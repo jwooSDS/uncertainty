@@ -3,6 +3,7 @@ tab:nice-tab
 prerequisites
 intro
 literature
+new-section
 methods
 math-example
 applications
