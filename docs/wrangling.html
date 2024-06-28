@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 1 Data Wrangling with R | Linear Models for Data Science</title>
+<meta name="author" content="Jeffrey Woo">
+<meta name="description" content="1.1 Introduction The data structure that we will be dealing with most often will be data frames. When we read data in to R, they are typically stored as a data frame. A data frame can be viewed...">
+<meta name="generator" content="bookdown 0.34 with bs4_book()">
+<meta property="og:title" content="Chapter 1 Data Wrangling with R | Linear Models for Data Science">
+<meta property="og:type" content="book">
+<meta property="og:description" content="1.1 Introduction The data structure that we will be dealing with most often will be data frames. When we read data in to R, they are typically stored as a data frame. A data frame can be viewed...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 1 Data Wrangling with R | Linear Models for Data Science">
+<meta name="twitter:description" content="1.1 Introduction The data structure that we will be dealing with most often will be data frames. When we read data in to R, they are typically stored as a data frame. A data frame can be viewed...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.2/transition.js"></script><script src="libs/bs3compat-0.4.2/tabs.js"></script><script src="libs/bs3compat-0.4.2/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<style type="text/css">
+    /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+        }
+    .hanging div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }
+  </style>
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Linear Models for Data Science</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Preface</a></li>
+<li><a class="active" href="wrangling.html"><span class="header-section-number">1</span> Data Wrangling with R</a></li>
+<li><a class="" href="intro.html"><span class="header-section-number">2</span> Introduction</a></li>
+<li><a class="" href="literature.html"><span class="header-section-number">3</span> Literature</a></li>
+<li><a class="" href="methods.html"><span class="header-section-number">4</span> Methods</a></li>
+<li><a class="" href="applications.html"><span class="header-section-number">5</span> Applications</a></li>
+<li><a class="" href="final-words.html"><span class="header-section-number">6</span> Final Words</a></li>
+<li><a class="" href="references.html">References</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="wrangling" class="section level1" number="1">
+<h1>
+<span class="header-section-number">1</span> Data Wrangling with R<a class="anchor" aria-label="anchor" href="#wrangling"><i class="fas fa-link"></i></a>
+</h1>
+<div id="introduction" class="section level2" number="1.1">
+<h2>
+<span class="header-section-number">1.1</span> Introduction<a class="anchor" aria-label="anchor" href="#introduction"><i class="fas fa-link"></i></a>
+</h2>
+<p>The data structure that we will be dealing with most often will be data frames. When we read data in to R, they are typically stored as a data frame. A data frame can be viewed like an EXCEL spreadsheet, where data are stored in rows and columns. Before performing any analysis, we want the data frame to have this basic structure:</p>
+<ul>
+<li>Each row of the data frame corresponds to an observation.</li>
+<li>Each column of the data frame corresponds to a variable.</li>
+</ul>
+<p>Sometimes, data are not structured in this way, and we will have to transform the data to take on this basic data structure. This process is called data wrangling. The most common and basic operations to transform the data are:</p>
+<ul>
+<li>Selecting a subset of columns of the data frame.</li>
+<li>Selecting a subset of rows of the data frame based on some criteria.</li>
+<li>Change column names.</li>
+<li>Find missing data.</li>
+<li>Create new variables based on existing variables.</li>
+<li>Combine multiple data frames.</li>
+</ul>
+<p>We will explore two approaches to data wrangling:</p>
+<ul>
+<li>Using functions that already come pre-loaded with R (sometimes called base R).</li>
+<li>Using functions from the <code>dplyr</code> package.</li>
+</ul>
+<p>These two approaches are quite different but can achieve the same goals in data wrangling. Each user of R usually ends up with their own preferred way of performing data wrangling operations, but it is important to know both approaches so you are able to work with a broader audience.</p>
+</div>
+<div id="data-wrangling-using-base-r-functions" class="section level2" number="1.2">
+<h2>
+<span class="header-section-number">1.2</span> Data Wrangling using Base R Functions<a class="anchor" aria-label="anchor" href="#data-wrangling-using-base-r-functions"><i class="fas fa-link"></i></a>
+</h2>
+<p>We will use the dataset <code>ClassDataPrevious.csv</code> as an example. The data were collected from an introductory statistics class at UVa from a previous semester. Download the dataset from Canvas and read it into R.</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">Data</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"ClassDataPrevious.csv"</span>, header<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<p>We check the number of rows and columns in this dataframe.</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">Data</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 298   8</code></pre>
+<p>There are 298 rows and 8 columns: so we have 298 students and 8 variables. We can also check the names for each column.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">Data</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] "Year"     "Sleep"    "Sport"    "Courses"  "Major"    "Age"      "Computer"
+## [8] "Lunch"</code></pre>
+<p>The variables are:</p>
+<ol style="list-style-type: decimal">
+<li>
+<code>Year</code>: the year the student is in</li>
+<li>
+<code>Sleep</code>: how much sleep the student averages a night (in hours)</li>
+<li>
+<code>Sport</code>: the student’s favorite sport</li>
+<li>
+<code>Courses</code>: how many courses the student is taking in the semester</li>
+<li>
+<code>Major</code>: the student’s major</li>
+<li>
+<code>Age</code>: the student’s age (in years)</li>
+<li>
+<code>Computer</code>: the operating system the student uses (Mac or PC)</li>
+<li>
+<code>Lunch</code>: how much the student usually spends on lunch (in dollars)</li>
+</ol>
+<div id="view-specific-rows-andor-columns-of-a-data-frame" class="section level3" number="1.2.1">
+<h3>
+<span class="header-section-number">1.2.1</span> View specific row(s) and/or column(s) of a data frame<a class="anchor" aria-label="anchor" href="#view-specific-rows-andor-columns-of-a-data-frame"><i class="fas fa-link"></i></a>
+</h3>
+<p>We can view specific rows and/or columns of any data frame using the square brackets <code>[]</code>, for example:</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">Data</span><span class="op">[</span><span class="fl">1</span>,<span class="fl">2</span><span class="op">]</span> <span class="co">##row index first, then column index</span></span></code></pre></div>
+<pre><code>## [1] 8</code></pre>
+<p>The row index is listed first, then the column index, in the square brackets. This means the first student sleeps 8 hours a night. We can also view multiple rows and columns, for example:</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">Data</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">3</span>,<span class="fl">4</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">5</span>,<span class="fl">8</span><span class="op">)</span><span class="op">]</span></span></code></pre></div>
+<pre><code>##     Year                            Major Lunch
+## 1 Second                         Commerce    11
+## 3 Second Cognitive science and psychology    10
+## 4  First                         Pre-Comm     4</code></pre>
+<p>to view the 1st, 5th, and 8th variables for observations 1, 3, and 4.</p>
+<p>There are several ways to view a specific column. For example, to view the 1st column (which is the variable called <code>Year</code>):</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">Data</span><span class="op">$</span><span class="va">Year</span> <span class="co">##or</span></span>
+<span><span class="va">Data</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span> <span class="co">##or</span></span>
+<span><span class="va">Data</span><span class="op">[</span>,<span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span><span class="op">:</span><span class="fl">8</span><span class="op">)</span><span class="op">]</span></span></code></pre></div>
+<p>Note the comma separates the indices for the row and column. An empty value before the comma means we want all the rows, and then the specific column. To view multiple columns, for example the first four columns:</p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">Data</span><span class="op">[</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span></span>
+<span><span class="va">Data</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">4</span><span class="op">)</span><span class="op">]</span></span></code></pre></div>
+<p>To view the values of certain rows, we can use</p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">Data</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">3</span><span class="op">)</span>,<span class="op">]</span></span></code></pre></div>
+<p>to view the values for observations 1 and 3. An empty value after the comma means we want all the columns for those specific rows.</p>
+</div>
+<div id="select-observations-by-conditions" class="section level3" number="1.2.2">
+<h3>
+<span class="header-section-number">1.2.2</span> Select observations by condition(s)<a class="anchor" aria-label="anchor" href="#select-observations-by-conditions"><i class="fas fa-link"></i></a>
+</h3>
+<p>We may want to only analyze certain subsets of our data, based on some conditions. For example, we may only want to analyze students whose favorite sport is soccer. The <code><a href="https://rdrr.io/r/base/which.html">which()</a></code> function in R helps us find the indices associated with a condition being met. For example:</p>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="va">Data</span><span class="op">$</span><span class="va">Sport</span><span class="op">==</span><span class="st">"Soccer"</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##  [1]   3  20  25  26  31  32  33  38  44  46  48  50  51  64  67  71  87  92  98
+## [20]  99 118 122 124 126 128 133 136 137 143 146 153 159 165 174 197 198 207 211
+## [39] 214 226 234 241 255 259 260 266 274 278 281 283 294 295</code></pre>
+<p>informs us which rows belong to observations whose favorite sport is soccer, i.e. the 3rd, 20th, 25th (and so on) students. We can create a new data frame that contains only students whose favorite sport is soccer:</p>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">SoccerPeeps</span><span class="op">&lt;-</span><span class="va">Data</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="va">Data</span><span class="op">$</span><span class="va">Sport</span><span class="op">==</span><span class="st">"Soccer"</span><span class="op">)</span>,<span class="op">]</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">SoccerPeeps</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 52  8</code></pre>
+<p>We are extracting the rows which satisfy the condition, favorite sport being soccer, and storing these rows into a new data frame called <code>SoccerPeeps</code>. We can see that this new data frame has 52 observations.</p>
+<p>Suppose we want to have a data frame that satisfies two conditions: that the favorite sport is soccer and they are 2nd years at UVa. We can type:</p>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">SoccerPeeps_2nd</span><span class="op">&lt;-</span><span class="va">Data</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="va">Data</span><span class="op">$</span><span class="va">Sport</span><span class="op">==</span><span class="st">"Soccer"</span> <span class="op">&amp;</span> <span class="va">Data</span><span class="op">$</span><span class="va">Year</span><span class="op">==</span><span class="st">"Second"</span><span class="op">)</span>,<span class="op">]</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">SoccerPeeps_2nd</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 25  8</code></pre>
+<p>This new data frame <code>SoccerPeeps_2nd</code> has 25 observations.</p>
+<p>We can also set conditions based on numeric variables, for example, we want students who sleep more than eight hours a night</p>
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">Sleepy</span><span class="op">&lt;-</span><span class="va">Data</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="va">Data</span><span class="op">$</span><span class="va">Sleep</span><span class="op">&gt;</span><span class="fl">8</span><span class="op">)</span>,<span class="op">]</span></span></code></pre></div>
+<p>We can also create a data frame that contains students who satisfy at least one out of two conditions, for example, the favorite sport is soccer or they sleep more than 8 hours a night:</p>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">Sleepy_or_Soccer</span><span class="op">&lt;-</span><span class="va">Data</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="va">Data</span><span class="op">$</span><span class="va">Sport</span><span class="op">==</span><span class="st">"Soccer"</span> <span class="op">|</span> <span class="va">Data</span><span class="op">$</span><span class="va">Sleep</span><span class="op">&gt;</span><span class="fl">8</span><span class="op">)</span>,<span class="op">]</span></span></code></pre></div>
+</div>
+<div id="change-column-names" class="section level3" number="1.2.3">
+<h3>
+<span class="header-section-number">1.2.3</span> Change column name(s)<a class="anchor" aria-label="anchor" href="#change-column-names"><i class="fas fa-link"></i></a>
+</h3>
+<p>For some datasets, the names of the columns are complicated or do not make sense. We should always give descriptive names to columns that make sense. For this dataset, the names are self-explanatory so we do not really need to change them. As an example, suppose we want to change the name of the 7th column from <code>Computer</code> to <code>Comp</code>:</p>
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">Data</span><span class="op">)</span><span class="op">[</span><span class="fl">7</span><span class="op">]</span><span class="op">&lt;-</span><span class="st">"Comp"</span></span></code></pre></div>
+<p>To change the names of multiples columns (for example, the 1st and 7th columns), type:</p>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">Data</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">7</span><span class="op">)</span><span class="op">]</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Yr"</span>,<span class="st">"Computer"</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div id="find-and-remove-missing-data" class="section level3" number="1.2.4">
+<h3>
+<span class="header-section-number">1.2.4</span> Find and remove missing data<a class="anchor" aria-label="anchor" href="#find-and-remove-missing-data"><i class="fas fa-link"></i></a>
+</h3>
+<p>There are a few ways to locate missing data. Using the <code><a href="https://rdrr.io/r/base/NA.html">is.na()</a></code> function directly on a data frame produces a lot of output that can be messy to view:</p>
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">Data</span><span class="op">)</span></span></code></pre></div>
+<p>On the other hand, using the <code><a href="https://rdrr.io/r/stats/complete.cases.html">complete.cases()</a></code> function is more pleasing to view:</p>
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">Data</span><span class="op">[</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/stats/complete.cases.html">complete.cases</a></span><span class="op">(</span><span class="va">Data</span><span class="op">)</span>,<span class="op">]</span></span></code></pre></div>
+<pre><code>##         Yr Sleep      Sport Courses                                      Major
+## 103 Second    NA Basketball       7 psychology and youth and social innovation
+## 206 Second     8       None       4                          Cognitive Science
+##     Age Computer Lunch
+## 103  19      Mac    10
+## 206  19      Mac    NA</code></pre>
+<p>The code above will extract rows that are not complete cases, in other words, rows that have missing entries. The output informs us observation 103 has a missing value for <code>Sleep</code>, and observation 206 has a missing value for <code>Lunch</code>.</p>
+<p>If you want to remove observations with a missing value, you can use one of the following two lines of code to create new data frames with the rows with missing values removed:</p>
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">Data_nomiss</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/na.fail.html">na.omit</a></span><span class="op">(</span><span class="va">Data</span><span class="op">)</span> <span class="co">##or</span></span>
+<span><span class="va">Data_nomiss2</span><span class="op">&lt;-</span><span class="va">Data</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/stats/complete.cases.html">complete.cases</a></span><span class="op">(</span><span class="va">Data</span><span class="op">)</span>,<span class="op">]</span></span></code></pre></div>
+<p><strong>A word of caution</strong>: these lines of code will remove the entire row as long as at least a column has missing entries. As noted earlier, observation 103 has a missing value for only the <code>Sleep</code> variable. But this observation still provides information on the other variables, which are now removed.</p>
+</div>
+<div id="summarizing-variables" class="section level3" number="1.2.5">
+<h3>
+<span class="header-section-number">1.2.5</span> Summarizing variable(s)<a class="anchor" aria-label="anchor" href="#summarizing-variables"><i class="fas fa-link"></i></a>
+</h3>
+<p>Very often, we want to obtain some characteristics of our data. A common way to summarize a numerical variable is to find its mean. We have four numerical variables in our data frame, which are in columns 2, 4, 6, and 8. To find the mean of all four numerical variables, we can use the <code><a href="https://rdrr.io/r/base/apply.html">apply()</a></code> function:</p>
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">Data</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">4</span>,<span class="fl">6</span>,<span class="fl">8</span><span class="op">)</span><span class="op">]</span>,<span class="fl">2</span>,<span class="va">mean</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##     Sleep   Courses       Age     Lunch 
+##        NA  5.016779 19.573826        NA</code></pre>
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">Data</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">4</span>,<span class="fl">6</span>,<span class="fl">8</span><span class="op">)</span><span class="op">]</span>,<span class="fl">2</span>,<span class="va">mean</span>,na.rm<span class="op">=</span><span class="cn">T</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##      Sleep    Courses        Age      Lunch 
+## 155.559259   5.016779  19.573826 156.594175</code></pre>
+<p>Notice that due to the missing values, the first line has <code>NA</code> for some of the variables. The second line includes an optional argument, <code>na.rm=T</code>, which will remove the observations with an <code>NA</code> value for the variable from the calculation of the mean.</p>
+<p>There are at least 3 arguments that are supplied to the <code><a href="https://rdrr.io/r/base/apply.html">apply()</a></code> function:</p>
+<ol style="list-style-type: decimal">
+<li><p>The first argument is a data frame containing all the variables which we want to find the mean of. In this case, we want columns 2, 4, 6, and 8 of the data frame <code>Data</code>.</p></li>
+<li><p>The second argument takes on the value <code>1</code> or <code>2</code>. Since we want to find the mean of columns, rather than rows, we type <code>2</code>. If want to mean of a row, we will type <code>1</code>.</p></li>
+<li><p>The third argument specifies the name of the function you want to apply to the columns of the supplied data frame. In this case, we want the mean. We can change this to find the median, standard deviation, etc, of these numeric variables if we want to.</p></li>
+</ol>
+<p>We notice the means for some of the variables are suspiciously high, so looking at the medians will be more informative.</p>
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">Data</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">4</span>,<span class="fl">6</span>,<span class="fl">8</span><span class="op">)</span><span class="op">]</span>,<span class="fl">2</span>,<span class="va">median</span>,na.rm<span class="op">=</span><span class="cn">T</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##   Sleep Courses     Age   Lunch 
+##     7.5     5.0    19.0     9.0</code></pre>
+</div>
+<div id="summarizing-variable-by-groups" class="section level3" number="1.2.6">
+<h3>
+<span class="header-section-number">1.2.6</span> Summarizing variable by groups<a class="anchor" aria-label="anchor" href="#summarizing-variable-by-groups"><i class="fas fa-link"></i></a>
+</h3>
+<p>Sometimes we want to summarize a variable by groups. Suppose we want to find the median amount of sleep separately for 1st years, 2nd years, 3rd years, and 4th years get. We can use the <code><a href="https://rdrr.io/r/base/tapply.html">tapply()</a></code> function:</p>
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/tapply.html">tapply</a></span><span class="op">(</span><span class="va">Data</span><span class="op">$</span><span class="va">Sleep</span>,<span class="va">Data</span><span class="op">$</span><span class="va">Yr</span>,<span class="va">median</span>,na.rm<span class="op">=</span><span class="cn">T</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##  First Fourth Second  Third 
+##    8.0    7.0    7.5    7.0</code></pre>
+<p>This informs us the median amount of sleep first years get is 8 hours a night; for fourth years the median amount is 7 hours a night.</p>
+<p>There are at least 3 arguments that are supplied to the <code><a href="https://rdrr.io/r/base/tapply.html">tapply()</a></code> function:</p>
+<ol style="list-style-type: decimal">
+<li><p>The first argument contains the vector which we want to summarize.</p></li>
+<li><p>The second argument contains the factor which we use to subset our data. In this example, we want to subset according to <code>Yr</code>.</p></li>
+<li><p>The third argument is the function which we want to apply to each subset of our data.</p></li>
+<li><p>The fourth argument is optional, in this case, we want to remove observations with missing values from the calculation of the mean.</p></li>
+</ol>
+<p>Notice the output orders the factor levels in alphabetical order. For our context, it is better to rearrange the levels to First, Second, Third, Fourth using the <code><a href="https://rdrr.io/r/base/factor.html">factor()</a></code> function:</p>
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">Data</span><span class="op">$</span><span class="va">Yr</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">Data</span><span class="op">$</span><span class="va">Yr</span>, levels<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"First"</span>,<span class="st">"Second"</span>,<span class="st">"Third"</span>,<span class="st">"Fourth"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/levels.html">levels</a></span><span class="op">(</span><span class="va">Data</span><span class="op">$</span><span class="va">Yr</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] "First"  "Second" "Third"  "Fourth"</code></pre>
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/tapply.html">tapply</a></span><span class="op">(</span><span class="va">Data</span><span class="op">$</span><span class="va">Sleep</span>,<span class="va">Data</span><span class="op">$</span><span class="va">Yr</span>,<span class="va">median</span>,na.rm<span class="op">=</span><span class="cn">T</span><span class="op">)</span> <span class="co">##much nicer</span></span></code></pre></div>
+<pre><code>##  First Second  Third Fourth 
+##    8.0    7.5    7.0    7.0</code></pre>
+<p>This output makes a lot more sense for this context.</p>
+<p>If we want to summarize a variable on groups formed by more than one variable, we need to adjust the second argument in the <code><a href="https://rdrr.io/r/base/tapply.html">tapply()</a></code> function by creating a list. Suppose we want to find the median sleep hour based on the <code>Yr</code> and the preferred operating system of the observations,</p>
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/tapply.html">tapply</a></span><span class="op">(</span><span class="va">Data</span><span class="op">$</span><span class="va">Sleep</span>,<span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">Data</span><span class="op">$</span><span class="va">Yr</span>,<span class="va">Data</span><span class="op">$</span><span class="va">Computer</span><span class="op">)</span>,<span class="va">median</span>,na.rm<span class="op">=</span><span class="cn">T</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##           Mac   PC
+## First  NA 8.0 7.50
+## Second  7 7.5 7.50
+## Third  NA 7.5 7.00
+## Fourth NA 7.0 7.25</code></pre>
+<p>Interestingly, it looks like there were observations who did not specify which operating system they use, hence the extra column in the output.</p>
+</div>
+<div id="create-a-new-variable-based-on-existing-variables" class="section level3" number="1.2.7">
+<h3>
+<span class="header-section-number">1.2.7</span> Create a new variable based on existing variable(s)<a class="anchor" aria-label="anchor" href="#create-a-new-variable-based-on-existing-variables"><i class="fas fa-link"></i></a>
+</h3>
+<p>Depending on the context of our analysis, we may need to create new variables based on existing variables. There are a few variations of this task, based on the type of variable you want to create, and the type of variable it is based on.</p>
+<div id="create-a-numeric-variable-based-on-another-numeric-variable" class="section level4" number="1.2.7.1">
+<h4>
+<span class="header-section-number">1.2.7.1</span> Create a numeric variable based on another numeric variable<a class="anchor" aria-label="anchor" href="#create-a-numeric-variable-based-on-another-numeric-variable"><i class="fas fa-link"></i></a>
+</h4>
+<p>The variable <code>Sleep</code> is in number of hours. Suppose we need to convert the values of <code>Sleep</code> to number of minutes, we can simply perform the following mathematical operation:</p>
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">Sleep_mins</span><span class="op">&lt;-</span><span class="va">Data</span><span class="op">$</span><span class="va">Sleep</span> <span class="op">*</span> <span class="fl">60</span></span></code></pre></div>
+<p>and store the transformed variable into a vector called <code>Sleep_mins</code>.</p>
+</div>
+<div id="create-a-binary-variable-based-on-a-numeric-variable" class="section level4" number="1.2.7.2">
+<h4>
+<span class="header-section-number">1.2.7.2</span> Create a binary variable based on a numeric variable<a class="anchor" aria-label="anchor" href="#create-a-binary-variable-based-on-a-numeric-variable"><i class="fas fa-link"></i></a>
+</h4>
+<p>Suppose we want to create a binary variable (categorical variable with two levels), called <code>deprived</code>. An observation will obtain a value of “yes” if they sleep for less than 7 hours a night, and “no” otherwise. The <code><a href="https://rdrr.io/r/base/ifelse.html">ifelse()</a></code> function is useful in creating binary variables:</p>
+<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">deprived</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">Data</span><span class="op">$</span><span class="va">Sleep</span><span class="op">&lt;</span><span class="fl">7</span>, <span class="st">"yes"</span>, <span class="st">"no"</span><span class="op">)</span></span></code></pre></div>
+<p>There are 3 arguments associated with the <code><a href="https://rdrr.io/r/base/ifelse.html">ifelse()</a></code> function:</p>
+<ol style="list-style-type: decimal">
+<li><p>The first argument is the condition that we wish to use.</p></li>
+<li><p>The second argument is the value of the observation if the condition is true.</p></li>
+<li><p>The third argument is the value of the observation if the condition if false.</p></li>
+</ol>
+</div>
+<div id="create-a-categorical-variable-based-on-a-numeric-variable" class="section level4" number="1.2.7.3">
+<h4>
+<span class="header-section-number">1.2.7.3</span> Create a categorical variable based on a numeric variable<a class="anchor" aria-label="anchor" href="#create-a-categorical-variable-based-on-a-numeric-variable"><i class="fas fa-link"></i></a>
+</h4>
+<p>Suppose we want to create a categorical variable based on the number of courses a student takes. We will call this new variable <code>CourseLoad</code>, which takes on the following values:</p>
+<ul>
+<li>
+<code>light</code> if 3 courses or less,</li>
+<li>
+<code>regular</code> if 4 or 5 courses,</li>
+<li>
+<code>heavy</code> if more than 5 courses .</li>
+</ul>
+<p>The <code><a href="https://rdrr.io/r/base/cut.html">cut()</a></code> function is used in this situation</p>
+<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">CourseLoad</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/cut.html">cut</a></span><span class="op">(</span><span class="va">Data</span><span class="op">$</span><span class="va">Courses</span>, breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="cn">Inf</span>, <span class="fl">3</span>, <span class="fl">5</span>, <span class="cn">Inf</span><span class="op">)</span>, </span>
+<span>                labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"light"</span>, <span class="st">"regular"</span>, <span class="st">"heavy"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p>There are three arguments that are applied to the <code><a href="https://rdrr.io/r/base/cut.html">cut()</a></code> function:</p>
+<ol style="list-style-type: decimal">
+<li><p>The first argument is the vector which you are basing the new variable on.</p></li>
+<li><p>The argument breaks lists how you want to set the intervals associated with <code>Data$Courses</code>. In this case, we are creating three intervals: one from <span class="math inline">\((-\infty, 3]\)</span>, another from <span class="math inline">\((3, 5]\)</span>, and the last interval from <span class="math inline">\((5, \infty]\)</span>.</p></li>
+<li><p>The argument labels gives the label for <code>CourseLoad</code> associated with each interval.</p></li>
+</ol>
+</div>
+<div id="collapse-levels" class="section level4" number="1.2.7.4">
+<h4>
+<span class="header-section-number">1.2.7.4</span> Collapse levels<a class="anchor" aria-label="anchor" href="#collapse-levels"><i class="fas fa-link"></i></a>
+</h4>
+<p>Sometimes, a categorical variable has more levels than we need for our analysis, and we want to collapse some levels. For example, the variable <code>Yr</code> has four levels: First, Second, Third, and Fourth. Perhaps we are more interested in comparing upperclassmen and underclassmen, so we want to collapse First and Second years into underclassmen, and Third and Fourth years into upperclassmen:</p>
+<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/levels.html">levels</a></span><span class="op">(</span><span class="va">Data</span><span class="op">$</span><span class="va">Yr</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] "First"  "Second" "Third"  "Fourth"</code></pre>
+<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">new.levels</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"und"</span>, <span class="st">"und"</span>, <span class="st">"up"</span>,<span class="st">"up"</span><span class="op">)</span></span>
+<span><span class="va">Year2</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">new.levels</span><span class="op">[</span><span class="va">Data</span><span class="op">$</span><span class="va">Yr</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/levels.html">levels</a></span><span class="op">(</span><span class="va">Year2</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] "und" "up"</code></pre>
+<p>The levels associated with the variable <code>Yr</code> are ordered as First, Second, Third, Fourth. The character vector new.levels has <code>under</code> as the first two characters, and <code>upper</code> as the last two characters to correspond to the original levels in the variable <code>Yr</code>. The new variable is called <code>Year2</code>.</p>
+</div>
+</div>
+<div id="combine-data-frames" class="section level3" number="1.2.8">
+<h3>
+<span class="header-section-number">1.2.8</span> Combine data frames<a class="anchor" aria-label="anchor" href="#combine-data-frames"><i class="fas fa-link"></i></a>
+</h3>
+<p>We have created four new variables, <code>Sleep_mins</code>, <code>deprived</code>, <code>CourseLoad</code>, and <code>Year2</code>, based on previously existing variables. Since these variables are all based on the same observations, we can combine them with an existing data frame using the <code><a href="https://rdrr.io/r/base/data.frame.html">data.frame()</a></code> function:</p>
+<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">Data</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">Data</span>,<span class="va">Sleep_mins</span>,<span class="va">deprived</span>,<span class="va">CourseLoad</span>,<span class="va">Year2</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">Data</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##       Yr Sleep      Sport Courses                            Major Age Computer
+## 1 Second     8 Basketball       6                         Commerce  19      Mac
+## 2 Second     7     Tennis       5                       Psychology  19      Mac
+## 3 Second     8     Soccer       5 Cognitive science and psychology  21      Mac
+## 4  First     9 Basketball       5                         Pre-Comm  19      Mac
+## 5 Second     4 Basketball       6                      Statistics   19       PC
+## 6  Third     7       None       4                       Psychology  20       PC
+##   Lunch Sleep_mins deprived CourseLoad Year2
+## 1    11        480       no      heavy   und
+## 2    10        420       no    regular   und
+## 3    10        480       no    regular   und
+## 4     4        540       no    regular   und
+## 5     0        240      yes      heavy   und
+## 6    11        420       no    regular    up</code></pre>
+<p>Notice that since we listed the four new variables after <code>Data</code> in the <code><a href="https://rdrr.io/r/base/data.frame.html">data.frame()</a></code> function, they appear after the original columns in the data frame.</p>
+<p>Alternatively, we can use the <code><a href="https://rdrr.io/r/base/cbind.html">cbind()</a></code> function which gives the same data frame:</p>
+<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">Data2</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">Data</span>,<span class="va">Sleep_mins</span>,<span class="va">deprived</span>,<span class="va">CourseLoad</span>,<span class="va">Year2</span><span class="op">)</span></span></code></pre></div>
+<p>If you are combining data frames which have different observations but the same columns, we can merge them using <code><a href="https://rdrr.io/r/base/cbind.html">rbind()</a></code>:</p>
+<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">dat1</span><span class="op">&lt;-</span><span class="va">Data</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span></span>
+<span><span class="va">dat3</span><span class="op">&lt;-</span><span class="va">Data</span><span class="op">[</span><span class="fl">6</span><span class="op">:</span><span class="fl">8</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span></span>
+<span><span class="va">res.dat2</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span><span class="op">(</span><span class="va">dat1</span>,<span class="va">dat3</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">res.dat2</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##       Yr Sleep      Sport
+## 1 Second     8 Basketball
+## 2 Second     7     Tennis
+## 3 Second     8     Soccer
+## 6  Third     7       None
+## 7 Second     7 Basketball
+## 8  First     7 Basketball</code></pre>
+</div>
+<div id="export-data-frame-in-r-to-a-.csv-file" class="section level3" number="1.2.9">
+<h3>
+<span class="header-section-number">1.2.9</span> Export data frame in R to a .csv file<a class="anchor" aria-label="anchor" href="#export-data-frame-in-r-to-a-.csv-file"><i class="fas fa-link"></i></a>
+</h3>
+<p>To export a data frame to a .csv file, type:</p>
+<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/write.table.html">write.csv</a></span><span class="op">(</span><span class="va">Data</span>, file<span class="op">=</span><span class="st">"newdata.csv"</span>, row.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<p>A file newdata.csv will be created in the working directory. Note that by default, the argument <code>row.names</code> is set to be <code>TRUE</code>. This will add a column in the dataframe which is an index number. I do not find this step useful in most analyses so I almost always set <code>row.names</code> to be <code>FALSE</code>.</p>
+</div>
+<div id="sort-data-frame-by-column-values" class="section level3" number="1.2.10">
+<h3>
+<span class="header-section-number">1.2.10</span> Sort data frame by column values<a class="anchor" aria-label="anchor" href="#sort-data-frame-by-column-values"><i class="fas fa-link"></i></a>
+</h3>
+<p>To sort your data frame in ascending order by <code>Age</code>:</p>
+<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">Data_by_age</span><span class="op">&lt;-</span><span class="va">Data</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/order.html">order</a></span><span class="op">(</span><span class="va">Data</span><span class="op">$</span><span class="va">Age</span><span class="op">)</span>,<span class="op">]</span></span></code></pre></div>
+<p>To sort in descending order by <code>Age</code>:</p>
+<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">Data_by_age_des</span><span class="op">&lt;-</span><span class="va">Data</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/order.html">order</a></span><span class="op">(</span><span class="op">-</span><span class="va">Data</span><span class="op">$</span><span class="va">Age</span><span class="op">)</span>,<span class="op">]</span></span></code></pre></div>
+<p>To sort in ascending order by <code>Age</code> first, then by <code>Sleep</code>:</p>
+<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">Data_by_age_sleep</span><span class="op">&lt;-</span><span class="va">Data</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/order.html">order</a></span><span class="op">(</span><span class="va">Data</span><span class="op">$</span><span class="va">Age</span>, <span class="va">Data</span><span class="op">$</span><span class="va">Sleep</span><span class="op">)</span>,<span class="op">]</span></span></code></pre></div>
+</div>
+</div>
+<div id="data-wrangling-using-dplyr-functions" class="section level2" number="1.3">
+<h2>
+<span class="header-section-number">1.3</span> Data Wrangling Using dplyr Functions<a class="anchor" aria-label="anchor" href="#data-wrangling-using-dplyr-functions"><i class="fas fa-link"></i></a>
+</h2>
+<p>In the previous section, we were performing data wrangling operations using functions that are built in with base R. In this module, we will be using functions mostly from a package called <code>dplyr</code>, which can perform the same operations as well.</p>
+<p>Before performing data wrangling operations, let us clear our environment, so that previously declared objects are removed. This allows us to start with a clean slate, which is often desirable when starting on a new analysis. This is done via:</p>
+<div class="sourceCode" id="cb57"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p>The <code>dplyr</code> package is a subset of the <code>tidyverse</code> package, so we can access these functions after installing and loading either package. After installing the <code>tidyverse</code> package, load it by typing:</p>
+<div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">##library(dplyr) or</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span> </span></code></pre></div>
+<p>The <code>dplyr</code> package was developed to make the syntax more intuitive to a broader range of R users, primarily through the use of pipes. However, the code involved with functions from <code>dlpyr</code> tends to be longer than code involved with base R functions, and there are more functions to learn with <code>dplyr</code>.</p>
+<p>You will find a lot of articles on the internet by various R users about why each of them believes one approach to be superior to the other. I am not fussy about which approach you use as long as you can perform the necessary operations. It is to your benefit to be familiar with both approaches so you can work with a broader range of R users.</p>
+<p>We will continue to use the dataset <code>ClassDataPrevious.csv</code> as an example. Download the dataset from Canvas and read it into R:</p>
+<div class="sourceCode" id="cb59"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">Data</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"ClassDataPrevious.csv"</span>, header<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<p>In the examples below, we are performing the same operations as in the previous section, but using <code>dplyr</code> functions instead of base R functions.</p>
+<div id="select-specific-columns-of-a-data-frame" class="section level3" number="1.3.1">
+<h3>
+<span class="header-section-number">1.3.1</span> Select specific column(s) of a data frame<a class="anchor" aria-label="anchor" href="#select-specific-columns-of-a-data-frame"><i class="fas fa-link"></i></a>
+</h3>
+<p>The <code><a href="https://dplyr.tidyverse.org/reference/select.html">select()</a></code> function is used to select specific columns. There are a couple of ways to use this function. First:</p>
+<div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">Data</span>,<span class="va">Year</span><span class="op">)</span></span></code></pre></div>
+<p>to select the column <code>Year</code> from the data frame called <code>Data</code>.</p>
+<div id="pipes" class="section level4" number="1.3.1.1">
+<h4>
+<span class="header-section-number">1.3.1.1</span> Pipes<a class="anchor" aria-label="anchor" href="#pipes"><i class="fas fa-link"></i></a>
+</h4>
+<p>Alternatively, we can use pipes:</p>
+<div class="sourceCode" id="cb61"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">Data</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">Year</span><span class="op">)</span></span></code></pre></div>
+<p>Pipes in R are typed using <code>%&gt;%</code> or by pressing Ctrl + Shift + M on your keyboard. To think of the operations above, we can read the code as</p>
+<ol style="list-style-type: decimal">
+<li>take the data frame called Data</li>
+<li>and then select the column named Year.</li>
+</ol>
+<p>We can interpret a pipe as “and then”. Commands after a pipe should be placed on a new line (press enter). Pipes are especially useful if we want to execute several commands in sequence, which we will see in later examples.</p>
+</div>
+</div>
+<div id="select-observations-by-conditions-1" class="section level3" number="1.3.2">
+<h3>
+<span class="header-section-number">1.3.2</span> Select observations by condition(s)<a class="anchor" aria-label="anchor" href="#select-observations-by-conditions-1"><i class="fas fa-link"></i></a>
+</h3>
+<p>The <code><a href="https://dplyr.tidyverse.org/reference/filter.html">filter()</a></code> function allows us to subset our data based on some conditions, for example, to select students whose favorite sport is soccer:</p>
+<div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">Data</span>, <span class="va">Sport</span><span class="op">==</span><span class="st">"Soccer"</span><span class="op">)</span></span></code></pre></div>
+<p>We can create a new data frame called <code>SoccerPeeps</code> that contains students whose favorite sport is soccer:</p>
+<div class="sourceCode" id="cb63"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">SoccerPeeps</span><span class="op">&lt;-</span><span class="va">Data</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">Sport</span><span class="op">==</span><span class="st">"Soccer"</span><span class="op">)</span></span></code></pre></div>
+<p>Suppose we want to have a data frame, called <code>SoccerPeeps_2nd</code>, that satisfies two conditions: that the favorite sport is soccer and they are 2nd years at UVa:</p>
+<div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">SoccerPeeps_2nd</span><span class="op">&lt;-</span><span class="va">Data</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">Sport</span><span class="op">==</span><span class="st">"Soccer"</span> <span class="op">&amp;</span> <span class="va">Year</span><span class="op">==</span><span class="st">"Second"</span><span class="op">)</span></span></code></pre></div>
+<p>We can also set conditions based on numeric variables, for example, we want the students who sleep more than eight hours a night:</p>
+<div class="sourceCode" id="cb65"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">Sleepy</span><span class="op">&lt;-</span><span class="va">Data</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">Sleep</span><span class="op">&gt;</span><span class="fl">8</span><span class="op">)</span></span></code></pre></div>
+<p>We can also create a data frame that contains observations as long as they satisfy at least one out of two conditions: the favorite sport is soccer or they sleep more than 8 hours a night:</p>
+<div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">Sleepy_or_Soccer</span><span class="op">&lt;-</span><span class="va">Data</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">Sport</span><span class="op">==</span><span class="st">"Soccer"</span> <span class="op">|</span> <span class="va">Sleep</span><span class="op">&gt;</span><span class="fl">8</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div id="change-column-names-1" class="section level3" number="1.3.3">
+<h3>
+<span class="header-section-number">1.3.3</span> Change column name(s)<a class="anchor" aria-label="anchor" href="#change-column-names-1"><i class="fas fa-link"></i></a>
+</h3>
+<p>It is straightforward to change the names of columns using the <code><a href="https://dplyr.tidyverse.org/reference/rename.html">rename()</a></code> function. For example:</p>
+<div class="sourceCode" id="cb67"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">Data</span><span class="op">&lt;-</span><span class="va">Data</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span>Yr<span class="op">=</span><span class="va">Year</span>, Comp<span class="op">=</span><span class="va">Computer</span><span class="op">)</span></span></code></pre></div>
+<p>allows us to change the name of two columns: from <code>Year</code> and <code>Computer</code> to <code>Yr</code> and <code>Comp</code>.</p>
+</div>
+<div id="summarizing-variables-1" class="section level3" number="1.3.4">
+<h3>
+<span class="header-section-number">1.3.4</span> Summarizing variable(s)<a class="anchor" aria-label="anchor" href="#summarizing-variables-1"><i class="fas fa-link"></i></a>
+</h3>
+<p>The <code><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize()</a></code> function allows us to summarize a column. Suppose we want to find the mean value of the numeric columns: <code>Sleep</code>, <code>Courses</code>, <code>Age</code>, and <code>Lunch</code>:</p>
+<div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">Data</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">Sleep</span>,na.rm <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">Courses</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">Age</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">Lunch</span>,na.rm <span class="op">=</span> <span class="cn">T</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##   mean(Sleep, na.rm = T) mean(Courses) mean(Age) mean(Lunch, na.rm = T)
+## 1               155.5593      5.016779  19.57383               156.5942</code></pre>
+<p>The output looks a bit cumbersome. We can give names to each summary</p>
+<div class="sourceCode" id="cb70"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">Data</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span><span class="op">(</span>avgSleep<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">Sleep</span>,na.rm <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>,avgCourse<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">Courses</span><span class="op">)</span>,avgAge<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">Age</span><span class="op">)</span>,</span>
+<span>            avgLun<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">Lunch</span>,na.rm <span class="op">=</span> <span class="cn">T</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##   avgSleep avgCourse   avgAge   avgLun
+## 1 155.5593  5.016779 19.57383 156.5942</code></pre>
+<p>As mentioned previously, the means look suspiciously high for a couple of variables, so looking at the medians may be more informative:</p>
+<div class="sourceCode" id="cb72"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">Data</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span><span class="op">(</span>medSleep<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span><span class="va">Sleep</span>,na.rm <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>,medCourse<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span><span class="va">Courses</span><span class="op">)</span>,</span>
+<span>            medAge<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span><span class="va">Age</span><span class="op">)</span>,medLun<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span><span class="va">Lunch</span>,na.rm <span class="op">=</span> <span class="cn">T</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##   medSleep medCourse medAge medLun
+## 1      7.5         5     19      9</code></pre>
+<p><strong>Note:</strong> For a lot of functions in the <code>dplyr</code> package, using American spelling or British spelling works. So we can use <code><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise()</a></code> instead of <code><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize()</a></code>.</p>
+</div>
+<div id="summarizing-variable-by-groups-1" class="section level3" number="1.3.5">
+<h3>
+<span class="header-section-number">1.3.5</span> Summarizing variable by groups<a class="anchor" aria-label="anchor" href="#summarizing-variable-by-groups-1"><i class="fas fa-link"></i></a>
+</h3>
+<p>Suppose we want to find the median amount of sleep 1st years, 2nd years, 3rd years, and 4th years get. We can use the <code><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by()</a></code> function:</p>
+<div class="sourceCode" id="cb74"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">Data</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">Yr</span><span class="op">)</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span><span class="op">(</span>medSleep<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span><span class="va">Sleep</span>,na.rm<span class="op">=</span><span class="cn">T</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## # A tibble: 4 × 2
+##   Yr     medSleep
+##   &lt;chr&gt;     &lt;dbl&gt;
+## 1 First       8  
+## 2 Fourth      7  
+## 3 Second      7.5
+## 4 Third       7</code></pre>
+<p>The way to read the code above is</p>
+<ol style="list-style-type: decimal">
+<li>Get the data frame called <code>Data</code>,</li>
+<li>and then group the observations by <code>Yr</code>,</li>
+<li>and then find the median amount of sleep by each <code>Yr</code> and store the median in a vector called <code>medSleep</code>.</li>
+</ol>
+<p>As seen previously, the ordering of the factor levels is in alphabetical order. For our context, it is better to rearrange the levels to First, Second, Third, Fourth. We can use the <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate()</a></code> function whenever we want to transform or create a new variable. In this case, we are transforming the variable <code>Yr</code> by reordering the factor levels with the <code><a href="https://forcats.tidyverse.org/reference/fct_relevel.html">fct_relevel()</a></code> function:</p>
+<div class="sourceCode" id="cb76"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">Data</span><span class="op">&lt;-</span> <span class="va">Data</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>Yr <span class="op">=</span> <span class="va">Yr</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>           <span class="fu"><a href="https://forcats.tidyverse.org/reference/fct_relevel.html">fct_relevel</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"First"</span>,<span class="st">"Second"</span>,<span class="st">"Third"</span>,<span class="st">"Fourth"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<ol style="list-style-type: decimal">
+<li>Get the data frame called <code>Data</code>,</li>
+<li>and then transform the variable called <code>Yr</code>,</li>
+<li>and then reorder the factor levels.</li>
+</ol>
+<p>Then, we use pipes, the <code><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by()</a></code>, and <code><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize()</a></code> functions like before:</p>
+<div class="sourceCode" id="cb77"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">Data</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">Yr</span><span class="op">)</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span><span class="op">(</span>medSleep<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span><span class="va">Sleep</span>,na.rm<span class="op">=</span><span class="cn">T</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## # A tibble: 4 × 2
+##   Yr     medSleep
+##   &lt;fct&gt;     &lt;dbl&gt;
+## 1 First       8  
+## 2 Second      7.5
+## 3 Third       7  
+## 4 Fourth      7</code></pre>
+<p>This output makes a lot more sense for this context.</p>
+<p>To summarize a variable on groups formed by more than one variable, we just add the other variables in the <code><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by()</a></code> function:</p>
+<div class="sourceCode" id="cb79"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">Data</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">Yr</span>,<span class="va">Comp</span><span class="op">)</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span><span class="op">(</span>medSleep<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span><span class="va">Sleep</span>,na.rm<span class="op">=</span><span class="cn">T</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## `summarise()` has grouped output by 'Yr'. You can override using the `.groups`
+## argument.</code></pre>
+<pre><code>## # A tibble: 9 × 3
+## # Groups:   Yr [4]
+##   Yr     Comp  medSleep
+##   &lt;fct&gt;  &lt;chr&gt;    &lt;dbl&gt;
+## 1 First  "Mac"     8   
+## 2 First  "PC"      7.5 
+## 3 Second ""        7   
+## 4 Second "Mac"     7.5 
+## 5 Second "PC"      7.5 
+## 6 Third  "Mac"     7.5 
+## 7 Third  "PC"      7   
+## 8 Fourth "Mac"     7   
+## 9 Fourth "PC"      7.25</code></pre>
+</div>
+<div id="create-a-new-variable-based-on-existing-variables-1" class="section level3" number="1.3.6">
+<h3>
+<span class="header-section-number">1.3.6</span> Create a new variable based on existing variable(s)<a class="anchor" aria-label="anchor" href="#create-a-new-variable-based-on-existing-variables-1"><i class="fas fa-link"></i></a>
+</h3>
+<p>As mentioned in the previously, the <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate()</a></code> function is used to transform a variable or to create a new variable. There are a few variations of this task, based on the type of variable you want to create, and the type of variable it is based on.</p>
+<div id="create-a-numeric-variable-based-on-another-numeric-variable-1" class="section level4" number="1.3.6.1">
+<h4>
+<span class="header-section-number">1.3.6.1</span> Create a numeric variable based on another numeric variable<a class="anchor" aria-label="anchor" href="#create-a-numeric-variable-based-on-another-numeric-variable-1"><i class="fas fa-link"></i></a>
+</h4>
+<p>The variable <code>Sleep</code> is in number of hours. Suppose we need to convert the values of <code>Sleep</code> to number of minutes, we can simply perform the following mathematical operation:</p>
+<div class="sourceCode" id="cb82"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">Data</span><span class="op">&lt;-</span><span class="va">Data</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>Sleep_mins <span class="op">=</span> <span class="va">Sleep</span><span class="op">*</span><span class="fl">60</span><span class="op">)</span></span></code></pre></div>
+<p>and store the transformed variable called <code>Sleep_mins</code> and add <code>Sleep_mins</code> to the data frame called <code>Data</code>.</p>
+</div>
+<div id="create-a-binary-variable-based-on-a-numeric-variable-1" class="section level4" number="1.3.6.2">
+<h4>
+<span class="header-section-number">1.3.6.2</span> Create a binary variable based on a numeric variable<a class="anchor" aria-label="anchor" href="#create-a-binary-variable-based-on-a-numeric-variable-1"><i class="fas fa-link"></i></a>
+</h4>
+<p>Suppose we want to create a binary variable , called <code>deprived</code>. An observation will obtain a value of <code>yes</code> if they sleep for less than 7 hours a night, and <code>no</code> otherwise. We will then add this variable deprived to the data frame called <code>Data</code>:</p>
+<div class="sourceCode" id="cb83"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">Data</span><span class="op">&lt;-</span><span class="va">Data</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>deprived<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">Sleep</span><span class="op">&lt;</span><span class="fl">7</span>, <span class="st">"yes"</span>, <span class="st">"no"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div id="create-a-categorical-variable-based-on-a-numeric-variable-1" class="section level4" number="1.3.6.3">
+<h4>
+<span class="header-section-number">1.3.6.3</span> Create a categorical variable based on a numeric variable<a class="anchor" aria-label="anchor" href="#create-a-categorical-variable-based-on-a-numeric-variable-1"><i class="fas fa-link"></i></a>
+</h4>
+<p>Suppose we want to create a categorical variable based on the number of courses a student takes. We will call this new variable <code>CourseLoad</code>, which takes on the following values:</p>
+<ul>
+<li>
+<code>light</code> if 3 courses or less,</li>
+<li>
+<code>regular</code> if 4 or 5 courses,</li>
+<li>
+<code>heavy</code> if more than 5 courses</li>
+</ul>
+<p>and then add <code>CourseLoad</code> to the data frame <code>Data</code>. We can use the <code><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when()</a></code> function from the <code>dplyr</code> package, instead of the <code><a href="https://rdrr.io/r/base/cut.html">cut()</a></code> function:</p>
+<div class="sourceCode" id="cb84"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">Data</span><span class="op">&lt;-</span><span class="va">Data</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>CourseLoad<span class="op">=</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when</a></span><span class="op">(</span><span class="va">Courses</span> <span class="op">&lt;=</span> <span class="fl">3</span> <span class="op">~</span> <span class="st">"light"</span>, </span>
+<span>                              <span class="va">Courses</span> <span class="op">&gt;</span><span class="fl">3</span> <span class="op">&amp;</span> <span class="va">Courses</span> <span class="op">&lt;=</span><span class="fl">5</span> <span class="op">~</span> <span class="st">"regular"</span>, </span>
+<span>                              <span class="va">Courses</span> <span class="op">&gt;</span> <span class="fl">5</span> <span class="op">~</span> <span class="st">"heavy"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p>Notice how the names of the categorical variable are supplied after a specific condition is specified.</p>
+</div>
+<div id="collapsing-levels" class="section level4" number="1.3.6.4">
+<h4>
+<span class="header-section-number">1.3.6.4</span> Collapsing levels<a class="anchor" aria-label="anchor" href="#collapsing-levels"><i class="fas fa-link"></i></a>
+</h4>
+<p>Sometimes, a categorical variable has more levels than we need for our analysis, and we want to collapse some levels. For example, the variable Yr has four levels: First, Second, Third, and Fourth. Perhaps we are more interested in comparing between upperclassmen and underclassmen, so we want to collapse First and Second Yrs into underclassmen, and Third and Fourth Yrs into upperclassmen. We will use the <code><a href="https://forcats.tidyverse.org/reference/fct_collapse.html">fct_collapse()</a></code> function:</p>
+<div class="sourceCode" id="cb85"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">Data</span><span class="op">&lt;-</span><span class="va">Data</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>UpUnder<span class="op">=</span><span class="fu"><a href="https://forcats.tidyverse.org/reference/fct_collapse.html">fct_collapse</a></span><span class="op">(</span><span class="va">Yr</span>,under<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"First"</span>,<span class="st">"Second"</span><span class="op">)</span>,up<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Third"</span>,<span class="st">"Fourth"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p>We are creating a new variable called <code>UpUnder</code>, which is done by collapsing <code>First</code> and <code>Second</code> into a new factor called <code>under</code>, and collapsing <code>Third</code> and <code>Fourth</code> into a new factor called <code>up</code>. <code>UpUnder</code> is also added to the data frame <code>Data</code>.</p>
+</div>
+</div>
+<div id="combine-data-frames-1" class="section level3" number="1.3.7">
+<h3>
+<span class="header-section-number">1.3.7</span> Combine data frames<a class="anchor" aria-label="anchor" href="#combine-data-frames-1"><i class="fas fa-link"></i></a>
+</h3>
+<p>To combine data frames which have different observations but the same columns, we can combine them using <code><a href="https://dplyr.tidyverse.org/reference/bind_rows.html">bind_rows()</a></code>:</p>
+<div class="sourceCode" id="cb86"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">dat1</span><span class="op">&lt;-</span><span class="va">Data</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span></span>
+<span><span class="va">dat3</span><span class="op">&lt;-</span><span class="va">Data</span><span class="op">[</span><span class="fl">6</span><span class="op">:</span><span class="fl">8</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span></span>
+<span><span class="va">res.dat2</span><span class="op">&lt;-</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_rows.html">bind_rows</a></span><span class="op">(</span><span class="va">dat1</span>,<span class="va">dat3</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">res.dat2</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##       Yr Sleep      Sport
+## 1 Second     8 Basketball
+## 2 Second     7     Tennis
+## 3 Second     8     Soccer
+## 4  Third     7       None
+## 5 Second     7 Basketball
+## 6  First     7 Basketball</code></pre>
+<p><code><a href="https://dplyr.tidyverse.org/reference/bind_rows.html">bind_rows()</a></code> works the same way as <code><a href="https://rdrr.io/r/base/cbind.html">rbind()</a></code>. Likewise, we can use <code><a href="https://dplyr.tidyverse.org/reference/bind_cols.html">bind_cols()</a></code> instead of <code><a href="https://rdrr.io/r/base/cbind.html">cbind()</a></code>.</p>
+</div>
+<div id="sort-data-frame-by-column-values-1" class="section level3" number="1.3.8">
+<h3>
+<span class="header-section-number">1.3.8</span> Sort data frame by column values<a class="anchor" aria-label="anchor" href="#sort-data-frame-by-column-values-1"><i class="fas fa-link"></i></a>
+</h3>
+<p>To sort your data frame in ascending order by <code>Age</code>:</p>
+<div class="sourceCode" id="cb88"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">Data_by_age</span><span class="op">&lt;-</span><span class="va">Data</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">Age</span><span class="op">)</span></span></code></pre></div>
+<p>To sort in descending order by <code>Age</code>:</p>
+<div class="sourceCode" id="cb89"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">Data_by_age_des</span><span class="op">&lt;-</span><span class="va">Data</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html">desc</a></span><span class="op">(</span><span class="va">Age</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p>To sort in ascending order by <code>Age</code> first, then by <code>Sleep</code>:</p>
+<div class="sourceCode" id="cb90"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">Data_by_age_sleep</span><span class="op">&lt;-</span><span class="va">Data</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">Age</span>,<span class="va">Sleep</span><span class="op">)</span></span></code></pre></div>
+
+</div>
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="index.html">Preface</a></div>
+<div class="next"><a href="intro.html"><span class="header-section-number">2</span> Introduction</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#wrangling"><span class="header-section-number">1</span> Data Wrangling with R</a></li>
+<li><a class="nav-link" href="#introduction"><span class="header-section-number">1.1</span> Introduction</a></li>
+<li>
+<a class="nav-link" href="#data-wrangling-using-base-r-functions"><span class="header-section-number">1.2</span> Data Wrangling using Base R Functions</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#view-specific-rows-andor-columns-of-a-data-frame"><span class="header-section-number">1.2.1</span> View specific row(s) and/or column(s) of a data frame</a></li>
+<li><a class="nav-link" href="#select-observations-by-conditions"><span class="header-section-number">1.2.2</span> Select observations by condition(s)</a></li>
+<li><a class="nav-link" href="#change-column-names"><span class="header-section-number">1.2.3</span> Change column name(s)</a></li>
+<li><a class="nav-link" href="#find-and-remove-missing-data"><span class="header-section-number">1.2.4</span> Find and remove missing data</a></li>
+<li><a class="nav-link" href="#summarizing-variables"><span class="header-section-number">1.2.5</span> Summarizing variable(s)</a></li>
+<li><a class="nav-link" href="#summarizing-variable-by-groups"><span class="header-section-number">1.2.6</span> Summarizing variable by groups</a></li>
+<li><a class="nav-link" href="#create-a-new-variable-based-on-existing-variables"><span class="header-section-number">1.2.7</span> Create a new variable based on existing variable(s)</a></li>
+<li><a class="nav-link" href="#combine-data-frames"><span class="header-section-number">1.2.8</span> Combine data frames</a></li>
+<li><a class="nav-link" href="#export-data-frame-in-r-to-a-.csv-file"><span class="header-section-number">1.2.9</span> Export data frame in R to a .csv file</a></li>
+<li><a class="nav-link" href="#sort-data-frame-by-column-values"><span class="header-section-number">1.2.10</span> Sort data frame by column values</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#data-wrangling-using-dplyr-functions"><span class="header-section-number">1.3</span> Data Wrangling Using dplyr Functions</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#select-specific-columns-of-a-data-frame"><span class="header-section-number">1.3.1</span> Select specific column(s) of a data frame</a></li>
+<li><a class="nav-link" href="#select-observations-by-conditions-1"><span class="header-section-number">1.3.2</span> Select observations by condition(s)</a></li>
+<li><a class="nav-link" href="#change-column-names-1"><span class="header-section-number">1.3.3</span> Change column name(s)</a></li>
+<li><a class="nav-link" href="#summarizing-variables-1"><span class="header-section-number">1.3.4</span> Summarizing variable(s)</a></li>
+<li><a class="nav-link" href="#summarizing-variable-by-groups-1"><span class="header-section-number">1.3.5</span> Summarizing variable by groups</a></li>
+<li><a class="nav-link" href="#create-a-new-variable-based-on-existing-variables-1"><span class="header-section-number">1.3.6</span> Create a new variable based on existing variable(s)</a></li>
+<li><a class="nav-link" href="#combine-data-frames-1"><span class="header-section-number">1.3.7</span> Combine data frames</a></li>
+<li><a class="nav-link" href="#sort-data-frame-by-column-values-1"><span class="header-section-number">1.3.8</span> Sort data frame by column values</a></li>
+</ul>
+</li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Linear Models for Data Science</strong>" was written by Jeffrey Woo. It was last built on 2024-06-28.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

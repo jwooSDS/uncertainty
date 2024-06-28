@@ -127,7 +127,7 @@
 
 \title{Linear Models for Data Science}
 \author{Jeffrey Woo}
-\date{2024-06-27}
+\date{2024-06-28}
 
 \begin{document}
 \maketitle
@@ -201,6 +201,1055 @@ Some other resources that readers may want to check out:
 \item
   \emph{Applied Linear Regression Models} (ALRM), Kutner, Nachtsheim, Neter, 4th ed.~ALRM is the same as the first 14 chapters of ALSM. The second part of ALSM covers topics in Design of Experiments, which I highly recommend if you are interested in those topics.
 \end{itemize}
+
+\hypertarget{wrangling}{%
+\chapter{Data Wrangling with R}\label{wrangling}}
+
+\hypertarget{introduction}{%
+\section{Introduction}\label{introduction}}
+
+The data structure that we will be dealing with most often will be data frames. When we read data in to R, they are typically stored as a data frame. A data frame can be viewed like an EXCEL spreadsheet, where data are stored in rows and columns. Before performing any analysis, we want the data frame to have this basic structure:
+
+\begin{itemize}
+\tightlist
+\item
+  Each row of the data frame corresponds to an observation.
+\item
+  Each column of the data frame corresponds to a variable.
+\end{itemize}
+
+Sometimes, data are not structured in this way, and we will have to transform the data to take on this basic data structure. This process is called data wrangling. The most common and basic operations to transform the data are:
+
+\begin{itemize}
+\tightlist
+\item
+  Selecting a subset of columns of the data frame.
+\item
+  Selecting a subset of rows of the data frame based on some criteria.
+\item
+  Change column names.
+\item
+  Find missing data.
+\item
+  Create new variables based on existing variables.
+\item
+  Combine multiple data frames.
+\end{itemize}
+
+We will explore two approaches to data wrangling:
+
+\begin{itemize}
+\tightlist
+\item
+  Using functions that already come pre-loaded with R (sometimes called base R).
+\item
+  Using functions from the \texttt{dplyr} package.
+\end{itemize}
+
+These two approaches are quite different but can achieve the same goals in data wrangling. Each user of R usually ends up with their own preferred way of performing data wrangling operations, but it is important to know both approaches so you are able to work with a broader audience.
+
+\hypertarget{data-wrangling-using-base-r-functions}{%
+\section{Data Wrangling using Base R Functions}\label{data-wrangling-using-base-r-functions}}
+
+We will use the dataset \texttt{ClassDataPrevious.csv} as an example. The data were collected from an introductory statistics class at UVa from a previous semester. Download the dataset from Canvas and read it into R.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Data}\OtherTok{\textless{}{-}}\FunctionTok{read.csv}\NormalTok{(}\StringTok{"ClassDataPrevious.csv"}\NormalTok{, }\AttributeTok{header=}\ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+We check the number of rows and columns in this dataframe.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{dim}\NormalTok{(Data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 298   8
+\end{verbatim}
+
+There are 298 rows and 8 columns: so we have 298 students and 8 variables. We can also check the names for each column.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{colnames}\NormalTok{(Data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Year"     "Sleep"    "Sport"    "Courses"  "Major"    "Age"      "Computer"
+## [8] "Lunch"
+\end{verbatim}
+
+The variables are:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \texttt{Year}: the year the student is in
+\item
+  \texttt{Sleep}: how much sleep the student averages a night (in hours)
+\item
+  \texttt{Sport}: the student's favorite sport
+\item
+  \texttt{Courses}: how many courses the student is taking in the semester
+\item
+  \texttt{Major}: the student's major
+\item
+  \texttt{Age}: the student's age (in years)
+\item
+  \texttt{Computer}: the operating system the student uses (Mac or PC)
+\item
+  \texttt{Lunch}: how much the student usually spends on lunch (in dollars)
+\end{enumerate}
+
+\hypertarget{view-specific-rows-andor-columns-of-a-data-frame}{%
+\subsection{View specific row(s) and/or column(s) of a data frame}\label{view-specific-rows-andor-columns-of-a-data-frame}}
+
+We can view specific rows and/or columns of any data frame using the square brackets \texttt{{[}{]}}, for example:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Data[}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{] }\DocumentationTok{\#\#row index first, then column index}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 8
+\end{verbatim}
+
+The row index is listed first, then the column index, in the square brackets. This means the first student sleeps 8 hours a night. We can also view multiple rows and columns, for example:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Data[}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{),}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{8}\NormalTok{)]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##     Year                            Major Lunch
+## 1 Second                         Commerce    11
+## 3 Second Cognitive science and psychology    10
+## 4  First                         Pre-Comm     4
+\end{verbatim}
+
+to view the 1st, 5th, and 8th variables for observations 1, 3, and 4.
+
+There are several ways to view a specific column. For example, to view the 1st column (which is the variable called \texttt{Year}):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Data}\SpecialCharTok{$}\NormalTok{Year }\DocumentationTok{\#\#or}
+\NormalTok{Data[,}\DecValTok{1}\NormalTok{] }\DocumentationTok{\#\#or}
+\NormalTok{Data[,}\SpecialCharTok{{-}}\FunctionTok{c}\NormalTok{(}\DecValTok{2}\SpecialCharTok{:}\DecValTok{8}\NormalTok{)]}
+\end{Highlighting}
+\end{Shaded}
+
+Note the comma separates the indices for the row and column. An empty value before the comma means we want all the rows, and then the specific column. To view multiple columns, for example the first four columns:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Data[,}\DecValTok{1}\SpecialCharTok{:}\DecValTok{4}\NormalTok{]}
+\NormalTok{Data[,}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{)]}
+\end{Highlighting}
+\end{Shaded}
+
+To view the values of certain rows, we can use
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Data[}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{3}\NormalTok{),]}
+\end{Highlighting}
+\end{Shaded}
+
+to view the values for observations 1 and 3. An empty value after the comma means we want all the columns for those specific rows.
+
+\hypertarget{select-observations-by-conditions}{%
+\subsection{Select observations by condition(s)}\label{select-observations-by-conditions}}
+
+We may want to only analyze certain subsets of our data, based on some conditions. For example, we may only want to analyze students whose favorite sport is soccer. The \texttt{which()} function in R helps us find the indices associated with a condition being met. For example:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{which}\NormalTok{(Data}\SpecialCharTok{$}\NormalTok{Sport}\SpecialCharTok{==}\StringTok{"Soccer"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1]   3  20  25  26  31  32  33  38  44  46  48  50  51  64  67  71  87  92  98
+## [20]  99 118 122 124 126 128 133 136 137 143 146 153 159 165 174 197 198 207 211
+## [39] 214 226 234 241 255 259 260 266 274 278 281 283 294 295
+\end{verbatim}
+
+informs us which rows belong to observations whose favorite sport is soccer, i.e.~the 3rd, 20th, 25th (and so on) students. We can create a new data frame that contains only students whose favorite sport is soccer:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{SoccerPeeps}\OtherTok{\textless{}{-}}\NormalTok{Data[}\FunctionTok{which}\NormalTok{(Data}\SpecialCharTok{$}\NormalTok{Sport}\SpecialCharTok{==}\StringTok{"Soccer"}\NormalTok{),]}
+\FunctionTok{dim}\NormalTok{(SoccerPeeps)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 52  8
+\end{verbatim}
+
+We are extracting the rows which satisfy the condition, favorite sport being soccer, and storing these rows into a new data frame called \texttt{SoccerPeeps}. We can see that this new data frame has 52 observations.
+
+Suppose we want to have a data frame that satisfies two conditions: that the favorite sport is soccer and they are 2nd years at UVa. We can type:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{SoccerPeeps\_2nd}\OtherTok{\textless{}{-}}\NormalTok{Data[}\FunctionTok{which}\NormalTok{(Data}\SpecialCharTok{$}\NormalTok{Sport}\SpecialCharTok{==}\StringTok{"Soccer"} \SpecialCharTok{\&}\NormalTok{ Data}\SpecialCharTok{$}\NormalTok{Year}\SpecialCharTok{==}\StringTok{"Second"}\NormalTok{),]}
+\FunctionTok{dim}\NormalTok{(SoccerPeeps\_2nd)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 25  8
+\end{verbatim}
+
+This new data frame \texttt{SoccerPeeps\_2nd} has 25 observations.
+
+We can also set conditions based on numeric variables, for example, we want students who sleep more than eight hours a night
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Sleepy}\OtherTok{\textless{}{-}}\NormalTok{Data[}\FunctionTok{which}\NormalTok{(Data}\SpecialCharTok{$}\NormalTok{Sleep}\SpecialCharTok{\textgreater{}}\DecValTok{8}\NormalTok{),]}
+\end{Highlighting}
+\end{Shaded}
+
+We can also create a data frame that contains students who satisfy at least one out of two conditions, for example, the favorite sport is soccer or they sleep more than 8 hours a night:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Sleepy\_or\_Soccer}\OtherTok{\textless{}{-}}\NormalTok{Data[}\FunctionTok{which}\NormalTok{(Data}\SpecialCharTok{$}\NormalTok{Sport}\SpecialCharTok{==}\StringTok{"Soccer"} \SpecialCharTok{|}\NormalTok{ Data}\SpecialCharTok{$}\NormalTok{Sleep}\SpecialCharTok{\textgreater{}}\DecValTok{8}\NormalTok{),]}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{change-column-names}{%
+\subsection{Change column name(s)}\label{change-column-names}}
+
+For some datasets, the names of the columns are complicated or do not make sense. We should always give descriptive names to columns that make sense. For this dataset, the names are self-explanatory so we do not really need to change them. As an example, suppose we want to change the name of the 7th column from \texttt{Computer} to \texttt{Comp}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{names}\NormalTok{(Data)[}\DecValTok{7}\NormalTok{]}\OtherTok{\textless{}{-}}\StringTok{"Comp"}
+\end{Highlighting}
+\end{Shaded}
+
+To change the names of multiples columns (for example, the 1st and 7th columns), type:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{names}\NormalTok{(Data)[}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{7}\NormalTok{)]}\OtherTok{\textless{}{-}}\FunctionTok{c}\NormalTok{(}\StringTok{"Yr"}\NormalTok{,}\StringTok{"Computer"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{find-and-remove-missing-data}{%
+\subsection{Find and remove missing data}\label{find-and-remove-missing-data}}
+
+There are a few ways to locate missing data. Using the \texttt{is.na()} function directly on a data frame produces a lot of output that can be messy to view:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{is.na}\NormalTok{(Data)}
+\end{Highlighting}
+\end{Shaded}
+
+On the other hand, using the \texttt{complete.cases()} function is more pleasing to view:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Data[}\SpecialCharTok{!}\FunctionTok{complete.cases}\NormalTok{(Data),]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##         Yr Sleep      Sport Courses                                      Major
+## 103 Second    NA Basketball       7 psychology and youth and social innovation
+## 206 Second     8       None       4                          Cognitive Science
+##     Age Computer Lunch
+## 103  19      Mac    10
+## 206  19      Mac    NA
+\end{verbatim}
+
+The code above will extract rows that are not complete cases, in other words, rows that have missing entries. The output informs us observation 103 has a missing value for \texttt{Sleep}, and observation 206 has a missing value for \texttt{Lunch}.
+
+If you want to remove observations with a missing value, you can use one of the following two lines of code to create new data frames with the rows with missing values removed:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Data\_nomiss}\OtherTok{\textless{}{-}}\FunctionTok{na.omit}\NormalTok{(Data) }\DocumentationTok{\#\#or}
+\NormalTok{Data\_nomiss2}\OtherTok{\textless{}{-}}\NormalTok{Data[}\FunctionTok{complete.cases}\NormalTok{(Data),]}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{A word of caution}: these lines of code will remove the entire row as long as at least a column has missing entries. As noted earlier, observation 103 has a missing value for only the \texttt{Sleep} variable. But this observation still provides information on the other variables, which are now removed.
+
+\hypertarget{summarizing-variables}{%
+\subsection{Summarizing variable(s)}\label{summarizing-variables}}
+
+Very often, we want to obtain some characteristics of our data. A common way to summarize a numerical variable is to find its mean. We have four numerical variables in our data frame, which are in columns 2, 4, 6, and 8. To find the mean of all four numerical variables, we can use the \texttt{apply()} function:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{apply}\NormalTok{(Data[,}\FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{6}\NormalTok{,}\DecValTok{8}\NormalTok{)],}\DecValTok{2}\NormalTok{,mean)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##     Sleep   Courses       Age     Lunch 
+##        NA  5.016779 19.573826        NA
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{apply}\NormalTok{(Data[,}\FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{6}\NormalTok{,}\DecValTok{8}\NormalTok{)],}\DecValTok{2}\NormalTok{,mean,}\AttributeTok{na.rm=}\NormalTok{T)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      Sleep    Courses        Age      Lunch 
+## 155.559259   5.016779  19.573826 156.594175
+\end{verbatim}
+
+Notice that due to the missing values, the first line has \texttt{NA} for some of the variables. The second line includes an optional argument, \texttt{na.rm=T}, which will remove the observations with an \texttt{NA} value for the variable from the calculation of the mean.
+
+There are at least 3 arguments that are supplied to the \texttt{apply()} function:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  The first argument is a data frame containing all the variables which we want to find the mean of. In this case, we want columns 2, 4, 6, and 8 of the data frame \texttt{Data}.
+\item
+  The second argument takes on the value \texttt{1} or \texttt{2}. Since we want to find the mean of columns, rather than rows, we type \texttt{2}. If want to mean of a row, we will type \texttt{1}.
+\item
+  The third argument specifies the name of the function you want to apply to the columns of the supplied data frame. In this case, we want the mean. We can change this to find the median, standard deviation, etc, of these numeric variables if we want to.
+\end{enumerate}
+
+We notice the means for some of the variables are suspiciously high, so looking at the medians will be more informative.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{apply}\NormalTok{(Data[,}\FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{6}\NormalTok{,}\DecValTok{8}\NormalTok{)],}\DecValTok{2}\NormalTok{,median,}\AttributeTok{na.rm=}\NormalTok{T)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   Sleep Courses     Age   Lunch 
+##     7.5     5.0    19.0     9.0
+\end{verbatim}
+
+\hypertarget{summarizing-variable-by-groups}{%
+\subsection{Summarizing variable by groups}\label{summarizing-variable-by-groups}}
+
+Sometimes we want to summarize a variable by groups. Suppose we want to find the median amount of sleep separately for 1st years, 2nd years, 3rd years, and 4th years get. We can use the \texttt{tapply()} function:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{tapply}\NormalTok{(Data}\SpecialCharTok{$}\NormalTok{Sleep,Data}\SpecialCharTok{$}\NormalTok{Yr,median,}\AttributeTok{na.rm=}\NormalTok{T)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  First Fourth Second  Third 
+##    8.0    7.0    7.5    7.0
+\end{verbatim}
+
+This informs us the median amount of sleep first years get is 8 hours a night; for fourth years the median amount is 7 hours a night.
+
+There are at least 3 arguments that are supplied to the \texttt{tapply()} function:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  The first argument contains the vector which we want to summarize.
+\item
+  The second argument contains the factor which we use to subset our data. In this example, we want to subset according to \texttt{Yr}.
+\item
+  The third argument is the function which we want to apply to each subset of our data.
+\item
+  The fourth argument is optional, in this case, we want to remove observations with missing values from the calculation of the mean.
+\end{enumerate}
+
+Notice the output orders the factor levels in alphabetical order. For our context, it is better to rearrange the levels to First, Second, Third, Fourth using the \texttt{factor()} function:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Data}\SpecialCharTok{$}\NormalTok{Yr}\OtherTok{\textless{}{-}}\FunctionTok{factor}\NormalTok{(Data}\SpecialCharTok{$}\NormalTok{Yr, }\AttributeTok{levels=}\FunctionTok{c}\NormalTok{(}\StringTok{"First"}\NormalTok{,}\StringTok{"Second"}\NormalTok{,}\StringTok{"Third"}\NormalTok{,}\StringTok{"Fourth"}\NormalTok{))}
+
+\FunctionTok{levels}\NormalTok{(Data}\SpecialCharTok{$}\NormalTok{Yr)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "First"  "Second" "Third"  "Fourth"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{tapply}\NormalTok{(Data}\SpecialCharTok{$}\NormalTok{Sleep,Data}\SpecialCharTok{$}\NormalTok{Yr,median,}\AttributeTok{na.rm=}\NormalTok{T) }\DocumentationTok{\#\#much nicer}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  First Second  Third Fourth 
+##    8.0    7.5    7.0    7.0
+\end{verbatim}
+
+This output makes a lot more sense for this context.
+
+If we want to summarize a variable on groups formed by more than one variable, we need to adjust the second argument in the \texttt{tapply()} function by creating a list. Suppose we want to find the median sleep hour based on the \texttt{Yr} and the preferred operating system of the observations,
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{tapply}\NormalTok{(Data}\SpecialCharTok{$}\NormalTok{Sleep,}\FunctionTok{list}\NormalTok{(Data}\SpecialCharTok{$}\NormalTok{Yr,Data}\SpecialCharTok{$}\NormalTok{Computer),median,}\AttributeTok{na.rm=}\NormalTok{T)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##           Mac   PC
+## First  NA 8.0 7.50
+## Second  7 7.5 7.50
+## Third  NA 7.5 7.00
+## Fourth NA 7.0 7.25
+\end{verbatim}
+
+Interestingly, it looks like there were observations who did not specify which operating system they use, hence the extra column in the output.
+
+\hypertarget{create-a-new-variable-based-on-existing-variables}{%
+\subsection{Create a new variable based on existing variable(s)}\label{create-a-new-variable-based-on-existing-variables}}
+
+Depending on the context of our analysis, we may need to create new variables based on existing variables. There are a few variations of this task, based on the type of variable you want to create, and the type of variable it is based on.
+
+\hypertarget{create-a-numeric-variable-based-on-another-numeric-variable}{%
+\subsubsection{Create a numeric variable based on another numeric variable}\label{create-a-numeric-variable-based-on-another-numeric-variable}}
+
+The variable \texttt{Sleep} is in number of hours. Suppose we need to convert the values of \texttt{Sleep} to number of minutes, we can simply perform the following mathematical operation:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Sleep\_mins}\OtherTok{\textless{}{-}}\NormalTok{Data}\SpecialCharTok{$}\NormalTok{Sleep }\SpecialCharTok{*} \DecValTok{60}
+\end{Highlighting}
+\end{Shaded}
+
+and store the transformed variable into a vector called \texttt{Sleep\_mins}.
+
+\hypertarget{create-a-binary-variable-based-on-a-numeric-variable}{%
+\subsubsection{Create a binary variable based on a numeric variable}\label{create-a-binary-variable-based-on-a-numeric-variable}}
+
+Suppose we want to create a binary variable (categorical variable with two levels), called \texttt{deprived}. An observation will obtain a value of ``yes'' if they sleep for less than 7 hours a night, and ``no'' otherwise. The \texttt{ifelse()} function is useful in creating binary variables:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{deprived}\OtherTok{\textless{}{-}}\FunctionTok{ifelse}\NormalTok{(Data}\SpecialCharTok{$}\NormalTok{Sleep}\SpecialCharTok{\textless{}}\DecValTok{7}\NormalTok{, }\StringTok{"yes"}\NormalTok{, }\StringTok{"no"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+There are 3 arguments associated with the \texttt{ifelse()} function:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  The first argument is the condition that we wish to use.
+\item
+  The second argument is the value of the observation if the condition is true.
+\item
+  The third argument is the value of the observation if the condition if false.
+\end{enumerate}
+
+\hypertarget{create-a-categorical-variable-based-on-a-numeric-variable}{%
+\subsubsection{Create a categorical variable based on a numeric variable}\label{create-a-categorical-variable-based-on-a-numeric-variable}}
+
+Suppose we want to create a categorical variable based on the number of courses a student takes. We will call this new variable \texttt{CourseLoad}, which takes on the following values:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{light} if 3 courses or less,
+\item
+  \texttt{regular} if 4 or 5 courses,
+\item
+  \texttt{heavy} if more than 5 courses .
+\end{itemize}
+
+The \texttt{cut()} function is used in this situation
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{CourseLoad}\OtherTok{\textless{}{-}}\FunctionTok{cut}\NormalTok{(Data}\SpecialCharTok{$}\NormalTok{Courses, }\AttributeTok{breaks =} \FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\ConstantTok{Inf}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{5}\NormalTok{, }\ConstantTok{Inf}\NormalTok{), }
+                \AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"light"}\NormalTok{, }\StringTok{"regular"}\NormalTok{, }\StringTok{"heavy"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+There are three arguments that are applied to the \texttt{cut()} function:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  The first argument is the vector which you are basing the new variable on.
+\item
+  The argument breaks lists how you want to set the intervals associated with \texttt{Data\$Courses}. In this case, we are creating three intervals: one from \((-\infty, 3]\), another from \((3, 5]\), and the last interval from \((5, \infty]\).
+\item
+  The argument labels gives the label for \texttt{CourseLoad} associated with each interval.
+\end{enumerate}
+
+\hypertarget{collapse-levels}{%
+\subsubsection{Collapse levels}\label{collapse-levels}}
+
+Sometimes, a categorical variable has more levels than we need for our analysis, and we want to collapse some levels. For example, the variable \texttt{Yr} has four levels: First, Second, Third, and Fourth. Perhaps we are more interested in comparing upperclassmen and underclassmen, so we want to collapse First and Second years into underclassmen, and Third and Fourth years into upperclassmen:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{levels}\NormalTok{(Data}\SpecialCharTok{$}\NormalTok{Yr)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "First"  "Second" "Third"  "Fourth"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{new.levels}\OtherTok{\textless{}{-}}\FunctionTok{c}\NormalTok{(}\StringTok{"und"}\NormalTok{, }\StringTok{"und"}\NormalTok{, }\StringTok{"up"}\NormalTok{,}\StringTok{"up"}\NormalTok{)}
+\NormalTok{Year2}\OtherTok{\textless{}{-}}\FunctionTok{factor}\NormalTok{(new.levels[Data}\SpecialCharTok{$}\NormalTok{Yr])}
+\FunctionTok{levels}\NormalTok{(Year2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "und" "up"
+\end{verbatim}
+
+The levels associated with the variable \texttt{Yr} are ordered as First, Second, Third, Fourth. The character vector new.levels has \texttt{under} as the first two characters, and \texttt{upper} as the last two characters to correspond to the original levels in the variable \texttt{Yr}. The new variable is called \texttt{Year2}.
+
+\hypertarget{combine-data-frames}{%
+\subsection{Combine data frames}\label{combine-data-frames}}
+
+We have created four new variables, \texttt{Sleep\_mins}, \texttt{deprived}, \texttt{CourseLoad}, and \texttt{Year2}, based on previously existing variables. Since these variables are all based on the same observations, we can combine them with an existing data frame using the \texttt{data.frame()} function:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Data}\OtherTok{\textless{}{-}}\FunctionTok{data.frame}\NormalTok{(Data,Sleep\_mins,deprived,CourseLoad,Year2)}
+\FunctionTok{head}\NormalTok{(Data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##       Yr Sleep      Sport Courses                            Major Age Computer
+## 1 Second     8 Basketball       6                         Commerce  19      Mac
+## 2 Second     7     Tennis       5                       Psychology  19      Mac
+## 3 Second     8     Soccer       5 Cognitive science and psychology  21      Mac
+## 4  First     9 Basketball       5                         Pre-Comm  19      Mac
+## 5 Second     4 Basketball       6                      Statistics   19       PC
+## 6  Third     7       None       4                       Psychology  20       PC
+##   Lunch Sleep_mins deprived CourseLoad Year2
+## 1    11        480       no      heavy   und
+## 2    10        420       no    regular   und
+## 3    10        480       no    regular   und
+## 4     4        540       no    regular   und
+## 5     0        240      yes      heavy   und
+## 6    11        420       no    regular    up
+\end{verbatim}
+
+Notice that since we listed the four new variables after \texttt{Data} in the \texttt{data.frame()} function, they appear after the original columns in the data frame.
+
+Alternatively, we can use the \texttt{cbind()} function which gives the same data frame:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Data2}\OtherTok{\textless{}{-}}\FunctionTok{cbind}\NormalTok{(Data,Sleep\_mins,deprived,CourseLoad,Year2)}
+\end{Highlighting}
+\end{Shaded}
+
+If you are combining data frames which have different observations but the same columns, we can merge them using \texttt{rbind()}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dat1}\OtherTok{\textless{}{-}}\NormalTok{Data[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{3}\NormalTok{,}\DecValTok{1}\SpecialCharTok{:}\DecValTok{3}\NormalTok{]}
+\NormalTok{dat3}\OtherTok{\textless{}{-}}\NormalTok{Data[}\DecValTok{6}\SpecialCharTok{:}\DecValTok{8}\NormalTok{,}\DecValTok{1}\SpecialCharTok{:}\DecValTok{3}\NormalTok{]}
+\NormalTok{res.dat2}\OtherTok{\textless{}{-}}\FunctionTok{rbind}\NormalTok{(dat1,dat3)}
+\FunctionTok{head}\NormalTok{(res.dat2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##       Yr Sleep      Sport
+## 1 Second     8 Basketball
+## 2 Second     7     Tennis
+## 3 Second     8     Soccer
+## 6  Third     7       None
+## 7 Second     7 Basketball
+## 8  First     7 Basketball
+\end{verbatim}
+
+\hypertarget{export-data-frame-in-r-to-a-.csv-file}{%
+\subsection{Export data frame in R to a .csv file}\label{export-data-frame-in-r-to-a-.csv-file}}
+
+To export a data frame to a .csv file, type:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{write.csv}\NormalTok{(Data, }\AttributeTok{file=}\StringTok{"newdata.csv"}\NormalTok{, }\AttributeTok{row.names =} \ConstantTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+A file newdata.csv will be created in the working directory. Note that by default, the argument \texttt{row.names} is set to be \texttt{TRUE}. This will add a column in the dataframe which is an index number. I do not find this step useful in most analyses so I almost always set \texttt{row.names} to be \texttt{FALSE}.
+
+\hypertarget{sort-data-frame-by-column-values}{%
+\subsection{Sort data frame by column values}\label{sort-data-frame-by-column-values}}
+
+To sort your data frame in ascending order by \texttt{Age}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Data\_by\_age}\OtherTok{\textless{}{-}}\NormalTok{Data[}\FunctionTok{order}\NormalTok{(Data}\SpecialCharTok{$}\NormalTok{Age),]}
+\end{Highlighting}
+\end{Shaded}
+
+To sort in descending order by \texttt{Age}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Data\_by\_age\_des}\OtherTok{\textless{}{-}}\NormalTok{Data[}\FunctionTok{order}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{Data}\SpecialCharTok{$}\NormalTok{Age),]}
+\end{Highlighting}
+\end{Shaded}
+
+To sort in ascending order by \texttt{Age} first, then by \texttt{Sleep}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Data\_by\_age\_sleep}\OtherTok{\textless{}{-}}\NormalTok{Data[}\FunctionTok{order}\NormalTok{(Data}\SpecialCharTok{$}\NormalTok{Age, Data}\SpecialCharTok{$}\NormalTok{Sleep),]}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{data-wrangling-using-dplyr-functions}{%
+\section{Data Wrangling Using dplyr Functions}\label{data-wrangling-using-dplyr-functions}}
+
+In the previous section, we were performing data wrangling operations using functions that are built in with base R. In this module, we will be using functions mostly from a package called \texttt{dplyr}, which can perform the same operations as well.
+
+Before performing data wrangling operations, let us clear our environment, so that previously declared objects are removed. This allows us to start with a clean slate, which is often desirable when starting on a new analysis. This is done via:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{rm}\NormalTok{(}\AttributeTok{list =} \FunctionTok{ls}\NormalTok{())}
+\end{Highlighting}
+\end{Shaded}
+
+The \texttt{dplyr} package is a subset of the \texttt{tidyverse} package, so we can access these functions after installing and loading either package. After installing the \texttt{tidyverse} package, load it by typing:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#library(dplyr) or}
+\FunctionTok{library}\NormalTok{(tidyverse) }
+\end{Highlighting}
+\end{Shaded}
+
+The \texttt{dplyr} package was developed to make the syntax more intuitive to a broader range of R users, primarily through the use of pipes. However, the code involved with functions from \texttt{dlpyr} tends to be longer than code involved with base R functions, and there are more functions to learn with \texttt{dplyr}.
+
+You will find a lot of articles on the internet by various R users about why each of them believes one approach to be superior to the other. I am not fussy about which approach you use as long as you can perform the necessary operations. It is to your benefit to be familiar with both approaches so you can work with a broader range of R users.
+
+We will continue to use the dataset \texttt{ClassDataPrevious.csv} as an example. Download the dataset from Canvas and read it into R:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Data}\OtherTok{\textless{}{-}}\FunctionTok{read.csv}\NormalTok{(}\StringTok{"ClassDataPrevious.csv"}\NormalTok{, }\AttributeTok{header=}\ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+In the examples below, we are performing the same operations as in the previous section, but using \texttt{dplyr} functions instead of base R functions.
+
+\hypertarget{select-specific-columns-of-a-data-frame}{%
+\subsection{Select specific column(s) of a data frame}\label{select-specific-columns-of-a-data-frame}}
+
+The \texttt{select()} function is used to select specific columns. There are a couple of ways to use this function. First:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{select}\NormalTok{(Data,Year)}
+\end{Highlighting}
+\end{Shaded}
+
+to select the column \texttt{Year} from the data frame called \texttt{Data}.
+
+\hypertarget{pipes}{%
+\subsubsection{Pipes}\label{pipes}}
+
+Alternatively, we can use pipes:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Data}\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(Year)}
+\end{Highlighting}
+\end{Shaded}
+
+Pipes in R are typed using \texttt{\%\textgreater{}\%} or by pressing Ctrl + Shift + M on your keyboard. To think of the operations above, we can read the code as
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  take the data frame called Data
+\item
+  and then select the column named Year.
+\end{enumerate}
+
+We can interpret a pipe as ``and then''. Commands after a pipe should be placed on a new line (press enter). Pipes are especially useful if we want to execute several commands in sequence, which we will see in later examples.
+
+\hypertarget{select-observations-by-conditions-1}{%
+\subsection{Select observations by condition(s)}\label{select-observations-by-conditions-1}}
+
+The \texttt{filter()} function allows us to subset our data based on some conditions, for example, to select students whose favorite sport is soccer:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{filter}\NormalTok{(Data, Sport}\SpecialCharTok{==}\StringTok{"Soccer"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+We can create a new data frame called \texttt{SoccerPeeps} that contains students whose favorite sport is soccer:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{SoccerPeeps}\OtherTok{\textless{}{-}}\NormalTok{Data}\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(Sport}\SpecialCharTok{==}\StringTok{"Soccer"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Suppose we want to have a data frame, called \texttt{SoccerPeeps\_2nd}, that satisfies two conditions: that the favorite sport is soccer and they are 2nd years at UVa:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{SoccerPeeps\_2nd}\OtherTok{\textless{}{-}}\NormalTok{Data}\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(Sport}\SpecialCharTok{==}\StringTok{"Soccer"} \SpecialCharTok{\&}\NormalTok{ Year}\SpecialCharTok{==}\StringTok{"Second"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+We can also set conditions based on numeric variables, for example, we want the students who sleep more than eight hours a night:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Sleepy}\OtherTok{\textless{}{-}}\NormalTok{Data}\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(Sleep}\SpecialCharTok{\textgreater{}}\DecValTok{8}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+We can also create a data frame that contains observations as long as they satisfy at least one out of two conditions: the favorite sport is soccer or they sleep more than 8 hours a night:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Sleepy\_or\_Soccer}\OtherTok{\textless{}{-}}\NormalTok{Data}\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(Sport}\SpecialCharTok{==}\StringTok{"Soccer"} \SpecialCharTok{|}\NormalTok{ Sleep}\SpecialCharTok{\textgreater{}}\DecValTok{8}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{change-column-names-1}{%
+\subsection{Change column name(s)}\label{change-column-names-1}}
+
+It is straightforward to change the names of columns using the \texttt{rename()} function. For example:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Data}\OtherTok{\textless{}{-}}\NormalTok{Data}\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{rename}\NormalTok{(}\AttributeTok{Yr=}\NormalTok{Year, }\AttributeTok{Comp=}\NormalTok{Computer)}
+\end{Highlighting}
+\end{Shaded}
+
+allows us to change the name of two columns: from \texttt{Year} and \texttt{Computer} to \texttt{Yr} and \texttt{Comp}.
+
+\hypertarget{summarizing-variables-1}{%
+\subsection{Summarizing variable(s)}\label{summarizing-variables-1}}
+
+The \texttt{summarize()} function allows us to summarize a column. Suppose we want to find the mean value of the numeric columns: \texttt{Sleep}, \texttt{Courses}, \texttt{Age}, and \texttt{Lunch}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Data}\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarize}\NormalTok{(}\FunctionTok{mean}\NormalTok{(Sleep,}\AttributeTok{na.rm =}\NormalTok{ T),}\FunctionTok{mean}\NormalTok{(Courses),}\FunctionTok{mean}\NormalTok{(Age),}\FunctionTok{mean}\NormalTok{(Lunch,}\AttributeTok{na.rm =}\NormalTok{ T))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   mean(Sleep, na.rm = T) mean(Courses) mean(Age) mean(Lunch, na.rm = T)
+## 1               155.5593      5.016779  19.57383               156.5942
+\end{verbatim}
+
+The output looks a bit cumbersome. We can give names to each summary
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Data}\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarize}\NormalTok{(}\AttributeTok{avgSleep=}\FunctionTok{mean}\NormalTok{(Sleep,}\AttributeTok{na.rm =}\NormalTok{ T),}\AttributeTok{avgCourse=}\FunctionTok{mean}\NormalTok{(Courses),}\AttributeTok{avgAge=}\FunctionTok{mean}\NormalTok{(Age),}
+            \AttributeTok{avgLun=}\FunctionTok{mean}\NormalTok{(Lunch,}\AttributeTok{na.rm =}\NormalTok{ T))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   avgSleep avgCourse   avgAge   avgLun
+## 1 155.5593  5.016779 19.57383 156.5942
+\end{verbatim}
+
+As mentioned previously, the means look suspiciously high for a couple of variables, so looking at the medians may be more informative:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Data}\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarize}\NormalTok{(}\AttributeTok{medSleep=}\FunctionTok{median}\NormalTok{(Sleep,}\AttributeTok{na.rm =}\NormalTok{ T),}\AttributeTok{medCourse=}\FunctionTok{median}\NormalTok{(Courses),}
+            \AttributeTok{medAge=}\FunctionTok{median}\NormalTok{(Age),}\AttributeTok{medLun=}\FunctionTok{median}\NormalTok{(Lunch,}\AttributeTok{na.rm =}\NormalTok{ T))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   medSleep medCourse medAge medLun
+## 1      7.5         5     19      9
+\end{verbatim}
+
+\textbf{Note:} For a lot of functions in the \texttt{dplyr} package, using American spelling or British spelling works. So we can use \texttt{summarise()} instead of \texttt{summarize()}.
+
+\hypertarget{summarizing-variable-by-groups-1}{%
+\subsection{Summarizing variable by groups}\label{summarizing-variable-by-groups-1}}
+
+Suppose we want to find the median amount of sleep 1st years, 2nd years, 3rd years, and 4th years get. We can use the \texttt{group\_by()} function:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Data}\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(Yr)}\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarize}\NormalTok{(}\AttributeTok{medSleep=}\FunctionTok{median}\NormalTok{(Sleep,}\AttributeTok{na.rm=}\NormalTok{T))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 4 x 2
+##   Yr     medSleep
+##   <chr>     <dbl>
+## 1 First       8  
+## 2 Fourth      7  
+## 3 Second      7.5
+## 4 Third       7
+\end{verbatim}
+
+The way to read the code above is
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Get the data frame called \texttt{Data},
+\item
+  and then group the observations by \texttt{Yr},
+\item
+  and then find the median amount of sleep by each \texttt{Yr} and store the median in a vector called \texttt{medSleep}.
+\end{enumerate}
+
+As seen previously, the ordering of the factor levels is in alphabetical order. For our context, it is better to rearrange the levels to First, Second, Third, Fourth. We can use the \texttt{mutate()} function whenever we want to transform or create a new variable. In this case, we are transforming the variable \texttt{Yr} by reordering the factor levels with the \texttt{fct\_relevel()} function:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Data}\OtherTok{\textless{}{-}}\NormalTok{ Data}\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{Yr =}\NormalTok{ Yr}\SpecialCharTok{\%\textgreater{}\%}
+           \FunctionTok{fct\_relevel}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\StringTok{"First"}\NormalTok{,}\StringTok{"Second"}\NormalTok{,}\StringTok{"Third"}\NormalTok{,}\StringTok{"Fourth"}\NormalTok{)))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Get the data frame called \texttt{Data},
+\item
+  and then transform the variable called \texttt{Yr},
+\item
+  and then reorder the factor levels.
+\end{enumerate}
+
+Then, we use pipes, the \texttt{group\_by()}, and \texttt{summarize()} functions like before:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Data}\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(Yr)}\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarize}\NormalTok{(}\AttributeTok{medSleep=}\FunctionTok{median}\NormalTok{(Sleep,}\AttributeTok{na.rm=}\NormalTok{T))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 4 x 2
+##   Yr     medSleep
+##   <fct>     <dbl>
+## 1 First       8  
+## 2 Second      7.5
+## 3 Third       7  
+## 4 Fourth      7
+\end{verbatim}
+
+This output makes a lot more sense for this context.
+
+To summarize a variable on groups formed by more than one variable, we just add the other variables in the \texttt{group\_by()} function:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Data}\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(Yr,Comp)}\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarize}\NormalTok{(}\AttributeTok{medSleep=}\FunctionTok{median}\NormalTok{(Sleep,}\AttributeTok{na.rm=}\NormalTok{T))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `summarise()` has grouped output by 'Yr'. You can override using the `.groups`
+## argument.
+\end{verbatim}
+
+\begin{verbatim}
+## # A tibble: 9 x 3
+## # Groups:   Yr [4]
+##   Yr     Comp  medSleep
+##   <fct>  <chr>    <dbl>
+## 1 First  "Mac"     8   
+## 2 First  "PC"      7.5 
+## 3 Second ""        7   
+## 4 Second "Mac"     7.5 
+## 5 Second "PC"      7.5 
+## 6 Third  "Mac"     7.5 
+## 7 Third  "PC"      7   
+## 8 Fourth "Mac"     7   
+## 9 Fourth "PC"      7.25
+\end{verbatim}
+
+\hypertarget{create-a-new-variable-based-on-existing-variables-1}{%
+\subsection{Create a new variable based on existing variable(s)}\label{create-a-new-variable-based-on-existing-variables-1}}
+
+As mentioned in the previously, the \texttt{mutate()} function is used to transform a variable or to create a new variable. There are a few variations of this task, based on the type of variable you want to create, and the type of variable it is based on.
+
+\hypertarget{create-a-numeric-variable-based-on-another-numeric-variable-1}{%
+\subsubsection{Create a numeric variable based on another numeric variable}\label{create-a-numeric-variable-based-on-another-numeric-variable-1}}
+
+The variable \texttt{Sleep} is in number of hours. Suppose we need to convert the values of \texttt{Sleep} to number of minutes, we can simply perform the following mathematical operation:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Data}\OtherTok{\textless{}{-}}\NormalTok{Data}\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{Sleep\_mins =}\NormalTok{ Sleep}\SpecialCharTok{*}\DecValTok{60}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+and store the transformed variable called \texttt{Sleep\_mins} and add \texttt{Sleep\_mins} to the data frame called \texttt{Data}.
+
+\hypertarget{create-a-binary-variable-based-on-a-numeric-variable-1}{%
+\subsubsection{Create a binary variable based on a numeric variable}\label{create-a-binary-variable-based-on-a-numeric-variable-1}}
+
+Suppose we want to create a binary variable , called \texttt{deprived}. An observation will obtain a value of \texttt{yes} if they sleep for less than 7 hours a night, and \texttt{no} otherwise. We will then add this variable deprived to the data frame called \texttt{Data}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Data}\OtherTok{\textless{}{-}}\NormalTok{Data}\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{deprived=}\FunctionTok{ifelse}\NormalTok{(Sleep}\SpecialCharTok{\textless{}}\DecValTok{7}\NormalTok{, }\StringTok{"yes"}\NormalTok{, }\StringTok{"no"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{create-a-categorical-variable-based-on-a-numeric-variable-1}{%
+\subsubsection{Create a categorical variable based on a numeric variable}\label{create-a-categorical-variable-based-on-a-numeric-variable-1}}
+
+Suppose we want to create a categorical variable based on the number of courses a student takes. We will call this new variable \texttt{CourseLoad}, which takes on the following values:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{light} if 3 courses or less,
+\item
+  \texttt{regular} if 4 or 5 courses,
+\item
+  \texttt{heavy} if more than 5 courses
+\end{itemize}
+
+and then add \texttt{CourseLoad} to the data frame \texttt{Data}. We can use the \texttt{case\_when()} function from the \texttt{dplyr} package, instead of the \texttt{cut()} function:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Data}\OtherTok{\textless{}{-}}\NormalTok{Data}\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{CourseLoad=}\FunctionTok{case\_when}\NormalTok{(Courses }\SpecialCharTok{\textless{}=} \DecValTok{3} \SpecialCharTok{\textasciitilde{}} \StringTok{"light"}\NormalTok{, }
+\NormalTok{                              Courses }\SpecialCharTok{\textgreater{}}\DecValTok{3} \SpecialCharTok{\&}\NormalTok{ Courses }\SpecialCharTok{\textless{}=}\DecValTok{5} \SpecialCharTok{\textasciitilde{}} \StringTok{"regular"}\NormalTok{, }
+\NormalTok{                              Courses }\SpecialCharTok{\textgreater{}} \DecValTok{5} \SpecialCharTok{\textasciitilde{}} \StringTok{"heavy"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+Notice how the names of the categorical variable are supplied after a specific condition is specified.
+
+\hypertarget{collapsing-levels}{%
+\subsubsection{Collapsing levels}\label{collapsing-levels}}
+
+Sometimes, a categorical variable has more levels than we need for our analysis, and we want to collapse some levels. For example, the variable Yr has four levels: First, Second, Third, and Fourth. Perhaps we are more interested in comparing between upperclassmen and underclassmen, so we want to collapse First and Second Yrs into underclassmen, and Third and Fourth Yrs into upperclassmen. We will use the \texttt{fct\_collapse()} function:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Data}\OtherTok{\textless{}{-}}\NormalTok{Data}\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{UpUnder=}\FunctionTok{fct\_collapse}\NormalTok{(Yr,}\AttributeTok{under=}\FunctionTok{c}\NormalTok{(}\StringTok{"First"}\NormalTok{,}\StringTok{"Second"}\NormalTok{),}\AttributeTok{up=}\FunctionTok{c}\NormalTok{(}\StringTok{"Third"}\NormalTok{,}\StringTok{"Fourth"}\NormalTok{)))}
+\end{Highlighting}
+\end{Shaded}
+
+We are creating a new variable called \texttt{UpUnder}, which is done by collapsing \texttt{First} and \texttt{Second} into a new factor called \texttt{under}, and collapsing \texttt{Third} and \texttt{Fourth} into a new factor called \texttt{up}. \texttt{UpUnder} is also added to the data frame \texttt{Data}.
+
+\hypertarget{combine-data-frames-1}{%
+\subsection{Combine data frames}\label{combine-data-frames-1}}
+
+To combine data frames which have different observations but the same columns, we can combine them using \texttt{bind\_rows()}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dat1}\OtherTok{\textless{}{-}}\NormalTok{Data[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{3}\NormalTok{,}\DecValTok{1}\SpecialCharTok{:}\DecValTok{3}\NormalTok{]}
+\NormalTok{dat3}\OtherTok{\textless{}{-}}\NormalTok{Data[}\DecValTok{6}\SpecialCharTok{:}\DecValTok{8}\NormalTok{,}\DecValTok{1}\SpecialCharTok{:}\DecValTok{3}\NormalTok{]}
+\NormalTok{res.dat2}\OtherTok{\textless{}{-}}\FunctionTok{bind\_rows}\NormalTok{(dat1,dat3)}
+\FunctionTok{head}\NormalTok{(res.dat2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##       Yr Sleep      Sport
+## 1 Second     8 Basketball
+## 2 Second     7     Tennis
+## 3 Second     8     Soccer
+## 4  Third     7       None
+## 5 Second     7 Basketball
+## 6  First     7 Basketball
+\end{verbatim}
+
+\texttt{bind\_rows()} works the same way as \texttt{rbind()}. Likewise, we can use \texttt{bind\_cols()} instead of \texttt{cbind()}.
+
+\hypertarget{sort-data-frame-by-column-values-1}{%
+\subsection{Sort data frame by column values}\label{sort-data-frame-by-column-values-1}}
+
+To sort your data frame in ascending order by \texttt{Age}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Data\_by\_age}\OtherTok{\textless{}{-}}\NormalTok{Data}\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{arrange}\NormalTok{(Age)}
+\end{Highlighting}
+\end{Shaded}
+
+To sort in descending order by \texttt{Age}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Data\_by\_age\_des}\OtherTok{\textless{}{-}}\NormalTok{Data}\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{arrange}\NormalTok{(}\FunctionTok{desc}\NormalTok{(Age))}
+\end{Highlighting}
+\end{Shaded}
+
+To sort in ascending order by \texttt{Age} first, then by \texttt{Sleep}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Data\_by\_age\_sleep}\OtherTok{\textless{}{-}}\NormalTok{Data}\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{arrange}\NormalTok{(Age,Sleep)}
+\end{Highlighting}
+\end{Shaded}
 
 \hypertarget{intro}{%
 \chapter{Introduction}\label{intro}}
