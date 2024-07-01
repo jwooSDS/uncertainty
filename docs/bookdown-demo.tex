@@ -127,7 +127,7 @@
 
 \title{Linear Models for Data Science}
 \author{Jeffrey Woo}
-\date{2024-06-28}
+\date{2024-07-01}
 
 \begin{document}
 \maketitle
@@ -1250,6 +1250,799 @@ To sort in ascending order by \texttt{Age} first, then by \texttt{Sleep}:
   \FunctionTok{arrange}\NormalTok{(Age,Sleep)}
 \end{Highlighting}
 \end{Shaded}
+
+\hypertarget{viz}{%
+\chapter{Data Visualization with R Using ggplot2}\label{viz}}
+
+\hypertarget{introduction-1}{%
+\section{Introduction}\label{introduction-1}}
+
+Data visualizations are tools that summarize data. Consider the visuals from the \href{https://covid.cdc.gov/covid-data-tracker/\#datatracker-home}{CDC covid tracker dashboard} to an external site. Without actually having access to the actual data, we have a sense of trends associated with hospitalizations and deaths. Good visualizations are easy to interpret for a wide variety of audiences, and are easier to explain than statistical models.
+
+In this module, you will learn how to create common data visualizations. The choice of data visualization is almost always determined by whether the variable(s) involved is categorical or quantitative. Discrete variables are interesting because depending on the circumstance, they can be viewed as either categorical or quantitative in the context of data visualizations.
+
+We will be using functions from the \texttt{ggplot2} package to create visualizations. The \texttt{ggplot2} package enables users to create various kinds of data visualizations, beyond the visualizations that can be made in base R. The \texttt{ggplot2} package is automatically loaded when we load the \texttt{tidyverse} package, although we can load \texttt{ggplot2} on its own.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\end{Highlighting}
+\end{Shaded}
+
+We will use the dataset \texttt{ClassDataPrevious.csv} as an example. The data were collected from an introductory statistics class at UVa from a previous semester. Download the dataset from Canvas and read it into R.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Data}\OtherTok{\textless{}{-}}\FunctionTok{read.csv}\NormalTok{(}\StringTok{"ClassDataPrevious.csv"}\NormalTok{, }\AttributeTok{header=}\ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+The variables are:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \texttt{Year}: the year the student is in
+\item
+  \texttt{Sleep}: how much sleep the student averages a night (in hours)
+\item
+  \texttt{Sport}: the student's favorite sport
+\item
+  \texttt{Courses}: how many courses the student is taking in the semester
+\item
+  \texttt{Major}: the student's major
+\item
+  \texttt{Age}: the student's age (in years)
+\item
+  \texttt{Computer}: the operating system the student uses (Mac or PC)
+\item
+  \texttt{Lunch}: how much the student usually spends on lunch (in dollars)
+\end{enumerate}
+
+\hypertarget{visualizations-with-a-single-categorical-variable}{%
+\section{Visualizations with a Single Categorical Variable}\label{visualizations-with-a-single-categorical-variable}}
+
+\hypertarget{frequency-tables}{%
+\subsection{Frequency tables}\label{frequency-tables}}
+
+Frequency tables are a common tool to summarize categorical variables. These tables give us the number of observations (sometimes called counts) that belong to each class of a categorical variable. These tables are created using the \texttt{table()} function. Suppose we want to see the number of students in each year in our data:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{table}\NormalTok{(Data}\SpecialCharTok{$}\NormalTok{Year)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  First Fourth Second  Third 
+##     83     30    139     46
+\end{verbatim}
+
+Notice the order of the years could be rearranged to make more sense:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Data}\SpecialCharTok{$}\NormalTok{Year}\OtherTok{\textless{}{-}}\FunctionTok{factor}\NormalTok{(Data}\SpecialCharTok{$}\NormalTok{Year, }\AttributeTok{levels=}\FunctionTok{c}\NormalTok{(}\StringTok{"First"}\NormalTok{,}\StringTok{"Second"}\NormalTok{,}\StringTok{"Third"}\NormalTok{,}\StringTok{"Fourth"}\NormalTok{))}
+\FunctionTok{levels}\NormalTok{(Data}\SpecialCharTok{$}\NormalTok{Year)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "First"  "Second" "Third"  "Fourth"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mytab}\OtherTok{\textless{}{-}}\FunctionTok{table}\NormalTok{(Data}\SpecialCharTok{$}\NormalTok{Year)}
+\NormalTok{mytab}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  First Second  Third Fourth 
+##     83    139     46     30
+\end{verbatim}
+
+So we have 83 first years, 139 second years, 46 third years, and 30 fourth years in our dataset.
+
+We can report these numbers using proportions instead of counts, using \texttt{prop.table()}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{prop.table}\NormalTok{(mytab)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##     First    Second     Third    Fourth 
+## 0.2785235 0.4664430 0.1543624 0.1006711
+\end{verbatim}
+
+or percentages by multiplying by 100:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{prop.table}\NormalTok{(mytab) }\SpecialCharTok{*} \DecValTok{100}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##    First   Second    Third   Fourth 
+## 27.85235 46.64430 15.43624 10.06711
+\end{verbatim}
+
+To round the percentages to two decimal places, use the \texttt{round()} function:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{round}\NormalTok{(}\FunctionTok{prop.table}\NormalTok{(mytab) }\SpecialCharTok{*} \DecValTok{100}\NormalTok{, }\DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  First Second  Third Fourth 
+##  27.85  46.64  15.44  10.07
+\end{verbatim}
+
+So about 27.85\% of these students are first years, 46.64\% are second years, 15.44\% are third years, and 10.07\% are fourth years.
+
+\hypertarget{bar-charts}{%
+\subsection{Bar charts}\label{bar-charts}}
+
+Bar charts are a simple way to visualize categorical data, and can be viewed as a visual representation of frequency tables. To create a bar chart for the years of these students, we use:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(Data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{Year))}\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-69-1.pdf}
+
+We can read the number of students who are first, second, third, and fourth years by reading off the corresponding value on the vertical axis.
+
+From these two lines we code, we can see the basic structure of creating data visualizations with the \texttt{ggplot()} function:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Use the \texttt{ggplot()} function, and supply the name of the data frame, and the x- and/or y- variables via the aes() function. End this line with a \texttt{+} operator, and then press enter.
+\item
+  In the next line, specify the type of graph we want to create (called \texttt{geoms}). For a bar chart, type \texttt{geom\_bar()}.
+\end{enumerate}
+
+Some describe these lines of code as two layers of code. These two layers must be supplied for all data visualizations with \texttt{ggplot()}.
+
+Additional optional layers can be added (these usually deal with the details of the visuals). Suppose we want to change the orientation of this bar chart, we can add an optional line, or layer:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(Data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{Year))}\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{()}\SpecialCharTok{+}
+  \FunctionTok{coord\_flip}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-70-1.pdf}
+
+It is recommended that each layer is typed on a line below the previous layer. A \texttt{+} sign is used at the end of each layer to add another layer below.
+
+To change the color of the bars:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(Data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{Year))}\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{fill=}\StringTok{"blue"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-71-1.pdf}
+
+To have a different color to outline the bars:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(Data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{Year))}\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{fill=}\StringTok{"blue"}\NormalTok{,}\AttributeTok{color=}\StringTok{"orange"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-72-1.pdf}
+
+\hypertarget{customize-title-and-labels-of-axes-in-bar-charts}{%
+\subsubsection{Customize title and labels of axes in bar charts}\label{customize-title-and-labels-of-axes-in-bar-charts}}
+
+To change the orientation of the labels on the horizontal axis, we add an extra layer called \texttt{theme}. This will be useful when we have many classes and/or labels with long names.
+
+To rotate the labels on the horizontal by 90 degrees:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(Data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{Year))}\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{()}\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{angle =} \DecValTok{90}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-73-1.pdf}
+
+As we create more visualizations, it is good practice to give short but meaningful and descriptive names for each axis and provide a title. We can change the labels of the x- and y- axes, as well as add a title for the bar chart by adding another layer called \texttt{labs}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(Data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{Year))}\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{()}\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{angle =} \DecValTok{90}\NormalTok{))}\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x=}\StringTok{"Year"}\NormalTok{, }\AttributeTok{y=}\StringTok{"Number of Students"}\NormalTok{, }\AttributeTok{title=}\StringTok{"Dist of Years"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-74-1.pdf}
+
+We can also adjust the position of the title, for example, center-justify it via \texttt{theme}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(Data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{Year))}\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{()}\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{angle =} \DecValTok{90}\NormalTok{), }
+        \AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{hjust =} \FloatTok{0.5}\NormalTok{))}\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x=}\StringTok{"Year"}\NormalTok{, }\AttributeTok{y=}\StringTok{"Number of Students"}\NormalTok{, }\AttributeTok{title=}\StringTok{"Dist of Years"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-75-1.pdf}
+
+\hypertarget{create-a-bar-chart-using-proportions}{%
+\subsubsection{Create a bar chart using proportions}\label{create-a-bar-chart-using-proportions}}
+
+Suppose we want to create a bar chart where the y-axis displays the proportions, rather than the counts of each level. There are a few steps to produce such a bar chart. First, we create a new dataframe, where each row represents a year, and we add the proportion of each year into a new column:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{newData}\OtherTok{\textless{}{-}}\NormalTok{Data}\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(Year)}\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarize}\NormalTok{(}\AttributeTok{Counts=}\FunctionTok{n}\NormalTok{())}\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{Percent=}\NormalTok{Counts}\SpecialCharTok{/}\FunctionTok{nrow}\NormalTok{(Data))}
+\end{Highlighting}
+\end{Shaded}
+
+The code above does the following:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Creates a new data frame called \texttt{newData} by taking the data frame called \texttt{Data},
+\item
+  and then groups the observations by \texttt{Year},
+\item
+  and then counts the number of observations in each \texttt{Year} and stores these values in a vector called \texttt{Counts},
+\item
+  and then creates a new vector called \texttt{Percent} by using the mathematical operations as specified in \texttt{mutate()}. \texttt{Percent} is added to \texttt{newData}.
+\end{enumerate}
+
+We can take a look at the contents of \texttt{newData}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{newData}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 4 x 3
+##   Year   Counts Percent
+##   <fct>   <int>   <dbl>
+## 1 First      83   0.279
+## 2 Second    139   0.466
+## 3 Third      46   0.154
+## 4 Fourth     30   0.101
+\end{verbatim}
+
+To create a bar chart using proportions:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(newData, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{Year, }\AttributeTok{y=}\NormalTok{Percent))}\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{stat=}\StringTok{"identity"}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{angle =} \DecValTok{90}\NormalTok{), }
+        \AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{hjust =} \FloatTok{0.5}\NormalTok{))}\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x=}\StringTok{"Year"}\NormalTok{, }\AttributeTok{y=}\StringTok{"Percent of Students"}\NormalTok{, }\AttributeTok{title=}\StringTok{"Dist of Years"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-78-1.pdf}
+
+Note the following:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  In the first layer, we use \texttt{newData} instead of the old data frame. In \texttt{aes()}, we specified a y-variable, which we want to be \texttt{Percent}.
+\item
+  In the second layer, we specified \texttt{stat="identity"} inside \texttt{geom\_bar()}.
+\end{enumerate}
+
+\hypertarget{visualizations-with-a-single-quantitative-variable}{%
+\section{Visualizations with a Single Quantitative Variable}\label{visualizations-with-a-single-quantitative-variable}}
+
+\hypertarget{number-summary}{%
+\subsection{5 number summary}\label{number-summary}}
+
+The \texttt{summary()} function, when applied to a quantitative variable, produces the 5 number summary: the minimum, the first quartile (25th percentile), the median (50th percentile), the third quartile (75th percentile), and the maximum, as well as the mean. For example, to obtain the 5 number summary of the ages of these students:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(Data}\SpecialCharTok{$}\NormalTok{Age)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   18.00   19.00   19.00   19.57   20.00   51.00
+\end{verbatim}
+
+The average age of the observations in this dataset is 19.57 years old. Notice the first quartile and the median are both 19 years old, that means at least a quarter of the observations are 19 years old. Also note the maximum of 51 years old, so we have a student who is quite a lot older than the rest.
+
+\hypertarget{boxplots}{%
+\subsection{Boxplots}\label{boxplots}}
+
+A boxplot is a graphical representation of the 5 number summary. To create a generic boxplot, we have the following two lines of code when using the \texttt{ggplot()} function:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(Data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{y=}\NormalTok{Age))}\SpecialCharTok{+}
+  \FunctionTok{geom\_boxplot}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-80-1.pdf}
+
+Note we are still using the same structure when creating data visualizations with \texttt{ggplot()}:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Use the \texttt{ggplot()} function, and supply the name of the data frame, and the x- and/or y- variables via the aes() function. End this line with a \texttt{+} operator, and then press enter.
+\item
+  In the next line, specify the type of graph we want to create (called \texttt{geoms}). For a boxplot, type \texttt{geom\_boxplot}.
+\end{enumerate}
+
+Notice there are outliers (observations that are a lot older or younger) that are denoted by the dots. One is the 51 year old, and 22 year olds are deemed to be outliers. The rule being used is the \(1.5 \times IQR\) rule.
+
+Similar to bar charts, we can change the orientation of boxplots by adding an additional layer as before:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(Data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{y=}\NormalTok{Age))}\SpecialCharTok{+}
+  \FunctionTok{geom\_boxplot}\NormalTok{()}\SpecialCharTok{+}
+  \FunctionTok{coord\_flip}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+We can change the color of the box and the outliers similarly:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(Data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{y=}\NormalTok{Age))}\SpecialCharTok{+}
+  \FunctionTok{geom\_boxplot}\NormalTok{(}\AttributeTok{color=}\StringTok{"blue"}\NormalTok{, }\AttributeTok{outlier.color =} \StringTok{"orange"}\NormalTok{ )}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{histograms}{%
+\subsection{Histograms}\label{histograms}}
+
+A histogram displays the number of observations within each bin on the x-axis:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(Data,}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{Age))}\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+\end{verbatim}
+
+Notice a warning message is displayed when creating a basic histogram. To fix this, we use the binwidth argument within \texttt{geom\_histogram}. We try \texttt{binwidth=1} for now, which means the width of the bin is 1 unit:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(Data,}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{Age))}\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{binwidth =} \DecValTok{1}\NormalTok{,}\AttributeTok{fill=}\StringTok{"blue"}\NormalTok{,}\AttributeTok{color=}\StringTok{"orange"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-84-1.pdf}
+
+The ages of the students are mostly young, with 19 and 20 years olds being the most commonly occuring.
+
+A well-known drawback of histograms is that the width of the bins can drastically affect the visual. For example, suppose we change the binwidth to 2:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(Data,}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{Age))}\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{binwidth =} \DecValTok{2}\NormalTok{,}\AttributeTok{fill=}\StringTok{"blue"}\NormalTok{,}\AttributeTok{color=}\StringTok{"orange"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-85-1.pdf}
+
+Each bar now contains two ages: the first bar contains the 18 and 19 year olds. Notice how the shape has been changed a little bit from the previous histogram with a different binwidth?
+
+\hypertarget{density-plots}{%
+\subsection{Density plots}\label{density-plots}}
+
+Density plots are a variation of histograms, where the plot attempts to use a smooth mathematical function to approximate the shape of the histogram, and is unaffected by binwidth:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(Data,}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{Age))}\SpecialCharTok{+}
+  \FunctionTok{geom\_density}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-86-1.pdf}
+
+We can see that 19 and 20 year olds are the most common ages in this data. Be careful in interpreting the values on the veritical axis: these do not represent proportions. A characteristic of density plots is that the area under the plot is always one.
+
+\hypertarget{bivariate-visualizations}{%
+\section{Bivariate Visualizations}\label{bivariate-visualizations}}
+
+We will now look at visualizations we can create to explore the relationship between two variables. The term bivariate means that we are looking at two variables.
+
+We will be using a new dataset as an example, so we clear the environment:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{rm}\NormalTok{(}\AttributeTok{list =} \FunctionTok{ls}\NormalTok{())}
+\end{Highlighting}
+\end{Shaded}
+
+We will be using the dataset, \texttt{gapminder}, from the \texttt{gapminder} package. Install and load the \texttt{gapminder} package. Also load the \texttt{tidyverse} package (which automatically loads the \texttt{ggplot2} package):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\FunctionTok{library}\NormalTok{(gapminder)}
+\end{Highlighting}
+\end{Shaded}
+
+We can take a look at the \texttt{gapminder} dataset:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{gapminder[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{15}\NormalTok{,]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 15 x 6
+##    country     continent  year lifeExp      pop gdpPercap
+##    <fct>       <fct>     <int>   <dbl>    <int>     <dbl>
+##  1 Afghanistan Asia       1952    28.8  8425333      779.
+##  2 Afghanistan Asia       1957    30.3  9240934      821.
+##  3 Afghanistan Asia       1962    32.0 10267083      853.
+##  4 Afghanistan Asia       1967    34.0 11537966      836.
+##  5 Afghanistan Asia       1972    36.1 13079460      740.
+##  6 Afghanistan Asia       1977    38.4 14880372      786.
+##  7 Afghanistan Asia       1982    39.9 12881816      978.
+##  8 Afghanistan Asia       1987    40.8 13867957      852.
+##  9 Afghanistan Asia       1992    41.7 16317921      649.
+## 10 Afghanistan Asia       1997    41.8 22227415      635.
+## 11 Afghanistan Asia       2002    42.1 25268405      727.
+## 12 Afghanistan Asia       2007    43.8 31889923      975.
+## 13 Albania     Europe     1952    55.2  1282697     1601.
+## 14 Albania     Europe     1957    59.3  1476505     1942.
+## 15 Albania     Europe     1962    64.8  1728137     2313.
+\end{verbatim}
+
+Per the documentation, the variables are
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \texttt{country}
+\item
+  \texttt{continent}
+\item
+  \texttt{year}: from 1952 to 2007 in increments of 5 years
+\item
+  \texttt{lifeExp}: life expectancy at birth, in years
+\item
+  \texttt{pop}: population of country
+\item
+  \texttt{gdpPercap}: GDP per capita in US dollars, adjusted for inflation
+\end{enumerate}
+
+We notice that data are collected from each country across a number of different years: 1952 to 2007 in increments of five years. For this example, we will mainly focus on the data for the most recent year, 2007:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Data}\OtherTok{\textless{}{-}}\NormalTok{gapminder}\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(year}\SpecialCharTok{==}\DecValTok{2007}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+The specific visuals to use will again depend on the type of variables we are using, whether they are categorical or quantitative.
+
+\hypertarget{compare-quantitative-variable-across-categories}{%
+\subsection{Compare quantitative variable across categories}\label{compare-quantitative-variable-across-categories}}
+
+\hypertarget{side-by-side-boxplots}{%
+\subsubsection{Side by side boxplots}\label{side-by-side-boxplots}}
+
+Side by side boxplots are useful to compare a quantitative variable across different classes of a categorical variable. For example, we want to compare life expectancies across the different continents in the year 2007:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(Data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{continent, }\AttributeTok{y=}\NormalTok{lifeExp))}\SpecialCharTok{+}
+  \FunctionTok{geom\_boxplot}\NormalTok{(}\AttributeTok{fill=}\StringTok{"Blue"}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x=}\StringTok{"Continent"}\NormalTok{, }\AttributeTok{y=}\StringTok{"Life Exp"}\NormalTok{, }\AttributeTok{title=}\StringTok{"Dist of Life Expectancies by Continent"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-91-1.pdf}
+
+Countries in the Oceania region have long life expectancies with little variation. Comparing the Americas and Asia, the median life expectancies are similar, but the spread is larger for Asia.
+
+\hypertarget{violin-plots}{%
+\subsubsection{Violin plots}\label{violin-plots}}
+
+Violin plots are an alternative to boxplots. To create these plots to compare life expectancies across the different continents in the year 2007:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(Data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{continent, }\AttributeTok{y=}\NormalTok{lifeExp))}\SpecialCharTok{+}
+  \FunctionTok{geom\_violin}\NormalTok{()}\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x=}\StringTok{"Continent"}\NormalTok{, }\AttributeTok{y=}\StringTok{"Life Exp"}\NormalTok{, }\AttributeTok{title=}\StringTok{"Dist of Life Expectancies by Continent"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-92-1.pdf}
+
+The width of the violin informs us which values are more commonly occuring. For example, look at the violin for Europe. The violin is wider at higher life expectancies, so longer life expectancies are more common in European countries.
+
+\hypertarget{summarizing-two-categorical-variables}{%
+\subsection{Summarizing two categorical variables}\label{summarizing-two-categorical-variables}}
+
+For this example, we create a new binary variable called \texttt{expectancy}, which will be denoted as \texttt{low} if the life expectancy in the country is less than 70 years, and \texttt{high} otherwise:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Data}\OtherTok{\textless{}{-}}\NormalTok{Data}\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{expectancy=}\FunctionTok{ifelse}\NormalTok{(lifeExp}\SpecialCharTok{\textless{}}\DecValTok{70}\NormalTok{,}\StringTok{"Low"}\NormalTok{,}\StringTok{"High"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{two-way-tables}{%
+\subsubsection{Two-way tables}\label{two-way-tables}}
+
+Suppose we want to see how \texttt{expectancy} varies across the continents. A two-way table can be created for produce counts when two categorical variables are involved:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mytab2}\OtherTok{\textless{}{-}}\FunctionTok{table}\NormalTok{(Data}\SpecialCharTok{$}\NormalTok{continent, Data}\SpecialCharTok{$}\NormalTok{expectancy)}
+\DocumentationTok{\#\#continent in rows, expectancy in columns}
+\NormalTok{mytab2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##           
+##            High Low
+##   Africa      7  45
+##   Americas   22   3
+##   Asia       22  11
+##   Europe     30   0
+##   Oceania     2   0
+\end{verbatim}
+
+The first variable in \texttt{table()} will be placed in the rows, the second variable will be placed in the columns.
+
+From this table, we can see that 22 countries in the Americas have high life expectancies, while 3 countries in the Americas have low life expectancies.
+
+We may be interested in looking at the proportions, instead of counts, of countries in each continent that have high or low life expectancies. To convert this table to proportions, we can use \texttt{prop.table()}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{prop.table}\NormalTok{(mytab2, }\DecValTok{1}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##           
+##                 High       Low
+##   Africa   0.1346154 0.8653846
+##   Americas 0.8800000 0.1200000
+##   Asia     0.6666667 0.3333333
+##   Europe   1.0000000 0.0000000
+##   Oceania  1.0000000 0.0000000
+\end{verbatim}
+
+We want proportions for each continent, so we want proportions in each row to add up to 1. Therefore, the second argument in \texttt{prop.table()} is 1. Enter 2 for this argument if we want the proportions in each column to add up to 1.
+
+As before, to convert to percentages and round to 2 decimal places:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{round}\NormalTok{(}\FunctionTok{prop.table}\NormalTok{(mytab2, }\DecValTok{1}\NormalTok{) }\SpecialCharTok{*} \DecValTok{100}\NormalTok{, }\DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##           
+##              High    Low
+##   Africa    13.46  86.54
+##   Americas  88.00  12.00
+##   Asia      66.67  33.33
+##   Europe   100.00   0.00
+##   Oceania  100.00   0.00
+\end{verbatim}
+
+\hypertarget{bar-charts-1}{%
+\subsubsection{Bar charts}\label{bar-charts-1}}
+
+A stacked bar chart can be used to display the relationship between the binary variable \texttt{expectancy} across continents:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(Data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{continent, }\AttributeTok{fill=}\NormalTok{expectancy))}\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{position =} \StringTok{"stack"}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x=}\StringTok{"Continent"}\NormalTok{, }\AttributeTok{y=}\StringTok{"Count"}\NormalTok{, }\AttributeTok{title=}\StringTok{"Life Expectancies by Continent"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-97-1.pdf}
+
+We can see how many countries exist in each continent, and how many of these countries in each continent have high or low life expectancies. For example, there are about 25 countries in the Americas with the majority having high life expectancies.
+
+We can change the way the bar chart is displayed by changing \texttt{position} in \texttt{geom\_bar()} to \texttt{position\ =\ "dodge"} or \texttt{position\ =\ "fill"}, the latter being more useful for proportions instead of counts:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(Data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{continent, }\AttributeTok{fill=}\NormalTok{expectancy))}\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{position =} \StringTok{"dodge"}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(Data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{continent, }\AttributeTok{fill=}\NormalTok{expectancy))}\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{position =} \StringTok{"fill"}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x=}\StringTok{"Continent"}\NormalTok{, }\AttributeTok{y=}\StringTok{"Proportion"}\NormalTok{, }
+       \AttributeTok{title=}\StringTok{"Proportion of Life Expectancies by Continent"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-99-1.pdf}
+
+\hypertarget{summarizing-two-quantitative-variables}{%
+\subsection{Summarizing two quantitative variables}\label{summarizing-two-quantitative-variables}}
+
+\hypertarget{scatterplots}{%
+\subsubsection{Scatterplots}\label{scatterplots}}
+
+Scatterplots are the standard visualization when two quantitative variables are involved. To create a scatterplot for life expectancy against GDP per capita:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(Data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{gdpPercap,}\AttributeTok{y=}\NormalTok{lifeExp))}\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-100-1.pdf}
+
+We see a curved relationship between life expectancies and GDP per capita. Countries with higher GDP per capita tend to have longer life expectancies.
+
+When there are many observations, plots on the scatterplot may actually overlap each other. To have a sense of how many of these exist, we can add a transparency scale called \texttt{alpha=0.2} inside \texttt{geom\_point()}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(Data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{gdpPercap,}\AttributeTok{y=}\NormalTok{lifeExp))}\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{alpha=}\FloatTok{0.2}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x=}\StringTok{"GDP"}\NormalTok{, }\AttributeTok{y=}\StringTok{"Life Exp"}\NormalTok{, }
+       \AttributeTok{title=}\StringTok{"Scatterplot of Life Exp against GDP"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-101-1.pdf}
+
+The default value for \texttt{alpha} is 1, which means the points are not at all transparent. The closer this value is to 0, the more transparent the points are. A darker point indicates more observations with those specific values on both variables.
+
+\hypertarget{multivariate-visualizations}{%
+\section{Multivariate Visualizations}\label{multivariate-visualizations}}
+
+We will now look at visualizations we can create to explore the relationship between multiple (more than two) variables. The term multivariate means that we are looking at more than two variables.
+
+\hypertarget{bar-charts-2}{%
+\subsection{Bar charts}\label{bar-charts-2}}
+
+Previously, we created a bar chart to look at how \texttt{expectancy} varies across the continents. Suppose we want to see how these bar graphs vary across the years, so we use the \texttt{year} variable as a third variable via a layer \texttt{facet\_wrap}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#another data frame across all years plus a binary variable }
+\DocumentationTok{\#\#for expectancy}
+\NormalTok{Data.all}\OtherTok{\textless{}{-}}\NormalTok{gapminder}\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{expectancy=}\FunctionTok{ifelse}\NormalTok{(lifeExp}\SpecialCharTok{\textless{}}\DecValTok{70}\NormalTok{,}\StringTok{"Low"}\NormalTok{,}\StringTok{"High"}\NormalTok{))}
+
+\FunctionTok{ggplot}\NormalTok{(Data.all,}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{continent, }\AttributeTok{fill=}\NormalTok{expectancy))}\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{position =} \StringTok{"fill"}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{facet\_wrap}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{year)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-102-1.pdf}
+
+Notice that three categorical variables are summarized in this bar chart. Is there something that can be done to improve this bar chart? How would you make this improvement?
+
+\hypertarget{scatterplots-1}{%
+\subsection{Scatterplots}\label{scatterplots-1}}
+
+Previously, we created a scatterplot of life expectancy against GDP per capita. We can include another quantitative variable in the scatterplot, by using the size of the plots. We can use the size of the plots to denote the population of the countries. This is supplied via \texttt{size} in \texttt{aes()}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(Data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{gdpPercap, }\AttributeTok{y=}\NormalTok{lifeExp, }\AttributeTok{size=}\NormalTok{pop))}\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-103-1.pdf}
+
+We can adjust the size of the plots by adding a layer \texttt{scale\_size()}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(Data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{gdpPercap, }\AttributeTok{y=}\NormalTok{lifeExp, }\AttributeTok{size=}\NormalTok{pop))}\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{()}\SpecialCharTok{+}
+  \FunctionTok{scale\_size}\NormalTok{(}\AttributeTok{range =} \FunctionTok{c}\NormalTok{(}\FloatTok{0.1}\NormalTok{,}\DecValTok{12}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-104-1.pdf}
+
+This scatterplot summarizes three quantitative variables.
+
+We can use different-colored plots to denote which continent each point belongs to:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(Data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{gdpPercap, }\AttributeTok{y=}\NormalTok{lifeExp, }\AttributeTok{size=}\NormalTok{pop, }\AttributeTok{color=}\NormalTok{continent))}\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{()}\SpecialCharTok{+}
+  \FunctionTok{scale\_size}\NormalTok{(}\AttributeTok{range =} \FunctionTok{c}\NormalTok{(}\FloatTok{0.1}\NormalTok{,}\DecValTok{12}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-105-1.pdf}
+
+This scatterplot summarizes three quantitative variables and one categorical variable.
+
+We can adjust the plots by changing its shape and making it more translucent via \texttt{shape} and \texttt{alpha} in \texttt{aes()}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(Data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{gdpPercap, }\AttributeTok{y=}\NormalTok{lifeExp, }\AttributeTok{size=}\NormalTok{pop, }\AttributeTok{fill=}\NormalTok{continent))}\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{shape=}\DecValTok{21}\NormalTok{, }\AttributeTok{alpha=}\FloatTok{0.5}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{scale\_size}\NormalTok{(}\AttributeTok{range =} \FunctionTok{c}\NormalTok{(}\FloatTok{0.1}\NormalTok{,}\DecValTok{12}\NormalTok{))}\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x=}\StringTok{"GDP"}\NormalTok{, }\AttributeTok{y=}\StringTok{"Life Exp"}\NormalTok{, }\AttributeTok{title=}\StringTok{"Scatterplot of Life Exp against GDP"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-106-1.pdf}
 
 \hypertarget{intro}{%
 \chapter{Introduction}\label{intro}}

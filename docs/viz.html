@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 2 Data Visualization with R Using ggplot2 | Linear Models for Data Science</title>
+<meta name="author" content="Jeffrey Woo">
+<meta name="description" content="2.1 Introduction Data visualizations are tools that summarize data. Consider the visuals from the CDC covid tracker dashboard to an external site. Without actually having access to the actual...">
+<meta name="generator" content="bookdown 0.34 with bs4_book()">
+<meta property="og:title" content="Chapter 2 Data Visualization with R Using ggplot2 | Linear Models for Data Science">
+<meta property="og:type" content="book">
+<meta property="og:description" content="2.1 Introduction Data visualizations are tools that summarize data. Consider the visuals from the CDC covid tracker dashboard to an external site. Without actually having access to the actual...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 2 Data Visualization with R Using ggplot2 | Linear Models for Data Science">
+<meta name="twitter:description" content="2.1 Introduction Data visualizations are tools that summarize data. Consider the visuals from the CDC covid tracker dashboard to an external site. Without actually having access to the actual...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.2/transition.js"></script><script src="libs/bs3compat-0.4.2/tabs.js"></script><script src="libs/bs3compat-0.4.2/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<style type="text/css">
+    /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+        }
+    .hanging div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }
+  </style>
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Linear Models for Data Science</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Preface</a></li>
+<li><a class="" href="wrangling.html"><span class="header-section-number">1</span> Data Wrangling with R</a></li>
+<li><a class="active" href="viz.html"><span class="header-section-number">2</span> Data Visualization with R Using ggplot2</a></li>
+<li><a class="" href="intro.html"><span class="header-section-number">3</span> Introduction</a></li>
+<li><a class="" href="literature.html"><span class="header-section-number">4</span> Literature</a></li>
+<li><a class="" href="methods.html"><span class="header-section-number">5</span> Methods</a></li>
+<li><a class="" href="applications.html"><span class="header-section-number">6</span> Applications</a></li>
+<li><a class="" href="final-words.html"><span class="header-section-number">7</span> Final Words</a></li>
+<li><a class="" href="references.html">References</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="viz" class="section level1" number="2">
+<h1>
+<span class="header-section-number">2</span> Data Visualization with R Using ggplot2<a class="anchor" aria-label="anchor" href="#viz"><i class="fas fa-link"></i></a>
+</h1>
+<div id="introduction-1" class="section level2" number="2.1">
+<h2>
+<span class="header-section-number">2.1</span> Introduction<a class="anchor" aria-label="anchor" href="#introduction-1"><i class="fas fa-link"></i></a>
+</h2>
+<p>Data visualizations are tools that summarize data. Consider the visuals from the <a href="https://covid.cdc.gov/covid-data-tracker/#datatracker-home">CDC covid tracker dashboard</a> to an external site. Without actually having access to the actual data, we have a sense of trends associated with hospitalizations and deaths. Good visualizations are easy to interpret for a wide variety of audiences, and are easier to explain than statistical models.</p>
+<p>In this module, you will learn how to create common data visualizations. The choice of data visualization is almost always determined by whether the variable(s) involved is categorical or quantitative. Discrete variables are interesting because depending on the circumstance, they can be viewed as either categorical or quantitative in the context of data visualizations.</p>
+<p>We will be using functions from the <code>ggplot2</code> package to create visualizations. The <code>ggplot2</code> package enables users to create various kinds of data visualizations, beyond the visualizations that can be made in base R. The <code>ggplot2</code> package is automatically loaded when we load the <code>tidyverse</code> package, although we can load <code>ggplot2</code> on its own.</p>
+<div class="sourceCode" id="cb91"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span></code></pre></div>
+<p>We will use the dataset <code>ClassDataPrevious.csv</code> as an example. The data were collected from an introductory statistics class at UVa from a previous semester. Download the dataset from Canvas and read it into R.</p>
+<div class="sourceCode" id="cb92"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">Data</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"ClassDataPrevious.csv"</span>, header<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<p>The variables are:</p>
+<ol style="list-style-type: decimal">
+<li>
+<code>Year</code>: the year the student is in</li>
+<li>
+<code>Sleep</code>: how much sleep the student averages a night (in hours)</li>
+<li>
+<code>Sport</code>: the student’s favorite sport</li>
+<li>
+<code>Courses</code>: how many courses the student is taking in the semester</li>
+<li>
+<code>Major</code>: the student’s major</li>
+<li>
+<code>Age</code>: the student’s age (in years)</li>
+<li>
+<code>Computer</code>: the operating system the student uses (Mac or PC)</li>
+<li>
+<code>Lunch</code>: how much the student usually spends on lunch (in dollars)</li>
+</ol>
+</div>
+<div id="visualizations-with-a-single-categorical-variable" class="section level2" number="2.2">
+<h2>
+<span class="header-section-number">2.2</span> Visualizations with a Single Categorical Variable<a class="anchor" aria-label="anchor" href="#visualizations-with-a-single-categorical-variable"><i class="fas fa-link"></i></a>
+</h2>
+<div id="frequency-tables" class="section level3" number="2.2.1">
+<h3>
+<span class="header-section-number">2.2.1</span> Frequency tables<a class="anchor" aria-label="anchor" href="#frequency-tables"><i class="fas fa-link"></i></a>
+</h3>
+<p>Frequency tables are a common tool to summarize categorical variables. These tables give us the number of observations (sometimes called counts) that belong to each class of a categorical variable. These tables are created using the <code><a href="https://rdrr.io/r/base/table.html">table()</a></code> function. Suppose we want to see the number of students in each year in our data:</p>
+<div class="sourceCode" id="cb93"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">Data</span><span class="op">$</span><span class="va">Year</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## 
+##  First Fourth Second  Third 
+##     83     30    139     46</code></pre>
+<p>Notice the order of the years could be rearranged to make more sense:</p>
+<div class="sourceCode" id="cb95"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">Data</span><span class="op">$</span><span class="va">Year</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">Data</span><span class="op">$</span><span class="va">Year</span>, levels<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"First"</span>,<span class="st">"Second"</span>,<span class="st">"Third"</span>,<span class="st">"Fourth"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/levels.html">levels</a></span><span class="op">(</span><span class="va">Data</span><span class="op">$</span><span class="va">Year</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] "First"  "Second" "Third"  "Fourth"</code></pre>
+<div class="sourceCode" id="cb97"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mytab</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">Data</span><span class="op">$</span><span class="va">Year</span><span class="op">)</span></span>
+<span><span class="va">mytab</span></span></code></pre></div>
+<pre><code>## 
+##  First Second  Third Fourth 
+##     83    139     46     30</code></pre>
+<p>So we have 83 first years, 139 second years, 46 third years, and 30 fourth years in our dataset.</p>
+<p>We can report these numbers using proportions instead of counts, using <code><a href="https://rdrr.io/r/base/proportions.html">prop.table()</a></code>:</p>
+<div class="sourceCode" id="cb99"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/proportions.html">prop.table</a></span><span class="op">(</span><span class="va">mytab</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## 
+##     First    Second     Third    Fourth 
+## 0.2785235 0.4664430 0.1543624 0.1006711</code></pre>
+<p>or percentages by multiplying by 100:</p>
+<div class="sourceCode" id="cb101"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/proportions.html">prop.table</a></span><span class="op">(</span><span class="va">mytab</span><span class="op">)</span> <span class="op">*</span> <span class="fl">100</span></span></code></pre></div>
+<pre><code>## 
+##    First   Second    Third   Fourth 
+## 27.85235 46.64430 15.43624 10.06711</code></pre>
+<p>To round the percentages to two decimal places, use the <code><a href="https://rdrr.io/r/base/Round.html">round()</a></code> function:</p>
+<div class="sourceCode" id="cb103"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/proportions.html">prop.table</a></span><span class="op">(</span><span class="va">mytab</span><span class="op">)</span> <span class="op">*</span> <span class="fl">100</span>, <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## 
+##  First Second  Third Fourth 
+##  27.85  46.64  15.44  10.07</code></pre>
+<p>So about 27.85% of these students are first years, 46.64% are second years, 15.44% are third years, and 10.07% are fourth years.</p>
+</div>
+<div id="bar-charts" class="section level3" number="2.2.2">
+<h3>
+<span class="header-section-number">2.2.2</span> Bar charts<a class="anchor" aria-label="anchor" href="#bar-charts"><i class="fas fa-link"></i></a>
+</h3>
+<p>Bar charts are a simple way to visualize categorical data, and can be viewed as a visual representation of frequency tables. To create a bar chart for the years of these students, we use:</p>
+<div class="sourceCode" id="cb105"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">Data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">Year</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/unnamed-chunk-69-1.png" width="672"></div>
+<p>We can read the number of students who are first, second, third, and fourth years by reading off the corresponding value on the vertical axis.</p>
+<p>From these two lines we code, we can see the basic structure of creating data visualizations with the <code><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot()</a></code> function:</p>
+<ol style="list-style-type: decimal">
+<li><p>Use the <code><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot()</a></code> function, and supply the name of the data frame, and the x- and/or y- variables via the aes() function. End this line with a <code>+</code> operator, and then press enter.</p></li>
+<li><p>In the next line, specify the type of graph we want to create (called <code>geoms</code>). For a bar chart, type <code><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar()</a></code>.</p></li>
+</ol>
+<p>Some describe these lines of code as two layers of code. These two layers must be supplied for all data visualizations with <code><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot()</a></code>.</p>
+<p>Additional optional layers can be added (these usually deal with the details of the visuals). Suppose we want to change the orientation of this bar chart, we can add an optional line, or layer:</p>
+<div class="sourceCode" id="cb106"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">Data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">Year</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_flip.html">coord_flip</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/unnamed-chunk-70-1.png" width="672"></div>
+<p>It is recommended that each layer is typed on a line below the previous layer. A <code>+</code> sign is used at the end of each layer to add another layer below.</p>
+<p>To change the color of the bars:</p>
+<div class="sourceCode" id="cb107"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">Data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">Year</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span>fill<span class="op">=</span><span class="st">"blue"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/unnamed-chunk-71-1.png" width="672"></div>
+<p>To have a different color to outline the bars:</p>
+<div class="sourceCode" id="cb108"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">Data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">Year</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span>fill<span class="op">=</span><span class="st">"blue"</span>,color<span class="op">=</span><span class="st">"orange"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/unnamed-chunk-72-1.png" width="672"></div>
+<div id="customize-title-and-labels-of-axes-in-bar-charts" class="section level4" number="2.2.2.1">
+<h4>
+<span class="header-section-number">2.2.2.1</span> Customize title and labels of axes in bar charts<a class="anchor" aria-label="anchor" href="#customize-title-and-labels-of-axes-in-bar-charts"><i class="fas fa-link"></i></a>
+</h4>
+<p>To change the orientation of the labels on the horizontal axis, we add an extra layer called <code>theme</code>. This will be useful when we have many classes and/or labels with long names.</p>
+<p>To rotate the labels on the horizontal by 90 degrees:</p>
+<div class="sourceCode" id="cb109"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">Data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">Year</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>axis.text.x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>angle <span class="op">=</span> <span class="fl">90</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/unnamed-chunk-73-1.png" width="672"></div>
+<p>As we create more visualizations, it is good practice to give short but meaningful and descriptive names for each axis and provide a title. We can change the labels of the x- and y- axes, as well as add a title for the bar chart by adding another layer called <code>labs</code>:</p>
+<div class="sourceCode" id="cb110"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">Data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">Year</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>axis.text.x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>angle <span class="op">=</span> <span class="fl">90</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x<span class="op">=</span><span class="st">"Year"</span>, y<span class="op">=</span><span class="st">"Number of Students"</span>, title<span class="op">=</span><span class="st">"Dist of Years"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/unnamed-chunk-74-1.png" width="672"></div>
+<p>We can also adjust the position of the title, for example, center-justify it via <code>theme</code>:</p>
+<div class="sourceCode" id="cb111"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">Data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">Year</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>axis.text.x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>angle <span class="op">=</span> <span class="fl">90</span><span class="op">)</span>, </span>
+<span>        plot.title <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>hjust <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x<span class="op">=</span><span class="st">"Year"</span>, y<span class="op">=</span><span class="st">"Number of Students"</span>, title<span class="op">=</span><span class="st">"Dist of Years"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/unnamed-chunk-75-1.png" width="672"></div>
+</div>
+<div id="create-a-bar-chart-using-proportions" class="section level4" number="2.2.2.2">
+<h4>
+<span class="header-section-number">2.2.2.2</span> Create a bar chart using proportions<a class="anchor" aria-label="anchor" href="#create-a-bar-chart-using-proportions"><i class="fas fa-link"></i></a>
+</h4>
+<p>Suppose we want to create a bar chart where the y-axis displays the proportions, rather than the counts of each level. There are a few steps to produce such a bar chart. First, we create a new dataframe, where each row represents a year, and we add the proportion of each year into a new column:</p>
+<div class="sourceCode" id="cb112"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">newData</span><span class="op">&lt;-</span><span class="va">Data</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">Year</span><span class="op">)</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span><span class="op">(</span>Counts<span class="op">=</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>Percent<span class="op">=</span><span class="va">Counts</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">Data</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p>The code above does the following:</p>
+<ol style="list-style-type: decimal">
+<li>Creates a new data frame called <code>newData</code> by taking the data frame called <code>Data</code>,</li>
+<li>and then groups the observations by <code>Year</code>,</li>
+<li>and then counts the number of observations in each <code>Year</code> and stores these values in a vector called <code>Counts</code>,</li>
+<li>and then creates a new vector called <code>Percent</code> by using the mathematical operations as specified in <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate()</a></code>. <code>Percent</code> is added to <code>newData</code>.</li>
+</ol>
+<p>We can take a look at the contents of <code>newData</code>:</p>
+<div class="sourceCode" id="cb113"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">newData</span></span></code></pre></div>
+<pre><code>## # A tibble: 4 × 3
+##   Year   Counts Percent
+##   &lt;fct&gt;   &lt;int&gt;   &lt;dbl&gt;
+## 1 First      83   0.279
+## 2 Second    139   0.466
+## 3 Third      46   0.154
+## 4 Fourth     30   0.101</code></pre>
+<p>To create a bar chart using proportions:</p>
+<div class="sourceCode" id="cb115"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">newData</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">Year</span>, y<span class="op">=</span><span class="va">Percent</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span>stat<span class="op">=</span><span class="st">"identity"</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>axis.text.x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>angle <span class="op">=</span> <span class="fl">90</span><span class="op">)</span>, </span>
+<span>        plot.title <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>hjust <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x<span class="op">=</span><span class="st">"Year"</span>, y<span class="op">=</span><span class="st">"Percent of Students"</span>, title<span class="op">=</span><span class="st">"Dist of Years"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/unnamed-chunk-78-1.png" width="672"></div>
+<p>Note the following:</p>
+<ol style="list-style-type: decimal">
+<li>In the first layer, we use <code>newData</code> instead of the old data frame. In <code><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes()</a></code>, we specified a y-variable, which we want to be <code>Percent</code>.</li>
+<li>In the second layer, we specified <code>stat="identity"</code> inside <code><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar()</a></code>.</li>
+</ol>
+</div>
+</div>
+</div>
+<div id="visualizations-with-a-single-quantitative-variable" class="section level2" number="2.3">
+<h2>
+<span class="header-section-number">2.3</span> Visualizations with a Single Quantitative Variable<a class="anchor" aria-label="anchor" href="#visualizations-with-a-single-quantitative-variable"><i class="fas fa-link"></i></a>
+</h2>
+<div id="number-summary" class="section level3" number="2.3.1">
+<h3>
+<span class="header-section-number">2.3.1</span> 5 number summary<a class="anchor" aria-label="anchor" href="#number-summary"><i class="fas fa-link"></i></a>
+</h3>
+<p>The <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code> function, when applied to a quantitative variable, produces the 5 number summary: the minimum, the first quartile (25th percentile), the median (50th percentile), the third quartile (75th percentile), and the maximum, as well as the mean. For example, to obtain the 5 number summary of the ages of these students:</p>
+<div class="sourceCode" id="cb116"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">Data</span><span class="op">$</span><span class="va">Age</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   18.00   19.00   19.00   19.57   20.00   51.00</code></pre>
+<p>The average age of the observations in this dataset is 19.57 years old. Notice the first quartile and the median are both 19 years old, that means at least a quarter of the observations are 19 years old. Also note the maximum of 51 years old, so we have a student who is quite a lot older than the rest.</p>
+</div>
+<div id="boxplots" class="section level3" number="2.3.2">
+<h3>
+<span class="header-section-number">2.3.2</span> Boxplots<a class="anchor" aria-label="anchor" href="#boxplots"><i class="fas fa-link"></i></a>
+</h3>
+<p>A boxplot is a graphical representation of the 5 number summary. To create a generic boxplot, we have the following two lines of code when using the <code><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot()</a></code> function:</p>
+<div class="sourceCode" id="cb118"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">Data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>y<span class="op">=</span><span class="va">Age</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/unnamed-chunk-80-1.png" width="672"></div>
+<p>Note we are still using the same structure when creating data visualizations with <code><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot()</a></code>:</p>
+<ol style="list-style-type: decimal">
+<li><p>Use the <code><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot()</a></code> function, and supply the name of the data frame, and the x- and/or y- variables via the aes() function. End this line with a <code>+</code> operator, and then press enter.</p></li>
+<li><p>In the next line, specify the type of graph we want to create (called <code>geoms</code>). For a boxplot, type <code>geom_boxplot</code>.</p></li>
+</ol>
+<p>Notice there are outliers (observations that are a lot older or younger) that are denoted by the dots. One is the 51 year old, and 22 year olds are deemed to be outliers. The rule being used is the <span class="math inline">\(1.5 \times IQR\)</span> rule.</p>
+<p>Similar to bar charts, we can change the orientation of boxplots by adding an additional layer as before:</p>
+<div class="sourceCode" id="cb119"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">Data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>y<span class="op">=</span><span class="va">Age</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_flip.html">coord_flip</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p>We can change the color of the box and the outliers similarly:</p>
+<div class="sourceCode" id="cb120"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">Data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>y<span class="op">=</span><span class="va">Age</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span>color<span class="op">=</span><span class="st">"blue"</span>, outlier.color <span class="op">=</span> <span class="st">"orange"</span> <span class="op">)</span></span></code></pre></div>
+</div>
+<div id="histograms" class="section level3" number="2.3.3">
+<h3>
+<span class="header-section-number">2.3.3</span> Histograms<a class="anchor" aria-label="anchor" href="#histograms"><i class="fas fa-link"></i></a>
+</h3>
+<p>A histogram displays the number of observations within each bin on the x-axis:</p>
+<div class="sourceCode" id="cb121"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">Data</span>,<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">Age</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p>Notice a warning message is displayed when creating a basic histogram. To fix this, we use the binwidth argument within <code>geom_histogram</code>. We try <code>binwidth=1</code> for now, which means the width of the bin is 1 unit:</p>
+<div class="sourceCode" id="cb123"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">Data</span>,<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">Age</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span>binwidth <span class="op">=</span> <span class="fl">1</span>,fill<span class="op">=</span><span class="st">"blue"</span>,color<span class="op">=</span><span class="st">"orange"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/unnamed-chunk-84-1.png" width="672"></div>
+<p>The ages of the students are mostly young, with 19 and 20 years olds being the most commonly occuring.</p>
+<p>A well-known drawback of histograms is that the width of the bins can drastically affect the visual. For example, suppose we change the binwidth to 2:</p>
+<div class="sourceCode" id="cb124"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">Data</span>,<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">Age</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span>binwidth <span class="op">=</span> <span class="fl">2</span>,fill<span class="op">=</span><span class="st">"blue"</span>,color<span class="op">=</span><span class="st">"orange"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/unnamed-chunk-85-1.png" width="672"></div>
+<p>Each bar now contains two ages: the first bar contains the 18 and 19 year olds. Notice how the shape has been changed a little bit from the previous histogram with a different binwidth?</p>
+</div>
+<div id="density-plots" class="section level3" number="2.3.4">
+<h3>
+<span class="header-section-number">2.3.4</span> Density plots<a class="anchor" aria-label="anchor" href="#density-plots"><i class="fas fa-link"></i></a>
+</h3>
+<p>Density plots are a variation of histograms, where the plot attempts to use a smooth mathematical function to approximate the shape of the histogram, and is unaffected by binwidth:</p>
+<div class="sourceCode" id="cb125"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">Data</span>,<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">Age</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_density.html">geom_density</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/unnamed-chunk-86-1.png" width="672"></div>
+<p>We can see that 19 and 20 year olds are the most common ages in this data. Be careful in interpreting the values on the veritical axis: these do not represent proportions. A characteristic of density plots is that the area under the plot is always one.</p>
+</div>
+</div>
+<div id="bivariate-visualizations" class="section level2" number="2.4">
+<h2>
+<span class="header-section-number">2.4</span> Bivariate Visualizations<a class="anchor" aria-label="anchor" href="#bivariate-visualizations"><i class="fas fa-link"></i></a>
+</h2>
+<p>We will now look at visualizations we can create to explore the relationship between two variables. The term bivariate means that we are looking at two variables.</p>
+<p>We will be using a new dataset as an example, so we clear the environment:</p>
+<div class="sourceCode" id="cb126"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p>We will be using the dataset, <code>gapminder</code>, from the <code>gapminder</code> package. Install and load the <code>gapminder</code> package. Also load the <code>tidyverse</code> package (which automatically loads the <code>ggplot2</code> package):</p>
+<div class="sourceCode" id="cb127"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jennybc/gapminder">gapminder</a></span><span class="op">)</span></span></code></pre></div>
+<p>We can take a look at the <code>gapminder</code> dataset:</p>
+<div class="sourceCode" id="cb128"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">gapminder</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">15</span>,<span class="op">]</span></span></code></pre></div>
+<pre><code>## # A tibble: 15 × 6
+##    country     continent  year lifeExp      pop gdpPercap
+##    &lt;fct&gt;       &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;    &lt;int&gt;     &lt;dbl&gt;
+##  1 Afghanistan Asia       1952    28.8  8425333      779.
+##  2 Afghanistan Asia       1957    30.3  9240934      821.
+##  3 Afghanistan Asia       1962    32.0 10267083      853.
+##  4 Afghanistan Asia       1967    34.0 11537966      836.
+##  5 Afghanistan Asia       1972    36.1 13079460      740.
+##  6 Afghanistan Asia       1977    38.4 14880372      786.
+##  7 Afghanistan Asia       1982    39.9 12881816      978.
+##  8 Afghanistan Asia       1987    40.8 13867957      852.
+##  9 Afghanistan Asia       1992    41.7 16317921      649.
+## 10 Afghanistan Asia       1997    41.8 22227415      635.
+## 11 Afghanistan Asia       2002    42.1 25268405      727.
+## 12 Afghanistan Asia       2007    43.8 31889923      975.
+## 13 Albania     Europe     1952    55.2  1282697     1601.
+## 14 Albania     Europe     1957    59.3  1476505     1942.
+## 15 Albania     Europe     1962    64.8  1728137     2313.</code></pre>
+<p>Per the documentation, the variables are</p>
+<ol style="list-style-type: decimal">
+<li><code>country</code></li>
+<li><code>continent</code></li>
+<li>
+<code>year</code>: from 1952 to 2007 in increments of 5 years</li>
+<li>
+<code>lifeExp</code>: life expectancy at birth, in years</li>
+<li>
+<code>pop</code>: population of country</li>
+<li>
+<code>gdpPercap</code>: GDP per capita in US dollars, adjusted for inflation</li>
+</ol>
+<p>We notice that data are collected from each country across a number of different years: 1952 to 2007 in increments of five years. For this example, we will mainly focus on the data for the most recent year, 2007:</p>
+<div class="sourceCode" id="cb130"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">Data</span><span class="op">&lt;-</span><span class="va">gapminder</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">year</span><span class="op">==</span><span class="fl">2007</span><span class="op">)</span></span></code></pre></div>
+<p>The specific visuals to use will again depend on the type of variables we are using, whether they are categorical or quantitative.</p>
+<div id="compare-quantitative-variable-across-categories" class="section level3" number="2.4.1">
+<h3>
+<span class="header-section-number">2.4.1</span> Compare quantitative variable across categories<a class="anchor" aria-label="anchor" href="#compare-quantitative-variable-across-categories"><i class="fas fa-link"></i></a>
+</h3>
+<div id="side-by-side-boxplots" class="section level4" number="2.4.1.1">
+<h4>
+<span class="header-section-number">2.4.1.1</span> Side by side boxplots<a class="anchor" aria-label="anchor" href="#side-by-side-boxplots"><i class="fas fa-link"></i></a>
+</h4>
+<p>Side by side boxplots are useful to compare a quantitative variable across different classes of a categorical variable. For example, we want to compare life expectancies across the different continents in the year 2007:</p>
+<div class="sourceCode" id="cb131"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">Data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">continent</span>, y<span class="op">=</span><span class="va">lifeExp</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span>fill<span class="op">=</span><span class="st">"Blue"</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x<span class="op">=</span><span class="st">"Continent"</span>, y<span class="op">=</span><span class="st">"Life Exp"</span>, title<span class="op">=</span><span class="st">"Dist of Life Expectancies by Continent"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/unnamed-chunk-91-1.png" width="672"></div>
+<p>Countries in the Oceania region have long life expectancies with little variation. Comparing the Americas and Asia, the median life expectancies are similar, but the spread is larger for Asia.</p>
+</div>
+<div id="violin-plots" class="section level4" number="2.4.1.2">
+<h4>
+<span class="header-section-number">2.4.1.2</span> Violin plots<a class="anchor" aria-label="anchor" href="#violin-plots"><i class="fas fa-link"></i></a>
+</h4>
+<p>Violin plots are an alternative to boxplots. To create these plots to compare life expectancies across the different continents in the year 2007:</p>
+<div class="sourceCode" id="cb132"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">Data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">continent</span>, y<span class="op">=</span><span class="va">lifeExp</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_violin.html">geom_violin</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x<span class="op">=</span><span class="st">"Continent"</span>, y<span class="op">=</span><span class="st">"Life Exp"</span>, title<span class="op">=</span><span class="st">"Dist of Life Expectancies by Continent"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/unnamed-chunk-92-1.png" width="672"></div>
+<p>The width of the violin informs us which values are more commonly occuring. For example, look at the violin for Europe. The violin is wider at higher life expectancies, so longer life expectancies are more common in European countries.</p>
+</div>
+</div>
+<div id="summarizing-two-categorical-variables" class="section level3" number="2.4.2">
+<h3>
+<span class="header-section-number">2.4.2</span> Summarizing two categorical variables<a class="anchor" aria-label="anchor" href="#summarizing-two-categorical-variables"><i class="fas fa-link"></i></a>
+</h3>
+<p>For this example, we create a new binary variable called <code>expectancy</code>, which will be denoted as <code>low</code> if the life expectancy in the country is less than 70 years, and <code>high</code> otherwise:</p>
+<div class="sourceCode" id="cb133"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">Data</span><span class="op">&lt;-</span><span class="va">Data</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>expectancy<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">lifeExp</span><span class="op">&lt;</span><span class="fl">70</span>,<span class="st">"Low"</span>,<span class="st">"High"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<div id="two-way-tables" class="section level4" number="2.4.2.1">
+<h4>
+<span class="header-section-number">2.4.2.1</span> Two-way tables<a class="anchor" aria-label="anchor" href="#two-way-tables"><i class="fas fa-link"></i></a>
+</h4>
+<p>Suppose we want to see how <code>expectancy</code> varies across the continents. A two-way table can be created for produce counts when two categorical variables are involved:</p>
+<div class="sourceCode" id="cb134"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mytab2</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">Data</span><span class="op">$</span><span class="va">continent</span>, <span class="va">Data</span><span class="op">$</span><span class="va">expectancy</span><span class="op">)</span></span>
+<span><span class="co">##continent in rows, expectancy in columns</span></span>
+<span><span class="va">mytab2</span></span></code></pre></div>
+<pre><code>##           
+##            High Low
+##   Africa      7  45
+##   Americas   22   3
+##   Asia       22  11
+##   Europe     30   0
+##   Oceania     2   0</code></pre>
+<p>The first variable in <code><a href="https://rdrr.io/r/base/table.html">table()</a></code> will be placed in the rows, the second variable will be placed in the columns.</p>
+<p>From this table, we can see that 22 countries in the Americas have high life expectancies, while 3 countries in the Americas have low life expectancies.</p>
+<p>We may be interested in looking at the proportions, instead of counts, of countries in each continent that have high or low life expectancies. To convert this table to proportions, we can use <code><a href="https://rdrr.io/r/base/proportions.html">prop.table()</a></code>:</p>
+<div class="sourceCode" id="cb136"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/proportions.html">prop.table</a></span><span class="op">(</span><span class="va">mytab2</span>, <span class="fl">1</span><span class="op">)</span> </span></code></pre></div>
+<pre><code>##           
+##                 High       Low
+##   Africa   0.1346154 0.8653846
+##   Americas 0.8800000 0.1200000
+##   Asia     0.6666667 0.3333333
+##   Europe   1.0000000 0.0000000
+##   Oceania  1.0000000 0.0000000</code></pre>
+<p>We want proportions for each continent, so we want proportions in each row to add up to 1. Therefore, the second argument in <code><a href="https://rdrr.io/r/base/proportions.html">prop.table()</a></code> is 1. Enter 2 for this argument if we want the proportions in each column to add up to 1.</p>
+<p>As before, to convert to percentages and round to 2 decimal places:</p>
+<div class="sourceCode" id="cb138"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/proportions.html">prop.table</a></span><span class="op">(</span><span class="va">mytab2</span>, <span class="fl">1</span><span class="op">)</span> <span class="op">*</span> <span class="fl">100</span>, <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##           
+##              High    Low
+##   Africa    13.46  86.54
+##   Americas  88.00  12.00
+##   Asia      66.67  33.33
+##   Europe   100.00   0.00
+##   Oceania  100.00   0.00</code></pre>
+</div>
+<div id="bar-charts-1" class="section level4" number="2.4.2.2">
+<h4>
+<span class="header-section-number">2.4.2.2</span> Bar charts<a class="anchor" aria-label="anchor" href="#bar-charts-1"><i class="fas fa-link"></i></a>
+</h4>
+<p>A stacked bar chart can be used to display the relationship between the binary variable <code>expectancy</code> across continents:</p>
+<div class="sourceCode" id="cb140"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">Data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">continent</span>, fill<span class="op">=</span><span class="va">expectancy</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span>position <span class="op">=</span> <span class="st">"stack"</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x<span class="op">=</span><span class="st">"Continent"</span>, y<span class="op">=</span><span class="st">"Count"</span>, title<span class="op">=</span><span class="st">"Life Expectancies by Continent"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/unnamed-chunk-97-1.png" width="672"></div>
+<p>We can see how many countries exist in each continent, and how many of these countries in each continent have high or low life expectancies. For example, there are about 25 countries in the Americas with the majority having high life expectancies.</p>
+<p>We can change the way the bar chart is displayed by changing <code>position</code> in <code><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar()</a></code> to <code>position = "dodge"</code> or <code>position = "fill"</code>, the latter being more useful for proportions instead of counts:</p>
+<div class="sourceCode" id="cb141"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">Data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">continent</span>, fill<span class="op">=</span><span class="va">expectancy</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span>position <span class="op">=</span> <span class="st">"dodge"</span><span class="op">)</span> </span></code></pre></div>
+<div class="sourceCode" id="cb142"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">Data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">continent</span>, fill<span class="op">=</span><span class="va">expectancy</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span>position <span class="op">=</span> <span class="st">"fill"</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x<span class="op">=</span><span class="st">"Continent"</span>, y<span class="op">=</span><span class="st">"Proportion"</span>, </span>
+<span>       title<span class="op">=</span><span class="st">"Proportion of Life Expectancies by Continent"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/unnamed-chunk-99-1.png" width="672"></div>
+</div>
+</div>
+<div id="summarizing-two-quantitative-variables" class="section level3" number="2.4.3">
+<h3>
+<span class="header-section-number">2.4.3</span> Summarizing two quantitative variables<a class="anchor" aria-label="anchor" href="#summarizing-two-quantitative-variables"><i class="fas fa-link"></i></a>
+</h3>
+<div id="scatterplots" class="section level4" number="2.4.3.1">
+<h4>
+<span class="header-section-number">2.4.3.1</span> Scatterplots<a class="anchor" aria-label="anchor" href="#scatterplots"><i class="fas fa-link"></i></a>
+</h4>
+<p>Scatterplots are the standard visualization when two quantitative variables are involved. To create a scatterplot for life expectancy against GDP per capita:</p>
+<div class="sourceCode" id="cb143"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">Data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">gdpPercap</span>,y<span class="op">=</span><span class="va">lifeExp</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/unnamed-chunk-100-1.png" width="672"></div>
+<p>We see a curved relationship between life expectancies and GDP per capita. Countries with higher GDP per capita tend to have longer life expectancies.</p>
+<p>When there are many observations, plots on the scatterplot may actually overlap each other. To have a sense of how many of these exist, we can add a transparency scale called <code>alpha=0.2</code> inside <code><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point()</a></code>:</p>
+<div class="sourceCode" id="cb144"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">Data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">gdpPercap</span>,y<span class="op">=</span><span class="va">lifeExp</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>alpha<span class="op">=</span><span class="fl">0.2</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x<span class="op">=</span><span class="st">"GDP"</span>, y<span class="op">=</span><span class="st">"Life Exp"</span>, </span>
+<span>       title<span class="op">=</span><span class="st">"Scatterplot of Life Exp against GDP"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/unnamed-chunk-101-1.png" width="672"></div>
+<p>The default value for <code>alpha</code> is 1, which means the points are not at all transparent. The closer this value is to 0, the more transparent the points are. A darker point indicates more observations with those specific values on both variables.</p>
+</div>
+</div>
+</div>
+<div id="multivariate-visualizations" class="section level2" number="2.5">
+<h2>
+<span class="header-section-number">2.5</span> Multivariate Visualizations<a class="anchor" aria-label="anchor" href="#multivariate-visualizations"><i class="fas fa-link"></i></a>
+</h2>
+<p>We will now look at visualizations we can create to explore the relationship between multiple (more than two) variables. The term multivariate means that we are looking at more than two variables.</p>
+<div id="bar-charts-2" class="section level3" number="2.5.1">
+<h3>
+<span class="header-section-number">2.5.1</span> Bar charts<a class="anchor" aria-label="anchor" href="#bar-charts-2"><i class="fas fa-link"></i></a>
+</h3>
+<p>Previously, we created a bar chart to look at how <code>expectancy</code> varies across the continents. Suppose we want to see how these bar graphs vary across the years, so we use the <code>year</code> variable as a third variable via a layer <code>facet_wrap</code>:</p>
+<div class="sourceCode" id="cb145"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">##another data frame across all years plus a binary variable </span></span>
+<span><span class="co">##for expectancy</span></span>
+<span><span class="va">Data.all</span><span class="op">&lt;-</span><span class="va">gapminder</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>expectancy<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">lifeExp</span><span class="op">&lt;</span><span class="fl">70</span>,<span class="st">"Low"</span>,<span class="st">"High"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">Data.all</span>,<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">continent</span>, fill<span class="op">=</span><span class="va">expectancy</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span>position <span class="op">=</span> <span class="st">"fill"</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">year</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/unnamed-chunk-102-1.png" width="672"></div>
+<p>Notice that three categorical variables are summarized in this bar chart. Is there something that can be done to improve this bar chart? How would you make this improvement?</p>
+</div>
+<div id="scatterplots-1" class="section level3" number="2.5.2">
+<h3>
+<span class="header-section-number">2.5.2</span> Scatterplots<a class="anchor" aria-label="anchor" href="#scatterplots-1"><i class="fas fa-link"></i></a>
+</h3>
+<p>Previously, we created a scatterplot of life expectancy against GDP per capita. We can include another quantitative variable in the scatterplot, by using the size of the plots. We can use the size of the plots to denote the population of the countries. This is supplied via <code>size</code> in <code><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes()</a></code>:</p>
+<div class="sourceCode" id="cb146"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">Data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">gdpPercap</span>, y<span class="op">=</span><span class="va">lifeExp</span>, size<span class="op">=</span><span class="va">pop</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/unnamed-chunk-103-1.png" width="672"></div>
+<p>We can adjust the size of the plots by adding a layer <code><a href="https://ggplot2.tidyverse.org/reference/scale_size.html">scale_size()</a></code>:</p>
+<div class="sourceCode" id="cb147"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">Data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">gdpPercap</span>, y<span class="op">=</span><span class="va">lifeExp</span>, size<span class="op">=</span><span class="va">pop</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_size.html">scale_size</a></span><span class="op">(</span>range <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.1</span>,<span class="fl">12</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/unnamed-chunk-104-1.png" width="672"></div>
+<p>This scatterplot summarizes three quantitative variables.</p>
+<p>We can use different-colored plots to denote which continent each point belongs to:</p>
+<div class="sourceCode" id="cb148"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">Data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">gdpPercap</span>, y<span class="op">=</span><span class="va">lifeExp</span>, size<span class="op">=</span><span class="va">pop</span>, color<span class="op">=</span><span class="va">continent</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_size.html">scale_size</a></span><span class="op">(</span>range <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.1</span>,<span class="fl">12</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/unnamed-chunk-105-1.png" width="672"></div>
+<p>This scatterplot summarizes three quantitative variables and one categorical variable.</p>
+<p>We can adjust the plots by changing its shape and making it more translucent via <code>shape</code> and <code>alpha</code> in <code><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes()</a></code>:</p>
+<div class="sourceCode" id="cb149"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">Data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">gdpPercap</span>, y<span class="op">=</span><span class="va">lifeExp</span>, size<span class="op">=</span><span class="va">pop</span>, fill<span class="op">=</span><span class="va">continent</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>shape<span class="op">=</span><span class="fl">21</span>, alpha<span class="op">=</span><span class="fl">0.5</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_size.html">scale_size</a></span><span class="op">(</span>range <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.1</span>,<span class="fl">12</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x<span class="op">=</span><span class="st">"GDP"</span>, y<span class="op">=</span><span class="st">"Life Exp"</span>, title<span class="op">=</span><span class="st">"Scatterplot of Life Exp against GDP"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/unnamed-chunk-106-1.png" width="672"></div>
+
+</div>
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="wrangling.html"><span class="header-section-number">1</span> Data Wrangling with R</a></div>
+<div class="next"><a href="intro.html"><span class="header-section-number">3</span> Introduction</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#viz"><span class="header-section-number">2</span> Data Visualization with R Using ggplot2</a></li>
+<li><a class="nav-link" href="#introduction-1"><span class="header-section-number">2.1</span> Introduction</a></li>
+<li>
+<a class="nav-link" href="#visualizations-with-a-single-categorical-variable"><span class="header-section-number">2.2</span> Visualizations with a Single Categorical Variable</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#frequency-tables"><span class="header-section-number">2.2.1</span> Frequency tables</a></li>
+<li><a class="nav-link" href="#bar-charts"><span class="header-section-number">2.2.2</span> Bar charts</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#visualizations-with-a-single-quantitative-variable"><span class="header-section-number">2.3</span> Visualizations with a Single Quantitative Variable</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#number-summary"><span class="header-section-number">2.3.1</span> 5 number summary</a></li>
+<li><a class="nav-link" href="#boxplots"><span class="header-section-number">2.3.2</span> Boxplots</a></li>
+<li><a class="nav-link" href="#histograms"><span class="header-section-number">2.3.3</span> Histograms</a></li>
+<li><a class="nav-link" href="#density-plots"><span class="header-section-number">2.3.4</span> Density plots</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#bivariate-visualizations"><span class="header-section-number">2.4</span> Bivariate Visualizations</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#compare-quantitative-variable-across-categories"><span class="header-section-number">2.4.1</span> Compare quantitative variable across categories</a></li>
+<li><a class="nav-link" href="#summarizing-two-categorical-variables"><span class="header-section-number">2.4.2</span> Summarizing two categorical variables</a></li>
+<li><a class="nav-link" href="#summarizing-two-quantitative-variables"><span class="header-section-number">2.4.3</span> Summarizing two quantitative variables</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#multivariate-visualizations"><span class="header-section-number">2.5</span> Multivariate Visualizations</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#bar-charts-2"><span class="header-section-number">2.5.1</span> Bar charts</a></li>
+<li><a class="nav-link" href="#scatterplots-1"><span class="header-section-number">2.5.2</span> Scatterplots</a></li>
+</ul>
+</li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Linear Models for Data Science</strong>" was written by Jeffrey Woo. It was last built on 2024-07-01.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>
