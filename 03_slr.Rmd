@@ -1,3 +1,6 @@
+<!-- Line 382: TROUBLE WITH ADDING LATEX TABLE -->
+<!-- Line 178: Change "Module 5" to add reference for chapter -->
+
 # Basics with Simple Linear Regression (SLR) {#slr}
 
 ## Introduction
@@ -41,10 +44,9 @@ df<-data.frame(study,courses)
 result<-lm(study~courses, data=df)
 ```
 
-```{r}
+```{r scatter-courses, fig.cap='Scatterplot of Study Time against Number of Courses Taken'}
 ##create scatterplot with regression line overlaid
-plot(df$courses, df$study, xlab="# of Courses", ylab="Study Time (Mins)", 
-     main="Scatterplot of Study Time against Number of Courses Taken")
+plot(df$courses, df$study, xlab="# of Courses", ylab="Study Time (Mins)")
 abline(result)
 ```
 
@@ -170,6 +172,8 @@ We need to make some assumptions for the error term $\epsilon$. Generally, the a
 4. The errors are normally distributed.
 
 From \@ref(eq:SLRmod), notice we have another parameter, $\sigma^2$.
+
+<!-- Change "Module 5" to add reference for chapter -->
 
 We will go into more detail about what these assumptions mean, and how to assess whether they are met, in module 5. 
 
@@ -324,7 +328,7 @@ $\sigma^2$, the variance of the error terms, measures the spread of the response
 
 ### Practice questions
 
-Take a look at the scatterplot of study time against number of courses taken (top of page 2). On this plot, label the following:
+Take a look at the scatterplot of study time against number of courses taken, Figure \@ref(fig:scatter-courses). On this plot, label the following:
 
 - estimated SLR equation
 - the fitted value when $x=3$, $x=4$, and $x=5$.

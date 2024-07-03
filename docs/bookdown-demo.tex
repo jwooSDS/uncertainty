@@ -2069,13 +2069,16 @@ The most common way of visualizing the relationship between one quantitative pre
 \begin{Shaded}
 \begin{Highlighting}[]
 \DocumentationTok{\#\#create scatterplot with regression line overlaid}
-\FunctionTok{plot}\NormalTok{(df}\SpecialCharTok{$}\NormalTok{courses, df}\SpecialCharTok{$}\NormalTok{study, }\AttributeTok{xlab=}\StringTok{"\# of Courses"}\NormalTok{, }\AttributeTok{ylab=}\StringTok{"Study Time (Mins)"}\NormalTok{, }
-     \AttributeTok{main=}\StringTok{"Scatterplot of Study Time against Number of Courses Taken"}\NormalTok{)}
+\FunctionTok{plot}\NormalTok{(df}\SpecialCharTok{$}\NormalTok{courses, df}\SpecialCharTok{$}\NormalTok{study, }\AttributeTok{xlab=}\StringTok{"\# of Courses"}\NormalTok{, }\AttributeTok{ylab=}\StringTok{"Study Time (Mins)"}\NormalTok{)}
 \FunctionTok{abline}\NormalTok{(result)}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-110-1.pdf}
+\begin{figure}
+\centering
+\includegraphics{bookdown-demo_files/figure-latex/scatter-courses-1.pdf}
+\caption{\label{fig:scatter-courses}Scatterplot of Study Time against Number of Courses Taken}
+\end{figure}
 
 Questions that we may have include:
 
@@ -2311,7 +2314,7 @@ Let us take a look at these density plots next.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-112-1.pdf}
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-111-1.pdf}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2324,7 +2327,7 @@ Let us take a look at these density plots next.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-112-2.pdf}
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-111-2.pdf}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2337,7 +2340,7 @@ Let us take a look at these density plots next.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-112-3.pdf}
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-111-3.pdf}
 
 Notice all of these plots are normal, with different means (centers), and similar spreads.
 
@@ -2482,7 +2485,7 @@ where \(MS_{res}\) is the called the \textbf{mean squared residuals}.
 \hypertarget{practice-questions-1}{%
 \subsection{Practice questions}\label{practice-questions-1}}
 
-Take a look at the scatterplot of study time against number of courses taken (top of page 2). On this plot, label the following:
+Take a look at the scatterplot of study time against number of courses taken, Figure \ref{fig:scatter-courses}. On this plot, label the following:
 
 \begin{itemize}
 \tightlist
@@ -2746,7 +2749,7 @@ We should always verify with scatterplot that the relationship is (approximately
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-121-1.pdf}
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-120-1.pdf}
 
 We note that the observations are fairly evenly scattered on both sides of the regression line, so a linear association exists. We see a negative linear association. As family income increases, the gift aid, on average, decreases.
 

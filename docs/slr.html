@@ -100,10 +100,14 @@
 <span><span class="va">result</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">study</span><span class="op">~</span><span class="va">courses</span>, data<span class="op">=</span><span class="va">df</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb151"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##create scatterplot with regression line overlaid</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">courses</span>, <span class="va">df</span><span class="op">$</span><span class="va">study</span>, xlab<span class="op">=</span><span class="st">"# of Courses"</span>, ylab<span class="op">=</span><span class="st">"Study Time (Mins)"</span>, </span>
-<span>     main<span class="op">=</span><span class="st">"Scatterplot of Study Time against Number of Courses Taken"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">courses</span>, <span class="va">df</span><span class="op">$</span><span class="va">study</span>, xlab<span class="op">=</span><span class="st">"# of Courses"</span>, ylab<span class="op">=</span><span class="st">"Study Time (Mins)"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="bookdown-demo_files/figure-html/unnamed-chunk-110-1.png" width="672"></div>
+<div class="figure">
+<span style="display:block;" id="fig:scatter-courses"></span>
+<img src="bookdown-demo_files/figure-html/scatter-courses-1.png" alt="Scatterplot of Study Time against Number of Courses Taken" width="672"><p class="caption">
+Figure 3.1: Scatterplot of Study Time against Number of Courses Taken
+</p>
+</div>
 <p>Questions that we may have include:</p>
 <ul>
 <li>Are study time and the number of courses taken related to one another?</li>
@@ -254,7 +258,7 @@ y=\beta_0+\beta_{1} x + \epsilon.
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">x.3</span>,<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">study</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_density.html">geom_density</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x<span class="op">=</span><span class="st">"Study Time (Mins)"</span>, title<span class="op">=</span><span class="st">"Dist of Study Times with 3 Courses"</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="bookdown-demo_files/figure-html/unnamed-chunk-112-1.png" width="672"></div>
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/unnamed-chunk-111-1.png" width="672"></div>
 <div class="sourceCode" id="cb154"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##subset dataframe</span></span>
 <span><span class="va">x.4</span><span class="op">&lt;-</span><span class="va">df</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">courses</span><span class="op">==</span><span class="fl">4</span><span class="op">)</span>,<span class="op">]</span></span>
@@ -262,7 +266,7 @@ y=\beta_0+\beta_{1} x + \epsilon.
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">x.4</span>,<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">study</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_density.html">geom_density</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x<span class="op">=</span><span class="st">"Study Time (Mins)"</span>, title<span class="op">=</span><span class="st">"Dist of Study Times with 4 Courses"</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="bookdown-demo_files/figure-html/unnamed-chunk-112-2.png" width="672"></div>
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/unnamed-chunk-111-2.png" width="672"></div>
 <div class="sourceCode" id="cb155"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##subset dataframe</span></span>
 <span><span class="va">x.5</span><span class="op">&lt;-</span><span class="va">df</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">courses</span><span class="op">==</span><span class="fl">5</span><span class="op">)</span>,<span class="op">]</span></span>
@@ -270,7 +274,7 @@ y=\beta_0+\beta_{1} x + \epsilon.
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">x.5</span>,<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">study</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_density.html">geom_density</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x<span class="op">=</span><span class="st">"Study Time (Mins)"</span>, title<span class="op">=</span><span class="st">"Dist of Study Times with 5 Courses"</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="bookdown-demo_files/figure-html/unnamed-chunk-112-3.png" width="672"></div>
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/unnamed-chunk-111-3.png" width="672"></div>
 <p>Notice all of these plots are normal, with different means (centers), and similar spreads.</p>
 <p><em>Please see the associated video for more explanation about the distribution of the response variable, for each value of the predictor variable, in an SLR setting.</em></p>
 </div>
@@ -370,7 +374,7 @@ s^2 = MS_{res} = \frac{SS_{res}}{n-2} = \frac{\sum\limits_{i=1}^n e_i^2}{n-2},
 <h3>
 <span class="header-section-number">3.4.1</span> Practice questions<a class="anchor" aria-label="anchor" href="#practice-questions-1"><i class="fas fa-link"></i></a>
 </h3>
-<p>Take a look at the scatterplot of study time against number of courses taken (top of page 2). On this plot, label the following:</p>
+<p>Take a look at the scatterplot of study time against number of courses taken, Figure <a href="slr.html#fig:scatter-courses">3.1</a>. On this plot, label the following:</p>
 <ul>
 <li>estimated SLR equation</li>
 <li>the fitted value when <span class="math inline">\(x=3\)</span>, <span class="math inline">\(x=4\)</span>, and <span class="math inline">\(x=5\)</span>.</li>
@@ -550,7 +554,7 @@ r = \frac{\sum\limits_{i=1}^{n}(x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum\limits
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"lm"</span>, se<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span><span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x<span class="op">=</span><span class="st">"Family Income"</span>, y<span class="op">=</span><span class="st">"Gift Aid"</span>, title<span class="op">=</span><span class="st">"Scatterplot of Gift Aid against Family"</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="bookdown-demo_files/figure-html/unnamed-chunk-121-1.png" width="672"></div>
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/unnamed-chunk-120-1.png" width="672"></div>
 <p>We note that the observations are fairly evenly scattered on both sides of the regression line, so a linear association exists. We see a negative linear association. As family income increases, the gift aid, on average, decreases.</p>
 <p>We also do not see any observation with weird values that may warrant further investigation.</p>
 </div>
