@@ -127,7 +127,7 @@
 
 \title{Linear Models for Data Science}
 \author{Jeffrey Woo}
-\date{2024-07-01}
+\date{2024-07-03}
 
 \begin{document}
 \maketitle
@@ -2043,6 +2043,949 @@ We can adjust the plots by changing its shape and making it more translucent via
 \end{Shaded}
 
 \includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-106-1.pdf}
+
+\hypertarget{slr}{%
+\chapter{Basics with Simple Linear Regression (SLR)}\label{slr}}
+
+\hypertarget{introduction-2}{%
+\section{Introduction}\label{introduction-2}}
+
+We will start this module by introducing the simple linear regression model. Simple linear regression uses the term ``simple,'' because it concerns the study of only one predictor variable with one quantitative response variable. In contrast, multiple linear regression, which we will study in future modules, uses the term ``multiple,'' because it concerns the study of two or more predictor variables with one quantitative response variable. We start with simple linear regression as it is much easier to visualize concepts in regression models when there is only one predictor variable.
+
+For the time being, we will only consider predictor variables that are quantitative. We will consider predictor variables that are categorical in future modules.
+
+The most common way of visualizing the relationship between one quantitative predictor variable and one quantitative response variable is with a scatter plot. In the simulated example below, we have data from 6000 UVa undergraduate students on the amount of time they spend studying in a week (in minutes), and how many courses they are taking in the semester (3 or 4 credit courses).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#create dataframe}
+\NormalTok{df}\OtherTok{\textless{}{-}}\FunctionTok{data.frame}\NormalTok{(study,courses)}
+
+\DocumentationTok{\#\#fit regression}
+\NormalTok{result}\OtherTok{\textless{}{-}}\FunctionTok{lm}\NormalTok{(study}\SpecialCharTok{\textasciitilde{}}\NormalTok{courses, }\AttributeTok{data=}\NormalTok{df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#create scatterplot with regression line overlaid}
+\FunctionTok{plot}\NormalTok{(df}\SpecialCharTok{$}\NormalTok{courses, df}\SpecialCharTok{$}\NormalTok{study, }\AttributeTok{xlab=}\StringTok{"\# of Courses"}\NormalTok{, }\AttributeTok{ylab=}\StringTok{"Study Time (Mins)"}\NormalTok{, }
+     \AttributeTok{main=}\StringTok{"Scatterplot of Study Time against Number of Courses Taken"}\NormalTok{)}
+\FunctionTok{abline}\NormalTok{(result)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-110-1.pdf}
+
+Questions that we may have include:
+
+\begin{itemize}
+\tightlist
+\item
+  Are study time and the number of courses taken related to one another?
+\item
+  How strong is this relationship?
+\item
+  Could we use the data to make a prediction for the study time of a student who is not in this scatterplot?
+\item
+  How confident are we of the prediction?
+\end{itemize}
+
+These questions can be answered using simple linear regression.
+
+Note that we will only be learning about models with just one response variable. We will not cover multivariate regression, which is used when there is more than one response variable. There may be some confusion between ``multiple'' linear regression and ``multivariate'' regression due to the closeness in terminology.
+
+\hypertarget{basic-ideas-with-statistics}{%
+\subsection{Basic Ideas with Statistics}\label{basic-ideas-with-statistics}}
+
+\hypertarget{population-vs-sample}{%
+\subsubsection{Population vs Sample}\label{population-vs-sample}}
+
+Statistical methods are usually used to make inferences about the \textbf{population} based on information from a \textbf{sample}.
+
+\begin{itemize}
+\tightlist
+\item
+  A sample is the collection of units that is actually measured or surveyed in a study.
+\item
+  The population includes all units of interest.
+\end{itemize}
+
+In the study time example above, the population is all UVa undergraduate students, while the sample is the 6000 students that we have data on and are displayed on the scatterplot.
+
+\hypertarget{parameters-vs-statistics}{%
+\subsubsection{Parameters vs Statistics}\label{parameters-vs-statistics}}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Parameters} are numerical quantities that describe a population.
+\item
+  \textbf{Statistics} are numerical quantities that describe a sample.
+\end{itemize}
+
+In the study time example, an example of a parameter will be the average study time among all UVa undergraduate students (called the population mean), and an example of a statistic will be the average study time among the 6000 UVa students we have data on (called the sample mean).
+
+Notice that in real life, we will rarely know the actual numerical value of a parameter. So we use the numerical value of the statistic to \textbf{estimate} the unknown numerical value of the corresponding parameter.
+
+We also have different notation for parameters and statistics. For example,
+
+\begin{itemize}
+\tightlist
+\item
+  the population mean is denoted as \(\mu\).
+\item
+  the sample mean is denoted as \(\bar{x}\).
+\end{itemize}
+
+We say that \(\bar{x}\) is an \textbf{estimator} of \(\mu\).
+
+It is important to pay attention to whether we are describing a statistic (a known value that can be calculated) or a parameter (an unknown value).
+
+\hypertarget{motivation}{%
+\subsection{Motivation}\label{motivation}}
+
+Linear regression models generally have two primary uses:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Prediction}: Predict a future value of a response variable, using information from predictor variables.
+\item
+  \textbf{Association}: Quantify the relationship between variables. How does a change in the predictor variable change the value of the response variable?
+\end{enumerate}
+
+We always distinguish between a \textbf{response variable, denoted by \(y\)}, and a \textbf{predictor variable, denoted by \(x\)}. In most statistical models, we say that the response variable can be approximated by some \textbf{mathematical function, denoted by \(f\)}, of the predictor variable, i.e.
+
+\[
+y \approx f(x).
+\]
+Oftentimes, we write this relationship as
+
+\[
+y = f(x) + \epsilon,
+\]
+
+where \textbf{\(\epsilon\) denotes a random error term}, with a mean of 0. The error term cannot be predicted based on the data we have.
+
+There are various statistical methods to estimate \(f\). Once we estimate \(f\), we can use our method for prediction and / or association.
+
+Using the study time example above:
+
+\begin{itemize}
+\tightlist
+\item
+  a prediction example: a student intends to take 4 courses in the semester. What is this student's predicted study time, on average?
+\item
+  an association example: we want to see how taking more courses increases study time.
+\end{itemize}
+
+\hypertarget{practice-questions}{%
+\subsubsection{Practice questions}\label{practice-questions}}
+
+In the examples below, are we using a regression model for prediction or for association?
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  It is early in the morning and I am heading out for the rest of the day. I want to know the weather forecast for the rest of the day so I know what to wear.
+\item
+  An executive for a sports league wants to assess how increasing the length of commercial breaks may impact the enjoyment of sports fans who watch games on TV.
+\item
+  The Education Secretary would like to evaluate how certain factors such as use of technology in classrooms and investment in teacher training and teacher pay are associated with reading skills of students.
+\item
+  When buying a home, the prospective buyer would like to know if the home is under- or over- priced, given its characteristics.
+\end{enumerate}
+
+\hypertarget{simple-linear-regression-slr}{%
+\section{Simple Linear Regression (SLR)}\label{simple-linear-regression-slr}}
+
+In simple linear regression (SLR), the function \(f\) that relates the predictor variable with the response variable is typically \(\beta_0 + \beta_1 x\). Mathematically, we express this as
+
+\[
+y \approx \beta_0 + \beta_1 x,
+\]
+
+or in other words, that the response variable has an approximately linear relationship with the predictor variable.
+
+In SLR, this relationship is more explicitly formulated as the \textbf{simple linear regression equation}:
+
+\begin{equation} 
+E(y|x)=\beta_0+\beta_{1}x.
+\label{eq:SLR}
+\end{equation}
+
+\begin{itemize}
+\item
+  \(\beta_0\) and \(\beta_1\) are parameters in the SLR equation, and we want to estimate them.
+\item
+  These parameters are sometimes called \textbf{regression coefficients}.
+\item
+  \(\beta_1\) is also called the \textbf{slope. It denotes the change in \(y\), on average, when \(x\) increases by one unit.}
+\item
+  \(\beta_0\) is also called the \textbf{intercept. It denotes the average of \(y\) when \(x=0\).}
+\item
+  The notation on the left hand side of \eqref{eq:SLR} denotes the \textbf{expected value} of the response variable, for a fixed value of the predictor variable. What \eqref{eq:SLR} implies is that, for each value of the predictor variable \(x\), the expected value of the response variable \(y\) is \(\beta_0+\beta_{1}x\). The expected value is also the population mean. Applying \eqref{eq:SLR} to our study time example, it implies that:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    for students who take 3 courses, their expected study time is equal to \(\beta_0 + 3\beta_1\),
+  \item
+    for students who take 4 courses, their expected study time is equal to \(\beta_0 + 4\beta_1\),
+  \item
+    for students who take 5 courses, their expected study time is equal to \(\beta_0 + 5\beta_1\).
+  \end{itemize}
+\end{itemize}
+
+So \(f(x) = \beta_0 + \beta_1x\) gives us the value of the expected value of the response variable for a specific value of the predictor variable. But, for each value of the predictor variable, the value of the response variable is not a constant. We say that for each value of \(x\), the response variable \(y\) has some variance. The variance of the response variable for each value of \(x\) is the same as the variance of the error term, \(\epsilon\). Thus we have the \textbf{simple linear regression model}
+
+\begin{equation} 
+y=\beta_0+\beta_{1} x + \epsilon. 
+\label{eq:SLRmod}
+\end{equation}
+
+We need to make some assumptions for the error term \(\epsilon\). Generally, the assumptions are:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  The errors have mean 0.
+\item
+  The \textbf{errors have variance denoted by \(\sigma^2\)}. Notice this variance is constant.
+\item
+  The errors are independent.
+\item
+  The errors are normally distributed.
+\end{enumerate}
+
+From \eqref{eq:SLRmod}, notice we have another parameter, \(\sigma^2\).
+
+We will go into more detail about what these assumptions mean, and how to assess whether they are met, in module 5.
+
+What these assumptions mean is that for each value of the predictor variable \(x\), the response variable:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  follows a normal distribution,
+\item
+  with mean equal to \(\beta_0+\beta_{1} x\),
+\item
+  and variance equal to \(\sigma^2\).
+\end{enumerate}
+
+Using our study time example, it means that:
+
+\begin{itemize}
+\tightlist
+\item
+  for students who take 3 courses, the distribution of their study times is \(N(\beta_0 + 3\beta_1, \sigma^2)\).
+\item
+  for students who take 4 courses, the distribution of their study times is \(N(\beta_0 + 4\beta_1, \sigma^2)\).
+\item
+  for students who take 5 courses, the distribution of their study times is \(N(\beta_0 + 5\beta_1, \sigma^2)\).
+\end{itemize}
+
+So if we were to subset our dataframe into three subsets, one with students who take 3 courses, another subset for students who take 4 courses, and another subset for students who take 5 courses, and then create a density plot of study times for each subset, each density plot should follow a normal distribution, with different means, and the same spread.
+
+Let us take a look at these density plots next.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#subset dataframe}
+\NormalTok{x}\FloatTok{.3}\OtherTok{\textless{}{-}}\NormalTok{df[}\FunctionTok{which}\NormalTok{(df}\SpecialCharTok{$}\NormalTok{courses}\SpecialCharTok{==}\DecValTok{3}\NormalTok{),]}
+\DocumentationTok{\#\#density plot of study time for students taking 3 courses}
+\FunctionTok{ggplot}\NormalTok{(x}\FloatTok{.3}\NormalTok{,}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{study))}\SpecialCharTok{+}
+  \FunctionTok{geom\_density}\NormalTok{()}\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x=}\StringTok{"Study Time (Mins)"}\NormalTok{, }\AttributeTok{title=}\StringTok{"Dist of Study Times with 3 Courses"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-112-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#subset dataframe}
+\NormalTok{x}\FloatTok{.4}\OtherTok{\textless{}{-}}\NormalTok{df[}\FunctionTok{which}\NormalTok{(df}\SpecialCharTok{$}\NormalTok{courses}\SpecialCharTok{==}\DecValTok{4}\NormalTok{),]}
+\DocumentationTok{\#\#density plot of study time for students taking 4 courses}
+\FunctionTok{ggplot}\NormalTok{(x}\FloatTok{.4}\NormalTok{,}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{study))}\SpecialCharTok{+}
+  \FunctionTok{geom\_density}\NormalTok{()}\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x=}\StringTok{"Study Time (Mins)"}\NormalTok{, }\AttributeTok{title=}\StringTok{"Dist of Study Times with 4 Courses"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-112-2.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#subset dataframe}
+\NormalTok{x}\FloatTok{.5}\OtherTok{\textless{}{-}}\NormalTok{df[}\FunctionTok{which}\NormalTok{(df}\SpecialCharTok{$}\NormalTok{courses}\SpecialCharTok{==}\DecValTok{5}\NormalTok{),]}
+\DocumentationTok{\#\#density plot of study time for students taking 5 courses}
+\FunctionTok{ggplot}\NormalTok{(x}\FloatTok{.5}\NormalTok{,}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{study))}\SpecialCharTok{+}
+  \FunctionTok{geom\_density}\NormalTok{()}\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x=}\StringTok{"Study Time (Mins)"}\NormalTok{, }\AttributeTok{title=}\StringTok{"Dist of Study Times with 5 Courses"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-112-3.pdf}
+
+Notice all of these plots are normal, with different means (centers), and similar spreads.
+
+\emph{Please see the associated video for more explanation about the distribution of the response variable, for each value of the predictor variable, in an SLR setting.}
+
+\hypertarget{estimating-regression-coefficients-in-slr}{%
+\section{Estimating Regression Coefficients in SLR}\label{estimating-regression-coefficients-in-slr}}
+
+From \eqref{eq:SLR} and \eqref{eq:SLRmod}, we noted that we have to estimate the regression coefficients \(\beta_0, \beta_1\) as well as the parameter \(\sigma^2\) associated with the error term. As mentioned earlier, we are unable to obtain numerical values of these parameters as we do not have data from the entire population. So what we do is use the data from our sample to estimate these parameters.
+
+We estimate \(\beta_0,\beta_1\) using \(\hat{\beta}_0,\hat{\beta}_1\) based on a sample of observations \((x_i,y_i)\) of size \(n\).
+
+The subscripts associated with the response and predictor variables denote which data point that value belongs to. Let us take a look at the first few rows of the data frame for the study time example:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{head}\NormalTok{(df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      study courses
+## 1 429.8311       3
+## 2 458.4588       3
+## 3 391.9406       3
+## 4 378.0196       3
+## 5 397.9856       3
+## 6 405.7145       3
+\end{verbatim}
+
+For example, \(x_1\) denotes the number of courses taken by student number 1 in the dataframe, which is 3. \(y_4\) denotes the study time for student number 4 in the dataframe, which is 378.0196456.
+
+Following \eqref{eq:SLR} and \eqref{eq:SLRmod}, the sample versions are
+
+\begin{equation} 
+\hat{y}=\hat{\beta}_0+\hat{\beta}_1 x
+\label{eq:fitted}
+\end{equation}
+
+and
+
+\begin{equation} 
+y=\hat{\beta}_0+\hat{\beta}_1 x + e
+\label{eq:fitted-model}
+\end{equation}
+
+respectively. \eqref{eq:fitted} is called the \textbf{estimated SLR equation}, or \textbf{fitted SLR equation}. \eqref{eq:fitted-model} is called the \textbf{estimated SLR model}.
+
+\(\hat{\beta}_1,\hat{\beta}_0\) are the estimators for \(\beta_1,\beta_0\) respectively. These estimators can be interpreted in the following manner:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{\(\hat{\beta}_1\) denotes the change in the predicted \(y\) when \(x\) increases by 1 unit. Alternatively, it denotes the change in \(y\), on average, when \(x\) increases by 1 unit.}
+\item
+  \textbf{\(\hat{\beta}_0\) denotes the predicted \(y\) when \(x=0\). Alternatively, it denotes the average of \(y\) when \(x=0\).}
+\end{itemize}
+
+From \eqref{eq:fitted-model}, notice we use \textbf{\(e\) to denote the residual}, or in other words, the ``error'' in the sample.
+
+From \eqref{eq:fitted} and \eqref{eq:fitted-model}, we have the following quantities that we can compute:
+
+\begin{equation}
+\text{Predicted/Fitted values: } \hat{y}_i = \hat{\beta}_0+\hat{\beta}_1 x_i.
+\label{eq:fits}
+\end{equation}
+
+\begin{equation} 
+\text{Residuals: } e_i = y_i-\hat{y}_i.
+\label{eq:res}
+\end{equation}
+
+\begin{equation} 
+\text{Sum of Squared Residuals: } SS_{res} =  \sum\limits_{i=1}^n(y_i-\hat{y}_i)^2.
+\label{eq:SSres}
+\end{equation}
+
+We compute the estimated coefficients \(\hat{\beta}_1,\hat{\beta}_0\) using the \textbf{method of least squares}, i.e.~choose the numerical values of \(\hat{\beta}_1,\hat{\beta}_0\) that minimize \(SS_{res}\) as given in \eqref{eq:SSres}.
+
+By minimizing \(SS_{res}\) with respect to \(\hat{\beta}_0\) and \(\hat{\beta}_1\), the estimated coefficients in the simple linear regression equation are
+
+\begin{equation} 
+\hat{\beta}_1 = \frac{\sum\limits_{i=1}^n(x_i-\bar{x})(y_i-\bar{y})}{\sum\limits_{i=1}^n(x_i-\bar{x})^2}
+\label{eq:b1}
+\end{equation}
+
+and
+
+\begin{equation} 
+\hat{\beta}_0 = \bar{y}- \hat{\beta}_1 \bar{x}
+\label{eq:b0}
+\end{equation}
+
+\(\hat{\beta}_1, \hat{\beta}_0\) are called \textbf{least squares estimators}.
+
+The minimization of \(SS_{res}\) with respect to \(\hat{\beta}_0\) and \(\hat{\beta}_1\) is done by taking the partial derivatives of \eqref{eq:SSres} with respect to \(\hat{\beta}_1\) and \(\hat{\beta}_0\), setting these two partial derivatives equal to 0, and solving these two equations for \(\hat{\beta}_1\) and \(\hat{\beta}_0\).
+
+Let's take a look at the estimated coefficients for our study time example:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#fit regression}
+\NormalTok{result}\OtherTok{\textless{}{-}}\FunctionTok{lm}\NormalTok{(study}\SpecialCharTok{\textasciitilde{}}\NormalTok{courses, }\AttributeTok{data=}\NormalTok{df)}
+\DocumentationTok{\#\#print out the estimated coefficients}
+\NormalTok{result}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = study ~ courses, data = df)
+## 
+## Coefficients:
+## (Intercept)      courses  
+##       58.45       120.39
+\end{verbatim}
+
+From our sample of 6000 students, we have
+
+\begin{itemize}
+\tightlist
+\item
+  \(\hat{\beta}_1\) = 120.3930985. The predicted study time increases by 120.3930985 minutes for each additional course taken.
+\item
+  \(\hat{\beta}_0\) = 58.4482853. The predicted study time is 58.4482853 when no courses are taken. Notice this value does not make sense, as a student cannot be taking 0 courses. If you look at our data, the number of courses taken is 3, 4, or 5. So we should only use our regression when \(3 \leq x \leq 5\). We cannot use it for values of \(x\) outside the range of our data. Making predictions of the response variable for predictors outside the range of the data is called \textbf{extrapolation} and should not be done.
+\end{itemize}
+
+\hypertarget{estimating-variance-of-errors-in-slr}{%
+\section{Estimating Variance of Errors in SLR}\label{estimating-variance-of-errors-in-slr}}
+
+The estimator of \(\sigma^2\), the variance of the error terms (also the variance of the probability distribution of \(y\) given \(x\)) is
+\begin{equation} 
+s^2 = MS_{res} = \frac{SS_{res}}{n-2} = \frac{\sum\limits_{i=1}^n e_i^2}{n-2},
+\label{eq:variance}
+\end{equation}
+
+where \(MS_{res}\) is the called the \textbf{mean squared residuals}.
+
+\(\sigma^2\), the variance of the error terms, measures the spread of the response variable, for each value of \(x\). The smaller this is, the closer the data points are to the regression equation.
+
+\hypertarget{practice-questions-1}{%
+\subsection{Practice questions}\label{practice-questions-1}}
+
+Take a look at the scatterplot of study time against number of courses taken (top of page 2). On this plot, label the following:
+
+\begin{itemize}
+\tightlist
+\item
+  estimated SLR equation
+\item
+  the fitted value when \(x=3\), \(x=4\), and \(x=5\).
+\item
+  the residual for any data point on the plot of your choosing.
+\end{itemize}
+
+\emph{Try these on your own first, then view the associated video to see if you labeled the plot correctly!}
+
+\hypertarget{assessing-linear-association}{%
+\section{Assessing Linear Association}\label{assessing-linear-association}}
+
+As noted earlier, the variance of the error terms inform us how close the data points are to the estimated SLR equation. The smaller the variance of the error terms, the closer the data points are to the estimated SLR equation. This in turn implies the linear relationship between the variables is stronger.
+
+We will learn about some common measures that are used to quantify the strength of the linear relationship between the response and predictor variables. Before we do that, we need to define some other terms.
+
+\hypertarget{sum-of-squares}{%
+\subsection{Sum of squares}\label{sum-of-squares}}
+
+\begin{equation} 
+\text{Total Sum of Squares: } SS_T = \sum\limits_{i=1}^{n} (y_i - \bar{y})^{2}.
+\label{eq:SST}
+\end{equation}
+
+Total sum of squares is defined as the \textbf{total variance in the response variable}. The larger this value is, the larger the spread is of the response variable.
+
+\begin{equation} 
+\text{Regression sum of squares: } SS_R = \sum\limits_{i=1}^{n} (\hat{y_i} - \bar{y})^{2}.
+\label{eq:SSR}
+\end{equation}
+
+Regression sum of squares is defined as the \textbf{variance in the response variable that can be explained by our regression}.
+
+We also have residual sum of squares, \(SS_{res}\). Its mathematical formulation is given in \eqref{eq:SSres}. It is defined as the \textbf{variance in the response variable that cannot be explained by our regression}.
+
+It can be shown that
+
+\begin{equation}
+SS_T = SS_R + SS_{res}.
+\label{eq:SS}
+\end{equation}
+
+Each of the sums of squares has its associated \textbf{degrees of freedom (df)}:
+
+\begin{itemize}
+\tightlist
+\item
+  df for \(SS_R\): \(df_R = 1\)
+\item
+  df for \(SS_{res}\): \(df_{res} = n-2\)
+\item
+  df for \(SS_T\): \(df_T = n-1\)
+\end{itemize}
+
+\emph{Please see the associated video for more explanation about the concept behind degrees of freedom.}
+
+\hypertarget{anova-table}{%
+\subsection{ANOVA Table}\label{anova-table}}
+
+Information regarding the sums of squares is usually presented in the form of an \textbf{ANOVA (analysis of variance) table}:
+
+Note:
+
+\begin{itemize}
+\tightlist
+\item
+  Dividing each sum of square with its corresponding degrees of freedom gives the corresponding mean square.
+\item
+  In the last column, we report an \(F\) statistic, which equal to \(\frac{MS_R}{MS_{res}}\). This \(F\) statistic is associated with an \textbf{ANOVA F test}, which we will look at in more detail in the next subsection.
+\end{itemize}
+
+To obtain the ANOVA table for our study time example:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{anova}\NormalTok{(result)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Analysis of Variance Table
+## 
+## Response: study
+##             Df   Sum Sq  Mean Sq F value    Pr(>F)    
+## courses      1 57977993 57977993   65404 < 2.2e-16 ***
+## Residuals 5998  5317017      886                      
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+\end{verbatim}
+
+Notice that R does not print out the information for the line regarding \(SS_T\).
+
+\hypertarget{anova-f-test}{%
+\subsection{\texorpdfstring{ANOVA \(F\) Test}{ANOVA F Test}}\label{anova-f-test}}
+
+In SLR, the ANOVA \(F\) statistic from the ANOVA table can be used to test if the slope of the SLR equation is 0 or not. In words, this means that whether there is a linear association between the variables or not. If the slope is 0, it means that changes in the value of the predictor variable do not change the value of the response variable, on average; hence the variables are not linearly associated.
+
+The null and alternative hypotheses are:
+
+\[
+H_0: \beta_1 = 0, H_a: \beta_1 \neq 0.
+\]
+The test statistic is
+
+\begin{equation} \label{eq:ANOVA}
+F = \frac{MS_R}{MS_{res}}
+\end{equation}
+
+and is compared with an \(F_{1,n-2}\) distribution. Note that \(F_{1,n-2}\) is read as an \textbf{F distribution with 1 and \(n-2\) degrees of freedom}.
+
+Going back to the study time example, the \(F\) statistic is \ensuremath{6.5403586\times 10^{4}}. The critical value can be found using
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{qf}\NormalTok{(}\DecValTok{1}\FloatTok{{-}0.05}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{6000{-}2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 3.84301
+\end{verbatim}
+
+Since our test statistic is larger than the critical value, we reject the null hypothesis. Our data support the claim that the slope is different from 0, or in other words, that there is a linear association between study time and number of courses taken.
+
+\hypertarget{coefficient-of-determination}{%
+\subsection{Coefficient of determination}\label{coefficient-of-determination}}
+
+The \textbf{coefficient of determination, \(R^2\),} is
+
+\begin{equation}
+R^{2} = \frac{SS_R}{SS_T} = 1 - \frac{SS_{res}}{SS_T}.
+\label{eq:R2}
+\end{equation}
+
+\(R^{2}\) is an indication of how well the data fits our model. In the context of simple linear regression, it denotes \textbf{the proportion of variance in the response variable that is explained by the predictor}.
+
+A few notes about \(R^2\):
+
+\begin{itemize}
+\tightlist
+\item
+  \(0 \leq R^2 \leq 1\).
+\item
+  Values closer to 1 indicate a better fit; values closer to 0 indicate a poorer fit.
+\item
+  Sometimes reported as a percentage.
+\end{itemize}
+
+To obtain \(R^2\) for our study time example:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{anova.tab}\OtherTok{\textless{}{-}}\FunctionTok{anova}\NormalTok{(result)}
+\DocumentationTok{\#\#SST not provided, so we add up SSR and SSres}
+\NormalTok{SST}\OtherTok{\textless{}{-}}\FunctionTok{sum}\NormalTok{(anova.tab}\SpecialCharTok{$}\StringTok{"Sum Sq"}\NormalTok{)}
+\DocumentationTok{\#\#R2}
+\NormalTok{anova.tab}\SpecialCharTok{$}\StringTok{"Sum Sq"}\NormalTok{[}\DecValTok{1}\NormalTok{]}\SpecialCharTok{/}\NormalTok{SST}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.9159963
+\end{verbatim}
+
+This implies that the proportion of variance in study time that can be explained by the number of courses taken is 0.9159963.
+
+\hypertarget{correlation}{%
+\subsection{Correlation}\label{correlation}}
+
+A measure used to quantify the strength of the linear association between two quantitative variables is the \textbf{sample correlation}. The sample correlation, \(\mbox{Corr}(x,y)\) or \(r\), is given by
+
+\begin{equation} 
+r = \frac{\sum\limits_{i=1}^{n}(x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum\limits_{i=1}^{n}(x_i - \bar{x})^{2}(y_i - \bar{y})^{2}}}.
+\label{eq:corr}
+\end{equation}
+
+A few notes about \(r\):
+
+\begin{itemize}
+\tightlist
+\item
+  \(-1 \leq r \leq 1\).
+\item
+  Sign of correlation indicates direction of association. A positive value indicates a positive linear association: as the predictor variable increases, so does the response variable, on average. A negative value indicates a negative linear association: as the predictor variable increases, the response variable decreases, on average.
+\item
+  Values closer to 1 or -1 indicate a stronger linear association; values closer to 0 indicate a weaker linear association.
+\item
+  In SLR, it turns out that \(r^2 = R^2\).
+\end{itemize}
+
+Using our study time example, the correlation between study time and number of courses taken is
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cor}\NormalTok{(df}\SpecialCharTok{$}\NormalTok{study, df}\SpecialCharTok{$}\NormalTok{courses)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.9570769
+\end{verbatim}
+
+This value indicates a very strong and positive linear association between study time and number of courses taken (remember that this is simulated data and is not real).
+
+\hypertarget{how-strong-is-strong}{%
+\subsubsection{How strong is strong?}\label{how-strong-is-strong}}
+
+A question that is often raised is how large should the magnitude of the sample correlation be for it to be considered strong? The answer is: it depends on the context. If you are conducting an experiment that is governed by scientific laws (e.g an experiment verifying Newton's 2nd law that \(F = ma\)), we should expect an extremely high correlation. A correlation of 0.9 in such an instance may be considered weak. The value of the correlation you have should be compared with correlations from similar studies in that domain to determine if it is strong or not.
+
+\hypertarget{a-word-of-caution}{%
+\section{A Word of Caution}\label{a-word-of-caution}}
+
+To be able to use the measures we have learned (such as correlation, \(R^2\)) and to interpret the estimated regression coefficients, we must verify via a scatterplot that the association between the two variables is approximately linear. If we see a non linear pattern in the scatterplot, we should not use or interpret these values. We will learn how to remedy the situation if we see a non linear pattern in the scatterplot in module 5.
+
+\emph{Please see the associated video for a demonstration on how not looking at the scatterplot can lead to misleading interpretations.}
+
+\hypertarget{r-tutorial}{%
+\section{R Tutorial}\label{r-tutorial}}
+
+For this tutorial, we will work with the dataset \texttt{elmhurst} from the \texttt{openintro} package in R.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\FunctionTok{library}\NormalTok{(openintro)}
+\NormalTok{Data}\OtherTok{\textless{}{-}}\NormalTok{openintro}\SpecialCharTok{::}\NormalTok{elmhurst}
+\end{Highlighting}
+\end{Shaded}
+
+Type \texttt{?openintro::elmhurst} to read the documentation for datasets in R. Always seek to understand the background of your data! The key pieces of information are:
+
+\begin{itemize}
+\tightlist
+\item
+  A random sample of 50 students (all freshman from the 2011 class at Elmhurst College).
+\item
+  Family income of the student (units are missing).
+\item
+  Gift aid, in \$1000s.
+\end{itemize}
+
+We want to explore how family income may be related to gift aid, in a simple linear regression framework.
+
+\hypertarget{visualization}{%
+\subsection*{Visualization}\label{visualization}}
+\addcontentsline{toc}{subsection}{Visualization}
+
+We should always verify with scatterplot that the relationship is (approximately) linear before proceeding with correlation and simple linear regression!
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#scatterplot of gift aid against family income}
+\NormalTok{ggplot2}\SpecialCharTok{::}\FunctionTok{ggplot}\NormalTok{(Data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{family\_income,}\AttributeTok{y=}\NormalTok{gift\_aid))}\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{()}\SpecialCharTok{+}
+  \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{method =} \StringTok{"lm"}\NormalTok{, }\AttributeTok{se=}\ConstantTok{FALSE}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x=}\StringTok{"Family Income"}\NormalTok{, }\AttributeTok{y=}\StringTok{"Gift Aid"}\NormalTok{, }\AttributeTok{title=}\StringTok{"Scatterplot of Gift Aid against Family"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-121-1.pdf}
+
+We note that the observations are fairly evenly scattered on both sides of the regression line, so a linear association exists. We see a negative linear association. As family income increases, the gift aid, on average, decreases.
+
+We also do not see any observation with weird values that may warrant further investigation.
+
+\hypertarget{regression}{%
+\subsection*{Regression}\label{regression}}
+\addcontentsline{toc}{subsection}{Regression}
+
+We use the \texttt{lm()} function to fit a regression model:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#regress gift aid against family income}
+\NormalTok{result}\OtherTok{\textless{}{-}}\FunctionTok{lm}\NormalTok{(gift\_aid}\SpecialCharTok{\textasciitilde{}}\NormalTok{family\_income, }\AttributeTok{data=}\NormalTok{Data)}
+\end{Highlighting}
+\end{Shaded}
+
+Use the \texttt{summary()} function to display relevant information from this regression:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#look at information regarding regression}
+\FunctionTok{summary}\NormalTok{(result)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = gift_aid ~ family_income, data = Data)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -10.1128  -3.6234  -0.2161   3.1587  11.5707 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)   24.31933    1.29145  18.831  < 2e-16 ***
+## family_income -0.04307    0.01081  -3.985 0.000229 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 4.783 on 48 degrees of freedom
+## Multiple R-squared:  0.2486, Adjusted R-squared:  0.2329 
+## F-statistic: 15.88 on 1 and 48 DF,  p-value: 0.0002289
+\end{verbatim}
+
+We see the following values:
+
+\begin{itemize}
+\tightlist
+\item
+  \(\hat{\beta}_1 =\) -0.0430717. The estimated slope informs us the the predicted gift aid decreases by 0.0430717 thousands of dollars (or \$43.07) per unit increase in family income.
+\item
+  \(\hat{\beta}_0 =\) 24.319329. For students with no family income, their predicted gift aid is \$24 319.33. Note: from the scatterplot, we have an observation with 0 family income. We must be careful in not extrapolating when making predictions with our regression. We should only make predictions for family incomes between the minimum and maximum values of family incomes in our data.
+\item
+  \(s\) = 4.7825989, is the estimate of the standard deviation of the error terms. This is reported as residual standard error in R. Squaring this gives the estimated variance.
+\item
+  \(F\) = 15.8772043. This is the value of the ANOVA \(F\) statistic. The corresponding p-value is reported. Since this p-value is very small, we reject the null hypothesis. The data support the claim that there is a linear association between gift aid and family income.
+\item
+  \(R^2 =\) 0.2485582. The coefficient of determination informs us that about 24.86\% of the variation in gift aid can be explained by family income.
+\end{itemize}
+
+\hypertarget{extract-values-from-r-objects}{%
+\subsubsection*{Extract values from R objects}\label{extract-values-from-r-objects}}
+\addcontentsline{toc}{subsubsection}{Extract values from R objects}
+
+We can actually extract these values that are being reported from \texttt{summary(result)}. To see what can be extracted from an R object, use the \texttt{names()} function:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#see what can be extracted from summary(result)}
+\FunctionTok{names}\NormalTok{(}\FunctionTok{summary}\NormalTok{(result))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] "call"          "terms"         "residuals"     "coefficients" 
+##  [5] "aliased"       "sigma"         "df"            "r.squared"    
+##  [9] "adj.r.squared" "fstatistic"    "cov.unscaled"
+\end{verbatim}
+
+To extract the estimated coefficients:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#extract coefficients}
+\FunctionTok{summary}\NormalTok{(result)}\SpecialCharTok{$}\NormalTok{coefficients}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                  Estimate Std. Error   t value     Pr(>|t|)
+## (Intercept)   24.31932901 1.29145027 18.831022 8.281020e-24
+## family_income -0.04307165 0.01080947 -3.984621 2.288734e-04
+\end{verbatim}
+
+Notice the information is presented in a table. To extract a specific value, we can specify the row and column indices:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#extract slope}
+\FunctionTok{summary}\NormalTok{(result)}\SpecialCharTok{$}\NormalTok{coefficients[}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] -0.04307165
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#extract intercept}
+\FunctionTok{summary}\NormalTok{(result)}\SpecialCharTok{$}\NormalTok{coefficients[}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 24.31933
+\end{verbatim}
+
+On your own, extract the values of the residual standard error, the ANOVA F statistic, and \(R^2\).
+
+\hypertarget{prediction}{%
+\subsubsection*{Prediction}\label{prediction}}
+\addcontentsline{toc}{subsubsection}{Prediction}
+
+A use of regression models is prediction. Suppose I want to predict the gift aid of a student with family income of 50 thousand dollars (assuming the unit is in thousands of dollars). We use the \texttt{predict()} function:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#create data point for prediction}
+\NormalTok{newdata}\OtherTok{\textless{}{-}}\FunctionTok{data.frame}\NormalTok{(}\AttributeTok{family\_income=}\DecValTok{50}\NormalTok{)}
+\DocumentationTok{\#\#predicted gift aid when x=50}
+\FunctionTok{predict}\NormalTok{(result,newdata)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##        1 
+## 22.16575
+\end{verbatim}
+
+This student's predicted gift aid is \$22 165.75. Alternatively, you could have calculated this by plugging \(x=50\) into the estimated SLR equation:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(result)}\SpecialCharTok{$}\NormalTok{coefficients[}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{] }\SpecialCharTok{+} \FunctionTok{summary}\NormalTok{(result)}\SpecialCharTok{$}\NormalTok{coefficients[}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{]}\SpecialCharTok{*}\DecValTok{50}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 22.16575
+\end{verbatim}
+
+\hypertarget{anova-table-1}{%
+\subsubsection*{ANOVA table}\label{anova-table-1}}
+\addcontentsline{toc}{subsubsection}{ANOVA table}
+
+We use the \texttt{anova()} function to display the ANOVA table
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{anova.tab}\OtherTok{\textless{}{-}}\FunctionTok{anova}\NormalTok{(result)}
+\NormalTok{anova.tab}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Analysis of Variance Table
+## 
+## Response: gift_aid
+##               Df  Sum Sq Mean Sq F value    Pr(>F)    
+## family_income  1  363.16  363.16  15.877 0.0002289 ***
+## Residuals     48 1097.92   22.87                      
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+\end{verbatim}
+
+The report \(F\) statistic is the same as the value reported earlier from \texttt{summary(result)}.
+
+The first line of the output gives \(SS_{R}\), the second line gives \(SS_{res}\). The function doesn't provide \(SS_T\), but we know that \(SS_T = SS_{R} + SS_{res}\).
+
+Again, to see what can be extracted from \texttt{anova.tab}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{names}\NormalTok{(anova.tab)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Df"      "Sum Sq"  "Mean Sq" "F value" "Pr(>F)"
+\end{verbatim}
+
+So \(SS_T\) can be easily calculated:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{SST}\OtherTok{\textless{}{-}}\FunctionTok{sum}\NormalTok{(anova.tab}\SpecialCharTok{$}\StringTok{"Sum Sq"}\NormalTok{)}
+\NormalTok{SST}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1461.079
+\end{verbatim}
+
+The \(R^2\) was reported to be 0.2485582. To verify using the ANOVA table:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{anova.tab}\SpecialCharTok{$}\StringTok{"Sum Sq"}\NormalTok{[}\DecValTok{1}\NormalTok{]}\SpecialCharTok{/}\NormalTok{SST}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.2485582
+\end{verbatim}
+
+\hypertarget{correlation-1}{%
+\subsection*{Correlation}\label{correlation-1}}
+\addcontentsline{toc}{subsection}{Correlation}
+
+We use the \texttt{cor()} function to find the correlation between two quantitative variables:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#correlation}
+\FunctionTok{cor}\NormalTok{(Data}\SpecialCharTok{$}\NormalTok{family\_income,Data}\SpecialCharTok{$}\NormalTok{gift\_aid)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] -0.4985561
+\end{verbatim}
+
+The correlation is -0.4985561. We have a moderate, negative linear association between family income and gift aid.
 
 \hypertarget{intro}{%
 \chapter{Introduction}\label{intro}}
