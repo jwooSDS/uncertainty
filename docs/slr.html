@@ -68,11 +68,14 @@
 <li><a class="" href="wrangling.html"><span class="header-section-number">1</span> Data Wrangling with R</a></li>
 <li><a class="" href="viz.html"><span class="header-section-number">2</span> Data Visualization with R Using ggplot2</a></li>
 <li><a class="active" href="slr.html"><span class="header-section-number">3</span> Basics with Simple Linear Regression (SLR)</a></li>
-<li><a class="" href="intro.html"><span class="header-section-number">4</span> Introduction</a></li>
-<li><a class="" href="literature.html"><span class="header-section-number">5</span> Literature</a></li>
-<li><a class="" href="methods.html"><span class="header-section-number">6</span> Methods</a></li>
-<li><a class="" href="applications.html"><span class="header-section-number">7</span> Applications</a></li>
-<li><a class="" href="final-words.html"><span class="header-section-number">8</span> Final Words</a></li>
+<li><a class="" href="inf.html"><span class="header-section-number">4</span> Inference with Simple Linear Regression (SLR)</a></li>
+<li><a class="" href="diag.html"><span class="header-section-number">5</span> Model Diagnostics and Remedial Measures in SLR</a></li>
+<li><a class="" href="try.html"><span class="header-section-number">6</span> TABLE</a></li>
+<li><a class="" href="intro.html"><span class="header-section-number">7</span> Introduction</a></li>
+<li><a class="" href="literature.html"><span class="header-section-number">8</span> Literature</a></li>
+<li><a class="" href="methods.html"><span class="header-section-number">9</span> Methods</a></li>
+<li><a class="" href="applications.html"><span class="header-section-number">10</span> Applications</a></li>
+<li><a class="" href="final-words.html"><span class="header-section-number">11</span> Final Words</a></li>
 <li><a class="" href="references.html">References</a></li>
 </ul>
 
@@ -234,7 +237,7 @@ y=\beta_0+\beta_{1} x + \epsilon.
 <li>The errors are normally distributed.</li>
 </ol>
 <p>From <a href="slr.html#eq:SLRmod">(3.2)</a>, notice we have another parameter, <span class="math inline">\(\sigma^2\)</span>.</p>
-<p>We will go into more detail about what these assumptions mean, and how to assess whether they are met, in module 5.</p>
+<p>We will go into more detail about what these assumptions mean, and how to assess whether they are met, in module <a href="diag.html#diag">5</a>.</p>
 <p>What these assumptions mean is that for each value of the predictor variable <span class="math inline">\(x\)</span>, the response variable:</p>
 <ol style="list-style-type: decimal">
 <li>follows a normal distribution,</li>
@@ -425,7 +428,45 @@ SS_T = SS_R + SS_{res}.
 <span class="header-section-number">3.5.2</span> ANOVA Table<a class="anchor" aria-label="anchor" href="#anova-table"><i class="fas fa-link"></i></a>
 </h3>
 <p>Information regarding the sums of squares is usually presented in the form of an <strong>ANOVA (analysis of variance) table</strong>:</p>
-<!-- TROUBLE WITH ADDING LATEX TABLE -->
+<div class="inline-table"><table class="table table-sm">
+<colgroup>
+<col width="23%">
+<col width="29%">
+<col width="15%">
+<col width="15%">
+<col width="15%">
+</colgroup>
+<thead><tr class="header">
+<th align="center">Source of Variation</th>
+<th align="center">SS</th>
+<th align="center">df</th>
+<th align="center">MS</th>
+<th align="center">F</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="center">Regression</td>
+<td align="center"><span class="math inline">\(SS_R=\sum\left(\hat{y_i}-\bar{y}\right)^2\)</span></td>
+<td align="center"><span class="math inline">\(df_R = 1\)</span></td>
+<td align="center"><span class="math inline">\(MS_R=\frac{SS_R}{df_R}\)</span></td>
+<td align="center"><span class="math inline">\(\frac{MS_R}{MS_{res}}\)</span></td>
+</tr>
+<tr class="even">
+<td align="center">Error</td>
+<td align="center"><span class="math inline">\(SS_{res} = \sum\left(y_i-\hat{y_i}\right)^2\)</span></td>
+<td align="center"><span class="math inline">\(df_{res} = n-2\)</span></td>
+<td align="center"><span class="math inline">\(MS_{res}=\frac{SS_{res}}{df_{res}}\)</span></td>
+<td align="center"><code>***</code></td>
+</tr>
+<tr class="odd">
+<td align="center">Total</td>
+<td align="center"><span class="math inline">\(SS_T=\sum\left(y_i-\bar{y}\right)^2\)</span></td>
+<td align="center"><span class="math inline">\(df_T = n-1\)</span></td>
+<td align="center"><code>***</code></td>
+<td align="center"><code>***</code></td>
+</tr>
+</tbody>
+</table></div>
 <p>Note:</p>
 <ul>
 <li>Dividing each sum of square with its corresponding degrees of freedom gives the corresponding mean square.</li>
@@ -686,12 +727,13 @@ r = \frac{\sum\limits_{i=1}^{n}(x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum\limits
 <pre><code>## [1] -0.4985561</code></pre>
 <p>The correlation is -0.4985561. We have a moderate, negative linear association between family income and gift aid.</p>
 
+<!-- Line 357: Change "Module 5" to add reference for chapter -->
 </div>
 </div>
 </div>
   <div class="chapter-nav">
 <div class="prev"><a href="viz.html"><span class="header-section-number">2</span> Data Visualization with R Using ggplot2</a></div>
-<div class="next"><a href="intro.html"><span class="header-section-number">4</span> Introduction</a></div>
+<div class="next"><a href="inf.html"><span class="header-section-number">4</span> Inference with Simple Linear Regression (SLR)</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
@@ -740,7 +782,7 @@ r = \frac{\sum\limits_{i=1}^{n}(x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum\limits
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Linear Models for Data Science</strong>" was written by Jeffrey Woo. It was last built on 2024-07-03.</p>
+    <p>"<strong>Linear Models for Data Science</strong>" was written by Jeffrey Woo. It was last built on 2024-07-09.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

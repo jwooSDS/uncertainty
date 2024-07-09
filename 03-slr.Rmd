@@ -1,6 +1,3 @@
-<!-- Line 382: TROUBLE WITH ADDING LATEX TABLE -->
-<!-- Line 178: Change "Module 5" to add reference for chapter -->
-
 # Basics with Simple Linear Regression (SLR) {#slr}
 
 ## Introduction
@@ -173,9 +170,7 @@ We need to make some assumptions for the error term $\epsilon$. Generally, the a
 
 From \@ref(eq:SLRmod), notice we have another parameter, $\sigma^2$.
 
-<!-- Change "Module 5" to add reference for chapter -->
-
-We will go into more detail about what these assumptions mean, and how to assess whether they are met, in module 5. 
+We will go into more detail about what these assumptions mean, and how to assess whether they are met, in module \@ref(diag). 
 
 What these assumptions mean is that for each value of the predictor variable $x$, the response variable:
 
@@ -379,7 +374,11 @@ Each of the sums of squares has its associated **degrees of freedom (df)**:
 
 Information regarding the sums of squares is usually presented in the form of an **ANOVA (analysis of variance) table**:
 
-<!-- TROUBLE WITH ADDING LATEX TABLE -->
+| Source of Variation  |  SS  |  df  | MS | F |
+|:----------:|:-------------:|:------:|:------:|:------:|
+| Regression |  $SS_R=\sum\left(\hat{y_i}-\bar{y}\right)^2$ | $df_R = 1$  | $MS_R=\frac{SS_R}{df_R}$ | $\frac{MS_R}{MS_{res}}$ |
+| Error |    $SS_{res} = \sum\left(y_i-\hat{y_i}\right)^2$   | $df_{res} = n-2$ | $MS_{res}=\frac{SS_{res}}{df_{res}}$ | `***` |
+| Total | $SS_T=\sum\left(y_i-\bar{y}\right)^2$ | $df_T = n-1$ | `***` | `***` |
 
 Note:
 

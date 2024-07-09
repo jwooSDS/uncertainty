@@ -1,0 +1,12 @@
+# TABLE {#try}
+
+## Introduction
+
+| Source of Variation  |  SS  |  df  | MS | F |
+|:----------:|:-------------:|:------:|:------:|:------:|
+| Regression |  $SS_R=\sum\left(\hat{y_i}-\bar{y}\right)^2$ | $df_R = 1$  | $MS_R=\frac{SS_R}{df_R}$ | $\frac{MS_R}{MS_{res}}$ |
+| Error |    $SS_{res} = \sum\left(y_i-\hat{y_i}\right)^2$   | $df_{res} = n-2$ | $MS_{res}=\frac{SS_{res}}{df_{res}}$ | `***` |
+| Total | $SS_T=\sum\left(y_i-\bar{y}\right)^2$ | $df_T = n-1$ | `***` | `***` |
+
+
+
