@@ -132,6 +132,7 @@ cautions-using-slr-and-correlation
 outliers
 association-and-causation
 questions-1
+r-tutorial-1
 diag
 introduction-4
 assumptions-in-linear-regression
