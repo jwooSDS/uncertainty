@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 6 Multiple Linear Regression (MLR) | Linear Models for Data Science</title>
+<meta name="author" content="Jeffrey Woo">
+<meta name="description" content="6.1 Introduction Linear regression models are used to explore the relationship between variables as well as make predictions. Simple linear regression (SLR) concerns the study of only one...">
+<meta name="generator" content="bookdown 0.34 with bs4_book()">
+<meta property="og:title" content="Chapter 6 Multiple Linear Regression (MLR) | Linear Models for Data Science">
+<meta property="og:type" content="book">
+<meta property="og:description" content="6.1 Introduction Linear regression models are used to explore the relationship between variables as well as make predictions. Simple linear regression (SLR) concerns the study of only one...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 6 Multiple Linear Regression (MLR) | Linear Models for Data Science">
+<meta name="twitter:description" content="6.1 Introduction Linear regression models are used to explore the relationship between variables as well as make predictions. Simple linear regression (SLR) concerns the study of only one...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.2/transition.js"></script><script src="libs/bs3compat-0.4.2/tabs.js"></script><script src="libs/bs3compat-0.4.2/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<style type="text/css">
+    /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+        }
+    .hanging div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }
+  </style>
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Linear Models for Data Science</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Preface</a></li>
+<li><a class="" href="wrangling.html"><span class="header-section-number">1</span> Data Wrangling with R</a></li>
+<li><a class="" href="viz.html"><span class="header-section-number">2</span> Data Visualization with R Using ggplot2</a></li>
+<li><a class="" href="slr.html"><span class="header-section-number">3</span> Basics with Simple Linear Regression (SLR)</a></li>
+<li><a class="" href="inf.html"><span class="header-section-number">4</span> Inference with Simple Linear Regression (SLR)</a></li>
+<li><a class="" href="diag.html"><span class="header-section-number">5</span> Model Diagnostics and Remedial Measures in SLR</a></li>
+<li><a class="active" href="mlr.html"><span class="header-section-number">6</span> Multiple Linear Regression (MLR)</a></li>
+<li><a class="" href="intro.html"><span class="header-section-number">7</span> Introduction</a></li>
+<li><a class="" href="literature.html"><span class="header-section-number">8</span> Literature</a></li>
+<li><a class="" href="methods.html"><span class="header-section-number">9</span> Methods</a></li>
+<li><a class="" href="applications.html"><span class="header-section-number">10</span> Applications</a></li>
+<li><a class="" href="final-words.html"><span class="header-section-number">11</span> Final Words</a></li>
+<li><a class="" href="references.html">References</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="mlr" class="section level1" number="6">
+<h1>
+<span class="header-section-number">6</span> Multiple Linear Regression (MLR)<a class="anchor" aria-label="anchor" href="#mlr"><i class="fas fa-link"></i></a>
+</h1>
+<div id="introduction-5" class="section level2" number="6.1">
+<h2>
+<span class="header-section-number">6.1</span> Introduction<a class="anchor" aria-label="anchor" href="#introduction-5"><i class="fas fa-link"></i></a>
+</h2>
+<p>Linear regression models are used to explore the relationship between variables as well as make predictions. Simple linear regression (SLR) concerns the study of only one predictor variable with one response variable. However, given the context, it may be clear there are multiple predictors that relate to the response variable. In such a context, we want to:</p>
+<ul>
+<li>Improve predictions on the response variable by including more useful predictors.</li>
+<li>Assess how a predictor relates to the response variable when controlling for other predictors.</li>
+</ul>
+<p><strong>Multiple linear regression (MLR)</strong> models allow us to examine the effect of multiple predictors on the response variable simultaneously.</p>
+<p>There are a couple of ways to think about MLR:</p>
+<ul>
+<li>Extension of SLR to MLR.</li>
+<li>SLR as a special case of MLR.</li>
+</ul>
+<p>As a motivating example, we look at data regarding black cherry trees. The data, <code>cherry</code> come from the <code>openintro</code> package. Researchers want to understand the relationship between the volume of these trees and their diameter and height. Data come from 31 trees in the Allegheny National Forest, Pennsylvania.</p>
+<div class="sourceCode" id="cb240"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://openintrostat.github.io/openintro/">openintro</a></span><span class="op">)</span></span>
+<span><span class="va">Data</span><span class="op">&lt;-</span><span class="fu">openintro</span><span class="fu">::</span><span class="va"><a href="https://openintrostat.github.io/openintro/reference/cherry.html">cherry</a></span></span></code></pre></div>
+<p>From this context, we know that volume of a tree is influenced by its diameter and height, so we have more than one predictor in this study.</p>
+<p>As you read this set of notes, take note of the similarities and differences between SLR and MLR.</p>
+</div>
+<div id="notation-in-mlr" class="section level2" number="6.2">
+<h2>
+<span class="header-section-number">6.2</span> Notation in MLR<a class="anchor" aria-label="anchor" href="#notation-in-mlr"><i class="fas fa-link"></i></a>
+</h2>
+<p>We write the <strong>MLR model</strong> as:</p>
+<p><span class="math display" id="eq:6MLRmod">\[\begin{equation}
+y_i = \beta_0+\beta_1 x_{i1} + \beta_2 x_{i2} + \cdots + \beta_{k} x_{i k} + \epsilon_i.
+\tag{6.1}
+\end{equation}\]</span></p>
+<p>In this setup, we have <span class="math inline">\(k\)</span> quantitative predictors. The notation in <a href="mlr.html#eq:6MLRmod">(6.1)</a> are as follows:</p>
+<ul>
+<li>
+<span class="math inline">\(y_i\)</span>: value of response variable for observation <span class="math inline">\(i\)</span>,</li>
+<li>
+<span class="math inline">\(\beta_0\)</span>: <strong>intercept</strong> for MLR model,</li>
+<li>
+<span class="math inline">\(\beta_j\)</span>: <strong>coefficient</strong> (or slope) for predictor <span class="math inline">\(j\)</span>, for <span class="math inline">\(j = 1, 2, \cdots, k\)</span>. We have <span class="math inline">\(k\)</span> predictors, each with its corresponding coefficient.</li>
+<li>
+<span class="math inline">\(x_{ij}\)</span>: observation <span class="math inline">\(i\)</span>’s value for predictor <span class="math inline">\(j\)</span>. Notice there are two numbers in the subscript. The first number denotes which observation, and the second denotes which predictor.</li>
+<li>
+<span class="math inline">\(\epsilon_i:\)</span> <strong>error</strong> for observation <span class="math inline">\(i\)</span>.</li>
+</ul>
+<p>The <strong>assumptions</strong> in MLR are identical to SLR:</p>
+<p><span class="math display" id="eq:6assumptions">\[\begin{equation}
+\epsilon_1,\ldots,\epsilon_n \ i.i.d. \sim N(0,\sigma^2).
+\tag{6.2}
+\end{equation}\]</span></p>
+<p>Let us use the <code>cherry</code> data from <code>openintro</code> as an example:</p>
+<div class="sourceCode" id="cb241"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">Data</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## # A tibble: 6 × 3
+##    diam height volume
+##   &lt;dbl&gt;  &lt;int&gt;  &lt;dbl&gt;
+## 1   8.3     70   10.3
+## 2   8.6     65   10.3
+## 3   8.8     63   10.2
+## 4  10.5     72   16.4
+## 5  10.7     81   18.8
+## 6  10.8     83   19.7</code></pre>
+<ul>
+<li>
+<span class="math inline">\(y_2\)</span> = 10.3 cubic feet, the volume for observation 2</li>
+<li>
+<span class="math inline">\(x_{41} = 10.5\)</span> inches, observation 4’s diameter (predictor 1)</li>
+<li>
+<span class="math inline">\(x_{22} = 65\)</span> feet, observation 2’s height (predictor 2)</li>
+</ul>
+<p>The MLR model in <a href="mlr.html#eq:6MLRmod">(6.1)</a> is often expressed using matrices, which is a lot neater:</p>
+<p><span class="math display">\[
+\left[
+\begin{array}{c}
+   y_1  \\
+   y_2  \\
+   \vdots   \\
+   y_n
+\end{array}
+\right] =
+\left[
+\begin{array}{cccc}
+   1 &amp; x_{11} &amp; \cdots &amp; x_{1k}  \\
+   1 &amp; x_{21} &amp; \cdots &amp; x_{2k}  \\
+   \vdots   \\
+   1 &amp; x_{n1} &amp; \cdots &amp; x_{nk}  \\
+\end{array}
+\right]
+\left[
+\begin{array}{c}
+\beta_0 \\
+\beta_1 \\
+\vdots \\
+\beta_{k}
+\end{array}
+\right] +
+\left[
+\begin{array}{c}
+   \epsilon_1  \\
+   \epsilon_2  \\
+   \vdots   \\
+   \epsilon_n
+\end{array}
+\right],
+\]</span></p>
+<p>or</p>
+<p><span class="math display" id="eq:6matrix">\[\begin{equation}
+\boldsymbol{y} = \boldsymbol{X \beta} + \boldsymbol{\epsilon}.
+\tag{6.3}
+\end{equation}\]</span></p>
+<p>The notation in <a href="mlr.html#eq:6matrix">(6.3)</a> are as follows:</p>
+<ul>
+<li>
+<span class="math inline">\(\boldsymbol{y}\)</span>: <strong>vector of responses</strong> (length <span class="math inline">\(n\)</span>),</li>
+<li>
+<span class="math inline">\(\boldsymbol{\beta}\)</span>: <strong>vector of parameters</strong> (length <span class="math inline">\(p = k+1\)</span>, where <span class="math inline">\(p\)</span> denotes the number of regression parameters),</li>
+<li>
+<span class="math inline">\(\boldsymbol{X}\)</span>: <strong>design matrix</strong> (dimension <span class="math inline">\(n \times p\)</span>),</li>
+<li>
+<span class="math inline">\(\boldsymbol{\epsilon}\)</span>: <strong>vector of residuals</strong> (length <span class="math inline">\(n\)</span>).</li>
+</ul>
+<p>The formulation in <a href="mlr.html#eq:6matrix">(6.3)</a> is the basis for calling the model a “linear” regression. The model is <strong>linear in the parameters</strong>, not the predictors. A common misconception is that the model is linear in the predictors.</p>
+<p>Following <a href="mlr.html#eq:6MLRmod">(6.1)</a>, the <strong>MLR equation</strong> can be written as:</p>
+<p><span class="math display" id="eq:6MLR">\[\begin{equation}
+E(y|x) = \beta_0+\beta_1 x_1 + \beta_2 x_2 + \cdots + \beta_{k} x_k.
+\tag{6.4}
+\end{equation}\]</span></p>
+<p>And in turn, the <strong>estimated MLR equation</strong> can be written as:</p>
+<p><span class="math display" id="eq:6MLReq">\[\begin{equation}
+\hat{y} = \hat{\beta_0}+\hat{\beta_1} x_1 + \hat{\beta_2} x_2 + \cdots + \hat{\beta_{k}} x_k.
+\tag{6.5}
+\end{equation}\]</span></p>
+<div id="interpreting-coefficients-in-mlr" class="section level3" number="6.2.1">
+<h3>
+<span class="header-section-number">6.2.1</span> Interpreting coefficients in MLR<a class="anchor" aria-label="anchor" href="#interpreting-coefficients-in-mlr"><i class="fas fa-link"></i></a>
+</h3>
+<p>The interpretation of estimated coefficients are similar with SLR, with a small caveat: <span class="math inline">\(\hat{\beta}_j\)</span> denotes the change in the predicted response per unit change in <span class="math inline">\(x_j\)</span>, <strong>when the other predictors are held constant.</strong> There are other common ways to state the bold part:</p>
+<ul>
+<li>when controlling for the other predictors.</li>
+<li>when the other predictors are taken into account.</li>
+<li>after adjusting for the effect of the other predictors.</li>
+</ul>
+<p>If you are familiar with how a partial derivative is interpreted in multivariate calculus, you will realize that the interpretation of estimated coefficients in MLR sound like how a partial derivative is interpreted.</p>
+<p>Let us look at the estimated regression equation for the <code>cherry</code> data:</p>
+<div class="sourceCode" id="cb243"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">result</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">volume</span><span class="op">~</span><span class="va">.</span>, data<span class="op">=</span><span class="va">Data</span><span class="op">)</span></span>
+<span><span class="va">result</span></span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = volume ~ ., data = Data)
+## 
+## Coefficients:
+## (Intercept)         diam       height  
+##    -57.9877       4.7082       0.3393</code></pre>
+<p>The estimated MLR equation is <span class="math inline">\(\hat{y} = -57.9877 + 4.7082x_1 + 0.3393x_2\)</span>. The estimated coefficient for diameter inform us that for each additional inch in diameter, the predicted volume of a cherry tree increases by 4.7082 cubic feet, while holding height constant.</p>
+</div>
+<div id="visualizing-mlr" class="section level3" number="6.2.2">
+<h3>
+<span class="header-section-number">6.2.2</span> Visualizing MLR<a class="anchor" aria-label="anchor" href="#visualizing-mlr"><i class="fas fa-link"></i></a>
+</h3>
+<p>How should we visualize an MLR equation? Suppose we have two predictor variables, <span class="math inline">\(x_1\)</span> and <span class="math inline">\(x_2\)</span>, with MLR equation <span class="math inline">\(E(y|x_1,x_2) = 2 + 5x_1 + 5x_2\)</span>. A <strong>contour plot</strong> can be used to visualize a response variable with two predictors:</p>
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/unnamed-chunk-173-1.png" width="672"></div>
+<p>The contour plot creates an axis for each predictor. The value of the response variable is denoted by the contour lines with the actual value displayed on the line. In this toy example, <span class="math inline">\(\beta_1 = 5\)</span>. This means that if we hold <span class="math inline">\(x_2\)</span> constant (e.g. set <span class="math inline">\(x_2 = 1\)</span> per the red horizontal line), increasing <span class="math inline">\(x_1\)</span> by 1 unit increases the mean of <span class="math inline">\(y\)</span> by 5 units.</p>
+<p>The regression equation <span class="math inline">\(E(y|x_1,x_2) = 2 + 5x_1 + 5x_2\)</span> is sometimes called a <strong>regression plane</strong>, instead of a regression line, since we have more than 1 predictor. We can visualize this regression plane below</p>
+<div class="inline-figure">
+<img src="images/3dplot.jpg"><!-- -->
+</div>
+<p>Due to limitations in human visualization, going beyond a 3-dimensional plot (1 response and 2 predictors) is difficult.</p>
+<p><em>Please see the associated video for a little more explanation regarding the contour plot and 3-dimensional plot</em>.</p>
+</div>
+</div>
+<div id="estimating-coefficients-in-mlr" class="section level2" number="6.3">
+<h2>
+<span class="header-section-number">6.3</span> Estimating coefficients in MLR<a class="anchor" aria-label="anchor" href="#estimating-coefficients-in-mlr"><i class="fas fa-link"></i></a>
+</h2>
+<p>From <a href="mlr.html#eq:6MLReq">(6.5)</a>, the predicted response (or fitted values), can be written in matrix form as:</p>
+<p><span class="math display" id="eq:6yhat">\[\begin{equation}
+\boldsymbol{\hat{y}} = \boldsymbol{X\hat{\beta}},
+\tag{6.6}
+\end{equation}\]</span></p>
+<p>where <span class="math inline">\(\boldsymbol{\hat{\beta}} = (\hat{\beta_0}, \hat{\beta_1}, \cdots, \hat{\beta_k})^\prime\)</span>.</p>
+<p>We use the <strong>method of least squares</strong> to find the estimated coefficients in MLR. This is the same idea when applied in SLR. The method involves minimizing the <strong>sum of squared residuals</strong>, <span class="math inline">\(SS_{res}\)</span>. In SLR, we minimize</p>
+<p><span class="math display">\[
+\sum\limits_{i=1}^{n} \left[ y_i - (\hat{\beta_0}+\hat{\beta_1} x_i) \right]^{2}
+\]</span></p>
+<p>with respect to <span class="math inline">\(\hat{\beta_0}, \hat{\beta_1}\)</span>. In MLR, the <span class="math inline">\(SS_{res}\)</span> can be expressed in matrix form:</p>
+<p><span class="math display" id="eq:6min">\[\begin{equation}
+Q = \left(\boldsymbol{y - X\hat{\beta}}\right)^{\prime} \left(\boldsymbol{y - X\hat{\beta}}\right)
+\tag{6.7}
+\end{equation}\]</span></p>
+<p>To minimize the <span class="math inline">\(Q = SS_{res}\)</span> with respect to <span class="math inline">\(\hat{\beta_0}, \hat{\beta_1}, \cdots, \hat{\beta_k}\)</span>, We take partial derivatives of <span class="math inline">\(Q\)</span> and set them all to 0, i.e. <span class="math inline">\(\frac{\nabla Q}{\nabla \hat{\beta}}=0\)</span>. Solving for these equations, we get</p>
+<p><span class="math display" id="eq:6b">\[\begin{equation}
+\boldsymbol{\hat{\beta}} = \left[
+\begin{array}{c}
+   \hat{\beta}_0  \\
+   \hat{\beta}_1 \\
+   \vdots \\
+   \hat{\beta}_k
+\end{array}
+\right]  =
+\left(\boldsymbol{X}^{\prime} \boldsymbol{X} \right)^{-1} \boldsymbol{X}^{\prime} \boldsymbol{y} .
+\tag{6.8}
+\end{equation}\]</span></p>
+<p><strong>Residuals</strong> are found in the same way in SLR:</p>
+<p><span class="math display">\[
+e_i = y_i - \hat{y_i},
+\]</span></p>
+<p>or in matrix form:</p>
+<p><span class="math display" id="eq:6res">\[\begin{equation}
+\boldsymbol{e} = \boldsymbol{y} - \boldsymbol{\hat{y}} = \boldsymbol{y} - \boldsymbol{X\hat{\beta}}.
+\tag{6.9}
+\end{equation}\]</span></p>
+<div id="estimating-variance-of-errors" class="section level3" number="6.3.1">
+<h3>
+<span class="header-section-number">6.3.1</span> Estimating variance of errors<a class="anchor" aria-label="anchor" href="#estimating-variance-of-errors"><i class="fas fa-link"></i></a>
+</h3>
+<p>Similar to SLR, <span class="math inline">\(MS_{res}\)</span> is used to estimate <span class="math inline">\(\sigma^2\)</span>, the variance of the error terms. <span class="math inline">\(MS_{res}\)</span> if found using</p>
+<p><span class="math display" id="eq:6MSres">\[\begin{equation}
+MS_{res}=\frac{SS_{res}}{n-p},
+\tag{6.10}
+\end{equation}\]</span></p>
+<p>where <span class="math inline">\(p\)</span> denotes the <strong>number of regression parameters</strong>. In SLR, <span class="math inline">\(p=2\)</span>, since we have an intercept and one slope. Note: I have seen too many people think <span class="math inline">\(p\)</span> denotes the number of predictors. This is incorrect! As we move forward, we will explore more complicated regression models and we always think in terms of number of regression parameters.</p>
+</div>
+<div id="distribution-of-least-squares-estimators-1" class="section level3" number="6.3.2">
+<h3>
+<span class="header-section-number">6.3.2</span> Distribution of least squares estimators<a class="anchor" aria-label="anchor" href="#distribution-of-least-squares-estimators-1"><i class="fas fa-link"></i></a>
+</h3>
+<p>Following the Gauss Markov theorem, the least squares estimators <span class="math inline">\(\boldsymbol{\hat{\beta}}\)</span> are unbiased, i.e.</p>
+<p><span class="math display" id="eq:6mean2">\[\begin{equation}
+\boldsymbol{E\left(\hat{\beta}\right)} = \boldsymbol{\beta},
+\tag{6.11}
+\end{equation}\]</span></p>
+<p>with <strong>variance-covariance matrix</strong> given by</p>
+<p><span class="math display" id="eq:6cov2">\[\begin{equation}
+\boldsymbol{Var}\left(\boldsymbol{\hat{\beta}}\right) = \sigma^{2}\left(\boldsymbol{X^{\prime}X} \right)^{-1}
+\tag{6.12}
+\end{equation}\]</span></p>
+<p>with <span class="math inline">\(\sigma^{2}\)</span> estimated by <span class="math inline">\(MS_{res}\)</span>. A few notes about the variance-covariance matrix of the least squares estimators:</p>
+<ul>
+<li>it is of dimension <span class="math inline">\(p \times p\)</span>,</li>
+<li>the diagonal elements denote the variance of each estimated parameter. For example, the first diagonal element denotes the variance of <span class="math inline">\(\hat{\beta}_0\)</span>, the first estimated parameter.</li>
+<li>the off-diagonal elements denote the covariance between respective parameters. For example, the (1,2) entry denotes the covariance between <span class="math inline">\(\hat{\beta}_0\)</span> and <span class="math inline">\(\hat{\beta}_1\)</span>.</li>
+</ul>
+<p><em>Please see the associated video for a demonstration on how to read a variance-covariance matrix.</em></p>
+</div>
+</div>
+<div id="anova-f-test-in-mlr" class="section level2" number="6.4">
+<h2>
+<span class="header-section-number">6.4</span> ANOVA <span class="math inline">\(F\)</span> Test in MLR<a class="anchor" aria-label="anchor" href="#anova-f-test-in-mlr"><i class="fas fa-link"></i></a>
+</h2>
+<div id="sum-of-squares-1" class="section level3" number="6.4.1">
+<h3>
+<span class="header-section-number">6.4.1</span> Sum of squares<a class="anchor" aria-label="anchor" href="#sum-of-squares-1"><i class="fas fa-link"></i></a>
+</h3>
+<p>As in simple regression, the <strong>analysis of variance (ANOVA) table</strong> for an MLR model displays quantities that measure how much of the variability in the response variable is explained (and not explained) by the regression model. The underlying conceptual idea for the construction of the analysis of variance table is the same:</p>
+<p><span class="math display" id="eq:6SS">\[\begin{equation}
+SS_T = SS_R + SS_{res}.
+\tag{6.13}
+\end{equation}\]</span></p>
+<p>What change are the associated degrees of freedom:</p>
+<ul>
+<li>df for <span class="math inline">\(SS_R\)</span>: <span class="math inline">\(df_R = p-1\)</span>
+</li>
+<li>df for <span class="math inline">\(SS_{res}\)</span>: <span class="math inline">\(df_{res} = n-p\)</span>
+</li>
+<li>df for <span class="math inline">\(SS_T\)</span>: <span class="math inline">\(df_T = n-1\)</span>
+</li>
+</ul>
+<p>Notice the degrees of freedom in SLR has <span class="math inline">\(p=2\)</span>.</p>
+</div>
+<div id="anova-table-2" class="section level3" number="6.4.2">
+<h3>
+<span class="header-section-number">6.4.2</span> ANOVA table<a class="anchor" aria-label="anchor" href="#anova-table-2"><i class="fas fa-link"></i></a>
+</h3>
+<p>The ANOVA table is thus</p>
+<div class="inline-table"><table class="table table-sm">
+<colgroup>
+<col width="23%">
+<col width="29%">
+<col width="15%">
+<col width="15%">
+<col width="15%">
+</colgroup>
+<thead><tr class="header">
+<th align="center">Source of Variation</th>
+<th align="center">SS</th>
+<th align="center">df</th>
+<th align="center">MS</th>
+<th align="center">F</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="center">Regression</td>
+<td align="center"><span class="math inline">\(SS_R=\sum\left(\hat{y_i}-\bar{y}\right)^2\)</span></td>
+<td align="center"><span class="math inline">\(df_R = p-1\)</span></td>
+<td align="center"><span class="math inline">\(MS_R=\frac{SS_R}{df_R}\)</span></td>
+<td align="center"><span class="math inline">\(\frac{MS_R}{MS_{res}}\)</span></td>
+</tr>
+<tr class="even">
+<td align="center">Error</td>
+<td align="center"><span class="math inline">\(SS_{res} = \sum\left(y_i-\hat{y_i}\right)^2\)</span></td>
+<td align="center"><span class="math inline">\(df_{res} = n-p\)</span></td>
+<td align="center"><span class="math inline">\(MS_{res}=\frac{SS_{res}}{df_{res}}\)</span></td>
+<td align="center"><code>***</code></td>
+</tr>
+<tr class="odd">
+<td align="center">Total</td>
+<td align="center"><span class="math inline">\(SS_T=\sum\left(y_i-\bar{y}\right)^2\)</span></td>
+<td align="center"><span class="math inline">\(df_T = n-1\)</span></td>
+<td align="center"><code>***</code></td>
+<td align="center"><code>***</code></td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div id="anova-f-test-1" class="section level3" number="6.4.3">
+<h3>
+<span class="header-section-number">6.4.3</span> ANOVA <span class="math inline">\(F\)</span> test<a class="anchor" aria-label="anchor" href="#anova-f-test-1"><i class="fas fa-link"></i></a>
+</h3>
+<p>The null and alternative hypotheses associated with the ANOVA <span class="math inline">\(F\)</span> test are:</p>
+<p><span class="math display">\[
+H_0: \beta_1=\beta_2=...=\beta_{k}=0, H_a: \text{ at least one of the coefficients is not 0.}
+\]</span>
+So the null hypothesis states the regression coefficients for all predictors are 0. Notice how this statement simplifies in SLR.</p>
+<p>There are a few different ways to view these hypothesis statements:</p>
+<ul>
+<li>Is our MLR model <strong>useful</strong>?</li>
+<li>Is our MLR model <strong>preferred</strong> over an intercept-only model?</li>
+<li>Can we drop <strong>all</strong> our predictors from the MLR model?</li>
+</ul>
+<p>The test statistic is still</p>
+<p><span class="math display" id="eq:6ANOVA">\[\begin{equation}
+F = \frac{MS_R}{MS_{res}}
+\tag{6.14}
+\end{equation}\]</span></p>
+<p>which is compared with an <span class="math inline">\(F_{p-1,n-p}\)</span> distribution.</p>
+</div>
+<div id="coefficient-of-determination-1" class="section level3" number="6.4.4">
+<h3>
+<span class="header-section-number">6.4.4</span> Coefficient of determination<a class="anchor" aria-label="anchor" href="#coefficient-of-determination-1"><i class="fas fa-link"></i></a>
+</h3>
+<p>The <strong>coefficient of determination, <span class="math inline">\(R^2\)</span>,</strong> is still</p>
+<p><span class="math display" id="eq:6R2">\[\begin{equation}
+R^{2} = \frac{SS_R}{SS_T} = 1 - \frac{SS_{res}}{SS_T},
+\tag{6.15}
+\end{equation}\]</span></p>
+<p>where <span class="math inline">\(R^{2}\)</span> is interpreted as <strong>the proportion of variance in the response variable that is explained by the predictors</strong>.</p>
+<div id="caution-with-r2" class="section level4" number="6.4.4.1">
+<h4>
+<span class="header-section-number">6.4.4.1</span> Caution with <span class="math inline">\(R^2\)</span><a class="anchor" aria-label="anchor" href="#caution-with-r2"><i class="fas fa-link"></i></a>
+</h4>
+<p>Adding more predictors to a model can only increase <span class="math inline">\(R^2\)</span>, as <span class="math inline">\(SS_{res}\)</span> never becomes larger with more predictors and <span class="math inline">\(SS_T\)</span> remains the same for a given set of responses.</p>
+<ul>
+<li>So even adding predictors that don’t make sense will increase <span class="math inline">\(R^2\)</span>.</li>
+<li>
+<span class="math inline">\(R^2\)</span> should be used to compare models with the same number of parameters.</li>
+<li>
+<span class="math inline">\(R^2\)</span> is a popular measure as it has a nice geometric interpretation.</li>
+</ul>
+<p>In response to this caution, we have the <strong>adjusted <span class="math inline">\(R^2\)</span></strong>, denoted by <span class="math inline">\(R_{a}^{2}\)</span>:</p>
+<p><span class="math display" id="eq:6adjusted">\[\begin{equation}
+R_{a}^{2} = 1 - \frac{\frac{SS_{res}}{n-p}}{\frac{SS_T}{n-1}} = 1 - \left(\frac{n-1}{n-p} \right) \frac{SS_{res}}{SS_T}.
+\tag{6.16}
+\end{equation}\]</span></p>
+<p><span class="math inline">\(R_{a}^{2}\)</span> increases if the added predictors significantly improve the fit of the model, and decreases otherwise.</p>
+<p>Let us go back to the <code>cherry</code> dataset as an example:</p>
+<div class="sourceCode" id="cb245"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = volume ~ ., data = Data)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -6.4065 -2.6493 -0.2876  2.2003  8.4847 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) -57.9877     8.6382  -6.713 2.75e-07 ***
+## diam          4.7082     0.2643  17.816  &lt; 2e-16 ***
+## height        0.3393     0.1302   2.607   0.0145 *  
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 3.882 on 28 degrees of freedom
+## Multiple R-squared:  0.948,  Adjusted R-squared:  0.9442 
+## F-statistic:   255 on 2 and 28 DF,  p-value: &lt; 2.2e-16</code></pre>
+<p>The ANOVA <span class="math inline">\(F\)</span> statistic is 255` with a small p-value. So we reject the null hypothesis and state that our MLR model with diameter and height as predictors is useful.</p>
+<p>The <span class="math inline">\(R^2\)</span> is 0.948. About 94.8% of the variance in volume of cherry trees can be explained by their diameter and height.</p>
+<p>The <span class="math inline">\(R_{a}^{2}\)</span> is 0.9442. This value is used in comparison with another model to decide which should be preferred.</p>
+</div>
+</div>
+</div>
+<div id="t-test-for-regression-coefficient-in-mlr" class="section level2" number="6.5">
+<h2>
+<span class="header-section-number">6.5</span> <span class="math inline">\(t\)</span> Test for Regression Coefficient in MLR<a class="anchor" aria-label="anchor" href="#t-test-for-regression-coefficient-in-mlr"><i class="fas fa-link"></i></a>
+</h2>
+<p>We can assess whether a regression coefficient is significantly different from 0 in an MLR. The null and alternative hypotheses are very much the same as in SLR:</p>
+<p><span class="math display">\[
+H_0: \beta_j = 0, H_a: \beta_j \neq 0.
+\]</span>
+What these hypotheses mean in words:</p>
+<ul>
+<li>The null hypothesis supports dropping predictor <span class="math inline">\(x_j\)</span> from the MLR model, <strong>in the presence of the other predictors.</strong>
+</li>
+<li>The alternative hypothesis supports keeping predictor <span class="math inline">\(x_j\)</span> in the MLR model, or that we <strong>cannot drop it in the presence of the other predictors.</strong>
+</li>
+</ul>
+<p>Notice the meaning of the null and alternative hypotheses are a little different than in SLR, where other predictors are not taken into account.</p>
+<p>The test statistic is still</p>
+<p><span class="math display" id="eq:6ttest">\[\begin{equation}
+t = \frac{\hat{\beta}_j}{se(\hat{\beta}_j)}
+\tag{6.17}
+\end{equation}\]</span></p>
+<p>which is compared with a <span class="math inline">\(t_{n-p}\)</span> distribution.</p>
+<p>Let us take a look at the <code>cherry</code> dataset:</p>
+<div class="sourceCode" id="cb247"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span><span class="op">$</span><span class="va">coefficients</span></span></code></pre></div>
+<pre><code>##                Estimate Std. Error   t value     Pr(&gt;|t|)
+## (Intercept) -57.9876589  8.6382259 -6.712913 2.749507e-07
+## diam          4.7081605  0.2642646 17.816084 8.223304e-17
+## height        0.3392512  0.1301512  2.606594 1.449097e-02</code></pre>
+<p>Notice the <span class="math inline">\(t\)</span> statistics associated with testing for the coefficient for each predictor is highly significant. So we do not have evidence to drop any of the other predictors to simplify the model.</p>
+<div id="caution-in-interpretating-t-test-in-mlr" class="section level3" number="6.5.1">
+<h3>
+<span class="header-section-number">6.5.1</span> Caution in interpretating <span class="math inline">\(t\)</span> test in MLR<a class="anchor" aria-label="anchor" href="#caution-in-interpretating-t-test-in-mlr"><i class="fas fa-link"></i></a>
+</h3>
+<p>An insignificant <span class="math inline">\(t\)</span> test for a coefficient <span class="math inline">\(\beta_j\)</span> in MLR indicates that predictor <span class="math inline">\(x_j\)</span> can be removed from the model (and leave the other predictors in). It is <strong>not needed in the presence of the other predictors.</strong></p>
+<ol style="list-style-type: decimal">
+<li>
+<p>A common misstatement many make is that an insignificant <span class="math inline">\(t\)</span> test for a coefficient <span class="math inline">\(\beta_j\)</span> in MLR implies that predictor <span class="math inline">\(x_j\)</span> has no linear relation with the response variable. This is not necessarily correct!</p>
+<ul>
+<li><p>If <span class="math inline">\(x_j\)</span> is highly correlated with at least one of the other predictors, or is a linear combination of a number of other predictors, <span class="math inline">\(x_j\)</span> will probably be insignificant as the addition of <span class="math inline">\(x_j\)</span> doesn’t help in improving the model. This concept is called <strong>multicollinearity</strong> which we will explore in more depth in the next module. <span class="math inline">\(x_j\)</span> does not provide independent information from the other predictors, and so will not be needed when the other predictors are in the model.</p></li>
+<li><p><span class="math inline">\(x_j\)</span> itself may still be linearly related to the response variable, on its own.</p></li>
+<li><p>If your goal is to assess if <span class="math inline">\(x_j\)</span> is linearly related to the response, need to use SLR.</p></li>
+</ul>
+</li>
+<li>
+<p>Another common misstatement people make is that if they observe more than one <span class="math inline">\(t\)</span> statistic that is insignificant, it means that all of the associated predictors can be dropped from the model. This again is not necessarily correct.</p>
+<ul>
+<li>An insignificant <span class="math inline">\(t\)</span> test informs us we can drop that particular predictor, while leaving the other predictors in the model. We can only drop one predictor at a time based on <span class="math inline">\(t\)</span> tests.</li>
+</ul>
+</li>
+</ol>
+<p>Notice the limitation of the <span class="math inline">\(t\)</span> test and ANOVA <span class="math inline">\(F\)</span> test in MLR:</p>
+<ul>
+<li>We can <strong>only drop 1 predictor</strong> based on a <span class="math inline">\(t\)</span> test.</li>
+<li>We can <strong>drop all predictors</strong> based on an ANOVA <span class="math inline">\(F\)</span> test.</li>
+<li>What if we wish to drop more than 1 predictor simultaneously, but not all, from the model? We will explore this via another <span class="math inline">\(F\)</span> test in the next module.</li>
+</ul>
+</div>
+</div>
+<div id="cis-in-mlr" class="section level2" number="6.6">
+<h2>
+<span class="header-section-number">6.6</span> CIs in MLR<a class="anchor" aria-label="anchor" href="#cis-in-mlr"><i class="fas fa-link"></i></a>
+</h2>
+<div id="ci-for-regression-coefficient" class="section level3" number="6.6.1">
+<h3>
+<span class="header-section-number">6.6.1</span> CI for regression coefficient<a class="anchor" aria-label="anchor" href="#ci-for-regression-coefficient"><i class="fas fa-link"></i></a>
+</h3>
+<p>The general form for CIs is still the same:</p>
+<p><span class="math display" id="eq:6CI">\[\begin{equation}
+\mbox{estimator} \pm (\mbox{multiplier} \times \mbox{s.e of estimator}).
+\tag{6.18}
+\end{equation}\]</span></p>
+<p>The <span class="math inline">\(100(1-\alpha)\%\)</span> CI for <span class="math inline">\(\beta_j\)</span> is</p>
+<p><span class="math display" id="eq:6CIb">\[\begin{equation}
+\hat{\beta}_j \pm t_{1-\alpha/2;n-p}  se(\hat{\beta}_j) = \hat{\beta}_j \pm t_{1-\alpha/2;n-p} s \sqrt{C_{jj}}
+\tag{6.19}
+\end{equation}\]</span></p>
+<p>where <span class="math inline">\(C_{jj}\)</span> denotes the <span class="math inline">\(j\)</span>th diagonal entry in variance-covariance matrix of the estimated coefficients, <span class="math inline">\(\boldsymbol{Var}\left(\boldsymbol{\hat{\beta}}\right)\)</span>.</p>
+<p>The multiplier is now based on a <span class="math inline">\(t_{n-p}\)</span> distribution, instead of a <span class="math inline">\(t_{n-2}\)</span> distribution for SLR.</p>
+</div>
+<div id="ci-of-the-mean-response-1" class="section level3" number="6.6.2">
+<h3>
+<span class="header-section-number">6.6.2</span> CI of the mean response<a class="anchor" aria-label="anchor" href="#ci-of-the-mean-response-1"><i class="fas fa-link"></i></a>
+</h3>
+<p>Since we have multiple predictors, we may interested in the CI for the mean of the response, when the predictors are each equal to specific values. Let the vector <span class="math inline">\(\boldsymbol{x_0}\)</span> denote these values on each predictor, specifically</p>
+<p><span class="math display">\[
+\boldsymbol{x_0} = (1, x_{01}, x_{02}, \cdots, x_{0k})^{\prime},
+\]</span></p>
+<p>where <span class="math inline">\(x_{0j}\)</span> denotes the value for predictor <span class="math inline">\(x_j\)</span>. The CI for the mean response when <span class="math inline">\(\boldsymbol{x} = \boldsymbol{x_0}\)</span> is</p>
+<p><span class="math display" id="eq:6CImean">\[\begin{equation}
+\hat{\mu}_{y|\boldsymbol{x_0}}\pm t_{1-\alpha/2,n-p}s\sqrt{\boldsymbol{x_0}^{\prime} \boldsymbol{(X^\prime X)^{-1}} \boldsymbol{x_0}}.
+\tag{6.20}
+\end{equation}\]</span></p>
+</div>
+<div id="pi-of-a-new-response-1" class="section level3" number="6.6.3">
+<h3>
+<span class="header-section-number">6.6.3</span> PI of a new response<a class="anchor" aria-label="anchor" href="#pi-of-a-new-response-1"><i class="fas fa-link"></i></a>
+</h3>
+<p>For a new value of the response when <span class="math inline">\(\boldsymbol{x} = \boldsymbol{x_0}\)</span>, the PI is</p>
+<p><span class="math display" id="eq:6pred">\[\begin{equation}
+\hat{y}_0\pm t_{1-\alpha/2,n-p}s \sqrt{1+ \boldsymbol{x_0}^{\prime} \boldsymbol{(X^\prime X)^{-1}} \boldsymbol{x_0}}.
+\tag{6.21}
+\end{equation}\]</span></p>
+</div>
+</div>
+<div id="r-tutorial-3" class="section level2" number="6.7">
+<h2>
+<span class="header-section-number">6.7</span> R Tutorial<a class="anchor" aria-label="anchor" href="#r-tutorial-3"><i class="fas fa-link"></i></a>
+</h2>
+<p>For this tutorial, we will learn how to fit multiple linear regression (MLR) in R. You will realize that fitting MLR is very similar to fitting SLR.</p>
+<p>We will look at data regarding black cherry trees. The data, <code>cherry</code>, come from the <code>openintro</code> package. Researchers want to understand the relationship between the volume (in cubic feet) of these trees and their diameter (in inches, at 54 inches above ground) and height (in feet). Data come from 31 trees in the Allegheny National Forest, Pennsylvania.</p>
+<div class="sourceCode" id="cb249"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://openintrostat.github.io/openintro/">openintro</a></span><span class="op">)</span></span>
+<span><span class="va">Data</span><span class="op">&lt;-</span><span class="fu">openintro</span><span class="fu">::</span><span class="va"><a href="https://openintrostat.github.io/openintro/reference/cherry.html">cherry</a></span></span></code></pre></div>
+<div id="scatterplot-matrix" class="section level3 unnumbered">
+<h3>Scatterplot matrix<a class="anchor" aria-label="anchor" href="#scatterplot-matrix"><i class="fas fa-link"></i></a>
+</h3>
+<p>A scatterplot matrix is useful to create scatterplots involving more than two quantitative variables. We will use the <code><a href="https://ggobi.github.io/ggally/reference/ggpairs.html">ggpairs()</a></code> function from the <code>GGally</code> package:</p>
+<div class="sourceCode" id="cb250"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggobi.github.io/ggally/">GGally</a></span><span class="op">)</span></span>
+<span><span class="co">##scatterplot matrix</span></span>
+<span><span class="fu">GGally</span><span class="fu">::</span><span class="fu"><a href="https://ggobi.github.io/ggally/reference/ggpairs.html">ggpairs</a></span><span class="op">(</span><span class="va">Data</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/unnamed-chunk-179-1.png" width="672"></div>
+<p>A few pieces of information are presented in the output. Notice the output is displayed in a matrix format.</p>
+<ul>
+<li>The off-diagonal entries of the output give us the scatterplot and correlation between the corresponding pair of quantitative variables.
+<ul>
+<li>For example, look at the scatterplot in row 3, column 1 of the output. The corresponding label for the column is <code>diam</code> and the label for the row is <code>volume</code>. This informs us this is a scatterplot for <code>volume</code> on the vertical axis and <code>diam</code> on the horizontal axis. We see a strong positive linear association between these two variables.</li>
+<li>The correlation between <code>volume</code> and <code>diam</code> is displayed in row 1, column 3. Again, notice the label for the column and row. This correlation is 0.967, which is high.</li>
+<li>For practice, locate the scatterplot of <code>volume</code> and <code>height</code> and its corresponding correlation. Also locate the scatterplot of <code>diam</code> and <code>height</code> and its corresponding correlation.</li>
+</ul>
+</li>
+<li>The diagonal entries display the density plot of the corresponding variable. For example, the third diagonal entry displays the density plot for <code>volume</code>. We can see that the distribution is somewhat right skewed as most trees have a volume between 10 and 40 cubic feet.</li>
+</ul>
+</div>
+<div id="fit-mlr-using-lm" class="section level3 unnumbered">
+<h3>Fit MLR using <code>lm()</code><a class="anchor" aria-label="anchor" href="#fit-mlr-using-lm"><i class="fas fa-link"></i></a>
+</h3>
+<p>To fit multiple linear regression (MLR)</p>
+<div class="sourceCode" id="cb251"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">##Fit MLR model, using + in between predictors</span></span>
+<span><span class="va">result</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">volume</span><span class="op">~</span><span class="va">diam</span><span class="op">+</span><span class="va">height</span>, data<span class="op">=</span><span class="va">Data</span><span class="op">)</span></span></code></pre></div>
+<p>where we list the predictors after <code>~</code> with a <code>+</code> operator in between the predictors. Another way would be</p>
+<div class="sourceCode" id="cb252"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">result</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">volume</span><span class="op">~</span><span class="va">.</span>, data<span class="op">=</span><span class="va">Data</span><span class="op">)</span></span></code></pre></div>
+<p>The <code>.</code> after <code>~</code> informs the <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> function to use every column other than <code>volume</code> in the data frame as predictors.</p>
+<p>Just like with simple linear regression (SLR) we can get relevant information using <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code>:</p>
+<div class="sourceCode" id="cb253"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = volume ~ diam + height, data = Data)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -6.4065 -2.6493 -0.2876  2.2003  8.4847 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) -57.9877     8.6382  -6.713 2.75e-07 ***
+## diam          4.7082     0.2643  17.816  &lt; 2e-16 ***
+## height        0.3393     0.1302   2.607   0.0145 *  
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 3.882 on 28 degrees of freedom
+## Multiple R-squared:  0.948,  Adjusted R-squared:  0.9442 
+## F-statistic:   255 on 2 and 28 DF,  p-value: &lt; 2.2e-16</code></pre>
+<ul>
+<li>The estimated regression equation is <span class="math inline">\(\hat{y} = -57.988 + 4.708 diam + 0.339height\)</span>.
+<ul>
+<li>The estimated coefficient for <code>diam</code> is interpreted as: the predicted volume of a cherry tree increases by 4.708 cubic feet per inch increase in diameter, while holding height constant.</li>
+<li>The estimated coefficient for <code>height</code> is interpreted as: the predicted volume of a cherry tree increases by 0.339 cubic feet per foot increase in height, while holding diameter constant.</li>
+</ul>
+</li>
+<li>The <span class="math inline">\(R^2\)</span> is 0.948. About 94.8% of the variance in volume of cherry trees can be explained by their diameter and height.</li>
+<li>The residual standard error is 3.882. This estimates <span class="math inline">\(\sigma\)</span>, the standard deviation of the error term.</li>
+</ul>
+</div>
+<div id="inference-with-mlr" class="section level3 unnumbered">
+<h3>Inference with MLR<a class="anchor" aria-label="anchor" href="#inference-with-mlr"><i class="fas fa-link"></i></a>
+</h3>
+<p>Just like SLR, each coefficient is tested against a null hypothesis that <span class="math inline">\(\beta_j = 0\)</span> with a two-sided alternative. The test is significant for both coefficients, so we cannot drop either predictor from the model.</p>
+<p>The ANOVA <span class="math inline">\(F\)</span> statistic is 255, with a small p-value. So data supports the claim that our model is useful.</p>
+<p>The confidence intervals for the coefficients can be found using <code><a href="https://rdrr.io/r/stats/confint.html">confint()</a></code>:</p>
+<div class="sourceCode" id="cb255"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/confint.html">confint</a></span><span class="op">(</span><span class="va">result</span>,level <span class="op">=</span> <span class="fl">0.95</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##                    2.5 %      97.5 %
+## (Intercept) -75.68226247 -40.2930554
+## diam          4.16683899   5.2494820
+## height        0.07264863   0.6058538</code></pre>
+<p>The confidence interval for the mean response and the prediction interval for a new observation given a specific value of the predictors can also be found using <code><a href="https://rdrr.io/r/stats/predict.html">predict()</a></code>. For example, when the diameter is 10 inches and height is 80 feet:</p>
+<div class="sourceCode" id="cb257"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">newdata</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>diam<span class="op">=</span><span class="fl">10</span>, height<span class="op">=</span><span class="fl">80</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">result</span>, <span class="va">newdata</span>, level<span class="op">=</span><span class="fl">0.95</span>,</span>
+<span>        interval<span class="op">=</span><span class="st">"confidence"</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##        fit      lwr      upr
+## 1 16.23404 13.36762 19.10047</code></pre>
+<div class="sourceCode" id="cb259"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">result</span>, <span class="va">newdata</span>, level<span class="op">=</span><span class="fl">0.95</span>,</span>
+<span>        interval<span class="op">=</span><span class="st">"prediction"</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##        fit      lwr      upr
+## 1 16.23404 7.781596 24.68649</code></pre>
+<p>You might realize by now we are using the same functions as we did in SLR.</p>
+<p><strong>Note</strong>: Obviously, all these calculations are performed and interpreted assuming the regression assumptions are met. Regression assumptions are checked in the same way as in SLR. On your own, as practice, assess the regression assumptions.</p>
+
+</div>
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="diag.html"><span class="header-section-number">5</span> Model Diagnostics and Remedial Measures in SLR</a></div>
+<div class="next"><a href="intro.html"><span class="header-section-number">7</span> Introduction</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#mlr"><span class="header-section-number">6</span> Multiple Linear Regression (MLR)</a></li>
+<li><a class="nav-link" href="#introduction-5"><span class="header-section-number">6.1</span> Introduction</a></li>
+<li>
+<a class="nav-link" href="#notation-in-mlr"><span class="header-section-number">6.2</span> Notation in MLR</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#interpreting-coefficients-in-mlr"><span class="header-section-number">6.2.1</span> Interpreting coefficients in MLR</a></li>
+<li><a class="nav-link" href="#visualizing-mlr"><span class="header-section-number">6.2.2</span> Visualizing MLR</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#estimating-coefficients-in-mlr"><span class="header-section-number">6.3</span> Estimating coefficients in MLR</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#estimating-variance-of-errors"><span class="header-section-number">6.3.1</span> Estimating variance of errors</a></li>
+<li><a class="nav-link" href="#distribution-of-least-squares-estimators-1"><span class="header-section-number">6.3.2</span> Distribution of least squares estimators</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#anova-f-test-in-mlr"><span class="header-section-number">6.4</span> ANOVA \(F\) Test in MLR</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#sum-of-squares-1"><span class="header-section-number">6.4.1</span> Sum of squares</a></li>
+<li><a class="nav-link" href="#anova-table-2"><span class="header-section-number">6.4.2</span> ANOVA table</a></li>
+<li><a class="nav-link" href="#anova-f-test-1"><span class="header-section-number">6.4.3</span> ANOVA \(F\) test</a></li>
+<li><a class="nav-link" href="#coefficient-of-determination-1"><span class="header-section-number">6.4.4</span> Coefficient of determination</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#t-test-for-regression-coefficient-in-mlr"><span class="header-section-number">6.5</span> \(t\) Test for Regression Coefficient in MLR</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#caution-in-interpretating-t-test-in-mlr"><span class="header-section-number">6.5.1</span> Caution in interpretating \(t\) test in MLR</a></li></ul>
+</li>
+<li>
+<a class="nav-link" href="#cis-in-mlr"><span class="header-section-number">6.6</span> CIs in MLR</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#ci-for-regression-coefficient"><span class="header-section-number">6.6.1</span> CI for regression coefficient</a></li>
+<li><a class="nav-link" href="#ci-of-the-mean-response-1"><span class="header-section-number">6.6.2</span> CI of the mean response</a></li>
+<li><a class="nav-link" href="#pi-of-a-new-response-1"><span class="header-section-number">6.6.3</span> PI of a new response</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#r-tutorial-3"><span class="header-section-number">6.7</span> R Tutorial</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#scatterplot-matrix">Scatterplot matrix</a></li>
+<li><a class="nav-link" href="#fit-mlr-using-lm">Fit MLR using lm()</a></li>
+<li><a class="nav-link" href="#inference-with-mlr">Inference with MLR</a></li>
+</ul>
+</li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Linear Models for Data Science</strong>" was written by Jeffrey Woo. It was last built on 2024-07-11.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

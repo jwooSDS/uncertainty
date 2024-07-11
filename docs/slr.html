@@ -70,11 +70,12 @@
 <li><a class="active" href="slr.html"><span class="header-section-number">3</span> Basics with Simple Linear Regression (SLR)</a></li>
 <li><a class="" href="inf.html"><span class="header-section-number">4</span> Inference with Simple Linear Regression (SLR)</a></li>
 <li><a class="" href="diag.html"><span class="header-section-number">5</span> Model Diagnostics and Remedial Measures in SLR</a></li>
-<li><a class="" href="intro.html"><span class="header-section-number">6</span> Introduction</a></li>
-<li><a class="" href="literature.html"><span class="header-section-number">7</span> Literature</a></li>
-<li><a class="" href="methods.html"><span class="header-section-number">8</span> Methods</a></li>
-<li><a class="" href="applications.html"><span class="header-section-number">9</span> Applications</a></li>
-<li><a class="" href="final-words.html"><span class="header-section-number">10</span> Final Words</a></li>
+<li><a class="" href="mlr.html"><span class="header-section-number">6</span> Multiple Linear Regression (MLR)</a></li>
+<li><a class="" href="intro.html"><span class="header-section-number">7</span> Introduction</a></li>
+<li><a class="" href="literature.html"><span class="header-section-number">8</span> Literature</a></li>
+<li><a class="" href="methods.html"><span class="header-section-number">9</span> Methods</a></li>
+<li><a class="" href="applications.html"><span class="header-section-number">10</span> Applications</a></li>
+<li><a class="" href="final-words.html"><span class="header-section-number">11</span> Final Words</a></li>
 <li><a class="" href="references.html">References</a></li>
 </ul>
 
@@ -494,8 +495,9 @@ SS_T = SS_R + SS_{res}.
 H_0: \beta_1 = 0, H_a: \beta_1 \neq 0.
 \]</span>
 The test statistic is</p>
-<p><span class="math display">\[\begin{equation} \label{eq:ANOVA}
+<p><span class="math display" id="eq:ANOVA">\[\begin{equation}
 F = \frac{MS_R}{MS_{res}}
+\tag{3.14}
 \end{equation}\]</span></p>
 <p>and is compared with an <span class="math inline">\(F_{1,n-2}\)</span> distribution. Note that <span class="math inline">\(F_{1,n-2}\)</span> is read as an <strong>F distribution with 1 and <span class="math inline">\(n-2\)</span> degrees of freedom</strong>.</p>
 <p>Going back to the study time example, the <span class="math inline">\(F\)</span> statistic is 6.5403586^{4}. The critical value can be found using</p>
@@ -511,7 +513,7 @@ F = \frac{MS_R}{MS_{res}}
 <p>The <strong>coefficient of determination, <span class="math inline">\(R^2\)</span>,</strong> is</p>
 <p><span class="math display" id="eq:R2">\[\begin{equation}
 R^{2} = \frac{SS_R}{SS_T} = 1 - \frac{SS_{res}}{SS_T}.
-\tag{3.14}
+\tag{3.15}
 \end{equation}\]</span></p>
 <p><span class="math inline">\(R^{2}\)</span> is an indication of how well the data fits our model. In the context of simple linear regression, it denotes <strong>the proportion of variance in the response variable that is explained by the predictor</strong>.</p>
 <p>A few notes about <span class="math inline">\(R^2\)</span>:</p>
@@ -538,7 +540,7 @@ R^{2} = \frac{SS_R}{SS_T} = 1 - \frac{SS_{res}}{SS_T}.
 <p>A measure used to quantify the strength of the linear association between two quantitative variables is the <strong>sample correlation</strong>. The sample correlation, <span class="math inline">\(\mbox{Corr}(x,y)\)</span> or <span class="math inline">\(r\)</span>, is given by</p>
 <p><span class="math display" id="eq:corr">\[\begin{equation}
 r = \frac{\sum\limits_{i=1}^{n}(x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum\limits_{i=1}^{n}(x_i - \bar{x})^{2}(y_i - \bar{y})^{2}}}.
-\tag{3.15}
+\tag{3.16}
 \end{equation}\]</span></p>
 <p>A few notes about <span class="math inline">\(r\)</span>:</p>
 <ul>

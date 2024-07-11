@@ -404,8 +404,9 @@ H_0: \beta_1 = 0, H_a: \beta_1 \neq 0.
 $$
 The test statistic is
 
-\begin{equation} \label{eq:ANOVA}
+\begin{equation} 
 F = \frac{MS_R}{MS_{res}}
+(\#eq:ANOVA)
 \end{equation}
 
 and is compared with an $F_{1,n-2}$ distribution. Note that $F_{1,n-2}$ is read as an **F distribution with 1 and $n-2$ degrees of freedom**.

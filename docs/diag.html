@@ -70,11 +70,12 @@
 <li><a class="" href="slr.html"><span class="header-section-number">3</span> Basics with Simple Linear Regression (SLR)</a></li>
 <li><a class="" href="inf.html"><span class="header-section-number">4</span> Inference with Simple Linear Regression (SLR)</a></li>
 <li><a class="active" href="diag.html"><span class="header-section-number">5</span> Model Diagnostics and Remedial Measures in SLR</a></li>
-<li><a class="" href="intro.html"><span class="header-section-number">6</span> Introduction</a></li>
-<li><a class="" href="literature.html"><span class="header-section-number">7</span> Literature</a></li>
-<li><a class="" href="methods.html"><span class="header-section-number">8</span> Methods</a></li>
-<li><a class="" href="applications.html"><span class="header-section-number">9</span> Applications</a></li>
-<li><a class="" href="final-words.html"><span class="header-section-number">10</span> Final Words</a></li>
+<li><a class="" href="mlr.html"><span class="header-section-number">6</span> Multiple Linear Regression (MLR)</a></li>
+<li><a class="" href="intro.html"><span class="header-section-number">7</span> Introduction</a></li>
+<li><a class="" href="literature.html"><span class="header-section-number">8</span> Literature</a></li>
+<li><a class="" href="methods.html"><span class="header-section-number">9</span> Methods</a></li>
+<li><a class="" href="applications.html"><span class="header-section-number">10</span> Applications</a></li>
+<li><a class="" href="final-words.html"><span class="header-section-number">11</span> Final Words</a></li>
 <li><a class="" href="references.html">References</a></li>
 </ul>
 
@@ -504,9 +505,8 @@ Figure 5.11: Transformations for x
 <p>For this tutorial, we will go over a dataset involving prices of used cars (Mazdas). The two variables are the sales price of the used car, and the age of the car in years. Download the data file, <code>mazda.txt</code> and read the data:</p>
 <div class="sourceCode" id="cb222"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">Data</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.table</a></span><span class="op">(</span><span class="st">"mazda.txt"</span>, header<span class="op">=</span><span class="cn">TRUE</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span></span></code></pre></div>
-<div id="model-diagnostics-with-scatterplots" class="section level4" number="5.6.1.1">
-<h4>
-<span class="header-section-number">5.6.1.1</span> Model Diagnostics with Scatterplots<a class="anchor" aria-label="anchor" href="#model-diagnostics-with-scatterplots"><i class="fas fa-link"></i></a>
+<div id="model-diagnostics-with-scatterplots" class="section level4 unnumbered">
+<h4>Model Diagnostics with Scatterplots<a class="anchor" aria-label="anchor" href="#model-diagnostics-with-scatterplots"><i class="fas fa-link"></i></a>
 </h4>
 <p>We can use a scatterplot of the response variable against the predictor to assess assumptions 1 and 2:</p>
 <div class="sourceCode" id="cb223"><pre class="downlit sourceCode r">
@@ -521,9 +521,8 @@ Figure 5.11: Transformations for x
 <p>To assess assumption 1, the data points should be evenly scattered on both sides of the regression line, as we move from left to right. We do not see this in the scatterplot, so assumption 1 is not met. When age is between 0 and 2, the data points are mostly above the line. When age is between 5 and 11, the data points are mostly below the line, and when age is greater than 13, the data points are above the line.</p>
 <p>To assess assumption 2, the vertical spread of the data points should be constant as we move from left to right. The spread seems to be decreasing as we move from left to right (or in other words, the spread is increasing as the response increases), so assumption 2 is not met.</p>
 </div>
-<div id="model-diagnostics-with-residual-plots" class="section level4" number="5.6.1.2">
-<h4>
-<span class="header-section-number">5.6.1.2</span> Model Diagnostics with Residual Plots<a class="anchor" aria-label="anchor" href="#model-diagnostics-with-residual-plots"><i class="fas fa-link"></i></a>
+<div id="model-diagnostics-with-residual-plots" class="section level4 unnumbered">
+<h4>Model Diagnostics with Residual Plots<a class="anchor" aria-label="anchor" href="#model-diagnostics-with-residual-plots"><i class="fas fa-link"></i></a>
 </h4>
 <p>Sometimes, a residual plot is easier to visualize than a scatterplot. We fit our SLR model using <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> as usual. Applying the <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> function to an object created with <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> actually produces a four diagnostic plots. To display the four diagnostic plots in a 2 by 2 array, we specify <code>par(mfrow = c(2, 2))</code> so the plotting window is split into a 2 by 2 array:</p>
 <div class="sourceCode" id="cb224"><pre class="downlit sourceCode r">
@@ -540,9 +539,8 @@ Figure 5.11: Transformations for x
 <p>Now that we know that both assumptions 1 and 2 are not met. We need to transform the response variable first, to stabilize the variance.</p>
 <p>Based on the residual plot, we see that the variance of the residuals increases as we move from left to right. So we know we need to transform the response variable using <span class="math inline">\(y^* = y^\lambda\)</span> with <span class="math inline">\(\lambda &lt; 1\)</span>. A log transform should be considered since we can still interpret regression coefficients.</p>
 </div>
-<div id="box-cox-transformation-on-y" class="section level4" number="5.6.1.3">
-<h4>
-<span class="header-section-number">5.6.1.3</span> Box Cox Transformation on y<a class="anchor" aria-label="anchor" href="#box-cox-transformation-on-y"><i class="fas fa-link"></i></a>
+<div id="box-cox-transformation-on-y" class="section level4 unnumbered">
+<h4>Box Cox Transformation on y<a class="anchor" aria-label="anchor" href="#box-cox-transformation-on-y"><i class="fas fa-link"></i></a>
 </h4>
 <p>The Box Cox plot can be used to decide how to transform the response variable. The transformation takes the form <span class="math inline">\(y^* = y^{\lambda}\)</span>, with the value of <span class="math inline">\(\lambda\)</span> to be chosen. If <span class="math inline">\(\lambda = 0\)</span>, we perform a <span class="math inline">\(\log\)</span> transformation.</p>
 <p>We will use the <code><a href="https://rdrr.io/pkg/MASS/man/boxcox.html">boxcox()</a></code> function from the <code>MASS</code> package:</p>
@@ -571,9 +569,8 @@ Figure 5.11: Transformations for x
 </ul>
 <p>We do not need to perform any other transformations.</p>
 </div>
-<div id="interpreting-coefficients-with-log-transformed-response" class="section level4" number="5.6.1.4">
-<h4>
-<span class="header-section-number">5.6.1.4</span> Interpreting Coefficients with Log Transformed Response<a class="anchor" aria-label="anchor" href="#interpreting-coefficients-with-log-transformed-response"><i class="fas fa-link"></i></a>
+<div id="interpreting-coefficients-with-log-transformed-response" class="section level4 unnumbered">
+<h4>Interpreting Coefficients with Log Transformed Response<a class="anchor" aria-label="anchor" href="#interpreting-coefficients-with-log-transformed-response"><i class="fas fa-link"></i></a>
 </h4>
 <p>So our regression equation is</p>
 <div class="sourceCode" id="cb228"><pre class="downlit sourceCode r">
@@ -591,9 +588,8 @@ Figure 5.11: Transformations for x
 <li>The price of used Mazdas decreases by <span class="math inline">\((1 - 0.8481481) \times 100\)</span> percent, or 15.18519 percent, for each year older the car is.</li>
 </ul>
 </div>
-<div id="acf-plot-of-residuals" class="section level4" number="5.6.1.5">
-<h4>
-<span class="header-section-number">5.6.1.5</span> ACF Plot of Residuals<a class="anchor" aria-label="anchor" href="#acf-plot-of-residuals"><i class="fas fa-link"></i></a>
+<div id="acf-plot-of-residuals" class="section level4 unnumbered">
+<h4>ACF Plot of Residuals<a class="anchor" aria-label="anchor" href="#acf-plot-of-residuals"><i class="fas fa-link"></i></a>
 </h4>
 <p>We have yet to assess the assumption that the observed prices are independent from each other. Assuming that these prices are from different cars and not the same car measured repeatedly over time, there is no reason to think the prices are dependent on each other.</p>
 <p>We an also produce an ACF plot to confirm our thought:</p>
@@ -611,9 +607,8 @@ Figure 5.11: Transformations for x
 <div class="sourceCode" id="cb231"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/julianfaraway/faraway">faraway</a></span><span class="op">)</span></span>
 <span><span class="va">Data</span><span class="op">&lt;-</span><span class="fu">faraway</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/faraway/man/gala.html">gala</a></span></span></code></pre></div>
-<div id="model-diagnostics-with-scatterplots-1" class="section level4" number="5.6.2.1">
-<h4>
-<span class="header-section-number">5.6.2.1</span> Model Diagnostics with Scatterplots<a class="anchor" aria-label="anchor" href="#model-diagnostics-with-scatterplots-1"><i class="fas fa-link"></i></a>
+<div id="model-diagnostics-with-scatterplots-1" class="section level4 unnumbered">
+<h4>Model Diagnostics with Scatterplots<a class="anchor" aria-label="anchor" href="#model-diagnostics-with-scatterplots-1"><i class="fas fa-link"></i></a>
 </h4>
 <p>We can use a scatterplot of the response variable against the predictor to assess assumptions 1 and 2.</p>
 <div class="sourceCode" id="cb232"><pre class="downlit sourceCode r">
@@ -629,9 +624,8 @@ Figure 5.11: Transformations for x
 <p>To assess assumption 1, the data points should be evenly scattered on both sides of the regression line, as we move from left to right. This plot looks nonlinear.</p>
 <p>To assess assumption 2, the vertical spread of the data points should be constant as we move from left to right. This can be a bit difficult to assess with this scatterplot, although observations with small areas are closer to the line, which suggests the assumption is not met.</p>
 </div>
-<div id="model-diagnostics-with-residual-plots-1" class="section level4" number="5.6.2.2">
-<h4>
-<span class="header-section-number">5.6.2.2</span> Model Diagnostics with Residual Plots<a class="anchor" aria-label="anchor" href="#model-diagnostics-with-residual-plots-1"><i class="fas fa-link"></i></a>
+<div id="model-diagnostics-with-residual-plots-1" class="section level4 unnumbered">
+<h4>Model Diagnostics with Residual Plots<a class="anchor" aria-label="anchor" href="#model-diagnostics-with-residual-plots-1"><i class="fas fa-link"></i></a>
 </h4>
 <p>Fairly often, when assessing regression assumptions, a residual plot is easier to visualize than a scatterplot.</p>
 <div class="sourceCode" id="cb233"><pre class="downlit sourceCode r">
@@ -645,9 +639,8 @@ Figure 5.11: Transformations for x
 </ul>
 <p>Now that we know that both assumptions 1 and 2 are not met. We need to transform the response variable first, to stabilize the variance.</p>
 </div>
-<div id="box-cox-transformation-on-y-1" class="section level4" number="5.6.2.3">
-<h4>
-<span class="header-section-number">5.6.2.3</span> Box Cox Transformation on y<a class="anchor" aria-label="anchor" href="#box-cox-transformation-on-y-1"><i class="fas fa-link"></i></a>
+<div id="box-cox-transformation-on-y-1" class="section level4 unnumbered">
+<h4>Box Cox Transformation on y<a class="anchor" aria-label="anchor" href="#box-cox-transformation-on-y-1"><i class="fas fa-link"></i></a>
 </h4>
 <p>From the scale-location plot, we see the variance of the residuals is increasing, so we expect to transform the response variable with <span class="math inline">\(y^* = y^{\lambda}\)</span> with <span class="math inline">\(\lambda &lt; 1\)</span>. So see which specific value of <span class="math inline">\(\lambda\)</span> to use, we can use the Box Cox plot:</p>
 <div class="sourceCode" id="cb234"><pre class="downlit sourceCode r">
@@ -669,9 +662,8 @@ Figure 5.11: Transformations for x
 <li><p>However, the residual plot still appears to be nonlinear. So assumption 1 is still not met.</p></li>
 </ul>
 </div>
-<div id="transformation-on-x" class="section level4" number="5.6.2.4">
-<h4>
-<span class="header-section-number">5.6.2.4</span> Transformation on x<a class="anchor" aria-label="anchor" href="#transformation-on-x"><i class="fas fa-link"></i></a>
+<div id="transformation-on-x" class="section level4 unnumbered">
+<h4>Transformation on x<a class="anchor" aria-label="anchor" href="#transformation-on-x"><i class="fas fa-link"></i></a>
 </h4>
 <p>To see which specific transformation on the predictor to use, we create a scatterplot of the transformed response and the predictor.</p>
 <div class="sourceCode" id="cb236"><pre class="downlit sourceCode r">
@@ -693,9 +685,8 @@ Figure 5.11: Transformations for x
 <div class="inline-figure"><img src="bookdown-demo_files/figure-html/unnamed-chunk-168-1.png" width="672"></div>
 <p>Based on the residual plot (top left), both assumptions are met. The residuals are evenly scattered across the horizontal axis with no pattern. The vertical spread of the residuals is also constant. So the transformations worked.</p>
 </div>
-<div id="interpreting-coefficients-with-log-transformed-response-and-predictor" class="section level4" number="5.6.2.5">
-<h4>
-<span class="header-section-number">5.6.2.5</span> Interpreting Coefficients with Log Transformed Response and Predictor<a class="anchor" aria-label="anchor" href="#interpreting-coefficients-with-log-transformed-response-and-predictor"><i class="fas fa-link"></i></a>
+<div id="interpreting-coefficients-with-log-transformed-response-and-predictor" class="section level4 unnumbered">
+<h4>Interpreting Coefficients with Log Transformed Response and Predictor<a class="anchor" aria-label="anchor" href="#interpreting-coefficients-with-log-transformed-response-and-predictor"><i class="fas fa-link"></i></a>
 </h4>
 <p>So our regression equation is</p>
 <div class="sourceCode" id="cb238"><pre class="downlit sourceCode r">
@@ -718,7 +709,7 @@ Figure 5.11: Transformations for x
 </div>
   <div class="chapter-nav">
 <div class="prev"><a href="inf.html"><span class="header-section-number">4</span> Inference with Simple Linear Regression (SLR)</a></div>
-<div class="next"><a href="intro.html"><span class="header-section-number">6</span> Introduction</a></div>
+<div class="next"><a href="mlr.html"><span class="header-section-number">6</span> Multiple Linear Regression (MLR)</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">

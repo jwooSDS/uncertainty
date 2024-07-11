@@ -374,7 +374,7 @@ For this tutorial, we will go over a dataset involving prices of used cars (Mazd
 Data<-read.table("mazda.txt", header=TRUE, sep="")
 ```
 
-#### Model Diagnostics with Scatterplots
+#### Model Diagnostics with Scatterplots {-}
 
 We can use a scatterplot of the response variable against the predictor to assess assumptions 1 and 2:
 
@@ -392,7 +392,7 @@ To assess assumption 1, the data points should be evenly scattered on both sides
 
 To assess assumption 2, the vertical spread of the data points should be constant as we move from left to right. The spread seems to be decreasing as we move from left to right (or in other words, the spread is increasing as the response increases), so assumption 2 is not met.
 
-#### Model Diagnostics with Residual Plots
+#### Model Diagnostics with Residual Plots {-}
 
 Sometimes, a residual plot is easier to visualize than a scatterplot. We fit our SLR model using `lm()` as usual. Applying the `plot()` function to an object created with `lm()` actually produces a four diagnostic plots. To display the four diagnostic plots in a 2 by 2 array, we specify `par(mfrow = c(2, 2))` so the plotting window is split into a 2 by 2 array:
 
@@ -414,7 +414,7 @@ Now that we know that both assumptions 1 and 2 are not met. We need to transform
 
 Based on the residual plot, we see that the variance of the residuals increases as we move from left to right. So we know we need to transform the response variable using $y^* = y^\lambda$ with $\lambda < 1$. A log transform should be considered since we can still interpret regression coefficients. 
 
-#### Box Cox Transformation on y
+#### Box Cox Transformation on y {-}
 
 The Box Cox plot can be used to decide how to transform the response variable. The transformation takes the form $y^* = y^{\lambda}$, with the value of $\lambda$ to be chosen. If $\lambda = 0$, we perform a $\log$ transformation. 
 
@@ -451,7 +451,7 @@ We need to reassess assumptions 1 and 2 after the transformation.
 
 We do not need to perform any other transformations. 
 
-#### Interpreting Coefficients with Log Transformed Response
+#### Interpreting Coefficients with Log Transformed Response {-}
 
 So our regression equation is
 
@@ -464,7 +464,7 @@ $\hat{y^*} = 10.1878 - 0.1647x$, where $y^* = \log(y)$. To interpret the slope:
 - The price of used Mazdas is multiplied by $\exp(-0.1647) = 0.8481481$ for each year older the car is.
 - The price of used Mazdas decreases by $(1 - 0.8481481) \times 100$ percent, or 15.18519 percent, for each year older the car is.
 
-#### ACF Plot of Residuals
+#### ACF Plot of Residuals {-}
 
 We have yet to assess the assumption that the observed prices are independent from each other. Assuming that these prices are from different cars and not the same car measured repeatedly over time, there is no reason to think the prices are dependent on each other. 
 
@@ -489,7 +489,7 @@ library(faraway)
 Data<-faraway::gala
 ```
 
-#### Model Diagnostics with Scatterplots
+#### Model Diagnostics with Scatterplots {-}
 
 We can use a scatterplot of the response variable against the predictor to assess assumptions 1 and 2.
 
@@ -508,7 +508,7 @@ To assess assumption 1, the data points should be evenly scattered on both sides
 
 To assess assumption 2, the vertical spread of the data points should be constant as we move from left to right. This can be a bit difficult to assess with this scatterplot, although observations with small areas are closer to the line, which suggests the assumption is not met. 
 
-#### Model Diagnostics with Residual Plots
+#### Model Diagnostics with Residual Plots {-}
 
 Fairly often, when assessing regression assumptions, a residual plot is easier to visualize than a scatterplot.
 
@@ -524,7 +524,7 @@ plot(result)
 
 Now that we know that both assumptions 1 and 2 are not met. We need to transform the response variable first, to stabilize the variance. 
 
-#### Box Cox Transformation on y
+#### Box Cox Transformation on y {-}
 
 From the scale-location plot, we see the variance of the residuals is increasing, so we expect to transform the response variable with $y^* = y^{\lambda}$ with $\lambda < 1$. So see which specific value of $\lambda$ to use, we can use the Box Cox plot:
 
@@ -550,7 +550,7 @@ We need to reassess assumptions 1 and 2 after the transformation.
 
 + However, the residual plot still appears to be nonlinear. So assumption 1 is still not met. 
 
-#### Transformation on x
+#### Transformation on x {-}
 
 To see which specific transformation on the predictor to use, we create a scatterplot of the transformed response and the predictor.
 
@@ -576,7 +576,7 @@ plot(result.xystar)
 
 Based on the residual plot (top left), both assumptions are met. The residuals are evenly scattered across the horizontal axis with no pattern. The vertical spread of the residuals is also constant. So the transformations worked. 
 
-#### Interpreting Coefficients with Log Transformed Response and Predictor
+#### Interpreting Coefficients with Log Transformed Response and Predictor {-}
 
 So our regression equation is
 

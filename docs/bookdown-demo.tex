@@ -2621,8 +2621,9 @@ H_0: \beta_1 = 0, H_a: \beta_1 \neq 0.
 \]
 The test statistic is
 
-\begin{equation} \label{eq:ANOVA}
+\begin{equation} 
 F = \frac{MS_R}{MS_{res}}
+\label{eq:ANOVA}
 \end{equation}
 
 and is compared with an \(F_{1,n-2}\) distribution. Note that \(F_{1,n-2}\) is read as an \textbf{F distribution with 1 and \(n-2\) degrees of freedom}.
@@ -4395,7 +4396,8 @@ For this tutorial, we will go over a dataset involving prices of used cars (Mazd
 \end{Shaded}
 
 \hypertarget{model-diagnostics-with-scatterplots}{%
-\subsubsection{Model Diagnostics with Scatterplots}\label{model-diagnostics-with-scatterplots}}
+\subsubsection*{Model Diagnostics with Scatterplots}\label{model-diagnostics-with-scatterplots}}
+\addcontentsline{toc}{subsubsection}{Model Diagnostics with Scatterplots}
 
 We can use a scatterplot of the response variable against the predictor to assess assumptions 1 and 2:
 
@@ -4418,7 +4420,8 @@ To assess assumption 1, the data points should be evenly scattered on both sides
 To assess assumption 2, the vertical spread of the data points should be constant as we move from left to right. The spread seems to be decreasing as we move from left to right (or in other words, the spread is increasing as the response increases), so assumption 2 is not met.
 
 \hypertarget{model-diagnostics-with-residual-plots}{%
-\subsubsection{Model Diagnostics with Residual Plots}\label{model-diagnostics-with-residual-plots}}
+\subsubsection*{Model Diagnostics with Residual Plots}\label{model-diagnostics-with-residual-plots}}
+\addcontentsline{toc}{subsubsection}{Model Diagnostics with Residual Plots}
 
 Sometimes, a residual plot is easier to visualize than a scatterplot. We fit our SLR model using \texttt{lm()} as usual. Applying the \texttt{plot()} function to an object created with \texttt{lm()} actually produces a four diagnostic plots. To display the four diagnostic plots in a 2 by 2 array, we specify \texttt{par(mfrow\ =\ c(2,\ 2))} so the plotting window is split into a 2 by 2 array:
 
@@ -4448,7 +4451,8 @@ Now that we know that both assumptions 1 and 2 are not met. We need to transform
 Based on the residual plot, we see that the variance of the residuals increases as we move from left to right. So we know we need to transform the response variable using \(y^* = y^\lambda\) with \(\lambda < 1\). A log transform should be considered since we can still interpret regression coefficients.
 
 \hypertarget{box-cox-transformation-on-y}{%
-\subsubsection{Box Cox Transformation on y}\label{box-cox-transformation-on-y}}
+\subsubsection*{Box Cox Transformation on y}\label{box-cox-transformation-on-y}}
+\addcontentsline{toc}{subsubsection}{Box Cox Transformation on y}
 
 The Box Cox plot can be used to decide how to transform the response variable. The transformation takes the form \(y^* = y^{\lambda}\), with the value of \(\lambda\) to be chosen. If \(\lambda = 0\), we perform a \(\log\) transformation.
 
@@ -4501,7 +4505,8 @@ We need to reassess assumptions 1 and 2 after the transformation.
 We do not need to perform any other transformations.
 
 \hypertarget{interpreting-coefficients-with-log-transformed-response}{%
-\subsubsection{Interpreting Coefficients with Log Transformed Response}\label{interpreting-coefficients-with-log-transformed-response}}
+\subsubsection*{Interpreting Coefficients with Log Transformed Response}\label{interpreting-coefficients-with-log-transformed-response}}
+\addcontentsline{toc}{subsubsection}{Interpreting Coefficients with Log Transformed Response}
 
 So our regression equation is
 
@@ -4532,7 +4537,8 @@ So our regression equation is
 \end{itemize}
 
 \hypertarget{acf-plot-of-residuals}{%
-\subsubsection{ACF Plot of Residuals}\label{acf-plot-of-residuals}}
+\subsubsection*{ACF Plot of Residuals}\label{acf-plot-of-residuals}}
+\addcontentsline{toc}{subsubsection}{ACF Plot of Residuals}
 
 We have yet to assess the assumption that the observed prices are independent from each other. Assuming that these prices are from different cars and not the same car measured repeatedly over time, there is no reason to think the prices are dependent on each other.
 
@@ -4561,7 +4567,8 @@ For this second example, we will go over an example for the \texttt{faraway} pac
 \end{Shaded}
 
 \hypertarget{model-diagnostics-with-scatterplots-1}{%
-\subsubsection{Model Diagnostics with Scatterplots}\label{model-diagnostics-with-scatterplots-1}}
+\subsubsection*{Model Diagnostics with Scatterplots}\label{model-diagnostics-with-scatterplots-1}}
+\addcontentsline{toc}{subsubsection}{Model Diagnostics with Scatterplots}
 
 We can use a scatterplot of the response variable against the predictor to assess assumptions 1 and 2.
 
@@ -4585,7 +4592,8 @@ To assess assumption 1, the data points should be evenly scattered on both sides
 To assess assumption 2, the vertical spread of the data points should be constant as we move from left to right. This can be a bit difficult to assess with this scatterplot, although observations with small areas are closer to the line, which suggests the assumption is not met.
 
 \hypertarget{model-diagnostics-with-residual-plots-1}{%
-\subsubsection{Model Diagnostics with Residual Plots}\label{model-diagnostics-with-residual-plots-1}}
+\subsubsection*{Model Diagnostics with Residual Plots}\label{model-diagnostics-with-residual-plots-1}}
+\addcontentsline{toc}{subsubsection}{Model Diagnostics with Residual Plots}
 
 Fairly often, when assessing regression assumptions, a residual plot is easier to visualize than a scatterplot.
 
@@ -4609,7 +4617,8 @@ Fairly often, when assessing regression assumptions, a residual plot is easier t
 Now that we know that both assumptions 1 and 2 are not met. We need to transform the response variable first, to stabilize the variance.
 
 \hypertarget{box-cox-transformation-on-y-1}{%
-\subsubsection{Box Cox Transformation on y}\label{box-cox-transformation-on-y-1}}
+\subsubsection*{Box Cox Transformation on y}\label{box-cox-transformation-on-y-1}}
+\addcontentsline{toc}{subsubsection}{Box Cox Transformation on y}
 
 From the scale-location plot, we see the variance of the residuals is increasing, so we expect to transform the response variable with \(y^* = y^{\lambda}\) with \(\lambda < 1\). So see which specific value of \(\lambda\) to use, we can use the Box Cox plot:
 
@@ -4647,7 +4656,8 @@ We need to reassess assumptions 1 and 2 after the transformation.
 \end{itemize}
 
 \hypertarget{transformation-on-x}{%
-\subsubsection{Transformation on x}\label{transformation-on-x}}
+\subsubsection*{Transformation on x}\label{transformation-on-x}}
+\addcontentsline{toc}{subsubsection}{Transformation on x}
 
 To see which specific transformation on the predictor to use, we create a scatterplot of the transformed response and the predictor.
 
@@ -4682,7 +4692,8 @@ This plot resembles a logarithmic curve, so we use a log transformation on the p
 Based on the residual plot (top left), both assumptions are met. The residuals are evenly scattered across the horizontal axis with no pattern. The vertical spread of the residuals is also constant. So the transformations worked.
 
 \hypertarget{interpreting-coefficients-with-log-transformed-response-and-predictor}{%
-\subsubsection{Interpreting Coefficients with Log Transformed Response and Predictor}\label{interpreting-coefficients-with-log-transformed-response-and-predictor}}
+\subsubsection*{Interpreting Coefficients with Log Transformed Response and Predictor}\label{interpreting-coefficients-with-log-transformed-response-and-predictor}}
+\addcontentsline{toc}{subsubsection}{Interpreting Coefficients with Log Transformed Response and Predictor}
 
 So our regression equation is
 
@@ -4710,6 +4721,809 @@ So our regression equation is
 \item
   For a 1\% increase in the area of a Galapagos island, the number of plant species increases by about 0.3886\%.
 \end{itemize}
+
+\hypertarget{mlr}{%
+\chapter{Multiple Linear Regression (MLR)}\label{mlr}}
+
+\hypertarget{introduction-5}{%
+\section{Introduction}\label{introduction-5}}
+
+Linear regression models are used to explore the relationship between variables as well as make predictions. Simple linear regression (SLR) concerns the study of only one predictor variable with one response variable. However, given the context, it may be clear there are multiple predictors that relate to the response variable. In such a context, we want to:
+
+\begin{itemize}
+\tightlist
+\item
+  Improve predictions on the response variable by including more useful predictors.
+\item
+  Assess how a predictor relates to the response variable when controlling for other predictors.
+\end{itemize}
+
+\textbf{Multiple linear regression (MLR)} models allow us to examine the effect of multiple predictors on the response variable simultaneously.
+
+There are a couple of ways to think about MLR:
+
+\begin{itemize}
+\tightlist
+\item
+  Extension of SLR to MLR.
+\item
+  SLR as a special case of MLR.
+\end{itemize}
+
+As a motivating example, we look at data regarding black cherry trees. The data, \texttt{cherry} come from the \texttt{openintro} package. Researchers want to understand the relationship between the volume of these trees and their diameter and height. Data come from 31 trees in the Allegheny National Forest, Pennsylvania.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(openintro)}
+\NormalTok{Data}\OtherTok{\textless{}{-}}\NormalTok{openintro}\SpecialCharTok{::}\NormalTok{cherry}
+\end{Highlighting}
+\end{Shaded}
+
+From this context, we know that volume of a tree is influenced by its diameter and height, so we have more than one predictor in this study.
+
+As you read this set of notes, take note of the similarities and differences between SLR and MLR.
+
+\hypertarget{notation-in-mlr}{%
+\section{Notation in MLR}\label{notation-in-mlr}}
+
+We write the \textbf{MLR model} as:
+
+\begin{equation} 
+y_i = \beta_0+\beta_1 x_{i1} + \beta_2 x_{i2} + \cdots + \beta_{k} x_{i k} + \epsilon_i.
+\label{eq:6MLRmod}
+\end{equation}
+
+In this setup, we have \(k\) quantitative predictors. The notation in \eqref{eq:6MLRmod} are as follows:
+
+\begin{itemize}
+\tightlist
+\item
+  \(y_i\): value of response variable for observation \(i\),
+\item
+  \(\beta_0\): \textbf{intercept} for MLR model,
+\item
+  \(\beta_j\): \textbf{coefficient} (or slope) for predictor \(j\), for \(j = 1, 2, \cdots, k\). We have \(k\) predictors, each with its corresponding coefficient.
+\item
+  \(x_{ij}\): observation \(i\)'s value for predictor \(j\). Notice there are two numbers in the subscript. The first number denotes which observation, and the second denotes which predictor.
+\item
+  \(\epsilon_i:\) \textbf{error} for observation \(i\).
+\end{itemize}
+
+The \textbf{assumptions} in MLR are identical to SLR:
+
+\begin{equation} 
+\epsilon_1,\ldots,\epsilon_n \ i.i.d. \sim N(0,\sigma^2).
+\label{eq:6assumptions}
+\end{equation}
+
+Let us use the \texttt{cherry} data from \texttt{openintro} as an example:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{head}\NormalTok{(Data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 3
+##    diam height volume
+##   <dbl>  <int>  <dbl>
+## 1   8.3     70   10.3
+## 2   8.6     65   10.3
+## 3   8.8     63   10.2
+## 4  10.5     72   16.4
+## 5  10.7     81   18.8
+## 6  10.8     83   19.7
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  \(y_2\) = 10.3 cubic feet, the volume for observation 2
+\item
+  \(x_{41} = 10.5\) inches, observation 4's diameter (predictor 1)
+\item
+  \(x_{22} = 65\) feet, observation 2's height (predictor 2)
+\end{itemize}
+
+The MLR model in \eqref{eq:6MLRmod} is often expressed using matrices, which is a lot neater:
+
+\[
+\left[
+\begin{array}{c}
+   y_1  \\
+   y_2  \\
+   \vdots   \\
+   y_n
+\end{array}
+\right] =
+\left[
+\begin{array}{cccc}
+   1 & x_{11} & \cdots & x_{1k}  \\
+   1 & x_{21} & \cdots & x_{2k}  \\
+   \vdots   \\
+   1 & x_{n1} & \cdots & x_{nk}  \\
+\end{array}
+\right]
+\left[
+\begin{array}{c}
+\beta_0 \\
+\beta_1 \\
+\vdots \\
+\beta_{k}
+\end{array}
+\right] +
+\left[
+\begin{array}{c}
+   \epsilon_1  \\
+   \epsilon_2  \\
+   \vdots   \\
+   \epsilon_n
+\end{array}
+\right],
+\]
+
+or
+
+\begin{equation} 
+\boldsymbol{y} = \boldsymbol{X \beta} + \boldsymbol{\epsilon}.
+\label{eq:6matrix}
+\end{equation}
+
+The notation in \eqref{eq:6matrix} are as follows:
+
+\begin{itemize}
+\tightlist
+\item
+  \(\boldsymbol{y}\): \textbf{vector of responses} (length \(n\)),
+\item
+  \(\boldsymbol{\beta}\): \textbf{vector of parameters} (length \(p = k+1\), where \(p\) denotes the number of regression parameters),
+\item
+  \(\boldsymbol{X}\): \textbf{design matrix} (dimension \(n \times p\)),
+\item
+  \(\boldsymbol{\epsilon}\): \textbf{vector of residuals} (length \(n\)).
+\end{itemize}
+
+The formulation in \eqref{eq:6matrix} is the basis for calling the model a ``linear'' regression. The model is \textbf{linear in the parameters}, not the predictors. A common misconception is that the model is linear in the predictors.
+
+Following \eqref{eq:6MLRmod}, the \textbf{MLR equation} can be written as:
+
+\begin{equation} 
+E(y|x) = \beta_0+\beta_1 x_1 + \beta_2 x_2 + \cdots + \beta_{k} x_k.
+\label{eq:6MLR}
+\end{equation}
+
+And in turn, the \textbf{estimated MLR equation} can be written as:
+
+\begin{equation} 
+\hat{y} = \hat{\beta_0}+\hat{\beta_1} x_1 + \hat{\beta_2} x_2 + \cdots + \hat{\beta_{k}} x_k.
+\label{eq:6MLReq}
+\end{equation}
+
+\hypertarget{interpreting-coefficients-in-mlr}{%
+\subsection{Interpreting coefficients in MLR}\label{interpreting-coefficients-in-mlr}}
+
+The interpretation of estimated coefficients are similar with SLR, with a small caveat: \(\hat{\beta}_j\) denotes the change in the predicted response per unit change in \(x_j\), \textbf{when the other predictors are held constant.} There are other common ways to state the bold part:
+
+\begin{itemize}
+\tightlist
+\item
+  when controlling for the other predictors.
+\item
+  when the other predictors are taken into account.
+\item
+  after adjusting for the effect of the other predictors.
+\end{itemize}
+
+If you are familiar with how a partial derivative is interpreted in multivariate calculus, you will realize that the interpretation of estimated coefficients in MLR sound like how a partial derivative is interpreted.
+
+Let us look at the estimated regression equation for the \texttt{cherry} data:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{result}\OtherTok{\textless{}{-}}\FunctionTok{lm}\NormalTok{(volume}\SpecialCharTok{\textasciitilde{}}\NormalTok{., }\AttributeTok{data=}\NormalTok{Data)}
+\NormalTok{result}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = volume ~ ., data = Data)
+## 
+## Coefficients:
+## (Intercept)         diam       height  
+##    -57.9877       4.7082       0.3393
+\end{verbatim}
+
+The estimated MLR equation is \(\hat{y} = -57.9877 + 4.7082x_1 + 0.3393x_2\). The estimated coefficient for diameter inform us that for each additional inch in diameter, the predicted volume of a cherry tree increases by 4.7082 cubic feet, while holding height constant.
+
+\hypertarget{visualizing-mlr}{%
+\subsection{Visualizing MLR}\label{visualizing-mlr}}
+
+How should we visualize an MLR equation? Suppose we have two predictor variables, \(x_1\) and \(x_2\), with MLR equation \(E(y|x_1,x_2) = 2 + 5x_1 + 5x_2\). A \textbf{contour plot} can be used to visualize a response variable with two predictors:
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-173-1.pdf}
+
+The contour plot creates an axis for each predictor. The value of the response variable is denoted by the contour lines with the actual value displayed on the line. In this toy example, \(\beta_1 = 5\). This means that if we hold \(x_2\) constant (e.g.~set \(x_2 = 1\) per the red horizontal line), increasing \(x_1\) by 1 unit increases the mean of \(y\) by 5 units.
+
+The regression equation \(E(y|x_1,x_2) = 2 + 5x_1 + 5x_2\) is sometimes called a \textbf{regression plane}, instead of a regression line, since we have more than 1 predictor. We can visualize this regression plane below
+
+\includegraphics{images/3dplot.jpg}
+
+Due to limitations in human visualization, going beyond a 3-dimensional plot (1 response and 2 predictors) is difficult.
+
+\emph{Please see the associated video for a little more explanation regarding the contour plot and 3-dimensional plot}.
+
+\hypertarget{estimating-coefficients-in-mlr}{%
+\section{Estimating coefficients in MLR}\label{estimating-coefficients-in-mlr}}
+
+From \eqref{eq:6MLReq}, the predicted response (or fitted values), can be written in matrix form as:
+
+\begin{equation} 
+\boldsymbol{\hat{y}} = \boldsymbol{X\hat{\beta}},
+\label{eq:6yhat}
+\end{equation}
+
+where \(\boldsymbol{\hat{\beta}} = (\hat{\beta_0}, \hat{\beta_1}, \cdots, \hat{\beta_k})^\prime\).
+
+We use the \textbf{method of least squares} to find the estimated coefficients in MLR. This is the same idea when applied in SLR. The method involves minimizing the \textbf{sum of squared residuals}, \(SS_{res}\). In SLR, we minimize
+
+\[
+\sum\limits_{i=1}^{n} \left[ y_i - (\hat{\beta_0}+\hat{\beta_1} x_i) \right]^{2}
+\]
+
+with respect to \(\hat{\beta_0}, \hat{\beta_1}\). In MLR, the \(SS_{res}\) can be expressed in matrix form:
+
+\begin{equation}
+Q = \left(\boldsymbol{y - X\hat{\beta}}\right)^{\prime} \left(\boldsymbol{y - X\hat{\beta}}\right)
+\label{eq:6min}
+\end{equation}
+
+To minimize the \(Q = SS_{res}\) with respect to \(\hat{\beta_0}, \hat{\beta_1}, \cdots, \hat{\beta_k}\), We take partial derivatives of \(Q\) and set them all to 0, i.e.~\(\frac{\nabla Q}{\nabla \hat{\beta}}=0\). Solving for these equations, we get
+
+\begin{equation} 
+\boldsymbol{\hat{\beta}} = \left[
+\begin{array}{c}
+   \hat{\beta}_0  \\
+   \hat{\beta}_1 \\
+   \vdots \\
+   \hat{\beta}_k
+\end{array}
+\right]  =
+\left(\boldsymbol{X}^{\prime} \boldsymbol{X} \right)^{-1} \boldsymbol{X}^{\prime} \boldsymbol{y} .
+\label{eq:6b}
+\end{equation}
+
+\textbf{Residuals} are found in the same way in SLR:
+
+\[
+e_i = y_i - \hat{y_i},
+\]
+
+or in matrix form:
+
+\begin{equation} 
+\boldsymbol{e} = \boldsymbol{y} - \boldsymbol{\hat{y}} = \boldsymbol{y} - \boldsymbol{X\hat{\beta}}.
+\label{eq:6res}
+\end{equation}
+
+\hypertarget{estimating-variance-of-errors}{%
+\subsection{Estimating variance of errors}\label{estimating-variance-of-errors}}
+
+Similar to SLR, \(MS_{res}\) is used to estimate \(\sigma^2\), the variance of the error terms. \(MS_{res}\) if found using
+
+\begin{equation}
+MS_{res}=\frac{SS_{res}}{n-p},
+\label{eq:6MSres}
+\end{equation}
+
+where \(p\) denotes the \textbf{number of regression parameters}. In SLR, \(p=2\), since we have an intercept and one slope. Note: I have seen too many people think \(p\) denotes the number of predictors. This is incorrect! As we move forward, we will explore more complicated regression models and we always think in terms of number of regression parameters.
+
+\hypertarget{distribution-of-least-squares-estimators-1}{%
+\subsection{Distribution of least squares estimators}\label{distribution-of-least-squares-estimators-1}}
+
+Following the Gauss Markov theorem, the least squares estimators \(\boldsymbol{\hat{\beta}}\) are unbiased, i.e.
+
+\begin{equation} 
+\boldsymbol{E\left(\hat{\beta}\right)} = \boldsymbol{\beta},
+\label{eq:6mean2}
+\end{equation}
+
+with \textbf{variance-covariance matrix} given by
+
+\begin{equation} 
+\boldsymbol{Var}\left(\boldsymbol{\hat{\beta}}\right) = \sigma^{2}\left(\boldsymbol{X^{\prime}X} \right)^{-1}
+\label{eq:6cov2}
+\end{equation}
+
+with \(\sigma^{2}\) estimated by \(MS_{res}\). A few notes about the variance-covariance matrix of the least squares estimators:
+
+\begin{itemize}
+\tightlist
+\item
+  it is of dimension \(p \times p\),
+\item
+  the diagonal elements denote the variance of each estimated parameter. For example, the first diagonal element denotes the variance of \(\hat{\beta}_0\), the first estimated parameter.
+\item
+  the off-diagonal elements denote the covariance between respective parameters. For example, the (1,2) entry denotes the covariance between \(\hat{\beta}_0\) and \(\hat{\beta}_1\).
+\end{itemize}
+
+\emph{Please see the associated video for a demonstration on how to read a variance-covariance matrix.}
+
+\hypertarget{anova-f-test-in-mlr}{%
+\section{\texorpdfstring{ANOVA \(F\) Test in MLR}{ANOVA F Test in MLR}}\label{anova-f-test-in-mlr}}
+
+\hypertarget{sum-of-squares-1}{%
+\subsection{Sum of squares}\label{sum-of-squares-1}}
+
+As in simple regression, the \textbf{analysis of variance (ANOVA) table} for an MLR model displays quantities that measure how much of the variability in the response variable is explained (and not explained) by the regression model. The underlying conceptual idea for the construction of the analysis of variance table is the same:
+
+\begin{equation} 
+SS_T = SS_R + SS_{res}.
+\label{eq:6SS}
+\end{equation}
+
+What change are the associated degrees of freedom:
+
+\begin{itemize}
+\tightlist
+\item
+  df for \(SS_R\): \(df_R = p-1\)
+\item
+  df for \(SS_{res}\): \(df_{res} = n-p\)
+\item
+  df for \(SS_T\): \(df_T = n-1\)
+\end{itemize}
+
+Notice the degrees of freedom in SLR has \(p=2\).
+
+\hypertarget{anova-table-2}{%
+\subsection{ANOVA table}\label{anova-table-2}}
+
+The ANOVA table is thus
+
+\begin{longtable}[]{@{}
+  >{\centering\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.2353}}
+  >{\centering\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.2941}}
+  >{\centering\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.1569}}
+  >{\centering\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.1569}}
+  >{\centering\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.1569}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\centering
+Source of Variation
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+SS
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+df
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+MS
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+F
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Regression & \(SS_R=\sum\left(\hat{y_i}-\bar{y}\right)^2\) & \(df_R = p-1\) & \(MS_R=\frac{SS_R}{df_R}\) & \(\frac{MS_R}{MS_{res}}\) \\
+Error & \(SS_{res} = \sum\left(y_i-\hat{y_i}\right)^2\) & \(df_{res} = n-p\) & \(MS_{res}=\frac{SS_{res}}{df_{res}}\) & \texttt{***} \\
+Total & \(SS_T=\sum\left(y_i-\bar{y}\right)^2\) & \(df_T = n-1\) & \texttt{***} & \texttt{***} \\
+\end{longtable}
+
+\hypertarget{anova-f-test-1}{%
+\subsection{\texorpdfstring{ANOVA \(F\) test}{ANOVA F test}}\label{anova-f-test-1}}
+
+The null and alternative hypotheses associated with the ANOVA \(F\) test are:
+
+\[
+H_0: \beta_1=\beta_2=...=\beta_{k}=0, H_a: \text{ at least one of the coefficients is not 0.}
+\]
+So the null hypothesis states the regression coefficients for all predictors are 0. Notice how this statement simplifies in SLR.
+
+There are a few different ways to view these hypothesis statements:
+
+\begin{itemize}
+\tightlist
+\item
+  Is our MLR model \textbf{useful}?
+\item
+  Is our MLR model \textbf{preferred} over an intercept-only model?
+\item
+  Can we drop \textbf{all} our predictors from the MLR model?
+\end{itemize}
+
+The test statistic is still
+
+\begin{equation}
+F = \frac{MS_R}{MS_{res}}
+\label{eq:6ANOVA}
+\end{equation}
+
+which is compared with an \(F_{p-1,n-p}\) distribution.
+
+\hypertarget{coefficient-of-determination-1}{%
+\subsection{Coefficient of determination}\label{coefficient-of-determination-1}}
+
+The \textbf{coefficient of determination, \(R^2\),} is still
+
+\begin{equation} 
+R^{2} = \frac{SS_R}{SS_T} = 1 - \frac{SS_{res}}{SS_T},
+\label{eq:6R2}
+\end{equation}
+
+where \(R^{2}\) is interpreted as \textbf{the proportion of variance in the response variable that is explained by the predictors}.
+
+\hypertarget{caution-with-r2}{%
+\subsubsection{\texorpdfstring{Caution with \(R^2\)}{Caution with R\^{}2}}\label{caution-with-r2}}
+
+Adding more predictors to a model can only increase \(R^2\), as \(SS_{res}\) never becomes larger with more predictors and \(SS_T\) remains the same for a given set of responses.
+
+\begin{itemize}
+\tightlist
+\item
+  So even adding predictors that don't make sense will increase \(R^2\).
+\item
+  \(R^2\) should be used to compare models with the same number of parameters.
+\item
+  \(R^2\) is a popular measure as it has a nice geometric interpretation.
+\end{itemize}
+
+In response to this caution, we have the \textbf{adjusted \(R^2\)}, denoted by \(R_{a}^{2}\):
+
+\begin{equation} 
+R_{a}^{2} = 1 - \frac{\frac{SS_{res}}{n-p}}{\frac{SS_T}{n-1}} = 1 - \left(\frac{n-1}{n-p} \right) \frac{SS_{res}}{SS_T}.
+\label{eq:6adjusted}
+\end{equation}
+
+\(R_{a}^{2}\) increases if the added predictors significantly improve the fit of the model, and decreases otherwise.
+
+Let us go back to the \texttt{cherry} dataset as an example:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(result)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = volume ~ ., data = Data)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -6.4065 -2.6493 -0.2876  2.2003  8.4847 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(>|t|)    
+## (Intercept) -57.9877     8.6382  -6.713 2.75e-07 ***
+## diam          4.7082     0.2643  17.816  < 2e-16 ***
+## height        0.3393     0.1302   2.607   0.0145 *  
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 3.882 on 28 degrees of freedom
+## Multiple R-squared:  0.948,  Adjusted R-squared:  0.9442 
+## F-statistic:   255 on 2 and 28 DF,  p-value: < 2.2e-16
+\end{verbatim}
+
+The ANOVA \(F\) statistic is 255` with a small p-value. So we reject the null hypothesis and state that our MLR model with diameter and height as predictors is useful.
+
+The \(R^2\) is 0.948. About 94.8\% of the variance in volume of cherry trees can be explained by their diameter and height.
+
+The \(R_{a}^{2}\) is 0.9442. This value is used in comparison with another model to decide which should be preferred.
+
+\hypertarget{t-test-for-regression-coefficient-in-mlr}{%
+\section{\texorpdfstring{\(t\) Test for Regression Coefficient in MLR}{t Test for Regression Coefficient in MLR}}\label{t-test-for-regression-coefficient-in-mlr}}
+
+We can assess whether a regression coefficient is significantly different from 0 in an MLR. The null and alternative hypotheses are very much the same as in SLR:
+
+\[
+H_0: \beta_j = 0, H_a: \beta_j \neq 0.
+\]
+What these hypotheses mean in words:
+
+\begin{itemize}
+\tightlist
+\item
+  The null hypothesis supports dropping predictor \(x_j\) from the MLR model, \textbf{in the presence of the other predictors.}
+\item
+  The alternative hypothesis supports keeping predictor \(x_j\) in the MLR model, or that we \textbf{cannot drop it in the presence of the other predictors.}
+\end{itemize}
+
+Notice the meaning of the null and alternative hypotheses are a little different than in SLR, where other predictors are not taken into account.
+
+The test statistic is still
+
+\begin{equation} 
+t = \frac{\hat{\beta}_j}{se(\hat{\beta}_j)}
+\label{eq:6ttest}
+\end{equation}
+
+which is compared with a \(t_{n-p}\) distribution.
+
+Let us take a look at the \texttt{cherry} dataset:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(result)}\SpecialCharTok{$}\NormalTok{coefficients}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                Estimate Std. Error   t value     Pr(>|t|)
+## (Intercept) -57.9876589  8.6382259 -6.712913 2.749507e-07
+## diam          4.7081605  0.2642646 17.816084 8.223304e-17
+## height        0.3392512  0.1301512  2.606594 1.449097e-02
+\end{verbatim}
+
+Notice the \(t\) statistics associated with testing for the coefficient for each predictor is highly significant. So we do not have evidence to drop any of the other predictors to simplify the model.
+
+\hypertarget{caution-in-interpretating-t-test-in-mlr}{%
+\subsection{\texorpdfstring{Caution in interpretating \(t\) test in MLR}{Caution in interpretating t test in MLR}}\label{caution-in-interpretating-t-test-in-mlr}}
+
+An insignificant \(t\) test for a coefficient \(\beta_j\) in MLR indicates that predictor \(x_j\) can be removed from the model (and leave the other predictors in). It is \textbf{not needed in the presence of the other predictors.}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  A common misstatement many make is that an insignificant \(t\) test for a coefficient \(\beta_j\) in MLR implies that predictor \(x_j\) has no linear relation with the response variable. This is not necessarily correct!
+
+  \begin{itemize}
+  \item
+    If \(x_j\) is highly correlated with at least one of the other predictors, or is a linear combination of a number of other predictors, \(x_j\) will probably be insignificant as the addition of \(x_j\) doesn't help in improving the model. This concept is called \textbf{multicollinearity} which we will explore in more depth in the next module. \(x_j\) does not provide independent information from the other predictors, and so will not be needed when the other predictors are in the model.
+  \item
+    \(x_j\) itself may still be linearly related to the response variable, on its own.
+  \item
+    If your goal is to assess if \(x_j\) is linearly related to the response, need to use SLR.
+  \end{itemize}
+\item
+  Another common misstatement people make is that if they observe more than one \(t\) statistic that is insignificant, it means that all of the associated predictors can be dropped from the model. This again is not necessarily correct.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    An insignificant \(t\) test informs us we can drop that particular predictor, while leaving the other predictors in the model. We can only drop one predictor at a time based on \(t\) tests.
+  \end{itemize}
+\end{enumerate}
+
+Notice the limitation of the \(t\) test and ANOVA \(F\) test in MLR:
+
+\begin{itemize}
+\tightlist
+\item
+  We can \textbf{only drop 1 predictor} based on a \(t\) test.
+\item
+  We can \textbf{drop all predictors} based on an ANOVA \(F\) test.
+\item
+  What if we wish to drop more than 1 predictor simultaneously, but not all, from the model? We will explore this via another \(F\) test in the next module.
+\end{itemize}
+
+\hypertarget{cis-in-mlr}{%
+\section{CIs in MLR}\label{cis-in-mlr}}
+
+\hypertarget{ci-for-regression-coefficient}{%
+\subsection{CI for regression coefficient}\label{ci-for-regression-coefficient}}
+
+The general form for CIs is still the same:
+
+\begin{equation}
+\mbox{estimator} \pm (\mbox{multiplier} \times \mbox{s.e of estimator}). 
+\label{eq:6CI}
+\end{equation}
+
+The \(100(1-\alpha)\%\) CI for \(\beta_j\) is
+
+\begin{equation} 
+\hat{\beta}_j \pm t_{1-\alpha/2;n-p}  se(\hat{\beta}_j) = \hat{\beta}_j \pm t_{1-\alpha/2;n-p} s \sqrt{C_{jj}}
+\label{eq:6CIb}
+\end{equation}
+
+where \(C_{jj}\) denotes the \(j\)th diagonal entry in variance-covariance matrix of the estimated coefficients, \(\boldsymbol{Var}\left(\boldsymbol{\hat{\beta}}\right)\).
+
+The multiplier is now based on a \(t_{n-p}\) distribution, instead of a \(t_{n-2}\) distribution for SLR.
+
+\hypertarget{ci-of-the-mean-response-1}{%
+\subsection{CI of the mean response}\label{ci-of-the-mean-response-1}}
+
+Since we have multiple predictors, we may interested in the CI for the mean of the response, when the predictors are each equal to specific values. Let the vector \(\boldsymbol{x_0}\) denote these values on each predictor, specifically
+
+\[
+\boldsymbol{x_0} = (1, x_{01}, x_{02}, \cdots, x_{0k})^{\prime},
+\]
+
+where \(x_{0j}\) denotes the value for predictor \(x_j\). The CI for the mean response when \(\boldsymbol{x} = \boldsymbol{x_0}\) is
+
+\begin{equation}
+\hat{\mu}_{y|\boldsymbol{x_0}}\pm t_{1-\alpha/2,n-p}s\sqrt{\boldsymbol{x_0}^{\prime} \boldsymbol{(X^\prime X)^{-1}} \boldsymbol{x_0}}.
+\label{eq:6CImean}
+\end{equation}
+
+\hypertarget{pi-of-a-new-response-1}{%
+\subsection{PI of a new response}\label{pi-of-a-new-response-1}}
+
+For a new value of the response when \(\boldsymbol{x} = \boldsymbol{x_0}\), the PI is
+
+\begin{equation} 
+\hat{y}_0\pm t_{1-\alpha/2,n-p}s \sqrt{1+ \boldsymbol{x_0}^{\prime} \boldsymbol{(X^\prime X)^{-1}} \boldsymbol{x_0}}.
+\label{eq:6pred}
+\end{equation}
+
+\hypertarget{r-tutorial-3}{%
+\section{R Tutorial}\label{r-tutorial-3}}
+
+For this tutorial, we will learn how to fit multiple linear regression (MLR) in R. You will realize that fitting MLR is very similar to fitting SLR.
+
+We will look at data regarding black cherry trees. The data, \texttt{cherry}, come from the \texttt{openintro} package. Researchers want to understand the relationship between the volume (in cubic feet) of these trees and their diameter (in inches, at 54 inches above ground) and height (in feet). Data come from 31 trees in the Allegheny National Forest, Pennsylvania.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(openintro)}
+\NormalTok{Data}\OtherTok{\textless{}{-}}\NormalTok{openintro}\SpecialCharTok{::}\NormalTok{cherry}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{scatterplot-matrix}{%
+\subsection*{Scatterplot matrix}\label{scatterplot-matrix}}
+\addcontentsline{toc}{subsection}{Scatterplot matrix}
+
+A scatterplot matrix is useful to create scatterplots involving more than two quantitative variables. We will use the \texttt{ggpairs()} function from the \texttt{GGally} package:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(GGally)}
+\DocumentationTok{\#\#scatterplot matrix}
+\NormalTok{GGally}\SpecialCharTok{::}\FunctionTok{ggpairs}\NormalTok{(Data)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-179-1.pdf}
+
+A few pieces of information are presented in the output. Notice the output is displayed in a matrix format.
+
+\begin{itemize}
+\tightlist
+\item
+  The off-diagonal entries of the output give us the scatterplot and correlation between the corresponding pair of quantitative variables.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    For example, look at the scatterplot in row 3, column 1 of the output. The corresponding label for the column is \texttt{diam} and the label for the row is \texttt{volume}. This informs us this is a scatterplot for \texttt{volume} on the vertical axis and \texttt{diam} on the horizontal axis. We see a strong positive linear association between these two variables.
+  \item
+    The correlation between \texttt{volume} and \texttt{diam} is displayed in row 1, column 3. Again, notice the label for the column and row. This correlation is 0.967, which is high.
+  \item
+    For practice, locate the scatterplot of \texttt{volume} and \texttt{height} and its corresponding correlation. Also locate the scatterplot of \texttt{diam} and \texttt{height} and its corresponding correlation.
+  \end{itemize}
+\item
+  The diagonal entries display the density plot of the corresponding variable. For example, the third diagonal entry displays the density plot for \texttt{volume}. We can see that the distribution is somewhat right skewed as most trees have a volume between 10 and 40 cubic feet.
+\end{itemize}
+
+\hypertarget{fit-mlr-using-lm}{%
+\subsection*{\texorpdfstring{Fit MLR using \texttt{lm()}}{Fit MLR using lm()}}\label{fit-mlr-using-lm}}
+\addcontentsline{toc}{subsection}{Fit MLR using \texttt{lm()}}
+
+To fit multiple linear regression (MLR)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#Fit MLR model, using + in between predictors}
+\NormalTok{result}\OtherTok{\textless{}{-}}\FunctionTok{lm}\NormalTok{(volume}\SpecialCharTok{\textasciitilde{}}\NormalTok{diam}\SpecialCharTok{+}\NormalTok{height, }\AttributeTok{data=}\NormalTok{Data)}
+\end{Highlighting}
+\end{Shaded}
+
+where we list the predictors after \texttt{\textasciitilde{}} with a \texttt{+} operator in between the predictors. Another way would be
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{result}\OtherTok{\textless{}{-}}\FunctionTok{lm}\NormalTok{(volume}\SpecialCharTok{\textasciitilde{}}\NormalTok{., }\AttributeTok{data=}\NormalTok{Data)}
+\end{Highlighting}
+\end{Shaded}
+
+The \texttt{.} after \texttt{\textasciitilde{}} informs the \texttt{lm()} function to use every column other than \texttt{volume} in the data frame as predictors.
+
+Just like with simple linear regression (SLR) we can get relevant information using \texttt{summary()}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(result)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = volume ~ diam + height, data = Data)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -6.4065 -2.6493 -0.2876  2.2003  8.4847 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(>|t|)    
+## (Intercept) -57.9877     8.6382  -6.713 2.75e-07 ***
+## diam          4.7082     0.2643  17.816  < 2e-16 ***
+## height        0.3393     0.1302   2.607   0.0145 *  
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 3.882 on 28 degrees of freedom
+## Multiple R-squared:  0.948,  Adjusted R-squared:  0.9442 
+## F-statistic:   255 on 2 and 28 DF,  p-value: < 2.2e-16
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  The estimated regression equation is \(\hat{y} = -57.988 + 4.708 diam + 0.339height\).
+
+  \begin{itemize}
+  \tightlist
+  \item
+    The estimated coefficient for \texttt{diam} is interpreted as: the predicted volume of a cherry tree increases by 4.708 cubic feet per inch increase in diameter, while holding height constant.
+  \item
+    The estimated coefficient for \texttt{height} is interpreted as: the predicted volume of a cherry tree increases by 0.339 cubic feet per foot increase in height, while holding diameter constant.
+  \end{itemize}
+\item
+  The \(R^2\) is 0.948. About 94.8\% of the variance in volume of cherry trees can be explained by their diameter and height.
+\item
+  The residual standard error is 3.882. This estimates \(\sigma\), the standard deviation of the error term.
+\end{itemize}
+
+\hypertarget{inference-with-mlr}{%
+\subsection*{Inference with MLR}\label{inference-with-mlr}}
+\addcontentsline{toc}{subsection}{Inference with MLR}
+
+Just like SLR, each coefficient is tested against a null hypothesis that \(\beta_j = 0\) with a two-sided alternative. The test is significant for both coefficients, so we cannot drop either predictor from the model.
+
+The ANOVA \(F\) statistic is 255, with a small p-value. So data supports the claim that our model is useful.
+
+The confidence intervals for the coefficients can be found using \texttt{confint()}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{confint}\NormalTok{(result,}\AttributeTok{level =} \FloatTok{0.95}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                    2.5 %      97.5 %
+## (Intercept) -75.68226247 -40.2930554
+## diam          4.16683899   5.2494820
+## height        0.07264863   0.6058538
+\end{verbatim}
+
+The confidence interval for the mean response and the prediction interval for a new observation given a specific value of the predictors can also be found using \texttt{predict()}. For example, when the diameter is 10 inches and height is 80 feet:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{newdata}\OtherTok{\textless{}{-}}\FunctionTok{data.frame}\NormalTok{(}\AttributeTok{diam=}\DecValTok{10}\NormalTok{, }\AttributeTok{height=}\DecValTok{80}\NormalTok{)}
+
+\FunctionTok{predict}\NormalTok{(result, newdata, }\AttributeTok{level=}\FloatTok{0.95}\NormalTok{,}
+        \AttributeTok{interval=}\StringTok{"confidence"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##        fit      lwr      upr
+## 1 16.23404 13.36762 19.10047
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{predict}\NormalTok{(result, newdata, }\AttributeTok{level=}\FloatTok{0.95}\NormalTok{,}
+        \AttributeTok{interval=}\StringTok{"prediction"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##        fit      lwr      upr
+## 1 16.23404 7.781596 24.68649
+\end{verbatim}
+
+You might realize by now we are using the same functions as we did in SLR.
+
+\textbf{Note}: Obviously, all these calculations are performed and interpreted assuming the regression assumptions are met. Regression assumptions are checked in the same way as in SLR. On your own, as practice, assess the regression assumptions.
 
 \hypertarget{intro}{%
 \chapter{Introduction}\label{intro}}
