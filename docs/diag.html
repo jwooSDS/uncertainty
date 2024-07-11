@@ -70,12 +70,11 @@
 <li><a class="" href="slr.html"><span class="header-section-number">3</span> Basics with Simple Linear Regression (SLR)</a></li>
 <li><a class="" href="inf.html"><span class="header-section-number">4</span> Inference with Simple Linear Regression (SLR)</a></li>
 <li><a class="active" href="diag.html"><span class="header-section-number">5</span> Model Diagnostics and Remedial Measures in SLR</a></li>
-<li><a class="" href="try.html"><span class="header-section-number">6</span> TABLE</a></li>
-<li><a class="" href="intro.html"><span class="header-section-number">7</span> Introduction</a></li>
-<li><a class="" href="literature.html"><span class="header-section-number">8</span> Literature</a></li>
-<li><a class="" href="methods.html"><span class="header-section-number">9</span> Methods</a></li>
-<li><a class="" href="applications.html"><span class="header-section-number">10</span> Applications</a></li>
-<li><a class="" href="final-words.html"><span class="header-section-number">11</span> Final Words</a></li>
+<li><a class="" href="intro.html"><span class="header-section-number">6</span> Introduction</a></li>
+<li><a class="" href="literature.html"><span class="header-section-number">7</span> Literature</a></li>
+<li><a class="" href="methods.html"><span class="header-section-number">8</span> Methods</a></li>
+<li><a class="" href="applications.html"><span class="header-section-number">9</span> Applications</a></li>
+<li><a class="" href="final-words.html"><span class="header-section-number">10</span> Final Words</a></li>
 <li><a class="" href="references.html">References</a></li>
 </ul>
 
@@ -122,21 +121,26 @@ y=\beta_0+\beta_{1} x + \epsilon.
 <span class="header-section-number">5.2.1</span> Assumption 1: Errors have mean 0.<a class="anchor" aria-label="anchor" href="#assumption-1-errors-have-mean-0."><i class="fas fa-link"></i></a>
 </h3>
 <p>For each value of the predictor, the errors have <strong>mean 0</strong>. A by-product of this statement is that the relationship between <span class="math inline">\(y\)</span> and <span class="math inline">\(x\)</span>, as expressed via <span class="math inline">\(y \approx f(x)\)</span>, is correct. So, if <span class="math inline">\(f(x) = \beta_0 + \beta_1 x\)</span>, then the relationship is approximately linear.</p>
-<p>The plots in Figure <!-- overall --> are based on simulated data. The scatterplot shown in Figure <!-- linear --> is an example of when this assumption is met. As we move from left to right on the plot, the data points are generally evenly scattered on both sides of the regression line that is overlaid.</p>
-<!-- Add figure here. linear_plot.jpeg & quadratic_plot.jpg -->
-<p>The scatterplot shown in Figure <!-- quadratic --> is an example of when this assumption is <strong>not</strong> met. As we move from left to right on the plot in Figure <!-- quadratic -->, the data points are generally not evenly scattered on both sides of the regression line that is overlaid.</p>
+<p>The plots in Figure <a href="diag.html#fig:ass1">5.1</a> are based on simulated data. The scatterplot shown in Figure <a href="diag.html#fig:ass1">5.1</a>(a) is an example of when this assumption is met. As we move from left to right on the plot, the data points are generally evenly scattered on both sides of the regression line that is overlaid.</p>
+<div class="figure">
+<span style="display:block;" id="fig:ass1"></span>
+<img src="images/ass1.jpg" alt="Assumption 1"><p class="caption">
+Figure 5.1: Assumption 1
+</p>
+</div>
+<p>The scatterplot shown in Figure <a href="diag.html#fig:ass1">5.1</a>(b) is an example of when this assumption is <strong>not</strong> met. As we move from left to right on the plot in Figure <a href="diag.html#fig:ass1">5.1</a>(b), the data points are generally not evenly scattered on both sides of the regression line that is overlaid.</p>
 <ul>
 <li>When <span class="math inline">\(-2 \leq x \leq -1.2\)</span>, the data points are generally above the regression line;</li>
 <li>then when <span class="math inline">\(-1.2 &lt; x &lt; 1\)</span>, the data points are generally below the regression line;</li>
 <li>and then when <span class="math inline">\(x \geq 1\)</span>, the data points are generally above the regression line.</li>
 </ul>
-<p><em>Please see the associated video for more explanation on how to use Figure <!-- overall --> to assess assumption 1.</em> <!-- overall --></p>
+<p><em>Please see the associated video for more explanation on how to use Figure <a href="diag.html#fig:ass1">5.1</a> to assess assumption 1.</em></p>
 <div id="consequences-of-violating-this-assumption" class="section level4" number="5.2.1.1">
 <h4>
 <span class="header-section-number">5.2.1.1</span> Consequences of violating this assumption<a class="anchor" aria-label="anchor" href="#consequences-of-violating-this-assumption"><i class="fas fa-link"></i></a>
 </h4>
 <p><strong>Predictions will be biased</strong>. This means that predicted values will systematically over- or under- estimate the true values of the response variable. Of the 4 assumptions listed, this is <strong>most crucial assumption</strong>.</p>
-<p>Using Figure <!-- quadratic --> as an example, this implies that</p>
+<p>Using Figure <a href="diag.html#fig:ass1">5.1</a>(b) as an example, this implies that</p>
 <ul>
 <li>when <span class="math inline">\(-2 \leq x \leq -1.2\)</span>, the regression line will systematically under-predict the response variable;</li>
 <li>then when <span class="math inline">\(-1.2 &lt; x &lt; 1\)</span>, the regression line will systematically over-predict the response variable;</li>
@@ -149,16 +153,21 @@ y=\beta_0+\beta_{1} x + \epsilon.
 <span class="header-section-number">5.2.2</span> Assumption 2: Errors have constant variance<a class="anchor" aria-label="anchor" href="#assumption-2-errors-have-constant-variance"><i class="fas fa-link"></i></a>
 </h3>
 <p>For each value of the predictor, the error terms have <strong>constant variance</strong>, denoted by <span class="math inline">\(\sigma^2\)</span>. This implies that when looking at a scatterplot, the vertical variation of data points around the regression equation has the same magnitude everywhere.</p>
-<p>The plots in Figure <!-- overall2 --> are based on simulated data. The scatterplot shown in Figure <!-- linear2 --> is an example of when this assumption is met (this figure is actually the same as Figure <!-- linear -->, so the data that produced these plots satisfy both assumptions). As we move from left to right on the plot, the vertical variation of the data points about the regression line is approximately constant.</p>
-<!-- Add figure here. linear_plot.jpeg & increasing_var.jpg -->
-<p>The scatterplot shown in Figure <!-- increasing --> is an example of when this assumption is <strong>not</strong> met. As we move from left to right on the plot in Figure <!-- increasing -->, the vertical variation of the data points about the regression line becomes larger as the value of the response variable gets larger, so the variance is not constant.</p>
-<p><em>Please see the associated video for more explanation on how to use Figure <!-- overall2 --> to assess assumption 2.</em> <!-- overall2 --></p>
+<p>The plots in Figure <a href="diag.html#fig:ass2">5.2</a> are based on simulated data. The scatterplot shown in Figure <a href="diag.html#fig:ass2">5.2</a>(a) is an example of when this assumption is met (this figure is actually the same as Figure <a href="diag.html#fig:ass1">5.1</a>(a), so the data that produced these plots satisfy both assumptions). As we move from left to right on the plot, the vertical variation of the data points about the regression line is approximately constant.</p>
+<div class="figure">
+<span style="display:block;" id="fig:ass2"></span>
+<img src="images/ass2.jpg" alt="Assumption 2"><p class="caption">
+Figure 5.2: Assumption 2
+</p>
+</div>
+<p>The scatterplot shown in Figure <a href="diag.html#fig:ass2">5.2</a>(b) is an example of when this assumption is <strong>not</strong> met. As we move from left to right on the plot in Figure <a href="diag.html#fig:ass2">5.2</a>(b), the vertical variation of the data points about the regression line becomes larger as the value of the response variable gets larger, so the variance is not constant.</p>
+<p><em>Please see the associated video for more explanation on how to use Figure <a href="diag.html#fig:ass2">5.2</a> to assess assumption 2.</em></p>
 <div id="consequences-of-violating-this-assumption-1" class="section level4" number="5.2.2.1">
 <h4>
 <span class="header-section-number">5.2.2.1</span> Consequences of violating this assumption<a class="anchor" aria-label="anchor" href="#consequences-of-violating-this-assumption-1"><i class="fas fa-link"></i></a>
 </h4>
 <p><strong>Statistical inference will no longer be reliable.</strong> This means that the results from any hypothesis test, confidence interval, or prediction interval are no longer reliable.</p>
-<p>Interestingly, for the scatterplot in Figure <!-- increasing -->, we can say that assumption 1 is met, since the the data points are generally evenly scattered on both sides of the regression line. Predictions will still be unbiased; the predicted response, <span class="math inline">\(\hat{y}\)</span>, do not systematically over- or under-predict the response variable. So if our goal is to assess if the relationship is approximately linear, this scatterplot is fine. We do lose the utility from hypothesis tests, CIs, and PIs.</p>
+<p>Interestingly, for the scatterplot in Figure <a href="diag.html#fig:ass2">5.2</a>(b), we can say that assumption 1 is met, since the the data points are generally evenly scattered on both sides of the regression line. Predictions will still be unbiased; the predicted response, <span class="math inline">\(\hat{y}\)</span>, do not systematically over- or under-predict the response variable. So if our goal is to assess if the relationship is approximately linear, this scatterplot is fine. We do lose the utility from hypothesis tests, CIs, and PIs.</p>
 </div>
 </div>
 <div id="assumption-3-errors-are-independent" class="section level3" number="5.2.3">
@@ -208,23 +217,23 @@ y=\beta_0+\beta_{1} x + \epsilon.
 <li>Data points <strong>evenly scattered</strong> (for each value on the x-axis) around fitted line (assumption 1).</li>
 <li>Vertical variation of data points constant (assumption 2).</li>
 </ul>
-<p>We have used Figure <!-- linear2 --> as an example of a scatterplot that meets these assumptions. Let us take a look at another example that we have worked with. This scatterplot is from the <code>elmhurst</code> dataset from the <code>openintro</code> package that we have been seeing in tutorials. We are regressing the amount of gift aid a student receives based on the student’s family income. The corresponding scatterplot is shown in in Figure <a href="diag.html#fig:elmhurst">5.1</a>.</p>
+<p>We have used Figure <a href="diag.html#fig:ass2">5.2</a>(a) as an example of a scatterplot that meets these assumptions. Let us take a look at another example that we have worked with. This scatterplot is from the <code>elmhurst</code> dataset from the <code>openintro</code> package that we have been seeing in tutorials. We are regressing the amount of gift aid a student receives based on the student’s family income. The corresponding scatterplot is shown in in Figure <a href="diag.html#fig:elmhurst">5.3</a>.</p>
 <div class="figure">
 <span style="display:block;" id="fig:elmhurst"></span>
 <img src="bookdown-demo_files/figure-html/elmhurst-1.png" alt="Scatterplot of Gift Aid Against Family Income" width="672"><p class="caption">
-Figure 5.1: Scatterplot of Gift Aid Against Family Income
+Figure 5.3: Scatterplot of Gift Aid Against Family Income
 </p>
 </div>
-<p>In Figure <a href="diag.html#fig:elmhurst">5.1</a>, we see that the data points are evenly scattered around the fitted line. We also see the vertical variation of the data points is fairly constant. So assumptions that the errors have 0 mean and constant variance appear to be met.</p>
+<p>In Figure <a href="diag.html#fig:elmhurst">5.3</a>, we see that the data points are evenly scattered around the fitted line. We also see the vertical variation of the data points is fairly constant. So assumptions that the errors have 0 mean and constant variance appear to be met.</p>
 <div id="practice-question" class="section level4" number="5.3.1.1">
 <h4>
 <span class="header-section-number">5.3.1.1</span> Practice question<a class="anchor" aria-label="anchor" href="#practice-question"><i class="fas fa-link"></i></a>
 </h4>
-<p>The data are about the prices of used cars. We are regressing the sale price of the car against the age of the car. The corresponding scatterplot is shown in Figure <a href="diag.html#fig:mazda">5.2</a>. Based on Figure <a href="diag.html#fig:mazda">5.2</a>, which of assumptions 1 or 2 (or both, or neither), is met? We will go over this in the tutorial.</p>
+<p>The data are about the prices of used cars. We are regressing the sale price of the car against the age of the car. The corresponding scatterplot is shown in Figure <a href="diag.html#fig:mazda">5.4</a>. Based on Figure <a href="diag.html#fig:mazda">5.4</a>, which of assumptions 1 or 2 (or both, or neither), is met? We will go over this in the tutorial.</p>
 <div class="figure">
 <span style="display:block;" id="fig:mazda"></span>
 <img src="bookdown-demo_files/figure-html/mazda-1.png" alt="Scatterplot of Sale Price Against Age" width="672"><p class="caption">
-Figure 5.2: Scatterplot of Sale Price Against Age
+Figure 5.4: Scatterplot of Sale Price Against Age
 </p>
 </div>
 </div>
@@ -239,37 +248,36 @@ Figure 5.2: Scatterplot of Sale Price Against Age
 <li>The residuals should have <strong>similar vertical variation</strong> across the plot (assumption 2).</li>
 <li>Some writers combine these two points into the following statement: the residuals should fall in a <strong>horizontal band around 0</strong> with no apparent pattern (assumption 1, 2).</li>
 </ul>
-<p>The residual plots in Figure <!-- resplots --> are based on simulated data from Figures <!-- linear -->, <!-- quadratic -->, and <!-- increasing -->.</p>
-<!-- Add figure here. resplot1.jpeg, resplot2.jpeg, resplot3.jpeg -->
-<p>We make the following observations:
-- From Figure <!-- res1 -->, we see that the residuals are evenly scattered across the horizontal axis, and their vertical variation is fairly constant across the plot. So both assumptions are met.
-- From Figure <!-- res2 -->, we see that the residuals are <strong>not</strong> evenly scattered across the horizontal axis, although their vertical variation is fairly constant across the plot. So only assumption 1 is not met.
-- From Figure <!-- res3 -->, we see that the residuals are evenly scattered across the horizontal axis, but their vertical variation is <strong>not constant</strong> across the plot. In fact, the vertical variation is increasing as we move from left to right. So only assumption 2 is not met.</p>
+<p>The residual plots in Figure <a href="diag.html#fig:resplots">5.5</a> are based on simulated data from Figures <a href="diag.html#fig:ass1">5.1</a>(a), <a href="diag.html#fig:ass1">5.1</a>(b), and <a href="diag.html#fig:ass2">5.2</a>(b).</p>
+<div class="figure">
+<span style="display:block;" id="fig:resplots"></span>
+<img src="images/resplots.jpg" alt="Residual Plots from Fig 1(a), 1(b), 2(b) Respectively"><p class="caption">
+Figure 5.5: Residual Plots from Fig 1(a), 1(b), 2(b) Respectively
+</p>
+</div>
+<p>We make the following observations:</p>
+<ul>
+<li>From Figure <a href="diag.html#fig:resplots">5.5</a>(a), we see that the residuals are evenly scattered across the horizontal axis, and their vertical variation is fairly constant across the plot. So both assumptions are met.</li>
+<li>From Figure <a href="diag.html#fig:resplots">5.5</a>(b), we see that the residuals are <strong>not</strong> evenly scattered across the horizontal axis, although their vertical variation is fairly constant across the plot. So only assumption 1 is not met.</li>
+<li>From Figure <a href="diag.html#fig:resplots">5.5</a>(c), we see that the residuals are evenly scattered across the horizontal axis, but their vertical variation is <strong>not constant</strong> across the plot. In fact, the vertical variation is increasing as we move from left to right. So only assumption 2 is not met.</li>
+</ul>
 <p>If you compare the conclusions from the residuals plots and scatterplots, they are the same. In SLR, the takeaways should be consistent.</p>
-<p><em>Please see the associated video for more explanation on how to use Figure <!-- resplots --> to assess assumptions 1 and 2.</em> <!-- resplots --></p>
+<p><em>Please see the associated video for more explanation on how to use Figure <a href="diag.html#fig:resplots">5.5</a> to assess assumptions 1 and 2.</em></p>
 <div id="practice-questions-2" class="section level4" number="5.3.2.1">
 <h4>
 <span class="header-section-number">5.3.2.1</span> Practice questions<a class="anchor" aria-label="anchor" href="#practice-questions-2"><i class="fas fa-link"></i></a>
 </h4>
 <ol style="list-style-type: decimal">
-<li>The residual plot in Figure <a href="diag.html#fig:elmhurst-res">5.3</a> comes from regressing gift aid against family income for the <code>elmhurst</code> dataset. Based on this residual plot, which assumptions are met?</li>
+<li><p>The residual plot in Figure <a href="diag.html#fig:practice">5.6</a>(a) comes from regressing gift aid against family income for the <code>elmhurst</code> dataset. Based on this residual plot, which assumptions are met?</p></li>
+<li><p>The residual plot in Figure <a href="diag.html#fig:practice">5.6</a>(b) comes from regressing price of cars against age for the used cars dataset. Based on this residual plot, which assumptions are met?</p></li>
 </ol>
-<div class="figure">
-<span style="display:block;" id="fig:elmhurst-res"></span>
-<img src="bookdown-demo_files/figure-html/elmhurst-res-1.png" alt="Residual Plot Regressing Gift Aid Against Family Income" width="672"><p class="caption">
-Figure 5.3: Residual Plot Regressing Gift Aid Against Family Income
-</p>
-</div>
-<ol start="2" style="list-style-type: decimal">
-<li>The residual plot in Figure <a href="diag.html#fig:mazda-res">5.4</a> comes from regressing price of cars against age for the used cars dataset. Based on this residual plot, which assumptions are met?</li>
-</ol>
-<div class="figure">
-<span style="display:block;" id="fig:mazda-res"></span>
-<img src="bookdown-demo_files/figure-html/mazda-res-1.png" alt="Residual Plot Regressing Price Against Age for Used Cars" width="672"><p class="caption">
-Figure 5.4: Residual Plot Regressing Price Against Age for Used Cars
-</p>
-</div>
 <p><em>Please see the associated video as I go over these practice questions.</em></p>
+<div class="figure">
+<span style="display:block;" id="fig:practice"></span>
+<img src="images/practice.jpg" alt="Residual Plots for Practice Questions"><p class="caption">
+Figure 5.6: Residual Plots for Practice Questions
+</p>
+</div>
 </div>
 </div>
 <div id="acf-plot" class="section level3" number="5.3.3">
@@ -283,26 +291,31 @@ Figure 5.4: Residual Plot Regressing Price Against Age for Used Cars
 </ul>
 <p>An autocorrelation function (ACF) plot of the residuals may be a used to help assess if the assumption that the errors are independent is met. However, the plot is not a substitute for using your understanding about the nature of the data and should only be used as a confirmation.</p>
 <p>The ACF plot measures the correlation between a vector of observations and the lagged versions of the observations. If the observations are uncorrelated, the correlations between the vector of observations and lagged versions of these observations are theoretically 0. We may create an ACF plot for the residuals from our regression.</p>
-<p>The ACF plot in Figure <!-- acf --> and is based on simulated data that were independently generated.</p>
-<!-- Add figure here. acf.jpeg, acf_ordered.jpeg -->
+<p>The ACF plot in Figure <a href="diag.html#fig:ass3">5.7</a>(a) and is based on simulated data that were independently generated.</p>
+<div class="figure">
+<span style="display:block;" id="fig:ass3"></span>
+<img src="images/ass3.jpg" alt="Assumption 3"><p class="caption">
+Figure 5.7: Assumption 3
+</p>
+</div>
 <p>A few notes about the ACF plot:</p>
 <ul>
 <li>The ACF at lag 0 is always 1. The correlation of any vector with itself is always 1.</li>
 <li>The dashed horizontal lines represent critical values. An ACF at any lag beyond the critical value indicates an ACF that is significant. We have evidence of correlation (and hence dependence) in our residuals.</li>
 <li>If the observed values for the response variable are independent, then we would expect the ACFs at lags greater than 0 to be insignificant. Do note that because we are conducting multiple hypothesis tests, do not be too alarmed if the ACFs are slightly beyond the critical values at an isolated lag or 2.</li>
 </ul>
-<p>Based on Figure <!-- acf -->, we see that the ACFs at all lags greater than 0 are insignificant. We do not have evidence the residuals are correlated with each other, so we do not have evidence that assumption 3 is not met.</p>
-<p>Sometimes, the dataframe can be sorted in some manner (e.g. increasing order for response variable), and if so, we would actually expect to see significant correlations in the ACF plot. The ACF plot in Figure <!-- acf2 --> is such an example. The residuals are from the same simulated dataset, only with the data sorted by the response variable. If we had just looked at the ACF plot in Figure <!-- acf2 --> without understanding the data were simulated independently and then sorted, we would have erroneously concluded that the residuals are not independent and the regression assumption is not met.</p>
+<p>Based on Figure <a href="diag.html#fig:ass3">5.7</a>(a), we see that the ACFs at all lags greater than 0 are insignificant. We do not have evidence the residuals are correlated with each other, so we do not have evidence that assumption 3 is not met.</p>
+<p>Sometimes, the dataframe can be sorted in some manner (e.g. increasing order for response variable), and if so, we would actually expect to see significant correlations in the ACF plot. The ACF plot in Figure <a href="diag.html#fig:ass3">5.7</a>(b) is such an example. The residuals are from the same simulated dataset, only with the data sorted by the response variable. If we had just looked at the ACF plot in Figure <a href="diag.html#fig:ass3">5.7</a>(b) without understanding the data were simulated independently and then sorted, we would have erroneously concluded that the residuals are not independent and the regression assumption is not met.</p>
 </div>
 <div id="qq-plot" class="section level3" number="5.3.4">
 <h3>
 <span class="header-section-number">5.3.4</span> QQ plot<a class="anchor" aria-label="anchor" href="#qq-plot"><i class="fas fa-link"></i></a>
 </h3>
-<p>A normal probability plot (also called a QQ plot) is used to assess if the distribution of a variable is normal. It typically plots the residuals against their theoretical residual if they followed a normal distribution. A QQ line is typically overlaid. If the plots fall closely to the QQ line, we have evidence that the observations follow a normal distribution. Figure <a href="diag.html#fig:qq">5.5</a> shows a QQ plot that comes from a normally distributed variable.</p>
+<p>A normal probability plot (also called a QQ plot) is used to assess if the distribution of a variable is normal. It typically plots the residuals against their theoretical residual if they followed a normal distribution. A QQ line is typically overlaid. If the plots fall closely to the QQ line, we have evidence that the observations follow a normal distribution. Figure <a href="diag.html#fig:qq">5.8</a> shows a QQ plot that comes from a normally distributed variable.</p>
 <div class="figure">
 <span style="display:block;" id="fig:qq"></span>
 <img src="images/qqplot.jpeg" alt="QQ Plot"><p class="caption">
-Figure 5.5: QQ Plot
+Figure 5.8: QQ Plot
 </p>
 </div>
 </div>
@@ -348,19 +361,25 @@ Figure 5.5: QQ Plot
 </h3>
 <p>We can stabilize the variance of the errors based on the residual plot, if we see either of the following scenarios:</p>
 <ul>
-<li>vertical variation of residuals <strong>increasing</strong> as fitted response increases, or as we move from left to right, as in Figure <!-- inc -->, or</li>
-<li>vertical variation of residuals <strong>decreasing</strong> as fitted response increases, or as we move from left to right, as in Figure <!-- dec -->.</li>
+<li>vertical variation of residuals <strong>increasing</strong> as fitted response increases, or as we move from left to right, as in Figure <a href="diag.html#fig:variance">5.9</a>(a), or</li>
+<li>vertical variation of residuals <strong>decreasing</strong> as fitted response increases, or as we move from left to right, as in Figure <a href="diag.html#fig:variance">5.9</a>(b).</li>
 </ul>
-<!-- Add figure here. resplot3.jpeg, resplot4.jpeg --><p>Note that increasing variance as fitted response increases is much more common with real data. Generally, larger values of a variable are associated with larger spread.</p>
+<div class="figure">
+<span style="display:block;" id="fig:variance"></span>
+<img src="images/variance.jpg" alt="Non Constant Variance in Residual Plot"><p class="caption">
+Figure 5.9: Non Constant Variance in Residual Plot
+</p>
+</div>
+<p>Note that increasing variance as fitted response increases is much more common with real data. Generally, larger values of a variable are associated with larger spread.</p>
 <p>We transform <span class="math inline">\(y\)</span> using <span class="math inline">\(y^{*} = y^{\lambda}\)</span>, with <span class="math inline">\(\lambda\)</span> chosen based on whether the variance of the residuals is increasing or decreasing with fitted response:</p>
 <ul>
-<li>For Figure <!-- inc -->, choose <span class="math inline">\(\lambda &lt; 1\)</span>.
+<li>For Figure <a href="diag.html#fig:variance">5.9</a>(a), choose <span class="math inline">\(\lambda &lt; 1\)</span>.
 <ul>
 <li>If <span class="math inline">\(\lambda = 0\)</span>, it means we use a logarithmic transformation with base e, i.e. <span class="math inline">\(y^* = \log(y)\)</span>.</li>
 <li>Note that a logarithm with no base means a natural log, or ln.</li>
 </ul>
 </li>
-<li>For Figure <!-- dec -->, choose <span class="math inline">\(\lambda &gt; 1\)</span>.</li>
+<li>For Figure <a href="diag.html#fig:variance">5.9</a>(b), choose <span class="math inline">\(\lambda &gt; 1\)</span>.</li>
 </ul>
 <p>So based on the residual plot, we have a range of values for <span class="math inline">\(\lambda\)</span>.</p>
 </div>
@@ -368,8 +387,13 @@ Figure 5.5: QQ Plot
 <h3>
 <span class="header-section-number">5.4.2</span> Box-Cox Plot<a class="anchor" aria-label="anchor" href="#box-cox-plot"><i class="fas fa-link"></i></a>
 </h3>
-<p>We can use a Box-Cox plot to help us narrow the range of <span class="math inline">\(\lambda\)</span> to use. It is a plot of the log-likelihood function against <span class="math inline">\(\lambda\)</span>, and we choose <span class="math inline">\(\lambda\)</span> that maximizes this log-likelihood function. For example, Figure <!-- bcplot --> shows the Box Cox plot generated for the regression associated with the residual plot in Figure <!-- dec -->.</p>
-<!-- Add figure here. boxcox.jpeg -->
+<p>We can use a Box-Cox plot to help us narrow the range of <span class="math inline">\(\lambda\)</span> to use. It is a plot of the log-likelihood function against <span class="math inline">\(\lambda\)</span>, and we choose <span class="math inline">\(\lambda\)</span> that maximizes this log-likelihood function. For example, Figure <a href="diag.html#fig:bcplot">5.10</a> shows the Box Cox plot generated for the regression associated with the residual plot in Figure <a href="diag.html#fig:variance">5.9</a>(b).</p>
+<div class="figure">
+<span style="display:block;" id="fig:bcplot"></span>
+<img src="images/bcplot.jpg" alt="Box-Cox Plot based on Figure 9(b)"><p class="caption">
+Figure 5.10: Box-Cox Plot based on Figure 9(b)
+</p>
+</div>
 <p>Notice an approximate 95% CI is provided for <span class="math inline">\(\lambda\)</span>. A few comments on how to use the Box-Cox plot:</p>
 <ul>
 <li>Three vertical dashed lines are displayed: the middle line corresponds to the optimal value of <span class="math inline">\(\lambda\)</span>; the other two lines are the lower and upper bounds of a 95% CI for <span class="math inline">\(\lambda\)</span>.</li>
@@ -402,8 +426,13 @@ Figure 5.5: QQ Plot
 <span class="header-section-number">5.5</span> Remedial Measures: Linearization Transformations<a class="anchor" aria-label="anchor" href="#remedial-measures-linearization-transformations"><i class="fas fa-link"></i></a>
 </h2>
 <p>We first ensure the variance has been stabilized and assumption 2 is met. If <span class="math inline">\(f(x)\)</span> does not accurately capture the relationship between the variables, we transform the predictor variable to meet assumption 1. Some writers call this a linearization transformation, as we seek to make the transformed version of the predictor variable, <span class="math inline">\(x^*\)</span>, to be approximately linear with the response variable (or transformed <span class="math inline">\(y\)</span>), i.e. <span class="math inline">\(y = \beta_0 + \beta_1 x^* + \epsilon\)</span>. We do not consider transforming the response variable to deal with assumption 1, as transforming the response variable is likely to reintroduce violation of assumption 2.</p>
-<p>The general strategy on how to transform the predictor is via a scatterplot of <span class="math inline">\(y\)</span> (or <span class="math inline">\(y^*\)</span>) against <span class="math inline">\(x\)</span>. We use the pattern seen in the plot to decide how to transform the predictor. Some examples are shown in Figure <!-- xstar --> below.</p>
-<!-- Add figure here. ylog.jpeg, yinv.jpeg, ysqrt.jpeg, y2.jpeg -->
+<p>The general strategy on how to transform the predictor is via a scatterplot of <span class="math inline">\(y\)</span> (or <span class="math inline">\(y^*\)</span>) against <span class="math inline">\(x\)</span>. We use the pattern seen in the plot to decide how to transform the predictor. Some examples are shown in Figure <a href="diag.html#fig:xstar">5.11</a> below.</p>
+<div class="figure">
+<span style="display:block;" id="fig:xstar"></span>
+<img src="images/xstar.jpg" alt="Transformations for x"><p class="caption">
+Figure 5.11: Transformations for x
+</p>
+</div>
 <div id="hierarchical-principle" class="section level3" number="5.5.1">
 <h3>
 <span class="header-section-number">5.5.1</span> Hierarchical Principle<a class="anchor" aria-label="anchor" href="#hierarchical-principle"><i class="fas fa-link"></i></a>
@@ -448,10 +477,248 @@ Figure 5.5: QQ Plot
 </ul>
 </div>
 </div>
+<div id="r-tutorial-2" class="section level2" number="5.6">
+<h2>
+<span class="header-section-number">5.6</span> R Tutorial<a class="anchor" aria-label="anchor" href="#r-tutorial-2"><i class="fas fa-link"></i></a>
+</h2>
+<div id="example-1" class="section level3" number="5.6.1">
+<h3>
+<span class="header-section-number">5.6.1</span> Example 1<a class="anchor" aria-label="anchor" href="#example-1"><i class="fas fa-link"></i></a>
+</h3>
+<p>The linear regression model involves several assumptions. Among them are:</p>
+<ol style="list-style-type: decimal">
+<li>The errors, for each fixed value of <span class="math inline">\(x\)</span>, have mean 0. This implies that the relationship as specified in the regression equation is appropriate.</li>
+<li>The errors, for each fixed value of <span class="math inline">\(x\)</span>, have constant variance. That is, the variation in the errors is theoretically the same regardless of the value of <span class="math inline">\(x\)</span> (or <span class="math inline">\(\hat{y}\)</span>).</li>
+<li>The errors are independent.</li>
+<li>The errors, for each fixed value of <span class="math inline">\(x\)</span>, follow a normal distribution.</li>
+</ol>
+<p>To assess assumptions 1 and 2, we can examine scatterplots of:</p>
+<ul>
+<li>
+<span class="math inline">\(y\)</span> versus <span class="math inline">\(x\)</span>.</li>
+<li>residuals versus fitted values, <span class="math inline">\(\hat{y}\)</span>.</li>
+</ul>
+<p>Assumption 3 is assessed based on knowledge of the data. An autocorrelation (ACF) plot of the residuals may also be used.</p>
+<p>Assumption 4 is assessed with a normal probability plot, and is considered the least crucial of the assumptions.</p>
+<p>We will see how to generate the relevant graphical displays to help us assess whether the assumptions are met, and if needed, carry out transformations on the variable(s) so the assumptions are met.</p>
+<p>For this tutorial, we will go over a dataset involving prices of used cars (Mazdas). The two variables are the sales price of the used car, and the age of the car in years. Download the data file, <code>mazda.txt</code> and read the data:</p>
+<div class="sourceCode" id="cb222"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">Data</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.table</a></span><span class="op">(</span><span class="st">"mazda.txt"</span>, header<span class="op">=</span><span class="cn">TRUE</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span></span></code></pre></div>
+<div id="model-diagnostics-with-scatterplots" class="section level4" number="5.6.1.1">
+<h4>
+<span class="header-section-number">5.6.1.1</span> Model Diagnostics with Scatterplots<a class="anchor" aria-label="anchor" href="#model-diagnostics-with-scatterplots"><i class="fas fa-link"></i></a>
+</h4>
+<p>We can use a scatterplot of the response variable against the predictor to assess assumptions 1 and 2:</p>
+<div class="sourceCode" id="cb223"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">##scatterplot, and overlay regression line</span></span>
+<span><span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">Data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">Age</span>,y<span class="op">=</span><span class="va">Price</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"lm"</span>, se<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x<span class="op">=</span><span class="st">"Age"</span>, y<span class="op">=</span><span class="st">"Sales Price"</span>, title<span class="op">=</span><span class="st">"Scatterplot of Sales Price against Age"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/unnamed-chunk-154-1.png" width="672"></div>
+<p>To assess assumption 1, the data points should be evenly scattered on both sides of the regression line, as we move from left to right. We do not see this in the scatterplot, so assumption 1 is not met. When age is between 0 and 2, the data points are mostly above the line. When age is between 5 and 11, the data points are mostly below the line, and when age is greater than 13, the data points are above the line.</p>
+<p>To assess assumption 2, the vertical spread of the data points should be constant as we move from left to right. The spread seems to be decreasing as we move from left to right (or in other words, the spread is increasing as the response increases), so assumption 2 is not met.</p>
+</div>
+<div id="model-diagnostics-with-residual-plots" class="section level4" number="5.6.1.2">
+<h4>
+<span class="header-section-number">5.6.1.2</span> Model Diagnostics with Residual Plots<a class="anchor" aria-label="anchor" href="#model-diagnostics-with-residual-plots"><i class="fas fa-link"></i></a>
+</h4>
+<p>Sometimes, a residual plot is easier to visualize than a scatterplot. We fit our SLR model using <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> as usual. Applying the <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> function to an object created with <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> actually produces a four diagnostic plots. To display the four diagnostic plots in a 2 by 2 array, we specify <code>par(mfrow = c(2, 2))</code> so the plotting window is split into a 2 by 2 array:</p>
+<div class="sourceCode" id="cb224"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">result</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Price</span><span class="op">~</span><span class="va">Age</span>, data<span class="op">=</span><span class="va">Data</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/unnamed-chunk-155-1.png" width="672"></div>
+<ul>
+<li><p>The first plot (top left) is the residual plot, with residuals on the y-axis and fitted values on the x-axis. The residual plot can be used to address assumptions 1 and 2. A red line is overlayed to represent the average value of the residuals for differing values along the x-axis. This line should be along the x-axis without any apparent curvature to indicate the form of our model is reasonable. This is not what we see, as we see a clear curved pattern. So assumption 1 is not met. For assumption 2, we want to see the vertical spread of the residuals to be fairly constant as we move from left to right. We do not see this in the residual plot; the vertical spread increases as we move from left to right, so assumption 2 is not met.</p></li>
+<li><p>The second plot (top right) is the normal probability plot (also called a QQ plot), and addresses assumption 4. If the residuals are normal, the residuals should fall along the 45 degree line. The regression model is fairly robust to this assumption though; the normality assumption is the least crucial of the four.</p></li>
+<li><p>The third plot (bottom left) is a plot of the square root of the absolute value of the standardized residuals against the fitted values (scale-location). This plot should be used to assess assumption 2, the constant variance assumption. A red line is overlayed to represent the average value on the vertical axis for differing values along the x-axis. If the variance is constant, the red line should be horizontal and the vertical spread of the plot should be constant. This plot should be used to assess assumption 2, if we have a small sample size. Otherwise, this plot should tell a similar story to the first plot (top left) when assessing assumption 2.</p></li>
+<li><p>The last plot (bottom right) is a plot to identify influential outliers. Data points that lie in the contour lines with large Cook’s distance are influential. None of our data points have Cook’s distance greater than 0.5. As a general rule of thumb, observations with Cook’s distance greater than 1 are flagged as influential. We will talk more about influential observations in a future module.</p></li>
+</ul>
+<p>Now that we know that both assumptions 1 and 2 are not met. We need to transform the response variable first, to stabilize the variance.</p>
+<p>Based on the residual plot, we see that the variance of the residuals increases as we move from left to right. So we know we need to transform the response variable using <span class="math inline">\(y^* = y^\lambda\)</span> with <span class="math inline">\(\lambda &lt; 1\)</span>. A log transform should be considered since we can still interpret regression coefficients.</p>
+</div>
+<div id="box-cox-transformation-on-y" class="section level4" number="5.6.1.3">
+<h4>
+<span class="header-section-number">5.6.1.3</span> Box Cox Transformation on y<a class="anchor" aria-label="anchor" href="#box-cox-transformation-on-y"><i class="fas fa-link"></i></a>
+</h4>
+<p>The Box Cox plot can be used to decide how to transform the response variable. The transformation takes the form <span class="math inline">\(y^* = y^{\lambda}\)</span>, with the value of <span class="math inline">\(\lambda\)</span> to be chosen. If <span class="math inline">\(\lambda = 0\)</span>, we perform a <span class="math inline">\(\log\)</span> transformation.</p>
+<p>We will use the <code><a href="https://rdrr.io/pkg/MASS/man/boxcox.html">boxcox()</a></code> function from the <code>MASS</code> package:</p>
+<div class="sourceCode" id="cb225"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://www.stats.ox.ac.uk/pub/MASS4/">MASS</a></span><span class="op">)</span> <span class="co">##to use boxcox function</span></span>
+<span><span class="fu">MASS</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/MASS/man/boxcox.html">boxcox</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/unnamed-chunk-156-1.png" width="672"></div>
+<p>We can “zoom in” on the plot to have a better idea about the value of <span class="math inline">\(\lambda\)</span> we can use, by specifying the range of <code>lambda</code> inside the function:</p>
+<div class="sourceCode" id="cb226"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">##adjust lambda for better visualization. Choose lambda between -0.5 and 0.5</span></span>
+<span><span class="fu">MASS</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/MASS/man/boxcox.html">boxcox</a></span><span class="op">(</span><span class="va">result</span>, lambda <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="fl">1</span><span class="op">/</span><span class="fl">10</span><span class="op">)</span><span class="op">)</span> </span></code></pre></div>
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/unnamed-chunk-157-1.png" width="672"></div>
+<p>We can choose any value of <span class="math inline">\(\lambda\)</span> within the CI. A log transformation is preferred if possible, since we can still interpret coefficients. Since 0 lies in the CI, we choose <span class="math inline">\(\lambda = 0\)</span>, to log transform the response variable to get <span class="math inline">\(y^* = \log(y)\)</span>. We regress <span class="math inline">\(y^*\)</span> against <span class="math inline">\(x\)</span>, and check the resulting residual plot:</p>
+<div class="sourceCode" id="cb227"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">##transform y and then regress ystar on x</span></span>
+<span><span class="va">ystar</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">Data</span><span class="op">$</span><span class="va">Price</span><span class="op">)</span></span>
+<span><span class="va">Data</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">Data</span>,<span class="va">ystar</span><span class="op">)</span></span>
+<span><span class="va">result.ystar</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">ystar</span><span class="op">~</span><span class="va">Age</span>, data<span class="op">=</span><span class="va">Data</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result.ystar</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/unnamed-chunk-158-1.png" width="672"></div>
+<p>We need to reassess assumptions 1 and 2 after the transformation.</p>
+<ul>
+<li><p>For assumption 2, we see that the vertical spread of the residuals in the residual plot (top left) is fairly constant, as we move from left to right. So assumption 2 is met. The log transformation worked.</p></li>
+<li><p>We also notice that the residuals are now evenly scattered across the horizontal axis in the residual plot (top left). So assumption 1 is now met.</p></li>
+</ul>
+<p>We do not need to perform any other transformations.</p>
+</div>
+<div id="interpreting-coefficients-with-log-transformed-response" class="section level4" number="5.6.1.4">
+<h4>
+<span class="header-section-number">5.6.1.4</span> Interpreting Coefficients with Log Transformed Response<a class="anchor" aria-label="anchor" href="#interpreting-coefficients-with-log-transformed-response"><i class="fas fa-link"></i></a>
+</h4>
+<p>So our regression equation is</p>
+<div class="sourceCode" id="cb228"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">result.ystar</span></span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = ystar ~ Age, data = Data)
+## 
+## Coefficients:
+## (Intercept)          Age  
+##     10.1878      -0.1647</code></pre>
+<p><span class="math inline">\(\hat{y^*} = 10.1878 - 0.1647x\)</span>, where <span class="math inline">\(y^* = \log(y)\)</span>. To interpret the slope:</p>
+<ul>
+<li>The price of used Mazdas is multiplied by <span class="math inline">\(\exp(-0.1647) = 0.8481481\)</span> for each year older the car is.</li>
+<li>The price of used Mazdas decreases by <span class="math inline">\((1 - 0.8481481) \times 100\)</span> percent, or 15.18519 percent, for each year older the car is.</li>
+</ul>
+</div>
+<div id="acf-plot-of-residuals" class="section level4" number="5.6.1.5">
+<h4>
+<span class="header-section-number">5.6.1.5</span> ACF Plot of Residuals<a class="anchor" aria-label="anchor" href="#acf-plot-of-residuals"><i class="fas fa-link"></i></a>
+</h4>
+<p>We have yet to assess the assumption that the observed prices are independent from each other. Assuming that these prices are from different cars and not the same car measured repeatedly over time, there is no reason to think the prices are dependent on each other.</p>
+<p>We an also produce an ACF plot to confirm our thought:</p>
+<div class="sourceCode" id="cb230"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/acf.html">acf</a></span><span class="op">(</span><span class="va">result.ystar</span><span class="op">$</span><span class="va">residuals</span>, main<span class="op">=</span><span class="st">"ACF Plot of Residuals with ystar"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/unnamed-chunk-160-1.png" width="672"></div>
+<p>None of the ACFs beyond lag 0 are significant, so we don’t have evidence that the observations are dependent on each other.</p>
+</div>
+</div>
+<div id="example-2" class="section level3" number="5.6.2">
+<h3>
+<span class="header-section-number">5.6.2</span> Example 2<a class="anchor" aria-label="anchor" href="#example-2"><i class="fas fa-link"></i></a>
+</h3>
+<p>For this second example, we will go over an example for the <code>faraway</code> package. The dataframe is called <code>gala</code>. The data are about species diversity on the Galapagos Islands. There are 30 islands, and for each island, we have data on 7 variables. We will focus on the variable <code>Species</code>, which denotes the number of plant species found on the island, and <code>Area</code>, the area of the island in squared kilometers. We wish to see how the number of plant species of an island is related to the area of the island.</p>
+<div class="sourceCode" id="cb231"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/julianfaraway/faraway">faraway</a></span><span class="op">)</span></span>
+<span><span class="va">Data</span><span class="op">&lt;-</span><span class="fu">faraway</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/faraway/man/gala.html">gala</a></span></span></code></pre></div>
+<div id="model-diagnostics-with-scatterplots-1" class="section level4" number="5.6.2.1">
+<h4>
+<span class="header-section-number">5.6.2.1</span> Model Diagnostics with Scatterplots<a class="anchor" aria-label="anchor" href="#model-diagnostics-with-scatterplots-1"><i class="fas fa-link"></i></a>
+</h4>
+<p>We can use a scatterplot of the response variable against the predictor to assess assumptions 1 and 2.</p>
+<div class="sourceCode" id="cb232"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">##scatterplot, and overlay regression line</span></span>
+<span><span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">Data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">Area</span>,y<span class="op">=</span><span class="va">Species</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"lm"</span>, se<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x<span class="op">=</span><span class="st">"Area of Island (sq km)"</span>, y<span class="op">=</span><span class="st">"# of Plant Species"</span>, </span>
+<span>       title<span class="op">=</span><span class="st">"Scatterplot of Number of Plant Species against Area of Galapagos Island"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/unnamed-chunk-163-1.png" width="672"></div>
+<p>To assess assumption 1, the data points should be evenly scattered on both sides of the regression line, as we move from left to right. This plot looks nonlinear.</p>
+<p>To assess assumption 2, the vertical spread of the data points should be constant as we move from left to right. This can be a bit difficult to assess with this scatterplot, although observations with small areas are closer to the line, which suggests the assumption is not met.</p>
+</div>
+<div id="model-diagnostics-with-residual-plots-1" class="section level4" number="5.6.2.2">
+<h4>
+<span class="header-section-number">5.6.2.2</span> Model Diagnostics with Residual Plots<a class="anchor" aria-label="anchor" href="#model-diagnostics-with-residual-plots-1"><i class="fas fa-link"></i></a>
+</h4>
+<p>Fairly often, when assessing regression assumptions, a residual plot is easier to visualize than a scatterplot.</p>
+<div class="sourceCode" id="cb233"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">result</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Species</span><span class="op">~</span><span class="va">Area</span>, data<span class="op">=</span><span class="va">Data</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/unnamed-chunk-164-1.png" width="672"></div>
+<ul>
+<li><p>From the residual plot (top left), we see a curved pattern, so we have a nonlinear relationship. Assumption 1 is not met.</p></li>
+<li><p>From the scale-location plot (bottom left), the vertical variance of the plots appear to be higher for islands with larger fitted valies, so assumption 2 is not met.</p></li>
+</ul>
+<p>Now that we know that both assumptions 1 and 2 are not met. We need to transform the response variable first, to stabilize the variance.</p>
+</div>
+<div id="box-cox-transformation-on-y-1" class="section level4" number="5.6.2.3">
+<h4>
+<span class="header-section-number">5.6.2.3</span> Box Cox Transformation on y<a class="anchor" aria-label="anchor" href="#box-cox-transformation-on-y-1"><i class="fas fa-link"></i></a>
+</h4>
+<p>From the scale-location plot, we see the variance of the residuals is increasing, so we expect to transform the response variable with <span class="math inline">\(y^* = y^{\lambda}\)</span> with <span class="math inline">\(\lambda &lt; 1\)</span>. So see which specific value of <span class="math inline">\(\lambda\)</span> to use, we can use the Box Cox plot:</p>
+<div class="sourceCode" id="cb234"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://www.stats.ox.ac.uk/pub/MASS4/">MASS</a></span><span class="op">)</span></span>
+<span><span class="fu">MASS</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/MASS/man/boxcox.html">boxcox</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/unnamed-chunk-165-1.png" width="672"></div>
+<p>A log transformation is preferred if possible, since we can still interpret coefficients. Since 0 lies in the CI, we choose <span class="math inline">\(\lambda = 0\)</span>, to log transform the response variable to get <span class="math inline">\(y^* = \log(y)\)</span>. We regress <span class="math inline">\(y^*\)</span> against <span class="math inline">\(x\)</span>, and check the resulting residual plot:</p>
+<div class="sourceCode" id="cb235"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">##log transform response and add to dataframe</span></span>
+<span><span class="va">Data</span><span class="op">$</span><span class="va">y.star</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">Data</span><span class="op">$</span><span class="va">Species</span><span class="op">)</span></span>
+<span><span class="co">##perform new regression</span></span>
+<span><span class="va">result.ystar</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">y.star</span><span class="op">~</span><span class="va">Area</span>, data<span class="op">=</span><span class="va">Data</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result.ystar</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/unnamed-chunk-166-1.png" width="672"></div>
+<p>We need to reassess assumptions 1 and 2 after the transformation.</p>
+<ul>
+<li><p>For assumption 2, we see that the vertical spread of the residuals in the residual plot (top left) is fairly constant, as we move from left to right. So assumption 2 is met. The log transformation worked in stabilizing the variance.</p></li>
+<li><p>However, the residual plot still appears to be nonlinear. So assumption 1 is still not met.</p></li>
+</ul>
+</div>
+<div id="transformation-on-x" class="section level4" number="5.6.2.4">
+<h4>
+<span class="header-section-number">5.6.2.4</span> Transformation on x<a class="anchor" aria-label="anchor" href="#transformation-on-x"><i class="fas fa-link"></i></a>
+</h4>
+<p>To see which specific transformation on the predictor to use, we create a scatterplot of the transformed response and the predictor.</p>
+<div class="sourceCode" id="cb236"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">Data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">Area</span>,y<span class="op">=</span><span class="va">y.star</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"lm"</span>, se<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x<span class="op">=</span><span class="st">"Area of Island (sq km)"</span>, y<span class="op">=</span><span class="st">"Log # of Plant Species"</span>, </span>
+<span>       title<span class="op">=</span><span class="st">"Scatterplot of Log Number of Plant Species against Area of Galapagos Island"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/unnamed-chunk-167-1.png" width="672"></div>
+<p>This plot resembles a logarithmic curve, so we use a log transformation on the predictor, so let <span class="math inline">\(x^{*} = \log(x)\)</span>. As usual, a log transformation is preferred since we can still interpret the regression coefficients. We then perform a regression using both the log transformed response variable and predictor, and assess the diagnostic plots.</p>
+<div class="sourceCode" id="cb237"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">##log transform predictor and add to dataframe</span></span>
+<span><span class="va">Data</span><span class="op">$</span><span class="va">x.star</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">Data</span><span class="op">$</span><span class="va">Area</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">##perform new regression</span></span>
+<span><span class="va">result.xystar</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">y.star</span><span class="op">~</span><span class="va">x.star</span>, data<span class="op">=</span><span class="va">Data</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result.xystar</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/unnamed-chunk-168-1.png" width="672"></div>
+<p>Based on the residual plot (top left), both assumptions are met. The residuals are evenly scattered across the horizontal axis with no pattern. The vertical spread of the residuals is also constant. So the transformations worked.</p>
+</div>
+<div id="interpreting-coefficients-with-log-transformed-response-and-predictor" class="section level4" number="5.6.2.5">
+<h4>
+<span class="header-section-number">5.6.2.5</span> Interpreting Coefficients with Log Transformed Response and Predictor<a class="anchor" aria-label="anchor" href="#interpreting-coefficients-with-log-transformed-response-and-predictor"><i class="fas fa-link"></i></a>
+</h4>
+<p>So our regression equation is</p>
+<div class="sourceCode" id="cb238"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">result.xystar</span></span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = y.star ~ x.star, data = Data)
+## 
+## Coefficients:
+## (Intercept)       x.star  
+##      2.9037       0.3886</code></pre>
+<p><span class="math inline">\(\hat{y^*} = 2.9037 + 0.3886x^{*}\)</span>, where <span class="math inline">\(y^* = \log(y)\)</span> and <span class="math inline">\(x^* = \log(x)\)</span>. There are a couple of ways to interpret the slope:</p>
+<ul>
+<li><p>For a 1% increase in the area of a Galapagos island, the number of plant species found on the island is multiplied by <span class="math inline">\((1.01)^{0.3886} = 1.003874\)</span>, OR</p></li>
+<li><p>For a 1% increase in the area of a Galapagos island, the number of plant species increases by about 0.3886%.</p></li>
+</ul>
+</div>
+</div>
+</div>
 </div>
   <div class="chapter-nav">
 <div class="prev"><a href="inf.html"><span class="header-section-number">4</span> Inference with Simple Linear Regression (SLR)</a></div>
-<div class="next"><a href="try.html"><span class="header-section-number">6</span> TABLE</a></div>
+<div class="next"><a href="intro.html"><span class="header-section-number">6</span> Introduction</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
@@ -489,6 +756,12 @@ Figure 5.5: QQ Plot
 <li><a class="nav-link" href="#some-general-comments-about-assessing-assumptions-and-transformations"><span class="header-section-number">5.5.4</span> Some General Comments about Assessing Assumptions and Transformations</a></li>
 </ul>
 </li>
+<li>
+<a class="nav-link" href="#r-tutorial-2"><span class="header-section-number">5.6</span> R Tutorial</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#example-1"><span class="header-section-number">5.6.1</span> Example 1</a></li>
+<li><a class="nav-link" href="#example-2"><span class="header-section-number">5.6.2</span> Example 2</a></li>
+</ul>
+</li>
 </ul>
 
       <div class="book-extra">
@@ -505,7 +778,7 @@ Figure 5.5: QQ Plot
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Linear Models for Data Science</strong>" was written by Jeffrey Woo. It was last built on 2024-07-10.</p>
+    <p>"<strong>Linear Models for Data Science</strong>" was written by Jeffrey Woo. It was last built on 2024-07-11.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

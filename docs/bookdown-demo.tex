@@ -127,7 +127,7 @@
 
 \title{Linear Models for Data Science}
 \author{Jeffrey Woo}
-\date{2024-07-10}
+\date{2024-07-11}
 
 \begin{document}
 \maketitle
@@ -3895,9 +3895,15 @@ Let's dig a little deeper into the meaning and implications of these 4 assumptio
 
 For each value of the predictor, the errors have \textbf{mean 0}. A by-product of this statement is that the relationship between \(y\) and \(x\), as expressed via \(y \approx f(x)\), is correct. So, if \(f(x) = \beta_0 + \beta_1 x\), then the relationship is approximately linear.
 
-The plots in Figure are based on simulated data. The scatterplot shown in Figure is an example of when this assumption is met. As we move from left to right on the plot, the data points are generally evenly scattered on both sides of the regression line that is overlaid.
+The plots in Figure \ref{fig:ass1} are based on simulated data. The scatterplot shown in Figure \ref{fig:ass1}(a) is an example of when this assumption is met. As we move from left to right on the plot, the data points are generally evenly scattered on both sides of the regression line that is overlaid.
 
-The scatterplot shown in Figure is an example of when this assumption is \textbf{not} met. As we move from left to right on the plot in Figure , the data points are generally not evenly scattered on both sides of the regression line that is overlaid.
+\begin{figure}
+\centering
+\includegraphics{images/ass1.jpg}
+\caption{\label{fig:ass1}Assumption 1}
+\end{figure}
+
+The scatterplot shown in Figure \ref{fig:ass1}(b) is an example of when this assumption is \textbf{not} met. As we move from left to right on the plot in Figure \ref{fig:ass1}(b), the data points are generally not evenly scattered on both sides of the regression line that is overlaid.
 
 \begin{itemize}
 \tightlist
@@ -3909,14 +3915,14 @@ The scatterplot shown in Figure is an example of when this assumption is \textbf
   and then when \(x \geq 1\), the data points are generally above the regression line.
 \end{itemize}
 
-\emph{Please see the associated video for more explanation on how to use Figure to assess assumption 1.}
+\emph{Please see the associated video for more explanation on how to use Figure \ref{fig:ass1} to assess assumption 1.}
 
 \hypertarget{consequences-of-violating-this-assumption}{%
 \subsubsection{Consequences of violating this assumption}\label{consequences-of-violating-this-assumption}}
 
 \textbf{Predictions will be biased}. This means that predicted values will systematically over- or under- estimate the true values of the response variable. Of the 4 assumptions listed, this is \textbf{most crucial assumption}.
 
-Using Figure as an example, this implies that
+Using Figure \ref{fig:ass1}(b) as an example, this implies that
 
 \begin{itemize}
 \tightlist
@@ -3933,18 +3939,24 @@ Using Figure as an example, this implies that
 
 For each value of the predictor, the error terms have \textbf{constant variance}, denoted by \(\sigma^2\). This implies that when looking at a scatterplot, the vertical variation of data points around the regression equation has the same magnitude everywhere.
 
-The plots in Figure are based on simulated data. The scatterplot shown in Figure is an example of when this assumption is met (this figure is actually the same as Figure , so the data that produced these plots satisfy both assumptions). As we move from left to right on the plot, the vertical variation of the data points about the regression line is approximately constant.
+The plots in Figure \ref{fig:ass2} are based on simulated data. The scatterplot shown in Figure \ref{fig:ass2}(a) is an example of when this assumption is met (this figure is actually the same as Figure \ref{fig:ass1}(a), so the data that produced these plots satisfy both assumptions). As we move from left to right on the plot, the vertical variation of the data points about the regression line is approximately constant.
 
-The scatterplot shown in Figure is an example of when this assumption is \textbf{not} met. As we move from left to right on the plot in Figure , the vertical variation of the data points about the regression line becomes larger as the value of the response variable gets larger, so the variance is not constant.
+\begin{figure}
+\centering
+\includegraphics{images/ass2.jpg}
+\caption{\label{fig:ass2}Assumption 2}
+\end{figure}
 
-\emph{Please see the associated video for more explanation on how to use Figure to assess assumption 2.}
+The scatterplot shown in Figure \ref{fig:ass2}(b) is an example of when this assumption is \textbf{not} met. As we move from left to right on the plot in Figure \ref{fig:ass2}(b), the vertical variation of the data points about the regression line becomes larger as the value of the response variable gets larger, so the variance is not constant.
+
+\emph{Please see the associated video for more explanation on how to use Figure \ref{fig:ass2} to assess assumption 2.}
 
 \hypertarget{consequences-of-violating-this-assumption-1}{%
 \subsubsection{Consequences of violating this assumption}\label{consequences-of-violating-this-assumption-1}}
 
 \textbf{Statistical inference will no longer be reliable.} This means that the results from any hypothesis test, confidence interval, or prediction interval are no longer reliable.
 
-Interestingly, for the scatterplot in Figure , we can say that assumption 1 is met, since the the data points are generally evenly scattered on both sides of the regression line. Predictions will still be unbiased; the predicted response, \(\hat{y}\), do not systematically over- or under-predict the response variable. So if our goal is to assess if the relationship is approximately linear, this scatterplot is fine. We do lose the utility from hypothesis tests, CIs, and PIs.
+Interestingly, for the scatterplot in Figure \ref{fig:ass2}(b), we can say that assumption 1 is met, since the the data points are generally evenly scattered on both sides of the regression line. Predictions will still be unbiased; the predicted response, \(\hat{y}\), do not systematically over- or under-predict the response variable. So if our goal is to assess if the relationship is approximately linear, this scatterplot is fine. We do lose the utility from hypothesis tests, CIs, and PIs.
 
 \hypertarget{assumption-3-errors-are-independent}{%
 \subsection{Assumption 3: Errors are independent}\label{assumption-3-errors-are-independent}}
@@ -3998,7 +4010,7 @@ We can examine the scatterplot of \(y\) against \(x\) to check for assumptions 1
   Vertical variation of data points constant (assumption 2).
 \end{itemize}
 
-We have used Figure as an example of a scatterplot that meets these assumptions. Let us take a look at another example that we have worked with. This scatterplot is from the \texttt{elmhurst} dataset from the \texttt{openintro} package that we have been seeing in tutorials. We are regressing the amount of gift aid a student receives based on the student's family income. The corresponding scatterplot is shown in in Figure \ref{fig:elmhurst}.
+We have used Figure \ref{fig:ass2}(a) as an example of a scatterplot that meets these assumptions. Let us take a look at another example that we have worked with. This scatterplot is from the \texttt{elmhurst} dataset from the \texttt{openintro} package that we have been seeing in tutorials. We are regressing the amount of gift aid a student receives based on the student's family income. The corresponding scatterplot is shown in in Figure \ref{fig:elmhurst}.
 
 \begin{figure}
 \centering
@@ -4034,48 +4046,48 @@ While using the scatterplot is an intuitive way of assessing regression assumpti
   Some writers combine these two points into the following statement: the residuals should fall in a \textbf{horizontal band around 0} with no apparent pattern (assumption 1, 2).
 \end{itemize}
 
-The residual plots in Figure are based on simulated data from Figures , , and .
+The residual plots in Figure \ref{fig:resplots} are based on simulated data from Figures \ref{fig:ass1}(a), \ref{fig:ass1}(b), and \ref{fig:ass2}(b).
+
+\begin{figure}
+\centering
+\includegraphics{images/resplots.jpg}
+\caption{\label{fig:resplots}Residual Plots from Fig 1(a), 1(b), 2(b) Respectively}
+\end{figure}
 
 We make the following observations:
-- From Figure , we see that the residuals are evenly scattered across the horizontal axis, and their vertical variation is fairly constant across the plot. So both assumptions are met.
-- From Figure , we see that the residuals are \textbf{not} evenly scattered across the horizontal axis, although their vertical variation is fairly constant across the plot. So only assumption 1 is not met.
-- From Figure , we see that the residuals are evenly scattered across the horizontal axis, but their vertical variation is \textbf{not constant} across the plot. In fact, the vertical variation is increasing as we move from left to right. So only assumption 2 is not met.
+
+\begin{itemize}
+\tightlist
+\item
+  From Figure \ref{fig:resplots}(a), we see that the residuals are evenly scattered across the horizontal axis, and their vertical variation is fairly constant across the plot. So both assumptions are met.
+\item
+  From Figure \ref{fig:resplots}(b), we see that the residuals are \textbf{not} evenly scattered across the horizontal axis, although their vertical variation is fairly constant across the plot. So only assumption 1 is not met.
+\item
+  From Figure \ref{fig:resplots}(c), we see that the residuals are evenly scattered across the horizontal axis, but their vertical variation is \textbf{not constant} across the plot. In fact, the vertical variation is increasing as we move from left to right. So only assumption 2 is not met.
+\end{itemize}
 
 If you compare the conclusions from the residuals plots and scatterplots, they are the same. In SLR, the takeaways should be consistent.
 
-\emph{Please see the associated video for more explanation on how to use Figure to assess assumptions 1 and 2.}
+\emph{Please see the associated video for more explanation on how to use Figure \ref{fig:resplots} to assess assumptions 1 and 2.}
 
 \hypertarget{practice-questions-2}{%
 \subsubsection{Practice questions}\label{practice-questions-2}}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
-\tightlist
 \item
-  The residual plot in Figure \ref{fig:elmhurst-res} comes from regressing gift aid against family income for the \texttt{elmhurst} dataset. Based on this residual plot, which assumptions are met?
-\end{enumerate}
-
-\begin{figure}
-\centering
-\includegraphics{bookdown-demo_files/figure-latex/elmhurst-res-1.pdf}
-\caption{\label{fig:elmhurst-res}Residual Plot Regressing Gift Aid Against Family Income}
-\end{figure}
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\setcounter{enumi}{1}
-\tightlist
+  The residual plot in Figure \ref{fig:practice}(a) comes from regressing gift aid against family income for the \texttt{elmhurst} dataset. Based on this residual plot, which assumptions are met?
 \item
-  The residual plot in Figure \ref{fig:mazda-res} comes from regressing price of cars against age for the used cars dataset. Based on this residual plot, which assumptions are met?
+  The residual plot in Figure \ref{fig:practice}(b) comes from regressing price of cars against age for the used cars dataset. Based on this residual plot, which assumptions are met?
 \end{enumerate}
-
-\begin{figure}
-\centering
-\includegraphics{bookdown-demo_files/figure-latex/mazda-res-1.pdf}
-\caption{\label{fig:mazda-res}Residual Plot Regressing Price Against Age for Used Cars}
-\end{figure}
 
 \emph{Please see the associated video as I go over these practice questions.}
+
+\begin{figure}
+\centering
+\includegraphics{images/practice.jpg}
+\caption{\label{fig:practice}Residual Plots for Practice Questions}
+\end{figure}
 
 \hypertarget{acf-plot}{%
 \subsection{ACF plot}\label{acf-plot}}
@@ -4093,7 +4105,13 @@ An autocorrelation function (ACF) plot of the residuals may be a used to help as
 
 The ACF plot measures the correlation between a vector of observations and the lagged versions of the observations. If the observations are uncorrelated, the correlations between the vector of observations and lagged versions of these observations are theoretically 0. We may create an ACF plot for the residuals from our regression.
 
-The ACF plot in Figure and is based on simulated data that were independently generated.
+The ACF plot in Figure \ref{fig:ass3}(a) and is based on simulated data that were independently generated.
+
+\begin{figure}
+\centering
+\includegraphics{images/ass3.jpg}
+\caption{\label{fig:ass3}Assumption 3}
+\end{figure}
 
 A few notes about the ACF plot:
 
@@ -4107,9 +4125,9 @@ A few notes about the ACF plot:
   If the observed values for the response variable are independent, then we would expect the ACFs at lags greater than 0 to be insignificant. Do note that because we are conducting multiple hypothesis tests, do not be too alarmed if the ACFs are slightly beyond the critical values at an isolated lag or 2.
 \end{itemize}
 
-Based on Figure , we see that the ACFs at all lags greater than 0 are insignificant. We do not have evidence the residuals are correlated with each other, so we do not have evidence that assumption 3 is not met.
+Based on Figure \ref{fig:ass3}(a), we see that the ACFs at all lags greater than 0 are insignificant. We do not have evidence the residuals are correlated with each other, so we do not have evidence that assumption 3 is not met.
 
-Sometimes, the dataframe can be sorted in some manner (e.g.~increasing order for response variable), and if so, we would actually expect to see significant correlations in the ACF plot. The ACF plot in Figure is such an example. The residuals are from the same simulated dataset, only with the data sorted by the response variable. If we had just looked at the ACF plot in Figure without understanding the data were simulated independently and then sorted, we would have erroneously concluded that the residuals are not independent and the regression assumption is not met.
+Sometimes, the dataframe can be sorted in some manner (e.g.~increasing order for response variable), and if so, we would actually expect to see significant correlations in the ACF plot. The ACF plot in Figure \ref{fig:ass3}(b) is such an example. The residuals are from the same simulated dataset, only with the data sorted by the response variable. If we had just looked at the ACF plot in Figure \ref{fig:ass3}(b) without understanding the data were simulated independently and then sorted, we would have erroneously concluded that the residuals are not independent and the regression assumption is not met.
 
 \hypertarget{qq-plot}{%
 \subsection{QQ plot}\label{qq-plot}}
@@ -4181,10 +4199,16 @@ We can stabilize the variance of the errors based on the residual plot, if we se
 \begin{itemize}
 \tightlist
 \item
-  vertical variation of residuals \textbf{increasing} as fitted response increases, or as we move from left to right, as in Figure , or
+  vertical variation of residuals \textbf{increasing} as fitted response increases, or as we move from left to right, as in Figure \ref{fig:variance}(a), or
 \item
-  vertical variation of residuals \textbf{decreasing} as fitted response increases, or as we move from left to right, as in Figure .
+  vertical variation of residuals \textbf{decreasing} as fitted response increases, or as we move from left to right, as in Figure \ref{fig:variance}(b).
 \end{itemize}
+
+\begin{figure}
+\centering
+\includegraphics{images/variance.jpg}
+\caption{\label{fig:variance}Non Constant Variance in Residual Plot}
+\end{figure}
 
 Note that increasing variance as fitted response increases is much more common with real data. Generally, larger values of a variable are associated with larger spread.
 
@@ -4193,7 +4217,7 @@ We transform \(y\) using \(y^{*} = y^{\lambda}\), with \(\lambda\) chosen based 
 \begin{itemize}
 \tightlist
 \item
-  For Figure , choose \(\lambda < 1\).
+  For Figure \ref{fig:variance}(a), choose \(\lambda < 1\).
 
   \begin{itemize}
   \tightlist
@@ -4203,7 +4227,7 @@ We transform \(y\) using \(y^{*} = y^{\lambda}\), with \(\lambda\) chosen based 
     Note that a logarithm with no base means a natural log, or ln.
   \end{itemize}
 \item
-  For Figure , choose \(\lambda > 1\).
+  For Figure \ref{fig:variance}(b), choose \(\lambda > 1\).
 \end{itemize}
 
 So based on the residual plot, we have a range of values for \(\lambda\).
@@ -4211,7 +4235,13 @@ So based on the residual plot, we have a range of values for \(\lambda\).
 \hypertarget{box-cox-plot}{%
 \subsection{Box-Cox Plot}\label{box-cox-plot}}
 
-We can use a Box-Cox plot to help us narrow the range of \(\lambda\) to use. It is a plot of the log-likelihood function against \(\lambda\), and we choose \(\lambda\) that maximizes this log-likelihood function. For example, Figure shows the Box Cox plot generated for the regression associated with the residual plot in Figure .
+We can use a Box-Cox plot to help us narrow the range of \(\lambda\) to use. It is a plot of the log-likelihood function against \(\lambda\), and we choose \(\lambda\) that maximizes this log-likelihood function. For example, Figure \ref{fig:bcplot} shows the Box Cox plot generated for the regression associated with the residual plot in Figure \ref{fig:variance}(b).
+
+\begin{figure}
+\centering
+\includegraphics{images/bcplot.jpg}
+\caption{\label{fig:bcplot}Box-Cox Plot based on Figure 9(b)}
+\end{figure}
 
 Notice an approximate 95\% CI is provided for \(\lambda\). A few comments on how to use the Box-Cox plot:
 
@@ -4259,7 +4289,13 @@ A log transformation on the response is preferred over any other transformation,
 
 We first ensure the variance has been stabilized and assumption 2 is met. If \(f(x)\) does not accurately capture the relationship between the variables, we transform the predictor variable to meet assumption 1. Some writers call this a linearization transformation, as we seek to make the transformed version of the predictor variable, \(x^*\), to be approximately linear with the response variable (or transformed \(y\)), i.e.~\(y = \beta_0 + \beta_1 x^* + \epsilon\). We do not consider transforming the response variable to deal with assumption 1, as transforming the response variable is likely to reintroduce violation of assumption 2.
 
-The general strategy on how to transform the predictor is via a scatterplot of \(y\) (or \(y^*\)) against \(x\). We use the pattern seen in the plot to decide how to transform the predictor. Some examples are shown in Figure below.
+The general strategy on how to transform the predictor is via a scatterplot of \(y\) (or \(y^*\)) against \(x\). We use the pattern seen in the plot to decide how to transform the predictor. Some examples are shown in Figure \ref{fig:xstar} below.
+
+\begin{figure}
+\centering
+\includegraphics{images/xstar.jpg}
+\caption{\label{fig:xstar}Transformations for x}
+\end{figure}
 
 \hypertarget{hierarchical-principle}{%
 \subsection{Hierarchical Principle}\label{hierarchical-principle}}
@@ -4313,38 +4349,367 @@ If both response and predictor variables are log transformed, the regression coe
   Solve assumption 2 first, then assumption 1.
 \end{itemize}
 
-\hypertarget{try}{%
-\chapter{TABLE}\label{try}}
+\hypertarget{r-tutorial-2}{%
+\section{R Tutorial}\label{r-tutorial-2}}
 
-\hypertarget{introduction-5}{%
-\section{Introduction}\label{introduction-5}}
+\hypertarget{example-1}{%
+\subsection{Example 1}\label{example-1}}
 
-\begin{longtable}[]{@{}
-  >{\centering\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.2353}}
-  >{\centering\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.2941}}
-  >{\centering\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.1569}}
-  >{\centering\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.1569}}
-  >{\centering\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.1569}}@{}}
-\toprule\noalign{}
-\begin{minipage}[b]{\linewidth}\centering
-Source of Variation
-\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
-SS
-\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
-df
-\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
-MS
-\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
-F
-\end{minipage} \\
-\midrule\noalign{}
-\endhead
-\bottomrule\noalign{}
-\endlastfoot
-Regression & \(SS_R=\sum\left(\hat{y_i}-\bar{y}\right)^2\) & \(df_R = 1\) & \(MS_R=\frac{SS_R}{df_R}\) & \(\frac{MS_R}{MS_{res}}\) \\
-Error & \(SS_{res} = \sum\left(y_i-\hat{y_i}\right)^2\) & \(df_{res} = n-2\) & \(MS_{res}=\frac{SS_{res}}{df_{res}}\) & \texttt{***} \\
-Total & \(SS_T=\sum\left(y_i-\bar{y}\right)^2\) & \(df_T = n-1\) & \texttt{***} & \texttt{***} \\
-\end{longtable}
+The linear regression model involves several assumptions. Among them are:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  The errors, for each fixed value of \(x\), have mean 0. This implies that the relationship as specified in the regression equation is appropriate.
+\item
+  The errors, for each fixed value of \(x\), have constant variance. That is, the variation in the errors is theoretically the same regardless of the value of \(x\) (or \(\hat{y}\)).
+\item
+  The errors are independent.
+\item
+  The errors, for each fixed value of \(x\), follow a normal distribution.
+\end{enumerate}
+
+To assess assumptions 1 and 2, we can examine scatterplots of:
+
+\begin{itemize}
+\tightlist
+\item
+  \(y\) versus \(x\).
+\item
+  residuals versus fitted values, \(\hat{y}\).
+\end{itemize}
+
+Assumption 3 is assessed based on knowledge of the data. An autocorrelation (ACF) plot of the residuals may also be used.
+
+Assumption 4 is assessed with a normal probability plot, and is considered the least crucial of the assumptions.
+
+We will see how to generate the relevant graphical displays to help us assess whether the assumptions are met, and if needed, carry out transformations on the variable(s) so the assumptions are met.
+
+For this tutorial, we will go over a dataset involving prices of used cars (Mazdas). The two variables are the sales price of the used car, and the age of the car in years. Download the data file, \texttt{mazda.txt} and read the data:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Data}\OtherTok{\textless{}{-}}\FunctionTok{read.table}\NormalTok{(}\StringTok{"mazda.txt"}\NormalTok{, }\AttributeTok{header=}\ConstantTok{TRUE}\NormalTok{, }\AttributeTok{sep=}\StringTok{""}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{model-diagnostics-with-scatterplots}{%
+\subsubsection{Model Diagnostics with Scatterplots}\label{model-diagnostics-with-scatterplots}}
+
+We can use a scatterplot of the response variable against the predictor to assess assumptions 1 and 2:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(tidyverse)}
+
+\DocumentationTok{\#\#scatterplot, and overlay regression line}
+\NormalTok{ggplot2}\SpecialCharTok{::}\FunctionTok{ggplot}\NormalTok{(Data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{Age,}\AttributeTok{y=}\NormalTok{Price))}\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{()}\SpecialCharTok{+}
+  \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{method =} \StringTok{"lm"}\NormalTok{, }\AttributeTok{se=}\ConstantTok{FALSE}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x=}\StringTok{"Age"}\NormalTok{, }\AttributeTok{y=}\StringTok{"Sales Price"}\NormalTok{, }\AttributeTok{title=}\StringTok{"Scatterplot of Sales Price against Age"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-154-1.pdf}
+
+To assess assumption 1, the data points should be evenly scattered on both sides of the regression line, as we move from left to right. We do not see this in the scatterplot, so assumption 1 is not met. When age is between 0 and 2, the data points are mostly above the line. When age is between 5 and 11, the data points are mostly below the line, and when age is greater than 13, the data points are above the line.
+
+To assess assumption 2, the vertical spread of the data points should be constant as we move from left to right. The spread seems to be decreasing as we move from left to right (or in other words, the spread is increasing as the response increases), so assumption 2 is not met.
+
+\hypertarget{model-diagnostics-with-residual-plots}{%
+\subsubsection{Model Diagnostics with Residual Plots}\label{model-diagnostics-with-residual-plots}}
+
+Sometimes, a residual plot is easier to visualize than a scatterplot. We fit our SLR model using \texttt{lm()} as usual. Applying the \texttt{plot()} function to an object created with \texttt{lm()} actually produces a four diagnostic plots. To display the four diagnostic plots in a 2 by 2 array, we specify \texttt{par(mfrow\ =\ c(2,\ 2))} so the plotting window is split into a 2 by 2 array:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{result}\OtherTok{\textless{}{-}}\FunctionTok{lm}\NormalTok{(Price}\SpecialCharTok{\textasciitilde{}}\NormalTok{Age, }\AttributeTok{data=}\NormalTok{Data)}
+\FunctionTok{par}\NormalTok{(}\AttributeTok{mfrow =} \FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{))}
+\FunctionTok{plot}\NormalTok{(result)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-155-1.pdf}
+
+\begin{itemize}
+\item
+  The first plot (top left) is the residual plot, with residuals on the y-axis and fitted values on the x-axis. The residual plot can be used to address assumptions 1 and 2. A red line is overlayed to represent the average value of the residuals for differing values along the x-axis. This line should be along the x-axis without any apparent curvature to indicate the form of our model is reasonable. This is not what we see, as we see a clear curved pattern. So assumption 1 is not met. For assumption 2, we want to see the vertical spread of the residuals to be fairly constant as we move from left to right. We do not see this in the residual plot; the vertical spread increases as we move from left to right, so assumption 2 is not met.
+\item
+  The second plot (top right) is the normal probability plot (also called a QQ plot), and addresses assumption 4. If the residuals are normal, the residuals should fall along the 45 degree line. The regression model is fairly robust to this assumption though; the normality assumption is the least crucial of the four.
+\item
+  The third plot (bottom left) is a plot of the square root of the absolute value of the standardized residuals against the fitted values (scale-location). This plot should be used to assess assumption 2, the constant variance assumption. A red line is overlayed to represent the average value on the vertical axis for differing values along the x-axis. If the variance is constant, the red line should be horizontal and the vertical spread of the plot should be constant. This plot should be used to assess assumption 2, if we have a small sample size. Otherwise, this plot should tell a similar story to the first plot (top left) when assessing assumption 2.
+\item
+  The last plot (bottom right) is a plot to identify influential outliers. Data points that lie in the contour lines with large Cook's distance are influential. None of our data points have Cook's distance greater than 0.5. As a general rule of thumb, observations with Cook's distance greater than 1 are flagged as influential. We will talk more about influential observations in a future module.
+\end{itemize}
+
+Now that we know that both assumptions 1 and 2 are not met. We need to transform the response variable first, to stabilize the variance.
+
+Based on the residual plot, we see that the variance of the residuals increases as we move from left to right. So we know we need to transform the response variable using \(y^* = y^\lambda\) with \(\lambda < 1\). A log transform should be considered since we can still interpret regression coefficients.
+
+\hypertarget{box-cox-transformation-on-y}{%
+\subsubsection{Box Cox Transformation on y}\label{box-cox-transformation-on-y}}
+
+The Box Cox plot can be used to decide how to transform the response variable. The transformation takes the form \(y^* = y^{\lambda}\), with the value of \(\lambda\) to be chosen. If \(\lambda = 0\), we perform a \(\log\) transformation.
+
+We will use the \texttt{boxcox()} function from the \texttt{MASS} package:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(MASS) }\DocumentationTok{\#\#to use boxcox function}
+\NormalTok{MASS}\SpecialCharTok{::}\FunctionTok{boxcox}\NormalTok{(result)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-156-1.pdf}
+
+We can ``zoom in'' on the plot to have a better idea about the value of \(\lambda\) we can use, by specifying the range of \texttt{lambda} inside the function:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#adjust lambda for better visualization. Choose lambda between {-}0.5 and 0.5}
+\NormalTok{MASS}\SpecialCharTok{::}\FunctionTok{boxcox}\NormalTok{(result, }\AttributeTok{lambda =} \FunctionTok{seq}\NormalTok{(}\SpecialCharTok{{-}}\FloatTok{0.5}\NormalTok{, }\FloatTok{0.5}\NormalTok{, }\DecValTok{1}\SpecialCharTok{/}\DecValTok{10}\NormalTok{)) }
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-157-1.pdf}
+
+We can choose any value of \(\lambda\) within the CI. A log transformation is preferred if possible, since we can still interpret coefficients. Since 0 lies in the CI, we choose \(\lambda = 0\), to log transform the response variable to get \(y^* = \log(y)\). We regress \(y^*\) against \(x\), and check the resulting residual plot:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#transform y and then regress ystar on x}
+\NormalTok{ystar}\OtherTok{\textless{}{-}}\FunctionTok{log}\NormalTok{(Data}\SpecialCharTok{$}\NormalTok{Price)}
+\NormalTok{Data}\OtherTok{\textless{}{-}}\FunctionTok{data.frame}\NormalTok{(Data,ystar)}
+\NormalTok{result.ystar}\OtherTok{\textless{}{-}}\FunctionTok{lm}\NormalTok{(ystar}\SpecialCharTok{\textasciitilde{}}\NormalTok{Age, }\AttributeTok{data=}\NormalTok{Data)}
+\FunctionTok{par}\NormalTok{(}\AttributeTok{mfrow =} \FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{))}
+\FunctionTok{plot}\NormalTok{(result.ystar)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-158-1.pdf}
+
+We need to reassess assumptions 1 and 2 after the transformation.
+
+\begin{itemize}
+\item
+  For assumption 2, we see that the vertical spread of the residuals in the residual plot (top left) is fairly constant, as we move from left to right. So assumption 2 is met. The log transformation worked.
+\item
+  We also notice that the residuals are now evenly scattered across the horizontal axis in the residual plot (top left). So assumption 1 is now met.
+\end{itemize}
+
+We do not need to perform any other transformations.
+
+\hypertarget{interpreting-coefficients-with-log-transformed-response}{%
+\subsubsection{Interpreting Coefficients with Log Transformed Response}\label{interpreting-coefficients-with-log-transformed-response}}
+
+So our regression equation is
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{result.ystar}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = ystar ~ Age, data = Data)
+## 
+## Coefficients:
+## (Intercept)          Age  
+##     10.1878      -0.1647
+\end{verbatim}
+
+\(\hat{y^*} = 10.1878 - 0.1647x\), where \(y^* = \log(y)\). To interpret the slope:
+
+\begin{itemize}
+\tightlist
+\item
+  The price of used Mazdas is multiplied by \(\exp(-0.1647) = 0.8481481\) for each year older the car is.
+\item
+  The price of used Mazdas decreases by \((1 - 0.8481481) \times 100\) percent, or 15.18519 percent, for each year older the car is.
+\end{itemize}
+
+\hypertarget{acf-plot-of-residuals}{%
+\subsubsection{ACF Plot of Residuals}\label{acf-plot-of-residuals}}
+
+We have yet to assess the assumption that the observed prices are independent from each other. Assuming that these prices are from different cars and not the same car measured repeatedly over time, there is no reason to think the prices are dependent on each other.
+
+We an also produce an ACF plot to confirm our thought:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{acf}\NormalTok{(result.ystar}\SpecialCharTok{$}\NormalTok{residuals, }\AttributeTok{main=}\StringTok{"ACF Plot of Residuals with ystar"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-160-1.pdf}
+
+None of the ACFs beyond lag 0 are significant, so we don't have evidence that the observations are dependent on each other.
+
+\hypertarget{example-2}{%
+\subsection{Example 2}\label{example-2}}
+
+For this second example, we will go over an example for the \texttt{faraway} package. The dataframe is called \texttt{gala}. The data are about species diversity on the Galapagos Islands. There are 30 islands, and for each island, we have data on 7 variables. We will focus on the variable \texttt{Species}, which denotes the number of plant species found on the island, and \texttt{Area}, the area of the island in squared kilometers. We wish to see how the number of plant species of an island is related to the area of the island.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(faraway)}
+\NormalTok{Data}\OtherTok{\textless{}{-}}\NormalTok{faraway}\SpecialCharTok{::}\NormalTok{gala}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{model-diagnostics-with-scatterplots-1}{%
+\subsubsection{Model Diagnostics with Scatterplots}\label{model-diagnostics-with-scatterplots-1}}
+
+We can use a scatterplot of the response variable against the predictor to assess assumptions 1 and 2.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(tidyverse)}
+
+\DocumentationTok{\#\#scatterplot, and overlay regression line}
+\NormalTok{ggplot2}\SpecialCharTok{::}\FunctionTok{ggplot}\NormalTok{(Data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{Area,}\AttributeTok{y=}\NormalTok{Species))}\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{()}\SpecialCharTok{+}
+  \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{method =} \StringTok{"lm"}\NormalTok{, }\AttributeTok{se=}\ConstantTok{FALSE}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x=}\StringTok{"Area of Island (sq km)"}\NormalTok{, }\AttributeTok{y=}\StringTok{"\# of Plant Species"}\NormalTok{, }
+       \AttributeTok{title=}\StringTok{"Scatterplot of Number of Plant Species against Area of Galapagos Island"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-163-1.pdf}
+
+To assess assumption 1, the data points should be evenly scattered on both sides of the regression line, as we move from left to right. This plot looks nonlinear.
+
+To assess assumption 2, the vertical spread of the data points should be constant as we move from left to right. This can be a bit difficult to assess with this scatterplot, although observations with small areas are closer to the line, which suggests the assumption is not met.
+
+\hypertarget{model-diagnostics-with-residual-plots-1}{%
+\subsubsection{Model Diagnostics with Residual Plots}\label{model-diagnostics-with-residual-plots-1}}
+
+Fairly often, when assessing regression assumptions, a residual plot is easier to visualize than a scatterplot.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{result}\OtherTok{\textless{}{-}}\FunctionTok{lm}\NormalTok{(Species}\SpecialCharTok{\textasciitilde{}}\NormalTok{Area, }\AttributeTok{data=}\NormalTok{Data)}
+\FunctionTok{par}\NormalTok{(}\AttributeTok{mfrow =} \FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{))}
+\FunctionTok{plot}\NormalTok{(result)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-164-1.pdf}
+
+\begin{itemize}
+\item
+  From the residual plot (top left), we see a curved pattern, so we have a nonlinear relationship. Assumption 1 is not met.
+\item
+  From the scale-location plot (bottom left), the vertical variance of the plots appear to be higher for islands with larger fitted valies, so assumption 2 is not met.
+\end{itemize}
+
+Now that we know that both assumptions 1 and 2 are not met. We need to transform the response variable first, to stabilize the variance.
+
+\hypertarget{box-cox-transformation-on-y-1}{%
+\subsubsection{Box Cox Transformation on y}\label{box-cox-transformation-on-y-1}}
+
+From the scale-location plot, we see the variance of the residuals is increasing, so we expect to transform the response variable with \(y^* = y^{\lambda}\) with \(\lambda < 1\). So see which specific value of \(\lambda\) to use, we can use the Box Cox plot:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(MASS)}
+\NormalTok{MASS}\SpecialCharTok{::}\FunctionTok{boxcox}\NormalTok{(result)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-165-1.pdf}
+
+A log transformation is preferred if possible, since we can still interpret coefficients. Since 0 lies in the CI, we choose \(\lambda = 0\), to log transform the response variable to get \(y^* = \log(y)\). We regress \(y^*\) against \(x\), and check the resulting residual plot:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#log transform response and add to dataframe}
+\NormalTok{Data}\SpecialCharTok{$}\NormalTok{y.star}\OtherTok{\textless{}{-}}\FunctionTok{log}\NormalTok{(Data}\SpecialCharTok{$}\NormalTok{Species)}
+\DocumentationTok{\#\#perform new regression}
+\NormalTok{result.ystar}\OtherTok{\textless{}{-}}\FunctionTok{lm}\NormalTok{(y.star}\SpecialCharTok{\textasciitilde{}}\NormalTok{Area, }\AttributeTok{data=}\NormalTok{Data)}
+\FunctionTok{par}\NormalTok{(}\AttributeTok{mfrow =} \FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{))}
+\FunctionTok{plot}\NormalTok{(result.ystar)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-166-1.pdf}
+
+We need to reassess assumptions 1 and 2 after the transformation.
+
+\begin{itemize}
+\item
+  For assumption 2, we see that the vertical spread of the residuals in the residual plot (top left) is fairly constant, as we move from left to right. So assumption 2 is met. The log transformation worked in stabilizing the variance.
+\item
+  However, the residual plot still appears to be nonlinear. So assumption 1 is still not met.
+\end{itemize}
+
+\hypertarget{transformation-on-x}{%
+\subsubsection{Transformation on x}\label{transformation-on-x}}
+
+To see which specific transformation on the predictor to use, we create a scatterplot of the transformed response and the predictor.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ggplot2}\SpecialCharTok{::}\FunctionTok{ggplot}\NormalTok{(Data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{Area,}\AttributeTok{y=}\NormalTok{y.star))}\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{()}\SpecialCharTok{+}
+  \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{method =} \StringTok{"lm"}\NormalTok{, }\AttributeTok{se=}\ConstantTok{FALSE}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x=}\StringTok{"Area of Island (sq km)"}\NormalTok{, }\AttributeTok{y=}\StringTok{"Log \# of Plant Species"}\NormalTok{, }
+       \AttributeTok{title=}\StringTok{"Scatterplot of Log Number of Plant Species against Area of Galapagos Island"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-167-1.pdf}
+
+This plot resembles a logarithmic curve, so we use a log transformation on the predictor, so let \(x^{*} = \log(x)\). As usual, a log transformation is preferred since we can still interpret the regression coefficients. We then perform a regression using both the log transformed response variable and predictor, and assess the diagnostic plots.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#log transform predictor and add to dataframe}
+\NormalTok{Data}\SpecialCharTok{$}\NormalTok{x.star}\OtherTok{\textless{}{-}}\FunctionTok{log}\NormalTok{(Data}\SpecialCharTok{$}\NormalTok{Area)}
+
+\DocumentationTok{\#\#perform new regression}
+\NormalTok{result.xystar}\OtherTok{\textless{}{-}}\FunctionTok{lm}\NormalTok{(y.star}\SpecialCharTok{\textasciitilde{}}\NormalTok{x.star, }\AttributeTok{data=}\NormalTok{Data)}
+\FunctionTok{par}\NormalTok{(}\AttributeTok{mfrow =} \FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{))}
+\FunctionTok{plot}\NormalTok{(result.xystar)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-168-1.pdf}
+
+Based on the residual plot (top left), both assumptions are met. The residuals are evenly scattered across the horizontal axis with no pattern. The vertical spread of the residuals is also constant. So the transformations worked.
+
+\hypertarget{interpreting-coefficients-with-log-transformed-response-and-predictor}{%
+\subsubsection{Interpreting Coefficients with Log Transformed Response and Predictor}\label{interpreting-coefficients-with-log-transformed-response-and-predictor}}
+
+So our regression equation is
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{result.xystar}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = y.star ~ x.star, data = Data)
+## 
+## Coefficients:
+## (Intercept)       x.star  
+##      2.9037       0.3886
+\end{verbatim}
+
+\(\hat{y^*} = 2.9037 + 0.3886x^{*}\), where \(y^* = \log(y)\) and \(x^* = \log(x)\). There are a couple of ways to interpret the slope:
+
+\begin{itemize}
+\item
+  For a 1\% increase in the area of a Galapagos island, the number of plant species found on the island is multiplied by \((1.01)^{0.3886} = 1.003874\), OR
+\item
+  For a 1\% increase in the area of a Galapagos island, the number of plant species increases by about 0.3886\%.
+\end{itemize}
 
 \hypertarget{intro}{%
 \chapter{Introduction}\label{intro}}
