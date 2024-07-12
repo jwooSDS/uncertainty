@@ -127,7 +127,7 @@
 
 \title{Linear Models for Data Science}
 \author{Jeffrey Woo}
-\date{2024-07-11}
+\date{2024-07-12}
 
 \begin{document}
 \maketitle
@@ -4943,7 +4943,7 @@ The estimated MLR equation is \(\hat{y} = -57.9877 + 4.7082x_1 + 0.3393x_2\). Th
 
 How should we visualize an MLR equation? Suppose we have two predictor variables, \(x_1\) and \(x_2\), with MLR equation \(E(y|x_1,x_2) = 2 + 5x_1 + 5x_2\). A \textbf{contour plot} can be used to visualize a response variable with two predictors:
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-173-1.pdf}
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-174-1.pdf}
 
 The contour plot creates an axis for each predictor. The value of the response variable is denoted by the contour lines with the actual value displayed on the line. In this toy example, \(\beta_1 = 5\). This means that if we hold \(x_2\) constant (e.g.~set \(x_2 = 1\) per the red horizontal line), increasing \(x_1\) by 1 unit increases the mean of \(y\) by 5 units.
 
@@ -5377,7 +5377,7 @@ A scatterplot matrix is useful to create scatterplots involving more than two qu
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-179-1.pdf}
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-180-1.pdf}
 
 A few pieces of information are presented in the output. Notice the output is displayed in a matrix format.
 
@@ -5525,6 +5525,958 @@ You might realize by now we are using the same functions as we did in SLR.
 
 \textbf{Note}: Obviously, all these calculations are performed and interpreted assuming the regression assumptions are met. Regression assumptions are checked in the same way as in SLR. On your own, as practice, assess the regression assumptions.
 
+\hypertarget{F}{%
+\chapter{\texorpdfstring{General Linear \(F\) Test and Multicollinearity}{General Linear F Test and Multicollinearity}}\label{F}}
+
+\hypertarget{introduction-6}{%
+\section{Introduction}\label{introduction-6}}
+
+The purpose of multiple linear regression is to use more than one predictor to predict a response variable. This modules explores an approach to choosing which variables to include in a multiple regression model. For example, many variables can be used to predict someone's systolic blood pressure, such as their age, weight, height, and pulse rate. While all of those predictors are likely to influence the systolic blood pressure, we want to know if we need all of them, or if a subset of those predictors will perform just as well. We will use the general linear \(F\) test to do so.
+
+Another issue with having multiple predictors is that the likelihood that at least one of the predictors are linearly dependent, or correlated, with some other predictors increases. This is called multicollinearity. There are some negative consequences if multicollinearity is present. We will learn about these consequences, how to diagnose the presence of multicollinearity, and some solutions if multicollinearity is present.
+
+\hypertarget{the-general-linear-f-test}{%
+\section{\texorpdfstring{The General Linear \(F\) Test}{The General Linear F Test}}\label{the-general-linear-f-test}}
+
+\hypertarget{motivation-1}{%
+\subsection{Motivation}\label{motivation-1}}
+
+In the previous module, we noted the limitation of the \(t\) test and ANOVA \(F\) test in MLR:
+
+\begin{itemize}
+\tightlist
+\item
+  We can \textbf{only drop 1 predictor} based on a \(t\) test.
+\item
+  We can \textbf{drop all predictors} based on an ANOVA \(F\) test.
+\end{itemize}
+
+What if we wish to drop more than 1 predictor simultaneously, but not all, from the model? We will explore this via the \textbf{general linear \(F\) test}. In fact, the \(t\) test and ANOVA \(F\) test are actually special cases of the general linear \(F\) test.
+
+Let us look at a motivating example, using the dataset \texttt{Peruvian.txt}. The data contains variables relating to blood pressures of Peruvians who have migrated from rural high altitude areas to urban lower altitude areas. The variables are:
+
+\begin{itemize}
+\tightlist
+\item
+  \(y\): Systolic blood pressure
+\item
+  \(x_1\): Age
+\item
+  \(x_2\): Years in urban area
+\item
+  \(x_3\): fraction of life in urban area \((x_1/x_2)\)
+\item
+  \(x_4\): Weight in kg
+\item
+  \(x_5\): Height in mm
+\item
+  \(x_6\): Chin skinfold
+\item
+  \(x_7\): Forearm skinfold
+\item
+  \(x_8\): Calf skinfold
+\item
+  \(x_9\): Resting pulse rate
+\end{itemize}
+
+We want to assess how the systolic blood pressure of these migrants may be predicted and related to these predictors.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Data}\OtherTok{\textless{}{-}}\FunctionTok{read.table}\NormalTok{(}\StringTok{"Peruvian.txt"}\NormalTok{, }\AttributeTok{header=}\ConstantTok{TRUE}\NormalTok{,}\AttributeTok{sep=}\StringTok{""}\NormalTok{)}
+\FunctionTok{head}\NormalTok{(Data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   Systol_BP Age Years fraclife Weight Height Chin Forearm Calf Pulse
+## 1       170  21     1 0.047619   71.0   1629  8.0     7.0 12.7    88
+## 2       120  22     6 0.272727   56.5   1569  3.3     5.0  8.0    64
+## 3       125  24     5 0.208333   56.0   1561  3.3     1.3  4.3    68
+## 4       148  24     1 0.041667   61.0   1619  3.7     3.0  4.3    52
+## 5       140  25     1 0.040000   65.0   1566  9.0    12.7 20.7    72
+## 6       106  27    19 0.703704   62.0   1639  3.0     3.3  5.7    72
+\end{verbatim}
+
+Let us fit an MLR with all the predictors and take a look at the \(t\) tests and ANOVA \(F\) test:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{result}\OtherTok{\textless{}{-}}\FunctionTok{lm}\NormalTok{(Systol\_BP}\SpecialCharTok{\textasciitilde{}}\NormalTok{., }\AttributeTok{data=}\NormalTok{Data)}
+\FunctionTok{summary}\NormalTok{(result)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = Systol_BP ~ ., data = Data)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -12.3443  -6.3972   0.0507   5.7293  14.5257 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)  146.81883   48.97099   2.998 0.005526 ** 
+## Age           -1.12143    0.32741  -3.425 0.001855 ** 
+## Years          2.45538    0.81458   3.014 0.005306 ** 
+## fraclife    -115.29384   30.16903  -3.822 0.000648 ***
+## Weight         1.41393    0.43097   3.281 0.002697 ** 
+## Height        -0.03464    0.03686  -0.940 0.355196    
+## Chin          -0.94369    0.74097  -1.274 0.212923    
+## Forearm       -1.17085    1.19330  -0.981 0.334613    
+## Calf          -0.15867    0.53716  -0.295 0.769809    
+## Pulse          0.11455    0.17043   0.672 0.506822    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 8.655 on 29 degrees of freedom
+## Multiple R-squared:  0.6674, Adjusted R-squared:  0.5641 
+## F-statistic: 6.465 on 9 and 29 DF,  p-value: 5.241e-05
+\end{verbatim}
+
+Notice the \(t\) tests are insignificant for a lot of the coefficients (the last five). Individually, each \(t\) test is informing us that we can drop that specific predictor, while leaving the other predictors in the model.
+
+An erroneous interpretation is to say collectively, these \(t\) tests inform us we can drop all of these predictors, \(x_5\) to \(x_9\), from the model. This is a misconception.
+
+One idea could be to drop the most insignificant predictor, refit the model, and reassess which predictors are insignificant, and continue dropping the most insignificant predictor and refitting the model until all \(t\) tests are significant. We will end up conducting multiple hypothesis tests to do so. If possible, we should limit the number of hypothesis tests we conduct: the more tests we do, the likelihood of us wrongly rejecting a null hypothesis increases.
+
+This is where the \textbf{general linear \(F\) test} (sometimes called a partial \(F\) test) is used. We can perform one test to assess if we can simultaneously drop multiple predictors from the model.
+
+Based on this output, we consider dropping \(x_5, x_6, x_7, x_8, x_9\) since their \(t\) tests are insignificant.
+
+\hypertarget{setting-up-the-general-linear-f-test}{%
+\subsection{\texorpdfstring{Setting up the general linear \(F\) test}{Setting up the general linear F test}}\label{setting-up-the-general-linear-f-test}}
+
+The general linear \(F\) test allows us to assess if multiple predictors can be dropped simultaneously from the model. The associated F statistic measures the change in the \(SS_R\) (or \(SS_{res}\)) with the removal of these predictors from the model. The test is based on the following concepts:
+
+\begin{itemize}
+\tightlist
+\item
+  As long as we have the same response variable, \textbf{\(SS_T\) is constant}, regardless of the model. This is because \(SS_T = \sum(y_i - \bar{y})\). It only involves the response variable.
+\item
+  \(SS_T = SS_R + SS_{Res}\).
+\item
+  Each time predictors are added to the model, the \(SS_R\) increases and the \(SS_{Res}\) decreases \textbf{by the same amount}, since \(SS_T\) stays constant.
+\end{itemize}
+
+The general linear \(F\) test answers the question: is the change in \(SS_R\) (or change in \(SS_{res}\)) significant with the removal or addition of predictor(s)?
+
+This question can be answered in a framework that compares two models:
+
+\begin{itemize}
+\tightlist
+\item
+  a \textbf{full model}, denoted by \(F\), that uses all predictors under consideration,
+\item
+  a \textbf{reduced model}, denoted by \(R\), that results if some predictors from the full model are dropped.
+\end{itemize}
+
+\hypertarget{hypothesis-statements-1}{%
+\subsection{Hypothesis statements}\label{hypothesis-statements-1}}
+
+Based on this framework, the null and alternative hypotheses for the \texttt{Peruvian.txt} dataset is
+
+\[
+H_0: \beta_5 = \beta_6 = \beta_7 = \beta_8 = \beta_9 = 0, H_a: \text{ at least one coeff in } H_0 \text{ is not zero}.
+\]
+
+In general, the null hypothesis states that the \textbf{parameters of the terms that we wish to drop are all 0.} Therefore, the null hypothesis supports the reduced model, R.
+
+The alternative hypothesis states that we cannot drop all the terms that we wish to drop. Therefore, the alternative hypothesis supports the full model, F.
+
+\hypertarget{test-statistic}{%
+\subsection{Test statistic}\label{test-statistic}}
+
+The associated test statistic for the general linear \(F\) test is
+
+\begin{equation} 
+F_0=\frac{[SS_R(F)-SS_R(R)]/r}{SS_{res}(F)/(n-p)},
+\label{eq:7ssr}
+\end{equation}
+
+\textbf{or equivalently}
+
+\begin{equation} 
+F_0=\frac{[SS_{res}(R)-SS_{res}(F)]/r}{SS_{res}(F)/(n-p)}.
+\label{eq:7sse}
+\end{equation}
+
+The test statistic \(F_0\) is compared with an \(F_{r,n-p}\) distribution. The notation is as follows:
+
+\begin{itemize}
+\tightlist
+\item
+  \(SS_R(F)\) denotes the \(SS_R\) of full model,
+\item
+  \(SS_R(R)\) denotes the \(SS_R\) of reduced model,
+\item
+  \(r\) denotes number of parameters being dropped/tested,
+\item
+  \(p\) denotes the number of parameters in the full model,
+\item
+  \(SS_{res}(F)\) denotes the \(SS_{res}\) of full model,
+\item
+  \(SS_{res}(R)\) denotes the \(SS_{res}\) of reduced model.
+\end{itemize}
+
+Note that the change in \(SS_R\), \(SS_R(F)-SS_R(R)\) is always equal to the change in \(SS_{res}\), \(SS_{res}(R)-SS_{res}(F)\). Therefore, \eqref{eq:7ssr} is always equal to \eqref{eq:7sse}.
+
+\hypertarget{worked-example}{%
+\subsection{Worked example}\label{worked-example}}
+
+Let us look at some output for our \texttt{Peruvian.txt} dataset:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{reduced}\OtherTok{\textless{}{-}}\FunctionTok{lm}\NormalTok{(Systol\_BP}\SpecialCharTok{\textasciitilde{}}\NormalTok{Age}\SpecialCharTok{+}\NormalTok{Years}\SpecialCharTok{+}\NormalTok{fraclife}\SpecialCharTok{+}\NormalTok{Weight, }\AttributeTok{data=}\NormalTok{Data)}
+\FunctionTok{anova}\NormalTok{(reduced,result)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Analysis of Variance Table
+## 
+## Model 1: Systol_BP ~ Age + Years + fraclife + Weight
+## Model 2: Systol_BP ~ Age + Years + fraclife + Weight + Height + Chin + 
+##     Forearm + Calf + Pulse
+##   Res.Df    RSS Df Sum of Sq      F Pr(>F)
+## 1     34 2629.7                           
+## 2     29 2172.6  5    457.12 1.2204 0.3247
+\end{verbatim}
+
+\begin{itemize}
+\item
+  In the output, model 1 has the predictors are \(x_1, x_2, x_3, x_4\), while model 2 has the predictors \(x_1, \cdots, x_9\). So model 1 is the reduced model, and model 2 is the full model.
+\item
+  We see some information presented in a table. The first line corresponds to model 1, the second line corresponds to model 2.
+\item
+  Under the column \texttt{RSS}, we have the values for \(SS_{res}\). Admittedly, this can be a bit confusing, but it is not \(SS_R\). So we can see that \(SS_{res}(R) = 2629.7\) and \(SS_{res}(F) = 2172.6\). Note that \(SS_{res}\) is always smaller for the full model, and \(SS_R\) is always larger for the full model.
+\item
+  Under the column \texttt{Res.DF}, we have the degrees of freedom for the \(SS_{res}\) of that model. In the calculation of the \(F\) statistic, we want the value associated with the full model, 29.
+\item
+  Under the column \texttt{Df}, we have the number of parameters that we are testing to drop, which is 5.
+\item
+  Under the column \texttt{Sum\ of\ Sq}, we have the difference in \(SS_{res}\) between both models, \(SS_{res}(R) - SS_{res}(F) = 2629.7 - 2172.6 = 457.12\).
+\item
+  Under the column \texttt{F}, we have the F statistic, \(F_0 = 1.2204\). We can verify this calculation using \eqref{eq:7sse}, \(F_0 = \frac{(2629.7 - 2172.6)/5}{2172.6/29}\) (with some rounding).
+\item
+  The p-value of this general linear \(F\) test is reported in the last column. This can be found using:
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{1}\SpecialCharTok{{-}}\FunctionTok{pf}\NormalTok{(}\FloatTok{1.2204}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{29}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.3247085
+\end{verbatim}
+
+The critical value can be found using:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{qf}\NormalTok{(}\DecValTok{1}\FloatTok{{-}0.05}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{29}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2.545386
+\end{verbatim}
+
+So we fail to reject the null hypothesis. The data do not support the alternative hypothesis (i.e.~the full model). So we go with the reduced model.
+
+\hypertarget{comparison-of-general-linear-f-test-with-other-hypothesis-tests-in-mlr}{%
+\subsection{\texorpdfstring{Comparison of general linear \(F\) test with other hypothesis tests in MLR}{Comparison of general linear F test with other hypothesis tests in MLR}}\label{comparison-of-general-linear-f-test-with-other-hypothesis-tests-in-mlr}}
+
+The \(t\) test and ANOVA \(F\) test in MLR are special cases of the general linear \(F\) test, when \(r=1\) and \(r=p-1\) respectively.
+
+\begin{itemize}
+\item
+  For the \(t\) test, the reduced model has 1 less term than the full model. The \(F_0\) statistic is compared with an \(F_{1,n-p}\) distribution. It turns out that an \(F_{1,n-p}\) distribution is directly related with a \(t_{n-p}\) distribution, and so the general linear \(F\) test is exactly the same as the \(t\) test when dropping 1 term.
+\item
+  For the ANOVA \(F\) test. The reduced model drops all the terms and has only the intercept. Some call this the intercept-only model.
+\end{itemize}
+
+\hypertarget{alternative-approach-to-general-linear-f-test}{%
+\subsection{\texorpdfstring{Alternative approach to general linear \(F\) test}{Alternative approach to general linear F test}}\label{alternative-approach-to-general-linear-f-test}}
+
+There is another way in which the information needed to perform a general linear \(F\) test. This approach is called the \textbf{sequential sums of squares} (sometimes called extra sums of squares). It works on the same principle that every time a predictor is added to the model, the \(SS_R\) of the model increases, and the \(SS_{res}\) decreases by the same amount, since \(SS_T\) is constant. The information is displayed as we add one predictor at a time. Let us define some notation:
+
+\begin{itemize}
+\tightlist
+\item
+  \(SS_R(x_1)\) denotes \(SS_R\) when \(x_1\) is the only predictor in the model.
+\item
+  \(SS_R(x_1, x_2)\) denotes \(SS_R\) when \(x_1, x_2\) are in the model.
+\item
+  \(SS_R(x_2|x_1)\) denotes the increase in \(SS_R\) when \(x_2\) is added to the model with \(x_1\) already in it. It is read as \(SS_R\) of \(x_2\) given \(x_1\).
+\end{itemize}
+
+Based on this example, \(SS_R(x_2|x_1) = SS_R(x_1, x_2) - SS_R(x_1)\), and so \(SS_R(x_1, x_2) = SS_R(x_1) + SS_R(x_2|x_1)\). Note that \(SS_R(x_2|x_1)\) is not equal to \(SS_R(x_2)\), as the latter denotes \(SS_R\) when \(x_2\) is the only predictor in the model.
+
+Let us see how we can use the sequential sums of squares with the \texttt{Peruvian.txt} dataset:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{anova}\NormalTok{(result)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Analysis of Variance Table
+## 
+## Response: Systol_BP
+##           Df  Sum Sq Mean Sq F value    Pr(>F)    
+## Age        1    0.22    0.22  0.0030  0.956852    
+## Years      1   82.55   82.55  1.1019  0.302514    
+## fraclife   1 3112.40 3112.40 41.5448 4.728e-07 ***
+## Weight     1  706.55  706.55  9.4311  0.004603 ** 
+## Height     1    1.68    1.68  0.0224  0.882113    
+## Chin       1  297.68  297.68  3.9735  0.055703 .  
+## Forearm    1  113.91  113.91  1.5205  0.227440    
+## Calf       1   10.01   10.01  0.1336  0.717419    
+## Pulse      1   33.84   33.84  0.4518  0.506822    
+## Residuals 29 2172.59   74.92                      
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+\end{verbatim}
+
+The values under the column ``Sum Sq'' give the sequential \(SS_{R}\)s. So,
+
+\begin{itemize}
+\tightlist
+\item
+  for the first line, we have \(SS_{R}(x_1) = 0.22\),
+\item
+  the second line, we have \(SS_{R}(x_2|x_1) = 82.55\),
+\item
+  then \(SS_{R}(x_3|x_1, x_2) = 3112.40\),
+\item
+  and so on for each term,
+\item
+  finally, \(SS_{R}(x_9|x_1, x_2, \cdots, x_8) = 33.84\).
+\item
+  The very last line refers to \(SS_{Res}(x_1, x_2, \cdots, x_9) = 2172.59\).
+\end{itemize}
+
+Essentially, the output for each term informs us the increase in \(SS_R\) when that term is added to the model, given that the previously listed terms are already in the model.
+
+Notice the order the sequential sums of squares are displayed is the same order used when entering the predictors in \texttt{lm()}.
+
+We are still testing
+
+\[
+H_0: \beta_5 = \beta_6 = \beta_7 = \beta_8 = \beta_9 = 0, H_a: \text{ at least one coeff in } H_0 \text{ is not zero}.
+\]
+
+Using \eqref{eq:7ssr}, the F statistic for this test is
+
+\(\begin{aligned} F_0 &= \frac{[SS_R(F)-SS_R(R)]/r}{SS_{res}(F)/(n-p)} \\  &= \frac{(1.68+297.68+113.91+10.01+33.84)/5}{2172.59/29}\\  &= 1.220339. \end{aligned}\)
+
+Compare this \(F_0\) statistic using this approach with the example shown in Section 2.5. We have the exact same result (other than rounding).
+
+\emph{Please view the associated video for more explanation on the extra sums of squares approach.}
+
+\hypertarget{practice-questions-3}{%
+\subsubsection{Practice questions}\label{practice-questions-3}}
+
+We will use the sequential sums of squares for the \texttt{Peruvian.txt} dataset:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{anova}\NormalTok{(result)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Analysis of Variance Table
+## 
+## Response: Systol_BP
+##           Df  Sum Sq Mean Sq F value    Pr(>F)    
+## Age        1    0.22    0.22  0.0030  0.956852    
+## Years      1   82.55   82.55  1.1019  0.302514    
+## fraclife   1 3112.40 3112.40 41.5448 4.728e-07 ***
+## Weight     1  706.55  706.55  9.4311  0.004603 ** 
+## Height     1    1.68    1.68  0.0224  0.882113    
+## Chin       1  297.68  297.68  3.9735  0.055703 .  
+## Forearm    1  113.91  113.91  1.5205  0.227440    
+## Calf       1   10.01   10.01  0.1336  0.717419    
+## Pulse      1   33.84   33.84  0.4518  0.506822    
+## Residuals 29 2172.59   74.92                      
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Carry out a general linear \(F\) test to assess if we can drop \(x_7, x_8, x_9\) from the model with all predictors.
+\item
+  What is the value of \(SS_R(x_1, x_2, x_3)\)?
+\item
+  What is the value of \(SS_{res}(x_1, x_2, x_3)\)?
+\item
+  What is the value of \(SS_{res}(x_1, x_2, \cdots, x_8)\)?
+\end{enumerate}
+
+\emph{Please view the associated video for a review of these practice questions.}
+
+\hypertarget{multicollinearity}{%
+\section{Multicollinearity}\label{multicollinearity}}
+
+What happens if at least one predictor is almost a linear combination of other predictors? This is called multicollinearity, and there are negative consequences on our MLR model. We will learn what these negative consequences are, how to detect multicollinearity, and some solutions. As we consider more and more predictors for our model, multicollinearity is more likely to exist.
+
+\hypertarget{linear-dependency-multicollinearity}{%
+\subsection{Linear dependency \& multicollinearity}\label{linear-dependency-multicollinearity}}
+
+Before we define multicollinearity, we have to define linear dependency. Recall that we can write the MLR model in matrix form as
+
+\begin{equation} 
+\boldsymbol{y} = \boldsymbol{X \beta} + \boldsymbol{\epsilon}.
+\label{eq:7matrix}
+\end{equation}
+
+where \(\boldsymbol{X}\) is the design matrix and is
+
+\[
+\left[
+\begin{array}{cccc}
+   1 & x_{11} & \cdots & x_{1k}  \\
+   1 & x_{21} & \cdots & x_{2k}  \\
+   \vdots   \\
+   1 & x_{n1} & \cdots & x_{nk}  \\
+\end{array}
+\right]
+\]
+
+Note that each column of the design matrix (other than column 1) represents each predictor variable.
+
+The columns of a matrix are \textbf{linearly dependent} if at least one column can be expressed as a linear combination of the other columns (there exist nonzero constants \(c_i\) such that \(c_1x_1 + c_2x_2 + ... + c_{k}x_{k} = 0\)).
+
+As an example, suppose we have three predictors: \(x_1\) denoting SAT verbal score, \(x_2\) denoting SAT math score, and \(x_3\) denoting SAT score. Since SAT score is the sum of the SAT verbal and math scores, \(x_3 = x_1 + x_2\). So if we were to create the design matrix for these three predictors, we have linear dependency. With linear dependency, we can predict \(x_3\) from \(x_1, x_2\) with no error. Recall that the least squares estimators are found using
+
+\begin{equation}
+\boldsymbol{\hat\beta} = \left(\boldsymbol{X}^{\prime} \boldsymbol{X} \right)^{-1} \boldsymbol{X}^{\prime} \boldsymbol{y}.
+\label{eq:7ls}
+\end{equation}
+
+If there is a linear dependence among the columns of \(\boldsymbol{X}\), then \(\bf{(X^{\prime}X)}^{-1}\) does not exist. This means that unique estimates of \(\beta_j\)'s cannot be determined.
+
+\textbf{Multicollinearity} exists in our model when at least one predictor is \textbf{almost linearly dependent}, or can be predicted with a high degree of accuracy, from the other predictors.
+
+An example of multicollinearity would be if we have predictors \(x_1\) denoting right arm length, \(x_2\) denoting right thigh length, and \(x_3\) denoting right calf length. If we know someone's right arm and right thigh lengths, we can probably predict their right calf length with a high degree of accuracy. In this example, we are likely to have multicollinearity.
+
+With multiple predictors, we will always find some degree of \textbf{collinearity}. The question is whether this degree is high enough warrant our concern.
+
+When predictors are linearly dependent on each other, they do not provide independent information in their association to the response variable. It becomes difficult to \textbf{separate} their effects on the response variable.
+
+\hypertarget{sources}{%
+\subsection{Sources of multicollinearity}\label{sources}}
+
+There are a few reasons for the presence of multicollinearity.
+
+\hypertarget{study-design}{%
+\subsubsection{Study design}\label{study-design}}
+
+The design of the study might lead to multicollinearity, and so a solution will be to change its design. Let us consider this example:
+
+Suppose the Virginia Department of Motor Vehicles (DMV) wants to study the waiting time customers spend waiting in line, based on the number of people ahead in line and number of counters open.
+
+\begin{itemize}
+\item
+  The number of people ahead in line and number of counters open could be highly positively correlated; the more people in line, the more counters will be staffed by the DMV. So the nature of the study leads to multicollinearity.
+\item
+  To break the multicollinearity between the number of people ahead in line and number of counters open, we could collect data on instances where the number of people in line is high, yet the number of counters opened is low, and vice versa. This will allow us to isolate the effect of each predictor on waiting times.
+\end{itemize}
+
+\hypertarget{nature-of-the-data}{%
+\subsubsection{Nature of the data}\label{nature-of-the-data}}
+
+Sometimes, the very nature of the variables lead to multicollinearity and we cannot do much to remedy this.
+
+Suppose we wish to investigate electric consumption in households based on income and size of the home in a city.
+
+\begin{itemize}
+\item
+  Income and size of the home are likely to be highly correlated, due to high income earners wanting to buy bigger homes, and low income earners being unable to buy bigger homes.
+\item
+  We cannot force high income earners to live in small homes, or have low income earners buy bigger homes to break the multicollinearity. In this setting, we have to choose one of the predictors.
+\end{itemize}
+
+\hypertarget{too-many-predictors}{%
+\subsubsection{Too many predictors}\label{too-many-predictors}}
+
+As we collect data on more and more variables, we are more likely to encounter multicollinearity. We have to ask if some predictors are provide the same, or similar information, as other predictors.
+
+\hypertarget{consequences-of-multicollinearity}{%
+\subsection{Consequences of multicollinearity}\label{consequences-of-multicollinearity}}
+
+The main consequence with multicollinearity is that we have \textbf{high variance with the estimated coefficients}. This means the value of the estimated coefficient may be very different from the true value. The consequences from this are:
+
+\begin{itemize}
+\item
+  Estimated coefficients can be difficult to interpret, as the estimated value may be different from the true parameter. Also, if 2 predictors are correlated, then holding one constant while increasing the other one may not make much sense.
+\item
+  Algebraic sign of coefficients can be different from what is known theoretically. If the true coefficient is positive, but because the estimated coefficient is different, it could be negative. So we may think the direction of the association is opposite.
+\item
+  Predictors that we know should impact the response variable are found to be insignificant, as the standard error of the estimated coefficient is large, and hence the \(t\) statistic is small. We may erroneously think that predictor is not related to the response variable.
+\end{itemize}
+
+Interestingly, predictions may still be unbiased if the regression assumptions are met.
+
+So depending on what you are using your regression model for, multicollinearity may or may not be a huge problem. Recall the two main uses of regression models:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Prediction}: Predict a future value of a response variable, using information from predictor variables.
+\item
+  \textbf{Association}: Quantify the relationship between variables. How does a change in the predictor variable change the value of the response variable?
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  If the goal of your regression analysis is to interpret the coefficients and understand the effects of each the predictors on the response variable, multicollinearity is a big issue.
+\item
+  If the goal of your regression analysis is predict future values of the response, then multicollinearity may be less of an issue as long as you do not extrapolate.
+\end{itemize}
+
+\hypertarget{detecting-multicollinearity}{%
+\section{Detecting Multicollinearity}\label{detecting-multicollinearity}}
+
+The following are indicators of the presence of multicollinearity:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \textbf{Insignificant} results in individual tests on the regression
+  coefficients for important predictor variables. A significant ANOVA F test provides more evidence of multicollinearity.
+\item
+  The presence of estimated coefficients with \textbf{large standard errors}.
+\item
+  Estimated regression coefficients with an algebraic sign
+  that is the \textbf{opposite} of that expected from theoretical
+  considerations or prior experience.
+\item
+  \textbf{High correlation} between pairs of
+  predictor variables.
+\item
+  \textbf{High variance inflation factors} (VIFs).
+\end{enumerate}
+
+We have touched upon the first three ways earlier, and using correlation makes intuitive sense. Next, we will look at VIFs in a bit more detail.
+
+\hypertarget{variance-inflation-factors-vifs}{%
+\subsection{Variance inflation factors (VIFs)}\label{variance-inflation-factors-vifs}}
+
+\textbf{Variance inflation factors (VIFs)} are associated with the coefficients of the predictor variables in MLR. VIFs measure \textbf{how much the variance of the corresponding coefficient is multiplied by due to the presence of collinearity versus the lack of collinearity being present}. Mathematically, VIFs are defined as:
+
+\begin{equation}
+\left(VIF\right)_j = \frac{1}{1-R_j^2},
+\,\,\,\,\,\,j=1,2,\ldots,k,
+\label{eq:7vif}
+\end{equation}
+
+where \(R_j^2\) is the \textbf{coefficient of determination when
+\(x_j\) is regressed on the other \(k-1\) predictors in the model}.
+
+Larger VIFs indicate stronger evidence of multicollinearity. Generally, VIFs greater than 5 indicate some degree of multicollinearity, and VIFs greater than 10 indicate a high level of multicollinearity.
+
+Let us look at the VIFs for the \texttt{Peruvian.txt} dataset:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(faraway)}
+\FunctionTok{round}\NormalTok{(faraway}\SpecialCharTok{::}\FunctionTok{vif}\NormalTok{(result),}\DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      Age    Years fraclife   Weight   Height     Chin  Forearm     Calf 
+##    3.213   34.289   24.387    4.748    1.914    2.064    3.802    2.415 
+##    Pulse 
+##    1.329
+\end{verbatim}
+
+The VIFs for the coefficients for \(x_2, x_3\) are above 5, indicating some degree of multicollinearity in our data.
+
+\hypertarget{handling-multicollinearity}{%
+\subsection{Handling multicollinearity}\label{handling-multicollinearity}}
+
+Depends on the source of multicollinearity, as discussed in Section \ref{sources}.
+
+\begin{itemize}
+\item
+  If due to study design, we can collect data on observations to break the collinearity.
+\item
+  If due to the nature of the data where some predictors are linearly dependent on others, drop predictor(s). Choose a subset of these predictors (maybe even just one) and remove the rest from the model.
+\item
+  Abandon least squares regression and use other methods. Other methods such as shrinkage methods and principal components regression help improve predictions, but may not aid in helping explore the relationship between the predictors and response variable. So it depends on what you want to use your regression for.
+\end{itemize}
+
+\hypertarget{r-tutorial-4}{%
+\section{R Tutorial}\label{r-tutorial-4}}
+
+For this tutorial, we will learn how conduct the general linear \(F\) test as well as to detect the presence of multicollinearity in MLR. We will continue to use the \texttt{Peruvian.txt} dataset. The data contains variables relating to blood pressures of Peruvians who have migrated from rural high altitude areas to urban lower altitude areas. The variables are:
+
+\begin{itemize}
+\tightlist
+\item
+  \(y\): Systolic blood pressure
+\item
+  \(x_1\): Age
+\item
+  \(x_2\): Years in urban area
+\item
+  \(x_3\): fraction of life in urban area \((x_1/x_2)\)
+\item
+  \(x_4\): Weight in kg
+\item
+  \(x_5\): Height in mm
+\item
+  \(x_6\): Chin skinfold
+\item
+  \(x_7\): Forearm skinfold
+\item
+  \(x_8\): Calf skinfold
+\item
+  \(x_9\): Resting pulse rate
+\end{itemize}
+
+We want to assess how the systolic blood pressure of these migrants may be predicted and related to these predictors.
+
+Download the data file and read the data in.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Data}\OtherTok{\textless{}{-}}\FunctionTok{read.table}\NormalTok{(}\StringTok{"Peruvian.txt"}\NormalTok{, }\AttributeTok{header=}\ConstantTok{TRUE}\NormalTok{,}\AttributeTok{sep=}\StringTok{""}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+There are a number of strategies on how to start building a multiple linear regression (MLR) model. One possible strategy is to build an initial model based on what appear to be predictors that are most related to the response variable, the systolic blood pressure. Let us create a correlation matrix of the variables:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{round}\NormalTok{(}\FunctionTok{cor}\NormalTok{(Data),}\DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##           Systol_BP    Age  Years fraclife Weight Height   Chin Forearm   Calf
+## Systol_BP     1.000  0.006 -0.087   -0.276  0.521  0.219  0.170   0.272  0.251
+## Age           0.006  1.000  0.588    0.365  0.432  0.056  0.158   0.055 -0.005
+## Years        -0.087  0.588  1.000    0.938  0.481  0.073  0.222   0.143  0.001
+## fraclife     -0.276  0.365  0.938    1.000  0.293  0.051  0.120   0.028 -0.113
+## Weight        0.521  0.432  0.481    0.293  1.000  0.450  0.562   0.544  0.392
+## Height        0.219  0.056  0.073    0.051  0.450  1.000 -0.008  -0.069 -0.003
+## Chin          0.170  0.158  0.222    0.120  0.562 -0.008  1.000   0.638  0.516
+## Forearm       0.272  0.055  0.143    0.028  0.544 -0.069  0.638   1.000  0.736
+## Calf          0.251 -0.005  0.001   -0.113  0.392 -0.003  0.516   0.736  1.000
+## Pulse         0.135  0.091  0.237    0.214  0.312  0.008  0.223   0.422  0.209
+##           Pulse
+## Systol_BP 0.135
+## Age       0.091
+## Years     0.237
+## fraclife  0.214
+## Weight    0.312
+## Height    0.008
+## Chin      0.223
+## Forearm   0.422
+## Calf      0.209
+## Pulse     1.000
+\end{verbatim}
+
+We use the \texttt{round()} function so we can limit the number of decimal places the output uses, which in this case is three.
+
+\hypertarget{general-linear-f-test}{%
+\subsection*{\texorpdfstring{General Linear \(F\) Test}{General Linear F Test}}\label{general-linear-f-test}}
+\addcontentsline{toc}{subsection}{General Linear \(F\) Test}
+
+It appears from the correlation matrix that \(x_3, x_4, x_7, x_8\) have moderately strong linear associations with systolic blood pressure (they have the higest correlations). So we start with these four predictors for our MLR:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#fit MLR}
+\NormalTok{result}\OtherTok{\textless{}{-}}\FunctionTok{lm}\NormalTok{(Systol\_BP}\SpecialCharTok{\textasciitilde{}}\NormalTok{fraclife}\SpecialCharTok{+}\NormalTok{Weight}\SpecialCharTok{+}\NormalTok{Forearm}\SpecialCharTok{+}\NormalTok{Calf, }\AttributeTok{data=}\NormalTok{Data)}
+\FunctionTok{summary}\NormalTok{(result)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = Systol_BP ~ fraclife + Weight + Forearm + Calf, 
+##     data = Data)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -17.7706  -7.0950   0.4133   5.8314  24.0159 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)  57.11972   15.56936   3.669 0.000827 ***
+## fraclife    -27.79798    7.63270  -3.642 0.000892 ***
+## Weight        1.33346    0.28858   4.621  5.3e-05 ***
+## Forearm      -0.52910    1.14255  -0.463 0.646254    
+## Calf         -0.06171    0.60134  -0.103 0.918870    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 9.985 on 34 degrees of freedom
+## Multiple R-squared:  0.481,  Adjusted R-squared:  0.4199 
+## F-statistic: 7.878 on 4 and 34 DF,  p-value: 0.000132
+\end{verbatim}
+
+Based on the \(t\) tests, we consider dropping \(x_7, x_8\) from the model. So we perform a general linear \(F\) test with the full model using predictors \(x_3, x_4, x_7, x_8\) and the reduced model only using \(x_3, x_4\). The null and alternative hypotheses are:
+
+\(H_0: \beta_7 = \beta_8 =0\),
+
+\(H_a:\) at least one of the coefficients in \(H_0\) is not 0.
+
+In words, the null hypothesis supports going with the reduced model by dropping \(x_7, x_8\), whereas the alternative hypothesis supports the full model by not dropping \(x_7, x_8\).
+
+We explore two approaches to conducting this general linear \(F\) test.
+
+\hypertarget{directly-comparing-the-full-and-reduced-models}{%
+\subsubsection*{Directly comparing the full and reduced models}\label{directly-comparing-the-full-and-reduced-models}}
+\addcontentsline{toc}{subsubsection}{Directly comparing the full and reduced models}
+
+In this approach, we fit the reduced model, and then use the \texttt{anova()} function to compare the reduced model with the full model:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{reduced}\OtherTok{\textless{}{-}}\FunctionTok{lm}\NormalTok{(Systol\_BP}\SpecialCharTok{\textasciitilde{}}\NormalTok{fraclife}\SpecialCharTok{+}\NormalTok{Weight, }\AttributeTok{data=}\NormalTok{Data)}
+
+\DocumentationTok{\#\#general linear F test to compare reduced model with full model}
+\FunctionTok{anova}\NormalTok{(reduced, result)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Analysis of Variance Table
+## 
+## Model 1: Systol_BP ~ fraclife + Weight
+## Model 2: Systol_BP ~ fraclife + Weight + Forearm + Calf
+##   Res.Df    RSS Df Sum of Sq      F Pr(>F)
+## 1     36 3441.4                           
+## 2     34 3389.8  2    51.598 0.2588 0.7735
+\end{verbatim}
+
+The \(F\) statistic from this test is 0.2588, with a p-value of 0.7735. So we fail to reject the null hypothesis, so there is little evidence of supporting the full model. We go with the reduced model over the full model.
+
+\hypertarget{sequential-sums-of-squares}{%
+\subsubsection*{Sequential sums of squares}\label{sequential-sums-of-squares}}
+\addcontentsline{toc}{subsubsection}{Sequential sums of squares}
+
+In this other approach, we use the \texttt{anova()} function on the full model to obtain the \textbf{sequential sums of squares} associated with the full model:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{anova}\NormalTok{(result)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Analysis of Variance Table
+## 
+## Response: Systol_BP
+##           Df Sum Sq Mean Sq F value    Pr(>F)    
+## fraclife   1  498.1  498.06  4.9957   0.03209 *  
+## Weight     1 2592.0 2592.01 25.9984 1.279e-05 ***
+## Forearm    1   50.5   50.55  0.5070   0.48129    
+## Calf       1    1.0    1.05  0.0105   0.91887    
+## Residuals 34 3389.8   99.70                      
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+\end{verbatim}
+
+The values under the column ``Sum Sq'' give the sequential \(SS_{R}\)s. Notice how the information is provided: in the order in which the predictors were entered into \texttt{lm()}.
+
+The general linear F statistic is
+
+\begin{align}
+F &= \frac{[SS_R(F) - SS_R(R)]/r}{SS_{res}(F)/(n-p)} \nonumber \\
+  &= \frac{[SS_R(x_3, x_4, x_7, x_8) - SS_R(x_3, x_4)]/2}{SS_{res}(x_3, x_4, x_7, x_8)/(39-5)} \nonumber \\
+  &= \frac{SS_R(x_7, x_8 | x_3, x_4)/2}{SS_{res}(x_3, x_4, x_7, x_8)/(39-5)} \nonumber \\
+  &= \frac{(50.5+1.0)/2}{3389.8/34} \nonumber \\
+  &= 0.2582748
+\end{align}
+
+which is similar to the value found in approach 1 (discrepancy due to rounding off in intermediate steps).
+
+The corresponding p-value is
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{1}\SpecialCharTok{{-}}\FunctionTok{pf}\NormalTok{(}\FloatTok{0.2582748}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{34}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.7738846
+\end{verbatim}
+
+and the critical value is
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{qf}\NormalTok{(}\FloatTok{0.95}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{34}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 3.275898
+\end{verbatim}
+
+So we fail to reject the null hypothesis and go with the reduced model.
+
+\hypertarget{multicollinearity-1}{%
+\subsection*{Multicollinearity}\label{multicollinearity-1}}
+\addcontentsline{toc}{subsection}{Multicollinearity}
+
+With the presence of multiple predictors, it is often tempting to start by including all the predictors in the model.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#fit MLR with all predictors}
+\NormalTok{all}\OtherTok{\textless{}{-}}\FunctionTok{lm}\NormalTok{(Systol\_BP}\SpecialCharTok{\textasciitilde{}}\NormalTok{., }\AttributeTok{data=}\NormalTok{Data)}
+\end{Highlighting}
+\end{Shaded}
+
+There are a few ways to detect the presence of multicollinearity in our model.
+
+\hypertarget{t-tests-and-anova-f-test}{%
+\subsubsection*{\texorpdfstring{\(t\) tests and ANOVA \(F\) test}{t tests and ANOVA F test}}\label{t-tests-and-anova-f-test}}
+\addcontentsline{toc}{subsubsection}{\(t\) tests and ANOVA \(F\) test}
+
+The presence of a lot of insignificant \(t\) tests for the regression coefficients, along a highly significant ANOVA \(F\) test is an indication that multicollinearity is present:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#look at t tests, and F test}
+\FunctionTok{summary}\NormalTok{(all)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = Systol_BP ~ ., data = Data)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -12.3443  -6.3972   0.0507   5.7293  14.5257 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)  146.81883   48.97099   2.998 0.005526 ** 
+## Age           -1.12143    0.32741  -3.425 0.001855 ** 
+## Years          2.45538    0.81458   3.014 0.005306 ** 
+## fraclife    -115.29384   30.16903  -3.822 0.000648 ***
+## Weight         1.41393    0.43097   3.281 0.002697 ** 
+## Height        -0.03464    0.03686  -0.940 0.355196    
+## Chin          -0.94369    0.74097  -1.274 0.212923    
+## Forearm       -1.17085    1.19330  -0.981 0.334613    
+## Calf          -0.15867    0.53716  -0.295 0.769809    
+## Pulse          0.11455    0.17043   0.672 0.506822    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 8.655 on 29 degrees of freedom
+## Multiple R-squared:  0.6674, Adjusted R-squared:  0.5641 
+## F-statistic: 6.465 on 9 and 29 DF,  p-value: 5.241e-05
+\end{verbatim}
+
+Notice how five of the \(t\) tests are insignificant, but the ANOVA \(F\) is highly significant. So we have evidence of multicollinearity.
+
+\hypertarget{standard-errors-of-estimated-coefficients}{%
+\subsubsection*{Standard errors of estimated coefficients}\label{standard-errors-of-estimated-coefficients}}
+\addcontentsline{toc}{subsubsection}{Standard errors of estimated coefficients}
+
+Looking at the output from \texttt{summary()}, we do not see any standard errors that are large. If we have strong multicollinearity, standard errors should be large.
+
+\hypertarget{correlation-between-pairs-of-predictors}{%
+\subsubsection*{Correlation between pairs of predictors}\label{correlation-between-pairs-of-predictors}}
+\addcontentsline{toc}{subsubsection}{Correlation between pairs of predictors}
+
+We can also look at the pairwise correlations among predictors:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#correlation matrix, round to 3 decimal}
+\FunctionTok{round}\NormalTok{(}\FunctionTok{cor}\NormalTok{(Data[,}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{]),}\DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##             Age Years fraclife Weight Height   Chin Forearm   Calf Pulse
+## Age       1.000 0.588    0.365  0.432  0.056  0.158   0.055 -0.005 0.091
+## Years     0.588 1.000    0.938  0.481  0.073  0.222   0.143  0.001 0.237
+## fraclife  0.365 0.938    1.000  0.293  0.051  0.120   0.028 -0.113 0.214
+## Weight    0.432 0.481    0.293  1.000  0.450  0.562   0.544  0.392 0.312
+## Height    0.056 0.073    0.051  0.450  1.000 -0.008  -0.069 -0.003 0.008
+## Chin      0.158 0.222    0.120  0.562 -0.008  1.000   0.638  0.516 0.223
+## Forearm   0.055 0.143    0.028  0.544 -0.069  0.638   1.000  0.736 0.422
+## Calf     -0.005 0.001   -0.113  0.392 -0.003  0.516   0.736  1.000 0.209
+## Pulse     0.091 0.237    0.214  0.312  0.008  0.223   0.422  0.209 1.000
+\end{verbatim}
+
+Looking at this matrix, we notice that pairs of predictors involving \(x_1, x_2, x_3\), and \(x_4, x_6, x_7\) have high correlations. For pairs involving other predictors, the correlations are a lot weaker. So there is some degree of multicollinearity.
+
+\hypertarget{vifs}{%
+\subsubsection*{VIFs}\label{vifs}}
+\addcontentsline{toc}{subsubsection}{VIFs}
+
+High VIFs are an indication of multicollinearity.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#VIFs}
+\FunctionTok{library}\NormalTok{(faraway)}
+\NormalTok{faraway}\SpecialCharTok{::}\FunctionTok{vif}\NormalTok{(all)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##       Age     Years  fraclife    Weight    Height      Chin   Forearm      Calf 
+##  3.213372 34.289220 24.387489  4.747710  1.913992  2.063865  3.802313  2.414603 
+##     Pulse 
+##  1.329233
+\end{verbatim}
+
+The largest VIFs belong to \(x_2\) and \(x_3\), which are 34.289220 and 24.387489 respectively. VIFs above 10 indicate a strong degree of multicollinearity.
+
+To summarize what we have seen:
+
+\begin{itemize}
+\tightlist
+\item
+  The ANOVA F test is significant, but a lot of the t tests are insignificant.
+\item
+  We don't see huge standard errors for the estimated coefficients.
+\item
+  Some of the predictors have high pairwise correlations, e.g.~Pairs involving \(x_1, x_2, x_3\), and \(x_4, x_6, x_7\).
+\item
+  The largest VIF is 34.289220.
+\end{itemize}
+
+Collectively, there is some degree of multicollinearity in this model.
+
+\hypertarget{next-steps}{%
+\subsubsection*{Next steps}\label{next-steps}}
+\addcontentsline{toc}{subsubsection}{Next steps}
+
+We have identified that predictors \(x_1, x_2, x_3\), and \(x_4, x_6, x_7\) are the ones that are most likely to be causing multicollinearity. A solution will be to use a subset of these predictors and not all of them.
+
+Using subject matter knowledge can help with this decision.
+
 \hypertarget{intro}{%
 \chapter{Introduction}\label{intro}}
 
@@ -5596,16 +6548,6 @@ Sepal.Length & Sepal.Width & Petal.Length & Petal.Width & Species\\
 
 You can write citations, too. For example, we are using the \textbf{bookdown} package \citep{R-bookdown} in this sample book, which was built on top of R Markdown and \textbf{knitr} \citep{xie2015}.
 
-\hypertarget{literature}{%
-\chapter{Literature}\label{literature}}
-
-Here is a review of existing methods.
-
-\hypertarget{new-section}{%
-\section{New section}\label{new-section}}
-
-Add some text here. BLAH BLAH
-
 \hypertarget{methods}{%
 \chapter{Methods}\label{methods}}
 
@@ -5629,22 +6571,6 @@ We will approximate standard error to 0.027\footnote{\(p\) is unknown but expect
   \[
   SE = \sqrt(\frac{p(1-p)}{n}) \approx \sqrt{\frac{1/3 (1 - 1/3)} {300}} = 0.027
   \]}
-
-\hypertarget{applications}{%
-\chapter{Applications}\label{applications}}
-
-Some \emph{significant} applications are demonstrated in this chapter.
-
-\hypertarget{example-one}{%
-\section{Example one}\label{example-one}}
-
-\hypertarget{example-two}{%
-\section{Example two}\label{example-two}}
-
-\hypertarget{final-words}{%
-\chapter{Final Words}\label{final-words}}
-
-We have finished a nice book.
 
   \bibliography{book.bib,packages.bib}
 

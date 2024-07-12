@@ -71,11 +71,9 @@
 <li><a class="" href="inf.html"><span class="header-section-number">4</span> Inference with Simple Linear Regression (SLR)</a></li>
 <li><a class="" href="diag.html"><span class="header-section-number">5</span> Model Diagnostics and Remedial Measures in SLR</a></li>
 <li><a class="active" href="mlr.html"><span class="header-section-number">6</span> Multiple Linear Regression (MLR)</a></li>
-<li><a class="" href="intro.html"><span class="header-section-number">7</span> Introduction</a></li>
-<li><a class="" href="literature.html"><span class="header-section-number">8</span> Literature</a></li>
+<li><a class="" href="F.html"><span class="header-section-number">7</span> General Linear \(F\) Test and Multicollinearity</a></li>
+<li><a class="" href="intro.html"><span class="header-section-number">8</span> Introduction</a></li>
 <li><a class="" href="methods.html"><span class="header-section-number">9</span> Methods</a></li>
-<li><a class="" href="applications.html"><span class="header-section-number">10</span> Applications</a></li>
-<li><a class="" href="final-words.html"><span class="header-section-number">11</span> Final Words</a></li>
 <li><a class="" href="references.html">References</a></li>
 </ul>
 
@@ -248,7 +246,7 @@ E(y|x) = \beta_0+\beta_1 x_1 + \beta_2 x_2 + \cdots + \beta_{k} x_k.
 <span class="header-section-number">6.2.2</span> Visualizing MLR<a class="anchor" aria-label="anchor" href="#visualizing-mlr"><i class="fas fa-link"></i></a>
 </h3>
 <p>How should we visualize an MLR equation? Suppose we have two predictor variables, <span class="math inline">\(x_1\)</span> and <span class="math inline">\(x_2\)</span>, with MLR equation <span class="math inline">\(E(y|x_1,x_2) = 2 + 5x_1 + 5x_2\)</span>. A <strong>contour plot</strong> can be used to visualize a response variable with two predictors:</p>
-<div class="inline-figure"><img src="bookdown-demo_files/figure-html/unnamed-chunk-173-1.png" width="672"></div>
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/unnamed-chunk-174-1.png" width="672"></div>
 <p>The contour plot creates an axis for each predictor. The value of the response variable is denoted by the contour lines with the actual value displayed on the line. In this toy example, <span class="math inline">\(\beta_1 = 5\)</span>. This means that if we hold <span class="math inline">\(x_2\)</span> constant (e.g. set <span class="math inline">\(x_2 = 1\)</span> per the red horizontal line), increasing <span class="math inline">\(x_1\)</span> by 1 unit increases the mean of <span class="math inline">\(y\)</span> by 5 units.</p>
 <p>The regression equation <span class="math inline">\(E(y|x_1,x_2) = 2 + 5x_1 + 5x_2\)</span> is sometimes called a <strong>regression plane</strong>, instead of a regression line, since we have more than 1 predictor. We can visualize this regression plane below</p>
 <div class="inline-figure">
@@ -602,7 +600,7 @@ t = \frac{\hat{\beta}_j}{se(\hat{\beta}_j)}
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggobi.github.io/ggally/">GGally</a></span><span class="op">)</span></span>
 <span><span class="co">##scatterplot matrix</span></span>
 <span><span class="fu">GGally</span><span class="fu">::</span><span class="fu"><a href="https://ggobi.github.io/ggally/reference/ggpairs.html">ggpairs</a></span><span class="op">(</span><span class="va">Data</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="bookdown-demo_files/figure-html/unnamed-chunk-179-1.png" width="672"></div>
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/unnamed-chunk-180-1.png" width="672"></div>
 <p>A few pieces of information are presented in the output. Notice the output is displayed in a matrix format.</p>
 <ul>
 <li>The off-diagonal entries of the output give us the scatterplot and correlation between the corresponding pair of quantitative variables.
@@ -692,7 +690,7 @@ t = \frac{\hat{\beta}_j}{se(\hat{\beta}_j)}
 </div>
   <div class="chapter-nav">
 <div class="prev"><a href="diag.html"><span class="header-section-number">5</span> Model Diagnostics and Remedial Measures in SLR</a></div>
-<div class="next"><a href="intro.html"><span class="header-section-number">7</span> Introduction</a></div>
+<div class="next"><a href="F.html"><span class="header-section-number">7</span> General Linear \(F\) Test and Multicollinearity</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
@@ -751,7 +749,7 @@ t = \frac{\hat{\beta}_j}{se(\hat{\beta}_j)}
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Linear Models for Data Science</strong>" was written by Jeffrey Woo. It was last built on 2024-07-11.</p>
+    <p>"<strong>Linear Models for Data Science</strong>" was written by Jeffrey Woo. It was last built on 2024-07-12.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

@@ -2,6 +2,10 @@
 
 ## Introduction
 
+```{r, echo=FALSE}
+rm(list = ls())
+```
+
 Linear regression models are used to explore the relationship between variables as well as make predictions. Simple linear regression (SLR) concerns the study of only one predictor variable with one response variable. However, given the context, it may be clear there are multiple predictors that relate to the response variable. In such a context, we want to:
 
 - Improve predictions on the response variable by including more useful predictors.

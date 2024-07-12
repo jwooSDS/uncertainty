@@ -1,0 +1,537 @@
+# General Linear $F$ Test and Multicollinearity {#F}
+
+## Introduction
+
+```{r, echo=FALSE}
+rm(list = ls())
+```
+
+The purpose of multiple linear regression is to use more than one predictor to predict a response variable. This modules explores an approach to choosing which variables to include in a multiple regression model. For example, many variables can be used to predict someone's systolic blood pressure, such as their age, weight, height, and pulse rate. While all of those predictors are likely to influence the systolic blood pressure, we want to know if we need all of them, or if a subset of those predictors will perform just as well. We will use the general linear $F$ test to do so.
+
+Another issue with having multiple predictors is that the likelihood that at least one of the predictors are linearly dependent, or correlated, with some other predictors increases. This is called multicollinearity. There are some negative consequences if multicollinearity is present. We will learn about these consequences, how to diagnose the presence of multicollinearity, and some solutions if multicollinearity is present. 
+
+## The General Linear $F$ Test
+
+### Motivation
+
+In the previous module, we noted the limitation of the $t$ test and ANOVA $F$ test in MLR:
+
+- We can **only drop 1 predictor** based on a $t$ test.
+- We can **drop all predictors** based on an ANOVA $F$ test.
+
+What if we wish to drop more than 1 predictor simultaneously, but not all, from the model? We will explore this via the **general linear $F$ test**. In fact, the $t$ test and ANOVA $F$ test are actually special cases of the general linear $F$ test.
+
+Let us look at a motivating example, using the dataset `Peruvian.txt`. The data contains variables relating to blood pressures of Peruvians who have migrated from rural high altitude areas to urban lower altitude areas. The variables are:
+
+- $y$: Systolic blood pressure
+- $x_1$: Age
+- $x_2$: Years in urban area
+- $x_3$: fraction of life in urban area $(x_1/x_2)$
+- $x_4$: Weight in kg
+- $x_5$: Height in mm
+- $x_6$: Chin skinfold
+- $x_7$: Forearm skinfold
+- $x_8$: Calf skinfold
+- $x_9$: Resting pulse rate
+
+We want to assess how the systolic blood pressure of these migrants may be predicted and related to these predictors.
+
+```{r}
+Data<-read.table("Peruvian.txt", header=TRUE,sep="")
+head(Data)
+```
+
+Let us fit an MLR with all the predictors and take a look at the $t$ tests and ANOVA $F$ test:
+
+```{r}
+result<-lm(Systol_BP~., data=Data)
+summary(result)
+```
+
+Notice the $t$ tests are insignificant for a lot of the coefficients (the last five). Individually, each $t$ test is informing us that we can drop that specific predictor, while leaving the other predictors in the model. 
+
+An erroneous interpretation is to say collectively, these $t$ tests inform us we can drop all of these predictors, $x_5$ to $x_9$, from the model. This is a misconception. 
+
+One idea could be to drop the most insignificant predictor, refit the model, and reassess which predictors are insignificant, and continue dropping the most insignificant predictor and refitting the model until all $t$ tests are significant. We will end up conducting multiple hypothesis tests to do so. If possible, we should limit the number of hypothesis tests we conduct: the more tests we do, the likelihood of us wrongly rejecting a null hypothesis increases. 
+
+This is where the **general linear $F$ test** (sometimes called a partial $F$ test) is used. We can perform one test to assess if we can simultaneously drop multiple predictors from the model. 
+
+Based on this output, we consider dropping $x_5, x_6, x_7, x_8, x_9$ since their $t$ tests are insignificant.
+
+### Setting up the general linear $F$ test
+
+The general linear $F$ test allows us to assess if multiple predictors can be dropped simultaneously from the model. The associated F statistic measures the change in the $SS_R$ (or $SS_{res}$) with the removal of these predictors from the model. The test is based on the following concepts:
+
+- As long as we have the same response variable, **$SS_T$ is constant**, regardless of the model. This is because $SS_T = \sum(y_i - \bar{y})$. It only involves the response variable.
+- $SS_T = SS_R + SS_{Res}$.
+- Each time predictors are added to the model, the $SS_R$ increases and the $SS_{Res}$ decreases **by the same amount**, since $SS_T$ stays constant.
+
+The general linear $F$ test answers the question: is the change in $SS_R$ (or change in $SS_{res}$) significant with the removal or addition of predictor(s)?
+
+This question can be answered in a framework that compares two models:
+
+- a **full model**, denoted by $F$, that uses all predictors under consideration,
+- a **reduced model**, denoted by $R$, that results if some predictors from the full model are dropped. 
+
+### Hypothesis statements
+
+Based on this framework, the null and alternative hypotheses for the `Peruvian.txt` dataset is
+
+$$
+H_0: \beta_5 = \beta_6 = \beta_7 = \beta_8 = \beta_9 = 0, H_a: \text{ at least one coeff in } H_0 \text{ is not zero}.
+$$
+
+In general, the null hypothesis states that the **parameters of the terms that we wish to drop are all 0.** Therefore, the null hypothesis supports the reduced model, R. 
+
+The alternative hypothesis states that we cannot drop all the terms that we wish to drop. Therefore, the alternative hypothesis supports the full model, F.
+
+### Test statistic
+
+The associated test statistic for the general linear $F$ test is
+
+\begin{equation} 
+F_0=\frac{[SS_R(F)-SS_R(R)]/r}{SS_{res}(F)/(n-p)},
+(\#eq:7ssr)
+\end{equation}
+
+**or equivalently**
+
+\begin{equation} 
+F_0=\frac{[SS_{res}(R)-SS_{res}(F)]/r}{SS_{res}(F)/(n-p)}.
+(\#eq:7sse)
+\end{equation}
+
+The test statistic $F_0$ is compared with an $F_{r,n-p}$ distribution. The notation is as follows:
+
+- $SS_R(F)$ denotes the $SS_R$ of full model,
+- $SS_R(R)$ denotes the $SS_R$ of reduced model,
+- $r$ denotes number of parameters being dropped/tested,
+- $p$ denotes the number of parameters in the full model,
+- $SS_{res}(F)$ denotes the $SS_{res}$ of full model,
+- $SS_{res}(R)$ denotes the $SS_{res}$ of reduced model.
+
+Note that the change in $SS_R$, $SS_R(F)-SS_R(R)$ is always equal to the change in $SS_{res}$, $SS_{res}(R)-SS_{res}(F)$. Therefore, \@ref(eq:7ssr) is always equal to \@ref(eq:7sse).
+
+### Worked example
+
+Let us look at some output for our `Peruvian.txt` dataset:
+
+```{r}
+reduced<-lm(Systol_BP~Age+Years+fraclife+Weight, data=Data)
+anova(reduced,result)
+```
+
+- In the output, model 1 has the predictors are $x_1, x_2, x_3, x_4$, while model 2 has the predictors $x_1, \cdots, x_9$. So model 1 is the reduced model, and model 2 is the full model. 
+
+- We see some information presented in a table. The first line corresponds to model 1, the second line corresponds to model 2. 
+
+- Under the column `RSS`, we have the values for $SS_{res}$. Admittedly, this can be a bit confusing, but it is not $SS_R$. So we can see that $SS_{res}(R) = 2629.7$ and $SS_{res}(F) = 2172.6$. Note that $SS_{res}$ is always smaller for the full model, and $SS_R$ is always larger for the full model. 
+
+- Under the column `Res.DF`, we have the degrees of freedom for the $SS_{res}$ of that model. In the calculation of the $F$ statistic, we want the value associated with the full model, 29. 
+
+- Under the column `Df`, we have the number of parameters that we are testing to drop, which is 5. 
+
+- Under the column `Sum of Sq`, we have the difference in $SS_{res}$ between both models, $SS_{res}(R) - SS_{res}(F) = 2629.7 - 2172.6 = 457.12$.
+
+- Under the column `F`, we have the F statistic, $F_0 = 1.2204$. We can verify this calculation using \@ref(eq:7sse), $F_0 = \frac{(2629.7 - 2172.6)/5}{2172.6/29}$ (with some rounding).
+
+- The p-value of this general linear $F$ test is reported in the last column. This can be found using:
+
+```{r}
+1-pf(1.2204, 5, 29)
+```
+
+The critical value can be found using:
+
+```{r}
+qf(1-0.05, 5, 29)
+```
+
+So we fail to reject the null hypothesis. The data do not support the alternative hypothesis (i.e. the full model). So we go with the reduced model.
+
+### Comparison of general linear $F$ test with other hypothesis tests in MLR
+
+The $t$ test and ANOVA $F$ test in MLR are special cases of the general linear $F$ test, when $r=1$ and $r=p-1$ respectively. 
+
+- For the $t$ test, the reduced model has 1 less term than the full model. The $F_0$ statistic is compared with an $F_{1,n-p}$ distribution. It turns out that an $F_{1,n-p}$ distribution is directly related with a $t_{n-p}$ distribution, and so the general linear $F$ test is exactly the same as the $t$ test when dropping 1 term. 
+
+- For the ANOVA $F$ test. The reduced model drops all the terms and has only the intercept. Some call this the intercept-only model. 
+
+### Alternative approach to general linear $F$ test
+
+There is another way in which the information needed to perform a general linear $F$ test. This approach is called the **sequential sums of squares** (sometimes called extra sums of squares). It works on the same principle that every time a predictor is added to the model, the $SS_R$ of the model increases, and the $SS_{res}$ decreases by the same amount, since $SS_T$ is constant. The information is displayed as we add one predictor at a time. Let us define some notation:
+
+- $SS_R(x_1)$ denotes $SS_R$ when $x_1$ is the only predictor in the model.
+- $SS_R(x_1, x_2)$ denotes $SS_R$ when $x_1, x_2$ are in the model.
+- $SS_R(x_2|x_1)$ denotes the increase in $SS_R$ when $x_2$ is added to the model with $x_1$ already in it. It is read as $SS_R$ of $x_2$ given $x_1$.
+
+Based on this example, $SS_R(x_2|x_1) = SS_R(x_1, x_2) - SS_R(x_1)$, and so $SS_R(x_1, x_2) = SS_R(x_1) + SS_R(x_2|x_1)$. Note that $SS_R(x_2|x_1)$ is not equal to $SS_R(x_2)$, as the latter denotes $SS_R$ when $x_2$ is the only predictor in the model. 
+
+Let us see how we can use the sequential sums of squares with the `Peruvian.txt` dataset:
+
+```{r}
+anova(result)
+```
+
+The values under the column "Sum Sq" give the sequential $SS_{R}$s. So, 
+
+- for the first line, we have $SS_{R}(x_1) = 0.22$, 
+- the second line, we have $SS_{R}(x_2|x_1) = 82.55$, 
+- then $SS_{R}(x_3|x_1, x_2) = 3112.40$, 
+- and so on for each term,
+- finally, $SS_{R}(x_9|x_1, x_2, \cdots, x_8) = 33.84$. 
+- The very last line refers to $SS_{Res}(x_1, x_2, \cdots, x_9) = 2172.59$.
+
+Essentially, the output for each term informs us the increase in $SS_R$ when that term is added to the model, given that the previously listed terms are already in the model. 
+
+Notice the order the sequential sums of squares are displayed is the same order used when entering the predictors in `lm()`.
+
+We are still testing
+
+$$
+H_0: \beta_5 = \beta_6 = \beta_7 = \beta_8 = \beta_9 = 0, H_a: \text{ at least one coeff in } H_0 \text{ is not zero}.
+$$
+
+Using \@ref(eq:7ssr), the F statistic for this test is 
+
+$\begin{aligned}
+F_0 &= \frac{[SS_R(F)-SS_R(R)]/r}{SS_{res}(F)/(n-p)} \\
+    &= \frac{(1.68+297.68+113.91+10.01+33.84)/5}{2172.59/29}\\
+    &= 1.220339.
+\end{aligned}$
+
+Compare this $F_0$ statistic using this approach with the example shown in Section 2.5. We have the exact same result (other than rounding). 
+
+*Please view the associated video for more explanation on the extra sums of squares approach.*
+
+#### Practice questions
+
+We will use the sequential sums of squares for the `Peruvian.txt` dataset:
+
+```{r}
+anova(result)
+```
+
+1. Carry out a general linear $F$ test to assess if we can drop $x_7, x_8, x_9$ from the model with all predictors.
+2. What is the value of $SS_R(x_1, x_2, x_3)$? 
+3. What is the value of $SS_{res}(x_1, x_2, x_3)$?
+4. What is the value of $SS_{res}(x_1, x_2, \cdots, x_8)$?
+
+*Please view the associated video for a review of these practice questions.*
+
+## Multicollinearity
+
+What happens if at least one predictor is almost a linear combination of other predictors? This is called multicollinearity, and there are negative consequences on our MLR model. We will learn what these negative consequences are, how to detect multicollinearity, and some solutions. As we consider more and more predictors for our model, multicollinearity is more likely to exist.
+
+### Linear dependency & multicollinearity
+
+Before we define multicollinearity, we have to define linear dependency. Recall that we can write the MLR model in matrix form as
+
+\begin{equation} 
+\boldsymbol{y} = \boldsymbol{X \beta} + \boldsymbol{\epsilon}.
+(\#eq:7matrix)
+\end{equation}
+
+where $\boldsymbol{X}$ is the design matrix and is 
+
+$$
+\left[
+\begin{array}{cccc}
+   1 & x_{11} & \cdots & x_{1k}  \\
+   1 & x_{21} & \cdots & x_{2k}  \\
+   \vdots   \\
+   1 & x_{n1} & \cdots & x_{nk}  \\
+\end{array}
+\right]
+$$
+
+Note that each column of the design matrix (other than column 1) represents each predictor variable. 
+
+The columns of a matrix are **linearly dependent** if at least one column can be expressed as a linear combination of the other columns (there exist nonzero constants $c_i$ such that $c_1x_1 + c_2x_2 + ... + c_{k}x_{k} = 0$).
+
+As an example, suppose we have three predictors: $x_1$ denoting SAT verbal score, $x_2$ denoting SAT math score, and $x_3$ denoting SAT score. Since SAT score is the sum of the SAT verbal and math scores, $x_3 = x_1 + x_2$. So if we were to create the design matrix for these three predictors, we have linear dependency. With linear dependency, we can predict $x_3$ from $x_1, x_2$ with no error. Recall that the least squares estimators are found using
+
+\begin{equation}
+\boldsymbol{\hat\beta} = \left(\boldsymbol{X}^{\prime} \boldsymbol{X} \right)^{-1} \boldsymbol{X}^{\prime} \boldsymbol{y}.
+(\#eq:7ls)
+\end{equation}
+
+If there is a linear dependence among the columns of $\boldsymbol{X}$, then $\bf{(X^{\prime}X)}^{-1}$ does not exist.  This means that unique estimates of $\beta_j$'s cannot be determined.
+
+**Multicollinearity** exists in our model when at least one predictor is **almost linearly dependent**, or can be predicted with a high degree of accuracy, from the other predictors.
+
+An example of multicollinearity would be if we have predictors $x_1$ denoting right arm length, $x_2$ denoting right thigh length, and $x_3$ denoting right calf length. If we know someone's right arm and right thigh lengths, we can probably predict their right calf length with a high degree of accuracy. In this example, we are likely to have multicollinearity. 
+
+With multiple predictors, we will always find some degree of **collinearity**. The question is whether this degree is high enough warrant our concern. 
+
+When predictors are linearly dependent on each other, they do not provide independent information in their association to the response variable. It becomes difficult to **separate** their effects on the response variable.
+
+### Sources of multicollinearity {#sources}
+
+There are a few reasons for the presence of multicollinearity.
+
+#### Study design
+
+The design of the study might lead to multicollinearity, and so a solution will be to change its design. Let us consider this example:
+
+Suppose the Virginia Department of Motor Vehicles (DMV) wants to study the waiting time customers spend waiting in line, based on the number of people ahead in line and number of counters open.
+
+- The number of people ahead in line and number of counters open could be highly positively correlated; the more people in line, the more counters will be staffed by the DMV. So the nature of the study leads to multicollinearity. 
+
+- To break the multicollinearity between the number of people ahead in line and number of counters open, we could collect data on instances where the number of people in line is high, yet the number of counters opened is low, and vice versa. This will allow us to isolate the effect of each predictor on waiting times.
+
+#### Nature of the data
+
+Sometimes, the very nature of the variables lead to multicollinearity and we cannot do much to remedy this.
+
+Suppose we wish to investigate electric consumption in households based on income and size of the home in a city. 
+
+- Income and size of the home are likely to be highly correlated, due to high income earners wanting to buy bigger homes, and low income earners being unable to buy bigger homes.
+
+- We cannot force high income earners to live in small homes, or have low income earners buy bigger homes to break the multicollinearity. In this setting, we have to choose one of the predictors. 
+
+#### Too many predictors
+
+As we collect data on more and more variables, we are more likely to encounter multicollinearity. We have to ask if some predictors are provide the same, or similar information, as other predictors.
+
+### Consequences of multicollinearity
+
+The main consequence with multicollinearity is that we have **high variance with the estimated coefficients**. This means the value of the estimated coefficient may be very different from the true value. The consequences from this are:
+
+- Estimated coefficients can be difficult to interpret, as the estimated value may be different from the true parameter. Also, if 2 predictors are correlated, then holding one constant while increasing the other one may not make much sense. 
+    
+- Algebraic sign of coefficients can be different from what is known theoretically. If the true coefficient is positive, but because the estimated coefficient is different, it could be negative. So we may think the direction of the association is opposite.
+    
+- Predictors that we know should impact the response variable are found to be insignificant, as the standard error of the estimated coefficient is large, and hence the $t$ statistic is small. We may erroneously think that predictor is not related to the response variable. 
+
+Interestingly, predictions may still be unbiased if the regression assumptions are met.
+
+So depending on what you are using your regression model for, multicollinearity may or may not be a huge problem. Recall the two main uses of regression models:
+
+1. **Prediction**: Predict a future value of a response variable, using information from predictor variables.
+2. **Association**: Quantify the relationship between variables. How does a change in the predictor variable change the value of the response variable?
+
+- If the goal of your regression analysis is to interpret the coefficients and understand the effects of each the predictors on the response variable, multicollinearity is a big issue.
+- If the goal of your regression analysis is predict future values of the response, then multicollinearity may be less of an issue as long as you do not extrapolate.
+
+## Detecting Multicollinearity
+
+The following are indicators of the presence of multicollinearity:
+
+1. **Insignificant** results in individual tests on the regression
+coefficients for important predictor variables. A significant ANOVA F test provides more evidence of multicollinearity. 
+
+2. The presence of estimated coefficients with **large standard errors**.
+
+3. Estimated regression coefficients with an algebraic sign
+that is the **opposite** of that expected from theoretical
+considerations or prior experience.
+
+4. **High correlation** between pairs of
+predictor variables.
+
+5. **High variance inflation factors** (VIFs). 
+
+We have touched upon the first three ways earlier, and using correlation makes intuitive sense. Next, we will look at VIFs in a bit more detail.
+
+### Variance inflation factors (VIFs)
+
+**Variance inflation factors (VIFs)** are associated with the coefficients of the predictor variables in MLR. VIFs measure **how much the variance of the corresponding coefficient is multiplied by due to the presence of collinearity versus the lack of collinearity being present**. Mathematically, VIFs are defined as:
+
+\begin{equation}
+\left(VIF\right)_j = \frac{1}{1-R_j^2},
+\,\,\,\,\,\,j=1,2,\ldots,k,
+(\#eq:7vif)
+\end{equation}
+
+where $R_j^2$ is the **coefficient of determination when
+$x_j$ is regressed on the other $k-1$ predictors in the model**.
+
+Larger VIFs indicate stronger evidence of multicollinearity. Generally, VIFs greater than 5 indicate some degree of multicollinearity, and VIFs greater than 10 indicate a high level of multicollinearity.
+
+Let us look at the VIFs for the `Peruvian.txt` dataset:
+
+```{r}
+library(faraway)
+round(faraway::vif(result),3)
+```
+
+The VIFs for the coefficients for $x_2, x_3$ are above 5, indicating some degree of multicollinearity in our data. 
+
+### Handling multicollinearity
+
+Depends on the source of multicollinearity, as discussed in Section \@ref(sources).
+
+- If due to study design, we can collect data on observations to break the collinearity.
+
+- If due to the nature of the data where some predictors are linearly dependent on others, drop predictor(s). Choose a subset of these predictors (maybe even just one) and remove the rest from the model. 
+
+- Abandon least squares regression and use other methods. Other methods such as shrinkage methods and principal components regression help improve predictions, but may not aid in helping explore the relationship between the predictors and response variable. So it depends on what you want to use your regression for. 
+
+## R Tutorial
+
+```{r, echo=FALSE}
+rm(list = ls())
+```
+
+For this tutorial, we will learn how conduct the general linear $F$ test as well as to detect the presence of multicollinearity in MLR. We will continue to use the `Peruvian.txt` dataset. The data contains variables relating to blood pressures of Peruvians who have migrated from rural high altitude areas to urban lower altitude areas. The variables are:
+
+- $y$: Systolic blood pressure
+- $x_1$: Age
+- $x_2$: Years in urban area
+- $x_3$: fraction of life in urban area $(x_1/x_2)$
+- $x_4$: Weight in kg
+- $x_5$: Height in mm
+- $x_6$: Chin skinfold
+- $x_7$: Forearm skinfold
+- $x_8$: Calf skinfold
+- $x_9$: Resting pulse rate
+
+We want to assess how the systolic blood pressure of these migrants may be predicted and related to these predictors.
+
+Download the data file and read the data in. 
+
+```{r}
+Data<-read.table("Peruvian.txt", header=TRUE,sep="")
+```
+
+There are a number of strategies on how to start building a multiple linear regression (MLR) model. One possible strategy is to build an initial model based on what appear to be predictors that are most related to the response variable, the systolic blood pressure. Let us create a correlation matrix of the variables:
+
+```{r}
+round(cor(Data),3)
+```
+
+We use the `round()` function so we can limit the number of decimal places the output uses, which in this case is three. 
+
+### General Linear $F$ Test {-}
+
+It appears from the correlation matrix that $x_3, x_4, x_7, x_8$ have moderately strong linear associations with systolic blood pressure (they have the higest correlations). So we start with these four predictors for our MLR:
+
+```{r}
+##fit MLR
+result<-lm(Systol_BP~fraclife+Weight+Forearm+Calf, data=Data)
+summary(result)
+```
+
+Based on the $t$ tests, we consider dropping $x_7, x_8$ from the model. So we perform a general linear $F$ test with the full model using predictors $x_3, x_4, x_7, x_8$ and the reduced model only using $x_3, x_4$. The null and alternative hypotheses are:
+
+$H_0: \beta_7 = \beta_8 =0$,
+
+$H_a:$ at least one of the coefficients in $H_0$ is not 0.
+
+In words, the null hypothesis supports going with the reduced model by dropping $x_7, x_8$, whereas the alternative hypothesis supports the full model by not dropping $x_7, x_8$. 
+
+We explore two approaches to conducting this general linear $F$ test.
+
+#### Directly comparing the full and reduced models {-}
+
+In this approach, we fit the reduced model, and then use the `anova()` function to compare the reduced model with the full model:
+
+```{r}
+reduced<-lm(Systol_BP~fraclife+Weight, data=Data)
+
+##general linear F test to compare reduced model with full model
+anova(reduced, result)
+```
+
+The $F$ statistic from this test is 0.2588, with a p-value of 0.7735. So we fail to reject the null hypothesis, so there is little evidence of supporting the full model. We go with the reduced model over the full model.
+
+#### Sequential sums of squares {-}
+
+In this other approach, we use the `anova()` function on the full model to obtain the **sequential sums of squares** associated with the full model:
+
+```{r}
+anova(result)
+```
+
+The values under the column "Sum Sq" give the sequential $SS_{R}$s. Notice how the information is provided: in the order in which the predictors were entered into `lm()`.  
+
+The general linear F statistic is
+
+\begin{align}
+F &= \frac{[SS_R(F) - SS_R(R)]/r}{SS_{res}(F)/(n-p)} \nonumber \\
+  &= \frac{[SS_R(x_3, x_4, x_7, x_8) - SS_R(x_3, x_4)]/2}{SS_{res}(x_3, x_4, x_7, x_8)/(39-5)} \nonumber \\
+  &= \frac{SS_R(x_7, x_8 | x_3, x_4)/2}{SS_{res}(x_3, x_4, x_7, x_8)/(39-5)} \nonumber \\
+  &= \frac{(50.5+1.0)/2}{3389.8/34} \nonumber \\
+  &= 0.2582748
+\end{align}
+
+which is similar to the value found in approach 1 (discrepancy due to rounding off in intermediate steps).
+
+The corresponding p-value is
+
+```{r}
+1-pf(0.2582748,2,34)
+```
+
+and the critical value is
+
+```{r}
+qf(0.95,2,34)
+```
+
+So we fail to reject the null hypothesis and go with the reduced model. 
+
+### Multicollinearity {-}
+
+With the presence of multiple predictors, it is often tempting to start by including all the predictors in the model. 
+
+```{r}
+##fit MLR with all predictors
+all<-lm(Systol_BP~., data=Data)
+```
+
+There are a few ways to detect the presence of multicollinearity in our model.
+
+#### $t$ tests and ANOVA $F$ test {-}
+
+The presence of a lot of insignificant $t$ tests for the regression coefficients, along a highly significant ANOVA $F$ test is an indication that multicollinearity is present:
+
+```{r}
+##look at t tests, and F test
+summary(all)
+```
+
+Notice how five of the $t$ tests are insignificant, but the ANOVA $F$ is highly significant. So we have evidence of multicollinearity.
+
+#### Standard errors of estimated coefficients  {-}
+
+Looking at the output from `summary()`, we do not see any standard errors that are large. If we have strong multicollinearity, standard errors should be large. 
+
+#### Correlation between pairs of predictors {-}
+
+We can also look at the pairwise correlations among predictors:
+
+```{r}
+##correlation matrix, round to 3 decimal
+round(cor(Data[,-1]),3)
+```
+
+Looking at this matrix, we notice that pairs of predictors involving $x_1, x_2, x_3$, and $x_4, x_6, x_7$ have high correlations. For pairs involving other predictors, the correlations are a lot weaker. So there is some degree of multicollinearity. 
+
+#### VIFs {-}
+
+High VIFs are an indication of multicollinearity.
+
+```{r}
+##VIFs
+library(faraway)
+faraway::vif(all)
+```
+
+The largest VIFs belong to $x_2$ and $x_3$, which are 34.289220 and 24.387489 respectively. VIFs above 10 indicate a strong degree of multicollinearity. 
+
+To summarize what we have seen:
+
+- The ANOVA F test is significant, but a lot of the t tests are insignificant.
+- We don't see huge standard errors for the estimated coefficients.
+- Some of the predictors have high pairwise correlations, e.g. Pairs involving $x_1, x_2, x_3$, and $x_4, x_6, x_7$.
+- The largest VIF is 34.289220.
+
+Collectively, there is some degree of multicollinearity in this model. 
+
+#### Next steps {-}
+
+We have identified that predictors $x_1, x_2, x_3$, and $x_4, x_6, x_7$ are the ones that are most likely to be causing multicollinearity. A solution will be to use a subset of these predictors and not all of them. 
+
+Using subject matter knowledge can help with this decision.
