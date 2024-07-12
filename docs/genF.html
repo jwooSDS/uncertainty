@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 7 General Linear \(F\) Test and Multicollinearity | Linear Models for Data Science</title>
+<meta name="author" content="Jeffrey Woo">
+<meta name="description" content="7.1 Introduction The purpose of multiple linear regression is to use more than one predictor to predict a response variable. This modules explores an approach to choosing which variables to...">
+<meta name="generator" content="bookdown 0.34 with bs4_book()">
+<meta property="og:title" content="Chapter 7 General Linear \(F\) Test and Multicollinearity | Linear Models for Data Science">
+<meta property="og:type" content="book">
+<meta property="og:description" content="7.1 Introduction The purpose of multiple linear regression is to use more than one predictor to predict a response variable. This modules explores an approach to choosing which variables to...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 7 General Linear \(F\) Test and Multicollinearity | Linear Models for Data Science">
+<meta name="twitter:description" content="7.1 Introduction The purpose of multiple linear regression is to use more than one predictor to predict a response variable. This modules explores an approach to choosing which variables to...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.2/transition.js"></script><script src="libs/bs3compat-0.4.2/tabs.js"></script><script src="libs/bs3compat-0.4.2/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<style type="text/css">
+    /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+        }
+    .hanging div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }
+  </style>
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Linear Models for Data Science</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Preface</a></li>
+<li><a class="" href="wrangling.html"><span class="header-section-number">1</span> Data Wrangling with R</a></li>
+<li><a class="" href="viz.html"><span class="header-section-number">2</span> Data Visualization with R Using ggplot2</a></li>
+<li><a class="" href="slr.html"><span class="header-section-number">3</span> Basics with Simple Linear Regression (SLR)</a></li>
+<li><a class="" href="inf.html"><span class="header-section-number">4</span> Inference with Simple Linear Regression (SLR)</a></li>
+<li><a class="" href="diag.html"><span class="header-section-number">5</span> Model Diagnostics and Remedial Measures in SLR</a></li>
+<li><a class="" href="mlr.html"><span class="header-section-number">6</span> Multiple Linear Regression (MLR)</a></li>
+<li><a class="active" href="genF.html"><span class="header-section-number">7</span> General Linear \(F\) Test and Multicollinearity</a></li>
+<li><a class="" href="cat.html"><span class="header-section-number">8</span> Categorical Predictors in MLR</a></li>
+<li><a class="" href="intro.html"><span class="header-section-number">9</span> Introduction</a></li>
+<li><a class="" href="methods.html"><span class="header-section-number">10</span> Methods</a></li>
+<li><a class="" href="references.html">References</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="genF" class="section level1" number="7">
+<h1>
+<span class="header-section-number">7</span> General Linear <span class="math inline">\(F\)</span> Test and Multicollinearity<a class="anchor" aria-label="anchor" href="#genF"><i class="fas fa-link"></i></a>
+</h1>
+<div id="introduction-6" class="section level2" number="7.1">
+<h2>
+<span class="header-section-number">7.1</span> Introduction<a class="anchor" aria-label="anchor" href="#introduction-6"><i class="fas fa-link"></i></a>
+</h2>
+<p>The purpose of multiple linear regression is to use more than one predictor to predict a response variable. This modules explores an approach to choosing which variables to include in a multiple regression model. For example, many variables can be used to predict someone’s systolic blood pressure, such as their age, weight, height, and pulse rate. While all of those predictors are likely to influence the systolic blood pressure, we want to know if we need all of them, or if a subset of those predictors will perform just as well. We will use the general linear <span class="math inline">\(F\)</span> test to do so.</p>
+<p>Another issue with having multiple predictors is that the likelihood that at least one of the predictors are linearly dependent, or correlated, with some other predictors increases. This is called multicollinearity. There are some negative consequences if multicollinearity is present. We will learn about these consequences, how to diagnose the presence of multicollinearity, and some solutions if multicollinearity is present.</p>
+</div>
+<div id="the-general-linear-f-test" class="section level2" number="7.2">
+<h2>
+<span class="header-section-number">7.2</span> The General Linear <span class="math inline">\(F\)</span> Test<a class="anchor" aria-label="anchor" href="#the-general-linear-f-test"><i class="fas fa-link"></i></a>
+</h2>
+<div id="motivation-1" class="section level3" number="7.2.1">
+<h3>
+<span class="header-section-number">7.2.1</span> Motivation<a class="anchor" aria-label="anchor" href="#motivation-1"><i class="fas fa-link"></i></a>
+</h3>
+<p>In the previous module, we noted the limitation of the <span class="math inline">\(t\)</span> test and ANOVA <span class="math inline">\(F\)</span> test in MLR:</p>
+<ul>
+<li>We can <strong>only drop 1 predictor</strong> based on a <span class="math inline">\(t\)</span> test.</li>
+<li>We can <strong>drop all predictors</strong> based on an ANOVA <span class="math inline">\(F\)</span> test.</li>
+</ul>
+<p>What if we wish to drop more than 1 predictor simultaneously, but not all, from the model? We will explore this via the <strong>general linear <span class="math inline">\(F\)</span> test</strong>. In fact, the <span class="math inline">\(t\)</span> test and ANOVA <span class="math inline">\(F\)</span> test are actually special cases of the general linear <span class="math inline">\(F\)</span> test.</p>
+<p>Let us look at a motivating example, using the dataset <code>Peruvian.txt</code>. The data contains variables relating to blood pressures of Peruvians who have migrated from rural high altitude areas to urban lower altitude areas. The variables are:</p>
+<ul>
+<li>
+<span class="math inline">\(y\)</span>: Systolic blood pressure</li>
+<li>
+<span class="math inline">\(x_1\)</span>: Age</li>
+<li>
+<span class="math inline">\(x_2\)</span>: Years in urban area</li>
+<li>
+<span class="math inline">\(x_3\)</span>: fraction of life in urban area <span class="math inline">\((x_1/x_2)\)</span>
+</li>
+<li>
+<span class="math inline">\(x_4\)</span>: Weight in kg</li>
+<li>
+<span class="math inline">\(x_5\)</span>: Height in mm</li>
+<li>
+<span class="math inline">\(x_6\)</span>: Chin skinfold</li>
+<li>
+<span class="math inline">\(x_7\)</span>: Forearm skinfold</li>
+<li>
+<span class="math inline">\(x_8\)</span>: Calf skinfold</li>
+<li>
+<span class="math inline">\(x_9\)</span>: Resting pulse rate</li>
+</ul>
+<p>We want to assess how the systolic blood pressure of these migrants may be predicted and related to these predictors.</p>
+<div class="sourceCode" id="cb261"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">Data</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.table</a></span><span class="op">(</span><span class="st">"Peruvian.txt"</span>, header<span class="op">=</span><span class="cn">TRUE</span>,sep<span class="op">=</span><span class="st">""</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">Data</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##   Systol_BP Age Years fraclife Weight Height Chin Forearm Calf Pulse
+## 1       170  21     1 0.047619   71.0   1629  8.0     7.0 12.7    88
+## 2       120  22     6 0.272727   56.5   1569  3.3     5.0  8.0    64
+## 3       125  24     5 0.208333   56.0   1561  3.3     1.3  4.3    68
+## 4       148  24     1 0.041667   61.0   1619  3.7     3.0  4.3    52
+## 5       140  25     1 0.040000   65.0   1566  9.0    12.7 20.7    72
+## 6       106  27    19 0.703704   62.0   1639  3.0     3.3  5.7    72</code></pre>
+<p>Let us fit an MLR with all the predictors and take a look at the <span class="math inline">\(t\)</span> tests and ANOVA <span class="math inline">\(F\)</span> test:</p>
+<div class="sourceCode" id="cb263"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">result</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Systol_BP</span><span class="op">~</span><span class="va">.</span>, data<span class="op">=</span><span class="va">Data</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = Systol_BP ~ ., data = Data)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -12.3443  -6.3972   0.0507   5.7293  14.5257 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  146.81883   48.97099   2.998 0.005526 ** 
+## Age           -1.12143    0.32741  -3.425 0.001855 ** 
+## Years          2.45538    0.81458   3.014 0.005306 ** 
+## fraclife    -115.29384   30.16903  -3.822 0.000648 ***
+## Weight         1.41393    0.43097   3.281 0.002697 ** 
+## Height        -0.03464    0.03686  -0.940 0.355196    
+## Chin          -0.94369    0.74097  -1.274 0.212923    
+## Forearm       -1.17085    1.19330  -0.981 0.334613    
+## Calf          -0.15867    0.53716  -0.295 0.769809    
+## Pulse          0.11455    0.17043   0.672 0.506822    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 8.655 on 29 degrees of freedom
+## Multiple R-squared:  0.6674, Adjusted R-squared:  0.5641 
+## F-statistic: 6.465 on 9 and 29 DF,  p-value: 5.241e-05</code></pre>
+<p>Notice the <span class="math inline">\(t\)</span> tests are insignificant for a lot of the coefficients (the last five). Individually, each <span class="math inline">\(t\)</span> test is informing us that we can drop that specific predictor, while leaving the other predictors in the model.</p>
+<p>An erroneous interpretation is to say collectively, these <span class="math inline">\(t\)</span> tests inform us we can drop all of these predictors, <span class="math inline">\(x_5\)</span> to <span class="math inline">\(x_9\)</span>, from the model. This is a misconception.</p>
+<p>One idea could be to drop the most insignificant predictor, refit the model, and reassess which predictors are insignificant, and continue dropping the most insignificant predictor and refitting the model until all <span class="math inline">\(t\)</span> tests are significant. We will end up conducting multiple hypothesis tests to do so. If possible, we should limit the number of hypothesis tests we conduct: the more tests we do, the likelihood of us wrongly rejecting a null hypothesis increases.</p>
+<p>This is where the <strong>general linear <span class="math inline">\(F\)</span> test</strong> (sometimes called a partial <span class="math inline">\(F\)</span> test) is used. We can perform one test to assess if we can simultaneously drop multiple predictors from the model.</p>
+<p>Based on this output, we consider dropping <span class="math inline">\(x_5, x_6, x_7, x_8, x_9\)</span> since their <span class="math inline">\(t\)</span> tests are insignificant.</p>
+</div>
+<div id="setting-up-the-general-linear-f-test" class="section level3" number="7.2.2">
+<h3>
+<span class="header-section-number">7.2.2</span> Setting up the general linear <span class="math inline">\(F\)</span> test<a class="anchor" aria-label="anchor" href="#setting-up-the-general-linear-f-test"><i class="fas fa-link"></i></a>
+</h3>
+<p>The general linear <span class="math inline">\(F\)</span> test allows us to assess if multiple predictors can be dropped simultaneously from the model. The associated F statistic measures the change in the <span class="math inline">\(SS_R\)</span> (or <span class="math inline">\(SS_{res}\)</span>) with the removal of these predictors from the model. The test is based on the following concepts:</p>
+<ul>
+<li>As long as we have the same response variable, <strong><span class="math inline">\(SS_T\)</span> is constant</strong>, regardless of the model. This is because <span class="math inline">\(SS_T = \sum(y_i - \bar{y})\)</span>. It only involves the response variable.</li>
+<li>
+<span class="math inline">\(SS_T = SS_R + SS_{Res}\)</span>.</li>
+<li>Each time predictors are added to the model, the <span class="math inline">\(SS_R\)</span> increases and the <span class="math inline">\(SS_{Res}\)</span> decreases <strong>by the same amount</strong>, since <span class="math inline">\(SS_T\)</span> stays constant.</li>
+</ul>
+<p>The general linear <span class="math inline">\(F\)</span> test answers the question: is the change in <span class="math inline">\(SS_R\)</span> (or change in <span class="math inline">\(SS_{res}\)</span>) significant with the removal or addition of predictor(s)?</p>
+<p>This question can be answered in a framework that compares two models:</p>
+<ul>
+<li>a <strong>full model</strong>, denoted by <span class="math inline">\(F\)</span>, that uses all predictors under consideration,</li>
+<li>a <strong>reduced model</strong>, denoted by <span class="math inline">\(R\)</span>, that results if some predictors from the full model are dropped.</li>
+</ul>
+</div>
+<div id="hypothesis-statements-1" class="section level3" number="7.2.3">
+<h3>
+<span class="header-section-number">7.2.3</span> Hypothesis statements<a class="anchor" aria-label="anchor" href="#hypothesis-statements-1"><i class="fas fa-link"></i></a>
+</h3>
+<p>Based on this framework, the null and alternative hypotheses for the <code>Peruvian.txt</code> dataset is</p>
+<p><span class="math display">\[
+H_0: \beta_5 = \beta_6 = \beta_7 = \beta_8 = \beta_9 = 0, H_a: \text{ at least one coeff in } H_0 \text{ is not zero}.
+\]</span></p>
+<p>In general, the null hypothesis states that the <strong>parameters of the terms that we wish to drop are all 0.</strong> Therefore, the null hypothesis supports the reduced model, R.</p>
+<p>The alternative hypothesis states that we cannot drop all the terms that we wish to drop. Therefore, the alternative hypothesis supports the full model, F.</p>
+</div>
+<div id="test-statistic" class="section level3" number="7.2.4">
+<h3>
+<span class="header-section-number">7.2.4</span> Test statistic<a class="anchor" aria-label="anchor" href="#test-statistic"><i class="fas fa-link"></i></a>
+</h3>
+<p>The associated test statistic for the general linear <span class="math inline">\(F\)</span> test is</p>
+<p><span class="math display" id="eq:7ssr">\[\begin{equation}
+F_0=\frac{[SS_R(F)-SS_R(R)]/r}{SS_{res}(F)/(n-p)},
+\tag{7.1}
+\end{equation}\]</span></p>
+<p><strong>or equivalently</strong></p>
+<p><span class="math display" id="eq:7sse">\[\begin{equation}
+F_0=\frac{[SS_{res}(R)-SS_{res}(F)]/r}{SS_{res}(F)/(n-p)}.
+\tag{7.2}
+\end{equation}\]</span></p>
+<p>The test statistic <span class="math inline">\(F_0\)</span> is compared with an <span class="math inline">\(F_{r,n-p}\)</span> distribution. The notation is as follows:</p>
+<ul>
+<li>
+<span class="math inline">\(SS_R(F)\)</span> denotes the <span class="math inline">\(SS_R\)</span> of full model,</li>
+<li>
+<span class="math inline">\(SS_R(R)\)</span> denotes the <span class="math inline">\(SS_R\)</span> of reduced model,</li>
+<li>
+<span class="math inline">\(r\)</span> denotes number of parameters being dropped/tested,</li>
+<li>
+<span class="math inline">\(p\)</span> denotes the number of parameters in the full model,</li>
+<li>
+<span class="math inline">\(SS_{res}(F)\)</span> denotes the <span class="math inline">\(SS_{res}\)</span> of full model,</li>
+<li>
+<span class="math inline">\(SS_{res}(R)\)</span> denotes the <span class="math inline">\(SS_{res}\)</span> of reduced model.</li>
+</ul>
+<p>Note that the change in <span class="math inline">\(SS_R\)</span>, <span class="math inline">\(SS_R(F)-SS_R(R)\)</span> is always equal to the change in <span class="math inline">\(SS_{res}\)</span>, <span class="math inline">\(SS_{res}(R)-SS_{res}(F)\)</span>. Therefore, <a href="genF.html#eq:7ssr">(7.1)</a> is always equal to <a href="genF.html#eq:7sse">(7.2)</a>.</p>
+</div>
+<div id="worked-example" class="section level3" number="7.2.5">
+<h3>
+<span class="header-section-number">7.2.5</span> Worked example<a class="anchor" aria-label="anchor" href="#worked-example"><i class="fas fa-link"></i></a>
+</h3>
+<p>Let us look at some output for our <code>Peruvian.txt</code> dataset:</p>
+<div class="sourceCode" id="cb265"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">reduced</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Systol_BP</span><span class="op">~</span><span class="va">Age</span><span class="op">+</span><span class="va">Years</span><span class="op">+</span><span class="va">fraclife</span><span class="op">+</span><span class="va">Weight</span>, data<span class="op">=</span><span class="va">Data</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">reduced</span>,<span class="va">result</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## Analysis of Variance Table
+## 
+## Model 1: Systol_BP ~ Age + Years + fraclife + Weight
+## Model 2: Systol_BP ~ Age + Years + fraclife + Weight + Height + Chin + 
+##     Forearm + Calf + Pulse
+##   Res.Df    RSS Df Sum of Sq      F Pr(&gt;F)
+## 1     34 2629.7                           
+## 2     29 2172.6  5    457.12 1.2204 0.3247</code></pre>
+<ul>
+<li><p>In the output, model 1 has the predictors are <span class="math inline">\(x_1, x_2, x_3, x_4\)</span>, while model 2 has the predictors <span class="math inline">\(x_1, \cdots, x_9\)</span>. So model 1 is the reduced model, and model 2 is the full model.</p></li>
+<li><p>We see some information presented in a table. The first line corresponds to model 1, the second line corresponds to model 2.</p></li>
+<li><p>Under the column <code>RSS</code>, we have the values for <span class="math inline">\(SS_{res}\)</span>. Admittedly, this can be a bit confusing, but it is not <span class="math inline">\(SS_R\)</span>. So we can see that <span class="math inline">\(SS_{res}(R) = 2629.7\)</span> and <span class="math inline">\(SS_{res}(F) = 2172.6\)</span>. Note that <span class="math inline">\(SS_{res}\)</span> is always smaller for the full model, and <span class="math inline">\(SS_R\)</span> is always larger for the full model.</p></li>
+<li><p>Under the column <code>Res.DF</code>, we have the degrees of freedom for the <span class="math inline">\(SS_{res}\)</span> of that model. In the calculation of the <span class="math inline">\(F\)</span> statistic, we want the value associated with the full model, 29.</p></li>
+<li><p>Under the column <code>Df</code>, we have the number of parameters that we are testing to drop, which is 5.</p></li>
+<li><p>Under the column <code>Sum of Sq</code>, we have the difference in <span class="math inline">\(SS_{res}\)</span> between both models, <span class="math inline">\(SS_{res}(R) - SS_{res}(F) = 2629.7 - 2172.6 = 457.12\)</span>.</p></li>
+<li><p>Under the column <code>F</code>, we have the F statistic, <span class="math inline">\(F_0 = 1.2204\)</span>. We can verify this calculation using <a href="genF.html#eq:7sse">(7.2)</a>, <span class="math inline">\(F_0 = \frac{(2629.7 - 2172.6)/5}{2172.6/29}\)</span> (with some rounding).</p></li>
+<li><p>The p-value of this general linear <span class="math inline">\(F\)</span> test is reported in the last column. This can be found using:</p></li>
+</ul>
+<div class="sourceCode" id="cb267"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fl">1</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/stats/Fdist.html">pf</a></span><span class="op">(</span><span class="fl">1.2204</span>, <span class="fl">5</span>, <span class="fl">29</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 0.3247085</code></pre>
+<p>The critical value can be found using:</p>
+<div class="sourceCode" id="cb269"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Fdist.html">qf</a></span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="fl">0.05</span>, <span class="fl">5</span>, <span class="fl">29</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 2.545386</code></pre>
+<p>So we fail to reject the null hypothesis. The data do not support the alternative hypothesis (i.e. the full model). So we go with the reduced model.</p>
+</div>
+<div id="comparison-of-general-linear-f-test-with-other-hypothesis-tests-in-mlr" class="section level3" number="7.2.6">
+<h3>
+<span class="header-section-number">7.2.6</span> Comparison of general linear <span class="math inline">\(F\)</span> test with other hypothesis tests in MLR<a class="anchor" aria-label="anchor" href="#comparison-of-general-linear-f-test-with-other-hypothesis-tests-in-mlr"><i class="fas fa-link"></i></a>
+</h3>
+<p>The <span class="math inline">\(t\)</span> test and ANOVA <span class="math inline">\(F\)</span> test in MLR are special cases of the general linear <span class="math inline">\(F\)</span> test, when <span class="math inline">\(r=1\)</span> and <span class="math inline">\(r=p-1\)</span> respectively.</p>
+<ul>
+<li><p>For the <span class="math inline">\(t\)</span> test, the reduced model has 1 less term than the full model. The <span class="math inline">\(F_0\)</span> statistic is compared with an <span class="math inline">\(F_{1,n-p}\)</span> distribution. It turns out that an <span class="math inline">\(F_{1,n-p}\)</span> distribution is directly related with a <span class="math inline">\(t_{n-p}\)</span> distribution, and so the general linear <span class="math inline">\(F\)</span> test is exactly the same as the <span class="math inline">\(t\)</span> test when dropping 1 term.</p></li>
+<li><p>For the ANOVA <span class="math inline">\(F\)</span> test. The reduced model drops all the terms and has only the intercept. Some call this the intercept-only model.</p></li>
+</ul>
+</div>
+<div id="alternative-approach-to-general-linear-f-test" class="section level3" number="7.2.7">
+<h3>
+<span class="header-section-number">7.2.7</span> Alternative approach to general linear <span class="math inline">\(F\)</span> test<a class="anchor" aria-label="anchor" href="#alternative-approach-to-general-linear-f-test"><i class="fas fa-link"></i></a>
+</h3>
+<p>There is another way in which the information needed to perform a general linear <span class="math inline">\(F\)</span> test. This approach is called the <strong>sequential sums of squares</strong> (sometimes called extra sums of squares). It works on the same principle that every time a predictor is added to the model, the <span class="math inline">\(SS_R\)</span> of the model increases, and the <span class="math inline">\(SS_{res}\)</span> decreases by the same amount, since <span class="math inline">\(SS_T\)</span> is constant. The information is displayed as we add one predictor at a time. Let us define some notation:</p>
+<ul>
+<li>
+<span class="math inline">\(SS_R(x_1)\)</span> denotes <span class="math inline">\(SS_R\)</span> when <span class="math inline">\(x_1\)</span> is the only predictor in the model.</li>
+<li>
+<span class="math inline">\(SS_R(x_1, x_2)\)</span> denotes <span class="math inline">\(SS_R\)</span> when <span class="math inline">\(x_1, x_2\)</span> are in the model.</li>
+<li>
+<span class="math inline">\(SS_R(x_2|x_1)\)</span> denotes the increase in <span class="math inline">\(SS_R\)</span> when <span class="math inline">\(x_2\)</span> is added to the model with <span class="math inline">\(x_1\)</span> already in it. It is read as <span class="math inline">\(SS_R\)</span> of <span class="math inline">\(x_2\)</span> given <span class="math inline">\(x_1\)</span>.</li>
+</ul>
+<p>Based on this example, <span class="math inline">\(SS_R(x_2|x_1) = SS_R(x_1, x_2) - SS_R(x_1)\)</span>, and so <span class="math inline">\(SS_R(x_1, x_2) = SS_R(x_1) + SS_R(x_2|x_1)\)</span>. Note that <span class="math inline">\(SS_R(x_2|x_1)\)</span> is not equal to <span class="math inline">\(SS_R(x_2)\)</span>, as the latter denotes <span class="math inline">\(SS_R\)</span> when <span class="math inline">\(x_2\)</span> is the only predictor in the model.</p>
+<p>Let us see how we can use the sequential sums of squares with the <code>Peruvian.txt</code> dataset:</p>
+<div class="sourceCode" id="cb271"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## Analysis of Variance Table
+## 
+## Response: Systol_BP
+##           Df  Sum Sq Mean Sq F value    Pr(&gt;F)    
+## Age        1    0.22    0.22  0.0030  0.956852    
+## Years      1   82.55   82.55  1.1019  0.302514    
+## fraclife   1 3112.40 3112.40 41.5448 4.728e-07 ***
+## Weight     1  706.55  706.55  9.4311  0.004603 ** 
+## Height     1    1.68    1.68  0.0224  0.882113    
+## Chin       1  297.68  297.68  3.9735  0.055703 .  
+## Forearm    1  113.91  113.91  1.5205  0.227440    
+## Calf       1   10.01   10.01  0.1336  0.717419    
+## Pulse      1   33.84   33.84  0.4518  0.506822    
+## Residuals 29 2172.59   74.92                      
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+<p>The values under the column “Sum Sq” give the sequential <span class="math inline">\(SS_{R}\)</span>s. So,</p>
+<ul>
+<li>for the first line, we have <span class="math inline">\(SS_{R}(x_1) = 0.22\)</span>,</li>
+<li>the second line, we have <span class="math inline">\(SS_{R}(x_2|x_1) = 82.55\)</span>,</li>
+<li>then <span class="math inline">\(SS_{R}(x_3|x_1, x_2) = 3112.40\)</span>,</li>
+<li>and so on for each term,</li>
+<li>finally, <span class="math inline">\(SS_{R}(x_9|x_1, x_2, \cdots, x_8) = 33.84\)</span>.</li>
+<li>The very last line refers to <span class="math inline">\(SS_{Res}(x_1, x_2, \cdots, x_9) = 2172.59\)</span>.</li>
+</ul>
+<p>Essentially, the output for each term informs us the increase in <span class="math inline">\(SS_R\)</span> when that term is added to the model, given that the previously listed terms are already in the model.</p>
+<p>Notice the order the sequential sums of squares are displayed is the same order used when entering the predictors in <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code>.</p>
+<p>We are still testing</p>
+<p><span class="math display">\[
+H_0: \beta_5 = \beta_6 = \beta_7 = \beta_8 = \beta_9 = 0, H_a: \text{ at least one coeff in } H_0 \text{ is not zero}.
+\]</span></p>
+<p>Using <a href="genF.html#eq:7ssr">(7.1)</a>, the F statistic for this test is</p>
+<p><span class="math inline">\(\begin{aligned} F_0 &amp;= \frac{[SS_R(F)-SS_R(R)]/r}{SS_{res}(F)/(n-p)} \\  &amp;= \frac{(1.68+297.68+113.91+10.01+33.84)/5}{2172.59/29}\\  &amp;= 1.220339. \end{aligned}\)</span></p>
+<p>Compare this <span class="math inline">\(F_0\)</span> statistic using this approach with the example shown in Section 2.5. We have the exact same result (other than rounding).</p>
+<p><em>Please view the associated video for more explanation on the extra sums of squares approach.</em></p>
+<div id="practice-questions-3" class="section level4" number="7.2.7.1">
+<h4>
+<span class="header-section-number">7.2.7.1</span> Practice questions<a class="anchor" aria-label="anchor" href="#practice-questions-3"><i class="fas fa-link"></i></a>
+</h4>
+<p>We will use the sequential sums of squares for the <code>Peruvian.txt</code> dataset:</p>
+<div class="sourceCode" id="cb273"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## Analysis of Variance Table
+## 
+## Response: Systol_BP
+##           Df  Sum Sq Mean Sq F value    Pr(&gt;F)    
+## Age        1    0.22    0.22  0.0030  0.956852    
+## Years      1   82.55   82.55  1.1019  0.302514    
+## fraclife   1 3112.40 3112.40 41.5448 4.728e-07 ***
+## Weight     1  706.55  706.55  9.4311  0.004603 ** 
+## Height     1    1.68    1.68  0.0224  0.882113    
+## Chin       1  297.68  297.68  3.9735  0.055703 .  
+## Forearm    1  113.91  113.91  1.5205  0.227440    
+## Calf       1   10.01   10.01  0.1336  0.717419    
+## Pulse      1   33.84   33.84  0.4518  0.506822    
+## Residuals 29 2172.59   74.92                      
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+<ol style="list-style-type: decimal">
+<li>Carry out a general linear <span class="math inline">\(F\)</span> test to assess if we can drop <span class="math inline">\(x_7, x_8, x_9\)</span> from the model with all predictors.</li>
+<li>What is the value of <span class="math inline">\(SS_R(x_1, x_2, x_3)\)</span>?</li>
+<li>What is the value of <span class="math inline">\(SS_{res}(x_1, x_2, x_3)\)</span>?</li>
+<li>What is the value of <span class="math inline">\(SS_{res}(x_1, x_2, \cdots, x_8)\)</span>?</li>
+</ol>
+<p><em>Please view the associated video for a review of these practice questions.</em></p>
+</div>
+</div>
+</div>
+<div id="multicollinearity" class="section level2" number="7.3">
+<h2>
+<span class="header-section-number">7.3</span> Multicollinearity<a class="anchor" aria-label="anchor" href="#multicollinearity"><i class="fas fa-link"></i></a>
+</h2>
+<p>What happens if at least one predictor is almost a linear combination of other predictors? This is called multicollinearity, and there are negative consequences on our MLR model. We will learn what these negative consequences are, how to detect multicollinearity, and some solutions. As we consider more and more predictors for our model, multicollinearity is more likely to exist.</p>
+<div id="linear-dependency-multicollinearity" class="section level3" number="7.3.1">
+<h3>
+<span class="header-section-number">7.3.1</span> Linear dependency &amp; multicollinearity<a class="anchor" aria-label="anchor" href="#linear-dependency-multicollinearity"><i class="fas fa-link"></i></a>
+</h3>
+<p>Before we define multicollinearity, we have to define linear dependency. Recall that we can write the MLR model in matrix form as</p>
+<p><span class="math display" id="eq:7matrix">\[\begin{equation}
+\boldsymbol{y} = \boldsymbol{X \beta} + \boldsymbol{\epsilon}.
+\tag{7.3}
+\end{equation}\]</span></p>
+<p>where <span class="math inline">\(\boldsymbol{X}\)</span> is the design matrix and is</p>
+<p><span class="math display">\[
+\left[
+\begin{array}{cccc}
+   1 &amp; x_{11} &amp; \cdots &amp; x_{1k}  \\
+   1 &amp; x_{21} &amp; \cdots &amp; x_{2k}  \\
+   \vdots   \\
+   1 &amp; x_{n1} &amp; \cdots &amp; x_{nk}  \\
+\end{array}
+\right]
+\]</span></p>
+<p>Note that each column of the design matrix (other than column 1) represents each predictor variable.</p>
+<p>The columns of a matrix are <strong>linearly dependent</strong> if at least one column can be expressed as a linear combination of the other columns (there exist nonzero constants <span class="math inline">\(c_i\)</span> such that <span class="math inline">\(c_1x_1 + c_2x_2 + ... + c_{k}x_{k} = 0\)</span>).</p>
+<p>As an example, suppose we have three predictors: <span class="math inline">\(x_1\)</span> denoting SAT verbal score, <span class="math inline">\(x_2\)</span> denoting SAT math score, and <span class="math inline">\(x_3\)</span> denoting SAT score. Since SAT score is the sum of the SAT verbal and math scores, <span class="math inline">\(x_3 = x_1 + x_2\)</span>. So if we were to create the design matrix for these three predictors, we have linear dependency. With linear dependency, we can predict <span class="math inline">\(x_3\)</span> from <span class="math inline">\(x_1, x_2\)</span> with no error. Recall that the least squares estimators are found using</p>
+<p><span class="math display" id="eq:7ls">\[\begin{equation}
+\boldsymbol{\hat\beta} = \left(\boldsymbol{X}^{\prime} \boldsymbol{X} \right)^{-1} \boldsymbol{X}^{\prime} \boldsymbol{y}.
+\tag{7.4}
+\end{equation}\]</span></p>
+<p>If there is a linear dependence among the columns of <span class="math inline">\(\boldsymbol{X}\)</span>, then <span class="math inline">\(\bf{(X^{\prime}X)}^{-1}\)</span> does not exist. This means that unique estimates of <span class="math inline">\(\beta_j\)</span>’s cannot be determined.</p>
+<p><strong>Multicollinearity</strong> exists in our model when at least one predictor is <strong>almost linearly dependent</strong>, or can be predicted with a high degree of accuracy, from the other predictors.</p>
+<p>An example of multicollinearity would be if we have predictors <span class="math inline">\(x_1\)</span> denoting right arm length, <span class="math inline">\(x_2\)</span> denoting right thigh length, and <span class="math inline">\(x_3\)</span> denoting right calf length. If we know someone’s right arm and right thigh lengths, we can probably predict their right calf length with a high degree of accuracy. In this example, we are likely to have multicollinearity.</p>
+<p>With multiple predictors, we will always find some degree of <strong>collinearity</strong>. The question is whether this degree is high enough warrant our concern.</p>
+<p>When predictors are linearly dependent on each other, they do not provide independent information in their association to the response variable. It becomes difficult to <strong>separate</strong> their effects on the response variable.</p>
+</div>
+<div id="sources" class="section level3" number="7.3.2">
+<h3>
+<span class="header-section-number">7.3.2</span> Sources of multicollinearity<a class="anchor" aria-label="anchor" href="#sources"><i class="fas fa-link"></i></a>
+</h3>
+<p>There are a few reasons for the presence of multicollinearity.</p>
+<div id="study-design" class="section level4" number="7.3.2.1">
+<h4>
+<span class="header-section-number">7.3.2.1</span> Study design<a class="anchor" aria-label="anchor" href="#study-design"><i class="fas fa-link"></i></a>
+</h4>
+<p>The design of the study might lead to multicollinearity, and so a solution will be to change its design. Let us consider this example:</p>
+<p>Suppose the Virginia Department of Motor Vehicles (DMV) wants to study the waiting time customers spend waiting in line, based on the number of people ahead in line and number of counters open.</p>
+<ul>
+<li><p>The number of people ahead in line and number of counters open could be highly positively correlated; the more people in line, the more counters will be staffed by the DMV. So the nature of the study leads to multicollinearity.</p></li>
+<li><p>To break the multicollinearity between the number of people ahead in line and number of counters open, we could collect data on instances where the number of people in line is high, yet the number of counters opened is low, and vice versa. This will allow us to isolate the effect of each predictor on waiting times.</p></li>
+</ul>
+</div>
+<div id="nature-of-the-data" class="section level4" number="7.3.2.2">
+<h4>
+<span class="header-section-number">7.3.2.2</span> Nature of the data<a class="anchor" aria-label="anchor" href="#nature-of-the-data"><i class="fas fa-link"></i></a>
+</h4>
+<p>Sometimes, the very nature of the variables lead to multicollinearity and we cannot do much to remedy this.</p>
+<p>Suppose we wish to investigate electric consumption in households based on income and size of the home in a city.</p>
+<ul>
+<li><p>Income and size of the home are likely to be highly correlated, due to high income earners wanting to buy bigger homes, and low income earners being unable to buy bigger homes.</p></li>
+<li><p>We cannot force high income earners to live in small homes, or have low income earners buy bigger homes to break the multicollinearity. In this setting, we have to choose one of the predictors.</p></li>
+</ul>
+</div>
+<div id="too-many-predictors" class="section level4" number="7.3.2.3">
+<h4>
+<span class="header-section-number">7.3.2.3</span> Too many predictors<a class="anchor" aria-label="anchor" href="#too-many-predictors"><i class="fas fa-link"></i></a>
+</h4>
+<p>As we collect data on more and more variables, we are more likely to encounter multicollinearity. We have to ask if some predictors are provide the same, or similar information, as other predictors.</p>
+</div>
+</div>
+<div id="consequences-of-multicollinearity" class="section level3" number="7.3.3">
+<h3>
+<span class="header-section-number">7.3.3</span> Consequences of multicollinearity<a class="anchor" aria-label="anchor" href="#consequences-of-multicollinearity"><i class="fas fa-link"></i></a>
+</h3>
+<p>The main consequence with multicollinearity is that we have <strong>high variance with the estimated coefficients</strong>. This means the value of the estimated coefficient may be very different from the true value. The consequences from this are:</p>
+<ul>
+<li><p>Estimated coefficients can be difficult to interpret, as the estimated value may be different from the true parameter. Also, if 2 predictors are correlated, then holding one constant while increasing the other one may not make much sense.</p></li>
+<li><p>Algebraic sign of coefficients can be different from what is known theoretically. If the true coefficient is positive, but because the estimated coefficient is different, it could be negative. So we may think the direction of the association is opposite.</p></li>
+<li><p>Predictors that we know should impact the response variable are found to be insignificant, as the standard error of the estimated coefficient is large, and hence the <span class="math inline">\(t\)</span> statistic is small. We may erroneously think that predictor is not related to the response variable.</p></li>
+</ul>
+<p>Interestingly, predictions may still be unbiased if the regression assumptions are met.</p>
+<p>So depending on what you are using your regression model for, multicollinearity may or may not be a huge problem. Recall the two main uses of regression models:</p>
+<ol style="list-style-type: decimal">
+<li>
+<strong>Prediction</strong>: Predict a future value of a response variable, using information from predictor variables.</li>
+<li>
+<strong>Association</strong>: Quantify the relationship between variables. How does a change in the predictor variable change the value of the response variable?</li>
+</ol>
+<ul>
+<li>If the goal of your regression analysis is to interpret the coefficients and understand the effects of each the predictors on the response variable, multicollinearity is a big issue.</li>
+<li>If the goal of your regression analysis is predict future values of the response, then multicollinearity may be less of an issue as long as you do not extrapolate.</li>
+</ul>
+</div>
+</div>
+<div id="detecting-multicollinearity" class="section level2" number="7.4">
+<h2>
+<span class="header-section-number">7.4</span> Detecting Multicollinearity<a class="anchor" aria-label="anchor" href="#detecting-multicollinearity"><i class="fas fa-link"></i></a>
+</h2>
+<p>The following are indicators of the presence of multicollinearity:</p>
+<ol style="list-style-type: decimal">
+<li><p><strong>Insignificant</strong> results in individual tests on the regression
+coefficients for important predictor variables. A significant ANOVA F test provides more evidence of multicollinearity.</p></li>
+<li><p>The presence of estimated coefficients with <strong>large standard errors</strong>.</p></li>
+<li><p>Estimated regression coefficients with an algebraic sign
+that is the <strong>opposite</strong> of that expected from theoretical
+considerations or prior experience.</p></li>
+<li><p><strong>High correlation</strong> between pairs of
+predictor variables.</p></li>
+<li><p><strong>High variance inflation factors</strong> (VIFs).</p></li>
+</ol>
+<p>We have touched upon the first three ways earlier, and using correlation makes intuitive sense. Next, we will look at VIFs in a bit more detail.</p>
+<div id="variance-inflation-factors-vifs" class="section level3" number="7.4.1">
+<h3>
+<span class="header-section-number">7.4.1</span> Variance inflation factors (VIFs)<a class="anchor" aria-label="anchor" href="#variance-inflation-factors-vifs"><i class="fas fa-link"></i></a>
+</h3>
+<p><strong>Variance inflation factors (VIFs)</strong> are associated with the coefficients of the predictor variables in MLR. VIFs measure <strong>how much the variance of the corresponding coefficient is multiplied by due to the presence of collinearity versus the lack of collinearity being present</strong>. Mathematically, VIFs are defined as:</p>
+<p><span class="math display" id="eq:7vif">\[\begin{equation}
+\left(VIF\right)_j = \frac{1}{1-R_j^2},
+\,\,\,\,\,\,j=1,2,\ldots,k,
+\tag{7.5}
+\end{equation}\]</span></p>
+<p>where <span class="math inline">\(R_j^2\)</span> is the <strong>coefficient of determination when
+<span class="math inline">\(x_j\)</span> is regressed on the other <span class="math inline">\(k-1\)</span> predictors in the model</strong>.</p>
+<p>Larger VIFs indicate stronger evidence of multicollinearity. Generally, VIFs greater than 5 indicate some degree of multicollinearity, and VIFs greater than 10 indicate a high level of multicollinearity.</p>
+<p>Let us look at the VIFs for the <code>Peruvian.txt</code> dataset:</p>
+<div class="sourceCode" id="cb275"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/julianfaraway/faraway">faraway</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu">faraway</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/faraway/man/vif.html">vif</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span>,<span class="fl">3</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##      Age    Years fraclife   Weight   Height     Chin  Forearm     Calf 
+##    3.213   34.289   24.387    4.748    1.914    2.064    3.802    2.415 
+##    Pulse 
+##    1.329</code></pre>
+<p>The VIFs for the coefficients for <span class="math inline">\(x_2, x_3\)</span> are above 5, indicating some degree of multicollinearity in our data.</p>
+</div>
+<div id="handling-multicollinearity" class="section level3" number="7.4.2">
+<h3>
+<span class="header-section-number">7.4.2</span> Handling multicollinearity<a class="anchor" aria-label="anchor" href="#handling-multicollinearity"><i class="fas fa-link"></i></a>
+</h3>
+<p>Depends on the source of multicollinearity, as discussed in Section <a href="genF.html#sources">7.3.2</a>.</p>
+<ul>
+<li><p>If due to study design, we can collect data on observations to break the collinearity.</p></li>
+<li><p>If due to the nature of the data where some predictors are linearly dependent on others, drop predictor(s). Choose a subset of these predictors (maybe even just one) and remove the rest from the model.</p></li>
+<li><p>Abandon least squares regression and use other methods. Other methods such as shrinkage methods and principal components regression help improve predictions, but may not aid in helping explore the relationship between the predictors and response variable. So it depends on what you want to use your regression for.</p></li>
+</ul>
+</div>
+</div>
+<div id="r-tutorial-4" class="section level2" number="7.5">
+<h2>
+<span class="header-section-number">7.5</span> R Tutorial<a class="anchor" aria-label="anchor" href="#r-tutorial-4"><i class="fas fa-link"></i></a>
+</h2>
+<p>For this tutorial, we will learn how conduct the general linear <span class="math inline">\(F\)</span> test as well as to detect the presence of multicollinearity in MLR. We will continue to use the <code>Peruvian.txt</code> dataset. The data contains variables relating to blood pressures of Peruvians who have migrated from rural high altitude areas to urban lower altitude areas. The variables are:</p>
+<ul>
+<li>
+<span class="math inline">\(y\)</span>: Systolic blood pressure</li>
+<li>
+<span class="math inline">\(x_1\)</span>: Age</li>
+<li>
+<span class="math inline">\(x_2\)</span>: Years in urban area</li>
+<li>
+<span class="math inline">\(x_3\)</span>: fraction of life in urban area <span class="math inline">\((x_1/x_2)\)</span>
+</li>
+<li>
+<span class="math inline">\(x_4\)</span>: Weight in kg</li>
+<li>
+<span class="math inline">\(x_5\)</span>: Height in mm</li>
+<li>
+<span class="math inline">\(x_6\)</span>: Chin skinfold</li>
+<li>
+<span class="math inline">\(x_7\)</span>: Forearm skinfold</li>
+<li>
+<span class="math inline">\(x_8\)</span>: Calf skinfold</li>
+<li>
+<span class="math inline">\(x_9\)</span>: Resting pulse rate</li>
+</ul>
+<p>We want to assess how the systolic blood pressure of these migrants may be predicted and related to these predictors.</p>
+<p>Download the data file and read the data in.</p>
+<div class="sourceCode" id="cb277"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">Data</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.table</a></span><span class="op">(</span><span class="st">"Peruvian.txt"</span>, header<span class="op">=</span><span class="cn">TRUE</span>,sep<span class="op">=</span><span class="st">""</span><span class="op">)</span></span></code></pre></div>
+<p>There are a number of strategies on how to start building a multiple linear regression (MLR) model. One possible strategy is to build an initial model based on what appear to be predictors that are most related to the response variable, the systolic blood pressure. Let us create a correlation matrix of the variables:</p>
+<div class="sourceCode" id="cb278"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span><span class="op">(</span><span class="va">Data</span><span class="op">)</span>,<span class="fl">3</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##           Systol_BP    Age  Years fraclife Weight Height   Chin Forearm   Calf
+## Systol_BP     1.000  0.006 -0.087   -0.276  0.521  0.219  0.170   0.272  0.251
+## Age           0.006  1.000  0.588    0.365  0.432  0.056  0.158   0.055 -0.005
+## Years        -0.087  0.588  1.000    0.938  0.481  0.073  0.222   0.143  0.001
+## fraclife     -0.276  0.365  0.938    1.000  0.293  0.051  0.120   0.028 -0.113
+## Weight        0.521  0.432  0.481    0.293  1.000  0.450  0.562   0.544  0.392
+## Height        0.219  0.056  0.073    0.051  0.450  1.000 -0.008  -0.069 -0.003
+## Chin          0.170  0.158  0.222    0.120  0.562 -0.008  1.000   0.638  0.516
+## Forearm       0.272  0.055  0.143    0.028  0.544 -0.069  0.638   1.000  0.736
+## Calf          0.251 -0.005  0.001   -0.113  0.392 -0.003  0.516   0.736  1.000
+## Pulse         0.135  0.091  0.237    0.214  0.312  0.008  0.223   0.422  0.209
+##           Pulse
+## Systol_BP 0.135
+## Age       0.091
+## Years     0.237
+## fraclife  0.214
+## Weight    0.312
+## Height    0.008
+## Chin      0.223
+## Forearm   0.422
+## Calf      0.209
+## Pulse     1.000</code></pre>
+<p>We use the <code><a href="https://rdrr.io/r/base/Round.html">round()</a></code> function so we can limit the number of decimal places the output uses, which in this case is three.</p>
+<div id="general-linear-f-test" class="section level3 unnumbered">
+<h3>General Linear <span class="math inline">\(F\)</span> Test<a class="anchor" aria-label="anchor" href="#general-linear-f-test"><i class="fas fa-link"></i></a>
+</h3>
+<p>It appears from the correlation matrix that <span class="math inline">\(x_3, x_4, x_7, x_8\)</span> have moderately strong linear associations with systolic blood pressure (they have the higest correlations). So we start with these four predictors for our MLR:</p>
+<div class="sourceCode" id="cb280"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">##fit MLR</span></span>
+<span><span class="va">result</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Systol_BP</span><span class="op">~</span><span class="va">fraclife</span><span class="op">+</span><span class="va">Weight</span><span class="op">+</span><span class="va">Forearm</span><span class="op">+</span><span class="va">Calf</span>, data<span class="op">=</span><span class="va">Data</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = Systol_BP ~ fraclife + Weight + Forearm + Calf, 
+##     data = Data)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -17.7706  -7.0950   0.4133   5.8314  24.0159 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  57.11972   15.56936   3.669 0.000827 ***
+## fraclife    -27.79798    7.63270  -3.642 0.000892 ***
+## Weight        1.33346    0.28858   4.621  5.3e-05 ***
+## Forearm      -0.52910    1.14255  -0.463 0.646254    
+## Calf         -0.06171    0.60134  -0.103 0.918870    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 9.985 on 34 degrees of freedom
+## Multiple R-squared:  0.481,  Adjusted R-squared:  0.4199 
+## F-statistic: 7.878 on 4 and 34 DF,  p-value: 0.000132</code></pre>
+<p>Based on the <span class="math inline">\(t\)</span> tests, we consider dropping <span class="math inline">\(x_7, x_8\)</span> from the model. So we perform a general linear <span class="math inline">\(F\)</span> test with the full model using predictors <span class="math inline">\(x_3, x_4, x_7, x_8\)</span> and the reduced model only using <span class="math inline">\(x_3, x_4\)</span>. The null and alternative hypotheses are:</p>
+<p><span class="math inline">\(H_0: \beta_7 = \beta_8 =0\)</span>,</p>
+<p><span class="math inline">\(H_a:\)</span> at least one of the coefficients in <span class="math inline">\(H_0\)</span> is not 0.</p>
+<p>In words, the null hypothesis supports going with the reduced model by dropping <span class="math inline">\(x_7, x_8\)</span>, whereas the alternative hypothesis supports the full model by not dropping <span class="math inline">\(x_7, x_8\)</span>.</p>
+<p>We explore two approaches to conducting this general linear <span class="math inline">\(F\)</span> test.</p>
+<div id="directly-comparing-the-full-and-reduced-models" class="section level4 unnumbered">
+<h4>Directly comparing the full and reduced models<a class="anchor" aria-label="anchor" href="#directly-comparing-the-full-and-reduced-models"><i class="fas fa-link"></i></a>
+</h4>
+<p>In this approach, we fit the reduced model, and then use the <code><a href="https://rdrr.io/r/stats/anova.html">anova()</a></code> function to compare the reduced model with the full model:</p>
+<div class="sourceCode" id="cb282"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">reduced</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Systol_BP</span><span class="op">~</span><span class="va">fraclife</span><span class="op">+</span><span class="va">Weight</span>, data<span class="op">=</span><span class="va">Data</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">##general linear F test to compare reduced model with full model</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">reduced</span>, <span class="va">result</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## Analysis of Variance Table
+## 
+## Model 1: Systol_BP ~ fraclife + Weight
+## Model 2: Systol_BP ~ fraclife + Weight + Forearm + Calf
+##   Res.Df    RSS Df Sum of Sq      F Pr(&gt;F)
+## 1     36 3441.4                           
+## 2     34 3389.8  2    51.598 0.2588 0.7735</code></pre>
+<p>The <span class="math inline">\(F\)</span> statistic from this test is 0.2588, with a p-value of 0.7735. So we fail to reject the null hypothesis, so there is little evidence of supporting the full model. We go with the reduced model over the full model.</p>
+</div>
+<div id="sequential-sums-of-squares" class="section level4 unnumbered">
+<h4>Sequential sums of squares<a class="anchor" aria-label="anchor" href="#sequential-sums-of-squares"><i class="fas fa-link"></i></a>
+</h4>
+<p>In this other approach, we use the <code><a href="https://rdrr.io/r/stats/anova.html">anova()</a></code> function on the full model to obtain the <strong>sequential sums of squares</strong> associated with the full model:</p>
+<div class="sourceCode" id="cb284"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## Analysis of Variance Table
+## 
+## Response: Systol_BP
+##           Df Sum Sq Mean Sq F value    Pr(&gt;F)    
+## fraclife   1  498.1  498.06  4.9957   0.03209 *  
+## Weight     1 2592.0 2592.01 25.9984 1.279e-05 ***
+## Forearm    1   50.5   50.55  0.5070   0.48129    
+## Calf       1    1.0    1.05  0.0105   0.91887    
+## Residuals 34 3389.8   99.70                      
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+<p>The values under the column “Sum Sq” give the sequential <span class="math inline">\(SS_{R}\)</span>s. Notice how the information is provided: in the order in which the predictors were entered into <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code>.</p>
+<p>The general linear F statistic is</p>
+<p><span class="math display">\[\begin{align}
+F &amp;= \frac{[SS_R(F) - SS_R(R)]/r}{SS_{res}(F)/(n-p)} \nonumber \\
+  &amp;= \frac{[SS_R(x_3, x_4, x_7, x_8) - SS_R(x_3, x_4)]/2}{SS_{res}(x_3, x_4, x_7, x_8)/(39-5)} \nonumber \\
+  &amp;= \frac{SS_R(x_7, x_8 | x_3, x_4)/2}{SS_{res}(x_3, x_4, x_7, x_8)/(39-5)} \nonumber \\
+  &amp;= \frac{(50.5+1.0)/2}{3389.8/34} \nonumber \\
+  &amp;= 0.2582748
+\end{align}\]</span></p>
+<p>which is similar to the value found in approach 1 (discrepancy due to rounding off in intermediate steps).</p>
+<p>The corresponding p-value is</p>
+<div class="sourceCode" id="cb286"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fl">1</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/stats/Fdist.html">pf</a></span><span class="op">(</span><span class="fl">0.2582748</span>,<span class="fl">2</span>,<span class="fl">34</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 0.7738846</code></pre>
+<p>and the critical value is</p>
+<div class="sourceCode" id="cb288"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Fdist.html">qf</a></span><span class="op">(</span><span class="fl">0.95</span>,<span class="fl">2</span>,<span class="fl">34</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 3.275898</code></pre>
+<p>So we fail to reject the null hypothesis and go with the reduced model.</p>
+</div>
+</div>
+<div id="multicollinearity-1" class="section level3 unnumbered">
+<h3>Multicollinearity<a class="anchor" aria-label="anchor" href="#multicollinearity-1"><i class="fas fa-link"></i></a>
+</h3>
+<p>With the presence of multiple predictors, it is often tempting to start by including all the predictors in the model.</p>
+<div class="sourceCode" id="cb290"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">##fit MLR with all predictors</span></span>
+<span><span class="va">all</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Systol_BP</span><span class="op">~</span><span class="va">.</span>, data<span class="op">=</span><span class="va">Data</span><span class="op">)</span></span></code></pre></div>
+<p>There are a few ways to detect the presence of multicollinearity in our model.</p>
+<div id="t-tests-and-anova-f-test" class="section level4 unnumbered">
+<h4>
+<span class="math inline">\(t\)</span> tests and ANOVA <span class="math inline">\(F\)</span> test<a class="anchor" aria-label="anchor" href="#t-tests-and-anova-f-test"><i class="fas fa-link"></i></a>
+</h4>
+<p>The presence of a lot of insignificant <span class="math inline">\(t\)</span> tests for the regression coefficients, along a highly significant ANOVA <span class="math inline">\(F\)</span> test is an indication that multicollinearity is present:</p>
+<div class="sourceCode" id="cb291"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">##look at t tests, and F test</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">all</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = Systol_BP ~ ., data = Data)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -12.3443  -6.3972   0.0507   5.7293  14.5257 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  146.81883   48.97099   2.998 0.005526 ** 
+## Age           -1.12143    0.32741  -3.425 0.001855 ** 
+## Years          2.45538    0.81458   3.014 0.005306 ** 
+## fraclife    -115.29384   30.16903  -3.822 0.000648 ***
+## Weight         1.41393    0.43097   3.281 0.002697 ** 
+## Height        -0.03464    0.03686  -0.940 0.355196    
+## Chin          -0.94369    0.74097  -1.274 0.212923    
+## Forearm       -1.17085    1.19330  -0.981 0.334613    
+## Calf          -0.15867    0.53716  -0.295 0.769809    
+## Pulse          0.11455    0.17043   0.672 0.506822    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 8.655 on 29 degrees of freedom
+## Multiple R-squared:  0.6674, Adjusted R-squared:  0.5641 
+## F-statistic: 6.465 on 9 and 29 DF,  p-value: 5.241e-05</code></pre>
+<p>Notice how five of the <span class="math inline">\(t\)</span> tests are insignificant, but the ANOVA <span class="math inline">\(F\)</span> is highly significant. So we have evidence of multicollinearity.</p>
+</div>
+<div id="standard-errors-of-estimated-coefficients" class="section level4 unnumbered">
+<h4>Standard errors of estimated coefficients<a class="anchor" aria-label="anchor" href="#standard-errors-of-estimated-coefficients"><i class="fas fa-link"></i></a>
+</h4>
+<p>Looking at the output from <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code>, we do not see any standard errors that are large. If we have strong multicollinearity, standard errors should be large.</p>
+</div>
+<div id="correlation-between-pairs-of-predictors" class="section level4 unnumbered">
+<h4>Correlation between pairs of predictors<a class="anchor" aria-label="anchor" href="#correlation-between-pairs-of-predictors"><i class="fas fa-link"></i></a>
+</h4>
+<p>We can also look at the pairwise correlations among predictors:</p>
+<div class="sourceCode" id="cb293"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">##correlation matrix, round to 3 decimal</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span><span class="op">(</span><span class="va">Data</span><span class="op">[</span>,<span class="op">-</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span>,<span class="fl">3</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##             Age Years fraclife Weight Height   Chin Forearm   Calf Pulse
+## Age       1.000 0.588    0.365  0.432  0.056  0.158   0.055 -0.005 0.091
+## Years     0.588 1.000    0.938  0.481  0.073  0.222   0.143  0.001 0.237
+## fraclife  0.365 0.938    1.000  0.293  0.051  0.120   0.028 -0.113 0.214
+## Weight    0.432 0.481    0.293  1.000  0.450  0.562   0.544  0.392 0.312
+## Height    0.056 0.073    0.051  0.450  1.000 -0.008  -0.069 -0.003 0.008
+## Chin      0.158 0.222    0.120  0.562 -0.008  1.000   0.638  0.516 0.223
+## Forearm   0.055 0.143    0.028  0.544 -0.069  0.638   1.000  0.736 0.422
+## Calf     -0.005 0.001   -0.113  0.392 -0.003  0.516   0.736  1.000 0.209
+## Pulse     0.091 0.237    0.214  0.312  0.008  0.223   0.422  0.209 1.000</code></pre>
+<p>Looking at this matrix, we notice that pairs of predictors involving <span class="math inline">\(x_1, x_2, x_3\)</span>, and <span class="math inline">\(x_4, x_6, x_7\)</span> have high correlations. For pairs involving other predictors, the correlations are a lot weaker. So there is some degree of multicollinearity.</p>
+</div>
+<div id="vifs" class="section level4 unnumbered">
+<h4>VIFs<a class="anchor" aria-label="anchor" href="#vifs"><i class="fas fa-link"></i></a>
+</h4>
+<p>High VIFs are an indication of multicollinearity.</p>
+<div class="sourceCode" id="cb295"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">##VIFs</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/julianfaraway/faraway">faraway</a></span><span class="op">)</span></span>
+<span><span class="fu">faraway</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/faraway/man/vif.html">vif</a></span><span class="op">(</span><span class="va">all</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##       Age     Years  fraclife    Weight    Height      Chin   Forearm      Calf 
+##  3.213372 34.289220 24.387489  4.747710  1.913992  2.063865  3.802313  2.414603 
+##     Pulse 
+##  1.329233</code></pre>
+<p>The largest VIFs belong to <span class="math inline">\(x_2\)</span> and <span class="math inline">\(x_3\)</span>, which are 34.289220 and 24.387489 respectively. VIFs above 10 indicate a strong degree of multicollinearity.</p>
+<p>To summarize what we have seen:</p>
+<ul>
+<li>The ANOVA F test is significant, but a lot of the t tests are insignificant.</li>
+<li>We don’t see huge standard errors for the estimated coefficients.</li>
+<li>Some of the predictors have high pairwise correlations, e.g. Pairs involving <span class="math inline">\(x_1, x_2, x_3\)</span>, and <span class="math inline">\(x_4, x_6, x_7\)</span>.</li>
+<li>The largest VIF is 34.289220.</li>
+</ul>
+<p>Collectively, there is some degree of multicollinearity in this model.</p>
+</div>
+<div id="next-steps" class="section level4 unnumbered">
+<h4>Next steps<a class="anchor" aria-label="anchor" href="#next-steps"><i class="fas fa-link"></i></a>
+</h4>
+<p>We have identified that predictors <span class="math inline">\(x_1, x_2, x_3\)</span>, and <span class="math inline">\(x_4, x_6, x_7\)</span> are the ones that are most likely to be causing multicollinearity. A solution will be to use a subset of these predictors and not all of them.</p>
+<p>Using subject matter knowledge can help with this decision.</p>
+
+<!-- eqnarray environment issue -->
+</div>
+</div>
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="mlr.html"><span class="header-section-number">6</span> Multiple Linear Regression (MLR)</a></div>
+<div class="next"><a href="cat.html"><span class="header-section-number">8</span> Categorical Predictors in MLR</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#genF"><span class="header-section-number">7</span> General Linear \(F\) Test and Multicollinearity</a></li>
+<li><a class="nav-link" href="#introduction-6"><span class="header-section-number">7.1</span> Introduction</a></li>
+<li>
+<a class="nav-link" href="#the-general-linear-f-test"><span class="header-section-number">7.2</span> The General Linear \(F\) Test</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#motivation-1"><span class="header-section-number">7.2.1</span> Motivation</a></li>
+<li><a class="nav-link" href="#setting-up-the-general-linear-f-test"><span class="header-section-number">7.2.2</span> Setting up the general linear \(F\) test</a></li>
+<li><a class="nav-link" href="#hypothesis-statements-1"><span class="header-section-number">7.2.3</span> Hypothesis statements</a></li>
+<li><a class="nav-link" href="#test-statistic"><span class="header-section-number">7.2.4</span> Test statistic</a></li>
+<li><a class="nav-link" href="#worked-example"><span class="header-section-number">7.2.5</span> Worked example</a></li>
+<li><a class="nav-link" href="#comparison-of-general-linear-f-test-with-other-hypothesis-tests-in-mlr"><span class="header-section-number">7.2.6</span> Comparison of general linear \(F\) test with other hypothesis tests in MLR</a></li>
+<li><a class="nav-link" href="#alternative-approach-to-general-linear-f-test"><span class="header-section-number">7.2.7</span> Alternative approach to general linear \(F\) test</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#multicollinearity"><span class="header-section-number">7.3</span> Multicollinearity</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#linear-dependency-multicollinearity"><span class="header-section-number">7.3.1</span> Linear dependency &amp; multicollinearity</a></li>
+<li><a class="nav-link" href="#sources"><span class="header-section-number">7.3.2</span> Sources of multicollinearity</a></li>
+<li><a class="nav-link" href="#consequences-of-multicollinearity"><span class="header-section-number">7.3.3</span> Consequences of multicollinearity</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#detecting-multicollinearity"><span class="header-section-number">7.4</span> Detecting Multicollinearity</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#variance-inflation-factors-vifs"><span class="header-section-number">7.4.1</span> Variance inflation factors (VIFs)</a></li>
+<li><a class="nav-link" href="#handling-multicollinearity"><span class="header-section-number">7.4.2</span> Handling multicollinearity</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#r-tutorial-4"><span class="header-section-number">7.5</span> R Tutorial</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#general-linear-f-test">General Linear \(F\) Test</a></li>
+<li><a class="nav-link" href="#multicollinearity-1">Multicollinearity</a></li>
+</ul>
+</li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Linear Models for Data Science</strong>" was written by Jeffrey Woo. It was last built on 2024-07-12.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

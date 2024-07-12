@@ -1,4 +1,4 @@
-# General Linear $F$ Test and Multicollinearity {#F}
+# General Linear $F$ Test and Multicollinearity {#genF}
 
 ## Introduction
 

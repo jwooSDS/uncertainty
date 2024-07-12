@@ -4,15 +4,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 8 General Linear \(F\) Test and Multicollinearity | Linear Models for Data Science</title>
+<title>Chapter 8 Categorical Predictors in MLR | Linear Models for Data Science</title>
 <meta name="author" content="Jeffrey Woo">
 <meta name="description" content="8.1 Introduction Thus far, we have only considered predictors that are quantitative in MLR. But what if we need or want to consider predictors that are categorical instead? For example, what if we...">
 <meta name="generator" content="bookdown 0.34 with bs4_book()">
-<meta property="og:title" content="Chapter 8 General Linear \(F\) Test and Multicollinearity | Linear Models for Data Science">
+<meta property="og:title" content="Chapter 8 Categorical Predictors in MLR | Linear Models for Data Science">
 <meta property="og:type" content="book">
 <meta property="og:description" content="8.1 Introduction Thus far, we have only considered predictors that are quantitative in MLR. But what if we need or want to consider predictors that are categorical instead? For example, what if we...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 8 General Linear \(F\) Test and Multicollinearity | Linear Models for Data Science">
+<meta name="twitter:title" content="Chapter 8 Categorical Predictors in MLR | Linear Models for Data Science">
 <meta name="twitter:description" content="8.1 Introduction Thus far, we have only considered predictors that are quantitative in MLR. But what if we need or want to consider predictors that are categorical instead? For example, what if we...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
@@ -72,7 +72,7 @@
 <li><a class="" href="diag.html"><span class="header-section-number">5</span> Model Diagnostics and Remedial Measures in SLR</a></li>
 <li><a class="" href="mlr.html"><span class="header-section-number">6</span> Multiple Linear Regression (MLR)</a></li>
 <li><a class="" href="genF.html"><span class="header-section-number">7</span> General Linear \(F\) Test and Multicollinearity</a></li>
-<li><a class="active" href="F.html"><span class="header-section-number">8</span> General Linear \(F\) Test and Multicollinearity</a></li>
+<li><a class="active" href="cat.html"><span class="header-section-number">8</span> Categorical Predictors in MLR</a></li>
 <li><a class="" href="intro.html"><span class="header-section-number">9</span> Introduction</a></li>
 <li><a class="" href="methods.html"><span class="header-section-number">10</span> Methods</a></li>
 <li><a class="" href="references.html">References</a></li>
@@ -83,9 +83,9 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="F" class="section level1" number="8">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="cat" class="section level1" number="8">
 <h1>
-<span class="header-section-number">8</span> General Linear <span class="math inline">\(F\)</span> Test and Multicollinearity<a class="anchor" aria-label="anchor" href="#F"><i class="fas fa-link"></i></a>
+<span class="header-section-number">8</span> Categorical Predictors in MLR<a class="anchor" aria-label="anchor" href="#cat"><i class="fas fa-link"></i></a>
 </h1>
 <div id="introduction-7" class="section level2" number="8.1">
 <h2>
@@ -172,7 +172,7 @@ However, this will not work in MLR. Recall that the least squares estimators are
 \end{array}
 \right]
 \]</span>
-Notice that in the design matrix, column 1 equals to the sum of column 3 and column 4. This means we have linear dependence among the columns of the design matrix. And when this happens, <span class="math inline">\((\boldsymbol{X}^{\prime} \boldsymbol{X})^{-1}\)</span> cannot be found so unique solutions to the least squares estimators <a href="F.html#eq:8b">(8.1)</a> do not exist.</p>
+Notice that in the design matrix, column 1 equals to the sum of column 3 and column 4. This means we have linear dependence among the columns of the design matrix. And when this happens, <span class="math inline">\((\boldsymbol{X}^{\prime} \boldsymbol{X})^{-1}\)</span> cannot be found so unique solutions to the least squares estimators <a href="cat.html#eq:8b">(8.1)</a> do not exist.</p>
 <p>To get around this issue, we use what is known as <strong>dummy coding</strong>.</p>
 </div>
 <div id="dummy-coding" class="section level3" number="8.2.2">
@@ -197,7 +197,7 @@ I_1 &amp;=&amp; \left\{ \begin{array}{ll} 1 &amp; \mbox{ if stock firm} \\ 0 &am
 <h3>
 <span class="header-section-number">8.2.3</span> Regression coefficient interpretation<a class="anchor" aria-label="anchor" href="#regression-coefficient-interpretation"><i class="fas fa-link"></i></a>
 </h3>
-<p>To see how we can interpret the regression coefficients with dummy coding, we can substitute the numerical value of the indicator variable in <a href="F.html#eq:8additive">(8.2)</a> to obtain the regression equation for each firm type:</p>
+<p>To see how we can interpret the regression coefficients with dummy coding, we can substitute the numerical value of the indicator variable in <a href="cat.html#eq:8additive">(8.2)</a> to obtain the regression equation for each firm type:</p>
 <ul>
 <li><p>Mutual firms: <span class="math inline">\(E(y|x) = \beta_0 + \beta_1x_1 +\beta_2(0) = \beta_0 + \beta_1x_1\)</span></p></li>
 <li><p>Stock firms: <span class="math inline">\(E(y|x) = \beta_0 + \beta_1x_1 + \beta_2(1) = (\beta_0+\beta_2) + \beta_1x_1\)</span></p></li>
@@ -270,20 +270,20 @@ I_1 &amp;=&amp; \left\{ \begin{array}{ll} 1 &amp; \mbox{ if stock firm} \\ 0 &am
 <h2>
 <span class="header-section-number">8.3</span> Interaction Terms<a class="anchor" aria-label="anchor" href="#interaction-terms"><i class="fas fa-link"></i></a>
 </h2>
-<p>The regression model as stated in <a href="F.html#eq:8additive">(8.2)</a> is sometimes called a model with <strong>additive effects</strong>. Additive effects assume that each predictor’s effect on the response does not depend on the value of the other predictor. As long as we hold the other predictor constant, changing the value of the predictor is associated with the same change in the mean response. Using our example, this implies that the when looking at the scatterplot of time to adopt innovation against size of firms, with separate lines for each firm type, the regression lines are parallel.</p>
+<p>The regression model as stated in <a href="cat.html#eq:8additive">(8.2)</a> is sometimes called a model with <strong>additive effects</strong>. Additive effects assume that each predictor’s effect on the response does not depend on the value of the other predictor. As long as we hold the other predictor constant, changing the value of the predictor is associated with the same change in the mean response. Using our example, this implies that the when looking at the scatterplot of time to adopt innovation against size of firms, with separate lines for each firm type, the regression lines are parallel.</p>
 <p>If the lines are not parallel, it means the effect of changing firm size on the time to adopt innovation depends on the firm type. When the effect of a predictor on the response depends on the value of the other predictor, we have an <strong>interaction effect</strong> between the predictors on the response variable. To add an interaction effect between the predictors into the model, we have</p>
 <p><span class="math display" id="eq:8interaction">\[\begin{equation}
 y = \beta_0 + \beta_1x_{1} + \beta_2I_1 + \beta_3 x_1 I_1 + \epsilon
 \tag{8.3}
 \end{equation}\]</span></p>
-<p>where <span class="math inline">\(I_1 = 1\)</span> if stock firm and 0 if mutual firm. Substituting the values for <span class="math inline">\(I_1\)</span> in <a href="F.html#eq:8interaction">(8.3)</a>, we have the following regression equations for each firm type:</p>
+<p>where <span class="math inline">\(I_1 = 1\)</span> if stock firm and 0 if mutual firm. Substituting the values for <span class="math inline">\(I_1\)</span> in <a href="cat.html#eq:8interaction">(8.3)</a>, we have the following regression equations for each firm type:</p>
 <ul>
 <li><p>Mutual firm: <span class="math inline">\(E(y|x) = \beta_0+\beta_2(0)+\beta_1x_1+\beta_3 x_1(0)=\beta_0+\beta_1x_1.\)</span></p></li>
 <li><p>Stock firm: <span class="math inline">\(E(y|x) = \beta_0+\beta_2(1)+\beta_1x_1+\beta_3 x_1(1)=(\beta_0+\beta_2)+(\beta_1+\beta_3)x_1.\)</span></p></li>
 </ul>
-<p>We have different intercepts and different slopes for these regressions, whereas in model <a href="F.html#eq:8additive">(8.2)</a>, the slopes are the same.</p>
+<p>We have different intercepts and different slopes for these regressions, whereas in model <a href="cat.html#eq:8additive">(8.2)</a>, the slopes are the same.</p>
 <p>If there is an interaction, we can see the effect of changing <span class="math inline">\(x_1\)</span> on the response depends on the other predictor: for mutual firms, increasing <span class="math inline">\(x_1\)</span> by one unit changes the mean response by <span class="math inline">\(\beta_1\)</span>; while for tool stock firms, increasing <span class="math inline">\(x_1\)</span> by one unit changes the mean response by <span class="math inline">\(\beta_1 + \beta_3\)</span>.</p>
-<p>Models with interactions are a bit more difficult to interpret than models with no interactions. Therefore, we typical assess if the interaction term is significant or not. This can be tested in a general linear <span class="math inline">\(F\)</span> test framework, since a model with additive effects <a href="F.html#eq:8additive">(8.2)</a> is the reduced model and a model with interaction effects <a href="F.html#eq:8interaction">(8.3)</a> is the full model. If the coefficient of the interaction term is insignificant, we can drop the interaction term and go with the model with just additive effects.</p>
+<p>Models with interactions are a bit more difficult to interpret than models with no interactions. Therefore, we typical assess if the interaction term is significant or not. This can be tested in a general linear <span class="math inline">\(F\)</span> test framework, since a model with additive effects <a href="cat.html#eq:8additive">(8.2)</a> is the reduced model and a model with interaction effects <a href="cat.html#eq:8interaction">(8.3)</a> is the full model. If the coefficient of the interaction term is insignificant, we can drop the interaction term and go with the model with just additive effects.</p>
 <div class="sourceCode" id="cb302"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##model with interaction</span></span>
 <span><span class="va">result.int</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">time</span><span class="op">~</span><span class="va">size</span><span class="op">*</span><span class="va">firm</span>, data<span class="op">=</span><span class="va">Data</span><span class="op">)</span></span>
@@ -458,7 +458,7 @@ Var\left(\hat{\beta}_j-\hat{\beta}_l\right) = Var\left(\hat{\beta}_j\right) + Va
 ## Flavor             -0.170  0.030       0.037         0.037
 ## RegionNorth        -0.277  0.037       0.160         0.113
 ## RegionCentral      -0.277  0.037       0.113         0.202</code></pre>
-<p>Let us compute the CI for <span class="math inline">\(\beta_2 - \beta_3\)</span> using <a href="F.html#eq:8CI">(8.4)</a></p>
+<p>Let us compute the CI for <span class="math inline">\(\beta_2 - \beta_3\)</span> using <a href="cat.html#eq:8CI">(8.4)</a></p>
 <p><span class="math display">\[\begin{eqnarray*}
 (\hat{\beta}_2-\hat{\beta}_3) &amp;\pm&amp;
 t_{1-\alpha/2,n-p}\sqrt{Var\left(\hat{\beta}_2-\hat{\beta}_3\right)} \nonumber \\
@@ -618,7 +618,7 @@ y = \beta_0 + \beta_1x_{1} + \beta_2I_{1} + \beta_3I_{2} + \beta_4 x_1 I_{1} + \
 \hat{\beta}_j \pm t_{1-\alpha/(2g); n-p} se(\hat{\beta}_j).
 \tag{8.8}
 \end{equation}\]</span></p>
-<p>The multiplier in <a href="#eq::8bon">(<strong>??</strong>)</a> is found using <span class="math inline">\(t_{1-\alpha/(2g); n-p}\)</span> instead of <span class="math inline">\(t_{1-\alpha/2; n-p}\)</span>.</p>
+<p>The multiplier in <a href="cat.html#eq:8bon">(8.8)</a> is found using <span class="math inline">\(t_{1-\alpha/(2g); n-p}\)</span> instead of <span class="math inline">\(t_{1-\alpha/2; n-p}\)</span>.</p>
 <p>Going back to the wine example, suppose we wish to make all three pairwise comparisons. The CI to compare the North region with Napa Valley is</p>
 <p><span class="math display">\[\begin{eqnarray*}
 \hat{\beta}_2 &amp;\pm&amp; t_{1-\alpha/(2\times3); 38-4} se(\hat{\beta}_2) \nonumber \\
@@ -1031,7 +1031,7 @@ which is larger in magnitude than the critical value of 2.518259, so we reject t
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#F"><span class="header-section-number">8</span> General Linear \(F\) Test and Multicollinearity</a></li>
+<li><a class="nav-link" href="#cat"><span class="header-section-number">8</span> Categorical Predictors in MLR</a></li>
 <li>
 <a class="nav-link" href="#introduction-7"><span class="header-section-number">8.1</span> Introduction</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#quantitative-vs-categorical-variable"><span class="header-section-number">8.1.1</span> Quantitative vs categorical variable</a></li></ul>
 </li>
