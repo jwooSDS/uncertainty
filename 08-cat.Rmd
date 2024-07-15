@@ -1,5 +1,3 @@
-<!-- eqnarray environment issue -->
-
 # Categorical Predictors in MLR {#cat}
 
 ## Introduction

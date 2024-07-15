@@ -127,7 +127,7 @@
 
 \title{Linear Models for Data Science}
 \author{Jeffrey Woo}
-\date{2024-07-12}
+\date{2024-07-15}
 
 \begin{document}
 \maketitle
@@ -7792,6 +7792,768 @@ Another procedure for multiple pairwise comparisons is the Tukey procedure. We u
 We can see that there is a significant difference in the mean Quality rating for all pairs of regions, for given flavor rating, since these tests are all significant.
 
 Given the negative values for the difference in the estimated coefficients, wines from the Napa valley have the highest ratings, followed by wines from the North region, and then wines from the Central region, when flavor rating is controlled.
+
+\hypertarget{crit}{%
+\chapter{Model Selection Criteria and Automated Search Procedures}\label{crit}}
+
+\hypertarget{introduction-8}{%
+\section{Introduction}\label{introduction-8}}
+
+In building a regression model, we are faced with two conflicting objectives:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  to include more predictors into the model so as to improve the predictive ability of the model and
+\item
+  to not include predictors that are unnecessary, which will lead to more uncertainty in our predictions and make our model needlessly complicated, making predictions and interpretations more challenging.
+\end{enumerate}
+
+For example, recall the NFL dataset that you have seen and worked on in the previous modules. In the data set, you are presented with 9 potential predictors to predict the number of wins for a team. You are faced with the question of which and how many of the predictors you will need to include in the model. Do we start by using just offensive statistics, or should we start by also including the strength of schedule? Or why not just use all of the predictors right away?
+
+In this module, you will learn the various ways to assess different competing models.
+
+\hypertarget{model-assessment-concepts}{%
+\section{Model Assessment Concepts}\label{model-assessment-concepts}}
+
+Previously, we looked at \textbf{model diagnostics}, which are tools to assess if the assumptions for a regression model are met. We are assessing if the assumption that the error terms in a regression model and independent and identically distributed as a normal distribution with mean 0 and constant variance denoted by \(\sigma^2\).
+
+Meeting the assumptions do not guarantee that the model fits the data well, as the variance of the error terms could be large. We now shift our attention to \textbf{model assessment}, which measures how well the model fits the data and how well the model predicts future observations.
+
+Recall there are two main uses of regression models:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Prediction}: Predict a future value of a response variable, using information from predictor variables.
+\item
+  \textbf{Association}: Quantify the relationship between variables. How does a change in a predictor variable change the value of the response variable, on average?
+\end{enumerate}
+
+With multiple predictors to choose from, we need a way to chose between all the possible models that we can fit. For example, if we have \(k\) predictors, then there are \(2^{k}\) possible models with just additive effects to consider. What predictors should we include?
+
+\begin{itemize}
+\item
+  Generally speaking, we can improve the model fit (in terms of improving \(R^2\) or reducing \(SS_{res}\)) by adding more predictors (even if added needlessly).
+\item
+  However, if we needlessly add in predictors, the predictive ability of a model can suffer, and we make the model more difficult to interpret.
+\end{itemize}
+
+So we can see that needlessly adding predictors negatively affects both uses of regression models. Generally, we apply the principle of ``Ockham's razor'':
+Given two theories that describe a phenomenon equally well, we should prefer the theory that is simpler. In selecting regression models, we should choose the one with fewer parameters when there are multiple models that give nearly the same fit to the data. We always should be asking: does the improvement in fit for models with more parameters justify the extra complexity?
+
+Model assessment can be viewed as a trade-off between model complexity and model fit, so the model can be interpreted and predicts well on future data.
+
+\hypertarget{training-and-test-data}{%
+\subsection{Training and test data}\label{training-and-test-data}}
+
+By now, you should realize that a model that fits the data well does not necessarily predict well on future observations. We introduce the definitions of training and test data:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Training data}: are the observations used to build the regression model.
+\item
+  \textbf{Test data}: are the observations that were not used to build the regression model and are solely used to assess how well the model predicts future observations.
+\end{itemize}
+
+Model fit typically measures how well the training data fits the model (e.g.~\(R^2\), \(SS_{res}\)). Model assessment measures how well the model does in predicting the test data.
+
+\hypertarget{overfitting}{%
+\subsection{Overfitting}\label{overfitting}}
+
+A model that fits the training data well is not guaranteed to predict test data. In fact, a model that performs a lot worse on test data than on training data is an indication that the model is needlessly complicated. Such a model is \textbf{overfitted}.
+
+It may seem counter intuitive that a model that has more parameters could perform worse on test data. The reason is the following: we have mentioned that models take the form \(y = f(\boldsymbol{x}) + \epsilon\), where the function \(f\) denotes the true relationship between the response and predictor variables, and \(\epsilon\) denotes the random error. A model that is overfitted fails to account for the errors properly by incorporating the errors into the estimation of \(f\), so the estimated \(f\) is not a good approximation for the true relationship \(f\). So we end up using this poor approximation for \(f\) in predicting test data.
+
+Model selection criteria are used to select between several models by assessing the models in terms of model fit and model complexity. These criteria prevent overfitting from happening.
+
+\hypertarget{model-selection-criteria}{%
+\section{Model Selection Criteria}\label{model-selection-criteria}}
+
+A variety of model selection criteria have been proposed to assess regression models. These criteria typically measure the model fit and have a penalty for each additional parameter. The penalty penalizes the model when it gets too complicated.
+
+The coefficient of determination, \(R^2\), is typically not used as a model selection criteria, since it always increases when we add parameters to the model, and so will favor more models that add parameters. \(R^2\) does not have a penalty for each additional parameter. \(R^2\) can be used when comparing models with the same number of parameters.
+
+We will next look at various model selection criteria that have a penalty for each additional parameter.
+
+\hypertarget{adjusted-r-squared-r_adjp2}{%
+\subsection{\texorpdfstring{Adjusted R-squared: \(R_{Adj,p}^{2}\)}{Adjusted R-squared: R\_\{Adj,p\}\^{}\{2\}}}\label{adjusted-r-squared-r_adjp2}}
+
+The adjusted R-squared, denoted by \(R_{Adj,p}^{2}\), is
+
+\begin{equation} 
+R_{Adj,p}^{2} = 1 - \left( \frac{n-1}{n-p} \right) (1 - R^2_{p})
+\label{eq:9aR2}
+\end{equation}
+
+\begin{itemize}
+\tightlist
+\item
+  \(R_{Adj,p}^{2}\) is a measure of fit with penalty for additional parameters.
+\item
+  By including one additional parameter, \(R^2_{p}\) will increase and the divisor \(n-p\) decreases.
+\item
+  Choosing the model with the largest \(R_{Adj,p}^{2}\) is equivalent to selecting the one with the smallest \(MS_{res}(p)\).
+\item
+  Larger value is better.
+\end{itemize}
+
+\hypertarget{mallows-c_p}{%
+\subsection{\texorpdfstring{Mallow's \(C_p\)}{Mallow's C\_p}}\label{mallows-c_p}}
+
+Mallow's \(C_p\) measures the variance and bias associated with predicting test data. In the context of MLR, it is found using
+
+\begin{equation} 
+C_p = \frac{SS_{res}(p)}{MS_{res}(P)} - (n-2p).
+\label{eq:9cp}
+\end{equation}
+
+\begin{itemize}
+\tightlist
+\item
+  \(C_p\) is a measure of fit with penalty for additional parameters.
+\item
+  By including one additional parameter, \(2p\) increases while \(SS_{res}\) decreases.
+\item
+  \(MS_{res}(P)\) denotes the \(MS_{res}\) of the model with all \(P\) parameters.
+\item
+  Some authors suggest choosing the simplest model with \(C_p\) closest to \(p\). The argument is that if the model is unbiased, \(C_p = p\).
+\item
+  However, unbiased models are not guaranteed to perform best on test data. So, we should select the model with the smallest \(C_p\).
+\end{itemize}
+
+\hypertarget{aic_p-and-bic_p}{%
+\subsection{\texorpdfstring{\(AIC_p\) and \(BIC_p\)}{AIC\_p and BIC\_p}}\label{aic_p-and-bic_p}}
+
+A couple of related measures are also used, the Akaike information criterion, \(AIC_p\), and the Bayesian information criterion, \(BIC_p\). In MLR, they are
+
+\begin{equation} 
+\mbox{AIC}_p = n\log \frac{SS_{res}(p)}{n} + 2p
+\label{eq:9aic}
+\end{equation}
+
+and
+
+\begin{equation}
+\mbox{BIC}_p = n\log \frac{SS_{res}(p)}{n} +p\log n.
+\label{eq:9bic}
+\end{equation}
+
+\begin{itemize}
+\tightlist
+\item
+  Both are measures of fit with penalty for additional parameters.
+\item
+  By including one additional parameter, \(2p\) and \(p\log n\) increase while \(SS_{res}\) decreases.
+\item
+  Models with low \(AIC_p\), \(BIC_p\) are desired.
+\item
+  If \(\log n > 2\) (i.e.~\(n \geq 8\)), then \(BIC_p\) increases with \(p\) more quickly than \(AIC_p\). Thus, \(BIC_p\) favors smaller models compared to AIC.
+\end{itemize}
+
+\hypertarget{press-statistic}{%
+\subsection{PRESS statistic}\label{press-statistic}}
+
+The PRESS statistic measures the difference in predicted response when an observation is excluded in estimating the model. It is defined as
+
+\begin{equation} 
+PRESS = \sum_{i=1}^n\left(y_i-\hat{y}_{i(i)}\right)^2
+\label{eq:9PRESS}
+\end{equation}
+
+where \(\hat{y}_{i(i)}\) is the predicted value for the \(i\)th observation
+when the regression is fitted without the \(i\)th observation.
+
+\begin{itemize}
+\tightlist
+\item
+  Small PRESS statistic is desired.
+\item
+  Models with small PRESS statistics have small prediction errors on test data.
+\item
+  Of the criteria listed, the PRESS statistic \eqref{eq:9PRESS} is motivated by measuring the prediction error in test data, whereas the other criteria \eqref{eq:9aR2}, \eqref{eq:9cp}, \eqref{eq:9aic}, \eqref{eq:9bic} are motivated by balancing model fit and model complexity, and as a consequence will perform well in predicting test data.
+\end{itemize}
+
+A related measure to the PRESS statistic \eqref{eq:9PRESS} is \(R^2_{prediction}\),
+
+\begin{equation}
+R^2_{prediction} = 1 - \frac{PRESS}{SS_T},
+\label{eq:9R2pred}
+\end{equation}
+
+which can be interpreted as the \textbf{proportion of the variability in the response of new observations that can be explained by our model}.
+
+\begin{itemize}
+\tightlist
+\item
+  On average, \(R^2_{prediction}\) is less than \(R^2_p\).
+\item
+  An \(R^2_{prediction}\) that is a lot smaller than \(R^2_p\) indicates overfitting.
+\end{itemize}
+
+\hypertarget{summary-and-final-comments}{%
+\subsection{Summary and final comments}\label{summary-and-final-comments}}
+
+We have introduced a number of criteria. While these criteria attempt to measure model fit and complexity, they are not mathematically equivalent. None of these should be regarded as definitive in itself, but taken together
+they provide a range of possible options which, combined with some
+judgment about the data themselves, can usually be used to decide
+upon a model which is reasonable from all criteria. A couple of other points to note:
+
+\begin{itemize}
+\tightlist
+\item
+  We still need to check the model for regression assumptions.
+\item
+  These criteria can only be used to compare models with the same response variable, as they are affected by the unit associated with the response variable.
+\end{itemize}
+
+\hypertarget{automated-search-procedures}{%
+\section{Automated Search Procedures}\label{automated-search-procedures}}
+
+With multiple predictors to choose from, we need a way to choose between all the possible models that we can fit. For example, if we have \(k\) quantitative predictors, then there are \(2^{k}\) possible models with just additive effects to consider. If \(k\) is large, then there are many models to compare. Can we automate the process of model selection to make things more computationally efficient?
+
+\hypertarget{forward-selection-backward-elimination}{%
+\subsection{Forward selection, backward elimination}\label{forward-selection-backward-elimination}}
+
+A couple of methods to automate this process:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Forward Selection}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    We begin with a model with no predictors, and add in predictor variables one at a time in some optimal way, until a desirable stopping point is reached.
+  \end{itemize}
+\item
+  \textbf{Backward Elimination}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    We begin with a model with all potential predictors, and then remove the ``weak'' predictor variables one at a time in some optimal way, until a desirable stopping point is reached.
+  \end{itemize}
+\end{enumerate}
+
+A critical concept is that each step is conditional on the previous step. For instance, in forward selection we are adding a variable to those already selected.
+
+The criterion to add (or eliminate) a predictor in each step for forward selection (or backward elimination) might be based on \(p\)-value, \(SS_{res}\), \(AIC_{p}\), etc.
+
+Suppose we use \(AIC_p\) as the criterion. We know that smaller values of \(\mbox{AIC}_{p}\) are desired.
+
+\begin{itemize}
+\tightlist
+\item
+  In a forward step, given a model of size \(p\) in the previous step, compare all the candidate models of size \(p+1\) by adding one of the remaining predictor variables. Among these size-(\(p+1\)) models, select the one that results in the smallest \(AIC_{p+1}\), which is also smaller than the \(AIC_p\) of the model in the previous step.
+\item
+  In a backward step, given a model of size \(p\) in the previous step, compare all the candidate models of size \(p-1\) by eliminating one of the existing predictors. Among these size-(\(p-1\)) models, remove the one that results in the smallest \(AIC_{p-1}\) value, that is also smaller than the \(AIC_p\) of the model in the previous step.
+\item
+  The algorithm stops when the \(AIC\) no longer decreases.
+\end{itemize}
+
+Let us consider this toy example. Suppose there are four potential predictors, \(x_1,x_2,x_3,x_4\). The table below gives the \(AIC\) of all possible models. Assume the AIC of the intercept-only model is 25.
+
+\begin{longtable}[]{@{}
+  >{\centering\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.1458}}
+  >{\centering\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.1042}}
+  >{\centering\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.1458}}
+  >{\centering\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.1042}}
+  >{\centering\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.1458}}
+  >{\centering\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.1042}}
+  >{\centering\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.1458}}
+  >{\centering\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.1042}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\centering
+Model
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+AIC
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Model
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+AIC
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Model
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+AIC
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Model
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+AIC
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\(x_1\) & 20 & \(x_1, x_2\) & 8 & \(x_1, x_2, x_3\) & 5 & \(x_1, x_2, x_3, x_4\) & 10 \\
+\(x_2\) & 17 & \(x_1, x_3\) & 10 & \(x_1, x_2, x_4\) & 7 & & \\
+\(x_3\) & 15 & \(x_1, x_4\) & 17 & \(x_1, x_3, x_4\) & 8 & & \\
+\(x_4\) & 19 & \(x_2, x_3\) & 11 & \(x_2, x_3, x_4\) & 6 & & \\
+& & \(x_2, x_4\) & 12 & & & & \\
+& & \(x_3, x_4\) & 9 & & & & \\
+\end{longtable}
+
+Suppose we start from the intercept-only model. What model gets selected by forward election?
+
+\begin{itemize}
+\tightlist
+\item
+  In step 1, we will add \(x_3\) to the intercept-only model. This is the model with just 1 predictor that has the smallest \(AIC\) that also decreases the AIC from the previous step.
+\item
+  In step 2, we consider adding one of the three remaining predictors, \(x_1, x_2, x_4\) to the model with \(x_3\) already in. \(x_3\) will not be removed. \(x_4\) will be added because it results in the smallest \(AIC\) that also decreases the AIC from the previous step.
+\item
+  In step 3, we consider adding one of the two remaining predictors, \(x_1, x_2\) to the model with \(x_3, x_4\) already in. \(x_2\) will be added because it results in the smallest \(AIC\) that also decreases the AIC from the previous step.
+\item
+  Algorithm stops here, as adding an additional predictor at this step will not decrease the AIC. So the model selected has \(x_2, x_3, x_4\).
+\end{itemize}
+
+\hypertarget{practice-question-1}{%
+\subsubsection{Practice question}\label{practice-question-1}}
+
+What model gets selected by backward elimination, if we start from the model with all 4 predictors?
+
+\emph{View the associated video for a review of this practice question.}
+
+\hypertarget{stepwise-regression}{%
+\subsubsection{Stepwise regression}\label{stepwise-regression}}
+
+A combination procedure called \textbf{stepwise regression} can also be used. It is a combination procedure because at each step, the algorithm considers adding any of the remaining predictors or removing any of the current predictors.
+
+\hypertarget{final-comments}{%
+\subsection{Final comments}\label{final-comments}}
+
+We still need to check the model for regression assumptions. Also, the model chosen by these procedures are not guaranteed to be the same. The starting point, and criteria used, can also affect the model selected. Typically, automated search procedures consider models with just additive effects.
+
+Use these procedures as a starting point in model building, and not as a definitive answer to choose your final model.
+
+\hypertarget{r-tutorial-6}{%
+\section{R Tutorial}\label{r-tutorial-6}}
+
+In this tutorial, we will learn how to use model selection criteria and automated search procedures in setting up our MLR model. We will be using the \texttt{regsubsets()} function from the \texttt{leaps} package to automate the process of assessing models using model selection criteria, so install and load the \texttt{leaps} package:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(leaps)}
+\end{Highlighting}
+\end{Shaded}
+
+We will use the \texttt{mtcars} data set that comes built in with R. The data come from 32 classic automobiles.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Data}\OtherTok{\textless{}{-}}\NormalTok{mtcars}
+\end{Highlighting}
+\end{Shaded}
+
+Type \texttt{?mtcars} to read the description of the data. Notice that two variables, \texttt{vs} and \texttt{am} are actually categorical and are coded using 0-1 indicators. Since they are correctly coded as 0-1 indicators, we do not need to use the \texttt{factor()} function to convert these variables to be viewed as categorical.
+
+When using \texttt{lm()}, R will perform the 0-1 coding associated with categorical variables.
+
+In the examples below, we consider \texttt{mpg} to the response variable and all the other variables are potential predictors.
+
+\hypertarget{model-selection-criteria-1}{%
+\subsection*{Model Selection Criteria}\label{model-selection-criteria-1}}
+\addcontentsline{toc}{subsection}{Model Selection Criteria}
+
+The \texttt{regsubsets()} function from the \texttt{leaps} package will fit all possible regression models based on the supplied dataframe and specified response variable, and then calculate the values of \(R^2\), adjusted \(R^2\), \(SS_{res}\), Mallows \(C_p\), and BIC of each model. It does not calculate the PRESS statistic and the AIC. To do so:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{allreg }\OtherTok{\textless{}{-}}\NormalTok{ leaps}\SpecialCharTok{::}\FunctionTok{regsubsets}\NormalTok{(mpg }\SpecialCharTok{\textasciitilde{}}\NormalTok{., }\AttributeTok{data=}\NormalTok{Data, }\AttributeTok{nbest=}\DecValTok{1}\NormalTok{)}
+\FunctionTok{summary}\NormalTok{(allreg)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Subset selection object
+## Call: regsubsets.formula(mpg ~ ., data = Data, nbest = 1)
+## 10 Variables  (and intercept)
+##      Forced in Forced out
+## cyl      FALSE      FALSE
+## disp     FALSE      FALSE
+## hp       FALSE      FALSE
+## drat     FALSE      FALSE
+## wt       FALSE      FALSE
+## qsec     FALSE      FALSE
+## vs       FALSE      FALSE
+## am       FALSE      FALSE
+## gear     FALSE      FALSE
+## carb     FALSE      FALSE
+## 1 subsets of each size up to 8
+## Selection Algorithm: exhaustive
+##          cyl disp hp  drat wt  qsec vs  am  gear carb
+## 1  ( 1 ) " " " "  " " " "  "*" " "  " " " " " "  " " 
+## 2  ( 1 ) "*" " "  " " " "  "*" " "  " " " " " "  " " 
+## 3  ( 1 ) " " " "  " " " "  "*" "*"  " " "*" " "  " " 
+## 4  ( 1 ) " " " "  "*" " "  "*" "*"  " " "*" " "  " " 
+## 5  ( 1 ) " " "*"  "*" " "  "*" "*"  " " "*" " "  " " 
+## 6  ( 1 ) " " "*"  "*" "*"  "*" "*"  " " "*" " "  " " 
+## 7  ( 1 ) " " "*"  "*" "*"  "*" "*"  " " "*" "*"  " " 
+## 8  ( 1 ) " " "*"  "*" "*"  "*" "*"  " " "*" "*"  "*"
+\end{verbatim}
+
+The default value for \texttt{nbest} is 1. This means that the algorithm will return the one best set of predictors (based on \(R^2\)) for each number of possible predictors.
+
+So based on \(R^2\), among all possible 1-predictor models, the model that is best has \texttt{wt} as the one predictor. Among all possible 2-predictor models, the model that is best has \texttt{cyl} and \texttt{wt} as the two predictors.
+
+Changing \texttt{nbest} to be 2 gives:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{allreg2 }\OtherTok{\textless{}{-}}\NormalTok{ leaps}\SpecialCharTok{::}\FunctionTok{regsubsets}\NormalTok{(mpg }\SpecialCharTok{\textasciitilde{}}\NormalTok{., }\AttributeTok{data=}\NormalTok{Data, }\AttributeTok{nbest=}\DecValTok{2}\NormalTok{)}
+\FunctionTok{summary}\NormalTok{(allreg2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Subset selection object
+## Call: regsubsets.formula(mpg ~ ., data = Data, nbest = 2)
+## 10 Variables  (and intercept)
+##      Forced in Forced out
+## cyl      FALSE      FALSE
+## disp     FALSE      FALSE
+## hp       FALSE      FALSE
+## drat     FALSE      FALSE
+## wt       FALSE      FALSE
+## qsec     FALSE      FALSE
+## vs       FALSE      FALSE
+## am       FALSE      FALSE
+## gear     FALSE      FALSE
+## carb     FALSE      FALSE
+## 2 subsets of each size up to 8
+## Selection Algorithm: exhaustive
+##          cyl disp hp  drat wt  qsec vs  am  gear carb
+## 1  ( 1 ) " " " "  " " " "  "*" " "  " " " " " "  " " 
+## 1  ( 2 ) "*" " "  " " " "  " " " "  " " " " " "  " " 
+## 2  ( 1 ) "*" " "  " " " "  "*" " "  " " " " " "  " " 
+## 2  ( 2 ) " " " "  "*" " "  "*" " "  " " " " " "  " " 
+## 3  ( 1 ) " " " "  " " " "  "*" "*"  " " "*" " "  " " 
+## 3  ( 2 ) "*" " "  "*" " "  "*" " "  " " " " " "  " " 
+## 4  ( 1 ) " " " "  "*" " "  "*" "*"  " " "*" " "  " " 
+## 4  ( 2 ) " " " "  " " " "  "*" "*"  " " "*" " "  "*" 
+## 5  ( 1 ) " " "*"  "*" " "  "*" "*"  " " "*" " "  " " 
+## 5  ( 2 ) " " " "  " " "*"  "*" "*"  " " "*" " "  "*" 
+## 6  ( 1 ) " " "*"  "*" "*"  "*" "*"  " " "*" " "  " " 
+## 6  ( 2 ) " " "*"  "*" " "  "*" "*"  " " "*" "*"  " " 
+## 7  ( 1 ) " " "*"  "*" "*"  "*" "*"  " " "*" "*"  " " 
+## 7  ( 2 ) "*" "*"  "*" "*"  "*" "*"  " " "*" " "  " " 
+## 8  ( 1 ) " " "*"  "*" "*"  "*" "*"  " " "*" "*"  "*" 
+## 8  ( 2 ) " " "*"  "*" "*"  "*" "*"  "*" "*" "*"  " "
+\end{verbatim}
+
+So based on \(R^2\), among all possible 1-predictor models, the model that is best has \texttt{wt} as the one predictor. The second best 1-predictor model has \texttt{cyl} as the one predictor.
+
+Let's see what can be extracted from \texttt{summary(allreg2)}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{names}\NormalTok{(}\FunctionTok{summary}\NormalTok{(allreg2))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "which"  "rsq"    "rss"    "adjr2"  "cp"     "bic"    "outmat" "obj"
+\end{verbatim}
+
+We can extract information regarding adjusted \(R^2\), Mallow's \(C_p\), and \(BIC\), so we can find the best models based on these criteria:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{which.max}\NormalTok{(}\FunctionTok{summary}\NormalTok{(allreg2)}\SpecialCharTok{$}\NormalTok{adjr2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 9
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{which.min}\NormalTok{(}\FunctionTok{summary}\NormalTok{(allreg2)}\SpecialCharTok{$}\NormalTok{cp)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 5
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{which.min}\NormalTok{(}\FunctionTok{summary}\NormalTok{(allreg2)}\SpecialCharTok{$}\NormalTok{bic)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 5
+\end{verbatim}
+
+From \texttt{allreg2}, model 9 has the best adjusted \(R^2\), while model 5 has the best Mallow's \(C_p\) and \(BIC\). To get the corresponding coefficients and predictors of these models:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{coef}\NormalTok{(allreg2, }\FunctionTok{which.max}\NormalTok{(}\FunctionTok{summary}\NormalTok{(allreg2)}\SpecialCharTok{$}\NormalTok{adjr2))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## (Intercept)        disp          hp          wt        qsec          am 
+## 14.36190396  0.01123765 -0.02117055 -4.08433206  1.00689683  3.47045340
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{coef}\NormalTok{(allreg2, }\FunctionTok{which.min}\NormalTok{(}\FunctionTok{summary}\NormalTok{(allreg2)}\SpecialCharTok{$}\NormalTok{cp))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## (Intercept)          wt        qsec          am 
+##    9.617781   -3.916504    1.225886    2.935837
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{coef}\NormalTok{(allreg2, }\FunctionTok{which.min}\NormalTok{(}\FunctionTok{summary}\NormalTok{(allreg2)}\SpecialCharTok{$}\NormalTok{bic))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## (Intercept)          wt        qsec          am 
+##    9.617781   -3.916504    1.225886    2.935837
+\end{verbatim}
+
+It turns out we have 2 candidate models. They all have \texttt{wt}, \texttt{qsec}, and \texttt{am}. The model with the best adjusted \(R^2\) has two additional predictors: \texttt{disp} and \texttt{hp}.
+
+\hypertarget{forward-selection-backward-elimination-and-stepwise-regression}{%
+\subsection*{Forward selection, backward elimination, and stepwise regression}\label{forward-selection-backward-elimination-and-stepwise-regression}}
+\addcontentsline{toc}{subsection}{Forward selection, backward elimination, and stepwise regression}
+
+Fitting all possible regression models can be slow to run if there are many predictors and many observations. To cut down the number of potential models considered, we can use forward selection, backward elimination, and stepwise regression. These procedures will require declaring the smallest possible model, and the largest possible model first. The algorithm will consider models within this range of models.
+
+To do so, we start by declaring an intercept-only model and a full model (with all predictors). These two models contain the scope of all possible models to consider:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#intercept only model}
+\NormalTok{regnull }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(mpg}\SpecialCharTok{\textasciitilde{}}\DecValTok{1}\NormalTok{, }\AttributeTok{data=}\NormalTok{Data)}
+\DocumentationTok{\#\#model with all predictors}
+\NormalTok{regfull }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(mpg}\SpecialCharTok{\textasciitilde{}}\NormalTok{., }\AttributeTok{data=}\NormalTok{Data)}
+\end{Highlighting}
+\end{Shaded}
+
+To carry out forward selection:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{step}\NormalTok{(regnull, }\AttributeTok{scope=}\FunctionTok{list}\NormalTok{(}\AttributeTok{lower=}\NormalTok{regnull, }\AttributeTok{upper=}\NormalTok{regfull), }\AttributeTok{direction=}\StringTok{"forward"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Start:  AIC=115.94
+## mpg ~ 1
+## 
+##        Df Sum of Sq     RSS     AIC
+## + wt    1    847.73  278.32  73.217
+## + cyl   1    817.71  308.33  76.494
+## + disp  1    808.89  317.16  77.397
+## + hp    1    678.37  447.67  88.427
+## + drat  1    522.48  603.57  97.988
+## + vs    1    496.53  629.52  99.335
+## + am    1    405.15  720.90 103.672
+## + carb  1    341.78  784.27 106.369
+## + gear  1    259.75  866.30 109.552
+## + qsec  1    197.39  928.66 111.776
+## <none>              1126.05 115.943
+## 
+## Step:  AIC=73.22
+## mpg ~ wt
+## 
+##        Df Sum of Sq    RSS    AIC
+## + cyl   1    87.150 191.17 63.198
+## + hp    1    83.274 195.05 63.840
+## + qsec  1    82.858 195.46 63.908
+## + vs    1    54.228 224.09 68.283
+## + carb  1    44.602 233.72 69.628
+## + disp  1    31.639 246.68 71.356
+## <none>              278.32 73.217
+## + drat  1     9.081 269.24 74.156
+## + gear  1     1.137 277.19 75.086
+## + am    1     0.002 278.32 75.217
+## 
+## Step:  AIC=63.2
+## mpg ~ wt + cyl
+## 
+##        Df Sum of Sq    RSS    AIC
+## + hp    1   14.5514 176.62 62.665
+## + carb  1   13.7724 177.40 62.805
+## <none>              191.17 63.198
+## + qsec  1   10.5674 180.60 63.378
+## + gear  1    3.0281 188.14 64.687
+## + disp  1    2.6796 188.49 64.746
+## + vs    1    0.7059 190.47 65.080
+## + am    1    0.1249 191.05 65.177
+## + drat  1    0.0010 191.17 65.198
+## 
+## Step:  AIC=62.66
+## mpg ~ wt + cyl + hp
+## 
+##        Df Sum of Sq    RSS    AIC
+## <none>              176.62 62.665
+## + am    1    6.6228 170.00 63.442
+## + disp  1    6.1762 170.44 63.526
+## + carb  1    2.5187 174.10 64.205
+## + drat  1    2.2453 174.38 64.255
+## + qsec  1    1.4010 175.22 64.410
+## + gear  1    0.8558 175.76 64.509
+## + vs    1    0.0599 176.56 64.654
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = mpg ~ wt + cyl + hp, data = Data)
+## 
+## Coefficients:
+## (Intercept)           wt          cyl           hp  
+##    38.75179     -3.16697     -0.94162     -0.01804
+\end{verbatim}
+
+At the start of the algorithm, the AIC of the intercept-only model is calculated to be 115.94. The algorithm then considers adding each predictor to the intercept-only model. For each 1-predictor model, the AIC is calculated, and the 1-predictor models are arranged from smallest to largest in terms of AIC. In the output, all 1-predictor models are superior to the intercept-only model. The predictor \texttt{wt} is chosen to be used since it results in the model with the smallest AIC.
+
+In the next step, \texttt{wt} is in the model and cannot be removed. The AIC is 73.22. The algorithm then considers adding each predictor in addition to \texttt{wt}. For each two-predictor model, the AIC is calculated. The two-predictor models are then ordered from smallest to largest. Adding \texttt{cyl} leads to the smallest AIC so it is chosen to be added to \texttt{wt}. Note that adding \texttt{drat}, \texttt{gear}, or \texttt{am} to \texttt{wt} actually increases the AIC.
+
+The algorithm continues until the last step. At this stage, \texttt{wt}, \texttt{cyl}, and \texttt{hp} are added to the model and have an AIC of 62.66. The algorithm considers adding one of the remaining predictors, but adding any of them results in a higher AIC. Thus the algorithm stops.
+
+For backward elimination, the code is similar. The \texttt{direction} is changed from \texttt{forward} to \texttt{backward}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{step}\NormalTok{(regfull, }\AttributeTok{scope=}\FunctionTok{list}\NormalTok{(}\AttributeTok{lower=}\NormalTok{regnull, }\AttributeTok{upper=}\NormalTok{regfull), }\AttributeTok{direction=}\StringTok{"backward"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+And for stepwise regression, \texttt{direction} is set to \texttt{both}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{step}\NormalTok{(regnull, }\AttributeTok{scope=}\FunctionTok{list}\NormalTok{(}\AttributeTok{lower=}\NormalTok{regnull, }\AttributeTok{upper=}\NormalTok{regfull), }\AttributeTok{direction=}\StringTok{"both"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Start:  AIC=115.94
+## mpg ~ 1
+## 
+##        Df Sum of Sq     RSS     AIC
+## + wt    1    847.73  278.32  73.217
+## + cyl   1    817.71  308.33  76.494
+## + disp  1    808.89  317.16  77.397
+## + hp    1    678.37  447.67  88.427
+## + drat  1    522.48  603.57  97.988
+## + vs    1    496.53  629.52  99.335
+## + am    1    405.15  720.90 103.672
+## + carb  1    341.78  784.27 106.369
+## + gear  1    259.75  866.30 109.552
+## + qsec  1    197.39  928.66 111.776
+## <none>              1126.05 115.943
+## 
+## Step:  AIC=73.22
+## mpg ~ wt
+## 
+##        Df Sum of Sq     RSS     AIC
+## + cyl   1     87.15  191.17  63.198
+## + hp    1     83.27  195.05  63.840
+## + qsec  1     82.86  195.46  63.908
+## + vs    1     54.23  224.09  68.283
+## + carb  1     44.60  233.72  69.628
+## + disp  1     31.64  246.68  71.356
+## <none>               278.32  73.217
+## + drat  1      9.08  269.24  74.156
+## + gear  1      1.14  277.19  75.086
+## + am    1      0.00  278.32  75.217
+## - wt    1    847.73 1126.05 115.943
+## 
+## Step:  AIC=63.2
+## mpg ~ wt + cyl
+## 
+##        Df Sum of Sq    RSS    AIC
+## + hp    1    14.551 176.62 62.665
+## + carb  1    13.772 177.40 62.805
+## <none>              191.17 63.198
+## + qsec  1    10.567 180.60 63.378
+## + gear  1     3.028 188.14 64.687
+## + disp  1     2.680 188.49 64.746
+## + vs    1     0.706 190.47 65.080
+## + am    1     0.125 191.05 65.177
+## + drat  1     0.001 191.17 65.198
+## - cyl   1    87.150 278.32 73.217
+## - wt    1   117.162 308.33 76.494
+## 
+## Step:  AIC=62.66
+## mpg ~ wt + cyl + hp
+## 
+##        Df Sum of Sq    RSS    AIC
+## <none>              176.62 62.665
+## - hp    1    14.551 191.17 63.198
+## + am    1     6.623 170.00 63.442
+## + disp  1     6.176 170.44 63.526
+## - cyl   1    18.427 195.05 63.840
+## + carb  1     2.519 174.10 64.205
+## + drat  1     2.245 174.38 64.255
+## + qsec  1     1.401 175.22 64.410
+## + gear  1     0.856 175.76 64.509
+## + vs    1     0.060 176.56 64.654
+## - wt    1   115.354 291.98 76.750
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = mpg ~ wt + cyl + hp, data = Data)
+## 
+## Coefficients:
+## (Intercept)           wt          cyl           hp  
+##    38.75179     -3.16697     -0.94162     -0.01804
+\end{verbatim}
+
+Notice with stepwise regression, we consider removing any predictor as well as adding any predictor in each step.
+
+It turns out that for this dataset, forward selection, backward elimination, and stepwise regression propose the same model with \texttt{wt}, \texttt{cyl}, and \texttt{hp} as predictors.
+
+\hypertarget{some-comments}{%
+\subsection*{Some Comments}\label{some-comments}}
+\addcontentsline{toc}{subsection}{Some Comments}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \texttt{regsubsets()} and \texttt{step()} functions only consider 1st order models (no interactions or higher order terms).
+\item
+  \texttt{regsubsets()} and \texttt{step()} functions do not check if the regression assumptions are met. You still need to check the residual plot.
+\item
+  \texttt{regsubsets()} and \texttt{step()} functions do not guarantee the best model will be identified for your specific goal.
+\item
+  Notice that the various model selection criteria used in \texttt{regsubsets()} can lead to different models.
+\item
+  The various procedures in the \texttt{step()} function can lead to different models.
+\item
+  \texttt{step()} function can lead to different models if you have a different starting point.
+\item
+  For the \texttt{step()} function, R uses AIC to decide when to stop the search. The textbook describes the procedure using the \(F\) statistic. The choice of criteria could impact the end result.
+\end{enumerate}
+
+\hypertarget{practice-question-2}{%
+\subsection*{Practice Question}\label{practice-question-2}}
+\addcontentsline{toc}{subsection}{Practice Question}
+
+For the candidate models found above, create residual plots and Box Cox plots to see if the response variable should be transformed. If needed, transform the response variable, and re run these the \texttt{regsubsets()} and \texttt{step()} functions to see what candidate models are suggested.
 
 \hypertarget{intro}{%
 \chapter{Introduction}\label{intro}}
