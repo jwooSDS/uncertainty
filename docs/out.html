@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 10 Analysis of Residuals in MLR | Linear Models for Data Science</title>
+<meta name="author" content="Jeffrey Woo">
+<meta name="description" content="10.1 Introduction When we compute the sample average, a data point that is much larger or smaller than the rest of the data will have a large influence on the value of the average. We usually...">
+<meta name="generator" content="bookdown 0.34 with bs4_book()">
+<meta property="og:title" content="Chapter 10 Analysis of Residuals in MLR | Linear Models for Data Science">
+<meta property="og:type" content="book">
+<meta property="og:description" content="10.1 Introduction When we compute the sample average, a data point that is much larger or smaller than the rest of the data will have a large influence on the value of the average. We usually...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 10 Analysis of Residuals in MLR | Linear Models for Data Science">
+<meta name="twitter:description" content="10.1 Introduction When we compute the sample average, a data point that is much larger or smaller than the rest of the data will have a large influence on the value of the average. We usually...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.2/transition.js"></script><script src="libs/bs3compat-0.4.2/tabs.js"></script><script src="libs/bs3compat-0.4.2/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<style type="text/css">
+    /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+        }
+    .hanging div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }
+  </style>
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Linear Models for Data Science</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Preface</a></li>
+<li><a class="" href="wrangling.html"><span class="header-section-number">1</span> Data Wrangling with R</a></li>
+<li><a class="" href="viz.html"><span class="header-section-number">2</span> Data Visualization with R Using ggplot2</a></li>
+<li><a class="" href="slr.html"><span class="header-section-number">3</span> Basics with Simple Linear Regression (SLR)</a></li>
+<li><a class="" href="inf.html"><span class="header-section-number">4</span> Inference with Simple Linear Regression (SLR)</a></li>
+<li><a class="" href="diag.html"><span class="header-section-number">5</span> Model Diagnostics and Remedial Measures in SLR</a></li>
+<li><a class="" href="mlr.html"><span class="header-section-number">6</span> Multiple Linear Regression (MLR)</a></li>
+<li><a class="" href="genF.html"><span class="header-section-number">7</span> General Linear \(F\) Test and Multicollinearity</a></li>
+<li><a class="" href="cat.html"><span class="header-section-number">8</span> Categorical Predictors in MLR</a></li>
+<li><a class="" href="crit.html"><span class="header-section-number">9</span> Model Selection Criteria and Automated Search Procedures</a></li>
+<li><a class="active" href="out.html"><span class="header-section-number">10</span> Analysis of Residuals in MLR</a></li>
+<li><a class="" href="intro.html"><span class="header-section-number">11</span> Introduction</a></li>
+<li><a class="" href="methods.html"><span class="header-section-number">12</span> Methods</a></li>
+<li><a class="" href="references.html">References</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="out" class="section level1" number="10">
+<h1>
+<span class="header-section-number">10</span> Analysis of Residuals in MLR<a class="anchor" aria-label="anchor" href="#out"><i class="fas fa-link"></i></a>
+</h1>
+<div id="introduction-9" class="section level2" number="10.1">
+<h2>
+<span class="header-section-number">10.1</span> Introduction<a class="anchor" aria-label="anchor" href="#introduction-9"><i class="fas fa-link"></i></a>
+</h2>
+<p>When we compute the sample average, a data point that is much larger or smaller than the rest of the data will have a large influence on the value of the average. We usually check to see if the data point was an error (in which case the value is checked for correctness) or if there is something interesting about the data point that warrants a closer look.</p>
+<p>Likewise, we are concerned with observations that have high leverage, are outlying, or are influential in a regression model. In this module, you will learn various measures to detect these observations. A lot of these measures are based on residuals. Generally speaking, we are most concerned with influential observations, as their presence (or removal) significantly alter the estimated regression equation.</p>
+<p>Lastly, we will be using residuals from MLR to help us assess if any of the predictor variables need to be transformed, and if so, how to transform them, in order to meet the assumptions for MLR.</p>
+<div id="terminology" class="section level3" number="10.1.1">
+<h3>
+<span class="header-section-number">10.1.1</span> Terminology<a class="anchor" aria-label="anchor" href="#terminology"><i class="fas fa-link"></i></a>
+</h3>
+<p>You may have noticed in the earlier paragraphs that we are differentiating between observations that have high leverage, are outlying, or are influential. These observations have slightly different definitions:</p>
+<ul>
+<li>
+<strong>High leverage</strong>: an observation whose predictor(s) is extreme.</li>
+<li>
+<strong>Outlier</strong>: an observation whose response variable does not follow the general trend of the data.</li>
+<li>
+<strong>Influential</strong>: an observation whose presence (or removal) unduly affects any part of the regression analysis, usually in terms of unduly affecting the predicted response, the estimated coefficients, or the results from hypothesis tests and confidence intervals.</li>
+</ul>
+<p>The scatterplots below in Figure <a href="out.html#fig:10plots">10.1</a> display three examples of these types of observations. We are using just one predictor for ease of visualization. In each example, there are 6 observations.</p>
+<div class="figure">
+<span style="display:block;" id="fig:10plots"></span>
+<img src="images/10plots.jpg" alt="Scatterplot of Data with high leverage, Outlying, and Influential Observation"><p class="caption">
+Figure 10.1: Scatterplot of Data with high leverage, Outlying, and Influential Observation
+</p>
+</div>
+<p>Figure <a href="out.html#fig:10plots">10.1</a>(a) displays the scatterplot of an observation that is considered high leverage, denoted by the red diamond in the top right of the plot.</p>
+<ul>
+<li>The general pattern of the observations is a positive linear association between both variables. As <span class="math inline">\(x\)</span> gets larger, <span class="math inline">\(y\)</span> gets larger.</li>
+<li>The high leverage observation is a high leverage observation, as its value of <span class="math inline">\(x\)</span> is a lot larger than the values of <span class="math inline">\(x\)</span> for the other observations.</li>
+<li>The high leverage observation has a large value of <span class="math inline">\(x\)</span>, and its response has a value that is consistent with the general pattern of the observations. Therefore, it not considered an outlier.</li>
+<li>In the figure, two estimated regression lines are overlaid. The line in black is the regression line for the observations excluding the high leverage observation, and the line in red is the regression line when the high leverage observation is included. The lines are almost indistinguishable. Therefore, the high leverage observation is not influential.</li>
+</ul>
+<p>Figure <a href="out.html#fig:10plots">10.1</a>(b) displays the scatterplot of an observation that is considered an outlier, denoted by the blue triangle in the top left of the plot.</p>
+<ul>
+<li>The general pattern of the observations is a positive linear association between both variables. As <span class="math inline">\(x\)</span> gets larger, <span class="math inline">\(y\)</span> gets larger.</li>
+<li>The outlier is not a high leverage observation, as its value of <span class="math inline">\(x\)</span> is not a lot larger or smaller than the values of <span class="math inline">\(x\)</span> for the other observations.</li>
+<li>The outlier has a small value of <span class="math inline">\(x\)</span>, but its response has a value that is a lot larger than what the general pattern would suggest. Therefore, it is considered an outlier.</li>
+<li>In the figure, two estimated regression lines are overlaid. The line in black is the regression line for the observations excluding the outlier, and the line in blue is the regression line when the outlier is included. The lines are almost indistinguishable. Therefore, the outlier is not influential.</li>
+</ul>
+<p>Figure <a href="out.html#fig:10plots">10.1</a>(c) displays the scatterplot of an observation that is considered influential, denoted by the orange cross in the bottom right of the plot.</p>
+<ul>
+<li>The general pattern of the observations is a positive linear association between both variables. As <span class="math inline">\(x\)</span> gets larger, <span class="math inline">\(y\)</span> gets larger.</li>
+<li>The influential observation is also a high leverage observation, as its value of <span class="math inline">\(x\)</span> is a lot larger than the values of <span class="math inline">\(x\)</span> for the other observations.</li>
+<li>The influential observation has a large value of <span class="math inline">\(x\)</span>, but its response has a value that is a lot smaller than what the general pattern would suggest. Therefore, it is also considered an outlier.</li>
+<li>In the figure, two estimated regression lines are overlaid. The line in black is the regression line for the observations excluding the influential observation and the line in orange is the regression line when the influential observation is included. The lines are very different. Therefore, the observation is influential.</li>
+</ul>
+<p>From Figure <a href="out.html#fig:10plots">10.1</a> , we can see that an observation that has high leverage or is outlying is not guaranteed to be influential. As a general rule , observations that have high leverage and/or are outlying have the potential to be influential. Observations that are both outlying and have high leverage are very likely to be influential.</p>
+<p>We will now look at measures to detect these observations. These measures typically involve the residuals, or variation of residuals, from our regression.</p>
+</div>
+</div>
+<div id="detecting-high-leverage-observations" class="section level2" number="10.2">
+<h2>
+<span class="header-section-number">10.2</span> Detecting High Leverage Observations<a class="anchor" aria-label="anchor" href="#detecting-high-leverage-observations"><i class="fas fa-link"></i></a>
+</h2>
+<div id="limitation-of-residuals-in-detecting-high-leverage-observations" class="section level3" number="10.2.1">
+<h3>
+<span class="header-section-number">10.2.1</span> Limitation of residuals in detecting high leverage observations<a class="anchor" aria-label="anchor" href="#limitation-of-residuals-in-detecting-high-leverage-observations"><i class="fas fa-link"></i></a>
+</h3>
+<p>An intuitive way to detect observations that have high leverage, are outlying, or are influential, is to use the residuals, defined as:</p>
+<p><span class="math display" id="eq:10res">\[\begin{equation}
+e_i = y_i - \hat{y_i}.
+\tag{10.1}
+\end{equation}\]</span></p>
+<p>However, there are certain limitations in using residuals to detect these observations. To illustrate this, let us go back to Figure <a href="out.html#fig:10plots">10.1</a>. Visually, the residual is the vertical distance of an observation from the regression equation. In Figures <a href="out.html#fig:10plots">10.1</a>(a) and <a href="out.html#fig:10plots">10.1</a>(c), notice that the high leverage observation (red diamond) and influential observation (orange cross) are very close to the estimated regression equation in red and orange respectively. So these observations will have small residuals. However, in Figure <a href="out.html#fig:10plots">10.1</a>(b) , the outlier is far away from their respective estimated regression equations, and so have a large residual. So <strong>residuals may be unable to detect high leverage observations</strong>.</p>
+<p><em>Please view the associated video for a mathematical explanation for why high leverage observations are likely to have small residuals.</em></p>
+</div>
+<div id="hat-matrix" class="section level3" number="10.2.2">
+<h3>
+<span class="header-section-number">10.2.2</span> Hat matrix<a class="anchor" aria-label="anchor" href="#hat-matrix"><i class="fas fa-link"></i></a>
+</h3>
+<p>Recall in MLR that the predicted response (or fitted values), can be written in matrix form as</p>
+<p><span class="math display" id="eq:10yhat">\[\begin{equation}
+\boldsymbol{\hat{y}} = \boldsymbol{X\hat{\beta}}.
+\tag{10.2}
+\end{equation}\]</span></p>
+<p>Using the method of least squares, the estimated coefficients can be found using</p>
+<p><span class="math display" id="eq:10b">\[\begin{equation}
+\boldsymbol{\hat{\beta}} = \left[
+\begin{array}{c}
+   \hat{\beta}_0  \\
+   \hat{\beta}_1 \\
+   \vdots \\
+   \hat{\beta}_k
+\end{array}
+\right]  =
+\left(\boldsymbol{X}^{\prime} \boldsymbol{X} \right)^{-1} \boldsymbol{X}^{\prime} \boldsymbol{y} .
+\tag{10.3}
+\end{equation}\]</span></p>
+<p>Subbing <a href="out.html#eq:10b">(10.3)</a> into <a href="out.html#eq:10yhat">(10.2)</a>, we have</p>
+<p><span class="math display" id="eq:10hat">\[\begin{eqnarray}
+\boldsymbol{\hat{y}} &amp;=&amp; \boldsymbol{X} \left(\boldsymbol{X}^{\prime} \boldsymbol{X} \right)^{-1} \boldsymbol{X}^{\prime} \boldsymbol{y} \nonumber \\
+                     &amp;=&amp; \boldsymbol{Hy},
+\tag{10.4}
+\end{eqnarray}\]</span></p>
+<p>where <span class="math inline">\(\boldsymbol{H} = \boldsymbol{X (X^{\prime}X)^{-1}X^\prime}\)</span> is called the <strong>hat matrix</strong>. If we write <a href="out.html#eq:10hat">(10.4)</a> in scalar form, we have</p>
+<p><span class="math display">\[\begin{eqnarray*}
+\hat{y_1} &amp;=&amp; h_{11}y_1 + h_{12}y_2 + \cdots + h_{1n}y_n \nonumber \\
+\hat{y_2} &amp;=&amp; h_{21}y_1 + h_{22}y_2 + \cdots + h_{2n}y_n \nonumber \\
+&amp;=&amp; \vdots \nonumber \\
+\hat{y_n} &amp;=&amp; h_{n1}y_1 + h_{n2}y_2 + \cdots + h_{nn}y_n \nonumber
+\end{eqnarray*}\]</span></p>
+<p>where <span class="math inline">\(h_{ij}\)</span> denotes the <span class="math inline">\((i,j)\)</span>th entry in the hat matrix.</p>
+</div>
+<div id="leverage" class="section level3" number="10.2.3">
+<h3>
+<span class="header-section-number">10.2.3</span> Leverage<a class="anchor" aria-label="anchor" href="#leverage"><i class="fas fa-link"></i></a>
+</h3>
+<p>It turns out we use the diagonal entries of the hat matrix, <span class="math inline">\(h_{ii}\)</span>, to define <strong>leverage</strong>, which measures the distance of the predictors for observation <span class="math inline">\(i\)</span> and the center of the predictors for all observations.</p>
+<p>Using <a href="out.html#eq:10hat">(10.4)</a> in scalar form, we can see that the predicted response for each observation is a linear combination of observed responses <span class="math inline">\(y_1, y_2, \cdots, y_n\)</span>. The leverage <span class="math inline">\(h_{ii}\)</span> measures the impact that observation <span class="math inline">\(y_i\)</span> has in predicting its response. If the leverage is high, observation <span class="math inline">\(i\)</span> has a high impact on its prediction. Leverages have the following properties:</p>
+<ul>
+<li>
+<span class="math inline">\(h_{ii} = \boldsymbol{X_{i}}^{\prime} \left(\boldsymbol{X^{\prime}X} \right)^{-1} \boldsymbol{X_{i}}\)</span>.</li>
+<li>
+<span class="math inline">\(0\leq h_{ii}\leq 1\)</span>.</li>
+<li>
+<span class="math inline">\(\sum_{i=1}^n h_{ii}=p\)</span>, where <span class="math inline">\(p\)</span> is number of parameters. Therefore the average of the leverages is <span class="math inline">\(\frac{p}{n}\)</span>.</li>
+</ul>
+<p>There are various recommendations of how to determine if an observation has high leverage. We will use <span class="math inline">\(h_{ii} &gt; \frac{2p}{n}\)</span> as a general rule, or twice the average of the leverages. Note that we should use this as a guide, and remember that the higher the leverage, the further away the predictors for observation <span class="math inline">\(i\)</span> are from the center of the predictors for all observations.</p>
+<p>Let us find the residual and leverage of the observations that make up the scatterplot in Figure <a href="out.html#fig:10plots">10.1</a>(a). Note that there are 6 observations, and the high leverage observation has index 6. First, we take a look at the residuals. The absolute values of the residuals are reported below and are sorted in increasing order:</p>
+<div class="sourceCode" id="cb372"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">##absolute value of residuals, sorted in increasing order</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">result.lev</span><span class="op">$</span><span class="va">res</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##         5         6         2         4         3         1 
+## 0.1561530 0.3052037 0.5633585 0.7479269 1.3792798 1.4147975</code></pre>
+<p>Notice that the high leverage observation has a residual with absolute value of 0.3052. There are a few other observations with larger residuals. So residuals will fail to identify observation 6 has having high leverage. We now look at leverages, reported below and sorted in increasing order:</p>
+<div class="sourceCode" id="cb374"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">##leverages, sorted in increasing order</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.influence.html">lm.influence</a></span><span class="op">(</span><span class="va">result.lev</span><span class="op">)</span><span class="op">$</span><span class="va">hat</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##         4         3         2         1         5         6 
+## 0.1667478 0.1839964 0.2132494 0.2345507 0.2492167 0.9522391</code></pre>
+<div class="sourceCode" id="cb376"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">##criteria</span></span>
+<span><span class="va">p</span><span class="op">&lt;-</span><span class="fl">2</span></span>
+<span><span class="va">n</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">Data.lev</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></span>
+<span><span class="fl">2</span><span class="op">*</span><span class="va">p</span><span class="op">/</span><span class="va">n</span></span></code></pre></div>
+<pre><code>## [1] 0.6666667</code></pre>
+<p>Note that observation 6 has leverage of 0.9522, which is a lot larger relative to the leverages of the other five observations. Indeed, it is larger than the suggested criteria of <span class="math inline">\(\frac{2p}{n} = 0.6667\)</span>. We can see how leverage, and not residuals, is measure that should be used to identify high leverage observations.</p>
+</div>
+</div>
+<div id="analysis-of-residuals-detecting-outliers" class="section level2" number="10.3">
+<h2>
+<span class="header-section-number">10.3</span> Analysis of Residuals: Detecting Outliers<a class="anchor" aria-label="anchor" href="#analysis-of-residuals-detecting-outliers"><i class="fas fa-link"></i></a>
+</h2>
+<p>In the previous section, we noted that residuals should not be used to detect high leverage observations. Another limitation is that the numerical value of residuals is based on the unit of the response variable. So what makes a residual large depends on the unit of the response variable. In view of this limitation, we consider standardizing residuals to make them unitless. There are a few ways of standardizing residuals, some of which are useful in detecting outliers.</p>
+<div id="standardized-residuals" class="section level3" number="10.3.1">
+<h3>
+<span class="header-section-number">10.3.1</span> Standardized residuals<a class="anchor" aria-label="anchor" href="#standardized-residuals"><i class="fas fa-link"></i></a>
+</h3>
+<p>Recall that the errors in our regression model, denoted by <span class="math inline">\(\epsilon\)</span>, have variance denoted by <span class="math inline">\(\sigma^2\)</span>, which in turn is estimated by the <span class="math inline">\(MS_{res} = \frac{\sum(y_i - \hat{y_i})^2}{n-p}\)</span>. Therefore, the <strong>standardized residuals</strong>, <span class="math inline">\(d_i\)</span>, are found by</p>
+<p><span class="math display" id="eq:10di">\[\begin{equation}
+d_{i} = \frac{e_i}{\sqrt{MS_{res}}}.
+\tag{10.5}
+\end{equation}\]</span></p>
+<p>We are dividing the residuals, <span class="math inline">\(e_i\)</span>, by the standard error of the errors.</p>
+</div>
+<div id="studentized-residuals" class="section level3" number="10.3.2">
+<h3>
+<span class="header-section-number">10.3.2</span> Studentized residuals<a class="anchor" aria-label="anchor" href="#studentized-residuals"><i class="fas fa-link"></i></a>
+</h3>
+<p>However, <span class="math inline">\(MS_{res}\)</span> estimates the variance of the errors, not the residuals. It turns out the variance of the residuals is</p>
+<p><span class="math display" id="eq:10var">\[\begin{equation}
+Var (e_i) = MS_{res}(1-h_{ii}).
+\tag{10.6}
+\end{equation}\]</span></p>
+<p>So we should be standardizing the residual by using the standard error of the residuals instead, and we get <strong>studentized residuals</strong></p>
+<p><span class="math display" id="eq:10ri">\[\begin{equation}
+r_i = \frac{e_i}{\sqrt{MS_{res}(1-h_{ii})}}.
+\tag{10.7}
+\end{equation}\]</span></p>
+<p>Let us find the residuals and studentized residuals for the observations given in Figure <a href="out.html#fig:10plots">10.1</a>(b). Note that there are 6 observations, and the outlying observation has index 6. First, we take a look at the residuals. The absolute values of the residuals are reported below and are sorted in increasing order:</p>
+<div class="sourceCode" id="cb378"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">##absolute value of residuals, sorted in increasing order</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">result.out</span><span class="op">$</span><span class="va">res</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##         1         2         4         5         3         6 
+##  1.259631  2.007224  2.796350  2.892751  3.754347 12.710304</code></pre>
+<p>Residuals identify the outlying observation, index 6. However, the numerical values for these residuals depend on the unit of the response variable, so it can be hard to ascertain what value of residual is considered large. So we can look at the studentized residuals instead:</p>
+<div class="sourceCode" id="cb380"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">##absolute value of studentized residuals, sorted in increasing order</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/influence.measures.html">rstandard</a></span><span class="op">(</span><span class="va">result.out</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##         1         2         5         3         4         6 
+## 0.2134751 0.3186190 0.5258773 0.5970578 0.8023354 1.9850133</code></pre>
+<p>The studentized residual estimates how many standard deviations its predicted response is from the actual response. So the predicted response for the outlying observation is estimated to be 2 standard deviations away from its true value. Typically, studentized residuals with magnitude larger than 2 are flagged. In comparison with the other five studentized residuals, the outlier has a studentized residual quite a lot larger than the others.</p>
+<p>Let us take a look at the studentized residual for the observations shown in Fig <a href="out.html#fig:10plots">10.1</a>(c). Again, note that there are 6 observations, and the influential observation has index 6.</p>
+<div class="sourceCode" id="cb382"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/influence.measures.html">rstandard</a></span><span class="op">(</span><span class="va">result.both</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##         2         3         1         5         4         6 
+## 0.1180102 0.1618282 0.3298582 1.1348254 1.8125713 1.9409466</code></pre>
+<p>The value of the studentized residual for the influential observation is 1.9409, pretty close to 2. However, notice that in relationship with the other studentized residuals, it is not a lot larger. So we may not deem this observation as outlying, or deem that observation 4 is also outlying, which is incorrect. This can happen when the observation is influential. So, we see some limitation in using studentized residuals to flag outliers. We will further refine the residual so we can identify outliers more clearly.</p>
+</div>
+<div id="deleted-residuals" class="section level3" number="10.3.3">
+<h3>
+<span class="header-section-number">10.3.3</span> Deleted residuals<a class="anchor" aria-label="anchor" href="#deleted-residuals"><i class="fas fa-link"></i></a>
+</h3>
+<p>We have seen an example in the previous subsection where an influential observation that is also outlying has studentized residuals that are not a lot larger than the other studentized residuals. This is because if the observation also has high leverage (for example in Fig <a href="out.html#fig:10plots">10.1</a>(c)), the observation is likely to pull the estimated regression equation towards itself, resulting in a small residual and studentized residual that is not a lot larger than the rest.</p>
+<p>To address this issue, we remove the observation in question from estimating the regression model, so the observation will not pull the regression equation towards itself.</p>
+<p>We can use the <strong>deleted residual</strong> to measure this. It is defined as the difference in the value of the actual response for an observation and its prediction when the observation is not used to estimate the regression equation. The deleted residual for observation <span class="math inline">\(i\)</span> is denoted as</p>
+<p><span class="math display" id="eq:10deleted">\[\begin{equation}
+e_{(i)}=y_i-\hat{y}_{i(i)}.
+\tag{10.8}
+\end{equation}\]</span></p>
+<p>There are two values in the subscript for <span class="math inline">\(\hat{y}_{i(i)}\)</span>. The value outside the subscript denotes the observation we are making the prediction for. The subscript surrounded by the parenthesis indicates the observation has been removed from estimating the regression equation.</p>
+<p>Let us use Figure <a href="out.html#fig:10plots">10.1</a>(c) as an example to demonstrate. The influential observation is denoted by the orange cross, and is observation 6:</p>
+<ul>
+<li>
+<span class="math inline">\(y_6\)</span> denotes the value of the response variable for this observation.</li>
+<li>
+<span class="math inline">\(\hat{y}_{6(6)}\)</span> denotes the predicted response for this observation, if it was removed from estimating the regression equation. Visually, on Figure <a href="out.html#fig:10plots">10.1</a>(c), <span class="math inline">\(\hat{y}_{6(6)}\)</span> is the predicted response based on the black regression line, since the black regression line was estimated without observation 6.</li>
+<li>
+<span class="math inline">\(e_{(6)}\)</span> denotes the vertical distance of observation 6 (the orange cross) from the black regression line.</li>
+</ul>
+<p>A mathematically equivalent form for <a href="out.html#eq:10deleted">(10.8)</a> is</p>
+<p><span class="math display" id="eq:10deleted2">\[\begin{equation}
+e_{(i)} = \frac{e_i}{1-h_{ii}}.
+\tag{10.9}
+\end{equation}\]</span></p>
+<p>Note that the larger <span class="math inline">\(h_{ii}\)</span> is, the deleted residual is larger compared to the residual. Thus deleted residuals will at times identify outliers when residuals would not, especially if it has high leverage.</p>
+<p>Just like residuals, deleted residuals depend on the unit of the response variable, so we should scale deleted residuals.</p>
+<p><em>Please view the associated video for more explanation behind deleted residuals.</em></p>
+</div>
+<div id="externally-studentized-residuals" class="section level3" number="10.3.4">
+<h3>
+<span class="header-section-number">10.3.4</span> Externally studentized residuals<a class="anchor" aria-label="anchor" href="#externally-studentized-residuals"><i class="fas fa-link"></i></a>
+</h3>
+<p>We can scale the deleted residuals to obtain residuals, which are</p>
+<p><span class="math display" id="eq:10sdeleted">\[\begin{equation}
+t_i = \frac{e_i}{\sqrt{MS_{res(i)}(1-h_{ii})}}.
+\tag{10.10}
+\end{equation}\]</span></p>
+<p>Note that <span class="math inline">\(MS_{res(i)}\)</span> denotes the <span class="math inline">\(MS_{res}\)</span> of the regression model that is estimated without observation <span class="math inline">\(i\)</span>. From a computational standpoint, calculating <span class="math inline">\(t_i\)</span>s this way requires us to fit <span class="math inline">\(n\)</span> regression models, in order to find <span class="math inline">\(MS_{res(i)}\)</span> for each <span class="math inline">\(t_i\)</span>.</p>
+<p>A computationally more efficient to compute <span class="math inline">\(t_i\)</span> is</p>
+<p><span class="math display" id="eq:10sdeleted2">\[\begin{equation}
+t_i =
+e_i\left[\frac{n-1-p}{SS_{res}(1-h_{ii})-e_i^2}\right]^{1/2}.
+\tag{10.11}
+\end{equation}\]</span></p>
+<p>The formulation in <a href="out.html#eq:10sdeleted2">(10.11)</a> only requires us to fit one estimated regression model. The reason why <a href="out.html#eq:10sdeleted">(10.10)</a> and <a href="out.html#eq:10sdeleted2">(10.11)</a> are equivalent is based on the relationship between <span class="math inline">\(MS_{res}\)</span> and <span class="math inline">\(MS_{res(i)}\)</span>:</p>
+<p><span class="math display" id="eq:10relate">\[\begin{equation}
+(n-p)MS_{res}=(n-1-p)MS_{res(i)} + \frac{e_i^2}{(1-h_{ii})}.
+\tag{10.12}
+\end{equation}\]</span></p>
+<p>Let us take a look at the externally studentized residuals for the scatterplots shown in in Figures <a href="out.html#fig:10plots">10.1</a>(b) and <a href="out.html#fig:10plots">10.1</a>(c). Again, we are sorting them based on increasing order based on absolute values:</p>
+<div class="sourceCode" id="cb384"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">##from Fig 1b</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/influence.measures.html">rstudent</a></span><span class="op">(</span><span class="va">result.out</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##          1          2          5          3          4          6 
+##  0.1859371  0.2795018  0.4720327  0.5417717  0.7585583 14.0687652</code></pre>
+<div class="sourceCode" id="cb386"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">##from Fig 1c</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/influence.measures.html">rstudent</a></span><span class="op">(</span><span class="va">result.both</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##         2         3         1         5         4         6 
+## 0.1023782 0.1406084 0.2896319 1.1935239 3.7138867 6.9686966</code></pre>
+<p>Notice how the externally studentized residuals for observation 6 in both plots are a lot larger than for the other observations. It is now a lot more obvious that these are outliers, compared to using studentized residuals earlier on.</p>
+<p>Generally speaking, <span class="math inline">\(|t_i| &gt; 3\)</span> is a decent rule to use to flag outliers. But this rule should be used in relation with all the <span class="math inline">\(t_i\)</span>s.</p>
+<p>We have covered measures to detect high leverage observations and outliers. These observations usually have something interesting that make them “stand out” from the other observations. But they are not necessarily influential in a regression setting.</p>
+</div>
+</div>
+<div id="influential-observations" class="section level2" number="10.4">
+<h2>
+<span class="header-section-number">10.4</span> Influential Observations<a class="anchor" aria-label="anchor" href="#influential-observations"><i class="fas fa-link"></i></a>
+</h2>
+<p>In a regression setting, an observation is influential if its presence, or removal, drastically alters the regression analysis. We usually quantify this alteration in terms of how much the predicted response and / or the estimated coefficients change with and without the observation in question. Generally speaking, observations that have high leverage and are outlying have the most potential to be influential. As an example from Figure <a href="out.html#fig:10plots">10.1</a>, we see that the estimated regression line is drastically altered only in Figure <a href="out.html#fig:10plots">10.1</a>(c).</p>
+<div id="dfbetas" class="section level3" number="10.4.1">
+<h3>
+<span class="header-section-number">10.4.1</span> DFBETAs<a class="anchor" aria-label="anchor" href="#dfbetas"><i class="fas fa-link"></i></a>
+</h3>
+<p>We can look at how the estimated coefficients change when the observation in question is removed from estimating the model. This is the motivation behind <strong>DFBETAs</strong>:</p>
+<p><span class="math display" id="eq:10dfbeta">\[\begin{equation}
+DFBETAS_{j,i} = \frac{\hat{\beta}_j-\hat{\beta}_{j(i)}}
+{\sqrt{MS_{res(i)}c_{jj}}}
+\tag{10.13}
+\end{equation}\]</span></p>
+<p>where <span class="math inline">\(c_{jj}\)</span> is the <span class="math inline">\(j\)</span>th diagonal element of
+<span class="math inline">\(\left(\boldsymbol{X^{\prime}X}\right)^{-1}\)</span>, since <span class="math inline">\(Var(\boldsymbol{\hat{\beta}}) = \sigma^2 \left(\boldsymbol{X^{\prime}X}\right)^{-1}\)</span>.</p>
+<p>Notice there are two subscripts in <span class="math inline">\(DFBETA_{j,i}\)</span>. The first subscript denotes the coefficient, and the second denotes the observation. The numerator in <a href="out.html#eq:10dfbeta">(10.13)</a> measures the change in the estimated coefficient, and then we standardize this change by dividing with its standard error.</p>
+<p>A few other things to note with <a href="out.html#eq:10dfbeta">(10.13)</a>:</p>
+<ul>
+<li>The sign for <span class="math inline">\(DFBETAS_{j,i}\)</span> indicates whether excluding an observation leads to an increase or decrease in that estimated regression coefficient.</li>
+<li>
+<span class="math inline">\(DFBETAS\)</span> can be interpreted as the number of standard errors the estimated coefficient changes when observation <span class="math inline">\(i\)</span> is removed from building the model.</li>
+<li>Suggested rule for influential observation: <span class="math inline">\(|(\mbox{DFBETAS})_{j,i}|&gt;\frac{2}{\sqrt{n}}\)</span>. Again, this should be used as a guide, and in conjunction with the values of <span class="math inline">\(DFBETAS\)</span> for all coefficients and observations.</li>
+</ul>
+<p>Let us go back to the scatterplot in Fig <a href="out.html#fig:10plots">10.1</a>(c) and compute the <span class="math inline">\(DFBETAs\)</span>:</p>
+<div class="sourceCode" id="cb388"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/influence.measures.html">dfbetas</a></span><span class="op">(</span><span class="va">result.both</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##   (Intercept)            x
+## 1 -0.15341916   0.08625257
+## 2 -0.04957068   0.02491157
+## 3  0.05689633  -0.02049090
+## 4  1.05250538   0.03665073
+## 5 -0.66636733   0.39576044
+## 6 13.00009691 -28.26234465</code></pre>
+<p>Notice the information is presented in a <span class="math inline">\(6 \times 2\)</span> matrix. The dimension will always by <span class="math inline">\(n \times p\)</span>, where each row index corresponds to the observation, and the column index corresponds to the coefficient. The value in row 6 column 1 informs us that removing observation 6 from estimating the model will change <span class="math inline">\(\hat{\beta_0}\)</span> by about 13 standard errors, and change <span class="math inline">\(\hat{\beta_1}\)</span> by about 28 standard errors. In comparison to the <span class="math inline">\(DFBETAS\)</span> for other observations, these values are huge, so we flag observation 6 as influential.</p>
+<p>Checking in with the suggested rule for influential observations:</p>
+<div class="sourceCode" id="cb390"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">##criteria for DFBETAs</span></span>
+<span><span class="fl">2</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 0.8164966</code></pre>
+<p>So clearly observation 6 is influential, since its <span class="math inline">\(DFBETAs\)</span> are much larger than 0.8165.</p>
+</div>
+<div id="dffits" class="section level3" number="10.4.2">
+<h3>
+<span class="header-section-number">10.4.2</span> DFFITs<a class="anchor" aria-label="anchor" href="#dffits"><i class="fas fa-link"></i></a>
+</h3>
+<p>Another measure for influential observations is based on the change in the predicted response when the model is estimated with and without the observation in question. One such measure is <span class="math inline">\(DFFITs\)</span>, defined as</p>
+<p><span class="math display" id="eq:10dffits2">\[\begin{eqnarray}
+DFFITS_i &amp;=&amp; \frac{\hat{y}_i-\hat{y}_{i(i)}}{\sqrt{S^2_{(i)}h_{ii}}} \tag{10.14} \\
+                 &amp;=&amp; t_i\left(\frac{h_{ii}}{1-h_{ii}}\right)^{1/2}. \tag{10.15}
+\end{eqnarray}\]</span></p>
+<p>A few notes about <span class="math inline">\(DFFITs\)</span>:</p>
+<ul>
+<li>Using <a href="out.html#eq:10dffits">(10.14)</a>, <span class="math inline">\(DFFITs\)</span> can be interpreted as the number of standard errors <span class="math inline">\(\hat{y}_i\)</span> changes if observation <span class="math inline">\(i\)</span> is removed when estimating the model.</li>
+<li>
+<span class="math inline">\(DFFITs\)</span> measures the influence of observation <span class="math inline">\(i\)</span> on its own fitted value.</li>
+<li>As a guide, <span class="math inline">\(\left|DFFITS_i\right| &gt; 2\sqrt{p/n}\)</span> considered influential. Again, this should be used in conjunction with the <span class="math inline">\(DFFITs\)</span> for all observations.</li>
+<li>Using <a href="out.html#eq:10dffits2">(10.15)</a>, we can see that observations with high leverage and are outlying are likely to have high values for <span class="math inline">\(DFFITs\)</span>.</li>
+</ul>
+<p>Let us go back to the scatterplot in Fig <a href="out.html#fig:10plots">10.1</a>(c) and compute the <span class="math inline">\(DFFITs\)</span>:</p>
+<div class="sourceCode" id="cb392"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/influence.measures.html">dffits</a></span><span class="op">(</span><span class="va">result.both</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##            1            2            3            4            5            6 
+##  -0.16032698  -0.05330067   0.06676822   1.66138579  -0.68764196 -31.11630918</code></pre>
+<p>The <span class="math inline">\(DFFITs\)</span> for observation 6 is around -31, which is a lot larger in magnitude compared to the other <span class="math inline">\(DFFITs\)</span>. We can safely say that it is influential, since its presence or removal changes its predicted response by about 31 standard errors.</p>
+<p>Checking in with the suggested rule for influential observations:</p>
+<div class="sourceCode" id="cb394"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">##criteria for DFFITs</span></span>
+<span><span class="fl">2</span><span class="op">*</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">p</span><span class="op">/</span><span class="va">n</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 1.154701</code></pre>
+<p>The magnitude of <span class="math inline">\(DFFITS_6\)</span> is clearly larger than this criteria, so it is influential based on this criteria. Interestingly, the criteria will also flag observation 4 as influential, even though visually it does not appear to be, based on Fig <a href="out.html#fig:10plots">10.1</a>(c).</p>
+</div>
+<div id="cooks-distance" class="section level3" number="10.4.3">
+<h3>
+<span class="header-section-number">10.4.3</span> Cook’s distance<a class="anchor" aria-label="anchor" href="#cooks-distance"><i class="fas fa-link"></i></a>
+</h3>
+<p>Another measure that is motivated by the change in fitted values is <strong>Cook’s Distance</strong></p>
+<p><span class="math display" id="eq:10cooks2">\[\begin{eqnarray}
+D_i &amp;=&amp; \frac{\left( \boldsymbol{\hat{y}} - \boldsymbol{\hat{y}_{(i)}} \right)^{\prime} \left( \boldsymbol{\hat{y}} - \boldsymbol{\hat{y}_{(i)}} \right)}{p MS_{res}} \tag{10.16} \\
+    &amp;=&amp; \frac{r_i^2}{p}\frac{h_{ii}}{1-h_{ii}}. \tag{10.17}
+\end{eqnarray}\]</span></p>
+<p><span class="math inline">\(\boldsymbol{\hat{y}_{(i)}}\)</span> denotes the vector of fitted values with observation <span class="math inline">\(i\)</span> removed. A few comments about Cook’s distance:</p>
+<ul>
+<li><p>From <a href="out.html#eq:10cooks1">(10.16)</a>, we can see that the numerator of Cook’s distance measures the Squared Euclidean distance between the vector of fitted values with all observations, <span class="math inline">\(\boldsymbol{\hat{y}}\)</span>, and the vector of fitted values with observation <span class="math inline">\(i\)</span> removed, <span class="math inline">\(\boldsymbol{\hat{y}_{(i)}}\)</span>. So it measures how the fitted values for all observations change, if observation <span class="math inline">\(i\)</span> is removed. This is unlike <span class="math inline">\(DFFITs\)</span>, which only measures the change in fitted value for observation <span class="math inline">\(i\)</span>.</p></li>
+<li><p>From <a href="out.html#eq:10cooks2">(10.17)</a>, we can see that observations with high leverage and that are outlying are likely to have large Cook’s distances.</p></li>
+<li><p>A suggested guideline is that observations with Cook’s distance larger than 1 will be flagged as influential.</p></li>
+</ul>
+<p>Let us go back to the scatterplot in Fig <a href="out.html#fig:10plots">10.1</a>(c) and compute the Cook’s distances:</p>
+<div class="sourceCode" id="cb396"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/influence.measures.html">cooks.distance</a></span><span class="op">(</span><span class="va">result.both</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##            1            2            3            4            5            6 
+##  0.016670353  0.001887380  0.002952539  0.328733436  0.213742357 37.555213339</code></pre>
+<p>The Cook’s distance for observation 6 is about 37.5552, which is a lot larger than 1, and a lot larger than the Cook’s distance for other observations. So we flag it as an influential observation.</p>
+</div>
+<div id="some-comments-about-flagged-observations" class="section level3" number="10.4.4">
+<h3>
+<span class="header-section-number">10.4.4</span> Some comments about flagged observations<a class="anchor" aria-label="anchor" href="#some-comments-about-flagged-observations"><i class="fas fa-link"></i></a>
+</h3>
+<p>A tendency is to remove observations that have been flagged using any of the measures in this module. Be <strong>EXTREMELY CAREFUL</strong> with deleting such observations. Many times, these observations provide interesting case studies and should always be identified and discussed. Something is making them different from the other observations.</p>
+<p>A few other comments:</p>
+<ul>
+<li>Do not get too caught up with the guidelines for flagging these observations. Use these guidelines in relation to the values for all observations as well. Also use context to guide you.</li>
+<li>If it is clear that these observations were data entry errors, fix them.</li>
+<li>If these observations represent unusual circumstances that do not meet the <strong>objectives</strong> of the study, or if there is something fundamentally wrong with the observation, you may delete them, but make sure to clearly explain why. For example, you may be measuring the weights of newborn babies, but a 20 week old baby’s weight was entered into the study. Clearly, the 20 week old is not part of the study, so we can remove that baby’s weight.</li>
+<li>Sometimes, these observations are flagged due to a predictor or response variable being a lot larger than the rest. Log transforming the corresponding variable can help make the value a lot closer to the rest.</li>
+<li>Fit the model with and without the influential observations and see how differently the models answer our questions of interest.</li>
+<li>You should always address the removal of any observations in your report. Also provide the justifications for their removal.</li>
+</ul>
+</div>
+</div>
+<div id="partial-regression-plots" class="section level2" number="10.5">
+<h2>
+<span class="header-section-number">10.5</span> Partial Regression Plots<a class="anchor" aria-label="anchor" href="#partial-regression-plots"><i class="fas fa-link"></i></a>
+</h2>
+<p>Another use of residuals is to use them to inform us if we need to transform predictor variables in MLR.</p>
+<p>In SLR, we learned how to use scatterplots and residual plots to assess the various regression assumptions, and how to transform the predictor or response variable as needed. For MLR, we still use residual plots in the same way to assess a couple of the regression assumptions:</p>
+<ol style="list-style-type: decimal">
+<li>The errors have mean 0.</li>
+<li>The errors have constant variance.</li>
+</ol>
+<p>A challenge in MLR is that if assumption 1 is violated, we know we can remedy this by transforming at least one of the predictors, but we cannot use scatterplots to decide which predictor to transform, and how to transform. The main reason is that scatterplots only take into account one of the predictors and ignoring the other predictors, whereas MLR fits all the predictors into the model at the same time.</p>
+<p>A <strong>partial regression plot</strong> illustrates the marginal effect of adding a predictor when the others are already in the model. We can use partial regression plots to decide if a predictor should be added into our MLR model, or if needed, how to transform the predictor. Note that there are a number of other commonly used names for partial regression plots such as added variable plots and marginal effects plots.</p>
+<p>Partial regression plots are created in the following manner. Suppose we have predictors <span class="math inline">\(x_1, x_2, \cdots, x_{k-1}\)</span> in the model, and want to decide if we need to add, drop, or transform predictor <span class="math inline">\(x_k\)</span>:</p>
+<ul>
+<li>We regress <span class="math inline">\(y\)</span> against <span class="math inline">\(x_1, x_2, \cdots, x_{k-1}\)</span> and obtain the residuals. Denote these residuals by <span class="math inline">\(e(y|x_1, x_2, \cdots, x_{k-1})\)</span>.</li>
+<li>We regress the predictor in question, <span class="math inline">\(x_k\)</span>, against the other predictors in the model and obtain the residuals. Denote these residuals by <span class="math inline">\(e(x_k|x_1, x_2, \cdots, x_{k-1})\)</span>.</li>
+<li>Then, we plot <span class="math inline">\(e(x_k|x_1, x_2, \cdots, x_{k-1})\)</span> against <span class="math inline">\(e(y|x_1, x_2, \cdots, x_{k-1})\)</span>. This plot is the partial regression plot of <span class="math inline">\(x_k\)</span>.</li>
+</ul>
+<p>Usually, we assess the partial regression plot for the following patterns: (1) Random horizontal band (no pattern); or (2) Linear pattern; or (3) Nonlinear pattern.</p>
+<ul>
+<li>If we see a random horizontal band, it means we can drop <span class="math inline">\(x_k\)</span> from the model.</li>
+<li>If we see a linear pattern, keep <span class="math inline">\(x_k\)</span> as in the model without transformation.</li>
+<li>If we see a nonlinear pattern, we will need <span class="math inline">\(x_k\)</span> as a predictor, but it needs to be transformed. We use the shape of the partial regression plot to aid us in transforming the predictor.</li>
+</ul>
+<p>Some properties of partial regression plots:</p>
+<ul>
+<li>The estimated intercept is 0.</li>
+<li>The estimated slope is the estimated coefficient of <span class="math inline">\(x_k\)</span> in the model with <span class="math inline">\(x_1, x_2, \cdots, x_{k}\)</span> as predictors.</li>
+</ul>
+<p>Let us take a look at an example based on simulated data. For simplicity, we have a response variable and two predictors, <span class="math inline">\(x_1, x_2\)</span>. We consider a MLR model here, and create the corresponding diagnostic plots:</p>
+<div class="sourceCode" id="cb398"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">##create dataframe</span></span>
+<span><span class="va">Data</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">x1</span>,<span class="va">x2</span>,<span class="va">y</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">##MLR</span></span>
+<span><span class="va">result</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">y</span><span class="op">~</span><span class="va">x1</span><span class="op">+</span><span class="va">x2</span>, data<span class="op">=</span><span class="va">Data</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">##residual plot</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/unnamed-chunk-261-1.png" width="672"></div>
+<p>Looking at the residual plot at the top left, the assumption that the variance of the errors is constant is reasonably met, as the vertical spread of the residuals is similar throughout the plot. Assumption 1, that the errors have mean 0, is not met. We can see a curved pattern in the residuals and they are not evenly scattered across the horizontal axis. For small and large values on the horizontal axis, the residuals are almost exclusively negative and so do not have a mean of 0. For moderate values on the horizontal axis, the residuals are almost exclusively positive and so do not have a mean of 0.</p>
+<p>So we know that we need to transform at least one predictor, since assumption 1 is not met. However, the residual plot does not inform us which predictor to transform, and how. So we create partial regression plots:</p>
+<div class="sourceCode" id="cb399"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-forge.r-project.org/projects/car/">car</a></span><span class="op">)</span></span>
+<span><span class="fu">car</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/car/man/avPlots.html">avPlots</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/unnamed-chunk-262-1.png" width="672"></div>
+<p>The first plot on the left is the partial regression plot for <span class="math inline">\(x_1\)</span>, and the second plot on the right is the partial regression plot for <span class="math inline">\(x_2\)</span>.</p>
+<ul>
+<li>Based on the partial regression plot for <span class="math inline">\(x_1\)</span>, we see a clear linear pattern, as the plots are evenly scattered across the blue line. So <span class="math inline">\(x_1\)</span> does not need to be transformed.</li>
+<li>Based on the partial regression plot for <span class="math inline">\(x_2\)</span>, we see a non linear pattern. For values on the horizontal axis that are small and large, the plots are all below the blue line; however, for values on the horizontal axis that are moderate, the plots are all above the blue line. The shape of this pattern resembles a logarithmic function, we will log transform <span class="math inline">\(x_2\)</span>, refit the regression, and reassess the residual plot.</li>
+</ul>
+<div class="sourceCode" id="cb400"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">##need to transform x2</span></span>
+<span><span class="va">x2star</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">x2</span><span class="op">)</span></span>
+<span><span class="va">Data</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">Data</span>,<span class="va">x2star</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">##regress using x2star</span></span>
+<span><span class="va">result2</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">y</span><span class="op">~</span><span class="va">x1</span><span class="op">+</span><span class="va">x2star</span>, data<span class="op">=</span><span class="va">Data</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">##diagnostic plots</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result2</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/unnamed-chunk-263-1.png" width="672"></div>
+<p>The residual plot now looks a lot more reasonable. The residuals are evenly scattered across the horizontal axis with constant vertical spread, so assumptions 1 and 2 are met. The transformation of <span class="math inline">\(x_2\)</span> was successful.</p>
+<p>Out of curiosity, we can look at the resulting partial regression plots:</p>
+<div class="sourceCode" id="cb401"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">##partial regression plots</span></span>
+<span><span class="fu">car</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/car/man/avPlots.html">avPlots</a></span><span class="op">(</span><span class="va">result2</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/unnamed-chunk-264-1.png" width="672"></div>
+<p>It is not surprising to see that for both partial regression plots, the plots are evenly scattered across the blue lines. In fact, the slopes of the blue lines will be the same value as the corresponding estimated coefficient:</p>
+<div class="sourceCode" id="cb402"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">result2</span></span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = y ~ x1 + x2star, data = Data)
+## 
+## Coefficients:
+## (Intercept)           x1       x2star  
+##       5.898        3.014       10.072</code></pre>
+<p>The estimated coefficients for <span class="math inline">\(x_1\)</span> and <span class="math inline">\(x_2\)</span> in the MLR are about 3 and 10 respectively, which match with what we see in their corresponding partial regression plots.</p>
+</div>
+<div id="r-tutorial-7" class="section level2" number="10.6">
+<h2>
+<span class="header-section-number">10.6</span> R Tutorial<a class="anchor" aria-label="anchor" href="#r-tutorial-7"><i class="fas fa-link"></i></a>
+</h2>
+<p>For this tutorial, we will go over a data set from the mid 1980s that contains data on the mean teacher pay, mean spending in public schools, for each state.</p>
+<p>We want to assess how teacher pay (<code>PAY</code>) is related to spending in public schools (<code>SPEND</code>), while controlling for geographic region (<code>AREA</code>). The geographic regions are North (coded 1), South (coded 2), and West (coded 3).</p>
+<p>Load the various packages that we need for visualizations and assessing regression assumptions. Also download the data file, <code>teacher_pay.txt</code>:</p>
+<div class="sourceCode" id="cb404"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span> <span class="co">##for visuals</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://www.stats.ox.ac.uk/pub/MASS4/">MASS</a></span><span class="op">)</span> <span class="co">##for boxcox</span></span>
+<span><span class="va">Data</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.table</a></span><span class="op">(</span><span class="st">"teacher_pay.txt"</span>, header<span class="op">=</span><span class="cn">TRUE</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span></span></code></pre></div>
+<p>Notice <code>AREA</code> is recorded with integers, so we need to convert it to a factor, and give descriptive names to the regions.</p>
+<div class="sourceCode" id="cb405"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">Data</span><span class="op">$</span><span class="va">AREA</span><span class="op">)</span> <span class="co">##notice its integer. Need to convert to factor</span></span></code></pre></div>
+<pre><code>## [1] "integer"</code></pre>
+<div class="sourceCode" id="cb407"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">Data</span><span class="op">$</span><span class="va">AREA</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">Data</span><span class="op">$</span><span class="va">AREA</span><span class="op">)</span> <span class="co">##convert to factor</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/levels.html">levels</a></span><span class="op">(</span><span class="va">Data</span><span class="op">$</span><span class="va">AREA</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] "1" "2" "3"</code></pre>
+<div class="sourceCode" id="cb409"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/levels.html">levels</a></span><span class="op">(</span><span class="va">Data</span><span class="op">$</span><span class="va">AREA</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"North"</span>, <span class="st">"South"</span>, <span class="st">"West"</span><span class="op">)</span> <span class="co">##Give names to the classes</span></span></code></pre></div>
+<p>We create some visualizations to see if we can spot potential outliers, high leverage, and / or influential observations. We create a scatterplot of the two quantitative variables: <code>PAY</code> against <code>SPEND</code>, with different colors to denote the three regions. This dataframe actually provides the names of the state for each row, so we can overlay the names of the states on the scatterplot via the layer <code><a href="https://ggplot2.tidyverse.org/reference/geom_text.html">geom_text()</a></code>:</p>
+<div class="sourceCode" id="cb410"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">Data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">SPEND</span>, y<span class="op">=</span><span class="va">PAY</span>, color<span class="op">=</span><span class="va">AREA</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>method<span class="op">=</span><span class="va">lm</span>, se<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title<span class="op">=</span><span class="st">"Scatterplot of Pay against Expenditure, by Area"</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_text.html">geom_text</a></span><span class="op">(</span>label<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">Data</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/unnamed-chunk-269-1.png" width="672"></div>
+<p>Based on this scatterplots, we note the following:</p>
+<ul>
+<li>Within each geographic region, teacher pay has a positive linear association with spending in public schools.</li>
+<li>The slopes are not all parallel, so the association between teacher pay and spending in public schools varies across geographic regions.</li>
+<li>Alaska stands out, as its teacher pay and spending in public schools are a lot higher than the rest of the states in the West.</li>
+</ul>
+<div id="model-fitting-and-diagnostics" class="section level3 unnumbered">
+<h3>Model fitting and Diagnostics<a class="anchor" aria-label="anchor" href="#model-fitting-and-diagnostics"><i class="fas fa-link"></i></a>
+</h3>
+<p>Given what we noted above, we fit a model with interaction.</p>
+<div class="sourceCode" id="cb411"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">result</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">PAY</span><span class="op">~</span><span class="va">AREA</span><span class="op">*</span><span class="va">SPEND</span>, data<span class="op">=</span><span class="va">Data</span><span class="op">)</span></span></code></pre></div>
+<p>We take a look at the residual plot to assess regression assumptions:</p>
+<div class="sourceCode" id="cb412"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/unnamed-chunk-271-1.png" width="672"></div>
+<p>Look at the residuals vs leverage plot (bottom right). This plot identifies Alaska as having Cook’s distance greater than 1, and DC has Cook’s distance greater than 0.5. So based on Cook’s distance we have one influential observation: Alaska. Which is not terribly surprising as we saw in the scatterplots above that it was clearly a high leverage observation.</p>
+<p>Looking at the scale-location plot (bottom left), it appears the variance of the standardized residuals could be increasing. However, this could be unduly influenced by Alaska being influential and high leverage.</p>
+<p>The residual plot looks fine: they are generally evenly scattered across the horizontal axis with constant vertical variation.</p>
+<p>We take a look at the Box Cox plot.</p>
+<div class="sourceCode" id="cb413"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">MASS</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/MASS/man/boxcox.html">boxcox</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span> </span></code></pre></div>
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/unnamed-chunk-272-1.png" width="672"></div>
+<p>Notice that <span class="math inline">\(\lambda=1\)</span> is slightly outside the 95% CI. For now, we will not transform the response variable, given this, and that the residual plot looks fine.</p>
+</div>
+<div id="detecting-high-leverage-observations-and-outliers" class="section level3 unnumbered">
+<h3>Detecting high leverage observations and outliers<a class="anchor" aria-label="anchor" href="#detecting-high-leverage-observations-and-outliers"><i class="fas fa-link"></i></a>
+</h3>
+<p>We calculate the leverages and externally studentized residuals. Leverages are found by extracting the component called <code>hat</code> after the function <code><a href="https://rdrr.io/r/stats/lm.influence.html">lm.influence()</a></code> is used on an object created by <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code>. The function <code><a href="https://rdrr.io/r/stats/influence.measures.html">rstudent()</a></code> is used to obtain the externally studentized residuals of an object created by <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code>:</p>
+<div class="sourceCode" id="cb414"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">hii</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.influence.html">lm.influence</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span><span class="op">$</span><span class="va">hat</span> <span class="co">##leverages</span></span>
+<span><span class="va">ext.student</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/influence.measures.html">rstudent</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span> <span class="co">##ext studentized res</span></span>
+<span><span class="va">n</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">Data</span><span class="op">)</span></span>
+<span><span class="va">p</span><span class="op">&lt;-</span><span class="fl">6</span></span></code></pre></div>
+<p>And compare them with relevant criteria.</p>
+<div class="sourceCode" id="cb415"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">hii</span><span class="op">[</span><span class="va">hii</span><span class="op">&gt;</span><span class="fl">2</span><span class="op">*</span><span class="va">p</span><span class="op">/</span><span class="va">n</span><span class="op">]</span></span></code></pre></div>
+<pre><code>##        NY        NJ        DC        AK 
+## 0.3053842 0.2581918 0.3912344 0.7487242</code></pre>
+<p>4 states have high leverage. Alaska and DC being flagged are not surprising given the residual vs leverage plot earlier. Let us sort the leverages:</p>
+<div class="sourceCode" id="cb417"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="va">hii</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##         KA         MN         MI         PA         IL         IA         WI 
+## 0.04763314 0.04814049 0.04872688 0.05324797 0.05377504 0.05632986 0.05706558 
+##         VT         OH         NC         LA         TX         GA         VA 
+## 0.05707857 0.05746450 0.05973863 0.06129159 0.06143055 0.06827941 0.06996579 
+##         ME         SC         MT         CO         NB         HA         KY 
+## 0.07183791 0.07252628 0.07694962 0.07743972 0.07745833 0.07772608 0.07819689 
+##         OR         WA         CA         WV         FL         NM         OK 
+## 0.07834563 0.07849313 0.08023754 0.08125084 0.08156618 0.08607902 0.08859618 
+##         MA         IN         AL         MO         RI         NH         AR 
+## 0.09089505 0.09092285 0.09127547 0.09139123 0.09410454 0.09633746 0.10245416 
+##         ND         NV         SD         AZ         TE         CT         ID 
+## 0.10338837 0.11028362 0.11624741 0.11760852 0.11879029 0.12437883 0.14499945 
+##         WY         MS         UT         MD         DE         NJ         NY 
+## 0.15610645 0.16134343 0.16700704 0.18479604 0.22726386 0.25819177 0.30538424 
+##         DC         AK 
+## 0.39123441 0.74872418</code></pre>
+<p>Notice that NJ’s leverage is not that much higher than most of the states, even though it was flagged earlier. Next, we use externally studentized residuals to flag outliers:</p>
+<div class="sourceCode" id="cb419"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">ext.student</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">ext.student</span><span class="op">)</span><span class="op">&gt;</span><span class="fl">3</span><span class="op">]</span></span></code></pre></div>
+<pre><code>##       MI 
+## 3.019843</code></pre>
+<p>Michigan is flagged as an outlier. Looking back at the scatterplot, we notice it’s response is a quite a bit larger than what the estimated regression equation would predict. We take a look at the externally studentized residuals by sorting them:</p>
+<div class="sourceCode" id="cb421"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">ext.student</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##         MD         SC         HA         NY         MO         MA         KY 
+## 0.03644196 0.05262498 0.06210089 0.06476159 0.08128973 0.10835326 0.10929606 
+##         GA         WV         NC         PA         WA         MS         CO 
+## 0.17250321 0.19257076 0.21152962 0.21756552 0.22063591 0.24283511 0.28475162 
+##         ND         OK         AR         VA         WI         OR         UT 
+## 0.29501349 0.29572399 0.36126156 0.36637531 0.39488723 0.44073911 0.45678081 
+##         ID         OH         NB         CT         NH         IA         TX 
+## 0.49053845 0.59490670 0.59806955 0.60434181 0.63829421 0.70327885 0.73994193 
+##         AZ         KA         LA         TE         NM         AL         RI 
+## 0.78792273 0.82077814 0.82468153 0.89762127 0.91539379 1.04254320 1.08246221 
+##         NV         IN         FL         MN         VT         ME         SD 
+## 1.10165201 1.14073928 1.15171582 1.20035013 1.31410121 1.32914423 1.43863273 
+##         NJ         WY         DE         IL         MT         CA         AK 
+## 1.56668720 1.66500360 1.69610186 1.72424711 1.76080510 1.82999671 2.07828421 
+##         DC         MI 
+## 2.36884012 3.01984305</code></pre>
+<p>There are a couple of states with externally studentized that are not a lot smaller than Michigan’s. For the time being, we are not too alarmed by Michigan.</p>
+</div>
+<div id="detecting-influential-observations" class="section level3 unnumbered">
+<h3>Detecting influential observations<a class="anchor" aria-label="anchor" href="#detecting-influential-observations"><i class="fas fa-link"></i></a>
+</h3>
+<div id="dfbetas-1" class="section level4 unnumbered">
+<h4>DFBETAS<a class="anchor" aria-label="anchor" href="#dfbetas-1"><i class="fas fa-link"></i></a>
+</h4>
+<p>Next, we identify influential observations based on DFBETAS, via the <code>debetas()</code> function:</p>
+<div class="sourceCode" id="cb423"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">DFBETAS</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/influence.measures.html">dfbetas</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">DFBETAS</span><span class="op">)</span><span class="op">&gt;</span><span class="fl">2</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##    (Intercept) AREASouth AREAWest SPEND AREASouth:SPEND AREAWest:SPEND
+## ME       FALSE     FALSE    FALSE FALSE           FALSE          FALSE
+## NH       FALSE     FALSE    FALSE FALSE           FALSE          FALSE
+## VT       FALSE     FALSE    FALSE FALSE           FALSE          FALSE
+## MA       FALSE     FALSE    FALSE FALSE           FALSE          FALSE
+## RI       FALSE     FALSE    FALSE FALSE           FALSE          FALSE
+## CT       FALSE     FALSE    FALSE FALSE           FALSE          FALSE
+## NY       FALSE     FALSE    FALSE FALSE           FALSE          FALSE
+## NJ        TRUE      TRUE     TRUE  TRUE            TRUE           TRUE
+## PA       FALSE     FALSE    FALSE FALSE           FALSE          FALSE
+## OH       FALSE     FALSE    FALSE FALSE           FALSE          FALSE
+## IN        TRUE     FALSE    FALSE FALSE           FALSE          FALSE
+## IL       FALSE     FALSE    FALSE FALSE           FALSE          FALSE
+## MI       FALSE     FALSE    FALSE FALSE           FALSE          FALSE
+## WI       FALSE     FALSE    FALSE FALSE           FALSE          FALSE
+## MN       FALSE     FALSE    FALSE FALSE           FALSE          FALSE
+## IA       FALSE     FALSE    FALSE FALSE           FALSE          FALSE
+## MO       FALSE     FALSE    FALSE FALSE           FALSE          FALSE
+## ND       FALSE     FALSE    FALSE FALSE           FALSE          FALSE
+## SD        TRUE      TRUE     TRUE  TRUE           FALSE           TRUE
+## NB       FALSE     FALSE    FALSE FALSE           FALSE          FALSE
+## KA       FALSE     FALSE    FALSE FALSE           FALSE          FALSE
+## DE       FALSE      TRUE    FALSE FALSE            TRUE          FALSE
+## MD       FALSE     FALSE    FALSE FALSE           FALSE          FALSE
+## DC       FALSE      TRUE    FALSE FALSE            TRUE          FALSE
+## VA       FALSE     FALSE    FALSE FALSE           FALSE          FALSE
+## WV       FALSE     FALSE    FALSE FALSE           FALSE          FALSE
+## NC       FALSE     FALSE    FALSE FALSE           FALSE          FALSE
+## SC       FALSE     FALSE    FALSE FALSE           FALSE          FALSE
+## GA       FALSE     FALSE    FALSE FALSE           FALSE          FALSE
+## FL       FALSE     FALSE    FALSE FALSE           FALSE          FALSE
+## KY       FALSE     FALSE    FALSE FALSE           FALSE          FALSE
+## TE       FALSE     FALSE    FALSE FALSE           FALSE          FALSE
+## AL       FALSE     FALSE    FALSE FALSE           FALSE          FALSE
+## MS       FALSE     FALSE    FALSE FALSE           FALSE          FALSE
+## AR       FALSE     FALSE    FALSE FALSE           FALSE          FALSE
+## LA       FALSE     FALSE    FALSE FALSE           FALSE          FALSE
+## OK       FALSE     FALSE    FALSE FALSE           FALSE          FALSE
+## TX       FALSE     FALSE    FALSE FALSE           FALSE          FALSE
+## MT       FALSE     FALSE    FALSE FALSE           FALSE          FALSE
+## ID       FALSE     FALSE    FALSE FALSE           FALSE          FALSE
+## WY       FALSE     FALSE    FALSE FALSE           FALSE           TRUE
+## CO       FALSE     FALSE    FALSE FALSE           FALSE          FALSE
+## NM       FALSE     FALSE    FALSE FALSE           FALSE          FALSE
+## AZ       FALSE     FALSE    FALSE FALSE           FALSE          FALSE
+## UT       FALSE     FALSE    FALSE FALSE           FALSE          FALSE
+## NV       FALSE     FALSE    FALSE FALSE           FALSE          FALSE
+## WA       FALSE     FALSE    FALSE FALSE           FALSE          FALSE
+## OR       FALSE     FALSE    FALSE FALSE           FALSE          FALSE
+## CA       FALSE     FALSE    FALSE FALSE           FALSE          FALSE
+## AK       FALSE     FALSE     TRUE FALSE           FALSE           TRUE
+## HA       FALSE     FALSE    FALSE FALSE           FALSE          FALSE</code></pre>
+<p>There is a lot of output to look at, since we are computing the DFBETAS for each coefficient and each observation.</p>
+<p>We see that:</p>
+<ul>
+<li>NJ is influential in for all coefficients.</li>
+<li>IN is influential for <span class="math inline">\(\hat{\beta}_0\)</span>, the intercept.</li>
+<li>SD is influential for all coefficients except <span class="math inline">\(\hat{\beta}_4\)</span>.</li>
+<li>DE, DC are influential for <span class="math inline">\(\hat{\beta}_1\)</span> and <span class="math inline">\(\hat{\beta}_4\)</span>.</li>
+<li>WY is influential for <span class="math inline">\(\hat{\beta}_5\)</span>.</li>
+<li>AK is influential for <span class="math inline">\(\hat{\beta}_2\)</span> and <span class="math inline">\(\hat{\beta}_5\)</span>.</li>
+</ul>
+<p>It may be useful to actually look at the actual values of these DFBETAS of these states.</p>
+<div class="sourceCode" id="cb425"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">##see actual values for DFBETAS of these states</span></span>
+<span><span class="va">DFBETAS</span><span class="op">[</span><span class="st">"NJ"</span>,<span class="op">]</span></span></code></pre></div>
+<pre><code>##     (Intercept)       AREASouth        AREAWest           SPEND AREASouth:SPEND 
+##       0.7409886      -0.5257624      -0.6082822      -0.8347137       0.5404329 
+##  AREAWest:SPEND 
+##       0.6968517</code></pre>
+<div class="sourceCode" id="cb427"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">DFBETAS</span><span class="op">[</span><span class="st">"IN"</span>,<span class="op">]</span></span></code></pre></div>
+<pre><code>##     (Intercept)       AREASouth        AREAWest           SPEND AREASouth:SPEND 
+##       0.2952144      -0.2094670      -0.2423433      -0.2489711       0.1611956 
+##  AREAWest:SPEND 
+##       0.2078509</code></pre>
+<div class="sourceCode" id="cb429"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">DFBETAS</span><span class="op">[</span><span class="st">"SD"</span>,<span class="op">]</span></span></code></pre></div>
+<pre><code>##     (Intercept)       AREASouth        AREAWest           SPEND AREASouth:SPEND 
+##      -0.4584579       0.3252951       0.3763509       0.4009003      -0.2595617 
+##  AREAWest:SPEND 
+##      -0.3346873</code></pre>
+<div class="sourceCode" id="cb431"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">DFBETAS</span><span class="op">[</span><span class="st">"DE"</span>,<span class="op">]</span></span></code></pre></div>
+<pre><code>##     (Intercept)       AREASouth        AREAWest           SPEND AREASouth:SPEND 
+##    1.128835e-15    4.723272e-01   -6.863935e-16   -8.545510e-16   -6.035000e-01 
+##  AREAWest:SPEND 
+##    6.560284e-16</code></pre>
+<div class="sourceCode" id="cb433"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">DFBETAS</span><span class="op">[</span><span class="st">"DC"</span>,<span class="op">]</span></span></code></pre></div>
+<pre><code>##     (Intercept)       AREASouth        AREAWest           SPEND AREASouth:SPEND 
+##   -2.452921e-15   -1.090038e+00    1.455494e-15    1.848907e-15    1.334032e+00 
+##  AREAWest:SPEND 
+##   -1.358816e-15</code></pre>
+<div class="sourceCode" id="cb435"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">DFBETAS</span><span class="op">[</span><span class="st">"WY"</span>,<span class="op">]</span></span></code></pre></div>
+<pre><code>##     (Intercept)       AREASouth        AREAWest           SPEND AREASouth:SPEND 
+##    2.021103e-16   -1.615063e-16    1.694842e-01   -1.547569e-16    1.058109e-16 
+##  AREAWest:SPEND 
+##   -2.807636e-01</code></pre>
+<div class="sourceCode" id="cb437"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">DFBETAS</span><span class="op">[</span><span class="st">"AK"</span>,<span class="op">]</span></span></code></pre></div>
+<pre><code>##     (Intercept)       AREASouth        AREAWest           SPEND AREASouth:SPEND 
+##   -7.309710e-16    6.954223e-16   -1.577954e+00    3.368755e-16   -3.872654e-16 
+##  AREAWest:SPEND 
+##    1.870692e+00</code></pre>
+<p>Recall that DFBETAS measure the number of standard errors the estimated coefficients change with the removal of these observations.</p>
+<p>Again, we can use subject matter expertise to decide what change in estimated coefficient is considered practically significant and alter our criteria for DFBETAS accordingly. This decision should be made before looking at the data.</p>
+</div>
+<div id="dffits-1" class="section level4 unnumbered">
+<h4>DFFITS<a class="anchor" aria-label="anchor" href="#dffits-1"><i class="fas fa-link"></i></a>
+</h4>
+<p>Next, we identify influential observations based on DFFITS, via the <code><a href="https://rdrr.io/r/stats/influence.measures.html">dffits()</a></code> function:</p>
+<div class="sourceCode" id="cb439"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">DFFITS</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/influence.measures.html">dffits</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span>
+<span><span class="va">DFFITS</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">DFFITS</span><span class="op">)</span><span class="op">&gt;</span><span class="fl">2</span><span class="op">*</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">p</span><span class="op">/</span><span class="va">n</span><span class="op">)</span><span class="op">]</span></span></code></pre></div>
+<pre><code>##         NJ         DE         DC         WY         AK 
+## -0.9242888 -0.9198172  1.8990186 -0.7161133  3.5874885</code></pre>
+<div class="sourceCode" id="cb441"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">DFFITS</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##         SC         MD         HA         MO         KY         MA         NY 
+## 0.01471597 0.01735062 0.01802815 0.02578098 0.03183319 0.03426140 0.04294064 
+##         GA         PA         NC         WV         WA         CO         OK 
+## 0.04669810 0.05159688 0.05331808 0.05726718 0.06439360 0.08249938 0.09220164 
+##         WI         ND         VA         MS         AR         OR         OH 
+## 0.09714477 0.10017873 0.10048925 0.10651115 0.12205575 0.12850053 0.14689256 
+##         IA         NB         KA         TX         ID         UT         NH 
+## 0.17182516 0.17329768 0.18356009 0.18930262 0.20201008 0.20452885 0.20840847 
+##         LA         CT         MN         NM         AZ         VT         TE 
+## 0.21072756 0.22777064 0.26994593 0.28093270 0.28765528 0.32331629 0.32956719 
+##         AL         FL         RI         IN         ME         NV         IL 
+## 0.33041136 0.34322306 0.34888234 0.36076345 0.36977458 0.38785924 0.41104811 
+##         MT         SD         CA         MI         WY         DE         NJ 
+## 0.50839566 0.52176655 0.54050695 0.68346464 0.71611334 0.91981717 0.92428875 
+##         DC         AK 
+## 1.89901862 3.58748845</code></pre>
+<p>NJ, DE, DC, WY, AK are influential since their DFFITS are greater than <span class="math inline">\(2\sqrt{\frac{p}{n}}\)</span>. DFFITS for AK and DC are a lot higher than the rest. We can also perform some calculations to see how different their predicted response changes with and without these observations.</p>
+<p>Alaska and DC being flagged are not too surprising since we flagged them earlier in the residuals vs leverage plot as having large Cook’s distances.</p>
+<div class="sourceCode" id="cb443"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">##compute yhat and yhat(i) for the states found above</span></span>
+<span><span class="va">y</span><span class="op">&lt;-</span><span class="va">Data</span><span class="op">$</span><span class="va">PAY</span></span>
+<span><span class="va">yhat</span><span class="op">&lt;-</span><span class="va">y</span><span class="op">-</span><span class="va">result</span><span class="op">$</span><span class="va">res</span> </span>
+<span><span class="va">del.res</span><span class="op">&lt;-</span><span class="va">result</span><span class="op">$</span><span class="va">res</span><span class="op">/</span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">hii</span><span class="op">)</span> <span class="co">##deleted residual</span></span>
+<span><span class="va">yhat.i</span><span class="op">&lt;-</span><span class="va">y</span><span class="op">-</span><span class="va">del.res</span> <span class="co">##yhat(i)</span></span>
+<span><span class="co">##compare yhat, yhat(i), and compute their difference for the states found above</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">yhat</span>,<span class="va">yhat.i</span>, <span class="va">yhat</span><span class="op">-</span><span class="va">yhat.i</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">DFFITS</span><span class="op">)</span><span class="op">&gt;</span><span class="fl">2</span><span class="op">*</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">p</span><span class="op">/</span><span class="va">n</span><span class="op">)</span>,<span class="op">]</span></span></code></pre></div>
+<pre><code>##        yhat   yhat.i           
+## NJ 30188.73 31239.42 -1050.6910
+## DE 27944.46 28921.02  -976.5579
+## DC 29988.89 27417.51  2571.3848
+## WY 30634.16 31264.99  -630.8240
+## AK 39194.77 32385.49  6809.2826</code></pre>
+<p>The predicted mean teacher pay in Alaska changes by about $6,800 when Alaska is removed from the model. The predicted mean teacher pay in Wyoming changes by about $630 when Wyoming is removed from the model. We may wish to consult a subject matter expert if a change in $630 has practical significance in the context of the data. We can use subject matter expertise to decide what change in predicted pay is considered practically significant and alter our criteria for DFFITS accordingly. This decision should be made before looking at the data.</p>
+</div>
+<div id="cooks-distance-1" class="section level4 unnumbered">
+<h4>Cook’s distance<a class="anchor" aria-label="anchor" href="#cooks-distance-1"><i class="fas fa-link"></i></a>
+</h4>
+<p>Let’s look at Cook’s distance, using the <code><a href="https://rdrr.io/r/stats/influence.measures.html">cooks.distance()</a></code> function:</p>
+<div class="sourceCode" id="cb445"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">COOKS</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/influence.measures.html">cooks.distance</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span>
+<span><span class="va">COOKS</span><span class="op">[</span><span class="va">COOKS</span><span class="op">&gt;</span><span class="fl">1</span><span class="op">]</span></span></code></pre></div>
+<pre><code>##       AK 
+## 1.997662</code></pre>
+<div class="sourceCode" id="cb447"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="va">COOKS</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##           SC           MD           HA           MO           KY           MA 
+## 3.691126e-05 5.131276e-05 5.539532e-05 1.132772e-04 1.726836e-04 2.000336e-04 
+##           NY           GA           PA           NC           WV           WA 
+## 3.142709e-04 3.714612e-04 4.533030e-04 4.840790e-04 5.585400e-04 7.060148e-04 
+##           CO           OK           WI           ND           VA           MS 
+## 1.158005e-03 1.446184e-03 1.602917e-03 1.707267e-03 1.716030e-03 1.931155e-03 
+##           AR           OR           OH           IA           NB           KA 
+## 2.531855e-03 2.802240e-03 3.648622e-03 4.976540e-03 5.077827e-03 5.656739e-03 
+##           TX           ID           UT           NH           LA           CT 
+## 6.033246e-03 6.918088e-03 7.096810e-03 7.335614e-03 7.454007e-03 8.770292e-03 
+##           MN           NM           AZ           VT           AL           TE 
+## 1.202731e-02 1.320140e-02 1.390812e-02 1.714530e-02 1.816021e-02 1.818091e-02 
+##           FL           RI           IN           ME           NV           IL 
+## 1.949227e-02 2.020936e-02 2.154745e-02 2.240714e-02 2.495400e-02 2.697727e-02 
+##           MT           SD           CA           MI           WY           DE 
+## 4.115665e-02 4.431989e-02 4.627581e-02 6.595379e-02 8.223120e-02 1.353651e-01 
+##           NJ           DC           AK 
+## 1.379268e-01 5.451778e-01 1.997662e+00</code></pre>
+<p>Only Alaska is flagged, which is not surprising given our earlier observations with the residuals vs leverage plot, as Alaska was the only observation with Cook’s distance greater than 1. The Cook’s distance for Alaska is a lot higher than the others.</p>
+</div>
+</div>
+<div id="thoughts" class="section level3 unnumbered">
+<h3>Thoughts<a class="anchor" aria-label="anchor" href="#thoughts"><i class="fas fa-link"></i></a>
+</h3>
+<p>So what do we do? Really depends on the original research questions and what values of DFFITS and DFBETAS you consider to be practically significant, which may require consultation with a subject matter expert.</p>
+<p>We note the following:</p>
+<ul>
+<li>Alaska is influential across all measures, and has the highest values across all measures.</li>
+<li>DC is influential based on DFFITS and DFBETAS, with the second largest magnitudes.</li>
+</ul>
+<p>Personally, given what I know, this is what I would do:</p>
+<ul>
+<li>Remove DC. DC is more like a city than a state, so I do not think it makes sense to compare DC with states.</li>
+<li>Remove Alaska and make it clear that the model excludes Alaska, and that Alaska has some interesting characteristics that makes it stand out from the other western states (high expenditure and high teacher pay).</li>
+</ul>
+<p>Refit the model with these two removed (and clearly explained).</p>
+<div class="sourceCode" id="cb449"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">data.no.akdc</span><span class="op">&lt;-</span><span class="va">Data</span><span class="op">[</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">50</span>,<span class="fl">24</span><span class="op">)</span>,<span class="op">]</span> <span class="co">##remove row 50 and 24, which is AK and DC</span></span>
+<span><span class="va">result.no.akdc</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">PAY</span><span class="op">~</span><span class="va">AREA</span><span class="op">*</span><span class="va">SPEND</span>, data<span class="op">=</span><span class="va">data.no.akdc</span><span class="op">)</span> </span></code></pre></div>
+<p>Check diagnostic plots. Residual plot looks fine. Notice no observation has large Cook’s distance.</p>
+<div class="sourceCode" id="cb450"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result.no.akdc</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/unnamed-chunk-284-1.png" width="672"></div>
+<p>Box Cox plot suggests we don’t need to transform the response variable.</p>
+<div class="sourceCode" id="cb451"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">MASS</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/MASS/man/boxcox.html">boxcox</a></span><span class="op">(</span><span class="va">result.no.akdc</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/unnamed-chunk-285-1.png" width="672"></div>
+<p>Let us fit a model with no interaction between the predictors, and conduct a general linear F test to see if we can drop the interaction terms:</p>
+<div class="sourceCode" id="cb452"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">##no interactions</span></span>
+<span><span class="va">result.no.akdc.reduced</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">PAY</span><span class="op">~</span><span class="va">AREA</span><span class="op">+</span><span class="va">SPEND</span>, data<span class="op">=</span><span class="va">data.no.akdc</span><span class="op">)</span></span>
+<span><span class="co">##general linear F test</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">result.no.akdc.reduced</span>, <span class="va">result.no.akdc</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## Analysis of Variance Table
+## 
+## Model 1: PAY ~ AREA + SPEND
+## Model 2: PAY ~ AREA * SPEND
+##   Res.Df       RSS Df Sum of Sq      F Pr(&gt;F)
+## 1     45 204237951                           
+## 2     43 185418192  2  18819759 2.1822 0.1251</code></pre>
+<p>So we can drop the interaction terms. To be complete, you may want to reassess the regression assumptions for the model with no interactions, although removing insignificant terms usually does not affect the residual plot by a lot.</p>
+</div>
+<div id="partial-regression-plots-1" class="section level3 unnumbered">
+<h3>Partial regression plots<a class="anchor" aria-label="anchor" href="#partial-regression-plots-1"><i class="fas fa-link"></i></a>
+</h3>
+<p>We can use the <code><a href="https://rdrr.io/pkg/car/man/avPlots.html">avPlots()</a></code> function from the <code>car</code> package to create partial regression plots:</p>
+<div class="sourceCode" id="cb454"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-forge.r-project.org/projects/car/">car</a></span><span class="op">)</span></span>
+<span><span class="fu">car</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/car/man/avPlots.html">avPlots</a></span><span class="op">(</span><span class="va">result.no.akdc.reduced</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/unnamed-chunk-287-1.png" width="672"></div>
+<p>Partial regression plots should only be used to assess coefficients associated with quantitative predictors. The partial regression plot for the predictor <code>SPEND</code> has the plots evenly scattered on both sides of the blue line, indicating that we do not need to transform it. This should not be surprising given that the residual plot for the model does not indicate that the assumption that the errors have mean 0 was violated.</p>
+
+</div>
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="crit.html"><span class="header-section-number">9</span> Model Selection Criteria and Automated Search Procedures</a></div>
+<div class="next"><a href="intro.html"><span class="header-section-number">11</span> Introduction</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#out"><span class="header-section-number">10</span> Analysis of Residuals in MLR</a></li>
+<li>
+<a class="nav-link" href="#introduction-9"><span class="header-section-number">10.1</span> Introduction</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#terminology"><span class="header-section-number">10.1.1</span> Terminology</a></li></ul>
+</li>
+<li>
+<a class="nav-link" href="#detecting-high-leverage-observations"><span class="header-section-number">10.2</span> Detecting High Leverage Observations</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#limitation-of-residuals-in-detecting-high-leverage-observations"><span class="header-section-number">10.2.1</span> Limitation of residuals in detecting high leverage observations</a></li>
+<li><a class="nav-link" href="#hat-matrix"><span class="header-section-number">10.2.2</span> Hat matrix</a></li>
+<li><a class="nav-link" href="#leverage"><span class="header-section-number">10.2.3</span> Leverage</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#analysis-of-residuals-detecting-outliers"><span class="header-section-number">10.3</span> Analysis of Residuals: Detecting Outliers</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#standardized-residuals"><span class="header-section-number">10.3.1</span> Standardized residuals</a></li>
+<li><a class="nav-link" href="#studentized-residuals"><span class="header-section-number">10.3.2</span> Studentized residuals</a></li>
+<li><a class="nav-link" href="#deleted-residuals"><span class="header-section-number">10.3.3</span> Deleted residuals</a></li>
+<li><a class="nav-link" href="#externally-studentized-residuals"><span class="header-section-number">10.3.4</span> Externally studentized residuals</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#influential-observations"><span class="header-section-number">10.4</span> Influential Observations</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#dfbetas"><span class="header-section-number">10.4.1</span> DFBETAs</a></li>
+<li><a class="nav-link" href="#dffits"><span class="header-section-number">10.4.2</span> DFFITs</a></li>
+<li><a class="nav-link" href="#cooks-distance"><span class="header-section-number">10.4.3</span> Cook’s distance</a></li>
+<li><a class="nav-link" href="#some-comments-about-flagged-observations"><span class="header-section-number">10.4.4</span> Some comments about flagged observations</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#partial-regression-plots"><span class="header-section-number">10.5</span> Partial Regression Plots</a></li>
+<li>
+<a class="nav-link" href="#r-tutorial-7"><span class="header-section-number">10.6</span> R Tutorial</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#model-fitting-and-diagnostics">Model fitting and Diagnostics</a></li>
+<li><a class="nav-link" href="#detecting-high-leverage-observations-and-outliers">Detecting high leverage observations and outliers</a></li>
+<li><a class="nav-link" href="#detecting-influential-observations">Detecting influential observations</a></li>
+<li><a class="nav-link" href="#thoughts">Thoughts</a></li>
+<li><a class="nav-link" href="#partial-regression-plots-1">Partial regression plots</a></li>
+</ul>
+</li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Linear Models for Data Science</strong>" was written by Jeffrey Woo. It was last built on 2024-07-15.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>
