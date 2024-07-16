@@ -335,14 +335,11 @@ Data<-read.table("students.txt", header=T, sep="")
 We are going to perform some basic data wrangling for our dataframe:
 
 - Remove the first column, as it is just an index.
-- Keep observations that have no missing values in any variable. There are about a dozen observations with missing values in at least one variable.
 - Apply `factor()` to categorical variables. As a reminder, this should be done to categorical variables if you want to change the reference class.
 
 ```{r, message=FALSE, warning=FALSE}
 ##first column is index, remove it
 Data<-Data[,-1]
-##some NAs in data. Remove them
-Data<-Data[complete.cases(Data),]
 
 ##convert categorical to factors. needed for contrasts
 Data$Gender<-factor(Data$Gender)
@@ -394,10 +391,10 @@ I have placed the actual response in the rows, and whether the predicted probabi
 
 For our model with a threshold of 0.5, we have:
 
-- 46 observations that truly have not driven drunk and were correctly classified as not having driven drunk (true negative).
-- 12 observations that truly have not driven drunk but were incorrectly classified as having driven drunk (false positive).
-- 22 observations that truly have driven drunk and were correctly classified as having driven drunk (true positive).
-- 39 observations that truly have driven drunk but were incorrectly classified as not having driven drunk (false negative).
+- 48 observations that truly have not driven drunk and were correctly classified as not having driven drunk (true negative).
+- 11 observations that truly have not driven drunk but were incorrectly classified as having driven drunk (false positive).
+- 45 observations that truly have driven drunk and were correctly classified as having driven drunk (true positive).
+- 21 observations that truly have driven drunk but were incorrectly classified as not having driven drunk (false negative).
 
 ### ROC Curve {-}
 
@@ -434,8 +431,4 @@ auc<-ROCR::performance(rates, measure = "auc")
 auc@y.values
 ```
 
-The AUC of our ROC curve is 0.7742, which means our logistic regression does better than random guessing.
-
-### Practice {-}
-
-On your own, fit a logistic regression using all the predictors. Then obtain the confusion matrix with a threshold of 0.5, as well as the corresponding ROC curve and AUC of this model. Compare these with what we obtained for the model with just three predictors: `Smoke`, `Marijuan`, and `DaysBeer`. Which model does better based on these? Is the answer surprising?
+The AUC of our ROC curve is 0.8355, which means our logistic regression does better than random guessing.

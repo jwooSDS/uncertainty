@@ -111,8 +111,6 @@ eq:11CI
 eq:11LRT
 fig:12conf
 fig:12conf2
-fig:nice-fig
-tab:nice-tab
 wrangling
 introduction
 data-wrangling-using-base-r-functions
@@ -379,6 +377,3 @@ cautions-with-classification
 unbalanced-sample-sizes
 separation
 r-tutorial-9
-intro
-methods
-math-example

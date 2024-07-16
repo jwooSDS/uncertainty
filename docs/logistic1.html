@@ -21,28 +21,6 @@
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
-<style type="text/css">
-    /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
-    div.csl-bib-body { }
-    div.csl-entry {
-      clear: both;
-        }
-    .hanging div.csl-entry {
-      margin-left:2em;
-      text-indent:-2em;
-    }
-    div.csl-left-margin {
-      min-width:2em;
-      float:left;
-    }
-    div.csl-right-inline {
-      margin-left:2em;
-      padding-left:1em;
-    }
-    div.csl-indent {
-      margin-left: 2em;
-    }
-  </style>
 </head>
 <body data-spy="scroll" data-target="#toc">
 
@@ -77,9 +55,6 @@
 <li><a class="" href="out.html"><span class="header-section-number">10</span> Analysis of Residuals in MLR</a></li>
 <li><a class="active" href="logistic1.html"><span class="header-section-number">11</span> Logistic Regression</a></li>
 <li><a class="" href="logistic2.html"><span class="header-section-number">12</span> Logistic Regression 2</a></li>
-<li><a class="" href="intro.html"><span class="header-section-number">13</span> Introduction</a></li>
-<li><a class="" href="methods.html"><span class="header-section-number">14</span> Methods</a></li>
-<li><a class="" href="references.html">References</a></li>
 </ul>
 
         <div class="book-extra">
@@ -432,14 +407,11 @@ We have a dataset, <code>students.txt</code>, that contains information on about
 <p>We are going to perform some basic data wrangling for our dataframe:</p>
 <ul>
 <li>Remove the first column, as it is just an index.</li>
-<li>Keep observations that have no missing values in any variable. There are about a dozen observations with missing values in at least one variable.</li>
 <li>Apply <code><a href="https://rdrr.io/r/base/factor.html">factor()</a></code> to categorical variables. As a reminder, this should be done to categorical variables if you want to change the reference class.</li>
 </ul>
 <div class="sourceCode" id="cb460"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##first column is index, remove it</span></span>
 <span><span class="va">Data</span><span class="op">&lt;-</span><span class="va">Data</span><span class="op">[</span>,<span class="op">-</span><span class="fl">1</span><span class="op">]</span></span>
-<span><span class="co">##some NAs in data. Remove them</span></span>
-<span><span class="va">Data</span><span class="op">&lt;-</span><span class="va">Data</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/stats/complete.cases.html">complete.cases</a></span><span class="op">(</span><span class="va">Data</span><span class="op">)</span>,<span class="op">]</span></span>
 <span></span>
 <span><span class="co">##convert categorical to factors. needed for contrasts</span></span>
 <span><span class="va">Data</span><span class="op">$</span><span class="va">Gender</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">Data</span><span class="op">$</span><span class="va">Gender</span><span class="op">)</span></span>
@@ -500,44 +472,44 @@ We have a dataset, <code>students.txt</code>, that contains information on about
 <span><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">train</span><span class="op">$</span><span class="va">Gender</span>, <span class="va">train</span><span class="op">$</span><span class="va">DrivDrnk</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##         
 ##          No Yes
-##   female 40  27
-##   male   23  28</code></pre>
+##   female 47  32
+##   male   21  24</code></pre>
 <div class="sourceCode" id="cb466"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">train</span><span class="op">$</span><span class="va">Smoke</span>, <span class="va">train</span><span class="op">$</span><span class="va">DrivDrnk</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##      
 ##       No Yes
-##   No  60  32
-##   Yes  3  23</code></pre>
+##   No  63  39
+##   Yes  5  17</code></pre>
 <div class="sourceCode" id="cb468"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">train</span><span class="op">$</span><span class="va">Marijuan</span>, <span class="va">train</span><span class="op">$</span><span class="va">DrivDrnk</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##      
 ##       No Yes
-##   No  45  17
-##   Yes 18  38</code></pre>
+##   No  50  19
+##   Yes 18  37</code></pre>
 <p>Or we can display the tables via proportions instead of counts:</p>
 <div class="sourceCode" id="cb470"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##two way tables using proportions</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/proportions.html">prop.table</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">train</span><span class="op">$</span><span class="va">Gender</span>, <span class="va">train</span><span class="op">$</span><span class="va">DrivDrnk</span><span class="op">)</span>,<span class="fl">1</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##         
 ##                 No       Yes
-##   female 0.5970149 0.4029851
-##   male   0.4509804 0.5490196</code></pre>
+##   female 0.5949367 0.4050633
+##   male   0.4666667 0.5333333</code></pre>
 <div class="sourceCode" id="cb472"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/proportions.html">prop.table</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">train</span><span class="op">$</span><span class="va">Smoke</span>, <span class="va">train</span><span class="op">$</span><span class="va">DrivDrnk</span><span class="op">)</span>,<span class="fl">1</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##      
 ##              No       Yes
-##   No  0.6521739 0.3478261
-##   Yes 0.1153846 0.8846154</code></pre>
+##   No  0.6176471 0.3823529
+##   Yes 0.2272727 0.7727273</code></pre>
 <div class="sourceCode" id="cb474"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/proportions.html">prop.table</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">train</span><span class="op">$</span><span class="va">Marijuan</span>, <span class="va">train</span><span class="op">$</span><span class="va">DrivDrnk</span><span class="op">)</span>,<span class="fl">1</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##      
 ##              No       Yes
-##   No  0.7258065 0.2741935
-##   Yes 0.3214286 0.6785714</code></pre>
+##   No  0.7246377 0.2753623
+##   Yes 0.3272727 0.6727273</code></pre>
 <ul>
-<li>About 55% of male students have driven drunk, compared to about 40% of female students.</li>
-<li>About 88% of smokers have driven drunk, compared to 35% of non smokers.</li>
-<li>About 68% of marijuana users have driven drunk, compared to 27% of non users.</li>
+<li>About 53% of male students have driven drunk, compared to about 41% of female students.</li>
+<li>About 77% of smokers have driven drunk, compared to 38% of non smokers.</li>
+<li>About 67% of marijuana users have driven drunk, compared to 28% of non users.</li>
 </ul>
 <p>The earlier barcharts are the visualizations of these tables.</p>
 </div>
@@ -563,39 +535,41 @@ We have a dataset, <code>students.txt</code>, that contains information on about
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title<span class="op">=</span><span class="st">"Density Plot of Study Hours by Driven Drunk"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">gridExtra</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gridExtra/man/arrangeGrob.html">grid.arrange</a></span><span class="op">(</span><span class="va">dp1</span>, <span class="va">dp2</span>, <span class="va">dp3</span>, <span class="va">dp4</span>, ncol <span class="op">=</span> <span class="fl">2</span>, nrow <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## Warning: Removed 2 rows containing non-finite values (`stat_density()`).</code></pre>
+<pre><code>## Warning: Removed 3 rows containing non-finite values (`stat_density()`).</code></pre>
 <div class="inline-figure"><img src="bookdown-demo_files/figure-html/unnamed-chunk-301-1.png" width="672"></div>
 <ul>
-<li>Among those who have driven drunk, we see a higher proportion of students lower GPAs (below 3.0). For those who have not driven drunk, a higher proportion of students have higher GPAs (above 3.0).</li>
+<li>Among those who have driven drunk, we see a fairly uniform proportion of students with GPAs between 2.75 and 3.5. For those who have not driven drunk, a higher proportion of students have higher GPAs (above 3.0).</li>
 <li>A higher proportion of students who have not driven drunk party less than 10 days a month, compared to students who have driven drunk.</li>
 <li>Similarly, a higher proportion of students who have not driven drunk spend less than 10 days drinking beer, compared to students who have driven drunk.</li>
-<li>A much high proportion of students who have driven drunk spend less than 15 hours studying a week, compared to students who have not drive drunk.</li>
-<li>Each of these quantitative predictors may be related to whether students have driven drunk. It looks like lower GPAs, partying more, drinking more, and studying less is associated with increased likelihood of having driven drunk.</li>
+<li>The density plots of study hours are almost identical for those who have driven drunk and those who have not driven drunk. This suggests study hours is not associated with the likelihood of having driven drunk.</li>
+<li>It looks like lower GPAs, partying more, and drinking more are associated with increased likelihood of having driven drunk.</li>
 </ul>
 </div>
 <div id="correlations-between-quantitative-predictors" class="section level4 unnumbered">
 <h4>Correlations between quantitative predictors<a class="anchor" aria-label="anchor" href="#correlations-between-quantitative-predictors"><i class="fas fa-link"></i></a>
 </h4>
 <p>We can quickly check the correlations between the quantitative predictors:</p>
-<div class="sourceCode" id="cb477"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb479"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##correlations between quantitative predictors</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span><span class="op">(</span><span class="va">train</span><span class="op">[</span>,<span class="fl">5</span><span class="op">:</span><span class="fl">8</span><span class="op">]</span><span class="op">)</span>,<span class="fl">3</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span><span class="op">(</span><span class="va">train</span><span class="op">[</span>,<span class="fl">5</span><span class="op">:</span><span class="fl">8</span><span class="op">]</span>, use<span class="op">=</span> <span class="st">"complete.obs"</span><span class="op">)</span>,<span class="fl">3</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##             GPA PartyNum DaysBeer StudyHrs
-## GPA       1.000   -0.259   -0.361    0.207
-## PartyNum -0.259    1.000    0.773   -0.014
-## DaysBeer -0.361    0.773    1.000   -0.186
-## StudyHrs  0.207   -0.014   -0.186    1.000</code></pre>
+## GPA       1.000   -0.198   -0.246    0.094
+## PartyNum -0.198    1.000    0.760   -0.067
+## DaysBeer -0.246    0.760    1.000   -0.162
+## StudyHrs  0.094   -0.067   -0.162    1.000</code></pre>
 <p>Notice that <code>DaysBeer</code> and <code>PartyNum</code> are highly correlated. Probably not surprising since drinking is probably done at parties, so a student who parties more is likely to drink more.</p>
 </div>
 </div>
 <div id="fit-logistic-regression" class="section level3 unnumbered">
 <h3>Fit Logistic Regression<a class="anchor" aria-label="anchor" href="#fit-logistic-regression"><i class="fas fa-link"></i></a>
 </h3>
-<p>Based on the visualizations, we suspect that all the predictors may influence the response variable. We use the <code><a href="https://rdrr.io/r/stats/glm.html">glm()</a></code> function to fit logistic regression:</p>
-<div class="sourceCode" id="cb479"><pre class="downlit sourceCode r">
+<p>Based on the visualizations, we suspect that all the predictors, other than <code>StudyHrs</code>, may influence the response variable. We use the <code><a href="https://rdrr.io/r/stats/glm.html">glm()</a></code> function to fit logistic regression using of these predictors as a starting point:</p>
+<div class="sourceCode" id="cb481"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##fit logistic regression</span></span>
 <span><span class="va">result</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">DrivDrnk</span><span class="op">~</span><span class="va">.</span>, family<span class="op">=</span><span class="va">binomial</span>, data<span class="op">=</span><span class="va">train</span><span class="op">)</span></span></code></pre></div>
-<p>Notice we specify the argument <code>family = "binomial"</code>. This has to be specified for a logistic regression. If this is not specified, a linear regression is fitted instead. The function <code><a href="https://rdrr.io/r/stats/glm.html">glm()</a></code> uses maximum likelihood estimation whereas <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> uses ordinary least squares. We can look at the Wald tests and deviance of our model using <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code>:</p>
-<div class="sourceCode" id="cb480"><pre class="downlit sourceCode r">
+<p>Notice we specify the argument <code>family = "binomial"</code>. This has to be specified for a logistic regression. If this is not specified, a linear regression is fitted instead. The function uses maximum likelihood estimation whereas uses ordinary least squares. We can look at the Wald tests and deviance of our model using <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code>:</p>
+<div class="sourceCode" id="cb482"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## 
 ## Call:
@@ -603,65 +577,74 @@ We have a dataset, <code>students.txt</code>, that contains information on about
 ## 
 ## Deviance Residuals: 
 ##     Min       1Q   Median       3Q      Max  
-## -2.4529  -0.7418  -0.4578   0.6672   2.0707  
+## -1.9055  -0.8746  -0.4923   0.8913   2.0261  
 ## 
 ## Coefficients:
-##             Estimate Std. Error z value Pr(&gt;|z|)    
-## (Intercept) -1.93400    1.94169  -0.996 0.319231    
-## Gendermale   0.20055    0.47903   0.419 0.675462    
-## SmokeYes     2.36384    0.71312   3.315 0.000917 ***
-## MarijuanYes  0.94538    0.49745   1.900 0.057374 .  
-## GPA          0.08094    0.55353   0.146 0.883751    
-## PartyNum    -0.02539    0.07337  -0.346 0.729282    
-## DaysBeer     0.13664    0.06921   1.974 0.048346 *  
-## StudyHrs    -0.02221    0.03065  -0.724 0.468764    
+##             Estimate Std. Error z value Pr(&gt;|z|)  
+## (Intercept) -3.96023    2.04822  -1.933   0.0532 .
+## Gendermale   0.54708    0.45355   1.206   0.2277  
+## SmokeYes     1.43666    0.63046   2.279   0.0227 *
+## MarijuanYes  0.73292    0.49107   1.492   0.1356  
+## GPA          0.51899    0.56048   0.926   0.3545  
+## PartyNum     0.04523    0.07112   0.636   0.5248  
+## DaysBeer     0.09104    0.06011   1.515   0.1299  
+## StudyHrs     0.01341    0.02405   0.558   0.5771  
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
 ## (Dispersion parameter for binomial family taken to be 1)
 ## 
-##     Null deviance: 163.04  on 117  degrees of freedom
-## Residual deviance: 114.52  on 110  degrees of freedom
-## AIC: 130.52
+##     Null deviance: 163.55  on 118  degrees of freedom
+## Residual deviance: 130.73  on 111  degrees of freedom
+##   (5 observations deleted due to missingness)
+## AIC: 146.73
 ## 
-## Number of Fisher Scoring iterations: 5</code></pre>
-<p>Notice a few predictors have highly insignificant coefficients: <code>Gender</code>, <code>GPA</code>, <code>PartyNum</code>, and <code>StudyHrs</code>. <code>PartyNum</code> being insignificant is not surprising since we noted it is highly correlated with <code>DaysBeer</code>. We can also assess variance inflation factors (VIFs) in logistic regression like before:</p>
-<div class="sourceCode" id="cb482"><pre class="downlit sourceCode r">
+## Number of Fisher Scoring iterations: 4</code></pre>
+<p>We make the following observations:</p>
+<ul>
+<li>Notice only <code>Smoke</code> is significant.</li>
+<li>We did note earlier that <code>PartyNum</code> and <code>DaysBeer</code> are highly correlated, so both being insignificant may be due to multicollinearity, and not that they are not related to the response variable. The visualizations earlier showed they may be significant predictors.</li>
+<li>
+<code>Marijuan</code> is also barely insignificant, which may be a bit surprising since we did see that it could be a significant predictor from the visualizations.</li>
+</ul>
+<p>We can also assess variance inflation factors (VIFs) in logistic regression like before:</p>
+<div class="sourceCode" id="cb484"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/julianfaraway/faraway">faraway</a></span><span class="op">)</span></span>
 <span><span class="fu">faraway</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/faraway/man/vif.html">vif</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##  Gendermale    SmokeYes MarijuanYes         GPA    PartyNum    DaysBeer 
-##    6.644806   10.308653    7.281197    8.420435   20.957260   23.110089 
+##    5.704470    6.874033    7.060265    6.447132   15.288866   16.032542 
 ##    StudyHrs 
-##    9.156448</code></pre>
+##    5.558041</code></pre>
 <p>Not surprisingly, we have evidence of multicollinearity.</p>
 <div id="likelihood-ratio-tests" class="section level4 unnumbered">
 <h4>Likelihood ratio tests<a class="anchor" aria-label="anchor" href="#likelihood-ratio-tests"><i class="fas fa-link"></i></a>
 </h4>
+<p>Given what we have seen, we try to fit a reduced model with <code>Smoke</code> (significant), <code>Marijuan</code> (barely insignificant but visualization suggested it may be significant), and <code>DaysBeer</code> (barely insignificant, which could be due to its correlation with <code>PartyNum</code> and visualzation suggested it may be significant).</p>
 <p>Let us see if we can drop <code>Gender</code>, <code>GPA</code>, <code>PartyNum</code>, and <code>StudyHrs</code> from the model, via a likelihood ratio test (LRT). The <span class="math inline">\(\Delta G^2\)</span> test statistic is found by finding the difference in the deviances of the two models. The deviance can be found by extracting the component <code>deviance</code> from an object created by <code><a href="https://rdrr.io/r/stats/glm.html">glm()</a></code>:</p>
-<div class="sourceCode" id="cb484"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb486"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">reduced</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">DrivDrnk</span><span class="op">~</span><span class="va">Smoke</span><span class="op">+</span><span class="va">Marijuan</span><span class="op">+</span><span class="va">DaysBeer</span>, family<span class="op">=</span><span class="va">binomial</span>, data<span class="op">=</span><span class="va">train</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">##test to compare reduced and full model</span></span>
 <span><span class="co">##test stat</span></span>
 <span><span class="va">TS</span><span class="op">&lt;-</span><span class="va">reduced</span><span class="op">$</span><span class="va">deviance</span><span class="op">-</span><span class="va">result</span><span class="op">$</span><span class="va">deviance</span></span>
 <span><span class="va">TS</span></span></code></pre></div>
-<pre><code>## [1] 1.007939</code></pre>
-<div class="sourceCode" id="cb486"><pre class="downlit sourceCode r">
+<pre><code>## [1] 6.996033</code></pre>
+<div class="sourceCode" id="cb488"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##pvalue</span></span>
 <span><span class="fl">1</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/stats/Chisquare.html">pchisq</a></span><span class="op">(</span><span class="va">TS</span>,<span class="fl">4</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] 0.9085899</code></pre>
-<div class="sourceCode" id="cb488"><pre class="downlit sourceCode r">
+<pre><code>## [1] 0.136098</code></pre>
+<div class="sourceCode" id="cb490"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##critical value</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/Chisquare.html">qchisq</a></span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="fl">0.05</span>,<span class="fl">4</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 9.487729</code></pre>
 <ul>
 <li>The null hypothesis supports dropping the 4 predictors, and the alternative hypothesis supports not dropping the 4 predictors.</li>
-<li>The <span class="math inline">\(\Delta G^2\)</span> test statistic is 1.008, and is compared with a <span class="math inline">\(\chi^2_4\)</span> distribution, i.e. a chi-squared distribution with 4 degrees of freedom. The degrees of freedom is equal to the number of terms we are dropping.</li>
-<li>The p-value is 0.9086, and the critical value us 9.4877.</li>
+<li>The <span class="math inline">\(\Delta G^2\)</span> test statistic is 6.996, and is compared with a <span class="math inline">\(\chi^2_4\)</span> distribution, i.e. a chi-squared distribution with 4 degrees of freedom. The degrees of freedom is equal to the number of terms we are dropping.</li>
+<li>The p-value is 0.1361, and the critical value us 9.4877.</li>
 <li>So we fail to reject the null hypothesis. Data do not support using the full model with all the predictors, so we drop <code>Gender</code>, <code>GPA</code>, <code>PartyNum</code>, and <code>StudyHrs</code> to use the reduced model.</li>
 </ul>
 <p>Let us take a look at the estimated coefficients for this model:</p>
-<div class="sourceCode" id="cb490"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb492"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">reduced</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## 
 ## Call:
@@ -670,54 +653,54 @@ We have a dataset, <code>students.txt</code>, that contains information on about
 ## 
 ## Deviance Residuals: 
 ##     Min       1Q   Median       3Q      Max  
-## -2.3922  -0.7793  -0.4980   0.7128   2.0730  
+## -2.3539  -0.8492  -0.5685   0.9106   1.9506  
 ## 
 ## Coefficients:
 ##             Estimate Std. Error z value Pr(&gt;|z|)    
-## (Intercept) -2.02459    0.43398  -4.665 3.08e-06 ***
-## SmokeYes     2.39376    0.68727   3.483 0.000496 ***
-## MarijuanYes  0.95839    0.47955   1.999 0.045659 *  
-## DaysBeer     0.12480    0.04353   2.867 0.004143 ** 
+## (Intercept) -1.74079    0.39459  -4.412 1.03e-05 ***
+## SmokeYes     1.20960    0.58958   2.052  0.04021 *  
+## MarijuanYes  0.93362    0.45504   2.052  0.04019 *  
+## DaysBeer     0.11332    0.04305   2.632  0.00848 ** 
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
 ## (Dispersion parameter for binomial family taken to be 1)
 ## 
-##     Null deviance: 163.04  on 117  degrees of freedom
-## Residual deviance: 115.53  on 114  degrees of freedom
-## AIC: 123.53
+##     Null deviance: 170.74  on 123  degrees of freedom
+## Residual deviance: 137.73  on 120  degrees of freedom
+## AIC: 145.73
 ## 
-## Number of Fisher Scoring iterations: 5</code></pre>
+## Number of Fisher Scoring iterations: 4</code></pre>
 <p>So our logistic regression equation is</p>
 <p><span class="math display">\[
-\log \left( \frac{\hat{\pi}}{1-\hat{\pi}}   \right) = -2.0246 + 2.3938I_1 + 0.9584I_2 + 0.1248 DaysBeer,
+\log \left( \frac{\hat{\pi}}{1-\hat{\pi}}   \right) = -1.7408 + 1.2096I_1 + 0.9336I_2 + 0.1133 DaysBeer,
 \]</span>
 where <span class="math inline">\(I_1 = 1\)</span> if the student smokes, and <span class="math inline">\(I_2 = 1\)</span> if the student uses marijuana.</p>
 <ul>
 <li>Given that these coefficients are positive, smoking, using marijuana, and drinking on more days are associated with higher likelihood of having driven drunk.</li>
-<li>The odds of driving drunk for smokers is <span class="math inline">\(\exp(2.3938) = 10.955\)</span> times the odds for non smokers, when controlling for marijuana use and days drinking.</li>
-<li>The odds of driving drunk for marijuana users is <span class="math inline">\(\exp(0.9584) = 2.6075\)</span> times the odds for non users, when controlling for smoking and days drinking.</li>
-<li>The odds of driving drunk is multiplied by a factor of <span class="math inline">\(\exp(0.1248) = 1.1329\)</span> for each additional day of drinking, when controlling for smoking and marijuana use.</li>
+<li>The odds of driving drunk for smokers is <span class="math inline">\(\exp(1.2096) = 3.3521\)</span> times the odds for non smokers, when controlling for marijuana use and days drinking.</li>
+<li>The odds of driving drunk for marijuana users is <span class="math inline">\(\exp(0.9336) = 2.5437\)</span> times the odds for non users, when controlling for smoking and days drinking.</li>
+<li>The odds of driving drunk is multiplied by a factor of <span class="math inline">\(\exp(0.1133) = 1.1200\)</span> for each additional day of drinking, when controlling for smoking and marijuana use.</li>
 </ul>
 </div>
 <div id="predicted-log-odds-and-probabilities" class="section level4 unnumbered">
 <h4>Predicted log odds and probabilities<a class="anchor" aria-label="anchor" href="#predicted-log-odds-and-probabilities"><i class="fas fa-link"></i></a>
 </h4>
 <p>We can use the <code><a href="https://rdrr.io/r/stats/predict.html">predict()</a></code> function to calculate predicted log odds for our test data, using the reduced model:</p>
-<div class="sourceCode" id="cb492"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb494"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##predicted log odds for test data</span></span>
 <span><span class="va">logodds</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">reduced</span>,newdata<span class="op">=</span><span class="va">test</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">logodds</span><span class="op">)</span></span></code></pre></div>
-<pre><code>##         2         3         5         6         7         9 
-## -2.024593 -1.525404  3.199523  1.951552 -2.024593  1.429744</code></pre>
+<pre><code>##          2          3          5          6          7          9 
+## -1.7407941 -1.2875077  2.1022521  0.9690362 -1.7407941  1.4592572</code></pre>
 <p>To find probabilities instead, supply <code>type="response"</code> within the <code><a href="https://rdrr.io/r/stats/predict.html">predict()</a></code> function:</p>
-<div class="sourceCode" id="cb494"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb496"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##predicted probabilities for test data</span></span>
 <span><span class="va">preds</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">reduced</span>,newdata<span class="op">=</span><span class="va">test</span>, type<span class="op">=</span><span class="st">"response"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">preds</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##         2         3         5         6         7         9 
-## 0.1166449 0.1786671 0.9608163 0.8756158 0.1166449 0.8068613</code></pre>
-<p>So for observation index 2, the student’s predicted log odds of driving drunk is -2.024593, with corresponding predicted probability of 0.1166449.</p>
+## 0.1492121 0.2162750 0.8911219 0.7249273 0.1492121 0.8114190</code></pre>
+<p>So for observation index 2, the student’s predicted log odds of driving drunk is -1.7407941, with corresponding predicted probability of 0.1492121.</p>
 
 </div>
 </div>

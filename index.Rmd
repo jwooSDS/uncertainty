@@ -42,11 +42,21 @@ I have tried to use as many open source data sets as much as possible so that re
 
 The chapters for the book is as follows:
 
+- Chapters \@ref(wrangling) and \@ref(viz) focus on core R skills needed: data wrangling and data visualization. These are R skills needed to perform regression analysis.
+
+- Chapters \@ref(slr), \@ref(inf), and \@ref(diag) cover simple linear regression (SLR). This is the simplest scenario in regression when we have one predictor and one response variable that is quantitative. We are using this scenario to be able to more clearly explain concepts in regression before moving into the more practical multiple linear regression (MLR), which involves multiple predictors.
+
+- Chapters \@ref(mlr) to \@ref(out) cover multiple linear regression: when we have multiple predictors and one response variable that is quantitative. 
+
+- Chapters \@ref{logistic1} and \@ref{logistic2} cover logistic regression: when we have a response variable that is binary. 
+
 ## Other resources {-}
 
 Some other resources that readers may want to check out:
 
 - *OpenIntro Statistics*, 4th ed. Diez, Cetinkaya-Rundel, Barr, OpenIntro. Get free PDF version at <https://leanpub.com/os>, just set the price that you want to pay to $0. This is a good book for introductory statistics. 
+
+- *Introduction to Probability for Data Science*, Chan. <https://probability4datascience.com/index.html>. This book covers the fundamentals of probability and mathematics needed for data science. It does a good job explaining why seemingly abstract mathematical concepts are needed in data science. 
 
 - *Linear Models with R*, 2nd ed. Faraway. This is probably one of the few books that balances between the two camps that I wrote about earlier. It does require familiarity with matrices and linear algebra though. 
 

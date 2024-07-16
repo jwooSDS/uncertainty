@@ -21,28 +21,6 @@
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
-<style type="text/css">
-    /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
-    div.csl-bib-body { }
-    div.csl-entry {
-      clear: both;
-        }
-    .hanging div.csl-entry {
-      margin-left:2em;
-      text-indent:-2em;
-    }
-    div.csl-left-margin {
-      min-width:2em;
-      float:left;
-    }
-    div.csl-right-inline {
-      margin-left:2em;
-      padding-left:1em;
-    }
-    div.csl-indent {
-      margin-left: 2em;
-    }
-  </style>
 </head>
 <body data-spy="scroll" data-target="#toc">
 
@@ -77,9 +55,6 @@
 <li><a class="" href="out.html"><span class="header-section-number">10</span> Analysis of Residuals in MLR</a></li>
 <li><a class="" href="logistic1.html"><span class="header-section-number">11</span> Logistic Regression</a></li>
 <li><a class="active" href="logistic2.html"><span class="header-section-number">12</span> Logistic Regression 2</a></li>
-<li><a class="" href="intro.html"><span class="header-section-number">13</span> Introduction</a></li>
-<li><a class="" href="methods.html"><span class="header-section-number">14</span> Methods</a></li>
-<li><a class="" href="references.html">References</a></li>
 </ul>
 
         <div class="book-extra">
@@ -99,7 +74,7 @@
 <p>Going back to the drink driving dataset from the previous module, we fitted a logistic regression model to estimate the log odds and probability of driving drunk among college students, based on a number of predictors. How could we evaluate the predictive ability of our logistic regression model with our data?</p>
 <p>With no access to more data, we will have to split our data into two portions: training data and test data. We use the training data to fit a logistic regression model. Then we use the model to estimate the probability of the observations in the test data of being in each class. We then use a <strong>decision rule or threshold</strong> to classify the observations in the test data (for example, if the estimated probability is greater than 0.5, classify the response as ``Yes”).</p>
 <p>We found that using <code>Smoke</code>, <code>Marijuan</code>, and <code>DaysBeer</code> as predictors was preferred over using all predictors, via a likelihood ratio test. So we fit the model, use the model to estimate the predicted probabilities of the test data, and then use a threshold of 0.5 to classify the test data.</p>
-<div class="sourceCode" id="cb496"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb498"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##fit model</span></span>
 <span><span class="va">reduced</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">DrivDrnk</span><span class="op">~</span><span class="va">Smoke</span><span class="op">+</span><span class="va">Marijuan</span><span class="op">+</span><span class="va">DaysBeer</span>, family<span class="op">=</span><span class="va">binomial</span>, data<span class="op">=</span><span class="va">train</span><span class="op">)</span></span>
 <span></span>
@@ -160,7 +135,7 @@ Figure 12.1: Confusion Matrix
 <li><p><strong>Precision</strong>: the proportion of observations classified as 1s that are truly 1s. From Table <a href="diag.html#fig:ass1">5.1</a>, this is calculated as <span class="math inline">\(\frac{TP}{FP + TP}\)</span>. In probability notation, this is denoted as <span class="math inline">\(P(y = 1 | \hat{y} = 1)\)</span>.</p></li>
 </ul>
 <p>Let us look at the confusion matrix for our drink driving example, using 0.5 as a threshold:</p>
-<div class="sourceCode" id="cb498"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb500"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##confusion matrix with 0.5 threshold</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">test</span><span class="op">$</span><span class="va">DrivDrnk</span>, <span class="va">preds</span><span class="op">&gt;</span><span class="fl">0.5</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##      
@@ -193,7 +168,7 @@ Figure 12.1: Confusion Matrix
 <span class="header-section-number">12.2.1.1</span> Practice question<a class="anchor" aria-label="anchor" href="#practice-question-3"><i class="fas fa-link"></i></a>
 </h4>
 <p>Suppose we change the threshold to 0.7 for our logistic regression. The subsequent confusion matrix is obtained:</p>
-<div class="sourceCode" id="cb500"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb502"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##confusion matrix with 0.7 threshold</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">test</span><span class="op">$</span><span class="va">DrivDrnk</span>, <span class="va">preds</span><span class="op">&gt;</span><span class="fl">0.7</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##      
@@ -237,7 +212,7 @@ Figure 12.1: Confusion Matrix
 <li>The ROC curve plots the associated TPR and FPR for every possible value of the threshold (i.e., between 0 and 1).</li>
 </ul>
 <p>Let us produce the ROC curve for our logistic regression for drunk driving based on three predictors <code>Smoke</code>, <code>Marijuan</code>, and <code>DaysBeer</code>:</p>
-<div class="sourceCode" id="cb502"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb504"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://ipa-tys.github.io/ROCR/">ROCR</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">##produce the numbers associated with classification table</span></span>
@@ -284,7 +259,7 @@ Figure 12.1: Confusion Matrix
 <li>An AUC closer to 0 indicates a model that does worse than random guessing.</li>
 </ul>
 <p>Let us look at the AUC for our logistic regression:</p>
-<div class="sourceCode" id="cb503"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb505"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##compute the AUC</span></span>
 <span><span class="va">auc</span><span class="op">&lt;-</span><span class="fu"><a href="http://ipa-tys.github.io/ROCR/reference/performance.html">performance</a></span><span class="op">(</span><span class="va">rates</span>, measure <span class="op">=</span> <span class="st">"auc"</span><span class="op">)</span></span>
 <span><span class="va">auc</span><span class="op">@</span><span class="va">y.values</span></span></code></pre></div>
@@ -341,7 +316,7 @@ Figure 12.2: Confusion Matrix with Unbalanced Response
 <p>Recall the two main uses of models are prediction and association. Separation is what we want if we are using the model for prediction. However, separation poses challenges if we want to gain insights into how the predictors are related to the response variable.</p>
 <p>The main issue with separation is that the standard errors of estimated coefficients get large. This implies that confidence intervals associated with coefficients are very wide, making interpretation of coefficients more challenging.</p>
 <p>Suppose we try to fit logistic regression for this scatterplot. The <code><a href="https://rdrr.io/r/stats/glm.html">glm()</a></code> function will print out a warning message that some of the estimated probabilities are exactly 0 or 1. This warning message is an indication that perfect separation exists.</p>
-<div class="sourceCode" id="cb505"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb507"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">result.sep</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">G</span><span class="op">~</span><span class="va">.</span>, family<span class="op">=</span><span class="va">binomial</span>, data<span class="op">=</span><span class="va">df</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred</code></pre>
 <p>So what are things to consider when separation exists in our data?</p>
@@ -378,20 +353,17 @@ Figure 12.2: Confusion Matrix with Unbalanced Response
 </ul>
 <p>Suppose we want to relate the likelihood of a student driving while drunk with the other variables.</p>
 <p>Let us read the data in:</p>
-<div class="sourceCode" id="cb507"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb509"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span><span class="va">Data</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.table</a></span><span class="op">(</span><span class="st">"students.txt"</span>, header<span class="op">=</span><span class="cn">T</span>, sep<span class="op">=</span><span class="st">""</span><span class="op">)</span></span></code></pre></div>
 <p>We are going to perform some basic data wrangling for our dataframe:</p>
 <ul>
 <li>Remove the first column, as it is just an index.</li>
-<li>Keep observations that have no missing values in any variable. There are about a dozen observations with missing values in at least one variable.</li>
 <li>Apply <code><a href="https://rdrr.io/r/base/factor.html">factor()</a></code> to categorical variables. As a reminder, this should be done to categorical variables if you want to change the reference class.</li>
 </ul>
-<div class="sourceCode" id="cb508"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb510"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##first column is index, remove it</span></span>
 <span><span class="va">Data</span><span class="op">&lt;-</span><span class="va">Data</span><span class="op">[</span>,<span class="op">-</span><span class="fl">1</span><span class="op">]</span></span>
-<span><span class="co">##some NAs in data. Remove them</span></span>
-<span><span class="va">Data</span><span class="op">&lt;-</span><span class="va">Data</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/stats/complete.cases.html">complete.cases</a></span><span class="op">(</span><span class="va">Data</span><span class="op">)</span>,<span class="op">]</span></span>
 <span></span>
 <span><span class="co">##convert categorical to factors. needed for contrasts</span></span>
 <span><span class="va">Data</span><span class="op">$</span><span class="va">Gender</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">Data</span><span class="op">$</span><span class="va">Gender</span><span class="op">)</span></span>
@@ -399,7 +371,7 @@ Figure 12.2: Confusion Matrix with Unbalanced Response
 <span><span class="va">Data</span><span class="op">$</span><span class="va">Marijuan</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">Data</span><span class="op">$</span><span class="va">Marijuan</span><span class="op">)</span></span>
 <span><span class="va">Data</span><span class="op">$</span><span class="va">DrivDrnk</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">Data</span><span class="op">$</span><span class="va">DrivDrnk</span><span class="op">)</span></span></code></pre></div>
 <p>We are going to split the dataset into equal portions: one a training set, and another a test set. Recall that the training set is used to build the model, and the test set is used to assess how the model performs on new observations. We use the <code><a href="https://rdrr.io/r/base/Random.html">set.seed()</a></code> function so that we can replicate the same split each time this block of code is run. An integer needs to be supplied to the <code><a href="https://rdrr.io/r/base/Random.html">set.seed()</a></code> function.</p>
-<div class="sourceCode" id="cb509"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb511"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##set seed so results (split) are reproducible</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">6021</span><span class="op">)</span></span>
 <span></span>
@@ -415,14 +387,14 @@ Figure 12.2: Confusion Matrix with Unbalanced Response
 <li>The last value, <code>replace=F</code>, means we want to sample without replacement, that means once an integer is sampled, it cannot be sampled again.</li>
 </ul>
 <p>Recall from the previous tutorial that we should use three predictors, <code>Smoke</code>, <code>Marijuan</code>, and <code>DaysBeer</code> instead of all of them. So we fit this logistic regression:</p>
-<div class="sourceCode" id="cb510"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb512"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##fit model</span></span>
 <span><span class="va">reduced</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">DrivDrnk</span><span class="op">~</span><span class="va">Smoke</span><span class="op">+</span><span class="va">Marijuan</span><span class="op">+</span><span class="va">DaysBeer</span>, family<span class="op">=</span><span class="va">binomial</span>, data<span class="op">=</span><span class="va">train</span><span class="op">)</span></span></code></pre></div>
 <div id="confusion-matrices" class="section level3 unnumbered">
 <h3>Confusion Matrices<a class="anchor" aria-label="anchor" href="#confusion-matrices"><i class="fas fa-link"></i></a>
 </h3>
 <p>To create a confusion matrix, we need to find the predicted probabilities for our test data, then use the <code><a href="https://rdrr.io/r/base/table.html">table()</a></code> function to tabulate the number of true positives, true negatives, false positives, and false negatives via a confusion matrix:</p>
-<div class="sourceCode" id="cb511"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb513"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##predicted probs for test data</span></span>
 <span><span class="va">preds</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">reduced</span>,newdata<span class="op">=</span><span class="va">test</span>, type<span class="op">=</span><span class="st">"response"</span><span class="op">)</span></span>
 <span></span>
@@ -430,22 +402,22 @@ Figure 12.2: Confusion Matrix with Unbalanced Response
 <span><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">test</span><span class="op">$</span><span class="va">DrivDrnk</span>, <span class="va">preds</span><span class="op">&gt;</span><span class="fl">0.5</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##      
 ##       FALSE TRUE
-##   No     46   12
-##   Yes    22   39</code></pre>
+##   No     48   11
+##   Yes    21   45</code></pre>
 <p>I have placed the actual response in the rows, and whether the predicted probability is greater than the threshold of 0.5 (the classification based on the model) in the columns.</p>
 <p>For our model with a threshold of 0.5, we have:</p>
 <ul>
-<li>46 observations that truly have not driven drunk and were correctly classified as not having driven drunk (true negative).</li>
-<li>12 observations that truly have not driven drunk but were incorrectly classified as having driven drunk (false positive).</li>
-<li>22 observations that truly have driven drunk and were correctly classified as having driven drunk (true positive).</li>
-<li>39 observations that truly have driven drunk but were incorrectly classified as not having driven drunk (false negative).</li>
+<li>48 observations that truly have not driven drunk and were correctly classified as not having driven drunk (true negative).</li>
+<li>11 observations that truly have not driven drunk but were incorrectly classified as having driven drunk (false positive).</li>
+<li>45 observations that truly have driven drunk and were correctly classified as having driven drunk (true positive).</li>
+<li>21 observations that truly have driven drunk but were incorrectly classified as not having driven drunk (false negative).</li>
 </ul>
 </div>
 <div id="roc-curve-1" class="section level3 unnumbered">
 <h3>ROC Curve<a class="anchor" aria-label="anchor" href="#roc-curve-1"><i class="fas fa-link"></i></a>
 </h3>
 <p>The ROC curve plots the true positive rate (TPR) against the false positive rate (FPR) of the logistic regression as the threshold is varied from 0 to 1. We need a couple of functions from the <code>ROCR</code> package, so we load it and use the <code><a href="http://ipa-tys.github.io/ROCR/reference/prediction.html">prediction()</a></code> and <code><a href="http://ipa-tys.github.io/ROCR/reference/performance.html">performance()</a></code> functions from it to create the ROC curve:</p>
-<div class="sourceCode" id="cb513"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb515"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://ipa-tys.github.io/ROCR/">ROCR</a></span><span class="op">)</span></span>
 <span><span class="co">##produce the numbers associated with classification table</span></span>
 <span><span class="va">rates</span><span class="op">&lt;-</span><span class="fu">ROCR</span><span class="fu">::</span><span class="fu"><a href="http://ipa-tys.github.io/ROCR/reference/prediction.html">prediction</a></span><span class="op">(</span><span class="va">preds</span>, <span class="va">test</span><span class="op">$</span><span class="va">DrivDrnk</span><span class="op">)</span></span>
@@ -469,25 +441,20 @@ Figure 12.2: Confusion Matrix with Unbalanced Response
 <h3>AUC<a class="anchor" aria-label="anchor" href="#auc-1"><i class="fas fa-link"></i></a>
 </h3>
 <p>Another measure is the AUC. As its name suggests, it is simply the area under the (ROC) curve. A perfect classifier will have an AUC of 1. A classifier that randomly guesses will have an AUC of 0.5. Thus, AUCs closer to 1 are desirable. To obtain the AUC of our ROC</p>
-<div class="sourceCode" id="cb514"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb516"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##compute the AUC</span></span>
 <span><span class="va">auc</span><span class="op">&lt;-</span><span class="fu">ROCR</span><span class="fu">::</span><span class="fu"><a href="http://ipa-tys.github.io/ROCR/reference/performance.html">performance</a></span><span class="op">(</span><span class="va">rates</span>, measure <span class="op">=</span> <span class="st">"auc"</span><span class="op">)</span></span>
 <span><span class="va">auc</span><span class="op">@</span><span class="va">y.values</span></span></code></pre></div>
 <pre><code>## [[1]]
-## [1] 0.7741662</code></pre>
-<p>The AUC of our ROC curve is 0.7742, which means our logistic regression does better than random guessing.</p>
-</div>
-<div id="practice" class="section level3 unnumbered">
-<h3>Practice<a class="anchor" aria-label="anchor" href="#practice"><i class="fas fa-link"></i></a>
-</h3>
-<p>On your own, fit a logistic regression using all the predictors. Then obtain the confusion matrix with a threshold of 0.5, as well as the corresponding ROC curve and AUC of this model. Compare these with what we obtained for the model with just three predictors: <code>Smoke</code>, <code>Marijuan</code>, and <code>DaysBeer</code>. Which model does better based on these? Is the answer surprising?</p>
+## [1] 0.8355162</code></pre>
+<p>The AUC of our ROC curve is 0.8355, which means our logistic regression does better than random guessing.</p>
 
 </div>
 </div>
 </div>
   <div class="chapter-nav">
 <div class="prev"><a href="logistic1.html"><span class="header-section-number">11</span> Logistic Regression</a></div>
-<div class="next"><a href="intro.html"><span class="header-section-number">13</span> Introduction</a></div>
+<div class="empty"></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
@@ -516,7 +483,6 @@ Figure 12.2: Confusion Matrix with Unbalanced Response
 <li><a class="nav-link" href="#confusion-matrices">Confusion Matrices</a></li>
 <li><a class="nav-link" href="#roc-curve-1">ROC Curve</a></li>
 <li><a class="nav-link" href="#auc-1">AUC</a></li>
-<li><a class="nav-link" href="#practice">Practice</a></li>
 </ul>
 </li>
 </ul>

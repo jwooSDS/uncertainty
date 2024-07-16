@@ -183,6 +183,17 @@ I have tried to use as many open source data sets as much as possible so that re
 
 The chapters for the book is as follows:
 
+\begin{itemize}
+\item
+  Chapters \ref{wrangling} and \ref{viz} focus on core R skills needed: data wrangling and data visualization. These are R skills needed to perform regression analysis.
+\item
+  Chapters \ref{slr}, \ref{inf}, and \ref{diag} cover simple linear regression (SLR). This is the simplest scenario in regression when we have one predictor and one response variable that is quantitative. We are using this scenario to be able to more clearly explain concepts in regression before moving into the more practical multiple linear regression (MLR), which involves multiple predictors.
+\item
+  Chapters \ref{mlr} to \ref{out} cover multiple linear regression: when we have multiple predictors and one response variable that is quantitative.
+\item
+  Chapters @ref\{logistic1\} and @ref\{logistic2\} cover logistic regression: when we have a response variable that is binary.
+\end{itemize}
+
 \hypertarget{other-resources}{%
 \section*{Other resources}\label{other-resources}}
 \addcontentsline{toc}{section}{Other resources}
@@ -192,6 +203,8 @@ Some other resources that readers may want to check out:
 \begin{itemize}
 \item
   \emph{OpenIntro Statistics}, 4th ed.~Diez, Cetinkaya-Rundel, Barr, OpenIntro. Get free PDF version at \url{https://leanpub.com/os}, just set the price that you want to pay to \$0. This is a good book for introductory statistics.
+\item
+  \emph{Introduction to Probability for Data Science}, Chan. \url{https://probability4datascience.com/index.html}. This book covers the fundamentals of probability and mathematics needed for data science. It does a good job explaining why seemingly abstract mathematical concepts are needed in data science.
 \item
   \emph{Linear Models with R}, 2nd ed.~Faraway. This is probably one of the few books that balances between the two camps that I wrote about earlier. It does require familiarity with matrices and linear algebra though.
 \item
@@ -10321,8 +10334,6 @@ We are going to perform some basic data wrangling for our dataframe:
 \item
   Remove the first column, as it is just an index.
 \item
-  Keep observations that have no missing values in any variable. There are about a dozen observations with missing values in at least one variable.
-\item
   Apply \texttt{factor()} to categorical variables. As a reminder, this should be done to categorical variables if you want to change the reference class.
 \end{itemize}
 
@@ -10330,8 +10341,6 @@ We are going to perform some basic data wrangling for our dataframe:
 \begin{Highlighting}[]
 \DocumentationTok{\#\#first column is index, remove it}
 \NormalTok{Data}\OtherTok{\textless{}{-}}\NormalTok{Data[,}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{]}
-\DocumentationTok{\#\#some NAs in data. Remove them}
-\NormalTok{Data}\OtherTok{\textless{}{-}}\NormalTok{Data[}\FunctionTok{complete.cases}\NormalTok{(Data),]}
 
 \DocumentationTok{\#\#convert categorical to factors. needed for contrasts}
 \NormalTok{Data}\SpecialCharTok{$}\NormalTok{Gender}\OtherTok{\textless{}{-}}\FunctionTok{factor}\NormalTok{(Data}\SpecialCharTok{$}\NormalTok{Gender)}
@@ -10426,8 +10435,8 @@ We can create two way tables to summarize the relationship between each categori
 \begin{verbatim}
 ##         
 ##          No Yes
-##   female 40  27
-##   male   23  28
+##   female 47  32
+##   male   21  24
 \end{verbatim}
 
 \begin{Shaded}
@@ -10439,8 +10448,8 @@ We can create two way tables to summarize the relationship between each categori
 \begin{verbatim}
 ##      
 ##       No Yes
-##   No  60  32
-##   Yes  3  23
+##   No  63  39
+##   Yes  5  17
 \end{verbatim}
 
 \begin{Shaded}
@@ -10452,8 +10461,8 @@ We can create two way tables to summarize the relationship between each categori
 \begin{verbatim}
 ##      
 ##       No Yes
-##   No  45  17
-##   Yes 18  38
+##   No  50  19
+##   Yes 18  37
 \end{verbatim}
 
 Or we can display the tables via proportions instead of counts:
@@ -10468,8 +10477,8 @@ Or we can display the tables via proportions instead of counts:
 \begin{verbatim}
 ##         
 ##                 No       Yes
-##   female 0.5970149 0.4029851
-##   male   0.4509804 0.5490196
+##   female 0.5949367 0.4050633
+##   male   0.4666667 0.5333333
 \end{verbatim}
 
 \begin{Shaded}
@@ -10481,8 +10490,8 @@ Or we can display the tables via proportions instead of counts:
 \begin{verbatim}
 ##      
 ##              No       Yes
-##   No  0.6521739 0.3478261
-##   Yes 0.1153846 0.8846154
+##   No  0.6176471 0.3823529
+##   Yes 0.2272727 0.7727273
 \end{verbatim}
 
 \begin{Shaded}
@@ -10494,18 +10503,18 @@ Or we can display the tables via proportions instead of counts:
 \begin{verbatim}
 ##      
 ##              No       Yes
-##   No  0.7258065 0.2741935
-##   Yes 0.3214286 0.6785714
+##   No  0.7246377 0.2753623
+##   Yes 0.3272727 0.6727273
 \end{verbatim}
 
 \begin{itemize}
 \tightlist
 \item
-  About 55\% of male students have driven drunk, compared to about 40\% of female students.
+  About 53\% of male students have driven drunk, compared to about 41\% of female students.
 \item
-  About 88\% of smokers have driven drunk, compared to 35\% of non smokers.
+  About 77\% of smokers have driven drunk, compared to 38\% of non smokers.
 \item
-  About 68\% of marijuana users have driven drunk, compared to 27\% of non users.
+  About 67\% of marijuana users have driven drunk, compared to 28\% of non users.
 \end{itemize}
 
 The earlier barcharts are the visualizations of these tables.
@@ -10538,20 +10547,28 @@ To see how the quantitative predictors, \texttt{GPA}, \texttt{PartyNum}, \texttt
 \end{Highlighting}
 \end{Shaded}
 
+\begin{verbatim}
+## Warning: Removed 2 rows containing non-finite values (`stat_density()`).
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: Removed 3 rows containing non-finite values (`stat_density()`).
+\end{verbatim}
+
 \includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-301-1.pdf}
 
 \begin{itemize}
 \tightlist
 \item
-  Among those who have driven drunk, we see a higher proportion of students lower GPAs (below 3.0). For those who have not driven drunk, a higher proportion of students have higher GPAs (above 3.0).
+  Among those who have driven drunk, we see a fairly uniform proportion of students with GPAs between 2.75 and 3.5. For those who have not driven drunk, a higher proportion of students have higher GPAs (above 3.0).
 \item
   A higher proportion of students who have not driven drunk party less than 10 days a month, compared to students who have driven drunk.
 \item
   Similarly, a higher proportion of students who have not driven drunk spend less than 10 days drinking beer, compared to students who have driven drunk.
 \item
-  A much high proportion of students who have driven drunk spend less than 15 hours studying a week, compared to students who have not drive drunk.
+  The density plots of study hours are almost identical for those who have driven drunk and those who have not driven drunk. This suggests study hours is not associated with the likelihood of having driven drunk.
 \item
-  Each of these quantitative predictors may be related to whether students have driven drunk. It looks like lower GPAs, partying more, drinking more, and studying less is associated with increased likelihood of having driven drunk.
+  It looks like lower GPAs, partying more, and drinking more are associated with increased likelihood of having driven drunk.
 \end{itemize}
 
 \hypertarget{correlations-between-quantitative-predictors}{%
@@ -10563,16 +10580,16 @@ We can quickly check the correlations between the quantitative predictors:
 \begin{Shaded}
 \begin{Highlighting}[]
 \DocumentationTok{\#\#correlations between quantitative predictors}
-\FunctionTok{round}\NormalTok{(}\FunctionTok{cor}\NormalTok{(train[,}\DecValTok{5}\SpecialCharTok{:}\DecValTok{8}\NormalTok{]),}\DecValTok{3}\NormalTok{)}
+\FunctionTok{round}\NormalTok{(}\FunctionTok{cor}\NormalTok{(train[,}\DecValTok{5}\SpecialCharTok{:}\DecValTok{8}\NormalTok{], }\AttributeTok{use=} \StringTok{"complete.obs"}\NormalTok{),}\DecValTok{3}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
 ##             GPA PartyNum DaysBeer StudyHrs
-## GPA       1.000   -0.259   -0.361    0.207
-## PartyNum -0.259    1.000    0.773   -0.014
-## DaysBeer -0.361    0.773    1.000   -0.186
-## StudyHrs  0.207   -0.014   -0.186    1.000
+## GPA       1.000   -0.198   -0.246    0.094
+## PartyNum -0.198    1.000    0.760   -0.067
+## DaysBeer -0.246    0.760    1.000   -0.162
+## StudyHrs  0.094   -0.067   -0.162    1.000
 \end{verbatim}
 
 Notice that \texttt{DaysBeer} and \texttt{PartyNum} are highly correlated. Probably not surprising since drinking is probably done at parties, so a student who parties more is likely to drink more.
@@ -10581,7 +10598,7 @@ Notice that \texttt{DaysBeer} and \texttt{PartyNum} are highly correlated. Proba
 \subsection*{Fit Logistic Regression}\label{fit-logistic-regression}}
 \addcontentsline{toc}{subsection}{Fit Logistic Regression}
 
-Based on the visualizations, we suspect that all the predictors may influence the response variable. We use the \texttt{glm()} function to fit logistic regression:
+Based on the visualizations, we suspect that all the predictors, other than \texttt{StudyHrs}, may influence the response variable. We use the \texttt{glm()} function to fit logistic regression using of these predictors as a starting point:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -10590,7 +10607,7 @@ Based on the visualizations, we suspect that all the predictors may influence th
 \end{Highlighting}
 \end{Shaded}
 
-Notice we specify the argument \texttt{family\ =\ "binomial"}. This has to be specified for a logistic regression. If this is not specified, a linear regression is fitted instead. The function \texttt{glm()} uses maximum likelihood estimation whereas \texttt{lm()} uses ordinary least squares. We can look at the Wald tests and deviance of our model using \texttt{summary()}:
+Notice we specify the argument \texttt{family\ =\ "binomial"}. This has to be specified for a logistic regression. If this is not specified, a linear regression is fitted instead. The function \verb=glm()= uses maximum likelihood estimation whereas \verb=lm()= uses ordinary least squares. We can look at the Wald tests and deviance of our model using \texttt{summary()}:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -10605,31 +10622,44 @@ Notice we specify the argument \texttt{family\ =\ "binomial"}. This has to be sp
 ## 
 ## Deviance Residuals: 
 ##     Min       1Q   Median       3Q      Max  
-## -2.4529  -0.7418  -0.4578   0.6672   2.0707  
+## -1.9055  -0.8746  -0.4923   0.8913   2.0261  
 ## 
 ## Coefficients:
-##             Estimate Std. Error z value Pr(>|z|)    
-## (Intercept) -1.93400    1.94169  -0.996 0.319231    
-## Gendermale   0.20055    0.47903   0.419 0.675462    
-## SmokeYes     2.36384    0.71312   3.315 0.000917 ***
-## MarijuanYes  0.94538    0.49745   1.900 0.057374 .  
-## GPA          0.08094    0.55353   0.146 0.883751    
-## PartyNum    -0.02539    0.07337  -0.346 0.729282    
-## DaysBeer     0.13664    0.06921   1.974 0.048346 *  
-## StudyHrs    -0.02221    0.03065  -0.724 0.468764    
+##             Estimate Std. Error z value Pr(>|z|)  
+## (Intercept) -3.96023    2.04822  -1.933   0.0532 .
+## Gendermale   0.54708    0.45355   1.206   0.2277  
+## SmokeYes     1.43666    0.63046   2.279   0.0227 *
+## MarijuanYes  0.73292    0.49107   1.492   0.1356  
+## GPA          0.51899    0.56048   0.926   0.3545  
+## PartyNum     0.04523    0.07112   0.636   0.5248  
+## DaysBeer     0.09104    0.06011   1.515   0.1299  
+## StudyHrs     0.01341    0.02405   0.558   0.5771  
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
 ## (Dispersion parameter for binomial family taken to be 1)
 ## 
-##     Null deviance: 163.04  on 117  degrees of freedom
-## Residual deviance: 114.52  on 110  degrees of freedom
-## AIC: 130.52
+##     Null deviance: 163.55  on 118  degrees of freedom
+## Residual deviance: 130.73  on 111  degrees of freedom
+##   (5 observations deleted due to missingness)
+## AIC: 146.73
 ## 
-## Number of Fisher Scoring iterations: 5
+## Number of Fisher Scoring iterations: 4
 \end{verbatim}
 
-Notice a few predictors have highly insignificant coefficients: \texttt{Gender}, \texttt{GPA}, \texttt{PartyNum}, and \texttt{StudyHrs}. \texttt{PartyNum} being insignificant is not surprising since we noted it is highly correlated with \texttt{DaysBeer}. We can also assess variance inflation factors (VIFs) in logistic regression like before:
+We make the following observations:
+
+\begin{itemize}
+\tightlist
+\item
+  Notice only \texttt{Smoke} is significant.
+\item
+  We did note earlier that \texttt{PartyNum} and \texttt{DaysBeer} are highly correlated, so both being insignificant may be due to multicollinearity, and not that they are not related to the response variable. The visualizations earlier showed they may be significant predictors.
+\item
+  \texttt{Marijuan} is also barely insignificant, which may be a bit surprising since we did see that it could be a significant predictor from the visualizations.
+\end{itemize}
+
+We can also assess variance inflation factors (VIFs) in logistic regression like before:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -10640,9 +10670,9 @@ Notice a few predictors have highly insignificant coefficients: \texttt{Gender},
 
 \begin{verbatim}
 ##  Gendermale    SmokeYes MarijuanYes         GPA    PartyNum    DaysBeer 
-##    6.644806   10.308653    7.281197    8.420435   20.957260   23.110089 
+##    5.704470    6.874033    7.060265    6.447132   15.288866   16.032542 
 ##    StudyHrs 
-##    9.156448
+##    5.558041
 \end{verbatim}
 
 Not surprisingly, we have evidence of multicollinearity.
@@ -10650,6 +10680,8 @@ Not surprisingly, we have evidence of multicollinearity.
 \hypertarget{likelihood-ratio-tests}{%
 \subsubsection*{Likelihood ratio tests}\label{likelihood-ratio-tests}}
 \addcontentsline{toc}{subsubsection}{Likelihood ratio tests}
+
+Given what we have seen, we try to fit a reduced model with \texttt{Smoke} (significant), \texttt{Marijuan} (barely insignificant but visualization suggested it may be significant), and \texttt{DaysBeer} (barely insignificant, which could be due to its correlation with \texttt{PartyNum} and visualzation suggested it may be significant).
 
 Let us see if we can drop \texttt{Gender}, \texttt{GPA}, \texttt{PartyNum}, and \texttt{StudyHrs} from the model, via a likelihood ratio test (LRT). The \(\Delta G^2\) test statistic is found by finding the difference in the deviances of the two models. The deviance can be found by extracting the component \texttt{deviance} from an object created by \texttt{glm()}:
 
@@ -10665,7 +10697,7 @@ Let us see if we can drop \texttt{Gender}, \texttt{GPA}, \texttt{PartyNum}, and 
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 1.007939
+## [1] 6.996033
 \end{verbatim}
 
 \begin{Shaded}
@@ -10676,7 +10708,7 @@ Let us see if we can drop \texttt{Gender}, \texttt{GPA}, \texttt{PartyNum}, and 
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.9085899
+## [1] 0.136098
 \end{verbatim}
 
 \begin{Shaded}
@@ -10695,9 +10727,9 @@ Let us see if we can drop \texttt{Gender}, \texttt{GPA}, \texttt{PartyNum}, and 
 \item
   The null hypothesis supports dropping the 4 predictors, and the alternative hypothesis supports not dropping the 4 predictors.
 \item
-  The \(\Delta G^2\) test statistic is 1.008, and is compared with a \(\chi^2_4\) distribution, i.e.~a chi-squared distribution with 4 degrees of freedom. The degrees of freedom is equal to the number of terms we are dropping.
+  The \(\Delta G^2\) test statistic is 6.996, and is compared with a \(\chi^2_4\) distribution, i.e.~a chi-squared distribution with 4 degrees of freedom. The degrees of freedom is equal to the number of terms we are dropping.
 \item
-  The p-value is 0.9086, and the critical value us 9.4877.
+  The p-value is 0.1361, and the critical value us 9.4877.
 \item
   So we fail to reject the null hypothesis. Data do not support using the full model with all the predictors, so we drop \texttt{Gender}, \texttt{GPA}, \texttt{PartyNum}, and \texttt{StudyHrs} to use the reduced model.
 \end{itemize}
@@ -10718,30 +10750,30 @@ Let us take a look at the estimated coefficients for this model:
 ## 
 ## Deviance Residuals: 
 ##     Min       1Q   Median       3Q      Max  
-## -2.3922  -0.7793  -0.4980   0.7128   2.0730  
+## -2.3539  -0.8492  -0.5685   0.9106   1.9506  
 ## 
 ## Coefficients:
 ##             Estimate Std. Error z value Pr(>|z|)    
-## (Intercept) -2.02459    0.43398  -4.665 3.08e-06 ***
-## SmokeYes     2.39376    0.68727   3.483 0.000496 ***
-## MarijuanYes  0.95839    0.47955   1.999 0.045659 *  
-## DaysBeer     0.12480    0.04353   2.867 0.004143 ** 
+## (Intercept) -1.74079    0.39459  -4.412 1.03e-05 ***
+## SmokeYes     1.20960    0.58958   2.052  0.04021 *  
+## MarijuanYes  0.93362    0.45504   2.052  0.04019 *  
+## DaysBeer     0.11332    0.04305   2.632  0.00848 ** 
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
 ## (Dispersion parameter for binomial family taken to be 1)
 ## 
-##     Null deviance: 163.04  on 117  degrees of freedom
-## Residual deviance: 115.53  on 114  degrees of freedom
-## AIC: 123.53
+##     Null deviance: 170.74  on 123  degrees of freedom
+## Residual deviance: 137.73  on 120  degrees of freedom
+## AIC: 145.73
 ## 
-## Number of Fisher Scoring iterations: 5
+## Number of Fisher Scoring iterations: 4
 \end{verbatim}
 
 So our logistic regression equation is
 
 \[
-\log \left( \frac{\hat{\pi}}{1-\hat{\pi}}   \right) = -2.0246 + 2.3938I_1 + 0.9584I_2 + 0.1248 DaysBeer,
+\log \left( \frac{\hat{\pi}}{1-\hat{\pi}}   \right) = -1.7408 + 1.2096I_1 + 0.9336I_2 + 0.1133 DaysBeer,
 \]
 where \(I_1 = 1\) if the student smokes, and \(I_2 = 1\) if the student uses marijuana.
 
@@ -10750,11 +10782,11 @@ where \(I_1 = 1\) if the student smokes, and \(I_2 = 1\) if the student uses mar
 \item
   Given that these coefficients are positive, smoking, using marijuana, and drinking on more days are associated with higher likelihood of having driven drunk.
 \item
-  The odds of driving drunk for smokers is \(\exp(2.3938) = 10.955\) times the odds for non smokers, when controlling for marijuana use and days drinking.
+  The odds of driving drunk for smokers is \(\exp(1.2096) = 3.3521\) times the odds for non smokers, when controlling for marijuana use and days drinking.
 \item
-  The odds of driving drunk for marijuana users is \(\exp(0.9584) = 2.6075\) times the odds for non users, when controlling for smoking and days drinking.
+  The odds of driving drunk for marijuana users is \(\exp(0.9336) = 2.5437\) times the odds for non users, when controlling for smoking and days drinking.
 \item
-  The odds of driving drunk is multiplied by a factor of \(\exp(0.1248) = 1.1329\) for each additional day of drinking, when controlling for smoking and marijuana use.
+  The odds of driving drunk is multiplied by a factor of \(\exp(0.1133) = 1.1200\) for each additional day of drinking, when controlling for smoking and marijuana use.
 \end{itemize}
 
 \hypertarget{predicted-log-odds-and-probabilities}{%
@@ -10772,8 +10804,8 @@ We can use the \texttt{predict()} function to calculate predicted log odds for o
 \end{Shaded}
 
 \begin{verbatim}
-##         2         3         5         6         7         9 
-## -2.024593 -1.525404  3.199523  1.951552 -2.024593  1.429744
+##          2          3          5          6          7          9 
+## -1.7407941 -1.2875077  2.1022521  0.9690362 -1.7407941  1.4592572
 \end{verbatim}
 
 To find probabilities instead, supply \texttt{type="response"} within the \texttt{predict()} function:
@@ -10788,10 +10820,10 @@ To find probabilities instead, supply \texttt{type="response"} within the \textt
 
 \begin{verbatim}
 ##         2         3         5         6         7         9 
-## 0.1166449 0.1786671 0.9608163 0.8756158 0.1166449 0.8068613
+## 0.1492121 0.2162750 0.8911219 0.7249273 0.1492121 0.8114190
 \end{verbatim}
 
-So for observation index 2, the student's predicted log odds of driving drunk is -2.024593, with corresponding predicted probability of 0.1166449.
+So for observation index 2, the student's predicted log odds of driving drunk is -1.7407941, with corresponding predicted probability of 0.1492121.
 
 \hypertarget{logistic2}{%
 \chapter{Logistic Regression 2}\label{logistic2}}
@@ -11222,8 +11254,6 @@ We are going to perform some basic data wrangling for our dataframe:
 \item
   Remove the first column, as it is just an index.
 \item
-  Keep observations that have no missing values in any variable. There are about a dozen observations with missing values in at least one variable.
-\item
   Apply \texttt{factor()} to categorical variables. As a reminder, this should be done to categorical variables if you want to change the reference class.
 \end{itemize}
 
@@ -11231,8 +11261,6 @@ We are going to perform some basic data wrangling for our dataframe:
 \begin{Highlighting}[]
 \DocumentationTok{\#\#first column is index, remove it}
 \NormalTok{Data}\OtherTok{\textless{}{-}}\NormalTok{Data[,}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{]}
-\DocumentationTok{\#\#some NAs in data. Remove them}
-\NormalTok{Data}\OtherTok{\textless{}{-}}\NormalTok{Data[}\FunctionTok{complete.cases}\NormalTok{(Data),]}
 
 \DocumentationTok{\#\#convert categorical to factors. needed for contrasts}
 \NormalTok{Data}\SpecialCharTok{$}\NormalTok{Gender}\OtherTok{\textless{}{-}}\FunctionTok{factor}\NormalTok{(Data}\SpecialCharTok{$}\NormalTok{Gender)}
@@ -11298,8 +11326,8 @@ To create a confusion matrix, we need to find the predicted probabilities for ou
 \begin{verbatim}
 ##      
 ##       FALSE TRUE
-##   No     46   12
-##   Yes    22   39
+##   No     48   11
+##   Yes    21   45
 \end{verbatim}
 
 I have placed the actual response in the rows, and whether the predicted probability is greater than the threshold of 0.5 (the classification based on the model) in the columns.
@@ -11309,13 +11337,13 @@ For our model with a threshold of 0.5, we have:
 \begin{itemize}
 \tightlist
 \item
-  46 observations that truly have not driven drunk and were correctly classified as not having driven drunk (true negative).
+  48 observations that truly have not driven drunk and were correctly classified as not having driven drunk (true negative).
 \item
-  12 observations that truly have not driven drunk but were incorrectly classified as having driven drunk (false positive).
+  11 observations that truly have not driven drunk but were incorrectly classified as having driven drunk (false positive).
 \item
-  22 observations that truly have driven drunk and were correctly classified as having driven drunk (true positive).
+  45 observations that truly have driven drunk and were correctly classified as having driven drunk (true positive).
 \item
-  39 observations that truly have driven drunk but were incorrectly classified as not having driven drunk (false negative).
+  21 observations that truly have driven drunk but were incorrectly classified as not having driven drunk (false negative).
 \end{itemize}
 
 \hypertarget{roc-curve-1}{%
@@ -11371,111 +11399,10 @@ Another measure is the AUC. As its name suggests, it is simply the area under th
 
 \begin{verbatim}
 ## [[1]]
-## [1] 0.7741662
+## [1] 0.8355162
 \end{verbatim}
 
-The AUC of our ROC curve is 0.7742, which means our logistic regression does better than random guessing.
-
-\hypertarget{practice}{%
-\subsection*{Practice}\label{practice}}
-\addcontentsline{toc}{subsection}{Practice}
-
-On your own, fit a logistic regression using all the predictors. Then obtain the confusion matrix with a threshold of 0.5, as well as the corresponding ROC curve and AUC of this model. Compare these with what we obtained for the model with just three predictors: \texttt{Smoke}, \texttt{Marijuan}, and \texttt{DaysBeer}. Which model does better based on these? Is the answer surprising?
-
-\hypertarget{intro}{%
-\chapter{Introduction}\label{intro}}
-
-You can label chapter and section titles using \texttt{\{\#label\}} after them, e.g., we can reference Chapter \ref{intro}. If you do not manually label them, there will be automatic labels anyway, e.g., Chapter \ref{methods}.
-
-Figures and tables with captions will be placed in \texttt{figure} and \texttt{table} environments, respectively.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{par}\NormalTok{(}\AttributeTok{mar =} \FunctionTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{, }\DecValTok{4}\NormalTok{, .}\DecValTok{1}\NormalTok{, .}\DecValTok{1}\NormalTok{))}
-\FunctionTok{plot}\NormalTok{(pressure, }\AttributeTok{type =} \StringTok{\textquotesingle{}b\textquotesingle{}}\NormalTok{, }\AttributeTok{pch =} \DecValTok{19}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{figure}
-
-{\centering \includegraphics[width=0.8\linewidth]{bookdown-demo_files/figure-latex/nice-fig-1} 
-
-}
-
-\caption{Here is a nice figure!}\label{fig:nice-fig}
-\end{figure}
-
-Reference a figure by its code chunk label with the \texttt{fig:} prefix, e.g., see Figure \ref{fig:nice-fig}. Similarly, you can reference tables generated from \texttt{knitr::kable()}, e.g., see Table \ref{tab:nice-tab}.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{kable}\NormalTok{(}
-  \FunctionTok{head}\NormalTok{(iris, }\DecValTok{20}\NormalTok{), }\AttributeTok{caption =} \StringTok{\textquotesingle{}Here is a nice table!\textquotesingle{}}\NormalTok{,}
-  \AttributeTok{booktabs =} \ConstantTok{TRUE}
-\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{table}
-
-\caption{\label{tab:nice-tab}Here is a nice table!}
-\centering
-\begin{tabular}[t]{rrrrl}
-\toprule
-Sepal.Length & Sepal.Width & Petal.Length & Petal.Width & Species\\
-\midrule
-5.1 & 3.5 & 1.4 & 0.2 & setosa\\
-4.9 & 3.0 & 1.4 & 0.2 & setosa\\
-4.7 & 3.2 & 1.3 & 0.2 & setosa\\
-4.6 & 3.1 & 1.5 & 0.2 & setosa\\
-5.0 & 3.6 & 1.4 & 0.2 & setosa\\
-\addlinespace
-5.4 & 3.9 & 1.7 & 0.4 & setosa\\
-4.6 & 3.4 & 1.4 & 0.3 & setosa\\
-5.0 & 3.4 & 1.5 & 0.2 & setosa\\
-4.4 & 2.9 & 1.4 & 0.2 & setosa\\
-4.9 & 3.1 & 1.5 & 0.1 & setosa\\
-\addlinespace
-5.4 & 3.7 & 1.5 & 0.2 & setosa\\
-4.8 & 3.4 & 1.6 & 0.2 & setosa\\
-4.8 & 3.0 & 1.4 & 0.1 & setosa\\
-4.3 & 3.0 & 1.1 & 0.1 & setosa\\
-5.8 & 4.0 & 1.2 & 0.2 & setosa\\
-\addlinespace
-5.7 & 4.4 & 1.5 & 0.4 & setosa\\
-5.4 & 3.9 & 1.3 & 0.4 & setosa\\
-5.1 & 3.5 & 1.4 & 0.3 & setosa\\
-5.7 & 3.8 & 1.7 & 0.3 & setosa\\
-5.1 & 3.8 & 1.5 & 0.3 & setosa\\
-\bottomrule
-\end{tabular}
-\end{table}
-
-You can write citations, too. For example, we are using the \textbf{bookdown} package \citep{R-bookdown} in this sample book, which was built on top of R Markdown and \textbf{knitr} \citep{xie2015}.
-
-\hypertarget{methods}{%
-\chapter{Methods}\label{methods}}
-
-We describe our methods in this chapter.
-
-Math can be added in body using usual syntax like this
-
-\hypertarget{math-example}{%
-\section{math example}\label{math-example}}
-
-\(p\) is unknown but expected to be around 1/3. Standard error will be approximated
-
-\[
-SE = \sqrt(\frac{p(1-p)}{n}) \approx \sqrt{\frac{1/3 (1 - 1/3)} {300}} = 0.027
-\]
-
-You can also use math in footnotes like this\footnote{where we mention \(p = \frac{a}{b}\)}.
-
-We will approximate standard error to 0.027\footnote{\(p\) is unknown but expected to be around 1/3. Standard error will be approximated
-
-  \[
-  SE = \sqrt(\frac{p(1-p)}{n}) \approx \sqrt{\frac{1/3 (1 - 1/3)} {300}} = 0.027
-  \]}
+The AUC of our ROC curve is 0.8355, which means our logistic regression does better than random guessing.
 
   \bibliography{book.bib,packages.bib}
 

@@ -312,14 +312,11 @@ Data<-read.table("students.txt", header=T, sep="")
 We are going to perform some basic data wrangling for our dataframe:
 
 - Remove the first column, as it is just an index.
-- Keep observations that have no missing values in any variable. There are about a dozen observations with missing values in at least one variable.
 - Apply `factor()` to categorical variables. As a reminder, this should be done to categorical variables if you want to change the reference class.
 
 ```{r, message=FALSE, warning=FALSE}
 ##first column is index, remove it
 Data<-Data[,-1]
-##some NAs in data. Remove them
-Data<-Data[complete.cases(Data),]
 
 ##convert categorical to factors. needed for contrasts
 Data$Gender<-factor(Data$Gender)
@@ -398,9 +395,9 @@ prop.table(table(train$Smoke, train$DrivDrnk),1)
 prop.table(table(train$Marijuan, train$DrivDrnk),1)
 ```
 
-- About 55% of male students have driven drunk, compared to about 40% of female students.
-- About 88% of smokers have driven drunk, compared to 35% of non smokers.
-- About 68% of marijuana users have driven drunk, compared to 27% of non users. 
+- About 53% of male students have driven drunk, compared to about 41% of female students.
+- About 77% of smokers have driven drunk, compared to 38% of non smokers.
+- About 67% of marijuana users have driven drunk, compared to 28% of non users. 
 
 The earlier barcharts are the visualizations of these tables.
 
@@ -428,11 +425,11 @@ dp4<-ggplot2::ggplot(train,aes(x=StudyHrs, color=DrivDrnk))+
 gridExtra::grid.arrange(dp1, dp2, dp3, dp4, ncol = 2, nrow = 2)
 ```
 
-- Among those who have driven drunk, we see a higher proportion of students lower GPAs (below 3.0). For those who have not driven drunk, a higher proportion of students have higher GPAs (above 3.0).
+- Among those who have driven drunk, we see a fairly uniform proportion of students with GPAs between 2.75 and 3.5. For those who have not driven drunk, a higher proportion of students have higher GPAs (above 3.0).
 - A higher proportion of students who have not driven drunk party less than 10 days a month, compared to students who have driven drunk.
 - Similarly, a higher proportion of students who have not driven drunk spend less than 10 days drinking beer, compared to students who have driven drunk. 
-- A much high proportion of students who have driven drunk spend less than 15 hours studying a week, compared to students who have not drive drunk. 
-- Each of these quantitative predictors may be related to whether students have driven drunk. It looks like lower GPAs, partying more, drinking more, and studying less is associated with increased likelihood of having driven drunk. 
+- The density plots of study hours are almost identical for those who have driven drunk and those who have not driven drunk. This suggests study hours is not associated with the likelihood of having driven drunk. 
+- It looks like lower GPAs, partying more, and drinking more are associated with increased likelihood of having driven drunk. 
 
 #### Correlations between quantitative predictors {-}
 
@@ -440,25 +437,31 @@ We can quickly check the correlations between the quantitative predictors:
 
 ```{r}
 ##correlations between quantitative predictors
-round(cor(train[,5:8]),3)
+round(cor(train[,5:8], use= "complete.obs"),3)
 ```
 Notice that `DaysBeer` and `PartyNum` are highly correlated. Probably not surprising since drinking is probably done at parties, so a student who parties more is likely to drink more. 
 
 ### Fit Logistic Regression {-}
 
-Based on the visualizations, we suspect that all the predictors may influence the response variable. We use the `glm()` function to fit logistic regression:
+Based on the visualizations, we suspect that all the predictors, other than `StudyHrs`, may influence the response variable. We use the `glm()` function to fit logistic regression using of these predictors as a starting point:
 
 ```{r}
 ##fit logistic regression
 result<-glm(DrivDrnk~., family=binomial, data=train)
 ```
 
-Notice we specify the argument `family = "binomial"`. This has to be specified for a logistic regression. If this is not specified, a linear regression is fitted instead. The function `glm()` uses maximum likelihood estimation whereas `lm()` uses ordinary least squares. We can look at the Wald tests and deviance of our model using `summary()`:
+Notice we specify the argument `family = "binomial"`. This has to be specified for a logistic regression. If this is not specified, a linear regression is fitted instead. The function \verb=glm()= uses maximum likelihood estimation whereas \verb=lm()= uses ordinary least squares. We can look at the Wald tests and deviance of our model using `summary()`:
 
 ```{r}
 summary(result)
 ```
-Notice a few predictors have highly insignificant coefficients: `Gender`, `GPA`, `PartyNum`, and `StudyHrs`. `PartyNum` being insignificant is not surprising since we noted it is highly correlated with `DaysBeer`. We can also assess variance inflation factors (VIFs) in logistic regression like before:
+We make the following observations:
+
+- Notice only `Smoke` is significant. 
+- We did note earlier that `PartyNum` and `DaysBeer` are highly correlated, so both being insignificant may be due to multicollinearity, and not that they are not related to the response variable. The visualizations earlier showed they may be significant predictors. 
+- `Marijuan` is also barely insignificant, which may be a bit surprising since we did see that it could be a significant predictor from the visualizations. 
+
+We can also assess variance inflation factors (VIFs) in logistic regression like before:
 
 ```{r}
 library(faraway)
@@ -468,6 +471,8 @@ faraway::vif(result)
 Not surprisingly, we have evidence of multicollinearity. 
 
 #### Likelihood ratio tests {-}
+
+Given what we have seen, we try to fit a reduced model with `Smoke` (significant), `Marijuan` (barely insignificant but visualization suggested it may be significant), and `DaysBeer` (barely insignificant, which could be due to its correlation with `PartyNum` and visualzation suggested it may be significant). 
 
 Let us see if we can drop `Gender`, `GPA`, `PartyNum`, and `StudyHrs` from the model, via a likelihood ratio test (LRT). The $\Delta G^2$ test statistic is found by finding the difference in the deviances of the two models. The deviance can be found by extracting the component `deviance` from an object created by `glm()`:
 
@@ -485,8 +490,8 @@ qchisq(1-0.05,4)
 ```
 
 - The null hypothesis supports dropping the 4 predictors, and the alternative hypothesis supports not dropping the 4 predictors. 
-- The $\Delta G^2$ test statistic is 1.008, and is compared with a $\chi^2_4$ distribution, i.e. a chi-squared distribution with 4 degrees of freedom. The degrees of freedom is equal to the number of terms we are dropping. 
-- The p-value is 0.9086, and the critical value us 9.4877.
+- The $\Delta G^2$ test statistic is 6.996, and is compared with a $\chi^2_4$ distribution, i.e. a chi-squared distribution with 4 degrees of freedom. The degrees of freedom is equal to the number of terms we are dropping. 
+- The p-value is 0.1361, and the critical value us 9.4877.
 - So we fail to reject the null hypothesis. Data do not support using the full model with all the predictors, so we drop `Gender`, `GPA`, `PartyNum`, and `StudyHrs` to use the reduced model.
 
 Let us take a look at the estimated coefficients for this model:
@@ -498,14 +503,14 @@ summary(reduced)
 So our logistic regression equation is 
 
 $$
-\log \left( \frac{\hat{\pi}}{1-\hat{\pi}}   \right) = -2.0246 + 2.3938I_1 + 0.9584I_2 + 0.1248 DaysBeer,
+\log \left( \frac{\hat{\pi}}{1-\hat{\pi}}   \right) = -1.7408 + 1.2096I_1 + 0.9336I_2 + 0.1133 DaysBeer,
 $$
 where $I_1 = 1$ if the student smokes, and $I_2 = 1$ if the student uses marijuana.
 
 - Given that these coefficients are positive, smoking, using marijuana, and drinking on more days are associated with higher likelihood of having driven drunk.
-- The odds of driving drunk for smokers is $\exp(2.3938) = 10.955$ times the odds for non smokers, when controlling for marijuana use and days drinking.
-- The odds of driving drunk for marijuana users is $\exp(0.9584) = 2.6075$ times the odds for non users, when controlling for smoking and days drinking.
-- The odds of driving drunk is multiplied by a factor of $\exp(0.1248) = 1.1329$ for each additional day of drinking, when controlling for smoking and marijuana use. 
+- The odds of driving drunk for smokers is $\exp(1.2096) = 3.3521$ times the odds for non smokers, when controlling for marijuana use and days drinking.
+- The odds of driving drunk for marijuana users is $\exp(0.9336) = 2.5437$ times the odds for non users, when controlling for smoking and days drinking.
+- The odds of driving drunk is multiplied by a factor of $\exp(0.1133) = 1.1200$ for each additional day of drinking, when controlling for smoking and marijuana use. 
 
 #### Predicted log odds and probabilities {-}
 
@@ -525,4 +530,4 @@ preds<-predict(reduced,newdata=test, type="response")
 head(preds)
 ```
 
-So for observation index 2, the student's predicted log odds of driving drunk is -2.024593, with corresponding predicted probability of 0.1166449.
+So for observation index 2, the student's predicted log odds of driving drunk is -1.7407941, with corresponding predicted probability of 0.1492121.
