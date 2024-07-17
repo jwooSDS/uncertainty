@@ -16,8 +16,6 @@ description: "This is a trial run"
 
 ## Who is this book for? {-}
 
-<!-- Remember each Rmd file contains one and only one chapter, and a chapter is defined by the first-level heading `#`. -->
-
 There are many books on linear models, with various expectations for different levels of familiarity with statistical, mathematical, and coding concepts. These books generally fall into one of two camps:
 
 1. Little to no familiarity with statistical and mathematical concepts, but fairly familiar to coding. These books tend to be written for programmers who want to get into data science. These books tend to explain linear models while trying to avoid statistical and mathematical concepts as much, only covering these concepts if absolutely necessary. These books tend to present linear models in a recipe format giving readers directions on what to do to build their models. 
@@ -36,7 +34,7 @@ As introductory statistics and introductory programming are pre-requisites for e
 
 ## Data sets used {-}
 
-I have tried to use as many open source data sets as much as possible so that readers can work on the various examples I have provided on their own. However, some data sets may not be open source and have come from my experience teaching this class since 2019 (and variations of the class since 2013), and have used some data sets that were shared by other statistics and data science educators. It is my goal to eventually use only open source data sets.
+I have tried to use as many open source data sets as much as possible so that readers can work on the various examples I have provided on their own. However, some data sets may not be open source and were shared by other statistics and data science educators over my years of teaching this class (or variations of it) since 2013. These data sets are available to students enrolled in STAT 6021. It is my goal to eventually use only open source data sets.
 
 ## Chapters {-}
 
@@ -48,7 +46,7 @@ The chapters for the book is as follows:
 
 - Chapters \@ref(mlr) to \@ref(out) cover multiple linear regression: when we have multiple predictors and one response variable that is quantitative. 
 
-- Chapters \@ref{logistic1} and \@ref{logistic2} cover logistic regression: when we have a response variable that is binary. 
+- Chapters \@ref(logistic1) and \@ref(logistic2) cover logistic regression: when we have a response variable that is binary. 
 
 ## Other resources {-}
 
@@ -56,7 +54,7 @@ Some other resources that readers may want to check out:
 
 - *OpenIntro Statistics*, 4th ed. Diez, Cetinkaya-Rundel, Barr, OpenIntro. Get free PDF version at <https://leanpub.com/os>, just set the price that you want to pay to $0. This is a good book for introductory statistics. 
 
-- *Introduction to Probability for Data Science*, Chan. <https://probability4datascience.com/index.html>. This book covers the fundamentals of probability and mathematics needed for data science. It does a good job explaining why seemingly abstract mathematical concepts are needed in data science. 
+- *Introduction to Probability for Data Science*, Chan. <https://probability4datascience.com/index.html>. This book covers the fundamentals of probability and mathematics needed for data science. It does a good job explaining how seemingly abstract mathematical concepts are needed and applied in data science. 
 
 - *Linear Models with R*, 2nd ed. Faraway. This is probably one of the few books that balances between the two camps that I wrote about earlier. It does require familiarity with matrices and linear algebra though. 
 
