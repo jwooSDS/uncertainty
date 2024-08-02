@@ -18,7 +18,7 @@ description: "This is a trial run"
 
 There are many books on linear models, with various expectations for different levels of familiarity with statistical, mathematical, and coding concepts. These books generally fall into one of two camps:
 
-1. Little to no familiarity with statistical and mathematical concepts, but fairly familiar to coding. These books tend to be written for programmers who want to get into data science. These books tend to explain linear models while trying to avoid statistical and mathematical concepts as much, only covering these concepts if absolutely necessary. These books tend to present linear models in a recipe format giving readers directions on what to do to build their models. 
+1. Little to no familiarity with statistical and mathematical concepts, but fairly familiar to coding. These books tend to be written for programmers who want to get into data science. These books tend to explain linear models while trying to avoid statistical and mathematical concepts as much as possible. These books tend to present linear models in a recipe format giving readers directions on what to do to build their models. 
 
 The drawback of such books is that readers do not get much understanding of the underlying concepts of linear models. It is impossible to give directions covering every possible scenario in the real world as real data are messy. Practitioners of data science often have to think outside the box in order to make linear models work for their particular data, and it is difficult to do so without understanding the mathematical framework of linear models. 
 
@@ -32,10 +32,6 @@ This book accompanies the course STAT 6021: Linear Models for Data Science, for 
 
 As introductory statistics and introductory programming are pre-requisites for entering the MSDS program, this book assumes basic knowledge of statistical inference and coding. Review materials covering these concepts are provided separately for enrolled students. 
 
-## Data sets used {-}
-
-I have tried to use as many open source data sets as much as possible so that readers can work on the various examples I have provided on their own. However, some data sets may not be open source and were shared by other statistics and data science educators over my years of teaching this class (or variations of it) since 2013. These data sets are available to students enrolled in STAT 6021. It is my goal to eventually use only open source data sets.
-
 ## Chapters {-}
 
 The chapters for the book is as follows:
@@ -47,6 +43,27 @@ The chapters for the book is as follows:
 - Chapters \@ref(mlr) to \@ref(out) cover multiple linear regression: when we have multiple predictors and one response variable that is quantitative. 
 
 - Chapters \@ref(logistic1) and \@ref(logistic2) cover logistic regression: when we have a response variable that is binary. 
+
+## How to use this book {-}
+
+- If you are using the provided R code from each chapter, please remember to clear your R environment whenever you move to a new chapter. This can be done by typing `rm(list = ls())`.
+
+- For Chapters \@ref(slr) to \@ref(logistic2), there is an R tutorial provided in the last section. You should also clear your R environment before running the code in the tutorials. 
+
+- Some additional resources are provided for students enrolled in STAT 6021. These include:
+
+  - Learning objectives.
+  - Explainer videos.
+  - Practice questions.
+  - Assignments. 
+  
+## Data sets used {-}
+
+I have tried to use as many open source data sets as much as possible so that readers can work on the various examples I have provided on their own. However, some data sets may not be open source and were shared by other statistics and data science educators over my years of teaching this class (or variations of it) since 2013. It is my goal to eventually use only open source data sets.
+
+## Reporting issues with this book {-}
+
+This book is mostly a compilation of course notes that were originally written as separate chapters. While effort has been made to fix typos, issues may still exist. If you find any issues (typos, formatting, etc), please report them at <https://github.com/jwooSDS/linear_models/issues>. Please be as specific as you can, including providing the specific section and paragraph where the issue is found.  
 
 ## Other resources {-}
 
@@ -62,4 +79,6 @@ Some other resources that readers may want to check out:
 
 - *Applied Linear Statistical Models* (ALSM), Kutner, Nachtsheim, Neter, Li, 5th ed. This book covers a wide range of topics in linear models and is also mathematically rigorous. 
 
-- *Applied Linear Regression Models* (ALRM), Kutner, Nachtsheim, Neter, 4th ed.  ALRM is the same as the first 14 chapters of ALSM. The second part of ALSM covers topics in Design of Experiments, which I highly recommend if you are interested in those topics. 
+- *Applied Linear Regression Models* (ALRM), Kutner, Nachtsheim, Neter, 4th ed.  ALRM is the same as the first 14 chapters of ALSM. The second part of ALSM covers topics in Design of Experiments, which I highly recommend if you are interested in those topics.
+
+
