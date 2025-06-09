@@ -4,16 +4,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 4 Inference with Simple Linear Regression (SLR) | Linear Models for Data Science</title>
+<title>Chapter 2 Inference with Simple Linear Regression (SLR) | Linear Models for Data Science</title>
 <meta name="author" content="Jeffrey Woo">
-<meta name="description" content="4.1 Introduction Oftentimes, the data we collect come from a random sample that is representative of the population of interest. A common example is an election poll before a presidential...">
+<meta name="description" content="2.1 Introduction Oftentimes, the data we collect come from a random sample that is representative of the population of interest. A common example is an election poll before a presidential...">
 <meta name="generator" content="bookdown 0.34 with bs4_book()">
-<meta property="og:title" content="Chapter 4 Inference with Simple Linear Regression (SLR) | Linear Models for Data Science">
+<meta property="og:title" content="Chapter 2 Inference with Simple Linear Regression (SLR) | Linear Models for Data Science">
 <meta property="og:type" content="book">
-<meta property="og:description" content="4.1 Introduction Oftentimes, the data we collect come from a random sample that is representative of the population of interest. A common example is an election poll before a presidential...">
+<meta property="og:description" content="2.1 Introduction Oftentimes, the data we collect come from a random sample that is representative of the population of interest. A common example is an election poll before a presidential...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 4 Inference with Simple Linear Regression (SLR) | Linear Models for Data Science">
-<meta name="twitter:description" content="4.1 Introduction Oftentimes, the data we collect come from a random sample that is representative of the population of interest. A common example is an election poll before a presidential...">
+<meta name="twitter:title" content="Chapter 2 Inference with Simple Linear Regression (SLR) | Linear Models for Data Science">
+<meta name="twitter:description" content="2.1 Introduction Oftentimes, the data we collect come from a random sample that is representative of the population of interest. A common example is an election poll before a presidential...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.2/transition.js"></script><script src="libs/bs3compat-0.4.2/tabs.js"></script><script src="libs/bs3compat-0.4.2/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -43,18 +43,8 @@
       <nav aria-label="Table of contents"><h2>Table of contents</h2>
         <ul class="book-toc list-unstyled">
 <li><a class="" href="index.html">Preface</a></li>
-<li><a class="" href="wrangling.html"><span class="header-section-number">1</span> Data Wrangling with R</a></li>
-<li><a class="" href="viz.html"><span class="header-section-number">2</span> Data Visualization with R Using ggplot2</a></li>
-<li><a class="" href="slr.html"><span class="header-section-number">3</span> Basics with Simple Linear Regression (SLR)</a></li>
-<li><a class="active" href="inf.html"><span class="header-section-number">4</span> Inference with Simple Linear Regression (SLR)</a></li>
-<li><a class="" href="diag.html"><span class="header-section-number">5</span> Model Diagnostics and Remedial Measures in SLR</a></li>
-<li><a class="" href="mlr.html"><span class="header-section-number">6</span> Multiple Linear Regression (MLR)</a></li>
-<li><a class="" href="genF.html"><span class="header-section-number">7</span> General Linear \(F\) Test and Multicollinearity</a></li>
-<li><a class="" href="cat.html"><span class="header-section-number">8</span> Categorical Predictors in MLR</a></li>
-<li><a class="" href="crit.html"><span class="header-section-number">9</span> Model Selection Criteria and Automated Search Procedures</a></li>
-<li><a class="" href="out.html"><span class="header-section-number">10</span> Analysis of Residuals in MLR</a></li>
-<li><a class="" href="logistic1.html"><span class="header-section-number">11</span> Logistic Regression</a></li>
-<li><a class="" href="logistic2.html"><span class="header-section-number">12</span> Logistic Regression 2</a></li>
+<li><a class="" href="slr.html"><span class="header-section-number">1</span> Basics with Simple Linear Regression (SLR)</a></li>
+<li><a class="active" href="inf.html"><span class="header-section-number">2</span> Inference with Simple Linear Regression (SLR)</a></li>
 </ul>
 
         <div class="book-extra">
@@ -62,27 +52,27 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="inf" class="section level1" number="4">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="inf" class="section level1" number="2">
 <h1>
-<span class="header-section-number">4</span> Inference with Simple Linear Regression (SLR)<a class="anchor" aria-label="anchor" href="#inf"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2</span> Inference with Simple Linear Regression (SLR)<a class="anchor" aria-label="anchor" href="#inf"><i class="fas fa-link"></i></a>
 </h1>
-<div id="introduction-3" class="section level2" number="4.1">
+<div id="introduction" class="section level2" number="2.1">
 <h2>
-<span class="header-section-number">4.1</span> Introduction<a class="anchor" aria-label="anchor" href="#introduction-3"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.1</span> Introduction<a class="anchor" aria-label="anchor" href="#introduction"><i class="fas fa-link"></i></a>
 </h2>
 <p>Oftentimes, the data we collect come from a random sample that is representative of the population of interest. A common example is an election poll before a presidential election. Random sampling allows the sample to be representative of the population. However, if we obtain another random sample, the characteristics of the new sample are unlikely to be exactly the same as the first sample. For example, the sample proportion who will vote for a certain party is unlikely to be the same for both random samples. What this tells us is that even with representative samples, sample proportions are unlikely to be equal to the population proportion, and sample proportions vary from sample to sample.</p>
 <p>Dr. W. Edwards Deming’s Red Bead experiment illustrates this concept. A video of this experiment <a href="https://www.youtube.com/watch?v=R3ewHrpqclA">can be found here.</a></p>
 <p>In this video, the number of red beads, which represent bad products, varies each time the worker obtains a random sample of 50 beads. The fact that the number of red beads increases in his second sample does not indicate that he performed his task any worse, as this increase is due to the random variation associated with samples.</p>
 <p>Note: Deming’s Red Bead experiment was developed to illustrate concepts associated with management. He is best known for his work in developing the Japanese economy after World War II. You will be able to find many blogs/articles discussing the experiment on the World Wide Web. Although many of the articles discuss how this experiment applies in management, it can be used to illustrate concepts of variation.</p>
 <p>The same idea extends to the slope and intercept of a regression line. The estimated slope and intercept will vary from sample to sample and are unlikely to be equal to the population slope and intercept. In inferential statistics, we use hypothesis tests and confidence intervals to aid us in accounting for this random variation. In this module, you will learn how to account for and quantify the random variation associated with the estimated regression model, and how to interpret the estimated regression model while accounting for random variation.</p>
-<div id="review-from-previous-module" class="section level3" number="4.1.1">
+<div id="review-from-previous-module" class="section level3" number="2.1.1">
 <h3>
-<span class="header-section-number">4.1.1</span> Review from previous module<a class="anchor" aria-label="anchor" href="#review-from-previous-module"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.1.1</span> Review from previous module<a class="anchor" aria-label="anchor" href="#review-from-previous-module"><i class="fas fa-link"></i></a>
 </h3>
 <p>The <strong>simple linear regression model</strong> is written as</p>
 <p><span class="math display" id="eq:4SLRmod">\[\begin{equation}
 y=\beta_0+\beta_{1} x + \epsilon.
-\tag{4.1}
+\tag{2.1}
 \end{equation}\]</span></p>
 <p>We make some assumptions for the error term <span class="math inline">\(\epsilon\)</span>. They are:</p>
 <ol style="list-style-type: decimal">
@@ -100,13 +90,13 @@ y=\beta_0+\beta_{1} x + \epsilon.
 <p>How do the values of these estimators vary from sample to sample?</p>
 </div>
 </div>
-<div id="hypothesis-testing-in-slr" class="section level2" number="4.2">
+<div id="hypothesis-testing-in-slr" class="section level2" number="2.2">
 <h2>
-<span class="header-section-number">4.2</span> Hypothesis Testing in SLR<a class="anchor" aria-label="anchor" href="#hypothesis-testing-in-slr"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.2</span> Hypothesis Testing in SLR<a class="anchor" aria-label="anchor" href="#hypothesis-testing-in-slr"><i class="fas fa-link"></i></a>
 </h2>
-<div id="distribution-of-least-squares-estimators" class="section level3" number="4.2.1">
+<div id="distribution-of-least-squares-estimators" class="section level3" number="2.2.1">
 <h3>
-<span class="header-section-number">4.2.1</span> Distribution of least squares estimators<a class="anchor" aria-label="anchor" href="#distribution-of-least-squares-estimators"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.2.1</span> Distribution of least squares estimators<a class="anchor" aria-label="anchor" href="#distribution-of-least-squares-estimators"><i class="fas fa-link"></i></a>
 </h3>
 <p><strong>Gauss Markov Theorem</strong>: Under assumptions for a regression model, the least squares estimators <span class="math inline">\(\hat{\beta}_1\)</span> and <span class="math inline">\(\hat{\beta}_0\)</span> are unbiased and have minimum variance among all unbiased linear estimators.</p>
 <p>Thus, the least squares estimators have the following properties:</p>
@@ -121,39 +111,39 @@ y=\beta_0+\beta_{1} x + \epsilon.
 </ol>
 <p><span class="math display" id="eq:4varb1">\[\begin{equation}
 \mbox{Var}(\hat{\beta}_1) = \frac{\sigma^{2}}{\sum{(x_{i}-\bar{x})^{2}}}
-\tag{4.2}
+\tag{2.2}
 \end{equation}\]</span></p>
 <ol start="3" style="list-style-type: decimal">
 <li>The variance of <span class="math inline">\(\hat{\beta}_0\)</span> is</li>
 </ol>
 <p><span class="math display" id="eq:4varb0">\[\begin{equation}
 \mbox{Var}(\hat{\beta}_0) = \sigma^2 \left[\frac{1}{n} + \frac{\bar{x}^2}{\sum (x_i -\bar{x})^2}\right]
-\tag{4.3}
+\tag{2.3}
 \end{equation}\]</span></p>
 <ol start="4" style="list-style-type: decimal">
 <li>
 <span class="math inline">\(\hat{\beta}_1\)</span> and <span class="math inline">\(\hat{\beta}_0\)</span> both follow a normal distribution.</li>
 </ol>
-<p>Note that in <a href="inf.html#eq:4varb1">(4.2)</a> and <a href="inf.html#eq:4varb0">(4.3)</a>, we use <span class="math inline">\(s^2 = MS_{res}\)</span> to estimate <span class="math inline">\(\sigma^2\)</span> since <span class="math inline">\(\sigma^2\)</span> is a unknown value.</p>
+<p>Note that in <a href="inf.html#eq:4varb1">(2.2)</a> and <a href="inf.html#eq:4varb0">(2.3)</a>, we use <span class="math inline">\(s^2 = MS_{res}\)</span> to estimate <span class="math inline">\(\sigma^2\)</span> since <span class="math inline">\(\sigma^2\)</span> is a unknown value.</p>
 <p>What these imply is that if we standardize <span class="math inline">\(\hat{\beta}_1\)</span> and <span class="math inline">\(\hat{\beta}_0\)</span>, these standardized quantities will follow a <span class="math inline">\(t_{n-2}\)</span> distribution, i.e.</p>
 <p><span class="math display" id="eq:distb1">\[\begin{equation}
 \frac{\hat{\beta}_1 - \beta_1}{se(\hat{\beta}_1)}\sim t_{n-2}
-\tag{4.4}
+\tag{2.4}
 \end{equation}\]</span></p>
 <p>and</p>
 <p><span class="math display" id="eq:distb0">\[\begin{equation}
 \frac{\hat{\beta}_0 - \beta_0}{se(\hat{\beta}_0)}\sim t_{n-2},
-\tag{4.5}
+\tag{2.5}
 \end{equation}\]</span></p>
 <p>where</p>
 <p><span class="math display" id="eq:seb1">\[\begin{equation}
 se(\hat{\beta}_1) = \sqrt{\frac{MS_{res}}{\sum{(x_{i}-\bar{x})^{2}}}} = \frac{s}{\sqrt{\sum{(x_{i}-\bar{x})^{2}}}}
-\tag{4.6}
+\tag{2.6}
 \end{equation}\]</span></p>
 <p>and</p>
 <p><span class="math display" id="eq:seb0">\[\begin{equation}
 se(\hat{\beta}_0) = \sqrt{MS_{res}\left[\frac{1}{n} + \frac{\bar{x}^2}{\sum (x_i -\bar{x})^2}\right]} = s \sqrt{\frac{1}{n} + \frac{\bar{x}^2}{\sum (x_i -\bar{x})^2}}
-\tag{4.7}
+\tag{2.7}
 \end{equation}\]</span></p>
 <p>Note:</p>
 <ul>
@@ -161,9 +151,9 @@ se(\hat{\beta}_0) = \sqrt{MS_{res}\left[\frac{1}{n} + \frac{\bar{x}^2}{\sum (x_i
 <li><p>A <span class="math inline">\(t_{n-2}\)</span> distribution is read as a <strong><span class="math inline">\(t\)</span> distribution with <span class="math inline">\(n-2\)</span> degrees of freedom</strong>.</p></li>
 </ul>
 </div>
-<div id="testing-regression-coefficients" class="section level3" number="4.2.2">
+<div id="testing-regression-coefficients" class="section level3" number="2.2.2">
 <h3>
-<span class="header-section-number">4.2.2</span> Testing regression coefficients<a class="anchor" aria-label="anchor" href="#testing-regression-coefficients"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.2.2</span> Testing regression coefficients<a class="anchor" aria-label="anchor" href="#testing-regression-coefficients"><i class="fas fa-link"></i></a>
 </h3>
 <p>Hypothesis testing is used to investigate if a population parameter is <strong>different from a specific value</strong>. In the context of SLR, we usually want to test if <span class="math inline">\(\beta_1\)</span> is 0 or not. If <span class="math inline">\(\beta_1 = 0\)</span>, there is no linear relationship between the variables.</p>
 <p>The general steps in hypothesis testing are:</p>
@@ -179,11 +169,11 @@ H_0: \beta_1 = 0, H_a: \beta_1 \neq 0.
 The test statistic is</p>
 <p><span class="math display" id="eq:4ttest">\[\begin{equation}
 t = \frac{\hat{\beta}_1 - \text{ value in null}}{se(\hat{\beta}_1)}
-\tag{4.8}
+\tag{2.8}
 \end{equation}\]</span></p>
-<p>which is compared with a <span class="math inline">\(t_{n-2}\)</span> distribution. Notice that <a href="inf.html#eq:4ttest">(4.8)</a> comes from <a href="inf.html#eq:distb1">(4.4)</a>.</p>
+<p>which is compared with a <span class="math inline">\(t_{n-2}\)</span> distribution. Notice that <a href="inf.html#eq:4ttest">(2.8)</a> comes from <a href="inf.html#eq:distb1">(2.4)</a>.</p>
 <p>Let us go back to our simulated example that we saw in the last module. We have data from 6000 UVa undergraduate students on the amount of time they spend studying in a week (in minutes), and how many courses they are taking in the semester (3 or 4 credit courses).</p>
-<div class="sourceCode" id="cb195"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##create dataframe</span></span>
 <span><span class="va">df</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">study</span>,<span class="va">courses</span><span class="op">)</span></span>
 <span></span>
@@ -194,12 +184,12 @@ t = \frac{\hat{\beta}_1 - \text{ value in null}}{se(\hat{\beta}_1)}
 <pre><code>##              Estimate Std. Error   t value      Pr(&gt;|t|)
 ## (Intercept)  58.44829  1.9218752  30.41211 4.652442e-189
 ## courses     120.39310  0.4707614 255.74125  0.000000e+00</code></pre>
-<p>The <span class="math inline">\(t\)</span> statistic for testing <span class="math inline">\(H_0: \beta_1 = 0, H_a: \beta_1 \neq 0\)</span> is reported to be 255.7412482, which can be calculated using <a href="inf.html#eq:4ttest">(4.8)</a>: <span class="math inline">\(t= \frac{120.39310 - 0}{0.4707614}\)</span>. The reported p-value is virtually 0, so we reject the null hypothesis. The data support the claim that there is a linear association between study time and the number of courses taken.</p>
+<p>The <span class="math inline">\(t\)</span> statistic for testing <span class="math inline">\(H_0: \beta_1 = 0, H_a: \beta_1 \neq 0\)</span> is reported to be 255.7412482, which can be calculated using <a href="inf.html#eq:4ttest">(2.8)</a>: <span class="math inline">\(t= \frac{120.39310 - 0}{0.4707614}\)</span>. The reported p-value is virtually 0, so we reject the null hypothesis. The data support the claim that there is a linear association between study time and the number of courses taken.</p>
 </div>
 </div>
-<div id="confidence-intervals-for-regression-coefficients" class="section level2" number="4.3">
+<div id="confidence-intervals-for-regression-coefficients" class="section level2" number="2.3">
 <h2>
-<span class="header-section-number">4.3</span> Confidence Intervals for Regression Coefficients<a class="anchor" aria-label="anchor" href="#confidence-intervals-for-regression-coefficients"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.3</span> Confidence Intervals for Regression Coefficients<a class="anchor" aria-label="anchor" href="#confidence-intervals-for-regression-coefficients"><i class="fas fa-link"></i></a>
 </h2>
 <p>Confidence intervals (CIs) are similar to hypothesis testing in the sense that they are also based on the distributional properties of an estimator. CIs may differ in their use in the following ways:</p>
 <ol style="list-style-type: decimal">
@@ -210,7 +200,7 @@ t = \frac{\hat{\beta}_1 - \text{ value in null}}{se(\hat{\beta}_1)}
 <p>Recall the general form for CIs:</p>
 <p><span class="math display" id="eq:4CI">\[\begin{equation}
 \mbox{estimator} \pm (\mbox{multiplier} \times \mbox{s.e of estimator}).
-\tag{4.9}
+\tag{2.9}
 \end{equation}\]</span></p>
 <p>We have the following components of a CI</p>
 <ul>
@@ -221,21 +211,21 @@ t = \frac{\hat{\beta}_1 - \text{ value in null}}{se(\hat{\beta}_1)}
 <li>
 <strong>standard error of estimator</strong>: measure of variance of estimator (basically the square root of the variance of estimator)</li>
 </ul>
-<p>Following <a href="inf.html#eq:4CI">(4.9)</a> and <a href="inf.html#eq:distb1">(4.4)</a>, the <span class="math inline">\(100(1-\alpha)\%\)</span> CI for <span class="math inline">\(\beta_1\)</span> is</p>
+<p>Following <a href="inf.html#eq:4CI">(2.9)</a> and <a href="inf.html#eq:distb1">(2.4)</a>, the <span class="math inline">\(100(1-\alpha)\%\)</span> CI for <span class="math inline">\(\beta_1\)</span> is</p>
 <p><span class="math display" id="eq:4CIb1">\[\begin{equation}
 \hat{\beta}_1 \pm t_{1-\alpha/2;n-2}  se(\hat{\beta}_1) = \hat{\beta}_1 \pm t_{1-\alpha/2;n-2} \frac{s}{\sqrt{\sum(x_i - \bar{x})^{2}}}.
-\tag{4.10}
+\tag{2.10}
 \end{equation}\]</span></p>
 <p>Going back to our study time example, the 95% CI for <span class="math inline">\(\beta_1\)</span> is (119.470237, 121.3159601).</p>
-<div class="sourceCode" id="cb197"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##CI for coefficients</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/confint.html">confint</a></span><span class="op">(</span><span class="va">result</span>,level <span class="op">=</span> <span class="fl">0.95</span><span class="op">)</span><span class="op">[</span><span class="fl">2</span>,<span class="op">]</span></span></code></pre></div>
 <pre><code>##    2.5 %   97.5 % 
 ## 119.4702 121.3160</code></pre>
 <p>An interpretation of this CI is that we have 95% confidence that the true slope <span class="math inline">\(\beta_1\)</span> lies between (119.470237, 121.3159601). In other words, for each additional course taken, the predicted study time increases between 119.470237 and 121.3159601 minutes.</p>
-<div id="thought-questions" class="section level3" number="4.3.1">
+<div id="thought-questions" class="section level3" number="2.3.1">
 <h3>
-<span class="header-section-number">4.3.1</span> Thought questions<a class="anchor" aria-label="anchor" href="#thought-questions"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.3.1</span> Thought questions<a class="anchor" aria-label="anchor" href="#thought-questions"><i class="fas fa-link"></i></a>
 </h3>
 <ul>
 <li><p>Is the conclusion from this 95% CI consistent with the hypothesis test for <span class="math inline">\(H_0: \beta_1 = 0\)</span> in the previous section at 0.05 significance level?</p></li>
@@ -250,14 +240,14 @@ t = \frac{\hat{\beta}_1 - \text{ value in null}}{se(\hat{\beta}_1)}
 <p>Generally, we are usually more interested in the slope than the intercept.</p>
 </div>
 </div>
-<div id="ci-of-the-mean-response" class="section level2" number="4.4">
+<div id="ci-of-the-mean-response" class="section level2" number="2.4">
 <h2>
-<span class="header-section-number">4.4</span> CI of the Mean Response<a class="anchor" aria-label="anchor" href="#ci-of-the-mean-response"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.4</span> CI of the Mean Response<a class="anchor" aria-label="anchor" href="#ci-of-the-mean-response"><i class="fas fa-link"></i></a>
 </h2>
 <p>We have established that the least squares estimators <span class="math inline">\(\hat{\beta}_1,\hat{\beta}_0\)</span> have their associated variances. Since the estimated SLR equation is</p>
 <p><span class="math display" id="eq:4fitted">\[\begin{equation}
 \hat{y}=\hat{\beta}_0+\hat{\beta}_1 x,
-\tag{4.11}
+\tag{2.11}
 \end{equation}\]</span></p>
 <p>it stands to reason that <span class="math inline">\(\hat{y}\)</span> has an associated variance as well, since it is a function of <span class="math inline">\(\hat{\beta}_1,\hat{\beta}_0\)</span>.</p>
 <p>There are two interpretations of <span class="math inline">\(\hat{y}\)</span>:</p>
@@ -270,10 +260,10 @@ t = \frac{\hat{\beta}_1 - \text{ value in null}}{se(\hat{\beta}_1)}
 <p><span class="math display" id="eq:4CImean">\[\begin{equation}
 \hat{\mu}_{y|x_0}\pm t_{1-\alpha/2,n-2}s\sqrt{\frac{1}{n} +
 \frac{(x_0-\bar{x})^2}{\sum(x_i-\bar{x})^2}}.
-\tag{4.12}
+\tag{2.12}
 \end{equation}\]</span></p>
 <p>Going back to our study time example, suppose we want the average study time for students who take 5 courses, the 95% CI is</p>
-<div class="sourceCode" id="cb199"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##CI for mean y when x=5</span></span>
 <span><span class="va">newdata</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>courses<span class="op">=</span><span class="fl">5</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">result</span>, <span class="va">newdata</span>, level<span class="op">=</span><span class="fl">0.95</span>, interval<span class="op">=</span><span class="st">"confidence"</span><span class="op">)</span></span></code></pre></div>
@@ -281,53 +271,53 @@ t = \frac{\hat{\beta}_1 - \text{ value in null}}{se(\hat{\beta}_1)}
 ## 1 660.4138 659.2224 661.6052</code></pre>
 <p>We have 95% confidence that the average study time for students who take 5 courses is between 659.2223688 and 661.605187 minutes.</p>
 </div>
-<div id="pi-of-a-new-response" class="section level2" number="4.5">
+<div id="pi-of-a-new-response" class="section level2" number="2.5">
 <h2>
-<span class="header-section-number">4.5</span> PI of a New Response<a class="anchor" aria-label="anchor" href="#pi-of-a-new-response"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.5</span> PI of a New Response<a class="anchor" aria-label="anchor" href="#pi-of-a-new-response"><i class="fas fa-link"></i></a>
 </h2>
-<p>Previously, we found a CI for the mean of <span class="math inline">\(y\)</span> given a specific value of <span class="math inline">\(x\)</span>, <a href="inf.html#eq:4CImean">(4.12)</a>. This CI gives us an idea about the location of the regression line at a specific of <span class="math inline">\(x\)</span>.</p>
+<p>Previously, we found a CI for the mean of <span class="math inline">\(y\)</span> given a specific value of <span class="math inline">\(x\)</span>, <a href="inf.html#eq:4CImean">(2.12)</a>. This CI gives us an idea about the location of the regression line at a specific of <span class="math inline">\(x\)</span>.</p>
 <p>Instead, we may have interest in finding an interval for a new value of <span class="math inline">\(\hat{y}_0\)</span>, when we have a new observation <span class="math inline">\(x=x_0\)</span>. This is called a <strong>prediction interval (PI) for a future observation <span class="math inline">\(y_0\)</span> when the predictor is a specific value</strong>. This interval follows from the second interpretation of <span class="math inline">\(\hat{y}\)</span>.</p>
 <p>The PI for <span class="math inline">\(\hat{y}_0\)</span> takes into account:</p>
 <ol style="list-style-type: decimal">
 <li>Variation in location for the distribution of <span class="math inline">\(y\)</span> (i.e. where is the center of the distribution of <span class="math inline">\(y\)</span>?).</li>
 <li>Variation <strong>within the probability distribution of <span class="math inline">\(y\)</span></strong>.</li>
 </ol>
-<p>By comparison, the confidence interval for the mean response <a href="inf.html#eq:4CImean">(4.12)</a> only takes into account the first element. The PI is</p>
+<p>By comparison, the confidence interval for the mean response <a href="inf.html#eq:4CImean">(2.12)</a> only takes into account the first element. The PI is</p>
 <p><span class="math display" id="eq:4pred">\[\begin{equation}
 \hat{y}_0\pm t_{1-\alpha/2,n-2}s \sqrt{1+\frac{1}{n} +
 \frac{(x_0-\bar{x})^2}{\sum(x_i-\bar{x})^2}}.
-\tag{4.13}
+\tag{2.13}
 \end{equation}\]</span></p>
 <p>Going back to our study time example, suppose we have a newly enrolled student who wishes to take 5 courses, and the student wants to predict his study time</p>
-<div class="sourceCode" id="cb201"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##PI for y when x=5</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">result</span>, <span class="va">newdata</span>, level<span class="op">=</span><span class="fl">0.95</span>, interval<span class="op">=</span><span class="st">"prediction"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##        fit      lwr      upr
 ## 1 660.4138 602.0347 718.7928</code></pre>
 <p>We have 95% confidence that the study time for this student is between 602.0347305 and 718.7928253 minutes.</p>
-<div id="thought-questions-1" class="section level3" number="4.5.1">
+<div id="thought-questions-1" class="section level3" number="2.5.1">
 <h3>
-<span class="header-section-number">4.5.1</span> Thought questions<a class="anchor" aria-label="anchor" href="#thought-questions-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.5.1</span> Thought questions<a class="anchor" aria-label="anchor" href="#thought-questions-1"><i class="fas fa-link"></i></a>
 </h3>
 <ul>
 <li>
-<p>In the following two scenarios, decide if we are more interested in the CI for the mean response given the predictor <a href="inf.html#eq:4CImean">(4.12)</a>, or the PI for a future response given the predictor <a href="inf.html#eq:4pred">(4.13)</a>.</p>
+<p>In the following two scenarios, decide if we are more interested in the CI for the mean response given the predictor <a href="inf.html#eq:4CImean">(2.12)</a>, or the PI for a future response given the predictor <a href="inf.html#eq:4pred">(2.13)</a>.</p>
 <ul>
 <li><p>We wish to estimate the waiting time, on average, of DMV customers if there are 10 people in line at the DMV.</p></li>
 <li><p>I enter the DMV and notice 10 people in line. I want to estimate my waiting time.</p></li>
 </ul>
 </li>
-<li><p>Look at the standard errors associated with the intervals given in <a href="inf.html#eq:4CImean">(4.12)</a> and <a href="inf.html#eq:4pred">(4.13)</a>. How are they related to each other?</p></li>
+<li><p>Look at the standard errors associated with the intervals given in <a href="inf.html#eq:4CImean">(2.12)</a> and <a href="inf.html#eq:4pred">(2.13)</a>. How are they related to each other?</p></li>
 </ul>
 </div>
 </div>
-<div id="supplemental-notes-on-statistical-inference" class="section level2" number="4.6">
+<div id="supplemental-notes-on-statistical-inference" class="section level2" number="2.6">
 <h2>
-<span class="header-section-number">4.6</span> Supplemental Notes on Statistical Inference<a class="anchor" aria-label="anchor" href="#supplemental-notes-on-statistical-inference"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.6</span> Supplemental Notes on Statistical Inference<a class="anchor" aria-label="anchor" href="#supplemental-notes-on-statistical-inference"><i class="fas fa-link"></i></a>
 </h2>
-<div id="hypothesis-statements" class="section level3" number="4.6.1">
+<div id="hypothesis-statements" class="section level3" number="2.6.1">
 <h3>
-<span class="header-section-number">4.6.1</span> Hypothesis statements<a class="anchor" aria-label="anchor" href="#hypothesis-statements"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.6.1</span> Hypothesis statements<a class="anchor" aria-label="anchor" href="#hypothesis-statements"><i class="fas fa-link"></i></a>
 </h3>
 <p>Let’s consider a <span class="math inline">\(t\)</span> test for the regression parameter, <span class="math inline">\(\beta_1\)</span>. Depending on context, the following could be null and alternative hypotheses</p>
 <ul>
@@ -359,9 +349,9 @@ t = \frac{\hat{\beta}_1 - \text{ value in null}}{se(\hat{\beta}_1)}
 <li>Conclusions are made in terms of supporting (or not supporting) the alternative hypothesis.</li>
 </ol>
 </div>
-<div id="sample-size-and-statistical-inference" class="section level3" number="4.6.2">
+<div id="sample-size-and-statistical-inference" class="section level3" number="2.6.2">
 <h3>
-<span class="header-section-number">4.6.2</span> Sample size and statistical inference<a class="anchor" aria-label="anchor" href="#sample-size-and-statistical-inference"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.6.2</span> Sample size and statistical inference<a class="anchor" aria-label="anchor" href="#sample-size-and-statistical-inference"><i class="fas fa-link"></i></a>
 </h3>
 <p>Generally speaking, there is a relationship between sample size and statistical inference (assuming other characteristics remain the same and our sample was randomly obtained or representative of the population of interest):</p>
 <ul>
@@ -373,9 +363,9 @@ t = \frac{\hat{\beta}_1 - \text{ value in null}}{se(\hat{\beta}_1)}
 </ul>
 </li>
 </ul>
-<div id="small-sample-sizes" class="section level4" number="4.6.2.1">
+<div id="small-sample-sizes" class="section level4" number="2.6.2.1">
 <h4>
-<span class="header-section-number">4.6.2.1</span> Small sample sizes<a class="anchor" aria-label="anchor" href="#small-sample-sizes"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.6.2.1</span> Small sample sizes<a class="anchor" aria-label="anchor" href="#small-sample-sizes"><i class="fas fa-link"></i></a>
 </h4>
 <p>Small sample sizes tend to result in:</p>
 <ul>
@@ -385,9 +375,9 @@ t = \frac{\hat{\beta}_1 - \text{ value in null}}{se(\hat{\beta}_1)}
 </ul>
 <p>While larger sample sizes have their advantages, there are also some disadvantages with sample sizes that are extremely large.</p>
 </div>
-<div id="large-sample-sizes" class="section level4" number="4.6.2.2">
+<div id="large-sample-sizes" class="section level4" number="2.6.2.2">
 <h4>
-<span class="header-section-number">4.6.2.2</span> Large sample sizes<a class="anchor" aria-label="anchor" href="#large-sample-sizes"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.6.2.2</span> Large sample sizes<a class="anchor" aria-label="anchor" href="#large-sample-sizes"><i class="fas fa-link"></i></a>
 </h4>
 <p>A “statistically significant” result does not necessarily mean that the result has practical consequences. Suppose a 95% confidence interval for <span class="math inline">\(\beta_1\)</span> is <span class="math inline">\((0.001, 0.002)\)</span>. The interval excludes 0, so it is “statistically significantly” different from 0 (because it is!), but does this result have practical consequences? A narrow CI that barely excludes the null value can happen when we have a large sample size.</p>
 <p>If one was to conduct the corresponding hypothesis test, we would reject the null hypothesis that <span class="math inline">\(\beta_1 = 0\)</span>. With large sample sizes, hypothesis tests are sensitive to small departures from the null hypothesis.</p>
@@ -397,9 +387,9 @@ t = \frac{\hat{\beta}_1 - \text{ value in null}}{se(\hat{\beta}_1)}
 <li>Subject area knowledge to assess practical significance.</li>
 </ul>
 </div>
-<div id="questions" class="section level4" number="4.6.2.3">
+<div id="questions" class="section level4" number="2.6.2.3">
 <h4>
-<span class="header-section-number">4.6.2.3</span> Questions<a class="anchor" aria-label="anchor" href="#questions"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.6.2.3</span> Questions<a class="anchor" aria-label="anchor" href="#questions"><i class="fas fa-link"></i></a>
 </h4>
 <p>Are the following results statistically significant? If so, are the results also practically significant? Assume a two-sided test with a null value of 0 (These are made up examples):</p>
 <ol style="list-style-type: decimal">
@@ -408,18 +398,18 @@ t = \frac{\hat{\beta}_1 - \text{ value in null}}{se(\hat{\beta}_1)}
 </ol>
 </div>
 </div>
-<div id="cautions-using-slr-and-correlation" class="section level3" number="4.6.3">
+<div id="cautions-using-slr-and-correlation" class="section level3" number="2.6.3">
 <h3>
-<span class="header-section-number">4.6.3</span> Cautions using SLR and Correlation<a class="anchor" aria-label="anchor" href="#cautions-using-slr-and-correlation"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.6.3</span> Cautions using SLR and Correlation<a class="anchor" aria-label="anchor" href="#cautions-using-slr-and-correlation"><i class="fas fa-link"></i></a>
 </h3>
-<p>Simple linear regression and correlation are meant for assessing <strong>linear</strong> relationships. If the relationship is not linear, we will need to transform the variable(s) (so the transformed variables have a linear relationship. Will explore this in Module <a href="diag.html#diag">5</a>).</p>
+<p>Simple linear regression and correlation are meant for assessing <strong>linear</strong> relationships. If the relationship is not linear, we will need to transform the variable(s) (so the transformed variables have a linear relationship. Will explore this in Module <a href="#diag"><strong>??</strong></a>).</p>
 <ul>
 <li>Always verify via a scatterplot that the relationship is at least approximately linear.</li>
 <li>A high correlation or a significant estimated slope by themselves do not prove that we have a strong linear relationship between the variables. Conversely, a correlation close to 0 or an insignificant estimated slope is also not proof that we do not have a relationship between the variables.</li>
 </ul>
-<div id="outliers" class="section level4" number="4.6.3.1">
+<div id="outliers" class="section level4" number="2.6.3.1">
 <h4>
-<span class="header-section-number">4.6.3.1</span> Outliers<a class="anchor" aria-label="anchor" href="#outliers"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.6.3.1</span> Outliers<a class="anchor" aria-label="anchor" href="#outliers"><i class="fas fa-link"></i></a>
 </h4>
 <p>SLR and correlation are sensitive to outliers / influential observations. Generally speaking, these are data that are “far away” or very different from the rest of the observations. These data points can be visually inspected from a scatterplot. Some potential considerations when dealing with such data points:</p>
 <ul>
@@ -436,9 +426,9 @@ t = \frac{\hat{\beta}_1 - \text{ value in null}}{se(\hat{\beta}_1)}
 <li>Knowing your data and context can help a lot in these decisions.</li>
 </ul>
 </div>
-<div id="association-and-causation" class="section level4" number="4.6.3.2">
+<div id="association-and-causation" class="section level4" number="2.6.3.2">
 <h4>
-<span class="header-section-number">4.6.3.2</span> Association and causation<a class="anchor" aria-label="anchor" href="#association-and-causation"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.6.3.2</span> Association and causation<a class="anchor" aria-label="anchor" href="#association-and-causation"><i class="fas fa-link"></i></a>
 </h4>
 <p>Two correlated variables do not mean that one variable causes the other variable to change. For example, consider a plot of ice cream consumption and deaths by drowning during various months. There may be some positive correlation, and clearly, eating more ice cream does not cause more drownings. The correlation can be explained by a third (lurking) variable: the weather.</p>
 <p>A <strong>lurking variable</strong> is a variable that has an impact on the relationship between the variables being studied, but is itself not studied.</p>
@@ -449,9 +439,9 @@ t = \frac{\hat{\beta}_1 - \text{ value in null}}{se(\hat{\beta}_1)}
 </ul>
 <p>Lurking variables are always an issue with <strong>observational studies</strong>. Researchers in observational studies do not intervene with the observations and simply observe the data that the observations generate. Causal relationships are much more difficult to establish with observational studies.</p>
 </div>
-<div id="questions-1" class="section level4" number="4.6.3.3">
+<div id="questions-1" class="section level4" number="2.6.3.3">
 <h4>
-<span class="header-section-number">4.6.3.3</span> Questions<a class="anchor" aria-label="anchor" href="#questions-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.6.3.3</span> Questions<a class="anchor" aria-label="anchor" href="#questions-1"><i class="fas fa-link"></i></a>
 </h4>
 <ol style="list-style-type: decimal">
 <li><p>Consider the <code>palmerpenguins</code> dataset that we have been working on. The data contain size measurements for three different species of penguins on three islands in the Palmer Archipelago, Antarctica over three years. Is this an observational study or randomized experiment?</p></li>
@@ -461,12 +451,12 @@ t = \frac{\hat{\beta}_1 - \text{ value in null}}{se(\hat{\beta}_1)}
 </div>
 </div>
 </div>
-<div id="r-tutorial-1" class="section level2" number="4.7">
+<div id="r-tutorial-1" class="section level2" number="2.7">
 <h2>
-<span class="header-section-number">4.7</span> R Tutorial<a class="anchor" aria-label="anchor" href="#r-tutorial-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.7</span> R Tutorial<a class="anchor" aria-label="anchor" href="#r-tutorial-1"><i class="fas fa-link"></i></a>
 </h2>
 <p>For this tutorial, we will continue to work with the dataset <code>elmhurst</code> from the <code>openintro</code> package in R.</p>
-<div class="sourceCode" id="cb203"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://openintrostat.github.io/openintro/">openintro</a></span><span class="op">)</span></span>
 <span><span class="va">Data</span><span class="op">&lt;-</span><span class="fu">openintro</span><span class="fu">::</span><span class="va"><a href="https://openintrostat.github.io/openintro/reference/elmhurst.html">elmhurst</a></span></span></code></pre></div>
@@ -481,7 +471,7 @@ t = \frac{\hat{\beta}_1 - \text{ value in null}}{se(\hat{\beta}_1)}
 <h3>Hypothesis test for <span class="math inline">\(\beta_1\)</span> (and <span class="math inline">\(\beta_0\)</span>)<a class="anchor" aria-label="anchor" href="#hypothesis-test-for-beta_1-and-beta_0"><i class="fas fa-link"></i></a>
 </h3>
 <p>Applying the <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code> function to <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> gives the results of hypothesis tests for <span class="math inline">\(\beta_1\)</span> and <span class="math inline">\(\beta_0\)</span>:</p>
-<div class="sourceCode" id="cb204"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##Fit a regression model</span></span>
 <span><span class="va">result</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">gift_aid</span><span class="op">~</span><span class="va">family_income</span>, data<span class="op">=</span><span class="va">Data</span><span class="op">)</span></span>
 <span></span>
@@ -515,12 +505,12 @@ t = \frac{\hat{\beta}_1 - \text{ value in null}}{se(\hat{\beta}_1)}
 <li>the corresponding p-value is 2.2887345^{-4}</li>
 </ul>
 <p>You can work out the p-value using R (slight difference due to rounding):</p>
-<div class="sourceCode" id="cb206"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb57"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##pvalue</span></span>
 <span><span class="fl">2</span><span class="op">*</span><span class="fu"><a href="https://rdrr.io/r/stats/TDist.html">pt</a></span><span class="op">(</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="op">-</span><span class="fl">3.985</span><span class="op">)</span>, df <span class="op">=</span> <span class="fl">50</span><span class="op">-</span><span class="fl">2</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 0.0002285996</code></pre>
 <p>Or find the critical value using R:</p>
-<div class="sourceCode" id="cb208"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb59"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##critical value</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/TDist.html">qt</a></span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="fl">0.05</span><span class="op">/</span><span class="fl">2</span>, df <span class="op">=</span> <span class="fl">50</span><span class="op">-</span><span class="fl">2</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 2.010635</code></pre>
@@ -535,7 +525,7 @@ t = \frac{\hat{\beta}_1 - \text{ value in null}}{se(\hat{\beta}_1)}
 <h3>Confidence interval for <span class="math inline">\(\beta_1\)</span> (and <span class="math inline">\(\beta_0\)</span>)<a class="anchor" aria-label="anchor" href="#confidence-interval-for-beta_1-and-beta_0"><i class="fas fa-link"></i></a>
 </h3>
 <p>To find the 95% confidence intervals for the coefficients, we use the <code><a href="https://rdrr.io/r/stats/confint.html">confint()</a></code> function:</p>
-<div class="sourceCode" id="cb210"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb61"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##to produce 95% CIs for all regression coefficients</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/confint.html">confint</a></span><span class="op">(</span><span class="va">result</span>,level <span class="op">=</span> <span class="fl">0.95</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##                     2.5 %      97.5 %
@@ -547,7 +537,7 @@ t = \frac{\hat{\beta}_1 - \text{ value in null}}{se(\hat{\beta}_1)}
 <h3>Confidence interval for mean response for given x<a class="anchor" aria-label="anchor" href="#confidence-interval-for-mean-response-for-given-x"><i class="fas fa-link"></i></a>
 </h3>
 <p>Suppose we want a confidence interval for the average gift aid for Elmhurst College students with family income of 80 thousand dollars. We can use the <code><a href="https://rdrr.io/r/stats/predict.html">predict()</a></code> function:</p>
-<div class="sourceCode" id="cb212"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb63"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##to produce 95% CI for the mean response when x=80, </span></span>
 <span><span class="va">newdata</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>family_income<span class="op">=</span><span class="fl">80</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">result</span>,<span class="va">newdata</span>,level<span class="op">=</span><span class="fl">0.95</span>, interval<span class="op">=</span><span class="st">"confidence"</span><span class="op">)</span></span></code></pre></div>
@@ -559,7 +549,7 @@ t = \frac{\hat{\beta}_1 - \text{ value in null}}{se(\hat{\beta}_1)}
 <h3>Prediction interval for a response for a given x<a class="anchor" aria-label="anchor" href="#prediction-interval-for-a-response-for-a-given-x"><i class="fas fa-link"></i></a>
 </h3>
 <p>For a prediction interval for the gift aid of an Elmhurst College student with family income of 80 thousand dollars:</p>
-<div class="sourceCode" id="cb214"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb65"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##and the 95% PI for the response of an observation when x=80</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">result</span>,<span class="va">newdata</span>,level<span class="op">=</span><span class="fl">0.95</span>, interval<span class="op">=</span><span class="st">"prediction"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##       fit      lwr      upr
@@ -570,7 +560,7 @@ t = \frac{\hat{\beta}_1 - \text{ value in null}}{se(\hat{\beta}_1)}
 <h3>Visualization of CI for mean response given x and PI of response given x<a class="anchor" aria-label="anchor" href="#visualization-of-ci-for-mean-response-given-x-and-pi-of-response-given-x"><i class="fas fa-link"></i></a>
 </h3>
 <p>When using the <code><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot()</a></code> function to create a scatterplot, we can overlay the SLR equation by adding a layer via <code>geom_smooth(method = lm)</code>. By default, the CI for the mean response for each value of the predictor gets overlaid as well. In the previous tutorial, we removed this by adding <code>se=FALSE</code> inside <code><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth()</a></code>:</p>
-<div class="sourceCode" id="cb216"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb67"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##regular scatterplot</span></span>
 <span><span class="co">##with regression line overlaid, and bounds of CI for mean y</span></span>
 <span><span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">Data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">family_income</span>, y<span class="op">=</span><span class="va">gift_aid</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
@@ -580,15 +570,15 @@ t = \frac{\hat{\beta}_1 - \text{ value in null}}{se(\hat{\beta}_1)}
 <span>       y<span class="op">=</span><span class="st">"Gift Aid"</span>, </span>
 <span>       title<span class="op">=</span><span class="st">"Scatterplot of Gift Aid against Family Income"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## `geom_smooth()` using formula = 'y ~ x'</code></pre>
-<div class="inline-figure"><img src="bookdown-demo_files/figure-html/unnamed-chunk-147-1.png" width="672"></div>
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/unnamed-chunk-41-1.png" width="672"></div>
 <p>Overlaying prediction intervals require a bit more work. We need to compute the lower and upper bounds of the PI for each value of the predictor:</p>
-<div class="sourceCode" id="cb218"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb69"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##find PIs for each observation</span></span>
 <span><span class="va">preds</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">result</span>, interval<span class="op">=</span><span class="st">"prediction"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## Warning in predict.lm(result, interval = "prediction"): predictions on current data refer to _future_ responses</code></pre>
 <p>Previously, when we used the <code><a href="https://rdrr.io/r/stats/predict.html">predict()</a></code> function, we provided the numerical value of <span class="math inline">\(x\)</span> to make a prediction on. If this is not supplied, the function will use all the current values of <span class="math inline">\(x\)</span> to make predictions, and will actually print out a warning message. For our purpose, this is not an issue since this is exactly what we want.</p>
 <p>We then add <code>preds</code> to the data frame in order to overlay the lower and upper bounds on the scatterplot, by adding extra layers via <code><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line()</a></code> in the <code><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot()</a></code> function:</p>
-<div class="sourceCode" id="cb220"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb71"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##add preds to data frame</span></span>
 <span><span class="va">Data</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">Data</span>,<span class="va">preds</span><span class="op">)</span></span>
 <span></span>
@@ -602,44 +592,44 @@ t = \frac{\hat{\beta}_1 - \text{ value in null}}{se(\hat{\beta}_1)}
 <span>       y<span class="op">=</span><span class="st">"Gift Aid"</span>, </span>
 <span>       title<span class="op">=</span><span class="st">"Scatterplot of Gift Aid against Family Income"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## `geom_smooth()` using formula = 'y ~ x'</code></pre>
-<div class="inline-figure"><img src="bookdown-demo_files/figure-html/unnamed-chunk-149-1.png" width="672"></div>
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/unnamed-chunk-43-1.png" width="672"></div>
 <p>As mentioned in the notes, the CI captures the location of the regression line, whereas the PI captures the data points.</p>
 
 </div>
 </div>
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="slr.html"><span class="header-section-number">3</span> Basics with Simple Linear Regression (SLR)</a></div>
-<div class="next"><a href="diag.html"><span class="header-section-number">5</span> Model Diagnostics and Remedial Measures in SLR</a></div>
+<div class="prev"><a href="slr.html"><span class="header-section-number">1</span> Basics with Simple Linear Regression (SLR)</a></div>
+<div class="empty"></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#inf"><span class="header-section-number">4</span> Inference with Simple Linear Regression (SLR)</a></li>
+<li><a class="nav-link" href="#inf"><span class="header-section-number">2</span> Inference with Simple Linear Regression (SLR)</a></li>
 <li>
-<a class="nav-link" href="#introduction-3"><span class="header-section-number">4.1</span> Introduction</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#review-from-previous-module"><span class="header-section-number">4.1.1</span> Review from previous module</a></li></ul>
+<a class="nav-link" href="#introduction"><span class="header-section-number">2.1</span> Introduction</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#review-from-previous-module"><span class="header-section-number">2.1.1</span> Review from previous module</a></li></ul>
 </li>
 <li>
-<a class="nav-link" href="#hypothesis-testing-in-slr"><span class="header-section-number">4.2</span> Hypothesis Testing in SLR</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#distribution-of-least-squares-estimators"><span class="header-section-number">4.2.1</span> Distribution of least squares estimators</a></li>
-<li><a class="nav-link" href="#testing-regression-coefficients"><span class="header-section-number">4.2.2</span> Testing regression coefficients</a></li>
+<a class="nav-link" href="#hypothesis-testing-in-slr"><span class="header-section-number">2.2</span> Hypothesis Testing in SLR</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#distribution-of-least-squares-estimators"><span class="header-section-number">2.2.1</span> Distribution of least squares estimators</a></li>
+<li><a class="nav-link" href="#testing-regression-coefficients"><span class="header-section-number">2.2.2</span> Testing regression coefficients</a></li>
 </ul>
 </li>
 <li>
-<a class="nav-link" href="#confidence-intervals-for-regression-coefficients"><span class="header-section-number">4.3</span> Confidence Intervals for Regression Coefficients</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#thought-questions"><span class="header-section-number">4.3.1</span> Thought questions</a></li></ul>
+<a class="nav-link" href="#confidence-intervals-for-regression-coefficients"><span class="header-section-number">2.3</span> Confidence Intervals for Regression Coefficients</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#thought-questions"><span class="header-section-number">2.3.1</span> Thought questions</a></li></ul>
 </li>
-<li><a class="nav-link" href="#ci-of-the-mean-response"><span class="header-section-number">4.4</span> CI of the Mean Response</a></li>
+<li><a class="nav-link" href="#ci-of-the-mean-response"><span class="header-section-number">2.4</span> CI of the Mean Response</a></li>
 <li>
-<a class="nav-link" href="#pi-of-a-new-response"><span class="header-section-number">4.5</span> PI of a New Response</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#thought-questions-1"><span class="header-section-number">4.5.1</span> Thought questions</a></li></ul>
+<a class="nav-link" href="#pi-of-a-new-response"><span class="header-section-number">2.5</span> PI of a New Response</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#thought-questions-1"><span class="header-section-number">2.5.1</span> Thought questions</a></li></ul>
 </li>
 <li>
-<a class="nav-link" href="#supplemental-notes-on-statistical-inference"><span class="header-section-number">4.6</span> Supplemental Notes on Statistical Inference</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#hypothesis-statements"><span class="header-section-number">4.6.1</span> Hypothesis statements</a></li>
-<li><a class="nav-link" href="#sample-size-and-statistical-inference"><span class="header-section-number">4.6.2</span> Sample size and statistical inference</a></li>
-<li><a class="nav-link" href="#cautions-using-slr-and-correlation"><span class="header-section-number">4.6.3</span> Cautions using SLR and Correlation</a></li>
+<a class="nav-link" href="#supplemental-notes-on-statistical-inference"><span class="header-section-number">2.6</span> Supplemental Notes on Statistical Inference</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#hypothesis-statements"><span class="header-section-number">2.6.1</span> Hypothesis statements</a></li>
+<li><a class="nav-link" href="#sample-size-and-statistical-inference"><span class="header-section-number">2.6.2</span> Sample size and statistical inference</a></li>
+<li><a class="nav-link" href="#cautions-using-slr-and-correlation"><span class="header-section-number">2.6.3</span> Cautions using SLR and Correlation</a></li>
 </ul>
 </li>
 <li>
-<a class="nav-link" href="#r-tutorial-1"><span class="header-section-number">4.7</span> R Tutorial</a><ul class="nav navbar-nav">
+<a class="nav-link" href="#r-tutorial-1"><span class="header-section-number">2.7</span> R Tutorial</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#hypothesis-test-for-beta_1-and-beta_0">Hypothesis test for \(\beta_1\) (and \(\beta_0\))</a></li>
 <li><a class="nav-link" href="#confidence-interval-for-beta_1-and-beta_0">Confidence interval for \(\beta_1\) (and \(\beta_0\))</a></li>
 <li><a class="nav-link" href="#confidence-interval-for-mean-response-for-given-x">Confidence interval for mean response for given x</a></li>
@@ -663,7 +653,7 @@ t = \frac{\hat{\beta}_1 - \text{ value in null}}{se(\hat{\beta}_1)}
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Linear Models for Data Science</strong>" was written by Jeffrey Woo. It was last built on 2024-08-02.</p>
+    <p>"<strong>Linear Models for Data Science</strong>" was written by Jeffrey Woo. It was last built on 2025-06-09.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

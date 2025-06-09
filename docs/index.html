@@ -43,18 +43,8 @@
       <nav aria-label="Table of contents"><h2>Table of contents</h2>
         <ul class="book-toc list-unstyled">
 <li><a class="active" href="index.html">Preface</a></li>
-<li><a class="" href="wrangling.html"><span class="header-section-number">1</span> Data Wrangling with R</a></li>
-<li><a class="" href="viz.html"><span class="header-section-number">2</span> Data Visualization with R Using ggplot2</a></li>
-<li><a class="" href="slr.html"><span class="header-section-number">3</span> Basics with Simple Linear Regression (SLR)</a></li>
-<li><a class="" href="inf.html"><span class="header-section-number">4</span> Inference with Simple Linear Regression (SLR)</a></li>
-<li><a class="" href="diag.html"><span class="header-section-number">5</span> Model Diagnostics and Remedial Measures in SLR</a></li>
-<li><a class="" href="mlr.html"><span class="header-section-number">6</span> Multiple Linear Regression (MLR)</a></li>
-<li><a class="" href="genF.html"><span class="header-section-number">7</span> General Linear \(F\) Test and Multicollinearity</a></li>
-<li><a class="" href="cat.html"><span class="header-section-number">8</span> Categorical Predictors in MLR</a></li>
-<li><a class="" href="crit.html"><span class="header-section-number">9</span> Model Selection Criteria and Automated Search Procedures</a></li>
-<li><a class="" href="out.html"><span class="header-section-number">10</span> Analysis of Residuals in MLR</a></li>
-<li><a class="" href="logistic1.html"><span class="header-section-number">11</span> Logistic Regression</a></li>
-<li><a class="" href="logistic2.html"><span class="header-section-number">12</span> Logistic Regression 2</a></li>
+<li><a class="" href="slr.html"><span class="header-section-number">1</span> Basics with Simple Linear Regression (SLR)</a></li>
+<li><a class="" href="inf.html"><span class="header-section-number">2</span> Inference with Simple Linear Regression (SLR)</a></li>
 </ul>
 
         <div class="book-extra">
@@ -86,10 +76,10 @@
 </h2>
 <p>The chapters for the book is as follows:</p>
 <ul>
-<li><p>Chapters <a href="wrangling.html#wrangling">1</a> and <a href="viz.html#viz">2</a> focus on core R skills needed: data wrangling and data visualization. These are R skills needed to perform regression analysis.</p></li>
-<li><p>Chapters <a href="slr.html#slr">3</a>, <a href="inf.html#inf">4</a>, and <a href="diag.html#diag">5</a> cover simple linear regression (SLR). This is the simplest scenario in regression when we have one predictor and one response variable that is quantitative. We are using this scenario to be able to more clearly explain concepts in regression before moving into the more practical multiple linear regression (MLR), which involves multiple predictors.</p></li>
-<li><p>Chapters <a href="mlr.html#mlr">6</a> to <a href="out.html#out">10</a> cover multiple linear regression: when we have multiple predictors and one response variable that is quantitative.</p></li>
-<li><p>Chapters <a href="logistic1.html#logistic1">11</a> and <a href="logistic2.html#logistic2">12</a> cover logistic regression: when we have a response variable that is binary.</p></li>
+<li><p>Chapters <a href="#wrangling"><strong>??</strong></a> and <a href="#viz"><strong>??</strong></a> focus on core R skills needed: data wrangling and data visualization. These are R skills needed to perform regression analysis.</p></li>
+<li><p>Chapters <a href="slr.html#slr">1</a>, <a href="inf.html#inf">2</a>, and <a href="#diag"><strong>??</strong></a> cover simple linear regression (SLR). This is the simplest scenario in regression when we have one predictor and one response variable that is quantitative. We are using this scenario to be able to more clearly explain concepts in regression before moving into the more practical multiple linear regression (MLR), which involves multiple predictors.</p></li>
+<li><p>Chapters <a href="#mlr"><strong>??</strong></a> to <a href="#out"><strong>??</strong></a> cover multiple linear regression: when we have multiple predictors and one response variable that is quantitative.</p></li>
+<li><p>Chapters <a href="#logistic1"><strong>??</strong></a> and <a href="#logistic2"><strong>??</strong></a> cover logistic regression: when we have a response variable that is binary.</p></li>
 </ul>
 </div>
 <div id="how-to-use-this-book" class="section level2 unnumbered">
@@ -97,7 +87,7 @@
 </h2>
 <ul>
 <li><p>If you are using the provided R code from each chapter, please remember to clear your R environment whenever you move to a new chapter. This can be done by typing <code>rm(list = ls())</code>.</p></li>
-<li><p>For Chapters <a href="slr.html#slr">3</a> to <a href="logistic2.html#logistic2">12</a>, there is an R tutorial provided in the last section. You should also clear your R environment before running the code in the tutorials.</p></li>
+<li><p>For Chapters <a href="slr.html#slr">1</a> to <a href="#logistic2"><strong>??</strong></a>, there is an R tutorial provided in the last section. You should also clear your R environment before running the code in the tutorials.</p></li>
 <li>
 <p>Some additional resources are provided for students enrolled in STAT 6021. These include:</p>
 <ul>
@@ -135,7 +125,7 @@
 </div>
   <div class="chapter-nav">
 <div class="empty"></div>
-<div class="next"><a href="wrangling.html"><span class="header-section-number">1</span> Data Wrangling with R</a></div>
+<div class="next"><a href="slr.html"><span class="header-section-number">1</span> Basics with Simple Linear Regression (SLR)</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
@@ -162,7 +152,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Linear Models for Data Science</strong>" was written by Jeffrey Woo. It was last built on 2024-08-02.</p>
+    <p>"<strong>Linear Models for Data Science</strong>" was written by Jeffrey Woo. It was last built on 2025-06-09.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

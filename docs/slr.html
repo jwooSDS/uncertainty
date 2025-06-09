@@ -4,16 +4,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 3 Basics with Simple Linear Regression (SLR) | Linear Models for Data Science</title>
+<title>Chapter 1 Basics with Simple Linear Regression (SLR) | Linear Models for Data Science</title>
 <meta name="author" content="Jeffrey Woo">
-<meta name="description" content="3.1 Introduction We will start this module by introducing the simple linear regression model. Simple linear regression uses the term “simple,” because it concerns the study of only one predictor...">
+<meta name="description" content="1.1 Introduction HI!!!! We will start this module by introducing the simple linear regression model. Simple linear regression uses the term “simple,” because it concerns the study of only one...">
 <meta name="generator" content="bookdown 0.34 with bs4_book()">
-<meta property="og:title" content="Chapter 3 Basics with Simple Linear Regression (SLR) | Linear Models for Data Science">
+<meta property="og:title" content="Chapter 1 Basics with Simple Linear Regression (SLR) | Linear Models for Data Science">
 <meta property="og:type" content="book">
-<meta property="og:description" content="3.1 Introduction We will start this module by introducing the simple linear regression model. Simple linear regression uses the term “simple,” because it concerns the study of only one predictor...">
+<meta property="og:description" content="1.1 Introduction HI!!!! We will start this module by introducing the simple linear regression model. Simple linear regression uses the term “simple,” because it concerns the study of only one...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 3 Basics with Simple Linear Regression (SLR) | Linear Models for Data Science">
-<meta name="twitter:description" content="3.1 Introduction We will start this module by introducing the simple linear regression model. Simple linear regression uses the term “simple,” because it concerns the study of only one predictor...">
+<meta name="twitter:title" content="Chapter 1 Basics with Simple Linear Regression (SLR) | Linear Models for Data Science">
+<meta name="twitter:description" content="1.1 Introduction HI!!!! We will start this module by introducing the simple linear regression model. Simple linear regression uses the term “simple,” because it concerns the study of only one...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.2/transition.js"></script><script src="libs/bs3compat-0.4.2/tabs.js"></script><script src="libs/bs3compat-0.4.2/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -43,18 +43,8 @@
       <nav aria-label="Table of contents"><h2>Table of contents</h2>
         <ul class="book-toc list-unstyled">
 <li><a class="" href="index.html">Preface</a></li>
-<li><a class="" href="wrangling.html"><span class="header-section-number">1</span> Data Wrangling with R</a></li>
-<li><a class="" href="viz.html"><span class="header-section-number">2</span> Data Visualization with R Using ggplot2</a></li>
-<li><a class="active" href="slr.html"><span class="header-section-number">3</span> Basics with Simple Linear Regression (SLR)</a></li>
-<li><a class="" href="inf.html"><span class="header-section-number">4</span> Inference with Simple Linear Regression (SLR)</a></li>
-<li><a class="" href="diag.html"><span class="header-section-number">5</span> Model Diagnostics and Remedial Measures in SLR</a></li>
-<li><a class="" href="mlr.html"><span class="header-section-number">6</span> Multiple Linear Regression (MLR)</a></li>
-<li><a class="" href="genF.html"><span class="header-section-number">7</span> General Linear \(F\) Test and Multicollinearity</a></li>
-<li><a class="" href="cat.html"><span class="header-section-number">8</span> Categorical Predictors in MLR</a></li>
-<li><a class="" href="crit.html"><span class="header-section-number">9</span> Model Selection Criteria and Automated Search Procedures</a></li>
-<li><a class="" href="out.html"><span class="header-section-number">10</span> Analysis of Residuals in MLR</a></li>
-<li><a class="" href="logistic1.html"><span class="header-section-number">11</span> Logistic Regression</a></li>
-<li><a class="" href="logistic2.html"><span class="header-section-number">12</span> Logistic Regression 2</a></li>
+<li><a class="active" href="slr.html"><span class="header-section-number">1</span> Basics with Simple Linear Regression (SLR)</a></li>
+<li><a class="" href="inf.html"><span class="header-section-number">2</span> Inference with Simple Linear Regression (SLR)</a></li>
 </ul>
 
         <div class="book-extra">
@@ -62,31 +52,31 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="slr" class="section level1" number="3">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="slr" class="section level1" number="1">
 <h1>
-<span class="header-section-number">3</span> Basics with Simple Linear Regression (SLR)<a class="anchor" aria-label="anchor" href="#slr"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1</span> Basics with Simple Linear Regression (SLR)<a class="anchor" aria-label="anchor" href="#slr"><i class="fas fa-link"></i></a>
 </h1>
-<div id="introduction-2" class="section level2" number="3.1">
+<div id="introduction-hi" class="section level2" number="1.1">
 <h2>
-<span class="header-section-number">3.1</span> Introduction<a class="anchor" aria-label="anchor" href="#introduction-2"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.1</span> Introduction HI!!!!<a class="anchor" aria-label="anchor" href="#introduction-hi"><i class="fas fa-link"></i></a>
 </h2>
 <p>We will start this module by introducing the simple linear regression model. Simple linear regression uses the term “simple,” because it concerns the study of only one predictor variable with one quantitative response variable. In contrast, multiple linear regression, which we will study in future modules, uses the term “multiple,” because it concerns the study of two or more predictor variables with one quantitative response variable. We start with simple linear regression as it is much easier to visualize concepts in regression models when there is only one predictor variable.</p>
 <p>For the time being, we will only consider predictor variables that are quantitative. We will consider predictor variables that are categorical in future modules.</p>
 <p>The most common way of visualizing the relationship between one quantitative predictor variable and one quantitative response variable is with a scatter plot. In the simulated example below, we have data from 6000 UVa undergraduate students on the amount of time they spend studying in a week (in minutes), and how many courses they are taking in the semester (3 or 4 credit courses).</p>
-<div class="sourceCode" id="cb150"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##create dataframe</span></span>
 <span><span class="va">df</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">study</span>,<span class="va">courses</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">##fit regression</span></span>
 <span><span class="va">result</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">study</span><span class="op">~</span><span class="va">courses</span>, data<span class="op">=</span><span class="va">df</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb151"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##create scatterplot with regression line overlaid</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">courses</span>, <span class="va">df</span><span class="op">$</span><span class="va">study</span>, xlab<span class="op">=</span><span class="st">"# of Courses"</span>, ylab<span class="op">=</span><span class="st">"Study Time (Mins)"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></code></pre></div>
 <div class="figure">
 <span style="display:block;" id="fig:scatter-courses"></span>
 <img src="bookdown-demo_files/figure-html/scatter-courses-1.png" alt="Scatterplot of Study Time against Number of Courses Taken" width="672"><p class="caption">
-Figure 3.1: Scatterplot of Study Time against Number of Courses Taken
+Figure 1.1: Scatterplot of Study Time against Number of Courses Taken
 </p>
 </div>
 <p>Questions that we may have include:</p>
@@ -98,13 +88,13 @@ Figure 3.1: Scatterplot of Study Time against Number of Courses Taken
 </ul>
 <p>These questions can be answered using simple linear regression.</p>
 <p>Note that we will only be learning about models with just one response variable. We will not cover multivariate regression, which is used when there is more than one response variable. There may be some confusion between “multiple” linear regression and “multivariate” regression due to the closeness in terminology.</p>
-<div id="basic-ideas-with-statistics" class="section level3" number="3.1.1">
+<div id="basic-ideas-with-statistics" class="section level3" number="1.1.1">
 <h3>
-<span class="header-section-number">3.1.1</span> Basic Ideas with Statistics<a class="anchor" aria-label="anchor" href="#basic-ideas-with-statistics"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.1.1</span> Basic Ideas with Statistics<a class="anchor" aria-label="anchor" href="#basic-ideas-with-statistics"><i class="fas fa-link"></i></a>
 </h3>
-<div id="population-vs-sample" class="section level4" number="3.1.1.1">
+<div id="population-vs-sample" class="section level4" number="1.1.1.1">
 <h4>
-<span class="header-section-number">3.1.1.1</span> Population vs Sample<a class="anchor" aria-label="anchor" href="#population-vs-sample"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.1.1.1</span> Population vs Sample<a class="anchor" aria-label="anchor" href="#population-vs-sample"><i class="fas fa-link"></i></a>
 </h4>
 <p>Statistical methods are usually used to make inferences about the <strong>population</strong> based on information from a <strong>sample</strong>.</p>
 <ul>
@@ -113,9 +103,9 @@ Figure 3.1: Scatterplot of Study Time against Number of Courses Taken
 </ul>
 <p>In the study time example above, the population is all UVa undergraduate students, while the sample is the 6000 students that we have data on and are displayed on the scatterplot.</p>
 </div>
-<div id="parameters-vs-statistics" class="section level4" number="3.1.1.2">
+<div id="parameters-vs-statistics" class="section level4" number="1.1.1.2">
 <h4>
-<span class="header-section-number">3.1.1.2</span> Parameters vs Statistics<a class="anchor" aria-label="anchor" href="#parameters-vs-statistics"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.1.1.2</span> Parameters vs Statistics<a class="anchor" aria-label="anchor" href="#parameters-vs-statistics"><i class="fas fa-link"></i></a>
 </h4>
 <ul>
 <li>
@@ -134,9 +124,9 @@ Figure 3.1: Scatterplot of Study Time against Number of Courses Taken
 <p>It is important to pay attention to whether we are describing a statistic (a known value that can be calculated) or a parameter (an unknown value).</p>
 </div>
 </div>
-<div id="motivation" class="section level3" number="3.1.2">
+<div id="motivation" class="section level3" number="1.1.2">
 <h3>
-<span class="header-section-number">3.1.2</span> Motivation<a class="anchor" aria-label="anchor" href="#motivation"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.1.2</span> Motivation<a class="anchor" aria-label="anchor" href="#motivation"><i class="fas fa-link"></i></a>
 </h3>
 <p>Linear regression models generally have two primary uses:</p>
 <ol style="list-style-type: decimal">
@@ -160,9 +150,9 @@ y = f(x) + \epsilon,
 <li>a prediction example: a student intends to take 4 courses in the semester. What is this student’s predicted study time, on average?</li>
 <li>an association example: we want to see how taking more courses increases study time.</li>
 </ul>
-<div id="practice-questions" class="section level4" number="3.1.2.1">
+<div id="practice-questions" class="section level4" number="1.1.2.1">
 <h4>
-<span class="header-section-number">3.1.2.1</span> Practice questions<a class="anchor" aria-label="anchor" href="#practice-questions"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.1.2.1</span> Practice questions<a class="anchor" aria-label="anchor" href="#practice-questions"><i class="fas fa-link"></i></a>
 </h4>
 <p>In the examples below, are we using a regression model for prediction or for association?</p>
 <ol style="list-style-type: decimal">
@@ -174,9 +164,9 @@ y = f(x) + \epsilon,
 </div>
 </div>
 </div>
-<div id="simple-linear-regression-slr" class="section level2" number="3.2">
+<div id="simple-linear-regression-slr" class="section level2" number="1.2">
 <h2>
-<span class="header-section-number">3.2</span> Simple Linear Regression (SLR)<a class="anchor" aria-label="anchor" href="#simple-linear-regression-slr"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.2</span> Simple Linear Regression (SLR)<a class="anchor" aria-label="anchor" href="#simple-linear-regression-slr"><i class="fas fa-link"></i></a>
 </h2>
 <p>In simple linear regression (SLR), the function <span class="math inline">\(f\)</span> that relates the predictor variable with the response variable is typically <span class="math inline">\(\beta_0 + \beta_1 x\)</span>. Mathematically, we express this as</p>
 <p><span class="math display">\[
@@ -186,7 +176,7 @@ y \approx \beta_0 + \beta_1 x,
 <p>In SLR, this relationship is more explicitly formulated as the <strong>simple linear regression equation</strong>:</p>
 <p><span class="math display" id="eq:SLR">\[\begin{equation}
 E(y|x)=\beta_0+\beta_{1}x.
-\tag{3.1}
+\tag{1.1}
 \end{equation}\]</span></p>
 <ul>
 <li><p><span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> are parameters in the SLR equation, and we want to estimate them.</p></li>
@@ -194,7 +184,7 @@ E(y|x)=\beta_0+\beta_{1}x.
 <li><p><span class="math inline">\(\beta_1\)</span> is also called the <strong>slope. It denotes the change in <span class="math inline">\(y\)</span>, on average, when <span class="math inline">\(x\)</span> increases by one unit.</strong></p></li>
 <li><p><span class="math inline">\(\beta_0\)</span> is also called the <strong>intercept. It denotes the average of <span class="math inline">\(y\)</span> when <span class="math inline">\(x=0\)</span>.</strong></p></li>
 <li>
-<p>The notation on the left hand side of <a href="slr.html#eq:SLR">(3.1)</a> denotes the <strong>expected value</strong> of the response variable, for a fixed value of the predictor variable. What <a href="slr.html#eq:SLR">(3.1)</a> implies is that, for each value of the predictor variable <span class="math inline">\(x\)</span>, the expected value of the response variable <span class="math inline">\(y\)</span> is <span class="math inline">\(\beta_0+\beta_{1}x\)</span>. The expected value is also the population mean. Applying <a href="slr.html#eq:SLR">(3.1)</a> to our study time example, it implies that:</p>
+<p>The notation on the left hand side of <a href="slr.html#eq:SLR">(1.1)</a> denotes the <strong>expected value</strong> of the response variable, for a fixed value of the predictor variable. What <a href="slr.html#eq:SLR">(1.1)</a> implies is that, for each value of the predictor variable <span class="math inline">\(x\)</span>, the expected value of the response variable <span class="math inline">\(y\)</span> is <span class="math inline">\(\beta_0+\beta_{1}x\)</span>. The expected value is also the population mean. Applying <a href="slr.html#eq:SLR">(1.1)</a> to our study time example, it implies that:</p>
 <ul>
 <li>for students who take 3 courses, their expected study time is equal to <span class="math inline">\(\beta_0 + 3\beta_1\)</span>,</li>
 <li>for students who take 4 courses, their expected study time is equal to <span class="math inline">\(\beta_0 + 4\beta_1\)</span>,</li>
@@ -205,7 +195,7 @@ E(y|x)=\beta_0+\beta_{1}x.
 <p>So <span class="math inline">\(f(x) = \beta_0 + \beta_1x\)</span> gives us the value of the expected value of the response variable for a specific value of the predictor variable. But, for each value of the predictor variable, the value of the response variable is not a constant. We say that for each value of <span class="math inline">\(x\)</span>, the response variable <span class="math inline">\(y\)</span> has some variance. The variance of the response variable for each value of <span class="math inline">\(x\)</span> is the same as the variance of the error term, <span class="math inline">\(\epsilon\)</span>. Thus we have the <strong>simple linear regression model</strong></p>
 <p><span class="math display" id="eq:SLRmod">\[\begin{equation}
 y=\beta_0+\beta_{1} x + \epsilon.
-\tag{3.2}
+\tag{1.2}
 \end{equation}\]</span></p>
 <p>We need to make some assumptions for the error term <span class="math inline">\(\epsilon\)</span>. Generally, the assumptions are:</p>
 <ol style="list-style-type: decimal">
@@ -214,8 +204,8 @@ y=\beta_0+\beta_{1} x + \epsilon.
 <li>The errors are independent.</li>
 <li>The errors are normally distributed.</li>
 </ol>
-<p>From <a href="slr.html#eq:SLRmod">(3.2)</a>, notice we have another parameter, <span class="math inline">\(\sigma^2\)</span>.</p>
-<p>We will go into more detail about what these assumptions mean, and how to assess whether they are met, in module <a href="diag.html#diag">5</a>.</p>
+<p>From <a href="slr.html#eq:SLRmod">(1.2)</a>, notice we have another parameter, <span class="math inline">\(\sigma^2\)</span>.</p>
+<p>We will go into more detail about what these assumptions mean, and how to assess whether they are met, in module <a href="#diag"><strong>??</strong></a>.</p>
 <p>What these assumptions mean is that for each value of the predictor variable <span class="math inline">\(x\)</span>, the response variable:</p>
 <ol style="list-style-type: decimal">
 <li>follows a normal distribution,</li>
@@ -230,43 +220,43 @@ y=\beta_0+\beta_{1} x + \epsilon.
 </ul>
 <p>So if we were to subset our dataframe into three subsets, one with students who take 3 courses, another subset for students who take 4 courses, and another subset for students who take 5 courses, and then create a density plot of study times for each subset, each density plot should follow a normal distribution, with different means, and the same spread.</p>
 <p>Let us take a look at these density plots next.</p>
-<div class="sourceCode" id="cb152"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb153"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##subset dataframe</span></span>
 <span><span class="va">x.3</span><span class="op">&lt;-</span><span class="va">df</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">courses</span><span class="op">==</span><span class="fl">3</span><span class="op">)</span>,<span class="op">]</span></span>
 <span><span class="co">##density plot of study time for students taking 3 courses</span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">x.3</span>,<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">study</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_density.html">geom_density</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x<span class="op">=</span><span class="st">"Study Time (Mins)"</span>, title<span class="op">=</span><span class="st">"Dist of Study Times with 3 Courses"</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="bookdown-demo_files/figure-html/unnamed-chunk-111-1.png" width="672"></div>
-<div class="sourceCode" id="cb154"><pre class="downlit sourceCode r">
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/unnamed-chunk-5-1.png" width="672"></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##subset dataframe</span></span>
 <span><span class="va">x.4</span><span class="op">&lt;-</span><span class="va">df</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">courses</span><span class="op">==</span><span class="fl">4</span><span class="op">)</span>,<span class="op">]</span></span>
 <span><span class="co">##density plot of study time for students taking 4 courses</span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">x.4</span>,<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">study</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_density.html">geom_density</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x<span class="op">=</span><span class="st">"Study Time (Mins)"</span>, title<span class="op">=</span><span class="st">"Dist of Study Times with 4 Courses"</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="bookdown-demo_files/figure-html/unnamed-chunk-111-2.png" width="672"></div>
-<div class="sourceCode" id="cb155"><pre class="downlit sourceCode r">
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/unnamed-chunk-5-2.png" width="672"></div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##subset dataframe</span></span>
 <span><span class="va">x.5</span><span class="op">&lt;-</span><span class="va">df</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">courses</span><span class="op">==</span><span class="fl">5</span><span class="op">)</span>,<span class="op">]</span></span>
 <span><span class="co">##density plot of study time for students taking 5 courses</span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">x.5</span>,<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">study</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_density.html">geom_density</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x<span class="op">=</span><span class="st">"Study Time (Mins)"</span>, title<span class="op">=</span><span class="st">"Dist of Study Times with 5 Courses"</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="bookdown-demo_files/figure-html/unnamed-chunk-111-3.png" width="672"></div>
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/unnamed-chunk-5-3.png" width="672"></div>
 <p>Notice all of these plots are normal, with different means (centers), and similar spreads.</p>
 <p><em>Please see the associated video for more explanation about the distribution of the response variable, for each value of the predictor variable, in an SLR setting.</em></p>
 </div>
-<div id="estimating-regression-coefficients-in-slr" class="section level2" number="3.3">
+<div id="estimating-regression-coefficients-in-slr" class="section level2" number="1.3">
 <h2>
-<span class="header-section-number">3.3</span> Estimating Regression Coefficients in SLR<a class="anchor" aria-label="anchor" href="#estimating-regression-coefficients-in-slr"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.3</span> Estimating Regression Coefficients in SLR<a class="anchor" aria-label="anchor" href="#estimating-regression-coefficients-in-slr"><i class="fas fa-link"></i></a>
 </h2>
-<p>From <a href="slr.html#eq:SLR">(3.1)</a> and <a href="slr.html#eq:SLRmod">(3.2)</a>, we noted that we have to estimate the regression coefficients <span class="math inline">\(\beta_0, \beta_1\)</span> as well as the parameter <span class="math inline">\(\sigma^2\)</span> associated with the error term. As mentioned earlier, we are unable to obtain numerical values of these parameters as we do not have data from the entire population. So what we do is use the data from our sample to estimate these parameters.</p>
+<p>From <a href="slr.html#eq:SLR">(1.1)</a> and <a href="slr.html#eq:SLRmod">(1.2)</a>, we noted that we have to estimate the regression coefficients <span class="math inline">\(\beta_0, \beta_1\)</span> as well as the parameter <span class="math inline">\(\sigma^2\)</span> associated with the error term. As mentioned earlier, we are unable to obtain numerical values of these parameters as we do not have data from the entire population. So what we do is use the data from our sample to estimate these parameters.</p>
 <p>We estimate <span class="math inline">\(\beta_0,\beta_1\)</span> using <span class="math inline">\(\hat{\beta}_0,\hat{\beta}_1\)</span> based on a sample of observations <span class="math inline">\((x_i,y_i)\)</span> of size <span class="math inline">\(n\)</span>.</p>
 <p>The subscripts associated with the response and predictor variables denote which data point that value belongs to. Let us take a look at the first few rows of the data frame for the study time example:</p>
-<div class="sourceCode" id="cb156"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##      study courses
 ## 1 429.8311       3
@@ -276,51 +266,51 @@ y=\beta_0+\beta_{1} x + \epsilon.
 ## 5 397.9856       3
 ## 6 405.7145       3</code></pre>
 <p>For example, <span class="math inline">\(x_1\)</span> denotes the number of courses taken by student number 1 in the dataframe, which is 3. <span class="math inline">\(y_4\)</span> denotes the study time for student number 4 in the dataframe, which is 378.0196456.</p>
-<p>Following <a href="slr.html#eq:SLR">(3.1)</a> and <a href="slr.html#eq:SLRmod">(3.2)</a>, the sample versions are</p>
+<p>Following <a href="slr.html#eq:SLR">(1.1)</a> and <a href="slr.html#eq:SLRmod">(1.2)</a>, the sample versions are</p>
 <p><span class="math display" id="eq:fitted">\[\begin{equation}
 \hat{y}=\hat{\beta}_0+\hat{\beta}_1 x
-\tag{3.3}
+\tag{1.3}
 \end{equation}\]</span></p>
 <p>and</p>
 <p><span class="math display" id="eq:fitted-model">\[\begin{equation}
 y=\hat{\beta}_0+\hat{\beta}_1 x + e
-\tag{3.4}
+\tag{1.4}
 \end{equation}\]</span></p>
-<p>respectively. <a href="slr.html#eq:fitted">(3.3)</a> is called the <strong>estimated SLR equation</strong>, or <strong>fitted SLR equation</strong>. <a href="slr.html#eq:fitted-model">(3.4)</a> is called the <strong>estimated SLR model</strong>.</p>
+<p>respectively. <a href="slr.html#eq:fitted">(1.3)</a> is called the <strong>estimated SLR equation</strong>, or <strong>fitted SLR equation</strong>. <a href="slr.html#eq:fitted-model">(1.4)</a> is called the <strong>estimated SLR model</strong>.</p>
 <p><span class="math inline">\(\hat{\beta}_1,\hat{\beta}_0\)</span> are the estimators for <span class="math inline">\(\beta_1,\beta_0\)</span> respectively. These estimators can be interpreted in the following manner:</p>
 <ul>
 <li><strong><span class="math inline">\(\hat{\beta}_1\)</span> denotes the change in the predicted <span class="math inline">\(y\)</span> when <span class="math inline">\(x\)</span> increases by 1 unit. Alternatively, it denotes the change in <span class="math inline">\(y\)</span>, on average, when <span class="math inline">\(x\)</span> increases by 1 unit.</strong></li>
 <li><strong><span class="math inline">\(\hat{\beta}_0\)</span> denotes the predicted <span class="math inline">\(y\)</span> when <span class="math inline">\(x=0\)</span>. Alternatively, it denotes the average of <span class="math inline">\(y\)</span> when <span class="math inline">\(x=0\)</span>.</strong></li>
 </ul>
-<p>From <a href="slr.html#eq:fitted-model">(3.4)</a>, notice we use <strong><span class="math inline">\(e\)</span> to denote the residual</strong>, or in other words, the “error” in the sample.</p>
-<p>From <a href="slr.html#eq:fitted">(3.3)</a> and <a href="slr.html#eq:fitted-model">(3.4)</a>, we have the following quantities that we can compute:</p>
+<p>From <a href="slr.html#eq:fitted-model">(1.4)</a>, notice we use <strong><span class="math inline">\(e\)</span> to denote the residual</strong>, or in other words, the “error” in the sample.</p>
+<p>From <a href="slr.html#eq:fitted">(1.3)</a> and <a href="slr.html#eq:fitted-model">(1.4)</a>, we have the following quantities that we can compute:</p>
 <p><span class="math display" id="eq:fits">\[\begin{equation}
 \text{Predicted/Fitted values: } \hat{y}_i = \hat{\beta}_0+\hat{\beta}_1 x_i.
-\tag{3.5}
+\tag{1.5}
 \end{equation}\]</span></p>
 <p><span class="math display" id="eq:res">\[\begin{equation}
 \text{Residuals: } e_i = y_i-\hat{y}_i.
-\tag{3.6}
+\tag{1.6}
 \end{equation}\]</span></p>
 <p><span class="math display" id="eq:SSres">\[\begin{equation}
 \text{Sum of Squared Residuals: } SS_{res} =  \sum\limits_{i=1}^n(y_i-\hat{y}_i)^2.
-\tag{3.7}
+\tag{1.7}
 \end{equation}\]</span></p>
-<p>We compute the estimated coefficients <span class="math inline">\(\hat{\beta}_1,\hat{\beta}_0\)</span> using the <strong>method of least squares</strong>, i.e. choose the numerical values of <span class="math inline">\(\hat{\beta}_1,\hat{\beta}_0\)</span> that minimize <span class="math inline">\(SS_{res}\)</span> as given in <a href="slr.html#eq:SSres">(3.7)</a>.</p>
+<p>We compute the estimated coefficients <span class="math inline">\(\hat{\beta}_1,\hat{\beta}_0\)</span> using the <strong>method of least squares</strong>, i.e. choose the numerical values of <span class="math inline">\(\hat{\beta}_1,\hat{\beta}_0\)</span> that minimize <span class="math inline">\(SS_{res}\)</span> as given in <a href="slr.html#eq:SSres">(1.7)</a>.</p>
 <p>By minimizing <span class="math inline">\(SS_{res}\)</span> with respect to <span class="math inline">\(\hat{\beta}_0\)</span> and <span class="math inline">\(\hat{\beta}_1\)</span>, the estimated coefficients in the simple linear regression equation are</p>
 <p><span class="math display" id="eq:b1">\[\begin{equation}
 \hat{\beta}_1 = \frac{\sum\limits_{i=1}^n(x_i-\bar{x})(y_i-\bar{y})}{\sum\limits_{i=1}^n(x_i-\bar{x})^2}
-\tag{3.8}
+\tag{1.8}
 \end{equation}\]</span></p>
 <p>and</p>
 <p><span class="math display" id="eq:b0">\[\begin{equation}
 \hat{\beta}_0 = \bar{y}- \hat{\beta}_1 \bar{x}
-\tag{3.9}
+\tag{1.9}
 \end{equation}\]</span></p>
 <p><span class="math inline">\(\hat{\beta}_1, \hat{\beta}_0\)</span> are called <strong>least squares estimators</strong>.</p>
-<p>The minimization of <span class="math inline">\(SS_{res}\)</span> with respect to <span class="math inline">\(\hat{\beta}_0\)</span> and <span class="math inline">\(\hat{\beta}_1\)</span> is done by taking the partial derivatives of <a href="slr.html#eq:SSres">(3.7)</a> with respect to <span class="math inline">\(\hat{\beta}_1\)</span> and <span class="math inline">\(\hat{\beta}_0\)</span>, setting these two partial derivatives equal to 0, and solving these two equations for <span class="math inline">\(\hat{\beta}_1\)</span> and <span class="math inline">\(\hat{\beta}_0\)</span>.</p>
+<p>The minimization of <span class="math inline">\(SS_{res}\)</span> with respect to <span class="math inline">\(\hat{\beta}_0\)</span> and <span class="math inline">\(\hat{\beta}_1\)</span> is done by taking the partial derivatives of <a href="slr.html#eq:SSres">(1.7)</a> with respect to <span class="math inline">\(\hat{\beta}_1\)</span> and <span class="math inline">\(\hat{\beta}_0\)</span>, setting these two partial derivatives equal to 0, and solving these two equations for <span class="math inline">\(\hat{\beta}_1\)</span> and <span class="math inline">\(\hat{\beta}_0\)</span>.</p>
 <p>Let’s take a look at the estimated coefficients for our study time example:</p>
-<div class="sourceCode" id="cb158"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##fit regression</span></span>
 <span><span class="va">result</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">study</span><span class="op">~</span><span class="va">courses</span>, data<span class="op">=</span><span class="va">df</span><span class="op">)</span></span>
 <span><span class="co">##print out the estimated coefficients</span></span>
@@ -340,22 +330,22 @@ y=\hat{\beta}_0+\hat{\beta}_1 x + e
 <span class="math inline">\(\hat{\beta}_0\)</span> = 58.4482853. The predicted study time is 58.4482853 when no courses are taken. Notice this value does not make sense, as a student cannot be taking 0 courses. If you look at our data, the number of courses taken is 3, 4, or 5. So we should only use our regression when <span class="math inline">\(3 \leq x \leq 5\)</span>. We cannot use it for values of <span class="math inline">\(x\)</span> outside the range of our data. Making predictions of the response variable for predictors outside the range of the data is called <strong>extrapolation</strong> and should not be done.</li>
 </ul>
 </div>
-<div id="estimating-variance-of-errors-in-slr" class="section level2" number="3.4">
+<div id="estimating-variance-of-errors-in-slr" class="section level2" number="1.4">
 <h2>
-<span class="header-section-number">3.4</span> Estimating Variance of Errors in SLR<a class="anchor" aria-label="anchor" href="#estimating-variance-of-errors-in-slr"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.4</span> Estimating Variance of Errors in SLR<a class="anchor" aria-label="anchor" href="#estimating-variance-of-errors-in-slr"><i class="fas fa-link"></i></a>
 </h2>
 <p>The estimator of <span class="math inline">\(\sigma^2\)</span>, the variance of the error terms (also the variance of the probability distribution of <span class="math inline">\(y\)</span> given <span class="math inline">\(x\)</span>) is
 <span class="math display" id="eq:variance">\[\begin{equation}
 s^2 = MS_{res} = \frac{SS_{res}}{n-2} = \frac{\sum\limits_{i=1}^n e_i^2}{n-2},
-\tag{3.10}
+\tag{1.10}
 \end{equation}\]</span></p>
 <p>where <span class="math inline">\(MS_{res}\)</span> is the called the <strong>mean squared residuals</strong>.</p>
 <p><span class="math inline">\(\sigma^2\)</span>, the variance of the error terms, measures the spread of the response variable, for each value of <span class="math inline">\(x\)</span>. The smaller this is, the closer the data points are to the regression equation.</p>
-<div id="practice-questions-1" class="section level3" number="3.4.1">
+<div id="practice-questions-1" class="section level3" number="1.4.1">
 <h3>
-<span class="header-section-number">3.4.1</span> Practice questions<a class="anchor" aria-label="anchor" href="#practice-questions-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.4.1</span> Practice questions<a class="anchor" aria-label="anchor" href="#practice-questions-1"><i class="fas fa-link"></i></a>
 </h3>
-<p>Take a look at the scatterplot of study time against number of courses taken, Figure <a href="slr.html#fig:scatter-courses">3.1</a>. On this plot, label the following:</p>
+<p>Take a look at the scatterplot of study time against number of courses taken, Figure <a href="slr.html#fig:scatter-courses">1.1</a>. On this plot, label the following:</p>
 <ul>
 <li>estimated SLR equation</li>
 <li>the fitted value when <span class="math inline">\(x=3\)</span>, <span class="math inline">\(x=4\)</span>, and <span class="math inline">\(x=5\)</span>.</li>
@@ -364,31 +354,31 @@ s^2 = MS_{res} = \frac{SS_{res}}{n-2} = \frac{\sum\limits_{i=1}^n e_i^2}{n-2},
 <p><em>Try these on your own first, then view the associated video to see if you labeled the plot correctly!</em></p>
 </div>
 </div>
-<div id="assessing-linear-association" class="section level2" number="3.5">
+<div id="assessing-linear-association" class="section level2" number="1.5">
 <h2>
-<span class="header-section-number">3.5</span> Assessing Linear Association<a class="anchor" aria-label="anchor" href="#assessing-linear-association"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.5</span> Assessing Linear Association<a class="anchor" aria-label="anchor" href="#assessing-linear-association"><i class="fas fa-link"></i></a>
 </h2>
 <p>As noted earlier, the variance of the error terms inform us how close the data points are to the estimated SLR equation. The smaller the variance of the error terms, the closer the data points are to the estimated SLR equation. This in turn implies the linear relationship between the variables is stronger.</p>
 <p>We will learn about some common measures that are used to quantify the strength of the linear relationship between the response and predictor variables. Before we do that, we need to define some other terms.</p>
-<div id="sum-of-squares" class="section level3" number="3.5.1">
+<div id="sum-of-squares" class="section level3" number="1.5.1">
 <h3>
-<span class="header-section-number">3.5.1</span> Sum of squares<a class="anchor" aria-label="anchor" href="#sum-of-squares"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.5.1</span> Sum of squares<a class="anchor" aria-label="anchor" href="#sum-of-squares"><i class="fas fa-link"></i></a>
 </h3>
 <p><span class="math display" id="eq:SST">\[\begin{equation}
 \text{Total Sum of Squares: } SS_T = \sum\limits_{i=1}^{n} (y_i - \bar{y})^{2}.
-\tag{3.11}
+\tag{1.11}
 \end{equation}\]</span></p>
 <p>Total sum of squares is defined as the <strong>total variance in the response variable</strong>. The larger this value is, the larger the spread is of the response variable.</p>
 <p><span class="math display" id="eq:SSR">\[\begin{equation}
 \text{Regression sum of squares: } SS_R = \sum\limits_{i=1}^{n} (\hat{y_i} - \bar{y})^{2}.
-\tag{3.12}
+\tag{1.12}
 \end{equation}\]</span></p>
 <p>Regression sum of squares is defined as the <strong>variance in the response variable that can be explained by our regression</strong>.</p>
-<p>We also have residual sum of squares, <span class="math inline">\(SS_{res}\)</span>. Its mathematical formulation is given in <a href="slr.html#eq:SSres">(3.7)</a>. It is defined as the <strong>variance in the response variable that cannot be explained by our regression</strong>.</p>
+<p>We also have residual sum of squares, <span class="math inline">\(SS_{res}\)</span>. Its mathematical formulation is given in <a href="slr.html#eq:SSres">(1.7)</a>. It is defined as the <strong>variance in the response variable that cannot be explained by our regression</strong>.</p>
 <p>It can be shown that</p>
 <p><span class="math display" id="eq:SS">\[\begin{equation}
 SS_T = SS_R + SS_{res}.
-\tag{3.13}
+\tag{1.13}
 \end{equation}\]</span></p>
 <p>Each of the sums of squares has its associated <strong>degrees of freedom (df)</strong>:</p>
 <ul>
@@ -401,9 +391,9 @@ SS_T = SS_R + SS_{res}.
 </ul>
 <p><em>Please see the associated video for more explanation about the concept behind degrees of freedom.</em></p>
 </div>
-<div id="anova-table" class="section level3" number="3.5.2">
+<div id="anova-table" class="section level3" number="1.5.2">
 <h3>
-<span class="header-section-number">3.5.2</span> ANOVA Table<a class="anchor" aria-label="anchor" href="#anova-table"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.5.2</span> ANOVA Table<a class="anchor" aria-label="anchor" href="#anova-table"><i class="fas fa-link"></i></a>
 </h3>
 <p>Information regarding the sums of squares is usually presented in the form of an <strong>ANOVA (analysis of variance) table</strong>:</p>
 <div class="inline-table"><table class="table table-sm">
@@ -451,7 +441,7 @@ SS_T = SS_R + SS_{res}.
 <li>In the last column, we report an <span class="math inline">\(F\)</span> statistic, which equal to <span class="math inline">\(\frac{MS_R}{MS_{res}}\)</span>. This <span class="math inline">\(F\)</span> statistic is associated with an <strong>ANOVA F test</strong>, which we will look at in more detail in the next subsection.</li>
 </ul>
 <p>To obtain the ANOVA table for our study time example:</p>
-<div class="sourceCode" id="cb160"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## Analysis of Variance Table
 ## 
@@ -463,9 +453,9 @@ SS_T = SS_R + SS_{res}.
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <p>Notice that R does not print out the information for the line regarding <span class="math inline">\(SS_T\)</span>.</p>
 </div>
-<div id="anova-f-test" class="section level3" number="3.5.3">
+<div id="anova-f-test" class="section level3" number="1.5.3">
 <h3>
-<span class="header-section-number">3.5.3</span> ANOVA <span class="math inline">\(F\)</span> Test<a class="anchor" aria-label="anchor" href="#anova-f-test"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.5.3</span> ANOVA <span class="math inline">\(F\)</span> Test<a class="anchor" aria-label="anchor" href="#anova-f-test"><i class="fas fa-link"></i></a>
 </h3>
 <p>In SLR, the ANOVA <span class="math inline">\(F\)</span> statistic from the ANOVA table can be used to test if the slope of the SLR equation is 0 or not. In words, this means that whether there is a linear association between the variables or not. If the slope is 0, it means that changes in the value of the predictor variable do not change the value of the response variable, on average; hence the variables are not linearly associated.</p>
 <p>The null and alternative hypotheses are:</p>
@@ -475,23 +465,23 @@ H_0: \beta_1 = 0, H_a: \beta_1 \neq 0.
 The test statistic is</p>
 <p><span class="math display" id="eq:ANOVA">\[\begin{equation}
 F = \frac{MS_R}{MS_{res}}
-\tag{3.14}
+\tag{1.14}
 \end{equation}\]</span></p>
 <p>and is compared with an <span class="math inline">\(F_{1,n-2}\)</span> distribution. Note that <span class="math inline">\(F_{1,n-2}\)</span> is read as an <strong>F distribution with 1 and <span class="math inline">\(n-2\)</span> degrees of freedom</strong>.</p>
 <p>Going back to the study time example, the <span class="math inline">\(F\)</span> statistic is 6.5403586^{4}. The critical value can be found using</p>
-<div class="sourceCode" id="cb162"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Fdist.html">qf</a></span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="fl">0.05</span>, <span class="fl">1</span>, <span class="fl">6000</span><span class="op">-</span><span class="fl">2</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 3.84301</code></pre>
 <p>Since our test statistic is larger than the critical value, we reject the null hypothesis. Our data support the claim that the slope is different from 0, or in other words, that there is a linear association between study time and number of courses taken.</p>
 </div>
-<div id="coefficient-of-determination" class="section level3" number="3.5.4">
+<div id="coefficient-of-determination" class="section level3" number="1.5.4">
 <h3>
-<span class="header-section-number">3.5.4</span> Coefficient of determination<a class="anchor" aria-label="anchor" href="#coefficient-of-determination"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.5.4</span> Coefficient of determination<a class="anchor" aria-label="anchor" href="#coefficient-of-determination"><i class="fas fa-link"></i></a>
 </h3>
 <p>The <strong>coefficient of determination, <span class="math inline">\(R^2\)</span>,</strong> is</p>
 <p><span class="math display" id="eq:R2">\[\begin{equation}
 R^{2} = \frac{SS_R}{SS_T} = 1 - \frac{SS_{res}}{SS_T}.
-\tag{3.15}
+\tag{1.15}
 \end{equation}\]</span></p>
 <p><span class="math inline">\(R^{2}\)</span> is an indication of how well the data fits our model. In the context of simple linear regression, it denotes <strong>the proportion of variance in the response variable that is explained by the predictor</strong>.</p>
 <p>A few notes about <span class="math inline">\(R^2\)</span>:</p>
@@ -502,7 +492,7 @@ R^{2} = \frac{SS_R}{SS_T} = 1 - \frac{SS_{res}}{SS_T}.
 <li>Sometimes reported as a percentage.</li>
 </ul>
 <p>To obtain <span class="math inline">\(R^2\)</span> for our study time example:</p>
-<div class="sourceCode" id="cb164"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">anova.tab</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span>
 <span><span class="co">##SST not provided, so we add up SSR and SSres</span></span>
 <span><span class="va">SST</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">anova.tab</span><span class="op">$</span><span class="st">"Sum Sq"</span><span class="op">)</span></span>
@@ -511,14 +501,14 @@ R^{2} = \frac{SS_R}{SS_T} = 1 - \frac{SS_{res}}{SS_T}.
 <pre><code>## [1] 0.9159963</code></pre>
 <p>This implies that the proportion of variance in study time that can be explained by the number of courses taken is 0.9159963.</p>
 </div>
-<div id="correlation" class="section level3" number="3.5.5">
+<div id="correlation" class="section level3" number="1.5.5">
 <h3>
-<span class="header-section-number">3.5.5</span> Correlation<a class="anchor" aria-label="anchor" href="#correlation"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.5.5</span> Correlation<a class="anchor" aria-label="anchor" href="#correlation"><i class="fas fa-link"></i></a>
 </h3>
 <p>A measure used to quantify the strength of the linear association between two quantitative variables is the <strong>sample correlation</strong>. The sample correlation, <span class="math inline">\(\mbox{Corr}(x,y)\)</span> or <span class="math inline">\(r\)</span>, is given by</p>
 <p><span class="math display" id="eq:corr">\[\begin{equation}
 r = \frac{\sum\limits_{i=1}^{n}(x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum\limits_{i=1}^{n}(x_i - \bar{x})^{2}(y_i - \bar{y})^{2}}}.
-\tag{3.16}
+\tag{1.16}
 \end{equation}\]</span></p>
 <p>A few notes about <span class="math inline">\(r\)</span>:</p>
 <ul>
@@ -529,31 +519,31 @@ r = \frac{\sum\limits_{i=1}^{n}(x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum\limits
 <li>In SLR, it turns out that <span class="math inline">\(r^2 = R^2\)</span>.</li>
 </ul>
 <p>Using our study time example, the correlation between study time and number of courses taken is</p>
-<div class="sourceCode" id="cb166"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">study</span>, <span class="va">df</span><span class="op">$</span><span class="va">courses</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 0.9570769</code></pre>
 <p>This value indicates a very strong and positive linear association between study time and number of courses taken (remember that this is simulated data and is not real).</p>
-<div id="how-strong-is-strong" class="section level4" number="3.5.5.1">
+<div id="how-strong-is-strong" class="section level4" number="1.5.5.1">
 <h4>
-<span class="header-section-number">3.5.5.1</span> How strong is strong?<a class="anchor" aria-label="anchor" href="#how-strong-is-strong"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.5.5.1</span> How strong is strong?<a class="anchor" aria-label="anchor" href="#how-strong-is-strong"><i class="fas fa-link"></i></a>
 </h4>
 <p>A question that is often raised is how large should the magnitude of the sample correlation be for it to be considered strong? The answer is: it depends on the context. If you are conducting an experiment that is governed by scientific laws (e.g an experiment verifying Newton’s 2nd law that <span class="math inline">\(F = ma\)</span>), we should expect an extremely high correlation. A correlation of 0.9 in such an instance may be considered weak. The value of the correlation you have should be compared with correlations from similar studies in that domain to determine if it is strong or not.</p>
 </div>
 </div>
 </div>
-<div id="a-word-of-caution" class="section level2" number="3.6">
+<div id="a-word-of-caution" class="section level2" number="1.6">
 <h2>
-<span class="header-section-number">3.6</span> A Word of Caution<a class="anchor" aria-label="anchor" href="#a-word-of-caution"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.6</span> A Word of Caution<a class="anchor" aria-label="anchor" href="#a-word-of-caution"><i class="fas fa-link"></i></a>
 </h2>
 <p>To be able to use the measures we have learned (such as correlation, <span class="math inline">\(R^2\)</span>) and to interpret the estimated regression coefficients, we must verify via a scatterplot that the association between the two variables is approximately linear. If we see a non linear pattern in the scatterplot, we should not use or interpret these values. We will learn how to remedy the situation if we see a non linear pattern in the scatterplot in module 5.</p>
 <p><em>Please see the associated video for a demonstration on how not looking at the scatterplot can lead to misleading interpretations.</em></p>
 </div>
-<div id="r-tutorial" class="section level2" number="3.7">
+<div id="r-tutorial" class="section level2" number="1.7">
 <h2>
-<span class="header-section-number">3.7</span> R Tutorial<a class="anchor" aria-label="anchor" href="#r-tutorial"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.7</span> R Tutorial<a class="anchor" aria-label="anchor" href="#r-tutorial"><i class="fas fa-link"></i></a>
 </h2>
 <p>For this tutorial, we will work with the dataset <code>elmhurst</code> from the <code>openintro</code> package in R.</p>
-<div class="sourceCode" id="cb168"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://openintrostat.github.io/openintro/">openintro</a></span><span class="op">)</span></span>
 <span><span class="va">Data</span><span class="op">&lt;-</span><span class="fu">openintro</span><span class="fu">::</span><span class="va"><a href="https://openintrostat.github.io/openintro/reference/elmhurst.html">elmhurst</a></span></span></code></pre></div>
@@ -568,13 +558,13 @@ r = \frac{\sum\limits_{i=1}^{n}(x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum\limits
 <h3>Visualization<a class="anchor" aria-label="anchor" href="#visualization"><i class="fas fa-link"></i></a>
 </h3>
 <p>We should always verify with scatterplot that the relationship is (approximately) linear before proceeding with correlation and simple linear regression!</p>
-<div class="sourceCode" id="cb169"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##scatterplot of gift aid against family income</span></span>
 <span><span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">Data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">family_income</span>,y<span class="op">=</span><span class="va">gift_aid</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"lm"</span>, se<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span><span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x<span class="op">=</span><span class="st">"Family Income"</span>, y<span class="op">=</span><span class="st">"Gift Aid"</span>, title<span class="op">=</span><span class="st">"Scatterplot of Gift Aid against Family"</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="bookdown-demo_files/figure-html/unnamed-chunk-120-1.png" width="672"></div>
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/unnamed-chunk-14-1.png" width="672"></div>
 <p>We note that the observations are fairly evenly scattered on both sides of the regression line, so a linear association exists. We see a negative linear association. As family income increases, the gift aid, on average, decreases.</p>
 <p>We also do not see any observation with weird values that may warrant further investigation.</p>
 </div>
@@ -582,11 +572,11 @@ r = \frac{\sum\limits_{i=1}^{n}(x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum\limits
 <h3>Regression<a class="anchor" aria-label="anchor" href="#regression"><i class="fas fa-link"></i></a>
 </h3>
 <p>We use the <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> function to fit a regression model:</p>
-<div class="sourceCode" id="cb170"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##regress gift aid against family income</span></span>
 <span><span class="va">result</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">gift_aid</span><span class="op">~</span><span class="va">family_income</span>, data<span class="op">=</span><span class="va">Data</span><span class="op">)</span></span></code></pre></div>
 <p>Use the <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code> function to display relevant information from this regression:</p>
-<div class="sourceCode" id="cb171"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##look at information regarding regression</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## 
@@ -624,25 +614,25 @@ r = \frac{\sum\limits_{i=1}^{n}(x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum\limits
 <h4>Extract values from R objects<a class="anchor" aria-label="anchor" href="#extract-values-from-r-objects"><i class="fas fa-link"></i></a>
 </h4>
 <p>We can actually extract these values that are being reported from <code>summary(result)</code>. To see what can be extracted from an R object, use the <code><a href="https://rdrr.io/r/base/names.html">names()</a></code> function:</p>
-<div class="sourceCode" id="cb173"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##see what can be extracted from summary(result)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##  [1] "call"          "terms"         "residuals"     "coefficients" 
 ##  [5] "aliased"       "sigma"         "df"            "r.squared"    
 ##  [9] "adj.r.squared" "fstatistic"    "cov.unscaled"</code></pre>
 <p>To extract the estimated coefficients:</p>
-<div class="sourceCode" id="cb175"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##extract coefficients</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span><span class="op">$</span><span class="va">coefficients</span></span></code></pre></div>
 <pre><code>##                  Estimate Std. Error   t value     Pr(&gt;|t|)
 ## (Intercept)   24.31932901 1.29145027 18.831022 8.281020e-24
 ## family_income -0.04307165 0.01080947 -3.984621 2.288734e-04</code></pre>
 <p>Notice the information is presented in a table. To extract a specific value, we can specify the row and column indices:</p>
-<div class="sourceCode" id="cb177"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##extract slope</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span><span class="op">$</span><span class="va">coefficients</span><span class="op">[</span><span class="fl">2</span>,<span class="fl">1</span><span class="op">]</span></span></code></pre></div>
 <pre><code>## [1] -0.04307165</code></pre>
-<div class="sourceCode" id="cb179"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##extract intercept</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span><span class="op">$</span><span class="va">coefficients</span><span class="op">[</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">]</span></span></code></pre></div>
 <pre><code>## [1] 24.31933</code></pre>
@@ -652,7 +642,7 @@ r = \frac{\sum\limits_{i=1}^{n}(x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum\limits
 <h4>Prediction<a class="anchor" aria-label="anchor" href="#prediction"><i class="fas fa-link"></i></a>
 </h4>
 <p>A use of regression models is prediction. Suppose I want to predict the gift aid of a student with family income of 50 thousand dollars (assuming the unit is in thousands of dollars). We use the <code><a href="https://rdrr.io/r/stats/predict.html">predict()</a></code> function:</p>
-<div class="sourceCode" id="cb181"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##create data point for prediction</span></span>
 <span><span class="va">newdata</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>family_income<span class="op">=</span><span class="fl">50</span><span class="op">)</span></span>
 <span><span class="co">##predicted gift aid when x=50</span></span>
@@ -660,7 +650,7 @@ r = \frac{\sum\limits_{i=1}^{n}(x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum\limits
 <pre><code>##        1 
 ## 22.16575</code></pre>
 <p>This student’s predicted gift aid is $22 165.75. Alternatively, you could have calculated this by plugging <span class="math inline">\(x=50\)</span> into the estimated SLR equation:</p>
-<div class="sourceCode" id="cb183"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span><span class="op">$</span><span class="va">coefficients</span><span class="op">[</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">]</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span><span class="op">$</span><span class="va">coefficients</span><span class="op">[</span><span class="fl">2</span>,<span class="fl">1</span><span class="op">]</span><span class="op">*</span><span class="fl">50</span></span></code></pre></div>
 <pre><code>## [1] 22.16575</code></pre>
 </div>
@@ -668,7 +658,7 @@ r = \frac{\sum\limits_{i=1}^{n}(x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum\limits
 <h4>ANOVA table<a class="anchor" aria-label="anchor" href="#anova-table-1"><i class="fas fa-link"></i></a>
 </h4>
 <p>We use the <code><a href="https://rdrr.io/r/stats/anova.html">anova()</a></code> function to display the ANOVA table</p>
-<div class="sourceCode" id="cb185"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">anova.tab</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span>
 <span><span class="va">anova.tab</span></span></code></pre></div>
 <pre><code>## Analysis of Variance Table
@@ -682,16 +672,16 @@ r = \frac{\sum\limits_{i=1}^{n}(x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum\limits
 <p>The report <span class="math inline">\(F\)</span> statistic is the same as the value reported earlier from <code>summary(result)</code>.</p>
 <p>The first line of the output gives <span class="math inline">\(SS_{R}\)</span>, the second line gives <span class="math inline">\(SS_{res}\)</span>. The function doesn’t provide <span class="math inline">\(SS_T\)</span>, but we know that <span class="math inline">\(SS_T = SS_{R} + SS_{res}\)</span>.</p>
 <p>Again, to see what can be extracted from <code>anova.tab</code>:</p>
-<div class="sourceCode" id="cb187"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">anova.tab</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "Df"      "Sum Sq"  "Mean Sq" "F value" "Pr(&gt;F)"</code></pre>
 <p>So <span class="math inline">\(SS_T\)</span> can be easily calculated:</p>
-<div class="sourceCode" id="cb189"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">SST</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">anova.tab</span><span class="op">$</span><span class="st">"Sum Sq"</span><span class="op">)</span></span>
 <span><span class="va">SST</span></span></code></pre></div>
 <pre><code>## [1] 1461.079</code></pre>
 <p>The <span class="math inline">\(R^2\)</span> was reported to be 0.2485582. To verify using the ANOVA table:</p>
-<div class="sourceCode" id="cb191"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">anova.tab</span><span class="op">$</span><span class="st">"Sum Sq"</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">/</span><span class="va">SST</span></span></code></pre></div>
 <pre><code>## [1] 0.2485582</code></pre>
 </div>
@@ -700,7 +690,7 @@ r = \frac{\sum\limits_{i=1}^{n}(x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum\limits
 <h3>Correlation<a class="anchor" aria-label="anchor" href="#correlation-1"><i class="fas fa-link"></i></a>
 </h3>
 <p>We use the <code><a href="https://rdrr.io/r/stats/cor.html">cor()</a></code> function to find the correlation between two quantitative variables:</p>
-<div class="sourceCode" id="cb193"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##correlation</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span><span class="op">(</span><span class="va">Data</span><span class="op">$</span><span class="va">family_income</span>,<span class="va">Data</span><span class="op">$</span><span class="va">gift_aid</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] -0.4985561</code></pre>
@@ -711,35 +701,35 @@ r = \frac{\sum\limits_{i=1}^{n}(x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum\limits
 </div>
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="viz.html"><span class="header-section-number">2</span> Data Visualization with R Using ggplot2</a></div>
-<div class="next"><a href="inf.html"><span class="header-section-number">4</span> Inference with Simple Linear Regression (SLR)</a></div>
+<div class="prev"><a href="index.html">Preface</a></div>
+<div class="next"><a href="inf.html"><span class="header-section-number">2</span> Inference with Simple Linear Regression (SLR)</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#slr"><span class="header-section-number">3</span> Basics with Simple Linear Regression (SLR)</a></li>
+<li><a class="nav-link" href="#slr"><span class="header-section-number">1</span> Basics with Simple Linear Regression (SLR)</a></li>
 <li>
-<a class="nav-link" href="#introduction-2"><span class="header-section-number">3.1</span> Introduction</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#basic-ideas-with-statistics"><span class="header-section-number">3.1.1</span> Basic Ideas with Statistics</a></li>
-<li><a class="nav-link" href="#motivation"><span class="header-section-number">3.1.2</span> Motivation</a></li>
+<a class="nav-link" href="#introduction-hi"><span class="header-section-number">1.1</span> Introduction HI!!!!</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#basic-ideas-with-statistics"><span class="header-section-number">1.1.1</span> Basic Ideas with Statistics</a></li>
+<li><a class="nav-link" href="#motivation"><span class="header-section-number">1.1.2</span> Motivation</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#simple-linear-regression-slr"><span class="header-section-number">3.2</span> Simple Linear Regression (SLR)</a></li>
-<li><a class="nav-link" href="#estimating-regression-coefficients-in-slr"><span class="header-section-number">3.3</span> Estimating Regression Coefficients in SLR</a></li>
+<li><a class="nav-link" href="#simple-linear-regression-slr"><span class="header-section-number">1.2</span> Simple Linear Regression (SLR)</a></li>
+<li><a class="nav-link" href="#estimating-regression-coefficients-in-slr"><span class="header-section-number">1.3</span> Estimating Regression Coefficients in SLR</a></li>
 <li>
-<a class="nav-link" href="#estimating-variance-of-errors-in-slr"><span class="header-section-number">3.4</span> Estimating Variance of Errors in SLR</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#practice-questions-1"><span class="header-section-number">3.4.1</span> Practice questions</a></li></ul>
+<a class="nav-link" href="#estimating-variance-of-errors-in-slr"><span class="header-section-number">1.4</span> Estimating Variance of Errors in SLR</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#practice-questions-1"><span class="header-section-number">1.4.1</span> Practice questions</a></li></ul>
 </li>
 <li>
-<a class="nav-link" href="#assessing-linear-association"><span class="header-section-number">3.5</span> Assessing Linear Association</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#sum-of-squares"><span class="header-section-number">3.5.1</span> Sum of squares</a></li>
-<li><a class="nav-link" href="#anova-table"><span class="header-section-number">3.5.2</span> ANOVA Table</a></li>
-<li><a class="nav-link" href="#anova-f-test"><span class="header-section-number">3.5.3</span> ANOVA \(F\) Test</a></li>
-<li><a class="nav-link" href="#coefficient-of-determination"><span class="header-section-number">3.5.4</span> Coefficient of determination</a></li>
-<li><a class="nav-link" href="#correlation"><span class="header-section-number">3.5.5</span> Correlation</a></li>
+<a class="nav-link" href="#assessing-linear-association"><span class="header-section-number">1.5</span> Assessing Linear Association</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#sum-of-squares"><span class="header-section-number">1.5.1</span> Sum of squares</a></li>
+<li><a class="nav-link" href="#anova-table"><span class="header-section-number">1.5.2</span> ANOVA Table</a></li>
+<li><a class="nav-link" href="#anova-f-test"><span class="header-section-number">1.5.3</span> ANOVA \(F\) Test</a></li>
+<li><a class="nav-link" href="#coefficient-of-determination"><span class="header-section-number">1.5.4</span> Coefficient of determination</a></li>
+<li><a class="nav-link" href="#correlation"><span class="header-section-number">1.5.5</span> Correlation</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#a-word-of-caution"><span class="header-section-number">3.6</span> A Word of Caution</a></li>
+<li><a class="nav-link" href="#a-word-of-caution"><span class="header-section-number">1.6</span> A Word of Caution</a></li>
 <li>
-<a class="nav-link" href="#r-tutorial"><span class="header-section-number">3.7</span> R Tutorial</a><ul class="nav navbar-nav">
+<a class="nav-link" href="#r-tutorial"><span class="header-section-number">1.7</span> R Tutorial</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#visualization">Visualization</a></li>
 <li><a class="nav-link" href="#regression">Regression</a></li>
 <li><a class="nav-link" href="#correlation-1">Correlation</a></li>
@@ -761,7 +751,7 @@ r = \frac{\sum\limits_{i=1}^{n}(x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum\limits
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Linear Models for Data Science</strong>" was written by Jeffrey Woo. It was last built on 2024-08-02.</p>
+    <p>"<strong>Linear Models for Data Science</strong>" was written by Jeffrey Woo. It was last built on 2025-06-09.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
