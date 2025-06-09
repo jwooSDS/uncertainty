@@ -120,12 +120,12 @@
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \urlstyle{same}
 \hypersetup{
-  pdftitle={Linear Models for Data Science},
+  pdftitle={Understanding Uncertainty Course Notes},
   pdfauthor={Jeffrey Woo},
   hidelinks,
   pdfcreator={LaTeX via pandoc}}
 
-\title{Linear Models for Data Science}
+\title{Understanding Uncertainty Course Notes}
 \author{Jeffrey Woo}
 \date{2025-06-09}
 
@@ -139,498 +139,41 @@
 \chapter*{Preface}\label{preface}
 \addcontentsline{toc}{chapter}{Preface}
 
-\section*{Who is this book for?}\label{who-is-this-book-for}
-\addcontentsline{toc}{section}{Who is this book for?}
+The examples in this preface is based on OpenIntro Statistics (Diez, Ceytinka-Rundel, Barr), Chapter 9.4 and 9.5, which provide more background information. You can access the book for free at \url{https://www.openintro.org/book/os/}
 
-There are many books on linear models, with various expectations for different levels of familiarity with statistical, mathematical, and coding concepts. These books generally fall into one of two camps:
+The main goal using data science is to understand data. Broadly speaking, this will involve building a statistical model for predicting, or estimating a response variable based on one or more predictors. Such models are used in a wide variety of fields such as finance, medicine, public policy, sports, and so on. We will look a couple of examples.
 
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  Little to no familiarity with statistical and mathematical concepts, but fairly familiar to coding. These books tend to be written for programmers who want to get into data science. These books tend to explain linear models while trying to avoid statistical and mathematical concepts as much as possible. These books tend to present linear models in a recipe format giving readers directions on what to do to build their models.
-\end{enumerate}
+\section{Examples}\label{examples}
 
-The drawback of such books is that readers do not get much understanding of the underlying concepts of linear models. It is impossible to give directions covering every possible scenario in the real world as real data are messy. Practitioners of data science often have to think outside the box in order to make linear models work for their particular data, and it is difficult to do so without understanding the mathematical framework of linear models.
+\subsection{Example 1: Mario Kart Auction Prices}\label{example-1-mario-kart-auction-prices}
 
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\setcounter{enumi}{1}
-\tightlist
-\item
-  Familiarity with mathematical notation and introductory statistical concepts such as statistical inference, and little to no familiarity with coding. These books tend to be written for mathematicians (or anyone with a strong background in mathematics) who want to get into data science. These books cover the mathematical framework of linear models thoroughly.
-\end{enumerate}
+In this first example, we will look at Ebay auctions of a video game called Mario Kart that is played on Nintendo Wii. We want to predict the price of an auction based on whether the game is new or not, whether the auction's main photo is a stock photo, the duration of the auction in days, and the number of Wii wheels included with the auction.
 
-The drawback of such books is that readers must be comfortable with mathematical notation. This limits the audience for such books to people with fairly thorough training in mathematics. People without such training will get lost trying to read such books, and do not understand why we need to know the mathematical foundations to use linear models in data science.
-
-This book is meant to be readable by both groups of readers. Some foundational mathematical knowledge will be presented, but will be written so that is readable by anyone. This book will also explain what these knowledge mean in the context of data science. Practical advice, based on the foundational mathematical knowledge, will also be given.
-
-This book accompanies the course STAT 6021: Linear Models for Data Science, for the Masters of Data Science (MSDS) program at the University of Virginia School of Data Science.
-
-As introductory statistics and introductory programming are pre-requisites for entering the MSDS program, this book assumes basic knowledge of statistical inference and coding. Review materials covering these concepts are provided separately for enrolled students.
-
-\section*{Chapters}\label{chapters}
-\addcontentsline{toc}{section}{Chapters}
-
-The chapters for the book is as follows:
-
-\begin{itemize}
-\item
-  Chapters \ref{wrangling} and \ref{viz} focus on core R skills needed: data wrangling and data visualization. These are R skills needed to perform regression analysis.
-\item
-  Chapters \ref{slr}, \ref{inf}, and \ref{diag} cover simple linear regression (SLR). This is the simplest scenario in regression when we have one predictor and one response variable that is quantitative. We are using this scenario to be able to more clearly explain concepts in regression before moving into the more practical multiple linear regression (MLR), which involves multiple predictors.
-\item
-  Chapters \ref{mlr} to \ref{out} cover multiple linear regression: when we have multiple predictors and one response variable that is quantitative.
-\item
-  Chapters \ref{logistic1} and \ref{logistic2} cover logistic regression: when we have a response variable that is binary.
-\end{itemize}
-
-\section*{How to use this book}\label{how-to-use-this-book}
-\addcontentsline{toc}{section}{How to use this book}
-
-\begin{itemize}
-\item
-  If you are using the provided R code from each chapter, please remember to clear your R environment whenever you move to a new chapter. This can be done by typing \texttt{rm(list\ =\ ls())}.
-\item
-  For Chapters \ref{slr} to \ref{logistic2}, there is an R tutorial provided in the last section. You should also clear your R environment before running the code in the tutorials.
-\item
-  Some additional resources are provided for students enrolled in STAT 6021. These include:
-
-  \begin{itemize}
-  \tightlist
-  \item
-    Learning objectives.
-  \item
-    Explainer videos.
-  \item
-    Practice questions.
-  \item
-    Assignments.
-  \end{itemize}
-\end{itemize}
-
-\section*{Data sets used}\label{data-sets-used}
-\addcontentsline{toc}{section}{Data sets used}
-
-I have tried to use as many open source data sets as much as possible so that readers can work on the various examples I have provided on their own. However, some data sets may not be open source and were shared by other statistics and data science educators over my years of teaching this class (or variations of it) since 2013. It is my goal to eventually use only open source data sets.
-
-\section*{Reporting issues with this book}\label{reporting-issues-with-this-book}
-\addcontentsline{toc}{section}{Reporting issues with this book}
-
-This book is mostly a compilation of course notes that were originally written as separate chapters. While effort has been made to fix typos, issues may still exist. If you find any issues (typos, formatting, etc), please report them at \url{https://github.com/jwooSDS/linear_models/issues}. Please be as specific as you can, including providing the specific section and paragraph where the issue is found.
-
-\section*{Other resources}\label{other-resources}
-\addcontentsline{toc}{section}{Other resources}
-
-Some other resources that readers may want to check out:
-
-\begin{itemize}
-\item
-  \emph{OpenIntro Statistics}, 4th ed.~Diez, Cetinkaya-Rundel, Barr, OpenIntro. Get free PDF version at \url{https://leanpub.com/os}, just set the price that you want to pay to \$0. This is a good book for introductory statistics.
-\item
-  \emph{Introduction to Probability for Data Science}, Chan. \url{https://probability4datascience.com/index.html}. This book covers the fundamentals of probability and mathematics needed for data science. It does a good job explaining how seemingly abstract mathematical concepts are needed and applied in data science.
-\item
-  \emph{Linear Models with R}, 2nd ed.~Faraway. This is probably one of the few books that balances between the two camps that I wrote about earlier. It does require familiarity with matrices and linear algebra though.
-\item
-  \emph{Introduction to Linear Regression Analysis}, 5th or 6th ed.~Montgomery, Peck, Vining. You may be able to access an e-version of the book through your university library if you are affiliated with a university. This book is mathematically rigorous so is useful to those who are interested in mathematical proofs that is not covered.
-\item
-  \emph{Applied Linear Statistical Models} (ALSM), Kutner, Nachtsheim, Neter, Li, 5th ed.~This book covers a wide range of topics in linear models and is also mathematically rigorous.
-\item
-  \emph{Applied Linear Regression Models} (ALRM), Kutner, Nachtsheim, Neter, 4th ed.~ALRM is the same as the first 14 chapters of ALSM. The second part of ALSM covers topics in Design of Experiments, which I highly recommend if you are interested in those topics.
-\end{itemize}
-
-\chapter{Basics with Simple Linear Regression (SLR)}\label{slr}
-
-\section{Introduction HI AGAIN!!!!}\label{introduction-hi-again}
-
-We will start this module by introducing the simple linear regression model. Simple linear regression uses the term ``simple,'' because it concerns the study of only one predictor variable with one quantitative response variable. In contrast, multiple linear regression, which we will study in future modules, uses the term ``multiple,'' because it concerns the study of two or more predictor variables with one quantitative response variable. We start with simple linear regression as it is much easier to visualize concepts in regression models when there is only one predictor variable.
-
-For the time being, we will only consider predictor variables that are quantitative. We will consider predictor variables that are categorical in future modules.
-
-The most common way of visualizing the relationship between one quantitative predictor variable and one quantitative response variable is with a scatter plot. In the simulated example below, we have data from 6000 UVa undergraduate students on the amount of time they spend studying in a week (in minutes), and how many courses they are taking in the semester (3 or 4 credit courses).
+A model that we can use for this example is the linear regression model:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\DocumentationTok{\#\#create dataframe}
-\NormalTok{df}\OtherTok{\textless{}{-}}\FunctionTok{data.frame}\NormalTok{(study,courses)}
+\FunctionTok{library}\NormalTok{(openintro)}
 
-\DocumentationTok{\#\#fit regression}
-\NormalTok{result}\OtherTok{\textless{}{-}}\FunctionTok{lm}\NormalTok{(study}\SpecialCharTok{\textasciitilde{}}\NormalTok{courses, }\AttributeTok{data=}\NormalTok{df)}
+\NormalTok{Data}\OtherTok{\textless{}{-}}\NormalTok{mariokart}
+\DocumentationTok{\#\#fit model}
+\NormalTok{result}\OtherTok{\textless{}{-}}\FunctionTok{lm}\NormalTok{(total\_pr}\SpecialCharTok{\textasciitilde{}}\NormalTok{cond}\SpecialCharTok{+}\NormalTok{stock\_photo}\SpecialCharTok{+}\NormalTok{duration}\SpecialCharTok{+}\NormalTok{wheels, }\AttributeTok{data=}\NormalTok{Data)}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\DocumentationTok{\#\#create scatterplot with regression line overlaid}
-\FunctionTok{plot}\NormalTok{(df}\SpecialCharTok{$}\NormalTok{courses, df}\SpecialCharTok{$}\NormalTok{study, }\AttributeTok{xlab=}\StringTok{"\# of Courses"}\NormalTok{, }\AttributeTok{ylab=}\StringTok{"Study Time (Mins)"}\NormalTok{)}
-\FunctionTok{abline}\NormalTok{(result)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{figure}
-\centering
-\includegraphics{bookdown-demo_files/figure-latex/scatter-courses-1.pdf}
-\caption{\label{fig:scatter-courses}Scatterplot of Study Time against Number of Courses Taken}
-\end{figure}
-
-Questions that we may have include:
-
-\begin{itemize}
-\tightlist
-\item
-  Are study time and the number of courses taken related to one another?
-\item
-  How strong is this relationship?
-\item
-  Could we use the data to make a prediction for the study time of a student who is not in this scatterplot?
-\item
-  How confident are we of the prediction?
-\end{itemize}
-
-These questions can be answered using simple linear regression.
-
-Note that we will only be learning about models with just one response variable. We will not cover multivariate regression, which is used when there is more than one response variable. There may be some confusion between ``multiple'' linear regression and ``multivariate'' regression due to the closeness in terminology.
-
-\subsection{Basic Ideas with Statistics}\label{basic-ideas-with-statistics}
-
-\subsubsection{Population vs Sample}\label{population-vs-sample}
-
-Statistical methods are usually used to make inferences about the \textbf{population} based on information from a \textbf{sample}.
-
-\begin{itemize}
-\tightlist
-\item
-  A sample is the collection of units that is actually measured or surveyed in a study.
-\item
-  The population includes all units of interest.
-\end{itemize}
-
-In the study time example above, the population is all UVa undergraduate students, while the sample is the 6000 students that we have data on and are displayed on the scatterplot.
-
-\subsubsection{Parameters vs Statistics}\label{parameters-vs-statistics}
-
-\begin{itemize}
-\tightlist
-\item
-  \textbf{Parameters} are numerical quantities that describe a population.
-\item
-  \textbf{Statistics} are numerical quantities that describe a sample.
-\end{itemize}
-
-In the study time example, an example of a parameter will be the average study time among all UVa undergraduate students (called the population mean), and an example of a statistic will be the average study time among the 6000 UVa students we have data on (called the sample mean).
-
-Notice that in real life, we will rarely know the actual numerical value of a parameter. So we use the numerical value of the statistic to \textbf{estimate} the unknown numerical value of the corresponding parameter.
-
-We also have different notation for parameters and statistics. For example,
-
-\begin{itemize}
-\tightlist
-\item
-  the population mean is denoted as \(\mu\).
-\item
-  the sample mean is denoted as \(\bar{x}\).
-\end{itemize}
-
-We say that \(\bar{x}\) is an \textbf{estimator} of \(\mu\).
-
-It is important to pay attention to whether we are describing a statistic (a known value that can be calculated) or a parameter (an unknown value).
-
-\subsection{Motivation}\label{motivation}
-
-Linear regression models generally have two primary uses:
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  \textbf{Prediction}: Predict a future value of a response variable, using information from predictor variables.
-\item
-  \textbf{Association}: Quantify the relationship between variables. How does a change in the predictor variable change the value of the response variable?
-\end{enumerate}
-
-We always distinguish between a \textbf{response variable, denoted by \(y\)}, and a \textbf{predictor variable, denoted by \(x\)}. In most statistical models, we say that the response variable can be approximated by some \textbf{mathematical function, denoted by \(f\)}, of the predictor variable, i.e.
+Generally speaking, a linear regression equation takes the following form:
 
 \[
-y \approx f(x).
-\]
-Oftentimes, we write this relationship as
-
-\[
-y = f(x) + \epsilon,
+\hat{y} = \hat{\beta}_0 + \hat{\beta}_1 x_1 + \hat{\beta}_2 x_2 + \cdots + \hat{\beta}_k x_k
 \]
 
-where \textbf{\(\epsilon\) denotes a random error term}, with a mean of 0. The error term cannot be predicted based on the data we have.
+where \(\hat{y}\) denotes the predicted value of the response variable, the price of the action in this example, \(x_1, x_2, \cdots, x_k\) denote the values of the predictors. This is example, we have: \(x_1\) for whether the game is new or not, \(x_2\) for whether the auction's main photo is a stock photo, \(x_3\) for the duration of the auction in days, and \(x_4\) for the number of Wii wheels included with the auction. \(\hat{\beta}_0, \hat{\beta}_1, \cdots, \hat{\beta}_k\) represent the estimated regression parameters. If we know what these values are, we can easily plug in the values of the predictors to obtain the predicted price of the auction.
 
-There are various statistical methods to estimate \(f\). Once we estimate \(f\), we can use our method for prediction and / or association.
-
-Using the study time example above:
-
-\begin{itemize}
-\tightlist
-\item
-  a prediction example: a student intends to take 4 courses in the semester. What is this student's predicted study time, on average?
-\item
-  an association example: we want to see how taking more courses increases study time.
-\end{itemize}
-
-\subsubsection{Practice questions}\label{practice-questions}
-
-In the examples below, are we using a regression model for prediction or for association?
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\item
-  It is early in the morning and I am heading out for the rest of the day. I want to know the weather forecast for the rest of the day so I know what to wear.
-\item
-  An executive for a sports league wants to assess how increasing the length of commercial breaks may impact the enjoyment of sports fans who watch games on TV.
-\item
-  The Education Secretary would like to evaluate how certain factors such as use of technology in classrooms and investment in teacher training and teacher pay are associated with reading skills of students.
-\item
-  When buying a home, the prospective buyer would like to know if the home is under- or over- priced, given its characteristics.
-\end{enumerate}
-
-\section{Simple Linear Regression (SLR)}\label{simple-linear-regression-slr}
-
-In simple linear regression (SLR), the function \(f\) that relates the predictor variable with the response variable is typically \(\beta_0 + \beta_1 x\). Mathematically, we express this as
-
-\[
-y \approx \beta_0 + \beta_1 x,
-\]
-
-or in other words, that the response variable has an approximately linear relationship with the predictor variable.
-
-In SLR, this relationship is more explicitly formulated as the \textbf{simple linear regression equation}:
-
-\begin{equation} 
-E(y|x)=\beta_0+\beta_{1}x.
-\label{eq:SLR}
-\end{equation}
-
-\begin{itemize}
-\item
-  \(\beta_0\) and \(\beta_1\) are parameters in the SLR equation, and we want to estimate them.
-\item
-  These parameters are sometimes called \textbf{regression coefficients}.
-\item
-  \(\beta_1\) is also called the \textbf{slope. It denotes the change in \(y\), on average, when \(x\) increases by one unit.}
-\item
-  \(\beta_0\) is also called the \textbf{intercept. It denotes the average of \(y\) when \(x=0\).}
-\item
-  The notation on the left hand side of \eqref{eq:SLR} denotes the \textbf{expected value} of the response variable, for a fixed value of the predictor variable. What \eqref{eq:SLR} implies is that, for each value of the predictor variable \(x\), the expected value of the response variable \(y\) is \(\beta_0+\beta_{1}x\). The expected value is also the population mean. Applying \eqref{eq:SLR} to our study time example, it implies that:
-
-  \begin{itemize}
-  \tightlist
-  \item
-    for students who take 3 courses, their expected study time is equal to \(\beta_0 + 3\beta_1\),
-  \item
-    for students who take 4 courses, their expected study time is equal to \(\beta_0 + 4\beta_1\),
-  \item
-    for students who take 5 courses, their expected study time is equal to \(\beta_0 + 5\beta_1\).
-  \end{itemize}
-\end{itemize}
-
-So \(f(x) = \beta_0 + \beta_1x\) gives us the value of the expected value of the response variable for a specific value of the predictor variable. But, for each value of the predictor variable, the value of the response variable is not a constant. We say that for each value of \(x\), the response variable \(y\) has some variance. The variance of the response variable for each value of \(x\) is the same as the variance of the error term, \(\epsilon\). Thus we have the \textbf{simple linear regression model}
-
-\begin{equation} 
-y=\beta_0+\beta_{1} x + \epsilon. 
-\label{eq:SLRmod}
-\end{equation}
-
-We need to make some assumptions for the error term \(\epsilon\). Generally, the assumptions are:
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  The errors have mean 0.
-\item
-  The \textbf{errors have variance denoted by \(\sigma^2\)}. Notice this variance is constant.
-\item
-  The errors are independent.
-\item
-  The errors are normally distributed.
-\end{enumerate}
-
-From \eqref{eq:SLRmod}, notice we have another parameter, \(\sigma^2\).
-
-We will go into more detail about what these assumptions mean, and how to assess whether they are met, in module \ref{diag}.
-
-What these assumptions mean is that for each value of the predictor variable \(x\), the response variable:
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  follows a normal distribution,
-\item
-  with mean equal to \(\beta_0+\beta_{1} x\),
-\item
-  and variance equal to \(\sigma^2\).
-\end{enumerate}
-
-Using our study time example, it means that:
-
-\begin{itemize}
-\tightlist
-\item
-  for students who take 3 courses, the distribution of their study times is \(N(\beta_0 + 3\beta_1, \sigma^2)\).
-\item
-  for students who take 4 courses, the distribution of their study times is \(N(\beta_0 + 4\beta_1, \sigma^2)\).
-\item
-  for students who take 5 courses, the distribution of their study times is \(N(\beta_0 + 5\beta_1, \sigma^2)\).
-\end{itemize}
-
-So if we were to subset our dataframe into three subsets, one with students who take 3 courses, another subset for students who take 4 courses, and another subset for students who take 5 courses, and then create a density plot of study times for each subset, each density plot should follow a normal distribution, with different means, and the same spread.
-
-Let us take a look at these density plots next.
+Fitting the model in R, we obtain the estimated regression parameters:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{library}\NormalTok{(tidyverse)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\DocumentationTok{\#\#subset dataframe}
-\NormalTok{x}\FloatTok{.3}\OtherTok{\textless{}{-}}\NormalTok{df[}\FunctionTok{which}\NormalTok{(df}\SpecialCharTok{$}\NormalTok{courses}\SpecialCharTok{==}\DecValTok{3}\NormalTok{),]}
-\DocumentationTok{\#\#density plot of study time for students taking 3 courses}
-\FunctionTok{ggplot}\NormalTok{(x}\FloatTok{.3}\NormalTok{,}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{study))}\SpecialCharTok{+}
-  \FunctionTok{geom\_density}\NormalTok{()}\SpecialCharTok{+}
-  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x=}\StringTok{"Study Time (Mins)"}\NormalTok{, }\AttributeTok{title=}\StringTok{"Dist of Study Times with 3 Courses"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-5-1.pdf}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\DocumentationTok{\#\#subset dataframe}
-\NormalTok{x}\FloatTok{.4}\OtherTok{\textless{}{-}}\NormalTok{df[}\FunctionTok{which}\NormalTok{(df}\SpecialCharTok{$}\NormalTok{courses}\SpecialCharTok{==}\DecValTok{4}\NormalTok{),]}
-\DocumentationTok{\#\#density plot of study time for students taking 4 courses}
-\FunctionTok{ggplot}\NormalTok{(x}\FloatTok{.4}\NormalTok{,}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{study))}\SpecialCharTok{+}
-  \FunctionTok{geom\_density}\NormalTok{()}\SpecialCharTok{+}
-  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x=}\StringTok{"Study Time (Mins)"}\NormalTok{, }\AttributeTok{title=}\StringTok{"Dist of Study Times with 4 Courses"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-5-2.pdf}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\DocumentationTok{\#\#subset dataframe}
-\NormalTok{x}\FloatTok{.5}\OtherTok{\textless{}{-}}\NormalTok{df[}\FunctionTok{which}\NormalTok{(df}\SpecialCharTok{$}\NormalTok{courses}\SpecialCharTok{==}\DecValTok{5}\NormalTok{),]}
-\DocumentationTok{\#\#density plot of study time for students taking 5 courses}
-\FunctionTok{ggplot}\NormalTok{(x}\FloatTok{.5}\NormalTok{,}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{study))}\SpecialCharTok{+}
-  \FunctionTok{geom\_density}\NormalTok{()}\SpecialCharTok{+}
-  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x=}\StringTok{"Study Time (Mins)"}\NormalTok{, }\AttributeTok{title=}\StringTok{"Dist of Study Times with 5 Courses"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-5-3.pdf}
-
-Notice all of these plots are normal, with different means (centers), and similar spreads.
-
-\emph{Please see the associated video for more explanation about the distribution of the response variable, for each value of the predictor variable, in an SLR setting.}
-
-\section{Estimating Regression Coefficients in SLR}\label{estimating-regression-coefficients-in-slr}
-
-From \eqref{eq:SLR} and \eqref{eq:SLRmod}, we noted that we have to estimate the regression coefficients \(\beta_0, \beta_1\) as well as the parameter \(\sigma^2\) associated with the error term. As mentioned earlier, we are unable to obtain numerical values of these parameters as we do not have data from the entire population. So what we do is use the data from our sample to estimate these parameters.
-
-We estimate \(\beta_0,\beta_1\) using \(\hat{\beta}_0,\hat{\beta}_1\) based on a sample of observations \((x_i,y_i)\) of size \(n\).
-
-The subscripts associated with the response and predictor variables denote which data point that value belongs to. Let us take a look at the first few rows of the data frame for the study time example:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{head}\NormalTok{(df)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-##      study courses
-## 1 429.8311       3
-## 2 458.4588       3
-## 3 391.9406       3
-## 4 378.0196       3
-## 5 397.9856       3
-## 6 405.7145       3
-\end{verbatim}
-
-For example, \(x_1\) denotes the number of courses taken by student number 1 in the dataframe, which is 3. \(y_4\) denotes the study time for student number 4 in the dataframe, which is 378.0196456.
-
-Following \eqref{eq:SLR} and \eqref{eq:SLRmod}, the sample versions are
-
-\begin{equation} 
-\hat{y}=\hat{\beta}_0+\hat{\beta}_1 x
-\label{eq:fitted}
-\end{equation}
-
-and
-
-\begin{equation} 
-y=\hat{\beta}_0+\hat{\beta}_1 x + e
-\label{eq:fitted-model}
-\end{equation}
-
-respectively. \eqref{eq:fitted} is called the \textbf{estimated SLR equation}, or \textbf{fitted SLR equation}. \eqref{eq:fitted-model} is called the \textbf{estimated SLR model}.
-
-\(\hat{\beta}_1,\hat{\beta}_0\) are the estimators for \(\beta_1,\beta_0\) respectively. These estimators can be interpreted in the following manner:
-
-\begin{itemize}
-\tightlist
-\item
-  \textbf{\(\hat{\beta}_1\) denotes the change in the predicted \(y\) when \(x\) increases by 1 unit. Alternatively, it denotes the change in \(y\), on average, when \(x\) increases by 1 unit.}
-\item
-  \textbf{\(\hat{\beta}_0\) denotes the predicted \(y\) when \(x=0\). Alternatively, it denotes the average of \(y\) when \(x=0\).}
-\end{itemize}
-
-From \eqref{eq:fitted-model}, notice we use \textbf{\(e\) to denote the residual}, or in other words, the ``error'' in the sample.
-
-From \eqref{eq:fitted} and \eqref{eq:fitted-model}, we have the following quantities that we can compute:
-
-\begin{equation}
-\text{Predicted/Fitted values: } \hat{y}_i = \hat{\beta}_0+\hat{\beta}_1 x_i.
-\label{eq:fits}
-\end{equation}
-
-\begin{equation} 
-\text{Residuals: } e_i = y_i-\hat{y}_i.
-\label{eq:res}
-\end{equation}
-
-\begin{equation} 
-\text{Sum of Squared Residuals: } SS_{res} =  \sum\limits_{i=1}^n(y_i-\hat{y}_i)^2.
-\label{eq:SSres}
-\end{equation}
-
-We compute the estimated coefficients \(\hat{\beta}_1,\hat{\beta}_0\) using the \textbf{method of least squares}, i.e.~choose the numerical values of \(\hat{\beta}_1,\hat{\beta}_0\) that minimize \(SS_{res}\) as given in \eqref{eq:SSres}.
-
-By minimizing \(SS_{res}\) with respect to \(\hat{\beta}_0\) and \(\hat{\beta}_1\), the estimated coefficients in the simple linear regression equation are
-
-\begin{equation} 
-\hat{\beta}_1 = \frac{\sum\limits_{i=1}^n(x_i-\bar{x})(y_i-\bar{y})}{\sum\limits_{i=1}^n(x_i-\bar{x})^2}
-\label{eq:b1}
-\end{equation}
-
-and
-
-\begin{equation} 
-\hat{\beta}_0 = \bar{y}- \hat{\beta}_1 \bar{x}
-\label{eq:b0}
-\end{equation}
-
-\(\hat{\beta}_1, \hat{\beta}_0\) are called \textbf{least squares estimators}.
-
-The minimization of \(SS_{res}\) with respect to \(\hat{\beta}_0\) and \(\hat{\beta}_1\) is done by taking the partial derivatives of \eqref{eq:SSres} with respect to \(\hat{\beta}_1\) and \(\hat{\beta}_0\), setting these two partial derivatives equal to 0, and solving these two equations for \(\hat{\beta}_1\) and \(\hat{\beta}_0\).
-
-Let's take a look at the estimated coefficients for our study time example:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\DocumentationTok{\#\#fit regression}
-\NormalTok{result}\OtherTok{\textless{}{-}}\FunctionTok{lm}\NormalTok{(study}\SpecialCharTok{\textasciitilde{}}\NormalTok{courses, }\AttributeTok{data=}\NormalTok{df)}
-\DocumentationTok{\#\#print out the estimated coefficients}
+\DocumentationTok{\#\#get estimated regression parameters}
 \NormalTok{result}
 \end{Highlighting}
 \end{Shaded}
@@ -638,1356 +181,628 @@ Let's take a look at the estimated coefficients for our study time example:
 \begin{verbatim}
 ## 
 ## Call:
-## lm(formula = study ~ courses, data = df)
+## lm(formula = total_pr ~ cond + stock_photo + duration + wheels, 
+##     data = Data)
 ## 
 ## Coefficients:
-## (Intercept)      courses  
-##       58.45       120.39
+##    (Intercept)        condused  stock_photoyes        duration          wheels  
+##        43.5201         -2.5816         -6.7542          0.3788          9.9476
 \end{verbatim}
 
-From our sample of 6000 students, we have
+so we have:
+
+\[
+\hat{y} = 43.5201 - 2.5816 x_1 - 6.7542 x_2 + 0.3788 x_3 + 9.9476 x_4
+\]
+
+So for an auction for Mario Kart game that is used, that uses a stock photo, is listed for 2 days, and comes with 0 wheels, the predicted price will be \(\hat{y} = 43.5201 - 2.5816 - 6.7542 + 0.3788 \times 2 = 34.94\) or about 35 dollars.
+
+\subsection{Example 2: Job Application Callback Rates}\label{example-2-job-application-callback-rates}
+
+In this example, we look at data from an experiment that sought to evaluate the effect of race and gender on job application callback rates. For the experiment, researchers created fake resumes to job postings in Boston and Chicago to see which resumes resulted in a callback. The fake resumes included relevant information such as the applicant's educational attainment, how many year's of experience the applicant as well as a first and last name. The names on the fake resume were meant to imply the applicant's race and gender. Only two races were considered (Black or White) and only two genders were considered (Make or Female) for the experiment.
+
+Prior to the experiment, the researchers conducted surveys to check for racial and gender associations for the names on the fake resumes; only names that passed a certain threshold from the surveys were included in the experiment.
+
+A model that can be used in this example is the logistic regression model
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Data2}\OtherTok{\textless{}{-}}\NormalTok{resume}
+\DocumentationTok{\#\#fit model}
+\NormalTok{result2}\OtherTok{\textless{}{-}}\FunctionTok{glm}\NormalTok{(received\_callback}\SpecialCharTok{\textasciitilde{}}\NormalTok{job\_city }\SpecialCharTok{+}\NormalTok{ college\_degree}\SpecialCharTok{+}\NormalTok{years\_experience}\SpecialCharTok{+}\NormalTok{race}\SpecialCharTok{+}\NormalTok{gender, }\AttributeTok{family=}\StringTok{"binomial"}\NormalTok{, }\AttributeTok{data=}\NormalTok{Data2)}
+\end{Highlighting}
+\end{Shaded}
+
+Generally speaking, a logistic regression equation takes the following form
+
+\[
+\log (\frac{\hat{\pi}}{1-\hat{\pi}}) = \hat{\beta}_0 + \hat{\beta}_1 x_1 + \hat{\beta}_2 x_2 + \cdots + \hat{\beta}_k x_k
+\]
+
+where \(\hat{\pi}\) denotes the predicted probability that the applicant receives a call back. \(x_1, x_2, \cdots, x_k\) denote the values of the predictors. This is example, we have: \(x_1\) for which city is the job posting located in, \(x_2\) for whether the applicant has a college degree or not, \(x_3\) for the experience of the applicant, \(x_4\) for associated race of the applicant, and \(x_5\) for the associated gender of the applicant. Similar to linear regression, \(\hat{\beta}_0, \hat{\beta}_1, \cdots, \hat{\beta}_k\) represent the estimated regression parameters. If we know what these values are, we can easily plug in the values of the predictors to obtain the predicted probability for an applicant with those characteristics to receive a callback.
+
+Fitting the model in R, we obtain the estimated regression parameters
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#get estimated regression parameters}
+\NormalTok{result2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:  glm(formula = received_callback ~ job_city + college_degree + 
+##     years_experience + race + gender, family = "binomial", data = Data2)
+## 
+## Coefficients:
+##      (Intercept)   job_cityChicago    college_degree  years_experience  
+##         -2.63974          -0.39206          -0.06550           0.03152  
+##        racewhite           genderm  
+##          0.44299          -0.22814  
+## 
+## Degrees of Freedom: 4869 Total (i.e. Null);  4864 Residual
+## Null Deviance:       2727 
+## Residual Deviance: 2680  AIC: 2692
+\end{verbatim}
+
+so we have
+
+\[
+\log (\frac{\hat{\pi}}{1-\hat{\pi}}) = -2.63974 - 0.39206 x_1 - 0.0655 x_2 + 0.03152 x_3 + 0.44299 x_4 - 0.22814 x_5
+\]
+
+So for an applicant in Boston, who has a college degree, has 10 years of experience and has a name that is associated with being a Black male, the logistic regression equation becomes \(\log (\frac{\hat{\pi}}{1-\hat{\pi}}) = -2.63974 - 0.0655 + 0.03152 \times 10 - 0.22814 = -2.61818\). Doing a little bit of algebra to solve, we get \(\hat{\pi} = 0.06797751\). Such an applicant has about a 6.8 percent chance of receiving a callback.
+
+\section{How were Estimated Parameters Calculated?}\label{how-were-estimated-parameters-calculated}
+
+In the two examples, notice how I used some R functions, supplied the names of the variables, and the R functions generated the values of the estimated parameters? One thing you will learn is how the functions actually calculate these numbers. It turns out that these calculations are based on foundational concepts associated with measures of uncertainty, probability, and expected values. We will be learning about these concepts in this class.
+
+Why do we want to know how these calculations are performed? So that we understand the intuition and logic behind how these models are built. It becomes a lot easier to work with these models when we understand their logic (for example, we know when these models can be used or cannot be used, we know what steps to take when we notice our data have certain characteristics, etc), instead of memorizing a bunch of steps.
+
+When presenting models and data to people, some people may occasionally questions our methods and models. Why should we trust the model? Should we trust these numbers that seem to come out from some black box?
+
+Notice we used two different models, linear regression and logistic regression, for examples 1 and 2. Why did we use these models? Could we have swapped the type of model used in these examples? The answer is actually no. One of the main considerations when deciding what model to use is to identify if our response variable is quantitative or categorical. You will learn why the linear regression model works when the response variable is quantitative, and why the logistic regression model works when the response variable is categorical.
+
+\section{The Course: Understanding Uncertainty}\label{the-course-understanding-uncertainty}
+
+As mentioned in the previous section, we will be learning about foundational concepts associated with measures of uncertainty, probability, and expected values. All of these concepts will then help explain the intuition and how statistical models are built.
+
+At the end of the course, we will apply these concepts and revisit the linear regression and logistic regression models. These are two of the most widely used models used in data science, as they are relatively easier to understand and explain. More modern methods (that you will learn about in future classes) such as decision trees and neural networks can be viewed as extensions of the linear and logistic regression models.
+
+\chapter{Descriptive Statistics}\label{descriptive-statistics}
+
+\section*{Introduction}\label{introduction}
+\addcontentsline{toc}{section}{Introduction}
+
+This module is based on OpenIntro Statistics (Diez, Ceytinka-Rundel, Barr), Chapter 2.1. You can access the book for free at \url{https://www.openintro.org/book/os/} Please note that I cover additional topics, and skip certain topics from the book.
+
+\section{Uncertainty with Data}\label{uncertainty-with-data}
+
+When we are analyzing data, there is always going to be some degree of uncertainty, as there is randomness in a lot of phenomena that we observe in our world. An event is \textbf{random} if individual outcomes of the event are unpredictable. For example, the weight of the next baby born in a local hospital. Without knowing any information about the biological parents, we have a high degree of uncertainty if we try to predict this baby's weight. Even if we know detailed information about the biological parents (for example they are both very tall), we may feel more confident in predicting that the baby is likely to be heavier than average, but we cannot be certain about this prediction.
+
+On the other end hand, an event is \textbf{deterministic} if we can predict individual outcomes of the event with certainty. For example, if we know the length of a cube is 2 inches, we know for sure that its volume is is \(2^3 = 8\) cubic inches, based on rules of mathematics. The volume of a cube with length 2 inches is always going to be 8 cubic inches, so the volume is deterministic.
+
+\emph{Thought question}: think about data that you see in real life. Write these down. Are these data random or deterministic?
+
+We will explore tools to help us quantify uncertainty in data. In this module, we will explore fairly standard tools that are used to describe data and give us an idea about the degree of uncertainty we have in the data. When describing data that is quantitative, we usually describe the following: the shape of its distribution, its average or typical value, and its spread and uncertainty.
+
+\section{Visualizing Data}\label{visualizing-data}
+
+Data visualization is the representation of information in the form of pictures. Imagine have access to weights of all newborn babies at a local hospital. Examining each numerical value could be time consuming. So instead, we can use visualizations to give us an idea about the values of the weights. For example, what weights of newborns are common? What proportion of babies have dangerously low weights (which may indicate health risks)? Good data visualizations can give us such information fairly quickly. Next, we will explore some common visualizations that are used for quantitative (or numerical) variables.
+
+\subsection{Dot Plots}\label{dot-plots}
+
+We will start with a \textbf{dot plot}, as it is the most basic visualization for a quantitative variable. We will use the \texttt{loan50} dataset from the \texttt{openintro} package. The data originally consist of thousands of loans made through the Lending Club platform, but we will randomly select 50 of these loans. Let us study the interest rate the loans the 50 applicants received.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\FunctionTok{library}\NormalTok{(openintro)}
+
+\DocumentationTok{\#\#create object for data}
+\NormalTok{Data}\OtherTok{\textless{}{-}}\NormalTok{loan50}
+\end{Highlighting}
+\end{Shaded}
+
+For simplicity, we will round the numerical values of the interest rates to the nearest whole number:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#round interest rate to whole number}
+\NormalTok{Data}\OtherTok{\textless{}{-}}\NormalTok{ Data}\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{r\_int\_rate =} \FunctionTok{round}\NormalTok{(interest\_rate))}
+\end{Highlighting}
+\end{Shaded}
+
+We can create the corresponding dot plot, per Figure \ref{fig:dotplot}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#dotplot}
+\FunctionTok{ggplot}\NormalTok{(Data,}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{r\_int\_rate))}\SpecialCharTok{+}
+  \FunctionTok{geom\_dotplot}\NormalTok{(}\AttributeTok{binwidth=}\DecValTok{1}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}
+    \AttributeTok{axis.text.y =} \FunctionTok{element\_blank}\NormalTok{(),  }\CommentTok{\# Remove y{-}axis labels}
+    \AttributeTok{axis.title.y =} \FunctionTok{element\_blank}\NormalTok{(), }\CommentTok{\# Remove y{-}axis title}
+    \AttributeTok{axis.ticks.y =} \FunctionTok{element\_blank}\NormalTok{()  }\CommentTok{\# Remove y{-}axis ticks}
+\NormalTok{  )}\SpecialCharTok{+} 
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x=}\StringTok{"Interest Rates (Rounded)"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\centering
+\includegraphics{bookdown-demo_files/figure-latex/dotplot-1.pdf}
+\caption{\label{fig:dotplot}Dot Plot for 50 Interest Rates (rounded)}
+\end{figure}
+
+Notice there is 1 black dot that corresponds to an interest rate of 20 (presumably in percent), so there is one applicant who has a rounded interest rate of 20 percent. There are 8 black dots that correspond to an interest rate to 10 percent, so there are 8 applicants with a rounded interest rate of 10 percent. So interest rates of 10 percent are much more commonly occurring than interest rate of 20 percent. So we can use the height, or number of dots, to help us glean how often the value of a certain interest rate occurs. Based on this dotplot, interest rates between 5 and 11 percent are common, with higher values being less common.
+
+\emph{Note:} do not get too torn up about the details in the code to produce this dot plot. I have chosen the present the dot plot this way to highlight how we use it, without getting bogged down in the details of how it can be produced. We will not be using dot plots in this class.
+
+\subsection{Histograms}\label{histograms}
+
+It turns out that dot plots are often not useful for large data sets, but they provide the general idea of how other visualizations for larger data sets work. The height of the dots inform us the frequency of those values occurring.
+
+A visualization that is more commonly used for larger data sets is a histogram. Instead of displaying how common each value of the variable exists, we think of the values as belonging to a \textbf{bin} of values. For example, we can create a bin that contains interest rates between 5 and 7.5 percent, another bin containing interest rates between 7.5 and 10 percent, and so on. A few things to note about histograms:
+
+\begin{itemize}
+\item
+  By convention, values that lie exactly on the boundary of a bin will belong to the lower bin. For example, an interest rate that is exactly 12.5 percent will belong to the bin between 10 and 12.5 percent, and not the bin between 12.5 to 15 percent.
+\item
+  Each bin should have the same width. In our example, the width is 2.5.
+\end{itemize}
+
+We create this histogram (using the original interest rates) below, per Figure \ref{fig:hist}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#set up sequence to specify the bins}
+\NormalTok{s25}\OtherTok{\textless{}{-}}\FunctionTok{seq}\NormalTok{(}\DecValTok{5}\NormalTok{,}\FloatTok{27.5}\NormalTok{,}\FloatTok{2.5}\NormalTok{)}
+
+\FunctionTok{ggplot}\NormalTok{(Data,}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{interest\_rate))}\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{breaks=}\NormalTok{s25,}\AttributeTok{fill=}\StringTok{"blue"}\NormalTok{,}\AttributeTok{color=}\StringTok{"orange"}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x=}\StringTok{"Interest Rate"}\NormalTok{, }\AttributeTok{title=}\StringTok{"Histogram of Interest Rates"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\centering
+\includegraphics{bookdown-demo_files/figure-latex/hist-1.pdf}
+\caption{\label{fig:hist}Historgram for 50 Interest Rates}
+\end{figure}
+
+Similar to the dot plot in Figure \ref{fig:dotplot}, the height of the histogram inform us what values are more commonly occurring. We can see from this histogram that interest rates between 5 and 10 percent are common, much more so than loans with interest rates greater than 20 percent. We could say that we have more certainty that a randomly selected loan applicant will have an interest rate between 5 and 10 percent than an interest rate that is greater than 20 percent.
+
+\subsubsection{Shapes of Distribution}\label{shapes-of-distribution}
+
+Histograms can also give us an idea about the \textbf{shape} of the distribution of interest rates. For the histogram in Figure \ref{fig:hist}, most of the loans are less than 15 percent, with only a small number of loans greater than 20 percent. We can say that we have greater certainty that a loan will have an interest rate less than 15 percent. When the data tail off to the right as in our histogram, the shape is said to be \textbf{right-skewed}. When a variable is said to be right-skewed, large values of the variable are much less common than small values of the variable; smaller values are more likely occur.
+
+\begin{itemize}
+\item
+  If the histogram has the reverse characteristic, i.e.~the data tail off to the left instead, the shape is said to be \textbf{left-skewed}. This implies that small values of the variable are much less common than large values of the variable; larger values are more likely to occur.
+\item
+  Histograms that trail off similarly in both directions are called \textbf{symmetric}. Large and small values are of the variable are equally likely.
+\item
+  Histograms that have a peak in the middle, and then trail off on both sides are not only symmetic, but also \textbf{bell-shaped}, or have a \textbf{normal} distribution. Note: it turns out one of the assumptions in linear regression is that the response variable follow a normal distribution. This may seem restrictive, however, we will see in later modules that this assumption is not particular crucial under some circumstances.
+\end{itemize}
+
+\emph{Thought question:} Can you think of real life variables that have symmetric, right-skewed, left-skewed distributions? Feel free to search the internet for examples.
+
+\subsubsection{Considerations with Histograms}\label{considerations-with-histograms}
+
+With our interest rate example, you may have noticed that I made a specific choice to the width of the bins when I created the histograms. It turns out that the width of the bins can impact the shape of the histogram, and potentially, how we interpret the histogram.
+
+Consider creating a histogram with bin width of 0.5, instead of 2.5, per Figure \ref{fig:hist05}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#set up sequence to specify the bins. width now 0.5}
+\NormalTok{s05}\OtherTok{\textless{}{-}}\FunctionTok{seq}\NormalTok{(}\DecValTok{5}\NormalTok{,}\FloatTok{27.5}\NormalTok{,}\FloatTok{0.5}\NormalTok{)}
+
+\FunctionTok{ggplot}\NormalTok{(Data,}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{interest\_rate))}\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{breaks=}\NormalTok{s05,}\AttributeTok{fill=}\StringTok{"blue"}\NormalTok{,}\AttributeTok{color=}\StringTok{"orange"}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x=}\StringTok{"Interest Rate"}\NormalTok{, }\AttributeTok{title=}\StringTok{"Histogram of Interest Rates"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\centering
+\includegraphics{bookdown-demo_files/figure-latex/hist05-1.pdf}
+\caption{\label{fig:hist05}Historgram for 50 Interest Rates, with Bin Width 0.5}
+\end{figure}
+
+Comparing Figure \ref{fig:hist05} with Figure \ref{fig:hist}, note the following:
+
+\begin{itemize}
+\item
+  Visually, the histogram looks more jagged with smaller bin width, whereas the histogram looks smoother with a larger bin width.
+\item
+  Smaller bin widths may be preferred if we need information about smaller ranges of interest rates. However, it can be difficult to write about general trends.
+\item
+  Larger bin widths may be more useful if we are trying to look for more general trends in the interest rates.
+\end{itemize}
+
+\emph{Thought question}: What happens if we create a histogram with a bin width that is too large?
+
+\subsection{Density Plots}\label{density-plots}
+
+Another visualization for a quantitative variable is a density plot. A density plot can be viewed as a smoothed version of the histogram. We can use the heights to inform us about what values are more common. We create a density plot for the interest rates in Figure \ref{fig:dens}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#density plot}
+\FunctionTok{plot}\NormalTok{(}\FunctionTok{density}\NormalTok{(Data}\SpecialCharTok{$}\NormalTok{interest\_rate), }\AttributeTok{main=}\StringTok{"Density Plot of Interest Rates"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\centering
+\includegraphics{bookdown-demo_files/figure-latex/dens-1.pdf}
+\caption{\label{fig:dens}Density Plot for 50 Interest Rates}
+\end{figure}
+
+Based on Figure \ref{fig:dens}, we see that low interest rates (between 5 and 12.5 percent) are much more common and high interest rates (higher than 20 percent). A few things to note about interpreting density plots:
 
 \begin{itemize}
 \tightlist
 \item
-  \(\hat{\beta}_1\) = 120.3930985. The predicted study time increases by 120.3930985 minutes for each additional course taken.
+  The area under the density plot is always equals to 1.
 \item
-  \(\hat{\beta}_0\) = 58.4482853. The predicted study time is 58.4482853 when no courses are taken. Notice this value does not make sense, as a student cannot be taking 0 courses. If you look at our data, the number of courses taken is 3, 4, or 5. So we should only use our regression when \(3 \leq x \leq 5\). We cannot use it for values of \(x\) outside the range of our data. Making predictions of the response variable for predictors outside the range of the data is called \textbf{extrapolation} and should not be done.
+  To find the proportion of interest rates that are between two values, for example between 10 and 15 percent, we would integrate this density plot over this range, i.e.~\(\int_{10}^{15} f(x) dx\), where \(f(x)\) is a mathematical equation that describes the density plot.
+\item
+  The values on the vertical axis do not equal to probabilities (a common misconception).
 \end{itemize}
 
-\section{Estimating Variance of Errors in SLR}\label{estimating-variance-of-errors-in-slr}
+The density plot is found using a method called kernel density estimation (KDE). We will over details about KDE in a later module as we need to cover quite a bit of material before doing so.
 
-The estimator of \(\sigma^2\), the variance of the error terms (also the variance of the probability distribution of \(y\) given \(x\)) is
+\subsubsection{Considerations with Density Plots}\label{considerations-with-density-plots}
+
+Similar to bins and histograms, density plots are affected by the \textbf{bandwidth}. Larger bandwidths lead to smoother density plots, while smaller bandwidths lead to more jagged density plots. We create a density plot that uses a bandwidth that is twice the default in Figure \ref{fig:dens2} below:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(}\FunctionTok{density}\NormalTok{(Data}\SpecialCharTok{$}\NormalTok{interest\_rate, }\AttributeTok{adjust=}\DecValTok{2}\NormalTok{), }\AttributeTok{main=}\StringTok{"Density Plot of Interest Rates, with Bandwidth Twice the Default"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\centering
+\includegraphics{bookdown-demo_files/figure-latex/dens2-1.pdf}
+\caption{\label{fig:dens2}Density Plot for 50 Interest Rates with Larger Bandwidth}
+\end{figure}
+
+Notice in Figure \ref{fig:dens2} that the little peak for interest rates between 15 and 20 (which existed in Figures \ref{fig:dens} and also \ref{fig:hist}) no longer exists. Using bandwidths that are too large can smooth out some of these peaks.
+
+\emph{Thought question}: What if we create a density plot with a bandwidth that is too small?
+
+\emph{Thought question}: How are bin widths for histograms and bandwidths for density plots related?
+
+\section{Ordered Statistics}\label{ordered-statistics}
+
+The idea behind ordered statistics is pretty self-explanatory: take your numerical variable, and order the values from smallest to largest. Going back to our example of the interest rates from 50 loan applicants, let \(X\) denote the interest rate. Then \(x_{(1)}\) will denote the interest rate that is the smallest, \(x_{(2)}\) denotes the second smallest interest rate, and \(x_{(50)}\) denotes the largest interest rate in our sample of 50.
+
+\subsection{Quantiles}\label{quantiles}
+
+\textbf{Quantiles} partition the range of numerical data into continuous intervals (groups) with (nearly) equal proportions. Common quartiles have their own names:
+
+\begin{itemize}
+\tightlist
+\item
+  Quartiles: 4 groups
+\item
+  Percentiles: 100 groups
+\end{itemize}
+
+There is one less quantiles than the number of groups. We will go over quartiles in more detail.
+
+\subsubsection{Quartiles}\label{quart}
+
+Quartiles divide the data into 4 groups, and each group has (nearly) equal number of observations. So there will be three quartiles, denoted by \(Q_1, Q_2, Q_3\).
+
+\begin{itemize}
+\tightlist
+\item
+  The first group will have values between negative infinity and \(Q_1\).
+\item
+  The second group will have values between negative \(Q_1\) and \(Q_2\).
+\item
+  The third group will have values between negative \(Q_2\) and \(Q_3\).
+\item
+  The fourth group will have values between negative \(Q_3\) and infinity.
+\end{itemize}
+
+\(Q_2\), sometimes called the second quartile, is the easiest value to find. It is also called the \textbf{median} of the data. Going back to our interest rates from the 50 loan applicants. Using our ordered statistics, the median is the middle observation. Since we have an even number of observations, we have two middle observations, \(x_{(25)}\) and \(x_{(26)}\). In this situation, the median will be the average of these two middle observations. Using R, we find the median to be:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{median}\NormalTok{(Data}\SpecialCharTok{$}\NormalTok{interest\_rate)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 9.93
+\end{verbatim}
+
+So half the interest rates are less than 9.93 percent, and half the interest rates are greater than 9.93 percent. You might also recognize another term for the median: the 50th percentile, as 50 percent of the interest rates are less than 9.93.
+
+To find the middle observation(s) based on a sample of size \(n\):
+
+\begin{itemize}
+\tightlist
+\item
+  If \(n\) is even, the 2 middle observations will be position \(\frac{n}{2}\) and \(\frac{n}{2} + 1\) in the ordered statistics.
+\item
+  If \(n\) is odd, the middle observation will be position \(\frac{n}{2} + 0.5\) in the ordered statistics.
+\end{itemize}
+
+\(Q_1\) and \(Q_3\) (also called the first and third quartiles) are found together, after finding \(Q_2\). Note that \(Q_2\) divides the data into two groups. Using our interest rates example, one group contains \(x_{(1)}, \cdots, x_{(25)}\), and another group contains \(x_{(26)}, \cdots, x_{(50)}\). \(Q_1\) is the median of the first group, and \(Q_3\) is the median of the second group. So for our 50 loan applicants:
+
+\begin{itemize}
+\tightlist
+\item
+  \(Q_1\) is \(x_{(13)}\), and
+\item
+  \(Q_3\) is \(x_{(38)}\).
+\end{itemize}
+
+To find these values in R, we could type:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{quantile}\NormalTok{(Data}\SpecialCharTok{$}\NormalTok{interest\_rate, }\AttributeTok{prob=}\FunctionTok{c}\NormalTok{(}\FloatTok{0.25}\NormalTok{,}\FloatTok{0.75}\NormalTok{), }\AttributeTok{type =} \DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   25%   75% 
+##  7.96 14.08
+\end{verbatim}
+
+So \(Q_1\) is 7.96 percent, and \(Q_3\) is 14.08 percent. It turns out that \(Q_1\) is also the 25th percentile, and \(Q_3\) is also the 75th percentile, by definition.
+
+Remember we wrote the following earlier:
+
+\begin{itemize}
+\tightlist
+\item
+  The first group will have values between negative infinity and \(Q_1\). So about a quarter of observations are have interest rates less than 7.96 percent.
+\item
+  The second group will have values between negative \(Q_1\) and \(Q_2\). So about a quarter of observations have interest rates between 7.96 and 9.93 percent.
+\item
+  The third group will have values between negative \(Q_2\) and \(Q_3\). So about a quarter of observations have interest rates between 9.93 and 14.08 percent.
+\item
+  The fourth group will have values between negative \(Q_3\) and infinity. So about a quarter of observations have interest rates above 14.08 percent.
+\end{itemize}
+
+Note: you may notice that we used \texttt{type\ =\ 1} inside the \texttt{quantile()} function. Using \texttt{type\ =\ 1} gives the values of the first and third quartiles that are based on the method that was just described. There are actually several ways to find quantiles, which may result in slightly differing values, although they all generally meet the definition that \(Q_1\) is the 25th percentile, and \(Q_3\) is the 75th percentile.
+
+\subsubsection{Percentiles}\label{percentiles}
+
+Another common quantile is the percentile. In general the \textbf{k-th percentile} is the value of the data point below which \(k\) percent of observations are found. So in our earlier example, we said that \(Q_3\) of the interest rates is 14.08 percent, and this is also the 75th percentile. So 75 percent of interest rates are less than 14.08 percent.
+
+We will not go over the details of finding percentiles by hand.
+
+\subsection{Box Plots}\label{box-plots}
+
+Another visualization used to summarize quantitative data is the box plot. A \textbf{box plot} summarizes the 5-number summary. The 5 numbers are the minimum, \(Q_1, Q_2, Q_3\), and the maximum. Using our interest rate data, the box plot is shown in Figure \ref{fig:boxplot}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#box plot}
+\FunctionTok{ggplot}\NormalTok{(Data,}\FunctionTok{aes}\NormalTok{(}\AttributeTok{y=}\NormalTok{interest\_rate))}\SpecialCharTok{+}
+  \FunctionTok{geom\_boxplot}\NormalTok{()}\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{y=}\StringTok{"Interest Rate"}\NormalTok{, }\AttributeTok{title=}\StringTok{"Box Plot of Interest Rates"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\centering
+\includegraphics{images/01-boxplot.jpeg}
+\caption{\label{fig:boxplot}Box Plot of Interest Rates}
+\end{figure}
+
+Some people call a box plot a box and whisker plot.
+
+\begin{itemize}
+\tightlist
+\item
+  The boundaries of the box represent \(Q_1\) and \(Q_3\).
+\item
+  The thick line in the box represents the median.
+\item
+  The two whiskers on either side of the box extend to the minimum and maximum, if outliers do not exist. If outliers exist, the whiskers extend to the minimum and maximum values that are not outliers.
+\end{itemize}
+
+Generally, when we have one quantitative variable, an outlier is an observation whose numerical value is far away from the rest of the data. In other words, it is a lot smaller or larger relative to the rest of the data.
+
+So for our 50 loans, there are two loan applicants with interest rates around 25 percent that are flagged as being a lot larger than the rest of the loans, which is reasonable since most of the loans are a lot smaller than 20 percent.
+
+We will not go over the details of how outliers are determined in box plots. If you are interested, you can read Chapter 2.1.5 from OpenIntro Statistics (Diez, Ceytinka-Rundel, Barr).
+
+Notice how much further large values (\(Q_3\) and maximum) are from the median, compared to the distance of the small values (\(Q_1\) and minimum) from the median. This indicates that the distribution of interest rates are right-skewed. Compare the boxplot of the interest rates in Figure \ref{fig:boxplot} with its corresponding histogram (Figure \ref{fig:hist}) and density plot (Figure \ref{fig:dens}).
+
+\emph{Thought question}: can you sketch a box plot that represents a variable that is left-skewed? How about a variable that is symmetric?
+
+\subsection{Empirical Cumulative Distribution Function}\label{empirical-cumulative-distribution-function}
+
+From the previous sections, we can see how we could use histograms, density plots, and box plots to inform us about what proportion of observations take certain values, and the values of the data that correspond to certain percentiles. However, we are limited to quartiles and not any percentile when using box plots, and we need to find areas under the density plot (using integration, not a trivial task), or add up frequencies on a histogram (can be time consuming).
+
+A plot that can easily give us values of the variable that correspond to percentiles is the \textbf{empirical cumulative distribution function (ECDF)} plot.
+
+Let \(X\) denote a random variable, and we have observed \(n\) observations of \(X\) denoted by \(x_1, \cdots, x_n\). Let \(x_{(1)}, \cdots x_{(n)}\) denote the ordered statstics of the \(n\) observations. The ECDF, denoted by \(\hat{F}_n(x)\) is the proportion of sample observations less than or equal to the value \(x\) of the random variable. Mathematically, the ECDF is:
+
+\[
+ \hat{F}_n(x) = 
+  \begin{cases} 
+   0, & \text{for } x < x_{(1)} \\
+   \frac{k}{n},       & \text{for } x_{(k)} \leq x < x_{(k+1)}, k = 1, \cdots, n-1\\
+   1, & \text{for } x \geq x_{(n)}.
+  \end{cases}
+\]
+We shall use a simple toy example to illustrate how an ECDF is constructed. Suppose we ask 5 people how many times to go to the gym (at least 20 minutes) in a typical work week. The answers are: 3, 0, 1, 5, 3. The random variable \(X\) is how many times a person goes to the gym for at least 20 minutes, and the ordered statistics are \(x_{(1)} = 0, x_{(2)} = 1, x_{(3)} = 3, x_{(4)} = 3, and x_{(5)} = 5\). Using the mathematical definition for the ECDF, we have:
+
+\begin{itemize}
+\tightlist
+\item
+  \(\hat{F}_n(x) = 0\) for \(x < x_{(1)} = 0\).
+\item
+  \(\hat{F}_n(x) = \frac{1}{5}\) for \(0 \leq x < x_{(2)} = 1\).
+\item
+  \(\hat{F}_n(x) = \frac{2}{5}\) for \(1 \leq x < x_{(3)} = 3\).
+\item
+  \(\hat{F}_n(x) = \frac{4}{5}\) for \(3 \leq x < x_{(5)} = 5\). This value is special for this example since we have two observations where \(x=3\).
+\item
+  \(\hat{F}_n(x) = 1\) for \(x \geq 5\).
+\end{itemize}
+
+The corresponding ECDF plot is shown in Figure \ref{fig:ecdf}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#toy data}
+\NormalTok{y}\OtherTok{\textless{}{-}}\FunctionTok{c}\NormalTok{(}\DecValTok{3}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{3}\NormalTok{)}
+\DocumentationTok{\#\#ECDF plot}
+\FunctionTok{plot}\NormalTok{(}\FunctionTok{ecdf}\NormalTok{(y), }\AttributeTok{main =} \StringTok{"ECDF for Toy Example"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\centering
+\includegraphics{bookdown-demo_files/figure-latex/ecdf-1.pdf}
+\caption{\label{fig:ecdf}ECDF Plot for Toy Example}
+\end{figure}
+
+We can easily find percentiles from this plot, for example, the 40th percentile is equal to 1, going to the gym once a week. About 20 percent of observations go to the gym less than 1 time a week.
+
+Next, we create the ECDF plot for the interest rates from the 50 loan applicants.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(}\FunctionTok{ecdf}\NormalTok{(Data}\SpecialCharTok{$}\NormalTok{interest\_rate), }\AttributeTok{main =} \StringTok{"ECDF Plot of Interest Rates"}\NormalTok{)}
+\FunctionTok{abline}\NormalTok{(}\AttributeTok{h=}\FloatTok{0.8}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\centering
+\includegraphics{bookdown-demo_files/figure-latex/ecdfreal-1.pdf}
+\caption{\label{fig:ecdfreal}ECDF Plot of Interest Rates}
+\end{figure}
+
+I overlaid a horizontal line for the 80th percentile, so we can read on the horizontal axis that this corresponds to an interest rate of about 17 percent. So about 80 percent of loan applicants have an interest rate less than 17 percent.
+
+\emph{Thought question}: try using the histogram and density plot for the interest rates (Figures \ref{fig:hist} and \ref{fig:dens}) to find the interest rate that corresponds to the 80th percentile. Was this easy to perform?
+
+\section{Measures of Centrality}\label{measures-of-centrality}
+
+So far, we have used visualizations to summarize the shape of the distribution of a quantitative variable. Next, we look at common measures of centrality. Loosely speaking, measures of centrality are measures that describe the average or typical value of a quantitative variable. The common measures of centrality are the mean, median, and mode.
+
+\subsection{Mean}\label{mean}
+
+The sample \textbf{mean} is simply the average value of the variable in our sample. The sample mean for a random variable \(X\) is denoted by \(\bar{x}\), and is found by:
+
 \begin{equation} 
-s^2 = MS_{res} = \frac{SS_{res}}{n-2} = \frac{\sum\limits_{i=1}^n e_i^2}{n-2},
+\bar{x} = \frac{\sum_{i=1}^n x_i}{n}.
+\label{eq:mean}
+\end{equation}
+
+So, for our toy example of the 5 people and how often they go to the gym in a week, their sample mean is \(\bar{x} = \frac{3+0+1+5+3}{5} = 2.4\).
+
+\subsection{Median}\label{median}
+
+We went over how to find the median in section \ref{quart}. The \textbf{median} is the value of the middle observation in ordered statistics. It is also called \(Q_2\), the second quartile, and the 50th percentile, so approximately 50 percent of observations have values smaller than the median.
+
+So, for our toy example of the 5 people and how often they go to the gym in a week, their sample median is \(x_{(3)} = 3\). So about 50 percent of people went to gym less than 3 times in a week.
+
+\subsection{Mode}\label{mode}
+
+Another measure is the mode. Mathematically speaking, the \textbf{mode} is the most commonly occurring value in the data. So for our toy example, the mode is 3, since 3 occurs twice and occurs the most often in our data.
+
+\subsection{Considerations}\label{considerations}
+
+A few things to consider when using these measures of centrality:
+
+\begin{itemize}
+\item
+  The mean is a measure that most people are comfortable with, however, caution needs to be used if the variable is skewed, as extreme outliers and drastically alter the value of the mean. Using our toy example with the gym, suppose the person who visits the gym the most visits 50 times, instead of 5. The numerical value of the sample mean explodes, and does not give a good representation of the central value of how many visits to the gym a person makes in a week. The mean is fine if the variable is symmetric.
+\item
+  The median is a measure that is recommended for skewed distributions, since the order associated with ordered statistics is not influenced by extreme outliers. Using the gym example, in the previous bullet point, the median is unaffected.
+\item
+  The mean being larger than the median is an indication that the distribution is right-skewed. Using our interest rate example, we have:
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{mean}\NormalTok{(Data}\SpecialCharTok{$}\NormalTok{interest\_rate)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 11.5672
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{median}\NormalTok{(Data}\SpecialCharTok{$}\NormalTok{interest\_rate)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 9.93
+\end{verbatim}
+
+which is consistent with the right skew we saw in the histogram and density plot in Figures \ref{fig:hist} and \ref{fig:dens}. Conversely, a left-skewed distribution usually has a mean that is smaller than the median. A symmetric distribution typically has similar values for the mean and median.
+
+\begin{itemize}
+\item
+  The mean is considered a \textbf{sensitive} measure, since its numerical value can be drastically affected by outliers. The median is considered a \textbf{robust} measure, since its numerical value is more resistant and is less affected by outliers.
+\item
+  The mathematical definition of mode can be difficult to use for variables that are continuous, since it is likely that there are no observations that have the same value when the variable is continuous. In this instance, the mode typically refers to the bin in the histogram that has is the tallest. So, using the histogram in Figure \ref{fig:hist} for the interest rates, the mode is between 7.5 to 10 percent.
+\end{itemize}
+
+\section{Measures of Uncertainty}\label{measures-of-uncertainty}
+
+In the previous sections, we learned about summarizing features a quantitative variable, by using visualizations to summarize its shape, and by using some measures of centrality that describe the average or typical values of the variable. One more feature we can summarize is the spread, associated with the values of a quantitative variable. Measures of spread are considered a way to measure uncertainty. Data that have larger spread have more uncertainty.
+
+\subsection{Variance and Standard Deviation}\label{variance-and-standard-deviation}
+
+One measure of spread is the variance. The sample \textbf{variance} for a random variable \(X\) is denoted by \(s^2\), or sometimes \(s_x^2\), and is found by:
+
+\begin{equation} 
+s^2 = \frac{\sum_{i=1}^n (x_i-\bar{x})^2}{n-1}.
 \label{eq:variance}
 \end{equation}
 
-where \(MS_{res}\) is the called the \textbf{mean squared residuals}.
-
-\(\sigma^2\), the variance of the error terms, measures the spread of the response variable, for each value of \(x\). The smaller this is, the closer the data points are to the regression equation.
-
-\subsection{Practice questions}\label{practice-questions-1}
-
-Take a look at the scatterplot of study time against number of courses taken, Figure \ref{fig:scatter-courses}. On this plot, label the following:
-
-\begin{itemize}
-\tightlist
-\item
-  estimated SLR equation
-\item
-  the fitted value when \(x=3\), \(x=4\), and \(x=5\).
-\item
-  the residual for any data point on the plot of your choosing.
-\end{itemize}
-
-\emph{Try these on your own first, then view the associated video to see if you labeled the plot correctly!}
-
-\section{Assessing Linear Association}\label{assessing-linear-association}
-
-As noted earlier, the variance of the error terms inform us how close the data points are to the estimated SLR equation. The smaller the variance of the error terms, the closer the data points are to the estimated SLR equation. This in turn implies the linear relationship between the variables is stronger.
-
-We will learn about some common measures that are used to quantify the strength of the linear relationship between the response and predictor variables. Before we do that, we need to define some other terms.
-
-\subsection{Sum of squares}\label{sum-of-squares}
-
-\begin{equation} 
-\text{Total Sum of Squares: } SS_T = \sum\limits_{i=1}^{n} (y_i - \bar{y})^{2}.
-\label{eq:SST}
-\end{equation}
-
-Total sum of squares is defined as the \textbf{total variance in the response variable}. The larger this value is, the larger the spread is of the response variable.
-
-\begin{equation} 
-\text{Regression sum of squares: } SS_R = \sum\limits_{i=1}^{n} (\hat{y_i} - \bar{y})^{2}.
-\label{eq:SSR}
-\end{equation}
-
-Regression sum of squares is defined as the \textbf{variance in the response variable that can be explained by our regression}.
-
-We also have residual sum of squares, \(SS_{res}\). Its mathematical formulation is given in \eqref{eq:SSres}. It is defined as the \textbf{variance in the response variable that cannot be explained by our regression}.
-
-It can be shown that
-
-\begin{equation}
-SS_T = SS_R + SS_{res}.
-\label{eq:SS}
-\end{equation}
-
-Each of the sums of squares has its associated \textbf{degrees of freedom (df)}:
-
-\begin{itemize}
-\tightlist
-\item
-  df for \(SS_R\): \(df_R = 1\)
-\item
-  df for \(SS_{res}\): \(df_{res} = n-2\)
-\item
-  df for \(SS_T\): \(df_T = n-1\)
-\end{itemize}
-
-\emph{Please see the associated video for more explanation about the concept behind degrees of freedom.}
-
-\subsection{ANOVA Table}\label{anova-table}
-
-Information regarding the sums of squares is usually presented in the form of an \textbf{ANOVA (analysis of variance) table}:
-
-\begin{longtable}[]{@{}
-  >{\centering\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.2353}}
-  >{\centering\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.2941}}
-  >{\centering\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.1569}}
-  >{\centering\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.1569}}
-  >{\centering\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.1569}}@{}}
-\toprule\noalign{}
-\begin{minipage}[b]{\linewidth}\centering
-Source of Variation
-\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
-SS
-\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
-df
-\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
-MS
-\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
-F
-\end{minipage} \\
-\midrule\noalign{}
-\endhead
-\bottomrule\noalign{}
-\endlastfoot
-Regression & \(SS_R=\sum\left(\hat{y_i}-\bar{y}\right)^2\) & \(df_R = 1\) & \(MS_R=\frac{SS_R}{df_R}\) & \(\frac{MS_R}{MS_{res}}\) \\
-Error & \(SS_{res} = \sum\left(y_i-\hat{y_i}\right)^2\) & \(df_{res} = n-2\) & \(MS_{res}=\frac{SS_{res}}{df_{res}}\) & \texttt{***} \\
-Total & \(SS_T=\sum\left(y_i-\bar{y}\right)^2\) & \(df_T = n-1\) & \texttt{***} & \texttt{***} \\
-\end{longtable}
-
-Note:
-
-\begin{itemize}
-\tightlist
-\item
-  Dividing each sum of square with its corresponding degrees of freedom gives the corresponding mean square.
-\item
-  In the last column, we report an \(F\) statistic, which equal to \(\frac{MS_R}{MS_{res}}\). This \(F\) statistic is associated with an \textbf{ANOVA F test}, which we will look at in more detail in the next subsection.
-\end{itemize}
-
-To obtain the ANOVA table for our study time example:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{anova}\NormalTok{(result)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## Analysis of Variance Table
-## 
-## Response: study
-##             Df   Sum Sq  Mean Sq F value    Pr(>F)    
-## courses      1 57977993 57977993   65404 < 2.2e-16 ***
-## Residuals 5998  5317017      886                      
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-\end{verbatim}
-
-Notice that R does not print out the information for the line regarding \(SS_T\).
-
-\subsection{\texorpdfstring{ANOVA \(F\) Test}{ANOVA F Test}}\label{anova-f-test}
-
-In SLR, the ANOVA \(F\) statistic from the ANOVA table can be used to test if the slope of the SLR equation is 0 or not. In words, this means that whether there is a linear association between the variables or not. If the slope is 0, it means that changes in the value of the predictor variable do not change the value of the response variable, on average; hence the variables are not linearly associated.
-
-The null and alternative hypotheses are:
+The variance can be interpreted as the approximate average squared distance of the observations from the mean. The formula in equation \eqref{eq:variance} may look a bit complicated, but let us use the toy example where we asked 5 people how often they go to the gym in a workweek. The answers are: 3, 0, 1, 5, 3, and we had earlier found the sample mean to be \(\bar{x} = 2.4\). To calculate the sample variance:
 
 \[
-H_0: \beta_1 = 0, H_a: \beta_1 \neq 0.
+\begin{split}
+s^2 &= \frac{\sum_{i=1}^n (x_i-\bar{x})^2}{n-1}\\
+ &= \frac{(3-2.4)^2 + (0-2.4)^2 + (1-2.4)^2 + (5-2.4)^2 + (3-2.4)^2}{5-1} \\
+&= 3.8 
+\end{split}
 \]
-The test statistic is
+
+Notice what we did in the numerator of equation \eqref{eq:variance}: we take the difference between each observed value from the sample mean, square these differences, then add up the squared differences. We then divide by \(n-1\), rather than \(n\), hence the sample variance being the approximate averaged squared distance of the observations from the mean. There is some nuance in the mathematics as to why we divide by \(n-1\) instead of \(n\), and may not be intuitive as to why we do so. It turns out dividing by \(n-1\) makes the sample variance an unbiased estimator of the true variance in the population (denoted by \(\sigma^2\)) and is more reliable than if we had divided by \(n\). We will go over this in more detail in a later module after covering a few additional concepts.
+
+Larger values of the sample variance indicate that the observations are generally further away from the sample mean, indicating larger spread, and a higher degree of uncertainty about future values.
+
+\emph{Thought question}: What does it mean if the sample variance of a set of observations is 0? Why does this indicate their there is little (or no) uncertainty about the set of observations?
+
+Another related measure is the sample \textbf{standard deviation}, which is the square root of the sample variance. Similar to the variance, larger values indicated more spread in the data.
+
+\subsection{Interquartile Range}\label{interquartile-range}
+
+Another measure of spread is the \textbf{interquartile range (IQR)}, and it is the difference between the third and first queartiles,
 
 \begin{equation} 
-F = \frac{MS_R}{MS_{res}}
-\label{eq:ANOVA}
+IQR = Q_3 - Q_1.
+\label{eq:IQR}
 \end{equation}
 
-and is compared with an \(F_{1,n-2}\) distribution. Note that \(F_{1,n-2}\) is read as an \textbf{F distribution with 1 and \(n-2\) degrees of freedom}.
-
-Going back to the study time example, the \(F\) statistic is \ensuremath{6.5403586\times 10^{4}}. The critical value can be found using
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{qf}\NormalTok{(}\DecValTok{1}\FloatTok{{-}0.05}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{6000{-}2}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] 3.84301
-\end{verbatim}
-
-Since our test statistic is larger than the critical value, we reject the null hypothesis. Our data support the claim that the slope is different from 0, or in other words, that there is a linear association between study time and number of courses taken.
-
-\subsection{Coefficient of determination}\label{coefficient-of-determination}
-
-The \textbf{coefficient of determination, \(R^2\),} is
-
-\begin{equation}
-R^{2} = \frac{SS_R}{SS_T} = 1 - \frac{SS_{res}}{SS_T}.
-\label{eq:R2}
-\end{equation}
-
-\(R^{2}\) is an indication of how well the data fits our model. In the context of simple linear regression, it denotes \textbf{the proportion of variance in the response variable that is explained by the predictor}.
-
-A few notes about \(R^2\):
-
-\begin{itemize}
-\tightlist
-\item
-  \(0 \leq R^2 \leq 1\).
-\item
-  Values closer to 1 indicate a better fit; values closer to 0 indicate a poorer fit.
-\item
-  Sometimes reported as a percentage.
-\end{itemize}
-
-To obtain \(R^2\) for our study time example:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{anova.tab}\OtherTok{\textless{}{-}}\FunctionTok{anova}\NormalTok{(result)}
-\DocumentationTok{\#\#SST not provided, so we add up SSR and SSres}
-\NormalTok{SST}\OtherTok{\textless{}{-}}\FunctionTok{sum}\NormalTok{(anova.tab}\SpecialCharTok{$}\StringTok{"Sum Sq"}\NormalTok{)}
-\DocumentationTok{\#\#R2}
-\NormalTok{anova.tab}\SpecialCharTok{$}\StringTok{"Sum Sq"}\NormalTok{[}\DecValTok{1}\NormalTok{]}\SpecialCharTok{/}\NormalTok{SST}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] 0.9159963
-\end{verbatim}
-
-This implies that the proportion of variance in study time that can be explained by the number of courses taken is 0.9159963.
-
-\subsection{Correlation}\label{correlation}
-
-A measure used to quantify the strength of the linear association between two quantitative variables is the \textbf{sample correlation}. The sample correlation, \(\mbox{Corr}(x,y)\) or \(r\), is given by
-
-\begin{equation} 
-r = \frac{\sum\limits_{i=1}^{n}(x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum\limits_{i=1}^{n}(x_i - \bar{x})^{2}(y_i - \bar{y})^{2}}}.
-\label{eq:corr}
-\end{equation}
-
-A few notes about \(r\):
-
-\begin{itemize}
-\tightlist
-\item
-  \(-1 \leq r \leq 1\).
-\item
-  Sign of correlation indicates direction of association. A positive value indicates a positive linear association: as the predictor variable increases, so does the response variable, on average. A negative value indicates a negative linear association: as the predictor variable increases, the response variable decreases, on average.
-\item
-  Values closer to 1 or -1 indicate a stronger linear association; values closer to 0 indicate a weaker linear association.
-\item
-  In SLR, it turns out that \(r^2 = R^2\).
-\end{itemize}
-
-Using our study time example, the correlation between study time and number of courses taken is
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{cor}\NormalTok{(df}\SpecialCharTok{$}\NormalTok{study, df}\SpecialCharTok{$}\NormalTok{courses)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] 0.9570769
-\end{verbatim}
-
-This value indicates a very strong and positive linear association between study time and number of courses taken (remember that this is simulated data and is not real).
-
-\subsubsection{How strong is strong?}\label{how-strong-is-strong}
-
-A question that is often raised is how large should the magnitude of the sample correlation be for it to be considered strong? The answer is: it depends on the context. If you are conducting an experiment that is governed by scientific laws (e.g an experiment verifying Newton's 2nd law that \(F = ma\)), we should expect an extremely high correlation. A correlation of 0.9 in such an instance may be considered weak. The value of the correlation you have should be compared with correlations from similar studies in that domain to determine if it is strong or not.
-
-\section{A Word of Caution}\label{a-word-of-caution}
-
-To be able to use the measures we have learned (such as correlation, \(R^2\)) and to interpret the estimated regression coefficients, we must verify via a scatterplot that the association between the two variables is approximately linear. If we see a non linear pattern in the scatterplot, we should not use or interpret these values. We will learn how to remedy the situation if we see a non linear pattern in the scatterplot in module 5.
-
-\emph{Please see the associated video for a demonstration on how not looking at the scatterplot can lead to misleading interpretations.}
-
-\section{R Tutorial}\label{r-tutorial}
-
-For this tutorial, we will work with the dataset \texttt{elmhurst} from the \texttt{openintro} package in R.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{library}\NormalTok{(tidyverse)}
-\FunctionTok{library}\NormalTok{(openintro)}
-\NormalTok{Data}\OtherTok{\textless{}{-}}\NormalTok{openintro}\SpecialCharTok{::}\NormalTok{elmhurst}
-\end{Highlighting}
-\end{Shaded}
-
-Type \texttt{?openintro::elmhurst} to read the documentation for datasets in R. Always seek to understand the background of your data! The key pieces of information are:
-
-\begin{itemize}
-\tightlist
-\item
-  A random sample of 50 students (all freshman from the 2011 class at Elmhurst College).
-\item
-  Family income of the student (units are missing).
-\item
-  Gift aid, in \$1000s.
-\end{itemize}
-
-We want to explore how family income may be related to gift aid, in a simple linear regression framework.
-
-\subsection*{Visualization}\label{visualization}
-\addcontentsline{toc}{subsection}{Visualization}
-
-We should always verify with scatterplot that the relationship is (approximately) linear before proceeding with correlation and simple linear regression!
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\DocumentationTok{\#\#scatterplot of gift aid against family income}
-\NormalTok{ggplot2}\SpecialCharTok{::}\FunctionTok{ggplot}\NormalTok{(Data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{family\_income,}\AttributeTok{y=}\NormalTok{gift\_aid))}\SpecialCharTok{+}
-  \FunctionTok{geom\_point}\NormalTok{()}\SpecialCharTok{+}
-  \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{method =} \StringTok{"lm"}\NormalTok{, }\AttributeTok{se=}\ConstantTok{FALSE}\NormalTok{)}\SpecialCharTok{+}
-  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x=}\StringTok{"Family Income"}\NormalTok{, }\AttributeTok{y=}\StringTok{"Gift Aid"}\NormalTok{, }\AttributeTok{title=}\StringTok{"Scatterplot of Gift Aid against Family"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-14-1.pdf}
-
-We note that the observations are fairly evenly scattered on both sides of the regression line, so a linear association exists. We see a negative linear association. As family income increases, the gift aid, on average, decreases.
-
-We also do not see any observation with weird values that may warrant further investigation.
-
-\subsection*{Regression}\label{regression}
-\addcontentsline{toc}{subsection}{Regression}
-
-We use the \texttt{lm()} function to fit a regression model:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\DocumentationTok{\#\#regress gift aid against family income}
-\NormalTok{result}\OtherTok{\textless{}{-}}\FunctionTok{lm}\NormalTok{(gift\_aid}\SpecialCharTok{\textasciitilde{}}\NormalTok{family\_income, }\AttributeTok{data=}\NormalTok{Data)}
-\end{Highlighting}
-\end{Shaded}
-
-Use the \texttt{summary()} function to display relevant information from this regression:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\DocumentationTok{\#\#look at information regarding regression}
-\FunctionTok{summary}\NormalTok{(result)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## 
-## Call:
-## lm(formula = gift_aid ~ family_income, data = Data)
-## 
-## Residuals:
-##      Min       1Q   Median       3Q      Max 
-## -10.1128  -3.6234  -0.2161   3.1587  11.5707 
-## 
-## Coefficients:
-##               Estimate Std. Error t value Pr(>|t|)    
-## (Intercept)   24.31933    1.29145  18.831  < 2e-16 ***
-## family_income -0.04307    0.01081  -3.985 0.000229 ***
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## Residual standard error: 4.783 on 48 degrees of freedom
-## Multiple R-squared:  0.2486, Adjusted R-squared:  0.2329 
-## F-statistic: 15.88 on 1 and 48 DF,  p-value: 0.0002289
-\end{verbatim}
-
-We see the following values:
-
-\begin{itemize}
-\tightlist
-\item
-  \(\hat{\beta}_1 =\) -0.0430717. The estimated slope informs us the the predicted gift aid decreases by 0.0430717 thousands of dollars (or \$43.07) per unit increase in family income.
-\item
-  \(\hat{\beta}_0 =\) 24.319329. For students with no family income, their predicted gift aid is \$24 319.33. Note: from the scatterplot, we have an observation with 0 family income. We must be careful in not extrapolating when making predictions with our regression. We should only make predictions for family incomes between the minimum and maximum values of family incomes in our data.
-\item
-  \(s\) = 4.7825989, is the estimate of the standard deviation of the error terms. This is reported as residual standard error in R. Squaring this gives the estimated variance.
-\item
-  \(F\) = 15.8772043. This is the value of the ANOVA \(F\) statistic. The corresponding p-value is reported. Since this p-value is very small, we reject the null hypothesis. The data support the claim that there is a linear association between gift aid and family income.
-\item
-  \(R^2 =\) 0.2485582. The coefficient of determination informs us that about 24.86\% of the variation in gift aid can be explained by family income.
-\end{itemize}
-
-\subsubsection*{Extract values from R objects}\label{extract-values-from-r-objects}
-\addcontentsline{toc}{subsubsection}{Extract values from R objects}
-
-We can actually extract these values that are being reported from \texttt{summary(result)}. To see what can be extracted from an R object, use the \texttt{names()} function:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\DocumentationTok{\#\#see what can be extracted from summary(result)}
-\FunctionTok{names}\NormalTok{(}\FunctionTok{summary}\NormalTok{(result))}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-##  [1] "call"          "terms"         "residuals"     "coefficients" 
-##  [5] "aliased"       "sigma"         "df"            "r.squared"    
-##  [9] "adj.r.squared" "fstatistic"    "cov.unscaled"
-\end{verbatim}
-
-To extract the estimated coefficients:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\DocumentationTok{\#\#extract coefficients}
-\FunctionTok{summary}\NormalTok{(result)}\SpecialCharTok{$}\NormalTok{coefficients}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-##                  Estimate Std. Error   t value     Pr(>|t|)
-## (Intercept)   24.31932901 1.29145027 18.831022 8.281020e-24
-## family_income -0.04307165 0.01080947 -3.984621 2.288734e-04
-\end{verbatim}
-
-Notice the information is presented in a table. To extract a specific value, we can specify the row and column indices:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\DocumentationTok{\#\#extract slope}
-\FunctionTok{summary}\NormalTok{(result)}\SpecialCharTok{$}\NormalTok{coefficients[}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{]}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] -0.04307165
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\DocumentationTok{\#\#extract intercept}
-\FunctionTok{summary}\NormalTok{(result)}\SpecialCharTok{$}\NormalTok{coefficients[}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{]}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] 24.31933
-\end{verbatim}
-
-On your own, extract the values of the residual standard error, the ANOVA F statistic, and \(R^2\).
-
-\subsubsection*{Prediction}\label{prediction}
-\addcontentsline{toc}{subsubsection}{Prediction}
-
-A use of regression models is prediction. Suppose I want to predict the gift aid of a student with family income of 50 thousand dollars (assuming the unit is in thousands of dollars). We use the \texttt{predict()} function:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\DocumentationTok{\#\#create data point for prediction}
-\NormalTok{newdata}\OtherTok{\textless{}{-}}\FunctionTok{data.frame}\NormalTok{(}\AttributeTok{family\_income=}\DecValTok{50}\NormalTok{)}
-\DocumentationTok{\#\#predicted gift aid when x=50}
-\FunctionTok{predict}\NormalTok{(result,newdata)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-##        1 
-## 22.16575
-\end{verbatim}
-
-This student's predicted gift aid is \$22 165.75. Alternatively, you could have calculated this by plugging \(x=50\) into the estimated SLR equation:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{summary}\NormalTok{(result)}\SpecialCharTok{$}\NormalTok{coefficients[}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{] }\SpecialCharTok{+} \FunctionTok{summary}\NormalTok{(result)}\SpecialCharTok{$}\NormalTok{coefficients[}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{]}\SpecialCharTok{*}\DecValTok{50}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] 22.16575
-\end{verbatim}
-
-\subsubsection*{ANOVA table}\label{anova-table-1}
-\addcontentsline{toc}{subsubsection}{ANOVA table}
-
-We use the \texttt{anova()} function to display the ANOVA table
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{anova.tab}\OtherTok{\textless{}{-}}\FunctionTok{anova}\NormalTok{(result)}
-\NormalTok{anova.tab}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## Analysis of Variance Table
-## 
-## Response: gift_aid
-##               Df  Sum Sq Mean Sq F value    Pr(>F)    
-## family_income  1  363.16  363.16  15.877 0.0002289 ***
-## Residuals     48 1097.92   22.87                      
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-\end{verbatim}
-
-The report \(F\) statistic is the same as the value reported earlier from \texttt{summary(result)}.
-
-The first line of the output gives \(SS_{R}\), the second line gives \(SS_{res}\). The function doesn't provide \(SS_T\), but we know that \(SS_T = SS_{R} + SS_{res}\).
-
-Again, to see what can be extracted from \texttt{anova.tab}:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{names}\NormalTok{(anova.tab)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] "Df"      "Sum Sq"  "Mean Sq" "F value" "Pr(>F)"
-\end{verbatim}
-
-So \(SS_T\) can be easily calculated:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{SST}\OtherTok{\textless{}{-}}\FunctionTok{sum}\NormalTok{(anova.tab}\SpecialCharTok{$}\StringTok{"Sum Sq"}\NormalTok{)}
-\NormalTok{SST}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] 1461.079
-\end{verbatim}
-
-The \(R^2\) was reported to be 0.2485582. To verify using the ANOVA table:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{anova.tab}\SpecialCharTok{$}\StringTok{"Sum Sq"}\NormalTok{[}\DecValTok{1}\NormalTok{]}\SpecialCharTok{/}\NormalTok{SST}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] 0.2485582
-\end{verbatim}
-
-\subsection*{Correlation}\label{correlation-1}
-\addcontentsline{toc}{subsection}{Correlation}
-
-We use the \texttt{cor()} function to find the correlation between two quantitative variables:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\DocumentationTok{\#\#correlation}
-\FunctionTok{cor}\NormalTok{(Data}\SpecialCharTok{$}\NormalTok{family\_income,Data}\SpecialCharTok{$}\NormalTok{gift\_aid)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] -0.4985561
-\end{verbatim}
-
-The correlation is -0.4985561. We have a moderate, negative linear association between family income and gift aid.
-
-\chapter{Inference with Simple Linear Regression (SLR)}\label{inf}
-
-\section{Introduction}\label{introduction}
-
-Oftentimes, the data we collect come from a random sample that is representative of the population of interest. A common example is an election poll before a presidential election. Random sampling allows the sample to be representative of the population. However, if we obtain another random sample, the characteristics of the new sample are unlikely to be exactly the same as the first sample. For example, the sample proportion who will vote for a certain party is unlikely to be the same for both random samples. What this tells us is that even with representative samples, sample proportions are unlikely to be equal to the population proportion, and sample proportions vary from sample to sample.
-
-Dr.~W. Edwards Deming's Red Bead experiment illustrates this concept. A video of this experiment \href{https://www.youtube.com/watch?v=R3ewHrpqclA}{can be found here.}
-
-In this video, the number of red beads, which represent bad products, varies each time the worker obtains a random sample of 50 beads. The fact that the number of red beads increases in his second sample does not indicate that he performed his task any worse, as this increase is due to the random variation associated with samples.
-
-Note: Deming's Red Bead experiment was developed to illustrate concepts associated with management. He is best known for his work in developing the Japanese economy after World War II. You will be able to find many blogs/articles discussing the experiment on the World Wide Web. Although many of the articles discuss how this experiment applies in management, it can be used to illustrate concepts of variation.
-
-The same idea extends to the slope and intercept of a regression line. The estimated slope and intercept will vary from sample to sample and are unlikely to be equal to the population slope and intercept. In inferential statistics, we use hypothesis tests and confidence intervals to aid us in accounting for this random variation. In this module, you will learn how to account for and quantify the random variation associated with the estimated regression model, and how to interpret the estimated regression model while accounting for random variation.
-
-\subsection{Review from previous module}\label{review-from-previous-module}
-
-The \textbf{simple linear regression model} is written as
-
-\begin{equation}
-y=\beta_0+\beta_{1} x + \epsilon. 
-\label{eq:4SLRmod}
-\end{equation}
-
-We make some assumptions for the error term \(\epsilon\). They are:
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  The errors have mean 0.
-\item
-  The \textbf{errors have variance denoted by \(\sigma^2\)}. Notice this variance is constant.
-\item
-  The errors are independent.
-\item
-  The errors are normally distributed.
-\end{enumerate}
-
-These assumptions allow us to derive the distributional properties associated with our least squares estimators \(\hat{\beta}_0, \hat{\beta}_1\), which then enables us to compute reliable confidence intervals and perform hypothesis tests on our SLR reliably.
-
-\(\hat{\beta}_1,\hat{\beta}_0\) are the estimators for \(\beta_1,\beta_0\) respectively. These estimators can be interpreted in the following manner:
-
-\begin{itemize}
-\tightlist
-\item
-  \textbf{\(\hat{\beta}_1\) denotes the change in the predicted \(y\) when \(x\) increases by 1 unit. Alternatively, it denotes the change in \(y\), on average, when \(x\) increases by 1 unit.}
-\item
-  \textbf{\(\hat{\beta}_0\) denotes the predicted \(y\) when \(x=0\). Alternatively, it denotes the average of \(y\) when \(x=0\).}
-\end{itemize}
-
-How do the values of these estimators vary from sample to sample?
-
-\section{Hypothesis Testing in SLR}\label{hypothesis-testing-in-slr}
-
-\subsection{Distribution of least squares estimators}\label{distribution-of-least-squares-estimators}
-
-\textbf{Gauss Markov Theorem}: Under assumptions for a regression model, the least squares estimators \(\hat{\beta}_1\) and \(\hat{\beta}_0\) are unbiased and have minimum variance among all unbiased linear estimators.
-
-Thus, the least squares estimators have the following properties:
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  \(\mbox{E}(\hat{\beta}_1) = \beta_1\), \(\mbox{E}(\hat{\beta}_0) = \beta_0\)
-\end{enumerate}
-
-Note: An estimator is \textbf{unbiased} if its expected value is exactly equal to the parameter it is estimating.
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\setcounter{enumi}{1}
-\tightlist
-\item
-  The variance of \(\hat{\beta}_1\) is
-\end{enumerate}
-
-\begin{equation} 
-\mbox{Var}(\hat{\beta}_1) = \frac{\sigma^{2}}{\sum{(x_{i}-\bar{x})^{2}}}
-\label{eq:4varb1}
-\end{equation}
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\setcounter{enumi}{2}
-\tightlist
-\item
-  The variance of \(\hat{\beta}_0\) is
-\end{enumerate}
-
-\begin{equation} 
-\mbox{Var}(\hat{\beta}_0) = \sigma^2 \left[\frac{1}{n} + \frac{\bar{x}^2}{\sum (x_i -\bar{x})^2}\right]
-\label{eq:4varb0}
-\end{equation}
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\setcounter{enumi}{3}
-\tightlist
-\item
-  \(\hat{\beta}_1\) and \(\hat{\beta}_0\) both follow a normal distribution.
-\end{enumerate}
-
-Note that in \eqref{eq:4varb1} and \eqref{eq:4varb0}, we use \(s^2 = MS_{res}\) to estimate \(\sigma^2\) since \(\sigma^2\) is a unknown value.
-
-What these imply is that if we standardize \(\hat{\beta}_1\) and \(\hat{\beta}_0\), these standardized quantities will follow a \(t_{n-2}\) distribution, i.e.
-
-\begin{equation} 
-\frac{\hat{\beta}_1 - \beta_1}{se(\hat{\beta}_1)}\sim t_{n-2}
-\label{eq:distb1}
-\end{equation}
-
-and
-
-\begin{equation} 
-\frac{\hat{\beta}_0 - \beta_0}{se(\hat{\beta}_0)}\sim t_{n-2},
-\label{eq:distb0}
-\end{equation}
-
-where
-
-\begin{equation}
-se(\hat{\beta}_1) = \sqrt{\frac{MS_{res}}{\sum{(x_{i}-\bar{x})^{2}}}} = \frac{s}{\sqrt{\sum{(x_{i}-\bar{x})^{2}}}}
-\label{eq:seb1}
-\end{equation}
-
-and
-
-\begin{equation} 
-se(\hat{\beta}_0) = \sqrt{MS_{res}\left[\frac{1}{n} + \frac{\bar{x}^2}{\sum (x_i -\bar{x})^2}\right]} = s \sqrt{\frac{1}{n} + \frac{\bar{x}^2}{\sum (x_i -\bar{x})^2}}
-\label{eq:seb0}
-\end{equation}
-
-Note:
-
-\begin{itemize}
-\item
-  \(se(\hat{\beta}_1)\) is read as the \textbf{standard error of \(\hat{\beta}_1\)}. The standard error of any estimator is essentially the sample standard deviation of that estimator, and measures the spread of that estimator.
-\item
-  A \(t_{n-2}\) distribution is read as a \textbf{\(t\) distribution with \(n-2\) degrees of freedom}.
-\end{itemize}
-
-\subsection{Testing regression coefficients}\label{testing-regression-coefficients}
-
-Hypothesis testing is used to investigate if a population parameter is \textbf{different from a specific value}. In the context of SLR, we usually want to test if \(\beta_1\) is 0 or not. If \(\beta_1 = 0\), there is no linear relationship between the variables.
-
-The general steps in hypothesis testing are:
-
-\begin{itemize}
-\tightlist
-\item
-  Step 1: State the null and alternative hypotheses.
-\item
-  Step 2: A test statistic is calculated using the sample, assuming the null is true. The value of the test statistic measures how the \textbf{sample deviates from the null}.
-\item
-  Step 3: Make conclusion, using either critical values or p-values.
-\end{itemize}
-
-In the previous module, we introduced the ANOVA \(F\) test. In SLR, this tests if the slope of the SLR equation is 0 or not. It turns out that we can also perform a \(t\) test for the slope. In the \(t\) test for the slope, the null and alternative hypotheses are:
-
-\[
-H_0: \beta_1 = 0, H_a: \beta_1 \neq 0.
-\]
-The test statistic is
-
-\begin{equation} 
-t = \frac{\hat{\beta}_1 - \text{ value in null}}{se(\hat{\beta}_1)}
-\label{eq:4ttest}
-\end{equation}
-
-which is compared with a \(t_{n-2}\) distribution. Notice that \eqref{eq:4ttest} comes from \eqref{eq:distb1}.
-
-Let us go back to our simulated example that we saw in the last module. We have data from 6000 UVa undergraduate students on the amount of time they spend studying in a week (in minutes), and how many courses they are taking in the semester (3 or 4 credit courses).
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\DocumentationTok{\#\#create dataframe}
-\NormalTok{df}\OtherTok{\textless{}{-}}\FunctionTok{data.frame}\NormalTok{(study,courses)}
-
-\DocumentationTok{\#\#fit regression}
-\NormalTok{result}\OtherTok{\textless{}{-}}\FunctionTok{lm}\NormalTok{(study}\SpecialCharTok{\textasciitilde{}}\NormalTok{courses, }\AttributeTok{data=}\NormalTok{df)}
-\DocumentationTok{\#\#look at regression coefficients}
-\FunctionTok{summary}\NormalTok{(result)}\SpecialCharTok{$}\NormalTok{coefficients}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-##              Estimate Std. Error   t value      Pr(>|t|)
-## (Intercept)  58.44829  1.9218752  30.41211 4.652442e-189
-## courses     120.39310  0.4707614 255.74125  0.000000e+00
-\end{verbatim}
-
-The \(t\) statistic for testing \(H_0: \beta_1 = 0, H_a: \beta_1 \neq 0\) is reported to be 255.7412482, which can be calculated using \eqref{eq:4ttest}: \(t= \frac{120.39310 - 0}{0.4707614}\). The reported p-value is virtually 0, so we reject the null hypothesis. The data support the claim that there is a linear association between study time and the number of courses taken.
-
-\section{Confidence Intervals for Regression Coefficients}\label{confidence-intervals-for-regression-coefficients}
-
-Confidence intervals (CIs) are similar to hypothesis testing in the sense that they are also based on the distributional properties of an estimator. CIs may differ in their use in the following ways:
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  We are not assessing if the parameter is different from a specific value.
-\item
-  We are more interested in exploring a plausible \textbf{range of values for an unknown parameter}.
-\end{enumerate}
-
-Because CIs and hypothesis tests are based on the distributional properties of an estimator, their conclusions will be consistent (as long as the significance level is the same).
-
-Recall the general form for CIs:
-
-\begin{equation} 
-\mbox{estimator} \pm (\mbox{multiplier} \times \mbox{s.e of estimator}). 
-\label{eq:4CI}
-\end{equation}
-
-We have the following components of a CI
-
-\begin{itemize}
-\tightlist
-\item
-  \textbf{estimator (or statistic)}: numerical quantity that describes a sample
-\item
-  \textbf{multiplier}: determined by confidence level and relevant probability distribution
-\item
-  \textbf{standard error of estimator}: measure of variance of estimator (basically the square root of the variance of estimator)
-\end{itemize}
-
-Following \eqref{eq:4CI} and \eqref{eq:distb1}, the \(100(1-\alpha)\%\) CI for \(\beta_1\) is
-
-\begin{equation} 
-\hat{\beta}_1 \pm t_{1-\alpha/2;n-2}  se(\hat{\beta}_1) = \hat{\beta}_1 \pm t_{1-\alpha/2;n-2} \frac{s}{\sqrt{\sum(x_i - \bar{x})^{2}}}.
-\label{eq:4CIb1}
-\end{equation}
-
-Going back to our study time example, the 95\% CI for \(\beta_1\) is (119.470237, 121.3159601).
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\DocumentationTok{\#\#CI for coefficients}
-\FunctionTok{confint}\NormalTok{(result,}\AttributeTok{level =} \FloatTok{0.95}\NormalTok{)[}\DecValTok{2}\NormalTok{,]}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-##    2.5 %   97.5 % 
-## 119.4702 121.3160
-\end{verbatim}
-
-An interpretation of this CI is that we have 95\% confidence that the true slope \(\beta_1\) lies between (119.470237, 121.3159601). In other words, for each additional course taken, the predicted study time increases between 119.470237 and 121.3159601 minutes.
-
-\subsection{Thought questions}\label{thought-questions}
-
-\begin{itemize}
-\item
-  Is the conclusion from this 95\% CI consistent with the hypothesis test for \(H_0: \beta_1 = 0\) in the previous section at 0.05 significance level?
-\item
-  I have presented hypothesis tests and CIs for the slope, \(\beta_1\).
-
-  \begin{itemize}
-  \item
-    How would you calculate the \(t\) statistic if you wanted to test \(H_0: \beta_0 = 0, H_0: \beta_0 \neq 0\)?
-  \item
-    How would you calculate the 95\% CI for the intercept \(\beta_0\)?
-  \end{itemize}
-\end{itemize}
-
-Generally, we are usually more interested in the slope than the intercept.
-
-\section{CI of the Mean Response}\label{ci-of-the-mean-response}
-
-We have established that the least squares estimators \(\hat{\beta}_1,\hat{\beta}_0\) have their associated variances. Since the estimated SLR equation is
-
-\begin{equation} 
-\hat{y}=\hat{\beta}_0+\hat{\beta}_1 x,
-\label{eq:4fitted}
-\end{equation}
-
-it stands to reason that \(\hat{y}\) has an associated variance as well, since it is a function of \(\hat{\beta}_1,\hat{\beta}_0\).
-
-There are two interpretations of \(\hat{y}\):
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  it \textbf{estimates the mean of \(y\) when \(x=x_0\)};
-\item
-  it \textbf{predicts the value of \(y\) for a new observation when \(x=x_0\)}.
-\end{enumerate}
-
-Note: \(x_0\) denotes a specific numerical value for the predictor variable.
-
-Depending on which interpretation we want, there are two different intervals based on \(\hat{y}\). The first interpretation is associated with the \textbf{confidence interval for the mean response, \(\hat{\mu}_{y|x_0}\), given the predictor}. This is used when we are interested in the average value of the response variable, when the predictor is equal to a specific value. This CI is
-
-\begin{equation} 
-\hat{\mu}_{y|x_0}\pm t_{1-\alpha/2,n-2}s\sqrt{\frac{1}{n} +
-\frac{(x_0-\bar{x})^2}{\sum(x_i-\bar{x})^2}}.
-\label{eq:4CImean}
-\end{equation}
-
-Going back to our study time example, suppose we want the average study time for students who take 5 courses, the 95\% CI is
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\DocumentationTok{\#\#CI for mean y when x=5}
-\NormalTok{newdata}\OtherTok{\textless{}{-}}\FunctionTok{data.frame}\NormalTok{(}\AttributeTok{courses=}\DecValTok{5}\NormalTok{)}
-\FunctionTok{predict}\NormalTok{(result, newdata, }\AttributeTok{level=}\FloatTok{0.95}\NormalTok{, }\AttributeTok{interval=}\StringTok{"confidence"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-##        fit      lwr      upr
-## 1 660.4138 659.2224 661.6052
-\end{verbatim}
-
-We have 95\% confidence that the average study time for students who take 5 courses is between 659.2223688 and 661.605187 minutes.
-
-\section{PI of a New Response}\label{pi-of-a-new-response}
-
-Previously, we found a CI for the mean of \(y\) given a specific value of \(x\), \eqref{eq:4CImean}. This CI gives us an idea about the location of the regression line at a specific of \(x\).
-
-Instead, we may have interest in finding an interval for a new value of \(\hat{y}_0\), when we have a new observation \(x=x_0\). This is called a \textbf{prediction interval (PI) for a future observation \(y_0\) when the predictor is a specific value}. This interval follows from the second interpretation of \(\hat{y}\).
-
-The PI for \(\hat{y}_0\) takes into account:
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  Variation in location for the distribution of \(y\) (i.e.~where is the center of the distribution of \(y\)?).
-\item
-  Variation \textbf{within the probability distribution of \(y\)}.
-\end{enumerate}
-
-By comparison, the confidence interval for the mean response \eqref{eq:4CImean} only takes into account the first element. The PI is
-
-\begin{equation} 
-\hat{y}_0\pm t_{1-\alpha/2,n-2}s \sqrt{1+\frac{1}{n} +
-\frac{(x_0-\bar{x})^2}{\sum(x_i-\bar{x})^2}}.
-\label{eq:4pred}
-\end{equation}
-
-Going back to our study time example, suppose we have a newly enrolled student who wishes to take 5 courses, and the student wants to predict his study time
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\DocumentationTok{\#\#PI for y when x=5}
-\FunctionTok{predict}\NormalTok{(result, newdata, }\AttributeTok{level=}\FloatTok{0.95}\NormalTok{, }\AttributeTok{interval=}\StringTok{"prediction"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-##        fit      lwr      upr
-## 1 660.4138 602.0347 718.7928
-\end{verbatim}
-
-We have 95\% confidence that the study time for this student is between 602.0347305 and 718.7928253 minutes.
-
-\subsection{Thought questions}\label{thought-questions-1}
-
-\begin{itemize}
-\item
-  In the following two scenarios, decide if we are more interested in the CI for the mean response given the predictor \eqref{eq:4CImean}, or the PI for a future response given the predictor \eqref{eq:4pred}.
-
-  \begin{itemize}
-  \item
-    We wish to estimate the waiting time, on average, of DMV customers if there are 10 people in line at the DMV.
-  \item
-    I enter the DMV and notice 10 people in line. I want to estimate my waiting time.
-  \end{itemize}
-\item
-  Look at the standard errors associated with the intervals given in \eqref{eq:4CImean} and \eqref{eq:4pred}. How are they related to each other?
-\end{itemize}
-
-\section{Supplemental Notes on Statistical Inference}\label{supplemental-notes-on-statistical-inference}
-
-\subsection{Hypothesis statements}\label{hypothesis-statements}
-
-Let's consider a \(t\) test for the regression parameter, \(\beta_1\). Depending on context, the following could be null and alternative hypotheses
-
-\begin{itemize}
-\tightlist
-\item
-  \(H_0: \beta_1 = 0, H_a: \beta_1 \neq 0\).
-\item
-  \(H_0: \beta_1 = 0, H_a: \beta_1 > 0\).
-\item
-  \(H_0: \beta_1 = 0, H_a: \beta_1 < 0\).
-\end{itemize}
-
-The null hypothesis should be stated as a statement of \textbf{equality}. This concept holds true for hypothesis tests in general. Some other books / resources might state them as
-
-\begin{itemize}
-\tightlist
-\item
-  \(H_0: \beta_1 = 0, H_a: \beta_1 \neq 0\).
-\item
-  \(H_0: \beta_1 \leq 0, H_a: \beta_1 > 0\).
-\item
-  \(H_0: \beta_1 \geq 0, H_a: \beta_1 < 0\).
-\end{itemize}
-
-I prefer using the equality statement for the null hypothesis for the following reasons (theoretical, pedagogical, practical):
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  The null hypothesis being an equality aligns with the definition of the p-value.
-\end{enumerate}
-
-\begin{itemize}
-\tightlist
-\item
-  The p-value is the probability of observing our sample estimate (or a value more extreme), if the null hypothesis is true (i.e.~\(\beta_1\) is truly 0). This is what we are assuming in the calculation for the test statistic.
-\end{itemize}
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\setcounter{enumi}{1}
-\tightlist
-\item
-  People tend to get confused between the null and alternative hypotheses if both involve inequalities (the alternative is the hypothesis you are trying to support).
-\item
-  Conclusions are made in terms of supporting (or not supporting) the alternative hypothesis.
-\end{enumerate}
-
-\subsection{Sample size and statistical inference}\label{sample-size-and-statistical-inference}
-
-Generally speaking, there is a relationship between sample size and statistical inference (assuming other characteristics remain the same and our sample was randomly obtained or representative of the population of interest):
-
-\begin{itemize}
-\tightlist
-\item
-  Larger sample sizes (typically) lead to narrower confidence intervals (more precise intervals).
-\item
-  Sample estimates based on larger samples are more likely to be closer to the true parameters.
-\item
-  Larger sample (typically) lead to more evidence against the null hypothesis.
-
-  \begin{itemize}
-  \tightlist
-  \item
-    This means a larger sample size leads to a more powerful test. The power of a test is the probability a hypothesis test is able to correctly reject the null hypothesis.
-  \end{itemize}
-\end{itemize}
-
-\subsubsection{Small sample sizes}\label{small-sample-sizes}
-
-Small sample sizes tend to result in:
-
-\begin{itemize}
-\tightlist
-\item
-  Confidence intervals that are wide.
-\item
-  Sample estimates that are more likely to be further away from the true parameters.
-\item
-  Hypothesis tests that are more likely to incorrectly fail to reject the null hypothesis when the alternative hypothesis is true.
-\end{itemize}
-
-While larger sample sizes have their advantages, there are also some disadvantages with sample sizes that are extremely large.
-
-\subsubsection{Large sample sizes}\label{large-sample-sizes}
-
-A ``statistically significant'' result does not necessarily mean that the result has practical consequences. Suppose a 95\% confidence interval for \(\beta_1\) is \((0.001, 0.002)\). The interval excludes 0, so it is ``statistically significantly'' different from 0 (because it is!), but does this result have practical consequences? A narrow CI that barely excludes the null value can happen when we have a large sample size.
-
-If one was to conduct the corresponding hypothesis test, we would reject the null hypothesis that \(\beta_1 = 0\). With large sample sizes, hypothesis tests are sensitive to small departures from the null hypothesis.
-
-In such instances, it may be worth considering hypothesis tests involving a different value in the null hypothesis, one that makes sense for your question. For example, a practically significant slope may need to be greater than a specific numerical value for a certain context.
-
-\begin{itemize}
-\tightlist
-\item
-  Statistical inference to assess statistical significance.
-\item
-  Subject area knowledge to assess practical significance.
-\end{itemize}
-
-\subsubsection{Questions}\label{questions}
-
-Are the following results statistically significant? If so, are the results also practically significant? Assume a two-sided test with a null value of 0 (These are made up examples):
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\item
-  In assessing if studying more is associated with better test scores, a SLR is carried out with test scores (out of 100 points) against study time (in hours). The 95\% confidence interval for the slope \(\beta_1\) is (5.632, 7.829).
-\item
-  A SLR is carried out to explore the linear relationship between number of years in school with income (in thousands of dollars). The 95\% confidence interval for the slope \(\beta_1\) is (0.051, 0.243).
-\end{enumerate}
-
-\subsection{Cautions using SLR and Correlation}\label{cautions-using-slr-and-correlation}
-
-Simple linear regression and correlation are meant for assessing \textbf{linear} relationships. If the relationship is not linear, we will need to transform the variable(s) (so the transformed variables have a linear relationship. Will explore this in Module \ref{diag}).
-
-\begin{itemize}
-\tightlist
-\item
-  Always verify via a scatterplot that the relationship is at least approximately linear.
-\item
-  A high correlation or a significant estimated slope by themselves do not prove that we have a strong linear relationship between the variables. Conversely, a correlation close to 0 or an insignificant estimated slope is also not proof that we do not have a relationship between the variables.
-\end{itemize}
-
-\subsubsection{Outliers}\label{outliers}
-
-SLR and correlation are sensitive to outliers / influential observations. Generally speaking, these are data that are ``far away'' or very different from the rest of the observations. These data points can be visually inspected from a scatterplot. Some potential considerations when dealing with such data points:
-
-\begin{itemize}
-\tightlist
-\item
-  Investigate these observations. There is usually something that is making them ``stand out'' from the rest of the data.
-\item
-  Data entry errors that can be corrected. Be sure to mention in the report.
-\item
-  Revisit how the data were sampled. Perhaps the data point is is not part of the population of interest. If so, data point can be removed (this is legitimate), but be sure to mention in the report.
-\end{itemize}
-
-With regards to regression analysis:
-
-\begin{itemize}
-\tightlist
-\item
-  Exclusion of data points must be clearly documented.
-\item
-  Fit the regression with and without the data points in question, and see how similar or different the conclusions become.
-\item
-  If the data points have large value(s) on the predictor and/or response, a log transformation on the variable can pull in the large values.
-\item
-  Consider subsetting your data and create separate models for each subset; or focus on a subset and make it clear your analysis is for a subset.
-\item
-  Knowing your data and context can help a lot in these decisions.
-\end{itemize}
-
-\subsubsection{Association and causation}\label{association-and-causation}
-
-Two correlated variables do not mean that one variable causes the other variable to change. For example, consider a plot of ice cream consumption and deaths by drowning during various months. There may be some positive correlation, and clearly, eating more ice cream does not cause more drownings. The correlation can be explained by a third (lurking) variable: the weather.
-
-A \textbf{lurking variable} is a variable that has an impact on the relationship between the variables being studied, but is itself not studied.
-
-A carefully designed \textbf{randomized experiment} can control for lurking variables, and causal relationships can be established. Typically, such experiments include:
-
-\begin{itemize}
-\tightlist
-\item
-  A control group and a treatment group.
-\item
-  Random assignment of large number of observations into the treatment and control groups. Due to the random assignment, the general characteristics of of subjects in each group are similar.
-\end{itemize}
-
-Lurking variables are always an issue with \textbf{observational studies}. Researchers in observational studies do not intervene with the observations and simply observe the data that the observations generate. Causal relationships are much more difficult to establish with observational studies.
-
-\subsubsection{Questions}\label{questions-1}
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\item
-  Consider the \texttt{palmerpenguins} dataset that we have been working on. The data contain size measurements for three different species of penguins on three islands in the Palmer Archipelago, Antarctica over three years. Is this an observational study or randomized experiment?
-\item
-  A fertilizer company wishes to evaluate how effective a new fertilizer is in terms of improving the yield of crops. A large field is divided into many smaller plots, and each smaller plot is randomly assigned to receive either the new fertilizer or the standard fertilizer. Is this an observational study or randomized experiment?
-\item
-  A professor wishes to evaluate the effectiveness of various teaching methods (traditional vs flipped classroom). The professor uses the traditional approach for a section that meets on Mondays, Wednesdays, and Fridays from 9 to 10am and uses the flipped classroom approach for a section that meets on Mondays, Wednesdays, and Fridays from 2 to 3pm. Students were free to choose whichever section that wanted to register for, with no knowledge of the teaching method being used. What are some potential lurking variables in this study?
-\end{enumerate}
-
-\section{R Tutorial}\label{r-tutorial-1}
-
-For this tutorial, we will continue to work with the dataset \texttt{elmhurst} from the \texttt{openintro} package in R.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{library}\NormalTok{(tidyverse)}
-\FunctionTok{library}\NormalTok{(openintro)}
-\NormalTok{Data}\OtherTok{\textless{}{-}}\NormalTok{openintro}\SpecialCharTok{::}\NormalTok{elmhurst}
-\end{Highlighting}
-\end{Shaded}
-
-The key pieces of information are:
-
-\begin{itemize}
-\tightlist
-\item
-  A random sample of 50 students (all freshman from the 2011 class at Elmhurst College).
-\item
-  Family income of the student (units are missing).
-\item
-  Gift aid, in \$1000s.
-\end{itemize}
-
-We want to explore how family income may be related to gift aid, in a simple linear regression framework.
-
-\subsection*{\texorpdfstring{Hypothesis test for \(\beta_1\) (and \(\beta_0\))}{Hypothesis test for \textbackslash beta\_1 (and \textbackslash beta\_0)}}\label{hypothesis-test-for-beta_1-and-beta_0}
-\addcontentsline{toc}{subsection}{Hypothesis test for \(\beta_1\) (and \(\beta_0\))}
-
-Applying the \texttt{summary()} function to \texttt{lm()} gives the results of hypothesis tests for \(\beta_1\) and \(\beta_0\):
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\DocumentationTok{\#\#Fit a regression model}
-\NormalTok{result}\OtherTok{\textless{}{-}}\FunctionTok{lm}\NormalTok{(gift\_aid}\SpecialCharTok{\textasciitilde{}}\NormalTok{family\_income, }\AttributeTok{data=}\NormalTok{Data)}
-
-\DocumentationTok{\#\#look at t stats and F stat}
-\FunctionTok{summary}\NormalTok{(result)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## 
-## Call:
-## lm(formula = gift_aid ~ family_income, data = Data)
-## 
-## Residuals:
-##      Min       1Q   Median       3Q      Max 
-## -10.1128  -3.6234  -0.2161   3.1587  11.5707 
-## 
-## Coefficients:
-##               Estimate Std. Error t value Pr(>|t|)    
-## (Intercept)   24.31933    1.29145  18.831  < 2e-16 ***
-## family_income -0.04307    0.01081  -3.985 0.000229 ***
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## Residual standard error: 4.783 on 48 degrees of freedom
-## Multiple R-squared:  0.2486, Adjusted R-squared:  0.2329 
-## F-statistic: 15.88 on 1 and 48 DF,  p-value: 0.0002289
-\end{verbatim}
-
-Under coefficients, we can see the results of the hypothesis tests for \(\beta_1\) and \(\beta_0\). Specifically, for \(\beta_1\):
-
-\begin{itemize}
-\tightlist
-\item
-  \(\hat{\beta}_1\) = -0.0430717
-\item
-  \(se(\hat{\beta}_1)\) = 0.0108095
-\item
-  the test statistic is \(t\) = -3.984621
-\item
-  the corresponding p-value is \ensuremath{2.2887345\times 10^{-4}}
-\end{itemize}
-
-You can work out the p-value using R (slight difference due to rounding):
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\DocumentationTok{\#\#pvalue}
-\DecValTok{2}\SpecialCharTok{*}\FunctionTok{pt}\NormalTok{(}\SpecialCharTok{{-}}\FunctionTok{abs}\NormalTok{(}\SpecialCharTok{{-}}\FloatTok{3.985}\NormalTok{), }\AttributeTok{df =} \DecValTok{50{-}2}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] 0.0002285996
-\end{verbatim}
-
-Or find the critical value using R:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\DocumentationTok{\#\#critical value}
-\FunctionTok{qt}\NormalTok{(}\DecValTok{1}\FloatTok{{-}0.05}\SpecialCharTok{/}\DecValTok{2}\NormalTok{, }\AttributeTok{df =} \DecValTok{50{-}2}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] 2.010635
-\end{verbatim}
-
-Either way, we end up rejecting the null hypothesis. The data support the claim that there is a linear association between gift aid and family income.
-
-Note:
-
-\begin{itemize}
-\item
-  the \(t\) tests for regression coefficients are based on \(H_0: \beta_j = 0, H_a: \beta_j \neq 0\). The reported p-value is based on this set of null and alternative hypotheses. If your null and alternative hypotheses are different, you will need to compute your own test statistic and p-value.
-\item
-  For SLR, the two-sided \(t\) test for \(\beta_1\) gives the exact same result as the ANOVA \(F\) test. Notice the p-values are the same. The \(F\) statistic of \(15.88\) is the squared of the \(t\) statistic, \((-3.985)^2\).
-\end{itemize}
-
-\subsection*{\texorpdfstring{Confidence interval for \(\beta_1\) (and \(\beta_0\))}{Confidence interval for \textbackslash beta\_1 (and \textbackslash beta\_0)}}\label{confidence-interval-for-beta_1-and-beta_0}
-\addcontentsline{toc}{subsection}{Confidence interval for \(\beta_1\) (and \(\beta_0\))}
-
-To find the 95\% confidence intervals for the coefficients, we use the \texttt{confint()} function:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\DocumentationTok{\#\#to produce 95\% CIs for all regression coefficients}
-\FunctionTok{confint}\NormalTok{(result,}\AttributeTok{level =} \FloatTok{0.95}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-##                     2.5 %      97.5 %
-## (Intercept)   21.72269421 26.91596380
-## family_income -0.06480555 -0.02133775
-\end{verbatim}
-
-The 95\% CI for \(\beta_1\) is (-0.0648056, -0.0213378). We have 95\% confidence that for each additional thousand dollars in family income, the predicted gift aid decreases between \$21.3378 and \$64.8056.
-
-\subsection*{Confidence interval for mean response for given x}\label{confidence-interval-for-mean-response-for-given-x}
-\addcontentsline{toc}{subsection}{Confidence interval for mean response for given x}
-
-Suppose we want a confidence interval for the average gift aid for Elmhurst College students with family income of 80 thousand dollars. We can use the \texttt{predict()} function:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\DocumentationTok{\#\#to produce 95\% CI for the mean response when x=80, }
-\NormalTok{newdata}\OtherTok{\textless{}{-}}\FunctionTok{data.frame}\NormalTok{(}\AttributeTok{family\_income=}\DecValTok{80}\NormalTok{)}
-\FunctionTok{predict}\NormalTok{(result,newdata,}\AttributeTok{level=}\FloatTok{0.95}\NormalTok{, }\AttributeTok{interval=}\StringTok{"confidence"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-##       fit      lwr      upr
-## 1 20.8736 19.43366 22.31353
-\end{verbatim}
-
-The 95\% CI for the mean gift aid for students with family income of 80 thousand dollars is (19.4336609, 22.3135327). We have 95\% confidence the mean gift aid for students with family income of 80 thousand dollars is between \$19 433.66 and \$22 313.53.
-
-\subsection*{Prediction interval for a response for a given x}\label{prediction-interval-for-a-response-for-a-given-x}
-\addcontentsline{toc}{subsection}{Prediction interval for a response for a given x}
-
-For a prediction interval for the gift aid of an Elmhurst College student with family income of 80 thousand dollars:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\DocumentationTok{\#\#and the 95\% PI for the response of an observation when x=80}
-\FunctionTok{predict}\NormalTok{(result,newdata,}\AttributeTok{level=}\FloatTok{0.95}\NormalTok{, }\AttributeTok{interval=}\StringTok{"prediction"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-##       fit      lwr      upr
-## 1 20.8736 11.15032 30.59687
-\end{verbatim}
-
-We have 95\% confidence that for an Elmhurst College student with family income of 80, this student's gift aid is between \$11 150.32 and \$30 596.87.
-
-\subsection*{Visualization of CI for mean response given x and PI of response given x}\label{visualization-of-ci-for-mean-response-given-x-and-pi-of-response-given-x}
-\addcontentsline{toc}{subsection}{Visualization of CI for mean response given x and PI of response given x}
-
-When using the \texttt{ggplot()} function to create a scatterplot, we can overlay the SLR equation by adding a layer via \texttt{geom\_smooth(method\ =\ lm)}. By default, the CI for the mean response for each value of the predictor gets overlaid as well. In the previous tutorial, we removed this by adding \texttt{se=FALSE} inside \texttt{geom\_smooth()}:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\DocumentationTok{\#\#regular scatterplot}
-\DocumentationTok{\#\#with regression line overlaid, and bounds of CI for mean y}
-\NormalTok{ggplot2}\SpecialCharTok{::}\FunctionTok{ggplot}\NormalTok{(Data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{family\_income, }\AttributeTok{y=}\NormalTok{gift\_aid))}\SpecialCharTok{+}
-  \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
-  \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{method=}\NormalTok{lm)}\SpecialCharTok{+}
-  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x=}\StringTok{"Family Income"}\NormalTok{, }
-       \AttributeTok{y=}\StringTok{"Gift Aid"}\NormalTok{, }
-       \AttributeTok{title=}\StringTok{"Scatterplot of Gift Aid against Family Income"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## `geom_smooth()` using formula = 'y ~ x'
-\end{verbatim}
-
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-41-1.pdf}
-
-Overlaying prediction intervals require a bit more work. We need to compute the lower and upper bounds of the PI for each value of the predictor:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\DocumentationTok{\#\#find PIs for each observation}
-\NormalTok{preds }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(result, }\AttributeTok{interval=}\StringTok{"prediction"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## Warning in predict.lm(result, interval = "prediction"): predictions on current data refer to _future_ responses
-\end{verbatim}
-
-Previously, when we used the \texttt{predict()} function, we provided the numerical value of \(x\) to make a prediction on. If this is not supplied, the function will use all the current values of \(x\) to make predictions, and will actually print out a warning message. For our purpose, this is not an issue since this is exactly what we want.
-
-We then add \texttt{preds} to the data frame in order to overlay the lower and upper bounds on the scatterplot, by adding extra layers via \texttt{geom\_line()} in the \texttt{ggplot()} function:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\DocumentationTok{\#\#add preds to data frame}
-\NormalTok{Data}\OtherTok{\textless{}{-}}\FunctionTok{data.frame}\NormalTok{(Data,preds)}
-
-\DocumentationTok{\#\#overlay PIs via geom\_line()}
-\NormalTok{ggplot2}\SpecialCharTok{::}\FunctionTok{ggplot}\NormalTok{(Data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{family\_income, }\AttributeTok{y=}\NormalTok{gift\_aid))}\SpecialCharTok{+}
-  \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
-  \FunctionTok{geom\_line}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{y=}\NormalTok{lwr), }\AttributeTok{color =} \StringTok{"red"}\NormalTok{, }\AttributeTok{linetype =} \StringTok{"dashed"}\NormalTok{)}\SpecialCharTok{+}
-  \FunctionTok{geom\_line}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{y=}\NormalTok{upr), }\AttributeTok{color =} \StringTok{"red"}\NormalTok{, }\AttributeTok{linetype =} \StringTok{"dashed"}\NormalTok{)}\SpecialCharTok{+}
-  \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{method=}\NormalTok{lm)}\SpecialCharTok{+}
-  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x=}\StringTok{"Family Income"}\NormalTok{, }
-       \AttributeTok{y=}\StringTok{"Gift Aid"}\NormalTok{, }
-       \AttributeTok{title=}\StringTok{"Scatterplot of Gift Aid against Family Income"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## `geom_smooth()` using formula = 'y ~ x'
-\end{verbatim}
-
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-43-1.pdf}
-
-As mentioned in the notes, the CI captures the location of the regression line, whereas the PI captures the data points.
+The IQR is considered a robust measure of spread, while the sample variance and standard deviations are considered to be sensitive.
 
   \bibliography{book.bib,packages.bib}
 

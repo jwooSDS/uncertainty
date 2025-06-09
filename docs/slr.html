@@ -4,15 +4,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 1 Basics with Simple Linear Regression (SLR) | Linear Models for Data Science</title>
+<title>Chapter 1 Basics with Simple Linear Regression (SLR) | Understanding Uncertainty Course Notes</title>
 <meta name="author" content="Jeffrey Woo">
 <meta name="description" content="1.1 Introduction HI AGAIN!!!! We will start this module by introducing the simple linear regression model. Simple linear regression uses the term “simple,” because it concerns the study of only...">
 <meta name="generator" content="bookdown 0.43 with bs4_book()">
-<meta property="og:title" content="Chapter 1 Basics with Simple Linear Regression (SLR) | Linear Models for Data Science">
+<meta property="og:title" content="Chapter 1 Basics with Simple Linear Regression (SLR) | Understanding Uncertainty Course Notes">
 <meta property="og:type" content="book">
 <meta property="og:description" content="1.1 Introduction HI AGAIN!!!! We will start this module by introducing the simple linear regression model. Simple linear regression uses the term “simple,” because it concerns the study of only...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 1 Basics with Simple Linear Regression (SLR) | Linear Models for Data Science">
+<meta name="twitter:title" content="Chapter 1 Basics with Simple Linear Regression (SLR) | Understanding Uncertainty Course Notes">
 <meta name="twitter:description" content="1.1 Introduction HI AGAIN!!!! We will start this module by introducing the simple linear regression model. Simple linear regression uses the term “simple,” because it concerns the study of only...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
@@ -30,7 +30,7 @@
 
     <div class="d-flex align-items-start justify-content-between">
       <h1>
-        <a href="index.html" title="">Linear Models for Data Science</a>
+        <a href="index.html" title="">Understanding Uncertainty Course Notes</a>
       </h1>
       <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
     </div>
@@ -44,7 +44,6 @@
         <ul class="book-toc list-unstyled">
 <li><a class="" href="index.html">Preface</a></li>
 <li><a class="active" href="slr.html"><span class="header-section-number">1</span> Basics with Simple Linear Regression (SLR)</a></li>
-<li><a class="" href="inf.html"><span class="header-section-number">2</span> Inference with Simple Linear Regression (SLR)</a></li>
 </ul>
 
         <div class="book-extra">
@@ -63,13 +62,13 @@
 <p>We will start this module by introducing the simple linear regression model. Simple linear regression uses the term “simple,” because it concerns the study of only one predictor variable with one quantitative response variable. In contrast, multiple linear regression, which we will study in future modules, uses the term “multiple,” because it concerns the study of two or more predictor variables with one quantitative response variable. We start with simple linear regression as it is much easier to visualize concepts in regression models when there is only one predictor variable.</p>
 <p>For the time being, we will only consider predictor variables that are quantitative. We will consider predictor variables that are categorical in future modules.</p>
 <p>The most common way of visualizing the relationship between one quantitative predictor variable and one quantitative response variable is with a scatter plot. In the simulated example below, we have data from 6000 UVa undergraduate students on the amount of time they spend studying in a week (in minutes), and how many courses they are taking in the semester (3 or 4 credit courses).</p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##create dataframe</span></span>
 <span><span class="va">df</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">study</span>,<span class="va">courses</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">##fit regression</span></span>
 <span><span class="va">result</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">study</span><span class="op">~</span><span class="va">courses</span>, data<span class="op">=</span><span class="va">df</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##create scatterplot with regression line overlaid</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">courses</span>, <span class="va">df</span><span class="op">$</span><span class="va">study</span>, xlab<span class="op">=</span><span class="st">"# of Courses"</span>, ylab<span class="op">=</span><span class="st">"Study Time (Mins)"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></code></pre></div>
@@ -220,32 +219,32 @@ y=\beta_0+\beta_{1} x + \epsilon.
 </ul>
 <p>So if we were to subset our dataframe into three subsets, one with students who take 3 courses, another subset for students who take 4 courses, and another subset for students who take 5 courses, and then create a density plot of study times for each subset, each density plot should follow a normal distribution, with different means, and the same spread.</p>
 <p>Let us take a look at these density plots next.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##subset dataframe</span></span>
 <span><span class="va">x.3</span><span class="op">&lt;-</span><span class="va">df</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">courses</span><span class="op">==</span><span class="fl">3</span><span class="op">)</span>,<span class="op">]</span></span>
 <span><span class="co">##density plot of study time for students taking 3 courses</span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">x.3</span>,<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">study</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_density.html">geom_density</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x<span class="op">=</span><span class="st">"Study Time (Mins)"</span>, title<span class="op">=</span><span class="st">"Dist of Study Times with 3 Courses"</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="bookdown-demo_files/figure-html/unnamed-chunk-5-1.png" width="672"></div>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/unnamed-chunk-9-1.png" width="672"></div>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##subset dataframe</span></span>
 <span><span class="va">x.4</span><span class="op">&lt;-</span><span class="va">df</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">courses</span><span class="op">==</span><span class="fl">4</span><span class="op">)</span>,<span class="op">]</span></span>
 <span><span class="co">##density plot of study time for students taking 4 courses</span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">x.4</span>,<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">study</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_density.html">geom_density</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x<span class="op">=</span><span class="st">"Study Time (Mins)"</span>, title<span class="op">=</span><span class="st">"Dist of Study Times with 4 Courses"</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="bookdown-demo_files/figure-html/unnamed-chunk-5-2.png" width="672"></div>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/unnamed-chunk-9-2.png" width="672"></div>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##subset dataframe</span></span>
 <span><span class="va">x.5</span><span class="op">&lt;-</span><span class="va">df</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">courses</span><span class="op">==</span><span class="fl">5</span><span class="op">)</span>,<span class="op">]</span></span>
 <span><span class="co">##density plot of study time for students taking 5 courses</span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">x.5</span>,<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">study</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_density.html">geom_density</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x<span class="op">=</span><span class="st">"Study Time (Mins)"</span>, title<span class="op">=</span><span class="st">"Dist of Study Times with 5 Courses"</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="bookdown-demo_files/figure-html/unnamed-chunk-5-3.png" width="672"></div>
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/unnamed-chunk-9-3.png" width="672"></div>
 <p>Notice all of these plots are normal, with different means (centers), and similar spreads.</p>
 <p><em>Please see the associated video for more explanation about the distribution of the response variable, for each value of the predictor variable, in an SLR setting.</em></p>
 </div>
@@ -256,7 +255,7 @@ y=\beta_0+\beta_{1} x + \epsilon.
 <p>From <a href="slr.html#eq:SLR">(1.1)</a> and <a href="slr.html#eq:SLRmod">(1.2)</a>, we noted that we have to estimate the regression coefficients <span class="math inline">\(\beta_0, \beta_1\)</span> as well as the parameter <span class="math inline">\(\sigma^2\)</span> associated with the error term. As mentioned earlier, we are unable to obtain numerical values of these parameters as we do not have data from the entire population. So what we do is use the data from our sample to estimate these parameters.</p>
 <p>We estimate <span class="math inline">\(\beta_0,\beta_1\)</span> using <span class="math inline">\(\hat{\beta}_0,\hat{\beta}_1\)</span> based on a sample of observations <span class="math inline">\((x_i,y_i)\)</span> of size <span class="math inline">\(n\)</span>.</p>
 <p>The subscripts associated with the response and predictor variables denote which data point that value belongs to. Let us take a look at the first few rows of the data frame for the study time example:</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##      study courses
 ## 1 429.8311       3
@@ -310,7 +309,7 @@ y=\hat{\beta}_0+\hat{\beta}_1 x + e
 <p><span class="math inline">\(\hat{\beta}_1, \hat{\beta}_0\)</span> are called <strong>least squares estimators</strong>.</p>
 <p>The minimization of <span class="math inline">\(SS_{res}\)</span> with respect to <span class="math inline">\(\hat{\beta}_0\)</span> and <span class="math inline">\(\hat{\beta}_1\)</span> is done by taking the partial derivatives of <a href="slr.html#eq:SSres">(1.7)</a> with respect to <span class="math inline">\(\hat{\beta}_1\)</span> and <span class="math inline">\(\hat{\beta}_0\)</span>, setting these two partial derivatives equal to 0, and solving these two equations for <span class="math inline">\(\hat{\beta}_1\)</span> and <span class="math inline">\(\hat{\beta}_0\)</span>.</p>
 <p>Let’s take a look at the estimated coefficients for our study time example:</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##fit regression</span></span>
 <span><span class="va">result</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">study</span><span class="op">~</span><span class="va">courses</span>, data<span class="op">=</span><span class="va">df</span><span class="op">)</span></span>
 <span><span class="co">##print out the estimated coefficients</span></span>
@@ -441,7 +440,7 @@ SS_T = SS_R + SS_{res}.
 <li>In the last column, we report an <span class="math inline">\(F\)</span> statistic, which equal to <span class="math inline">\(\frac{MS_R}{MS_{res}}\)</span>. This <span class="math inline">\(F\)</span> statistic is associated with an <strong>ANOVA F test</strong>, which we will look at in more detail in the next subsection.</li>
 </ul>
 <p>To obtain the ANOVA table for our study time example:</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## Analysis of Variance Table
 ## 
@@ -469,7 +468,7 @@ F = \frac{MS_R}{MS_{res}}
 \end{equation}\]</span></p>
 <p>and is compared with an <span class="math inline">\(F_{1,n-2}\)</span> distribution. Note that <span class="math inline">\(F_{1,n-2}\)</span> is read as an <strong>F distribution with 1 and <span class="math inline">\(n-2\)</span> degrees of freedom</strong>.</p>
 <p>Going back to the study time example, the <span class="math inline">\(F\)</span> statistic is 6.5403586^{4}. The critical value can be found using</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Fdist.html">qf</a></span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="fl">0.05</span>, <span class="fl">1</span>, <span class="fl">6000</span><span class="op">-</span><span class="fl">2</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 3.84301</code></pre>
 <p>Since our test statistic is larger than the critical value, we reject the null hypothesis. Our data support the claim that the slope is different from 0, or in other words, that there is a linear association between study time and number of courses taken.</p>
@@ -492,7 +491,7 @@ R^{2} = \frac{SS_R}{SS_T} = 1 - \frac{SS_{res}}{SS_T}.
 <li>Sometimes reported as a percentage.</li>
 </ul>
 <p>To obtain <span class="math inline">\(R^2\)</span> for our study time example:</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">anova.tab</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span>
 <span><span class="co">##SST not provided, so we add up SSR and SSres</span></span>
 <span><span class="va">SST</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">anova.tab</span><span class="op">$</span><span class="st">"Sum Sq"</span><span class="op">)</span></span>
@@ -519,7 +518,7 @@ r = \frac{\sum\limits_{i=1}^{n}(x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum\limits
 <li>In SLR, it turns out that <span class="math inline">\(r^2 = R^2\)</span>.</li>
 </ul>
 <p>Using our study time example, the correlation between study time and number of courses taken is</p>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">study</span>, <span class="va">df</span><span class="op">$</span><span class="va">courses</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 0.9570769</code></pre>
 <p>This value indicates a very strong and positive linear association between study time and number of courses taken (remember that this is simulated data and is not real).</p>
@@ -543,7 +542,7 @@ r = \frac{\sum\limits_{i=1}^{n}(x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum\limits
 <span class="header-section-number">1.7</span> R Tutorial<a class="anchor" aria-label="anchor" href="#r-tutorial"><i class="fas fa-link"></i></a>
 </h2>
 <p>For this tutorial, we will work with the dataset <code>elmhurst</code> from the <code>openintro</code> package in R.</p>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://openintrostat.github.io/openintro/">openintro</a></span><span class="op">)</span></span>
 <span><span class="va">Data</span><span class="op">&lt;-</span><span class="fu">openintro</span><span class="fu">::</span><span class="va"><a href="https://openintrostat.github.io/openintro/reference/elmhurst.html">elmhurst</a></span></span></code></pre></div>
@@ -558,13 +557,13 @@ r = \frac{\sum\limits_{i=1}^{n}(x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum\limits
 <h3>Visualization<a class="anchor" aria-label="anchor" href="#visualization"><i class="fas fa-link"></i></a>
 </h3>
 <p>We should always verify with scatterplot that the relationship is (approximately) linear before proceeding with correlation and simple linear regression!</p>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##scatterplot of gift aid against family income</span></span>
 <span><span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">Data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">family_income</span>,y<span class="op">=</span><span class="va">gift_aid</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"lm"</span>, se<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span><span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x<span class="op">=</span><span class="st">"Family Income"</span>, y<span class="op">=</span><span class="st">"Gift Aid"</span>, title<span class="op">=</span><span class="st">"Scatterplot of Gift Aid against Family"</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="bookdown-demo_files/figure-html/unnamed-chunk-14-1.png" width="672"></div>
+<div class="inline-figure"><img src="bookdown-demo_files/figure-html/unnamed-chunk-18-1.png" width="672"></div>
 <p>We note that the observations are fairly evenly scattered on both sides of the regression line, so a linear association exists. We see a negative linear association. As family income increases, the gift aid, on average, decreases.</p>
 <p>We also do not see any observation with weird values that may warrant further investigation.</p>
 </div>
@@ -572,11 +571,11 @@ r = \frac{\sum\limits_{i=1}^{n}(x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum\limits
 <h3>Regression<a class="anchor" aria-label="anchor" href="#regression"><i class="fas fa-link"></i></a>
 </h3>
 <p>We use the <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> function to fit a regression model:</p>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##regress gift aid against family income</span></span>
 <span><span class="va">result</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">gift_aid</span><span class="op">~</span><span class="va">family_income</span>, data<span class="op">=</span><span class="va">Data</span><span class="op">)</span></span></code></pre></div>
 <p>Use the <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code> function to display relevant information from this regression:</p>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##look at information regarding regression</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## 
@@ -614,25 +613,25 @@ r = \frac{\sum\limits_{i=1}^{n}(x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum\limits
 <h4>Extract values from R objects<a class="anchor" aria-label="anchor" href="#extract-values-from-r-objects"><i class="fas fa-link"></i></a>
 </h4>
 <p>We can actually extract these values that are being reported from <code>summary(result)</code>. To see what can be extracted from an R object, use the <code><a href="https://rdrr.io/r/base/names.html">names()</a></code> function:</p>
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##see what can be extracted from summary(result)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##  [1] "call"          "terms"         "residuals"     "coefficients" 
 ##  [5] "aliased"       "sigma"         "df"            "r.squared"    
 ##  [9] "adj.r.squared" "fstatistic"    "cov.unscaled"</code></pre>
 <p>To extract the estimated coefficients:</p>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##extract coefficients</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span><span class="op">$</span><span class="va">coefficients</span></span></code></pre></div>
 <pre><code>##                  Estimate Std. Error   t value     Pr(&gt;|t|)
 ## (Intercept)   24.31932901 1.29145027 18.831022 8.281020e-24
 ## family_income -0.04307165 0.01080947 -3.984621 2.288734e-04</code></pre>
 <p>Notice the information is presented in a table. To extract a specific value, we can specify the row and column indices:</p>
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##extract slope</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span><span class="op">$</span><span class="va">coefficients</span><span class="op">[</span><span class="fl">2</span>,<span class="fl">1</span><span class="op">]</span></span></code></pre></div>
 <pre><code>## [1] -0.04307165</code></pre>
-<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##extract intercept</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span><span class="op">$</span><span class="va">coefficients</span><span class="op">[</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">]</span></span></code></pre></div>
 <pre><code>## [1] 24.31933</code></pre>
@@ -642,7 +641,7 @@ r = \frac{\sum\limits_{i=1}^{n}(x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum\limits
 <h4>Prediction<a class="anchor" aria-label="anchor" href="#prediction"><i class="fas fa-link"></i></a>
 </h4>
 <p>A use of regression models is prediction. Suppose I want to predict the gift aid of a student with family income of 50 thousand dollars (assuming the unit is in thousands of dollars). We use the <code><a href="https://rdrr.io/r/stats/predict.html">predict()</a></code> function:</p>
-<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##create data point for prediction</span></span>
 <span><span class="va">newdata</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>family_income<span class="op">=</span><span class="fl">50</span><span class="op">)</span></span>
 <span><span class="co">##predicted gift aid when x=50</span></span>
@@ -650,7 +649,7 @@ r = \frac{\sum\limits_{i=1}^{n}(x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum\limits
 <pre><code>##        1 
 ## 22.16575</code></pre>
 <p>This student’s predicted gift aid is $22 165.75. Alternatively, you could have calculated this by plugging <span class="math inline">\(x=50\)</span> into the estimated SLR equation:</p>
-<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span><span class="op">$</span><span class="va">coefficients</span><span class="op">[</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">]</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span><span class="op">$</span><span class="va">coefficients</span><span class="op">[</span><span class="fl">2</span>,<span class="fl">1</span><span class="op">]</span><span class="op">*</span><span class="fl">50</span></span></code></pre></div>
 <pre><code>## [1] 22.16575</code></pre>
 </div>
@@ -658,7 +657,7 @@ r = \frac{\sum\limits_{i=1}^{n}(x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum\limits
 <h4>ANOVA table<a class="anchor" aria-label="anchor" href="#anova-table-1"><i class="fas fa-link"></i></a>
 </h4>
 <p>We use the <code><a href="https://rdrr.io/r/stats/anova.html">anova()</a></code> function to display the ANOVA table</p>
-<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">anova.tab</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span>
 <span><span class="va">anova.tab</span></span></code></pre></div>
 <pre><code>## Analysis of Variance Table
@@ -672,16 +671,16 @@ r = \frac{\sum\limits_{i=1}^{n}(x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum\limits
 <p>The report <span class="math inline">\(F\)</span> statistic is the same as the value reported earlier from <code>summary(result)</code>.</p>
 <p>The first line of the output gives <span class="math inline">\(SS_{R}\)</span>, the second line gives <span class="math inline">\(SS_{res}\)</span>. The function doesn’t provide <span class="math inline">\(SS_T\)</span>, but we know that <span class="math inline">\(SS_T = SS_{R} + SS_{res}\)</span>.</p>
 <p>Again, to see what can be extracted from <code>anova.tab</code>:</p>
-<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">anova.tab</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "Df"      "Sum Sq"  "Mean Sq" "F value" "Pr(&gt;F)"</code></pre>
 <p>So <span class="math inline">\(SS_T\)</span> can be easily calculated:</p>
-<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">SST</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">anova.tab</span><span class="op">$</span><span class="st">"Sum Sq"</span><span class="op">)</span></span>
 <span><span class="va">SST</span></span></code></pre></div>
 <pre><code>## [1] 1461.079</code></pre>
 <p>The <span class="math inline">\(R^2\)</span> was reported to be 0.2485582. To verify using the ANOVA table:</p>
-<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">anova.tab</span><span class="op">$</span><span class="st">"Sum Sq"</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">/</span><span class="va">SST</span></span></code></pre></div>
 <pre><code>## [1] 0.2485582</code></pre>
 </div>
@@ -690,19 +689,18 @@ r = \frac{\sum\limits_{i=1}^{n}(x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum\limits
 <h3>Correlation<a class="anchor" aria-label="anchor" href="#correlation-1"><i class="fas fa-link"></i></a>
 </h3>
 <p>We use the <code><a href="https://rdrr.io/r/stats/cor.html">cor()</a></code> function to find the correlation between two quantitative variables:</p>
-<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##correlation</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span><span class="op">(</span><span class="va">Data</span><span class="op">$</span><span class="va">family_income</span>,<span class="va">Data</span><span class="op">$</span><span class="va">gift_aid</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] -0.4985561</code></pre>
 <p>The correlation is -0.4985561. We have a moderate, negative linear association between family income and gift aid.</p>
 
-<!-- Line 357: Change "Module 5" to add reference for chapter -->
 </div>
 </div>
 </div>
   <div class="chapter-nav">
 <div class="prev"><a href="index.html">Preface</a></div>
-<div class="next"><a href="inf.html"><span class="header-section-number">2</span> Inference with Simple Linear Regression (SLR)</a></div>
+<div class="empty"></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
@@ -751,7 +749,7 @@ r = \frac{\sum\limits_{i=1}^{n}(x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum\limits
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Linear Models for Data Science</strong>" was written by Jeffrey Woo. It was last built on 2025-06-09.</p>
+    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2025-06-09.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

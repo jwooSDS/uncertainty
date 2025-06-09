@@ -1,5 +1,5 @@
 --- 
-title: "Linear Models for Data Science"
+title: "Understanding Uncertainty Course Notes"
 author: "Jeffrey Woo"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
@@ -9,76 +9,105 @@ bibliography: [book.bib, packages.bib]
 biblio-style: apalike
 link-citations: yes
 github-repo: rstudio/bookdown-demo
-description: "This is a trial run"
+description: "DS 5030"
 ---
 
 # Preface {-}
 
-## Who is this book for? {-}
+The examples in this preface is based on OpenIntro Statistics (Diez, Ceytinka-Rundel, Barr), Chapter 9.4 and 9.5, which provide more background information. You can access the book for free at https://www.openintro.org/book/os/ 
 
-There are many books on linear models, with various expectations for different levels of familiarity with statistical, mathematical, and coding concepts. These books generally fall into one of two camps:
+The main goal using data science is to understand data. Broadly speaking, this will involve building a statistical model for predicting, or estimating a response variable based on one or more predictors. Such models are used in a wide variety of fields such as finance, medicine, public policy, sports, and so on. We will look a couple of examples.
 
-1. Little to no familiarity with statistical and mathematical concepts, but fairly familiar to coding. These books tend to be written for programmers who want to get into data science. These books tend to explain linear models while trying to avoid statistical and mathematical concepts as much as possible. These books tend to present linear models in a recipe format giving readers directions on what to do to build their models. 
+## Examples
 
-The drawback of such books is that readers do not get much understanding of the underlying concepts of linear models. It is impossible to give directions covering every possible scenario in the real world as real data are messy. Practitioners of data science often have to think outside the box in order to make linear models work for their particular data, and it is difficult to do so without understanding the mathematical framework of linear models. 
+### Example 1: Mario Kart Auction Prices
 
-2. Familiarity with mathematical notation and introductory statistical concepts such as statistical inference, and little to no familiarity with coding. These books tend to be written for mathematicians (or anyone with a strong background in mathematics) who want to get into data science. These books cover the mathematical framework of linear models thoroughly.
+In this first example, we will look at Ebay auctions of a video game called Mario Kart that is played on Nintendo Wii. We want to predict the price of an auction based on whether the game is new or not, whether the auction's main photo is a stock photo, the duration of the auction in days, and the number of Wii wheels included with the auction. 
 
-The drawback of such books is that readers must be comfortable with mathematical notation. This limits the audience for such books to people with fairly thorough training in mathematics. People without such training will get lost trying to read such books, and do not understand why we need to know the mathematical foundations to use linear models in data science. 
+A model that we can use for this example is the linear regression model:
 
-This book is meant to be readable by both groups of readers. Some foundational mathematical knowledge will be presented, but will be written so that is readable by anyone. This book will also explain what these knowledge mean in the context of data science. Practical advice, based on the foundational mathematical knowledge, will also be given.
+```{r message=FALSE}
+library(openintro)
 
-This book accompanies the course STAT 6021: Linear Models for Data Science, for the Masters of Data Science (MSDS) program at the University of Virginia School of Data Science. 
+Data<-mariokart
+##fit model
+result<-lm(total_pr~cond+stock_photo+duration+wheels, data=Data)
+```
 
-As introductory statistics and introductory programming are pre-requisites for entering the MSDS program, this book assumes basic knowledge of statistical inference and coding. Review materials covering these concepts are provided separately for enrolled students. 
+Generally speaking, a linear regression equation takes the following form:
 
-## Chapters {-}
+$$
+\hat{y} = \hat{\beta}_0 + \hat{\beta}_1 x_1 + \hat{\beta}_2 x_2 + \cdots + \hat{\beta}_k x_k
+$$
 
-The chapters for the book is as follows:
+where $\hat{y}$ denotes the predicted value of the response variable, the price of the action in this example, $x_1, x_2, \cdots, x_k$ denote the values of the predictors. This is example, we have: $x_1$ for whether the game is new or not, $x_2$ for whether the auction's main photo is a stock photo, $x_3$ for the duration of the auction in days, and $x_4$ for the number of Wii wheels included with the auction. $\hat{\beta}_0, \hat{\beta}_1, \cdots, \hat{\beta}_k$ represent the estimated regression parameters. If we know what these values are, we can easily plug in the values of the predictors to obtain the predicted price of the auction.
 
-- Chapters \@ref(wrangling) and \@ref(viz) focus on core R skills needed: data wrangling and data visualization. These are R skills needed to perform regression analysis.
+Fitting the model in R, we obtain the estimated regression parameters:
 
-- Chapters \@ref(slr), \@ref(inf), and \@ref(diag) cover simple linear regression (SLR). This is the simplest scenario in regression when we have one predictor and one response variable that is quantitative. We are using this scenario to be able to more clearly explain concepts in regression before moving into the more practical multiple linear regression (MLR), which involves multiple predictors.
+```{r}
+##get estimated regression parameters
+result
+```
 
-- Chapters \@ref(mlr) to \@ref(out) cover multiple linear regression: when we have multiple predictors and one response variable that is quantitative. 
+so we have:
 
-- Chapters \@ref(logistic1) and \@ref(logistic2) cover logistic regression: when we have a response variable that is binary. 
+$$
+\hat{y} = 43.5201 - 2.5816 x_1 - 6.7542 x_2 + 0.3788 x_3 + 9.9476 x_4
+$$
 
-## How to use this book {-}
+So for an auction for Mario Kart game that is used, that uses a stock photo, is listed for 2 days, and comes with 0 wheels, the predicted price will be $\hat{y} = 43.5201 - 2.5816 - 6.7542 + 0.3788 \times 2 = 34.94$ or about 35 dollars. 
 
-- If you are using the provided R code from each chapter, please remember to clear your R environment whenever you move to a new chapter. This can be done by typing `rm(list = ls())`.
+### Example 2: Job Application Callback Rates
 
-- For Chapters \@ref(slr) to \@ref(logistic2), there is an R tutorial provided in the last section. You should also clear your R environment before running the code in the tutorials. 
+In this example, we look at data from an experiment that sought to evaluate the effect of race and gender on job application callback rates. For the experiment, researchers created fake resumes to job postings in Boston and Chicago to see which resumes resulted in a callback. The fake resumes included relevant information such as the applicant's educational attainment, how many year's of experience the applicant as well as a first and last name. The names on the fake resume were meant to imply the applicant's race and gender. Only two races were considered (Black or White) and only two genders were considered (Make or Female) for the experiment.
 
-- Some additional resources are provided for students enrolled in STAT 6021. These include:
+Prior to the experiment, the researchers conducted surveys to check for racial and gender associations for the names on the fake resumes; only names that passed a certain threshold from the surveys were included in the experiment. 
 
-  - Learning objectives.
-  - Explainer videos.
-  - Practice questions.
-  - Assignments. 
-  
-## Data sets used {-}
+A model that can be used in this example is the logistic regression model
 
-I have tried to use as many open source data sets as much as possible so that readers can work on the various examples I have provided on their own. However, some data sets may not be open source and were shared by other statistics and data science educators over my years of teaching this class (or variations of it) since 2013. It is my goal to eventually use only open source data sets.
+```{r}
+Data2<-resume
+##fit model
+result2<-glm(received_callback~job_city + college_degree+years_experience+race+gender, family="binomial", data=Data2)
 
-## Reporting issues with this book {-}
+```
 
-This book is mostly a compilation of course notes that were originally written as separate chapters. While effort has been made to fix typos, issues may still exist. If you find any issues (typos, formatting, etc), please report them at <https://github.com/jwooSDS/linear_models/issues>. Please be as specific as you can, including providing the specific section and paragraph where the issue is found.  
+Generally speaking, a logistic regression equation takes the following form
 
-## Other resources {-}
+$$
+\log (\frac{\hat{\pi}}{1-\hat{\pi}}) = \hat{\beta}_0 + \hat{\beta}_1 x_1 + \hat{\beta}_2 x_2 + \cdots + \hat{\beta}_k x_k
+$$
 
-Some other resources that readers may want to check out:
+where $\hat{\pi}$ denotes the predicted probability that the applicant receives a call back. $x_1, x_2, \cdots, x_k$ denote the values of the predictors. This is example, we have: $x_1$ for which city is the job posting located in, $x_2$ for whether the applicant has a college degree or not, $x_3$ for the experience of the applicant, $x_4$ for associated race of the applicant, and $x_5$ for the associated gender of the applicant. Similar to linear regression, $\hat{\beta}_0, \hat{\beta}_1, \cdots, \hat{\beta}_k$ represent the estimated regression parameters. If we know what these values are, we can easily plug in the values of the predictors to obtain the predicted probability for an applicant with those characteristics to receive a callback.
 
-- *OpenIntro Statistics*, 4th ed. Diez, Cetinkaya-Rundel, Barr, OpenIntro. Get free PDF version at <https://leanpub.com/os>, just set the price that you want to pay to $0. This is a good book for introductory statistics. 
+Fitting the model in R, we obtain the estimated regression parameters
 
-- *Introduction to Probability for Data Science*, Chan. <https://probability4datascience.com/index.html>. This book covers the fundamentals of probability and mathematics needed for data science. It does a good job explaining how seemingly abstract mathematical concepts are needed and applied in data science. 
+```{r}
+##get estimated regression parameters
+result2
+```
 
-- *Linear Models with R*, 2nd ed. Faraway. This is probably one of the few books that balances between the two camps that I wrote about earlier. It does require familiarity with matrices and linear algebra though. 
+so we have
 
-- *Introduction to Linear Regression Analysis*, 5th or 6th ed. Montgomery, Peck, Vining. You may be able to access an e-version of the book through your university library if you are affiliated with a university. This book is mathematically rigorous so is useful to those who are interested in mathematical proofs that is not covered.
+$$
+\log (\frac{\hat{\pi}}{1-\hat{\pi}}) = -2.63974 - 0.39206 x_1 - 0.0655 x_2 + 0.03152 x_3 + 0.44299 x_4 - 0.22814 x_5
+$$
 
-- *Applied Linear Statistical Models* (ALSM), Kutner, Nachtsheim, Neter, Li, 5th ed. This book covers a wide range of topics in linear models and is also mathematically rigorous. 
+So for an applicant in Boston, who has a college degree, has 10 years of experience and has a name that is associated with being a Black male, the logistic regression equation becomes $\log (\frac{\hat{\pi}}{1-\hat{\pi}}) = -2.63974 - 0.0655 + 0.03152 \times 10 - 0.22814 = -2.61818$. Doing a little bit of algebra to solve, we get $\hat{\pi} = 0.06797751$. Such an applicant has about a 6.8 percent chance of receiving a callback. 
 
-- *Applied Linear Regression Models* (ALRM), Kutner, Nachtsheim, Neter, 4th ed.  ALRM is the same as the first 14 chapters of ALSM. The second part of ALSM covers topics in Design of Experiments, which I highly recommend if you are interested in those topics.
+## How were Estimated Parameters Calculated?
 
+In the two examples, notice how I used some R functions, supplied the names of the variables, and the R functions generated the values of the estimated parameters? One thing you will learn is how the functions actually calculate these numbers. It turns out that these calculations are based on foundational concepts associated with measures of uncertainty, probability, and expected values. We will be learning about these concepts in this class.
+
+Why do we want to know how these calculations are performed? So that we understand the intuition and logic behind how these models are built. It becomes a lot easier to work with these models when we understand their logic (for example, we know when these models can be used or cannot be used, we know what steps to take when we notice our data have certain characteristics, etc), instead of memorizing a bunch of steps.
+
+When presenting models and data to people, some people may occasionally questions our methods and models. Why should we trust the model? Should we trust these numbers that seem to come out from some black box? 
+
+Notice we used two different models, linear regression and logistic regression, for examples 1 and 2. Why did we use these models? Could we have swapped the type of model used in these examples? The answer is actually no. One of the main considerations when deciding what model to use is to identify if our response variable is quantitative or categorical. You will learn why the linear regression model works when the response variable is quantitative, and why the logistic regression model works when the response variable is categorical. 
+
+## The Course: Understanding Uncertainty
+
+As mentioned in the previous section, we will be learning about foundational concepts associated with measures of uncertainty, probability, and expected values. All of these concepts will then help explain the intuition and how statistical models are built. 
+
+At the end of the course, we will apply these concepts and revisit the linear regression and logistic regression models. These are two of the most widely used models used in data science, as they are relatively easier to understand and explain. More modern methods (that you will learn about in future classes) such as decision trees and neural networks can be viewed as extensions of the linear and logistic regression models. 
 

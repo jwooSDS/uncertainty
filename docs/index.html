@@ -4,16 +4,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Preface | Linear Models for Data Science</title>
+<title>Preface | Understanding Uncertainty Course Notes</title>
 <meta name="author" content="Jeffrey Woo">
-<meta name="description" content="This is a trial run">
+<meta name="description" content="DS 5030">
 <meta name="generator" content="bookdown 0.43 with bs4_book()">
-<meta property="og:title" content="Preface | Linear Models for Data Science">
+<meta property="og:title" content="Preface | Understanding Uncertainty Course Notes">
 <meta property="og:type" content="book">
-<meta property="og:description" content="This is a trial run">
+<meta property="og:description" content="DS 5030">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Preface | Linear Models for Data Science">
-<meta name="twitter:description" content="This is a trial run">
+<meta name="twitter:title" content="Preface | Understanding Uncertainty Course Notes">
+<meta name="twitter:description" content="DS 5030">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.9.0/transition.js"></script><script src="libs/bs3compat-0.9.0/tabs.js"></script><script src="libs/bs3compat-0.9.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -30,7 +30,7 @@
 
     <div class="d-flex align-items-start justify-content-between">
       <h1>
-        <a href="index.html" title="">Linear Models for Data Science</a>
+        <a href="index.html" title="">Understanding Uncertainty Course Notes</a>
       </h1>
       <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
     </div>
@@ -43,8 +43,7 @@
       <nav aria-label="Table of contents"><h2>Table of contents</h2>
         <ul class="book-toc list-unstyled">
 <li><a class="active" href="index.html">Preface</a></li>
-<li><a class="" href="slr.html"><span class="header-section-number">1</span> Basics with Simple Linear Regression (SLR)</a></li>
-<li><a class="" href="inf.html"><span class="header-section-number">2</span> Inference with Simple Linear Regression (SLR)</a></li>
+<li><a class="" href="descriptive-statistics.html"><span class="header-section-number">1</span> Descriptive Statistics</a></li>
 </ul>
 
         <div class="book-extra">
@@ -55,87 +54,120 @@
   </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><!--bookdown:title:end--><!--bookdown:title:start--><div id="preface" class="section level1 unnumbered">
 <h1>Preface<a class="anchor" aria-label="anchor" href="#preface"><i class="fas fa-link"></i></a>
 </h1>
-<div id="who-is-this-book-for" class="section level2 unnumbered">
-<h2>Who is this book for?<a class="anchor" aria-label="anchor" href="#who-is-this-book-for"><i class="fas fa-link"></i></a>
+<p>The examples in this preface is based on OpenIntro Statistics (Diez, Ceytinka-Rundel, Barr), Chapter 9.4 and 9.5, which provide more background information. You can access the book for free at <a href="https://www.openintro.org/book/os/" class="uri">https://www.openintro.org/book/os/</a></p>
+<p>The main goal using data science is to understand data. Broadly speaking, this will involve building a statistical model for predicting, or estimating a response variable based on one or more predictors. Such models are used in a wide variety of fields such as finance, medicine, public policy, sports, and so on. We will look a couple of examples.</p>
+<div id="examples" class="section level2" number="0.1">
+<h2>
+<span class="header-section-number">0.1</span> Examples<a class="anchor" aria-label="anchor" href="#examples"><i class="fas fa-link"></i></a>
 </h2>
-<p>There are many books on linear models, with various expectations for different levels of familiarity with statistical, mathematical, and coding concepts. These books generally fall into one of two camps:</p>
-<ol style="list-style-type: decimal">
-<li>Little to no familiarity with statistical and mathematical concepts, but fairly familiar to coding. These books tend to be written for programmers who want to get into data science. These books tend to explain linear models while trying to avoid statistical and mathematical concepts as much as possible. These books tend to present linear models in a recipe format giving readers directions on what to do to build their models.</li>
-</ol>
-<p>The drawback of such books is that readers do not get much understanding of the underlying concepts of linear models. It is impossible to give directions covering every possible scenario in the real world as real data are messy. Practitioners of data science often have to think outside the box in order to make linear models work for their particular data, and it is difficult to do so without understanding the mathematical framework of linear models.</p>
-<ol start="2" style="list-style-type: decimal">
-<li>Familiarity with mathematical notation and introductory statistical concepts such as statistical inference, and little to no familiarity with coding. These books tend to be written for mathematicians (or anyone with a strong background in mathematics) who want to get into data science. These books cover the mathematical framework of linear models thoroughly.</li>
-</ol>
-<p>The drawback of such books is that readers must be comfortable with mathematical notation. This limits the audience for such books to people with fairly thorough training in mathematics. People without such training will get lost trying to read such books, and do not understand why we need to know the mathematical foundations to use linear models in data science.</p>
-<p>This book is meant to be readable by both groups of readers. Some foundational mathematical knowledge will be presented, but will be written so that is readable by anyone. This book will also explain what these knowledge mean in the context of data science. Practical advice, based on the foundational mathematical knowledge, will also be given.</p>
-<p>This book accompanies the course STAT 6021: Linear Models for Data Science, for the Masters of Data Science (MSDS) program at the University of Virginia School of Data Science.</p>
-<p>As introductory statistics and introductory programming are pre-requisites for entering the MSDS program, this book assumes basic knowledge of statistical inference and coding. Review materials covering these concepts are provided separately for enrolled students.</p>
+<div id="example-1-mario-kart-auction-prices" class="section level3" number="0.1.1">
+<h3>
+<span class="header-section-number">0.1.1</span> Example 1: Mario Kart Auction Prices<a class="anchor" aria-label="anchor" href="#example-1-mario-kart-auction-prices"><i class="fas fa-link"></i></a>
+</h3>
+<p>In this first example, we will look at Ebay auctions of a video game called Mario Kart that is played on Nintendo Wii. We want to predict the price of an auction based on whether the game is new or not, whether the auction’s main photo is a stock photo, the duration of the auction in days, and the number of Wii wheels included with the auction.</p>
+<p>A model that we can use for this example is the linear regression model:</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://openintrostat.github.io/openintro/">openintro</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">Data</span><span class="op">&lt;-</span><span class="va">mariokart</span></span>
+<span><span class="co">##fit model</span></span>
+<span><span class="va">result</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">total_pr</span><span class="op">~</span><span class="va">cond</span><span class="op">+</span><span class="va">stock_photo</span><span class="op">+</span><span class="va">duration</span><span class="op">+</span><span class="va">wheels</span>, data<span class="op">=</span><span class="va">Data</span><span class="op">)</span></span></code></pre></div>
+<p>Generally speaking, a linear regression equation takes the following form:</p>
+<p><span class="math display">\[
+\hat{y} = \hat{\beta}_0 + \hat{\beta}_1 x_1 + \hat{\beta}_2 x_2 + \cdots + \hat{\beta}_k x_k
+\]</span></p>
+<p>where <span class="math inline">\(\hat{y}\)</span> denotes the predicted value of the response variable, the price of the action in this example, <span class="math inline">\(x_1, x_2, \cdots, x_k\)</span> denote the values of the predictors. This is example, we have: <span class="math inline">\(x_1\)</span> for whether the game is new or not, <span class="math inline">\(x_2\)</span> for whether the auction’s main photo is a stock photo, <span class="math inline">\(x_3\)</span> for the duration of the auction in days, and <span class="math inline">\(x_4\)</span> for the number of Wii wheels included with the auction. <span class="math inline">\(\hat{\beta}_0, \hat{\beta}_1, \cdots, \hat{\beta}_k\)</span> represent the estimated regression parameters. If we know what these values are, we can easily plug in the values of the predictors to obtain the predicted price of the auction.</p>
+<p>Fitting the model in R, we obtain the estimated regression parameters:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">##get estimated regression parameters</span></span>
+<span><span class="va">result</span></span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = total_pr ~ cond + stock_photo + duration + wheels, 
+##     data = Data)
+## 
+## Coefficients:
+##    (Intercept)        condused  stock_photoyes        duration          wheels  
+##        43.5201         -2.5816         -6.7542          0.3788          9.9476</code></pre>
+<p>so we have:</p>
+<p><span class="math display">\[
+\hat{y} = 43.5201 - 2.5816 x_1 - 6.7542 x_2 + 0.3788 x_3 + 9.9476 x_4
+\]</span></p>
+<p>So for an auction for Mario Kart game that is used, that uses a stock photo, is listed for 2 days, and comes with 0 wheels, the predicted price will be <span class="math inline">\(\hat{y} = 43.5201 - 2.5816 - 6.7542 + 0.3788 \times 2 = 34.94\)</span> or about 35 dollars.</p>
 </div>
-<div id="chapters" class="section level2 unnumbered">
-<h2>Chapters<a class="anchor" aria-label="anchor" href="#chapters"><i class="fas fa-link"></i></a>
-</h2>
-<p>The chapters for the book is as follows:</p>
-<ul>
-<li><p>Chapters <a href="#wrangling"><strong>??</strong></a> and <a href="#viz"><strong>??</strong></a> focus on core R skills needed: data wrangling and data visualization. These are R skills needed to perform regression analysis.</p></li>
-<li><p>Chapters <a href="slr.html#slr">1</a>, <a href="inf.html#inf">2</a>, and <a href="#diag"><strong>??</strong></a> cover simple linear regression (SLR). This is the simplest scenario in regression when we have one predictor and one response variable that is quantitative. We are using this scenario to be able to more clearly explain concepts in regression before moving into the more practical multiple linear regression (MLR), which involves multiple predictors.</p></li>
-<li><p>Chapters <a href="#mlr"><strong>??</strong></a> to <a href="#out"><strong>??</strong></a> cover multiple linear regression: when we have multiple predictors and one response variable that is quantitative.</p></li>
-<li><p>Chapters <a href="#logistic1"><strong>??</strong></a> and <a href="#logistic2"><strong>??</strong></a> cover logistic regression: when we have a response variable that is binary.</p></li>
-</ul>
+<div id="example-2-job-application-callback-rates" class="section level3" number="0.1.2">
+<h3>
+<span class="header-section-number">0.1.2</span> Example 2: Job Application Callback Rates<a class="anchor" aria-label="anchor" href="#example-2-job-application-callback-rates"><i class="fas fa-link"></i></a>
+</h3>
+<p>In this example, we look at data from an experiment that sought to evaluate the effect of race and gender on job application callback rates. For the experiment, researchers created fake resumes to job postings in Boston and Chicago to see which resumes resulted in a callback. The fake resumes included relevant information such as the applicant’s educational attainment, how many year’s of experience the applicant as well as a first and last name. The names on the fake resume were meant to imply the applicant’s race and gender. Only two races were considered (Black or White) and only two genders were considered (Make or Female) for the experiment.</p>
+<p>Prior to the experiment, the researchers conducted surveys to check for racial and gender associations for the names on the fake resumes; only names that passed a certain threshold from the surveys were included in the experiment.</p>
+<p>A model that can be used in this example is the logistic regression model</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">Data2</span><span class="op">&lt;-</span><span class="va">resume</span></span>
+<span><span class="co">##fit model</span></span>
+<span><span class="va">result2</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">received_callback</span><span class="op">~</span><span class="va">job_city</span> <span class="op">+</span> <span class="va">college_degree</span><span class="op">+</span><span class="va">years_experience</span><span class="op">+</span><span class="va">race</span><span class="op">+</span><span class="va">gender</span>, family<span class="op">=</span><span class="st">"binomial"</span>, data<span class="op">=</span><span class="va">Data2</span><span class="op">)</span></span></code></pre></div>
+<p>Generally speaking, a logistic regression equation takes the following form</p>
+<p><span class="math display">\[
+\log (\frac{\hat{\pi}}{1-\hat{\pi}}) = \hat{\beta}_0 + \hat{\beta}_1 x_1 + \hat{\beta}_2 x_2 + \cdots + \hat{\beta}_k x_k
+\]</span></p>
+<p>where <span class="math inline">\(\hat{\pi}\)</span> denotes the predicted probability that the applicant receives a call back. <span class="math inline">\(x_1, x_2, \cdots, x_k\)</span> denote the values of the predictors. This is example, we have: <span class="math inline">\(x_1\)</span> for which city is the job posting located in, <span class="math inline">\(x_2\)</span> for whether the applicant has a college degree or not, <span class="math inline">\(x_3\)</span> for the experience of the applicant, <span class="math inline">\(x_4\)</span> for associated race of the applicant, and <span class="math inline">\(x_5\)</span> for the associated gender of the applicant. Similar to linear regression, <span class="math inline">\(\hat{\beta}_0, \hat{\beta}_1, \cdots, \hat{\beta}_k\)</span> represent the estimated regression parameters. If we know what these values are, we can easily plug in the values of the predictors to obtain the predicted probability for an applicant with those characteristics to receive a callback.</p>
+<p>Fitting the model in R, we obtain the estimated regression parameters</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">##get estimated regression parameters</span></span>
+<span><span class="va">result2</span></span></code></pre></div>
+<pre><code>## 
+## Call:  glm(formula = received_callback ~ job_city + college_degree + 
+##     years_experience + race + gender, family = "binomial", data = Data2)
+## 
+## Coefficients:
+##      (Intercept)   job_cityChicago    college_degree  years_experience  
+##         -2.63974          -0.39206          -0.06550           0.03152  
+##        racewhite           genderm  
+##          0.44299          -0.22814  
+## 
+## Degrees of Freedom: 4869 Total (i.e. Null);  4864 Residual
+## Null Deviance:       2727 
+## Residual Deviance: 2680  AIC: 2692</code></pre>
+<p>so we have</p>
+<p><span class="math display">\[
+\log (\frac{\hat{\pi}}{1-\hat{\pi}}) = -2.63974 - 0.39206 x_1 - 0.0655 x_2 + 0.03152 x_3 + 0.44299 x_4 - 0.22814 x_5
+\]</span></p>
+<p>So for an applicant in Boston, who has a college degree, has 10 years of experience and has a name that is associated with being a Black male, the logistic regression equation becomes <span class="math inline">\(\log (\frac{\hat{\pi}}{1-\hat{\pi}}) = -2.63974 - 0.0655 + 0.03152 \times 10 - 0.22814 = -2.61818\)</span>. Doing a little bit of algebra to solve, we get <span class="math inline">\(\hat{\pi} = 0.06797751\)</span>. Such an applicant has about a 6.8 percent chance of receiving a callback.</p>
 </div>
-<div id="how-to-use-this-book" class="section level2 unnumbered">
-<h2>How to use this book<a class="anchor" aria-label="anchor" href="#how-to-use-this-book"><i class="fas fa-link"></i></a>
-</h2>
-<ul>
-<li><p>If you are using the provided R code from each chapter, please remember to clear your R environment whenever you move to a new chapter. This can be done by typing <code>rm(list = ls())</code>.</p></li>
-<li><p>For Chapters <a href="slr.html#slr">1</a> to <a href="#logistic2"><strong>??</strong></a>, there is an R tutorial provided in the last section. You should also clear your R environment before running the code in the tutorials.</p></li>
-<li>
-<p>Some additional resources are provided for students enrolled in STAT 6021. These include:</p>
-<ul>
-<li>Learning objectives.</li>
-<li>Explainer videos.</li>
-<li>Practice questions.</li>
-<li>Assignments.</li>
-</ul>
-</li>
-</ul>
 </div>
-<div id="data-sets-used" class="section level2 unnumbered">
-<h2>Data sets used<a class="anchor" aria-label="anchor" href="#data-sets-used"><i class="fas fa-link"></i></a>
+<div id="how-were-estimated-parameters-calculated" class="section level2" number="0.2">
+<h2>
+<span class="header-section-number">0.2</span> How were Estimated Parameters Calculated?<a class="anchor" aria-label="anchor" href="#how-were-estimated-parameters-calculated"><i class="fas fa-link"></i></a>
 </h2>
-<p>I have tried to use as many open source data sets as much as possible so that readers can work on the various examples I have provided on their own. However, some data sets may not be open source and were shared by other statistics and data science educators over my years of teaching this class (or variations of it) since 2013. It is my goal to eventually use only open source data sets.</p>
+<p>In the two examples, notice how I used some R functions, supplied the names of the variables, and the R functions generated the values of the estimated parameters? One thing you will learn is how the functions actually calculate these numbers. It turns out that these calculations are based on foundational concepts associated with measures of uncertainty, probability, and expected values. We will be learning about these concepts in this class.</p>
+<p>Why do we want to know how these calculations are performed? So that we understand the intuition and logic behind how these models are built. It becomes a lot easier to work with these models when we understand their logic (for example, we know when these models can be used or cannot be used, we know what steps to take when we notice our data have certain characteristics, etc), instead of memorizing a bunch of steps.</p>
+<p>When presenting models and data to people, some people may occasionally questions our methods and models. Why should we trust the model? Should we trust these numbers that seem to come out from some black box?</p>
+<p>Notice we used two different models, linear regression and logistic regression, for examples 1 and 2. Why did we use these models? Could we have swapped the type of model used in these examples? The answer is actually no. One of the main considerations when deciding what model to use is to identify if our response variable is quantitative or categorical. You will learn why the linear regression model works when the response variable is quantitative, and why the logistic regression model works when the response variable is categorical.</p>
 </div>
-<div id="reporting-issues-with-this-book" class="section level2 unnumbered">
-<h2>Reporting issues with this book<a class="anchor" aria-label="anchor" href="#reporting-issues-with-this-book"><i class="fas fa-link"></i></a>
+<div id="the-course-understanding-uncertainty" class="section level2" number="0.3">
+<h2>
+<span class="header-section-number">0.3</span> The Course: Understanding Uncertainty<a class="anchor" aria-label="anchor" href="#the-course-understanding-uncertainty"><i class="fas fa-link"></i></a>
 </h2>
-<p>This book is mostly a compilation of course notes that were originally written as separate chapters. While effort has been made to fix typos, issues may still exist. If you find any issues (typos, formatting, etc), please report them at <a href="https://github.com/jwooSDS/linear_models/issues" class="uri">https://github.com/jwooSDS/linear_models/issues</a>. Please be as specific as you can, including providing the specific section and paragraph where the issue is found.</p>
-</div>
-<div id="other-resources" class="section level2 unnumbered">
-<h2>Other resources<a class="anchor" aria-label="anchor" href="#other-resources"><i class="fas fa-link"></i></a>
-</h2>
-<p>Some other resources that readers may want to check out:</p>
-<ul>
-<li><p><em>OpenIntro Statistics</em>, 4th ed. Diez, Cetinkaya-Rundel, Barr, OpenIntro. Get free PDF version at <a href="https://leanpub.com/os" class="uri">https://leanpub.com/os</a>, just set the price that you want to pay to $0. This is a good book for introductory statistics.</p></li>
-<li><p><em>Introduction to Probability for Data Science</em>, Chan. <a href="https://probability4datascience.com/index.html" class="uri">https://probability4datascience.com/index.html</a>. This book covers the fundamentals of probability and mathematics needed for data science. It does a good job explaining how seemingly abstract mathematical concepts are needed and applied in data science.</p></li>
-<li><p><em>Linear Models with R</em>, 2nd ed. Faraway. This is probably one of the few books that balances between the two camps that I wrote about earlier. It does require familiarity with matrices and linear algebra though.</p></li>
-<li><p><em>Introduction to Linear Regression Analysis</em>, 5th or 6th ed. Montgomery, Peck, Vining. You may be able to access an e-version of the book through your university library if you are affiliated with a university. This book is mathematically rigorous so is useful to those who are interested in mathematical proofs that is not covered.</p></li>
-<li><p><em>Applied Linear Statistical Models</em> (ALSM), Kutner, Nachtsheim, Neter, Li, 5th ed. This book covers a wide range of topics in linear models and is also mathematically rigorous.</p></li>
-<li><p><em>Applied Linear Regression Models</em> (ALRM), Kutner, Nachtsheim, Neter, 4th ed. ALRM is the same as the first 14 chapters of ALSM. The second part of ALSM covers topics in Design of Experiments, which I highly recommend if you are interested in those topics.</p></li>
-</ul>
+<p>As mentioned in the previous section, we will be learning about foundational concepts associated with measures of uncertainty, probability, and expected values. All of these concepts will then help explain the intuition and how statistical models are built.</p>
+<p>At the end of the course, we will apply these concepts and revisit the linear regression and logistic regression models. These are two of the most widely used models used in data science, as they are relatively easier to understand and explain. More modern methods (that you will learn about in future classes) such as decision trees and neural networks can be viewed as extensions of the linear and logistic regression models.</p>
+
 </div>
 </div>
   <div class="chapter-nav">
 <div class="empty"></div>
-<div class="next"><a href="slr.html"><span class="header-section-number">1</span> Basics with Simple Linear Regression (SLR)</a></div>
+<div class="next"><a href="descriptive-statistics.html"><span class="header-section-number">1</span> Descriptive Statistics</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
 <li><a class="nav-link" href="#preface">Preface</a></li>
-<li><a class="nav-link" href="#who-is-this-book-for">Who is this book for?</a></li>
-<li><a class="nav-link" href="#chapters">Chapters</a></li>
-<li><a class="nav-link" href="#how-to-use-this-book">How to use this book</a></li>
-<li><a class="nav-link" href="#data-sets-used">Data sets used</a></li>
-<li><a class="nav-link" href="#reporting-issues-with-this-book">Reporting issues with this book</a></li>
-<li><a class="nav-link" href="#other-resources">Other resources</a></li>
+<li>
+<a class="nav-link" href="#examples"><span class="header-section-number">0.1</span> Examples</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#example-1-mario-kart-auction-prices"><span class="header-section-number">0.1.1</span> Example 1: Mario Kart Auction Prices</a></li>
+<li><a class="nav-link" href="#example-2-job-application-callback-rates"><span class="header-section-number">0.1.2</span> Example 2: Job Application Callback Rates</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#how-were-estimated-parameters-calculated"><span class="header-section-number">0.2</span> How were Estimated Parameters Calculated?</a></li>
+<li><a class="nav-link" href="#the-course-understanding-uncertainty"><span class="header-section-number">0.3</span> The Course: Understanding Uncertainty</a></li>
 </ul>
 
       <div class="book-extra">
@@ -152,7 +184,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Linear Models for Data Science</strong>" was written by Jeffrey Woo. It was last built on 2025-06-09.</p>
+    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2025-06-09.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
