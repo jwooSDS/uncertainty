@@ -29,7 +29,7 @@ eq:4fitted
 eq:4CImean
 eq:4pred
 slr
-introduction-hi
+introduction-hi-again
 basic-ideas-with-statistics
 population-vs-sample
 parameters-vs-statistics
