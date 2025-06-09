@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 2 Probability | Understanding Uncertainty Course Notes</title>
+<meta name="author" content="Jeffrey Woo">
+<meta name="description" content="This module is based on Introduction to Probability (Blitzstein, Hwang), Chapters 1 and 2. You can access the book for free at https://stat110.hsites.harvard.edu/ (and then click on Book). Please...">
+<meta name="generator" content="bookdown 0.43 with bs4_book()">
+<meta property="og:title" content="Chapter 2 Probability | Understanding Uncertainty Course Notes">
+<meta property="og:type" content="book">
+<meta property="og:description" content="This module is based on Introduction to Probability (Blitzstein, Hwang), Chapters 1 and 2. You can access the book for free at https://stat110.hsites.harvard.edu/ (and then click on Book). Please...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 2 Probability | Understanding Uncertainty Course Notes">
+<meta name="twitter:description" content="This module is based on Introduction to Probability (Blitzstein, Hwang), Chapters 1 and 2. You can access the book for free at https://stat110.hsites.harvard.edu/ (and then click on Book). Please...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.9.0/transition.js"></script><script src="libs/bs3compat-0.9.0/tabs.js"></script><script src="libs/bs3compat-0.9.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Understanding Uncertainty Course Notes</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Preface</a></li>
+<li><a class="" href="descriptive-statistics.html"><span class="header-section-number">1</span> Descriptive Statistics</a></li>
+<li><a class="active" href="probability.html"><span class="header-section-number">2</span> Probability</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="probability" class="section level1" number="2">
+<h1>
+<span class="header-section-number">2</span> Probability<a class="anchor" aria-label="anchor" href="#probability"><i class="fas fa-link"></i></a>
+</h1>
+<p>This module is based on Introduction to Probability (Blitzstein, Hwang), Chapters 1 and 2. You can access the book for free at <a href="https://stat110.hsites.harvard.edu/" class="uri">https://stat110.hsites.harvard.edu/</a> (and then click on Book). Please note that I cover additional topics, and skip certain topics from the book. You may skip Sections 1.4 and 1.5, and examples 2.4.5 and 2.5.12 from the book.</p>
+<div id="probability-1" class="section level2" number="2.1">
+<h2>
+<span class="header-section-number">2.1</span> Probability<a class="anchor" aria-label="anchor" href="#probability-1"><i class="fas fa-link"></i></a>
+</h2>
+<p>A way of quantifying uncertainty is through probability. Think about these statements: “I am 100% certain that it will rain in the next hour” and “I am 50% certain that it will rain in the next hour”. The percentages are used to reflect the degree of certainty about the event happening. The first statement reflects certainty; the second reflects uncertainty as the statement implies the belief that it is equally likely that it will rain or not. In this module, we will learn about the basic concepts about probability.</p>
+<div id="why-study-probability" class="section level3" number="2.1.1">
+<h3>
+<span class="header-section-number">2.1.1</span> Why Study Probability?<a class="anchor" aria-label="anchor" href="#why-study-probability"><i class="fas fa-link"></i></a>
+</h3>
+<p>The book (Section 1.1) lists 10 different applications of probability, and there are many more applications. I will go as far as to say that anything that deals with data will also deal with probability.</p>
+</div>
+<div id="frequentiest-and-bayesian-view-of-probability" class="section level3" number="2.1.2">
+<h3>
+<span class="header-section-number">2.1.2</span> Frequentiest and Bayesian View of Probability<a class="anchor" aria-label="anchor" href="#frequentiest-and-bayesian-view-of-probability"><i class="fas fa-link"></i></a>
+</h3>
+<p>There are a couple of main viewpoints on how to interpret probability: <strong>frequentist</strong> and <strong>Bayesian</strong>. Consider the statement that “if we flip a fair coin, the coin has a 50% chance of landing heads”.</p>
+<ul>
+<li><p>The frequentist viewpoint views probability as the relative frequency associated with an event that is repeated for an infinite number of times. It will interpret the 50% probability as: if we were to flip the coin many many times, 50% of these times will result in the coin landing heads.</p></li>
+<li><p>The Bayesian viewpoint views probability as a measure of belief, or certainty, that an event will happen. It will interpret the 50% probability as: heads and tails are equally likely to occur with a coin flip.</p></li>
+</ul>
+<p>In this coin flip example, both interpretations are reasonable. However, in some instances, the frequentist interpretation may not be as interpretable if we cannot repeat the event many times. For example, the earlier statement about rain: “I am 50% certain that it will rain in the next hour”. Whether it will rain or not in the next hour is not a repeatable event, so the frequentist interpretation makes less sense here.</p>
+</div>
+</div>
+<div id="key-concepts-in-probability" class="section level2" number="2.2">
+<h2>
+<span class="header-section-number">2.2</span> Key Concepts in Probability<a class="anchor" aria-label="anchor" href="#key-concepts-in-probability"><i class="fas fa-link"></i></a>
+</h2>
+<p>In this section, we will cover the basic terminology and foundational ideas in probability.</p>
+<div id="sample-space" class="section level3" number="2.2.1">
+<h3>
+<span class="header-section-number">2.2.1</span> Sample Space<a class="anchor" aria-label="anchor" href="#sample-space"><i class="fas fa-link"></i></a>
+</h3>
+<p>The <strong>sample space</strong> of an experiment, denoted by <span class="math inline">\(S\)</span>, is the set of all possible outcomes of an experiment.</p>
+<p>For the rest of this module, we will use the following as an example: consider a standard deck of 52 cards, and we draw one card at random. What is the card drawn? The sample space for this experiment can be viewed as a list of all 52 cards, per Figure <a href="probability.html#fig:cards">2.1</a> below.</p>
+<div class="figure">
+<span style="display:block;" id="fig:cards"></span>
+<img src="images/02-cards.jpg" alt="Sample Space of Drawing One Card from Standard Deck. Picture from https://en.wikipedia.org/wiki/Standard_52-card_deck"><p class="caption">
+Figure 2.1: Sample Space of Drawing One Card from Standard Deck. Picture from <a href="https://en.wikipedia.org/wiki/Standard_52-card_deck" class="uri">https://en.wikipedia.org/wiki/Standard_52-card_deck</a>
+</p>
+</div>
+<p>While the definition of sample space may appear elementary, writing out the sample space is almost always the first step in performing any probability calculations.</p>
+</div>
+<div id="event" class="section level3" number="2.2.2">
+<h3>
+<span class="header-section-number">2.2.2</span> Event<a class="anchor" aria-label="anchor" href="#event"><i class="fas fa-link"></i></a>
+</h3>
+<p>An <strong>event</strong> is a subset of the sample space, and is usually denoted by an upper case letter. For example, let <span class="math inline">\(A\)</span> denote the event that I draw a card with a black suit (spades or clubs), and let <span class="math inline">\(B\)</span> denote the event I draw a picture card (Jack, Queen, or King). Events <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are each shown in Figures Figure <a href="probability.html#fig:cardsA">2.2</a> and Figure <a href="probability.html#fig:cardsB">2.3</a> below.</p>
+<div class="figure">
+<span style="display:block;" id="fig:cardsA"></span>
+<img src="images/02-cardsA.jpg" alt="Event $A$ (in Blue)"><p class="caption">
+Figure 2.2: Event <span class="math inline">\(A\)</span> (in Blue)
+</p>
+</div>
+<div class="figure">
+<span style="display:block;" id="fig:cardsB"></span>
+<img src="images/02-cardsB.jpg" alt="Event $B$ (in gold)"><p class="caption">
+Figure 2.3: Event <span class="math inline">\(B\)</span> (in gold)
+</p>
+</div>
+<p>The sample space of the experiment can be finite or infinite. In our card example, our sample space is finite since we can actually write out all possible outcomes. If the number of possible outcomes is infinite (i.e. we cannot write out the entire list of all possible outcomes), the sample space is infinite.</p>
+<p>We assign a probability to each event. The probability of event <span class="math inline">\(A\)</span> happening is <span class="math inline">\(P(A)\)</span>. <strong>If each outcome of a sample space is equally likely and we have a finite sample space, the probability of the event is the number of outcomes belonging to the event divided by the number of outcomes in the sample space.</strong> Using our card example, <span class="math inline">\(P(A) = \frac{26}{52} = \frac{1}{2}\)</span> and <span class="math inline">\(P(B) = \frac{12}{52} = \frac{3}{13}\)</span>.</p>
+</div>
+<div id="complements" class="section level3" number="2.2.3">
+<h3>
+<span class="header-section-number">2.2.3</span> Complements<a class="anchor" aria-label="anchor" href="#complements"><i class="fas fa-link"></i></a>
+</h3>
+<p>The <strong>complement</strong> of an event is the set of all outcomes that do not belong to the event. For example, the complement of <span class="math inline">\(A\)</span>, denoted by <span class="math inline">\(A^c\)</span>, will be drawing a card with a red suit (hearts or diamonds). One way to think about complements is that the complement of an event is the event not happening. Loking at Figure <a href="probability.html#fig:cardsA">2.2</a>, this will be the cards that are not outlined in blue. In this example, <span class="math inline">\(P(A^c) = \frac{26}{52} = \frac{1}{2}\)</span>.</p>
+<p><em>Thought question</em>: What is the probability of drawing a non picture card?</p>
+<p>From these examples, you might realize the probability associated with the complement of an event can be found by subtracting the probability of the event from 1, i.e.</p>
+<p><span class="math display" id="eq:comp">\[\begin{equation}
+P(A^c) = 1 - P(A).
+\tag{2.1}
+\end{equation}\]</span></p>
+<p>Sometimes, the calculation for the probability of the complement of an event is much less tedious than the probability of the event. In such an instance, equation <a href="probability.html#eq:comp">(2.1)</a> will be useful.</p>
+</div>
+<div id="unions" class="section level3" number="2.2.4">
+<h3>
+<span class="header-section-number">2.2.4</span> Unions<a class="anchor" aria-label="anchor" href="#unions"><i class="fas fa-link"></i></a>
+</h3>
+<p>The <strong>union</strong> of events is when <strong>at least one</strong> of the events happen. For example, the union of events <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>, denoted by <span class="math inline">\(A \cup B\)</span>, is the event that the card drawn is either a black suit, or a picture card, or both a black suit and a picture card. This is reflected in Figure <a href="probability.html#fig:cardsAB">2.4</a>.</p>
+<div class="figure">
+<span style="display:block;" id="fig:cardsAB"></span>
+<img src="images/02-cardsAB.jpg" alt="Union of A, B (in blue or gold, or both blue and gold)"><p class="caption">
+Figure 2.4: Union of A, B (in blue or gold, or both blue and gold)
+</p>
+</div>
+<p>To find <span class="math inline">\(P(A \cup B)\)</span>, we can refer to Figure <a href="probability.html#fig:cardsAB">2.4</a> and just count the number of outcomes to belong to either event <span class="math inline">\(A\)</span> (is black suit) or event <span class="math inline">\(B\)</span> (is picture card), and find this is <span class="math inline">\(\frac{32}{52}\)</span>.</p>
+<p>The union of <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> can be viewed as the event where either event <span class="math inline">\(A\)</span> or <span class="math inline">\(B\)</span> (or both) happens.</p>
+</div>
+<div id="intersections" class="section level3" number="2.2.5">
+<h3>
+<span class="header-section-number">2.2.5</span> Intersections<a class="anchor" aria-label="anchor" href="#intersections"><i class="fas fa-link"></i></a>
+</h3>
+<p>The <strong>intersection</strong> of events is when <strong>all</strong> of the events happen. Using our example, the intersection of events <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> is denoted by <span class="math inline">\(A \cap B\)</span>, is the event that the card drawn is both a black suit and a picture card. Using Figure <a href="probability.html#fig:cardsAB">2.4</a>, the outcomes belonging to <span class="math inline">\(A \cap B\)</span> are the cards that are outlined in blue and gold. This probability is <span class="math inline">\(P(A \cap B) = \frac{6}{32}\)</span>.</p>
+</div>
+<div id="addition-rule" class="section level3" number="2.2.6">
+<h3>
+<span class="header-section-number">2.2.6</span> Addition rule<a class="anchor" aria-label="anchor" href="#addition-rule"><i class="fas fa-link"></i></a>
+</h3>
+<p>A common mistake that can be made in calculating <span class="math inline">\(P(A \cup B)\)</span> is to just add up the probabilities of each individual event, so the mistake will say this probability is <span class="math inline">\(\frac{26}{52} + \frac{12}{52} = \frac{38}{52}\)</span>. The problem with this approach is that the outcomes that belong to both events (black picture cards) get counted twice, when we only want to count them once. This leads to the following formula for calculating probabilities involving unions of two events, and is sometimes called the <strong>addition rule</strong> in probability:</p>
+<p><span class="math display" id="eq:union">\[\begin{equation}
+P(A \cup B) = P(A) + P(B) - P(A \cap B).
+\tag{2.2}
+\end{equation}\]</span></p>
+<p>Using equation <a href="probability.html#eq:union">(2.2)</a>, <span class="math inline">\(P(A \cup B) = \frac{26}{52} + \frac{12}{52} - \frac{6}{32} = \frac{32}{52}\)</span>.</p>
+</div>
+<div id="disjoint-or-mutually-exclusive-events" class="section level3" number="2.2.7">
+<h3>
+<span class="header-section-number">2.2.7</span> Disjoint or Mutually Exclusive Events<a class="anchor" aria-label="anchor" href="#disjoint-or-mutually-exclusive-events"><i class="fas fa-link"></i></a>
+</h3>
+<p>The previous discussion leads to the idea of <strong>disjoint</strong>, or <strong>mutually exclusive</strong> events. Events are disjoint if they cannot happen simultaneously. In our card example, events <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are not disjoint, since <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> can happen simultaneously, since a card that is drawn can be both black and a picture card, e.g. we draw a king of spades.</p>
+<p>Using Figure <a href="probability.html#fig:cardsAB">2.4</a> as a visual example, we can see that events <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are not disjoint since the outcomes in blue overlap with the outcomes in gold.</p>
+<p>Suppose we define another event, <span class="math inline">\(C\)</span>, to denote that the card drawn is an Ace. The events <span class="math inline">\(B\)</span> and <span class="math inline">\(C\)</span> are disjoint since a card that is drawn cannot be both a picture card and an ace. This definition of disjoint events leads to the following: for events are disjoint, the probability of their intersection will be 0.</p>
+<p>Using Figure <a href="probability.html#fig:cardsBC">2.5</a> below as a visual example, we can see that events <span class="math inline">\(B\)</span> and <span class="math inline">\(C\)</span> are disjoint since the outcomes in gold and pink do not overlap.</p>
+<div class="figure">
+<span style="display:block;" id="fig:cardsBC"></span>
+<img src="images/02-cardsBC.jpg" alt="Events B, C (in gold and pink respectively)"><p class="caption">
+Figure 2.5: Events B, C (in gold and pink respectively)
+</p>
+</div>
+<p>Applying this idea to equation <a href="probability.html#eq:union">(2.2)</a>, we have the following for disjoint events: for disjoint events, the probability of at least one event happening is the sum of the probabilities for each event.</p>
+</div>
+<div id="axioms-of-probability" class="section level3" number="2.2.8">
+<h3>
+<span class="header-section-number">2.2.8</span> Axioms of Probability<a class="anchor" aria-label="anchor" href="#axioms-of-probability"><i class="fas fa-link"></i></a>
+</h3>
+<p>The following are called the axioms of probability, which are considered foundation properties associated with probability:</p>
+<ol style="list-style-type: decimal">
+<li>The probability of any event, <span class="math inline">\(E\)</span>, is non negative, i.e. <span class="math inline">\(P(E) \geq 0\)</span>.</li>
+<li>The probability that at least one outcome in the sample space occurs is 1, i.e.<span class="math inline">\(P(S) = 1\)</span>.</li>
+<li>If <span class="math inline">\(A_1, A_2, \cdots\)</span> are all disjoint events, then</li>
+</ol>
+<p><span class="math display">\[
+P(\bigcup\limits_{i=1}^{\infty} A_{i}) = \sum_{i=1}^{\infty} P(A_i).
+\]</span>
+In other words, for disjoint events, the probability that at least one event happens is the sum of their individual probabilities.</p>
+<p>Note: most writers list these as three axioms. Our book combines the first two axioms into 1, and so write these as two axioms.</p>
+<p>We can easily see how equations <a href="probability.html#eq:comp">(2.1)</a> and <a href="probability.html#eq:union">(2.2)</a> can be derived from these axioms. Note that these equations and the axioms apply in all circumstances, regardless of whether the sample space is finite or not.</p>
+</div>
+</div>
+<div id="conditional-probability" class="section level2" number="2.3">
+<h2>
+<span class="header-section-number">2.3</span> Conditional Probability<a class="anchor" aria-label="anchor" href="#conditional-probability"><i class="fas fa-link"></i></a>
+</h2>
+<p>The concept of conditional probability appears in almost all statistical and data science models. In statistical models such as logistic regression, we are trying to use observable data (called predictors, input variables, etc) to model the probabilities associated with the different values of an outcome that is random (called response variable, output variable, etc). If the observable data are predictive of the outcome, then the probabilities associated with the outcome should indicate greater certainty, than if we do not have the observable data. Conditional probabilities allows us to incorporate observable data, or evidence, when evaluating uncertainty with random outcomes.</p>
+<p>Consider that we are headed out for lunch, and we need to decide if we want to bring an umbrella (assuming we only bring an umbrella if we think it is going to rain). If we had been working in a windowless basement with no internet, we will have a high degree of uncertainty when evaluating if it will rain or not. However, if we were to look outside and observe the current weather conditions before heading out, we are likely to have a higher degree of certainty when evaluating if it will rain or not. Conditional probabilities allow us to incorporate what we see into our prediction of a random event.</p>
+<p>If we were to use the language of probability to denote this example, let <span class="math inline">\(R\)</span> denote the event that it will rain when we go for lunch. If we had been working in the windowless basement with no internet, we will be calculating <span class="math inline">\(P(R)\)</span>, the probability it will rain when we go to lunch. If we are able to incorporate the current weather conditions, this probability will be denoted as <span class="math inline">\(P(R|data)\)</span>, where data denotes the current observe weather conditions. <span class="math inline">\(P(R|data)\)</span> can be read as the probability that it will rain when we go to lunch, given what we have observed with the weather. With this example, we can see that <span class="math inline">\(P(R)\)</span> and <span class="math inline">\(P(R|data)\)</span> will be different, since we update our probability given useful information. Notice the <span class="math inline">\(|\)</span> symbol inside the probability. This symbol implies that we are working with a conditional probability, with the given or observed information listed after the <span class="math inline">\(|\)</span>.</p>
+<div id="def" class="section level3" number="2.3.1">
+<h3>
+<span class="header-section-number">2.3.1</span> Definition<a class="anchor" aria-label="anchor" href="#def"><i class="fas fa-link"></i></a>
+</h3>
+<p>If <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are events, with <span class="math inline">\(P(X)&gt;0\)</span>, the conditional probability of <span class="math inline">\(Y\)</span> given <span class="math inline">\(X\)</span>, denoted by <span class="math inline">\(P(Y|X)\)</span>, is</p>
+<p><span class="math display" id="eq:cond">\[\begin{equation}
+P(Y|X) = \frac{P(Y \cap X)}{P(X)}.
+\tag{2.3}
+\end{equation}\]</span></p>
+<p>In this definition, we want to update the probability of <span class="math inline">\(Y\)</span> happening, given that we have observed <span class="math inline">\(X\)</span>. <span class="math inline">\(X\)</span> can be viewed as the observable data or the evidence we want to incorporate.</p>
+<p>In the Bayesian viewpoint of probability, <span class="math inline">\(P(Y)\)</span> is called the <strong>prior</strong> probability of <span class="math inline">\(Y\)</span> since it reflects our belief about <span class="math inline">\(Y\)</span> before observing any data. <span class="math inline">\(P(Y|X)\)</span> is called the <strong>posterior</strong> probability of <span class="math inline">\(Y\)</span>, as it reflects an update on our belief about $Y after incorporating observed data.</p>
+<p>Let us go back to the standard deck of cards example. Let us find <span class="math inline">\(P(B|A)\)</span>, the probability that our card is a picture card, given that we know the card is a black suit. Visually, we can use the definition of conditional probability using Figure <a href="probability.html#fig:cardscond">2.6</a> below.</p>
+<div class="figure">
+<span style="display:block;" id="fig:cardscond"></span>
+<img src="images/02-cardscond.jpg" alt="Events A, given B"><p class="caption">
+Figure 2.6: Events A, given B
+</p>
+</div>
+<p>We are told that our card is a black suit, so we have only 26 possible outcomes to consider, as the red cards are eliminated and are crossed out in Figure <a href="probability.html#fig:cardscond">2.6</a>. out of these 26 outcomes, how many are picture cards? So this probability <span class="math inline">\(P(B|A)\)</span> is <span class="math inline">\(\frac{6}{26}\)</span>.</p>
+<p>Figure <a href="probability.html#fig:cardscond">2.6</a> represents the frequentist viewpoint of conditional probability: <span class="math inline">\(P(B|A)\)</span> represents the long run proportion of picture cards among cards that are black suits.</p>
+<p>We can also apply equation <a href="probability.html#eq:cond">(2.3)</a>: <span class="math inline">\(P(B|A) = \frac{\frac{6}{52}}{\frac{1}{2}} = \frac{6}{26}\)</span> which gives the same answer.</p>
+<p><em>Thought question</em>: work out the probability that the card drawn is a black suit, given that we know the card is a picture card.</p>
+<p>We can see from this example that in general <span class="math inline">\(P(Y|X) \neq P(X|Y)\)</span>. This informs us that we need to be extremely careful when writing out our conditional probabilities and interpreting them, and knowing which one matters to our analysis. For example, the probability that I feel unwell given that I have the flu is close to 1, but the probability that I have the flu given that I feel unwell is not close to 1 (since there are many things that can me me feel unwell). This confusion regarding conditional probabilities is sometimes called the confusion of the inverse or the prosecutor’s fallacy. This fallacy wrongly assumes that if the probability of a fingerprint match given that the person is innocent is small, it means that the probability that the person is innocent given a fingerprint match must also be small. Before going over this fallacy in more detail, we need to cover a few more concepts.</p>
+</div>
+<div id="multiplication-rule" class="section level3" number="2.3.2">
+<h3>
+<span class="header-section-number">2.3.2</span> Multiplication Rule<a class="anchor" aria-label="anchor" href="#multiplication-rule"><i class="fas fa-link"></i></a>
+</h3>
+<p>From equation <a href="probability.html#eq:cond">(2.3)</a>, we have the <strong>multiplication rule</strong> in probability</p>
+<p><span class="math display" id="eq:mult">\[\begin{equation}
+P(Y \cap X) = P(Y|X) \times P(X) = P(X|Y) \times P(Y).
+\tag{2.4}
+\end{equation}\]</span></p>
+<p>The multiplication rule is useful in finding the probability of multiple events happening, aespecially if the events happen sequentially. As an example, consider drawing two cards, without replacement, from a standard deck of cards. Without replacement means that after drawing the first card, it is not returned to the deck, so there will be 51 cards remaining after the first draw. Let <span class="math inline">\(D_1\)</span> and <span class="math inline">\(D_2\)</span> denote the events that the first draw is a diamond suit and the second draw is a diamond suit respectively. We want to find the probability that both cards drawn are diamond suits. This probability can be written as <span class="math inline">\(P(D_1 \cap D_2) = P(D_1) \times P(D_2|D_1)  = \frac{13}{52} \times \frac{12}{51}  = \frac{156}{2652}\)</span>.</p>
+</div>
+<div id="independent-events" class="section level3" number="2.3.3">
+<h3>
+<span class="header-section-number">2.3.3</span> Independent Events<a class="anchor" aria-label="anchor" href="#independent-events"><i class="fas fa-link"></i></a>
+</h3>
+<p>Events are independent if knowledge about whether one event happens or not does not change the probability of the other event happening. This implies that if <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are independent events, then the definition of conditional probability simplifies to <span class="math inline">\(P(Y|X) = P(Y)\)</span>. Likewise <span class="math inline">\(P(X|Y) = P(X)\)</span>. Applying this to the multiplication rule, we have the following for multiplication rule for independent events</p>
+<p><span class="math display" id="eq:mult2">\[\begin{equation}
+P(Y \cap X) = P(Y) \times P(X).
+\tag{2.5}
+\end{equation}\]</span></p>
+<p>The probability of all events happening is just the product of the probabilities for each individual event, if the events are all independent.</p>
+<p>Going back to our example with the standard deck of cards, where <span class="math inline">\(A\)</span> denotes the event that I draw a card with a black suit (spades or clubs), and <span class="math inline">\(B\)</span> denotes the event I draw a picture card (Jack, Queen, or King). We had earlier found that <span class="math inline">\(P(B) = \frac{12}{52}\)</span> and that <span class="math inline">\(P(B|A) = \frac{6}{26}\)</span>. Notice that these two probabilities are numerically equal, which informs us that the events are independent. Knowing whether the card is a black suit or not does not change the probability that the card is a picture card. This makes sense intuitively since the proportion of cars that are picture is the same for black and red suits.</p>
+</div>
+<div id="bayes-rule" class="section level3" number="2.3.4">
+<h3>
+<span class="header-section-number">2.3.4</span> Bayes’ Rule<a class="anchor" aria-label="anchor" href="#bayes-rule"><i class="fas fa-link"></i></a>
+</h3>
+<p>The definition of conditional probability in equation <a href="probability.html#eq:cond">(2.3)</a> and the multiplication rule in equation <a href="probability.html#eq:mult">(2.4)</a> give us <strong>Bayes’ rule</strong></p>
+<p><span class="math display" id="eq:bayes">\[\begin{equation}
+P(Y|X) = \frac{P(X|Y)P(Y)}{P(X)}.
+\tag{2.6}
+\end{equation}\]</span></p>
+<p>Bayes’ rule is useful if we want to find <span class="math inline">\(P(Y|X)\)</span> but we only have information regarding <span class="math inline">\(P(X|Y)\)</span> available. A fairly popular model is called linear discriminant analysis, and it models the conditional probability using Bayes’ rule.</p>
+</div>
+<div id="odds" class="section level3" number="2.3.5">
+<h3>
+<span class="header-section-number">2.3.5</span> Odds<a class="anchor" aria-label="anchor" href="#odds"><i class="fas fa-link"></i></a>
+</h3>
+<p>The <strong>odds</strong> of an event <span class="math inline">\(Y\)</span> are</p>
+<p><span class="math display" id="eq:odds">\[\begin{equation}
+odds(Y) = \frac{P(Y)}{P(Y^c)}.
+\tag{2.7}
+\end{equation}\]</span></p>
+<p>You may realize that the left hand side of equation @ref{eq:odds} is equal to the left hand side of a logistic regression equation.</p>
+<p>Using equation <a href="probability.html#eq:odds">(2.7)</a>, we can switch from odds to probability easily</p>
+<p><span class="math display" id="eq:odds2">\[\begin{equation}
+P(Y) = \frac{odds(Y)}{1 + odds(Y)}.
+\tag{2.8}
+\end{equation}\]</span></p>
+</div>
+<div id="odds-form-of-bayes-rule" class="section level3" number="2.3.6">
+<h3>
+<span class="header-section-number">2.3.6</span> Odds Form of Bayes’ Rule<a class="anchor" aria-label="anchor" href="#odds-form-of-bayes-rule"><i class="fas fa-link"></i></a>
+</h3>
+<p>Using Bayes’ rule in equation <a href="probability.html#eq:bayes">(2.6)</a> and the definition of odds in equation <a href="probability.html#eq:odds">(2.7)</a>, we have the <strong>odds form for Bayes’ rule</strong></p>
+<p><span class="math display" id="eq:oddsbayes">\[\begin{equation}
+\frac{P(Y|X)}{P(Y^c|X)} = \frac{P(X|Y)}{P(X|Y^c)} \frac{P(Y)}{P(Y^c)}.
+\tag{2.9}
+\end{equation}\]</span></p>
+</div>
+<div id="law-of-total-probability" class="section level3" number="2.3.7">
+<h3>
+<span class="header-section-number">2.3.7</span> Law of Total Probability<a class="anchor" aria-label="anchor" href="#law-of-total-probability"><i class="fas fa-link"></i></a>
+</h3>
+<p>Let <span class="math inline">\(Y_1, Y_2, \cdots, Y_n\)</span> be a partition of the sample space (<span class="math inline">\(Y_1, Y_2, \cdots, Y_n\)</span> are disjoint and their union is the sample space), with <span class="math inline">\(P(Y_i) &gt; 0)\)</span> for all <span class="math inline">\(i\)</span>. Then</p>
+<p><span class="math display" id="eq:total">\[\begin{equation}
+\begin{split}
+P(X) &amp;= \sum_{i=1}^n P(X|Y_i) \times P(Y_i)\\
+    &amp;= P(X|Y_1) \times P(Y_1) + P(X|Y_2) \times P(Y_2) + \cdots + P(X|Y_n) \times P(Y_n).
+\end{split}
+\tag{2.10}
+\end{equation}\]</span></p>
+<p>The law of total probability informs us of a way to find the probability of <span class="math inline">\(X\)</span>. We can divide the sample space in disjoint sets <span class="math inline">\(Y_i\)</span>, find the conditional probability of <span class="math inline">\(X\)</span> within each set, and then take a weighted sum of these conditional probabilities, weighted by <span class="math inline">\(P(Y_i)\)</span>. This is useful if the conditional probability for each set is easy to obtain.</p>
+<p>The law of total probability in equation <a href="probability.html#eq:total">(2.10)</a> can be applied to the denominator of Bayes’ rule in equation <a href="probability.html#eq:bayes">(2.6)</a> to have the following variation of Bayes’ rule:</p>
+<p><span class="math display" id="eq:bayes2">\[\begin{equation}
+P(Y|X) = \frac{P(X|Y)P(Y)}{\sum_{i=1}^n P(X|Y_i) \times P(Y_i)}.
+\tag{2.11}
+\end{equation}\]</span></p>
+</div>
+<div id="worked-example" class="section level3" number="2.3.8">
+<h3>
+<span class="header-section-number">2.3.8</span> Worked Example<a class="anchor" aria-label="anchor" href="#worked-example"><i class="fas fa-link"></i></a>
+</h3>
+<div id="approach-1-using-bayes-rule" class="section level4" number="2.3.8.1">
+<h4>
+<span class="header-section-number">2.3.8.1</span> Approach 1: Using Bayes’ Rule<a class="anchor" aria-label="anchor" href="#approach-1-using-bayes-rule"><i class="fas fa-link"></i></a>
+</h4>
+<p>We consider this worked example on how to apply Bayes’ rule and the law of total probability. Suppose my email can be divided into three categories: <span class="math inline">\(E_1\)</span> denotes spam email, <span class="math inline">\(E_2\)</span> denotes important email, and <span class="math inline">\(E_3\)</span> denotes not important email. An email must belong to only one of these categories. Let <span class="math inline">\(F\)</span> denote the event that the email contains the word “free”. From past data, I have the following information:</p>
+<ul>
+<li>
+<span class="math inline">\(P(E_1) = 0.2, P(E_2) = 0.5, P(E_3) = 0.3\)</span>.</li>
+<li>The word “free” appears in 99% of spam email, so <span class="math inline">\(P(F|E_1) = 0.99\)</span>.</li>
+<li>The word “free” appears in 10% of important email, so <span class="math inline">\(P(F|E_2) = 0.1\)</span>.</li>
+<li>The word “free” appears in 5% of important email, so <span class="math inline">\(P(F|E_3) = 0.05\)</span>.</li>
+</ul>
+<p>I receive an email that has the word free. What is the probability that it is spam? So we want to find <span class="math inline">\(P(E_1|F)\)</span>. Using equation <a href="probability.html#eq:bayes2">(2.11)</a>, we have</p>
+<p><span class="math display">\[
+\begin{split}
+P(E_1|F) &amp;= \frac{P(E_1 \cap F)}{P(F)}\\
+&amp;= \frac{P(F|E_1) \times P(E_1)}{P(F|E_1) \times P(E_1) + P(F|E_2) \times P(E_2) + P(F|E_3) \times P(E_3)} \\
+&amp;= \frac{0.99 \times 0.2}{0.99 \times 0.2 + 0.1 \times 0.5 + 0.05 \times 0.3}\\
+&amp;= 0.7528517
+\end{split}
+\]</span></p>
+</div>
+<div id="approach-2-using-tree-diagrams" class="section level4" number="2.3.8.2">
+<h4>
+<span class="header-section-number">2.3.8.2</span> Approach 2: Using Tree Diagrams<a class="anchor" aria-label="anchor" href="#approach-2-using-tree-diagrams"><i class="fas fa-link"></i></a>
+</h4>
+<p>A tree diagram is useful in finding conditional probabilities and probabilities involving intersections. It is a visual way of displaying the information you have at hand, when you have conditional probabilities over disjoint sets and probabilities for each disjoint set. In our toy example, the disjoint sets are the type of email I receive, <span class="math inline">\(E_1, E_2, E_3\)</span>, and the conditional probabilities we have are over these disjoint sets, i.e. <span class="math inline">\(P(F|E_1), P(F|E_2)\)</span> and <span class="math inline">\(P(F|E_3)\)</span>. We can put this information visual by first splitting our sample space into the disjoint sets <span class="math inline">\(E_1, E_2, E_3\)</span>, and then splitting each disjoint set on whether the email has the word “free” (<span class="math inline">\(F\)</span>) or not (<span class="math inline">\(F^c\)</span>). This information is displayed in a tree diagram as in Figure <a href="probability.html#fig:tree">2.7</a>.</p>
+<div class="figure">
+<span style="display:block;" id="fig:tree"></span>
+<img src="images/02-tree.jpg" alt="Tree Diagram for Email Example"><p class="caption">
+Figure 2.7: Tree Diagram for Email Example
+</p>
+</div>
+<p>Each split is represented by a branch, and we write the corresponding probability on each branch. We want to find the probability that a received email is spam given that it contains the word “free”, <span class="math inline">\(P(E_1|F)\)</span>, and using the definition of conditional probability in equation <a href="probability.html#eq:cond">(2.3)</a></p>
+<p><span class="math display">\[
+P(E_1|F) = \frac{P(E_1 \cap F)}{P(F)}.
+\]</span></p>
+<p>Looking at the tree diagram in Figure <a href="probability.html#fig:tree">2.7</a>, we can label the branches that lead to the numerator <span class="math inline">\(P(E_1 \cap F)\)</span>, the probability that the email is spam and contains the word free. This is shown on the tree diagram below in Figure <a href="probability.html#fig:tree1">2.8</a> below by highlighting the corresponding branches in blue.</p>
+<div class="figure">
+<span style="display:block;" id="fig:tree1"></span>
+<img src="images/02-treepath1.jpg" alt="Tree Diagram for Email Example, Branch for Numerator in Blue"><p class="caption">
+Figure 2.8: Tree Diagram for Email Example, Branch for Numerator in Blue
+</p>
+</div>
+<p>So <span class="math inline">\(P(E_1 \cap F) = 0.2 \times 0.99 = 0.198\)</span>. We then need to find the denominator <span class="math inline">\(P(F)\)</span>. Looking at Figure <a href="probability.html#fig:tree">2.7</a>, we can see three branches that lead to an email containing the word free: <span class="math inline">\(P(E_1 \cap F)\)</span> or <span class="math inline">\(P(E_2 \cap F)\)</span> or <span class="math inline">\(P(E_3 \cap F)\)</span>. This is shown on the tree diagram below in Figure <a href="probability.html#fig:tree2">2.9</a> below by highlighting the corresponding branches in gold.</p>
+<div class="figure">
+<span style="display:block;" id="fig:tree2"></span>
+<img src="images/02-treepath2.jpg" alt="Tree Diagram for Email Example, Branches for Denominator in Gold"><p class="caption">
+Figure 2.9: Tree Diagram for Email Example, Branches for Denominator in Gold
+</p>
+</div>
+<p>We know the probability for each branch, and we add them up to obtain the denominator <span class="math inline">\(P(F) = 0.2 \times 0.99 + 0.5 \times 0.1 + 0.3 \times 0.05 = 0.263.\)</span> Putting the pieces together, we have</p>
+<p><span class="math display">\[
+P(E_1|F) = \frac{P(E_1 \cap F)}{P(F)} = \frac{0.198}{0.263} = 0.7528517.
+\]</span></p>
+<p>Note: If you compare the intermediate calculations in approach, you end up using the calculations in approach 1, without referring to any of the associated equations.</p>
+</div>
+</div>
+</div>
+<div id="confusion-of-the-inverse" class="section level2" number="2.4">
+<h2>
+<span class="header-section-number">2.4</span> Confusion of the Inverse<a class="anchor" aria-label="anchor" href="#confusion-of-the-inverse"><i class="fas fa-link"></i></a>
+</h2>
+<p>We are now ready to talk about the prosecutor’s fallacy, or the <strong>confusion of the inverse</strong>, that we had earlier mention in section <a href="probability.html#def">2.3.1</a>. In essence, the confusion happens when we falsely equate <span class="math inline">\(P(X|Y)\)</span> to be equal to <span class="math inline">\(P(Y|X)\)</span>. In fact, a large value for <span class="math inline">\(P(X|Y)\)</span> does not necessarily imply that <span class="math inline">\(P(Y|X)\)</span> is also large. The term prosecutor’s fallacy when this confusion is applied in a criminal trial, e.g. the probability that an abusive relationship ends in murder could be small, but the probability that there was abuse in a relationship that ended in murder could be a lot higher.</p>
+<p>We will go over some examples that are based on real life.</p>
+<div id="disease-diagnostics" class="section level3" number="2.4.1">
+<h3>
+<span class="header-section-number">2.4.1</span> Disease Diagnostics<a class="anchor" aria-label="anchor" href="#disease-diagnostics"><i class="fas fa-link"></i></a>
+</h3>
+<p>Suppose we are testing a patient if he has a rare disease, which is estimated to be prevalent in 0.5% of all people. Suppose we have a medical test for this disease that is accurate. There can be a number of definitions of accuracy. In disease diagnostics, a couple of measures are sensitivity, which is the proportion of people with the disease who test positive, and specificity, the proportion of people without the disease who test negative. A positive test indicates the person has the disease. Suppose the sensitivity and specificity are both high: 0.95 and 0.9 respectively. Suppose the patient tests positive, what is the probability that the patient actually has the disease? Assume the test always indicates positive or negative.</p>
+<p>For this example, let <span class="math inline">\(D\)</span> denote the event the patient has the disease, and let + denote the event the patient tests positive on the test, and - denote the event the patient tests negative on the test. Given the information, we have</p>
+<ul>
+<li>
+<span class="math inline">\(P(D) = 0.005\)</span>.</li>
+<li>
+<span class="math inline">\(P(+|D) = 0.95\)</span>.</li>
+<li>
+<span class="math inline">\(P(-|D^c) = 0.9\)</span>.</li>
+</ul>
+<p>We wish to find <span class="math inline">\(P(D|+)\)</span>. Using Bayes rule and the Law of Total probability, this is</p>
+<p><span class="math display">\[
+\begin{split}
+P(D|+) &amp;= \frac{P(D \cap +)}{P(+)}\\
+&amp;= \frac{P(+|D) \times P(D)}{P(+|D) \times P(D) + P(+|D^c) \times P(D^c)} \\
+&amp;= \frac{0.95 \times 0.005}{0.95 \times 0.005 + 0.1 \times 0.995 }\\
+&amp;= 0.04556355
+\end{split}
+\]</span></p>
+<p>which is a small probability, so the patient is highly unlikely to actually have the rare disease. So while the test has high sensitivity with <span class="math inline">\(P(+|D) = 0.95\)</span>, this does not imply that a patient who tests positive actually has the disease, since <span class="math inline">\(P(D|+)\)</span> is low. The implication is that for a rare disease, a positive test does not imply you have a high probability of having the disease, even if the test is accurate.</p>
+<p>Why does this result make sense? Essentially, a large proportion of a small population could still be numerically much smaller than a small proportion of a large population. The disease is rare, so we have a small population of people with the disease, and almost all of them are detected by the test. We also have an extremely large population of people without the disease, and even a small proportion of them who erroneously test positive could still be a fairly large number. So among all the positive tests, most of the people do not have the disease. We consider the following table based on a population of 20 thousand people.</p>
+<div class="inline-table"><table class="table table-sm">
+<thead><tr class="header">
+<th align="center"></th>
+<th align="center">Positive</th>
+<th align="center">Negative</th>
+<th align="center">Total</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="center">Disease</td>
+<td align="center">95</td>
+<td align="center">5</td>
+<td align="center">100</td>
+</tr>
+<tr class="even">
+<td align="center">No Disease</td>
+<td align="center">1990</td>
+<td align="center">17910</td>
+<td align="center">19900</td>
+</tr>
+<tr class="odd">
+<td align="center">Total</td>
+<td align="center">2085</td>
+<td align="center">17915</td>
+<td align="center">20000</td>
+</tr>
+</tbody>
+</table></div>
+<p>Look at the first column, which shows number of people who test positive. A see that a large proportion of diseased people are detected, but since there are relatively few people with the disease, this number is small, 95. A small proportion of people who do not have the disease test positive for the disease, and a small proportion of this large population results in a relatively larger number, 1990. So most of the people who test positive, <span class="math inline">\(95 + 1990 = 2085\)</span> actually do not have the disease. Therefore <span class="math inline">\(P(D|+) = \frac{95}{2085} = 0.04556355\)</span>.</p>
+<p>We can also explain this result through the Bayes’ viewpoint of probability. Without knowing any information about the results of the test, the prior probability <span class="math inline">\(P(D) = 0.005\)</span>. However, upon seeing that the person positive, we updated the posterior probability <span class="math inline">\(P(D|+) = 0.04556355\)</span>, which is an increase from 0.005 when we knew knowing. The updated posterior probability is about 9 times the prior. So we believe the person is more likely to have the disease upon viewing the positive test, than if we knew nothing about the test result. The posterior probability is still small since its value depends on two pieces of information: the prior <span class="math inline">\(P(D)\)</span> and the sensitivity <span class="math inline">\(P(+|D)\)</span>. The product of these values belong to the numerator when calculating <span class="math inline">\(P(D|+)\)</span>. The denominator is <span class="math inline">\(P(+|D) \times P(D) + P(+|D^c) \times P(D^c)\)</span>. If the prior <span class="math inline">\(P(D)\)</span> is extremely low, then <span class="math inline">\(P(D^c)\)</span> is extremely close to 1, since the person either has the disease or does not have the disease. With <span class="math inline">\(P(D)\)</span> belong extremely low, the numerator is close to 0, and the value of the denominator is close to <span class="math inline">\(P(+|D^c) \times P(D^c)\)</span>, therefore <span class="math inline">\(P(D|+)\)</span> is small.</p>
+<p>Notice how we have talking about rare diseases? This confusion of the inverse, thinking that a high sensitivity implies that a person likely to have the disease if they test positive, only applies to rare diseases. If the disease is more prevalent, a high sensitivity is more likely to imply the person has the disease if they test positive.</p>
+<p>So why should we take such tests for rare diseases? What should we do? We should go through the test again. It turns out that if you test positive twice for a rare disease, the probability that you have the disease increases by a lot than if you only tested once and tested positive.</p>
+<p>To perform this calculation, we will use the odds form for Bayes’ rule, per equation <a href="probability.html#eq:oddsbayes">(2.9)</a></p>
+<p><span class="math display">\[
+\begin{split}
+\frac{P(D|T_1 \cap T_2)}{P(D^c|T_1 \cap T_2)} &amp;= \frac{P(T_1 \cap T_2 | D)}{P(T_1 \cap T_2 | D^c)} \frac{P(D)}{P(D^c)}\\
+&amp;= \frac{0.95^2}{0.1^2} \frac{0.005}{0.995} \\
+&amp;= 0.4535176
+\end{split}
+\]</span></p>
+<p>where <span class="math inline">\(T_1\)</span> and <span class="math inline">\(T_2\)</span> denote the events the person test positive in the first test and second test respectively. We also assume that the results from each test are independent with previous tests.</p>
+<p>The odds of having the disease given that the person positive twice is 0.4535176. Therefore, using equation <a href="probability.html#eq:odds2">(2.8)</a>, the corresponding probability of having the disease given that the person tested positive twice is <span class="math inline">\(P(D|T_1 \cap T_2) = \frac{0.4535176}{1+0.4535176} = 0.3120138\)</span>. See how this posterior probability has increased with two positive tests, from 1 positive test.</p>
+<p><em>Thought question</em>: perform the calculations to show that the posterior probability that the person has the disease if the person tests positive on 3 tests is 0.8116199.</p>
+<p><em>Thought question</em>: do you notice a certain pattern emerging when performing these calculations as the person undergoes more tests? Could you write either a mathematical equation, or even a function in R, that allows us to quickly compute the probability the person has the disease given that the person tested positive <span class="math inline">\(k\)</span> times, where <span class="math inline">\(k\)</span> can denote any non negative integer?</p>
+</div>
+<div id="prosecutors-fallacy" class="section level3" number="2.4.2">
+<h3>
+<span class="header-section-number">2.4.2</span> Prosecutor’s Fallacy<a class="anchor" aria-label="anchor" href="#prosecutors-fallacy"><i class="fas fa-link"></i></a>
+</h3>
+<p>The confusion of the inverse is also called the prosecutor’s fallacy (sometimes also called the defense attorney’s fallacy depending on which side is making the mistake) when it occurs in a legal setting. Generally, the confusion comes from equating P(evidence|innocent) with P(innocent|evidence).</p>
+<p>The book provides a discussion about this in Section 2.8, examples 2.8.1 and 2.8.2.</p>
+
+</div>
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="descriptive-statistics.html"><span class="header-section-number">1</span> Descriptive Statistics</a></div>
+<div class="empty"></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#probability"><span class="header-section-number">2</span> Probability</a></li>
+<li>
+<a class="nav-link" href="#probability-1"><span class="header-section-number">2.1</span> Probability</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#why-study-probability"><span class="header-section-number">2.1.1</span> Why Study Probability?</a></li>
+<li><a class="nav-link" href="#frequentiest-and-bayesian-view-of-probability"><span class="header-section-number">2.1.2</span> Frequentiest and Bayesian View of Probability</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#key-concepts-in-probability"><span class="header-section-number">2.2</span> Key Concepts in Probability</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#sample-space"><span class="header-section-number">2.2.1</span> Sample Space</a></li>
+<li><a class="nav-link" href="#event"><span class="header-section-number">2.2.2</span> Event</a></li>
+<li><a class="nav-link" href="#complements"><span class="header-section-number">2.2.3</span> Complements</a></li>
+<li><a class="nav-link" href="#unions"><span class="header-section-number">2.2.4</span> Unions</a></li>
+<li><a class="nav-link" href="#intersections"><span class="header-section-number">2.2.5</span> Intersections</a></li>
+<li><a class="nav-link" href="#addition-rule"><span class="header-section-number">2.2.6</span> Addition rule</a></li>
+<li><a class="nav-link" href="#disjoint-or-mutually-exclusive-events"><span class="header-section-number">2.2.7</span> Disjoint or Mutually Exclusive Events</a></li>
+<li><a class="nav-link" href="#axioms-of-probability"><span class="header-section-number">2.2.8</span> Axioms of Probability</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#conditional-probability"><span class="header-section-number">2.3</span> Conditional Probability</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#def"><span class="header-section-number">2.3.1</span> Definition</a></li>
+<li><a class="nav-link" href="#multiplication-rule"><span class="header-section-number">2.3.2</span> Multiplication Rule</a></li>
+<li><a class="nav-link" href="#independent-events"><span class="header-section-number">2.3.3</span> Independent Events</a></li>
+<li><a class="nav-link" href="#bayes-rule"><span class="header-section-number">2.3.4</span> Bayes’ Rule</a></li>
+<li><a class="nav-link" href="#odds"><span class="header-section-number">2.3.5</span> Odds</a></li>
+<li><a class="nav-link" href="#odds-form-of-bayes-rule"><span class="header-section-number">2.3.6</span> Odds Form of Bayes’ Rule</a></li>
+<li><a class="nav-link" href="#law-of-total-probability"><span class="header-section-number">2.3.7</span> Law of Total Probability</a></li>
+<li><a class="nav-link" href="#worked-example"><span class="header-section-number">2.3.8</span> Worked Example</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#confusion-of-the-inverse"><span class="header-section-number">2.4</span> Confusion of the Inverse</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#disease-diagnostics"><span class="header-section-number">2.4.1</span> Disease Diagnostics</a></li>
+<li><a class="nav-link" href="#prosecutors-fallacy"><span class="header-section-number">2.4.2</span> Prosecutor’s Fallacy</a></li>
+</ul>
+</li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2025-06-09.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

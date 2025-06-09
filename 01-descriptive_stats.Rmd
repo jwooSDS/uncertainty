@@ -1,7 +1,5 @@
 # Descriptive Statistics 
 
-## Introduction {-}
-
 ```{r, echo=FALSE}
 rm(list = ls())
 ```
