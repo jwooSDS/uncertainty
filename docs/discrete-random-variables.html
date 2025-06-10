@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 3 Discrete Random Variables | Understanding Uncertainty Course Notes</title>
+<meta name="author" content="Jeffrey Woo">
+<meta name="description" content="This module is based on Introduction to Probability (Blitzstein, Hwang), Chapters 3 and 4. You can access the book for free at https://stat110.hsites.harvard.edu/ (and then click on Book). Please...">
+<meta name="generator" content="bookdown 0.43 with bs4_book()">
+<meta property="og:title" content="Chapter 3 Discrete Random Variables | Understanding Uncertainty Course Notes">
+<meta property="og:type" content="book">
+<meta property="og:description" content="This module is based on Introduction to Probability (Blitzstein, Hwang), Chapters 3 and 4. You can access the book for free at https://stat110.hsites.harvard.edu/ (and then click on Book). Please...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 3 Discrete Random Variables | Understanding Uncertainty Course Notes">
+<meta name="twitter:description" content="This module is based on Introduction to Probability (Blitzstein, Hwang), Chapters 3 and 4. You can access the book for free at https://stat110.hsites.harvard.edu/ (and then click on Book). Please...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.9.0/transition.js"></script><script src="libs/bs3compat-0.9.0/tabs.js"></script><script src="libs/bs3compat-0.9.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Understanding Uncertainty Course Notes</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Preface</a></li>
+<li><a class="" href="descriptive.html"><span class="header-section-number">1</span> Descriptive Statistics</a></li>
+<li><a class="" href="probability.html"><span class="header-section-number">2</span> Probability</a></li>
+<li><a class="active" href="discrete-random-variables.html"><span class="header-section-number">3</span> Discrete Random Variables</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="discrete-random-variables" class="section level1" number="3">
+<h1>
+<span class="header-section-number">3</span> Discrete Random Variables<a class="anchor" aria-label="anchor" href="#discrete-random-variables"><i class="fas fa-link"></i></a>
+</h1>
+<p>This module is based on Introduction to Probability (Blitzstein, Hwang), Chapters 3 and 4. You can access the book for free at <a href="https://stat110.hsites.harvard.edu/" class="uri">https://stat110.hsites.harvard.edu/</a> (and then click on Book). Please note that I cover additional topics, and skip certain topics from the book. You may skip Sections 3.4, 3.7, 3.9, 4.3, 4.9 from the book.</p>
+<div id="random-variables" class="section level2" number="3.1">
+<h2>
+<span class="header-section-number">3.1</span> Random Variables<a class="anchor" aria-label="anchor" href="#random-variables"><i class="fas fa-link"></i></a>
+</h2>
+<p>The idea behind random variables is to simplify notation regarding probability, enable us to summarize results of experiments, and make it easier to quantify uncertainty.</p>
+<div id="example" class="section level3" number="3.1.1">
+<h3>
+<span class="header-section-number">3.1.1</span> Example<a class="anchor" aria-label="anchor" href="#example"><i class="fas fa-link"></i></a>
+</h3>
+<p>Consider flipping a coin three times and recording if it lands heads or tails each time. The sample space for this experiment will be <span class="math inline">\(S = \{HHH, HHT, HTH, THH, HTT, THT, TTH, TTT\}\)</span>. Given that each outcome is equally likely, the probability associated with each outcome is <span class="math inline">\(\frac{1}{8}\)</span>.</p>
+<p>Suppose I want to find the probability that I get exactly 2 heads out of the 3 flips. I could express this as:</p>
+<ul>
+<li>
+<span class="math inline">\(P(\text{two heads out of three flips})\)</span>, or</li>
+<li>
+<span class="math inline">\(P(HHT \cup HTH \cup THH)\)</span>, or</li>
+<li>
+<span class="math inline">\(P(A)\)</span> where <span class="math inline">\(A\)</span> denotes the event of getting two heads out of three flips.</li>
+</ul>
+<p>Another way is to define a random variable <span class="math inline">\(X\)</span> that expresses this event a bit more efficiently. Let <span class="math inline">\(X\)</span> denote the number of heads out of three flips, so another way could be to write <span class="math inline">\(P(X=2\)</span>). This is idea behind random variables: to assign events to a number.</p>
+</div>
+<div id="definition" class="section level3" number="3.1.2">
+<h3>
+<span class="header-section-number">3.1.2</span> Definition<a class="anchor" aria-label="anchor" href="#definition"><i class="fas fa-link"></i></a>
+</h3>
+<p>A <strong>random variable (RV)</strong> is a function from the sample space to real numbers.</p>
+<p>By convention, we denote random variables by capital letters. Using our 3 coin flip example, <span class="math inline">\(X\)</span> could be 0, 1, 2, or 3. We assign a number to each possible outcome of the sample space.</p>
+<p>Random variables provide numerical summaries of the experiment. This can be useful especially if the sample space is complicated. Random variables can also be used for non numeric outcomes.</p>
+</div>
+<div id="discrete-vs-continuous" class="section level3" number="3.1.3">
+<h3>
+<span class="header-section-number">3.1.3</span> Discrete Vs Continuous<a class="anchor" aria-label="anchor" href="#discrete-vs-continuous"><i class="fas fa-link"></i></a>
+</h3>
+<p>One of the key distinctions we have to make for random variables is to determine if it is discrete or continuous. The way we express probabilities for random variables depends on whether the random variable is discrete or continuous.</p>
+<p>A <strong>discrete random variable</strong> can only take on a countable (finite or infinite) number of values.</p>
+<p>The number of heads in 3 coin flips, <span class="math inline">\(X\)</span> is countable and finite, since we can actually list all of the values it can take as <span class="math inline">\(\{0,1,2,3 \}\)</span> and there are 4 such values. <span class="math inline">\(X\)</span> must take on one of these 4 numerical values; it cannot be a number outside this list. So it is discrete.</p>
+<p>A random variable is countable and infinite if we can list the values it can take, but the list has no end. For example, the number of people using a crosswalk over a 10 year period could take on the values <span class="math inline">\(\{0, 1, 2, 3, \cdots \}\)</span>. The number could take on any of an infinite number of values, but values in between these whole numbers cannot occur. So the number of people using a crosswalk over a 10 year period is a discrete random variable.</p>
+<p>A <strong>continuous random variable</strong> can take on an uncountable number of values in an interval of real numbers.</p>
+<p>For example, height of an American adult is a continuous random variable, as height can take on any value in interval between 40 and 100 inches. All values between 40 and 100 are possible.</p>
+<p>For this module, we will focus on discrete random variables.</p>
+<p>The <strong>support</strong> of a discrete random variable <span class="math inline">\(X\)</span> is the set of values <span class="math inline">\(X\)</span> can take such that <span class="math inline">\(P(X = x) &gt; 0\)</span>, i.e. the set of values that have non zero probability of happening. Using our 3 coin flips example, where <span class="math inline">\(X\)</span> is the number of heads out of the 3 coin slips, the support is <span class="math inline">\(\{0,1,2,3 \}\)</span>. Usually, the support of discrete random variables are integers.</p>
+<p><em>Thought question</em>: Can you come of examples of discrete and continuous random variables on your own? Feel free to search the internet for examples as well.</p>
+</div>
+</div>
+<div id="probability-mass-functions-pmfs" class="section level2" number="3.2">
+<h2>
+<span class="header-section-number">3.2</span> Probability Mass Functions (PMFs)<a class="anchor" aria-label="anchor" href="#probability-mass-functions-pmfs"><i class="fas fa-link"></i></a>
+</h2>
+<p>We use probability to describe the behavior of random variables. For example, what is the probability of obtaining 3 heads in 3 coin flips, or what is the probability of obtaining at least one head on 3 coin flips? This is called the <strong>distribution</strong> of a random variable. It specifies the probabilities of all events associated with the random variable.</p>
+<p>For discrete random variables, the distribution is specified by the <strong>probability mass function (PMF)</strong>. The PMF of a discrete random variable <span class="math inline">\(X\)</span> is the function <span class="math inline">\(P_X(x) = P(X=x)\)</span>. It is positive when <span class="math inline">\(x\)</span> is in the support of <span class="math inline">\(X\)</span>, and 0 otherwise.</p>
+<p>Note: In the notation for random variables, capital letters such as <span class="math inline">\(X\)</span> denote random variables, and lower case letters such as <span class="math inline">\(x\)</span> denote actual numerical values. So if we want to find the probability that we have 2 heads in 3 coin flips, we write <span class="math inline">\(P(X=2)\)</span>, where <span class="math inline">\(x\)</span> is 2 in this example.</p>
+<p>Going back to our example where we record the number of heads out of 3 coin flips, we can write out the PMF for the random variable <span class="math inline">\(X\)</span>:</p>
+<ul>
+<li>
+<span class="math inline">\(P_X(0) = P(X=0) = P(TTT) = \frac{1}{8}\)</span>,</li>
+<li>
+<span class="math inline">\(P_X(1) = P(X=1) = P(HTT \cup THT \cup TTH) = \frac{3}{8}\)</span>,</li>
+<li>
+<span class="math inline">\(P_X(2) = P(X=2) = P(HHT \cup THH \cup HTH) = \frac{3}{8}\)</span>,</li>
+<li>
+<span class="math inline">\(P_X(3) = P(X=3) = P(HHH) = \frac{1}{8}\)</span>.</li>
+</ul>
+<p>Fairly often, the PMF of a discrete random variable is presented in a simple table like in Table <a href="discrete-random-variables.html#tab:3-pmf-tab">3.1</a> below:</p>
+<div class="inline-table"><table class="table table-sm">
+<caption>
+<span id="tab:3-pmf-tab">Table 3.1: </span>PMF for X</caption>
+<thead><tr class="header">
+<th align="right">x</th>
+<th align="right">PMF</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="right">0</td>
+<td align="right">0.125</td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="right">0.375</td>
+</tr>
+<tr class="odd">
+<td align="right">2</td>
+<td align="right">0.375</td>
+</tr>
+<tr class="even">
+<td align="right">3</td>
+<td align="right">0.125</td>
+</tr>
+</tbody>
+</table></div>
+<p>Or usual a simple plot like the one below in Figure <a href="discrete-random-variables.html#fig:3-pmf">3.1</a>:</p>
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">##support</span></span>
+<span><span class="va">x</span><span class="op">&lt;-</span><span class="fl">0</span><span class="op">:</span><span class="fl">3</span></span>
+<span><span class="co">##number of flips</span></span>
+<span><span class="va">n</span><span class="op">&lt;-</span><span class="fl">3</span></span>
+<span><span class="co">## prob of head in a flip</span></span>
+<span><span class="va">p</span><span class="op">&lt;-</span><span class="fl">0.5</span></span>
+<span><span class="co">## PMF for each value in the support. </span></span>
+<span><span class="va">PMFs</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">/</span><span class="fl">8</span>, <span class="fl">3</span><span class="op">/</span><span class="fl">8</span>, <span class="fl">3</span><span class="op">/</span><span class="fl">8</span>, <span class="fl">1</span><span class="op">/</span><span class="fl">8</span><span class="op">)</span></span>
+<span><span class="co">## create plot of PMF vs each value in support</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">PMFs</span>, type<span class="op">=</span><span class="st">"h"</span>, main <span class="op">=</span> <span class="st">"PMF for X"</span>, xlab<span class="op">=</span><span class="st">"# of heads"</span>, ylab<span class="op">=</span><span class="st">"Probability"</span>, ylim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:3-pmf"></span>
+<img src="bookdown-demo_files/figure-html/3-pmf-1.png" alt="PMF for X" width="672"><p class="caption">
+Figure 3.1: PMF for X
+</p>
+</div>
+<p>The PMF provides a list of all possible values for the random variable and the corresponding probabilities. In other words, the PMF describes the distribution of the relative frequencies for each outcome. For our experiment, observing 1 or 2 heads is equally likely, and they occur three times as often as observing 0 or 3 heads. Observing 0 or 3 heads is also equally likely.</p>
+<div id="valid-pmfs" class="section level3" number="3.2.1">
+<h3>
+<span class="header-section-number">3.2.1</span> Valid PMFs<a class="anchor" aria-label="anchor" href="#valid-pmfs"><i class="fas fa-link"></i></a>
+</h3>
+<p>Consider a discrete random variable <span class="math inline">\(X\)</span> with support <span class="math inline">\(x_1, x_2, \cdots\)</span>. The PMF <span class="math inline">\(P_X(x)\)</span> of <span class="math inline">\(X\)</span> must satisfy:</p>
+<ul>
+<li>
+<span class="math inline">\(P_X(x) &gt; 0\)</span> if <span class="math inline">\(x = x_j\)</span>, and <span class="math inline">\(P_X(x) = 0\)</span> otherwise.</li>
+<li>
+<span class="math inline">\(\sum_{j=1}^{\infty} P_X(x_j) = 1\)</span>.</li>
+</ul>
+<p>In other words, the probabilities associated with the support are greater than 0, and the sum of the probabilities across the whole support must add up to 1.</p>
+</div>
+<div id="pmfs-and-histograms" class="section level3" number="3.2.2">
+<h3>
+<span class="header-section-number">3.2.2</span> PMFs and Histograms<a class="anchor" aria-label="anchor" href="#pmfs-and-histograms"><i class="fas fa-link"></i></a>
+</h3>
+<p>Recall the frequentist viewpoint of probability, that it represents the relative frequency associated with an event that is repeated for an infinite number of times.</p>
+<p>Consider our experiment where we flip a coin 3 times and count the number of heads. The support of our random variable <span class="math inline">\(X\)</span>, the number of heads, is <span class="math inline">\(\{0,1,2,3 \}\)</span>. Imagine performing our experiment a large number of times. Each time we perform the experiment, we record the number of heads. If we performed the experiment one million times, we would have recorded one million values for the number of heads, and each value must be in the support of <span class="math inline">\(X\)</span>. If we then create a histogram for the one million values for the number of heads, the shape of the histogram should be very close to the shape of the plot of the PMF in Figure <a href="discrete-random-variables.html#fig:3-pmf">3.1</a>. Figure <a href="discrete-random-variables.html#fig:3-sim">3.2</a> below shows the resulting histogram after performing the experiment 1 million times.</p>
+<div class="figure">
+<span style="display:block;" id="fig:3-sim"></span>
+<img src="bookdown-demo_files/figure-html/3-sim-1.png" alt="Histogram from Experiment Performed 1 Million Times" width="672"><p class="caption">
+Figure 3.2: Histogram from Experiment Performed 1 Million Times
+</p>
+</div>
+<p>Note: What we have just done here was to use simulations to repeat an experiment a large number of times using code.</p>
+</div>
+</div>
+<div id="cumulative-distribution-functions-cdfs" class="section level2" number="3.3">
+<h2>
+<span class="header-section-number">3.3</span> Cumulative Distribution Functions (CDFs)<a class="anchor" aria-label="anchor" href="#cumulative-distribution-functions-cdfs"><i class="fas fa-link"></i></a>
+</h2>
+<p>Another function that is used to describe the distirbution of discrete random variables is the <strong>cumulative distribution function (CDF)</strong>. The CDF of a random variable <span class="math inline">\(X\)</span> is <span class="math inline">\(F_X(x) = P(X \leq x)\)</span>. Notice that unlike the PMF, the definition of CDF applies for both discrete and continuous random variables.</p>
+<p>Going back to our example where we record the number of heads out of 3 coin flips, we can write out the CDF for the random variable <span class="math inline">\(X\)</span>:</p>
+<ul>
+<li>
+<span class="math inline">\(F_X(0) = P(X \leq 0) = P(X=0) = \frac{1}{8}\)</span>,</li>
+<li>
+<span class="math inline">\(F_X(1) = P(X \leq 1) = P(X=0) + P(X=1) = \frac{1}{8} +  \frac{3}{8} = \frac{1}{2}\)</span>,</li>
+<li>
+<span class="math inline">\(F_X(2) = P(X \leq 2) = P(X=0) + P(X=1) + P(X=2) = \frac{1}{2} + \frac{3}{8} = \frac{7}{8}\)</span>,</li>
+<li>
+<span class="math inline">\(F_X(3) = P(X \leq 3) = P(X=0) + P(X=1) + P(X=2) + P(X=3) = \frac{7}{8} + \frac{1}{8} = 1\)</span>.</li>
+</ul>
+<p>Notice how these calculations were based on the PMF. To find <span class="math inline">\(P(X \leq x)\)</span>, we summed the PDF over all values of the support that is less than or equal to <span class="math inline">\(x\)</span>. Fairly often, the CDF of a discrete random variable is presented in a simple table like Table <a href="discrete-random-variables.html#tab:3-cdf-tab">3.2</a> below:</p>
+<div class="inline-table"><table class="table table-sm">
+<caption>
+<span id="tab:3-cdf-tab">Table 3.2: </span>CDF for X</caption>
+<thead><tr class="header">
+<th align="right">x</th>
+<th align="right">CDF</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="right">0</td>
+<td align="right">0.125</td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="right">0.500</td>
+</tr>
+<tr class="odd">
+<td align="right">2</td>
+<td align="right">0.875</td>
+</tr>
+<tr class="even">
+<td align="right">3</td>
+<td align="right">1.000</td>
+</tr>
+</tbody>
+</table></div>
+<p>Or in a simple plot like in Figure <a href="discrete-random-variables.html#fig:3-cdf">3.3</a> below:</p>
+<div class="figure">
+<span style="display:block;" id="fig:3-cdf"></span>
+<img src="bookdown-demo_files/figure-html/3-cdf-1.png" alt="CDF for X" width="672"><p class="caption">
+Figure 3.3: CDF for X
+</p>
+</div>
+<p><em>Thought question</em>: do you see similarities between the CDF and the empirical cumulative density function (ECDF) from section <a href="descriptive.html#ecdf">1.3.3</a>?</p>
+<div id="valid-cdfs" class="section level3" number="3.3.1">
+<h3>
+<span class="header-section-number">3.3.1</span> Valid CDFs<a class="anchor" aria-label="anchor" href="#valid-cdfs"><i class="fas fa-link"></i></a>
+</h3>
+<p>The CDF <span class="math inline">\(F_X(x)\)</span> of <span class="math inline">\(X\)</span> must:</p>
+<ul>
+<li>be non decreasing. This means that as <span class="math inline">\(x\)</span> gets larger, the CDF either stays the same or increases. Visually, a graph of the CDF should never decreases as <span class="math inline">\(x\)</span> increases.</li>
+<li>approach 1 as <span class="math inline">\(x\)</span> approaches infinity and approach 0 as <span class="math inline">\(x\)</span> approaches negative infinity. Visually, a graph of the CDF should be equal to or close to 1 for large values of x, and it should be equal to or close to 0 for small values of x.</li>
+</ul>
+<p><em>Thought question</em>: Look at the CDF for our example in Figure @ref{fig:3-cdf}, and see how it satisfies the criteria listed above for a valid CDF.</p>
+</div>
+</div>
+<div id="expectations" class="section level2" number="3.4">
+<h2>
+<span class="header-section-number">3.4</span> Expectations<a class="anchor" aria-label="anchor" href="#expectations"><i class="fas fa-link"></i></a>
+</h2>
+<p>In the previous section, we see how PMFs and CDFs can be used to describe the distribution of a random variable. As the PMF can be viewed as a long-run version of the histogram, it gives us an idea about the shape of the distribution. Similar to Section <a href="descriptive.html#descriptive">1</a>, we will also be interested in measures of centrality and spread for random variables.</p>
+<p>A measure of centrality for random variables is the <strong>expectation</strong>. The expectation of a random variable can be interpreted as the long-run mean of the random variable, i.e. if we were able to repeat the experiment an infinite number of times, the expectation of the random variable will be the average result among all the experiments.</p>
+<p>For a discrete random variable <span class="math inline">\(X\)</span> with support <span class="math inline">\(x_1, x_2, \cdots, x_j\)</span>, the expected value, denoted by <span class="math inline">\(E(X)\)</span>, is</p>
+<p><span class="math display" id="eq:3-EX">\[\begin{equation}
+E(X) = \sum_{j=1}^{\infty} x_j P(X=x_j).
+\tag{3.1}
+\end{equation}\]</span></p>
+<p>We can use Table <a href="discrete-random-variables.html#tab:3-pmf-tab">3.1</a> as an example. To find the expected number of heads out of 3 coin flips, using equation <a href="discrete-random-variables.html#eq:3-EX">(3.1)</a>,</p>
+<p><span class="math display">\[
+\begin{split}
+E(X) &amp;= 0 \times \frac{1}{8} + 1 \times \frac{3}{8} + 2 \times \frac{3}{8} + 3 \times \frac{1}{8}\\
+       &amp;= 1.5
+\end{split}
+\]</span></p>
+<p>What we did was to take the product of each value in the support of the random variable with its corresponding probability, and add all these products.</p>
+<p>We can see from this another interpretation of the expected value of a random variable: it is the weighted average of the values for the random variable, weighted by their probabilities.</p>
+<p>Intuitively, this expected value of 1.5 should make sense. If we flip a coin 3 times, and the coin is fair, we expect half of these flips to land heads, or 1.5 flips to land heads.</p>
+<div id="linearity-of-expectations" class="section level3" number="3.4.1">
+<h3>
+<span class="header-section-number">3.4.1</span> Linearity of Expectations<a class="anchor" aria-label="anchor" href="#linearity-of-expectations"><i class="fas fa-link"></i></a>
+</h3>
+</div>
+<div id="variance" class="section level3" number="3.4.2">
+<h3>
+<span class="header-section-number">3.4.2</span> Variance<a class="anchor" aria-label="anchor" href="#variance"><i class="fas fa-link"></i></a>
+</h3>
+</div>
+</div>
+<div id="common-discrete-random-variables" class="section level2" number="3.5">
+<h2>
+<span class="header-section-number">3.5</span> Common Discrete Random Variables<a class="anchor" aria-label="anchor" href="#common-discrete-random-variables"><i class="fas fa-link"></i></a>
+</h2>
+<p>Next, we will introduce some commonly used distributions that may be used for discrete random variables. A number of common statistical models (for example, logistic regression, Poisson point process) are based on these distributions.</p>
+<div id="bernoulli" class="section level3" number="3.5.1">
+<h3>
+<span class="header-section-number">3.5.1</span> Bernoulli<a class="anchor" aria-label="anchor" href="#bernoulli"><i class="fas fa-link"></i></a>
+</h3>
+<p>The Bernoulli distribution might be the simplest discrete random variable. The support for such a random variable is <span class="math inline">\(\{0,1\}\)</span>. In other words, the value of a random variable that follows a Bernoulli distribution is either 0 or 1. A Bernoulli distribution is also described by the parameter <span class="math inline">\(p\)</span>, which is the probability that the random variable takes on the value of 1.</p>
+<p>More formally, a random variable <span class="math inline">\(X\)</span> follows a <strong>Bernoulli distribution</strong> with parameter <span class="math inline">\(p\)</span> if <span class="math inline">\(P(X=1) = p\)</span> and <span class="math inline">\(P(X=0) = 1-p\)</span>, where <span class="math inline">\(0&lt;p&lt;1\)</span>. Using mathematical notation, we can write <span class="math inline">\(X \sim Bern(p)\)</span> to express that the random variable <span class="math inline">\(X\)</span> is distributed as a Bernoulli with parameter <span class="math inline">\(p\)</span>. The PMF of a Bernoulli distribution is written as</p>
+<p><span class="math display" id="eq:3-bern">\[\begin{equation}
+P(X=k) = p^k (1-p)^{1-k}
+\tag{3.2}
+\end{equation}\]</span></p>
+<p>for <span class="math inline">\(k=0, 1\)</span>.</p>
+<p>It is not enough to specify that a random variable follows a Bernoulli distribution. We need to also clearly specify the value of the parameter <span class="math inline">\(p\)</span>. Consider the following two examples which describe two different experiments:</p>
+<ul>
+<li><p>Suppose I flip a fair coin once. Let <span class="math inline">\(Y=1\)</span> if the coin lands heads, and <span class="math inline">\(Y=0\)</span> if the coin lands tails. <span class="math inline">\(Y \sim Bern(\frac{1}{2}\)</span> in this example since the coin is fair.</p></li>
+<li><p>Suppose I am asked a question and I am given 5 multiple choices, of which only 1 is the correct answer. I have no idea about the topic, and the multiple choices do not help, so I have to guess. Let <span class="math inline">\(W=1\)</span> if I answer correctly, and <span class="math inline">\(W=0\)</span> if I answer incorrectly. <span class="math inline">\(W \sim Bern(\frac{1}{5})\)</span>.</p></li>
+</ul>
+<p><span class="math inline">\(P(Y=1)\)</span> and <span class="math inline">\(P(W=1)\)</span> are not the same in these examples.</p>
+<p>Fairly often, when we have a Bernoulli random variable, the event that results in the random variable being coded as 1 is called a <strong>success</strong>, and the event that results in the random variable being coded as 0 is called a <strong>failure</strong>. In such a setting, the parameter <span class="math inline">\(p\)</span> is called the <strong>success probability</strong> of the Bernoulli distribution. An experiment that has a Bernoulli distribution can be called a Bernoulli trial.</p>
+<p>If you go back to the second example in section <a href="index.html#eg2">0.1.2</a>, we were modeling whether a job applicant receives a callback or not. In this example, we could let <span class="math inline">\(V\)</span> be the random variable that an applicant receives a callback, with <span class="math inline">\(V=1\)</span> denoting the applicant received a callback, and <span class="math inline">\(V=0\)</span> when the applicant did not receive a callback. We used logistic regression in the example. It turns out that logistic regression is used when the variable of interest follows a Bernoulli distribution.</p>
+</div>
+<div id="binomial" class="section level3" number="3.5.2">
+<h3>
+<span class="header-section-number">3.5.2</span> Binomial<a class="anchor" aria-label="anchor" href="#binomial"><i class="fas fa-link"></i></a>
+</h3>
+<p>Suppose we have an experiment that follows a Bernoulli distribution, and we perform this experiment <span class="math inline">\(n\)</span> times (sometimes called trials), each time with the same success probability <span class="math inline">\(p\)</span>. The experiments are independent from each other. Let <span class="math inline">\(X\)</span> denote the number of successes out of the <span class="math inline">\(n\)</span> trials. <span class="math inline">\(X\)</span> follows a <strong>binomial distribution</strong> with parameters <span class="math inline">\(n\)</span> and <span class="math inline">\(p\)</span> (number of trials and success probability). We write <span class="math inline">\(X \sim Bin(n,p)\)</span> to express that <span class="math inline">\(X\)</span> follows a binomial distribution with parameters <span class="math inline">\(n\)</span> and <span class="math inline">\(p\)</span>, with <span class="math inline">\(n&gt;0\)</span> and <span class="math inline">\(0&lt;p&lt;1\)</span>. The PMF of a Binomial distribution is written as</p>
+<p><span class="math display" id="eq:3-bin">\[\begin{equation}
+P(X=k) = \binom{n}{k} p^k (1-p)^{n-k}
+\tag{3.3}
+\end{equation}\]</span></p>
+<p>for <span class="math inline">\(k=0,1,2, \cdots, n\)</span>, which is also the support of the binomial distribution.</p>
+<p>In equation <a href="discrete-random-variables.html#eq:3-bin">(3.3)</a>, <span class="math inline">\(\binom{n}{k}\)</span> is called the binomial coefficient, and is a number that represents the number of combinations that result in <span class="math inline">\(k\)</span> successes out of the <span class="math inline">\(n\)</span> trials. The binomial coefficient can be found using</p>
+<p><span class="math display" id="eq:3-bincoeff">\[\begin{equation}
+\binom{n}{k} =  \frac{n!}{k! (n-k)!}.
+\tag{3.4}
+\end{equation}\]</span></p>
+<p><span class="math inline">\(n!\)</span> is called n-factorial, and is the product of all positive integers less than or equal to n. So <span class="math inline">\(n! = n \times (n-1) \times (n-2) \times \cdots \times 1.\)</span> As an example <span class="math inline">\(5! = 5 \times 4 \times 3 \times 2 \times 1 = 120\)</span>, or using R:</p>
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Special.html">factorial</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 120</code></pre>
+<p>We go back to our first example of counting the number of heads out of three coin flips follows a binomial distribution. Each coin flip is either heads or tails. The success probability, the probability of heads, is 0.5 and is the same for each flip. The result of each flip is independent of other flips since other flips do not affect the outcome. The number of trials (flips in this example) is <span class="math inline">\(n=3\)</span> is specified as a fixed value. We let <span class="math inline">\(x\)</span> denote the number of heads in 3 coin clips, so we write <span class="math inline">\(X \sim Bin(3,0.5)\)</span>.</p>
+<p>Suppose we want to calculate <span class="math inline">\(P(X=2)\)</span> using equation <a href="discrete-random-variables.html#eq:3-bin">(3.3)</a>:</p>
+<p><span class="math display">\[
+\begin{split}
+P(X=2) &amp;= \binom{3}{2} (0.5)^2 (0.5)^1\\
+       &amp;= \frac{3!}{2! 1!} (0.5)^2 (0.5)^1 \\
+       &amp;= 3 \times \frac{1}{8} \\
+       &amp;= \frac{3}{8}.
+\end{split}
+\]</span></p>
+<p>In this example, the binomial coefficient equals to 3. Which indicates there were 3 combinations to obtain 2 heads in 3 coin flips. <span class="math inline">\(P(X=2\)</span> can be written as <span class="math inline">\(P(HHT \cup HTH \cup THH)\)</span>. Solving for <span class="math inline">\(P(HHT \cup HTH \cup THH)\)</span>, we have</p>
+<p><span class="math display">\[
+\begin{split}
+P(HHT \cup HTH \cup THH) &amp;= P(HHT) + P(HTH) + P(THH)\\
+       &amp;= 0.5^3 + 0.5^3 + 0.5^3 \\
+       &amp;= 3 \times \frac{1}{8} \\
+       &amp;= \frac{3}{8}.
+\end{split}
+\]</span>
+so we could have solved this using basic proabbility rules from the previous module, without using the PMF of the binomial distribution in equation <a href="discrete-random-variables.html#eq:3-bin">(3.3)</a>. Of course, the PMF of the binomial distribution gets a lot more convenient if <span class="math inline">\(n\)</span> gets larger, as the number of combinations and sample space get a lot larger.</p>
+<p>We can also use R to find <span class="math inline">\(P(X=2)\)</span>:</p>
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">dbinom</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">0.5</span><span class="op">)</span> <span class="co">##specify values of k, n, p in this order</span></span></code></pre></div>
+<pre><code>## [1] 0.375</code></pre>
+<p>Looking at the description of the Bernoulli and binomial distributions, you may notice that the Bernoulli distribution is a special case of a binomial distribution when <span class="math inline">\(n=1\)</span>, i.e. when we have only 1 trial.</p>
+<div id="pmfs-of-binomial" class="section level4" number="3.5.2.1">
+<h4>
+<span class="header-section-number">3.5.2.1</span> PMFs of Binomial<a class="anchor" aria-label="anchor" href="#pmfs-of-binomial"><i class="fas fa-link"></i></a>
+</h4>
+<p>We take a look at the PMFs of a few binomials, all with <span class="math inline">\(n=10\)</span> but we vary <span class="math inline">\(p\)</span> to be 0.2, 0.5, and 0.9, in Figure <a href="discrete-random-variables.html#fig:3-pmfs">3.4</a>:</p>
+<div class="figure">
+<span style="display:block;" id="fig:3-pmfs"></span>
+<img src="bookdown-demo_files/figure-html/3-pmfs-1.png" alt="PMF for X, n=10, p varied" width="672"><p class="caption">
+Figure 3.4: PMF for X, n=10, p varied
+</p>
+</div>
+<p>From figure <a href="discrete-random-variables.html#fig:3-pmfs">3.4</a>, we can see that the distribution of the binomial is symmetric when <span class="math inline">\(p=0.5\)</span>, as middle values of <span class="math inline">\(k\)</span> have higher probabilities, and the probabilities decrease as we go further away from the middle. When <span class="math inline">\(p \neq 0.5\)</span>, we see that the distribution gets skewed. When the success probability is small, smaller number of successes are likelier, and when the success probability is large, larger number of successes are likelier, which is intuitive. If the probability of success is small, we expect most outcomes to be failures.</p>
+</div>
+</div>
+<div id="poisson" class="section level3" number="3.5.3">
+<h3>
+<span class="header-section-number">3.5.3</span> Poisson<a class="anchor" aria-label="anchor" href="#poisson"><i class="fas fa-link"></i></a>
+</h3>
+
+</div>
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="probability.html"><span class="header-section-number">2</span> Probability</a></div>
+<div class="empty"></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#discrete-random-variables"><span class="header-section-number">3</span> Discrete Random Variables</a></li>
+<li>
+<a class="nav-link" href="#random-variables"><span class="header-section-number">3.1</span> Random Variables</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#example"><span class="header-section-number">3.1.1</span> Example</a></li>
+<li><a class="nav-link" href="#definition"><span class="header-section-number">3.1.2</span> Definition</a></li>
+<li><a class="nav-link" href="#discrete-vs-continuous"><span class="header-section-number">3.1.3</span> Discrete Vs Continuous</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#probability-mass-functions-pmfs"><span class="header-section-number">3.2</span> Probability Mass Functions (PMFs)</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#valid-pmfs"><span class="header-section-number">3.2.1</span> Valid PMFs</a></li>
+<li><a class="nav-link" href="#pmfs-and-histograms"><span class="header-section-number">3.2.2</span> PMFs and Histograms</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#cumulative-distribution-functions-cdfs"><span class="header-section-number">3.3</span> Cumulative Distribution Functions (CDFs)</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#valid-cdfs"><span class="header-section-number">3.3.1</span> Valid CDFs</a></li></ul>
+</li>
+<li>
+<a class="nav-link" href="#expectations"><span class="header-section-number">3.4</span> Expectations</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#linearity-of-expectations"><span class="header-section-number">3.4.1</span> Linearity of Expectations</a></li>
+<li><a class="nav-link" href="#variance"><span class="header-section-number">3.4.2</span> Variance</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#common-discrete-random-variables"><span class="header-section-number">3.5</span> Common Discrete Random Variables</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#bernoulli"><span class="header-section-number">3.5.1</span> Bernoulli</a></li>
+<li><a class="nav-link" href="#binomial"><span class="header-section-number">3.5.2</span> Binomial</a></li>
+<li><a class="nav-link" href="#poisson"><span class="header-section-number">3.5.3</span> Poisson</a></li>
+</ul>
+</li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2025-06-10.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,325 @@
+# Discrete Random Variables
+
+```{r, echo=FALSE}
+rm(list = ls())
+```
+
+This module is based on Introduction to Probability (Blitzstein, Hwang), Chapters 3 and 4. You can access the book for free at https://stat110.hsites.harvard.edu/ (and then click on Book). Please note that I cover additional topics, and skip certain topics from the book. You may skip Sections 3.4, 3.7, 3.9, 4.3, 4.9 from the book.
+
+## Random Variables
+
+The idea behind random variables is to simplify notation regarding probability, enable us to summarize results of experiments, and make it easier to quantify uncertainty.
+
+### Example
+
+Consider flipping a coin three times and recording if it lands heads or tails each time. The sample space for this experiment will be $S = \{HHH, HHT, HTH, THH, HTT, THT, TTH, TTT\}$. Given that each outcome is equally likely, the probability associated with each outcome is $\frac{1}{8}$.
+
+Suppose I want to find the probability that I get exactly 2 heads out of the 3 flips. I could express this as:
+
+- $P(\text{two heads out of three flips})$, or 
+- $P(HHT \cup HTH \cup THH)$, or
+- $P(A)$ where $A$ denotes the event of getting two heads out of three flips.
+
+Another way is to define a random variable $X$ that expresses this event a bit more efficiently. Let $X$ denote the number of heads out of three flips, so another way could be to write $P(X=2$). This is idea behind random variables: to assign events to a number. 
+
+### Definition
+
+A **random variable (RV)** is a function from the sample space to real numbers.
+
+By convention, we denote random variables by capital letters. Using our 3 coin flip example, $X$ could be 0, 1, 2, or 3. We assign a number to each possible outcome of the sample space. 
+
+Random variables provide numerical summaries of the experiment. This can be useful especially if the sample space is complicated. Random variables can also be used for non numeric outcomes. 
+
+### Discrete Vs Continuous
+
+One of the key distinctions we have to make for random variables is to determine if it is discrete or continuous. The way we express probabilities for random variables depends on whether the random variable is discrete or continuous.
+
+A **discrete random variable** can only take on a countable (finite or infinite) number of values.
+
+The number of heads in 3 coin flips, $X$ is countable and finite, since we can actually list all of the values it can take as $\{0,1,2,3 \}$ and there are 4 such values. $X$ must take on one of these 4 numerical values; it cannot be a number outside this list. So it is discrete.
+
+A random variable is countable and infinite if we can list the values it can take, but the list has no end. For example, the number of people using a crosswalk over a 10 year period could take on the values $\{0, 1, 2, 3, \cdots \}$. The number could take on any of an infinite number of values, but values in between these whole numbers cannot occur. So the number of people using a crosswalk over a 10 year period is a discrete random variable. 
+
+A **continuous random variable** can take on an uncountable number of values in an interval of real numbers. 
+
+For example, height of an American adult is a continuous random variable, as height can take on any value in interval between 40 and 100 inches. All values between 40 and 100 are possible. 
+
+For this module, we will focus on discrete random variables. 
+
+The **support** of a discrete random variable $X$ is the set of values $X$ can take such that $P(X = x) > 0$, i.e. the set of values that have non zero probability of happening. Using our 3 coin flips example, where $X$ is the number of heads out of the 3 coin slips, the support is $\{0,1,2,3 \}$. Usually, the support of discrete random variables are integers. 
+
+*Thought question*: Can you come of examples of discrete and continuous random variables on your own? Feel free to search the internet for examples as well. 
+
+## Probability Mass Functions (PMFs)
+
+We use probability to describe the behavior of random variables. For example, what is the probability of obtaining 3 heads in 3 coin flips, or what is the probability of obtaining at least one head on 3 coin flips? This is called the **distribution** of a random variable. It specifies the probabilities of all events associated with the random variable. 
+
+For discrete random variables, the distribution is specified by the **probability mass function (PMF)**. The PMF of a discrete random variable $X$ is the function $P_X(x) = P(X=x)$. It is positive when $x$ is in the support of $X$, and 0 otherwise. 
+
+Note: In the notation for random variables, capital letters such as $X$ denote random variables, and lower case letters such as $x$ denote actual numerical values. So if we want to find the probability that we have 2 heads in 3 coin flips, we write $P(X=2)$, where $x$ is 2 in this example. 
+
+Going back to our example where we record the number of heads out of 3 coin flips, we can write out the PMF for the random variable $X$:
+
+- $P_X(0) = P(X=0) = P(TTT) = \frac{1}{8}$,
+- $P_X(1) = P(X=1) = P(HTT \cup THT \cup TTH) = \frac{3}{8}$,
+- $P_X(2) = P(X=2) = P(HHT \cup THH \cup HTH) = \frac{3}{8}$,
+- $P_X(3) = P(X=3) = P(HHH) = \frac{1}{8}$.
+
+Fairly often, the PMF of a discrete random variable is presented in a simple table like in Table \@ref(tab:3-pmf-tab) below:
+
+```{r 3-pmf-tab, echo=FALSE}
+# Define your table data
+my_data <- data.frame(
+  x = c(0, 1, 2, 3),
+  PMF = c(1/8, 3/8, 3/8, 1/8)
+)
+
+# Create the table using kable
+knitr::kable(my_data, caption = "PMF for X")
+```
+
+Or usual a simple plot like the one below in Figure \@ref(fig:3-pmf):
+
+```{r 3-pmf, fig.cap="PMF for X"}
+##support
+x<-0:3
+##number of flips
+n<-3
+## prob of head in a flip
+p<-0.5
+## PMF for each value in the support. 
+PMFs<-c(1/8, 3/8, 3/8, 1/8)
+## create plot of PMF vs each value in support
+plot(x, PMFs, type="h", main = "PMF for X", xlab="# of heads", ylab="Probability", ylim=c(0,1))
+```
+
+The PMF provides a list of all possible values for the random variable and the corresponding probabilities. In other words, the PMF describes the distribution of the relative frequencies for each outcome. For our experiment, observing 1 or 2 heads is equally likely, and they occur three times as often as observing 0 or 3 heads. Observing 0 or 3 heads is also equally likely. 
+
+### Valid PMFs
+
+Consider a discrete random variable $X$ with support $x_1, x_2, \cdots$. The PMF $P_X(x)$ of $X$ must satisfy:
+
+- $P_X(x) > 0$ if $x = x_j$, and $P_X(x) = 0$ otherwise.
+- $\sum_{j=1}^{\infty} P_X(x_j) = 1$.
+
+In other words, the probabilities associated with the support are greater than 0, and the sum of the probabilities across the whole support must add up to 1. 
+
+### PMFs and Histograms
+
+Recall the frequentist viewpoint of probability, that it represents the relative frequency associated with an event that is repeated for an infinite number of times. 
+
+Consider our experiment where we flip a coin 3 times and count the number of heads. The support of our random variable $X$, the number of heads, is $\{0,1,2,3 \}$. Imagine performing our experiment a large number of times. Each time we perform the experiment, we record the number of heads. If we performed the experiment one million times, we would have recorded one million values for the number of heads, and each value must be in the support of $X$. If we then create a histogram for the one million values for the number of heads, the shape of the histogram should be very close to the shape of the plot of the PMF in Figure \@ref(fig:3-pmf). Figure \@ref(fig:3-sim) below shows the resulting histogram after performing the experiment 1 million times. 
+
+```{r 3-sim, fig.cap="Histogram from Experiment Performed 1 Million Times", echo=FALSE}
+##It turns out that our experiment can be modeled as a binomial distribution. 
+##More details about binomial distribution later in this module. 
+
+##set up X as a binomial
+n<-3 ##number of flips
+p<-0.5 ##prob of head in a flip
+x<-0:3 ##support for X
+
+##so you can replicate my simulation
+set.seed(1)
+reps<-1000000 ##how many times to run the experiment
+hist(rbinom(reps,n,p), breaks=-1:3, main="Hist with One Million Experiments", xlab="# of Successes")
+```
+
+Note: What we have just done here was to use simulations to repeat an experiment a large number of times using code. 
+
+## Cumulative Distribution Functions (CDFs)
+
+Another function that is used to describe the distirbution of discrete random variables is the **cumulative distribution function (CDF)**. The CDF of a random variable $X$ is $F_X(x) = P(X \leq x)$. Notice that unlike the PMF, the definition of CDF applies for both discrete and continuous random variables. 
+
+Going back to our example where we record the number of heads out of 3 coin flips, we can write out the CDF for the random variable $X$:
+
+- $F_X(0) = P(X \leq 0) = P(X=0) = \frac{1}{8}$,
+- $F_X(1) = P(X \leq 1) = P(X=0) + P(X=1) = \frac{1}{8} +  \frac{3}{8} = \frac{1}{2}$,
+- $F_X(2) = P(X \leq 2) = P(X=0) + P(X=1) + P(X=2) = \frac{1}{2} + \frac{3}{8} = \frac{7}{8}$,
+- $F_X(3) = P(X \leq 3) = P(X=0) + P(X=1) + P(X=2) + P(X=3) = \frac{7}{8} + \frac{1}{8} = 1$.
+
+Notice how these calculations were based on the PMF. To find $P(X \leq x)$, we summed the PDF over all values of the support that is less than or equal to $x$. Fairly often, the CDF of a discrete random variable is presented in a simple table like Table \@ref(tab:3-cdf-tab) below:
+
+```{r 3-cdf-tab, echo=FALSE}
+# Define your table data
+my_data <- data.frame(
+  x = c(0, 1, 2, 3),
+  CDF = c(1/8, 4/8, 7/8, 1)
+)
+
+# Create the table using kable
+knitr::kable(my_data, caption = "CDF for X")
+```
+
+Or in a simple plot like in Figure \@ref(fig:3-cdf) below:
+
+```{r 3-cdf, fig.cap="CDF for X", echo=FALSE}
+##support
+x<-0:3
+##number of flips
+n<-3
+## prob of head in a flip
+p<-0.5
+## PMF for each value in the support. 
+CDF<-c(1/8, 1/2, 7/8, 1)
+## create plot of PMF vs each value in support
+plot(x, CDF, type="h", main = "CDF for X", xlab="# of heads", ylab="Probability", ylim=c(0,1))
+```
+
+*Thought question*: do you see similarities between the CDF and the empirical cumulative density function (ECDF) from section \@ref(ecdf)?
+
+### Valid CDFs
+
+The CDF $F_X(x)$ of $X$ must:
+
+- be non decreasing. This means that as $x$ gets larger, the CDF either stays the same or increases. Visually, a graph of the CDF should never decreases as $x$ increases. 
+- approach 1 as $x$ approaches infinity and approach 0 as $x$ approaches negative infinity. Visually, a graph of the CDF should be equal to or close to 1 for large values of x, and it should be equal to or close to 0 for small values of x. 
+
+*Thought question*: Look at the CDF for our example in Figure \@ref{fig:3-cdf}, and see how it satisfies the criteria listed above for a valid CDF. 
+
+## Expectations
+
+In the previous section, we see how PMFs and CDFs can be used to describe the distribution of a random variable. As the PMF can be viewed as a long-run version of the histogram, it gives us an idea about the shape of the distribution. Similar to Section \@ref(descriptive), we will also be interested in measures of centrality and spread for random variables. 
+
+A measure of centrality for random variables is the **expectation**. The expectation of a random variable can be interpreted as the long-run mean of the random variable, i.e. if we were able to repeat the experiment an infinite number of times, the expectation of the random variable will be the average result among all the experiments. 
+
+For a discrete random variable $X$ with support $x_1, x_2, \cdots, x_j$, the expected value, denoted by $E(X)$, is 
+
+\begin{equation} 
+E(X) = \sum_{j=1}^{\infty} x_j P(X=x_j).
+(\#eq:3-EX)
+\end{equation}
+
+We can use Table \@ref(tab:3-pmf-tab) as an example. To find the expected number of heads out of 3 coin flips, using equation \@ref(eq:3-EX),
+
+$$
+\begin{split}
+E(X) &= 0 \times \frac{1}{8} + 1 \times \frac{3}{8} + 2 \times \frac{3}{8} + 3 \times \frac{1}{8}\\
+       &= 1.5
+\end{split}
+$$
+
+What we did was to take the product of each value in the support of the random variable with its corresponding probability, and add all these products.
+
+We can see from this another interpretation of the expected value of a random variable: it is the weighted average of the values for the random variable, weighted by their probabilities. 
+
+Intuitively, this expected value of 1.5 should make sense. If we flip a coin 3 times, and the coin is fair, we expect half of these flips to land heads, or 1.5 flips to land heads.
+
+### Linearity of Expectations
+
+### Variance
+
+## Common Discrete Random Variables
+
+Next, we will introduce some commonly used distributions that may be used for discrete random variables. A number of common statistical models (for example, logistic regression, Poisson point process) are based on these distributions.
+
+### Bernoulli
+
+The Bernoulli distribution might be the simplest discrete random variable. The support for such a random variable is $\{0,1\}$. In other words, the value of a random variable that follows a Bernoulli distribution is either 0 or 1. A Bernoulli distribution is also described by the parameter $p$, which is the probability that the random variable takes on the value of 1. 
+
+More formally, a random variable $X$ follows a **Bernoulli distribution** with parameter $p$ if $P(X=1) = p$ and $P(X=0) = 1-p$, where $0<p<1$. Using mathematical notation, we can write $X \sim Bern(p)$ to express that the random variable $X$ is distributed as a Bernoulli with parameter $p$. The PMF of a Bernoulli distribution is written as
+
+\begin{equation} 
+P(X=k) = p^k (1-p)^{1-k}
+(\#eq:3-bern)
+\end{equation}
+
+for $k=0, 1$. 
+
+It is not enough to specify that a random variable follows a Bernoulli distribution. We need to also clearly specify the value of the parameter $p$. Consider the following two examples which describe two different experiments:
+
+- Suppose I flip a fair coin once. Let $Y=1$ if the coin lands heads, and $Y=0$ if the coin lands tails. $Y \sim Bern(\frac{1}{2}$ in this example since the coin is fair. 
+
+- Suppose I am asked a question and I am given 5 multiple choices, of which only 1 is the correct answer. I have no idea about the topic, and the multiple choices do not help, so I have to guess. Let $W=1$ if I answer correctly, and $W=0$ if I answer incorrectly. $W \sim Bern(\frac{1}{5})$.
+
+$P(Y=1)$ and $P(W=1)$ are not the same in these examples. 
+
+Fairly often, when we have a Bernoulli random variable, the event that results in the random variable being coded as 1 is called a **success**, and the event that results in the random variable being coded as 0 is called a **failure**. In such a setting, the parameter $p$ is called the **success probability** of the Bernoulli distribution. An experiment that has a Bernoulli distribution can be called a Bernoulli trial. 
+
+If you go back to the second example in section \@ref(eg2), we were modeling whether a job applicant receives a callback or not. In this example, we could let $V$ be the random variable that an applicant receives a callback, with $V=1$ denoting the applicant received a callback, and $V=0$ when the applicant did not receive a callback. We used logistic regression in the example. It turns out that logistic regression is used when the variable of interest follows a Bernoulli distribution. 
+
+### Binomial
+
+Suppose we have an experiment that follows a Bernoulli distribution, and we perform this experiment $n$ times (sometimes called trials), each time with the same success probability $p$. The experiments are independent from each other. Let $X$ denote the number of successes out of the $n$ trials. $X$ follows a **binomial distribution** with parameters $n$ and $p$ (number of trials and success probability). We write $X \sim Bin(n,p)$ to express that $X$ follows a binomial distribution with parameters $n$ and $p$, with $n>0$ and $0<p<1$. The PMF of a Binomial distribution is written as
+
+\begin{equation} 
+P(X=k) = \binom{n}{k} p^k (1-p)^{n-k}
+(\#eq:3-bin)
+\end{equation}
+
+for $k=0,1,2, \cdots, n$, which is also the support of the binomial distribution. 
+
+In equation \@ref(eq:3-bin), $\binom{n}{k}$ is called the binomial coefficient, and is a number that represents the number of combinations that result in $k$ successes out of the $n$ trials. The binomial coefficient can be found using
+
+\begin{equation} 
+\binom{n}{k} =  \frac{n!}{k! (n-k)!}.
+(\#eq:3-bincoeff)
+\end{equation}
+
+$n!$ is called n-factorial, and is the product of all positive integers less than or equal to n. So $n! = n \times (n-1) \times (n-2) \times \cdots \times 1.$ As an example $5! = 5 \times 4 \times 3 \times 2 \times 1 = 120$, or using R:
+
+```{r}
+factorial(5)
+```
+
+We go back to our first example of counting the number of heads out of three coin flips follows a binomial distribution. Each coin flip is either heads or tails. The success probability, the probability of heads, is 0.5 and is the same for each flip. The result of each flip is independent of other flips since other flips do not affect the outcome. The number of trials (flips in this example) is $n=3$ is specified as a fixed value. We let $x$ denote the number of heads in 3 coin clips, so we write $X \sim Bin(3,0.5)$.
+
+Suppose we want to calculate $P(X=2)$ using equation \@ref(eq:3-bin):
+
+$$
+\begin{split}
+P(X=2) &= \binom{3}{2} (0.5)^2 (0.5)^1\\
+       &= \frac{3!}{2! 1!} (0.5)^2 (0.5)^1 \\
+       &= 3 \times \frac{1}{8} \\
+       &= \frac{3}{8}.
+\end{split}
+$$
+
+In this example, the binomial coefficient equals to 3. Which indicates there were 3 combinations to obtain 2 heads in 3 coin flips. $P(X=2$ can be written as $P(HHT \cup HTH \cup THH)$. Solving for $P(HHT \cup HTH \cup THH)$, we have
+
+$$
+\begin{split}
+P(HHT \cup HTH \cup THH) &= P(HHT) + P(HTH) + P(THH)\\
+       &= 0.5^3 + 0.5^3 + 0.5^3 \\
+       &= 3 \times \frac{1}{8} \\
+       &= \frac{3}{8}.
+\end{split}
+$$
+so we could have solved this using basic proabbility rules from the previous module, without using the PMF of the binomial distribution in equation \@ref(eq:3-bin). Of course, the PMF of the binomial distribution gets a lot more convenient if $n$ gets larger, as the number of combinations and sample space get a lot larger. 
+
+We can also use R to find $P(X=2)$:
+
+```{r}
+dbinom(2,3,0.5) ##specify values of k, n, p in this order
+```
+
+Looking at the description of the Bernoulli and binomial distributions, you may notice that the Bernoulli distribution is a special case of a binomial distribution when $n=1$, i.e. when we have only 1 trial. 
+
+#### PMFs of Binomial
+
+We take a look at the PMFs of a few binomials, all with $n=10$ but we vary $p$ to be 0.2, 0.5, and 0.9, in Figure \@ref(fig:3-pmfs):
+
+```{r 3-pmfs, fig.cap="PMF for X, n=10, p varied", echo=FALSE}
+x<-0:10
+n<-10
+PMFs2<-dbinom(x,n,0.2)
+PMFs5<-dbinom(x,n,0.5)
+PMFs9<-dbinom(x,n,0.9)
+
+par(mfrow=c(1,3))
+plot(x, PMFs2, type="h", main = "PMF when p=0.2", xlab="# of heads", ylab="Probability", ylim=c(0,0.4))
+plot(x, PMFs5, type="h", main = "PMF when p=0.5", xlab="# of heads", ylab="Probability", ylim=c(0,0.4))
+plot(x, PMFs9, type="h", main = "PMF when p=0.9", xlab="# of heads", ylab="Probability", ylim=c(0,0.4))
+```
+
+From figure \@ref(fig:3-pmfs), we can see that the distribution of the binomial is symmetric when $p=0.5$, as middle values of $k$ have higher probabilities, and the probabilities decrease as we go further away from the middle. When $p \neq 0.5$, we see that the distribution gets skewed. When the success probability is small, smaller number of successes are likelier, and when the success probability is large, larger number of successes are likelier, which is intuitive. If the probability of success is small, we expect most outcomes to be failures. 
+
+
+### Poisson
+
+
+
+
+
+
+

@@ -1,4 +1,4 @@
-# Descriptive Statistics 
+# Descriptive Statistics {#descriptive}
 
 ```{r, echo=FALSE}
 rm(list = ls())
@@ -243,7 +243,7 @@ Notice how much further large values ($Q_3$ and maximum) are from the median, co
 
 *Thought question*: can you sketch a box plot that represents a variable that is left-skewed? How about a variable that is symmetric?
 
-### Empirical Cumulative Distribution Function
+### Empirical Cumulative Distribution Function {#ecdf}
 
 From the previous sections, we can see how we could use histograms, density plots, and box plots to inform us about what proportion of observations take certain values, and the values of the data that correspond to certain percentiles. However, we are limited to quartiles and not any percentile when using box plots, and we need to find areas under the density plot (using integration, not a trivial task), or add up frequencies on a histogram (can be time consuming). 
 
@@ -336,7 +336,7 @@ which is consistent with the right skew we saw in the histogram and density plot
 - The mathematical definition of mode can be difficult to use for variables that are continuous, since it is likely that there are no observations that have the same value when the variable is continuous. In this instance, the mode typically refers to the bin in the histogram that has is the tallest. So, using the histogram in Figure \@ref(fig:hist) for the interest rates, the mode is between 7.5 to 10 percent. 
 
 
-## Measures of Uncertainty
+## Measures of Spread
 
 In the previous sections, we learned about summarizing features a quantitative variable, by using visualizations to summarize its shape, and by using some measures of centrality that describe the average or typical values of the variable. One more feature we can summarize is the spread, associated with the values of a quantitative variable. Measures of spread are considered a way to measure uncertainty. Data that have larger spread have more uncertainty.
 

@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 1 Descriptive Statistics | Understanding Uncertainty Course Notes</title>
+<meta name="author" content="Jeffrey Woo">
+<meta name="description" content="This module is based on OpenIntro Statistics (Diez, Ceytinka-Rundel, Barr), Chapter 2.1. You can access the book for free at https://www.openintro.org/book/os/ Please note that I cover additional...">
+<meta name="generator" content="bookdown 0.43 with bs4_book()">
+<meta property="og:title" content="Chapter 1 Descriptive Statistics | Understanding Uncertainty Course Notes">
+<meta property="og:type" content="book">
+<meta property="og:description" content="This module is based on OpenIntro Statistics (Diez, Ceytinka-Rundel, Barr), Chapter 2.1. You can access the book for free at https://www.openintro.org/book/os/ Please note that I cover additional...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 1 Descriptive Statistics | Understanding Uncertainty Course Notes">
+<meta name="twitter:description" content="This module is based on OpenIntro Statistics (Diez, Ceytinka-Rundel, Barr), Chapter 2.1. You can access the book for free at https://www.openintro.org/book/os/ Please note that I cover additional...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.9.0/transition.js"></script><script src="libs/bs3compat-0.9.0/tabs.js"></script><script src="libs/bs3compat-0.9.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Understanding Uncertainty Course Notes</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Preface</a></li>
+<li><a class="active" href="descriptive.html"><span class="header-section-number">1</span> Descriptive Statistics</a></li>
+<li><a class="" href="probability.html"><span class="header-section-number">2</span> Probability</a></li>
+<li><a class="" href="discrete-random-variables.html"><span class="header-section-number">3</span> Discrete Random Variables</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="descriptive" class="section level1" number="1">
+<h1>
+<span class="header-section-number">1</span> Descriptive Statistics<a class="anchor" aria-label="anchor" href="#descriptive"><i class="fas fa-link"></i></a>
+</h1>
+<p>This module is based on OpenIntro Statistics (Diez, Ceytinka-Rundel, Barr), Chapter 2.1. You can access the book for free at <a href="https://www.openintro.org/book/os/" class="uri">https://www.openintro.org/book/os/</a> Please note that I cover additional topics, and skip certain topics from the book.</p>
+<div id="uncertainty-with-data" class="section level2" number="1.1">
+<h2>
+<span class="header-section-number">1.1</span> Uncertainty with Data<a class="anchor" aria-label="anchor" href="#uncertainty-with-data"><i class="fas fa-link"></i></a>
+</h2>
+<p>When we are analyzing data, there is always going to be some degree of uncertainty, as there is randomness in a lot of phenomena that we observe in our world. An event is <strong>random</strong> if individual outcomes of the event are unpredictable. For example, the weight of the next baby born in a local hospital. Without knowing any information about the biological parents, we have a high degree of uncertainty if we try to predict this baby’s weight. Even if we know detailed information about the biological parents (for example they are both very tall), we may feel more confident in predicting that the baby is likely to be heavier than average, but we cannot be certain about this prediction.</p>
+<p>On the other end hand, an event is <strong>deterministic</strong> if we can predict individual outcomes of the event with certainty. For example, if we know the length of a cube is 2 inches, we know for sure that its volume is is <span class="math inline">\(2^3 = 8\)</span> cubic inches, based on rules of mathematics. The volume of a cube with length 2 inches is always going to be 8 cubic inches, so the volume is deterministic.</p>
+<p><em>Thought question</em>: think about data that you see in real life. Write these down. Are these data random or deterministic?</p>
+<p>We will explore tools to help us quantify uncertainty in data. In this module, we will explore fairly standard tools that are used to describe data and give us an idea about the degree of uncertainty we have in the data. When describing data that is quantitative, we usually describe the following: the shape of its distribution, its average or typical value, and its spread and uncertainty.</p>
+</div>
+<div id="visualizing-data" class="section level2" number="1.2">
+<h2>
+<span class="header-section-number">1.2</span> Visualizing Data<a class="anchor" aria-label="anchor" href="#visualizing-data"><i class="fas fa-link"></i></a>
+</h2>
+<p>Data visualization is the representation of information in the form of pictures. Imagine have access to weights of all newborn babies at a local hospital. Examining each numerical value could be time consuming. So instead, we can use visualizations to give us an idea about the values of the weights. For example, what weights of newborns are common? What proportion of babies have dangerously low weights (which may indicate health risks)? Good data visualizations can give us such information fairly quickly. Next, we will explore some common visualizations that are used for quantitative (or numerical) variables.</p>
+<div id="dot-plots" class="section level3" number="1.2.1">
+<h3>
+<span class="header-section-number">1.2.1</span> Dot Plots<a class="anchor" aria-label="anchor" href="#dot-plots"><i class="fas fa-link"></i></a>
+</h3>
+<p>We will start with a <strong>dot plot</strong>, as it is the most basic visualization for a quantitative variable. We will use the <code>loan50</code> dataset from the <code>openintro</code> package. The data originally consist of thousands of loans made through the Lending Club platform, but we will randomly select 50 of these loans. Let us study the interest rate the loans the 50 applicants received.</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://openintrostat.github.io/openintro/">openintro</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">##create object for data</span></span>
+<span><span class="va">Data</span><span class="op">&lt;-</span><span class="va">loan50</span></span></code></pre></div>
+<p>For simplicity, we will round the numerical values of the interest rates to the nearest whole number:</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">##round interest rate to whole number</span></span>
+<span><span class="va">Data</span><span class="op">&lt;-</span> <span class="va">Data</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>r_int_rate <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">interest_rate</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p>We can create the corresponding dot plot, per Figure <a href="descriptive.html#fig:dotplot">1.1</a>:</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">##dotplot</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">Data</span>,<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">r_int_rate</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_dotplot.html">geom_dotplot</a></span><span class="op">(</span>binwidth<span class="op">=</span><span class="fl">1</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span></span>
+<span>    axis.text.y <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_blank</a></span><span class="op">(</span><span class="op">)</span>,  <span class="co"># Remove y-axis labels</span></span>
+<span>    axis.title.y <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_blank</a></span><span class="op">(</span><span class="op">)</span>, <span class="co"># Remove y-axis title</span></span>
+<span>    axis.ticks.y <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_blank</a></span><span class="op">(</span><span class="op">)</span>  <span class="co"># Remove y-axis ticks</span></span>
+<span>  <span class="op">)</span><span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x<span class="op">=</span><span class="st">"Interest Rates (Rounded)"</span><span class="op">)</span></span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:dotplot"></span>
+<img src="bookdown-demo_files/figure-html/dotplot-1.png" alt="Dot Plot for 50 Interest Rates (rounded)" width="672"><p class="caption">
+Figure 1.1: Dot Plot for 50 Interest Rates (rounded)
+</p>
+</div>
+<p>Notice there is 1 black dot that corresponds to an interest rate of 20 (presumably in percent), so there is one applicant who has a rounded interest rate of 20 percent. There are 8 black dots that correspond to an interest rate to 10 percent, so there are 8 applicants with a rounded interest rate of 10 percent. So interest rates of 10 percent are much more commonly occurring than interest rate of 20 percent. So we can use the height, or number of dots, to help us glean how often the value of a certain interest rate occurs. Based on this dotplot, interest rates between 5 and 11 percent are common, with higher values being less common.</p>
+<p><em>Note:</em> do not get too torn up about the details in the code to produce this dot plot. I have chosen the present the dot plot this way to highlight how we use it, without getting bogged down in the details of how it can be produced. We will not be using dot plots in this class.</p>
+</div>
+<div id="histograms" class="section level3" number="1.2.2">
+<h3>
+<span class="header-section-number">1.2.2</span> Histograms<a class="anchor" aria-label="anchor" href="#histograms"><i class="fas fa-link"></i></a>
+</h3>
+<p>It turns out that dot plots are often not useful for large data sets, but they provide the general idea of how other visualizations for larger data sets work. The height of the dots inform us the frequency of those values occurring.</p>
+<p>A visualization that is more commonly used for larger data sets is a histogram. Instead of displaying how common each value of the variable exists, we think of the values as belonging to a <strong>bin</strong> of values. For example, we can create a bin that contains interest rates between 5 and 7.5 percent, another bin containing interest rates between 7.5 and 10 percent, and so on. A few things to note about histograms:</p>
+<ul>
+<li><p>By convention, values that lie exactly on the boundary of a bin will belong to the lower bin. For example, an interest rate that is exactly 12.5 percent will belong to the bin between 10 and 12.5 percent, and not the bin between 12.5 to 15 percent.</p></li>
+<li><p>Each bin should have the same width. In our example, the width is 2.5.</p></li>
+</ul>
+<p>We create this histogram (using the original interest rates) below, per Figure <a href="descriptive.html#fig:hist">1.2</a>:</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">##set up sequence to specify the bins</span></span>
+<span><span class="va">s25</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">5</span>,<span class="fl">27.5</span>,<span class="fl">2.5</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">Data</span>,<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">interest_rate</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span>breaks<span class="op">=</span><span class="va">s25</span>,fill<span class="op">=</span><span class="st">"blue"</span>,color<span class="op">=</span><span class="st">"orange"</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x<span class="op">=</span><span class="st">"Interest Rate"</span>, title<span class="op">=</span><span class="st">"Histogram of Interest Rates"</span><span class="op">)</span></span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:hist"></span>
+<img src="bookdown-demo_files/figure-html/hist-1.png" alt="Historgram for 50 Interest Rates" width="672"><p class="caption">
+Figure 1.2: Historgram for 50 Interest Rates
+</p>
+</div>
+<p>Similar to the dot plot in Figure <a href="descriptive.html#fig:dotplot">1.1</a>, the height of the histogram inform us what values are more commonly occurring. We can see from this histogram that interest rates between 5 and 10 percent are common, much more so than loans with interest rates greater than 20 percent. We could say that we have more certainty that a randomly selected loan applicant will have an interest rate between 5 and 10 percent than an interest rate that is greater than 20 percent.</p>
+<div id="shapes-of-distribution" class="section level4" number="1.2.2.1">
+<h4>
+<span class="header-section-number">1.2.2.1</span> Shapes of Distribution<a class="anchor" aria-label="anchor" href="#shapes-of-distribution"><i class="fas fa-link"></i></a>
+</h4>
+<p>Histograms can also give us an idea about the <strong>shape</strong> of the distribution of interest rates. For the histogram in Figure <a href="descriptive.html#fig:hist">1.2</a>, most of the loans are less than 15 percent, with only a small number of loans greater than 20 percent. We can say that we have greater certainty that a loan will have an interest rate less than 15 percent. When the data tail off to the right as in our histogram, the shape is said to be <strong>right-skewed</strong>. When a variable is said to be right-skewed, large values of the variable are much less common than small values of the variable; smaller values are more likely occur.</p>
+<ul>
+<li><p>If the histogram has the reverse characteristic, i.e. the data tail off to the left instead, the shape is said to be <strong>left-skewed</strong>. This implies that small values of the variable are much less common than large values of the variable; larger values are more likely to occur.</p></li>
+<li><p>Histograms that trail off similarly in both directions are called <strong>symmetric</strong>. Large and small values are of the variable are equally likely.</p></li>
+<li><p>Histograms that have a peak in the middle, and then trail off on both sides are not only symmetic, but also <strong>bell-shaped</strong>, or have a <strong>normal</strong> distribution. Note: it turns out one of the assumptions in linear regression is that the response variable follow a normal distribution. This may seem restrictive, however, we will see in later modules that this assumption is not particular crucial under some circumstances.</p></li>
+</ul>
+<p><em>Thought question:</em> Can you think of real life variables that have symmetric, right-skewed, left-skewed distributions? Feel free to search the internet for examples.</p>
+</div>
+<div id="considerations-with-histograms" class="section level4" number="1.2.2.2">
+<h4>
+<span class="header-section-number">1.2.2.2</span> Considerations with Histograms<a class="anchor" aria-label="anchor" href="#considerations-with-histograms"><i class="fas fa-link"></i></a>
+</h4>
+<p>With our interest rate example, you may have noticed that I made a specific choice to the width of the bins when I created the histograms. It turns out that the width of the bins can impact the shape of the histogram, and potentially, how we interpret the histogram.</p>
+<p>Consider creating a histogram with bin width of 0.5, instead of 2.5, per Figure <a href="descriptive.html#fig:hist05">1.3</a>:</p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">##set up sequence to specify the bins. width now 0.5</span></span>
+<span><span class="va">s05</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">5</span>,<span class="fl">27.5</span>,<span class="fl">0.5</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">Data</span>,<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">interest_rate</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span>breaks<span class="op">=</span><span class="va">s05</span>,fill<span class="op">=</span><span class="st">"blue"</span>,color<span class="op">=</span><span class="st">"orange"</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x<span class="op">=</span><span class="st">"Interest Rate"</span>, title<span class="op">=</span><span class="st">"Histogram of Interest Rates"</span><span class="op">)</span></span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:hist05"></span>
+<img src="bookdown-demo_files/figure-html/hist05-1.png" alt="Historgram for 50 Interest Rates, with Bin Width 0.5" width="672"><p class="caption">
+Figure 1.3: Historgram for 50 Interest Rates, with Bin Width 0.5
+</p>
+</div>
+<p>Comparing Figure <a href="descriptive.html#fig:hist05">1.3</a> with Figure <a href="descriptive.html#fig:hist">1.2</a>, note the following:</p>
+<ul>
+<li><p>Visually, the histogram looks more jagged with smaller bin width, whereas the histogram looks smoother with a larger bin width.</p></li>
+<li><p>Smaller bin widths may be preferred if we need information about smaller ranges of interest rates. However, it can be difficult to write about general trends.</p></li>
+<li><p>Larger bin widths may be more useful if we are trying to look for more general trends in the interest rates.</p></li>
+</ul>
+<p><em>Thought question</em>: What happens if we create a histogram with a bin width that is too large?</p>
+</div>
+</div>
+<div id="density-plots" class="section level3" number="1.2.3">
+<h3>
+<span class="header-section-number">1.2.3</span> Density Plots<a class="anchor" aria-label="anchor" href="#density-plots"><i class="fas fa-link"></i></a>
+</h3>
+<p>Another visualization for a quantitative variable is a density plot. A density plot can be viewed as a smoothed version of the histogram. We can use the heights to inform us about what values are more common. We create a density plot for the interest rates in Figure <a href="descriptive.html#fig:dens">1.4</a>:</p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">##density plot</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/density.html">density</a></span><span class="op">(</span><span class="va">Data</span><span class="op">$</span><span class="va">interest_rate</span><span class="op">)</span>, main<span class="op">=</span><span class="st">"Density Plot of Interest Rates"</span><span class="op">)</span></span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:dens"></span>
+<img src="bookdown-demo_files/figure-html/dens-1.png" alt="Density Plot for 50 Interest Rates" width="672"><p class="caption">
+Figure 1.4: Density Plot for 50 Interest Rates
+</p>
+</div>
+<p>Based on Figure <a href="descriptive.html#fig:dens">1.4</a>, we see that low interest rates (between 5 and 12.5 percent) are much more common and high interest rates (higher than 20 percent). A few things to note about interpreting density plots:</p>
+<ul>
+<li>The area under the density plot is always equals to 1.</li>
+<li>To find the proportion of interest rates that are between two values, for example between 10 and 15 percent, we would integrate this density plot over this range, i.e. <span class="math inline">\(\int_{10}^{15} f(x) dx\)</span>, where <span class="math inline">\(f(x)\)</span> is a mathematical equation that describes the density plot.</li>
+<li>The values on the vertical axis do not equal to probabilities (a common misconception).</li>
+</ul>
+<p>The density plot is found using a method called kernel density estimation (KDE). We will over details about KDE in a later module as we need to cover quite a bit of material before doing so.</p>
+<div id="considerations-with-density-plots" class="section level4" number="1.2.3.1">
+<h4>
+<span class="header-section-number">1.2.3.1</span> Considerations with Density Plots<a class="anchor" aria-label="anchor" href="#considerations-with-density-plots"><i class="fas fa-link"></i></a>
+</h4>
+<p>Similar to bins and histograms, density plots are affected by the <strong>bandwidth</strong>. Larger bandwidths lead to smoother density plots, while smaller bandwidths lead to more jagged density plots. We create a density plot that uses a bandwidth that is twice the default in Figure <a href="descriptive.html#fig:dens2">1.5</a> below:</p>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/density.html">density</a></span><span class="op">(</span><span class="va">Data</span><span class="op">$</span><span class="va">interest_rate</span>, adjust<span class="op">=</span><span class="fl">2</span><span class="op">)</span>, main<span class="op">=</span><span class="st">"Density Plot of Interest Rates, with Bandwidth Twice the Default"</span><span class="op">)</span></span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:dens2"></span>
+<img src="bookdown-demo_files/figure-html/dens2-1.png" alt="Density Plot for 50 Interest Rates with Larger Bandwidth" width="672"><p class="caption">
+Figure 1.5: Density Plot for 50 Interest Rates with Larger Bandwidth
+</p>
+</div>
+<p>Notice in Figure <a href="descriptive.html#fig:dens2">1.5</a> that the little peak for interest rates between 15 and 20 (which existed in Figures <a href="descriptive.html#fig:dens">1.4</a> and also <a href="descriptive.html#fig:hist">1.2</a>) no longer exists. Using bandwidths that are too large can smooth out some of these peaks.</p>
+<p><em>Thought question</em>: What if we create a density plot with a bandwidth that is too small?</p>
+<p><em>Thought question</em>: How are bin widths for histograms and bandwidths for density plots related?</p>
+</div>
+</div>
+</div>
+<div id="ordered-statistics" class="section level2" number="1.3">
+<h2>
+<span class="header-section-number">1.3</span> Ordered Statistics<a class="anchor" aria-label="anchor" href="#ordered-statistics"><i class="fas fa-link"></i></a>
+</h2>
+<p>The idea behind ordered statistics is pretty self-explanatory: take your numerical variable, and order the values from smallest to largest. Going back to our example of the interest rates from 50 loan applicants, let <span class="math inline">\(X\)</span> denote the interest rate. Then <span class="math inline">\(x_{(1)}\)</span> will denote the interest rate that is the smallest, <span class="math inline">\(x_{(2)}\)</span> denotes the second smallest interest rate, and <span class="math inline">\(x_{(50)}\)</span> denotes the largest interest rate in our sample of 50.</p>
+<div id="quantiles" class="section level3" number="1.3.1">
+<h3>
+<span class="header-section-number">1.3.1</span> Quantiles<a class="anchor" aria-label="anchor" href="#quantiles"><i class="fas fa-link"></i></a>
+</h3>
+<p><strong>Quantiles</strong> partition the range of numerical data into continuous intervals (groups) with (nearly) equal proportions. Common quartiles have their own names:</p>
+<ul>
+<li>Quartiles: 4 groups</li>
+<li>Percentiles: 100 groups</li>
+</ul>
+<p>There is one less quantiles than the number of groups. We will go over quartiles in more detail.</p>
+<div id="quart" class="section level4" number="1.3.1.1">
+<h4>
+<span class="header-section-number">1.3.1.1</span> Quartiles<a class="anchor" aria-label="anchor" href="#quart"><i class="fas fa-link"></i></a>
+</h4>
+<p>Quartiles divide the data into 4 groups, and each group has (nearly) equal number of observations. So there will be three quartiles, denoted by <span class="math inline">\(Q_1, Q_2, Q_3\)</span>.</p>
+<ul>
+<li>The first group will have values between negative infinity and <span class="math inline">\(Q_1\)</span>.</li>
+<li>The second group will have values between negative <span class="math inline">\(Q_1\)</span> and <span class="math inline">\(Q_2\)</span>.</li>
+<li>The third group will have values between negative <span class="math inline">\(Q_2\)</span> and <span class="math inline">\(Q_3\)</span>.</li>
+<li>The fourth group will have values between negative <span class="math inline">\(Q_3\)</span> and infinity.</li>
+</ul>
+<p><span class="math inline">\(Q_2\)</span>, sometimes called the second quartile, is the easiest value to find. It is also called the <strong>median</strong> of the data. Going back to our interest rates from the 50 loan applicants. Using our ordered statistics, the median is the middle observation. Since we have an even number of observations, we have two middle observations, <span class="math inline">\(x_{(25)}\)</span> and <span class="math inline">\(x_{(26)}\)</span>. In this situation, the median will be the average of these two middle observations. Using R, we find the median to be:</p>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span><span class="va">Data</span><span class="op">$</span><span class="va">interest_rate</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 9.93</code></pre>
+<p>So half the interest rates are less than 9.93 percent, and half the interest rates are greater than 9.93 percent. You might also recognize another term for the median: the 50th percentile, as 50 percent of the interest rates are less than 9.93.</p>
+<p>To find the middle observation(s) based on a sample of size <span class="math inline">\(n\)</span>:</p>
+<ul>
+<li>If <span class="math inline">\(n\)</span> is even, the 2 middle observations will be position <span class="math inline">\(\frac{n}{2}\)</span> and <span class="math inline">\(\frac{n}{2} + 1\)</span> in the ordered statistics.</li>
+<li>If <span class="math inline">\(n\)</span> is odd, the middle observation will be position <span class="math inline">\(\frac{n}{2} + 0.5\)</span> in the ordered statistics.</li>
+</ul>
+<p><span class="math inline">\(Q_1\)</span> and <span class="math inline">\(Q_3\)</span> (also called the first and third quartiles) are found together, after finding <span class="math inline">\(Q_2\)</span>. Note that <span class="math inline">\(Q_2\)</span> divides the data into two groups. Using our interest rates example, one group contains <span class="math inline">\(x_{(1)}, \cdots, x_{(25)}\)</span>, and another group contains <span class="math inline">\(x_{(26)}, \cdots, x_{(50)}\)</span>. <span class="math inline">\(Q_1\)</span> is the median of the first group, and <span class="math inline">\(Q_3\)</span> is the median of the second group. So for our 50 loan applicants:</p>
+<ul>
+<li>
+<span class="math inline">\(Q_1\)</span> is <span class="math inline">\(x_{(13)}\)</span>, and</li>
+<li>
+<span class="math inline">\(Q_3\)</span> is <span class="math inline">\(x_{(38)}\)</span>.</li>
+</ul>
+<p>To find these values in R, we could type:</p>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">Data</span><span class="op">$</span><span class="va">interest_rate</span>, prob<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.25</span>,<span class="fl">0.75</span><span class="op">)</span>, type <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##   25%   75% 
+##  7.96 14.08</code></pre>
+<p>So <span class="math inline">\(Q_1\)</span> is 7.96 percent, and <span class="math inline">\(Q_3\)</span> is 14.08 percent. It turns out that <span class="math inline">\(Q_1\)</span> is also the 25th percentile, and <span class="math inline">\(Q_3\)</span> is also the 75th percentile, by definition.</p>
+<p>Remember we wrote the following earlier:</p>
+<ul>
+<li>The first group will have values between negative infinity and <span class="math inline">\(Q_1\)</span>. So about a quarter of observations are have interest rates less than 7.96 percent.</li>
+<li>The second group will have values between negative <span class="math inline">\(Q_1\)</span> and <span class="math inline">\(Q_2\)</span>. So about a quarter of observations have interest rates between 7.96 and 9.93 percent.</li>
+<li>The third group will have values between negative <span class="math inline">\(Q_2\)</span> and <span class="math inline">\(Q_3\)</span>. So about a quarter of observations have interest rates between 9.93 and 14.08 percent.</li>
+<li>The fourth group will have values between negative <span class="math inline">\(Q_3\)</span> and infinity. So about a quarter of observations have interest rates above 14.08 percent.</li>
+</ul>
+<p>Note: you may notice that we used <code>type = 1</code> inside the <code><a href="https://rdrr.io/r/stats/quantile.html">quantile()</a></code> function. Using <code>type = 1</code> gives the values of the first and third quartiles that are based on the method that was just described. There are actually several ways to find quantiles, which may result in slightly differing values, although they all generally meet the definition that <span class="math inline">\(Q_1\)</span> is the 25th percentile, and <span class="math inline">\(Q_3\)</span> is the 75th percentile.</p>
+</div>
+<div id="percentiles" class="section level4" number="1.3.1.2">
+<h4>
+<span class="header-section-number">1.3.1.2</span> Percentiles<a class="anchor" aria-label="anchor" href="#percentiles"><i class="fas fa-link"></i></a>
+</h4>
+<p>Another common quantile is the percentile. In general the <strong>k-th percentile</strong> is the value of the data point below which <span class="math inline">\(k\)</span> percent of observations are found. So in our earlier example, we said that <span class="math inline">\(Q_3\)</span> of the interest rates is 14.08 percent, and this is also the 75th percentile. So 75 percent of interest rates are less than 14.08 percent.</p>
+<p>We will not go over the details of finding percentiles by hand.</p>
+</div>
+</div>
+<div id="box-plots" class="section level3" number="1.3.2">
+<h3>
+<span class="header-section-number">1.3.2</span> Box Plots<a class="anchor" aria-label="anchor" href="#box-plots"><i class="fas fa-link"></i></a>
+</h3>
+<p>Another visualization used to summarize quantitative data is the box plot. A <strong>box plot</strong> summarizes the 5-number summary. The 5 numbers are the minimum, <span class="math inline">\(Q_1, Q_2, Q_3\)</span>, and the maximum. Using our interest rate data, the box plot is shown in Figure <a href="descriptive.html#fig:boxplot">1.6</a>:</p>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">##box plot</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">Data</span>,<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>y<span class="op">=</span><span class="va">interest_rate</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>y<span class="op">=</span><span class="st">"Interest Rate"</span>, title<span class="op">=</span><span class="st">"Box Plot of Interest Rates"</span><span class="op">)</span></span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:boxplot"></span>
+<img src="images/01-boxplot.jpeg" alt="Box Plot of Interest Rates"><p class="caption">
+Figure 1.6: Box Plot of Interest Rates
+</p>
+</div>
+<p>Some people call a box plot a box and whisker plot.</p>
+<ul>
+<li>The boundaries of the box represent <span class="math inline">\(Q_1\)</span> and <span class="math inline">\(Q_3\)</span>.</li>
+<li>The thick line in the box represents the median.</li>
+<li>The two whiskers on either side of the box extend to the minimum and maximum, if outliers do not exist. If outliers exist, the whiskers extend to the minimum and maximum values that are not outliers.</li>
+</ul>
+<p>Generally, when we have one quantitative variable, an outlier is an observation whose numerical value is far away from the rest of the data. In other words, it is a lot smaller or larger relative to the rest of the data.</p>
+<p>So for our 50 loans, there are two loan applicants with interest rates around 25 percent that are flagged as being a lot larger than the rest of the loans, which is reasonable since most of the loans are a lot smaller than 20 percent.</p>
+<p>We will not go over the details of how outliers are determined in box plots. If you are interested, you can read Chapter 2.1.5 from OpenIntro Statistics (Diez, Ceytinka-Rundel, Barr).</p>
+<p>Notice how much further large values (<span class="math inline">\(Q_3\)</span> and maximum) are from the median, compared to the distance of the small values (<span class="math inline">\(Q_1\)</span> and minimum) from the median. This indicates that the distribution of interest rates are right-skewed. Compare the boxplot of the interest rates in Figure <a href="descriptive.html#fig:boxplot">1.6</a> with its corresponding histogram (Figure <a href="descriptive.html#fig:hist">1.2</a>) and density plot (Figure <a href="descriptive.html#fig:dens">1.4</a>).</p>
+<p><em>Thought question</em>: can you sketch a box plot that represents a variable that is left-skewed? How about a variable that is symmetric?</p>
+</div>
+<div id="ecdf" class="section level3" number="1.3.3">
+<h3>
+<span class="header-section-number">1.3.3</span> Empirical Cumulative Distribution Function<a class="anchor" aria-label="anchor" href="#ecdf"><i class="fas fa-link"></i></a>
+</h3>
+<p>From the previous sections, we can see how we could use histograms, density plots, and box plots to inform us about what proportion of observations take certain values, and the values of the data that correspond to certain percentiles. However, we are limited to quartiles and not any percentile when using box plots, and we need to find areas under the density plot (using integration, not a trivial task), or add up frequencies on a histogram (can be time consuming).</p>
+<p>A plot that can easily give us values of the variable that correspond to percentiles is the <strong>empirical cumulative distribution function (ECDF)</strong> plot.</p>
+<p>Let <span class="math inline">\(X\)</span> denote a random variable, and we have observed <span class="math inline">\(n\)</span> observations of <span class="math inline">\(X\)</span> denoted by <span class="math inline">\(x_1, \cdots, x_n\)</span>. Let <span class="math inline">\(x_{(1)}, \cdots x_{(n)}\)</span> denote the ordered statstics of the <span class="math inline">\(n\)</span> observations. The ECDF, denoted by <span class="math inline">\(\hat{F}_n(x)\)</span> is the proportion of sample observations less than or equal to the value <span class="math inline">\(x\)</span> of the random variable. Mathematically, the ECDF is:</p>
+<p><span class="math display">\[
+\hat{F}_n(x) =
+  \begin{cases}
+   0, &amp; \text{for } x &lt; x_{(1)} \\
+   \frac{k}{n},       &amp; \text{for } x_{(k)} \leq x &lt; x_{(k+1)}, k = 1, \cdots, n-1\\
+   1, &amp; \text{for } x \geq x_{(n)}.
+  \end{cases}
+\]</span>
+We shall use a simple toy example to illustrate how an ECDF is constructed. Suppose we ask 5 people how many times to go to the gym (at least 20 minutes) in a typical work week. The answers are: 3, 0, 1, 5, 3. The random variable <span class="math inline">\(X\)</span> is how many times a person goes to the gym for at least 20 minutes, and the ordered statistics are <span class="math inline">\(x_{(1)} = 0, x_{(2)} = 1, x_{(3)} = 3, x_{(4)} = 3, and x_{(5)} = 5\)</span>. Using the mathematical definition for the ECDF, we have:</p>
+<ul>
+<li>
+<span class="math inline">\(\hat{F}_n(x) = 0\)</span> for <span class="math inline">\(x &lt; x_{(1)} = 0\)</span>.</li>
+<li>
+<span class="math inline">\(\hat{F}_n(x) = \frac{1}{5}\)</span> for <span class="math inline">\(0 \leq x &lt; x_{(2)} = 1\)</span>.</li>
+<li>
+<span class="math inline">\(\hat{F}_n(x) = \frac{2}{5}\)</span> for <span class="math inline">\(1 \leq x &lt; x_{(3)} = 3\)</span>.</li>
+<li>
+<span class="math inline">\(\hat{F}_n(x) = \frac{4}{5}\)</span> for <span class="math inline">\(3 \leq x &lt; x_{(5)} = 5\)</span>. This value is special for this example since we have two observations where <span class="math inline">\(x=3\)</span>.</li>
+<li>
+<span class="math inline">\(\hat{F}_n(x) = 1\)</span> for <span class="math inline">\(x \geq 5\)</span>.</li>
+</ul>
+<p>The corresponding ECDF plot is shown in Figure <a href="descriptive.html#fig:ecdf">1.7</a>:</p>
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">##toy data</span></span>
+<span><span class="va">y</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">5</span>, <span class="fl">3</span><span class="op">)</span></span>
+<span><span class="co">##ECDF plot</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/ecdf.html">ecdf</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span>, main <span class="op">=</span> <span class="st">"ECDF for Toy Example"</span><span class="op">)</span></span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:ecdf"></span>
+<img src="bookdown-demo_files/figure-html/ecdf-1.png" alt="ECDF Plot for Toy Example" width="672"><p class="caption">
+Figure 1.7: ECDF Plot for Toy Example
+</p>
+</div>
+<p>We can easily find percentiles from this plot, for example, the 40th percentile is equal to 1, going to the gym once a week. About 20 percent of observations go to the gym less than 1 time a week.</p>
+<p>Next, we create the ECDF plot for the interest rates from the 50 loan applicants.</p>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/ecdf.html">ecdf</a></span><span class="op">(</span><span class="va">Data</span><span class="op">$</span><span class="va">interest_rate</span><span class="op">)</span>, main <span class="op">=</span> <span class="st">"ECDF Plot of Interest Rates"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span>h<span class="op">=</span><span class="fl">0.8</span><span class="op">)</span></span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:ecdfreal"></span>
+<img src="bookdown-demo_files/figure-html/ecdfreal-1.png" alt="ECDF Plot of Interest Rates" width="672"><p class="caption">
+Figure 1.8: ECDF Plot of Interest Rates
+</p>
+</div>
+<p>I overlaid a horizontal line for the 80th percentile, so we can read on the horizontal axis that this corresponds to an interest rate of about 17 percent. So about 80 percent of loan applicants have an interest rate less than 17 percent.</p>
+<p><em>Thought question</em>: try using the histogram and density plot for the interest rates (Figures <a href="descriptive.html#fig:hist">1.2</a> and <a href="descriptive.html#fig:dens">1.4</a>) to find the interest rate that corresponds to the 80th percentile. Was this easy to perform?</p>
+</div>
+</div>
+<div id="measures-of-centrality" class="section level2" number="1.4">
+<h2>
+<span class="header-section-number">1.4</span> Measures of Centrality<a class="anchor" aria-label="anchor" href="#measures-of-centrality"><i class="fas fa-link"></i></a>
+</h2>
+<p>So far, we have used visualizations to summarize the shape of the distribution of a quantitative variable. Next, we look at common measures of centrality. Loosely speaking, measures of centrality are measures that describe the average or typical value of a quantitative variable. The common measures of centrality are the mean, median, and mode.</p>
+<div id="mean" class="section level3" number="1.4.1">
+<h3>
+<span class="header-section-number">1.4.1</span> Mean<a class="anchor" aria-label="anchor" href="#mean"><i class="fas fa-link"></i></a>
+</h3>
+<p>The sample <strong>mean</strong> is simply the average value of the variable in our sample. The sample mean for a random variable <span class="math inline">\(X\)</span> is denoted by <span class="math inline">\(\bar{x}\)</span>, and is found by:</p>
+<p><span class="math display" id="eq:mean">\[\begin{equation}
+\bar{x} = \frac{\sum_{i=1}^n x_i}{n}.
+\tag{1.1}
+\end{equation}\]</span></p>
+<p>So, for our toy example of the 5 people and how often they go to the gym in a week, their sample mean is <span class="math inline">\(\bar{x} = \frac{3+0+1+5+3}{5} = 2.4\)</span>.</p>
+</div>
+<div id="median" class="section level3" number="1.4.2">
+<h3>
+<span class="header-section-number">1.4.2</span> Median<a class="anchor" aria-label="anchor" href="#median"><i class="fas fa-link"></i></a>
+</h3>
+<p>We went over how to find the median in section <a href="descriptive.html#quart">1.3.1.1</a>. The <strong>median</strong> is the value of the middle observation in ordered statistics. It is also called <span class="math inline">\(Q_2\)</span>, the second quartile, and the 50th percentile, so approximately 50 percent of observations have values smaller than the median.</p>
+<p>So, for our toy example of the 5 people and how often they go to the gym in a week, their sample median is <span class="math inline">\(x_{(3)} = 3\)</span>. So about 50 percent of people went to gym less than 3 times in a week.</p>
+</div>
+<div id="mode" class="section level3" number="1.4.3">
+<h3>
+<span class="header-section-number">1.4.3</span> Mode<a class="anchor" aria-label="anchor" href="#mode"><i class="fas fa-link"></i></a>
+</h3>
+<p>Another measure is the mode. Mathematically speaking, the <strong>mode</strong> is the most commonly occurring value in the data. So for our toy example, the mode is 3, since 3 occurs twice and occurs the most often in our data.</p>
+</div>
+<div id="considerations" class="section level3" number="1.4.4">
+<h3>
+<span class="header-section-number">1.4.4</span> Considerations<a class="anchor" aria-label="anchor" href="#considerations"><i class="fas fa-link"></i></a>
+</h3>
+<p>A few things to consider when using these measures of centrality:</p>
+<ul>
+<li><p>The mean is a measure that most people are comfortable with, however, caution needs to be used if the variable is skewed, as extreme outliers and drastically alter the value of the mean. Using our toy example with the gym, suppose the person who visits the gym the most visits 50 times, instead of 5. The numerical value of the sample mean explodes, and does not give a good representation of the central value of how many visits to the gym a person makes in a week. The mean is fine if the variable is symmetric.</p></li>
+<li><p>The median is a measure that is recommended for skewed distributions, since the order associated with ordered statistics is not influenced by extreme outliers. Using the gym example, in the previous bullet point, the median is unaffected.</p></li>
+<li><p>The mean being larger than the median is an indication that the distribution is right-skewed. Using our interest rate example, we have:</p></li>
+</ul>
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">Data</span><span class="op">$</span><span class="va">interest_rate</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 11.5672</code></pre>
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span><span class="va">Data</span><span class="op">$</span><span class="va">interest_rate</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 9.93</code></pre>
+<p>which is consistent with the right skew we saw in the histogram and density plot in Figures <a href="descriptive.html#fig:hist">1.2</a> and <a href="descriptive.html#fig:dens">1.4</a>. Conversely, a left-skewed distribution usually has a mean that is smaller than the median. A symmetric distribution typically has similar values for the mean and median.</p>
+<ul>
+<li><p>The mean is considered a <strong>sensitive</strong> measure, since its numerical value can be drastically affected by outliers. The median is considered a <strong>robust</strong> measure, since its numerical value is more resistant and is less affected by outliers.</p></li>
+<li><p>The mathematical definition of mode can be difficult to use for variables that are continuous, since it is likely that there are no observations that have the same value when the variable is continuous. In this instance, the mode typically refers to the bin in the histogram that has is the tallest. So, using the histogram in Figure <a href="descriptive.html#fig:hist">1.2</a> for the interest rates, the mode is between 7.5 to 10 percent.</p></li>
+</ul>
+</div>
+</div>
+<div id="measures-of-spread" class="section level2" number="1.5">
+<h2>
+<span class="header-section-number">1.5</span> Measures of Spread<a class="anchor" aria-label="anchor" href="#measures-of-spread"><i class="fas fa-link"></i></a>
+</h2>
+<p>In the previous sections, we learned about summarizing features a quantitative variable, by using visualizations to summarize its shape, and by using some measures of centrality that describe the average or typical values of the variable. One more feature we can summarize is the spread, associated with the values of a quantitative variable. Measures of spread are considered a way to measure uncertainty. Data that have larger spread have more uncertainty.</p>
+<div id="variance-and-standard-deviation" class="section level3" number="1.5.1">
+<h3>
+<span class="header-section-number">1.5.1</span> Variance and Standard Deviation<a class="anchor" aria-label="anchor" href="#variance-and-standard-deviation"><i class="fas fa-link"></i></a>
+</h3>
+<p>One measure of spread is the variance. The sample <strong>variance</strong> for a random variable <span class="math inline">\(X\)</span> is denoted by <span class="math inline">\(s^2\)</span>, or sometimes <span class="math inline">\(s_x^2\)</span>, and is found by:</p>
+<p><span class="math display" id="eq:variance">\[\begin{equation}
+s^2 = \frac{\sum_{i=1}^n (x_i-\bar{x})^2}{n-1}.
+\tag{1.2}
+\end{equation}\]</span></p>
+<p>The variance can be interpreted as the approximate average squared distance of the observations from the mean. The formula in equation <a href="descriptive.html#eq:variance">(1.2)</a> may look a bit complicated, but let us use the toy example where we asked 5 people how often they go to the gym in a workweek. The answers are: 3, 0, 1, 5, 3, and we had earlier found the sample mean to be <span class="math inline">\(\bar{x} = 2.4\)</span>. To calculate the sample variance:</p>
+<p><span class="math display">\[
+\begin{split}
+s^2 &amp;= \frac{\sum_{i=1}^n (x_i-\bar{x})^2}{n-1}\\
+&amp;= \frac{(3-2.4)^2 + (0-2.4)^2 + (1-2.4)^2 + (5-2.4)^2 + (3-2.4)^2}{5-1} \\
+&amp;= 3.8
+\end{split}
+\]</span></p>
+<p>Notice what we did in the numerator of equation <a href="descriptive.html#eq:variance">(1.2)</a>: we take the difference between each observed value from the sample mean, square these differences, then add up the squared differences. We then divide by <span class="math inline">\(n-1\)</span>, rather than <span class="math inline">\(n\)</span>, hence the sample variance being the approximate averaged squared distance of the observations from the mean. There is some nuance in the mathematics as to why we divide by <span class="math inline">\(n-1\)</span> instead of <span class="math inline">\(n\)</span>, and may not be intuitive as to why we do so. It turns out dividing by <span class="math inline">\(n-1\)</span> makes the sample variance an unbiased estimator of the true variance in the population (denoted by <span class="math inline">\(\sigma^2\)</span>) and is more reliable than if we had divided by <span class="math inline">\(n\)</span>. We will go over this in more detail in a later module after covering a few additional concepts.</p>
+<p>Larger values of the sample variance indicate that the observations are generally further away from the sample mean, indicating larger spread, and a higher degree of uncertainty about future values.</p>
+<p><em>Thought question</em>: What does it mean if the sample variance of a set of observations is 0? Why does this indicate their there is little (or no) uncertainty about the set of observations?</p>
+<p>Another related measure is the sample <strong>standard deviation</strong>, which is the square root of the sample variance. Similar to the variance, larger values indicated more spread in the data.</p>
+</div>
+<div id="interquartile-range" class="section level3" number="1.5.2">
+<h3>
+<span class="header-section-number">1.5.2</span> Interquartile Range<a class="anchor" aria-label="anchor" href="#interquartile-range"><i class="fas fa-link"></i></a>
+</h3>
+<p>Another measure of spread is the <strong>interquartile range (IQR)</strong>, and it is the difference between the third and first queartiles,</p>
+<p><span class="math display" id="eq:IQR">\[\begin{equation}
+IQR = Q_3 - Q_1.
+\tag{1.3}
+\end{equation}\]</span></p>
+<p>The IQR is considered a robust measure of spread, while the sample variance and standard deviations are considered to be sensitive.</p>
+
+</div>
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="index.html">Preface</a></div>
+<div class="next"><a href="probability.html"><span class="header-section-number">2</span> Probability</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#descriptive"><span class="header-section-number">1</span> Descriptive Statistics</a></li>
+<li><a class="nav-link" href="#uncertainty-with-data"><span class="header-section-number">1.1</span> Uncertainty with Data</a></li>
+<li>
+<a class="nav-link" href="#visualizing-data"><span class="header-section-number">1.2</span> Visualizing Data</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#dot-plots"><span class="header-section-number">1.2.1</span> Dot Plots</a></li>
+<li><a class="nav-link" href="#histograms"><span class="header-section-number">1.2.2</span> Histograms</a></li>
+<li><a class="nav-link" href="#density-plots"><span class="header-section-number">1.2.3</span> Density Plots</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#ordered-statistics"><span class="header-section-number">1.3</span> Ordered Statistics</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#quantiles"><span class="header-section-number">1.3.1</span> Quantiles</a></li>
+<li><a class="nav-link" href="#box-plots"><span class="header-section-number">1.3.2</span> Box Plots</a></li>
+<li><a class="nav-link" href="#ecdf"><span class="header-section-number">1.3.3</span> Empirical Cumulative Distribution Function</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#measures-of-centrality"><span class="header-section-number">1.4</span> Measures of Centrality</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#mean"><span class="header-section-number">1.4.1</span> Mean</a></li>
+<li><a class="nav-link" href="#median"><span class="header-section-number">1.4.2</span> Median</a></li>
+<li><a class="nav-link" href="#mode"><span class="header-section-number">1.4.3</span> Mode</a></li>
+<li><a class="nav-link" href="#considerations"><span class="header-section-number">1.4.4</span> Considerations</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#measures-of-spread"><span class="header-section-number">1.5</span> Measures of Spread</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#variance-and-standard-deviation"><span class="header-section-number">1.5.1</span> Variance and Standard Deviation</a></li>
+<li><a class="nav-link" href="#interquartile-range"><span class="header-section-number">1.5.2</span> Interquartile Range</a></li>
+</ul>
+</li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2025-06-10.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>
