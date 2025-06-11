@@ -127,7 +127,7 @@
 
 \title{Understanding Uncertainty Course Notes}
 \author{Jeffrey Woo}
-\date{2025-06-10}
+\date{2025-06-11}
 
 \begin{document}
 \maketitle
@@ -1278,7 +1278,7 @@ The \textbf{support} of a discrete random variable \(X\) is the set of values \(
 
 \section{Probability Mass Functions (PMFs)}\label{probability-mass-functions-pmfs}
 
-We use probability to describe the behavior of random variables. For example, what is the probability of obtaining 3 heads in 3 coin flips, or what is the probability of obtaining at least one head on 3 coin flips? This is called the \textbf{distribution} of a random variable. It specifies the probabilities of all events associated with the random variable.
+We use probability to describe the behavior of random variables. This is called the \textbf{distribution} of a random variable. It specifies the probabilities of all events associated with the random variable. For example, what is the probability of obtaining 3 heads in 3 coin flips, or what is the probability of obtaining at least one head on 3 coin flips?
 
 For discrete random variables, the distribution is specified by the \textbf{probability mass function (PMF)}. The PMF of a discrete random variable \(X\) is the function \(P_X(x) = P(X=x)\). It is positive when \(x\) is in the support of \(X\), and 0 otherwise.
 
@@ -1319,16 +1319,12 @@ x & PMF\\
 \end{tabular}
 \end{table}
 
-Or usual a simple plot like the one below in Figure \ref{fig:3-pmf}:
+Or use a simple plot like the one below in Figure \ref{fig:3-pmf}:
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \DocumentationTok{\#\#support}
 \NormalTok{x}\OtherTok{\textless{}{-}}\DecValTok{0}\SpecialCharTok{:}\DecValTok{3}
-\DocumentationTok{\#\#number of flips}
-\NormalTok{n}\OtherTok{\textless{}{-}}\DecValTok{3}
-\DocumentationTok{\#\# prob of head in a flip}
-\NormalTok{p}\OtherTok{\textless{}{-}}\FloatTok{0.5}
 \DocumentationTok{\#\# PMF for each value in the support. }
 \NormalTok{PMFs}\OtherTok{\textless{}{-}}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\SpecialCharTok{/}\DecValTok{8}\NormalTok{, }\DecValTok{3}\SpecialCharTok{/}\DecValTok{8}\NormalTok{, }\DecValTok{3}\SpecialCharTok{/}\DecValTok{8}\NormalTok{, }\DecValTok{1}\SpecialCharTok{/}\DecValTok{8}\NormalTok{)}
 \DocumentationTok{\#\# create plot of PMF vs each value in support}
@@ -1357,6 +1353,8 @@ Consider a discrete random variable \(X\) with support \(x_1, x_2, \cdots\). The
 \end{itemize}
 
 In other words, the probabilities associated with the support are greater than 0, and the sum of the probabilities across the whole support must add up to 1.
+
+\emph{Thought question}: based on Table \ref{tab:3-pmf-tab}, can you see why our PMF for \(X\) is valid?
 
 \subsection{PMFs and Histograms}\label{pmfs-and-histograms}
 
@@ -1433,7 +1431,7 @@ The CDF \(F_X(x)\) of \(X\) must:
   approach 1 as \(x\) approaches infinity and approach 0 as \(x\) approaches negative infinity. Visually, a graph of the CDF should be equal to or close to 1 for large values of x, and it should be equal to or close to 0 for small values of x.
 \end{itemize}
 
-\emph{Thought question}: Look at the CDF for our example in Figure @ref\{fig:3-cdf\}, and see how it satisfies the criteria listed above for a valid CDF.
+\emph{Thought question}: Look at the CDF for our example in Figure \ref{fig:3-cdf}, and see how it satisfies the criteria listed above for a valid CDF.
 
 \section{Expectations}\label{expectations}
 
@@ -1441,7 +1439,7 @@ In the previous section, we see how PMFs and CDFs can be used to describe the di
 
 A measure of centrality for random variables is the \textbf{expectation}. The expectation of a random variable can be interpreted as the long-run mean of the random variable, i.e.~if we were able to repeat the experiment an infinite number of times, the expectation of the random variable will be the average result among all the experiments.
 
-For a discrete random variable \(X\) with support \(x_1, x_2, \cdots, x_j\), the expected value, denoted by \(E(X)\), is
+For a discrete random variable \(X\) with support \(x_1, x_2, \cdots,\), the expected value, denoted by \(E(X)\), is
 
 \begin{equation} 
 E(X) = \sum_{j=1}^{\infty} x_j P(X=x_j).
@@ -1459,13 +1457,244 @@ E(X) &= 0 \times \frac{1}{8} + 1 \times \frac{3}{8} + 2 \times \frac{3}{8} + 3 \
 
 What we did was to take the product of each value in the support of the random variable with its corresponding probability, and add all these products.
 
-We can see from this another interpretation of the expected value of a random variable: it is the weighted average of the values for the random variable, weighted by their probabilities.
+We can see another interpretation of the expected value of a random variable from this calculation: it is the weighted average of the values for the random variable, weighted by their probabilities.
 
 Intuitively, this expected value of 1.5 should make sense. If we flip a coin 3 times, and the coin is fair, we expect half of these flips to land heads, or 1.5 flips to land heads.
 
 \subsection{Linearity of Expectations}\label{linearity-of-expectations}
 
+We have seen how to calculate the expected value of a random variable \(X\) using equation \eqref{eq:3-EX}. What we need is the PMF of \(X\). Sometimes our random variable can be viewed as a sum (or difference) of other random variables, or it could involve a multiplication and / or adding a constant to the random variable. Consider some of these scenarios:
+
+\begin{itemize}
+\item
+  Suppose my friend and I are fisherman. Let \(Y\) be the random variable describing the number of fish I catch on a workday, and let \(W\) be the random variable describing the number of fish my friend catches on a workday. We can let \(T = Y+W\) be the random variable describing the total number of fish we catch on a workday.
+\item
+  Suppose that I sell each fish for \$10 and my friend sells each fish for \$15. We can let \(R = 10Y + 15W\) be the random variable that describes the revenue we generate on a workday.
+\item
+  Suppose that my friend and I rent out a space at the market to sell our fish, and it costs \textbackslash5 a day to rent out the space. We can let \(G = 10Y + 15W - 5\) be the random variable that describes our gross income for the day.
+\end{itemize}
+
+All of these examples involve new random variables, \(T, R, G\) that can be based on previously defined random variables, \(Y, W\). It turns out that to find the expectations of the new random variables, all we need is the expectations of the previously defined random variables. We do not need to find the PMFS for \(T, R\) and \(S\) and then apply equation \eqref{eq:3-EX}.
+
+These can be done through the \textbf{linearity of expectations}: Let \(X\) and \(Y\) denote random variables, and \(a,b,c\) denote some constants, then
+
+\begin{equation} 
+E(aX + bY +c) = aE(X) + bE(Y) + c.
+\label{eq:3-linEX}
+\end{equation}
+
+Applying equation \eqref{eq:3-linEX} to the fishing examples:
+
+\begin{itemize}
+\tightlist
+\item
+  \(E(T) = E(Y) + E(W)\),
+\item
+  \(E(R) = 10E(Y) + 15E(W)\),
+\item
+  \(E(G) = 10E(Y) + 15E(W) - 5\).
+\end{itemize}
+
+All we need to find the expected values for the total number of fish, revenue generated, and gross income were the expected values for the number of fish each of us caught. We do not need the PMFs for \(T,R,G\).
+
+\subsubsection{Visual Explanation}\label{visual-explanation}
+
+For a visual explanation of why equation \eqref{eq:3-linEX} makes sense, we go back to our previous example where \(X\) denotes the number of heads in 3 coin flips. Figure \ref{fig:3-pmf} displays the PMF for this random variable. Let us create the PMF for a new random variable \(Y=2X\) and display it in Figure \ref{fig:3-pmf-lin} below:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#support of X}
+\NormalTok{x}\OtherTok{\textless{}{-}}\DecValTok{0}\SpecialCharTok{:}\DecValTok{3}
+\DocumentationTok{\#\# PMF for each value in the support. }
+\NormalTok{PMFs}\OtherTok{\textless{}{-}}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\SpecialCharTok{/}\DecValTok{8}\NormalTok{, }\DecValTok{3}\SpecialCharTok{/}\DecValTok{8}\NormalTok{, }\DecValTok{3}\SpecialCharTok{/}\DecValTok{8}\NormalTok{, }\DecValTok{1}\SpecialCharTok{/}\DecValTok{8}\NormalTok{)}
+\NormalTok{EX}\OtherTok{\textless{}{-}}\FloatTok{1.5}
+
+\DocumentationTok{\#\#support of Y}
+\NormalTok{y}\OtherTok{\textless{}{-}}\DecValTok{2}\SpecialCharTok{*}\NormalTok{x}
+\DocumentationTok{\#\# PMF for each value in the support. }
+\NormalTok{PMFs}\OtherTok{\textless{}{-}}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\SpecialCharTok{/}\DecValTok{8}\NormalTok{, }\DecValTok{3}\SpecialCharTok{/}\DecValTok{8}\NormalTok{, }\DecValTok{3}\SpecialCharTok{/}\DecValTok{8}\NormalTok{, }\DecValTok{1}\SpecialCharTok{/}\DecValTok{8}\NormalTok{)}
+\NormalTok{EY}\OtherTok{\textless{}{-}}\DecValTok{2}\SpecialCharTok{*}\NormalTok{EX}
+
+\FunctionTok{par}\NormalTok{(}\AttributeTok{mfrow=}\FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{))}
+
+\DocumentationTok{\#\# create plot of PMF vs each value in support}
+\FunctionTok{plot}\NormalTok{(x, PMFs, }\AttributeTok{type=}\StringTok{"h"}\NormalTok{, }\AttributeTok{main =} \StringTok{"PMF for X"}\NormalTok{, }\AttributeTok{xlab=}\StringTok{"X"}\NormalTok{, }\AttributeTok{ylab=}\StringTok{"Probability"}\NormalTok{, }\AttributeTok{ylim=}\FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{))}
+\DocumentationTok{\#\#overlay a line representing EX in red}
+\FunctionTok{abline}\NormalTok{(}\AttributeTok{v=}\NormalTok{EX, }\AttributeTok{col=}\StringTok{"red"}\NormalTok{)}
+
+\DocumentationTok{\#\# create plot of PMF vs each value in support}
+\FunctionTok{plot}\NormalTok{(y, PMFs, }\AttributeTok{type=}\StringTok{"h"}\NormalTok{, }\AttributeTok{main =} \StringTok{"PMF for Y"}\NormalTok{, }\AttributeTok{xlab=}\StringTok{"Y"}\NormalTok{, }\AttributeTok{ylab=}\StringTok{"Probability"}\NormalTok{, }\AttributeTok{ylim=}\FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{))}
+\DocumentationTok{\#\#overlay a line representing EY in red}
+\FunctionTok{abline}\NormalTok{(}\AttributeTok{v=}\NormalTok{EY, }\AttributeTok{col=}\StringTok{"red"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\centering
+\includegraphics{bookdown-demo_files/figure-latex/3-pmf-lin-1.pdf}
+\caption{\label{fig:3-pmf-lin}PMF for X and Y=2X}
+\end{figure}
+
+Note that the red vertical lines represent the expected value for the random variable, and since the PMFs are symmetric, the expected value lies right in the middle of the support. Comparing the PMFs in Figure \ref{fig:3-pmf-lin}, we get \(Y\) by multiplying \(X\) by 2. So the support of \(Y\) is now \(\{0,2,4,6\}\) but the associated probabilities are unchanged, so the heights of the probabilities on the vertical axis are unchanged. Therefore, the center, the expected value, is multiplied by the same constant.
+
+Consider another random variable \(W = X+3\). We create the PMF for \(W\) and display it in Figure \ref{fig:3-pmf-lin2} below:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#support of X}
+\NormalTok{x}\OtherTok{\textless{}{-}}\DecValTok{0}\SpecialCharTok{:}\DecValTok{3}
+\DocumentationTok{\#\# PMF for each value in the support. }
+\NormalTok{PMFs}\OtherTok{\textless{}{-}}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\SpecialCharTok{/}\DecValTok{8}\NormalTok{, }\DecValTok{3}\SpecialCharTok{/}\DecValTok{8}\NormalTok{, }\DecValTok{3}\SpecialCharTok{/}\DecValTok{8}\NormalTok{, }\DecValTok{1}\SpecialCharTok{/}\DecValTok{8}\NormalTok{)}
+\NormalTok{EX}\OtherTok{\textless{}{-}}\FloatTok{1.5}
+
+\DocumentationTok{\#\#support of W}
+\NormalTok{w}\OtherTok{\textless{}{-}}\NormalTok{x}\SpecialCharTok{+}\DecValTok{3}
+\DocumentationTok{\#\# PMF for each value in the support. }
+\NormalTok{PMFs}\OtherTok{\textless{}{-}}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\SpecialCharTok{/}\DecValTok{8}\NormalTok{, }\DecValTok{3}\SpecialCharTok{/}\DecValTok{8}\NormalTok{, }\DecValTok{3}\SpecialCharTok{/}\DecValTok{8}\NormalTok{, }\DecValTok{1}\SpecialCharTok{/}\DecValTok{8}\NormalTok{)}
+\NormalTok{EW}\OtherTok{\textless{}{-}}\NormalTok{EX}\SpecialCharTok{+}\DecValTok{3}
+
+\FunctionTok{par}\NormalTok{(}\AttributeTok{mfrow=}\FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{))}
+
+\DocumentationTok{\#\# create plot of PMF vs each value in support}
+\FunctionTok{plot}\NormalTok{(x, PMFs, }\AttributeTok{type=}\StringTok{"h"}\NormalTok{, }\AttributeTok{main =} \StringTok{"PMF for X"}\NormalTok{, }\AttributeTok{xlab=}\StringTok{"X"}\NormalTok{, }\AttributeTok{ylab=}\StringTok{"Probability"}\NormalTok{, }\AttributeTok{ylim=}\FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{))}
+\DocumentationTok{\#\#overlay a line representing EX in red}
+\FunctionTok{abline}\NormalTok{(}\AttributeTok{v=}\NormalTok{EX, }\AttributeTok{col=}\StringTok{"red"}\NormalTok{)}
+
+\DocumentationTok{\#\# create plot of PMF vs each value in support}
+\FunctionTok{plot}\NormalTok{(w, PMFs, }\AttributeTok{type=}\StringTok{"h"}\NormalTok{, }\AttributeTok{main =} \StringTok{"PMF for w"}\NormalTok{, }\AttributeTok{xlab=}\StringTok{"W"}\NormalTok{, }\AttributeTok{ylab=}\StringTok{"Probability"}\NormalTok{, }\AttributeTok{ylim=}\FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{))}
+\DocumentationTok{\#\#overlay a line representing EW in red}
+\FunctionTok{abline}\NormalTok{(}\AttributeTok{v=}\NormalTok{EW, }\AttributeTok{col=}\StringTok{"red"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\centering
+\includegraphics{bookdown-demo_files/figure-latex/3-pmf-lin2-1.pdf}
+\caption{\label{fig:3-pmf-lin2}PMF for X and W=X+3}
+\end{figure}
+
+Notice the PMFs for \(X\) and \(W\) look almost exactly the same. The only difference is that every value in the support for \(X\) is shifted by 3 units. The probabilities stay the same, so the heights in the PMFs are unchanged. So if every value is shifted by 3 units, the expected value, the long-run average, also gets shifted by 3 units. Adding a constant to a random variable shifts the expected value accordingly.
+
+\subsubsection{One More Example}\label{one-more-example}
+
+We look at one more example to illustrate the usefulness of the linearity of expectations. Consider a drunk man who has to walk on a one-dimensional number line and starts at the 0 position. For each step the drunk man takes, he either moves forward, backward, or stays at the same spot. He steps forward with probability \(p_f\), backward with probability \(p_b\), and stays at the same spot with probability \(p_s\), where \(p_f + p_b+p_s = 1\). Let \(Y\) be the position on the number line of the drunk man after 2 steps. What is the expected position of the drunk man after two steps, i.e.~what is \(E(Y)\)? Assume that each step is independent.
+
+Using brute force, we can find the PMF of \(Y\), and find \(E(Y)\) using equation \eqref{eq:3-EX}. First, we need to find the sample space for \(Y\). With two steps, the sample space is \(\{-2,-1,0,1,2\}\). Next, we need to find the probabilities associated with each outcome in the sample space.
+
+\begin{itemize}
+\tightlist
+\item
+  For \(Y=-2\), the man must move backward on each step. This probability will be \(P(Y=-2) = p_b^2\).
+\item
+  Likewise, for \(Y=2\), the man must move forward on each step. This probability will be \(P(Y=2) = p_f^2\).
+\item
+  For \(Y=-1\), the man could stay on the first step, then move back on the second, or move back on the first step, and stay on the second. This probability will be \(P(Y=-1) = p_s p_b + p_b p_s = 2p_b p_s\).
+\item
+  Likewise, for \(Y=1\), the man could stay on the first step, then move forward on the second, or move forward on the first step, and stay on the second. This probability will be \(P(Y=1) = p_s p_f + p_f p_s = 2p_f p_s\).
+\item
+  For \(Y=0\), the man could move forward, then backward, or move backward then forward, or stay on both steps. So \(P(Y=0) = p_f p_b + p_b p_f + p_s^2 = p_s^2 + 2 p_b p_f\).
+\end{itemize}
+
+Using equation @ref(eq:3\_EX),
+
+\[
+\begin{split}
+E(Y) &= -2 \times p_b^2 + -1 \times 2p_b p_s + 0 \times p_s^2 + 2 p_b p_f + 1 \times 2p_f p_s + 2 \times p_f^2 \\
+       &= 2 (p_f - p_b)
+\end{split}
+\]
+
+Note: I skipped a lot of messy algebra to get to the end result. Even with skipping this step, setting up the PMF was quite a bit of work.
+
+Suppose we use the linearity of expectations in equation \eqref{eq:3-linEX}. Let \(Y_1, Y_2\) denote the distance the man moves at step 1 and 2 respectively. Then \(Y = Y_1 + Y_2\). The sample of \(Y_1\) and \(Y_2\) are the same: \(\{-1,0,1\}\). Both \(Y_1\) and \(Y_2\) have the following PMF:
+
+\begin{itemize}
+\tightlist
+\item
+  \(P(Y_i = -1) = p_b\)
+\item
+  \(P(Y_i = 0) = p_s\)
+\item
+  \(P(Y_i = 1) = p_f\)
+\end{itemize}
+
+And using equation \eqref{eq:3-EX},
+
+\[
+\begin{split}
+E(Y_i) &= -1 \times p_b + 0 \times p_s + 1 \times p_f \\
+       &= p_f - p_b
+\end{split}
+\]
+
+So therefore \(E(Y) = E(Y_1) + E(Y_2) = 2(p_f - p_b)\). Notice how much simpler the solution becomes using linearity of expectations? Imagine if we wanted to find the expected position after 500 steps? Writing out the sample space for 500 steps will be extremely long.
+
+\subsection{Law of the Unconscious Statistician}\label{law-of-the-unconscious-statistician}
+
+Suppose we have the PMF of a random variable \(X\), and we want to find \(E(g(X))\), where \(g\) is a function of \(X\) (you can think of \(g\) as a transformation performed on \(X\)). One idea could be to find the PMF of \(g(X)\) and then use the definition of expectation in equation \eqref{eq:3-EX}. But we have seen in the previous subsection that finding the sample space after transforming the random variable can be challenging. It turns out we can find \(E(g(X))\) based on the PMF of \(X\), without having to find the PMF of \(g(X)\).
+
+This is done through the \textbf{Law of the Unconscious Statistician (LOTUS)}. Let \(X\) be a discrete random variable with support \(\{x_1, x_2, \cdots \}\), and \(g\) is a function applied to \(X\), then
+
+\begin{equation} 
+E(g(X)) = \sum_{i=j}^{\infty} g(x_j) P(X=x_j).
+\label{eq:3-lotus}
+\end{equation}
+
+An application of LOTUS is in finding the variance of a discrete random variable.
+
 \subsection{Variance}\label{variance}
+
+We have talked about the shape of the distribution of a discrete random variable, and its expected value. One more measure that we are interested in is the spread associated with the distribution. One common measure is the variance of the random variable.
+
+The \textbf{variance} of a random variable \(X\) is
+
+\begin{equation} 
+Var(X) = E[(X - EX)^2]
+\label{eq:3-var2}
+\end{equation}
+
+and the \textbf{standard deviation} of a random variable \(X\) is the squareroot of its variance
+
+\begin{equation} 
+SD(X) = \sqrt{Var(X)}.
+\label{eq:3-sd}
+\end{equation}
+
+Looking at equation \eqref{eq:3-var2} a little more closely, we can see a natural interpretation of the variance of a random variable: it is the average squared distance of the random variable from its mean, in the long-run. An equivalent formula for the variance of a random variable is
+
+\begin{equation} 
+Var(X) = E(X^2) - (EX)^2.
+\label{eq:3-var}
+\end{equation}
+
+Equation \eqref{eq:3-var} is easier to work with than equation \eqref{eq:3-var2} when performing actual calculations.
+
+Let us now go back to our original example, where \(X\) denotes the number of heads out of 3 coin flips. Earlier, we found the PMF of this random variable, per Table \ref{tab:3-pmf-tab}, and we found its expectation to be 1.5. To find the variance of \(X\) using equation \eqref{eq:3-var}, we find \(E(X^2)\) first using LOTUS in equation \eqref{eq:3-lotus}
+
+\[
+\begin{split}
+E(X^2) &= 0^2 \times \frac{1}{8} + 1^2 \times \frac{3}{8} + 2^2 \times \frac{3}{8} + 3^2 \times \frac{1}{8} \\
+       &= 3
+\end{split}
+\]
+
+so \(Var(x) = 3 - 1.5^2 = \frac{3}{4}\).
+
+\emph{Thought question}: Try to find \(Var(X)\) using equation \eqref{eq:3-var2} and LOTUS. You should arrive at the same answer but the steps may be a bit more complicated.
+
+\subsubsection{Properties of Variance}\label{properties-of-variance}
+
+Variance has the following properties:
+
+\begin{itemize}
+\tightlist
+\item
+  \(Var(X+c) = Var(X)\), where \(c\) is a constant. This should make sense, since if we add a constant to a random variable, we shift it by \(c\) units. As shown earlier in Figure \ref{fig:3-pmf-lin2}, the expected value also gets shifted by \(c\) units. Variance measures the average squared distance of a variable from its mean. So the distance, and the squared distance, of \(X\) from its mean is unchanged.
+\item
+  \(Var(cX) = c^2 Var(X)\). Look at Figure \ref{fig:3-pmf-lin}, notice the distance between each value in the support from its expected value gets multiplied by 2 (since \(Y=2X\)). So if we multiply a random variable by \(c\), the distance between each value in the support on its expected value is multiplied by \(c\). Since variance measures squared distance, the variance gets multiplied by \(c^2\).
+\item
+  If \(X\) and \(Y\) are independent random variables, then \(Var(X+Y) = Var(X) + Var(Y)\).
+\end{itemize}
 
 \section{Common Discrete Random Variables}\label{common-discrete-random-variables}
 
@@ -1488,7 +1717,7 @@ It is not enough to specify that a random variable follows a Bernoulli distribut
 
 \begin{itemize}
 \item
-  Suppose I flip a fair coin once. Let \(Y=1\) if the coin lands heads, and \(Y=0\) if the coin lands tails. \(Y \sim Bern(\frac{1}{2}\) in this example since the coin is fair.
+  Suppose I flip a fair coin once. Let \(Y=1\) if the coin lands heads, and \(Y=0\) if the coin lands tails. \(Y \sim Bern(\frac{1}{2})\) in this example since the coin is fair.
 \item
   Suppose I am asked a question and I am given 5 multiple choices, of which only 1 is the correct answer. I have no idea about the topic, and the multiple choices do not help, so I have to guess. Let \(W=1\) if I answer correctly, and \(W=0\) if I answer incorrectly. \(W \sim Bern(\frac{1}{5})\).
 \end{itemize}
@@ -1498,6 +1727,47 @@ It is not enough to specify that a random variable follows a Bernoulli distribut
 Fairly often, when we have a Bernoulli random variable, the event that results in the random variable being coded as 1 is called a \textbf{success}, and the event that results in the random variable being coded as 0 is called a \textbf{failure}. In such a setting, the parameter \(p\) is called the \textbf{success probability} of the Bernoulli distribution. An experiment that has a Bernoulli distribution can be called a Bernoulli trial.
 
 If you go back to the second example in section \ref{eg2}, we were modeling whether a job applicant receives a callback or not. In this example, we could let \(V\) be the random variable that an applicant receives a callback, with \(V=1\) denoting the applicant received a callback, and \(V=0\) when the applicant did not receive a callback. We used logistic regression in the example. It turns out that logistic regression is used when the variable of interest follows a Bernoulli distribution.
+
+\subsubsection{Properties of Bernoulli}\label{properties-of-bernoulli}
+
+Consider \(X\) is a Bernoulli distribution with parameter \(p\). The expectation of a Bernoulli distribution is
+
+\begin{equation} 
+E(X) = p
+\label{eq:3-bern-EX}
+\end{equation}
+
+and its variance is
+
+\begin{equation} 
+Var(X) = p(1-p).
+\label{eq:3-bern-var}
+\end{equation}
+
+\emph{Thought question}: Use the definition of expectations for discrete random variables, equation \eqref{eq:3-EX}, and the PMF of a Bernoulli random variable, and LOTUS to prove equations \eqref{eq:3-bern-EX} and \eqref{eq:3-bern-var}.
+
+The expected value being equal to \(p\) for a Bernoulli distribution should make sense. Remember that the support for such a random variable is 0 or 1, with \(P(X=1) = p\). Using the frequentist viewpoint, if we were to flip a coin and record heads or tails, and repeat this coin flipping many times, we will have record a bunch of 0s and 1s to represent the result for all the coin flips. The average of this bunch of 0s and 1s is just the proportion of 1s.
+
+The equation for the variance of a Bernoulli distribution exhibits an interesting and intuitive behavior. Figure \ref{fig:3-varBern} below shows how the variance behaves as we vary the value of \(p\):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{p}\OtherTok{\textless{}{-}}\FunctionTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{,}\AttributeTok{by =} \FloatTok{0.001}\NormalTok{) }\DocumentationTok{\#\#sequence of values for p}
+\NormalTok{Bern\_var}\OtherTok{\textless{}{-}}\NormalTok{p}\SpecialCharTok{*}\NormalTok{(}\DecValTok{1}\SpecialCharTok{{-}}\NormalTok{p) }\DocumentationTok{\#\#variance of Bernoulli}
+\DocumentationTok{\#\#plot variance against p}
+\FunctionTok{plot}\NormalTok{(p, Bern\_var, }\AttributeTok{ylab=}\StringTok{"Variance"}\NormalTok{, }\AttributeTok{main=}\StringTok{"Variance of Bernoulli as p is Varied"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\centering
+\includegraphics{bookdown-demo_files/figure-latex/3-varBern-1.pdf}
+\caption{\label{fig:3-varBern}Variance of Bernoulli}
+\end{figure}
+
+Notice the variance is at a maximum when \(p=0.5\), and the variance is minimum (in fact it is 0) when \(p=0\) or \(p=1\). If we have a biased coin such that it always lands heads, every coin flip will land on heads with no exception. There is no variability in the result, and we have utmost certainty in the result of each coin flip. On the other hand, if the coin is fair such that \(p=0.5\), we have the least certainty in the result of each coin flip, and so variance is maximum when the coin is fair.
+
+Another application of this property is during election results (assuming 2 candidates, but the same idea applies for more candidates). For swing states where the race is closer (so \(p\) is closer to half), projections on the winner have more uncertainty and so we need to get more data and wait longer for the projections. For states that primarily vote for one candidate (so \(p\) is closer to 0 or 1), projections happen a lot quicker as projections have less uncertainty.
 
 \subsection{Binomial}\label{binomial}
 
@@ -1529,6 +1799,8 @@ In equation \eqref{eq:3-bin}, \(\binom{n}{k}\) is called the binomial coefficien
 ## [1] 120
 \end{verbatim}
 
+Note: A fairly common model, the logistic regression model with aggregated data, is based on the binomial distribution. We mentioned logistic regression earlier. The difference between these two (with and without aggregated data) is based on the structure of the data frame. If you are interested in these differences, please read \url{https://www.r-bloggers.com/2021/02/how-to-run-logistic-regression-on-aggregate-data-in-r/}.
+
 We go back to our first example of counting the number of heads out of three coin flips follows a binomial distribution. Each coin flip is either heads or tails. The success probability, the probability of heads, is 0.5 and is the same for each flip. The result of each flip is independent of other flips since other flips do not affect the outcome. The number of trials (flips in this example) is \(n=3\) is specified as a fixed value. We let \(x\) denote the number of heads in 3 coin clips, so we write \(X \sim Bin(3,0.5)\).
 
 Suppose we want to calculate \(P(X=2)\) using equation \eqref{eq:3-bin}:
@@ -1552,7 +1824,7 @@ P(HHT \cup HTH \cup THH) &= P(HHT) + P(HTH) + P(THH)\\
        &= \frac{3}{8}.
 \end{split}
 \]
-so we could have solved this using basic proabbility rules from the previous module, without using the PMF of the binomial distribution in equation \eqref{eq:3-bin}. Of course, the PMF of the binomial distribution gets a lot more convenient if \(n\) gets larger, as the number of combinations and sample space get a lot larger.
+so we could have solved this using basic probability rules from the previous module, without using the PMF of the binomial distribution in equation \eqref{eq:3-bin}. Of course, the PMF of the binomial distribution gets a lot more convenient if \(n\) gets larger, as the number of combinations and sample space get a lot larger.
 
 We can also use R to find \(P(X=2)\):
 
@@ -1566,7 +1838,29 @@ We can also use R to find \(P(X=2)\):
 ## [1] 0.375
 \end{verbatim}
 
-Looking at the description of the Bernoulli and binomial distributions, you may notice that the Bernoulli distribution is a special case of a binomial distribution when \(n=1\), i.e.~when we have only 1 trial.
+\subsubsection{Relationship Between Binomial and Bernoulli}\label{relationship-between-binomial-and-bernoulli}
+
+Looking at the description of the Bernoulli and binomial distributions, you may notice that a Bernoulli random variable is a special case of a binomial random variable when \(n=1\), i.e.~when we have only 1 trial.
+
+The binomial random variable is also sometimes viewed as the sum of \(n\) independent Bernoulli random variables, all with the same value of \(p\).
+
+\subsubsection{Properties of Binomial}\label{properties-of-binomial}
+
+If \(X \sim Bin(n,p)\), then
+
+\begin{equation} 
+E(X) = np
+\label{eq:3-bin-EX}
+\end{equation}
+
+and
+
+\begin{equation} 
+Var(X) = np(1-p).
+\label{eq:3-bin-var}
+\end{equation}
+
+These results should make sense when we note the relationship between a binomial random variable and Bernoulli random variable. Suppose we have random variables \(Y_1, Y_2, \cdots, Y_n\) and they are all Bernoulli random variables with parameter \(p\) and are independent. Then \(Y = Y_1 + Y_2 + \cdots + Y_n \sim Bin(n,p)\). Therefore, using the linearity of expectations in equation \eqref{eq:3-linEX}, \(E(Y) = E(Y_1) + E(Y_2) + \cdots + E(Y_n) = np\). Since \(Y_1, Y_2, \cdots, Y_n\) are independent, \(Var(Y) = Var(Y_1) + Var(Y_2) + \cdots + Var(Y_n) = np(1-p)\).
 
 \subsubsection{PMFs of Binomial}\label{pmfs-of-binomial}
 
@@ -1581,6 +1875,68 @@ We take a look at the PMFs of a few binomials, all with \(n=10\) but we vary \(p
 From figure \ref{fig:3-pmfs}, we can see that the distribution of the binomial is symmetric when \(p=0.5\), as middle values of \(k\) have higher probabilities, and the probabilities decrease as we go further away from the middle. When \(p \neq 0.5\), we see that the distribution gets skewed. When the success probability is small, smaller number of successes are likelier, and when the success probability is large, larger number of successes are likelier, which is intuitive. If the probability of success is small, we expect most outcomes to be failures.
 
 \subsection{Poisson}\label{poisson}
+
+One more common distribution used for discrete random variables is the Poisson distribution. This is often used when the variable of interest is what we call count data (the support is non negative integers), for example, the number of cars that cross an intersection during the day.
+
+A random variable \(X\) follows a \textbf{Poisson distribution} with parameter \(\lambda\), where \(\lambda>0\). Using mathematical notation, we can write \(X \sim Pois(\lambda)\) to express that the random variable \(X\) is distributed as a Poisson with parameter \(p\). The PMF of a Poisson distribution is written as
+
+\begin{equation} 
+P(X=k) = \frac{e^{-\lambda}\lambda^k}{k!} 
+\label{eq:3-pois}
+\end{equation}
+
+for \(k=0,1,2,\cdots\). \(\lambda\) is sometimes called a rate parameter, as it is related to the rate of arrivals, for example, the number of that cross an intersection during a period of time.
+
+\subsubsection{Properties of Poisson}\label{properties-of-poisson}
+
+If \(X \sim Pois(\lambda)\), then
+
+\begin{equation} 
+E(X) = \lambda
+\label{eq:3-pois-EX}
+\end{equation}
+
+and
+
+\begin{equation} 
+Var(X) = \lambda.
+\label{eq:3-pois-var}
+\end{equation}
+
+These imply that larger values of a Poisson random variable are associated with larger variances. This is a common feature for count data. Consider the number of cars that cross an intersection during a one-hour time period. Consider the average number of cars during rush hour, say between 5 and 6pm. This average number is large, but the number could be a lot smaller due to inclement weather, or the number could get a lot larger is there is a convention occurring nearby. On the other hand, consider the average number of cars between 3 and 4am. This average number is small, and is likely to be small all the time, regardless of weather conditions and whether special events are happening.
+
+Another interesting property of the Poisson distribution is that it is skewed when \(\lambda\) is small, and approaches a bell-shaped distribution as \(\lambda\) gets bigger. Figure \ref{fig:3-pmfs-lambda} below illustrates this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#calculate probability of Poisson with these values on the support}
+\NormalTok{x}\OtherTok{\textless{}{-}}\DecValTok{0}\SpecialCharTok{:}\DecValTok{20}
+\NormalTok{lambda}\OtherTok{\textless{}{-}}\FunctionTok{c}\NormalTok{(}\FloatTok{0.5}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{10}\NormalTok{) }\DocumentationTok{\#\#try 4 different values of lambda}
+
+\DocumentationTok{\#\#create PMFs of these 4 Poissons with different lambdas}
+\FunctionTok{par}\NormalTok{(}\AttributeTok{mfrow=}\FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{))}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\DecValTok{4}\NormalTok{)}
+  
+\NormalTok{\{}
+\NormalTok{  dens}\OtherTok{\textless{}{-}}\FunctionTok{dpois}\NormalTok{(x,lambda[i])}
+  \FunctionTok{plot}\NormalTok{(x, dens, }\AttributeTok{type=}\StringTok{"l"}\NormalTok{, }\AttributeTok{main=}\FunctionTok{paste}\NormalTok{(}\StringTok{"Lambda is"}\NormalTok{, lambda[i]))}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\centering
+\includegraphics{bookdown-demo_files/figure-latex/3-pmfs-lambda-1.pdf}
+\caption{\label{fig:3-pmfs-lambda}PMF for Poissons as Rate Parameter is Varied}
+\end{figure}
+
+\subsubsection{Poisson Approximation to Binomial}\label{poisson-approximation-to-binomial}
+
+If \(X \sim Bin(n,p)\), and if \(n\) is large and \(p\) is small, then the PMF of \(X\) can be approximated by a Poisson distribution with rate parameter \(\lambda = np\). In other words, the approximation works better as \(n\) gets larger and \(np\) gets smaller.
+
+There are several rules of thumbs that exist to guide as to how large \(n\) should be and how small \(np\) should be. According to the National Institute of Standards and Technology \href{https://www.itl.nist.gov/div898/handbook/pmc/section3/pmc331.htm}{(NIST)}, \(n \geq 20\) and \(p \leq 0.05\), or \(n \geq 100\), and \(np \leq 10\).
+
+One of the main for using this approximation, instead of directly using the binomial distribution, is that the binomial coefficient can become compuationally expensive to compute when \(n\) is large.
 
   \bibliography{book.bib,packages.bib}
 

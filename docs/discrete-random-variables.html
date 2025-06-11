@@ -106,7 +106,7 @@
 <h2>
 <span class="header-section-number">3.2</span> Probability Mass Functions (PMFs)<a class="anchor" aria-label="anchor" href="#probability-mass-functions-pmfs"><i class="fas fa-link"></i></a>
 </h2>
-<p>We use probability to describe the behavior of random variables. For example, what is the probability of obtaining 3 heads in 3 coin flips, or what is the probability of obtaining at least one head on 3 coin flips? This is called the <strong>distribution</strong> of a random variable. It specifies the probabilities of all events associated with the random variable.</p>
+<p>We use probability to describe the behavior of random variables. This is called the <strong>distribution</strong> of a random variable. It specifies the probabilities of all events associated with the random variable. For example, what is the probability of obtaining 3 heads in 3 coin flips, or what is the probability of obtaining at least one head on 3 coin flips?</p>
 <p>For discrete random variables, the distribution is specified by the <strong>probability mass function (PMF)</strong>. The PMF of a discrete random variable <span class="math inline">\(X\)</span> is the function <span class="math inline">\(P_X(x) = P(X=x)\)</span>. It is positive when <span class="math inline">\(x\)</span> is in the support of <span class="math inline">\(X\)</span>, and 0 otherwise.</p>
 <p>Note: In the notation for random variables, capital letters such as <span class="math inline">\(X\)</span> denote random variables, and lower case letters such as <span class="math inline">\(x\)</span> denote actual numerical values. So if we want to find the probability that we have 2 heads in 3 coin flips, we write <span class="math inline">\(P(X=2)\)</span>, where <span class="math inline">\(x\)</span> is 2 in this example.</p>
 <p>Going back to our example where we record the number of heads out of 3 coin flips, we can write out the PMF for the random variable <span class="math inline">\(X\)</span>:</p>
@@ -147,14 +147,10 @@
 </tr>
 </tbody>
 </table></div>
-<p>Or usual a simple plot like the one below in Figure <a href="discrete-random-variables.html#fig:3-pmf">3.1</a>:</p>
+<p>Or use a simple plot like the one below in Figure <a href="discrete-random-variables.html#fig:3-pmf">3.1</a>:</p>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##support</span></span>
 <span><span class="va">x</span><span class="op">&lt;-</span><span class="fl">0</span><span class="op">:</span><span class="fl">3</span></span>
-<span><span class="co">##number of flips</span></span>
-<span><span class="va">n</span><span class="op">&lt;-</span><span class="fl">3</span></span>
-<span><span class="co">## prob of head in a flip</span></span>
-<span><span class="va">p</span><span class="op">&lt;-</span><span class="fl">0.5</span></span>
 <span><span class="co">## PMF for each value in the support. </span></span>
 <span><span class="va">PMFs</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">/</span><span class="fl">8</span>, <span class="fl">3</span><span class="op">/</span><span class="fl">8</span>, <span class="fl">3</span><span class="op">/</span><span class="fl">8</span>, <span class="fl">1</span><span class="op">/</span><span class="fl">8</span><span class="op">)</span></span>
 <span><span class="co">## create plot of PMF vs each value in support</span></span>
@@ -178,6 +174,7 @@ Figure 3.1: PMF for X
 <span class="math inline">\(\sum_{j=1}^{\infty} P_X(x_j) = 1\)</span>.</li>
 </ul>
 <p>In other words, the probabilities associated with the support are greater than 0, and the sum of the probabilities across the whole support must add up to 1.</p>
+<p><em>Thought question</em>: based on Table <a href="discrete-random-variables.html#tab:3-pmf-tab">3.1</a>, can you see why our PMF for <span class="math inline">\(X\)</span> is valid?</p>
 </div>
 <div id="pmfs-and-histograms" class="section level3" number="3.2.2">
 <h3>
@@ -254,7 +251,7 @@ Figure 3.3: CDF for X
 <li>be non decreasing. This means that as <span class="math inline">\(x\)</span> gets larger, the CDF either stays the same or increases. Visually, a graph of the CDF should never decreases as <span class="math inline">\(x\)</span> increases.</li>
 <li>approach 1 as <span class="math inline">\(x\)</span> approaches infinity and approach 0 as <span class="math inline">\(x\)</span> approaches negative infinity. Visually, a graph of the CDF should be equal to or close to 1 for large values of x, and it should be equal to or close to 0 for small values of x.</li>
 </ul>
-<p><em>Thought question</em>: Look at the CDF for our example in Figure @ref{fig:3-cdf}, and see how it satisfies the criteria listed above for a valid CDF.</p>
+<p><em>Thought question</em>: Look at the CDF for our example in Figure <a href="discrete-random-variables.html#fig:3-cdf">3.3</a>, and see how it satisfies the criteria listed above for a valid CDF.</p>
 </div>
 </div>
 <div id="expectations" class="section level2" number="3.4">
@@ -263,7 +260,7 @@ Figure 3.3: CDF for X
 </h2>
 <p>In the previous section, we see how PMFs and CDFs can be used to describe the distribution of a random variable. As the PMF can be viewed as a long-run version of the histogram, it gives us an idea about the shape of the distribution. Similar to Section <a href="descriptive.html#descriptive">1</a>, we will also be interested in measures of centrality and spread for random variables.</p>
 <p>A measure of centrality for random variables is the <strong>expectation</strong>. The expectation of a random variable can be interpreted as the long-run mean of the random variable, i.e. if we were able to repeat the experiment an infinite number of times, the expectation of the random variable will be the average result among all the experiments.</p>
-<p>For a discrete random variable <span class="math inline">\(X\)</span> with support <span class="math inline">\(x_1, x_2, \cdots, x_j\)</span>, the expected value, denoted by <span class="math inline">\(E(X)\)</span>, is</p>
+<p>For a discrete random variable <span class="math inline">\(X\)</span> with support <span class="math inline">\(x_1, x_2, \cdots,\)</span>, the expected value, denoted by <span class="math inline">\(E(X)\)</span>, is</p>
 <p><span class="math display" id="eq:3-EX">\[\begin{equation}
 E(X) = \sum_{j=1}^{\infty} x_j P(X=x_j).
 \tag{3.1}
@@ -276,17 +273,195 @@ E(X) &amp;= 0 \times \frac{1}{8} + 1 \times \frac{3}{8} + 2 \times \frac{3}{8} +
 \end{split}
 \]</span></p>
 <p>What we did was to take the product of each value in the support of the random variable with its corresponding probability, and add all these products.</p>
-<p>We can see from this another interpretation of the expected value of a random variable: it is the weighted average of the values for the random variable, weighted by their probabilities.</p>
+<p>We can see another interpretation of the expected value of a random variable from this calculation: it is the weighted average of the values for the random variable, weighted by their probabilities.</p>
 <p>Intuitively, this expected value of 1.5 should make sense. If we flip a coin 3 times, and the coin is fair, we expect half of these flips to land heads, or 1.5 flips to land heads.</p>
 <div id="linearity-of-expectations" class="section level3" number="3.4.1">
 <h3>
 <span class="header-section-number">3.4.1</span> Linearity of Expectations<a class="anchor" aria-label="anchor" href="#linearity-of-expectations"><i class="fas fa-link"></i></a>
 </h3>
+<p>We have seen how to calculate the expected value of a random variable <span class="math inline">\(X\)</span> using equation <a href="discrete-random-variables.html#eq:3-EX">(3.1)</a>. What we need is the PMF of <span class="math inline">\(X\)</span>. Sometimes our random variable can be viewed as a sum (or difference) of other random variables, or it could involve a multiplication and / or adding a constant to the random variable. Consider some of these scenarios:</p>
+<ul>
+<li><p>Suppose my friend and I are fisherman. Let <span class="math inline">\(Y\)</span> be the random variable describing the number of fish I catch on a workday, and let <span class="math inline">\(W\)</span> be the random variable describing the number of fish my friend catches on a workday. We can let <span class="math inline">\(T = Y+W\)</span> be the random variable describing the total number of fish we catch on a workday.</p></li>
+<li><p>Suppose that I sell each fish for $10 and my friend sells each fish for $15. We can let <span class="math inline">\(R = 10Y + 15W\)</span> be the random variable that describes the revenue we generate on a workday.</p></li>
+<li><p>Suppose that my friend and I rent out a space at the market to sell our fish, and it costs \5 a day to rent out the space. We can let <span class="math inline">\(G = 10Y + 15W - 5\)</span> be the random variable that describes our gross income for the day.</p></li>
+</ul>
+<p>All of these examples involve new random variables, <span class="math inline">\(T, R, G\)</span> that can be based on previously defined random variables, <span class="math inline">\(Y, W\)</span>. It turns out that to find the expectations of the new random variables, all we need is the expectations of the previously defined random variables. We do not need to find the PMFS for <span class="math inline">\(T, R\)</span> and <span class="math inline">\(S\)</span> and then apply equation <a href="discrete-random-variables.html#eq:3-EX">(3.1)</a>.</p>
+<p>These can be done through the <strong>linearity of expectations</strong>: Let <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> denote random variables, and <span class="math inline">\(a,b,c\)</span> denote some constants, then</p>
+<p><span class="math display" id="eq:3-linEX">\[\begin{equation}
+E(aX + bY +c) = aE(X) + bE(Y) + c.
+\tag{3.2}
+\end{equation}\]</span></p>
+<p>Applying equation <a href="discrete-random-variables.html#eq:3-linEX">(3.2)</a> to the fishing examples:</p>
+<ul>
+<li>
+<span class="math inline">\(E(T) = E(Y) + E(W)\)</span>,</li>
+<li>
+<span class="math inline">\(E(R) = 10E(Y) + 15E(W)\)</span>,</li>
+<li>
+<span class="math inline">\(E(G) = 10E(Y) + 15E(W) - 5\)</span>.</li>
+</ul>
+<p>All we need to find the expected values for the total number of fish, revenue generated, and gross income were the expected values for the number of fish each of us caught. We do not need the PMFs for <span class="math inline">\(T,R,G\)</span>.</p>
+<div id="visual-explanation" class="section level4" number="3.4.1.1">
+<h4>
+<span class="header-section-number">3.4.1.1</span> Visual Explanation<a class="anchor" aria-label="anchor" href="#visual-explanation"><i class="fas fa-link"></i></a>
+</h4>
+<p>For a visual explanation of why equation <a href="discrete-random-variables.html#eq:3-linEX">(3.2)</a> makes sense, we go back to our previous example where <span class="math inline">\(X\)</span> denotes the number of heads in 3 coin flips. Figure <a href="discrete-random-variables.html#fig:3-pmf">3.1</a> displays the PMF for this random variable. Let us create the PMF for a new random variable <span class="math inline">\(Y=2X\)</span> and display it in Figure <a href="discrete-random-variables.html#fig:3-pmf-lin">3.4</a> below:</p>
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">##support of X</span></span>
+<span><span class="va">x</span><span class="op">&lt;-</span><span class="fl">0</span><span class="op">:</span><span class="fl">3</span></span>
+<span><span class="co">## PMF for each value in the support. </span></span>
+<span><span class="va">PMFs</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">/</span><span class="fl">8</span>, <span class="fl">3</span><span class="op">/</span><span class="fl">8</span>, <span class="fl">3</span><span class="op">/</span><span class="fl">8</span>, <span class="fl">1</span><span class="op">/</span><span class="fl">8</span><span class="op">)</span></span>
+<span><span class="va">EX</span><span class="op">&lt;-</span><span class="fl">1.5</span></span>
+<span></span>
+<span><span class="co">##support of Y</span></span>
+<span><span class="va">y</span><span class="op">&lt;-</span><span class="fl">2</span><span class="op">*</span><span class="va">x</span></span>
+<span><span class="co">## PMF for each value in the support. </span></span>
+<span><span class="va">PMFs</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">/</span><span class="fl">8</span>, <span class="fl">3</span><span class="op">/</span><span class="fl">8</span>, <span class="fl">3</span><span class="op">/</span><span class="fl">8</span>, <span class="fl">1</span><span class="op">/</span><span class="fl">8</span><span class="op">)</span></span>
+<span><span class="va">EY</span><span class="op">&lt;-</span><span class="fl">2</span><span class="op">*</span><span class="va">EX</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## create plot of PMF vs each value in support</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">PMFs</span>, type<span class="op">=</span><span class="st">"h"</span>, main <span class="op">=</span> <span class="st">"PMF for X"</span>, xlab<span class="op">=</span><span class="st">"X"</span>, ylab<span class="op">=</span><span class="st">"Probability"</span>, ylim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">##overlay a line representing EX in red</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span>v<span class="op">=</span><span class="va">EX</span>, col<span class="op">=</span><span class="st">"red"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## create plot of PMF vs each value in support</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">y</span>, <span class="va">PMFs</span>, type<span class="op">=</span><span class="st">"h"</span>, main <span class="op">=</span> <span class="st">"PMF for Y"</span>, xlab<span class="op">=</span><span class="st">"Y"</span>, ylab<span class="op">=</span><span class="st">"Probability"</span>, ylim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">##overlay a line representing EY in red</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span>v<span class="op">=</span><span class="va">EY</span>, col<span class="op">=</span><span class="st">"red"</span><span class="op">)</span></span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:3-pmf-lin"></span>
+<img src="bookdown-demo_files/figure-html/3-pmf-lin-1.png" alt="PMF for X and Y=2X" width="672"><p class="caption">
+Figure 3.4: PMF for X and Y=2X
+</p>
 </div>
-<div id="variance" class="section level3" number="3.4.2">
+<p>Note that the red vertical lines represent the expected value for the random variable, and since the PMFs are symmetric, the expected value lies right in the middle of the support. Comparing the PMFs in Figure <a href="discrete-random-variables.html#fig:3-pmf-lin">3.4</a>, we get <span class="math inline">\(Y\)</span> by multiplying <span class="math inline">\(X\)</span> by 2. So the support of <span class="math inline">\(Y\)</span> is now <span class="math inline">\(\{0,2,4,6\}\)</span> but the associated probabilities are unchanged, so the heights of the probabilities on the vertical axis are unchanged. Therefore, the center, the expected value, is multiplied by the same constant.</p>
+<p>Consider another random variable <span class="math inline">\(W = X+3\)</span>. We create the PMF for <span class="math inline">\(W\)</span> and display it in Figure <a href="discrete-random-variables.html#fig:3-pmf-lin2">3.5</a> below:</p>
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">##support of X</span></span>
+<span><span class="va">x</span><span class="op">&lt;-</span><span class="fl">0</span><span class="op">:</span><span class="fl">3</span></span>
+<span><span class="co">## PMF for each value in the support. </span></span>
+<span><span class="va">PMFs</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">/</span><span class="fl">8</span>, <span class="fl">3</span><span class="op">/</span><span class="fl">8</span>, <span class="fl">3</span><span class="op">/</span><span class="fl">8</span>, <span class="fl">1</span><span class="op">/</span><span class="fl">8</span><span class="op">)</span></span>
+<span><span class="va">EX</span><span class="op">&lt;-</span><span class="fl">1.5</span></span>
+<span></span>
+<span><span class="co">##support of W</span></span>
+<span><span class="va">w</span><span class="op">&lt;-</span><span class="va">x</span><span class="op">+</span><span class="fl">3</span></span>
+<span><span class="co">## PMF for each value in the support. </span></span>
+<span><span class="va">PMFs</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">/</span><span class="fl">8</span>, <span class="fl">3</span><span class="op">/</span><span class="fl">8</span>, <span class="fl">3</span><span class="op">/</span><span class="fl">8</span>, <span class="fl">1</span><span class="op">/</span><span class="fl">8</span><span class="op">)</span></span>
+<span><span class="va">EW</span><span class="op">&lt;-</span><span class="va">EX</span><span class="op">+</span><span class="fl">3</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## create plot of PMF vs each value in support</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">PMFs</span>, type<span class="op">=</span><span class="st">"h"</span>, main <span class="op">=</span> <span class="st">"PMF for X"</span>, xlab<span class="op">=</span><span class="st">"X"</span>, ylab<span class="op">=</span><span class="st">"Probability"</span>, ylim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">##overlay a line representing EX in red</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span>v<span class="op">=</span><span class="va">EX</span>, col<span class="op">=</span><span class="st">"red"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## create plot of PMF vs each value in support</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">w</span>, <span class="va">PMFs</span>, type<span class="op">=</span><span class="st">"h"</span>, main <span class="op">=</span> <span class="st">"PMF for w"</span>, xlab<span class="op">=</span><span class="st">"W"</span>, ylab<span class="op">=</span><span class="st">"Probability"</span>, ylim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">##overlay a line representing EW in red</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span>v<span class="op">=</span><span class="va">EW</span>, col<span class="op">=</span><span class="st">"red"</span><span class="op">)</span></span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:3-pmf-lin2"></span>
+<img src="bookdown-demo_files/figure-html/3-pmf-lin2-1.png" alt="PMF for X and W=X+3" width="672"><p class="caption">
+Figure 3.5: PMF for X and W=X+3
+</p>
+</div>
+<p>Notice the PMFs for <span class="math inline">\(X\)</span> and <span class="math inline">\(W\)</span> look almost exactly the same. The only difference is that every value in the support for <span class="math inline">\(X\)</span> is shifted by 3 units. The probabilities stay the same, so the heights in the PMFs are unchanged. So if every value is shifted by 3 units, the expected value, the long-run average, also gets shifted by 3 units. Adding a constant to a random variable shifts the expected value accordingly.</p>
+</div>
+<div id="one-more-example" class="section level4" number="3.4.1.2">
+<h4>
+<span class="header-section-number">3.4.1.2</span> One More Example<a class="anchor" aria-label="anchor" href="#one-more-example"><i class="fas fa-link"></i></a>
+</h4>
+<p>We look at one more example to illustrate the usefulness of the linearity of expectations. Consider a drunk man who has to walk on a one-dimensional number line and starts at the 0 position. For each step the drunk man takes, he either moves forward, backward, or stays at the same spot. He steps forward with probability <span class="math inline">\(p_f\)</span>, backward with probability <span class="math inline">\(p_b\)</span>, and stays at the same spot with probability <span class="math inline">\(p_s\)</span>, where <span class="math inline">\(p_f + p_b+p_s = 1\)</span>. Let <span class="math inline">\(Y\)</span> be the position on the number line of the drunk man after 2 steps. What is the expected position of the drunk man after two steps, i.e. what is <span class="math inline">\(E(Y)\)</span>? Assume that each step is independent.</p>
+<p>Using brute force, we can find the PMF of <span class="math inline">\(Y\)</span>, and find <span class="math inline">\(E(Y)\)</span> using equation <a href="discrete-random-variables.html#eq:3-EX">(3.1)</a>. First, we need to find the sample space for <span class="math inline">\(Y\)</span>. With two steps, the sample space is <span class="math inline">\(\{-2,-1,0,1,2\}\)</span>. Next, we need to find the probabilities associated with each outcome in the sample space.</p>
+<ul>
+<li>For <span class="math inline">\(Y=-2\)</span>, the man must move backward on each step. This probability will be <span class="math inline">\(P(Y=-2) = p_b^2\)</span>.</li>
+<li>Likewise, for <span class="math inline">\(Y=2\)</span>, the man must move forward on each step. This probability will be <span class="math inline">\(P(Y=2) = p_f^2\)</span>.</li>
+<li>For <span class="math inline">\(Y=-1\)</span>, the man could stay on the first step, then move back on the second, or move back on the first step, and stay on the second. This probability will be <span class="math inline">\(P(Y=-1) = p_s p_b + p_b p_s = 2p_b p_s\)</span>.</li>
+<li>Likewise, for <span class="math inline">\(Y=1\)</span>, the man could stay on the first step, then move forward on the second, or move forward on the first step, and stay on the second. This probability will be <span class="math inline">\(P(Y=1) = p_s p_f + p_f p_s = 2p_f p_s\)</span>.</li>
+<li>For <span class="math inline">\(Y=0\)</span>, the man could move forward, then backward, or move backward then forward, or stay on both steps. So <span class="math inline">\(P(Y=0) = p_f p_b + p_b p_f + p_s^2 = p_s^2 + 2 p_b p_f\)</span>.</li>
+</ul>
+<p>Using equation @ref(eq:3_EX),</p>
+<p><span class="math display">\[
+\begin{split}
+E(Y) &amp;= -2 \times p_b^2 + -1 \times 2p_b p_s + 0 \times p_s^2 + 2 p_b p_f + 1 \times 2p_f p_s + 2 \times p_f^2 \\
+       &amp;= 2 (p_f - p_b)
+\end{split}
+\]</span></p>
+<p>Note: I skipped a lot of messy algebra to get to the end result. Even with skipping this step, setting up the PMF was quite a bit of work.</p>
+<p>Suppose we use the linearity of expectations in equation <a href="discrete-random-variables.html#eq:3-linEX">(3.2)</a>. Let <span class="math inline">\(Y_1, Y_2\)</span> denote the distance the man moves at step 1 and 2 respectively. Then <span class="math inline">\(Y = Y_1 + Y_2\)</span>. The sample of <span class="math inline">\(Y_1\)</span> and <span class="math inline">\(Y_2\)</span> are the same: <span class="math inline">\(\{-1,0,1\}\)</span>. Both <span class="math inline">\(Y_1\)</span> and <span class="math inline">\(Y_2\)</span> have the following PMF:</p>
+<ul>
+<li><span class="math inline">\(P(Y_i = -1) = p_b\)</span></li>
+<li><span class="math inline">\(P(Y_i = 0) = p_s\)</span></li>
+<li><span class="math inline">\(P(Y_i = 1) = p_f\)</span></li>
+</ul>
+<p>And using equation <a href="discrete-random-variables.html#eq:3-EX">(3.1)</a>,</p>
+<p><span class="math display">\[
+\begin{split}
+E(Y_i) &amp;= -1 \times p_b + 0 \times p_s + 1 \times p_f \\
+       &amp;= p_f - p_b
+\end{split}
+\]</span></p>
+<p>So therefore <span class="math inline">\(E(Y) = E(Y_1) + E(Y_2) = 2(p_f - p_b)\)</span>. Notice how much simpler the solution becomes using linearity of expectations? Imagine if we wanted to find the expected position after 500 steps? Writing out the sample space for 500 steps will be extremely long.</p>
+</div>
+</div>
+<div id="law-of-the-unconscious-statistician" class="section level3" number="3.4.2">
 <h3>
-<span class="header-section-number">3.4.2</span> Variance<a class="anchor" aria-label="anchor" href="#variance"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.4.2</span> Law of the Unconscious Statistician<a class="anchor" aria-label="anchor" href="#law-of-the-unconscious-statistician"><i class="fas fa-link"></i></a>
 </h3>
+<p>Suppose we have the PMF of a random variable <span class="math inline">\(X\)</span>, and we want to find <span class="math inline">\(E(g(X))\)</span>, where <span class="math inline">\(g\)</span> is a function of <span class="math inline">\(X\)</span> (you can think of <span class="math inline">\(g\)</span> as a transformation performed on <span class="math inline">\(X\)</span>). One idea could be to find the PMF of <span class="math inline">\(g(X)\)</span> and then use the definition of expectation in equation <a href="discrete-random-variables.html#eq:3-EX">(3.1)</a>. But we have seen in the previous subsection that finding the sample space after transforming the random variable can be challenging. It turns out we can find <span class="math inline">\(E(g(X))\)</span> based on the PMF of <span class="math inline">\(X\)</span>, without having to find the PMF of <span class="math inline">\(g(X)\)</span>.</p>
+<p>This is done through the <strong>Law of the Unconscious Statistician (LOTUS)</strong>. Let <span class="math inline">\(X\)</span> be a discrete random variable with support <span class="math inline">\(\{x_1, x_2, \cdots \}\)</span>, and <span class="math inline">\(g\)</span> is a function applied to <span class="math inline">\(X\)</span>, then</p>
+<p><span class="math display" id="eq:3-lotus">\[\begin{equation}
+E(g(X)) = \sum_{i=j}^{\infty} g(x_j) P(X=x_j).
+\tag{3.3}
+\end{equation}\]</span></p>
+<p>An application of LOTUS is in finding the variance of a discrete random variable.</p>
+</div>
+<div id="variance" class="section level3" number="3.4.3">
+<h3>
+<span class="header-section-number">3.4.3</span> Variance<a class="anchor" aria-label="anchor" href="#variance"><i class="fas fa-link"></i></a>
+</h3>
+<p>We have talked about the shape of the distribution of a discrete random variable, and its expected value. One more measure that we are interested in is the spread associated with the distribution. One common measure is the variance of the random variable.</p>
+<p>The <strong>variance</strong> of a random variable <span class="math inline">\(X\)</span> is</p>
+<p><span class="math display" id="eq:3-var2">\[\begin{equation}
+Var(X) = E[(X - EX)^2]
+\tag{3.4}
+\end{equation}\]</span></p>
+<p>and the <strong>standard deviation</strong> of a random variable <span class="math inline">\(X\)</span> is the squareroot of its variance</p>
+<p><span class="math display" id="eq:3-sd">\[\begin{equation}
+SD(X) = \sqrt{Var(X)}.
+\tag{3.5}
+\end{equation}\]</span></p>
+<p>Looking at equation <a href="discrete-random-variables.html#eq:3-var2">(3.4)</a> a little more closely, we can see a natural interpretation of the variance of a random variable: it is the average squared distance of the random variable from its mean, in the long-run. An equivalent formula for the variance of a random variable is</p>
+<p><span class="math display" id="eq:3-var">\[\begin{equation}
+Var(X) = E(X^2) - (EX)^2.
+\tag{3.6}
+\end{equation}\]</span></p>
+<p>Equation <a href="discrete-random-variables.html#eq:3-var">(3.6)</a> is easier to work with than equation <a href="discrete-random-variables.html#eq:3-var2">(3.4)</a> when performing actual calculations.</p>
+<p>Let us now go back to our original example, where <span class="math inline">\(X\)</span> denotes the number of heads out of 3 coin flips. Earlier, we found the PMF of this random variable, per Table <a href="discrete-random-variables.html#tab:3-pmf-tab">3.1</a>, and we found its expectation to be 1.5. To find the variance of <span class="math inline">\(X\)</span> using equation <a href="discrete-random-variables.html#eq:3-var">(3.6)</a>, we find <span class="math inline">\(E(X^2)\)</span> first using LOTUS in equation <a href="discrete-random-variables.html#eq:3-lotus">(3.3)</a></p>
+<p><span class="math display">\[
+\begin{split}
+E(X^2) &amp;= 0^2 \times \frac{1}{8} + 1^2 \times \frac{3}{8} + 2^2 \times \frac{3}{8} + 3^2 \times \frac{1}{8} \\
+       &amp;= 3
+\end{split}
+\]</span></p>
+<p>so <span class="math inline">\(Var(x) = 3 - 1.5^2 = \frac{3}{4}\)</span>.</p>
+<p><em>Thought question</em>: Try to find <span class="math inline">\(Var(X)\)</span> using equation <a href="discrete-random-variables.html#eq:3-var2">(3.4)</a> and LOTUS. You should arrive at the same answer but the steps may be a bit more complicated.</p>
+<div id="properties-of-variance" class="section level4" number="3.4.3.1">
+<h4>
+<span class="header-section-number">3.4.3.1</span> Properties of Variance<a class="anchor" aria-label="anchor" href="#properties-of-variance"><i class="fas fa-link"></i></a>
+</h4>
+<p>Variance has the following properties:</p>
+<ul>
+<li>
+<span class="math inline">\(Var(X+c) = Var(X)\)</span>, where <span class="math inline">\(c\)</span> is a constant. This should make sense, since if we add a constant to a random variable, we shift it by <span class="math inline">\(c\)</span> units. As shown earlier in Figure <a href="discrete-random-variables.html#fig:3-pmf-lin2">3.5</a>, the expected value also gets shifted by <span class="math inline">\(c\)</span> units. Variance measures the average squared distance of a variable from its mean. So the distance, and the squared distance, of <span class="math inline">\(X\)</span> from its mean is unchanged.</li>
+<li>
+<span class="math inline">\(Var(cX) = c^2 Var(X)\)</span>. Look at Figure <a href="discrete-random-variables.html#fig:3-pmf-lin">3.4</a>, notice the distance between each value in the support from its expected value gets multiplied by 2 (since <span class="math inline">\(Y=2X\)</span>). So if we multiply a random variable by <span class="math inline">\(c\)</span>, the distance between each value in the support on its expected value is multiplied by <span class="math inline">\(c\)</span>. Since variance measures squared distance, the variance gets multiplied by <span class="math inline">\(c^2\)</span>.</li>
+<li>If <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are independent random variables, then <span class="math inline">\(Var(X+Y) = Var(X) + Var(Y)\)</span>.</li>
+</ul>
+</div>
 </div>
 </div>
 <div id="common-discrete-random-variables" class="section level2" number="3.5">
@@ -302,17 +477,48 @@ E(X) &amp;= 0 \times \frac{1}{8} + 1 \times \frac{3}{8} + 2 \times \frac{3}{8} +
 <p>More formally, a random variable <span class="math inline">\(X\)</span> follows a <strong>Bernoulli distribution</strong> with parameter <span class="math inline">\(p\)</span> if <span class="math inline">\(P(X=1) = p\)</span> and <span class="math inline">\(P(X=0) = 1-p\)</span>, where <span class="math inline">\(0&lt;p&lt;1\)</span>. Using mathematical notation, we can write <span class="math inline">\(X \sim Bern(p)\)</span> to express that the random variable <span class="math inline">\(X\)</span> is distributed as a Bernoulli with parameter <span class="math inline">\(p\)</span>. The PMF of a Bernoulli distribution is written as</p>
 <p><span class="math display" id="eq:3-bern">\[\begin{equation}
 P(X=k) = p^k (1-p)^{1-k}
-\tag{3.2}
+\tag{3.7}
 \end{equation}\]</span></p>
 <p>for <span class="math inline">\(k=0, 1\)</span>.</p>
 <p>It is not enough to specify that a random variable follows a Bernoulli distribution. We need to also clearly specify the value of the parameter <span class="math inline">\(p\)</span>. Consider the following two examples which describe two different experiments:</p>
 <ul>
-<li><p>Suppose I flip a fair coin once. Let <span class="math inline">\(Y=1\)</span> if the coin lands heads, and <span class="math inline">\(Y=0\)</span> if the coin lands tails. <span class="math inline">\(Y \sim Bern(\frac{1}{2}\)</span> in this example since the coin is fair.</p></li>
+<li><p>Suppose I flip a fair coin once. Let <span class="math inline">\(Y=1\)</span> if the coin lands heads, and <span class="math inline">\(Y=0\)</span> if the coin lands tails. <span class="math inline">\(Y \sim Bern(\frac{1}{2})\)</span> in this example since the coin is fair.</p></li>
 <li><p>Suppose I am asked a question and I am given 5 multiple choices, of which only 1 is the correct answer. I have no idea about the topic, and the multiple choices do not help, so I have to guess. Let <span class="math inline">\(W=1\)</span> if I answer correctly, and <span class="math inline">\(W=0\)</span> if I answer incorrectly. <span class="math inline">\(W \sim Bern(\frac{1}{5})\)</span>.</p></li>
 </ul>
 <p><span class="math inline">\(P(Y=1)\)</span> and <span class="math inline">\(P(W=1)\)</span> are not the same in these examples.</p>
 <p>Fairly often, when we have a Bernoulli random variable, the event that results in the random variable being coded as 1 is called a <strong>success</strong>, and the event that results in the random variable being coded as 0 is called a <strong>failure</strong>. In such a setting, the parameter <span class="math inline">\(p\)</span> is called the <strong>success probability</strong> of the Bernoulli distribution. An experiment that has a Bernoulli distribution can be called a Bernoulli trial.</p>
 <p>If you go back to the second example in section <a href="index.html#eg2">0.1.2</a>, we were modeling whether a job applicant receives a callback or not. In this example, we could let <span class="math inline">\(V\)</span> be the random variable that an applicant receives a callback, with <span class="math inline">\(V=1\)</span> denoting the applicant received a callback, and <span class="math inline">\(V=0\)</span> when the applicant did not receive a callback. We used logistic regression in the example. It turns out that logistic regression is used when the variable of interest follows a Bernoulli distribution.</p>
+<div id="properties-of-bernoulli" class="section level4" number="3.5.1.1">
+<h4>
+<span class="header-section-number">3.5.1.1</span> Properties of Bernoulli<a class="anchor" aria-label="anchor" href="#properties-of-bernoulli"><i class="fas fa-link"></i></a>
+</h4>
+<p>Consider <span class="math inline">\(X\)</span> is a Bernoulli distribution with parameter <span class="math inline">\(p\)</span>. The expectation of a Bernoulli distribution is</p>
+<p><span class="math display" id="eq:3-bern-EX">\[\begin{equation}
+E(X) = p
+\tag{3.8}
+\end{equation}\]</span></p>
+<p>and its variance is</p>
+<p><span class="math display" id="eq:3-bern-var">\[\begin{equation}
+Var(X) = p(1-p).
+\tag{3.9}
+\end{equation}\]</span></p>
+<p><em>Thought question</em>: Use the definition of expectations for discrete random variables, equation <a href="discrete-random-variables.html#eq:3-EX">(3.1)</a>, and the PMF of a Bernoulli random variable, and LOTUS to prove equations <a href="discrete-random-variables.html#eq:3-bern-EX">(3.8)</a> and <a href="discrete-random-variables.html#eq:3-bern-var">(3.9)</a>.</p>
+<p>The expected value being equal to <span class="math inline">\(p\)</span> for a Bernoulli distribution should make sense. Remember that the support for such a random variable is 0 or 1, with <span class="math inline">\(P(X=1) = p\)</span>. Using the frequentist viewpoint, if we were to flip a coin and record heads or tails, and repeat this coin flipping many times, we will have record a bunch of 0s and 1s to represent the result for all the coin flips. The average of this bunch of 0s and 1s is just the proportion of 1s.</p>
+<p>The equation for the variance of a Bernoulli distribution exhibits an interesting and intuitive behavior. Figure <a href="discrete-random-variables.html#fig:3-varBern">3.6</a> below shows how the variance behaves as we vary the value of <span class="math inline">\(p\)</span>:</p>
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">p</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span>,by <span class="op">=</span> <span class="fl">0.001</span><span class="op">)</span> <span class="co">##sequence of values for p</span></span>
+<span><span class="va">Bern_var</span><span class="op">&lt;-</span><span class="va">p</span><span class="op">*</span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">p</span><span class="op">)</span> <span class="co">##variance of Bernoulli</span></span>
+<span><span class="co">##plot variance against p</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">p</span>, <span class="va">Bern_var</span>, ylab<span class="op">=</span><span class="st">"Variance"</span>, main<span class="op">=</span><span class="st">"Variance of Bernoulli as p is Varied"</span><span class="op">)</span></span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:3-varBern"></span>
+<img src="bookdown-demo_files/figure-html/3-varBern-1.png" alt="Variance of Bernoulli" width="672"><p class="caption">
+Figure 3.6: Variance of Bernoulli
+</p>
+</div>
+<p>Notice the variance is at a maximum when <span class="math inline">\(p=0.5\)</span>, and the variance is minimum (in fact it is 0) when <span class="math inline">\(p=0\)</span> or <span class="math inline">\(p=1\)</span>. If we have a biased coin such that it always lands heads, every coin flip will land on heads with no exception. There is no variability in the result, and we have utmost certainty in the result of each coin flip. On the other hand, if the coin is fair such that <span class="math inline">\(p=0.5\)</span>, we have the least certainty in the result of each coin flip, and so variance is maximum when the coin is fair.</p>
+<p>Another application of this property is during election results (assuming 2 candidates, but the same idea applies for more candidates). For swing states where the race is closer (so <span class="math inline">\(p\)</span> is closer to half), projections on the winner have more uncertainty and so we need to get more data and wait longer for the projections. For states that primarily vote for one candidate (so <span class="math inline">\(p\)</span> is closer to 0 or 1), projections happen a lot quicker as projections have less uncertainty.</p>
+</div>
 </div>
 <div id="binomial" class="section level3" number="3.5.2">
 <h3>
@@ -321,20 +527,21 @@ P(X=k) = p^k (1-p)^{1-k}
 <p>Suppose we have an experiment that follows a Bernoulli distribution, and we perform this experiment <span class="math inline">\(n\)</span> times (sometimes called trials), each time with the same success probability <span class="math inline">\(p\)</span>. The experiments are independent from each other. Let <span class="math inline">\(X\)</span> denote the number of successes out of the <span class="math inline">\(n\)</span> trials. <span class="math inline">\(X\)</span> follows a <strong>binomial distribution</strong> with parameters <span class="math inline">\(n\)</span> and <span class="math inline">\(p\)</span> (number of trials and success probability). We write <span class="math inline">\(X \sim Bin(n,p)\)</span> to express that <span class="math inline">\(X\)</span> follows a binomial distribution with parameters <span class="math inline">\(n\)</span> and <span class="math inline">\(p\)</span>, with <span class="math inline">\(n&gt;0\)</span> and <span class="math inline">\(0&lt;p&lt;1\)</span>. The PMF of a Binomial distribution is written as</p>
 <p><span class="math display" id="eq:3-bin">\[\begin{equation}
 P(X=k) = \binom{n}{k} p^k (1-p)^{n-k}
-\tag{3.3}
+\tag{3.10}
 \end{equation}\]</span></p>
 <p>for <span class="math inline">\(k=0,1,2, \cdots, n\)</span>, which is also the support of the binomial distribution.</p>
-<p>In equation <a href="discrete-random-variables.html#eq:3-bin">(3.3)</a>, <span class="math inline">\(\binom{n}{k}\)</span> is called the binomial coefficient, and is a number that represents the number of combinations that result in <span class="math inline">\(k\)</span> successes out of the <span class="math inline">\(n\)</span> trials. The binomial coefficient can be found using</p>
+<p>In equation <a href="discrete-random-variables.html#eq:3-bin">(3.10)</a>, <span class="math inline">\(\binom{n}{k}\)</span> is called the binomial coefficient, and is a number that represents the number of combinations that result in <span class="math inline">\(k\)</span> successes out of the <span class="math inline">\(n\)</span> trials. The binomial coefficient can be found using</p>
 <p><span class="math display" id="eq:3-bincoeff">\[\begin{equation}
 \binom{n}{k} =  \frac{n!}{k! (n-k)!}.
-\tag{3.4}
+\tag{3.11}
 \end{equation}\]</span></p>
 <p><span class="math inline">\(n!\)</span> is called n-factorial, and is the product of all positive integers less than or equal to n. So <span class="math inline">\(n! = n \times (n-1) \times (n-2) \times \cdots \times 1.\)</span> As an example <span class="math inline">\(5! = 5 \times 4 \times 3 \times 2 \times 1 = 120\)</span>, or using R:</p>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Special.html">factorial</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 120</code></pre>
+<p>Note: A fairly common model, the logistic regression model with aggregated data, is based on the binomial distribution. We mentioned logistic regression earlier. The difference between these two (with and without aggregated data) is based on the structure of the data frame. If you are interested in these differences, please read <a href="https://www.r-bloggers.com/2021/02/how-to-run-logistic-regression-on-aggregate-data-in-r/" class="uri">https://www.r-bloggers.com/2021/02/how-to-run-logistic-regression-on-aggregate-data-in-r/</a>.</p>
 <p>We go back to our first example of counting the number of heads out of three coin flips follows a binomial distribution. Each coin flip is either heads or tails. The success probability, the probability of heads, is 0.5 and is the same for each flip. The result of each flip is independent of other flips since other flips do not affect the outcome. The number of trials (flips in this example) is <span class="math inline">\(n=3\)</span> is specified as a fixed value. We let <span class="math inline">\(x\)</span> denote the number of heads in 3 coin clips, so we write <span class="math inline">\(X \sim Bin(3,0.5)\)</span>.</p>
-<p>Suppose we want to calculate <span class="math inline">\(P(X=2)\)</span> using equation <a href="discrete-random-variables.html#eq:3-bin">(3.3)</a>:</p>
+<p>Suppose we want to calculate <span class="math inline">\(P(X=2)\)</span> using equation <a href="discrete-random-variables.html#eq:3-bin">(3.10)</a>:</p>
 <p><span class="math display">\[
 \begin{split}
 P(X=2) &amp;= \binom{3}{2} (0.5)^2 (0.5)^1\\
@@ -352,31 +559,104 @@ P(HHT \cup HTH \cup THH) &amp;= P(HHT) + P(HTH) + P(THH)\\
        &amp;= \frac{3}{8}.
 \end{split}
 \]</span>
-so we could have solved this using basic proabbility rules from the previous module, without using the PMF of the binomial distribution in equation <a href="discrete-random-variables.html#eq:3-bin">(3.3)</a>. Of course, the PMF of the binomial distribution gets a lot more convenient if <span class="math inline">\(n\)</span> gets larger, as the number of combinations and sample space get a lot larger.</p>
+so we could have solved this using basic probability rules from the previous module, without using the PMF of the binomial distribution in equation <a href="discrete-random-variables.html#eq:3-bin">(3.10)</a>. Of course, the PMF of the binomial distribution gets a lot more convenient if <span class="math inline">\(n\)</span> gets larger, as the number of combinations and sample space get a lot larger.</p>
 <p>We can also use R to find <span class="math inline">\(P(X=2)\)</span>:</p>
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">dbinom</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">0.5</span><span class="op">)</span> <span class="co">##specify values of k, n, p in this order</span></span></code></pre></div>
 <pre><code>## [1] 0.375</code></pre>
-<p>Looking at the description of the Bernoulli and binomial distributions, you may notice that the Bernoulli distribution is a special case of a binomial distribution when <span class="math inline">\(n=1\)</span>, i.e. when we have only 1 trial.</p>
-<div id="pmfs-of-binomial" class="section level4" number="3.5.2.1">
+<div id="relationship-between-binomial-and-bernoulli" class="section level4" number="3.5.2.1">
 <h4>
-<span class="header-section-number">3.5.2.1</span> PMFs of Binomial<a class="anchor" aria-label="anchor" href="#pmfs-of-binomial"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.5.2.1</span> Relationship Between Binomial and Bernoulli<a class="anchor" aria-label="anchor" href="#relationship-between-binomial-and-bernoulli"><i class="fas fa-link"></i></a>
 </h4>
-<p>We take a look at the PMFs of a few binomials, all with <span class="math inline">\(n=10\)</span> but we vary <span class="math inline">\(p\)</span> to be 0.2, 0.5, and 0.9, in Figure <a href="discrete-random-variables.html#fig:3-pmfs">3.4</a>:</p>
+<p>Looking at the description of the Bernoulli and binomial distributions, you may notice that a Bernoulli random variable is a special case of a binomial random variable when <span class="math inline">\(n=1\)</span>, i.e. when we have only 1 trial.</p>
+<p>The binomial random variable is also sometimes viewed as the sum of <span class="math inline">\(n\)</span> independent Bernoulli random variables, all with the same value of <span class="math inline">\(p\)</span>.</p>
+</div>
+<div id="properties-of-binomial" class="section level4" number="3.5.2.2">
+<h4>
+<span class="header-section-number">3.5.2.2</span> Properties of Binomial<a class="anchor" aria-label="anchor" href="#properties-of-binomial"><i class="fas fa-link"></i></a>
+</h4>
+<p>If <span class="math inline">\(X \sim Bin(n,p)\)</span>, then</p>
+<p><span class="math display" id="eq:3-bin-EX">\[\begin{equation}
+E(X) = np
+\tag{3.12}
+\end{equation}\]</span></p>
+<p>and</p>
+<p><span class="math display" id="eq:3-bin-var">\[\begin{equation}
+Var(X) = np(1-p).
+\tag{3.13}
+\end{equation}\]</span></p>
+<p>These results should make sense when we note the relationship between a binomial random variable and Bernoulli random variable. Suppose we have random variables <span class="math inline">\(Y_1, Y_2, \cdots, Y_n\)</span> and they are all Bernoulli random variables with parameter <span class="math inline">\(p\)</span> and are independent. Then <span class="math inline">\(Y = Y_1 + Y_2 + \cdots + Y_n \sim Bin(n,p)\)</span>. Therefore, using the linearity of expectations in equation <a href="discrete-random-variables.html#eq:3-linEX">(3.2)</a>, <span class="math inline">\(E(Y) = E(Y_1) + E(Y_2) + \cdots + E(Y_n) = np\)</span>. Since <span class="math inline">\(Y_1, Y_2, \cdots, Y_n\)</span> are independent, <span class="math inline">\(Var(Y) = Var(Y_1) + Var(Y_2) + \cdots + Var(Y_n) = np(1-p)\)</span>.</p>
+</div>
+<div id="pmfs-of-binomial" class="section level4" number="3.5.2.3">
+<h4>
+<span class="header-section-number">3.5.2.3</span> PMFs of Binomial<a class="anchor" aria-label="anchor" href="#pmfs-of-binomial"><i class="fas fa-link"></i></a>
+</h4>
+<p>We take a look at the PMFs of a few binomials, all with <span class="math inline">\(n=10\)</span> but we vary <span class="math inline">\(p\)</span> to be 0.2, 0.5, and 0.9, in Figure <a href="discrete-random-variables.html#fig:3-pmfs">3.7</a>:</p>
 <div class="figure">
 <span style="display:block;" id="fig:3-pmfs"></span>
 <img src="bookdown-demo_files/figure-html/3-pmfs-1.png" alt="PMF for X, n=10, p varied" width="672"><p class="caption">
-Figure 3.4: PMF for X, n=10, p varied
+Figure 3.7: PMF for X, n=10, p varied
 </p>
 </div>
-<p>From figure <a href="discrete-random-variables.html#fig:3-pmfs">3.4</a>, we can see that the distribution of the binomial is symmetric when <span class="math inline">\(p=0.5\)</span>, as middle values of <span class="math inline">\(k\)</span> have higher probabilities, and the probabilities decrease as we go further away from the middle. When <span class="math inline">\(p \neq 0.5\)</span>, we see that the distribution gets skewed. When the success probability is small, smaller number of successes are likelier, and when the success probability is large, larger number of successes are likelier, which is intuitive. If the probability of success is small, we expect most outcomes to be failures.</p>
+<p>From figure <a href="discrete-random-variables.html#fig:3-pmfs">3.7</a>, we can see that the distribution of the binomial is symmetric when <span class="math inline">\(p=0.5\)</span>, as middle values of <span class="math inline">\(k\)</span> have higher probabilities, and the probabilities decrease as we go further away from the middle. When <span class="math inline">\(p \neq 0.5\)</span>, we see that the distribution gets skewed. When the success probability is small, smaller number of successes are likelier, and when the success probability is large, larger number of successes are likelier, which is intuitive. If the probability of success is small, we expect most outcomes to be failures.</p>
 </div>
 </div>
 <div id="poisson" class="section level3" number="3.5.3">
 <h3>
 <span class="header-section-number">3.5.3</span> Poisson<a class="anchor" aria-label="anchor" href="#poisson"><i class="fas fa-link"></i></a>
 </h3>
+<p>One more common distribution used for discrete random variables is the Poisson distribution. This is often used when the variable of interest is what we call count data (the support is non negative integers), for example, the number of cars that cross an intersection during the day.</p>
+<p>A random variable <span class="math inline">\(X\)</span> follows a <strong>Poisson distribution</strong> with parameter <span class="math inline">\(\lambda\)</span>, where <span class="math inline">\(\lambda&gt;0\)</span>. Using mathematical notation, we can write <span class="math inline">\(X \sim Pois(\lambda)\)</span> to express that the random variable <span class="math inline">\(X\)</span> is distributed as a Poisson with parameter <span class="math inline">\(p\)</span>. The PMF of a Poisson distribution is written as</p>
+<p><span class="math display" id="eq:3-pois">\[\begin{equation}
+P(X=k) = \frac{e^{-\lambda}\lambda^k}{k!}
+\tag{3.14}
+\end{equation}\]</span></p>
+<p>for <span class="math inline">\(k=0,1,2,\cdots\)</span>. <span class="math inline">\(\lambda\)</span> is sometimes called a rate parameter, as it is related to the rate of arrivals, for example, the number of that cross an intersection during a period of time.</p>
+<div id="properties-of-poisson" class="section level4" number="3.5.3.1">
+<h4>
+<span class="header-section-number">3.5.3.1</span> Properties of Poisson<a class="anchor" aria-label="anchor" href="#properties-of-poisson"><i class="fas fa-link"></i></a>
+</h4>
+<p>If <span class="math inline">\(X \sim Pois(\lambda)\)</span>, then</p>
+<p><span class="math display" id="eq:3-pois-EX">\[\begin{equation}
+E(X) = \lambda
+\tag{3.15}
+\end{equation}\]</span></p>
+<p>and</p>
+<p><span class="math display" id="eq:3-pois-var">\[\begin{equation}
+Var(X) = \lambda.
+\tag{3.16}
+\end{equation}\]</span></p>
+<p>These imply that larger values of a Poisson random variable are associated with larger variances. This is a common feature for count data. Consider the number of cars that cross an intersection during a one-hour time period. Consider the average number of cars during rush hour, say between 5 and 6pm. This average number is large, but the number could be a lot smaller due to inclement weather, or the number could get a lot larger is there is a convention occurring nearby. On the other hand, consider the average number of cars between 3 and 4am. This average number is small, and is likely to be small all the time, regardless of weather conditions and whether special events are happening.</p>
+<p>Another interesting property of the Poisson distribution is that it is skewed when <span class="math inline">\(\lambda\)</span> is small, and approaches a bell-shaped distribution as <span class="math inline">\(\lambda\)</span> gets bigger. Figure <a href="discrete-random-variables.html#fig:3-pmfs-lambda">3.8</a> below illustrates this:</p>
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">##calculate probability of Poisson with these values on the support</span></span>
+<span><span class="va">x</span><span class="op">&lt;-</span><span class="fl">0</span><span class="op">:</span><span class="fl">20</span></span>
+<span><span class="va">lambda</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.5</span>, <span class="fl">1</span>, <span class="fl">4</span>, <span class="fl">10</span><span class="op">)</span> <span class="co">##try 4 different values of lambda</span></span>
+<span></span>
+<span><span class="co">##create PMFs of these 4 Poissons with different lambdas</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">)</span></span>
+<span>  </span>
+<span><span class="op">{</span></span>
+<span>  <span class="va">dens</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/Poisson.html">dpois</a></span><span class="op">(</span><span class="va">x</span>,<span class="va">lambda</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">dens</span>, type<span class="op">=</span><span class="st">"l"</span>, main<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"Lambda is"</span>, <span class="va">lambda</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:3-pmfs-lambda"></span>
+<img src="bookdown-demo_files/figure-html/3-pmfs-lambda-1.png" alt="PMF for Poissons as Rate Parameter is Varied" width="672"><p class="caption">
+Figure 3.8: PMF for Poissons as Rate Parameter is Varied
+</p>
+</div>
+</div>
+<div id="poisson-approximation-to-binomial" class="section level4" number="3.5.3.2">
+<h4>
+<span class="header-section-number">3.5.3.2</span> Poisson Approximation to Binomial<a class="anchor" aria-label="anchor" href="#poisson-approximation-to-binomial"><i class="fas fa-link"></i></a>
+</h4>
+<p>If <span class="math inline">\(X \sim Bin(n,p)\)</span>, and if <span class="math inline">\(n\)</span> is large and <span class="math inline">\(p\)</span> is small, then the PMF of <span class="math inline">\(X\)</span> can be approximated by a Poisson distribution with rate parameter <span class="math inline">\(\lambda = np\)</span>. In other words, the approximation works better as <span class="math inline">\(n\)</span> gets larger and <span class="math inline">\(np\)</span> gets smaller.</p>
+<p>There are several rules of thumbs that exist to guide as to how large <span class="math inline">\(n\)</span> should be and how small <span class="math inline">\(np\)</span> should be. According to the National Institute of Standards and Technology <a href="https://www.itl.nist.gov/div898/handbook/pmc/section3/pmc331.htm">(NIST)</a>, <span class="math inline">\(n \geq 20\)</span> and <span class="math inline">\(p \leq 0.05\)</span>, or <span class="math inline">\(n \geq 100\)</span>, and <span class="math inline">\(np \leq 10\)</span>.</p>
+<p>One of the main for using this approximation, instead of directly using the binomial distribution, is that the binomial coefficient can become compuationally expensive to compute when <span class="math inline">\(n\)</span> is large.</p>
 
+</div>
 </div>
 </div>
 </div>
@@ -406,7 +686,8 @@ Figure 3.4: PMF for X, n=10, p varied
 <li>
 <a class="nav-link" href="#expectations"><span class="header-section-number">3.4</span> Expectations</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#linearity-of-expectations"><span class="header-section-number">3.4.1</span> Linearity of Expectations</a></li>
-<li><a class="nav-link" href="#variance"><span class="header-section-number">3.4.2</span> Variance</a></li>
+<li><a class="nav-link" href="#law-of-the-unconscious-statistician"><span class="header-section-number">3.4.2</span> Law of the Unconscious Statistician</a></li>
+<li><a class="nav-link" href="#variance"><span class="header-section-number">3.4.3</span> Variance</a></li>
 </ul>
 </li>
 <li>
@@ -432,7 +713,7 @@ Figure 3.4: PMF for X, n=10, p varied
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2025-06-10.</p>
+    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2025-06-11.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
