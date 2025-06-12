@@ -57,7 +57,7 @@
 <h1>
 <span class="header-section-number">3</span> Discrete Random Variables<a class="anchor" aria-label="anchor" href="#discrete-random-variables"><i class="fas fa-link"></i></a>
 </h1>
-<p>This module is based on Introduction to Probability (Blitzstein, Hwang), Chapters 3 and 4. You can access the book for free at <a href="https://stat110.hsites.harvard.edu/" class="uri">https://stat110.hsites.harvard.edu/</a> (and then click on Book). Please note that I cover additional topics, and skip certain topics from the book. You may skip Sections 3.4, 3.7, 3.9, 4.3, 4.9 from the book.</p>
+<p>This module is based on Introduction to Probability (Blitzstein, Hwang), Chapters 3 and 4. You can access the book for free at <a href="https://stat110.hsites.harvard.edu/" class="uri">https://stat110.hsites.harvard.edu/</a> (and then click on Book). Please note that I cover additional topics, and skip certain topics from the book. You may skip Sections 3.4, 3.9, Example 4.2.3, Section 4.3, Example 4.4.6, 4.4.7, Theorem 4.4.8, Example 4.4.9, 4.6.4, 4.7.4, 4.7.7, and Section 4.9 from the book.</p>
 <div id="random-variables" class="section level2" number="3.1">
 <h2>
 <span class="header-section-number">3.1</span> Random Variables<a class="anchor" aria-label="anchor" href="#random-variables"><i class="fas fa-link"></i></a>
@@ -241,6 +241,7 @@ Figure 3.2: Histogram from Experiment Performed 1 Million Times
 Figure 3.3: CDF for X
 </p>
 </div>
+<p>The CDF for discrete random variables always look like a step function, as it increases in discrete jumps at each value of the support. The height of each jump corresponds to the PMF at that value of the support.</p>
 <p><em>Thought question</em>: do you see similarities between the CDF and the empirical cumulative density function (ECDF) from section <a href="descriptive.html#ecdf">1.3.3</a>?</p>
 <div id="valid-cdfs" class="section level3" number="3.3.1">
 <h3>
@@ -540,7 +541,14 @@ P(X=k) = \binom{n}{k} p^k (1-p)^{n-k}
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Special.html">factorial</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 120</code></pre>
 <p>Note: A fairly common model, the logistic regression model with aggregated data, is based on the binomial distribution. We mentioned logistic regression earlier. The difference between these two (with and without aggregated data) is based on the structure of the data frame. If you are interested in these differences, please read <a href="https://www.r-bloggers.com/2021/02/how-to-run-logistic-regression-on-aggregate-data-in-r/" class="uri">https://www.r-bloggers.com/2021/02/how-to-run-logistic-regression-on-aggregate-data-in-r/</a>.</p>
-<p>We go back to our first example of counting the number of heads out of three coin flips follows a binomial distribution. Each coin flip is either heads or tails. The success probability, the probability of heads, is 0.5 and is the same for each flip. The result of each flip is independent of other flips since other flips do not affect the outcome. The number of trials (flips in this example) is <span class="math inline">\(n=3\)</span> is specified as a fixed value. We let <span class="math inline">\(x\)</span> denote the number of heads in 3 coin clips, so we write <span class="math inline">\(X \sim Bin(3,0.5)\)</span>.</p>
+<p>We go back to our first example of counting the number of heads out of three coin flips follows a binomial distribution.</p>
+<ul>
+<li>Each coin flip is either heads or tails. There are only two outcomes for each flip.</li>
+<li>The success probability, the probability of heads, is 0.5 and is the same for each flip. The parameter is fixed for each flip.</li>
+<li>The result of each flip is independent of other flips since other flips do not affect the outcome.</li>
+<li>The number of trials (flips in this example) is <span class="math inline">\(n=3\)</span> is specified as a fixed value.</li>
+</ul>
+<p>Since these four conditions are met, the number of heads in 3 coin flips can be modeled using a binomial distribution. We let <span class="math inline">\(x\)</span> denote the number of heads in 3 coin clips, so we write <span class="math inline">\(X \sim Bin(3,0.5)\)</span>.</p>
 <p>Suppose we want to calculate <span class="math inline">\(P(X=2)\)</span> using equation <a href="discrete-random-variables.html#eq:3-bin">(3.10)</a>:</p>
 <p><span class="math display">\[
 \begin{split}
@@ -627,7 +635,7 @@ Var(X) = \lambda.
 \tag{3.16}
 \end{equation}\]</span></p>
 <p>These imply that larger values of a Poisson random variable are associated with larger variances. This is a common feature for count data. Consider the number of cars that cross an intersection during a one-hour time period. Consider the average number of cars during rush hour, say between 5 and 6pm. This average number is large, but the number could be a lot smaller due to inclement weather, or the number could get a lot larger is there is a convention occurring nearby. On the other hand, consider the average number of cars between 3 and 4am. This average number is small, and is likely to be small all the time, regardless of weather conditions and whether special events are happening.</p>
-<p>Another interesting property of the Poisson distribution is that it is skewed when <span class="math inline">\(\lambda\)</span> is small, and approaches a bell-shaped distribution as <span class="math inline">\(\lambda\)</span> gets bigger. Figure <a href="discrete-random-variables.html#fig:3-pmfs-lambda">3.8</a> below illustrates this:</p>
+<p>Another interesting property of the Poisson distribution is that it is skewed when <span class="math inline">\(\lambda\)</span> is small, and approaches a bell-shaped distribution as <span class="math inline">\(\lambda\)</span> gets bigger. Figure <a href="discrete-random-variables.html#fig:3-pmfs-lambda">3.8</a> displays density plots of Poisson distributions as <span class="math inline">\(\lambda\)</span> is varied:</p>
 <div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##calculate probability of Poisson with these values on the support</span></span>
 <span><span class="va">x</span><span class="op">&lt;-</span><span class="fl">0</span><span class="op">:</span><span class="fl">20</span></span>
@@ -653,8 +661,34 @@ Figure 3.8: PMF for Poissons as Rate Parameter is Varied
 <span class="header-section-number">3.5.3.2</span> Poisson Approximation to Binomial<a class="anchor" aria-label="anchor" href="#poisson-approximation-to-binomial"><i class="fas fa-link"></i></a>
 </h4>
 <p>If <span class="math inline">\(X \sim Bin(n,p)\)</span>, and if <span class="math inline">\(n\)</span> is large and <span class="math inline">\(p\)</span> is small, then the PMF of <span class="math inline">\(X\)</span> can be approximated by a Poisson distribution with rate parameter <span class="math inline">\(\lambda = np\)</span>. In other words, the approximation works better as <span class="math inline">\(n\)</span> gets larger and <span class="math inline">\(np\)</span> gets smaller.</p>
-<p>There are several rules of thumbs that exist to guide as to how large <span class="math inline">\(n\)</span> should be and how small <span class="math inline">\(np\)</span> should be. According to the National Institute of Standards and Technology <a href="https://www.itl.nist.gov/div898/handbook/pmc/section3/pmc331.htm">(NIST)</a>, <span class="math inline">\(n \geq 20\)</span> and <span class="math inline">\(p \leq 0.05\)</span>, or <span class="math inline">\(n \geq 100\)</span>, and <span class="math inline">\(np \leq 10\)</span>.</p>
-<p>One of the main for using this approximation, instead of directly using the binomial distribution, is that the binomial coefficient can become compuationally expensive to compute when <span class="math inline">\(n\)</span> is large.</p>
+<p>There are several rules of thumbs that exist to guide as to how large <span class="math inline">\(n\)</span> should be and how small <span class="math inline">\(np\)</span> should be. The National Institute of Standards and Technology <a href="https://www.itl.nist.gov/div898/handbook/pmc/section3/pmc331.htm">(NIST)</a> suggest <span class="math inline">\(n \geq 20\)</span> and <span class="math inline">\(p \leq 0.05\)</span>, or <span class="math inline">\(n \geq 100\)</span>, and <span class="math inline">\(np \leq 10\)</span>.</p>
+<p>One of the main for using this approximation, instead of directly using the binomial distribution, is that the binomial coefficient can become computationally expensive to compute when <span class="math inline">\(n\)</span> is large.</p>
+<p>Consider this example: A company manufactures computer chips, and 2 percent of chips are defective. The quality control manager randomly samples 100 chips coming off the assembly line. What is the probability that at most 3 chips are defective?</p>
+<p>Let <span class="math inline">\(Y\)</span> denote the number of chips that are defective out of 100 chips.</p>
+<ul>
+<li>Each chip is either defective or not. There are only two outcomes for each chip.</li>
+<li>The “success” probability is 0.02 for each chip. This probability is assumed to be fixed for each chip.</li>
+<li>We have to assume that each chip is independent.</li>
+<li>The number of chips is fixed at <span class="math inline">\(n=100\)</span>.</li>
+</ul>
+<p>So we can model <span class="math inline">\(Y \sim Bin(100,0.02)\)</span>, as long as we assume the chips the independent. To find <span class="math inline">\(P(Y \leq 3)\)</span>, we can:</p>
+<ul>
+<li>use the binomial distribution, or</li>
+<li>approximate it using <span class="math inline">\(Pois(2)\)</span>, as <span class="math inline">\(\lambda = np = 100 \times 0.02\)</span>.</li>
+</ul>
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">##set up binomial</span></span>
+<span><span class="va">n</span><span class="op">&lt;-</span><span class="fl">100</span> </span>
+<span><span class="va">p</span><span class="op">&lt;-</span><span class="fl">0.02</span> </span>
+<span><span class="va">y</span><span class="op">&lt;-</span><span class="fl">0</span><span class="op">:</span><span class="fl">3</span> <span class="co">##we want P(Y=0), P(Y=1), P(Y=2), P(Y=3)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">dbinom</a></span><span class="op">(</span><span class="va">y</span>,<span class="va">n</span>,<span class="va">p</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 0.8589616</code></pre>
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">##Use Poisson to approx binomial</span></span>
+<span><span class="va">lambda</span><span class="op">&lt;-</span><span class="va">n</span><span class="op">*</span><span class="va">p</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Poisson.html">dpois</a></span><span class="op">(</span><span class="va">y</span>,<span class="va">lambda</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 0.8571235</code></pre>
+<p>Notice the values are very close to each other.</p>
 
 </div>
 </div>
@@ -713,7 +747,7 @@ Figure 3.8: PMF for Poissons as Rate Parameter is Varied
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2025-06-11.</p>
+    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2025-06-12.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

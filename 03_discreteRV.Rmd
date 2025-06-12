@@ -4,7 +4,7 @@
 rm(list = ls())
 ```
 
-This module is based on Introduction to Probability (Blitzstein, Hwang), Chapters 3 and 4. You can access the book for free at https://stat110.hsites.harvard.edu/ (and then click on Book). Please note that I cover additional topics, and skip certain topics from the book. You may skip Sections 3.4, 3.7, 3.9, 4.3, 4.9 from the book.
+This module is based on Introduction to Probability (Blitzstein, Hwang), Chapters 3 and 4. You can access the book for free at https://stat110.hsites.harvard.edu/ (and then click on Book). Please note that I cover additional topics, and skip certain topics from the book. You may skip Sections 3.4, 3.9, Example 4.2.3, Section 4.3, Example 4.4.6, 4.4.7, Theorem 4.4.8, Example 4.4.9, 4.6.4, 4.7.4, 4.7.7, and Section 4.9 from the book.
 
 ## Random Variables
 
@@ -152,13 +152,11 @@ knitr::kable(my_data, caption = "CDF for X")
 Or in a simple plot like in Figure \@ref(fig:3-cdf) below:
 
 ```{r 3-cdf, fig.cap="CDF for X", echo=FALSE}
-##support
-x<-0:3
-## CDF for each value in the support. 
-CDF<-c(1/8, 1/2, 7/8, 1)
+y<-c(0,1,1,1,2,2,2,3)
 ## create plot of CDF vs each value in support
-plot(x, CDF, type="h", main = "CDF for X", xlab="# of heads", ylab="Probability", ylim=c(0,1))
+plot(ecdf(y), , main = "CDF for X", xlab="# of heads", ylab="Probability")
 ```
+The CDF for discrete random variables always look like a step function, as it increases in discrete jumps at each value of the support. The height of each jump corresponds to the PMF at that value of the support. 
 
 *Thought question*: do you see similarities between the CDF and the empirical cumulative density function (ECDF) from section \@ref(ecdf)?
 
@@ -477,7 +475,14 @@ factorial(5)
 
 Note: A fairly common model, the logistic regression model with aggregated data, is based on the binomial distribution. We mentioned logistic regression earlier. The difference between these two (with and without aggregated data) is based on the structure of the data frame. If you are interested in these differences, please read https://www.r-bloggers.com/2021/02/how-to-run-logistic-regression-on-aggregate-data-in-r/.
 
-We go back to our first example of counting the number of heads out of three coin flips follows a binomial distribution. Each coin flip is either heads or tails. The success probability, the probability of heads, is 0.5 and is the same for each flip. The result of each flip is independent of other flips since other flips do not affect the outcome. The number of trials (flips in this example) is $n=3$ is specified as a fixed value. We let $x$ denote the number of heads in 3 coin clips, so we write $X \sim Bin(3,0.5)$.
+We go back to our first example of counting the number of heads out of three coin flips follows a binomial distribution. 
+
+- Each coin flip is either heads or tails. There are only two outcomes for each flip.
+- The success probability, the probability of heads, is 0.5 and is the same for each flip. The parameter is fixed for each flip.
+- The result of each flip is independent of other flips since other flips do not affect the outcome. 
+- The number of trials (flips in this example) is $n=3$ is specified as a fixed value. 
+
+Since these four conditions are met, the number of heads in 3 coin flips can be modeled using a binomial distribution. We let $x$ denote the number of heads in 3 coin clips, so we write $X \sim Bin(3,0.5)$.
 
 Suppose we want to calculate $P(X=2)$ using equation \@ref(eq:3-bin):
 
@@ -582,7 +587,7 @@ Var(X) = \lambda.
 
 These imply that larger values of a Poisson random variable are associated with larger variances. This is a common feature for count data. Consider the number of cars that cross an intersection during a one-hour time period. Consider the average number of cars during rush hour, say between 5 and 6pm. This average number is large, but the number could be a lot smaller due to inclement weather, or the number could get a lot larger is there is a convention occurring nearby. On the other hand, consider the average number of cars between 3 and 4am. This average number is small, and is likely to be small all the time, regardless of weather conditions and whether special events are happening. 
 
-Another interesting property of the Poisson distribution is that it is skewed when $\lambda$ is small, and approaches a bell-shaped distribution as $\lambda$ gets bigger. Figure \@ref(fig:3-pmfs-lambda) below illustrates this:
+Another interesting property of the Poisson distribution is that it is skewed when $\lambda$ is small, and approaches a bell-shaped distribution as $\lambda$ gets bigger. Figure \@ref(fig:3-pmfs-lambda) displays density plots of Poisson distributions as $\lambda$ is varied:
 
 ```{r 3-pmfs-lambda, fig.cap="PMF for Poissons as Rate Parameter is Varied"}
 ##calculate probability of Poisson with these values on the support
@@ -605,9 +610,35 @@ for (i in 1:4)
 
 If $X \sim Bin(n,p)$, and if $n$ is large and $p$ is small, then the PMF of $X$ can be approximated by a Poisson distribution with rate parameter $\lambda = np$. In other words, the approximation works better as $n$ gets larger and $np$ gets smaller. 
 
-There are several rules of thumbs that exist to guide as to how large $n$ should be and how small $np$ should be. According to the National Institute of Standards and Technology [(NIST)](https://www.itl.nist.gov/div898/handbook/pmc/section3/pmc331.htm), $n \geq 20$ and $p \leq 0.05$, or $n \geq 100$, and $np \leq 10$.
+There are several rules of thumbs that exist to guide as to how large $n$ should be and how small $np$ should be. The National Institute of Standards and Technology [(NIST)](https://www.itl.nist.gov/div898/handbook/pmc/section3/pmc331.htm) suggest $n \geq 20$ and $p \leq 0.05$, or $n \geq 100$, and $np \leq 10$.
 
-One of the main for using this approximation, instead of directly using the binomial distribution, is that the binomial coefficient can become compuationally expensive to compute when $n$ is large. 
+One of the main for using this approximation, instead of directly using the binomial distribution, is that the binomial coefficient can become computationally expensive to compute when $n$ is large. 
 
+Consider this example: A company manufactures computer chips, and 2 percent of chips are defective. The quality control manager randomly samples 100 chips coming off the assembly line. What is the probability that at most 3 chips are defective?
 
+Let $Y$ denote the number of chips that are defective out of 100 chips.
+
+- Each chip is either defective or not. There are only two outcomes for each chip.
+- The "success" probability is 0.02 for each chip. This probability is assumed to be fixed for each chip.
+- We have to assume that each chip is independent.
+- The number of chips is fixed at $n=100$.
+
+So we can model $Y \sim Bin(100,0.02)$, as long as we assume the chips the independent. To find $P(Y \leq 3)$, we can:
+
+- use the binomial distribution, or
+- approximate it using $Pois(2)$, as $\lambda = np = 100 \times 0.02$.
+
+```{r}
+##set up binomial
+n<-100 
+p<-0.02 
+y<-0:3 ##we want P(Y=0), P(Y=1), P(Y=2), P(Y=3)
+sum(dbinom(y,n,p))
+
+##Use Poisson to approx binomial
+lambda<-n*p
+sum(dpois(y,lambda))
+```
+
+Notice the values are very close to each other. 
 

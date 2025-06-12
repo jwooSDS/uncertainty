@@ -127,7 +127,7 @@
 
 \title{Understanding Uncertainty Course Notes}
 \author{Jeffrey Woo}
-\date{2025-06-11}
+\date{2025-06-12}
 
 \begin{document}
 \maketitle
@@ -803,7 +803,7 @@ The IQR is considered a robust measure of spread, while the sample variance and 
 
 \chapter{Probability}\label{probability}
 
-This module is based on Introduction to Probability (Blitzstein, Hwang), Chapters 1 and 2. You can access the book for free at \url{https://stat110.hsites.harvard.edu/} (and then click on Book). Please note that I cover additional topics, and skip certain topics from the book. You may skip Sections 1.4 and 1.5, and examples 2.4.5 and 2.5.12 from the book.
+This module is based on Introduction to Probability (Blitzstein, Hwang), Chapters 1 and 2. You can access the book for free at \url{https://stat110.hsites.harvard.edu/} (and then click on Book). Please note that I cover additional topics, and skip certain topics from the book. You may skip: Sections 1.4, 1.5, Theorem 1.6.3, Examples 1.6.4, 2.4.5, 2.5.12, 2.7.3 from the book.
 
 \section{Probability}\label{probability-1}
 
@@ -1224,7 +1224,7 @@ The book provides a discussion about this in Section 2.8, examples 2.8.1 and 2.8
 
 \chapter{Discrete Random Variables}\label{discrete-random-variables}
 
-This module is based on Introduction to Probability (Blitzstein, Hwang), Chapters 3 and 4. You can access the book for free at \url{https://stat110.hsites.harvard.edu/} (and then click on Book). Please note that I cover additional topics, and skip certain topics from the book. You may skip Sections 3.4, 3.7, 3.9, 4.3, 4.9 from the book.
+This module is based on Introduction to Probability (Blitzstein, Hwang), Chapters 3 and 4. You can access the book for free at \url{https://stat110.hsites.harvard.edu/} (and then click on Book). Please note that I cover additional topics, and skip certain topics from the book. You may skip Sections 3.4, 3.9, Example 4.2.3, Section 4.3, Example 4.4.6, 4.4.7, Theorem 4.4.8, Example 4.4.9, 4.6.4, 4.7.4, 4.7.7, and Section 4.9 from the book.
 
 \section{Random Variables}\label{random-variables}
 
@@ -1411,11 +1411,8 @@ x & CDF\\
 
 Or in a simple plot like in Figure \ref{fig:3-cdf} below:
 
-\begin{figure}
-\centering
 \includegraphics{bookdown-demo_files/figure-latex/3-cdf-1.pdf}
-\caption{\label{fig:3-cdf}CDF for X}
-\end{figure}
+The CDF for discrete random variables always look like a step function, as it increases in discrete jumps at each value of the support. The height of each jump corresponds to the PMF at that value of the support.
 
 \emph{Thought question}: do you see similarities between the CDF and the empirical cumulative density function (ECDF) from section \ref{ecdf}?
 
@@ -1801,7 +1798,21 @@ In equation \eqref{eq:3-bin}, \(\binom{n}{k}\) is called the binomial coefficien
 
 Note: A fairly common model, the logistic regression model with aggregated data, is based on the binomial distribution. We mentioned logistic regression earlier. The difference between these two (with and without aggregated data) is based on the structure of the data frame. If you are interested in these differences, please read \url{https://www.r-bloggers.com/2021/02/how-to-run-logistic-regression-on-aggregate-data-in-r/}.
 
-We go back to our first example of counting the number of heads out of three coin flips follows a binomial distribution. Each coin flip is either heads or tails. The success probability, the probability of heads, is 0.5 and is the same for each flip. The result of each flip is independent of other flips since other flips do not affect the outcome. The number of trials (flips in this example) is \(n=3\) is specified as a fixed value. We let \(x\) denote the number of heads in 3 coin clips, so we write \(X \sim Bin(3,0.5)\).
+We go back to our first example of counting the number of heads out of three coin flips follows a binomial distribution.
+
+\begin{itemize}
+\tightlist
+\item
+  Each coin flip is either heads or tails. There are only two outcomes for each flip.
+\item
+  The success probability, the probability of heads, is 0.5 and is the same for each flip. The parameter is fixed for each flip.
+\item
+  The result of each flip is independent of other flips since other flips do not affect the outcome.
+\item
+  The number of trials (flips in this example) is \(n=3\) is specified as a fixed value.
+\end{itemize}
+
+Since these four conditions are met, the number of heads in 3 coin flips can be modeled using a binomial distribution. We let \(x\) denote the number of heads in 3 coin clips, so we write \(X \sim Bin(3,0.5)\).
 
 Suppose we want to calculate \(P(X=2)\) using equation \eqref{eq:3-bin}:
 
@@ -1905,7 +1916,7 @@ Var(X) = \lambda.
 
 These imply that larger values of a Poisson random variable are associated with larger variances. This is a common feature for count data. Consider the number of cars that cross an intersection during a one-hour time period. Consider the average number of cars during rush hour, say between 5 and 6pm. This average number is large, but the number could be a lot smaller due to inclement weather, or the number could get a lot larger is there is a convention occurring nearby. On the other hand, consider the average number of cars between 3 and 4am. This average number is small, and is likely to be small all the time, regardless of weather conditions and whether special events are happening.
 
-Another interesting property of the Poisson distribution is that it is skewed when \(\lambda\) is small, and approaches a bell-shaped distribution as \(\lambda\) gets bigger. Figure \ref{fig:3-pmfs-lambda} below illustrates this:
+Another interesting property of the Poisson distribution is that it is skewed when \(\lambda\) is small, and approaches a bell-shaped distribution as \(\lambda\) gets bigger. Figure \ref{fig:3-pmfs-lambda} displays density plots of Poisson distributions as \(\lambda\) is varied:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1934,9 +1945,63 @@ Another interesting property of the Poisson distribution is that it is skewed wh
 
 If \(X \sim Bin(n,p)\), and if \(n\) is large and \(p\) is small, then the PMF of \(X\) can be approximated by a Poisson distribution with rate parameter \(\lambda = np\). In other words, the approximation works better as \(n\) gets larger and \(np\) gets smaller.
 
-There are several rules of thumbs that exist to guide as to how large \(n\) should be and how small \(np\) should be. According to the National Institute of Standards and Technology \href{https://www.itl.nist.gov/div898/handbook/pmc/section3/pmc331.htm}{(NIST)}, \(n \geq 20\) and \(p \leq 0.05\), or \(n \geq 100\), and \(np \leq 10\).
+There are several rules of thumbs that exist to guide as to how large \(n\) should be and how small \(np\) should be. The National Institute of Standards and Technology \href{https://www.itl.nist.gov/div898/handbook/pmc/section3/pmc331.htm}{(NIST)} suggest \(n \geq 20\) and \(p \leq 0.05\), or \(n \geq 100\), and \(np \leq 10\).
 
-One of the main for using this approximation, instead of directly using the binomial distribution, is that the binomial coefficient can become compuationally expensive to compute when \(n\) is large.
+One of the main for using this approximation, instead of directly using the binomial distribution, is that the binomial coefficient can become computationally expensive to compute when \(n\) is large.
+
+Consider this example: A company manufactures computer chips, and 2 percent of chips are defective. The quality control manager randomly samples 100 chips coming off the assembly line. What is the probability that at most 3 chips are defective?
+
+Let \(Y\) denote the number of chips that are defective out of 100 chips.
+
+\begin{itemize}
+\tightlist
+\item
+  Each chip is either defective or not. There are only two outcomes for each chip.
+\item
+  The ``success'' probability is 0.02 for each chip. This probability is assumed to be fixed for each chip.
+\item
+  We have to assume that each chip is independent.
+\item
+  The number of chips is fixed at \(n=100\).
+\end{itemize}
+
+So we can model \(Y \sim Bin(100,0.02)\), as long as we assume the chips the independent. To find \(P(Y \leq 3)\), we can:
+
+\begin{itemize}
+\tightlist
+\item
+  use the binomial distribution, or
+\item
+  approximate it using \(Pois(2)\), as \(\lambda = np = 100 \times 0.02\).
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#set up binomial}
+\NormalTok{n}\OtherTok{\textless{}{-}}\DecValTok{100} 
+\NormalTok{p}\OtherTok{\textless{}{-}}\FloatTok{0.02} 
+\NormalTok{y}\OtherTok{\textless{}{-}}\DecValTok{0}\SpecialCharTok{:}\DecValTok{3} \DocumentationTok{\#\#we want P(Y=0), P(Y=1), P(Y=2), P(Y=3)}
+\FunctionTok{sum}\NormalTok{(}\FunctionTok{dbinom}\NormalTok{(y,n,p))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.8589616
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#Use Poisson to approx binomial}
+\NormalTok{lambda}\OtherTok{\textless{}{-}}\NormalTok{n}\SpecialCharTok{*}\NormalTok{p}
+\FunctionTok{sum}\NormalTok{(}\FunctionTok{dpois}\NormalTok{(y,lambda))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.8571235
+\end{verbatim}
+
+Notice the values are very close to each other.
 
   \bibliography{book.bib,packages.bib}
 
