@@ -6,7 +6,7 @@ rm(list = ls())
 
 This module is based on Introduction to Probability (Blitzstein, Hwang), Chapters 1 and 2. You can access the book for free at https://stat110.hsites.harvard.edu/ (and then click on Book). Please note that I cover additional topics, and skip certain topics from the book. You may skip: Sections 1.4, 1.5, Theorem 1.6.3, Examples 1.6.4, 2.4.5, 2.5.12, 2.7.3 from the book.
 
-## Probability
+## Introduction to Probability
 
 A way of quantifying uncertainty is through probability. Think about these statements: "I am 100% certain that it will rain in the next hour" and "I am 50% certain that it will rain in the next hour". The percentages are used to reflect the degree of certainty about the event happening. The first statement reflects certainty; the second reflects uncertainty as the statement implies the belief that it is equally likely that it will rain or not. In this module, we will learn about the basic concepts about probability.
 

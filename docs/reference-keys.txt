@@ -84,7 +84,7 @@ measures-of-spread
 variance-and-standard-deviation
 interquartile-range
 probability
-probability-1
+introduction-to-probability
 why-study-probability
 frequentiest-and-bayesian-view-of-probability
 key-concepts-in-probability
@@ -137,3 +137,15 @@ pmfs-of-binomial
 poisson
 properties-of-poisson
 poisson-approximation-to-binomial
+using-r
+continuous-random-variables
+introduction
+probability-density-functions-pdfs
+estimating-pdfs-with-data
+cumulative-distribution-functions-cdfs-1
+expectations-1
+moments
+common-continuous-random-variables
+uniform
+universality-of-uniform
+normal

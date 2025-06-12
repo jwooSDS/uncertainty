@@ -1,0 +1,34 @@
+# Continuous Random Variables
+
+```{r, echo=FALSE}
+rm(list = ls())
+```
+
+This module is based on Introduction to Probability (Blitzstein, Hwang), Chapters 5 and 6. You can access the book for free at https://stat110.hsites.harvard.edu/ (and then click on Book). Please note that I cover additional topics, and skip certain topics from the book. You may skip Sections ??? from the book.
+
+## Introduction
+
+In the previous module, we learned about discrete random variables. We learned how their distributions can be described by the PMFs and CDFs, how to find their expected values and variances, as well as common distributions for discrete random variables. We will learn about their counterparts when dealing with continuous random variables. The concepts are similar, but how they are computed can be quite different. 
+
+As a reminder:
+
+- A **discrete random variable** can only take on a countable (finite or infinite) number of values.
+- A **continuous random variable** can take on an uncountable number of values in an interval of real numbers. 
+
+## Probability Density Functions (PDFs)
+
+### Estimating PDFs with Data
+
+## Cumulative Distribution Functions (CDFs)
+
+## Expectations
+
+### Moments
+
+## Common Continuous Random Variables
+
+### Uniform
+
+#### Universality of Uniform
+
+### Normal

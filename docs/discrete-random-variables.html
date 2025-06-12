@@ -46,6 +46,7 @@
 <li><a class="" href="descriptive.html"><span class="header-section-number">1</span> Descriptive Statistics</a></li>
 <li><a class="" href="probability.html"><span class="header-section-number">2</span> Probability</a></li>
 <li><a class="active" href="discrete-random-variables.html"><span class="header-section-number">3</span> Discrete Random Variables</a></li>
+<li><a class="" href="continuous-random-variables.html"><span class="header-section-number">4</span> Continuous Random Variables</a></li>
 </ul>
 
         <div class="book-extra">
@@ -469,7 +470,7 @@ E(X^2) &amp;= 0^2 \times \frac{1}{8} + 1^2 \times \frac{3}{8} + 2^2 \times \frac
 <h2>
 <span class="header-section-number">3.5</span> Common Discrete Random Variables<a class="anchor" aria-label="anchor" href="#common-discrete-random-variables"><i class="fas fa-link"></i></a>
 </h2>
-<p>Next, we will introduce some commonly used distributions that may be used for discrete random variables. A number of common statistical models (for example, logistic regression, Poisson point process) are based on these distributions.</p>
+<p>Next, we will introduce some commonly used distributions that may be used for discrete random variables. A number of common statistical models (for example, logistic regression, Poisson regression) are based on these distributions.</p>
 <div id="bernoulli" class="section level3" number="3.5.1">
 <h3>
 <span class="header-section-number">3.5.1</span> Bernoulli<a class="anchor" aria-label="anchor" href="#bernoulli"><i class="fas fa-link"></i></a>
@@ -558,7 +559,7 @@ P(X=2) &amp;= \binom{3}{2} (0.5)^2 (0.5)^1\\
        &amp;= \frac{3}{8}.
 \end{split}
 \]</span></p>
-<p>In this example, the binomial coefficient equals to 3. Which indicates there were 3 combinations to obtain 2 heads in 3 coin flips. <span class="math inline">\(P(X=2\)</span> can be written as <span class="math inline">\(P(HHT \cup HTH \cup THH)\)</span>. Solving for <span class="math inline">\(P(HHT \cup HTH \cup THH)\)</span>, we have</p>
+<p>In this example, the binomial coefficient equals to 3. Which indicates there were 3 combinations to obtain 2 heads in 3 coin flips. <span class="math inline">\(P(X=2)\)</span> can be written as <span class="math inline">\(P(HHT \cup HTH \cup THH)\)</span>. Solving for <span class="math inline">\(P(HHT \cup HTH \cup THH)\)</span>, we have</p>
 <p><span class="math display">\[
 \begin{split}
 P(HHT \cup HTH \cup THH) &amp;= P(HHT) + P(HTH) + P(THH)\\
@@ -689,14 +690,59 @@ Figure 3.8: PMF for Poissons as Rate Parameter is Varied
 <span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Poisson.html">dpois</a></span><span class="op">(</span><span class="va">y</span>,<span class="va">lambda</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 0.8571235</code></pre>
 <p>Notice the values are very close to each other.</p>
-
 </div>
 </div>
+</div>
+<div id="using-r" class="section level2" number="3.6">
+<h2>
+<span class="header-section-number">3.6</span> Using R<a class="anchor" aria-label="anchor" href="#using-r"><i class="fas fa-link"></i></a>
+</h2>
+<p>R has built in functions to compute the PMF, CDF, percentiles, as well as simulate data of common distributions. We will start using a random variable <span class="math inline">\(Y\)</span> which follows binomial distribution, with <span class="math inline">\(n=5, p = 0.3\)</span> as an example first. Note in this example that the support for <span class="math inline">\(Y\)</span> is <span class="math inline">\(\{0,1,2,3,4,5 \}\)</span>.</p>
+<ol style="list-style-type: decimal">
+<li>To find <span class="math inline">\(P(Y=2)\)</span>, use:</li>
+</ol>
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">dbinom</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">5</span>, <span class="fl">0.3</span><span class="op">)</span> <span class="co">##supply the value of Y you want, then the parameters n and p in this order</span></span></code></pre></div>
+<pre><code>## [1] 0.3087</code></pre>
+<p>The probability that <span class="math inline">\(Y\)</span> is equal to 2 is 0.3087.</p>
+<ol start="2" style="list-style-type: decimal">
+<li>To find <span class="math inline">\(P(Y \leq 2)\)</span>, use:</li>
+</ol>
+<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">pbinom</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">5</span>, <span class="fl">0.3</span><span class="op">)</span> <span class="co">##supply the value of Y you want, then the parameters n and p in this order</span></span></code></pre></div>
+<pre><code>## [1] 0.83692</code></pre>
+<p>The probability that <span class="math inline">\(Y\)</span> is less than or equal to 2 is 0.83692.</p>
+<ol start="3" style="list-style-type: decimal">
+<li>To find the value on the support that corresponds to the median (or 50th percentile), use:</li>
+</ol>
+<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">qbinom</a></span><span class="op">(</span><span class="fl">0.5</span>, <span class="fl">5</span>, <span class="fl">0.3</span><span class="op">)</span> <span class="co">##supply the value of the percentile you need, then the parameters n and p in this order</span></span></code></pre></div>
+<pre><code>## [1] 1</code></pre>
+<p>The median of a binomial distribution with 5 trials and success probability 0.3 is 1.</p>
+<ol start="4" style="list-style-type: decimal">
+<li>To simulate 10 realizations (repetitions) of <span class="math inline">\(Y\)</span>, use:</li>
+</ol>
+<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span> <span class="co">##use set.seed() so we get the same random numbers each time the code is run</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">rbinom</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">5</span>, <span class="fl">0.3</span><span class="op">)</span> <span class="co">##supply the number of simulated data you need, then the parameters n and p</span></span></code></pre></div>
+<pre><code>##  [1] 1 2 2 0 3 3 0 2 1 2</code></pre>
+<p>This outputs a vector of length 10. Each value represents the result of each rep. So the first time we ran the binomial distribution with <span class="math inline">\(n=5, p=0.3\)</span>, only 1 out of the 5 was a success. The second time it was run, only 2 out of the 5 was a success, and so on.</p>
+<p>Noticed these functions all ended with <code>binom</code>. We just added a different letter first, depending on whether we want the PMF, CDF, percentile, or random draw. The letters are <code>d</code>, <code>p</code>, <code>q</code>, and <code>r</code> respectively.</p>
+<p>The same idea works for any other distribution. For example, to find the probability of a Poisson distribution with rate parameter 2 being equal to 1, we type:</p>
+<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Poisson.html">dpois</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span> <span class="co">##supply value of k, then parameter</span></span></code></pre></div>
+<pre><code>## [1] 0.2706706</code></pre>
+<p><em>Thought questions:</em> Suppose <span class="math inline">\(Y \sim Pois(1)\)</span>.</p>
+<ul>
+<li>Find <span class="math inline">\(P(Y \leq 2)\)</span>.</li>
+<li>Find the 75th percentile of <span class="math inline">\(Y\)</span>.</li>
+<li>Simulate 10,000 reps from Y, and find its sample mean. Is the sample mean close to the expected value?</li>
+</ul>
 </div>
 </div>
   <div class="chapter-nav">
 <div class="prev"><a href="probability.html"><span class="header-section-number">2</span> Probability</a></div>
-<div class="empty"></div>
+<div class="next"><a href="continuous-random-variables.html"><span class="header-section-number">4</span> Continuous Random Variables</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
@@ -731,6 +777,7 @@ Figure 3.8: PMF for Poissons as Rate Parameter is Varied
 <li><a class="nav-link" href="#poisson"><span class="header-section-number">3.5.3</span> Poisson</a></li>
 </ul>
 </li>
+<li><a class="nav-link" href="#using-r"><span class="header-section-number">3.6</span> Using R</a></li>
 </ul>
 
       <div class="book-extra">

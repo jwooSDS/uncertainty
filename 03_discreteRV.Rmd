@@ -389,7 +389,7 @@ Variance has the following properties:
 
 ## Common Discrete Random Variables
 
-Next, we will introduce some commonly used distributions that may be used for discrete random variables. A number of common statistical models (for example, logistic regression, Poisson point process) are based on these distributions.
+Next, we will introduce some commonly used distributions that may be used for discrete random variables. A number of common statistical models (for example, logistic regression, Poisson regression) are based on these distributions.
 
 ### Bernoulli
 
@@ -495,7 +495,7 @@ P(X=2) &= \binom{3}{2} (0.5)^2 (0.5)^1\\
 \end{split}
 $$
 
-In this example, the binomial coefficient equals to 3. Which indicates there were 3 combinations to obtain 2 heads in 3 coin flips. $P(X=2$ can be written as $P(HHT \cup HTH \cup THH)$. Solving for $P(HHT \cup HTH \cup THH)$, we have
+In this example, the binomial coefficient equals to 3. Which indicates there were 3 combinations to obtain 2 heads in 3 coin flips. $P(X=2)$ can be written as $P(HHT \cup HTH \cup THH)$. Solving for $P(HHT \cup HTH \cup THH)$, we have
 
 $$
 \begin{split}
@@ -641,4 +641,54 @@ sum(dpois(y,lambda))
 ```
 
 Notice the values are very close to each other. 
+
+## Using R 
+
+R has built in functions to compute the PMF, CDF, percentiles, as well as simulate data of common distributions. We will start using a random variable $Y$ which follows binomial distribution, with $n=5, p = 0.3$ as an example first. Note in this example that the support for $Y$ is $\{0,1,2,3,4,5 \}$.
+
+1. To find $P(Y=2)$, use:
+
+```{r}
+dbinom(2, 5, 0.3) ##supply the value of Y you want, then the parameters n and p in this order
+```
+The probability that $Y$ is equal to 2 is 0.3087.
+
+2. To find $P(Y \leq 2)$, use:
+
+```{r}
+pbinom(2, 5, 0.3) ##supply the value of Y you want, then the parameters n and p in this order
+```
+
+The probability that $Y$ is less than or equal to 2 is 0.83692.
+
+3. To find the value on the support that corresponds to the median (or 50th percentile), use:
+
+```{r}
+qbinom(0.5, 5, 0.3) ##supply the value of the percentile you need, then the parameters n and p in this order
+```
+
+The median of a binomial distribution with 5 trials and success probability 0.3 is 1. 
+
+4. To simulate 10 realizations (repetitions) of $Y$, use:
+
+```{r}
+set.seed(2) ##use set.seed() so we get the same random numbers each time the code is run
+rbinom(10, 5, 0.3) ##supply the number of simulated data you need, then the parameters n and p
+```
+This outputs a vector of length 10. Each value represents the result of each rep. So the first time we ran the binomial distribution with $n=5, p=0.3$, only 1 out of the 5 was a success. The second time it was run, only 2 out of the 5 was a success, and so on.
+
+Noticed these functions all ended with `binom`. We just added a different letter first, depending on whether we want the PMF, CDF, percentile, or random draw. The letters are `d`, `p`, `q`, and `r` respectively. 
+
+The same idea works for any other distribution. For example, to find the probability of a Poisson distribution with rate parameter 2 being equal to 1, we type:
+
+```{r}
+dpois(1, 2) ##supply value of k, then parameter
+```
+
+*Thought questions:* Suppose $Y \sim Pois(1)$. 
+
+- Find $P(Y \leq 2)$.
+- Find the 75th percentile of $Y$.
+- Simulate 10,000 reps from Y, and find its sample mean. Is the sample mean close to the expected value?
+
 

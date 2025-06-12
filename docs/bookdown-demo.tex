@@ -805,7 +805,7 @@ The IQR is considered a robust measure of spread, while the sample variance and 
 
 This module is based on Introduction to Probability (Blitzstein, Hwang), Chapters 1 and 2. You can access the book for free at \url{https://stat110.hsites.harvard.edu/} (and then click on Book). Please note that I cover additional topics, and skip certain topics from the book. You may skip: Sections 1.4, 1.5, Theorem 1.6.3, Examples 1.6.4, 2.4.5, 2.5.12, 2.7.3 from the book.
 
-\section{Probability}\label{probability-1}
+\section{Introduction to Probability}\label{introduction-to-probability}
 
 A way of quantifying uncertainty is through probability. Think about these statements: ``I am 100\% certain that it will rain in the next hour'' and ``I am 50\% certain that it will rain in the next hour''. The percentages are used to reflect the degree of certainty about the event happening. The first statement reflects certainty; the second reflects uncertainty as the statement implies the belief that it is equally likely that it will rain or not. In this module, we will learn about the basic concepts about probability.
 
@@ -1695,7 +1695,7 @@ Variance has the following properties:
 
 \section{Common Discrete Random Variables}\label{common-discrete-random-variables}
 
-Next, we will introduce some commonly used distributions that may be used for discrete random variables. A number of common statistical models (for example, logistic regression, Poisson point process) are based on these distributions.
+Next, we will introduce some commonly used distributions that may be used for discrete random variables. A number of common statistical models (for example, logistic regression, Poisson regression) are based on these distributions.
 
 \subsection{Bernoulli}\label{bernoulli}
 
@@ -1825,7 +1825,7 @@ P(X=2) &= \binom{3}{2} (0.5)^2 (0.5)^1\\
 \end{split}
 \]
 
-In this example, the binomial coefficient equals to 3. Which indicates there were 3 combinations to obtain 2 heads in 3 coin flips. \(P(X=2\) can be written as \(P(HHT \cup HTH \cup THH)\). Solving for \(P(HHT \cup HTH \cup THH)\), we have
+In this example, the binomial coefficient equals to 3. Which indicates there were 3 combinations to obtain 2 heads in 3 coin flips. \(P(X=2)\) can be written as \(P(HHT \cup HTH \cup THH)\). Solving for \(P(HHT \cup HTH \cup THH)\), we have
 
 \[
 \begin{split}
@@ -2002,6 +2002,152 @@ So we can model \(Y \sim Bin(100,0.02)\), as long as we assume the chips the ind
 \end{verbatim}
 
 Notice the values are very close to each other.
+
+\section{Using R}\label{using-r}
+
+R has built in functions to compute the PMF, CDF, percentiles, as well as simulate data of common distributions. We will start using a random variable \(Y\) which follows binomial distribution, with \(n=5, p = 0.3\) as an example first. Note in this example that the support for \(Y\) is \(\{0,1,2,3,4,5 \}\).
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  To find \(P(Y=2)\), use:
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{dbinom}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{5}\NormalTok{, }\FloatTok{0.3}\NormalTok{) }\DocumentationTok{\#\#supply the value of Y you want, then the parameters n and p in this order}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.3087
+\end{verbatim}
+
+The probability that \(Y\) is equal to 2 is 0.3087.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  To find \(P(Y \leq 2)\), use:
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{pbinom}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{5}\NormalTok{, }\FloatTok{0.3}\NormalTok{) }\DocumentationTok{\#\#supply the value of Y you want, then the parameters n and p in this order}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.83692
+\end{verbatim}
+
+The probability that \(Y\) is less than or equal to 2 is 0.83692.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  To find the value on the support that corresponds to the median (or 50th percentile), use:
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{qbinom}\NormalTok{(}\FloatTok{0.5}\NormalTok{, }\DecValTok{5}\NormalTok{, }\FloatTok{0.3}\NormalTok{) }\DocumentationTok{\#\#supply the value of the percentile you need, then the parameters n and p in this order}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1
+\end{verbatim}
+
+The median of a binomial distribution with 5 trials and success probability 0.3 is 1.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  To simulate 10 realizations (repetitions) of \(Y\), use:
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{2}\NormalTok{) }\DocumentationTok{\#\#use set.seed() so we get the same random numbers each time the code is run}
+\FunctionTok{rbinom}\NormalTok{(}\DecValTok{10}\NormalTok{, }\DecValTok{5}\NormalTok{, }\FloatTok{0.3}\NormalTok{) }\DocumentationTok{\#\#supply the number of simulated data you need, then the parameters n and p}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] 1 2 2 0 3 3 0 2 1 2
+\end{verbatim}
+
+This outputs a vector of length 10. Each value represents the result of each rep. So the first time we ran the binomial distribution with \(n=5, p=0.3\), only 1 out of the 5 was a success. The second time it was run, only 2 out of the 5 was a success, and so on.
+
+Noticed these functions all ended with \texttt{binom}. We just added a different letter first, depending on whether we want the PMF, CDF, percentile, or random draw. The letters are \texttt{d}, \texttt{p}, \texttt{q}, and \texttt{r} respectively.
+
+The same idea works for any other distribution. For example, to find the probability of a Poisson distribution with rate parameter 2 being equal to 1, we type:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{dpois}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{) }\DocumentationTok{\#\#supply value of k, then parameter}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.2706706
+\end{verbatim}
+
+\emph{Thought questions:} Suppose \(Y \sim Pois(1)\).
+
+\begin{itemize}
+\tightlist
+\item
+  Find \(P(Y \leq 2)\).
+\item
+  Find the 75th percentile of \(Y\).
+\item
+  Simulate 10,000 reps from Y, and find its sample mean. Is the sample mean close to the expected value?
+\end{itemize}
+
+\chapter{Continuous Random Variables}\label{continuous-random-variables}
+
+This module is based on Introduction to Probability (Blitzstein, Hwang), Chapters 5 and 6. You can access the book for free at \url{https://stat110.hsites.harvard.edu/} (and then click on Book). Please note that I cover additional topics, and skip certain topics from the book. You may skip Sections ??? from the book.
+
+\section{Introduction}\label{introduction}
+
+In the previous module, we learned about discrete random variables. We learned how their distributions can be described by the PMFs and CDFs, how to find their expected values and variances, as well as common distributions for discrete random variables. We will learn about their counterparts when dealing with continuous random variables. The concepts are similar, but how they are computed can be quite different.
+
+As a reminder:
+
+\begin{itemize}
+\tightlist
+\item
+  A \textbf{discrete random variable} can only take on a countable (finite or infinite) number of values.
+\item
+  A \textbf{continuous random variable} can take on an uncountable number of values in an interval of real numbers.
+\end{itemize}
+
+\section{Probability Density Functions (PDFs)}\label{probability-density-functions-pdfs}
+
+\subsection{Estimating PDFs with Data}\label{estimating-pdfs-with-data}
+
+\section{Cumulative Distribution Functions (CDFs)}\label{cumulative-distribution-functions-cdfs-1}
+
+\section{Expectations}\label{expectations-1}
+
+\subsection{Moments}\label{moments}
+
+\section{Common Continuous Random Variables}\label{common-continuous-random-variables}
+
+\subsection{Uniform}\label{uniform}
+
+\subsubsection{Universality of Uniform}\label{universality-of-uniform}
+
+\subsection{Normal}\label{normal}
 
   \bibliography{book.bib,packages.bib}
 
