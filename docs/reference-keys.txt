@@ -64,6 +64,10 @@ fig:4-prob2
 eq:4-EX
 eq:4-lotus
 eq:4-var
+eq:4-skew
+fig:4-symm
+fig:4-kurt
+eq:4-kurt
 examples
 example-1-mario-kart-auction-prices
 eg2
@@ -154,8 +158,15 @@ valid-cdfs-1
 probability-density-functions-pdfs
 valid-pdfs
 estimating-pdfs-with-data
+summaries-of-a-distribution
 expectations-1
+median-1
+mode-1
+loss-functions
+variance-1
 moments
+skewness
+kurtosis
 common-continuous-random-variables
 uniform
 universality-of-uniform

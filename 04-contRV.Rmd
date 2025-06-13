@@ -127,7 +127,11 @@ The PDF of a continuous random variable must satisfy the following criteria:
 
 ### Estimating PDFs with Data
 
-## Expectations
+## Summaries of a Distribution
+
+Next, we will talk about some common summaries associated with a distribution. These involve measures of centrality and variance, which we have covered before. We will also talk about a couple of other measures: skewness and kurtosis.
+
+### Expectations
 
 The **expected value** of a continuous random variable $X$ is
 
@@ -135,6 +139,8 @@ The **expected value** of a continuous random variable $X$ is
 E(X) = \int_{-\infty}^{\infty} x f_X(x) dx.
 (\#eq:4-EX)
 \end{equation}
+
+Another common notation for $E(X)$ is $\mu$, or sometimes $\mu_X$ show that we are writing the mean of the random variable $X$.
 
 If we compare equation \@ref(eq:4-EX) with equation \@ref(eq:3-EX), we notice that we use an integral instead of a summation now that we are working with continuous random variables. 
 
@@ -153,6 +159,31 @@ Notice again when we compare equation \@ref(eq:4-lotus) with its discrete counte
 
 *Thought question*: Can you guess how to write the equation for the variance of a continuous random variable? Hint: Equation \@ref(eq:3-var2) is how to find the variance for a discrete random variable.
 
+#### Median
+
+The value $m$ is the **median** of a random variable $X$ if $P(X \leq c) \geq \frac{1}{2}$ and $P(X \geq c) \geq \frac{1}{2}$.
+
+Intuitively, the median is the value $m$ which splits the area under the PDF into half (or as close to half as possible if the random variable is discrete). Half the area will be to the left of $m$, the other half of the area will be to the right of $m$. 
+
+#### Mode
+
+For a continuous random variable $X$, the mode is the value $c$ that maximizes the PDF: $f_X(c) \geq f_X(x)$ for all $x$.
+
+For a discrete random variable $X$, the mode is the value $c$ that maximizes the PMF: $P(X=c) \geq P(X=x)$ for all $x$. Intuitively, the mode is the most commonly occurring value of a discrete random variable
+
+#### Loss Functions
+
+A goal of statistical modeling is to use the model to make predictions. We want to be able to quantify the quality of our prediction, or the prediction error. Consider we have an experiment that can be described by a random variable $X$, and we want to predict the value of the next experiment. The mean and median are natural guesses for the value of the next experiment.
+
+It turns out there a several ways to quantify our prediction error. These are usually called loss functions. Suppose our predicted value is denoted by $x_{pred}$. A couple of common loss functions:
+
+- **Mean squared error (MSE)**: $E(X-x_{pred})^2$,
+- **Mean absolute error (MAE)**: $E|X-x_{pred}|$.
+
+It turns out that the expected value $E(X)$ minimizes the MSE, and the median minimizes the MAE. So depending on what loss function suits our analysis, we could use either the mean or median for our predictions. We will cover these ideas in more detail in a later module (and indeed in later courses in this program).
+
+### Variance
+
 The **variance** of a continuous random variable $X$ is
 
 \begin{equation} 
@@ -160,10 +191,73 @@ Var(X) = \int_{-\infty}^{\infty} (x-\mu)^2 f_X(x) dx.
 (\#eq:4-var)
 \end{equation}
 
-The properties of variance is still the same as in Section \@ref(var-prop). It does not matter if the random variable is discrete or continuous.
-
+The properties of variance is still the same as in Section \@ref(var-prop). It does not matter if the random variable is discrete or continuous. A common notation used for variance is $\sigma^2$, or sometimes $\sigma_X^2$ to show its the variance of the random variable $X$. 
 
 ### Moments
+
+Before talking about measures that is used to describe distributions, we will cover some terminology that is used for these measures. Suppose we have a random variable $X$.
+
+- The **$n$th moment** of $X$ is $E(X^n)$. So the expected value, or the mean, is sometimes called the first moment.
+- The **$n$th central moment** of $X$ is $E((X-\mu)^n)$. So the variance is sometimes called the second central moment.
+- The **$n$ standardized moment** of $X$ is $E(\frac{(X-\mu)^n}{\sigma})$.
+
+### Skewness
+
+One measure that is used to describe the shape of a distribution is skewness, which is a measure of symmetry (or measure of skewness). The **skew** of a random variable $X$ is the third standardized moment:
+
+\begin{equation} 
+Skew(X) = E \left(\frac{(X-\mu)^3}{\sigma} \right)
+(\#eq:4-skew)
+\end{equation}
+
+A random variable $X$ has a **symmetric distribution about \mu** if $X - \mu$ has the same distribution as $\mu - X$. Fairly often, people will just say that $X$ is symmetric; it is almost always assumed that the symmetry is about its mean.
+
+Intuitively, symmetry means that the PDF of $X$ to the left of its mean is the mirror image of the PDF of $X$ to the right of its mean. We look at a couple of examples below in Figure \@ref(fig:4-symm):
+
+```{r 4-symm, fig.cap="PDFs for Symmetric RV vs Skewed RV", echo=FALSE}
+par(mfrow=c(1,2))
+curve(dnorm, from = -4, to = 4, main = "PDF for Symmetric RV", ylab="Probability", xlab="")
+abline(v=0, col="blue")
+
+curve(dexp, from = 0, to = 10, main = "PDF for Skewed RV", ylab="Probability", xlab="")
+abline(v=1, col="blue")
+```
+The blue vertical lines indicate the mean of these distributions. Notice the mirror image in the first plot, but not in the second plot. 
+
+If a distribution is not symmetric, we can say its distribution is asymmetric, or is skewed. The values of $Skew(X)$ that are associated with different shapes are:
+
+- $Skew(X) = 0$: $X$ is symmetric.
+- $Skew(X) > 0$: $X$ is right skewed.
+- $Skew(X) < 0$: $X$ is left skewed.
+
+### Kurtosis
+
+One more measure deals with the **tail** behavior of a distribution. Visually, the tails of a PDF are associated with probabilities of extreme values for a random variable. A distribution that is heavy tailed means that extreme values (on both ends) are more likely to occur. Tail behavior is an important consideration in risk management in finance: e.g. a heavy left tail in the PDF could mean a financial crisis. Figure \@ref(fig:4-kurt) shows an example of a heavy tailed distribution (in blue), compared to a Gaussian distribution (in black). We will talk more about the Gaussian distribution in the next subsection.
+
+```{r 4-kurt, fig.cap="PDF for Heavy Tailed Distribution", echo=FALSE}
+x_values <- seq(-4, 4, length = 100)
+
+# Plot the standard normal distribution
+curve(dnorm, from = -4, to = 4, main = "PDF for Symmetric RV", ylab="Probability", xlab="")
+
+# Add the t-distribution with 10 degrees of freedom
+curve(dt(x,df=1), from = -4, to = 4, add=TRUE, col="blue")
+```
+
+A common measure of tail behavior is the **Kurtosis**. The kurtosis of a random variable $X$ is the shifted fourth standardized moment:
+
+\begin{equation} 
+Kurt(X) = E \left(\frac{(X-\mu)^4}{\sigma} \right) - 3.
+(\#eq:4-kurt)
+\end{equation}
+
+The reason for subtracting (or shifting by) 3 is so that the Gaussian distribution (a commonly used distribution for continuous random variables) is 0. Note: Some people call equation \@ref(eq:4-kurt) the **excess kurtosis** and the kurtosis does not subtract the 3. 
+
+The values of $Kurt(X)$ that are associated with tail behaviors are:
+
+- $Kurt(X) = 0$: $X$ is similar tails to Gaussian distribution.
+- $Kurt(X) > 0$: $X$ has heavier tails compared to Gaussian distribution (extreme values more likely).
+- $SKurt(X) < 0$: $X$ has smaller tails compared to Gaussian distribution (extreme values less likely).
 
 ## Common Continuous Random Variables
 

@@ -155,15 +155,21 @@ Figure 4.3: Probabilities from PDF
 </h3>
 </div>
 </div>
-<div id="expectations-1" class="section level2" number="4.4">
+<div id="summaries-of-a-distribution" class="section level2" number="4.4">
 <h2>
-<span class="header-section-number">4.4</span> Expectations<a class="anchor" aria-label="anchor" href="#expectations-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.4</span> Summaries of a Distribution<a class="anchor" aria-label="anchor" href="#summaries-of-a-distribution"><i class="fas fa-link"></i></a>
 </h2>
+<p>Next, we will talk about some common summaries associated with a distribution. These involve measures of centrality and variance, which we have covered before. We will also talk about a couple of other measures: skewness and kurtosis.</p>
+<div id="expectations-1" class="section level3" number="4.4.1">
+<h3>
+<span class="header-section-number">4.4.1</span> Expectations<a class="anchor" aria-label="anchor" href="#expectations-1"><i class="fas fa-link"></i></a>
+</h3>
 <p>The <strong>expected value</strong> of a continuous random variable <span class="math inline">\(X\)</span> is</p>
 <p><span class="math display" id="eq:4-EX">\[\begin{equation}
 E(X) = \int_{-\infty}^{\infty} x f_X(x) dx.
 \tag{4.3}
 \end{equation}\]</span></p>
+<p>Another common notation for <span class="math inline">\(E(X)\)</span> is <span class="math inline">\(\mu\)</span>, or sometimes <span class="math inline">\(\mu_X\)</span> show that we are writing the mean of the random variable <span class="math inline">\(X\)</span>.</p>
 <p>If we compare equation <a href="continuous-random-variables.html#eq:4-EX">(4.3)</a> with equation <a href="discrete-random-variables.html#eq:3-EX">(3.2)</a>, we notice that we use an integral instead of a summation now that we are working with continuous random variables.</p>
 <p>The interpretation of expected values is still the same: the expectation of a random variable can be interpreted as the long-run mean of the random variable, i.e. if we were able to repeat the experiment an infinite number of times, the expectation of the random variable will be the average result among all the experiments. It is still a measure of centrality of the random variable.</p>
 <p>The <strong>linearity of expectations</strong> still hold in the same way, per equation <a href="discrete-random-variables.html#eq:3-linEX">(3.3)</a>. It does not matter if the random variable is discrete or continuous.</p>
@@ -174,16 +180,111 @@ E(g(X)) = \int_{-\infty}^{\infty} g(x) f_X(x).
 \end{equation}\]</span></p>
 <p>Notice again when we compare equation <a href="continuous-random-variables.html#eq:4-lotus">(4.4)</a> with its discrete counterpart in equation <a href="discrete-random-variables.html#eq:3-lotus">(3.4)</a>: we have just replaced the summation with an integral.</p>
 <p><em>Thought question</em>: Can you guess how to write the equation for the variance of a continuous random variable? Hint: Equation <a href="discrete-random-variables.html#eq:3-var2">(3.5)</a> is how to find the variance for a discrete random variable.</p>
+<div id="median-1" class="section level4" number="4.4.1.1">
+<h4>
+<span class="header-section-number">4.4.1.1</span> Median<a class="anchor" aria-label="anchor" href="#median-1"><i class="fas fa-link"></i></a>
+</h4>
+<p>The value <span class="math inline">\(m\)</span> is the <strong>median</strong> of a random variable <span class="math inline">\(X\)</span> if <span class="math inline">\(P(X \leq c) \geq \frac{1}{2}\)</span> and <span class="math inline">\(P(X \geq c) \geq \frac{1}{2}\)</span>.</p>
+<p>Intuitively, the median is the value <span class="math inline">\(m\)</span> which splits the area under the PDF into half (or as close to half as possible if the random variable is discrete). Half the area will be to the left of <span class="math inline">\(m\)</span>, the other half of the area will be to the right of <span class="math inline">\(m\)</span>.</p>
+</div>
+<div id="mode-1" class="section level4" number="4.4.1.2">
+<h4>
+<span class="header-section-number">4.4.1.2</span> Mode<a class="anchor" aria-label="anchor" href="#mode-1"><i class="fas fa-link"></i></a>
+</h4>
+<p>For a continuous random variable <span class="math inline">\(X\)</span>, the mode is the value <span class="math inline">\(c\)</span> that maximizes the PDF: <span class="math inline">\(f_X(c) \geq f_X(x)\)</span> for all <span class="math inline">\(x\)</span>.</p>
+<p>For a discrete random variable <span class="math inline">\(X\)</span>, the mode is the value <span class="math inline">\(c\)</span> that maximizes the PMF: <span class="math inline">\(P(X=c) \geq P(X=x)\)</span> for all <span class="math inline">\(x\)</span>. Intuitively, the mode is the most commonly occurring value of a discrete random variable</p>
+</div>
+<div id="loss-functions" class="section level4" number="4.4.1.3">
+<h4>
+<span class="header-section-number">4.4.1.3</span> Loss Functions<a class="anchor" aria-label="anchor" href="#loss-functions"><i class="fas fa-link"></i></a>
+</h4>
+<p>A goal of statistical modeling is to use the model to make predictions. We want to be able to quantify the quality of our prediction, or the prediction error. Consider we have an experiment that can be described by a random variable <span class="math inline">\(X\)</span>, and we want to predict the value of the next experiment. The mean and median are natural guesses for the value of the next experiment.</p>
+<p>It turns out there a several ways to quantify our prediction error. These are usually called loss functions. Suppose our predicted value is denoted by <span class="math inline">\(x_{pred}\)</span>. A couple of common loss functions:</p>
+<ul>
+<li>
+<strong>Mean squared error (MSE)</strong>: <span class="math inline">\(E(X-x_{pred})^2\)</span>,</li>
+<li>
+<strong>Mean absolute error (MAE)</strong>: <span class="math inline">\(E|X-x_{pred}|\)</span>.</li>
+</ul>
+<p>It turns out that the expected value <span class="math inline">\(E(X)\)</span> minimizes the MSE, and the median minimizes the MAE. So depending on what loss function suits our analysis, we could use either the mean or median for our predictions. We will cover these ideas in more detail in a later module (and indeed in later courses in this program).</p>
+</div>
+</div>
+<div id="variance-1" class="section level3" number="4.4.2">
+<h3>
+<span class="header-section-number">4.4.2</span> Variance<a class="anchor" aria-label="anchor" href="#variance-1"><i class="fas fa-link"></i></a>
+</h3>
 <p>The <strong>variance</strong> of a continuous random variable <span class="math inline">\(X\)</span> is</p>
 <p><span class="math display" id="eq:4-var">\[\begin{equation}
 Var(X) = \int_{-\infty}^{\infty} (x-\mu)^2 f_X(x) dx.
 \tag{4.5}
 \end{equation}\]</span></p>
-<p>The properties of variance is still the same as in Section <a href="discrete-random-variables.html#var-prop">3.4.3.1</a>. It does not matter if the random variable is discrete or continuous.</p>
-<div id="moments" class="section level3" number="4.4.1">
+<p>The properties of variance is still the same as in Section <a href="discrete-random-variables.html#var-prop">3.4.3.1</a>. It does not matter if the random variable is discrete or continuous. A common notation used for variance is <span class="math inline">\(\sigma^2\)</span>, or sometimes <span class="math inline">\(\sigma_X^2\)</span> to show its the variance of the random variable <span class="math inline">\(X\)</span>.</p>
+</div>
+<div id="moments" class="section level3" number="4.4.3">
 <h3>
-<span class="header-section-number">4.4.1</span> Moments<a class="anchor" aria-label="anchor" href="#moments"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.4.3</span> Moments<a class="anchor" aria-label="anchor" href="#moments"><i class="fas fa-link"></i></a>
 </h3>
+<p>Before talking about measures that is used to describe distributions, we will cover some terminology that is used for these measures. Suppose we have a random variable <span class="math inline">\(X\)</span>.</p>
+<ul>
+<li>The <strong><span class="math inline">\(n\)</span>th moment</strong> of <span class="math inline">\(X\)</span> is <span class="math inline">\(E(X^n)\)</span>. So the expected value, or the mean, is sometimes called the first moment.</li>
+<li>The <strong><span class="math inline">\(n\)</span>th central moment</strong> of <span class="math inline">\(X\)</span> is <span class="math inline">\(E((X-\mu)^n)\)</span>. So the variance is sometimes called the second central moment.</li>
+<li>The <strong><span class="math inline">\(n\)</span> standardized moment</strong> of <span class="math inline">\(X\)</span> is <span class="math inline">\(E(\frac{(X-\mu)^n}{\sigma})\)</span>.</li>
+</ul>
+</div>
+<div id="skewness" class="section level3" number="4.4.4">
+<h3>
+<span class="header-section-number">4.4.4</span> Skewness<a class="anchor" aria-label="anchor" href="#skewness"><i class="fas fa-link"></i></a>
+</h3>
+<p>One measure that is used to describe the shape of a distribution is skewness, which is a measure of symmetry (or measure of skewness). The <strong>skew</strong> of a random variable <span class="math inline">\(X\)</span> is the third standardized moment:</p>
+<p><span class="math display" id="eq:4-skew">\[\begin{equation}
+Skew(X) = E \left(\frac{(X-\mu)^3}{\sigma} \right)
+\tag{4.6}
+\end{equation}\]</span></p>
+<p>A random variable <span class="math inline">\(X\)</span> has a **symmetric distribution about * if <span class="math inline">\(X - \mu\)</span> has the same distribution as <span class="math inline">\(\mu - X\)</span>. Fairly often, people will just say that <span class="math inline">\(X\)</span> is symmetric; it is almost always assumed that the symmetry is about its mean.</p>
+<p>Intuitively, symmetry means that the PDF of <span class="math inline">\(X\)</span> to the left of its mean is the mirror image of the PDF of <span class="math inline">\(X\)</span> to the right of its mean. We look at a couple of examples below in Figure <a href="continuous-random-variables.html#fig:4-symm">4.4</a>:</p>
+<div class="figure">
+<span style="display:block;" id="fig:4-symm"></span>
+<img src="bookdown-demo_files/figure-html/4-symm-1.png" alt="PDFs for Symmetric RV vs Skewed RV" width="672"><p class="caption">
+Figure 4.4: PDFs for Symmetric RV vs Skewed RV
+</p>
+</div>
+<p>The blue vertical lines indicate the mean of these distributions. Notice the mirror image in the first plot, but not in the second plot.</p>
+<p>If a distribution is not symmetric, we can say its distribution is asymmetric, or is skewed. The values of <span class="math inline">\(Skew(X)\)</span> that are associated with different shapes are:</p>
+<ul>
+<li>
+<span class="math inline">\(Skew(X) = 0\)</span>: <span class="math inline">\(X\)</span> is symmetric.</li>
+<li>
+<span class="math inline">\(Skew(X) &gt; 0\)</span>: <span class="math inline">\(X\)</span> is right skewed.</li>
+<li>
+<span class="math inline">\(Skew(X) &lt; 0\)</span>: <span class="math inline">\(X\)</span> is left skewed.</li>
+</ul>
+</div>
+<div id="kurtosis" class="section level3" number="4.4.5">
+<h3>
+<span class="header-section-number">4.4.5</span> Kurtosis<a class="anchor" aria-label="anchor" href="#kurtosis"><i class="fas fa-link"></i></a>
+</h3>
+<p>One more measure deals with the <strong>tail</strong> behavior of a distribution. Visually, the tails of a PDF are associated with probabilities of extreme values for a random variable. A distribution that is heavy tailed means that extreme values (on both ends) are more likely to occur. Tail behavior is an important consideration in risk management in finance: e.g. a heavy left tail in the PDF could mean a financial crisis. Figure <a href="continuous-random-variables.html#fig:4-kurt">4.5</a> shows an example of a heavy tailed distribution (in blue), compared to a Gaussian distribution (in black). We will talk more about the Gaussian distribution in the next subsection.</p>
+<div class="figure">
+<span style="display:block;" id="fig:4-kurt"></span>
+<img src="bookdown-demo_files/figure-html/4-kurt-1.png" alt="PDF for Heavy Tailed Distribution" width="672"><p class="caption">
+Figure 4.5: PDF for Heavy Tailed Distribution
+</p>
+</div>
+<p>A common measure of tail behavior is the <strong>Kurtosis</strong>. The kurtosis of a random variable <span class="math inline">\(X\)</span> is the shifted fourth standardized moment:</p>
+<p><span class="math display" id="eq:4-kurt">\[\begin{equation}
+Kurt(X) = E \left(\frac{(X-\mu)^4}{\sigma} \right) - 3.
+\tag{4.7}
+\end{equation}\]</span></p>
+<p>The reason for subtracting (or shifting by) 3 is so that the Gaussian distribution (a commonly used distribution for continuous random variables) is 0. Note: Some people call equation <a href="continuous-random-variables.html#eq:4-kurt">(4.7)</a> the <strong>excess kurtosis</strong> and the kurtosis does not subtract the 3.</p>
+<p>The values of <span class="math inline">\(Kurt(X)\)</span> that are associated with tail behaviors are:</p>
+<ul>
+<li>
+<span class="math inline">\(Kurt(X) = 0\)</span>: <span class="math inline">\(X\)</span> is similar tails to Gaussian distribution.</li>
+<li>
+<span class="math inline">\(Kurt(X) &gt; 0\)</span>: <span class="math inline">\(X\)</span> has heavier tails compared to Gaussian distribution (extreme values more likely).</li>
+<li>
+<span class="math inline">\(SKurt(X) &lt; 0\)</span>: <span class="math inline">\(X\)</span> has smaller tails compared to Gaussian distribution (extreme values less likely).</li>
+</ul>
 </div>
 </div>
 <div id="common-continuous-random-variables" class="section level2" number="4.5">
@@ -226,7 +327,13 @@ Var(X) = \int_{-\infty}^{\infty} (x-\mu)^2 f_X(x) dx.
 </ul>
 </li>
 <li>
-<a class="nav-link" href="#expectations-1"><span class="header-section-number">4.4</span> Expectations</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#moments"><span class="header-section-number">4.4.1</span> Moments</a></li></ul>
+<a class="nav-link" href="#summaries-of-a-distribution"><span class="header-section-number">4.4</span> Summaries of a Distribution</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#expectations-1"><span class="header-section-number">4.4.1</span> Expectations</a></li>
+<li><a class="nav-link" href="#variance-1"><span class="header-section-number">4.4.2</span> Variance</a></li>
+<li><a class="nav-link" href="#moments"><span class="header-section-number">4.4.3</span> Moments</a></li>
+<li><a class="nav-link" href="#skewness"><span class="header-section-number">4.4.4</span> Skewness</a></li>
+<li><a class="nav-link" href="#kurtosis"><span class="header-section-number">4.4.5</span> Kurtosis</a></li>
+</ul>
 </li>
 <li>
 <a class="nav-link" href="#common-continuous-random-variables"><span class="header-section-number">4.5</span> Common Continuous Random Variables</a><ul class="nav navbar-nav">
