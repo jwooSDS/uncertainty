@@ -69,26 +69,117 @@
 <li>A <strong>discrete random variable</strong> can only take on a countable (finite or infinite) number of values.</li>
 <li>A <strong>continuous random variable</strong> can take on an uncountable number of values in an interval of real numbers.</li>
 </ul>
+<p>For example, height of an American adult is a continuous random variable, as height can take on any value in interval between 40 and 100 inches. All values between 40 and 100 are possible. We cannot list all possible real numbers in this range as the list is never ending.</p>
+<p>The sample space associated with a continuous random variable will be difficult to list, since it takes on an uncountable number of values. Using the example of heights of American adults, any real number between 40 and 100 inches is possible.</p>
+<p>This is different from a discrete random variable where we would list the sample space, or support, and then find the probability associated with each value in the support.</p>
+<p>Similar to discrete random variables, we want to describe the shape of the distribution, the centrality, and the spread of a continuous random distribution so we have an idea of probabilities associated with different ranges of values of the random variable.</p>
 </div>
-<div id="probability-density-functions-pdfs" class="section level2" number="4.2">
+<div id="cumulative-distribution-functions-cdfs-1" class="section level2" number="4.2">
 <h2>
-<span class="header-section-number">4.2</span> Probability Density Functions (PDFs)<a class="anchor" aria-label="anchor" href="#probability-density-functions-pdfs"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.2</span> Cumulative Distribution Functions (CDFs)<a class="anchor" aria-label="anchor" href="#cumulative-distribution-functions-cdfs-1"><i class="fas fa-link"></i></a>
 </h2>
-<div id="estimating-pdfs-with-data" class="section level3" number="4.2.1">
+<p>We start by talking about the cumulative distribution function, as its definition applies to both discrete and continuous random variables. The CDF of a random variable <span class="math inline">\(X\)</span> is <span class="math inline">\(F_X(x) = P(X \leq x)\)</span>. The difference lies in how a CDF looks visually and how it is calculated.</p>
+<p>Take a look at the CDF of a discrete random variable and the CDF of a continuous random variable below in Figure <a href="continuous-random-variables.html#fig:4-compare">4.1</a>:</p>
+<div class="figure">
+<span style="display:block;" id="fig:4-compare"></span>
+<img src="bookdown-demo_files/figure-html/4-compare-1.png" alt="CDF for Discrete RV vs CDF for Continuous RV" width="672"><p class="caption">
+Figure 4.1: CDF for Discrete RV vs CDF for Continuous RV
+</p>
+</div>
+<p>As mentioned in the previous module, the CDF for a discrete random variable is what is called a step function, as it jumps at each value of the support. On the other hand, the CDF for a continuous random variable increases smoothly as its sample space is infinite.</p>
+<p>The height of the CDF informs us the percentile associated with the value of the random variable. Looking at the CDF for the continuous random variable in Figure <a href="continuous-random-variables.html#fig:4-compare">4.1</a>, the height is 0.5 when the random variable is 0, so a value of 0 corresponds to the 50th percentile of this distribution.</p>
+<p>The technical definition of a continuous random variable is: A random variable has a continuous distribution if its CDF is differentiable.</p>
+<p>A discrete random variable fails in this definition since its derivative is undefined at the jumps.</p>
+<div id="valid-cdfs-1" class="section level3" number="4.2.1">
 <h3>
-<span class="header-section-number">4.2.1</span> Estimating PDFs with Data<a class="anchor" aria-label="anchor" href="#estimating-pdfs-with-data"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.2.1</span> Valid CDFs<a class="anchor" aria-label="anchor" href="#valid-cdfs-1"><i class="fas fa-link"></i></a>
+</h3>
+<p>The criteria for a valid CDF is the same, it does not matter if the random variable is discrete or continuous:</p>
+<ul>
+<li>non decreasing. This means that as <span class="math inline">\(x\)</span> gets larger, the CDF either stays the same or increases. Visually, a graph of the CDF should never decreases as <span class="math inline">\(x\)</span> increases.</li>
+<li>approach 1 as <span class="math inline">\(x\)</span> approaches infinity and approach 0 as <span class="math inline">\(x\)</span> approaches negative infinity. Visually, a graph of the CDF should be equal to or close to 1 for large values of x, and it should be equal to or close to 0 for small values of x.</li>
+</ul>
+<p><em>Thought question</em>: Look at the CDFs for our example in Figure <a href="continuous-random-variables.html#fig:4-compare">4.1</a>, and see how they satisfy the criteria listed above for a valid CDF.</p>
+</div>
+</div>
+<div id="probability-density-functions-pdfs" class="section level2" number="4.3">
+<h2>
+<span class="header-section-number">4.3</span> Probability Density Functions (PDFs)<a class="anchor" aria-label="anchor" href="#probability-density-functions-pdfs"><i class="fas fa-link"></i></a>
+</h2>
+<p>The <strong>probability density function (PDF)</strong> of a continuous random variable is analogous to the PMF of a discrete random variable.</p>
+<p>The definition of the PDF for continuous random variables is the following: for a continuous random variable <span class="math inline">\(X\)</span> with CDF <span class="math inline">\(F_X(x)\)</span>, the PDF of <span class="math inline">\(X\)</span>, <span class="math inline">\(f_X(x)\)</span>, is the derivative of its CDF, in other words, <span class="math inline">\(f_X(x) = F_X^{\prime}(x)\)</span>. The support of <span class="math inline">\(X\)</span> is the set of <span class="math inline">\(x\)</span> where <span class="math inline">\(f_X(x) &gt;0\)</span>.</p>
+<p>The relationship between the PDF and CDF of a continuous random variable <span class="math inline">\(X\)</span> can be expressed as</p>
+<p><span class="math display" id="eq:4-PDFCDF">\[\begin{equation}
+F_X(x) = P(X \leq x) = \int_{-\infty}^{x} f_X(x) dx.
+\tag{4.1}
+\end{equation}\]</span></p>
+<p>We take a look at an example below. Suppose we have a continuous random variable <span class="math inline">\(X\)</span> with its CDF and PDF displayed below, and we want to find <span class="math inline">\(P(X \leq 1)\)</span>:</p>
+<div class="figure">
+<span style="display:block;" id="fig:4-prob"></span>
+<img src="bookdown-demo_files/figure-html/4-prob-1.png" alt="Probabilities from CDF and PDF" width="672"><p class="caption">
+Figure 4.2: Probabilities from CDF and PDF
+</p>
+</div>
+<p>We can find <span class="math inline">\(P(X \leq 1)\)</span> in two different ways:</p>
+<ul>
+<li>from the CDF, find the value of 1 on the horizontal axis, and read off the corresponding value on the vertical axis (blue lines). This tells us that <span class="math inline">\(P(X \leq 1) = 0.84\)</span>.</li>
+<li>from the PDF, find the area under the PDF where <span class="math inline">\(X \leq 1\)</span>. This area corresponds to the shaded region in blue, and will be equal to 0.84 if we performed the integration per equation <a href="continuous-random-variables.html#eq:4-PDFCDF">(4.1)</a>.</li>
+</ul>
+<p>Compare equation <a href="continuous-random-variables.html#eq:4-PDFCDF">(4.1)</a> with equation <a href="discrete-random-variables.html#eq:3-CDF">(3.1)</a> and note the similarities and differences. For discrete CDFs, we sum the PMF over all values less than or equal to <span class="math inline">\(x\)</span>, whereas for continuous CDFs, we integrate, or accumulate the area, under the PDF over all values less than or equal to <span class="math inline">\(x\)</span>. Some people view the integral as a continuous version of a summation.</p>
+<p>From equation <a href="continuous-random-variables.html#eq:4-PDFCDF">(4.1)</a>, we can generalize a way to find the probability <span class="math inline">\(P(a&lt;X&lt;b)\)</span> for a continuous random variable <span class="math inline">\(X\)</span>:</p>
+<p><span class="math display" id="eq:4-integrate">\[\begin{equation}
+P(a&lt;X&lt;b) = F_X(b) - F_X(a) = \int_{a}^{b} f_X(x) dx.
+\tag{4.2}
+\end{equation}\]</span></p>
+<p>In other words, to find the probability for a range of values for <span class="math inline">\(X\)</span>, we just find the area under its PDF for that range of values. Going back to our example, if we want to find <span class="math inline">\(P(0&lt;X&lt;1)\)</span>, we will find the area under its PDF for <span class="math inline">\(0&lt;X&lt;1\)</span>, like in Figure <a href="continuous-random-variables.html#fig:4-prob2">4.3</a> below:</p>
+<div class="figure">
+<span style="display:block;" id="fig:4-prob2"></span>
+<img src="bookdown-demo_files/figure-html/4-prob2-1.png" alt="Probabilities from PDF" width="672"><p class="caption">
+Figure 4.3: Probabilities from PDF
+</p>
+</div>
+<p>As mentioned, the PDF of a continuous random variable is analogous, but not exactly the same as, to the PMF of a discrete random variable. One common misconception is that the PDF tells us a probability, for example, that the value of <span class="math inline">\(f_X(2) = P(X=2)\)</span>, if <span class="math inline">\(X\)</span> is continuous. This is only correct if <span class="math inline">\(X\)</span> is discrete. In fact, if we look at equation <a href="continuous-random-variables.html#eq:4-integrate">(4.2)</a> a little more closely, <span class="math inline">\(P(X=c) = 0\)</span> if <span class="math inline">\(X\)</span> is continuous and <span class="math inline">\(c\)</span> is a constant, since the area under its PDF will be 0.</p>
+<div id="valid-pdfs" class="section level3" number="4.3.1">
+<h3>
+<span class="header-section-number">4.3.1</span> Valid PDFs<a class="anchor" aria-label="anchor" href="#valid-pdfs"><i class="fas fa-link"></i></a>
+</h3>
+<p>The PDF of a continuous random variable must satisfy the following criteria:</p>
+<ul>
+<li>Non negative: <span class="math inline">\(f_X(x) \geq 0\)</span>,</li>
+<li>Integrates to 1: <span class="math inline">\(\int_{-\infty}^{\infty}f_X(x) dx = 1\)</span>.</li>
+</ul>
+</div>
+<div id="estimating-pdfs-with-data" class="section level3" number="4.3.2">
+<h3>
+<span class="header-section-number">4.3.2</span> Estimating PDFs with Data<a class="anchor" aria-label="anchor" href="#estimating-pdfs-with-data"><i class="fas fa-link"></i></a>
 </h3>
 </div>
-</div>
-<div id="cumulative-distribution-functions-cdfs-1" class="section level2" number="4.3">
-<h2>
-<span class="header-section-number">4.3</span> Cumulative Distribution Functions (CDFs)<a class="anchor" aria-label="anchor" href="#cumulative-distribution-functions-cdfs-1"><i class="fas fa-link"></i></a>
-</h2>
 </div>
 <div id="expectations-1" class="section level2" number="4.4">
 <h2>
 <span class="header-section-number">4.4</span> Expectations<a class="anchor" aria-label="anchor" href="#expectations-1"><i class="fas fa-link"></i></a>
 </h2>
+<p>The <strong>expected value</strong> of a continuous random variable <span class="math inline">\(X\)</span> is</p>
+<p><span class="math display" id="eq:4-EX">\[\begin{equation}
+E(X) = \int_{-\infty}^{\infty} x f_X(x) dx.
+\tag{4.3}
+\end{equation}\]</span></p>
+<p>If we compare equation <a href="continuous-random-variables.html#eq:4-EX">(4.3)</a> with equation <a href="discrete-random-variables.html#eq:3-EX">(3.2)</a>, we notice that we use an integral instead of a summation now that we are working with continuous random variables.</p>
+<p>The interpretation of expected values is still the same: the expectation of a random variable can be interpreted as the long-run mean of the random variable, i.e. if we were able to repeat the experiment an infinite number of times, the expectation of the random variable will be the average result among all the experiments. It is still a measure of centrality of the random variable.</p>
+<p>The <strong>linearity of expectations</strong> still hold in the same way, per equation <a href="discrete-random-variables.html#eq:3-linEX">(3.3)</a>. It does not matter if the random variable is discrete or continuous.</p>
+<p>The <strong>Law of the Unconscious Statistician (LOTUS)</strong> also still applies. For a continuous random variable <span class="math inline">\(X\)</span>, it is (unsurprisingly):</p>
+<p><span class="math display" id="eq:4-lotus">\[\begin{equation}
+E(g(X)) = \int_{-\infty}^{\infty} g(x) f_X(x).
+\tag{4.4}
+\end{equation}\]</span></p>
+<p>Notice again when we compare equation <a href="continuous-random-variables.html#eq:4-lotus">(4.4)</a> with its discrete counterpart in equation <a href="discrete-random-variables.html#eq:3-lotus">(3.4)</a>: we have just replaced the summation with an integral.</p>
+<p><em>Thought question</em>: Can you guess how to write the equation for the variance of a continuous random variable? Hint: Equation <a href="discrete-random-variables.html#eq:3-var2">(3.5)</a> is how to find the variance for a discrete random variable.</p>
+<p>The <strong>variance</strong> of a continuous random variable <span class="math inline">\(X\)</span> is</p>
+<p><span class="math display" id="eq:4-var">\[\begin{equation}
+Var(X) = \int_{-\infty}^{\infty} (x-\mu)^2 f_X(x) dx.
+\tag{4.5}
+\end{equation}\]</span></p>
+<p>The properties of variance is still the same as in Section <a href="discrete-random-variables.html#var-prop">3.4.3.1</a>. It does not matter if the random variable is discrete or continuous.</p>
 <div id="moments" class="section level3" number="4.4.1">
 <h3>
 <span class="header-section-number">4.4.1</span> Moments<a class="anchor" aria-label="anchor" href="#moments"><i class="fas fa-link"></i></a>
@@ -126,9 +217,14 @@
 <li><a class="nav-link" href="#continuous-random-variables"><span class="header-section-number">4</span> Continuous Random Variables</a></li>
 <li><a class="nav-link" href="#introduction"><span class="header-section-number">4.1</span> Introduction</a></li>
 <li>
-<a class="nav-link" href="#probability-density-functions-pdfs"><span class="header-section-number">4.2</span> Probability Density Functions (PDFs)</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#estimating-pdfs-with-data"><span class="header-section-number">4.2.1</span> Estimating PDFs with Data</a></li></ul>
+<a class="nav-link" href="#cumulative-distribution-functions-cdfs-1"><span class="header-section-number">4.2</span> Cumulative Distribution Functions (CDFs)</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#valid-cdfs-1"><span class="header-section-number">4.2.1</span> Valid CDFs</a></li></ul>
 </li>
-<li><a class="nav-link" href="#cumulative-distribution-functions-cdfs-1"><span class="header-section-number">4.3</span> Cumulative Distribution Functions (CDFs)</a></li>
+<li>
+<a class="nav-link" href="#probability-density-functions-pdfs"><span class="header-section-number">4.3</span> Probability Density Functions (PDFs)</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#valid-pdfs"><span class="header-section-number">4.3.1</span> Valid PDFs</a></li>
+<li><a class="nav-link" href="#estimating-pdfs-with-data"><span class="header-section-number">4.3.2</span> Estimating PDFs with Data</a></li>
+</ul>
+</li>
 <li>
 <a class="nav-link" href="#expectations-1"><span class="header-section-number">4.4</span> Expectations</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#moments"><span class="header-section-number">4.4.1</span> Moments</a></li></ul>
 </li>
@@ -154,7 +250,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2025-06-12.</p>
+    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2025-06-13.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

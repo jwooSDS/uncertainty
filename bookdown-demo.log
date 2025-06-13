@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999996 (MiKTeX 24.4) (preloaded format=xelatex 2025.6.7)  12 JUN 2025 17:10
+This is XeTeX, Version 3.141592653-2.6-0.999996 (MiKTeX 24.4) (preloaded format=xelatex 2025.6.7)  13 JUN 2025 15:48
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1068,18 +1068,18 @@ Underfull \vbox (badness 1043) has occurred while \output is active []
 File: bookdown-demo_files/figure-latex/3-sim-1.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/3-sim-1.pdf>
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
+Underfull \vbox (badness 4120) has occurred while \output is active []
 
 
 
 [51]
 
-LaTeX Warning: Reference `fig:3-cdf' on page 52 undefined on input line 1412.
+LaTeX Warning: Reference `fig:3-cdf' on page 52 undefined on input line 1421.
 
 File: bookdown-demo_files/figure-latex/3-cdf-1.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/3-cdf-1.pdf>
 
-Underfull \hbox (badness 10000) in paragraph at lines 1414--1416
+Underfull \hbox (badness 10000) in paragraph at lines 1423--1425
 [][]
  []
 
@@ -1090,7 +1090,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 [52]
 
-LaTeX Warning: Reference `fig:3-cdf' on page 53 undefined on input line 1431.
+LaTeX Warning: Reference `fig:3-cdf' on page 53 undefined on input line 1440.
 
 
 
@@ -1150,17 +1150,32 @@ df)
 
 [70]
 Chapter 4.
-No file bookdown-demo.bbl.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
 
 
 [71
 
 ]
+File: bookdown-demo_files/figure-latex/4-compare-1.pdf Graphic file (type pdf)
+<use bookdown-demo_files/figure-latex/4-compare-1.pdf>
 
-[72] (bookdown-demo.aux)
+
+[72]
+File: bookdown-demo_files/figure-latex/4-prob-1.pdf Graphic file (type pdf)
+<use bookdown-demo_files/figure-latex/4-prob-1.pdf>
+
+
+[73]
+
+[74]
+File: bookdown-demo_files/figure-latex/4-prob2-1.pdf Graphic file (type pdf)
+<use bookdown-demo_files/figure-latex/4-prob2-1.pdf>
+
+
+[75]
+No file bookdown-demo.bbl.
+
+
+[76] (bookdown-demo.aux)
  ***********
 LaTeX2e <2024-06-01> patch level 2
 L3 programming layer <2024-07-20>
@@ -1170,12 +1185,12 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 19701 strings out of 409029
- 355411 string characters out of 5763847
+ 19739 strings out of 409029
+ 356877 string characters out of 5763847
  1941612 words of memory out of 5000000
- 42107 multiletter control sequences out of 15000+600000
+ 42142 multiletter control sequences out of 15000+600000
  564568 words of font info for 95 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  90i,21n,123p,1199b,585s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on bookdown-demo.pdf (72 pages).
+Output written on bookdown-demo.pdf (76 pages).

@@ -42,7 +42,7 @@ A random variable is countable and infinite if we can list the values it can tak
 
 A **continuous random variable** can take on an uncountable number of values in an interval of real numbers. 
 
-For example, height of an American adult is a continuous random variable, as height can take on any value in interval between 40 and 100 inches. All values between 40 and 100 are possible. 
+For example, height of an American adult is a continuous random variable, as height can take on any value in interval between any interval, say 40 and 100 inches. All values between 40 and 100 are possible. 
 
 For this module, we will focus on discrete random variables. 
 
@@ -123,11 +123,13 @@ reps<-1000000 ##how many times to run the experiment
 hist(rbinom(reps,n,p), breaks=-1:3, main="Hist with One Million Experiments", xlab="# of Successes")
 ```
 
+In general, the PMF of an experiment should match the histogram in the long run.
+
 Note: What we have just done here was to use simulations to repeat an experiment a large number of times using code. 
 
 ## Cumulative Distribution Functions (CDFs)
 
-Another function that is used to describe the distirbution of discrete random variables is the **cumulative distribution function (CDF)**. The CDF of a random variable $X$ is $F_X(x) = P(X \leq x)$. Notice that unlike the PMF, the definition of CDF applies for both discrete and continuous random variables. 
+Another function that is used to describe the distribution of discrete random variables is the **cumulative distribution function (CDF)**. The CDF of a random variable $X$ is $F_X(x) = P(X \leq x)$. Notice that unlike the PMF, the definition of CDF applies for both discrete and continuous random variables. 
 
 Going back to our example where we record the number of heads out of 3 coin flips, we can write out the CDF for the random variable $X$:
 
@@ -136,7 +138,14 @@ Going back to our example where we record the number of heads out of 3 coin flip
 - $F_X(2) = P(X \leq 2) = P(X=0) + P(X=1) + P(X=2) = \frac{1}{2} + \frac{3}{8} = \frac{7}{8}$,
 - $F_X(3) = P(X \leq 3) = P(X=0) + P(X=1) + P(X=2) + P(X=3) = \frac{7}{8} + \frac{1}{8} = 1$.
 
-Notice how these calculations were based on the PMF. To find $P(X \leq x)$, we summed the PDF over all values of the support that is less than or equal to $x$. Fairly often, the CDF of a discrete random variable is presented in a simple table like Table \@ref(tab:3-cdf-tab) below:
+Notice how these calculations were based on the PMF. To find $P(X \leq x)$, we summed the PDF over all values of the support that is less than or equal to $x$. Therefore, another way to write the CDF for a discrete random variable is
+
+\begin{equation} 
+F_X(x) = P(X \leq x) = \sum_{x_j \leq x} P(X=x_j).
+(\#eq:3-CDF)
+\end{equation}
+
+Fairly often, the CDF of a discrete random variable is presented in a simple table like Table \@ref(tab:3-cdf-tab) below:
 
 ```{r 3-cdf-tab, echo=FALSE}
 # Define your table data
@@ -154,7 +163,7 @@ Or in a simple plot like in Figure \@ref(fig:3-cdf) below:
 ```{r 3-cdf, fig.cap="CDF for X", echo=FALSE}
 y<-c(0,1,1,1,2,2,2,3)
 ## create plot of CDF vs each value in support
-plot(ecdf(y), , main = "CDF for X", xlab="# of heads", ylab="Probability")
+plot(ecdf(y), main = "CDF for X", xlab="# of heads", ylab="Probability")
 ```
 The CDF for discrete random variables always look like a step function, as it increases in discrete jumps at each value of the support. The height of each jump corresponds to the PMF at that value of the support. 
 
@@ -379,7 +388,7 @@ so $Var(x) = 3 - 1.5^2 = \frac{3}{4}$.
 
 *Thought question*: Try to find $Var(X)$ using equation \@ref(eq:3-var2) and LOTUS. You should arrive at the same answer but the steps may be a bit more complicated.
 
-#### Properties of Variance
+#### Properties of Variance {#var-prop}
 
 Variance has the following properties:
 

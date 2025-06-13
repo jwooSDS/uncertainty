@@ -15,13 +15,153 @@ As a reminder:
 - A **discrete random variable** can only take on a countable (finite or infinite) number of values.
 - A **continuous random variable** can take on an uncountable number of values in an interval of real numbers. 
 
-## Probability Density Functions (PDFs)
+For example, height of an American adult is a continuous random variable, as height can take on any value in interval between 40 and 100 inches. All values between 40 and 100 are possible. We cannot list all possible real numbers in this range as the list is never ending.
 
-### Estimating PDFs with Data
+The sample space associated with a continuous random variable will be difficult to list, since it takes on an uncountable number of values. Using the example of heights of American adults, any real number between 40 and 100 inches is possible. 
+
+This is different from a discrete random variable where we would list the sample space, or support, and then find the probability associated with each value in the support. 
+
+Similar to discrete random variables, we want to describe the shape of the distribution, the centrality, and the spread of a continuous random distribution so we have an idea of probabilities associated with different ranges of values of the random variable. 
 
 ## Cumulative Distribution Functions (CDFs)
 
+We start by talking about the cumulative distribution function, as its definition applies to both discrete and continuous random variables. The CDF of a random variable $X$ is $F_X(x) = P(X \leq x)$. The difference lies in how a CDF looks visually and how it is calculated. 
+
+Take a look at the CDF of a discrete random variable and the CDF of a continuous random variable below in Figure \@ref(fig:4-compare):
+
+```{r 4-compare, fig.cap="CDF for Discrete RV vs CDF for Continuous RV", echo=FALSE}
+y<-c(0,1,1,1,2,2,2,3)
+## create plot of CDF vs each value in support
+par(mfrow=c(1,2))
+plot(ecdf(y) , main = "CDF for Discrete RV", xlab="", ylab="Probability")
+
+curve(pnorm, from = -5, to = 5, main = "CDF for Continuous RV", ylab="Probability", xlab="")
+```
+
+As mentioned in the previous module, the CDF for a discrete random variable is what is called a step function, as it jumps at each value of the support. On the other hand, the CDF for a continuous random variable increases smoothly as its sample space is infinite. 
+
+The height of the CDF informs us the percentile associated with the value of the random variable. Looking at the CDF for the continuous random variable in Figure \@ref(fig:4-compare), the height is 0.5 when the random variable is 0, so a value of 0 corresponds to the 50th percentile of this distribution. 
+
+The technical definition of a continuous random variable is: A random variable has a continuous distribution if its CDF is differentiable.
+
+A discrete random variable fails in this definition since its derivative is undefined at the jumps. 
+
+### Valid CDFs
+
+The criteria for a valid CDF is the same, it does not matter if the random variable is discrete or continuous:
+
+- non decreasing. This means that as $x$ gets larger, the CDF either stays the same or increases. Visually, a graph of the CDF should never decreases as $x$ increases. 
+- approach 1 as $x$ approaches infinity and approach 0 as $x$ approaches negative infinity. Visually, a graph of the CDF should be equal to or close to 1 for large values of x, and it should be equal to or close to 0 for small values of x. 
+
+*Thought question*: Look at the CDFs for our example in Figure \@ref(fig:4-compare), and see how they satisfy the criteria listed above for a valid CDF. 
+
+## Probability Density Functions (PDFs)
+
+The **probability density function (PDF)** of a continuous random variable is analogous to the PMF of a discrete random variable. 
+
+The definition of the PDF for continuous random variables is the following: for a continuous random variable $X$ with CDF $F_X(x)$, the PDF of $X$, $f_X(x)$, is the derivative of its CDF, in other words, $f_X(x) = F_X^{\prime}(x)$. The support of $X$ is the set of $x$ where $f_X(x) >0$.
+
+The relationship between the PDF and CDF of a continuous random variable $X$ can be expressed as
+
+\begin{equation} 
+F_X(x) = P(X \leq x) = \int_{-\infty}^{x} f_X(x) dx.
+(\#eq:4-PDFCDF)
+\end{equation}
+
+We take a look at an example below. Suppose we have a continuous random variable $X$ with its CDF and PDF displayed below, and we want to find $P(X \leq 1)$:
+
+```{r 4-prob, fig.cap="Probabilities from CDF and PDF", echo=FALSE}
+par(mfrow=c(1,2))
+curve(pnorm, from = -4, to = 4, main = "CDF for Continuous RV", ylab="Probability", xlab="")
+abline(h=0.84, col="blue")
+abline(v=1, col="blue")
+
+curve(dnorm, from = -4, to = 4, main = "PDF for Continuous RV", ylab="Density", xlab="")
+
+colorArea <- function(from, to, density, ..., col="blue", dens=NULL){
+    y_seq <- seq(from, to, length.out=500)
+    d <- c(0, density(y_seq, ...), 0)
+    polygon(c(from, y_seq, to), d, col=col, density=dens)
+}
+
+colorArea(from=-4, to=1, dnorm)
+```
+
+We can find $P(X \leq 1)$ in two different ways:
+
+- from the CDF, find the value of 1 on the horizontal axis, and read off the corresponding value on the vertical axis (blue lines). This tells us that $P(X \leq 1) = 0.84$.
+- from the PDF, find the area under the PDF where $X \leq 1$. This area corresponds to the shaded region in blue, and will be equal to 0.84 if we performed the integration per equation \@ref(eq:4-PDFCDF).
+
+Compare equation \@ref(eq:4-PDFCDF) with equation \@ref(eq:3-CDF) and note the similarities and differences. For discrete CDFs, we sum the PMF over all values less than or equal to $x$, whereas for continuous CDFs, we integrate, or accumulate the area, under the PDF over all values less than or equal to $x$. Some people view the integral as a continuous version of a summation. 
+
+From equation \@ref(eq:4-PDFCDF), we can generalize a way to find the probability $P(a<X<b)$  for a continuous random variable $X$:
+
+\begin{equation} 
+P(a<X<b) = F_X(b) - F_X(a) = \int_{a}^{b} f_X(x) dx.
+(\#eq:4-integrate)
+\end{equation}
+
+In other words, to find the probability for a range of values for $X$, we just find the area under its PDF for that range of values. Going back to our example, if we want to find $P(0<X<1)$, we will find the area under its PDF for $0<X<1$, like in Figure \@ref(fig:4-prob2) below:
+
+```{r 4-prob2, fig.cap="Probabilities from PDF", echo=FALSE}
+curve(dnorm, from = -4, to = 4, main = "PDF for Continuous RV", ylab="Density", xlab="")
+
+colorArea <- function(from, to, density, ..., col="blue", dens=NULL){
+    y_seq <- seq(from, to, length.out=500)
+    d <- c(0, density(y_seq, ...), 0)
+    polygon(c(from, y_seq, to), d, col=col, density=dens)
+}
+
+colorArea(from=-0, to=1, dnorm)
+```
+
+As mentioned, the PDF of a continuous random variable is analogous, but not exactly the same as, to the PMF of a discrete random variable. One common misconception is that the PDF tells us a probability, for example, that the value of $f_X(2) = P(X=2)$, if $X$ is continuous. This is only correct if $X$ is discrete. In fact, if we look at equation \@ref(eq:4-integrate) a little more closely, $P(X=c) = 0$ if $X$ is continuous and $c$ is a constant, since the area under its PDF will be 0. 
+
+
+### Valid PDFs
+
+The PDF of a continuous random variable must satisfy the following criteria:
+
+- Non negative: $f_X(x) \geq 0$,
+- Integrates to 1: $\int_{-\infty}^{\infty}f_X(x) dx = 1$.
+
+### Estimating PDFs with Data
+
 ## Expectations
+
+The **expected value** of a continuous random variable $X$ is
+
+\begin{equation} 
+E(X) = \int_{-\infty}^{\infty} x f_X(x) dx.
+(\#eq:4-EX)
+\end{equation}
+
+If we compare equation \@ref(eq:4-EX) with equation \@ref(eq:3-EX), we notice that we use an integral instead of a summation now that we are working with continuous random variables. 
+
+The interpretation of expected values is still the same: the expectation of a random variable can be interpreted as the long-run mean of the random variable, i.e. if we were able to repeat the experiment an infinite number of times, the expectation of the random variable will be the average result among all the experiments. It is still a measure of centrality of the random variable. 
+
+The **linearity of expectations** still hold in the same way, per equation \@ref(eq:3-linEX). It does not matter if the random variable is discrete or continuous.
+
+The **Law of the Unconscious Statistician (LOTUS)** also still applies. For a continuous random variable $X$, it is (unsurprisingly):
+
+\begin{equation} 
+E(g(X)) = \int_{-\infty}^{\infty} g(x) f_X(x).
+(\#eq:4-lotus)
+\end{equation}
+
+Notice again when we compare equation \@ref(eq:4-lotus) with its discrete counterpart in equation \@ref(eq:3-lotus): we have just replaced the summation with an integral. 
+
+*Thought question*: Can you guess how to write the equation for the variance of a continuous random variable? Hint: Equation \@ref(eq:3-var2) is how to find the variance for a discrete random variable.
+
+The **variance** of a continuous random variable $X$ is
+
+\begin{equation} 
+Var(X) = \int_{-\infty}^{\infty} (x-\mu)^2 f_X(x) dx.
+(\#eq:4-var)
+\end{equation}
+
+The properties of variance is still the same as in Section \@ref(var-prop). It does not matter if the random variable is discrete or continuous.
+
 
 ### Moments
 

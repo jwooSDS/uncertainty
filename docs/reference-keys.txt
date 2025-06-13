@@ -32,6 +32,7 @@ fig:tree2
 tab:3-pmf-tab
 fig:3-pmf
 fig:3-sim
+eq:3-CDF
 tab:3-cdf-tab
 fig:3-cdf
 eq:3-EX
@@ -55,6 +56,14 @@ eq:3-pois
 eq:3-pois-EX
 eq:3-pois-var
 fig:3-pmfs-lambda
+fig:4-compare
+eq:4-PDFCDF
+fig:4-prob
+eq:4-integrate
+fig:4-prob2
+eq:4-EX
+eq:4-lotus
+eq:4-var
 examples
 example-1-mario-kart-auction-prices
 eg2
@@ -126,7 +135,7 @@ visual-explanation
 one-more-example
 law-of-the-unconscious-statistician
 variance
-properties-of-variance
+var-prop
 common-discrete-random-variables
 bernoulli
 properties-of-bernoulli
@@ -140,9 +149,11 @@ poisson-approximation-to-binomial
 using-r
 continuous-random-variables
 introduction
-probability-density-functions-pdfs
-estimating-pdfs-with-data
 cumulative-distribution-functions-cdfs-1
+valid-cdfs-1
+probability-density-functions-pdfs
+valid-pdfs
+estimating-pdfs-with-data
 expectations-1
 moments
 common-continuous-random-variables
