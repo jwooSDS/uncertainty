@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999996 (MiKTeX 24.4) (preloaded format=xelatex 2025.6.7)  16 JUN 2025 17:29
+This is XeTeX, Version 3.141592653-2.6-0.999996 (MiKTeX 24.4) (preloaded format=xelatex 2025.6.7)  16 JUN 2025 17:40
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1160,11 +1160,11 @@ File: bookdown-demo_files/figure-latex/4-compare-1.pdf Graphic file (type pdf)
 
 
 [72]
+
+[73]
 File: bookdown-demo_files/figure-latex/4-prob-1.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/4-prob-1.pdf>
 
-
-[73]
 
 [74]
 File: bookdown-demo_files/figure-latex/4-prob2-1.pdf Graphic file (type pdf)
@@ -1188,7 +1188,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 2353--2355
  []
 
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
+Underfull \vbox (badness 5217) has occurred while \output is active []
 
 
 
@@ -1275,7 +1275,7 @@ LaTeX Warning: There were undefined references.
 Here is how much of TeX's memory you used:
  19864 strings out of 409029
  360881 string characters out of 5763847
- 1942612 words of memory out of 5000000
+ 1941612 words of memory out of 5000000
  42256 multiletter control sequences out of 15000+600000
  564568 words of font info for 95 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
