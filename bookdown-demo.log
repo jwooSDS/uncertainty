@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999996 (MiKTeX 24.4) (preloaded format=xelatex 2025.6.7)  13 JUN 2025 17:20
+This is XeTeX, Version 3.141592653-2.6-0.999996 (MiKTeX 24.4) (preloaded format=xelatex 2025.6.7)  16 JUN 2025 15:04
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1195,10 +1195,50 @@ File: bookdown-demo_files/figure-latex/4-kurt-1.pdf Graphic file (type pdf)
 
 
 [79]
+File: images/04-U.png Graphic file (type bmp)
+<images/04-U.png>
+File: images/04-Ucdf.png Graphic file (type bmp)
+<images/04-Ucdf.png>
+
+
+[80]
+
+[81]
+File: bookdown-demo_files/figure-latex/4-universe-1.pdf Graphic file (type pdf)
+
+<use bookdown-demo_files/figure-latex/4-universe-1.pdf>
+
+
+[82]
+Underfull \vbox (badness 2469) has occurred while \output is active []
+
+
+
+[83]
+File: bookdown-demo_files/figure-latex/4-Z-1.pdf Graphic file (type pdf)
+<use bookdown-demo_files/figure-latex/4-Z-1.pdf>
+
+
+[84]
+
+[85]
+Missing character: There is no 𝜇 in font [lmroman10-regular]:mapping=tex-text;!
+File: bookdown-demo_files/figure-latex/4-rule-1.pdf Graphic file (type pdf)
+<use bookdown-demo_files/figure-latex/4-rule-1.pdf>
+
+
+[86]
+
+[87]
+Overfull \hbox (38.25pt too wide) in paragraph at lines 2732--2732
+[]\TU/lmtt/m/n/10 ##  [1] -1.6907436  1.5545476  5.7635360 -2.3911270  0.759244
+7  1.3972609[] 
+ []
+
 No file bookdown-demo.bbl.
 
 
-[80] (bookdown-demo.aux)
+[88] (bookdown-demo.aux)
  ***********
 LaTeX2e <2024-06-01> patch level 2
 L3 programming layer <2024-07-20>
@@ -1208,12 +1248,12 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 19768 strings out of 409029
- 357890 string characters out of 5763847
+ 19827 strings out of 409029
+ 359754 string characters out of 5763847
  1941612 words of memory out of 5000000
- 42169 multiletter control sequences out of 15000+600000
+ 42222 multiletter control sequences out of 15000+600000
  564568 words of font info for 95 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  90i,21n,123p,1199b,585s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on bookdown-demo.pdf (80 pages).
+Output written on bookdown-demo.pdf (88 pages).

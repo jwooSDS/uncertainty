@@ -68,6 +68,14 @@ eq:4-skew
 fig:4-symm
 fig:4-kurt
 eq:4-kurt
+eq:4-U
+fig:4-U
+fig:4-Ucdf
+fig:4-universe
+eq:4-Z
+fig:4-Z
+eq:4-pdfNormal
+fig:4-rule
 examples
 example-1-mario-kart-auction-prices
 eg2
@@ -150,7 +158,7 @@ pmfs-of-binomial
 poisson
 properties-of-poisson
 poisson-approximation-to-binomial
-using-r
+Rdis
 continuous-random-variables
 introduction
 cumulative-distribution-functions-cdfs-1
@@ -171,3 +179,7 @@ common-continuous-random-variables
 uniform
 universality-of-uniform
 normal
+standard-normal
+from-standard-normal-to-other-normals
+rule
+using-r

@@ -257,12 +257,236 @@ The values of $Kurt(X)$ that are associated with tail behaviors are:
 
 - $Kurt(X) = 0$: $X$ is similar tails to Gaussian distribution.
 - $Kurt(X) > 0$: $X$ has heavier tails compared to Gaussian distribution (extreme values more likely).
-- $SKurt(X) < 0$: $X$ has smaller tails compared to Gaussian distribution (extreme values less likely).
+- $Kurt(X) < 0$: $X$ has smaller tails compared to Gaussian distribution (extreme values less likely).
 
 ## Common Continuous Random Variables
 
+Next, we will introduce some commonly used distributions that may be used for continuous random variables. A number of common statistical models (for example, linear regression) are based on these distributions.
+
 ### Uniform
+
+A random variable that follows a uniform distribution on the interval $(a,b)$ is a completely random number between $a$ and $b$. Notionally, an upper case $U$ is usually used to denote a uniform random variable. $U$ is said to have a **uniform distribution** on the interval $(a,b)$, denoted as $U \sim(a,b)$, if its PDF is
+
+\begin{equation} 
+f_X(x) = \begin{cases} 
+  \frac{1}{b-a} & \text{if } a<x<b \\
+  0 & \text{otherwise }. 
+\end{cases}
+(\#eq:4-U)
+\end{equation}
+
+Note that the parameters $a,b$ also help define the support of a uniform distribution. Figure \@ref(fig:4-U) below displays a plot of the PDF of a $U(a,b)$:
+
+```{r 4-U, fig.cap = "PDF of U(a,b). Picture from https://en.wikipedia.org/wiki/Continuous_uniform_distribution", echo = FALSE}
+knitr::include_graphics("images/04-U.png")
+```
+
+*Thought question*: Can you verify that this is a valid PDF?
+
+Figure \@ref(fig:4-Ucdf) below displays a plot of the CDF of a $U(a,b)$:
+
+```{r 4-Ucdf, fig.cap = "CDF of U(a,b). Picture from https://en.wikipedia.org/wiki/Continuous_uniform_distribution", echo = FALSE}
+knitr::include_graphics("images/04-Ucdf.png")
+```
+
+Some properties of the uniform distribution:
+
+- Its mean is $E(U) = \frac{a+b}{2}$.
+- Its variance is $Var(U) = \frac{(b-a)^2}{12}$.
+- Its skewness is 0.
+- Its kurtosis is -$\frac{6}{5}$.
+
+If the support of a uniform distribution is between 0 and 1, we have a **standard uniform distribution**. We will talk about the importance of the standard uniform distribution in the next subsection. 
 
 #### Universality of Uniform
 
+It turns out that we can construct a random variable with any continuous distribution based on a standard uniform distribution. This fact is used to simulate random numbers from continuous distributions. This fact is called the **Universality of the Uniform**: Let $F_X(x)$ denote the CDF of a continuous random variable $X$, then:
+
+1. Let $U \sim U(0,1)$ and $X = F^{-1}(U)$. Then $X$ is a random variable with CDF $F_X(x)$.
+2. $F_X(X) \sim U(0,1)$.
+
+To give some insight into what this means, we look at an example. Another continuous distribution is called the standard logistic distribution, which we will denote with $X$. Its CDF is
+
+$$
+F_X(x) = \frac{e^x}{1+e^x}.
+$$
+Let $U \sim U(0,1)$. The first part of the universality of the uniform informs us that the inverse of the CDF for the standard logistic is $F_X^{-1}(U) \sim X$, so we invert $F_X(x)$ to get its inverse $F_X{-1}(x)$. This is done by setting the CDF of $X$ to be equal to $u$, i.e. let $u = \frac{e^x}{1+e^x}$, and solving for $x$:
+
+$$
+\begin{split}
+u + u e^x &= e^x\\
+\implies u &= e^x (1-u) \\
+\implies e^x &= \frac{u}{1-u} \\
+\implies x &= \log (\frac{u}{1-u}).
+\end{split}
+$$
+
+Therefore $F^{-1}(u) = \log (\frac{u}{1-u})$ and $F^{-1}(U) = \log (\frac{U}{1-U})$. Therefore $\log (\frac{U}{1-U}$ follows a standard logistic distribution.
+
+Let us use simulations to show what is going on. First, we simulate 10,000 reps from a standard uniform distribution, then invert these values using $\log (\frac{U}{1-U})$, and create its density plot.  These are shown in Figure \@ref(fig:4-universe) below:
+
+```{r 4-universe, fig.cap="Uniform to Logistic"}
+set.seed(4)
+
+reps<-10000 ##number of reps
+u<-runif(reps) ##simulate standard uniform
+invert<- log(u/(1-u)) ##invert based on F inverse. These should now follow standard logistic
+
+par(mfrow=c(1,3))
+plot(density(u), main="Density Plot from 10,000 U's")
+plot(density(invert), main="Density Plot after Inverting", xlim=c(-6,6))
+curve(dlogis, from = -7, to = 7, main = "PDF for Logistic", ylab="Density", xlab="")
+```
+
+From Figure \@ref(fig:4-universe):
+
+- The first plot shows the density plot from our 10,000 reps from a standard normal. This is close to the PDF of a standard uniform.
+- The second plot shows the density plot after inverting our 10,000 reps from a standard normal, i.e. $F^{-1}(u) = \log (\frac{u}{1-u})$.
+- The third plot shows the PDF of a standard logistic. Notice how similar this looks to the second plot. 
+
+So we see that $\log (\frac{U}{1-U})$ follows a standard logistic distribution.
+
+The second part of the universality of the uniform informs us that if $X$ follows a standard logistic distribution, then $F(X) = \frac{e^X}{1 + e^X} \sim U(0,1)$.
+
+So, we can see the purpose of the universality of the uniform:
+
+- For part 1, we can simulate reps from any distribution, as long as we know its CDF. The software you use may not be able to simulate reps from a particular distribution, but you can write code to simulate reps from this distribution based on the standard uniform. 
+- For part 2, we can convert a random variable with an unknown distribution to one that is known: the standard uniform. 
+
 ### Normal
+
+Another widely used distribution for continuous random variables is the normal, or Gaussian distribution. This is a distribution that is symmetric and bell-shaped. This is probably the most important distribution in statistics and data science due to the central limit theorem. We will define this theorem in a later module, but loosely speaking, it says that if we take the average of a bunch of random variables, the average will approximate a normal distribution, even if the random variables are individually not normal. 
+
+A lot of questions that we wish to answer are based on averages. For example
+
+- Does the implementation of certain technologies in a class improve test scores for students, on average?
+- Are male Gentoo penguins heavier than their female counterparts, on average?
+- Does replacing traffic lights with a roundabout reduce the number of traffic accidents, on average?
+
+What the central limit theorem implies is that even if test scores, weights of Gentoo penguins, and number of traffic accidents do not follow a normal distribution, their average values will approximate a normal distribution. 
+
+#### Standard Normal
+
+First, we will talk about the **standard normal distribution**, as it turns out other normal distributions can be viewed as variations of the standard normal. A standard normal distribution has mean 0, and variance 1. It is usually denoted by $Z$. We can also write $Z \sim N(0,1)$ to say that $Z$ is normally distribution with mean 0 and variance 1. The PDF of a standard normal distribution is:
+
+\begin{equation} 
+\phi(z) = \frac{1}{\sqrt{2 \pi}} e^{-z^2/2}.
+(\#eq:4-Z)
+\end{equation}
+
+Notice the constant $\frac{1}{\sqrt{2 \pi}}$ in equation \@ref(eq:4-Z). Its presence is needed to make the PDF valid, since the PDf must integrate to 1. Such constants are called **normalizing constants**
+
+Figure \@ref(fig:4-Z) below displays its PDF:
+
+```{r 4-Z, fig.cap="PDF of Standard Normal"}
+curve(dnorm, from = -4, to = 4, main = "PDF for Z", ylab="Density", xlab="")
+```
+
+From Figure \@ref(fig:4-Z), we can see the following properties of a standard normal distribution (these will apply for any normal distribution):
+
+- Its PDF is symmetric about its mean. In Figure \@ref(fig:4-Z), the PDF is symmetric about 0, i.e. $\phi(-z) = \phi(z)$.
+- This implies that the tail areas are also symmetric. For example, $P(Z \leq -2) = P(Z \geq 2)$.
+- Its skew is 0, since it is symmetric.
+
+There is actually no closed-formed equation for the CDF of a standard normal (or any normal distribution). We write $\Phi(z) = P(Z \leq z) = \int_{\infty}^z \phi(z) dz$ to express the CDF of a standard normal.
+
+Notice that we have special letters $Z, \phi, \Phi$ to denote the standard normal distribution. This is an indication of how often it is used to warrant its own notation. 
+
+#### From Standard Normal to Other Normals
+
+If $Z \sim N(0,1)$, then $X = \mu + \sigma Z \sim N(\mu, \sigma^2)$. In other words, if $Z$ is standard normal, then $X = \mu + \sigma Z$ follows a normal distribution with mean $\mu$ and variance $\sigma^2$.
+
+*Thought question*: Can you use the linearity of expectations to explain why $X$ has mean 0? Can you use properties of variance from Section \@ref(var-prop) to explain why $X$ has variance $\sigma^2$?
+
+Notice how we started from a standard normal $Z$, and transformed $Z$ by multiplying it by $\sigma$ and then adding $\mu$ to get any normal distribution. A normal distribution is said to have parameters $\mu$ and $\sigma^2$. This transformation is called a **location-scale** transformation, or sometimes shifting and scaling. The scale changes since we multiply by a constant $\sigma$; the location is transformed since its mean changes from 0 to $\mu$. 
+
+We can also reverse this transformation and state the following: If $X \sim N(\mu, \sigma^2)$, then $Z = \frac{X-\mu}{\sigma} \sim N(0,1)$. If we start with $X \sim N(\mu, \sigma^2)$, then we can transform $X$ by subtracting \mu, and then dividing by $\sigma$, to obtain $Z$. This particular transformation is called **standardization**.
+
+The PDF of any normal distribution $X \sim N(\mu, \sigma^2)$ is
+
+\begin{equation} 
+f_X(x) = \frac{1}{\sigma \sqrt{2 \pi}} \exp \left(-\frac{(x - \mu)^2}{2 \sigma^2} \right).
+(\#eq:4-pdfNormal)
+\end{equation}
+
+*Thought question*: Compare equations \@ref(eq:4-pdfNormal) and \@ref(eq:4-Z). Can you see how equation \@ref(eq:4-Z) can be derived from equation \@ref(eq:4-pdfNormal)?
+
+#### 68-95-99.7 Rule
+
+The following property holds for any normal distribution, and is often called the **68-99-99.7%** rule. For any normal distribution $X \sim N(\mu, \sigma^2)$:
+
+- $P(\mu - \sigma < X < \mu + \sigma) \approx 0.68$,
+- $P(\mu - 2\sigma < X < \mu + 2\sigma) \approx 0.95$,
+- $P(\mu - 3\sigma < X < \mu + 3\sigma) \approx 0.997$.
+
+What these mean is that for any normal distribution:
+
+- About 68% of observed values will fall within 1 standard deviation of the mean,
+- About 95% of observed values will fall within 2 standard deviations of the mean, and
+- About 99.7% of observed values will fall within 3 standard deviations of the mean.
+
+The last statement is the basis for the term six sigma used in manufacturing, since the range virtually all data points should fall within a range that is six sigma wide. Visually, this rule is shown in Figure \@ref(fig:4-rule) when applied to the standard normal:
+
+```{r 4-rule, fig.cap="68-95-99.7 Rule", echo=FALSE}
+colorArea <- function(from, to, density, ..., col="blue", dens=NULL){
+    y_seq <- seq(from, to, length.out=500)
+    d <- c(0, density(y_seq, ...), 0)
+    polygon(c(from, y_seq, to), d, col=col, density=dens)
+}
+
+par(mfrow=c(3,1))
+curve(dnorm, from = -4, to = 4, main = "PDF for Z", ylab="Density", xlab="")
+colorArea(from=-1, to=1, dnorm)
+curve(dnorm, from = -4, to = 4, main = "PDF for Z", ylab="Density", xlab="")
+colorArea(from=-2, to=2, dnorm)
+curve(dnorm, from = -4, to = 4, main = "PDF for Z", ylab="Density", xlab="")
+colorArea(from=-3, to=3, dnorm)
+```
+
+We will work out the first statement, that about 68% of the observed values will fall within 1 standard deviation of the mean for any normal distribution. We will use R to help us verify this rule for a standard normal:
+
+```{r}
+upper1<-pnorm(1) ## what is percentile associated with Z=1 (i.e. 1 standard deviation above mean)
+lower1<-pnorm(-1) ## what is percentile associated with Z=-1 (i.e. 1 standard deviation below mean)
+upper1-lower1 ## find proportion in between 1 SD above and below mean.
+```
+*Thought question*: how would you tweak this code to verify the other two statements associated with the 68-95-99.7 rule?
+
+## Using R 
+
+R has built in functions to compute the density, CDF, percentiles, as well as simulate data of common distributions. We will start using a random variable $Y \sim N(1, 9)$ as an example.
+
+1. To find $f_Y(2)$, use:
+
+```{r}
+dnorm(2, 1, 3) ##supply the value of Y you want, then the parameters mu and sigma
+```
+The density $f_Y(2)$ is 0.1257944. Note: In R, the normal distribution is parametrized by the mean and standard deviation, which is different from the earlier sections of this module and our book, which uses the mean and variance.
+
+2. To find $P(Y \leq 2)$, use:
+
+```{r}
+pnorm(2, 1, 3) ##supply the value of Y you want, then the parameters mu and sigma
+```
+
+The probability that $Y$ is less than or equal to 2 is 0.6305587.
+
+3. To find the value on the support that corresponds to the 90th percentile, use:
+
+```{r}
+qnorm(0.9, 1, 3) ##supply the value of the percentile you need, then the parameters mu and sigma
+```
+
+The 90th percentile on $Y \sim N(1,3)$ is 4.844655. 
+
+4. To simulate 10 realizations (repetitions) of $Y$, use:
+
+```{r}
+set.seed(2) ##use set.seed() so we get the same random numbers each time the code is run
+rnorm(10, 1, 3) ##supply the number of simulated data you need, then the parameters mu and sigma
+```
+This outputs a vector of length 10. Each value represents the result of each rep. So the first value drawn from $Y \sim N(1,3)$ -1.6907436, the second value drawn is 1.5545476 and so on.
+
+Just like in Section \@ref(Rdis), notice these functions all ended with `norm`. We just added a different letter first, depending on whether we want the density (analogous to PDF), CDF, percentile, or random draw. The letters are `d`, `p`, `q`, and `r` respectively. 
+
+One thing to note: if we do not supply the mean and standard deviation, for example we type `rnorm(10)`, R will assume you want to use a standard normal distribution, so `rnorm(10)` will draw 10 random numbers from a standard normal. 

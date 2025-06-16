@@ -283,7 +283,7 @@ Kurt(X) = E \left(\frac{(X-\mu)^4}{\sigma} \right) - 3.
 <li>
 <span class="math inline">\(Kurt(X) &gt; 0\)</span>: <span class="math inline">\(X\)</span> has heavier tails compared to Gaussian distribution (extreme values more likely).</li>
 <li>
-<span class="math inline">\(SKurt(X) &lt; 0\)</span>: <span class="math inline">\(X\)</span> has smaller tails compared to Gaussian distribution (extreme values less likely).</li>
+<span class="math inline">\(Kurt(X) &lt; 0\)</span>: <span class="math inline">\(X\)</span> has smaller tails compared to Gaussian distribution (extreme values less likely).</li>
 </ul>
 </div>
 </div>
@@ -291,22 +291,228 @@ Kurt(X) = E \left(\frac{(X-\mu)^4}{\sigma} \right) - 3.
 <h2>
 <span class="header-section-number">4.5</span> Common Continuous Random Variables<a class="anchor" aria-label="anchor" href="#common-continuous-random-variables"><i class="fas fa-link"></i></a>
 </h2>
+<p>Next, we will introduce some commonly used distributions that may be used for continuous random variables. A number of common statistical models (for example, linear regression) are based on these distributions.</p>
 <div id="uniform" class="section level3" number="4.5.1">
 <h3>
 <span class="header-section-number">4.5.1</span> Uniform<a class="anchor" aria-label="anchor" href="#uniform"><i class="fas fa-link"></i></a>
 </h3>
+<p>A random variable that follows a uniform distribution on the interval <span class="math inline">\((a,b)\)</span> is a completely random number between <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span>. Notionally, an upper case <span class="math inline">\(U\)</span> is usually used to denote a uniform random variable. <span class="math inline">\(U\)</span> is said to have a <strong>uniform distribution</strong> on the interval <span class="math inline">\((a,b)\)</span>, denoted as <span class="math inline">\(U \sim(a,b)\)</span>, if its PDF is</p>
+<p><span class="math display" id="eq:4-U">\[\begin{equation}
+f_X(x) = \begin{cases}
+  \frac{1}{b-a} &amp; \text{if } a&lt;x&lt;b \\
+  0 &amp; \text{otherwise }.
+\end{cases}
+\tag{4.8}
+\end{equation}\]</span></p>
+<p>Note that the parameters <span class="math inline">\(a,b\)</span> also help define the support of a uniform distribution. Figure <a href="continuous-random-variables.html#fig:4-U">4.6</a> below displays a plot of the PDF of a <span class="math inline">\(U(a,b)\)</span>:</p>
+<div class="figure">
+<span style="display:block;" id="fig:4-U"></span>
+<img src="images/04-U.png" alt="PDF of U(a,b). Picture from https://en.wikipedia.org/wiki/Continuous_uniform_distribution"><p class="caption">
+Figure 4.6: PDF of U(a,b). Picture from <a href="https://en.wikipedia.org/wiki/Continuous_uniform_distribution" class="uri">https://en.wikipedia.org/wiki/Continuous_uniform_distribution</a>
+</p>
+</div>
+<p><em>Thought question</em>: Can you verify that this is a valid PDF?</p>
+<p>Figure <a href="continuous-random-variables.html#fig:4-Ucdf">4.7</a> below displays a plot of the CDF of a <span class="math inline">\(U(a,b)\)</span>:</p>
+<div class="figure">
+<span style="display:block;" id="fig:4-Ucdf"></span>
+<img src="images/04-Ucdf.png" alt="CDF of U(a,b). Picture from https://en.wikipedia.org/wiki/Continuous_uniform_distribution"><p class="caption">
+Figure 4.7: CDF of U(a,b). Picture from <a href="https://en.wikipedia.org/wiki/Continuous_uniform_distribution" class="uri">https://en.wikipedia.org/wiki/Continuous_uniform_distribution</a>
+</p>
+</div>
+<p>Some properties of the uniform distribution:</p>
+<ul>
+<li>Its mean is <span class="math inline">\(E(U) = \frac{a+b}{2}\)</span>.</li>
+<li>Its variance is <span class="math inline">\(Var(U) = \frac{(b-a)^2}{12}\)</span>.</li>
+<li>Its skewness is 0.</li>
+<li>Its kurtosis is -<span class="math inline">\(\frac{6}{5}\)</span>.</li>
+</ul>
+<p>If the support of a uniform distribution is between 0 and 1, we have a <strong>standard uniform distribution</strong>. We will talk about the importance of the standard uniform distribution in the next subsection.</p>
 <div id="universality-of-uniform" class="section level4" number="4.5.1.1">
 <h4>
 <span class="header-section-number">4.5.1.1</span> Universality of Uniform<a class="anchor" aria-label="anchor" href="#universality-of-uniform"><i class="fas fa-link"></i></a>
 </h4>
+<p>It turns out that we can construct a random variable with any continuous distribution based on a standard uniform distribution. This fact is used to simulate random numbers from continuous distributions. This fact is called the <strong>Universality of the Uniform</strong>: Let <span class="math inline">\(F_X(x)\)</span> denote the CDF of a continuous random variable <span class="math inline">\(X\)</span>, then:</p>
+<ol style="list-style-type: decimal">
+<li>Let <span class="math inline">\(U \sim U(0,1)\)</span> and <span class="math inline">\(X = F^{-1}(U)\)</span>. Then <span class="math inline">\(X\)</span> is a random variable with CDF <span class="math inline">\(F_X(x)\)</span>.</li>
+<li>
+<span class="math inline">\(F_X(X) \sim U(0,1)\)</span>.</li>
+</ol>
+<p>To give some insight into what this means, we look at an example. Another continuous distribution is called the standard logistic distribution, which we will denote with <span class="math inline">\(X\)</span>. Its CDF is</p>
+<p><span class="math display">\[
+F_X(x) = \frac{e^x}{1+e^x}.
+\]</span>
+Let <span class="math inline">\(U \sim U(0,1)\)</span>. The first part of the universality of the uniform informs us that the inverse of the CDF for the standard logistic is <span class="math inline">\(F_X^{-1}(U) \sim X\)</span>, so we invert <span class="math inline">\(F_X(x)\)</span> to get its inverse <span class="math inline">\(F_X{-1}(x)\)</span>. This is done by setting the CDF of <span class="math inline">\(X\)</span> to be equal to <span class="math inline">\(u\)</span>, i.e. let <span class="math inline">\(u = \frac{e^x}{1+e^x}\)</span>, and solving for <span class="math inline">\(x\)</span>:</p>
+<p><span class="math display">\[
+\begin{split}
+u + u e^x &amp;= e^x\\
+\implies u &amp;= e^x (1-u) \\
+\implies e^x &amp;= \frac{u}{1-u} \\
+\implies x &amp;= \log (\frac{u}{1-u}).
+\end{split}
+\]</span></p>
+<p>Therefore <span class="math inline">\(F^{-1}(u) = \log (\frac{u}{1-u})\)</span> and <span class="math inline">\(F^{-1}(U) = \log (\frac{U}{1-U})\)</span>. Therefore <span class="math inline">\(\log (\frac{U}{1-U}\)</span> follows a standard logistic distribution.</p>
+<p>Let us use simulations to show what is going on. First, we simulate 10,000 reps from a standard uniform distribution, then invert these values using <span class="math inline">\(\log (\frac{U}{1-U})\)</span>, and create its density plot. These are shown in Figure <a href="continuous-random-variables.html#fig:4-universe">4.8</a> below:</p>
+<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">4</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">reps</span><span class="op">&lt;-</span><span class="fl">10000</span> <span class="co">##number of reps</span></span>
+<span><span class="va">u</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="va">reps</span><span class="op">)</span> <span class="co">##simulate standard uniform</span></span>
+<span><span class="va">invert</span><span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">u</span><span class="op">/</span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">u</span><span class="op">)</span><span class="op">)</span> <span class="co">##invert based on F inverse. These should now follow standard logistic</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/density.html">density</a></span><span class="op">(</span><span class="va">u</span><span class="op">)</span>, main<span class="op">=</span><span class="st">"Density Plot from 10,000 U's"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/density.html">density</a></span><span class="op">(</span><span class="va">invert</span><span class="op">)</span>, main<span class="op">=</span><span class="st">"Density Plot after Inverting"</span>, xlim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">6</span>,<span class="fl">6</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/curve.html">curve</a></span><span class="op">(</span><span class="va">dlogis</span>, from <span class="op">=</span> <span class="op">-</span><span class="fl">7</span>, to <span class="op">=</span> <span class="fl">7</span>, main <span class="op">=</span> <span class="st">"PDF for Logistic"</span>, ylab<span class="op">=</span><span class="st">"Density"</span>, xlab<span class="op">=</span><span class="st">""</span><span class="op">)</span></span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:4-universe"></span>
+<img src="bookdown-demo_files/figure-html/4-universe-1.png" alt="Uniform to Logistic" width="672"><p class="caption">
+Figure 4.8: Uniform to Logistic
+</p>
+</div>
+<p>From Figure <a href="continuous-random-variables.html#fig:4-universe">4.8</a>:</p>
+<ul>
+<li>The first plot shows the density plot from our 10,000 reps from a standard normal. This is close to the PDF of a standard uniform.</li>
+<li>The second plot shows the density plot after inverting our 10,000 reps from a standard normal, i.e. <span class="math inline">\(F^{-1}(u) = \log (\frac{u}{1-u})\)</span>.</li>
+<li>The third plot shows the PDF of a standard logistic. Notice how similar this looks to the second plot.</li>
+</ul>
+<p>So we see that <span class="math inline">\(\log (\frac{U}{1-U})\)</span> follows a standard logistic distribution.</p>
+<p>The second part of the universality of the uniform informs us that if <span class="math inline">\(X\)</span> follows a standard logistic distribution, then <span class="math inline">\(F(X) = \frac{e^X}{1 + e^X} \sim U(0,1)\)</span>.</p>
+<p>So, we can see the purpose of the universality of the uniform:</p>
+<ul>
+<li>For part 1, we can simulate reps from any distribution, as long as we know its CDF. The software you use may not be able to simulate reps from a particular distribution, but you can write code to simulate reps from this distribution based on the standard uniform.</li>
+<li>For part 2, we can convert a random variable with an unknown distribution to one that is known: the standard uniform.</li>
+</ul>
 </div>
 </div>
 <div id="normal" class="section level3" number="4.5.2">
 <h3>
 <span class="header-section-number">4.5.2</span> Normal<a class="anchor" aria-label="anchor" href="#normal"><i class="fas fa-link"></i></a>
 </h3>
-
+<p>Another widely used distribution for continuous random variables is the normal, or Gaussian distribution. This is a distribution that is symmetric and bell-shaped. This is probably the most important distribution in statistics and data science due to the central limit theorem. We will define this theorem in a later module, but loosely speaking, it says that if we take the average of a bunch of random variables, the average will approximate a normal distribution, even if the random variables are individually not normal.</p>
+<p>A lot of questions that we wish to answer are based on averages. For example</p>
+<ul>
+<li>Does the implementation of certain technologies in a class improve test scores for students, on average?</li>
+<li>Are male Gentoo penguins heavier than their female counterparts, on average?</li>
+<li>Does replacing traffic lights with a roundabout reduce the number of traffic accidents, on average?</li>
+</ul>
+<p>What the central limit theorem implies is that even if test scores, weights of Gentoo penguins, and number of traffic accidents do not follow a normal distribution, their average values will approximate a normal distribution.</p>
+<div id="standard-normal" class="section level4" number="4.5.2.1">
+<h4>
+<span class="header-section-number">4.5.2.1</span> Standard Normal<a class="anchor" aria-label="anchor" href="#standard-normal"><i class="fas fa-link"></i></a>
+</h4>
+<p>First, we will talk about the <strong>standard normal distribution</strong>, as it turns out other normal distributions can be viewed as variations of the standard normal. A standard normal distribution has mean 0, and variance 1. It is usually denoted by <span class="math inline">\(Z\)</span>. We can also write <span class="math inline">\(Z \sim N(0,1)\)</span> to say that <span class="math inline">\(Z\)</span> is normally distribution with mean 0 and variance 1. The PDF of a standard normal distribution is:</p>
+<p><span class="math display" id="eq:4-Z">\[\begin{equation}
+\phi(z) = \frac{1}{\sqrt{2 \pi}} e^{-z^2/2}.
+\tag{4.9}
+\end{equation}\]</span></p>
+<p>Notice the constant <span class="math inline">\(\frac{1}{\sqrt{2 \pi}}\)</span> in equation <a href="continuous-random-variables.html#eq:4-Z">(4.9)</a>. Its presence is needed to make the PDF valid, since the PDf must integrate to 1. Such constants are called <strong>normalizing constants</strong></p>
+<p>Figure <a href="continuous-random-variables.html#fig:4-Z">4.9</a> below displays its PDF:</p>
+<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/curve.html">curve</a></span><span class="op">(</span><span class="va">dnorm</span>, from <span class="op">=</span> <span class="op">-</span><span class="fl">4</span>, to <span class="op">=</span> <span class="fl">4</span>, main <span class="op">=</span> <span class="st">"PDF for Z"</span>, ylab<span class="op">=</span><span class="st">"Density"</span>, xlab<span class="op">=</span><span class="st">""</span><span class="op">)</span></span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:4-Z"></span>
+<img src="bookdown-demo_files/figure-html/4-Z-1.png" alt="PDF of Standard Normal" width="672"><p class="caption">
+Figure 4.9: PDF of Standard Normal
+</p>
 </div>
+<p>From Figure <a href="continuous-random-variables.html#fig:4-Z">4.9</a>, we can see the following properties of a standard normal distribution (these will apply for any normal distribution):</p>
+<ul>
+<li>Its PDF is symmetric about its mean. In Figure <a href="continuous-random-variables.html#fig:4-Z">4.9</a>, the PDF is symmetric about 0, i.e. <span class="math inline">\(\phi(-z) = \phi(z)\)</span>.</li>
+<li>This implies that the tail areas are also symmetric. For example, <span class="math inline">\(P(Z \leq -2) = P(Z \geq 2)\)</span>.</li>
+<li>Its skew is 0, since it is symmetric.</li>
+</ul>
+<p>There is actually no closed-formed equation for the CDF of a standard normal (or any normal distribution). We write <span class="math inline">\(\Phi(z) = P(Z \leq z) = \int_{\infty}^z \phi(z) dz\)</span> to express the CDF of a standard normal.</p>
+<p>Notice that we have special letters <span class="math inline">\(Z, \phi, \Phi\)</span> to denote the standard normal distribution. This is an indication of how often it is used to warrant its own notation.</p>
+</div>
+<div id="from-standard-normal-to-other-normals" class="section level4" number="4.5.2.2">
+<h4>
+<span class="header-section-number">4.5.2.2</span> From Standard Normal to Other Normals<a class="anchor" aria-label="anchor" href="#from-standard-normal-to-other-normals"><i class="fas fa-link"></i></a>
+</h4>
+<p>If <span class="math inline">\(Z \sim N(0,1)\)</span>, then <span class="math inline">\(X = \mu + \sigma Z \sim N(\mu, \sigma^2)\)</span>. In other words, if <span class="math inline">\(Z\)</span> is standard normal, then <span class="math inline">\(X = \mu + \sigma Z\)</span> follows a normal distribution with mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^2\)</span>.</p>
+<p><em>Thought question</em>: Can you use the linearity of expectations to explain why <span class="math inline">\(X\)</span> has mean 0? Can you use properties of variance from Section <a href="discrete-random-variables.html#var-prop">3.4.3.1</a> to explain why <span class="math inline">\(X\)</span> has variance <span class="math inline">\(\sigma^2\)</span>?</p>
+<p>Notice how we started from a standard normal <span class="math inline">\(Z\)</span>, and transformed <span class="math inline">\(Z\)</span> by multiplying it by <span class="math inline">\(\sigma\)</span> and then adding <span class="math inline">\(\mu\)</span> to get any normal distribution. A normal distribution is said to have parameters <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma^2\)</span>. This transformation is called a <strong>location-scale</strong> transformation, or sometimes shifting and scaling. The scale changes since we multiply by a constant <span class="math inline">\(\sigma\)</span>; the location is transformed since its mean changes from 0 to <span class="math inline">\(\mu\)</span>.</p>
+<p>We can also reverse this transformation and state the following: If <span class="math inline">\(X \sim N(\mu, \sigma^2)\)</span>, then <span class="math inline">\(Z = \frac{X-\mu}{\sigma} \sim N(0,1)\)</span>. If we start with <span class="math inline">\(X \sim N(\mu, \sigma^2)\)</span>, then we can transform <span class="math inline">\(X\)</span> by subtracting , and then dividing by <span class="math inline">\(\sigma\)</span>, to obtain <span class="math inline">\(Z\)</span>. This particular transformation is called <strong>standardization</strong>.</p>
+<p>The PDF of any normal distribution <span class="math inline">\(X \sim N(\mu, \sigma^2)\)</span> is</p>
+<p><span class="math display" id="eq:4-pdfNormal">\[\begin{equation}
+f_X(x) = \frac{1}{\sigma \sqrt{2 \pi}} \exp \left(-\frac{(x - \mu)^2}{2 \sigma^2} \right).
+\tag{4.10}
+\end{equation}\]</span></p>
+<p><em>Thought question</em>: Compare equations <a href="continuous-random-variables.html#eq:4-pdfNormal">(4.10)</a> and <a href="continuous-random-variables.html#eq:4-Z">(4.9)</a>. Can you see how equation <a href="continuous-random-variables.html#eq:4-Z">(4.9)</a> can be derived from equation <a href="continuous-random-variables.html#eq:4-pdfNormal">(4.10)</a>?</p>
+</div>
+<div id="rule" class="section level4" number="4.5.2.3">
+<h4>
+<span class="header-section-number">4.5.2.3</span> 68-95-99.7 Rule<a class="anchor" aria-label="anchor" href="#rule"><i class="fas fa-link"></i></a>
+</h4>
+<p>The following property holds for any normal distribution, and is often called the <strong>68-99-99.7%</strong> rule. For any normal distribution <span class="math inline">\(X \sim N(\mu, \sigma^2)\)</span>:</p>
+<ul>
+<li>
+<span class="math inline">\(P(\mu - \sigma &lt; X &lt; \mu + \sigma) \approx 0.68\)</span>,</li>
+<li>
+<span class="math inline">\(P(\mu - 2\sigma &lt; X &lt; \mu + 2\sigma) \approx 0.95\)</span>,</li>
+<li>
+<span class="math inline">\(P(\mu - 3\sigma &lt; X &lt; \mu + 3\sigma) \approx 0.997\)</span>.</li>
+</ul>
+<p>What these mean is that for any normal distribution:</p>
+<ul>
+<li>About 68% of observed values will fall within 1 standard deviation of the mean,</li>
+<li>About 95% of observed values will fall within 2 standard deviations of the mean, and</li>
+<li>About 99.7% of observed values will fall within 3 standard deviations of the mean.</li>
+</ul>
+<p>The last statement is the basis for the term six sigma used in manufacturing, since the range virtually all data points should fall within a range that is six sigma wide. Visually, this rule is shown in Figure <a href="continuous-random-variables.html#fig:4-rule">4.10</a> when applied to the standard normal:</p>
+<div class="figure">
+<span style="display:block;" id="fig:4-rule"></span>
+<img src="bookdown-demo_files/figure-html/4-rule-1.png" alt="68-95-99.7 Rule" width="672"><p class="caption">
+Figure 4.10: 68-95-99.7 Rule
+</p>
+</div>
+<p>We will work out the first statement, that about 68% of the observed values will fall within 1 standard deviation of the mean for any normal distribution. We will use R to help us verify this rule for a standard normal:</p>
+<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">upper1</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">pnorm</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span> <span class="co">## what is percentile associated with Z=1 (i.e. 1 standard deviation above mean)</span></span>
+<span><span class="va">lower1</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">pnorm</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span> <span class="co">## what is percentile associated with Z=-1 (i.e. 1 standard deviation below mean)</span></span>
+<span><span class="va">upper1</span><span class="op">-</span><span class="va">lower1</span> <span class="co">## find proportion in between 1 SD above and below mean.</span></span></code></pre></div>
+<pre><code>## [1] 0.6826895</code></pre>
+<p><em>Thought question</em>: how would you tweak this code to verify the other two statements associated with the 68-95-99.7 rule?</p>
+</div>
+</div>
+</div>
+<div id="using-r" class="section level2" number="4.6">
+<h2>
+<span class="header-section-number">4.6</span> Using R<a class="anchor" aria-label="anchor" href="#using-r"><i class="fas fa-link"></i></a>
+</h2>
+<p>R has built in functions to compute the density, CDF, percentiles, as well as simulate data of common distributions. We will start using a random variable <span class="math inline">\(Y \sim N(1, 9)\)</span> as an example.</p>
+<ol style="list-style-type: decimal">
+<li>To find <span class="math inline">\(f_Y(2)\)</span>, use:</li>
+</ol>
+<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">dnorm</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span> <span class="co">##supply the value of Y you want, then the parameters mu and sigma</span></span></code></pre></div>
+<pre><code>## [1] 0.1257944</code></pre>
+<p>The density <span class="math inline">\(f_Y(2)\)</span> is 0.1257944. Note: In R, the normal distribution is parametrized by the mean and standard deviation, which is different from the earlier sections of this module and our book, which uses the mean and variance.</p>
+<ol start="2" style="list-style-type: decimal">
+<li>To find <span class="math inline">\(P(Y \leq 2)\)</span>, use:</li>
+</ol>
+<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">pnorm</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span> <span class="co">##supply the value of Y you want, then the parameters mu and sigma</span></span></code></pre></div>
+<pre><code>## [1] 0.6305587</code></pre>
+<p>The probability that <span class="math inline">\(Y\)</span> is less than or equal to 2 is 0.6305587.</p>
+<ol start="3" style="list-style-type: decimal">
+<li>To find the value on the support that corresponds to the 90th percentile, use:</li>
+</ol>
+<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">qnorm</a></span><span class="op">(</span><span class="fl">0.9</span>, <span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span> <span class="co">##supply the value of the percentile you need, then the parameters mu and sigma</span></span></code></pre></div>
+<pre><code>## [1] 4.844655</code></pre>
+<p>The 90th percentile on <span class="math inline">\(Y \sim N(1,3)\)</span> is 4.844655.</p>
+<ol start="4" style="list-style-type: decimal">
+<li>To simulate 10 realizations (repetitions) of <span class="math inline">\(Y\)</span>, use:</li>
+</ol>
+<div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span> <span class="co">##use set.seed() so we get the same random numbers each time the code is run</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span> <span class="co">##supply the number of simulated data you need, then the parameters mu and sigma</span></span></code></pre></div>
+<pre><code>##  [1] -1.6907436  1.5545476  5.7635360 -2.3911270  0.7592447  1.3972609
+##  [7]  3.1238642  0.2809059  6.9534218  0.5836390</code></pre>
+<p>This outputs a vector of length 10. Each value represents the result of each rep. So the first value drawn from <span class="math inline">\(Y \sim N(1,3)\)</span> -1.6907436, the second value drawn is 1.5545476 and so on.</p>
+<p>Just like in Section <a href="discrete-random-variables.html#Rdis">3.6</a>, notice these functions all ended with <code>norm</code>. We just added a different letter first, depending on whether we want the density (analogous to PDF), CDF, percentile, or random draw. The letters are <code>d</code>, <code>p</code>, <code>q</code>, and <code>r</code> respectively.</p>
+<p>One thing to note: if we do not supply the mean and standard deviation, for example we type <code>rnorm(10)</code>, R will assume you want to use a standard normal distribution, so <code>rnorm(10)</code> will draw 10 random numbers from a standard normal.</p>
+
 </div>
 </div>
   <div class="chapter-nav">
@@ -341,6 +547,7 @@ Kurt(X) = E \left(\frac{(X-\mu)^4}{\sigma} \right) - 3.
 <li><a class="nav-link" href="#normal"><span class="header-section-number">4.5.2</span> Normal</a></li>
 </ul>
 </li>
+<li><a class="nav-link" href="#using-r"><span class="header-section-number">4.6</span> Using R</a></li>
 </ul>
 
       <div class="book-extra">
@@ -357,7 +564,7 @@ Kurt(X) = E \left(\frac{(X-\mu)^4}{\sigma} \right) - 3.
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2025-06-13.</p>
+    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2025-06-16.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

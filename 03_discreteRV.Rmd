@@ -651,7 +651,7 @@ sum(dpois(y,lambda))
 
 Notice the values are very close to each other. 
 
-## Using R 
+## Using R {#Rdis}
 
 R has built in functions to compute the PMF, CDF, percentiles, as well as simulate data of common distributions. We will start using a random variable $Y$ which follows binomial distribution, with $n=5, p = 0.3$ as an example first. Note in this example that the support for $Y$ is $\{0,1,2,3,4,5 \}$.
 
@@ -686,7 +686,7 @@ rbinom(10, 5, 0.3) ##supply the number of simulated data you need, then the para
 ```
 This outputs a vector of length 10. Each value represents the result of each rep. So the first time we ran the binomial distribution with $n=5, p=0.3$, only 1 out of the 5 was a success. The second time it was run, only 2 out of the 5 was a success, and so on.
 
-Noticed these functions all ended with `binom`. We just added a different letter first, depending on whether we want the PMF, CDF, percentile, or random draw. The letters are `d`, `p`, `q`, and `r` respectively. 
+Notice these functions all ended with `binom`. We just added a different letter first, depending on whether we want the PMF, CDF, percentile, or random draw. The letters are `d`, `p`, `q`, and `r` respectively. 
 
 The same idea works for any other distribution. For example, to find the probability of a Poisson distribution with rate parameter 2 being equal to 1, we type:
 
