@@ -149,10 +149,13 @@ Figure 4.3: Probabilities from PDF
 <li>Integrates to 1: <span class="math inline">\(\int_{-\infty}^{\infty}f_X(x) dx = 1\)</span>.</li>
 </ul>
 </div>
-<div id="estimating-pdfs-with-data" class="section level3" number="4.3.2">
+<div id="pdfs-and-density-plots" class="section level3" number="4.3.2">
 <h3>
-<span class="header-section-number">4.3.2</span> Estimating PDFs with Data<a class="anchor" aria-label="anchor" href="#estimating-pdfs-with-data"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.3.2</span> PDFs and Density Plots<a class="anchor" aria-label="anchor" href="#pdfs-and-density-plots"><i class="fas fa-link"></i></a>
 </h3>
+<p>Recall in Section <a href="discrete-random-variables.html#pmfhist">3.2.2</a>, we learned that for discrete random variables, the PMF and histogram are related. The PMF represents the long-run proportion, while the histogram represents the relative frequency based on our data. As the sample size gets larger, the PMF should match the histogram.</p>
+<p>Similarly for continuous random variables, the PDF and the density plot are related. The PDF is associated with the distribution of a known random variable, while the density plot is estimated from our data, and if our data follows a known random variable, the PDF should match the density plot as the sample size gets larger.</p>
+<p>We will go over some of the details on how density plots are created at the end of this module, in Section <a href="continuous-random-variables.html#KDE">4.6.1</a>, as we still need to cover a bit more concepts.</p>
 </div>
 </div>
 <div id="summaries-of-a-distribution" class="section level2" number="4.4">
@@ -512,7 +515,103 @@ Figure 4.10: 68-95-99.7 Rule
 <p>This outputs a vector of length 10. Each value represents the result of each rep. So the first value drawn from <span class="math inline">\(Y \sim N(1,3)\)</span> -1.6907436, the second value drawn is 1.5545476 and so on.</p>
 <p>Just like in Section <a href="discrete-random-variables.html#Rdis">3.6</a>, notice these functions all ended with <code>norm</code>. We just added a different letter first, depending on whether we want the density (analogous to PDF), CDF, percentile, or random draw. The letters are <code>d</code>, <code>p</code>, <code>q</code>, and <code>r</code> respectively.</p>
 <p>One thing to note: if we do not supply the mean and standard deviation, for example we type <code>rnorm(10)</code>, R will assume you want to use a standard normal distribution, so <code>rnorm(10)</code> will draw 10 random numbers from a standard normal.</p>
+<div id="KDE" class="section level3" number="4.6.1">
+<h3>
+<span class="header-section-number">4.6.1</span> Density Plots and Kernel Density Estimation<a class="anchor" aria-label="anchor" href="#KDE"><i class="fas fa-link"></i></a>
+</h3>
+<p>We are now ready to talk about how density plots, like the ones in Figure <a href="continuous-random-variables.html#fig:4-universe">4.8</a> are created. Recall the difference between density plots and PDFs:</p>
+<ul>
+<li>A plot of the PDF describes the distribution of a known random variable.</li>
+<li>A density plot is based on our data, and is used to describe the distribution of our data. Our data may or may not follow a commonly known random variable. If it does, then a plot of the PDF and the density plot should match up as we gather more and more data.</li>
+</ul>
+<p>Proportions are found in the same way, by finding the area under the PDF or density plot for the appropriate range on the support.</p>
+<p>Suppose we have <span class="math inline">\(n\)</span> observed values of an unknown random variable <span class="math inline">\(X\)</span>: <span class="math inline">\(x_1, x_2, \cdots, x_n\)</span>.The density <span class="math inline">\(f\)</span> of <span class="math inline">\(X\)</span> is unknown and we want to estimate it with our data. To estimate the density <span class="math inline">\(f\)</span>, we use the <strong>kernel density estimator</strong>:</p>
+<p><span class="math display" id="eq:4-KDE">\[\begin{equation}
+\hat{f}_h(x) = \frac{1}{nh} \sum_{i=1}^n K \left( \frac{x-x_i}{h}\right ),
+\tag{4.11}
+\end{equation}\]</span></p>
+<p>where <span class="math inline">\(K\)</span> is the <strong>kernel</strong> and <span class="math inline">\(h\)</span> is a smoothing parameter, often called the <strong>bandwidth</strong>. Looking at equation <a href="continuous-random-variables.html#eq:4-KDE">(4.11)</a>, the KDE can be viewed as a weighted average of the relative likelihood of observing a particular value, with values nearer the specific value on the support receiving a higher weight.</p>
+<p>The kernel can be viewed as a weighting function, with the weights following the shape of a distribution that the user specifies (usually symmetric). Common kernel functions and their shapes are displayed in Figure <a href="continuous-random-variables.html#fig:4-KDE">4.11</a>:</p>
+<div class="figure">
+<span style="display:block;" id="fig:4-KDE"></span>
+<img src="images/04-KDE.png" alt="Common Kernals. Picture adapted from https://tgstewart.cloud/compprob/kde.html"><p class="caption">
+Figure 4.11: Common Kernals. Picture adapted from <a href="https://tgstewart.cloud/compprob/kde.html" class="uri">https://tgstewart.cloud/compprob/kde.html</a>
+</p>
+</div>
+<p>The horizontal axis on the kernel can be viewed as the distance of the value of a data point from a specific value on the support, and the mid point on the horizontal axis represents a distance of 0.</p>
+<ul>
+<li>Looking at the normal kernel, nearest values receive the highest weight, and values further away receive less weight.</li>
+<li>For the uniform kernel, values within a certain distance receive a weight, and values beyond a certain distance receive no weight.</li>
+<li>The Epanechnikov (parabolic) kernel is a mix of both: values beyond a certain distance receive no weight, and values within a certain distance receive a weight that is roughly inversely proportional to the distance.</li>
+</ul>
+<p><span class="math inline">\(h\)</span> is the smoothing parameter and is analogous to bin width in histograms. Larger values result in smoother looking density plots.</p>
+<p>Let us go back to an old example. We will use the <code>loan50</code> dataset from the <code>openintro</code> package. The data originally consist of thousands of loans made through the Lending Club platform, but we will randomly select 50 of these loans. Let us study the interest rate the loans the 50 applicants received.</p>
+<div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://openintrostat.github.io/openintro/">openintro</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">##create object for data</span></span>
+<span><span class="va">Data</span><span class="op">&lt;-</span><span class="va">loan50</span></span>
+<span></span>
+<span><span class="co">##create density plot using default</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/density.html">density</a></span><span class="op">(</span><span class="va">Data</span><span class="op">$</span><span class="va">interest_rate</span><span class="op">)</span>, main<span class="op">=</span><span class="st">"Density Plot of Interest Rates"</span><span class="op">)</span></span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:4-R"></span>
+<img src="bookdown-demo_files/figure-html/4-R-1.png" alt="Density Plot for 50 Interest Rates" width="672"><p class="caption">
+Figure 4.12: Density Plot for 50 Interest Rates
+</p>
+</div>
+<p>This actually uses KDE with the default settings: kernel is normal, and the bandwidth is based on <a href="https://en.wikipedia.org/wiki/Kernel_density_estimation#A_rule-of-thumb_bandwidth_estimator">Silverman’s rule of thumb</a>.</p>
+<p>To change these, we add the <code>kernel</code> and <code>adjust</code> argument when using the <code><a href="https://rdrr.io/r/stats/density.html">density()</a></code> function, for example, to use the Epanechnikov kernal with twice the default bandwidth:</p>
+<div class="sourceCode" id="cb61"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">##create density plot using different settings</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/density.html">density</a></span><span class="op">(</span><span class="va">Data</span><span class="op">$</span><span class="va">interest_rate</span>, kernel <span class="op">=</span> <span class="st">"epanechnikov"</span>, adjust <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>, </span>
+<span>     main<span class="op">=</span><span class="st">"Density Plot of Interest Rates"</span><span class="op">)</span></span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:4-R2"></span>
+<img src="bookdown-demo_files/figure-html/4-R2-1.png" alt="Density Plot for 50 Interest Rates, Epanechnikov Kernel, Twice the Bandwidth" width="672"><p class="caption">
+Figure 4.13: Density Plot for 50 Interest Rates, Epanechnikov Kernel, Twice the Bandwidth
+</p>
+</div>
+</div>
+<div id="numerical-summaries" class="section level3" number="4.6.2">
+<h3>
+<span class="header-section-number">4.6.2</span> Numerical Summaries<a class="anchor" aria-label="anchor" href="#numerical-summaries"><i class="fas fa-link"></i></a>
+</h3>
+<p>Equations <a href="continuous-random-variables.html#eq:4-EX">(4.3)</a>, <a href="continuous-random-variables.html#eq:4-var">(4.5)</a>, <a href="continuous-random-variables.html#eq:4-skew">(4.6)</a>, and <a href="continuous-random-variables.html#eq:4-kurt">(4.7)</a> are used to obtain the mean, variance, skewness, and kurtosis of a known distribution from a random variable. To calculate these quantities based on a sample of observed data, <span class="math inline">\(x_1, x_2, \cdots, x_n\)</span>, we use:</p>
+<p><span class="math display" id="eq:4-xbar">\[\begin{equation}
+\bar{x} =  \frac{1}{n} \sum_{i=1}^n x_i,
+\tag{4.12}
+\end{equation}\]</span></p>
+<p><span class="math display" id="eq:4-sampvar">\[\begin{equation}
+s_X^2 =  \frac{1}{n-1} \sum_{i=1}^n (x_i - \bar{x})^2,
+\tag{4.13}
+\end{equation}\]</span></p>
+<p>where <span class="math inline">\(\bar{x}\)</span> and <span class="math inline">\(s_x^2\)</span> denote the sample mean and variance respectively. The sample skewness and sample kurtosis are</p>
+<p><span class="math display" id="eq:4-sampskew">\[\begin{equation}
+\text{sample skewness } =  \frac{\frac{1}{n} \sum_{i=1}^n (x_i - \bar{x})^3}{s_X^3},
+\tag{4.14}
+\end{equation}\]</span></p>
+<p>and</p>
+<p><span class="math display" id="eq:4-sampkurt">\[\begin{equation}
+\text{sample kurtosis } =  \frac{\frac{1}{n} \sum_{i=1}^n (x_i - \bar{x})^4}{s_X^4} - 3.
+\tag{4.15}
+\end{equation}\]</span></p>
+<p>The functions <code><a href="https://rdrr.io/r/base/mean.html">mean()</a></code>, <code><a href="https://rdrr.io/r/stats/cor.html">var()</a></code>, <code><a href="https://rdrr.io/pkg/moments/man/skewness.html">skewness()</a></code>, and <code><a href="https://rdrr.io/pkg/moments/man/kurtosis.html">kurtosis()</a></code> compute these quantities in R. The latter two functions come from the <code>moments</code> package so be sure to install and load it prior to using them.</p>
+<div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">Data</span><span class="op">$</span><span class="va">interest_rate</span><span class="op">)</span> <span class="co">##mean</span></span></code></pre></div>
+<pre><code>## [1] 11.5672</code></pre>
+<div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html">var</a></span><span class="op">(</span><span class="va">Data</span><span class="op">$</span><span class="va">interest_rate</span><span class="op">)</span> <span class="co">##variance</span></span></code></pre></div>
+<pre><code>## [1] 25.52387</code></pre>
+<div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://www.r-project.org">moments</a></span><span class="op">)</span></span>
+<span><span class="fu">moments</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/moments/man/skewness.html">skewness</a></span><span class="op">(</span><span class="va">Data</span><span class="op">$</span><span class="va">interest_rate</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 1.102193</code></pre>
+<div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">moments</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/moments/man/kurtosis.html">kurtosis</a></span><span class="op">(</span><span class="va">Data</span><span class="op">$</span><span class="va">interest_rate</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 3.651631</code></pre>
 
+</div>
 </div>
 </div>
   <div class="chapter-nav">
@@ -529,7 +628,7 @@ Figure 4.10: 68-95-99.7 Rule
 <li>
 <a class="nav-link" href="#probability-density-functions-pdfs"><span class="header-section-number">4.3</span> Probability Density Functions (PDFs)</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#valid-pdfs"><span class="header-section-number">4.3.1</span> Valid PDFs</a></li>
-<li><a class="nav-link" href="#estimating-pdfs-with-data"><span class="header-section-number">4.3.2</span> Estimating PDFs with Data</a></li>
+<li><a class="nav-link" href="#pdfs-and-density-plots"><span class="header-section-number">4.3.2</span> PDFs and Density Plots</a></li>
 </ul>
 </li>
 <li>
@@ -547,7 +646,12 @@ Figure 4.10: 68-95-99.7 Rule
 <li><a class="nav-link" href="#normal"><span class="header-section-number">4.5.2</span> Normal</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#using-r"><span class="header-section-number">4.6</span> Using R</a></li>
+<li>
+<a class="nav-link" href="#using-r"><span class="header-section-number">4.6</span> Using R</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#KDE"><span class="header-section-number">4.6.1</span> Density Plots and Kernel Density Estimation</a></li>
+<li><a class="nav-link" href="#numerical-summaries"><span class="header-section-number">4.6.2</span> Numerical Summaries</a></li>
+</ul>
+</li>
 </ul>
 
       <div class="book-extra">

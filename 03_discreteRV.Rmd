@@ -102,7 +102,7 @@ In other words, the probabilities associated with the support are greater than 0
 
 *Thought question*: based on Table \@ref(tab:3-pmf-tab), can you see why our PMF for $X$ is valid?
 
-### PMFs and Histograms
+### PMFs and Histograms {#pmfhist}
 
 Recall the frequentist viewpoint of probability, that it represents the relative frequency associated with an event that is repeated for an infinite number of times. 
 

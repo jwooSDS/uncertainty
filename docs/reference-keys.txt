@@ -76,6 +76,14 @@ eq:4-Z
 fig:4-Z
 eq:4-pdfNormal
 fig:4-rule
+eq:4-KDE
+fig:4-KDE
+fig:4-R
+fig:4-R2
+eq:4-xbar
+eq:4-sampvar
+eq:4-sampskew
+eq:4-sampkurt
 examples
 example-1-mario-kart-auction-prices
 eg2
@@ -138,7 +146,7 @@ definition
 discrete-vs-continuous
 probability-mass-functions-pmfs
 valid-pmfs
-pmfs-and-histograms
+pmfhist
 cumulative-distribution-functions-cdfs
 valid-cdfs
 expectations
@@ -165,7 +173,7 @@ cumulative-distribution-functions-cdfs-1
 valid-cdfs-1
 probability-density-functions-pdfs
 valid-pdfs
-estimating-pdfs-with-data
+pdfs-and-density-plots
 summaries-of-a-distribution
 expectations-1
 median-1
@@ -183,3 +191,5 @@ standard-normal
 from-standard-normal-to-other-normals
 rule
 using-r
+KDE
+numerical-summaries

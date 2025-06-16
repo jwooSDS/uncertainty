@@ -125,7 +125,13 @@ The PDF of a continuous random variable must satisfy the following criteria:
 - Non negative: $f_X(x) \geq 0$,
 - Integrates to 1: $\int_{-\infty}^{\infty}f_X(x) dx = 1$.
 
-### Estimating PDFs with Data
+### PDFs and Density Plots
+
+Recall in Section \@ref(pmfhist), we learned that for discrete random variables, the PMF and histogram are related. The PMF represents the long-run proportion, while the histogram represents the relative frequency based on our data. As the sample size gets larger, the PMF should match the histogram. 
+
+Similarly for continuous random variables, the PDF and the density plot are related. The PDF is associated with the distribution of a known random variable, while the density plot is estimated from our data, and if our data follows a known random variable, the PDF should match the density plot as the sample size gets larger. 
+
+We will go over some of the details on how density plots are created at the end of this module, in Section \@ref(KDE), as we still need to cover a bit more concepts. 
 
 ## Summaries of a Distribution
 
@@ -489,4 +495,98 @@ This outputs a vector of length 10. Each value represents the result of each rep
 
 Just like in Section \@ref(Rdis), notice these functions all ended with `norm`. We just added a different letter first, depending on whether we want the density (analogous to PDF), CDF, percentile, or random draw. The letters are `d`, `p`, `q`, and `r` respectively. 
 
-One thing to note: if we do not supply the mean and standard deviation, for example we type `rnorm(10)`, R will assume you want to use a standard normal distribution, so `rnorm(10)` will draw 10 random numbers from a standard normal. 
+One thing to note: if we do not supply the mean and standard deviation, for example we type `rnorm(10)`, R will assume you want to use a standard normal distribution, so `rnorm(10)` will draw 10 random numbers from a standard normal.
+
+### Density Plots and Kernel Density Estimation {#KDE}
+
+We are now ready to talk about how density plots, like the ones in Figure \@ref(fig:4-universe) are created. Recall the difference between density plots and PDFs:
+
+- A plot of the PDF describes the distribution of a known random variable. 
+- A density plot is based on our data, and is used to describe the distribution of our data. Our data may or may not follow a commonly known random variable. If it does, then a plot of the PDF and the density plot should match up as we gather more and more data. 
+
+Proportions are found in the same way, by finding the area under the PDF or density plot for the appropriate range on the support. 
+
+Suppose we have $n$ observed values of an unknown random variable $X$: $x_1, x_2, \cdots, x_n$.The density $f$ of $X$ is unknown and we want to estimate it with our data. To estimate the density $f$, we use the **kernel density estimator**:
+
+\begin{equation} 
+\hat{f}_h(x) = \frac{1}{nh} \sum_{i=1}^n K \left( \frac{x-x_i}{h}\right ),
+(\#eq:4-KDE)
+\end{equation}
+
+where $K$ is the **kernel** and $h$ is a smoothing parameter, often called the **bandwidth**. Looking at equation \@ref(eq:4-KDE), the KDE can be viewed as a weighted average of the relative likelihood of observing a particular value, with values nearer the specific value on the support receiving a higher weight. 
+
+The kernel can be viewed as a weighting function, with the weights following the shape of a distribution that the user specifies (usually symmetric). Common kernel functions and their shapes are displayed in Figure \@ref(fig:4-KDE):
+
+```{r 4-KDE, fig.cap = "Common Kernals. Picture adapted from https://tgstewart.cloud/compprob/kde.html", echo = FALSE}
+knitr::include_graphics("images/04-KDE.png")
+```
+
+The horizontal axis on the kernel can be viewed as the distance of the value of a data point from a specific value on the support, and the mid point on the horizontal axis represents a distance of 0. 
+
+- Looking at the normal kernel, nearest values receive the highest weight, and values further away receive less weight. 
+- For the uniform kernel, values within a certain distance receive a weight, and values beyond a certain distance receive no weight.
+-  The Epanechnikov (parabolic) kernel is a mix of both: values beyond a certain distance receive no weight, and values within a certain distance receive a weight that is roughly inversely proportional to the distance. 
+
+$h$ is the smoothing parameter and is analogous to bin width in histograms. Larger values result in smoother looking density plots.
+
+Let us go back to an old example. We will use the `loan50` dataset from the `openintro` package. The data originally consist of thousands of loans made through the Lending Club platform, but we will randomly select 50 of these loans. Let us study the interest rate the loans the 50 applicants received. 
+
+```{r 4-R, fig.cap="Density Plot for 50 Interest Rates", message=FALSE, warning=FALSE}
+library(openintro)
+
+##create object for data
+Data<-loan50
+
+##create density plot using default
+plot(density(Data$interest_rate), main="Density Plot of Interest Rates")
+```
+
+This actually uses KDE with the default settings: kernel is normal, and the bandwidth is based on  [Silverman's rule of thumb](https://en.wikipedia.org/wiki/Kernel_density_estimation#A_rule-of-thumb_bandwidth_estimator).
+
+To change these, we add the `kernel` and `adjust` argument when using the `density()` function, for example, to use the Epanechnikov kernal with twice the default bandwidth:
+
+```{r 4-R2, fig.cap="Density Plot for 50 Interest Rates, Epanechnikov Kernel, Twice the Bandwidth", message=FALSE, warning=FALSE}
+
+##create density plot using different settings
+plot(density(Data$interest_rate, kernel = "epanechnikov", adjust = 2), 
+     main="Density Plot of Interest Rates")
+```
+
+### Numerical Summaries
+
+Equations \@ref(eq:4-EX), \@ref(eq:4-var), \@ref(eq:4-skew), and \@ref(eq:4-kurt) are used to obtain the mean, variance, skewness, and kurtosis of a known distribution from a random variable. To calculate these quantities based on a sample of observed data, $x_1, x_2, \cdots, x_n$, we use:
+
+\begin{equation} 
+\bar{x} =  \frac{1}{n} \sum_{i=1}^n x_i,
+(\#eq:4-xbar)
+\end{equation}
+
+\begin{equation} 
+s_X^2 =  \frac{1}{n-1} \sum_{i=1}^n (x_i - \bar{x})^2,
+(\#eq:4-sampvar)
+\end{equation}
+
+where $\bar{x}$ and $s_x^2$ denote the sample mean and variance respectively. The sample skewness and sample kurtosis are
+
+\begin{equation} 
+\text{sample skewness } =  \frac{\frac{1}{n} \sum_{i=1}^n (x_i - \bar{x})^3}{s_X^3},
+(\#eq:4-sampskew)
+\end{equation}
+
+and
+
+\begin{equation} 
+\text{sample kurtosis } =  \frac{\frac{1}{n} \sum_{i=1}^n (x_i - \bar{x})^4}{s_X^4} - 3.
+(\#eq:4-sampkurt)
+\end{equation}
+
+The functions `mean()`, `var()`, `skewness()`, and `kurtosis()` compute these quantities in R. The latter two functions come from the `moments` package so be sure to install and load it prior to using them. 
+
+```{r}
+mean(Data$interest_rate) ##mean
+var(Data$interest_rate) ##variance
+
+library(moments)
+moments::skewness(Data$interest_rate)
+moments::kurtosis(Data$interest_rate)
+```

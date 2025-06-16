@@ -1356,7 +1356,7 @@ In other words, the probabilities associated with the support are greater than 0
 
 \emph{Thought question}: based on Table \ref{tab:3-pmf-tab}, can you see why our PMF for \(X\) is valid?
 
-\subsection{PMFs and Histograms}\label{pmfs-and-histograms}
+\subsection{PMFs and Histograms}\label{pmfhist}
 
 Recall the frequentist viewpoint of probability, that it represents the relative frequency associated with an event that is repeated for an infinite number of times.
 
@@ -2244,7 +2244,13 @@ The PDF of a continuous random variable must satisfy the following criteria:
   Integrates to 1: \(\int_{-\infty}^{\infty}f_X(x) dx = 1\).
 \end{itemize}
 
-\subsection{Estimating PDFs with Data}\label{estimating-pdfs-with-data}
+\subsection{PDFs and Density Plots}\label{pdfs-and-density-plots}
+
+Recall in Section \ref{pmfhist}, we learned that for discrete random variables, the PMF and histogram are related. The PMF represents the long-run proportion, while the histogram represents the relative frequency based on our data. As the sample size gets larger, the PMF should match the histogram.
+
+Similarly for continuous random variables, the PDF and the density plot are related. The PDF is associated with the distribution of a known random variable, while the density plot is estimated from our data, and if our data follows a known random variable, the PDF should match the density plot as the sample size gets larger.
+
+We will go over some of the details on how density plots are created at the end of this module, in Section \ref{KDE}, as we still need to cover a bit more concepts.
 
 \section{Summaries of a Distribution}\label{summaries-of-a-distribution}
 
@@ -2736,6 +2742,160 @@ This outputs a vector of length 10. Each value represents the result of each rep
 Just like in Section \ref{Rdis}, notice these functions all ended with \texttt{norm}. We just added a different letter first, depending on whether we want the density (analogous to PDF), CDF, percentile, or random draw. The letters are \texttt{d}, \texttt{p}, \texttt{q}, and \texttt{r} respectively.
 
 One thing to note: if we do not supply the mean and standard deviation, for example we type \texttt{rnorm(10)}, R will assume you want to use a standard normal distribution, so \texttt{rnorm(10)} will draw 10 random numbers from a standard normal.
+
+\subsection{Density Plots and Kernel Density Estimation}\label{KDE}
+
+We are now ready to talk about how density plots, like the ones in Figure \ref{fig:4-universe} are created. Recall the difference between density plots and PDFs:
+
+\begin{itemize}
+\tightlist
+\item
+  A plot of the PDF describes the distribution of a known random variable.
+\item
+  A density plot is based on our data, and is used to describe the distribution of our data. Our data may or may not follow a commonly known random variable. If it does, then a plot of the PDF and the density plot should match up as we gather more and more data.
+\end{itemize}
+
+Proportions are found in the same way, by finding the area under the PDF or density plot for the appropriate range on the support.
+
+Suppose we have \(n\) observed values of an unknown random variable \(X\): \(x_1, x_2, \cdots, x_n\).The density \(f\) of \(X\) is unknown and we want to estimate it with our data. To estimate the density \(f\), we use the \textbf{kernel density estimator}:
+
+\begin{equation} 
+\hat{f}_h(x) = \frac{1}{nh} \sum_{i=1}^n K \left( \frac{x-x_i}{h}\right ),
+\label{eq:4-KDE}
+\end{equation}
+
+where \(K\) is the \textbf{kernel} and \(h\) is a smoothing parameter, often called the \textbf{bandwidth}. Looking at equation \eqref{eq:4-KDE}, the KDE can be viewed as a weighted average of the relative likelihood of observing a particular value, with values nearer the specific value on the support receiving a higher weight.
+
+The kernel can be viewed as a weighting function, with the weights following the shape of a distribution that the user specifies (usually symmetric). Common kernel functions and their shapes are displayed in Figure \ref{fig:4-KDE}:
+
+\begin{figure}
+\centering
+\includegraphics{images/04-KDE.png}
+\caption{\label{fig:4-KDE}Common Kernals. Picture adapted from \url{https://tgstewart.cloud/compprob/kde.html}}
+\end{figure}
+
+The horizontal axis on the kernel can be viewed as the distance of the value of a data point from a specific value on the support, and the mid point on the horizontal axis represents a distance of 0.
+
+\begin{itemize}
+\tightlist
+\item
+  Looking at the normal kernel, nearest values receive the highest weight, and values further away receive less weight.
+\item
+  For the uniform kernel, values within a certain distance receive a weight, and values beyond a certain distance receive no weight.
+\item
+  The Epanechnikov (parabolic) kernel is a mix of both: values beyond a certain distance receive no weight, and values within a certain distance receive a weight that is roughly inversely proportional to the distance.
+\end{itemize}
+
+\(h\) is the smoothing parameter and is analogous to bin width in histograms. Larger values result in smoother looking density plots.
+
+Let us go back to an old example. We will use the \texttt{loan50} dataset from the \texttt{openintro} package. The data originally consist of thousands of loans made through the Lending Club platform, but we will randomly select 50 of these loans. Let us study the interest rate the loans the 50 applicants received.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(openintro)}
+
+\DocumentationTok{\#\#create object for data}
+\NormalTok{Data}\OtherTok{\textless{}{-}}\NormalTok{loan50}
+
+\DocumentationTok{\#\#create density plot using default}
+\FunctionTok{plot}\NormalTok{(}\FunctionTok{density}\NormalTok{(Data}\SpecialCharTok{$}\NormalTok{interest\_rate), }\AttributeTok{main=}\StringTok{"Density Plot of Interest Rates"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\centering
+\includegraphics{bookdown-demo_files/figure-latex/4-R-1.pdf}
+\caption{\label{fig:4-R}Density Plot for 50 Interest Rates}
+\end{figure}
+
+This actually uses KDE with the default settings: kernel is normal, and the bandwidth is based on \href{https://en.wikipedia.org/wiki/Kernel_density_estimation\#A_rule-of-thumb_bandwidth_estimator}{Silverman's rule of thumb}.
+
+To change these, we add the \texttt{kernel} and \texttt{adjust} argument when using the \texttt{density()} function, for example, to use the Epanechnikov kernal with twice the default bandwidth:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#create density plot using different settings}
+\FunctionTok{plot}\NormalTok{(}\FunctionTok{density}\NormalTok{(Data}\SpecialCharTok{$}\NormalTok{interest\_rate, }\AttributeTok{kernel =} \StringTok{"epanechnikov"}\NormalTok{, }\AttributeTok{adjust =} \DecValTok{2}\NormalTok{), }
+     \AttributeTok{main=}\StringTok{"Density Plot of Interest Rates"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\centering
+\includegraphics{bookdown-demo_files/figure-latex/4-R2-1.pdf}
+\caption{\label{fig:4-R2}Density Plot for 50 Interest Rates, Epanechnikov Kernel, Twice the Bandwidth}
+\end{figure}
+
+\subsection{Numerical Summaries}\label{numerical-summaries}
+
+Equations \eqref{eq:4-EX}, \eqref{eq:4-var}, \eqref{eq:4-skew}, and \eqref{eq:4-kurt} are used to obtain the mean, variance, skewness, and kurtosis of a known distribution from a random variable. To calculate these quantities based on a sample of observed data, \(x_1, x_2, \cdots, x_n\), we use:
+
+\begin{equation} 
+\bar{x} =  \frac{1}{n} \sum_{i=1}^n x_i,
+\label{eq:4-xbar}
+\end{equation}
+
+\begin{equation} 
+s_X^2 =  \frac{1}{n-1} \sum_{i=1}^n (x_i - \bar{x})^2,
+\label{eq:4-sampvar}
+\end{equation}
+
+where \(\bar{x}\) and \(s_x^2\) denote the sample mean and variance respectively. The sample skewness and sample kurtosis are
+
+\begin{equation} 
+\text{sample skewness } =  \frac{\frac{1}{n} \sum_{i=1}^n (x_i - \bar{x})^3}{s_X^3},
+\label{eq:4-sampskew}
+\end{equation}
+
+and
+
+\begin{equation} 
+\text{sample kurtosis } =  \frac{\frac{1}{n} \sum_{i=1}^n (x_i - \bar{x})^4}{s_X^4} - 3.
+\label{eq:4-sampkurt}
+\end{equation}
+
+The functions \texttt{mean()}, \texttt{var()}, \texttt{skewness()}, and \texttt{kurtosis()} compute these quantities in R. The latter two functions come from the \texttt{moments} package so be sure to install and load it prior to using them.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{mean}\NormalTok{(Data}\SpecialCharTok{$}\NormalTok{interest\_rate) }\DocumentationTok{\#\#mean}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 11.5672
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{var}\NormalTok{(Data}\SpecialCharTok{$}\NormalTok{interest\_rate) }\DocumentationTok{\#\#variance}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 25.52387
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(moments)}
+\NormalTok{moments}\SpecialCharTok{::}\FunctionTok{skewness}\NormalTok{(Data}\SpecialCharTok{$}\NormalTok{interest\_rate)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1.102193
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{moments}\SpecialCharTok{::}\FunctionTok{kurtosis}\NormalTok{(Data}\SpecialCharTok{$}\NormalTok{interest\_rate)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 3.651631
+\end{verbatim}
 
   \bibliography{book.bib,packages.bib}
 
