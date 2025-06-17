@@ -118,7 +118,7 @@ Comparing Figure \@ref(fig:hist05) with Figure \@ref(fig:hist), note the followi
 
 *Thought question*: What happens if we create a histogram with a bin width that is too large?
 
-### Density Plots
+### Density Plots {#densplots}
 
 Another visualization for a quantitative variable is a density plot. A density plot can be viewed as a smoothed version of the histogram. We can use the heights to inform us about what values are more common. We create a density plot for the interest rates in Figure \@ref(fig:dens):
 

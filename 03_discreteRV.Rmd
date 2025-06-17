@@ -173,7 +173,7 @@ The CDF for discrete random variables always look like a step function, as it in
 
 The CDF $F_X(x)$ of $X$ must:
 
-- be non decreasing. This means that as $x$ gets larger, the CDF either stays the same or increases. Visually, a graph of the CDF should never decreases as $x$ increases. 
+- be non decreasing. This means that as $x$ gets larger, the CDF either stays the same or increases. Visually, a graph of the CDF never decreases as $x$ increases. 
 - approach 1 as $x$ approaches infinity and approach 0 as $x$ approaches negative infinity. Visually, a graph of the CDF should be equal to or close to 1 for large values of x, and it should be equal to or close to 0 for small values of x. 
 
 *Thought question*: Look at the CDF for our example in Figure \@ref(fig:3-cdf), and see how it satisfies the criteria listed above for a valid CDF. 

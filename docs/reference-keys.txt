@@ -74,12 +74,14 @@ fig:4-Ucdf
 fig:4-universe
 eq:4-Z
 fig:4-Z
+eq:4-standardize
 eq:4-pdfNormal
 fig:4-rule
 eq:4-KDE
 fig:4-KDE
 fig:4-R
 fig:4-R2
+fig:4-R3
 eq:4-xbar
 eq:4-sampvar
 eq:4-sampskew
@@ -96,7 +98,7 @@ dot-plots
 histograms
 shapes-of-distribution
 considerations-with-histograms
-density-plots
+densplots
 considerations-with-density-plots
 ordered-statistics
 quantiles
@@ -192,4 +194,5 @@ from-standard-normal-to-other-normals
 rule
 using-r
 KDE
+density-plots-and-histograms
 numerical-summaries

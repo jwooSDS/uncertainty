@@ -4,7 +4,7 @@
 rm(list = ls())
 ```
 
-This module is based on Introduction to Probability (Blitzstein, Hwang), Chapters 5 and 6. You can access the book for free at https://stat110.hsites.harvard.edu/ (and then click on Book). Please note that I cover additional topics, and skip certain topics from the book. You may skip Examples 4.1.6, 4.1.7, Proposition 5.2.3, Example 5.2.4, Sections 5.2.6, 5.2.7, Definition 5.3.7, Theorem 5.3.8, Example 5.4.7, Sections 5.5, 5.6, 5.7, Proposition 6.2.5, 6.2.6, Theorem 6.3.4, Sections 6.4 to 6.7 from the book.
+This module is based on Introduction to Probability (Blitzstein, Hwang), Chapters 5 and 6. You can access the book for free at https://stat110.hsites.harvard.edu/ (and then click on Book). Please note that I cover additional topics, and skip certain topics from the book. You may skip Examples 5.1.6, 5.1.7, Proposition 5.2.3, Example 5.2.4, Sections 5.2.6, 5.2.7, Definition 5.3.7, Theorem 5.3.8, Example 5.4.7, Sections 5.5, 5.6, 5.7, Proposition 6.2.5, 6.2.6, Theorem 6.3.4, Sections 6.4 to 6.7 from the book.
 
 ## Introduction
 
@@ -25,7 +25,7 @@ Similar to discrete random variables, we want to describe the shape of the distr
 
 ## Cumulative Distribution Functions (CDFs)
 
-We start by talking about the cumulative distribution function, as its definition applies to both discrete and continuous random variables. The CDF of a random variable $X$ is $F_X(x) = P(X \leq x)$. The difference lies in how a CDF looks visually and how it is calculated. 
+We start by talking about the cumulative distribution function, as its definition applies to both discrete and continuous random variables. The CDF of a random variable $X$ is $F_X(x) = P(X \leq x)$. The difference lies in how a CDF looks visually. 
 
 Take a look at the CDF of a discrete random variable and the CDF of a continuous random variable below in Figure \@ref(fig:4-compare):
 
@@ -50,7 +50,7 @@ A discrete random variable fails in this definition since its derivative is unde
 
 The criteria for a valid CDF is the same, it does not matter if the random variable is discrete or continuous:
 
-- non decreasing. This means that as $x$ gets larger, the CDF either stays the same or increases. Visually, a graph of the CDF should never decreases as $x$ increases. 
+- non decreasing. This means that as $x$ gets larger, the CDF either stays the same or increases. Visually, a graph of the CDF never decreases as $x$ increases. 
 - approach 1 as $x$ approaches infinity and approach 0 as $x$ approaches negative infinity. Visually, a graph of the CDF should be equal to or close to 1 for large values of x, and it should be equal to or close to 0 for small values of x. 
 
 *Thought question*: Look at the CDFs for our example in Figure \@ref(fig:4-compare), and see how they satisfy the criteria listed above for a valid CDF. 
@@ -163,7 +163,7 @@ E(g(X)) = \int_{-\infty}^{\infty} g(x) f_X(x).
 
 Notice again when we compare equation \@ref(eq:4-lotus) with its discrete counterpart in equation \@ref(eq:3-lotus): we have just replaced the summation with an integral. 
 
-*Thought question*: Can you guess how to write the equation for the variance of a continuous random variable? Hint: Equation \@ref(eq:3-var2) is how to find the variance for a discrete random variable.
+*Thought question*: Can you guess how to write the equation for the variance of a continuous random variable? Hint:  the variance for a discrete random variable is given in equation \@ref(eq:3-var2).
 
 #### Median
 
@@ -179,9 +179,9 @@ For a discrete random variable $X$, the mode is the value $c$ that maximizes the
 
 #### Loss Functions
 
-A goal of statistical modeling is to use the model to make predictions. We want to be able to quantify the quality of our prediction, or the prediction error. Consider we have an experiment that can be described by a random variable $X$, and we want to predict the value of the next experiment. The mean and median are natural guesses for the value of the next experiment.
+A goal of statistical modeling is to use the model to make predictions. We want to be able to quantify the quality of our prediction, or the prediction error. Suppose we have an experiment that can be described by a random variable $X$, and we want to predict the value of the next experiment. The mean and median are natural guesses for the value of the next experiment.
 
-It turns out there a several ways to quantify our prediction error. These are usually called loss functions. Suppose our predicted value is denoted by $x_{pred}$. A couple of common loss functions:
+It turns out there a several ways to quantify our prediction error. These are usually called loss functions. Suppose our predicted value is denoted by $x_{pred}$. A couple of common loss functions are:
 
 - **Mean squared error (MSE)**: $E(X-x_{pred})^2$,
 - **Mean absolute error (MAE)**: $E|X-x_{pred}|$.
@@ -197,11 +197,11 @@ Var(X) = \int_{-\infty}^{\infty} (x-\mu)^2 f_X(x) dx.
 (\#eq:4-var)
 \end{equation}
 
-The properties of variance is still the same as in Section \@ref(var-prop). It does not matter if the random variable is discrete or continuous. A common notation used for variance is $\sigma^2$, or sometimes $\sigma_X^2$ to show its the variance of the random variable $X$. 
+The properties of variance is still the same as in Section \@ref(var-prop). It does not matter if the random variable is discrete or continuous. A common notation used for variance is $\sigma^2$, or sometimes $\sigma_X^2$ to show it is the variance of the random variable $X$. 
 
 ### Moments
 
-Before talking about measures that is used to describe distributions, we will cover some terminology that is used for these measures. Suppose we have a random variable $X$.
+Before talking about other measures that are used to describe distributions, we will cover some terminology that is used for these measures. Suppose we have a random variable $X$.
 
 - The **$n$th moment** of $X$ is $E(X^n)$. So the expected value, or the mean, is sometimes called the first moment.
 - The **$n$th central moment** of $X$ is $E((X-\mu)^n)$. So the variance is sometimes called the second central moment.
@@ -216,7 +216,7 @@ Skew(X) = E \left(\frac{(X-\mu)^3}{\sigma} \right)
 (\#eq:4-skew)
 \end{equation}
 
-A random variable $X$ has a **symmetric distribution about \mu** if $X - \mu$ has the same distribution as $\mu - X$. Fairly often, people will just say that $X$ is symmetric; it is almost always assumed that the symmetry is about its mean.
+A random variable $X$ has a **symmetric distribution about its mean** if $X - \mu$ has the same distribution as $\mu - X$. Fairly often, people will just say that $X$ is symmetric; it is almost always assumed that the symmetry is about its mean.
 
 Intuitively, symmetry means that the PDF of $X$ to the left of its mean is the mirror image of the PDF of $X$ to the right of its mean. We look at a couple of examples below in Figure \@ref(fig:4-symm):
 
@@ -257,7 +257,7 @@ Kurt(X) = E \left(\frac{(X-\mu)^4}{\sigma} \right) - 3.
 (\#eq:4-kurt)
 \end{equation}
 
-The reason for subtracting (or shifting by) 3 is so that the Gaussian distribution (a commonly used distribution for continuous random variables) is 0. Note: Some people call equation \@ref(eq:4-kurt) the **excess kurtosis** and the kurtosis does not subtract the 3. 
+The reason for subtracting (or shifting by) 3 is so that the Gaussian distribution (a commonly used distribution for continuous random variables) has a kurtosis of 0. Note: Some authors call equation \@ref(eq:4-kurt) the **excess kurtosis** and the kurtosis does not subtract the 3. 
 
 The values of $Kurt(X)$ that are associated with tail behaviors are:
 
@@ -299,8 +299,10 @@ Some properties of the uniform distribution:
 
 - Its mean is $E(U) = \frac{a+b}{2}$.
 - Its variance is $Var(U) = \frac{(b-a)^2}{12}$.
-- Its skewness is 0.
-- Its kurtosis is -$\frac{6}{5}$.
+- Its skewness is 0, so it is symmetric.
+- Its kurtosis is -$\frac{6}{5}$, so its tails are not as heavy compared to a Gaussian distribution. 
+
+*Thought question*: Can you see why a uniform distribution is symmetric? Can you see why its tails are not heavy?
 
 If the support of a uniform distribution is between 0 and 1, we have a **standard uniform distribution**. We will talk about the importance of the standard uniform distribution in the next subsection. 
 
@@ -316,7 +318,7 @@ To give some insight into what this means, we look at an example. Another contin
 $$
 F_X(x) = \frac{e^x}{1+e^x}.
 $$
-Let $U \sim U(0,1)$. The first part of the universality of the uniform informs us that the inverse of the CDF for the standard logistic is $F_X^{-1}(U) \sim X$, so we invert $F_X(x)$ to get its inverse $F_X{-1}(x)$. This is done by setting the CDF of $X$ to be equal to $u$, i.e. let $u = \frac{e^x}{1+e^x}$, and solving for $x$:
+Let $U \sim U(0,1)$. The first part of the universality of the uniform informs us that the inverse of the CDF for the standard logistic is $F_X^{-1}(U) \sim X$, so we invert $F_X(x)$ to get its inverse $F_X^{-1}(x)$. This is done by setting the CDF of $X$ to be equal to $u$, i.e. let $u = \frac{e^x}{1+e^x}$, and solving for $x$:
 
 $$
 \begin{split}
@@ -327,9 +329,9 @@ u + u e^x &= e^x\\
 \end{split}
 $$
 
-Therefore $F^{-1}(u) = \log (\frac{u}{1-u})$ and $F^{-1}(U) = \log (\frac{U}{1-U})$. Therefore $\log (\frac{U}{1-U}$ follows a standard logistic distribution.
+Therefore $F^{-1}(u) = \log (\frac{u}{1-u})$ and $F^{-1}(U) = \log (\frac{U}{1-U})$. Therefore $\log (\frac{U}{1-U})$ follows a standard logistic distribution.
 
-Let us use simulations to show what is going on. First, we simulate 10,000 reps from a standard uniform distribution, then invert these values using $\log (\frac{U}{1-U})$, and create its density plot.  These are shown in Figure \@ref(fig:4-universe) below:
+Let us use simulations to show what is going on. First, we simulate 10,000 reps from a standard uniform distribution, then invert these values using $\log (\frac{u}{1-u})$, and create the density plot of $\log (\frac{u}{1-u})$.  These steps are shown in Figure \@ref(fig:4-universe) below:
 
 ```{r 4-universe, fig.cap="Uniform to Logistic"}
 set.seed(4)
@@ -373,14 +375,14 @@ What the central limit theorem implies is that even if test scores, weights of G
 
 #### Standard Normal
 
-First, we will talk about the **standard normal distribution**, as it turns out other normal distributions can be viewed as variations of the standard normal. A standard normal distribution has mean 0, and variance 1. It is usually denoted by $Z$. We can also write $Z \sim N(0,1)$ to say that $Z$ is normally distribution with mean 0 and variance 1. The PDF of a standard normal distribution is:
+First, we will talk about the **standard normal distribution**, as other normal distributions can be viewed as variations of the standard normal. A standard normal distribution has mean 0 and variance 1. It is usually denoted by $Z$. We can also write $Z \sim N(0,1)$ to say that $Z$ is normally distributed with mean 0 and variance 1. The PDF of a standard normal distribution is:
 
 \begin{equation} 
 \phi(z) = \frac{1}{\sqrt{2 \pi}} e^{-z^2/2}.
 (\#eq:4-Z)
 \end{equation}
 
-Notice the constant $\frac{1}{\sqrt{2 \pi}}$ in equation \@ref(eq:4-Z). Its presence is needed to make the PDF valid, since the PDf must integrate to 1. Such constants are called **normalizing constants**
+Notice the constant $\frac{1}{\sqrt{2 \pi}}$ in equation \@ref(eq:4-Z). Its presence is needed to make the PDF valid, since the PDF must integrate to 1. Such constants are called **normalizing constants**.
 
 Figure \@ref(fig:4-Z) below displays its PDF:
 
@@ -400,13 +402,20 @@ Notice that we have special letters $Z, \phi, \Phi$ to denote the standard norma
 
 #### From Standard Normal to Other Normals
 
-If $Z \sim N(0,1)$, then $X = \mu + \sigma Z \sim N(\mu, \sigma^2)$. In other words, if $Z$ is standard normal, then $X = \mu + \sigma Z$ follows a normal distribution with mean $\mu$ and variance $\sigma^2$.
+If $Z \sim N(0,1)$, then $X = \mu + \sigma Z \sim N(\mu, \sigma^2)$. In other words, if $Z$ is standard normal, then $X = \mu + \sigma Z$ follows a normal distribution with mean $\mu$ and variance $\sigma^2$. The parameters of a normal distribution are the mean $\mu$ and variance $\sigma^2$. 
 
-*Thought question*: Can you use the linearity of expectations to explain why $X$ has mean 0? Can you use properties of variance from Section \@ref(var-prop) to explain why $X$ has variance $\sigma^2$?
+Note that some authors say the parameters are the mean $\mu$ and standard deviation $\sigma$ instead, so be careful when reading notation associated with normal distributions from various sources. For example, $N(0,2)$ in our class and our book means normal distribution with mean 0 and variance 2, but for some other authors, $N(0,2)$ means normal distribution with mean 0 and standard deviation 2. Indeed, the functions in R use this alternate parameterization, so you need to be careful. 
 
-Notice how we started from a standard normal $Z$, and transformed $Z$ by multiplying it by $\sigma$ and then adding $\mu$ to get any normal distribution. A normal distribution is said to have parameters $\mu$ and $\sigma^2$. This transformation is called a **location-scale** transformation, or sometimes shifting and scaling. The scale changes since we multiply by a constant $\sigma$; the location is transformed since its mean changes from 0 to $\mu$. 
+*Thought question*: Can you use the linearity of expectations to explain why $X$ has mean $\mu$? Can you use properties of variance from Section \@ref(var-prop) to explain why $X$ has variance $\sigma^2$?
 
-We can also reverse this transformation and state the following: If $X \sim N(\mu, \sigma^2)$, then $Z = \frac{X-\mu}{\sigma} \sim N(0,1)$. If we start with $X \sim N(\mu, \sigma^2)$, then we can transform $X$ by subtracting \mu, and then dividing by $\sigma$, to obtain $Z$. This particular transformation is called **standardization**.
+Notice how we started from a standard normal $Z$, and transformed $Z$ by multiplying it by $\sigma$ and then adding $\mu$ to get any normal distribution. This transformation is called a **location-scale** transformation, or sometimes shifting and scaling. The scale changes since we multiply by a constant $\sigma$; the location is transformed since its mean changes from 0 to $\mu$. 
+
+We can also reverse this transformation and state the following: If $X \sim N(\mu, \sigma^2)$, then $Z = \frac{X-\mu}{\sigma} \sim N(0,1)$. If we start with $X \sim N(\mu, \sigma^2)$, then we can transform $X$ by subtracting \mu, and then dividing by $\sigma$, to obtain $Z$. This particular transformation is called **standardization**:
+
+\begin{equation} 
+Z = \frac{X-\mu}{\sigma}.
+(\#eq:4-standardize)
+\end{equation}
 
 The PDF of any normal distribution $X \sim N(\mu, \sigma^2)$ is
 
@@ -417,7 +426,7 @@ f_X(x) = \frac{1}{\sigma \sqrt{2 \pi}} \exp \left(-\frac{(x - \mu)^2}{2 \sigma^2
 
 *Thought question*: Compare equations \@ref(eq:4-pdfNormal) and \@ref(eq:4-Z). Can you see how equation \@ref(eq:4-Z) can be derived from equation \@ref(eq:4-pdfNormal)?
 
-#### 68-95-99.7 Rule
+#### 68-95-99.7% Rule
 
 The following property holds for any normal distribution, and is often called the **68-99-99.7%** rule. For any normal distribution $X \sim N(\mu, \sigma^2)$:
 
@@ -431,7 +440,7 @@ What these mean is that for any normal distribution:
 - About 95% of observed values will fall within 2 standard deviations of the mean, and
 - About 99.7% of observed values will fall within 3 standard deviations of the mean.
 
-The last statement is the basis for the term six sigma used in manufacturing, since the range virtually all data points should fall within a range that is six sigma wide. Visually, this rule is shown in Figure \@ref(fig:4-rule) when applied to the standard normal:
+The last statement is the basis for the term [six sigma](https://en.wikipedia.org/wiki/Six_Sigma) used in manufacturing, since the range virtually all data points should fall within a range that is six sigma wide (assuming they follow a normal distribution). Visually, this rule is shown in Figure \@ref(fig:4-rule) when applied to the standard normal:
 
 ```{r 4-rule, fig.cap="68-95-99.7 Rule", echo=FALSE}
 colorArea <- function(from, to, density, ..., col="blue", dens=NULL){
@@ -456,18 +465,18 @@ upper1<-pnorm(1) ## what is percentile associated with Z=1 (i.e. 1 standard devi
 lower1<-pnorm(-1) ## what is percentile associated with Z=-1 (i.e. 1 standard deviation below mean)
 upper1-lower1 ## find proportion in between 1 SD above and below mean.
 ```
-*Thought question*: how would you tweak this code to verify the other two statements associated with the 68-95-99.7 rule?
+*Thought question*: how would you tweak this code to verify the other two statements associated with the 68-95-99.7% rule?
 
 ## Using R 
 
-R has built in functions to compute the density, CDF, percentiles, as well as simulate data of common distributions. We will start using a random variable $Y \sim N(1, 9)$ as an example.
+R has built in functions to compute the density, CDF, percentiles, as well as simulate data of common distributions. We will start with a random variable $Y \sim N(1, 9)$ as an example.
 
 1. To find $f_Y(2)$, use:
 
 ```{r}
 dnorm(2, 1, 3) ##supply the value of Y you want, then the parameters mu and sigma
 ```
-The density $f_Y(2)$ is 0.1257944. Note: In R, the normal distribution is parametrized by the mean and standard deviation, which is different from the earlier sections of this module and our book, which uses the mean and variance.
+The density $f_Y(2)$ is 0.1257944. Note: In R, the normal distribution is parameterized by the mean and standard deviation, which is different from these set of notes and our book, which uses the mean and variance.
 
 2. To find $P(Y \leq 2)$, use:
 
@@ -477,15 +486,51 @@ pnorm(2, 1, 3) ##supply the value of Y you want, then the parameters mu and sigm
 
 The probability that $Y$ is less than or equal to 2 is 0.6305587.
 
+Alternatively, we can standardize this normal distribution, and use the standard normal. The standardization, per equation \@ref(eq:4-standardize), gives us
+
+$$
+z = \frac{2-1}{3} = \frac{1}{3},
+$$
+
+so
+
+$$
+\begin{split}
+P(Y \leq 2) &= P(\frac{Y-\mu}{\sigma} \leq \frac{2-1}{3}) \\
+            &= P(Z \leq \frac{1}{3}) \\
+            &= \Phi(\frac{1}{3})
+\end{split}
+$$
+
+which can be found using
+
+```{r}
+pnorm(1/3) ##don't supply mu and sigma means you want to use standard normal
+```
+
+which gives the same answer as `pnorm(2,1,3)`. 
+
 3. To find the value on the support that corresponds to the 90th percentile, use:
 
 ```{r}
 qnorm(0.9, 1, 3) ##supply the value of the percentile you need, then the parameters mu and sigma
 ```
 
-The 90th percentile on $Y \sim N(1,3)$ is 4.844655. 
+The 90th percentile of $Y \sim N(1,3)$ is 4.844655. 
 
-4. To simulate 10 realizations (repetitions) of $Y$, use:
+If we want to use the standard normal, we could find its 90th percentile:
+
+```{r}
+qnorm(0.9)
+```
+and then apply the location scale transformation
+
+```{r}
+qnorm(0.9)*3 + 1 ##multiply by sigma, then add mu
+```
+which is the same answer as `qnorm(0.9,1,3)`.
+
+4. To simulate 10 draws (repetitions) of $Y$, use:
 
 ```{r}
 set.seed(2) ##use set.seed() so we get the same random numbers each time the code is run
@@ -552,6 +597,18 @@ plot(density(Data$interest_rate, kernel = "epanechnikov", adjust = 2),
      main="Density Plot of Interest Rates")
 ```
 
+### Density Plots and Histograms
+
+In Section \@ref(densplots), we mentioned that density plots can be viewed as smoothed versions of a histogram. We create a histogram of interest rates, and overlay a density plot in blue, per Figure \@ref(fig:4-R3) below:
+
+```{r 4-R3, fig.cap="Histogram and Density Plot for 50 Interest Rates", message=FALSE, warning=FALSE}
+hist(Data$interest_rate, prob = TRUE, main = "Histogram with Density Plot", xlab="Interest Rates")
+
+##create density plot using default
+lines(density(Data$interest_rate), col="blue")
+```
+
+
 ### Numerical Summaries
 
 Equations \@ref(eq:4-EX), \@ref(eq:4-var), \@ref(eq:4-skew), and \@ref(eq:4-kurt) are used to obtain the mean, variance, skewness, and kurtosis of a known distribution from a random variable. To calculate these quantities based on a sample of observed data, $x_1, x_2, \cdots, x_n$, we use:
@@ -587,6 +644,8 @@ mean(Data$interest_rate) ##mean
 var(Data$interest_rate) ##variance
 
 library(moments)
-moments::skewness(Data$interest_rate)
-moments::kurtosis(Data$interest_rate)
+moments::skewness(Data$interest_rate) ##greater than 0
+moments::kurtosis(Data$interest_rate) ##greater than 0
 ```
+
+So our data is also right skewed and heavy tailed. 
