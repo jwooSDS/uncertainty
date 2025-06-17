@@ -16,7 +16,7 @@ The book (Section 1.1) lists 10 different applications of probability, and there
 
 ### Frequentiest and Bayesian View of Probability
 
-There are a couple of main viewpoints on how to interpret probability: **frequentist** and **Bayesian**. Consider the statement that "if we flip a fair coin, the coin has a 50% chance of landing heads". 
+There are a couple of viewpoints on how to interpret probability: **frequentist** and **Bayesian**. Consider the statement that "if we flip a fair coin, the coin has a 50% chance of landing heads". 
 
 - The frequentist viewpoint views probability as the relative frequency associated with an event that is repeated for an infinite number of times. It will interpret the 50% probability as: if we were to flip the coin many many times, 50% of these times will result in the coin landing heads. 
 
@@ -85,7 +85,7 @@ The union of $A$ and $B$ can be viewed as the event where either event $A$ or $B
 
 ### Intersections
 
-The **intersection** of events is when **all** of the events happen. Using our example, the intersection of events $A$ and $B$ is denoted by $A \cap B$, is the event that the card drawn is both a black suit and a picture card. Using Figure \@ref(fig:cardsAB), the outcomes belonging to $A \cap B$ are the cards that are outlined in blue and gold. This probability is $P(A \cap B) = \frac{6}{32}$.
+The **intersection** of events is when **all** of the events happen. Using our example, the intersection of events $A$ and $B$ is denoted by $A \cap B$, is the event that the card drawn is both a black suit and a picture card. Using Figure \@ref(fig:cardsAB), the outcomes belonging to $A \cap B$ are the cards that are outlined in blue and gold. This probability is $P(A \cap B) = \frac{6}{52}$.
 
 ### Addition rule
 
@@ -112,7 +112,7 @@ Using Figure \@ref(fig:cardsBC) below as a visual example, we can see that event
 knitr::include_graphics("images/02-cardsBC.jpg")
 ```
 
-Applying this idea to equation \@ref(eq:union), we have the following for disjoint events: for disjoint events, the probability of at least one event happening is the sum of the probabilities for each event.
+Applying this idea to equation \@ref(eq:union), we have the following for disjoint events: **for disjoint events, the probability of at least one event happening is the sum of the probabilities for each event**.
 
 ### Axioms of Probability
 
@@ -150,7 +150,7 @@ P(Y|X) = \frac{P(Y \cap X)}{P(X)}.
 
 In this definition, we want to update the probability of $Y$ happening, given that we have observed $X$. $X$ can be viewed as the observable data or the evidence we want to incorporate. 
 
-In the Bayesian viewpoint of probability, $P(Y)$ is called the **prior** probability of $Y$ since it reflects our belief about $Y$ before observing any data. $P(Y|X)$ is called the **posterior** probability of $Y$, as it reflects an update on our belief about $Y after incorporating observed data. 
+In the Bayesian viewpoint of probability, $P(Y)$ is called the **prior** probability of $Y$ since it reflects our belief about $Y$ before observing any data. $P(Y|X)$ is called the **posterior** probability of $Y$, as it reflects an update on our belief about $Y$ after incorporating observed data. 
 
 Let us go back to the standard deck of cards example. Let us find $P(B|A)$, the probability that our card is a picture card, given that we know the card is a black suit. Visually, we can use the definition of conditional probability using Figure \@ref(fig:cardscond) below.
 
@@ -158,19 +158,17 @@ Let us go back to the standard deck of cards example. Let us find $P(B|A)$, the 
 knitr::include_graphics("images/02-cardscond.jpg")
 ```
 
-We are told that our card is a black suit, so we have only 26 possible outcomes to consider, as the red cards are eliminated and are crossed out in Figure \@ref(fig:cardscond). out of these 26 outcomes, how many are picture cards? So this probability $P(B|A)$ is $\frac{6}{26}$.
-
-Figure \@ref(fig:cardscond) represents the frequentist viewpoint of conditional probability: $P(B|A)$ represents the long run proportion of picture cards among cards that are black suits. 
+We are told that our card is a black suit, so we have only 26 possible outcomes to consider, as the red cards are eliminated and are crossed out in Figure \@ref(fig:cardscond). Out of these 26 outcomes, how many are picture cards? So this probability $P(B|A)$ is $\frac{6}{26}$. Figure \@ref(fig:cardscond) represents the frequentist viewpoint of conditional probability: $P(B|A)$ represents the long run proportion of picture cards among cards that are black suits. 
 
 We can also apply equation \@ref(eq:cond): $P(B|A) = \frac{\frac{6}{52}}{\frac{1}{2}} = \frac{6}{26}$ which gives the same answer. 
 
 *Thought question*: work out the probability that the card drawn is a black suit, given that we know the card is a picture card. 
 
-We can see from this example that in general $P(Y|X) \neq P(X|Y)$. This informs us that we need to be extremely careful when writing out our conditional probabilities and interpreting them, and knowing which one matters to our analysis. For example, the probability that I feel unwell given that I have the flu is close to 1, but the probability that I have the flu given that I feel unwell is not close to 1 (since there are many things that can me me feel unwell). This confusion regarding conditional probabilities is sometimes called the confusion of the inverse or the prosecutor's fallacy. This fallacy wrongly assumes that if the probability of a fingerprint match given that the person is innocent is small, it means that the probability that the person is innocent given a fingerprint match must also be small.  Before going over this fallacy in more detail, we need to cover a few more concepts. 
+We can see from this example that in general $P(Y|X) \neq P(X|Y)$. This informs us that we need to be extremely careful when writing out our conditional probabilities and interpreting them, and knowing which one matters to our analysis. For example, the probability that I feel unwell given that I have the flu is close to 1, but the probability that I have the flu given that I feel unwell is not close to 1 (since there are many things that can make me feel unwell). This confusion regarding conditional probabilities is sometimes called the confusion of the inverse or the prosecutor's fallacy. This fallacy wrongly assumes that if the probability of a fingerprint match given that the person is innocent is small, it means that the probability that the person is innocent given a fingerprint match must also be small.  Before going over this fallacy in more detail, we need to cover a few more concepts. 
 
 ### Multiplication Rule
 
-From equation \@ref(eq:cond), we have the **multiplication rule** in probability
+From equation \@ref(eq:cond), we have the **multiplication rule** in probability:
 
 \begin{equation} 
 P(Y \cap X) = P(Y|X) \times P(X) = P(X|Y) \times P(Y).
@@ -213,7 +211,7 @@ odds(Y) = \frac{P(Y)}{P(Y^c)}.
 (\#eq:odds)
 \end{equation}
 
-You may realize that the left hand side of equation \@ref{eq:odds} is equal to the left hand side of a logistic regression equation. 
+You may realize that the left hand side of equation \@ref(eq:odds) is equal to the left hand side of a logistic regression equation that we saw in Section \@ref(eg2). 
 
 Using equation \@ref(eq:odds), we can switch from odds to probability easily
 
@@ -233,7 +231,7 @@ Using Bayes' rule in equation \@ref(eq:bayes) and the definition of odds in equa
 
 ### Law of Total Probability
 
-Let $Y_1, Y_2, \cdots, Y_n$ be a partition of the sample space ($Y_1, Y_2, \cdots, Y_n$ are disjoint and their union is the sample space), with $P(Y_i) > 0)$ for all $i$. Then
+Let $Y_1, Y_2, \cdots, Y_n$ be a partition of the sample space ($Y_1, Y_2, \cdots, Y_n$ are disjoint and their union is the sample space, with $P(Y_i) > 0$) for all $i$. Then
 
 \begin{equation} 
 \begin{split}
@@ -254,8 +252,6 @@ P(Y|X) = \frac{P(X|Y)P(Y)}{\sum_{i=1}^n P(X|Y_i) \times P(Y_i)}.
 
 ### Worked Example
 
-#### Approach 1: Using Bayes' Rule
-
 We consider this worked example on how to apply Bayes' rule and the law of total probability. Suppose my email can be divided into three categories: $E_1$ denotes spam email, $E_2$ denotes important email, and $E_3$ denotes not important email. An email must belong to only one of these categories. Let $F$ denote the event that the email contains the word "free". From past data, I have the following information: 
 
 - $P(E_1) = 0.2, P(E_2) = 0.5, P(E_3) = 0.3$.
@@ -263,7 +259,11 @@ We consider this worked example on how to apply Bayes' rule and the law of total
 - The word "free" appears in 10% of important email, so $P(F|E_2) = 0.1$.
 - The word "free" appears in 5% of important email, so $P(F|E_3) = 0.05$.
 
-I receive an email that has the word free. What is the probability that it is spam? So we want to find $P(E_1|F)$. Using equation \@ref(eq:bayes2), we have
+I receive an email that has the word free. What is the probability that it is spam? So we want to find $P(E_1|F)$.
+
+#### Approach 1: Using Bayes' Rule
+
+ Using equation \@ref(eq:bayes2), we have
 
 $$
 \begin{split}

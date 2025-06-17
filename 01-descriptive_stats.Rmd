@@ -60,9 +60,9 @@ Notice there is 1 black dot that corresponds to an interest rate of 20 (presumab
 
 ### Histograms
 
-It turns out that dot plots are often not useful for large data sets, but they provide the general idea of how other visualizations for larger data sets work. The height of the dots inform us the frequency of those values occurring. 
+It turns out that dot plots are often not useful for large data sets, but they provide the general idea of how other visualizations for larger data sets work. The height of the dots inform us about the frequency of those values occurring. 
 
-A visualization that is more commonly used for larger data sets is a histogram. Instead of displaying how common each value of the variable exists, we think of the values as belonging to a **bin** of values. For example, we can create a bin that contains interest rates between 5 and 7.5 percent, another bin containing interest rates between 7.5 and 10 percent, and so on. A few things to note about histograms:
+A visualization that is more commonly used for larger data sets is a **histogram**. Instead of displaying how common each value of the variable exists, we think of the values as belonging to a **bin** of values. For example, we can create a bin that contains interest rates between 5 and 7.5 percent, another bin containing interest rates between 7.5 and 10 percent, and so on. A few things to note about histograms:
 
 - By convention, values that lie exactly on the boundary of a bin will belong to the lower bin. For example, an interest rate that is exactly 12.5 percent will belong to the bin between 10 and 12.5 percent, and not the bin between 12.5 to 15 percent. 
 
@@ -87,7 +87,7 @@ Histograms can also give us an idea about the **shape** of the distribution of i
 
 - If the histogram has the reverse characteristic, i.e. the data tail off to the left instead, the shape is said to be **left-skewed**. This implies that small values of the variable are much less common than large values of the variable; larger values are more likely to occur.
 
-- Histograms that trail off similarly in both directions are called **symmetric**. Large and small values are of the variable are equally likely. 
+- Histograms that tail off similarly in both directions are called **symmetric**. Large and small values are of the variable are equally likely. 
 
 - Histograms that have a peak in the middle, and then trail off on both sides are not only symmetic, but also **bell-shaped**, or have a **normal** distribution. Note: it turns out one of the assumptions in linear regression is that the response variable follow a normal distribution. This may seem restrictive, however, we will see in later modules that this assumption is not particular crucial under some circumstances.
 
@@ -95,7 +95,7 @@ Histograms can also give us an idea about the **shape** of the distribution of i
 
 #### Considerations with Histograms
 
-With our interest rate example, you may have noticed that I made a specific choice to the width of the bins when I created the histograms. It turns out that the width of the bins can impact the shape of the histogram, and potentially, how we interpret the histogram. 
+With our interest rate example, you may have noticed that I made a specific choice on the width of the bins when I created the histograms. It turns out that the width of the bins can impact the shape of the histogram, and potentially, how we interpret the histogram. 
 
 Consider creating a histogram with bin width of 0.5, instead of 2.5, per Figure \@ref(fig:hist05):
 
@@ -120,7 +120,7 @@ Comparing Figure \@ref(fig:hist05) with Figure \@ref(fig:hist), note the followi
 
 ### Density Plots {#densplots}
 
-Another visualization for a quantitative variable is a density plot. A density plot can be viewed as a smoothed version of the histogram. We can use the heights to inform us about what values are more common. We create a density plot for the interest rates in Figure \@ref(fig:dens):
+Another visualization for a quantitative variable is a **density plot**. A density plot can be viewed as a smoothed version of the histogram. We can use the heights to inform us about what values are more common. We create a density plot for the interest rates in Figure \@ref(fig:dens):
 
 ```{r dens, fig.cap="Density Plot for 50 Interest Rates"}
 ##density plot
@@ -133,7 +133,7 @@ Based on Figure \@ref(fig:dens), we see that low interest rates (between 5 and 1
 - To find the proportion of interest rates that are between two values, for example between 10 and 15 percent, we would integrate this density plot over this range, i.e. $\int_{10}^{15} f(x) dx$, where $f(x)$ is a mathematical equation that describes the density plot. 
 - The values on the vertical axis do not equal to probabilities (a common misconception).
 
-The density plot is found using a method called kernel density estimation (KDE). We will over details about KDE in a later module as we need to cover quite a bit of material before doing so. 
+The density plot is found using a method called kernel density estimation (KDE). We will over details about KDE in Section \@ref(KDE) as we need to cover quite a bit of material before doing so. 
 
 #### Considerations with Density Plots
 
@@ -145,8 +145,6 @@ plot(density(Data$interest_rate, adjust=2), main="Density Plot of Interest Rates
 
 Notice in Figure \@ref(fig:dens2) that the little peak for interest rates between 15 and 20 (which existed in Figures \@ref(fig:dens) and also \@ref(fig:hist)) no longer exists. Using bandwidths that are too large can smooth out some of these peaks. 
 
-*Thought question*: What if we create a density plot with a bandwidth that is too small?
-
 *Thought question*: How are bin widths for histograms and bandwidths for density plots related?
 
 ## Ordered Statistics
@@ -155,12 +153,12 @@ The idea behind ordered statistics is pretty self-explanatory: take your numeric
 
 ### Quantiles
 
-**Quantiles** partition the range of numerical data into continuous intervals (groups) with (nearly) equal proportions. Common quartiles have their own names:
+**Quantiles** partition the range of numerical data into continuous intervals (groups) with (nearly) equal proportions. Common quantiles have their own names:
 
 - Quartiles: 4 groups
 - Percentiles: 100 groups
 
-There is one less quantiles than the number of groups. We will go over quartiles in more detail.
+We will go over quartiles in more detail.
 
 #### Quartiles {#quart}
 
@@ -177,7 +175,7 @@ $Q_2$, sometimes called the second quartile, is the easiest value to find. It is
 median(Data$interest_rate)
 ```
 
-So half the interest rates are less than 9.93 percent, and half the interest rates are greater than 9.93 percent. You might also recognize another term for the median: the 50th percentile, as 50 percent of the interest rates are less than 9.93. 
+So roughly half the interest rates are less than 9.93 percent, and roughly half the interest rates are greater than 9.93 percent. You might also recognize another term for the median: the 50th percentile, as 50 percent of the interest rates are less than 9.93. 
 
 To find the middle observation(s) based on a sample of size $n$:
 
@@ -210,8 +208,6 @@ Note: you may notice that we used `type = 1` inside the `quantile()` function. U
 
 Another common quantile is the percentile. In general the **k-th percentile** is the value of the data point below which $k$ percent of observations are found. So in our earlier example, we said that $Q_3$ of the interest rates is 14.08 percent, and this is also the 75th percentile. So 75 percent of interest rates are less than 14.08 percent. 
 
-We will not go over the details of finding percentiles by hand. 
-
 ### Box Plots
 
 Another visualization used to summarize quantitative data is the box plot. A **box plot** summarizes the 5-number summary. The 5 numbers are the minimum, $Q_1, Q_2, Q_3$, and the maximum. Using our interest rate data, the box plot is shown in Figure \@ref(fig:boxplot):
@@ -237,7 +233,7 @@ Generally, when we have one quantitative variable, an outlier is an observation 
 
 So for our 50 loans, there are two loan applicants with interest rates around 25 percent that are flagged as being a lot larger than the rest of the loans, which is reasonable since most of the loans are a lot smaller than 20 percent. 
 
-We will not go over the details of how outliers are determined in box plots. If you are interested, you can read Chapter 2.1.5 from OpenIntro Statistics (Diez, Ceytinka-Rundel, Barr). 
+We will not go over the details of how outliers are determined in box plots. If you are interested, you can read Chapter 2.1.5 from [OpenIntro Statistics (Diez, Ceytinka-Rundel, Barr)](https://www.openintro.org/book/os/).
 
 Notice how much further large values ($Q_3$ and maximum) are from the median, compared to the distance of the small values ($Q_1$ and minimum) from the median. This indicates that the distribution of interest rates are right-skewed. Compare the boxplot of the interest rates in Figure \@ref(fig:boxplot) with its corresponding histogram (Figure \@ref(fig:hist)) and density plot (Figure \@ref(fig:dens)). 
 
@@ -259,7 +255,7 @@ $$
    1, & \text{for } x \geq x_{(n)}.
   \end{cases}
 $$
-We shall use a simple toy example to illustrate how an ECDF is constructed. Suppose we ask 5 people how many times to go to the gym (at least 20 minutes) in a typical work week. The answers are: 3, 0, 1, 5, 3. The random variable $X$ is how many times a person goes to the gym for at least 20 minutes, and the ordered statistics are $x_{(1)} = 0, x_{(2)} = 1, x_{(3)} = 3, x_{(4)} = 3, and x_{(5)} = 5$. Using the mathematical definition for the ECDF, we have:
+We shall use a simple toy example to illustrate how an ECDF is constructed. Suppose we ask 5 people how many times to go to the gym (at least 20 minutes) in a typical work week. The answers are: 3, 0, 1, 5, 3. The random variable $X$ is how many times a person goes to the gym for at least 20 minutes, and the ordered statistics are $x_{(1)} = 0, x_{(2)} = 1, x_{(3)} = 3, x_{(4)} = 3, x_{(5)} = 5$. Using the mathematical definition for the ECDF, we have:
 
 - $\hat{F}_n(x) = 0$ for $x < x_{(1)} = 0$. 
 - $\hat{F}_n(x) = \frac{1}{5}$ for $0 \leq x < x_{(2)} = 1$. 

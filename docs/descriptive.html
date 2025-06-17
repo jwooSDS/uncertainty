@@ -113,8 +113,8 @@ Figure 1.1: Dot Plot for 50 Interest Rates (rounded)
 <h3>
 <span class="header-section-number">1.2.2</span> Histograms<a class="anchor" aria-label="anchor" href="#histograms"><i class="fas fa-link"></i></a>
 </h3>
-<p>It turns out that dot plots are often not useful for large data sets, but they provide the general idea of how other visualizations for larger data sets work. The height of the dots inform us the frequency of those values occurring.</p>
-<p>A visualization that is more commonly used for larger data sets is a histogram. Instead of displaying how common each value of the variable exists, we think of the values as belonging to a <strong>bin</strong> of values. For example, we can create a bin that contains interest rates between 5 and 7.5 percent, another bin containing interest rates between 7.5 and 10 percent, and so on. A few things to note about histograms:</p>
+<p>It turns out that dot plots are often not useful for large data sets, but they provide the general idea of how other visualizations for larger data sets work. The height of the dots inform us about the frequency of those values occurring.</p>
+<p>A visualization that is more commonly used for larger data sets is a <strong>histogram</strong>. Instead of displaying how common each value of the variable exists, we think of the values as belonging to a <strong>bin</strong> of values. For example, we can create a bin that contains interest rates between 5 and 7.5 percent, another bin containing interest rates between 7.5 and 10 percent, and so on. A few things to note about histograms:</p>
 <ul>
 <li><p>By convention, values that lie exactly on the boundary of a bin will belong to the lower bin. For example, an interest rate that is exactly 12.5 percent will belong to the bin between 10 and 12.5 percent, and not the bin between 12.5 to 15 percent.</p></li>
 <li><p>Each bin should have the same width. In our example, the width is 2.5.</p></li>
@@ -141,7 +141,7 @@ Figure 1.2: Historgram for 50 Interest Rates
 <p>Histograms can also give us an idea about the <strong>shape</strong> of the distribution of interest rates. For the histogram in Figure <a href="descriptive.html#fig:hist">1.2</a>, most of the loans are less than 15 percent, with only a small number of loans greater than 20 percent. We can say that we have greater certainty that a loan will have an interest rate less than 15 percent. When the data tail off to the right as in our histogram, the shape is said to be <strong>right-skewed</strong>. When a variable is said to be right-skewed, large values of the variable are much less common than small values of the variable; smaller values are more likely occur.</p>
 <ul>
 <li><p>If the histogram has the reverse characteristic, i.e. the data tail off to the left instead, the shape is said to be <strong>left-skewed</strong>. This implies that small values of the variable are much less common than large values of the variable; larger values are more likely to occur.</p></li>
-<li><p>Histograms that trail off similarly in both directions are called <strong>symmetric</strong>. Large and small values are of the variable are equally likely.</p></li>
+<li><p>Histograms that tail off similarly in both directions are called <strong>symmetric</strong>. Large and small values are of the variable are equally likely.</p></li>
 <li><p>Histograms that have a peak in the middle, and then trail off on both sides are not only symmetic, but also <strong>bell-shaped</strong>, or have a <strong>normal</strong> distribution. Note: it turns out one of the assumptions in linear regression is that the response variable follow a normal distribution. This may seem restrictive, however, we will see in later modules that this assumption is not particular crucial under some circumstances.</p></li>
 </ul>
 <p><em>Thought question:</em> Can you think of real life variables that have symmetric, right-skewed, left-skewed distributions? Feel free to search the internet for examples.</p>
@@ -150,7 +150,7 @@ Figure 1.2: Historgram for 50 Interest Rates
 <h4>
 <span class="header-section-number">1.2.2.2</span> Considerations with Histograms<a class="anchor" aria-label="anchor" href="#considerations-with-histograms"><i class="fas fa-link"></i></a>
 </h4>
-<p>With our interest rate example, you may have noticed that I made a specific choice to the width of the bins when I created the histograms. It turns out that the width of the bins can impact the shape of the histogram, and potentially, how we interpret the histogram.</p>
+<p>With our interest rate example, you may have noticed that I made a specific choice on the width of the bins when I created the histograms. It turns out that the width of the bins can impact the shape of the histogram, and potentially, how we interpret the histogram.</p>
 <p>Consider creating a histogram with bin width of 0.5, instead of 2.5, per Figure <a href="descriptive.html#fig:hist05">1.3</a>:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##set up sequence to specify the bins. width now 0.5</span></span>
@@ -178,7 +178,7 @@ Figure 1.3: Historgram for 50 Interest Rates, with Bin Width 0.5
 <h3>
 <span class="header-section-number">1.2.3</span> Density Plots<a class="anchor" aria-label="anchor" href="#densplots"><i class="fas fa-link"></i></a>
 </h3>
-<p>Another visualization for a quantitative variable is a density plot. A density plot can be viewed as a smoothed version of the histogram. We can use the heights to inform us about what values are more common. We create a density plot for the interest rates in Figure <a href="descriptive.html#fig:dens">1.4</a>:</p>
+<p>Another visualization for a quantitative variable is a <strong>density plot</strong>. A density plot can be viewed as a smoothed version of the histogram. We can use the heights to inform us about what values are more common. We create a density plot for the interest rates in Figure <a href="descriptive.html#fig:dens">1.4</a>:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##density plot</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/density.html">density</a></span><span class="op">(</span><span class="va">Data</span><span class="op">$</span><span class="va">interest_rate</span><span class="op">)</span>, main<span class="op">=</span><span class="st">"Density Plot of Interest Rates"</span><span class="op">)</span></span></code></pre></div>
@@ -194,7 +194,7 @@ Figure 1.4: Density Plot for 50 Interest Rates
 <li>To find the proportion of interest rates that are between two values, for example between 10 and 15 percent, we would integrate this density plot over this range, i.e. <span class="math inline">\(\int_{10}^{15} f(x) dx\)</span>, where <span class="math inline">\(f(x)\)</span> is a mathematical equation that describes the density plot.</li>
 <li>The values on the vertical axis do not equal to probabilities (a common misconception).</li>
 </ul>
-<p>The density plot is found using a method called kernel density estimation (KDE). We will over details about KDE in a later module as we need to cover quite a bit of material before doing so.</p>
+<p>The density plot is found using a method called kernel density estimation (KDE). We will over details about KDE in Section <a href="continuous-random-variables.html#KDE">4.6.1</a> as we need to cover quite a bit of material before doing so.</p>
 <div id="considerations-with-density-plots" class="section level4" number="1.2.3.1">
 <h4>
 <span class="header-section-number">1.2.3.1</span> Considerations with Density Plots<a class="anchor" aria-label="anchor" href="#considerations-with-density-plots"><i class="fas fa-link"></i></a>
@@ -209,7 +209,6 @@ Figure 1.5: Density Plot for 50 Interest Rates with Larger Bandwidth
 </p>
 </div>
 <p>Notice in Figure <a href="descriptive.html#fig:dens2">1.5</a> that the little peak for interest rates between 15 and 20 (which existed in Figures <a href="descriptive.html#fig:dens">1.4</a> and also <a href="descriptive.html#fig:hist">1.2</a>) no longer exists. Using bandwidths that are too large can smooth out some of these peaks.</p>
-<p><em>Thought question</em>: What if we create a density plot with a bandwidth that is too small?</p>
 <p><em>Thought question</em>: How are bin widths for histograms and bandwidths for density plots related?</p>
 </div>
 </div>
@@ -223,12 +222,12 @@ Figure 1.5: Density Plot for 50 Interest Rates with Larger Bandwidth
 <h3>
 <span class="header-section-number">1.3.1</span> Quantiles<a class="anchor" aria-label="anchor" href="#quantiles"><i class="fas fa-link"></i></a>
 </h3>
-<p><strong>Quantiles</strong> partition the range of numerical data into continuous intervals (groups) with (nearly) equal proportions. Common quartiles have their own names:</p>
+<p><strong>Quantiles</strong> partition the range of numerical data into continuous intervals (groups) with (nearly) equal proportions. Common quantiles have their own names:</p>
 <ul>
 <li>Quartiles: 4 groups</li>
 <li>Percentiles: 100 groups</li>
 </ul>
-<p>There is one less quantiles than the number of groups. We will go over quartiles in more detail.</p>
+<p>We will go over quartiles in more detail.</p>
 <div id="quart" class="section level4" number="1.3.1.1">
 <h4>
 <span class="header-section-number">1.3.1.1</span> Quartiles<a class="anchor" aria-label="anchor" href="#quart"><i class="fas fa-link"></i></a>
@@ -244,7 +243,7 @@ Figure 1.5: Density Plot for 50 Interest Rates with Larger Bandwidth
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span><span class="va">Data</span><span class="op">$</span><span class="va">interest_rate</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 9.93</code></pre>
-<p>So half the interest rates are less than 9.93 percent, and half the interest rates are greater than 9.93 percent. You might also recognize another term for the median: the 50th percentile, as 50 percent of the interest rates are less than 9.93.</p>
+<p>So roughly half the interest rates are less than 9.93 percent, and roughly half the interest rates are greater than 9.93 percent. You might also recognize another term for the median: the 50th percentile, as 50 percent of the interest rates are less than 9.93.</p>
 <p>To find the middle observation(s) based on a sample of size <span class="math inline">\(n\)</span>:</p>
 <ul>
 <li>If <span class="math inline">\(n\)</span> is even, the 2 middle observations will be position <span class="math inline">\(\frac{n}{2}\)</span> and <span class="math inline">\(\frac{n}{2} + 1\)</span> in the ordered statistics.</li>
@@ -277,7 +276,6 @@ Figure 1.5: Density Plot for 50 Interest Rates with Larger Bandwidth
 <span class="header-section-number">1.3.1.2</span> Percentiles<a class="anchor" aria-label="anchor" href="#percentiles"><i class="fas fa-link"></i></a>
 </h4>
 <p>Another common quantile is the percentile. In general the <strong>k-th percentile</strong> is the value of the data point below which <span class="math inline">\(k\)</span> percent of observations are found. So in our earlier example, we said that <span class="math inline">\(Q_3\)</span> of the interest rates is 14.08 percent, and this is also the 75th percentile. So 75 percent of interest rates are less than 14.08 percent.</p>
-<p>We will not go over the details of finding percentiles by hand.</p>
 </div>
 </div>
 <div id="box-plots" class="section level3" number="1.3.2">
@@ -304,7 +302,7 @@ Figure 1.6: Box Plot of Interest Rates
 </ul>
 <p>Generally, when we have one quantitative variable, an outlier is an observation whose numerical value is far away from the rest of the data. In other words, it is a lot smaller or larger relative to the rest of the data.</p>
 <p>So for our 50 loans, there are two loan applicants with interest rates around 25 percent that are flagged as being a lot larger than the rest of the loans, which is reasonable since most of the loans are a lot smaller than 20 percent.</p>
-<p>We will not go over the details of how outliers are determined in box plots. If you are interested, you can read Chapter 2.1.5 from OpenIntro Statistics (Diez, Ceytinka-Rundel, Barr).</p>
+<p>We will not go over the details of how outliers are determined in box plots. If you are interested, you can read Chapter 2.1.5 from <a href="https://www.openintro.org/book/os/">OpenIntro Statistics (Diez, Ceytinka-Rundel, Barr)</a>.</p>
 <p>Notice how much further large values (<span class="math inline">\(Q_3\)</span> and maximum) are from the median, compared to the distance of the small values (<span class="math inline">\(Q_1\)</span> and minimum) from the median. This indicates that the distribution of interest rates are right-skewed. Compare the boxplot of the interest rates in Figure <a href="descriptive.html#fig:boxplot">1.6</a> with its corresponding histogram (Figure <a href="descriptive.html#fig:hist">1.2</a>) and density plot (Figure <a href="descriptive.html#fig:dens">1.4</a>).</p>
 <p><em>Thought question</em>: can you sketch a box plot that represents a variable that is left-skewed? How about a variable that is symmetric?</p>
 </div>
@@ -323,7 +321,7 @@ Figure 1.6: Box Plot of Interest Rates
    1, &amp; \text{for } x \geq x_{(n)}.
   \end{cases}
 \]</span>
-We shall use a simple toy example to illustrate how an ECDF is constructed. Suppose we ask 5 people how many times to go to the gym (at least 20 minutes) in a typical work week. The answers are: 3, 0, 1, 5, 3. The random variable <span class="math inline">\(X\)</span> is how many times a person goes to the gym for at least 20 minutes, and the ordered statistics are <span class="math inline">\(x_{(1)} = 0, x_{(2)} = 1, x_{(3)} = 3, x_{(4)} = 3, and x_{(5)} = 5\)</span>. Using the mathematical definition for the ECDF, we have:</p>
+We shall use a simple toy example to illustrate how an ECDF is constructed. Suppose we ask 5 people how many times to go to the gym (at least 20 minutes) in a typical work week. The answers are: 3, 0, 1, 5, 3. The random variable <span class="math inline">\(X\)</span> is how many times a person goes to the gym for at least 20 minutes, and the ordered statistics are <span class="math inline">\(x_{(1)} = 0, x_{(2)} = 1, x_{(3)} = 3, x_{(4)} = 3, x_{(5)} = 5\)</span>. Using the mathematical definition for the ECDF, we have:</p>
 <ul>
 <li>
 <span class="math inline">\(\hat{F}_n(x) = 0\)</span> for <span class="math inline">\(x &lt; x_{(1)} = 0\)</span>.</li>

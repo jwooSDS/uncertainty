@@ -74,7 +74,7 @@
 <h3>
 <span class="header-section-number">2.1.2</span> Frequentiest and Bayesian View of Probability<a class="anchor" aria-label="anchor" href="#frequentiest-and-bayesian-view-of-probability"><i class="fas fa-link"></i></a>
 </h3>
-<p>There are a couple of main viewpoints on how to interpret probability: <strong>frequentist</strong> and <strong>Bayesian</strong>. Consider the statement that “if we flip a fair coin, the coin has a 50% chance of landing heads”.</p>
+<p>There are a couple of viewpoints on how to interpret probability: <strong>frequentist</strong> and <strong>Bayesian</strong>. Consider the statement that “if we flip a fair coin, the coin has a 50% chance of landing heads”.</p>
 <ul>
 <li><p>The frequentist viewpoint views probability as the relative frequency associated with an event that is repeated for an infinite number of times. It will interpret the 50% probability as: if we were to flip the coin many many times, 50% of these times will result in the coin landing heads.</p></li>
 <li><p>The Bayesian viewpoint views probability as a measure of belief, or certainty, that an event will happen. It will interpret the 50% probability as: heads and tails are equally likely to occur with a coin flip.</p></li>
@@ -152,7 +152,7 @@ Figure 2.4: Union of A, B (in blue or gold, or both blue and gold)
 <h3>
 <span class="header-section-number">2.2.5</span> Intersections<a class="anchor" aria-label="anchor" href="#intersections"><i class="fas fa-link"></i></a>
 </h3>
-<p>The <strong>intersection</strong> of events is when <strong>all</strong> of the events happen. Using our example, the intersection of events <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> is denoted by <span class="math inline">\(A \cap B\)</span>, is the event that the card drawn is both a black suit and a picture card. Using Figure <a href="probability.html#fig:cardsAB">2.4</a>, the outcomes belonging to <span class="math inline">\(A \cap B\)</span> are the cards that are outlined in blue and gold. This probability is <span class="math inline">\(P(A \cap B) = \frac{6}{32}\)</span>.</p>
+<p>The <strong>intersection</strong> of events is when <strong>all</strong> of the events happen. Using our example, the intersection of events <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> is denoted by <span class="math inline">\(A \cap B\)</span>, is the event that the card drawn is both a black suit and a picture card. Using Figure <a href="probability.html#fig:cardsAB">2.4</a>, the outcomes belonging to <span class="math inline">\(A \cap B\)</span> are the cards that are outlined in blue and gold. This probability is <span class="math inline">\(P(A \cap B) = \frac{6}{52}\)</span>.</p>
 </div>
 <div id="addition-rule" class="section level3" number="2.2.6">
 <h3>
@@ -179,7 +179,7 @@ P(A \cup B) = P(A) + P(B) - P(A \cap B).
 Figure 2.5: Events B, C (in gold and pink respectively)
 </p>
 </div>
-<p>Applying this idea to equation <a href="probability.html#eq:union">(2.2)</a>, we have the following for disjoint events: for disjoint events, the probability of at least one event happening is the sum of the probabilities for each event.</p>
+<p>Applying this idea to equation <a href="probability.html#eq:union">(2.2)</a>, we have the following for disjoint events: <strong>for disjoint events, the probability of at least one event happening is the sum of the probabilities for each event</strong>.</p>
 </div>
 <div id="axioms-of-probability" class="section level3" number="2.2.8">
 <h3>
@@ -216,7 +216,7 @@ P(Y|X) = \frac{P(Y \cap X)}{P(X)}.
 \tag{2.3}
 \end{equation}\]</span></p>
 <p>In this definition, we want to update the probability of <span class="math inline">\(Y\)</span> happening, given that we have observed <span class="math inline">\(X\)</span>. <span class="math inline">\(X\)</span> can be viewed as the observable data or the evidence we want to incorporate.</p>
-<p>In the Bayesian viewpoint of probability, <span class="math inline">\(P(Y)\)</span> is called the <strong>prior</strong> probability of <span class="math inline">\(Y\)</span> since it reflects our belief about <span class="math inline">\(Y\)</span> before observing any data. <span class="math inline">\(P(Y|X)\)</span> is called the <strong>posterior</strong> probability of <span class="math inline">\(Y\)</span>, as it reflects an update on our belief about $Y after incorporating observed data.</p>
+<p>In the Bayesian viewpoint of probability, <span class="math inline">\(P(Y)\)</span> is called the <strong>prior</strong> probability of <span class="math inline">\(Y\)</span> since it reflects our belief about <span class="math inline">\(Y\)</span> before observing any data. <span class="math inline">\(P(Y|X)\)</span> is called the <strong>posterior</strong> probability of <span class="math inline">\(Y\)</span>, as it reflects an update on our belief about <span class="math inline">\(Y\)</span> after incorporating observed data.</p>
 <p>Let us go back to the standard deck of cards example. Let us find <span class="math inline">\(P(B|A)\)</span>, the probability that our card is a picture card, given that we know the card is a black suit. Visually, we can use the definition of conditional probability using Figure <a href="probability.html#fig:cardscond">2.6</a> below.</p>
 <div class="figure">
 <span style="display:block;" id="fig:cardscond"></span>
@@ -224,17 +224,16 @@ P(Y|X) = \frac{P(Y \cap X)}{P(X)}.
 Figure 2.6: Events A, given B
 </p>
 </div>
-<p>We are told that our card is a black suit, so we have only 26 possible outcomes to consider, as the red cards are eliminated and are crossed out in Figure <a href="probability.html#fig:cardscond">2.6</a>. out of these 26 outcomes, how many are picture cards? So this probability <span class="math inline">\(P(B|A)\)</span> is <span class="math inline">\(\frac{6}{26}\)</span>.</p>
-<p>Figure <a href="probability.html#fig:cardscond">2.6</a> represents the frequentist viewpoint of conditional probability: <span class="math inline">\(P(B|A)\)</span> represents the long run proportion of picture cards among cards that are black suits.</p>
+<p>We are told that our card is a black suit, so we have only 26 possible outcomes to consider, as the red cards are eliminated and are crossed out in Figure <a href="probability.html#fig:cardscond">2.6</a>. Out of these 26 outcomes, how many are picture cards? So this probability <span class="math inline">\(P(B|A)\)</span> is <span class="math inline">\(\frac{6}{26}\)</span>. Figure <a href="probability.html#fig:cardscond">2.6</a> represents the frequentist viewpoint of conditional probability: <span class="math inline">\(P(B|A)\)</span> represents the long run proportion of picture cards among cards that are black suits.</p>
 <p>We can also apply equation <a href="probability.html#eq:cond">(2.3)</a>: <span class="math inline">\(P(B|A) = \frac{\frac{6}{52}}{\frac{1}{2}} = \frac{6}{26}\)</span> which gives the same answer.</p>
 <p><em>Thought question</em>: work out the probability that the card drawn is a black suit, given that we know the card is a picture card.</p>
-<p>We can see from this example that in general <span class="math inline">\(P(Y|X) \neq P(X|Y)\)</span>. This informs us that we need to be extremely careful when writing out our conditional probabilities and interpreting them, and knowing which one matters to our analysis. For example, the probability that I feel unwell given that I have the flu is close to 1, but the probability that I have the flu given that I feel unwell is not close to 1 (since there are many things that can me me feel unwell). This confusion regarding conditional probabilities is sometimes called the confusion of the inverse or the prosecutor’s fallacy. This fallacy wrongly assumes that if the probability of a fingerprint match given that the person is innocent is small, it means that the probability that the person is innocent given a fingerprint match must also be small. Before going over this fallacy in more detail, we need to cover a few more concepts.</p>
+<p>We can see from this example that in general <span class="math inline">\(P(Y|X) \neq P(X|Y)\)</span>. This informs us that we need to be extremely careful when writing out our conditional probabilities and interpreting them, and knowing which one matters to our analysis. For example, the probability that I feel unwell given that I have the flu is close to 1, but the probability that I have the flu given that I feel unwell is not close to 1 (since there are many things that can make me feel unwell). This confusion regarding conditional probabilities is sometimes called the confusion of the inverse or the prosecutor’s fallacy. This fallacy wrongly assumes that if the probability of a fingerprint match given that the person is innocent is small, it means that the probability that the person is innocent given a fingerprint match must also be small. Before going over this fallacy in more detail, we need to cover a few more concepts.</p>
 </div>
 <div id="multiplication-rule" class="section level3" number="2.3.2">
 <h3>
 <span class="header-section-number">2.3.2</span> Multiplication Rule<a class="anchor" aria-label="anchor" href="#multiplication-rule"><i class="fas fa-link"></i></a>
 </h3>
-<p>From equation <a href="probability.html#eq:cond">(2.3)</a>, we have the <strong>multiplication rule</strong> in probability</p>
+<p>From equation <a href="probability.html#eq:cond">(2.3)</a>, we have the <strong>multiplication rule</strong> in probability:</p>
 <p><span class="math display" id="eq:mult">\[\begin{equation}
 P(Y \cap X) = P(Y|X) \times P(X) = P(X|Y) \times P(Y).
 \tag{2.4}
@@ -273,7 +272,7 @@ P(Y|X) = \frac{P(X|Y)P(Y)}{P(X)}.
 odds(Y) = \frac{P(Y)}{P(Y^c)}.
 \tag{2.7}
 \end{equation}\]</span></p>
-<p>You may realize that the left hand side of equation @ref{eq:odds} is equal to the left hand side of a logistic regression equation.</p>
+<p>You may realize that the left hand side of equation <a href="probability.html#eq:odds">(2.7)</a> is equal to the left hand side of a logistic regression equation that we saw in Section <a href="index.html#eg2">0.1.2</a>.</p>
 <p>Using equation <a href="probability.html#eq:odds">(2.7)</a>, we can switch from odds to probability easily</p>
 <p><span class="math display" id="eq:odds2">\[\begin{equation}
 P(Y) = \frac{odds(Y)}{1 + odds(Y)}.
@@ -294,7 +293,7 @@ P(Y) = \frac{odds(Y)}{1 + odds(Y)}.
 <h3>
 <span class="header-section-number">2.3.7</span> Law of Total Probability<a class="anchor" aria-label="anchor" href="#law-of-total-probability"><i class="fas fa-link"></i></a>
 </h3>
-<p>Let <span class="math inline">\(Y_1, Y_2, \cdots, Y_n\)</span> be a partition of the sample space (<span class="math inline">\(Y_1, Y_2, \cdots, Y_n\)</span> are disjoint and their union is the sample space), with <span class="math inline">\(P(Y_i) &gt; 0)\)</span> for all <span class="math inline">\(i\)</span>. Then</p>
+<p>Let <span class="math inline">\(Y_1, Y_2, \cdots, Y_n\)</span> be a partition of the sample space (<span class="math inline">\(Y_1, Y_2, \cdots, Y_n\)</span> are disjoint and their union is the sample space, with <span class="math inline">\(P(Y_i) &gt; 0\)</span>) for all <span class="math inline">\(i\)</span>. Then</p>
 <p><span class="math display" id="eq:total">\[\begin{equation}
 \begin{split}
 P(X) &amp;= \sum_{i=1}^n P(X|Y_i) \times P(Y_i)\\
@@ -313,10 +312,6 @@ P(Y|X) = \frac{P(X|Y)P(Y)}{\sum_{i=1}^n P(X|Y_i) \times P(Y_i)}.
 <h3>
 <span class="header-section-number">2.3.8</span> Worked Example<a class="anchor" aria-label="anchor" href="#worked-example"><i class="fas fa-link"></i></a>
 </h3>
-<div id="approach-1-using-bayes-rule" class="section level4" number="2.3.8.1">
-<h4>
-<span class="header-section-number">2.3.8.1</span> Approach 1: Using Bayes’ Rule<a class="anchor" aria-label="anchor" href="#approach-1-using-bayes-rule"><i class="fas fa-link"></i></a>
-</h4>
 <p>We consider this worked example on how to apply Bayes’ rule and the law of total probability. Suppose my email can be divided into three categories: <span class="math inline">\(E_1\)</span> denotes spam email, <span class="math inline">\(E_2\)</span> denotes important email, and <span class="math inline">\(E_3\)</span> denotes not important email. An email must belong to only one of these categories. Let <span class="math inline">\(F\)</span> denote the event that the email contains the word “free”. From past data, I have the following information:</p>
 <ul>
 <li>
@@ -325,7 +320,12 @@ P(Y|X) = \frac{P(X|Y)P(Y)}{\sum_{i=1}^n P(X|Y_i) \times P(Y_i)}.
 <li>The word “free” appears in 10% of important email, so <span class="math inline">\(P(F|E_2) = 0.1\)</span>.</li>
 <li>The word “free” appears in 5% of important email, so <span class="math inline">\(P(F|E_3) = 0.05\)</span>.</li>
 </ul>
-<p>I receive an email that has the word free. What is the probability that it is spam? So we want to find <span class="math inline">\(P(E_1|F)\)</span>. Using equation <a href="probability.html#eq:bayes2">(2.11)</a>, we have</p>
+<p>I receive an email that has the word free. What is the probability that it is spam? So we want to find <span class="math inline">\(P(E_1|F)\)</span>.</p>
+<div id="approach-1-using-bayes-rule" class="section level4" number="2.3.8.1">
+<h4>
+<span class="header-section-number">2.3.8.1</span> Approach 1: Using Bayes’ Rule<a class="anchor" aria-label="anchor" href="#approach-1-using-bayes-rule"><i class="fas fa-link"></i></a>
+</h4>
+<p>Using equation <a href="probability.html#eq:bayes2">(2.11)</a>, we have</p>
 <p><span class="math display">\[
 \begin{split}
 P(E_1|F) &amp;= \frac{P(E_1 \cap F)}{P(F)}\\

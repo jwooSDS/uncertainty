@@ -340,9 +340,9 @@ Notice there is 1 black dot that corresponds to an interest rate of 20 (presumab
 
 \subsection{Histograms}\label{histograms}
 
-It turns out that dot plots are often not useful for large data sets, but they provide the general idea of how other visualizations for larger data sets work. The height of the dots inform us the frequency of those values occurring.
+It turns out that dot plots are often not useful for large data sets, but they provide the general idea of how other visualizations for larger data sets work. The height of the dots inform us about the frequency of those values occurring.
 
-A visualization that is more commonly used for larger data sets is a histogram. Instead of displaying how common each value of the variable exists, we think of the values as belonging to a \textbf{bin} of values. For example, we can create a bin that contains interest rates between 5 and 7.5 percent, another bin containing interest rates between 7.5 and 10 percent, and so on. A few things to note about histograms:
+A visualization that is more commonly used for larger data sets is a \textbf{histogram}. Instead of displaying how common each value of the variable exists, we think of the values as belonging to a \textbf{bin} of values. For example, we can create a bin that contains interest rates between 5 and 7.5 percent, another bin containing interest rates between 7.5 and 10 percent, and so on. A few things to note about histograms:
 
 \begin{itemize}
 \item
@@ -380,7 +380,7 @@ Histograms can also give us an idea about the \textbf{shape} of the distribution
 \item
   If the histogram has the reverse characteristic, i.e.~the data tail off to the left instead, the shape is said to be \textbf{left-skewed}. This implies that small values of the variable are much less common than large values of the variable; larger values are more likely to occur.
 \item
-  Histograms that trail off similarly in both directions are called \textbf{symmetric}. Large and small values are of the variable are equally likely.
+  Histograms that tail off similarly in both directions are called \textbf{symmetric}. Large and small values are of the variable are equally likely.
 \item
   Histograms that have a peak in the middle, and then trail off on both sides are not only symmetic, but also \textbf{bell-shaped}, or have a \textbf{normal} distribution. Note: it turns out one of the assumptions in linear regression is that the response variable follow a normal distribution. This may seem restrictive, however, we will see in later modules that this assumption is not particular crucial under some circumstances.
 \end{itemize}
@@ -389,7 +389,7 @@ Histograms can also give us an idea about the \textbf{shape} of the distribution
 
 \subsubsection{Considerations with Histograms}\label{considerations-with-histograms}
 
-With our interest rate example, you may have noticed that I made a specific choice to the width of the bins when I created the histograms. It turns out that the width of the bins can impact the shape of the histogram, and potentially, how we interpret the histogram.
+With our interest rate example, you may have noticed that I made a specific choice on the width of the bins when I created the histograms. It turns out that the width of the bins can impact the shape of the histogram, and potentially, how we interpret the histogram.
 
 Consider creating a histogram with bin width of 0.5, instead of 2.5, per Figure \ref{fig:hist05}:
 
@@ -425,7 +425,7 @@ Comparing Figure \ref{fig:hist05} with Figure \ref{fig:hist}, note the following
 
 \subsection{Density Plots}\label{densplots}
 
-Another visualization for a quantitative variable is a density plot. A density plot can be viewed as a smoothed version of the histogram. We can use the heights to inform us about what values are more common. We create a density plot for the interest rates in Figure \ref{fig:dens}:
+Another visualization for a quantitative variable is a \textbf{density plot}. A density plot can be viewed as a smoothed version of the histogram. We can use the heights to inform us about what values are more common. We create a density plot for the interest rates in Figure \ref{fig:dens}:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -452,7 +452,7 @@ Based on Figure \ref{fig:dens}, we see that low interest rates (between 5 and 12
   The values on the vertical axis do not equal to probabilities (a common misconception).
 \end{itemize}
 
-The density plot is found using a method called kernel density estimation (KDE). We will over details about KDE in a later module as we need to cover quite a bit of material before doing so.
+The density plot is found using a method called kernel density estimation (KDE). We will over details about KDE in Section \ref{KDE} as we need to cover quite a bit of material before doing so.
 
 \subsubsection{Considerations with Density Plots}\label{considerations-with-density-plots}
 
@@ -472,8 +472,6 @@ Similar to bins and histograms, density plots are affected by the \textbf{bandwi
 
 Notice in Figure \ref{fig:dens2} that the little peak for interest rates between 15 and 20 (which existed in Figures \ref{fig:dens} and also \ref{fig:hist}) no longer exists. Using bandwidths that are too large can smooth out some of these peaks.
 
-\emph{Thought question}: What if we create a density plot with a bandwidth that is too small?
-
 \emph{Thought question}: How are bin widths for histograms and bandwidths for density plots related?
 
 \section{Ordered Statistics}\label{ordered-statistics}
@@ -482,7 +480,7 @@ The idea behind ordered statistics is pretty self-explanatory: take your numeric
 
 \subsection{Quantiles}\label{quantiles}
 
-\textbf{Quantiles} partition the range of numerical data into continuous intervals (groups) with (nearly) equal proportions. Common quartiles have their own names:
+\textbf{Quantiles} partition the range of numerical data into continuous intervals (groups) with (nearly) equal proportions. Common quantiles have their own names:
 
 \begin{itemize}
 \tightlist
@@ -492,7 +490,7 @@ The idea behind ordered statistics is pretty self-explanatory: take your numeric
   Percentiles: 100 groups
 \end{itemize}
 
-There is one less quantiles than the number of groups. We will go over quartiles in more detail.
+We will go over quartiles in more detail.
 
 \subsubsection{Quartiles}\label{quart}
 
@@ -522,7 +520,7 @@ Quartiles divide the data into 4 groups, and each group has (nearly) equal numbe
 ## [1] 9.93
 \end{verbatim}
 
-So half the interest rates are less than 9.93 percent, and half the interest rates are greater than 9.93 percent. You might also recognize another term for the median: the 50th percentile, as 50 percent of the interest rates are less than 9.93.
+So roughly half the interest rates are less than 9.93 percent, and roughly half the interest rates are greater than 9.93 percent. You might also recognize another term for the median: the 50th percentile, as 50 percent of the interest rates are less than 9.93.
 
 To find the middle observation(s) based on a sample of size \(n\):
 
@@ -579,8 +577,6 @@ Note: you may notice that we used \texttt{type\ =\ 1} inside the \texttt{quantil
 
 Another common quantile is the percentile. In general the \textbf{k-th percentile} is the value of the data point below which \(k\) percent of observations are found. So in our earlier example, we said that \(Q_3\) of the interest rates is 14.08 percent, and this is also the 75th percentile. So 75 percent of interest rates are less than 14.08 percent.
 
-We will not go over the details of finding percentiles by hand.
-
 \subsection{Box Plots}\label{box-plots}
 
 Another visualization used to summarize quantitative data is the box plot. A \textbf{box plot} summarizes the 5-number summary. The 5 numbers are the minimum, \(Q_1, Q_2, Q_3\), and the maximum. Using our interest rate data, the box plot is shown in Figure \ref{fig:boxplot}:
@@ -616,7 +612,7 @@ Generally, when we have one quantitative variable, an outlier is an observation 
 
 So for our 50 loans, there are two loan applicants with interest rates around 25 percent that are flagged as being a lot larger than the rest of the loans, which is reasonable since most of the loans are a lot smaller than 20 percent.
 
-We will not go over the details of how outliers are determined in box plots. If you are interested, you can read Chapter 2.1.5 from OpenIntro Statistics (Diez, Ceytinka-Rundel, Barr).
+We will not go over the details of how outliers are determined in box plots. If you are interested, you can read Chapter 2.1.5 from \href{https://www.openintro.org/book/os/}{OpenIntro Statistics (Diez, Ceytinka-Rundel, Barr)}.
 
 Notice how much further large values (\(Q_3\) and maximum) are from the median, compared to the distance of the small values (\(Q_1\) and minimum) from the median. This indicates that the distribution of interest rates are right-skewed. Compare the boxplot of the interest rates in Figure \ref{fig:boxplot} with its corresponding histogram (Figure \ref{fig:hist}) and density plot (Figure \ref{fig:dens}).
 
@@ -638,7 +634,7 @@ Let \(X\) denote a random variable, and we have observed \(n\) observations of \
    1, & \text{for } x \geq x_{(n)}.
   \end{cases}
 \]
-We shall use a simple toy example to illustrate how an ECDF is constructed. Suppose we ask 5 people how many times to go to the gym (at least 20 minutes) in a typical work week. The answers are: 3, 0, 1, 5, 3. The random variable \(X\) is how many times a person goes to the gym for at least 20 minutes, and the ordered statistics are \(x_{(1)} = 0, x_{(2)} = 1, x_{(3)} = 3, x_{(4)} = 3, and x_{(5)} = 5\). Using the mathematical definition for the ECDF, we have:
+We shall use a simple toy example to illustrate how an ECDF is constructed. Suppose we ask 5 people how many times to go to the gym (at least 20 minutes) in a typical work week. The answers are: 3, 0, 1, 5, 3. The random variable \(X\) is how many times a person goes to the gym for at least 20 minutes, and the ordered statistics are \(x_{(1)} = 0, x_{(2)} = 1, x_{(3)} = 3, x_{(4)} = 3, x_{(5)} = 5\). Using the mathematical definition for the ECDF, we have:
 
 \begin{itemize}
 \tightlist
@@ -815,7 +811,7 @@ The book (Section 1.1) lists 10 different applications of probability, and there
 
 \subsection{Frequentiest and Bayesian View of Probability}\label{frequentiest-and-bayesian-view-of-probability}
 
-There are a couple of main viewpoints on how to interpret probability: \textbf{frequentist} and \textbf{Bayesian}. Consider the statement that ``if we flip a fair coin, the coin has a 50\% chance of landing heads''.
+There are a couple of viewpoints on how to interpret probability: \textbf{frequentist} and \textbf{Bayesian}. Consider the statement that ``if we flip a fair coin, the coin has a 50\% chance of landing heads''.
 
 \begin{itemize}
 \item
@@ -895,7 +891,7 @@ The union of \(A\) and \(B\) can be viewed as the event where either event \(A\)
 
 \subsection{Intersections}\label{intersections}
 
-The \textbf{intersection} of events is when \textbf{all} of the events happen. Using our example, the intersection of events \(A\) and \(B\) is denoted by \(A \cap B\), is the event that the card drawn is both a black suit and a picture card. Using Figure \ref{fig:cardsAB}, the outcomes belonging to \(A \cap B\) are the cards that are outlined in blue and gold. This probability is \(P(A \cap B) = \frac{6}{32}\).
+The \textbf{intersection} of events is when \textbf{all} of the events happen. Using our example, the intersection of events \(A\) and \(B\) is denoted by \(A \cap B\), is the event that the card drawn is both a black suit and a picture card. Using Figure \ref{fig:cardsAB}, the outcomes belonging to \(A \cap B\) are the cards that are outlined in blue and gold. This probability is \(P(A \cap B) = \frac{6}{52}\).
 
 \subsection{Addition rule}\label{addition-rule}
 
@@ -924,7 +920,7 @@ Using Figure \ref{fig:cardsBC} below as a visual example, we can see that events
 \caption{\label{fig:cardsBC}Events B, C (in gold and pink respectively)}
 \end{figure}
 
-Applying this idea to equation \eqref{eq:union}, we have the following for disjoint events: for disjoint events, the probability of at least one event happening is the sum of the probabilities for each event.
+Applying this idea to equation \eqref{eq:union}, we have the following for disjoint events: \textbf{for disjoint events, the probability of at least one event happening is the sum of the probabilities for each event}.
 
 \subsection{Axioms of Probability}\label{axioms-of-probability}
 
@@ -969,7 +965,7 @@ P(Y|X) = \frac{P(Y \cap X)}{P(X)}.
 
 In this definition, we want to update the probability of \(Y\) happening, given that we have observed \(X\). \(X\) can be viewed as the observable data or the evidence we want to incorporate.
 
-In the Bayesian viewpoint of probability, \(P(Y)\) is called the \textbf{prior} probability of \(Y\) since it reflects our belief about \(Y\) before observing any data. \(P(Y|X)\) is called the \textbf{posterior} probability of \(Y\), as it reflects an update on our belief about \$Y after incorporating observed data.
+In the Bayesian viewpoint of probability, \(P(Y)\) is called the \textbf{prior} probability of \(Y\) since it reflects our belief about \(Y\) before observing any data. \(P(Y|X)\) is called the \textbf{posterior} probability of \(Y\), as it reflects an update on our belief about \(Y\) after incorporating observed data.
 
 Let us go back to the standard deck of cards example. Let us find \(P(B|A)\), the probability that our card is a picture card, given that we know the card is a black suit. Visually, we can use the definition of conditional probability using Figure \ref{fig:cardscond} below.
 
@@ -979,19 +975,17 @@ Let us go back to the standard deck of cards example. Let us find \(P(B|A)\), th
 \caption{\label{fig:cardscond}Events A, given B}
 \end{figure}
 
-We are told that our card is a black suit, so we have only 26 possible outcomes to consider, as the red cards are eliminated and are crossed out in Figure \ref{fig:cardscond}. out of these 26 outcomes, how many are picture cards? So this probability \(P(B|A)\) is \(\frac{6}{26}\).
-
-Figure \ref{fig:cardscond} represents the frequentist viewpoint of conditional probability: \(P(B|A)\) represents the long run proportion of picture cards among cards that are black suits.
+We are told that our card is a black suit, so we have only 26 possible outcomes to consider, as the red cards are eliminated and are crossed out in Figure \ref{fig:cardscond}. Out of these 26 outcomes, how many are picture cards? So this probability \(P(B|A)\) is \(\frac{6}{26}\). Figure \ref{fig:cardscond} represents the frequentist viewpoint of conditional probability: \(P(B|A)\) represents the long run proportion of picture cards among cards that are black suits.
 
 We can also apply equation \eqref{eq:cond}: \(P(B|A) = \frac{\frac{6}{52}}{\frac{1}{2}} = \frac{6}{26}\) which gives the same answer.
 
 \emph{Thought question}: work out the probability that the card drawn is a black suit, given that we know the card is a picture card.
 
-We can see from this example that in general \(P(Y|X) \neq P(X|Y)\). This informs us that we need to be extremely careful when writing out our conditional probabilities and interpreting them, and knowing which one matters to our analysis. For example, the probability that I feel unwell given that I have the flu is close to 1, but the probability that I have the flu given that I feel unwell is not close to 1 (since there are many things that can me me feel unwell). This confusion regarding conditional probabilities is sometimes called the confusion of the inverse or the prosecutor's fallacy. This fallacy wrongly assumes that if the probability of a fingerprint match given that the person is innocent is small, it means that the probability that the person is innocent given a fingerprint match must also be small. Before going over this fallacy in more detail, we need to cover a few more concepts.
+We can see from this example that in general \(P(Y|X) \neq P(X|Y)\). This informs us that we need to be extremely careful when writing out our conditional probabilities and interpreting them, and knowing which one matters to our analysis. For example, the probability that I feel unwell given that I have the flu is close to 1, but the probability that I have the flu given that I feel unwell is not close to 1 (since there are many things that can make me feel unwell). This confusion regarding conditional probabilities is sometimes called the confusion of the inverse or the prosecutor's fallacy. This fallacy wrongly assumes that if the probability of a fingerprint match given that the person is innocent is small, it means that the probability that the person is innocent given a fingerprint match must also be small. Before going over this fallacy in more detail, we need to cover a few more concepts.
 
 \subsection{Multiplication Rule}\label{multiplication-rule}
 
-From equation \eqref{eq:cond}, we have the \textbf{multiplication rule} in probability
+From equation \eqref{eq:cond}, we have the \textbf{multiplication rule} in probability:
 
 \begin{equation} 
 P(Y \cap X) = P(Y|X) \times P(X) = P(X|Y) \times P(Y).
@@ -1033,7 +1027,7 @@ odds(Y) = \frac{P(Y)}{P(Y^c)}.
 \label{eq:odds}
 \end{equation}
 
-You may realize that the left hand side of equation @ref\{eq:odds\} is equal to the left hand side of a logistic regression equation.
+You may realize that the left hand side of equation \eqref{eq:odds} is equal to the left hand side of a logistic regression equation that we saw in Section \ref{eg2}.
 
 Using equation \eqref{eq:odds}, we can switch from odds to probability easily
 
@@ -1053,7 +1047,7 @@ Using Bayes' rule in equation \eqref{eq:bayes} and the definition of odds in equ
 
 \subsection{Law of Total Probability}\label{law-of-total-probability}
 
-Let \(Y_1, Y_2, \cdots, Y_n\) be a partition of the sample space (\(Y_1, Y_2, \cdots, Y_n\) are disjoint and their union is the sample space), with \(P(Y_i) > 0)\) for all \(i\). Then
+Let \(Y_1, Y_2, \cdots, Y_n\) be a partition of the sample space (\(Y_1, Y_2, \cdots, Y_n\) are disjoint and their union is the sample space, with \(P(Y_i) > 0\)) for all \(i\). Then
 
 \begin{equation} 
 \begin{split}
@@ -1074,8 +1068,6 @@ P(Y|X) = \frac{P(X|Y)P(Y)}{\sum_{i=1}^n P(X|Y_i) \times P(Y_i)}.
 
 \subsection{Worked Example}\label{worked-example}
 
-\subsubsection{Approach 1: Using Bayes' Rule}\label{approach-1-using-bayes-rule}
-
 We consider this worked example on how to apply Bayes' rule and the law of total probability. Suppose my email can be divided into three categories: \(E_1\) denotes spam email, \(E_2\) denotes important email, and \(E_3\) denotes not important email. An email must belong to only one of these categories. Let \(F\) denote the event that the email contains the word ``free''. From past data, I have the following information:
 
 \begin{itemize}
@@ -1090,7 +1082,11 @@ We consider this worked example on how to apply Bayes' rule and the law of total
   The word ``free'' appears in 5\% of important email, so \(P(F|E_3) = 0.05\).
 \end{itemize}
 
-I receive an email that has the word free. What is the probability that it is spam? So we want to find \(P(E_1|F)\). Using equation \eqref{eq:bayes2}, we have
+I receive an email that has the word free. What is the probability that it is spam? So we want to find \(P(E_1|F)\).
+
+\subsubsection{Approach 1: Using Bayes' Rule}\label{approach-1-using-bayes-rule}
+
+Using equation \eqref{eq:bayes2}, we have
 
 \[
 \begin{split}
