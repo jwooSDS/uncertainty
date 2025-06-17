@@ -1366,7 +1366,7 @@ Consider our experiment where we flip a coin 3 times and count the number of hea
 
 In general, the PMF of an experiment should match the histogram in the long run.
 
-Note: What we have just done here was to use simulations to repeat an experiment a large number of times using code.
+Note: What we have just done here was to use simulations to repeat an experiment a large number of times.
 
 \section{Cumulative Distribution Functions (CDFs)}\label{cumulative-distribution-functions-cdfs}
 
@@ -1473,10 +1473,10 @@ We have seen how to calculate the expected value of a random variable \(X\) usin
 \item
   Suppose that I sell each fish for \$10 and my friend sells each fish for \$15. We can let \(R = 10Y + 15W\) be the random variable that describes the revenue we generate on a workday.
 \item
-  Suppose that my friend and I rent out a space at the market to sell our fish, and it costs \textbackslash5 a day to rent out the space. We can let \(G = 10Y + 15W - 5\) be the random variable that describes our gross income for the day.
+  Suppose that my friend and I rent out a space at the market to sell our fish, and it costs \$5 a day to rent out the space. We can let \(G = 10Y + 15W - 5\) be the random variable that describes our gross income for the day.
 \end{itemize}
 
-All of these examples involve new random variables, \(T, R, G\) that can be based on previously defined random variables, \(Y, W\). It turns out that to find the expectations of the new random variables, all we need is the expectations of the previously defined random variables. We do not need to find the PMFS for \(T, R\) and \(S\) and then apply equation \eqref{eq:3-EX}.
+All of these examples involve new random variables, \(T, R, G\) that can be based on previously defined random variables, \(Y, W\). It turns out that to find the expectations of the new random variables, all we need is the expectations of the previously defined random variables. We do not need to find the PMFs for \(T, R\) and \(S\) and then apply equation \eqref{eq:3-EX}.
 
 These can be done through the \textbf{linearity of expectations}: Let \(X\) and \(Y\) denote random variables, and \(a,b,c\) denote some constants, then
 
@@ -1597,7 +1597,7 @@ Using brute force, we can find the PMF of \(Y\), and find \(E(Y)\) using equatio
   For \(Y=0\), the man could move forward, then backward, or move backward then forward, or stay on both steps. So \(P(Y=0) = p_f p_b + p_b p_f + p_s^2 = p_s^2 + 2 p_b p_f\).
 \end{itemize}
 
-Using equation @ref(eq:3\_EX),
+Using equation \eqref{eq:3-EX},
 
 \[
 \begin{split}
@@ -1606,7 +1606,7 @@ E(Y) &= -2 \times p_b^2 + -1 \times 2p_b p_s + 0 \times p_s^2 + 2 p_b p_f + 1 \t
 \end{split}
 \]
 
-Note: I skipped a lot of messy algebra to get to the end result. Even with skipping this step, setting up the PMF was quite a bit of work.
+Note: I skipped a lot of messy algebra to get to the end result. Even with skipping some of the messy algebra, setting up the PMF was quite a bit of work.
 
 Suppose we use the linearity of expectations in equation \eqref{eq:3-linEX}. Let \(Y_1, Y_2\) denote the distance the man moves at step 1 and 2 respectively. Then \(Y = Y_1 + Y_2\). The sample of \(Y_1\) and \(Y_2\) are the same: \(\{-1,0,1\}\). Both \(Y_1\) and \(Y_2\) have the following PMF:
 
@@ -1629,7 +1629,7 @@ E(Y_i) &= -1 \times p_b + 0 \times p_s + 1 \times p_f \\
 \end{split}
 \]
 
-So therefore \(E(Y) = E(Y_1) + E(Y_2) = 2(p_f - p_b)\). Notice how much simpler the solution becomes using linearity of expectations? Imagine if we wanted to find the expected position after 500 steps? Writing out the sample space for 500 steps will be extremely long.
+So therefore \(E(Y) = E(Y_1) + E(Y_2) = 2(p_f - p_b)\). Both approaches resulted in the same answer,but notice how much simpler its was to obtain the solution using linearity of expectations. Imagine if we wanted to find the expected position after 500 steps? Writing out the sample space for 500 steps will be extremely long.
 
 \subsection{Law of the Unconscious Statistician}\label{law-of-the-unconscious-statistician}
 
@@ -1782,7 +1782,7 @@ P(X=k) = \binom{n}{k} p^k (1-p)^{n-k}
 
 for \(k=0,1,2, \cdots, n\), which is also the support of the binomial distribution.
 
-In equation \eqref{eq:3-bin}, \(\binom{n}{k}\) is called the binomial coefficient, and is a number that represents the number of combinations that result in \(k\) successes out of the \(n\) trials. The binomial coefficient can be found using
+In equation \eqref{eq:3-bin}, \(\binom{n}{k}\) is called the binomial coefficient, and it is the number of combinations that result in \(k\) successes out of the \(n\) trials. The binomial coefficient can be found using
 
 \begin{equation} 
 \binom{n}{k} =  \frac{n!}{k! (n-k)!}.

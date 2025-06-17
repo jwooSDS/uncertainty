@@ -190,7 +190,7 @@ Figure 3.2: Histogram from Experiment Performed 1 Million Times
 </p>
 </div>
 <p>In general, the PMF of an experiment should match the histogram in the long run.</p>
-<p>Note: What we have just done here was to use simulations to repeat an experiment a large number of times using code.</p>
+<p>Note: What we have just done here was to use simulations to repeat an experiment a large number of times.</p>
 </div>
 </div>
 <div id="cumulative-distribution-functions-cdfs" class="section level2" number="3.3">
@@ -291,9 +291,9 @@ E(X) &amp;= 0 \times \frac{1}{8} + 1 \times \frac{3}{8} + 2 \times \frac{3}{8} +
 <ul>
 <li><p>Suppose my friend and I are fisherman. Let <span class="math inline">\(Y\)</span> be the random variable describing the number of fish I catch on a workday, and let <span class="math inline">\(W\)</span> be the random variable describing the number of fish my friend catches on a workday. We can let <span class="math inline">\(T = Y+W\)</span> be the random variable describing the total number of fish we catch on a workday.</p></li>
 <li><p>Suppose that I sell each fish for $10 and my friend sells each fish for $15. We can let <span class="math inline">\(R = 10Y + 15W\)</span> be the random variable that describes the revenue we generate on a workday.</p></li>
-<li><p>Suppose that my friend and I rent out a space at the market to sell our fish, and it costs \5 a day to rent out the space. We can let <span class="math inline">\(G = 10Y + 15W - 5\)</span> be the random variable that describes our gross income for the day.</p></li>
+<li><p>Suppose that my friend and I rent out a space at the market to sell our fish, and it costs $5 a day to rent out the space. We can let <span class="math inline">\(G = 10Y + 15W - 5\)</span> be the random variable that describes our gross income for the day.</p></li>
 </ul>
-<p>All of these examples involve new random variables, <span class="math inline">\(T, R, G\)</span> that can be based on previously defined random variables, <span class="math inline">\(Y, W\)</span>. It turns out that to find the expectations of the new random variables, all we need is the expectations of the previously defined random variables. We do not need to find the PMFS for <span class="math inline">\(T, R\)</span> and <span class="math inline">\(S\)</span> and then apply equation <a href="discrete-random-variables.html#eq:3-EX">(3.2)</a>.</p>
+<p>All of these examples involve new random variables, <span class="math inline">\(T, R, G\)</span> that can be based on previously defined random variables, <span class="math inline">\(Y, W\)</span>. It turns out that to find the expectations of the new random variables, all we need is the expectations of the previously defined random variables. We do not need to find the PMFs for <span class="math inline">\(T, R\)</span> and <span class="math inline">\(S\)</span> and then apply equation <a href="discrete-random-variables.html#eq:3-EX">(3.2)</a>.</p>
 <p>These can be done through the <strong>linearity of expectations</strong>: Let <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> denote random variables, and <span class="math inline">\(a,b,c\)</span> denote some constants, then</p>
 <p><span class="math display" id="eq:3-linEX">\[\begin{equation}
 E(aX + bY +c) = aE(X) + bE(Y) + c.
@@ -391,14 +391,14 @@ Figure 3.5: PMF for X and W=X+3
 <li>Likewise, for <span class="math inline">\(Y=1\)</span>, the man could stay on the first step, then move forward on the second, or move forward on the first step, and stay on the second. This probability will be <span class="math inline">\(P(Y=1) = p_s p_f + p_f p_s = 2p_f p_s\)</span>.</li>
 <li>For <span class="math inline">\(Y=0\)</span>, the man could move forward, then backward, or move backward then forward, or stay on both steps. So <span class="math inline">\(P(Y=0) = p_f p_b + p_b p_f + p_s^2 = p_s^2 + 2 p_b p_f\)</span>.</li>
 </ul>
-<p>Using equation @ref(eq:3_EX),</p>
+<p>Using equation <a href="discrete-random-variables.html#eq:3-EX">(3.2)</a>,</p>
 <p><span class="math display">\[
 \begin{split}
 E(Y) &amp;= -2 \times p_b^2 + -1 \times 2p_b p_s + 0 \times p_s^2 + 2 p_b p_f + 1 \times 2p_f p_s + 2 \times p_f^2 \\
        &amp;= 2 (p_f - p_b)
 \end{split}
 \]</span></p>
-<p>Note: I skipped a lot of messy algebra to get to the end result. Even with skipping this step, setting up the PMF was quite a bit of work.</p>
+<p>Note: I skipped a lot of messy algebra to get to the end result. Even with skipping some of the messy algebra, setting up the PMF was quite a bit of work.</p>
 <p>Suppose we use the linearity of expectations in equation <a href="discrete-random-variables.html#eq:3-linEX">(3.3)</a>. Let <span class="math inline">\(Y_1, Y_2\)</span> denote the distance the man moves at step 1 and 2 respectively. Then <span class="math inline">\(Y = Y_1 + Y_2\)</span>. The sample of <span class="math inline">\(Y_1\)</span> and <span class="math inline">\(Y_2\)</span> are the same: <span class="math inline">\(\{-1,0,1\}\)</span>. Both <span class="math inline">\(Y_1\)</span> and <span class="math inline">\(Y_2\)</span> have the following PMF:</p>
 <ul>
 <li><span class="math inline">\(P(Y_i = -1) = p_b\)</span></li>
@@ -412,7 +412,7 @@ E(Y_i) &amp;= -1 \times p_b + 0 \times p_s + 1 \times p_f \\
        &amp;= p_f - p_b
 \end{split}
 \]</span></p>
-<p>So therefore <span class="math inline">\(E(Y) = E(Y_1) + E(Y_2) = 2(p_f - p_b)\)</span>. Notice how much simpler the solution becomes using linearity of expectations? Imagine if we wanted to find the expected position after 500 steps? Writing out the sample space for 500 steps will be extremely long.</p>
+<p>So therefore <span class="math inline">\(E(Y) = E(Y_1) + E(Y_2) = 2(p_f - p_b)\)</span>. Both approaches resulted in the same answer,but notice how much simpler its was to obtain the solution using linearity of expectations. Imagine if we wanted to find the expected position after 500 steps? Writing out the sample space for 500 steps will be extremely long.</p>
 </div>
 </div>
 <div id="law-of-the-unconscious-statistician" class="section level3" number="3.4.2">
@@ -538,7 +538,7 @@ P(X=k) = \binom{n}{k} p^k (1-p)^{n-k}
 \tag{3.11}
 \end{equation}\]</span></p>
 <p>for <span class="math inline">\(k=0,1,2, \cdots, n\)</span>, which is also the support of the binomial distribution.</p>
-<p>In equation <a href="discrete-random-variables.html#eq:3-bin">(3.11)</a>, <span class="math inline">\(\binom{n}{k}\)</span> is called the binomial coefficient, and is a number that represents the number of combinations that result in <span class="math inline">\(k\)</span> successes out of the <span class="math inline">\(n\)</span> trials. The binomial coefficient can be found using</p>
+<p>In equation <a href="discrete-random-variables.html#eq:3-bin">(3.11)</a>, <span class="math inline">\(\binom{n}{k}\)</span> is called the binomial coefficient, and it is the number of combinations that result in <span class="math inline">\(k\)</span> successes out of the <span class="math inline">\(n\)</span> trials. The binomial coefficient can be found using</p>
 <p><span class="math display" id="eq:3-bincoeff">\[\begin{equation}
 \binom{n}{k} =  \frac{n!}{k! (n-k)!}.
 \tag{3.12}
