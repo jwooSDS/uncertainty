@@ -1,0 +1,90 @@
+# Joint Distributions
+
+```{r, echo=FALSE}
+rm(list = ls())
+```
+
+This module is based on Introduction to Probability (Blitzstein, Hwang), Chapters 7 and 9. You can access the book for free at https://stat110.hsites.harvard.edu/ (and then click on Book). Please note that I cover additional topics, and skip certain topics from the book. You may skip ??? from the book.
+
+## Introduction
+
+In the previous two modules, we learned about ways to summarize the distribution of individual random variables. We are now ready to extend the concepts from these modules and apply them to a slightly different setting, where we are analyzing how multiple variables are related to each other. It is extremely common to want to analyze the relationship between at least two variables. The book lists a few examples, but here are a few more:
+
+- Public policy: How does increasing expenditure on infrastructure impact economic development?
+- Education: How do smaller class sizes and higher teacher pay impact student learning outcomes?
+- Marketing: How does the design of a website influence the probability of a customer purchasing an item?
+
+This module will consider these variables jointly, in other words, how they relate to each other. A lot of the concepts like CDF, PDF, PMF, expectations, variances, and so on will have analogous versions when considering variables jointly. 
+
+## Joint Distributions for Discrete RVs
+
+We will start with discrete random variables first, then move on to continuous random variables. To keep things simple, we will use two variables to explain concepts, which can be generalized to any number of random variables. 
+
+Recall that for a single discrete random variable $X$, we use the PMF to inform us the support of $X$ and the probability associated with each value of the support. We said that the PMF informs us about the distribution of the random variable $X$.
+
+We now have two discrete random variables, $X$ and $Y$. The **joint distribution** of $X$ and $Y$ provides the probability associated with each possible combination of $X$ and $Y$. The **joint PMF** of $X$ and $Y$ is
+
+\begin{equation} 
+p_{X,Y}(x,y) = P(X=x, Y=y).
+(\#eq:5-jointPMF)
+\end{equation}
+
+Equation \@ref(eq:5-jointPMF) can be read as the probability that the random variables $X$ and $Y$ are equal to $x$ and $y$ respectively. Recall that upper case letters are usually used to denote random variables, and lower case letters are usually used as a placeholder for an actual numerical that the random variable could take. 
+
+Joint PMFs can be displayed via a table, like in Table \@ref(tab:simple-table) below. In this example, we consider how study time, $X$, is related with grades, $Y$, with 
+
+- $X=1$ for studying 0 to 5 hours a week, 
+- $X=2$ for studying 6 to 10 hours a week, and 
+- $X=3$ for studying more than 10 hours a week. 
+- $Y=1$ denotes getting an A, 
+- $Y=2$ denotes getting a B, and 
+- $Y=3$ denotes getting a C or lower.
+
+Table: (\#tab:simple-table) Example Joint PMF of Study Time ($X$) and Grades ($Y$)
+
+|  | X=1 | X=2 | X=3 |
+| :------- | :------- | :------- | :------- |
+| **Y=1** | 0.05 | 0.15| 0.30 |
+| **Y=2** | 0.10 | 0.20 | 0.10 |
+| **Y=3** | 0.15 | 0.05 | 0 |
+
+We could also write the joint PMF as:
+
+- $P(X=1, Y=1) = 0.05$
+- $P(X=1, Y=2) = 0.10$
+- $P(X=1, Y=3) = 0.15$
+- $P(X=2, Y=1) = 0.15$
+- $P(X=2, Y=2) = 0.20$
+- $P(X=2, Y=3) = 0.05$
+- $P(X=3, Y=1) = 0.30$
+- $P(X=3, Y=2) = 0.10$
+- $P(X=3, Y=3) = 0$
+
+Just like the PMFs of a single discrete random variable must sum to 1 and each PMF must be non negative, the joint PMFs of discrete random variables must sum to 1 and each individual PMF must be non negative to be valid.
+
+*Thought question*: Can you verify that the joint PMF in Table \@ref(tab:simple-table) is valid?
+
+The **joint CDF** of any discrete random variables $X$ and $Y$ is
+
+\begin{equation} 
+F_{X,Y}(x,y) = P(X \leq x, Y \leq y).
+(\#eq:5-jointCDF)
+\end{equation}
+
+*Thought question*: Compare equation \@ref(eq:5-jointCDF) with its univariate (one variable) counterpart in equation \@ref(eq:3-CDF). Can you see the similarities and differences?
+
+## Marginal Distributions for Discrete RVs
+
+## Conditional Distributions for Discrete RVs
+
+## Joint, Marginal, Conditional Distributions for Continuous RVs
+
+## Covariance and Correlation
+
+## Common Multivariate Distribtuions
+
+### Multinomial 
+
+### Multivariate Normal
+
+## Conditional Expectation

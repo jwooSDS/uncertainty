@@ -86,6 +86,9 @@ eq:4-xbar
 eq:4-sampvar
 eq:4-sampskew
 eq:4-sampkurt
+eq:5-jointPMF
+tab:simple-table
+eq:5-jointCDF
 examples
 example-1-mario-kart-auction-prices
 eg2
@@ -196,3 +199,14 @@ using-r
 KDE
 density-plots-and-histograms
 numerical-summaries
+joint-distributions
+introduction-1
+joint-distributions-for-discrete-rvs
+marginal-distributions-for-discrete-rvs
+conditional-distributions-for-discrete-rvs
+joint-marginal-conditional-distributions-for-continuous-rvs
+covariance-and-correlation
+common-multivariate-distribtuions
+multinomial
+multivariate-normal
+conditional-expectation

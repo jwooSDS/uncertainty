@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 5 Joint Distributions | Understanding Uncertainty Course Notes</title>
+<meta name="author" content="Jeffrey Woo">
+<meta name="description" content="This module is based on Introduction to Probability (Blitzstein, Hwang), Chapters 7 and 9. You can access the book for free at https://stat110.hsites.harvard.edu/ (and then click on Book). Please...">
+<meta name="generator" content="bookdown 0.43 with bs4_book()">
+<meta property="og:title" content="Chapter 5 Joint Distributions | Understanding Uncertainty Course Notes">
+<meta property="og:type" content="book">
+<meta property="og:description" content="This module is based on Introduction to Probability (Blitzstein, Hwang), Chapters 7 and 9. You can access the book for free at https://stat110.hsites.harvard.edu/ (and then click on Book). Please...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 5 Joint Distributions | Understanding Uncertainty Course Notes">
+<meta name="twitter:description" content="This module is based on Introduction to Probability (Blitzstein, Hwang), Chapters 7 and 9. You can access the book for free at https://stat110.hsites.harvard.edu/ (and then click on Book). Please...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.9.0/transition.js"></script><script src="libs/bs3compat-0.9.0/tabs.js"></script><script src="libs/bs3compat-0.9.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Understanding Uncertainty Course Notes</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Preface</a></li>
+<li><a class="" href="descriptive.html"><span class="header-section-number">1</span> Descriptive Statistics</a></li>
+<li><a class="" href="probability.html"><span class="header-section-number">2</span> Probability</a></li>
+<li><a class="" href="discrete-random-variables.html"><span class="header-section-number">3</span> Discrete Random Variables</a></li>
+<li><a class="" href="continuous-random-variables.html"><span class="header-section-number">4</span> Continuous Random Variables</a></li>
+<li><a class="active" href="joint-distributions.html"><span class="header-section-number">5</span> Joint Distributions</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="joint-distributions" class="section level1" number="5">
+<h1>
+<span class="header-section-number">5</span> Joint Distributions<a class="anchor" aria-label="anchor" href="#joint-distributions"><i class="fas fa-link"></i></a>
+</h1>
+<p>This module is based on Introduction to Probability (Blitzstein, Hwang), Chapters 7 and 9. You can access the book for free at <a href="https://stat110.hsites.harvard.edu/" class="uri">https://stat110.hsites.harvard.edu/</a> (and then click on Book). Please note that I cover additional topics, and skip certain topics from the book. You may skip ??? from the book.</p>
+<div id="introduction-1" class="section level2" number="5.1">
+<h2>
+<span class="header-section-number">5.1</span> Introduction<a class="anchor" aria-label="anchor" href="#introduction-1"><i class="fas fa-link"></i></a>
+</h2>
+<p>In the previous two modules, we learned about ways to summarize the distribution of individual random variables. We are now ready to extend the concepts from these modules and apply them to a slightly different setting, where we are analyzing how multiple variables are related to each other. It is extremely common to want to analyze the relationship between at least two variables. The book lists a few examples, but here are a few more:</p>
+<ul>
+<li>Public policy: How does increasing expenditure on infrastructure impact economic development?</li>
+<li>Education: How do smaller class sizes and higher teacher pay impact student learning outcomes?</li>
+<li>Marketing: How does the design of a website influence the probability of a customer purchasing an item?</li>
+</ul>
+<p>This module will consider these variables jointly, in other words, how they relate to each other. A lot of the concepts like CDF, PDF, PMF, expectations, variances, and so on will have analogous versions when considering variables jointly.</p>
+</div>
+<div id="joint-distributions-for-discrete-rvs" class="section level2" number="5.2">
+<h2>
+<span class="header-section-number">5.2</span> Joint Distributions for Discrete RVs<a class="anchor" aria-label="anchor" href="#joint-distributions-for-discrete-rvs"><i class="fas fa-link"></i></a>
+</h2>
+<p>We will start with discrete random variables first, then move on to continuous random variables. To keep things simple, we will use two variables to explain concepts, which can be generalized to any number of random variables.</p>
+<p>Recall that for a single discrete random variable <span class="math inline">\(X\)</span>, we use the PMF to inform us the support of <span class="math inline">\(X\)</span> and the probability associated with each value of the support. We said that the PMF informs us about the distribution of the random variable <span class="math inline">\(X\)</span>.</p>
+<p>We now have two discrete random variables, <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>. The <strong>joint distribution</strong> of <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> provides the probability associated with each possible combination of <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>. The <strong>joint PMF</strong> of <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> is</p>
+<p><span class="math display" id="eq:5-jointPMF">\[\begin{equation}
+p_{X,Y}(x,y) = P(X=x, Y=y).
+\tag{5.1}
+\end{equation}\]</span></p>
+<p>Equation <a href="joint-distributions.html#eq:5-jointPMF">(5.1)</a> can be read as the probability that the random variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are equal to <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> respectively. Recall that upper case letters are usually used to denote random variables, and lower case letters are usually used as a placeholder for an actual numerical that the random variable could take.</p>
+<p>Joint PMFs can be displayed via a table, like in Table <a href="joint-distributions.html#tab:simple-table">5.1</a> below. In this example, we consider how study time, <span class="math inline">\(X\)</span>, is related with grades, <span class="math inline">\(Y\)</span>, with</p>
+<ul>
+<li>
+<span class="math inline">\(X=1\)</span> for studying 0 to 5 hours a week,</li>
+<li>
+<span class="math inline">\(X=2\)</span> for studying 6 to 10 hours a week, and</li>
+<li>
+<span class="math inline">\(X=3\)</span> for studying more than 10 hours a week.</li>
+<li>
+<span class="math inline">\(Y=1\)</span> denotes getting an A,</li>
+<li>
+<span class="math inline">\(Y=2\)</span> denotes getting a B, and</li>
+<li>
+<span class="math inline">\(Y=3\)</span> denotes getting a C or lower.</li>
+</ul>
+<div class="inline-table"><table class="table table-sm">
+<caption>
+<span id="tab:simple-table">Table 5.1: </span> Example Joint PMF of Study Time (<span class="math inline">\(X\)</span>) and Grades (<span class="math inline">\(Y\)</span>)</caption>
+<thead><tr class="header">
+<th align="left"></th>
+<th align="left">X=1</th>
+<th align="left">X=2</th>
+<th align="left">X=3</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left"><strong>Y=1</strong></td>
+<td align="left">0.05</td>
+<td align="left">0.15</td>
+<td align="left">0.30</td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Y=2</strong></td>
+<td align="left">0.10</td>
+<td align="left">0.20</td>
+<td align="left">0.10</td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>Y=3</strong></td>
+<td align="left">0.15</td>
+<td align="left">0.05</td>
+<td align="left">0</td>
+</tr>
+</tbody>
+</table></div>
+<p>We could also write the joint PMF as:</p>
+<ul>
+<li><span class="math inline">\(P(X=1, Y=1) = 0.05\)</span></li>
+<li><span class="math inline">\(P(X=1, Y=2) = 0.10\)</span></li>
+<li><span class="math inline">\(P(X=1, Y=3) = 0.15\)</span></li>
+<li><span class="math inline">\(P(X=2, Y=1) = 0.15\)</span></li>
+<li><span class="math inline">\(P(X=2, Y=2) = 0.20\)</span></li>
+<li><span class="math inline">\(P(X=2, Y=3) = 0.05\)</span></li>
+<li><span class="math inline">\(P(X=3, Y=1) = 0.30\)</span></li>
+<li><span class="math inline">\(P(X=3, Y=2) = 0.10\)</span></li>
+<li><span class="math inline">\(P(X=3, Y=3) = 0\)</span></li>
+</ul>
+<p>Just like the PMFs of a single discrete random variable must sum to 1 and each PMF must be non negative, the joint PMFs of discrete random variables must sum to 1 and each individual PMF must be non negative to be valid.</p>
+<p><em>Thought question</em>: Can you verify that the joint PMF in Table <a href="joint-distributions.html#tab:simple-table">5.1</a> is valid?</p>
+<p>The <strong>joint CDF</strong> of any discrete random variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> is</p>
+<p><span class="math display" id="eq:5-jointCDF">\[\begin{equation}
+F_{X,Y}(x,y) = P(X \leq x, Y \leq y).
+\tag{5.2}
+\end{equation}\]</span></p>
+<p><em>Thought question</em>: Compare equation <a href="joint-distributions.html#eq:5-jointCDF">(5.2)</a> with its univariate (one variable) counterpart in equation <a href="discrete-random-variables.html#eq:3-CDF">(3.1)</a>. Can you see the similarities and differences?</p>
+</div>
+<div id="marginal-distributions-for-discrete-rvs" class="section level2" number="5.3">
+<h2>
+<span class="header-section-number">5.3</span> Marginal Distributions for Discrete RVs<a class="anchor" aria-label="anchor" href="#marginal-distributions-for-discrete-rvs"><i class="fas fa-link"></i></a>
+</h2>
+</div>
+<div id="conditional-distributions-for-discrete-rvs" class="section level2" number="5.4">
+<h2>
+<span class="header-section-number">5.4</span> Conditional Distributions for Discrete RVs<a class="anchor" aria-label="anchor" href="#conditional-distributions-for-discrete-rvs"><i class="fas fa-link"></i></a>
+</h2>
+</div>
+<div id="joint-marginal-conditional-distributions-for-continuous-rvs" class="section level2" number="5.5">
+<h2>
+<span class="header-section-number">5.5</span> Joint, Marginal, Conditional Distributions for Continuous RVs<a class="anchor" aria-label="anchor" href="#joint-marginal-conditional-distributions-for-continuous-rvs"><i class="fas fa-link"></i></a>
+</h2>
+</div>
+<div id="covariance-and-correlation" class="section level2" number="5.6">
+<h2>
+<span class="header-section-number">5.6</span> Covariance and Correlation<a class="anchor" aria-label="anchor" href="#covariance-and-correlation"><i class="fas fa-link"></i></a>
+</h2>
+</div>
+<div id="common-multivariate-distribtuions" class="section level2" number="5.7">
+<h2>
+<span class="header-section-number">5.7</span> Common Multivariate Distribtuions<a class="anchor" aria-label="anchor" href="#common-multivariate-distribtuions"><i class="fas fa-link"></i></a>
+</h2>
+<div id="multinomial" class="section level3" number="5.7.1">
+<h3>
+<span class="header-section-number">5.7.1</span> Multinomial<a class="anchor" aria-label="anchor" href="#multinomial"><i class="fas fa-link"></i></a>
+</h3>
+</div>
+<div id="multivariate-normal" class="section level3" number="5.7.2">
+<h3>
+<span class="header-section-number">5.7.2</span> Multivariate Normal<a class="anchor" aria-label="anchor" href="#multivariate-normal"><i class="fas fa-link"></i></a>
+</h3>
+</div>
+</div>
+<div id="conditional-expectation" class="section level2" number="5.8">
+<h2>
+<span class="header-section-number">5.8</span> Conditional Expectation<a class="anchor" aria-label="anchor" href="#conditional-expectation"><i class="fas fa-link"></i></a>
+</h2>
+
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="continuous-random-variables.html"><span class="header-section-number">4</span> Continuous Random Variables</a></div>
+<div class="empty"></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#joint-distributions"><span class="header-section-number">5</span> Joint Distributions</a></li>
+<li><a class="nav-link" href="#introduction-1"><span class="header-section-number">5.1</span> Introduction</a></li>
+<li><a class="nav-link" href="#joint-distributions-for-discrete-rvs"><span class="header-section-number">5.2</span> Joint Distributions for Discrete RVs</a></li>
+<li><a class="nav-link" href="#marginal-distributions-for-discrete-rvs"><span class="header-section-number">5.3</span> Marginal Distributions for Discrete RVs</a></li>
+<li><a class="nav-link" href="#conditional-distributions-for-discrete-rvs"><span class="header-section-number">5.4</span> Conditional Distributions for Discrete RVs</a></li>
+<li><a class="nav-link" href="#joint-marginal-conditional-distributions-for-continuous-rvs"><span class="header-section-number">5.5</span> Joint, Marginal, Conditional Distributions for Continuous RVs</a></li>
+<li><a class="nav-link" href="#covariance-and-correlation"><span class="header-section-number">5.6</span> Covariance and Correlation</a></li>
+<li>
+<a class="nav-link" href="#common-multivariate-distribtuions"><span class="header-section-number">5.7</span> Common Multivariate Distribtuions</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#multinomial"><span class="header-section-number">5.7.1</span> Multinomial</a></li>
+<li><a class="nav-link" href="#multivariate-normal"><span class="header-section-number">5.7.2</span> Multivariate Normal</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#conditional-expectation"><span class="header-section-number">5.8</span> Conditional Expectation</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2025-06-20.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>
