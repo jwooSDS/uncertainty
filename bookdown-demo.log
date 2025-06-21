@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999996 (MiKTeX 24.4) (preloaded format=xelatex 2025.6.7)  20 JUN 2025 17:41
+This is XeTeX, Version 3.141592653-2.6-0.999996 (MiKTeX 24.4) (preloaded format=xelatex 2025.6.7)  21 JUN 2025 16:41
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1028,25 +1028,25 @@ File: images/02-treepath2.jpg Graphic file (type bmp)
 
 [43]
 
-[44
-
-]
+[44]
 Chapter 3.
 
-Underfull \hbox (badness 1264) in paragraph at lines 1231--1232
+Underfull \hbox (badness 1264) in paragraph at lines 1236--1237
 \TU/lmr/m/n/10 tails each time. The sample space for this experiment will be $[
 ] []
  []
 
 
-Underfull \hbox (badness 4647) in paragraph at lines 1231--1232
+Underfull \hbox (badness 4647) in paragraph at lines 1236--1237
 [][][][][] [][][][] [][][][] [][][][] [][][][] [][][][] [][][][] [][][][]$\TU/l
 mr/m/n/10 . Given that each
  []
 
 
 
-[45]
+[45
+
+]
 
 [46]
 
@@ -1068,12 +1068,12 @@ Underfull \vbox (badness 4120) has occurred while \output is active []
 
 [49]
 
-LaTeX Warning: Reference `fig:3-cdf' on page 50 undefined on input line 1417.
+LaTeX Warning: Reference `fig:3-cdf' on page 50 undefined on input line 1422.
 
 File: bookdown-demo_files/figure-latex/3-cdf-1.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/3-cdf-1.pdf>
 
-Underfull \hbox (badness 10000) in paragraph at lines 1419--1421
+Underfull \hbox (badness 10000) in paragraph at lines 1424--1426
 [][]
  []
 
@@ -1084,7 +1084,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 [50]
 
-LaTeX Warning: Reference `fig:3-cdf' on page 51 undefined on input line 1436.
+LaTeX Warning: Reference `fig:3-cdf' on page 51 undefined on input line 1441.
 
 
 
@@ -1168,12 +1168,12 @@ File: bookdown-demo_files/figure-latex/4-prob2-1.pdf Graphic file (type pdf)
 
 [75]
 
-LaTeX Warning: Reference `fig:4-symm' on page 76 undefined on input line 2347.
+LaTeX Warning: Reference `fig:4-symm' on page 76 undefined on input line 2352.
 
 File: bookdown-demo_files/figure-latex/4-symm-1.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/4-symm-1.pdf>
 
-Underfull \hbox (badness 10000) in paragraph at lines 2349--2351
+Underfull \hbox (badness 10000) in paragraph at lines 2354--2356
 [][]
  []
 
@@ -1223,7 +1223,7 @@ File: bookdown-demo_files/figure-latex/4-rule-1.pdf Graphic file (type pdf)
 [85]
 
 [86]
-Overfull \hbox (38.25pt too wide) in paragraph at lines 2799--2799
+Overfull \hbox (38.25pt too wide) in paragraph at lines 2804--2804
 []\TU/lmtt/m/n/10 ##  [1] -1.6907436  1.5545476  5.7635360 -2.3911270  0.759244
 7  1.3972609[] 
  []
@@ -1262,10 +1262,36 @@ Underfull \vbox (badness 6808) has occurred while \output is active []
 ]
 
 [94]
+
+[95]
+
+[96]
+
+[97]
+
+[98]
+
+[99]
+
+[100]
+File: bookdown-demo_files/figure-latex/5-covs-1.pdf Graphic file (type pdf)
+<use bookdown-demo_files/figure-latex/5-covs-1.pdf>
+
+
+[101]
+
+[102]
+File: bookdown-demo_files/figure-latex/5-cov0-1.pdf Graphic file (type pdf)
+<use bookdown-demo_files/figure-latex/5-cov0-1.pdf>
 No file bookdown-demo.bbl.
 
+Underfull \vbox (badness 3209) has occurred while \output is active []
 
-[95] (bookdown-demo.aux)
+
+
+[103]
+
+[104] (bookdown-demo.aux)
  ***********
 LaTeX2e <2024-06-01> patch level 2
 L3 programming layer <2024-07-20>
@@ -1275,12 +1301,12 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 19900 strings out of 409029
- 361803 string characters out of 5763847
+ 19947 strings out of 409029
+ 363122 string characters out of 5763847
  1942612 words of memory out of 5000000
- 42291 multiletter control sequences out of 15000+600000
+ 42336 multiletter control sequences out of 15000+600000
  564568 words of font info for 95 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  90i,21n,123p,1199b,585s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on bookdown-demo.pdf (95 pages).
+Output written on bookdown-demo.pdf (104 pages).

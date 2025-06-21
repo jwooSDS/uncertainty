@@ -45,14 +45,14 @@ Table: (\#tab:simple-table) Example Joint PMF of Study Time ($X$) and Grades ($Y
 |  | X=1 | X=2 | X=3 |
 | :------- | :------- | :------- | :------- |
 | **Y=1** | 0.05 | 0.15| 0.30 |
-| **Y=2** | 0.10 | 0.20 | 0.10 |
-| **Y=3** | 0.15 | 0.05 | 0 |
+| **Y=2** | 0.05 | 0.20 | 0.10 |
+| **Y=3** | 0.10 | 0.05 | 0 |
 
 We could also write the joint PMF as:
 
 - $P(X=1, Y=1) = 0.05$
-- $P(X=1, Y=2) = 0.10$
-- $P(X=1, Y=3) = 0.15$
+- $P(X=1, Y=2) = 0.05$
+- $P(X=1, Y=3) = 0.10$
 - $P(X=2, Y=1) = 0.15$
 - $P(X=2, Y=2) = 0.20$
 - $P(X=2, Y=3) = 0.05$
@@ -73,15 +73,346 @@ F_{X,Y}(x,y) = P(X \leq x, Y \leq y).
 
 *Thought question*: Compare equation \@ref(eq:5-jointCDF) with its univariate (one variable) counterpart in equation \@ref(eq:3-CDF). Can you see the similarities and differences?
 
-## Marginal Distributions for Discrete RVs
+### Marginal Distributions for Discrete RVs
 
-## Conditional Distributions for Discrete RVs
+From the joint distribution of $X$ and $Y$, we can get the distribution of each individual random variable. We call this the **marginal distribution**, or unconditional distribution, of $X$ and $Y$. The marginal distribution of $X$ gives us information about the distribution of $X$, without taking $Y$ into consideration. To get the marginal PMF of $X$ from the joint PMF of $X$ and $Y$:
+
+\begin{equation} 
+P(X=x) = \sum_y P(X=x, Y=y).
+(\#eq:5-margPMF)
+\end{equation}
+
+Note that the summation is performed over the support of $Y$. We go back to Table \@ref(tab:simple-table) as an example. Suppose we want to find the marginal distribution of study times, $X$. Applying equation \@ref(eq:5-margPMF):
+
+$$
+\begin{split}
+P(X=1) &= \sum_y P(X=1, Y=y)\\
+ &= P(X=1, Y=1) + P(X=1, Y=2) + P(X=1, Y=3) \\
+&= 0.05 + 0.05 + 0.10\\
+&= 0.2,
+\end{split}
+$$
+
+$$
+\begin{split}
+P(X=2) &= \sum_y P(X=2, Y=y)\\
+ &= P(X=2, Y=1) + P(X=2, Y=2) + P(X=2, Y=3) \\
+&= 0.15 + 0.20 + 0.05\\
+&= 0.4,
+\end{split}
+$$
+
+and
+
+$$
+\begin{split}
+P(X=3) &= \sum_y P(X=3, Y=y)\\
+ &= P(X=3, Y=1) + P(X=3, Y=2) + P(X=3, Y=3) \\
+&= 0.30 + 0.10 + 0\\
+&= 0.4.
+\end{split}
+$$
+
+We can add this information to Table \@ref(tab:simple-table), to create Table \@ref(tab:5-marg-table)
+
+Table: (\#tab:5-marg-table) Example Joint PMF of Study Time ($X$) and Grades ($Y$), with Marginal PMF of Study Time
+
+|  | X=1 | X=2 | X=3 |
+| :------- | :------- | :------- | :------- |
+| **Y=1** | 0.05 | 0.15| 0.30 |
+| **Y=2** | 0.05 | 0.20 | 0.10 |
+| **Y=3** | 0.10 | 0.05 | 0 |
+| **Total**   | 0.2  | 0.4  | 0.4 |
+
+Notice we just added the probabilities in each column to get the marginal PMF of $X$, and write these probabilities to the margin of the table (hence the term marginal PMF). 
+
+You may notice that the marginal PMF of $X$ ends up being just the PMF of $X$. The term marginal is used to imply that the PMF was derived from a joint PMF, even if the information is the same.
+
+*Thought question*: Can you see how equation \@ref(eq:5-margPMF) is based on the Law of Total Probability in equation \@ref(eq:total)?
+
+Likewise, to obtain the marginal PMF of $Y$ from the joint PMF of $X$ and $Y$:
+
+\begin{equation} 
+P(X=x) = \sum_x P(X=x, Y=y).
+(\#eq:5-margPMF2)
+\end{equation}
+
+The summation is now performed over the support of $X$.
+
+*Thought question*: Can you verify the marginal PMF for grades displayed Table \@ref(tab:5-marg-table2) below?
+
+Table: (\#tab:5-marg-table2) Example Joint PMF of Study Time ($X$) and Grades ($Y$), with Marginal PMF of Study Time and Study Time
+
+|  | X=1 | X=2 | X=3 | Total |
+| :------- | :------- | :------- | :------- | :------- |
+| **Y=1** | 0.05 | 0.15| 0.30 | 0.50 |
+| **Y=2** | 0.05 | 0.20 | 0.10 | 0.35 |
+| **Y=3** | 0.10 | 0.05 | 0 | 0.15 |
+| **Total**   | 0.2  | 0.4  | 0.4 | 1|
+
+### Conditional Distributions for Discrete RVs
+
+We have seen how we can derive the marginal PMFs from a joint PMF. We may need to update the distribution of one of the variables based on the observed value of the other variable, or we need the distribution of one of the variables based on a specific value of the other variable. This leads to the **conditional PMF**.
+
+Suppose we want to update the distribution of $Y$ based on the observed value $X=x$, or we want the distribution of $Y$ only for observations where $X=x$. If $X$ and $Y$ are both discrete, the conditional PMF of $Y$ given $X=x$ is:
+
+\begin{equation} 
+P(Y=y|X=x) = \frac{P(X=x, Y=y)}{P(X=x)}.
+(\#eq:5-condPMFY)
+\end{equation}
+
+The conditional PMF of $Y$ given $X=x$ is essentially the joint PMF of $X$ and $Y$ divided by the marginal PMF of $X$. Note that the conditional PMF of $Y$ given $X=x$ is viewed as a function with the value of $x$ being fixed. 
+
+We go back to Table \@ref(tab:simple-table) as an example on how to find conditional PMFs. Suppose we want to find the distribution of grades for students who study little (0 to 5 hours per week). We want the conditional PMF of $Y$ given that $X=1$. Applying equation \@ref(eq:5-condPMFY) to Table \@ref(tab:5-marg-table2), we have
+
+$$
+\begin{split}
+P(Y=1|X=1) &= \frac{P(X=1, Y=1)}{P(X=1)}\\
+ &= \frac{0.05}{0.2} \\
+&= 0.25,
+\end{split}
+$$
+
+$$
+\begin{split}
+P(Y=2|X=1) &= \frac{P(X=1, Y=2)}{P(X=1)}\\
+ &= \frac{0.05}{0.2} \\
+&= 0.25,
+\end{split}
+$$
+
+and
+
+$$
+\begin{split}
+P(Y=3|X=1) &= \frac{P(X=1, Y=3)}{P(X=1)}\\
+ &= \frac{0.10}{0.2} \\
+&= 0.5.
+\end{split}
+$$
+The frequentist interpretation of these values is that among the students who studied little, they have a 50% chance of getting a C or lower, a 25% chance of getting a B, and a 25% chance of getting an A. 
+
+The Bayesian interpretation of these values is that if I know the student studied little, the student has a 50% chance of getting a C or lower, a 25% chance of getting a B, and a 25% chance of getting an A. 
+
+*Thought question*: Can you show the conditional PMF of $Y$ given $X=3$ based on Table \@ref(tab:5-marg-table2) is $P(Y=1|X=3) = 0.75, P(Y=2|X=3) = 0.25, P(Y=3|X=3) = 0$?
+
+To find the conditional PMF of $X$ given $Y=y$:
+
+\begin{equation} 
+P(X=x|Y=y) = \frac{P(X=x, Y=y)}{P(Y=y)}.
+(\#eq:5-condPMFX)
+\end{equation}
+
+*Thought question*: Can you show the conditional PMF of $X$ given $Y=1$ based on Table \@ref(tab:5-marg-table2) is $P(X=1|Y=1) = 0.1, P(X=2|Y=1) = 0.3, P(X=3|Y=1) = 0.6$? 
+
+### Bayes' Rule
+
+We can also apply Bayes' Rule for an alternative way of finding the conditional PMF of $Y$ given $X=x$. Equation \@ref(eq:5-condPMFY) can be written as:
+
+\begin{equation} 
+P(Y=y|X=x) = \frac{P(X=x|Y=y) P(Y=y)}{P(X=x)}.
+(\#eq:5-condPMFbayes)
+\end{equation}
+
+### Law of Total Probability
+
+We can apply the law of total probability to the denominator of equations \@ref(eq:5-condPMFY) and \@ref(eq:5-condPMFbayes), i.e. $P(X=x) = \sum_y P(X=x|Y=y) P(Y=y)$, so the conditional PMF of $Y$ given $X=x$ can also be written as
+
+\begin{equation} 
+P(Y=y|X=x) = \frac{P(X=x|Y=y) P(Y=y)}{\sum_y P(X=x|Y=y) P(Y=y)}.
+(\#eq:5-condPMFtotal)
+\end{equation}
+
+### Indepdence of Discrete RVs
+
+The notion of whether two random variables are **independent** or not (also called dependent) is whether the random variables have an association, or in other words, does changing the value of one random variable affect the distribution of the other? 
+
+If $X$ and $Y$ are discrete random variables, they are independent only if, for all values in the support of $X$ and $Y$:
+
+\begin{equation} 
+P(X=x, Y=y) = P(X=x) P(Y=y).
+(\#eq:5-ind)
+\end{equation}
+
+An equivalent condition is that for all values in the support of $X$ and $Y$:
+
+\begin{equation} 
+P(Y=y | X=x) = P(Y=y),
+(\#eq:5-ind2)
+\end{equation}
+
+or 
+
+\begin{equation} 
+P(X=x | Y=y) = P(X=x),
+(\#eq:5-ind3)
+\end{equation}
+
+To show that $X$ and $Y$ are independent, we need to show one of equations \@ref(eq:5-ind), \@ref(eq:5-ind2), or \@ref(eq:5-ind3) to be true for **all values in the support** of $X$ and $Y$. To show that $X$ and $Y$ are dependent, we need to show one of equations \@ref(eq:5-ind), \@ref(eq:5-ind2), or \@ref(eq:5-ind3) to be false for **just one value** of $X$ and $Y$.
+
+Equations \@ref(eq:5-ind2) and \@ref(eq:5-ind3) are pretty intuitive. These equations say that the conditional distribution of one variable, given the other, is the same as the marginal distribution of the variable. This means the distribution of the variable is not influenced by knowlege about the other variable. 
+
+The first equation \@ref(eq:5-ind) informs us that if the discrete variables are independent, their joint PMF is equal to the product of their marginal PMFs.
+
+We go back to the study time and grades example shown in Table \@ref(tab:5-marg-table2). Study time and grades are dependent (or not independent) since $P(Y=1|X=1) = 0.25$ but $P(Y=1) = 0.5$. They are not equal so study time and grades are not independent. It is usually easier to prove a condition is not met by providing a **counterexample**. 
+
+If study time and grades were independent, we needed to show $P(Y=1|X=x) = P(Y=1)$ when $X=1,2,3$, $P(Y=2|X=x) = P(Y=2)$ when $X=1,2,3$, and $P(Y=3|X=x) = P(Y=3)$ when $X=1,2,3$. It is usually more tedious to prove a condition is met as we have to show the condition is met under all circumstances. 
+
+Very often, knowing the context of the random variables helps. Since we expect students who study more to get better grades, we expect these variables to be dependent, so we know we just need to provide a counterexample. 
 
 ## Joint, Marginal, Conditional Distributions for Continuous RVs
 
+Recall in the previous modules the CDFs and PDFs for a continuous random variable are similar to CDFs and PMFs for discrete random variables. The continuous versions are generally found by swapping summations with integrals. The same general idea applies with joint distributions when both random variables are continuous. 
+
+Now suppose that $X$ and $Y$ denote random variables that are continuous. It is required that the **joint CDF** $F_{X,Y}(x,y) = P(X \leq x, Y \leq y)$ is differentiable with respect to $x$ and $y$. Their **joint PDF** is the partial derivative of their joint CDF with respect to $x$ and $y$: $f_{X,Y}(x,y) = \frac{\partial^2}{\partial x \partial y} F_{X,Y}(x,y)$.
+
+Similar to univariate PDFs, for joint PDFs to be valid, we require that:
+
+- $f_{X,Y}(x,y) \geq 0$ and
+- $\int_{-\infty}^\infty \int_{-\infty}^\infty f_{X,Y}(x,y)  dx dy = 1$.
+
+To find probabilities, for example $P(a<X<b, c<Y<d)$, we integrate the joint PDF over the two-dimensional region, i.e. $\int_{c}^d \int_{a}^b f_{X,Y}(x,y) dx dy$.
+
+The **marginal PDF** of $X$ can be found by integrating their joint PDF over the support of $Y$:
+
+\begin{equation} 
+f_X(x) = \int_{-\infty}^\infty f_{X,Y}(x,y) dy.
+(\#eq:5-margPDF)
+\end{equation}
+
+The conditional PDF of $Y$ given $X=x$ is
+
+\begin{equation} 
+f_{Y|X}(y|x) = \frac{f_{X,Y}(x,y)}{f_X(x)}
+(\#eq:5-condPDF)
+\end{equation}
+
+Bayes' rule for continuous random variables is
+
+\begin{equation} 
+f_{Y|X}(y|x) = \frac{f_{X|Y}(x|y) f_Y(y)}{f_X(x)}
+(\#eq:5-condPDFbayes)
+\end{equation}
+
+And the law of total probability is
+
+\begin{equation} 
+f_X(x) = \int_{-\infty}^\infty f_{X|Y}(x|y) f_Y(y) dy.
+(\#eq:5-condPDFtotal)
+\end{equation}
+
+Continuous random variables $X$ and $Y$ are independent if for all values of $x$ and $y$:
+
+\begin{equation} 
+F_{X,Y} (x,y) = F_X(x) F_Y(y)
+(\#eq:5-indcont1)
+\end{equation}
+
+or
+
+\begin{equation} 
+f_{X,Y} (x,y) = f_X(x) f_Y(y)
+(\#eq:5-indcont2)
+\end{equation}
+
+or
+
+\begin{equation} 
+f_{Y|X} (y|x) = f_Y(y)
+(\#eq:5-indcont3)
+\end{equation}
+
+or
+
+\begin{equation} 
+f_{X|Y} (x|y) = f_X(x).
+(\#eq:5-indcont4)
+\end{equation}
+
 ## Covariance and Correlation
 
-## Common Multivariate Distribtuions
+In the previous modules, we used summaries such as the mean, variance, skewness, and kurtosis to provide some insight into the distribution of a single random variable. When we have multiple random variables, one question we have is how the random variables related to each other. Summaries that are used to quantify the **linear relationship** between two random variables are the covariance and correlation. 
+
+Generally speaking, two random variables have a positive covariance and correlation if they increase or decrease together, i.e. if $X$ increases, $Y$ also generally increases; if $X$ decreases, $Y$ also generally decreases.
+
+Two random variables have a negative covariance and correlation if they move in the opposite direction, i.e. if $X$ increases, $Y$ generally decreases; if $X$ decreases, $Y$ generally increases. Figure \@ref(fig:5-covs) below displays these ideas visually through scatter plots. The scatter plot on the left shows an example of a pair of random variables having positive covariance, and the scatter plot on the right shows an example of a pair of random variables having negative covariance.
+
+```{r 5-covs, fig.cap="Positive Covariance (Left), Negative Covariance (Right)", echo=FALSE}
+library(mvtnorm)
+
+n<-5000
+
+mu_vector<-c(0,0)
+
+sig12<-0.7
+
+cov_mat<-matrix(c(1,sig12,sig12,1), nrow=2, ncol=2)
+
+data<-rmvnorm(n, mu_vector, cov_mat)
+  
+x1<-data[,1]
+x2<-data[,2]
+
+cov_mat2<-matrix(c(1,-sig12,-sig12,1), nrow=2, ncol=2)
+
+data2<-rmvnorm(n, mu_vector, cov_mat2)
+  
+x3<-data2[,1]
+x4<-data2[,2]
+
+par(mfrow=c(1,2))
+plot(x1,x2, xlab="X", ylab="Y")
+plot(x3,x4, xlab="X", ylab="Y")
+
+```
+
+One more thing to note: covariance and correlations can be calculated for random variables as long as they are quantitative, but not if at least one of them is categorical. The concept of increasing a random variable that is categorical does not make intuitive sense, for example, if we have a random variable that denotes the color of eyes, what does increasing color of eyes mean?
+
+### Covariance
+
+We know define covariance. The **covariance** between random variables $X$ and $Y$ is
+
+\begin{equation} 
+Cov(X,Y) = E\left[(X- \mu_X)(Y - \mu_Y) \right].
+(\#eq:5-cov)
+\end{equation}
+
+Looking at equation \@ref(eq:5-cov), we see that if both $X$ and $Y$ generally move in the same direction, then $X - \mu_x$ and $Y - \mu_y$ will either be both positive or both negative, therefore their product is positive, on average. If $X$ and $Y$ generally move in opposite directions, then $X - \mu_x$ and $Y - \mu_y$ have opposite signs, therefore their product is negative, on average. 
+
+Some key properties for covariance:
+
+- $Cov(X,X) = Var(X)$.The covariance of any random variable with itself is its variance. 
+- $Cov(X,Y) = Cov(Y,X)$. The covariance between $X$ and $Y$ is the same as the covariance between $Y$ and $X$.
+- $Cov(X,c) = 0$ for any constant $c$. Since a constant does not move, it has no relationship with $X$.
+- $Cov(aX,Y) = a Cov(X,Y)$ for any constant $a$. This implies that covariance is affected by the units of $X$ and $Y$.
+- $Var(X + Y) = Var(X) + Var(Y) + 2 Cov(X,Y)$.
+- If $X$ and $Y$ are independent, then $Cov(X,Y) = 0$. 
+- However, $Cov(X,Y) = 0$ does not mean that $X$ and $Y$ are independent. This is a common misconception. Remember that covariance measures linear relationship. The relationship between $X$ and $Y$ could be non linear, and in such instances, the covariance should not be used.Figure \@ref(fig:5-cov0) below provides an example this. In this figure, $X$ and $Y$ have a quadratic relationship, so they are clearly not independent, yet their covariance is virtually 0. 
+
+```{r 5-cov0, fig.cap="Covariance with Non Linear Relationship"}
+x<-seq(-1,1, by=0.01)
+y<-x^2
+
+##note from plot that X & Y do not have a linear relationship
+plot(x,y, xlab="X", ylab="Y")
+
+cov(x,y) ##covariance is virtually 0
+```
+
+For two vectors of observed data, each of size $n$: $X = (x_1, x_2, \cdots, x_n)$ and $Y = (y_1, y_2, \cdots, y_n)$. Their **sample covariance** is
+
+\begin{equation} 
+s_{x,y} = \frac{\sum_{i=1}^n (x_i - \bar{x})(y_i - \bar{y})}{n-1}
+(\#eq:5-sampcov)
+\end{equation}
+
+
+
+### Correlation
+
+
+
+## Common Multivariate Distributions
 
 ### Multinomial 
 

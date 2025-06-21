@@ -117,13 +117,13 @@ p_{X,Y}(x,y) = P(X=x, Y=y).
 </tr>
 <tr class="even">
 <td align="left"><strong>Y=2</strong></td>
-<td align="left">0.10</td>
+<td align="left">0.05</td>
 <td align="left">0.20</td>
 <td align="left">0.10</td>
 </tr>
 <tr class="odd">
 <td align="left"><strong>Y=3</strong></td>
-<td align="left">0.15</td>
+<td align="left">0.10</td>
 <td align="left">0.05</td>
 <td align="left">0</td>
 </tr>
@@ -132,8 +132,8 @@ p_{X,Y}(x,y) = P(X=x, Y=y).
 <p>We could also write the joint PMF as:</p>
 <ul>
 <li><span class="math inline">\(P(X=1, Y=1) = 0.05\)</span></li>
-<li><span class="math inline">\(P(X=1, Y=2) = 0.10\)</span></li>
-<li><span class="math inline">\(P(X=1, Y=3) = 0.15\)</span></li>
+<li><span class="math inline">\(P(X=1, Y=2) = 0.05\)</span></li>
+<li><span class="math inline">\(P(X=1, Y=3) = 0.10\)</span></li>
 <li><span class="math inline">\(P(X=2, Y=1) = 0.15\)</span></li>
 <li><span class="math inline">\(P(X=2, Y=2) = 0.20\)</span></li>
 <li><span class="math inline">\(P(X=2, Y=3) = 0.05\)</span></li>
@@ -149,45 +149,361 @@ F_{X,Y}(x,y) = P(X \leq x, Y \leq y).
 \tag{5.2}
 \end{equation}\]</span></p>
 <p><em>Thought question</em>: Compare equation <a href="joint-distributions.html#eq:5-jointCDF">(5.2)</a> with its univariate (one variable) counterpart in equation <a href="discrete-random-variables.html#eq:3-CDF">(3.1)</a>. Can you see the similarities and differences?</p>
-</div>
-<div id="marginal-distributions-for-discrete-rvs" class="section level2" number="5.3">
-<h2>
-<span class="header-section-number">5.3</span> Marginal Distributions for Discrete RVs<a class="anchor" aria-label="anchor" href="#marginal-distributions-for-discrete-rvs"><i class="fas fa-link"></i></a>
-</h2>
-</div>
-<div id="conditional-distributions-for-discrete-rvs" class="section level2" number="5.4">
-<h2>
-<span class="header-section-number">5.4</span> Conditional Distributions for Discrete RVs<a class="anchor" aria-label="anchor" href="#conditional-distributions-for-discrete-rvs"><i class="fas fa-link"></i></a>
-</h2>
-</div>
-<div id="joint-marginal-conditional-distributions-for-continuous-rvs" class="section level2" number="5.5">
-<h2>
-<span class="header-section-number">5.5</span> Joint, Marginal, Conditional Distributions for Continuous RVs<a class="anchor" aria-label="anchor" href="#joint-marginal-conditional-distributions-for-continuous-rvs"><i class="fas fa-link"></i></a>
-</h2>
-</div>
-<div id="covariance-and-correlation" class="section level2" number="5.6">
-<h2>
-<span class="header-section-number">5.6</span> Covariance and Correlation<a class="anchor" aria-label="anchor" href="#covariance-and-correlation"><i class="fas fa-link"></i></a>
-</h2>
-</div>
-<div id="common-multivariate-distribtuions" class="section level2" number="5.7">
-<h2>
-<span class="header-section-number">5.7</span> Common Multivariate Distribtuions<a class="anchor" aria-label="anchor" href="#common-multivariate-distribtuions"><i class="fas fa-link"></i></a>
-</h2>
-<div id="multinomial" class="section level3" number="5.7.1">
+<div id="marginal-distributions-for-discrete-rvs" class="section level3" number="5.2.1">
 <h3>
-<span class="header-section-number">5.7.1</span> Multinomial<a class="anchor" aria-label="anchor" href="#multinomial"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.2.1</span> Marginal Distributions for Discrete RVs<a class="anchor" aria-label="anchor" href="#marginal-distributions-for-discrete-rvs"><i class="fas fa-link"></i></a>
+</h3>
+<p>From the joint distribution of <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>, we can get the distribution of each individual random variable. We call this the <strong>marginal distribution</strong>, or unconditional distribution, of <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>. The marginal distribution of <span class="math inline">\(X\)</span> gives us information about the distribution of <span class="math inline">\(X\)</span>, without taking <span class="math inline">\(Y\)</span> into consideration. To get the marginal PMF of <span class="math inline">\(X\)</span> from the joint PMF of <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>:</p>
+<p><span class="math display" id="eq:5-margPMF">\[\begin{equation}
+P(X=x) = \sum_y P(X=x, Y=y).
+\tag{5.3}
+\end{equation}\]</span></p>
+<p>Note that the summation is performed over the support of <span class="math inline">\(Y\)</span>. We go back to Table <a href="joint-distributions.html#tab:simple-table">5.1</a> as an example. Suppose we want to find the marginal distribution of study times, <span class="math inline">\(X\)</span>. Applying equation <a href="joint-distributions.html#eq:5-margPMF">(5.3)</a>:</p>
+<p><span class="math display">\[
+\begin{split}
+P(X=1) &amp;= \sum_y P(X=1, Y=y)\\
+&amp;= P(X=1, Y=1) + P(X=1, Y=2) + P(X=1, Y=3) \\
+&amp;= 0.05 + 0.05 + 0.10\\
+&amp;= 0.2,
+\end{split}
+\]</span></p>
+<p><span class="math display">\[
+\begin{split}
+P(X=2) &amp;= \sum_y P(X=2, Y=y)\\
+&amp;= P(X=2, Y=1) + P(X=2, Y=2) + P(X=2, Y=3) \\
+&amp;= 0.15 + 0.20 + 0.05\\
+&amp;= 0.4,
+\end{split}
+\]</span></p>
+<p>and</p>
+<p><span class="math display">\[
+\begin{split}
+P(X=3) &amp;= \sum_y P(X=3, Y=y)\\
+&amp;= P(X=3, Y=1) + P(X=3, Y=2) + P(X=3, Y=3) \\
+&amp;= 0.30 + 0.10 + 0\\
+&amp;= 0.4.
+\end{split}
+\]</span></p>
+<p>We can add this information to Table <a href="joint-distributions.html#tab:simple-table">5.1</a>, to create Table <a href="joint-distributions.html#tab:5-marg-table">5.2</a></p>
+<div class="inline-table"><table class="table table-sm">
+<caption>
+<span id="tab:5-marg-table">Table 5.2: </span> Example Joint PMF of Study Time (<span class="math inline">\(X\)</span>) and Grades (<span class="math inline">\(Y\)</span>), with Marginal PMF of Study Time</caption>
+<thead><tr class="header">
+<th align="left"></th>
+<th align="left">X=1</th>
+<th align="left">X=2</th>
+<th align="left">X=3</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left"><strong>Y=1</strong></td>
+<td align="left">0.05</td>
+<td align="left">0.15</td>
+<td align="left">0.30</td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Y=2</strong></td>
+<td align="left">0.05</td>
+<td align="left">0.20</td>
+<td align="left">0.10</td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>Y=3</strong></td>
+<td align="left">0.10</td>
+<td align="left">0.05</td>
+<td align="left">0</td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Total</strong></td>
+<td align="left">0.2</td>
+<td align="left">0.4</td>
+<td align="left">0.4</td>
+</tr>
+</tbody>
+</table></div>
+<p>Notice we just added the probabilities in each column to get the marginal PMF of <span class="math inline">\(X\)</span>, and write these probabilities to the margin of the table (hence the term marginal PMF).</p>
+<p>You may notice that the marginal PMF of <span class="math inline">\(X\)</span> ends up being just the PMF of <span class="math inline">\(X\)</span>. The term marginal is used to imply that the PMF was derived from a joint PMF, even if the information is the same.</p>
+<p><em>Thought question</em>: Can you see how equation <a href="joint-distributions.html#eq:5-margPMF">(5.3)</a> is based on the Law of Total Probability in equation <a href="probability.html#eq:total">(2.10)</a>?</p>
+<p>Likewise, to obtain the marginal PMF of <span class="math inline">\(Y\)</span> from the joint PMF of <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>:</p>
+<p><span class="math display" id="eq:5-margPMF2">\[\begin{equation}
+P(X=x) = \sum_x P(X=x, Y=y).
+\tag{5.4}
+\end{equation}\]</span></p>
+<p>The summation is now performed over the support of <span class="math inline">\(X\)</span>.</p>
+<p><em>Thought question</em>: Can you verify the marginal PMF for grades displayed Table <a href="joint-distributions.html#tab:5-marg-table2">5.3</a> below?</p>
+<div class="inline-table"><table class="table table-sm">
+<caption>
+<span id="tab:5-marg-table2">Table 5.3: </span> Example Joint PMF of Study Time (<span class="math inline">\(X\)</span>) and Grades (<span class="math inline">\(Y\)</span>), with Marginal PMF of Study Time and Study Time</caption>
+<thead><tr class="header">
+<th align="left"></th>
+<th align="left">X=1</th>
+<th align="left">X=2</th>
+<th align="left">X=3</th>
+<th align="left">Total</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left"><strong>Y=1</strong></td>
+<td align="left">0.05</td>
+<td align="left">0.15</td>
+<td align="left">0.30</td>
+<td align="left">0.50</td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Y=2</strong></td>
+<td align="left">0.05</td>
+<td align="left">0.20</td>
+<td align="left">0.10</td>
+<td align="left">0.35</td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>Y=3</strong></td>
+<td align="left">0.10</td>
+<td align="left">0.05</td>
+<td align="left">0</td>
+<td align="left">0.15</td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Total</strong></td>
+<td align="left">0.2</td>
+<td align="left">0.4</td>
+<td align="left">0.4</td>
+<td align="left">1</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div id="conditional-distributions-for-discrete-rvs" class="section level3" number="5.2.2">
+<h3>
+<span class="header-section-number">5.2.2</span> Conditional Distributions for Discrete RVs<a class="anchor" aria-label="anchor" href="#conditional-distributions-for-discrete-rvs"><i class="fas fa-link"></i></a>
+</h3>
+<p>We have seen how we can derive the marginal PMFs from a joint PMF. We may need to update the distribution of one of the variables based on the observed value of the other variable, or we need the distribution of one of the variables based on a specific value of the other variable. This leads to the <strong>conditional PMF</strong>.</p>
+<p>Suppose we want to update the distribution of <span class="math inline">\(Y\)</span> based on the observed value <span class="math inline">\(X=x\)</span>, or we want the distribution of <span class="math inline">\(Y\)</span> only for observations where <span class="math inline">\(X=x\)</span>. If <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are both discrete, the conditional PMF of <span class="math inline">\(Y\)</span> given <span class="math inline">\(X=x\)</span> is:</p>
+<p><span class="math display" id="eq:5-condPMFY">\[\begin{equation}
+P(Y=y|X=x) = \frac{P(X=x, Y=y)}{P(X=x)}.
+\tag{5.5}
+\end{equation}\]</span></p>
+<p>The conditional PMF of <span class="math inline">\(Y\)</span> given <span class="math inline">\(X=x\)</span> is essentially the joint PMF of <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> divided by the marginal PMF of <span class="math inline">\(X\)</span>. Note that the conditional PMF of <span class="math inline">\(Y\)</span> given <span class="math inline">\(X=x\)</span> is viewed as a function with the value of <span class="math inline">\(x\)</span> being fixed.</p>
+<p>We go back to Table <a href="joint-distributions.html#tab:simple-table">5.1</a> as an example on how to find conditional PMFs. Suppose we want to find the distribution of grades for students who study little (0 to 5 hours per week). We want the conditional PMF of <span class="math inline">\(Y\)</span> given that <span class="math inline">\(X=1\)</span>. Applying equation <a href="joint-distributions.html#eq:5-condPMFY">(5.5)</a> to Table <a href="joint-distributions.html#tab:5-marg-table2">5.3</a>, we have</p>
+<p><span class="math display">\[
+\begin{split}
+P(Y=1|X=1) &amp;= \frac{P(X=1, Y=1)}{P(X=1)}\\
+&amp;= \frac{0.05}{0.2} \\
+&amp;= 0.25,
+\end{split}
+\]</span></p>
+<p><span class="math display">\[
+\begin{split}
+P(Y=2|X=1) &amp;= \frac{P(X=1, Y=2)}{P(X=1)}\\
+&amp;= \frac{0.05}{0.2} \\
+&amp;= 0.25,
+\end{split}
+\]</span></p>
+<p>and</p>
+<p><span class="math display">\[
+\begin{split}
+P(Y=3|X=1) &amp;= \frac{P(X=1, Y=3)}{P(X=1)}\\
+&amp;= \frac{0.10}{0.2} \\
+&amp;= 0.5.
+\end{split}
+\]</span>
+The frequentist interpretation of these values is that among the students who studied little, they have a 50% chance of getting a C or lower, a 25% chance of getting a B, and a 25% chance of getting an A.</p>
+<p>The Bayesian interpretation of these values is that if I know the student studied little, the student has a 50% chance of getting a C or lower, a 25% chance of getting a B, and a 25% chance of getting an A.</p>
+<p><em>Thought question</em>: Can you show the conditional PMF of <span class="math inline">\(Y\)</span> given <span class="math inline">\(X=3\)</span> based on Table <a href="joint-distributions.html#tab:5-marg-table2">5.3</a> is <span class="math inline">\(P(Y=1|X=3) = 0.75, P(Y=2|X=3) = 0.25, P(Y=3|X=3) = 0\)</span>?</p>
+<p>To find the conditional PMF of <span class="math inline">\(X\)</span> given <span class="math inline">\(Y=y\)</span>:</p>
+<p><span class="math display" id="eq:5-condPMFX">\[\begin{equation}
+P(X=x|Y=y) = \frac{P(X=x, Y=y)}{P(Y=y)}.
+\tag{5.6}
+\end{equation}\]</span></p>
+<p><em>Thought question</em>: Can you show the conditional PMF of <span class="math inline">\(X\)</span> given <span class="math inline">\(Y=1\)</span> based on Table <a href="joint-distributions.html#tab:5-marg-table2">5.3</a> is <span class="math inline">\(P(X=1|Y=1) = 0.1, P(X=2|Y=1) = 0.3, P(X=3|Y=1) = 0.6\)</span>?</p>
+</div>
+<div id="bayes-rule-1" class="section level3" number="5.2.3">
+<h3>
+<span class="header-section-number">5.2.3</span> Bayes’ Rule<a class="anchor" aria-label="anchor" href="#bayes-rule-1"><i class="fas fa-link"></i></a>
+</h3>
+<p>We can also apply Bayes’ Rule for an alternative way of finding the conditional PMF of <span class="math inline">\(Y\)</span> given <span class="math inline">\(X=x\)</span>. Equation <a href="joint-distributions.html#eq:5-condPMFY">(5.5)</a> can be written as:</p>
+<p><span class="math display" id="eq:5-condPMFbayes">\[\begin{equation}
+P(Y=y|X=x) = \frac{P(X=x|Y=y) P(Y=y)}{P(X=x)}.
+\tag{5.7}
+\end{equation}\]</span></p>
+</div>
+<div id="law-of-total-probability-1" class="section level3" number="5.2.4">
+<h3>
+<span class="header-section-number">5.2.4</span> Law of Total Probability<a class="anchor" aria-label="anchor" href="#law-of-total-probability-1"><i class="fas fa-link"></i></a>
+</h3>
+<p>We can apply the law of total probability to the denominator of equations <a href="joint-distributions.html#eq:5-condPMFY">(5.5)</a> and <a href="joint-distributions.html#eq:5-condPMFbayes">(5.7)</a>, i.e. <span class="math inline">\(P(X=x) = \sum_y P(X=x|Y=y) P(Y=y)\)</span>, so the conditional PMF of <span class="math inline">\(Y\)</span> given <span class="math inline">\(X=x\)</span> can also be written as</p>
+<p><span class="math display" id="eq:5-condPMFtotal">\[\begin{equation}
+P(Y=y|X=x) = \frac{P(X=x|Y=y) P(Y=y)}{\sum_y P(X=x|Y=y) P(Y=y)}.
+\tag{5.8}
+\end{equation}\]</span></p>
+</div>
+<div id="indepdence-of-discrete-rvs" class="section level3" number="5.2.5">
+<h3>
+<span class="header-section-number">5.2.5</span> Indepdence of Discrete RVs<a class="anchor" aria-label="anchor" href="#indepdence-of-discrete-rvs"><i class="fas fa-link"></i></a>
+</h3>
+<p>The notion of whether two random variables are <strong>independent</strong> or not (also called dependent) is whether the random variables have an association, or in other words, does changing the value of one random variable affect the distribution of the other?</p>
+<p>If <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are discrete random variables, they are independent only if, for all values in the support of <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>:</p>
+<p><span class="math display" id="eq:5-ind">\[\begin{equation}
+P(X=x, Y=y) = P(X=x) P(Y=y).
+\tag{5.9}
+\end{equation}\]</span></p>
+<p>An equivalent condition is that for all values in the support of <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>:</p>
+<p><span class="math display" id="eq:5-ind2">\[\begin{equation}
+P(Y=y | X=x) = P(Y=y),
+\tag{5.10}
+\end{equation}\]</span></p>
+<p>or</p>
+<p><span class="math display" id="eq:5-ind3">\[\begin{equation}
+P(X=x | Y=y) = P(X=x),
+\tag{5.11}
+\end{equation}\]</span></p>
+<p>To show that <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are independent, we need to show one of equations <a href="joint-distributions.html#eq:5-ind">(5.9)</a>, <a href="joint-distributions.html#eq:5-ind2">(5.10)</a>, or <a href="joint-distributions.html#eq:5-ind3">(5.11)</a> to be true for <strong>all values in the support</strong> of <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>. To show that <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are dependent, we need to show one of equations <a href="joint-distributions.html#eq:5-ind">(5.9)</a>, <a href="joint-distributions.html#eq:5-ind2">(5.10)</a>, or <a href="joint-distributions.html#eq:5-ind3">(5.11)</a> to be false for <strong>just one value</strong> of <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>.</p>
+<p>Equations <a href="joint-distributions.html#eq:5-ind2">(5.10)</a> and <a href="joint-distributions.html#eq:5-ind3">(5.11)</a> are pretty intuitive. These equations say that the conditional distribution of one variable, given the other, is the same as the marginal distribution of the variable. This means the distribution of the variable is not influenced by knowlege about the other variable.</p>
+<p>The first equation <a href="joint-distributions.html#eq:5-ind">(5.9)</a> informs us that if the discrete variables are independent, their joint PMF is equal to the product of their marginal PMFs.</p>
+<p>We go back to the study time and grades example shown in Table <a href="joint-distributions.html#tab:5-marg-table2">5.3</a>. Study time and grades are dependent (or not independent) since <span class="math inline">\(P(Y=1|X=1) = 0.25\)</span> but <span class="math inline">\(P(Y=1) = 0.5\)</span>. They are not equal so study time and grades are not independent. It is usually easier to prove a condition is not met by providing a <strong>counterexample</strong>.</p>
+<p>If study time and grades were independent, we needed to show <span class="math inline">\(P(Y=1|X=x) = P(Y=1)\)</span> when <span class="math inline">\(X=1,2,3\)</span>, <span class="math inline">\(P(Y=2|X=x) = P(Y=2)\)</span> when <span class="math inline">\(X=1,2,3\)</span>, and <span class="math inline">\(P(Y=3|X=x) = P(Y=3)\)</span> when <span class="math inline">\(X=1,2,3\)</span>. It is usually more tedious to prove a condition is met as we have to show the condition is met under all circumstances.</p>
+<p>Very often, knowing the context of the random variables helps. Since we expect students who study more to get better grades, we expect these variables to be dependent, so we know we just need to provide a counterexample.</p>
+</div>
+</div>
+<div id="joint-marginal-conditional-distributions-for-continuous-rvs" class="section level2" number="5.3">
+<h2>
+<span class="header-section-number">5.3</span> Joint, Marginal, Conditional Distributions for Continuous RVs<a class="anchor" aria-label="anchor" href="#joint-marginal-conditional-distributions-for-continuous-rvs"><i class="fas fa-link"></i></a>
+</h2>
+<p>Recall in the previous modules the CDFs and PDFs for a continuous random variable are similar to CDFs and PMFs for discrete random variables. The continuous versions are generally found by swapping summations with integrals. The same general idea applies with joint distributions when both random variables are continuous.</p>
+<p>Now suppose that <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> denote random variables that are continuous. It is required that the <strong>joint CDF</strong> <span class="math inline">\(F_{X,Y}(x,y) = P(X \leq x, Y \leq y)\)</span> is differentiable with respect to <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>. Their <strong>joint PDF</strong> is the partial derivative of their joint CDF with respect to <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>: <span class="math inline">\(f_{X,Y}(x,y) = \frac{\partial^2}{\partial x \partial y} F_{X,Y}(x,y)\)</span>.</p>
+<p>Similar to univariate PDFs, for joint PDFs to be valid, we require that:</p>
+<ul>
+<li>
+<span class="math inline">\(f_{X,Y}(x,y) \geq 0\)</span> and</li>
+<li>
+<span class="math inline">\(\int_{-\infty}^\infty \int_{-\infty}^\infty f_{X,Y}(x,y)  dx dy = 1\)</span>.</li>
+</ul>
+<p>To find probabilities, for example <span class="math inline">\(P(a&lt;X&lt;b, c&lt;Y&lt;d)\)</span>, we integrate the joint PDF over the two-dimensional region, i.e. <span class="math inline">\(\int_{c}^d \int_{a}^b f_{X,Y}(x,y) dx dy\)</span>.</p>
+<p>The <strong>marginal PDF</strong> of <span class="math inline">\(X\)</span> can be found by integrating their joint PDF over the support of <span class="math inline">\(Y\)</span>:</p>
+<p><span class="math display" id="eq:5-margPDF">\[\begin{equation}
+f_X(x) = \int_{-\infty}^\infty f_{X,Y}(x,y) dy.
+\tag{5.12}
+\end{equation}\]</span></p>
+<p>The conditional PDF of <span class="math inline">\(Y\)</span> given <span class="math inline">\(X=x\)</span> is</p>
+<p><span class="math display" id="eq:5-condPDF">\[\begin{equation}
+f_{Y|X}(y|x) = \frac{f_{X,Y}(x,y)}{f_X(x)}
+\tag{5.13}
+\end{equation}\]</span></p>
+<p>Bayes’ rule for continuous random variables is</p>
+<p><span class="math display" id="eq:5-condPDFbayes">\[\begin{equation}
+f_{Y|X}(y|x) = \frac{f_{X|Y}(x|y) f_Y(y)}{f_X(x)}
+\tag{5.14}
+\end{equation}\]</span></p>
+<p>And the law of total probability is</p>
+<p><span class="math display" id="eq:5-condPDFtotal">\[\begin{equation}
+f_X(x) = \int_{-\infty}^\infty f_{X|Y}(x|y) f_Y(y) dy.
+\tag{5.15}
+\end{equation}\]</span></p>
+<p>Continuous random variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are independent if for all values of <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>:</p>
+<p><span class="math display" id="eq:5-indcont1">\[\begin{equation}
+F_{X,Y} (x,y) = F_X(x) F_Y(y)
+\tag{5.16}
+\end{equation}\]</span></p>
+<p>or</p>
+<p><span class="math display" id="eq:5-indcont2">\[\begin{equation}
+f_{X,Y} (x,y) = f_X(x) f_Y(y)
+\tag{5.17}
+\end{equation}\]</span></p>
+<p>or</p>
+<p><span class="math display" id="eq:5-indcont3">\[\begin{equation}
+f_{Y|X} (y|x) = f_Y(y)
+\tag{5.18}
+\end{equation}\]</span></p>
+<p>or</p>
+<p><span class="math display" id="eq:5-indcont4">\[\begin{equation}
+f_{X|Y} (x|y) = f_X(x).
+\tag{5.19}
+\end{equation}\]</span></p>
+</div>
+<div id="covariance-and-correlation" class="section level2" number="5.4">
+<h2>
+<span class="header-section-number">5.4</span> Covariance and Correlation<a class="anchor" aria-label="anchor" href="#covariance-and-correlation"><i class="fas fa-link"></i></a>
+</h2>
+<p>In the previous modules, we used summaries such as the mean, variance, skewness, and kurtosis to provide some insight into the distribution of a single random variable. When we have multiple random variables, one question we have is how the random variables related to each other. Summaries that are used to quantify the <strong>linear relationship</strong> between two random variables are the covariance and correlation.</p>
+<p>Generally speaking, two random variables have a positive covariance and correlation if they increase or decrease together, i.e. if <span class="math inline">\(X\)</span> increases, <span class="math inline">\(Y\)</span> also generally increases; if <span class="math inline">\(X\)</span> decreases, <span class="math inline">\(Y\)</span> also generally decreases.</p>
+<p>Two random variables have a negative covariance and correlation if they move in the opposite direction, i.e. if <span class="math inline">\(X\)</span> increases, <span class="math inline">\(Y\)</span> generally decreases; if <span class="math inline">\(X\)</span> decreases, <span class="math inline">\(Y\)</span> generally increases. Figure <a href="joint-distributions.html#fig:5-covs">5.1</a> below displays these ideas visually through scatter plots. The scatter plot on the left shows an example of a pair of random variables having positive covariance, and the scatter plot on the right shows an example of a pair of random variables having negative covariance.</p>
+<div class="figure">
+<span style="display:block;" id="fig:5-covs"></span>
+<img src="bookdown-demo_files/figure-html/5-covs-1.png" alt="Positive Covariance (Left), Negative Covariance (Right)" width="672"><p class="caption">
+Figure 5.1: Positive Covariance (Left), Negative Covariance (Right)
+</p>
+</div>
+<p>One more thing to note: covariance and correlations can be calculated for random variables as long as they are quantitative, but not if at least one of them is categorical. The concept of increasing a random variable that is categorical does not make intuitive sense, for example, if we have a random variable that denotes the color of eyes, what does increasing color of eyes mean?</p>
+<div id="covariance" class="section level3" number="5.4.1">
+<h3>
+<span class="header-section-number">5.4.1</span> Covariance<a class="anchor" aria-label="anchor" href="#covariance"><i class="fas fa-link"></i></a>
+</h3>
+<p>We know define covariance. The <strong>covariance</strong> between random variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> is</p>
+<p><span class="math display" id="eq:5-cov">\[\begin{equation}
+Cov(X,Y) = E\left[(X- \mu_X)(Y - \mu_Y) \right].
+\tag{5.20}
+\end{equation}\]</span></p>
+<p>Looking at equation <a href="joint-distributions.html#eq:5-cov">(5.20)</a>, we see that if both <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> generally move in the same direction, then <span class="math inline">\(X - \mu_x\)</span> and <span class="math inline">\(Y - \mu_y\)</span> will either be both positive or both negative, therefore their product is positive, on average. If <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> generally move in opposite directions, then <span class="math inline">\(X - \mu_x\)</span> and <span class="math inline">\(Y - \mu_y\)</span> have opposite signs, therefore their product is negative, on average.</p>
+<p>Some key properties for covariance:</p>
+<ul>
+<li>
+<span class="math inline">\(Cov(X,X) = Var(X)\)</span>.The covariance of any random variable with itself is its variance.</li>
+<li>
+<span class="math inline">\(Cov(X,Y) = Cov(Y,X)\)</span>. The covariance between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> is the same as the covariance between <span class="math inline">\(Y\)</span> and <span class="math inline">\(X\)</span>.</li>
+<li>
+<span class="math inline">\(Cov(X,c) = 0\)</span> for any constant <span class="math inline">\(c\)</span>. Since a constant does not move, it has no relationship with <span class="math inline">\(X\)</span>.</li>
+<li>
+<span class="math inline">\(Cov(aX,Y) = a Cov(X,Y)\)</span> for any constant <span class="math inline">\(a\)</span>. This implies that covariance is affected by the units of <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>.</li>
+<li>
+<span class="math inline">\(Var(X + Y) = Var(X) + Var(Y) + 2 Cov(X,Y)\)</span>.</li>
+<li>If <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are independent, then <span class="math inline">\(Cov(X,Y) = 0\)</span>.</li>
+<li>However, <span class="math inline">\(Cov(X,Y) = 0\)</span> does not mean that <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are independent. This is a common misconception. Remember that covariance measures linear relationship. The relationship between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> could be non linear, and in such instances, the covariance should not be used.Figure <a href="joint-distributions.html#fig:5-cov0">5.2</a> below provides an example this. In this figure, <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> have a quadratic relationship, so they are clearly not independent, yet their covariance is virtually 0.</li>
+</ul>
+<div class="sourceCode" id="cb77"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">x</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>,<span class="fl">1</span>, by<span class="op">=</span><span class="fl">0.01</span><span class="op">)</span></span>
+<span><span class="va">y</span><span class="op">&lt;-</span><span class="va">x</span><span class="op">^</span><span class="fl">2</span></span>
+<span></span>
+<span><span class="co">##note from plot that X &amp; Y do not have a linear relationship</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">x</span>,<span class="va">y</span>, xlab<span class="op">=</span><span class="st">"X"</span>, ylab<span class="op">=</span><span class="st">"Y"</span><span class="op">)</span></span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:5-cov0"></span>
+<img src="bookdown-demo_files/figure-html/5-cov0-1.png" alt="Covariance with Non Linear Relationship" width="672"><p class="caption">
+Figure 5.2: Covariance with Non Linear Relationship
+</p>
+</div>
+<div class="sourceCode" id="cb78"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cov</a></span><span class="op">(</span><span class="va">x</span>,<span class="va">y</span><span class="op">)</span> <span class="co">##covariance is virtually 0</span></span></code></pre></div>
+<pre><code>## [1] 1.19967e-17</code></pre>
+<p>For two vectors of observed data, each of size <span class="math inline">\(n\)</span>: <span class="math inline">\(X = (x_1, x_2, \cdots, x_n)\)</span> and <span class="math inline">\(Y = (y_1, y_2, \cdots, y_n)\)</span>. Their <strong>sample covariance</strong> is</p>
+<p><span class="math display" id="eq:5-sampcov">\[\begin{equation}
+s_{x,y} = \frac{\sum_{i=1}^n (x_i - \bar{x})(y_i - \bar{y})}{n-1}
+\tag{5.21}
+\end{equation}\]</span></p>
+</div>
+<div id="correlation" class="section level3" number="5.4.2">
+<h3>
+<span class="header-section-number">5.4.2</span> Correlation<a class="anchor" aria-label="anchor" href="#correlation"><i class="fas fa-link"></i></a>
 </h3>
 </div>
-<div id="multivariate-normal" class="section level3" number="5.7.2">
+</div>
+<div id="common-multivariate-distributions" class="section level2" number="5.5">
+<h2>
+<span class="header-section-number">5.5</span> Common Multivariate Distributions<a class="anchor" aria-label="anchor" href="#common-multivariate-distributions"><i class="fas fa-link"></i></a>
+</h2>
+<div id="multinomial" class="section level3" number="5.5.1">
 <h3>
-<span class="header-section-number">5.7.2</span> Multivariate Normal<a class="anchor" aria-label="anchor" href="#multivariate-normal"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.5.1</span> Multinomial<a class="anchor" aria-label="anchor" href="#multinomial"><i class="fas fa-link"></i></a>
+</h3>
+</div>
+<div id="multivariate-normal" class="section level3" number="5.5.2">
+<h3>
+<span class="header-section-number">5.5.2</span> Multivariate Normal<a class="anchor" aria-label="anchor" href="#multivariate-normal"><i class="fas fa-link"></i></a>
 </h3>
 </div>
 </div>
-<div id="conditional-expectation" class="section level2" number="5.8">
+<div id="conditional-expectation" class="section level2" number="5.6">
 <h2>
-<span class="header-section-number">5.8</span> Conditional Expectation<a class="anchor" aria-label="anchor" href="#conditional-expectation"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.6</span> Conditional Expectation<a class="anchor" aria-label="anchor" href="#conditional-expectation"><i class="fas fa-link"></i></a>
 </h2>
 
 </div>
@@ -200,18 +516,29 @@ F_{X,Y}(x,y) = P(X \leq x, Y \leq y).
       <ul class="nav navbar-nav">
 <li><a class="nav-link" href="#joint-distributions"><span class="header-section-number">5</span> Joint Distributions</a></li>
 <li><a class="nav-link" href="#introduction-1"><span class="header-section-number">5.1</span> Introduction</a></li>
-<li><a class="nav-link" href="#joint-distributions-for-discrete-rvs"><span class="header-section-number">5.2</span> Joint Distributions for Discrete RVs</a></li>
-<li><a class="nav-link" href="#marginal-distributions-for-discrete-rvs"><span class="header-section-number">5.3</span> Marginal Distributions for Discrete RVs</a></li>
-<li><a class="nav-link" href="#conditional-distributions-for-discrete-rvs"><span class="header-section-number">5.4</span> Conditional Distributions for Discrete RVs</a></li>
-<li><a class="nav-link" href="#joint-marginal-conditional-distributions-for-continuous-rvs"><span class="header-section-number">5.5</span> Joint, Marginal, Conditional Distributions for Continuous RVs</a></li>
-<li><a class="nav-link" href="#covariance-and-correlation"><span class="header-section-number">5.6</span> Covariance and Correlation</a></li>
 <li>
-<a class="nav-link" href="#common-multivariate-distribtuions"><span class="header-section-number">5.7</span> Common Multivariate Distribtuions</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#multinomial"><span class="header-section-number">5.7.1</span> Multinomial</a></li>
-<li><a class="nav-link" href="#multivariate-normal"><span class="header-section-number">5.7.2</span> Multivariate Normal</a></li>
+<a class="nav-link" href="#joint-distributions-for-discrete-rvs"><span class="header-section-number">5.2</span> Joint Distributions for Discrete RVs</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#marginal-distributions-for-discrete-rvs"><span class="header-section-number">5.2.1</span> Marginal Distributions for Discrete RVs</a></li>
+<li><a class="nav-link" href="#conditional-distributions-for-discrete-rvs"><span class="header-section-number">5.2.2</span> Conditional Distributions for Discrete RVs</a></li>
+<li><a class="nav-link" href="#bayes-rule-1"><span class="header-section-number">5.2.3</span> Bayes’ Rule</a></li>
+<li><a class="nav-link" href="#law-of-total-probability-1"><span class="header-section-number">5.2.4</span> Law of Total Probability</a></li>
+<li><a class="nav-link" href="#indepdence-of-discrete-rvs"><span class="header-section-number">5.2.5</span> Indepdence of Discrete RVs</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#conditional-expectation"><span class="header-section-number">5.8</span> Conditional Expectation</a></li>
+<li><a class="nav-link" href="#joint-marginal-conditional-distributions-for-continuous-rvs"><span class="header-section-number">5.3</span> Joint, Marginal, Conditional Distributions for Continuous RVs</a></li>
+<li>
+<a class="nav-link" href="#covariance-and-correlation"><span class="header-section-number">5.4</span> Covariance and Correlation</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#covariance"><span class="header-section-number">5.4.1</span> Covariance</a></li>
+<li><a class="nav-link" href="#correlation"><span class="header-section-number">5.4.2</span> Correlation</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#common-multivariate-distributions"><span class="header-section-number">5.5</span> Common Multivariate Distributions</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#multinomial"><span class="header-section-number">5.5.1</span> Multinomial</a></li>
+<li><a class="nav-link" href="#multivariate-normal"><span class="header-section-number">5.5.2</span> Multivariate Normal</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#conditional-expectation"><span class="header-section-number">5.6</span> Conditional Expectation</a></li>
 </ul>
 
       <div class="book-extra">
@@ -228,7 +555,7 @@ F_{X,Y}(x,y) = P(X \leq x, Y \leq y).
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2025-06-20.</p>
+    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2025-06-21.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
