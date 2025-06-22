@@ -113,6 +113,14 @@ fig:5-covs
 eq:5-cov
 fig:5-cov0
 eq:5-sampcov
+eq:5-corr
+eq:5-sampcorr
+fig:5-corrs
+eq:5-condexpdis
+eq:5-condexpcont
+fig:5-condexp
+eq:5-condexpdis2
+eq:5-condexpcont2
 examples
 example-1-mario-kart-auction-prices
 eg2
@@ -154,7 +162,7 @@ intersections
 addition-rule
 disjoint-or-mutually-exclusive-events
 axioms-of-probability
-conditional-probability
+condprob
 def
 multiplication-rule
 independent-events
@@ -227,7 +235,7 @@ joint-distributions
 introduction-1
 joint-distributions-for-discrete-rvs
 marginal-distributions-for-discrete-rvs
-conditional-distributions-for-discrete-rvs
+conddist
 bayes-rule-1
 law-of-total-probability-1
 indepdence-of-discrete-rvs
@@ -235,7 +243,9 @@ joint-marginal-conditional-distributions-for-continuous-rvs
 covariance-and-correlation
 covariance
 correlation
+conditional-expectation
+conditional-expectation-given-event
+conditional-expectation-given-random-variable
 common-multivariate-distributions
 multinomial
 multivariate-normal
-conditional-expectation

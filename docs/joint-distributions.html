@@ -273,9 +273,9 @@ P(X=x) = \sum_x P(X=x, Y=y).
 </tbody>
 </table></div>
 </div>
-<div id="conditional-distributions-for-discrete-rvs" class="section level3" number="5.2.2">
+<div id="conddist" class="section level3" number="5.2.2">
 <h3>
-<span class="header-section-number">5.2.2</span> Conditional Distributions for Discrete RVs<a class="anchor" aria-label="anchor" href="#conditional-distributions-for-discrete-rvs"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.2.2</span> Conditional Distributions for Discrete RVs<a class="anchor" aria-label="anchor" href="#conddist"><i class="fas fa-link"></i></a>
 </h3>
 <p>We have seen how we can derive the marginal PMFs from a joint PMF. We may need to update the distribution of one of the variables based on the observed value of the other variable, or we need the distribution of one of the variables based on a specific value of the other variable. This leads to the <strong>conditional PMF</strong>.</p>
 <p>Suppose we want to update the distribution of <span class="math inline">\(Y\)</span> based on the observed value <span class="math inline">\(X=x\)</span>, or we want the distribution of <span class="math inline">\(Y\)</span> only for observations where <span class="math inline">\(X=x\)</span>. If <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are both discrete, the conditional PMF of <span class="math inline">\(Y\)</span> given <span class="math inline">\(X=x\)</span> is:</p>
@@ -479,33 +479,168 @@ Figure 5.2: Covariance with Non Linear Relationship
 s_{x,y} = \frac{\sum_{i=1}^n (x_i - \bar{x})(y_i - \bar{y})}{n-1}
 \tag{5.21}
 \end{equation}\]</span></p>
+<p>We noted earlier that covariance is affected by the units of the variables. Suppose one variable is measured in meters, and we convert it to become centimeters. The value of the covariance will get multiplied by 100. People find it easier to interpret a measure that does not depend on the units. This is where the correlation comes in: it is a unitless version of the covariance.</p>
 </div>
 <div id="correlation" class="section level3" number="5.4.2">
 <h3>
 <span class="header-section-number">5.4.2</span> Correlation<a class="anchor" aria-label="anchor" href="#correlation"><i class="fas fa-link"></i></a>
 </h3>
+<p>The <strong>correlation</strong> between random variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> is</p>
+<p><span class="math display" id="eq:5-corr">\[\begin{equation}
+\rho = Corr(X,Y) = \frac{Cov(X,Y)}{\sqrt{Var(x) Var(Y)}}.
+\tag{5.22}
+\end{equation}\]</span></p>
+<p>The <strong>sample correlation</strong> for two vectors of observed data, each of size <span class="math inline">\(n\)</span>: <span class="math inline">\(X = (x_1, x_2, \cdots, x_n)\)</span> and <span class="math inline">\(Y = (y_1, y_2, \cdots, y_n)\)</span>, is</p>
+<p><span class="math display" id="eq:5-sampcorr">\[\begin{equation}
+r = \frac{\sum_{i=1}^n (x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum_{i=1}^n (x_i - \bar{x})^2 \sum_{i=1}^n (y_i - \bar{y})^2}}
+\tag{5.23}
+\end{equation}\]</span></p>
+<p>Some key properties of correlation:</p>
+<ul>
+<li>It is bounded between -1 and 1.</li>
+<li>Values closer to -1 or 1 indicate a stronger linear relationship.</li>
+<li>Values closer to 0 indicate a weaker linear relationship.</li>
+<li>Its numerical value is unchanged with location and / or scale changes.</li>
+<li>If <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are independent, then <span class="math inline">\(Corr(X,Y) = 0\)</span>.</li>
+<li>However, <span class="math inline">\(Corr(X,Y) = 0\)</span> does not mean that <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are independent.</li>
+<li>Correlation should only be used if the relationship between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> is linear.</li>
+</ul>
+<p>Figure <a href="joint-distributions.html#fig:5-corrs">5.3</a> below shows examples of some scatterplots and their sample correlations. For the left plot, the data points fall close to a straight line, is negative, and so its correlation is close to -1. The middle plot has no linear relationship, so we do not see a trend with one variable increasing or decreasing as the other variable increases. The right plot shows the data points being fairly close to a straight line, but not as close as the left plot), so its correlation is not as close to 1 (or -1).</p>
+<div class="figure">
+<span style="display:block;" id="fig:5-corrs"></span>
+<img src="bookdown-demo_files/figure-html/5-corrs-1.png" alt="Strong Negative Correlation (Left), No Correlation (Middle), Moderate Positive Correlation (Right)" width="672"><p class="caption">
+Figure 5.3: Strong Negative Correlation (Left), No Correlation (Middle), Moderate Positive Correlation (Right)
+</p>
 </div>
 </div>
-<div id="common-multivariate-distributions" class="section level2" number="5.5">
+</div>
+<div id="conditional-expectation" class="section level2" number="5.5">
 <h2>
-<span class="header-section-number">5.5</span> Common Multivariate Distributions<a class="anchor" aria-label="anchor" href="#common-multivariate-distributions"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.5</span> Conditional Expectation<a class="anchor" aria-label="anchor" href="#conditional-expectation"><i class="fas fa-link"></i></a>
 </h2>
-<div id="multinomial" class="section level3" number="5.5.1">
+<p>In Section <a href="probability.html#condprob">2.3</a> and <a href="joint-distributions.html#conddist">5.2.2</a>, we explored the notion of conditional probabilities and conditional distributions:</p>
+<ul>
+<li>Updating the probability and distribution of a random variable <span class="math inline">\(Y\)</span>, after observing a certain outcome of another random variable <span class="math inline">\(X\)</span>, or</li>
+<li>Restricting the probability and distribution of a random variable <span class="math inline">\(Y\)</span> only for a certain value of another random variable.</li>
+</ul>
+<p>These represent the Bayesian and frequentist viewpoints of conditional probability and conditional distribution.</p>
+<p>It turns out a similar idea applies to the expected value of a random variable. Recall that the expected value of a random variable is the long-run average, in other words, the average value after observing the random variable an infinite number of times.</p>
+<p>The conditional expectation of a random variable is its long run-average:</p>
+<ul>
+<li>after observing a certain outcome of another variable or event, or</li>
+<li>after restricting our attention to cases when another random variable is fixed or equal to a specific value.</li>
+</ul>
+<p>Fairly often, we use statistical models to predict a response variable <span class="math inline">\(Y\)</span> based on a predictor <span class="math inline">\(X\)</span>. Predictions for values of <span class="math inline">\(Y\)</span> based on observed values of <span class="math inline">\(X\)</span> usually use the conditional expectation of <span class="math inline">\(Y\)</span> given <span class="math inline">\(X\)</span>. Given what we see with the predictor, the long run average of <span class="math inline">\(Y\)</span> ends up being used as the predicted value of the response variable.</p>
+<p>There are two slightly different notions of conditional expectations:</p>
+<ul>
+<li>Conditional expectation of random variable <span class="math inline">\(Y\)</span> given event <span class="math inline">\(A\)</span>. If <span class="math inline">\(A\)</span> has happened, what is the expected value of <span class="math inline">\(Y\)</span>?</li>
+<li>Conditional expectation of random variable <span class="math inline">\(Y\)</span> given another random variable <span class="math inline">\(X\)</span>. If we fix the value of the random variable <span class="math inline">\(X\)</span> to any value on its support, what is the expected value of <span class="math inline">\(Y\)</span>?</li>
+</ul>
+<p>The second notion is the one that is usually used for statistical models, but we will cover both as the first notion is easier to understand, and should help us understand the second notion.</p>
+<div id="conditional-expectation-given-event" class="section level3" number="5.5.1">
 <h3>
-<span class="header-section-number">5.5.1</span> Multinomial<a class="anchor" aria-label="anchor" href="#multinomial"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.5.1</span> Conditional Expectation Given Event<a class="anchor" aria-label="anchor" href="#conditional-expectation-given-event"><i class="fas fa-link"></i></a>
+</h3>
+<p>Recall that the expectation <span class="math inline">\(E(Y)\)</span> of a random variable <span class="math inline">\(Y\)</span> is its long-run average. If <span class="math inline">\(Y\)</span> is discrete, we take a weighted average involving the probabilities in its PMF <span class="math inline">\(P(Y=y)\)</span>. The calculation of the <strong>conditional expectation</strong> <span class="math inline">\(E(Y|A)\)</span> where <span class="math inline">\(A\)</span> is an event that has occurred simply replaces the probabilities <span class="math inline">\(P(Y=y)\)</span> with conditional probabilities <span class="math inline">\(P(Y=y|A)\)</span>. Therefore, for a discrete random variable <span class="math inline">\(Y\)</span>,</p>
+<p><span class="math display" id="eq:5-condexpdis">\[\begin{equation}
+E(Y|A) = \sum_y y P(Y=y|A)
+\tag{5.24}
+\end{equation}\]</span></p>
+<p>where the sum is over the support of <span class="math inline">\(Y\)</span>.</p>
+<p>If <span class="math inline">\(Y\)</span> is continuous, we use the conditional PDF instead:</p>
+<p><span class="math display" id="eq:5-condexpcont">\[\begin{equation}
+E(Y|A) = \int_{-\infty}^{\infty} y f(y|A) dy.
+\tag{5.25}
+\end{equation}\]</span></p>
+<p>The key is to understand the intuition behind conditional expectations, and we will use simulation to approximate this (the approximation works better if we use more simulated data). Simulation represents the frequentist viewpoint of conditional expectation.</p>
+<p>The code below does the following:</p>
+<ul>
+<li>Generate 100 values of <span class="math inline">\(X\)</span> uniformly on the support <span class="math inline">\(\{1,2,3,4\}\)</span>.</li>
+<li>Simulate <span class="math inline">\(Y\)</span> using <span class="math inline">\(Y = 10 + X + \epsilon\)</span> where <span class="math inline">\(\epsilon \sim N(0,1)\)</span>.</li>
+<li>Represent these values on a scatter plot, and also overlay a line that represents the sample mean of <span class="math inline">\(Y\)</span>, which estimates <span class="math inline">\(E(Y)\)</span>. This is simply the average value on the y-axis for all 100 data points. This is the plot on the left in Figure <a href="joint-distributions.html#fig:5-condexp">5.4</a> below.</li>
+<li>Represent these values on a scatter plot, but use blue color to denote the event <span class="math inline">\(A\)</span> which is when <span class="math inline">\(X=1\)</span>. A line that represents the sample mean of <span class="math inline">\(Y\)</span>, only for these blue data points (i.e. only when <span class="math inline">\(X=1\)</span>), is overlaid. This value estimates <span class="math inline">\(E(Y|A)\)</span> or <span class="math inline">\(E(Y|X=1)\)</span>. This is the plot on the right in Figure <a href="joint-distributions.html#fig:5-condexp">5.4</a> below. In calculating this sample mean, we could have completed disregarded the data points when <span class="math inline">\(X\)</span> was not 1.</li>
+</ul>
+<div class="sourceCode" id="cb80"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">40</span><span class="op">)</span></span>
+<span><span class="va">n</span><span class="op">&lt;-</span><span class="fl">100</span> <span class="co">##100 data points</span></span>
+<span></span>
+<span><span class="co">##generate X</span></span>
+<span><span class="va">x</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">1</span>,<span class="va">n</span><span class="op">/</span><span class="fl">4</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">2</span>,<span class="va">n</span><span class="op">/</span><span class="fl">4</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">3</span>,<span class="va">n</span><span class="op">/</span><span class="fl">4</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">4</span>,<span class="va">n</span><span class="op">/</span><span class="fl">4</span><span class="op">)</span><span class="op">)</span> </span>
+<span></span>
+<span><span class="co">##simulate Y</span></span>
+<span><span class="va">y</span><span class="op">&lt;-</span> <span class="fl">10</span> <span class="op">+</span> <span class="va">x</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">x</span>,<span class="va">y</span>, main<span class="op">=</span><span class="st">"Estimated E(Y) Overlaid"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span>h<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span><span class="op">)</span> <span class="co">##add line to represent est E(Y)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">x</span>,<span class="va">y</span>, col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">x</span> <span class="op">==</span> <span class="fl">1</span>,<span class="st">'blue'</span>, <span class="st">'black'</span><span class="op">)</span>, pch <span class="op">=</span> <span class="fl">19</span>, main<span class="op">=</span><span class="st">"Estimated E(Y|X=1) Overlaid"</span> <span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span>h<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">y</span><span class="op">[</span>x<span class="op">=</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span>, col<span class="op">=</span><span class="st">"blue"</span><span class="op">)</span> <span class="co">##add line to represent est E(Y|X=1)</span></span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:5-condexp"></span>
+<img src="bookdown-demo_files/figure-html/5-condexp-1.png" alt="Comparison of E(Y) and E(Y|X=1)" width="672"><p class="caption">
+Figure 5.4: Comparison of E(Y) and E(Y|X=1)
+</p>
+</div>
+<p>So, we can interpret the conditional expectation <span class="math inline">\(E(Y|A)\)</span> as the long-run average of <span class="math inline">\(Y\)</span> (only) when <span class="math inline">\(A\)</span> has happened. It is the long-run average of <span class="math inline">\(Y\)</span> when a certain condition is met.</p>
+</div>
+<div id="conditional-expectation-given-random-variable" class="section level3" number="5.5.2">
+<h3>
+<span class="header-section-number">5.5.2</span> Conditional Expectation Given Random Variable<a class="anchor" aria-label="anchor" href="#conditional-expectation-given-random-variable"><i class="fas fa-link"></i></a>
+</h3>
+<p>The conditional Expectation of <span class="math inline">\(Y\)</span> given a random variable <span class="math inline">\(X\)</span> is slightly different. In the simulated example in the previous subsection, we set <span class="math inline">\(X\)</span> to be a specific condition. Now, we consider the long-run average of <span class="math inline">\(Y\)</span> across all values in the support of <span class="math inline">\(X\)</span>.</p>
+<p>One way to think about this is to consider <span class="math inline">\(E(Y|X=x)\)</span>, where <span class="math inline">\(x\)</span> is any value on the support for <span class="math inline">\(X\)</span>. If <span class="math inline">\(Y\)</span> is discrete, this conditional expectation is:</p>
+<p><span class="math display" id="eq:5-condexpdis2">\[\begin{equation}
+E(Y|A) = \sum_y y P(Y=y|X=x)
+\tag{5.26}
+\end{equation}\]</span></p>
+<p>where the sum is over the support of <span class="math inline">\(Y\)</span>.</p>
+<p>If <span class="math inline">\(Y\)</span> is continuous:</p>
+<p><span class="math display" id="eq:5-condexpcont2">\[\begin{equation}
+E(Y|A) = \int_{-\infty}^{\infty} y f(y|x) dy.
+\tag{5.27}
+\end{equation}\]</span></p>
+<p>We go back to the simulated example in the previous subsection to explain what <span class="math inline">\(E(Y|X=x)\)</span> represents. Recall that the support for <span class="math inline">\(X\)</span> is <span class="math inline">\(\{1,2,3,4\}\)</span> and that <span class="math inline">\(Y = 10 + X + \epsilon\)</span> where <span class="math inline">\(\epsilon \sim N(0,1)\)</span>. So</p>
+<p><span class="math display">\[
+\begin{split}
+E(Y|X=x) &amp;= E(10 + X + \epsilon | X=x)\\
+&amp;= E(10 + x + \epsilon) \\
+&amp;= E(10) + E(x) + E(\epsilon) \\
+&amp;= 10 + x + 0 \\
+&amp;= 10 + x.
+\end{split}
+\]</span></p>
+<p>A brief explanation of each step:</p>
+<ul>
+<li>To go from line 1 to line 2, we subbed in <span class="math inline">\(x\)</span> for <span class="math inline">\(X\)</span>, since we are setting <span class="math inline">\(X=x\)</span>.</li>
+<li>To go from line 2 to line 3, we apply the linearity of expectations.</li>
+<li>To go from line 3 to 4, <span class="math inline">\(E(c)=c\)</span> for any constant. In this case, we are fixing <span class="math inline">\(x\)</span> to be a value in the support so it is a constant, and <span class="math inline">\(E(\epsilon) = 0\)</span> since <span class="math inline">\(\epsilon \sim N(0,1)\)</span>.</li>
+</ul>
+<p>So <span class="math inline">\(E(Y|X) = 10 + X\)</span>. What this means is that:</p>
+<ul>
+<li>When <span class="math inline">\(X=1\)</span>, <span class="math inline">\(E(Y|X=1) = 11\)</span>,</li>
+<li>When <span class="math inline">\(X=2\)</span>, <span class="math inline">\(E(Y|X=1) = 12\)</span>,</li>
+<li>When <span class="math inline">\(X=3\)</span>, <span class="math inline">\(E(Y|X=1) = 13\)</span>, and</li>
+<li>When <span class="math inline">\(X=4\)</span>, <span class="math inline">\(E(Y|X=1) = 14\)</span>.</li>
+</ul>
+<p>Note: We set up <span class="math inline">\(Y = 10 + X + \epsilon\)</span> where <span class="math inline">\(\epsilon \sim N(0,1)\)</span>. This follows the framework for linear regression which sets up <span class="math inline">\(Y = \beta_0 + \beta_1 X + \epsilon\)</span> where <span class="math inline">\(\epsilon \sim N(0,\sigma^2)\)</span>, i.e. <span class="math inline">\(\epsilon\)</span> is normal with mean 0 and a variance that is a fixed value. The conditional expectation given <span class="math inline">\(X\)</span> ends up being the prediction for <span class="math inline">\(Y\)</span> that minimizes the mean squared error in linear regression.</p>
+</div>
+</div>
+<div id="common-multivariate-distributions" class="section level2" number="5.6">
+<h2>
+<span class="header-section-number">5.6</span> Common Multivariate Distributions<a class="anchor" aria-label="anchor" href="#common-multivariate-distributions"><i class="fas fa-link"></i></a>
+</h2>
+<div id="multinomial" class="section level3" number="5.6.1">
+<h3>
+<span class="header-section-number">5.6.1</span> Multinomial<a class="anchor" aria-label="anchor" href="#multinomial"><i class="fas fa-link"></i></a>
 </h3>
 </div>
-<div id="multivariate-normal" class="section level3" number="5.5.2">
+<div id="multivariate-normal" class="section level3" number="5.6.2">
 <h3>
-<span class="header-section-number">5.5.2</span> Multivariate Normal<a class="anchor" aria-label="anchor" href="#multivariate-normal"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.6.2</span> Multivariate Normal<a class="anchor" aria-label="anchor" href="#multivariate-normal"><i class="fas fa-link"></i></a>
 </h3>
-</div>
-</div>
-<div id="conditional-expectation" class="section level2" number="5.6">
-<h2>
-<span class="header-section-number">5.6</span> Conditional Expectation<a class="anchor" aria-label="anchor" href="#conditional-expectation"><i class="fas fa-link"></i></a>
-</h2>
 
+</div>
 </div>
 </div>
   <div class="chapter-nav">
@@ -519,7 +654,7 @@ s_{x,y} = \frac{\sum_{i=1}^n (x_i - \bar{x})(y_i - \bar{y})}{n-1}
 <li>
 <a class="nav-link" href="#joint-distributions-for-discrete-rvs"><span class="header-section-number">5.2</span> Joint Distributions for Discrete RVs</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#marginal-distributions-for-discrete-rvs"><span class="header-section-number">5.2.1</span> Marginal Distributions for Discrete RVs</a></li>
-<li><a class="nav-link" href="#conditional-distributions-for-discrete-rvs"><span class="header-section-number">5.2.2</span> Conditional Distributions for Discrete RVs</a></li>
+<li><a class="nav-link" href="#conddist"><span class="header-section-number">5.2.2</span> Conditional Distributions for Discrete RVs</a></li>
 <li><a class="nav-link" href="#bayes-rule-1"><span class="header-section-number">5.2.3</span> Bayes’ Rule</a></li>
 <li><a class="nav-link" href="#law-of-total-probability-1"><span class="header-section-number">5.2.4</span> Law of Total Probability</a></li>
 <li><a class="nav-link" href="#indepdence-of-discrete-rvs"><span class="header-section-number">5.2.5</span> Indepdence of Discrete RVs</a></li>
@@ -533,12 +668,17 @@ s_{x,y} = \frac{\sum_{i=1}^n (x_i - \bar{x})(y_i - \bar{y})}{n-1}
 </ul>
 </li>
 <li>
-<a class="nav-link" href="#common-multivariate-distributions"><span class="header-section-number">5.5</span> Common Multivariate Distributions</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#multinomial"><span class="header-section-number">5.5.1</span> Multinomial</a></li>
-<li><a class="nav-link" href="#multivariate-normal"><span class="header-section-number">5.5.2</span> Multivariate Normal</a></li>
+<a class="nav-link" href="#conditional-expectation"><span class="header-section-number">5.5</span> Conditional Expectation</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#conditional-expectation-given-event"><span class="header-section-number">5.5.1</span> Conditional Expectation Given Event</a></li>
+<li><a class="nav-link" href="#conditional-expectation-given-random-variable"><span class="header-section-number">5.5.2</span> Conditional Expectation Given Random Variable</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#conditional-expectation"><span class="header-section-number">5.6</span> Conditional Expectation</a></li>
+<li>
+<a class="nav-link" href="#common-multivariate-distributions"><span class="header-section-number">5.6</span> Common Multivariate Distributions</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#multinomial"><span class="header-section-number">5.6.1</span> Multinomial</a></li>
+<li><a class="nav-link" href="#multivariate-normal"><span class="header-section-number">5.6.2</span> Multivariate Normal</a></li>
+</ul>
+</li>
 </ul>
 
       <div class="book-extra">
@@ -555,7 +695,7 @@ s_{x,y} = \frac{\sum_{i=1}^n (x_i - \bar{x})(y_i - \bar{y})}{n-1}
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2025-06-21.</p>
+    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2025-06-22.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

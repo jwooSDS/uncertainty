@@ -150,7 +150,7 @@ Table: (\#tab:5-marg-table2) Example Joint PMF of Study Time ($X$) and Grades ($
 | **Y=3** | 0.10 | 0.05 | 0 | 0.15 |
 | **Total**   | 0.2  | 0.4  | 0.4 | 1|
 
-### Conditional Distributions for Discrete RVs
+### Conditional Distributions for Discrete RVs {#conddist}
 
 We have seen how we can derive the marginal PMFs from a joint PMF. We may need to update the distribution of one of the variables based on the observed value of the other variable, or we need the distribution of one of the variables based on a specific value of the other variable. This leads to the **conditional PMF**.
 
@@ -406,10 +406,199 @@ s_{x,y} = \frac{\sum_{i=1}^n (x_i - \bar{x})(y_i - \bar{y})}{n-1}
 (\#eq:5-sampcov)
 \end{equation}
 
+We noted earlier that covariance is affected by the units of the variables. Suppose one variable is measured in meters, and we convert it to become centimeters. The value of the covariance will get multiplied by 100. People find it easier to interpret a measure that does not depend on the units. This is where the correlation comes in: it is a unitless version of the covariance. 
 
 
 ### Correlation
 
+The **correlation** between random variables $X$ and $Y$ is
+
+\begin{equation} 
+\rho = Corr(X,Y) = \frac{Cov(X,Y)}{\sqrt{Var(x) Var(Y)}}.
+(\#eq:5-corr)
+\end{equation}
+
+The **sample correlation** for two vectors of observed data, each of size $n$: $X = (x_1, x_2, \cdots, x_n)$ and $Y = (y_1, y_2, \cdots, y_n)$, is
+
+\begin{equation} 
+r = \frac{\sum_{i=1}^n (x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum_{i=1}^n (x_i - \bar{x})^2 \sum_{i=1}^n (y_i - \bar{y})^2}}
+(\#eq:5-sampcorr)
+\end{equation}
+
+Some key properties of correlation:
+
+- It is bounded between -1 and 1.
+- Values closer to -1 or 1 indicate a stronger linear relationship.
+- Values closer to 0 indicate a weaker linear relationship.
+- Its numerical value is unchanged with location and / or scale changes.
+- If $X$ and $Y$ are independent, then $Corr(X,Y) = 0$. 
+- However, $Corr(X,Y) = 0$ does not mean that $X$ and $Y$ are independent. 
+- Correlation should only be used if the relationship between $X$ and $Y$ is linear.
+
+Figure \@ref(fig:5-corrs) below shows examples of some scatterplots and their sample correlations. For the left plot, the data points fall close to a straight line, is negative, and so its correlation is close to -1. The middle plot has no linear relationship, so we do not see a trend with one variable increasing or decreasing as the other variable increases. The right plot shows the data points being fairly close to a straight line, but not as close as the left plot), so its correlation is not as close to 1 (or -1).
+
+```{r 5-corrs, fig.cap="Strong Negative Correlation (Left), No Correlation (Middle), Moderate Positive Correlation (Right)", echo=FALSE}
+library(mvtnorm)
+
+n<-5000
+
+mu_vector<-c(0,0)
+
+rho1<- -0.9
+
+cov_mat<-matrix(c(1,rho1,rho1,1), nrow=2, ncol=2)
+
+data<-rmvnorm(n, mu_vector, cov_mat)
+  
+x1<-data[,1]
+x2<-data[,2]
+
+rho2<- 0
+
+cov_mat2<-matrix(c(1,rho2,rho2,1), nrow=2, ncol=2)
+
+data2<-rmvnorm(n, mu_vector, cov_mat2)
+  
+x3<-data2[,1]
+x4<-data2[,2]
+
+rho3<- 0.5
+
+cov_mat3<-matrix(c(1,rho3,rho3,1), nrow=2, ncol=2)
+
+data3<-rmvnorm(n, mu_vector, cov_mat3)
+  
+x5<-data3[,1]
+x6<-data3[,2]
+
+par(mfrow=c(1,3))
+plot(x1,x2, xlab="X", ylab="Y", main="corr is -0.9")
+abline(lm(x2~x1), col="blue")
+plot(x3,x4, xlab="X", ylab="Y", main="corr is -0")
+abline(lm(x4~x3), col="blue")
+plot(x5,x6, xlab="X", ylab="Y", main="corr is 0.5")
+abline(lm(x6~x5), col="blue")
+
+```
+
+## Conditional Expectation
+
+In Section \@ref(condprob) and \@ref(conddist), we explored the notion of conditional probabilities and conditional distributions:
+
+- Updating the probability and distribution of a random variable $Y$, after observing a certain outcome of another random variable $X$, or
+- Restricting the probability and distribution of a random variable $Y$ only for a certain value of another random variable.
+
+These represent the Bayesian and frequentist viewpoints of conditional probability and conditional distribution.  
+
+It turns out a similar idea applies to the expected value of a random variable. Recall that the expected value of a random variable is the long-run average, in other words, the average value after observing the random variable an infinite number of times. 
+
+The conditional expectation of a random variable is its long run-average:
+
+- after observing a certain outcome of another variable or event, or
+- after restricting our attention to cases when another random variable is fixed or equal to a specific value. 
+
+Fairly often, we use statistical models to predict a response variable $Y$ based on a predictor $X$. Predictions for values of $Y$ based on observed values of $X$ usually use the conditional expectation of $Y$ given $X$. Given what we see with the predictor, the long run average of $Y$ ends up being used as the predicted value of the response variable. 
+
+There are two slightly different notions of conditional expectations:
+
+- Conditional expectation of random variable $Y$ given event $A$. If $A$ has happened, what is the expected value of $Y$?
+- Conditional expectation of random variable $Y$ given another random variable $X$. If we fix the value of the random variable $X$ to any value on its support, what is the expected value of $Y$?
+
+The second notion is the one that is usually used for statistical models, but we will cover both as the first notion is easier to understand, and should help us understand the second notion. 
+
+### Conditional Expectation Given Event
+
+Recall that the expectation $E(Y)$ of a random variable $Y$ is its long-run average. If $Y$ is discrete, we take a weighted average involving the probabilities in its PMF $P(Y=y)$. The calculation of the **conditional expectation** $E(Y|A)$ where $A$ is an event that has occurred simply replaces the probabilities $P(Y=y)$ with conditional probabilities $P(Y=y|A)$. Therefore, for a discrete random variable $Y$, 
+
+\begin{equation} 
+E(Y|A) = \sum_y y P(Y=y|A) 
+(\#eq:5-condexpdis)
+\end{equation}
+
+where the sum is over the support of $Y$. 
+
+If $Y$ is continuous, we use the conditional PDF instead:
+
+\begin{equation} 
+E(Y|A) = \int_{-\infty}^{\infty} y f(y|A) dy.
+(\#eq:5-condexpcont)
+\end{equation}
+
+The key is to understand the intuition behind conditional expectations, and we will use simulation to approximate this (the approximation works better if we use more simulated data). Simulation represents the frequentist viewpoint of conditional expectation.
+
+The code below does the following:
+
+- Generate 100 values of $X$ uniformly on the support $\{1,2,3,4\}$.
+- Simulate $Y$ using $Y = 10 + X + \epsilon$ where $\epsilon \sim N(0,1)$.
+- Represent these values on a scatter plot, and also overlay a line that represents the sample mean of $Y$, which estimates $E(Y)$. This is simply the average value on the y-axis for all 100 data points. This is the plot on the left in Figure \@ref(fig:5-condexp) below.
+- Represent these values on a scatter plot, but use blue color to denote the event $A$ which is when $X=1$. A line that represents the sample mean of $Y$, only for these blue data points (i.e. only when $X=1$), is overlaid. This value estimates $E(Y|A)$ or $E(Y|X=1)$. This is the plot on the right in Figure \@ref(fig:5-condexp) below. In calculating this sample mean, we could have completed disregarded the data points when $X$ was not 1.
+
+```{r 5-condexp, fig.cap="Comparison of E(Y) and E(Y|X=1)"}
+set.seed(40)
+n<-100 ##100 data points
+
+##generate X
+x<-c(rep(1,n/4), rep(2,n/4), rep(3,n/4), rep(4,n/4)) 
+
+##simulate Y
+y<- 10 + x + rnorm(n)
+
+par(mfrow=c(1,2))
+plot(x,y, main="Estimated E(Y) Overlaid")
+abline(h=mean(y)) ##add line to represent est E(Y)
+
+plot(x,y, col = ifelse(x == 1,'blue', 'black'), pch = 19, main="Estimated E(Y|X=1) Overlaid" )
+abline(h=mean(y[x=1]), col="blue") ##add line to represent est E(Y|X=1)
+```
+
+So, we can interpret the conditional expectation $E(Y|A)$ as the long-run average of $Y$ (only) when $A$ has happened. It is the long-run average of $Y$ when a certain condition is met. 
+
+### Conditional Expectation Given Random Variable
+
+The conditional Expectation of $Y$ given a random variable $X$ is slightly different. In the simulated example in the previous subsection, we set $X$ to be a specific condition. Now, we consider the long-run average of $Y$ across all values in the support of $X$. 
+
+One way to think about this is to consider $E(Y|X=x)$, where $x$ is any value on the support for $X$. If $Y$ is discrete, this conditional expectation is:
+
+\begin{equation} 
+E(Y|A) = \sum_y y P(Y=y|X=x) 
+(\#eq:5-condexpdis2)
+\end{equation}
+
+where the sum is over the support of $Y$. 
+
+If $Y$ is continuous:
+
+\begin{equation} 
+E(Y|A) = \int_{-\infty}^{\infty} y f(y|x) dy.
+(\#eq:5-condexpcont2)
+\end{equation}
+
+We go back to the simulated example in the previous subsection to explain what $E(Y|X=x)$ represents. Recall that the support for $X$ is $\{1,2,3,4\}$ and that $Y = 10 + X + \epsilon$ where $\epsilon \sim N(0,1)$. So
+
+$$
+\begin{split}
+E(Y|X=x) &= E(10 + X + \epsilon | X=x)\\
+ &= E(10 + x + \epsilon) \\
+ &= E(10) + E(x) + E(\epsilon) \\
+&= 10 + x + 0 \\
+ &= 10 + x.
+\end{split}
+$$
+
+A brief explanation of each step:
+
+- To go from line 1 to line 2, we subbed in $x$ for $X$, since we are setting $X=x$.
+- To go from line 2 to line 3, we apply the linearity of expectations.
+- To go from line 3 to 4, $E(c)=c$ for any constant. In this case, we are fixing $x$ to be a value in the support so it is a constant, and $E(\epsilon) = 0$ since $\epsilon \sim N(0,1)$.
+
+So $E(Y|X) = 10 + X$. What this means is that:
+
+- When $X=1$, $E(Y|X=1) = 11$,
+- When $X=2$, $E(Y|X=1) = 12$,
+- When $X=3$, $E(Y|X=1) = 13$, and
+- When $X=4$, $E(Y|X=1) = 14$.
+
+Note: We set up $Y = 10 + X + \epsilon$ where $\epsilon \sim N(0,1)$. This follows the framework for linear regression which sets up $Y = \beta_0 + \beta_1 X + \epsilon$ where $\epsilon \sim N(0,\sigma^2)$, i.e. $\epsilon$ is normal with mean 0 and a variance that is a fixed value. The conditional expectation given $X$ ends up being the prediction for $Y$ that minimizes the mean squared error in linear regression. 
 
 
 ## Common Multivariate Distributions
@@ -418,4 +607,4 @@ s_{x,y} = \frac{\sum_{i=1}^n (x_i - \bar{x})(y_i - \bar{y})}{n-1}
 
 ### Multivariate Normal
 
-## Conditional Expectation
+

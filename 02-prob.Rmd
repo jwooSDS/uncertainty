@@ -131,7 +131,7 @@ Note: most writers list these as three axioms. Our book combines the first two a
 
 We can easily see how equations \@ref(eq:comp) and \@ref(eq:union) can be derived from these axioms. Note that these equations and the axioms apply in all circumstances, regardless of whether the sample space is finite or not. 
 
-## Conditional Probability
+## Conditional Probability {#condprob}
 
 The concept of conditional probability appears in almost all statistical and data science models. In statistical models such as logistic regression, we are trying to use observable data (called predictors, input variables, etc) to model the probabilities associated with the different values of an outcome that is random (called response variable, output variable, etc). If the observable data are predictive of the outcome, then the probabilities associated with the outcome should indicate greater certainty, than if we do not have the observable data. Conditional probabilities allows us to incorporate observable data, or evidence, when evaluating uncertainty with random outcomes.
 
