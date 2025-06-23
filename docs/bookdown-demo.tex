@@ -127,7 +127,7 @@
 
 \title{Understanding Uncertainty Course Notes}
 \author{Jeffrey Woo}
-\date{2025-06-22}
+\date{2025-06-23}
 
 \begin{document}
 \maketitle
@@ -3019,6 +3019,8 @@ p_{X,Y}(x,y) = P(X=x, Y=y).
 
 Equation \eqref{eq:5-jointPMF} can be read as the probability that the random variables \(X\) and \(Y\) are equal to \(x\) and \(y\) respectively. Recall that upper case letters are usually used to denote random variables, and lower case letters are usually used as a placeholder for an actual numerical that the random variable could take.
 
+Joint distributions are sometimes called \textbf{multivariate distributions}. If we are looking at the distribution of one random variable, its distribution can be called a **univariate distribution*.
+
 Joint PMFs can be displayed via a table, like in Table \ref{tab:simple-table} below. In this example, we consider how study time, \(X\), is related with grades, \(Y\), with
 
 \begin{itemize}
@@ -3089,7 +3091,7 @@ F_{X,Y}(x,y) = P(X \leq x, Y \leq y).
 \label{eq:5-jointCDF}
 \end{equation}
 
-\emph{Thought question}: Compare equation \eqref{eq:5-jointCDF} with its univariate (one variable) counterpart in equation \eqref{eq:3-CDF}. Can you see the similarities and differences?
+\emph{Thought question}: Compare equation \eqref{eq:5-jointCDF} with its univariate counterpart in equation \eqref{eq:3-CDF}. Can you see the similarities and differences?
 
 \subsection{Marginal Distributions for Discrete RVs}\label{marginal-distributions-for-discrete-rvs}
 
@@ -3386,7 +3388,7 @@ Two random variables have a negative covariance and correlation if they move in 
 
 One more thing to note: covariance and correlations can be calculated for random variables as long as they are quantitative, but not if at least one of them is categorical. The concept of increasing a random variable that is categorical does not make intuitive sense, for example, if we have a random variable that denotes the color of eyes, what does increasing color of eyes mean?
 
-\subsection{Covariance}\label{covariance}
+\subsection{Covariance}\label{5-cov}
 
 We know define covariance. The \textbf{covariance} between random variables \(X\) and \(Y\) is
 
@@ -3545,7 +3547,7 @@ E(Y|A) = \sum_y y P(Y=y|A)
 \label{eq:5-condexpdis}
 \end{equation}
 
-where the sum is over the support of \(Y\).
+where the sum is over the support of \(Y\). Notice how we are summing the product of the support with its corresponding conditional probability, whereas to find \(E(Y)\), we sum the product of the support with its corresponding unconditional probability.
 
 If \(Y\) is continuous, we use the conditional PDF instead:
 
@@ -3660,7 +3662,98 @@ Note: We set up \(Y = 10 + X + \epsilon\) where \(\epsilon \sim N(0,1)\). This f
 
 \section{Common Multivariate Distributions}\label{common-multivariate-distributions}
 
+We now cover two of the most common multivariate distributions: the multinomial distribution and multivariate normal distribution for discrete and continuous random variables respectively.
+
 \subsection{Multinomial}\label{multinomial}
+
+The \textbf{multinomial} distribution can be viewed as a generalization of the binomial distribution. Recall that for the binomial, we carry out \(n\) trials, and for each trial we record whether it as a success or failure, in other words, there are only two outcomes for each trial. The multinomial distribution differs in that there can be more than two outcomes for each trial. For example, we randomly select \(n\) adults and ask them for their political affiliation. The affiliation could be Democrat, Republican, other party, no affiliation, so there are four possible outcomes or categories for each person.
+
+The set up of the multinomial distribution is as follows:
+
+\begin{itemize}
+\tightlist
+\item
+  We have \(n\) independent trials, and each trial belongs to one of \(k\) categories.
+\item
+  Each trial belongs to category \(j\) with probability \(p_j\), where \(p_j\) are non negative and \(\sum_{j=1}^k = 1\), i.e.~they sum to one.
+\item
+  Let \(X_1\) denote the number of trials belonging to category 1, \(X_2\) denote the number of trials belonging to category 2, and so on. Then \(X_1 + \cdots X_k = n\).
+\end{itemize}
+
+We then say that \(\boldsymbol{X} = (X_1, \cdots, X_k)\) is said to have a multinomial distribution with parameters \(n\) and \(\boldsymbol{p} = (p_1, \cdots, p_k)\). This can be written as \(\boldsymbol{X} \sim Mult_k(n, \boldsymbol{p})\).
+
+Note that the vectors \(\boldsymbol{X}\) and \(\boldsymbol{p}\) are written in bold. Vectors and matrices are commonly written using bold to distinguish them from scalars, which are not bolded. \(\boldsymbol{X}\) is an example of what we call a random vector, as it is a vector of random variables \(X_1, \cdots, X_k\).
+
+If \(\boldsymbol{X} \sim Mult_k(n, \boldsymbol{p})\), its PMF is
+
+\begin{equation} 
+P(X_1 = n_1, \cdots, X_k = n_k) = \frac{n!}{n_{1}! \cdots n_{k}!} p_1^{n_1} \cdots p_k^{n_k},
+\label{eq:5-multinomial}
+\end{equation}
+
+where \(n_1 + \cdots + n_k = n\).
+
+Let us use a toy example. Going back to political affiliations. Suppose among American voters, 28\% identify as Democrats, 29\% identify as Republicans, and 10\% identify have other affiliations, and 33\% are independents. Let \(X_1, X_2, X_3, X_4\) denote the number of Democrats, Republicans, others, and indepndents. The joint distribution of \(X_1, X_2, X_3, X_4\) is \(\boldsymbol{X} = (X_1, X_2, X_3, X_4) \sim Mult_4(0.28, 0.29, 0.1, 0.33)\).
+
+Suppose we want to find the probability that in a sample of 10 voters, 2 are Democrats, 3 are Republicans, and 1 has another affiliation, and 4 are Independents:
+
+\[
+\begin{split}
+P(X_1 = 2, X_2 = 3, X_3 = 1, X_4 = 4) &= \frac{10!}{2! 3! 1!4!} 0.28^{2} 0.29^{3} 0.1^1 0.33^4\\
+ &= 0.02857172.
+\end{split}
+\]
+
+Or use
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{dmultinom}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{4}\NormalTok{), }\AttributeTok{prob=}\FunctionTok{c}\NormalTok{(}\FloatTok{0.28}\NormalTok{,}\FloatTok{0.29}\NormalTok{,}\FloatTok{0.1}\NormalTok{,}\FloatTok{0.33}\NormalTok{)) }\DocumentationTok{\#\#specify X1, X2, X3, X4, then p1,p2,p3, p4}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.02857172
+\end{verbatim}
+
+\subsubsection{Multinomial Marginals}\label{multinomial-marginals}
+
+The marginals of a multinomial are binomial. For \(\boldsymbol{X} \sim Mult_k(n, \boldsymbol{p})\), \(X_j \sim Bin(n, p_j)\).
+
+Going back to our toy example with American voters, this means that \(X_1 \sim Bin(n,0.28), X_2 \sim Bin(n,0.29), X_3 \sim Bin(n, 0.1), X_4 \sim Bin(n,0.33)\). Hopefully this example makes sense. If we look at \(X_1,\) we are looking at the number of voters who are democrats and those who are not. The proportion of Democrats still remains the same, while the proportion of Republicans, other affiliations, and independents is the sum of their individual proportions, or 1 minus the proportion of Democrats.
+
+\subsubsection{Multinomial Lumping}\label{multinomial-lumping}
+
+With discrete and categorical variables, it can be common to want to lump (or merge, or collapse, or combine) categories together.
+
+We go back to our toy example. Suppose we consider Democrats and Republicans to be the major parties, we may wish to combine everyone else into one category: those with other affiliations and independents. We can define this using a new random variable \(\boldsymbol{Y} = (X_1, X_2, X_3+X_4) \sim Mult_3(n,(0.29,0.29,0.43)\). Note we now have 3 categories instead of 4. The proportion for the lumped category is the sum of their individual proportions.
+
+\subsubsection{Multinomial Covariance}\label{multinomial-covariance}
+
+For \(\boldsymbol{X} \sim Mult_k(n, \boldsymbol{p})\) with \(\boldsymbol{p} = (p_1,p_2, \cdots, p_k)\). The covariance between any two distinct components \(X_i\) and \(X_j\) is
+
+\begin{equation} 
+Cov(X_i, X_j) = -n p_i p_j,
+\label{eq:5-multinomialcov}
+\end{equation}
+
+for any \(i \neq j\). The book provides a nice proof, under Theorem 7.4.6, for those interested.
+
+Looking at \eqref{eq:5-multinomialcov}, we notice the covariance between any two distinct components is negative (since probabilities are non negative). This means that the numerical values of \(X_i\) and \(X_j\) go in opposite directions. This should make intuitive sense since \(n = X_1 + \cdots + X_k\) is fixed, so if \(X_i\) is large, \(X_j\) should be small since \(n\) is fixed. An extreme example will be if \(X_i = n\), then \(X_j\) must be 0.
+
+We go back to our toy example. Suppose we want to find the correlation between \(X_1\) and \(X_2\), the number of Democrats and Republicans in a sample of size \(n\). Note that \(X_1 \sim Bin(n,0.28), X_2 \sim Bin(n,0.29)\), and \(Cov(X_1,X_2) = -n \times 0.28 \times 0.29 = 0.0812n\),
+
+\[
+\begin{split}
+Corr(X_1,X_2) &= \frac{Cov(X_1,X_2)}{\sqrt{Var(X_1) Var(X_2)}}\\
+ &= \frac{-n p_1 p_2}{\sqrt{n p_1 (1-p_1) n p_2 (1-p_2)}} \\
+ &= -\sqrt{\frac{p_1 p_2}{(1-p_1)(1-p_2)}} \\
+ &= -\sqrt{\frac{0.28 \times 0.29}{(1-0.28)(1-0.29)}} \\
+ &= -0.3985498.
+\end{split}
+\]
+
+\subsubsection{Conditional Multinomial}\label{conditional-multinomial}
 
 \subsection{Multivariate Normal}\label{multivariate-normal}
 

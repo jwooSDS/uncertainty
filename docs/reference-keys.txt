@@ -121,6 +121,8 @@ eq:5-condexpcont
 fig:5-condexp
 eq:5-condexpdis2
 eq:5-condexpcont2
+eq:5-multinomial
+eq:5-multinomialcov
 examples
 example-1-mario-kart-auction-prices
 eg2
@@ -241,11 +243,15 @@ law-of-total-probability-1
 indepdence-of-discrete-rvs
 joint-marginal-conditional-distributions-for-continuous-rvs
 covariance-and-correlation
-covariance
+id_5-cov
 correlation
 conditional-expectation
 conditional-expectation-given-event
 conditional-expectation-given-random-variable
 common-multivariate-distributions
 multinomial
+multinomial-marginals
+multinomial-lumping
+multinomial-covariance
+conditional-multinomial
 multivariate-normal

@@ -84,6 +84,7 @@ p_{X,Y}(x,y) = P(X=x, Y=y).
 \tag{5.1}
 \end{equation}\]</span></p>
 <p>Equation <a href="joint-distributions.html#eq:5-jointPMF">(5.1)</a> can be read as the probability that the random variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are equal to <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> respectively. Recall that upper case letters are usually used to denote random variables, and lower case letters are usually used as a placeholder for an actual numerical that the random variable could take.</p>
+<p>Joint distributions are sometimes called <strong>multivariate distributions</strong>. If we are looking at the distribution of one random variable, its distribution can be called a **univariate distribution*.</p>
 <p>Joint PMFs can be displayed via a table, like in Table <a href="joint-distributions.html#tab:simple-table">5.1</a> below. In this example, we consider how study time, <span class="math inline">\(X\)</span>, is related with grades, <span class="math inline">\(Y\)</span>, with</p>
 <ul>
 <li>
@@ -148,7 +149,7 @@ p_{X,Y}(x,y) = P(X=x, Y=y).
 F_{X,Y}(x,y) = P(X \leq x, Y \leq y).
 \tag{5.2}
 \end{equation}\]</span></p>
-<p><em>Thought question</em>: Compare equation <a href="joint-distributions.html#eq:5-jointCDF">(5.2)</a> with its univariate (one variable) counterpart in equation <a href="discrete-random-variables.html#eq:3-CDF">(3.1)</a>. Can you see the similarities and differences?</p>
+<p><em>Thought question</em>: Compare equation <a href="joint-distributions.html#eq:5-jointCDF">(5.2)</a> with its univariate counterpart in equation <a href="discrete-random-variables.html#eq:3-CDF">(3.1)</a>. Can you see the similarities and differences?</p>
 <div id="marginal-distributions-for-discrete-rvs" class="section level3" number="5.2.1">
 <h3>
 <span class="header-section-number">5.2.1</span> Marginal Distributions for Discrete RVs<a class="anchor" aria-label="anchor" href="#marginal-distributions-for-discrete-rvs"><i class="fas fa-link"></i></a>
@@ -434,9 +435,9 @@ Figure 5.1: Positive Covariance (Left), Negative Covariance (Right)
 </p>
 </div>
 <p>One more thing to note: covariance and correlations can be calculated for random variables as long as they are quantitative, but not if at least one of them is categorical. The concept of increasing a random variable that is categorical does not make intuitive sense, for example, if we have a random variable that denotes the color of eyes, what does increasing color of eyes mean?</p>
-<div id="covariance" class="section level3" number="5.4.1">
+<div id="id_5-cov" class="section level3" number="5.4.1">
 <h3>
-<span class="header-section-number">5.4.1</span> Covariance<a class="anchor" aria-label="anchor" href="#covariance"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.4.1</span> Covariance<a class="anchor" aria-label="anchor" href="#id_5-cov"><i class="fas fa-link"></i></a>
 </h3>
 <p>We know define covariance. The <strong>covariance</strong> between random variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> is</p>
 <p><span class="math display" id="eq:5-cov">\[\begin{equation}
@@ -546,7 +547,7 @@ Figure 5.3: Strong Negative Correlation (Left), No Correlation (Middle), Moderat
 E(Y|A) = \sum_y y P(Y=y|A)
 \tag{5.24}
 \end{equation}\]</span></p>
-<p>where the sum is over the support of <span class="math inline">\(Y\)</span>.</p>
+<p>where the sum is over the support of <span class="math inline">\(Y\)</span>. Notice how we are summing the product of the support with its corresponding conditional probability, whereas to find <span class="math inline">\(E(Y)\)</span>, we sum the product of the support with its corresponding unconditional probability.</p>
 <p>If <span class="math inline">\(Y\)</span> is continuous, we use the conditional PDF instead:</p>
 <p><span class="math display" id="eq:5-condexpcont">\[\begin{equation}
 E(Y|A) = \int_{-\infty}^{\infty} y f(y|A) dy.
@@ -630,10 +631,79 @@ E(Y|X=x) &amp;= E(10 + X + \epsilon | X=x)\\
 <h2>
 <span class="header-section-number">5.6</span> Common Multivariate Distributions<a class="anchor" aria-label="anchor" href="#common-multivariate-distributions"><i class="fas fa-link"></i></a>
 </h2>
+<p>We now cover two of the most common multivariate distributions: the multinomial distribution and multivariate normal distribution for discrete and continuous random variables respectively.</p>
 <div id="multinomial" class="section level3" number="5.6.1">
 <h3>
 <span class="header-section-number">5.6.1</span> Multinomial<a class="anchor" aria-label="anchor" href="#multinomial"><i class="fas fa-link"></i></a>
 </h3>
+<p>The <strong>multinomial</strong> distribution can be viewed as a generalization of the binomial distribution. Recall that for the binomial, we carry out <span class="math inline">\(n\)</span> trials, and for each trial we record whether it as a success or failure, in other words, there are only two outcomes for each trial. The multinomial distribution differs in that there can be more than two outcomes for each trial. For example, we randomly select <span class="math inline">\(n\)</span> adults and ask them for their political affiliation. The affiliation could be Democrat, Republican, other party, no affiliation, so there are four possible outcomes or categories for each person.</p>
+<p>The set up of the multinomial distribution is as follows:</p>
+<ul>
+<li>We have <span class="math inline">\(n\)</span> independent trials, and each trial belongs to one of <span class="math inline">\(k\)</span> categories.</li>
+<li>Each trial belongs to category <span class="math inline">\(j\)</span> with probability <span class="math inline">\(p_j\)</span>, where <span class="math inline">\(p_j\)</span> are non negative and <span class="math inline">\(\sum_{j=1}^k = 1\)</span>, i.e. they sum to one.</li>
+<li>Let <span class="math inline">\(X_1\)</span> denote the number of trials belonging to category 1, <span class="math inline">\(X_2\)</span> denote the number of trials belonging to category 2, and so on. Then <span class="math inline">\(X_1 + \cdots X_k = n\)</span>.</li>
+</ul>
+<p>We then say that <span class="math inline">\(\boldsymbol{X} = (X_1, \cdots, X_k)\)</span> is said to have a multinomial distribution with parameters <span class="math inline">\(n\)</span> and <span class="math inline">\(\boldsymbol{p} = (p_1, \cdots, p_k)\)</span>. This can be written as <span class="math inline">\(\boldsymbol{X} \sim Mult_k(n, \boldsymbol{p})\)</span>.</p>
+<p>Note that the vectors <span class="math inline">\(\boldsymbol{X}\)</span> and <span class="math inline">\(\boldsymbol{p}\)</span> are written in bold. Vectors and matrices are commonly written using bold to distinguish them from scalars, which are not bolded. <span class="math inline">\(\boldsymbol{X}\)</span> is an example of what we call a random vector, as it is a vector of random variables <span class="math inline">\(X_1, \cdots, X_k\)</span>.</p>
+<p>If <span class="math inline">\(\boldsymbol{X} \sim Mult_k(n, \boldsymbol{p})\)</span>, its PMF is</p>
+<p><span class="math display" id="eq:5-multinomial">\[\begin{equation}
+P(X_1 = n_1, \cdots, X_k = n_k) = \frac{n!}{n_{1}! \cdots n_{k}!} p_1^{n_1} \cdots p_k^{n_k},
+\tag{5.28}
+\end{equation}\]</span></p>
+<p>where <span class="math inline">\(n_1 + \cdots + n_k = n\)</span>.</p>
+<p>Let us use a toy example. Going back to political affiliations. Suppose among American voters, 28% identify as Democrats, 29% identify as Republicans, and 10% identify have other affiliations, and 33% are independents. Let <span class="math inline">\(X_1, X_2, X_3, X_4\)</span> denote the number of Democrats, Republicans, others, and indepndents. The joint distribution of <span class="math inline">\(X_1, X_2, X_3, X_4\)</span> is <span class="math inline">\(\boldsymbol{X} = (X_1, X_2, X_3, X_4) \sim Mult_4(0.28, 0.29, 0.1, 0.33)\)</span>.</p>
+<p>Suppose we want to find the probability that in a sample of 10 voters, 2 are Democrats, 3 are Republicans, and 1 has another affiliation, and 4 are Independents:</p>
+<p><span class="math display">\[
+\begin{split}
+P(X_1 = 2, X_2 = 3, X_3 = 1, X_4 = 4) &amp;= \frac{10!}{2! 3! 1!4!} 0.28^{2} 0.29^{3} 0.1^1 0.33^4\\
+&amp;= 0.02857172.
+\end{split}
+\]</span></p>
+<p>Or use</p>
+<div class="sourceCode" id="cb81"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Multinom.html">dmultinom</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">1</span>,<span class="fl">4</span><span class="op">)</span>, prob<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.28</span>,<span class="fl">0.29</span>,<span class="fl">0.1</span>,<span class="fl">0.33</span><span class="op">)</span><span class="op">)</span> <span class="co">##specify X1, X2, X3, X4, then p1,p2,p3, p4</span></span></code></pre></div>
+<pre><code>## [1] 0.02857172</code></pre>
+<div id="multinomial-marginals" class="section level4" number="5.6.1.1">
+<h4>
+<span class="header-section-number">5.6.1.1</span> Multinomial Marginals<a class="anchor" aria-label="anchor" href="#multinomial-marginals"><i class="fas fa-link"></i></a>
+</h4>
+<p>The marginals of a multinomial are binomial. For <span class="math inline">\(\boldsymbol{X} \sim Mult_k(n, \boldsymbol{p})\)</span>, <span class="math inline">\(X_j \sim Bin(n, p_j)\)</span>.</p>
+<p>Going back to our toy example with American voters, this means that <span class="math inline">\(X_1 \sim Bin(n,0.28), X_2 \sim Bin(n,0.29), X_3 \sim Bin(n, 0.1), X_4 \sim Bin(n,0.33)\)</span>. Hopefully this example makes sense. If we look at <span class="math inline">\(X_1,\)</span> we are looking at the number of voters who are democrats and those who are not. The proportion of Democrats still remains the same, while the proportion of Republicans, other affiliations, and independents is the sum of their individual proportions, or 1 minus the proportion of Democrats.</p>
+</div>
+<div id="multinomial-lumping" class="section level4" number="5.6.1.2">
+<h4>
+<span class="header-section-number">5.6.1.2</span> Multinomial Lumping<a class="anchor" aria-label="anchor" href="#multinomial-lumping"><i class="fas fa-link"></i></a>
+</h4>
+<p>With discrete and categorical variables, it can be common to want to lump (or merge, or collapse, or combine) categories together.</p>
+<p>We go back to our toy example. Suppose we consider Democrats and Republicans to be the major parties, we may wish to combine everyone else into one category: those with other affiliations and independents. We can define this using a new random variable <span class="math inline">\(\boldsymbol{Y} = (X_1, X_2, X_3+X_4) \sim Mult_3(n,(0.29,0.29,0.43)\)</span>. Note we now have 3 categories instead of 4. The proportion for the lumped category is the sum of their individual proportions.</p>
+</div>
+<div id="multinomial-covariance" class="section level4" number="5.6.1.3">
+<h4>
+<span class="header-section-number">5.6.1.3</span> Multinomial Covariance<a class="anchor" aria-label="anchor" href="#multinomial-covariance"><i class="fas fa-link"></i></a>
+</h4>
+<p>For <span class="math inline">\(\boldsymbol{X} \sim Mult_k(n, \boldsymbol{p})\)</span> with <span class="math inline">\(\boldsymbol{p} = (p_1,p_2, \cdots, p_k)\)</span>. The covariance between any two distinct components <span class="math inline">\(X_i\)</span> and <span class="math inline">\(X_j\)</span> is</p>
+<p><span class="math display" id="eq:5-multinomialcov">\[\begin{equation}
+Cov(X_i, X_j) = -n p_i p_j,
+\tag{5.29}
+\end{equation}\]</span></p>
+<p>for any <span class="math inline">\(i \neq j\)</span>. The book provides a nice proof, under Theorem 7.4.6, for those interested.</p>
+<p>Looking at <a href="joint-distributions.html#eq:5-multinomialcov">(5.29)</a>, we notice the covariance between any two distinct components is negative (since probabilities are non negative). This means that the numerical values of <span class="math inline">\(X_i\)</span> and <span class="math inline">\(X_j\)</span> go in opposite directions. This should make intuitive sense since <span class="math inline">\(n = X_1 + \cdots + X_k\)</span> is fixed, so if <span class="math inline">\(X_i\)</span> is large, <span class="math inline">\(X_j\)</span> should be small since <span class="math inline">\(n\)</span> is fixed. An extreme example will be if <span class="math inline">\(X_i = n\)</span>, then <span class="math inline">\(X_j\)</span> must be 0.</p>
+<p>We go back to our toy example. Suppose we want to find the correlation between <span class="math inline">\(X_1\)</span> and <span class="math inline">\(X_2\)</span>, the number of Democrats and Republicans in a sample of size <span class="math inline">\(n\)</span>. Note that <span class="math inline">\(X_1 \sim Bin(n,0.28), X_2 \sim Bin(n,0.29)\)</span>, and <span class="math inline">\(Cov(X_1,X_2) = -n \times 0.28 \times 0.29 = 0.0812n\)</span>,</p>
+<p><span class="math display">\[
+\begin{split}
+Corr(X_1,X_2) &amp;= \frac{Cov(X_1,X_2)}{\sqrt{Var(X_1) Var(X_2)}}\\
+&amp;= \frac{-n p_1 p_2}{\sqrt{n p_1 (1-p_1) n p_2 (1-p_2)}} \\
+&amp;= -\sqrt{\frac{p_1 p_2}{(1-p_1)(1-p_2)}} \\
+&amp;= -\sqrt{\frac{0.28 \times 0.29}{(1-0.28)(1-0.29)}} \\
+&amp;= -0.3985498.
+\end{split}
+\]</span></p>
+</div>
+<div id="conditional-multinomial" class="section level4" number="5.6.1.4">
+<h4>
+<span class="header-section-number">5.6.1.4</span> Conditional Multinomial<a class="anchor" aria-label="anchor" href="#conditional-multinomial"><i class="fas fa-link"></i></a>
+</h4>
+</div>
 </div>
 <div id="multivariate-normal" class="section level3" number="5.6.2">
 <h3>
@@ -663,7 +733,7 @@ E(Y|X=x) &amp;= E(10 + X + \epsilon | X=x)\\
 <li><a class="nav-link" href="#joint-marginal-conditional-distributions-for-continuous-rvs"><span class="header-section-number">5.3</span> Joint, Marginal, Conditional Distributions for Continuous RVs</a></li>
 <li>
 <a class="nav-link" href="#covariance-and-correlation"><span class="header-section-number">5.4</span> Covariance and Correlation</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#covariance"><span class="header-section-number">5.4.1</span> Covariance</a></li>
+<li><a class="nav-link" href="#id_5-cov"><span class="header-section-number">5.4.1</span> Covariance</a></li>
 <li><a class="nav-link" href="#correlation"><span class="header-section-number">5.4.2</span> Correlation</a></li>
 </ul>
 </li>
@@ -695,7 +765,7 @@ E(Y|X=x) &amp;= E(10 + X + \epsilon | X=x)\\
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2025-06-22.</p>
+    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2025-06-23.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
