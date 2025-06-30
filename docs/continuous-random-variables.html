@@ -429,9 +429,9 @@ Figure 4.9: PDF of Standard Normal
 <p>There is actually no closed-formed equation for the CDF of a standard normal (or any normal distribution). We write <span class="math inline">\(\Phi(z) = P(Z \leq z) = \int_{\infty}^z \phi(z) dz\)</span> to express the CDF of a standard normal.</p>
 <p>Notice that we have special letters <span class="math inline">\(Z, \phi, \Phi\)</span> to denote the standard normal distribution. This is an indication of how often it is used to warrant its own notation.</p>
 </div>
-<div id="from-standard-normal-to-other-normals" class="section level4" number="4.5.2.2">
+<div id="norm" class="section level4" number="4.5.2.2">
 <h4>
-<span class="header-section-number">4.5.2.2</span> From Standard Normal to Other Normals<a class="anchor" aria-label="anchor" href="#from-standard-normal-to-other-normals"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.5.2.2</span> From Standard Normal to Other Normals<a class="anchor" aria-label="anchor" href="#norm"><i class="fas fa-link"></i></a>
 </h4>
 <p>If <span class="math inline">\(Z \sim N(0,1)\)</span>, then <span class="math inline">\(X = \mu + \sigma Z \sim N(\mu, \sigma^2)\)</span>. In other words, if <span class="math inline">\(Z\)</span> is standard normal, then <span class="math inline">\(X = \mu + \sigma Z\)</span> follows a normal distribution with mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^2\)</span>. The parameters of a normal distribution are the mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^2\)</span>.</p>
 <p>Note that some authors say the parameters are the mean <span class="math inline">\(\mu\)</span> and standard deviation <span class="math inline">\(\sigma\)</span> instead, so be careful when reading notation associated with normal distributions from various sources. For example, <span class="math inline">\(N(0,2)\)</span> in our class and our book means normal distribution with mean 0 and variance 2, but for some other authors, <span class="math inline">\(N(0,2)\)</span> means normal distribution with mean 0 and standard deviation 2. Indeed, the functions in R use this alternate parameterization, so you need to be careful.</p>
@@ -720,7 +720,7 @@ s_X^2 =  \frac{1}{n-1} \sum_{i=1}^n (x_i - \bar{x})^2,
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2025-06-23.</p>
+    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2025-06-30.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

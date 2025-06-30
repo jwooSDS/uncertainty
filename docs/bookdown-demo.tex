@@ -127,7 +127,7 @@
 
 \title{Understanding Uncertainty Course Notes}
 \author{Jeffrey Woo}
-\date{2025-06-23}
+\date{2025-06-30}
 
 \begin{document}
 \maketitle
@@ -2588,7 +2588,7 @@ There is actually no closed-formed equation for the CDF of a standard normal (or
 
 Notice that we have special letters \(Z, \phi, \Phi\) to denote the standard normal distribution. This is an indication of how often it is used to warrant its own notation.
 
-\subsubsection{From Standard Normal to Other Normals}\label{from-standard-normal-to-other-normals}
+\subsubsection{From Standard Normal to Other Normals}\label{norm}
 
 If \(Z \sim N(0,1)\), then \(X = \mu + \sigma Z \sim N(\mu, \sigma^2)\). In other words, if \(Z\) is standard normal, then \(X = \mu + \sigma Z\) follows a normal distribution with mean \(\mu\) and variance \(\sigma^2\). The parameters of a normal distribution are the mean \(\mu\) and variance \(\sigma^2\).
 
@@ -2986,7 +2986,7 @@ So our data is also right skewed and heavy tailed.
 
 \chapter{Joint Distributions}\label{joint-distributions}
 
-This module is based on Introduction to Probability (Blitzstein, Hwang), Chapters 7 and 9. You can access the book for free at \url{https://stat110.hsites.harvard.edu/} (and then click on Book). Please note that I cover additional topics, and skip certain topics from the book. You may skip ??? from the book.
+This module is based on Introduction to Probability (Blitzstein, Hwang), Chapters 7 and 9. You can access the book for free at \url{https://stat110.hsites.harvard.edu/} (and then click on Book). Please note that I cover additional topics, and skip certain topics from the book. You may skip Story 7.1.9, Theorems 7.1.10 to 7.1.12, Examples 7.1.23 to 7.1.26, Section 7.2, Examples 7.3.6 to 7.3.8, 7.4.8 (parts d and f only), Definition 7.5.6, Examples 9.1.8 to 9.1.10, Example 9.2.5, Theorem 9.3.2, Example 9.3.3, Theorems 9.3.7 to 9.3.9, and Sections 9.4 to 9.6 from the book.
 
 \section{Introduction}\label{introduction-1}
 
@@ -3666,7 +3666,7 @@ We now cover two of the most common multivariate distributions: the multinomial 
 
 \subsection{Multinomial}\label{multinomial}
 
-The \textbf{multinomial} distribution can be viewed as a generalization of the binomial distribution. Recall that for the binomial, we carry out \(n\) trials, and for each trial we record whether it as a success or failure, in other words, there are only two outcomes for each trial. The multinomial distribution differs in that there can be more than two outcomes for each trial. For example, we randomly select \(n\) adults and ask them for their political affiliation. The affiliation could be Democrat, Republican, other party, no affiliation, so there are four possible outcomes or categories for each person.
+The \textbf{multinomial} distribution can be viewed as a generalization of the binomial distribution into higher dimensions. Recall that for the binomial, we carry out \(n\) trials, and for each trial we record whether it as a success or failure, in other words, there are only two outcomes for each trial. The multinomial distribution differs in that there can be more than two outcomes for each trial. For example, we randomly select \(n\) adults and ask them for their political affiliation. The affiliation could be Democrat, Republican, other party, no affiliation, so there are four possible outcomes or categories for each person.
 
 The set up of the multinomial distribution is as follows:
 
@@ -3693,7 +3693,7 @@ P(X_1 = n_1, \cdots, X_k = n_k) = \frac{n!}{n_{1}! \cdots n_{k}!} p_1^{n_1} \cdo
 
 where \(n_1 + \cdots + n_k = n\).
 
-Let us use a toy example. Going back to political affiliations. Suppose among American voters, 28\% identify as Democrats, 29\% identify as Republicans, and 10\% identify have other affiliations, and 33\% are independents. Let \(X_1, X_2, X_3, X_4\) denote the number of Democrats, Republicans, others, and indepndents. The joint distribution of \(X_1, X_2, X_3, X_4\) is \(\boldsymbol{X} = (X_1, X_2, X_3, X_4) \sim Mult_4(0.28, 0.29, 0.1, 0.33)\).
+Let us use a toy example. Going back to political affiliations. Suppose among American voters, 28\% identify as Democrats, 29\% identify as Republicans, and 10\% identify have other affiliations, and 33\% are independents. Let \(X_1, X_2, X_3, X_4\) denote the number of Democrats, Republicans, others, and independents. The joint distribution of \(X_1, X_2, X_3, X_4\) is \(\boldsymbol{X} = (X_1, X_2, X_3, X_4) \sim Mult_4(0.28, 0.29, 0.1, 0.33)\).
 
 Suppose we want to find the probability that in a sample of 10 voters, 2 are Democrats, 3 are Republicans, and 1 has another affiliation, and 4 are Independents:
 
@@ -3724,7 +3724,7 @@ Going back to our toy example with American voters, this means that \(X_1 \sim B
 
 \subsubsection{Multinomial Lumping}\label{multinomial-lumping}
 
-With discrete and categorical variables, it can be common to want to lump (or merge, or collapse, or combine) categories together.
+With discrete and categorical variables, it can be common to want to lump (or merge, or collapse, or combine) categories together. If \(\boldsymbol{X} \sim Mult_k(n, \boldsymbol{p})\), then \(X_i + X_j \sim Bin(n, p_i + p_j)\). If we decide to merge categories 1 and 2, we have \((X_1 + X_2, X_3, \cdots, X_k) \sim Mult_{k-1}(n, (p_1 + p_2, p_3, \cdots, p_k))\).
 
 We go back to our toy example. Suppose we consider Democrats and Republicans to be the major parties, we may wish to combine everyone else into one category: those with other affiliations and independents. We can define this using a new random variable \(\boldsymbol{Y} = (X_1, X_2, X_3+X_4) \sim Mult_3(n,(0.29,0.29,0.43)\). Note we now have 3 categories instead of 4. The proportion for the lumped category is the sum of their individual proportions.
 
@@ -3755,7 +3755,178 @@ Corr(X_1,X_2) &= \frac{Cov(X_1,X_2)}{\sqrt{Var(X_1) Var(X_2)}}\\
 
 \subsubsection{Conditional Multinomial}\label{conditional-multinomial}
 
+Sometimes, we have some observed data from a multinomial distribution, and wish to update the distribution. Suppose we have \(\boldsymbol{X} \sim Mult_k(n, \boldsymbol{p})\), and we observed that \(X_1 = n_1\), then \((X_2, \cdots, X_k)|X_1 = n_1 \sim Mult_{k-1}(n-n_1, (p_2^{\prime}, \cdots, p_k^{\prime}))\) where \(p_j^{\prime} = \frac{p_j}{p_2 + \cdots + p_k}\).
+
 \subsection{Multivariate Normal}\label{multivariate-normal}
+
+The \textbf{multivariate normal} (MVN) distribution can be viewed as a generalization of the normal distribution into higher dimensions. Just like the univariate normal distribution, the central limit theorem also applies to higher dimensions.
+
+A \(k\)-dimensional random vector \(\boldsymbol{X} = (X_1, \cdots, X_k)\) is said to have an MVN distribution if every linear combination of the \(X_j\) is normal. This means that \(t_1 X_1 + \cdots + t_k X_k\) is normally distributed for any constants \(t_1, \cdots, t_k\). When \(k=2\), the MVN is often called a \textbf{bivarirate normal}.
+
+In Section \ref{norm}, we mentioned that the parameters of a normal distribution are its mean \(\mu\) and variance \(\sigma^2\). This idea is generalized to a MVN \(\boldsymbol{X} = (X_1, \cdots, X_k)\). The parameters are:
+
+\begin{itemize}
+\item
+  the \textbf{mean vector} \((\mu_1, \cdots, \mu_k)\) where \(\mu_j = E(X_j)\). This is a vector of length \(k\) where each entry is the expected value of that component.
+\item
+  the \textbf{covariance matrix}. This is a \(k \times k\) matrix where the \((i,j)\)th entry (i.e.~row \(i\), column \(j\)) is the covariance between \(X_i\) and \(X_j\). This implies that the diagonal entries give the variance of each component, and the covariance matrix is symmetric.
+\end{itemize}
+
+For example, suppose we have \(\boldsymbol{X} = (X_1, X_2, X_3)\) that is MVN with mean vector \((5, 2, 8)\) and covariance matrix
+
+\[
+\begin{pmatrix}
+3 & 1.5 & 2.5\\
+1.5 & 2 & 4.2 \\
+2.5 & 4.2 & 1
+\end{pmatrix},
+\]
+
+then
+
+\begin{itemize}
+\tightlist
+\item
+  \(E(X_1) = 5, E(X_2) = 2, E(X_3) = 8\),
+\item
+  \(Var(X_1) = 3, Var(X_2) = 2, Var(X_3) = 1\),
+\item
+  \(Cov(X_1, X_2) = Cov(X_2, X_1) = 1.5\),
+\item
+  \(Cov(X_1, X_3) = Cov(X_3, X_1) = 2.5\), and
+\item
+  \(Cov(X_2, X_3) = Cov(X_3, X_2) = 4.2\).
+\end{itemize}
+
+Some properties of MVN distribution:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  If \(\boldsymbol{X} = (X_1, \cdots, X_k)\) is MVN, the marginal distribution of each \(X_j\) is normal, as we can set \(t_j =1\) and all other constants to be 0.
+\item
+  However, the converse is not necessarily true. If each \(X_1, \cdots, X_k\) is normal, \((X_1, \cdots, X_k)\) is not necessarily MVN.
+\item
+  If \((X_1, \cdots, X_k)\) is MVN, then so is any subvector, e.g.~\((X_i, X_j)\) is bivariate normal.
+\item
+  If \(\boldsymbol{X} = (X_1, \cdots, X_k)\) and \(\boldsymbol{Y} = (Y_1, \cdots, Y_m)\) are MVN with \(\boldsymbol{X}\) independent of \(\boldsymbol{Y}\), then \(\boldsymbol{W} = ((X_1, \cdots, X_k, Y_1, \cdots, Y_m)\) is MVN.
+\item
+  Within an MVN random vector, uncorrelated implies independence. If \(\boldsymbol{X}\) is MVN and \(\boldsymbol{X} = (\boldsymbol{X_1, X_2})\) where \(\boldsymbol{X_1}\) and \(\boldsymbol{X_2}\) are subvetors, and every component of \(\boldsymbol{X_1}\) is uncorrelated with every component of \(\boldsymbol{X_2}\), then \(\boldsymbol{X_1}\) and \(\boldsymbol{X_2}\) are independent.
+\end{enumerate}
+
+\subsubsection{Simulations}\label{simulations}
+
+We can use simulations to verify the first property. For this simulation, we will do the following:
+
+\begin{itemize}
+\tightlist
+\item
+  Simulate 5000 draws from a MVN distribution with mean vector \((1,2,5)\) and covariance matrix
+\end{itemize}
+
+\[
+\begin{pmatrix}
+1 & 0.5 & 0.6\\
+0.5 & 2 & 0.2 \\
+0.6 & 0.2 & 4
+\end{pmatrix}.
+\]
+
+\begin{itemize}
+\item
+  Assess if each component \(X_1, X_2, X_3\) is normally distributed by using the Shapiro-Wilk test for normality.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    The null hypothesis is that the variable follows a normal distribution, and the alternative hypothesis is that the variable does not follow a normal distribution.
+  \item
+    So rejecting the null hypothesis means the variable is inconsistent with a normal distribution, while not rejecting means we do not have evidence the variable is inconsistent with a normal distribution.
+  \item
+    We will record the p-value of each test on \(X_1, X_2, X_3\).
+  \end{itemize}
+\item
+  Repeat the previous 2 steps for a total of 10 thousand reps.
+\item
+  Count the proportion of reps where the Shapiro-Wilk test rejected the null hypothesis at significance level 0.05 for \(X_1, X_2, X_3\).
+
+  \begin{itemize}
+  \tightlist
+  \item
+    If this property is correct, we will expect close to 5\% of the p-values to (wrongly) reject the null hypothesis, since the tests are conducted at 0.05 significance level.
+  \end{itemize}
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(mvtnorm) }\DocumentationTok{\#\#package to simulate from MVN}
+
+\NormalTok{reps}\OtherTok{\textless{}{-}}\DecValTok{10000} \DocumentationTok{\#\# how many reps}
+\NormalTok{pvalsx1}\OtherTok{\textless{}{-}}\NormalTok{pvalsx2}\OtherTok{\textless{}{-}}\NormalTok{pvalsx3}\OtherTok{\textless{}{-}}\FunctionTok{array}\NormalTok{(}\DecValTok{0}\NormalTok{,reps) }\DocumentationTok{\#\#initialize an array to store the pvalues from each test at each rep}
+\NormalTok{siglevel}\OtherTok{\textless{}{-}}\FloatTok{0.05} \DocumentationTok{\#\#sig level}
+\NormalTok{n}\OtherTok{\textless{}{-}}\DecValTok{5000} \DocumentationTok{\#\#number of draws for each rep}
+
+\NormalTok{mu\_vector}\OtherTok{\textless{}{-}}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{5}\NormalTok{) }\DocumentationTok{\#\#mean vector}
+
+\DocumentationTok{\#\#set up covariance matrix}
+\NormalTok{sig12}\OtherTok{\textless{}{-}}\FloatTok{0.5}
+\NormalTok{sig13}\OtherTok{\textless{}{-}}\FloatTok{0.6}
+\NormalTok{sig23}\OtherTok{\textless{}{-}}\FloatTok{0.2}
+\NormalTok{cov\_mat}\OtherTok{\textless{}{-}}\FunctionTok{matrix}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,sig12,sig13,sig12,}\DecValTok{2}\NormalTok{,sig23,sig13,sig23,}\DecValTok{4}\NormalTok{), }\AttributeTok{nrow=}\DecValTok{3}\NormalTok{, }\AttributeTok{ncol=}\DecValTok{3}\NormalTok{)}
+
+\DocumentationTok{\#\#set.seed so you can replicate my result.}
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{30}\NormalTok{)}
+
+\DocumentationTok{\#\#run steps 1 and 2 for 10 000 times}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{reps)}
+  
+\NormalTok{\{}
+
+\NormalTok{  data}\OtherTok{\textless{}{-}}\FunctionTok{rmvnorm}\NormalTok{(n, mu\_vector, cov\_mat)}
+  
+\NormalTok{  x1}\OtherTok{\textless{}{-}}\NormalTok{data[,}\DecValTok{1}\NormalTok{] }\DocumentationTok{\#\#extract X1}
+\NormalTok{  x2}\OtherTok{\textless{}{-}}\NormalTok{data[,}\DecValTok{2}\NormalTok{] }\DocumentationTok{\#\#extract X2}
+\NormalTok{  x3}\OtherTok{\textless{}{-}}\NormalTok{data[,}\DecValTok{3}\NormalTok{] }\DocumentationTok{\#\#extract X3}
+  
+  \DocumentationTok{\#\#store pvalue from Shapiro{-}Wilk test from each component}
+\NormalTok{  pvalsx1[i]}\OtherTok{\textless{}{-}}\FunctionTok{shapiro.test}\NormalTok{(x1)}\SpecialCharTok{$}\NormalTok{p.value }
+\NormalTok{  pvalsx2[i]}\OtherTok{\textless{}{-}}\FunctionTok{shapiro.test}\NormalTok{(x2)}\SpecialCharTok{$}\NormalTok{p.value}
+\NormalTok{  pvalsx3[i]}\OtherTok{\textless{}{-}}\FunctionTok{shapiro.test}\NormalTok{(x3)}\SpecialCharTok{$}\NormalTok{p.value }
+  
+\NormalTok{\}}
+
+\DocumentationTok{\#\#proportion of tests that wrongly reject the null}
+\FunctionTok{sum}\NormalTok{(pvalsx1}\SpecialCharTok{\textless{}}\NormalTok{siglevel)}\SpecialCharTok{/}\NormalTok{reps }\DocumentationTok{\#\#for X1}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.0471
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sum}\NormalTok{(pvalsx2}\SpecialCharTok{\textless{}}\NormalTok{siglevel)}\SpecialCharTok{/}\NormalTok{reps }\DocumentationTok{\#\#for X2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.0414
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sum}\NormalTok{(pvalsx3}\SpecialCharTok{\textless{}}\NormalTok{siglevel)}\SpecialCharTok{/}\NormalTok{reps }\DocumentationTok{\#\#for X3}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.043
+\end{verbatim}
+
+Since close to 5\% of each hypothesis test rejected the null hypothesis, it appears that each component is consistent with a normal distribution. (Or more accurately, we do not have evidence to say that each component is not normal.) It does appear that if \(\boldsymbol{X} = (X_1, \cdots, X_k)\) is MVN, the marginal distribution of each \(X_j\) is normal. Our simulation does not provide evidence against this property.
+
+Note: What we have done is sometimes called a Monte Carlo simulation, and is often used in research to verify theorems. While you may not be involved in research, writing code to run simulations is a good way for you to understand these theorems and how they are applied. We will cover Monte Carlo simulations in a more detail in a later module.
 
   \bibliography{book.bib,packages.bib}
 

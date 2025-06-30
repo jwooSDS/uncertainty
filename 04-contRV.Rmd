@@ -400,7 +400,7 @@ There is actually no closed-formed equation for the CDF of a standard normal (or
 
 Notice that we have special letters $Z, \phi, \Phi$ to denote the standard normal distribution. This is an indication of how often it is used to warrant its own notation. 
 
-#### From Standard Normal to Other Normals
+#### From Standard Normal to Other Normals {#norm}
 
 If $Z \sim N(0,1)$, then $X = \mu + \sigma Z \sim N(\mu, \sigma^2)$. In other words, if $Z$ is standard normal, then $X = \mu + \sigma Z$ follows a normal distribution with mean $\mu$ and variance $\sigma^2$. The parameters of a normal distribution are the mean $\mu$ and variance $\sigma^2$. 
 

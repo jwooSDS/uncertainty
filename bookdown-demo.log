@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999996 (MiKTeX 24.4) (preloaded format=xelatex 2025.6.7)  23 JUN 2025 16:27
+This is XeTeX, Version 3.141592653-2.6-0.999996 (MiKTeX 24.4) (preloaded format=xelatex 2025.6.7)  30 JUN 2025 16:16
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1253,9 +1253,6 @@ File: bookdown-demo_files/figure-latex/4-R3-1.pdf Graphic file (type pdf)
 [92]
 Chapter 5.
 
-Underfull \vbox (badness 6808) has occurred while \output is active []
-
-
 
 [93
 
@@ -1323,30 +1320,32 @@ LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/b/n' will be
 
 
 [109]
-Underfull \hbox (badness 1014) in paragraph at lines 3696--3697
-[]\TU/lmr/m/n/10 Let us use a toy example. Going back to political affiliations
-. Sup-
+Underfull \hbox (badness 2277) in paragraph at lines 3696--3697
+\TU/lmr/m/n/10 among American voters, 28% identify as Democrats, 29% identify a
+s
  []
 
 
-Underfull \hbox (badness 1077) in paragraph at lines 3696--3697
-\TU/lmr/m/n/10 pose among American voters, 28% identify as Democrats, 29% ident
-ify
- []
-
-
-Underfull \hbox (badness 1314) in paragraph at lines 3696--3697
-\TU/lmr/m/n/10 as Republicans, and 10% identify have other affiliations, and 33
-% are
+Underfull \hbox (badness 1701) in paragraph at lines 3696--3697
+\TU/lmr/m/n/10 others, and independents. The joint distribution of $[][][] [][]
+[] [][][] [][]$ is
  []
 
 
 
 [110]
+
+[111]
+
+[112]
+
+[113]
+
+[114]
 No file bookdown-demo.bbl.
 
 
-[111] (bookdown-demo.aux)
+[115] (bookdown-demo.aux)
  ***********
 LaTeX2e <2024-06-01> patch level 2
 L3 programming layer <2024-07-20>
@@ -1356,12 +1355,12 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 20014 strings out of 409029
- 365425 string characters out of 5763847
- 1943612 words of memory out of 5000000
- 42392 multiletter control sequences out of 15000+600000
+ 20017 strings out of 409029
+ 365463 string characters out of 5763847
+ 1947612 words of memory out of 5000000
+ 42395 multiletter control sequences out of 15000+600000
  566021 words of font info for 104 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  90i,21n,123p,1199b,585s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on bookdown-demo.pdf (111 pages).
+Output written on bookdown-demo.pdf (115 pages).

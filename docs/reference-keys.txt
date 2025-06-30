@@ -227,7 +227,7 @@ uniform
 universality-of-uniform
 normal
 standard-normal
-from-standard-normal-to-other-normals
+norm
 rule
 using-r
 KDE
@@ -255,3 +255,4 @@ multinomial-lumping
 multinomial-covariance
 conditional-multinomial
 multivariate-normal
+simulations

@@ -59,7 +59,7 @@
 <h1>
 <span class="header-section-number">5</span> Joint Distributions<a class="anchor" aria-label="anchor" href="#joint-distributions"><i class="fas fa-link"></i></a>
 </h1>
-<p>This module is based on Introduction to Probability (Blitzstein, Hwang), Chapters 7 and 9. You can access the book for free at <a href="https://stat110.hsites.harvard.edu/" class="uri">https://stat110.hsites.harvard.edu/</a> (and then click on Book). Please note that I cover additional topics, and skip certain topics from the book. You may skip ??? from the book.</p>
+<p>This module is based on Introduction to Probability (Blitzstein, Hwang), Chapters 7 and 9. You can access the book for free at <a href="https://stat110.hsites.harvard.edu/" class="uri">https://stat110.hsites.harvard.edu/</a> (and then click on Book). Please note that I cover additional topics, and skip certain topics from the book. You may skip Story 7.1.9, Theorems 7.1.10 to 7.1.12, Examples 7.1.23 to 7.1.26, Section 7.2, Examples 7.3.6 to 7.3.8, 7.4.8 (parts d and f only), Definition 7.5.6, Examples 9.1.8 to 9.1.10, Example 9.2.5, Theorem 9.3.2, Example 9.3.3, Theorems 9.3.7 to 9.3.9, and Sections 9.4 to 9.6 from the book.</p>
 <div id="introduction-1" class="section level2" number="5.1">
 <h2>
 <span class="header-section-number">5.1</span> Introduction<a class="anchor" aria-label="anchor" href="#introduction-1"><i class="fas fa-link"></i></a>
@@ -636,7 +636,7 @@ E(Y|X=x) &amp;= E(10 + X + \epsilon | X=x)\\
 <h3>
 <span class="header-section-number">5.6.1</span> Multinomial<a class="anchor" aria-label="anchor" href="#multinomial"><i class="fas fa-link"></i></a>
 </h3>
-<p>The <strong>multinomial</strong> distribution can be viewed as a generalization of the binomial distribution. Recall that for the binomial, we carry out <span class="math inline">\(n\)</span> trials, and for each trial we record whether it as a success or failure, in other words, there are only two outcomes for each trial. The multinomial distribution differs in that there can be more than two outcomes for each trial. For example, we randomly select <span class="math inline">\(n\)</span> adults and ask them for their political affiliation. The affiliation could be Democrat, Republican, other party, no affiliation, so there are four possible outcomes or categories for each person.</p>
+<p>The <strong>multinomial</strong> distribution can be viewed as a generalization of the binomial distribution into higher dimensions. Recall that for the binomial, we carry out <span class="math inline">\(n\)</span> trials, and for each trial we record whether it as a success or failure, in other words, there are only two outcomes for each trial. The multinomial distribution differs in that there can be more than two outcomes for each trial. For example, we randomly select <span class="math inline">\(n\)</span> adults and ask them for their political affiliation. The affiliation could be Democrat, Republican, other party, no affiliation, so there are four possible outcomes or categories for each person.</p>
 <p>The set up of the multinomial distribution is as follows:</p>
 <ul>
 <li>We have <span class="math inline">\(n\)</span> independent trials, and each trial belongs to one of <span class="math inline">\(k\)</span> categories.</li>
@@ -651,7 +651,7 @@ P(X_1 = n_1, \cdots, X_k = n_k) = \frac{n!}{n_{1}! \cdots n_{k}!} p_1^{n_1} \cdo
 \tag{5.28}
 \end{equation}\]</span></p>
 <p>where <span class="math inline">\(n_1 + \cdots + n_k = n\)</span>.</p>
-<p>Let us use a toy example. Going back to political affiliations. Suppose among American voters, 28% identify as Democrats, 29% identify as Republicans, and 10% identify have other affiliations, and 33% are independents. Let <span class="math inline">\(X_1, X_2, X_3, X_4\)</span> denote the number of Democrats, Republicans, others, and indepndents. The joint distribution of <span class="math inline">\(X_1, X_2, X_3, X_4\)</span> is <span class="math inline">\(\boldsymbol{X} = (X_1, X_2, X_3, X_4) \sim Mult_4(0.28, 0.29, 0.1, 0.33)\)</span>.</p>
+<p>Let us use a toy example. Going back to political affiliations. Suppose among American voters, 28% identify as Democrats, 29% identify as Republicans, and 10% identify have other affiliations, and 33% are independents. Let <span class="math inline">\(X_1, X_2, X_3, X_4\)</span> denote the number of Democrats, Republicans, others, and independents. The joint distribution of <span class="math inline">\(X_1, X_2, X_3, X_4\)</span> is <span class="math inline">\(\boldsymbol{X} = (X_1, X_2, X_3, X_4) \sim Mult_4(0.28, 0.29, 0.1, 0.33)\)</span>.</p>
 <p>Suppose we want to find the probability that in a sample of 10 voters, 2 are Democrats, 3 are Republicans, and 1 has another affiliation, and 4 are Independents:</p>
 <p><span class="math display">\[
 \begin{split}
@@ -674,7 +674,7 @@ P(X_1 = 2, X_2 = 3, X_3 = 1, X_4 = 4) &amp;= \frac{10!}{2! 3! 1!4!} 0.28^{2} 0.2
 <h4>
 <span class="header-section-number">5.6.1.2</span> Multinomial Lumping<a class="anchor" aria-label="anchor" href="#multinomial-lumping"><i class="fas fa-link"></i></a>
 </h4>
-<p>With discrete and categorical variables, it can be common to want to lump (or merge, or collapse, or combine) categories together.</p>
+<p>With discrete and categorical variables, it can be common to want to lump (or merge, or collapse, or combine) categories together. If <span class="math inline">\(\boldsymbol{X} \sim Mult_k(n, \boldsymbol{p})\)</span>, then <span class="math inline">\(X_i + X_j \sim Bin(n, p_i + p_j)\)</span>. If we decide to merge categories 1 and 2, we have <span class="math inline">\((X_1 + X_2, X_3, \cdots, X_k) \sim Mult_{k-1}(n, (p_1 + p_2, p_3, \cdots, p_k))\)</span>.</p>
 <p>We go back to our toy example. Suppose we consider Democrats and Republicans to be the major parties, we may wish to combine everyone else into one category: those with other affiliations and independents. We can define this using a new random variable <span class="math inline">\(\boldsymbol{Y} = (X_1, X_2, X_3+X_4) \sim Mult_3(n,(0.29,0.29,0.43)\)</span>. Note we now have 3 categories instead of 4. The proportion for the lumped category is the sum of their individual proportions.</p>
 </div>
 <div id="multinomial-covariance" class="section level4" number="5.6.1.3">
@@ -703,13 +703,131 @@ Corr(X_1,X_2) &amp;= \frac{Cov(X_1,X_2)}{\sqrt{Var(X_1) Var(X_2)}}\\
 <h4>
 <span class="header-section-number">5.6.1.4</span> Conditional Multinomial<a class="anchor" aria-label="anchor" href="#conditional-multinomial"><i class="fas fa-link"></i></a>
 </h4>
+<p>Sometimes, we have some observed data from a multinomial distribution, and wish to update the distribution. Suppose we have <span class="math inline">\(\boldsymbol{X} \sim Mult_k(n, \boldsymbol{p})\)</span>, and we observed that <span class="math inline">\(X_1 = n_1\)</span>, then <span class="math inline">\((X_2, \cdots, X_k)|X_1 = n_1 \sim Mult_{k-1}(n-n_1, (p_2^{\prime}, \cdots, p_k^{\prime}))\)</span> where <span class="math inline">\(p_j^{\prime} = \frac{p_j}{p_2 + \cdots + p_k}\)</span>.</p>
 </div>
 </div>
 <div id="multivariate-normal" class="section level3" number="5.6.2">
 <h3>
 <span class="header-section-number">5.6.2</span> Multivariate Normal<a class="anchor" aria-label="anchor" href="#multivariate-normal"><i class="fas fa-link"></i></a>
 </h3>
+<p>The <strong>multivariate normal</strong> (MVN) distribution can be viewed as a generalization of the normal distribution into higher dimensions. Just like the univariate normal distribution, the central limit theorem also applies to higher dimensions.</p>
+<p>A <span class="math inline">\(k\)</span>-dimensional random vector <span class="math inline">\(\boldsymbol{X} = (X_1, \cdots, X_k)\)</span> is said to have an MVN distribution if every linear combination of the <span class="math inline">\(X_j\)</span> is normal. This means that <span class="math inline">\(t_1 X_1 + \cdots + t_k X_k\)</span> is normally distributed for any constants <span class="math inline">\(t_1, \cdots, t_k\)</span>. When <span class="math inline">\(k=2\)</span>, the MVN is often called a <strong>bivarirate normal</strong>.</p>
+<p>In Section <a href="continuous-random-variables.html#norm">4.5.2.2</a>, we mentioned that the parameters of a normal distribution are its mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^2\)</span>. This idea is generalized to a MVN <span class="math inline">\(\boldsymbol{X} = (X_1, \cdots, X_k)\)</span>. The parameters are:</p>
+<ul>
+<li><p>the <strong>mean vector</strong> <span class="math inline">\((\mu_1, \cdots, \mu_k)\)</span> where <span class="math inline">\(\mu_j = E(X_j)\)</span>. This is a vector of length <span class="math inline">\(k\)</span> where each entry is the expected value of that component.</p></li>
+<li><p>the <strong>covariance matrix</strong>. This is a <span class="math inline">\(k \times k\)</span> matrix where the <span class="math inline">\((i,j)\)</span>th entry (i.e. row <span class="math inline">\(i\)</span>, column <span class="math inline">\(j\)</span>) is the covariance between <span class="math inline">\(X_i\)</span> and <span class="math inline">\(X_j\)</span>. This implies that the diagonal entries give the variance of each component, and the covariance matrix is symmetric.</p></li>
+</ul>
+<p>For example, suppose we have <span class="math inline">\(\boldsymbol{X} = (X_1, X_2, X_3)\)</span> that is MVN with mean vector <span class="math inline">\((5, 2, 8)\)</span> and covariance matrix</p>
+<p><span class="math display">\[
+\begin{pmatrix}
+3 &amp; 1.5 &amp; 2.5\\
+1.5 &amp; 2 &amp; 4.2 \\
+2.5 &amp; 4.2 &amp; 1
+\end{pmatrix},
+\]</span></p>
+<p>then</p>
+<ul>
+<li>
+<span class="math inline">\(E(X_1) = 5, E(X_2) = 2, E(X_3) = 8\)</span>,</li>
+<li>
+<span class="math inline">\(Var(X_1) = 3, Var(X_2) = 2, Var(X_3) = 1\)</span>,</li>
+<li>
+<span class="math inline">\(Cov(X_1, X_2) = Cov(X_2, X_1) = 1.5\)</span>,</li>
+<li>
+<span class="math inline">\(Cov(X_1, X_3) = Cov(X_3, X_1) = 2.5\)</span>, and</li>
+<li>
+<span class="math inline">\(Cov(X_2, X_3) = Cov(X_3, X_2) = 4.2\)</span>.</li>
+</ul>
+<p>Some properties of MVN distribution:</p>
+<ol style="list-style-type: decimal">
+<li><p>If <span class="math inline">\(\boldsymbol{X} = (X_1, \cdots, X_k)\)</span> is MVN, the marginal distribution of each <span class="math inline">\(X_j\)</span> is normal, as we can set <span class="math inline">\(t_j =1\)</span> and all other constants to be 0.</p></li>
+<li><p>However, the converse is not necessarily true. If each <span class="math inline">\(X_1, \cdots, X_k\)</span> is normal, <span class="math inline">\((X_1, \cdots, X_k)\)</span> is not necessarily MVN.</p></li>
+<li><p>If <span class="math inline">\((X_1, \cdots, X_k)\)</span> is MVN, then so is any subvector, e.g. <span class="math inline">\((X_i, X_j)\)</span> is bivariate normal.</p></li>
+<li><p>If <span class="math inline">\(\boldsymbol{X} = (X_1, \cdots, X_k)\)</span> and <span class="math inline">\(\boldsymbol{Y} = (Y_1, \cdots, Y_m)\)</span> are MVN with <span class="math inline">\(\boldsymbol{X}\)</span> independent of <span class="math inline">\(\boldsymbol{Y}\)</span>, then <span class="math inline">\(\boldsymbol{W} = ((X_1, \cdots, X_k, Y_1, \cdots, Y_m)\)</span> is MVN.</p></li>
+<li><p>Within an MVN random vector, uncorrelated implies independence. If <span class="math inline">\(\boldsymbol{X}\)</span> is MVN and <span class="math inline">\(\boldsymbol{X} = (\boldsymbol{X_1, X_2})\)</span> where <span class="math inline">\(\boldsymbol{X_1}\)</span> and <span class="math inline">\(\boldsymbol{X_2}\)</span> are subvetors, and every component of <span class="math inline">\(\boldsymbol{X_1}\)</span> is uncorrelated with every component of <span class="math inline">\(\boldsymbol{X_2}\)</span>, then <span class="math inline">\(\boldsymbol{X_1}\)</span> and <span class="math inline">\(\boldsymbol{X_2}\)</span> are independent.</p></li>
+</ol>
+<div id="simulations" class="section level4" number="5.6.2.1">
+<h4>
+<span class="header-section-number">5.6.2.1</span> Simulations<a class="anchor" aria-label="anchor" href="#simulations"><i class="fas fa-link"></i></a>
+</h4>
+<p>We can use simulations to verify the first property. For this simulation, we will do the following:</p>
+<ul>
+<li>Simulate 5000 draws from a MVN distribution with mean vector <span class="math inline">\((1,2,5)\)</span> and covariance matrix</li>
+</ul>
+<p><span class="math display">\[
+\begin{pmatrix}
+1 &amp; 0.5 &amp; 0.6\\
+0.5 &amp; 2 &amp; 0.2 \\
+0.6 &amp; 0.2 &amp; 4
+\end{pmatrix}.
+\]</span></p>
+<ul>
+<li>
+<p>Assess if each component <span class="math inline">\(X_1, X_2, X_3\)</span> is normally distributed by using the Shapiro-Wilk test for normality.</p>
+<ul>
+<li>The null hypothesis is that the variable follows a normal distribution, and the alternative hypothesis is that the variable does not follow a normal distribution.</li>
+<li>So rejecting the null hypothesis means the variable is inconsistent with a normal distribution, while not rejecting means we do not have evidence the variable is inconsistent with a normal distribution.</li>
+<li>We will record the p-value of each test on <span class="math inline">\(X_1, X_2, X_3\)</span>.</li>
+</ul>
+</li>
+<li><p>Repeat the previous 2 steps for a total of 10 thousand reps.</p></li>
+<li>
+<p>Count the proportion of reps where the Shapiro-Wilk test rejected the null hypothesis at significance level 0.05 for <span class="math inline">\(X_1, X_2, X_3\)</span>.</p>
+<ul>
+<li>If this property is correct, we will expect close to 5% of the p-values to (wrongly) reject the null hypothesis, since the tests are conducted at 0.05 significance level.</li>
+</ul>
+</li>
+</ul>
+<div class="sourceCode" id="cb83"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://mvtnorm.R-forge.R-project.org">mvtnorm</a></span><span class="op">)</span> <span class="co">##package to simulate from MVN</span></span>
+<span></span>
+<span><span class="va">reps</span><span class="op">&lt;-</span><span class="fl">10000</span> <span class="co">## how many reps</span></span>
+<span><span class="va">pvalsx1</span><span class="op">&lt;-</span><span class="va">pvalsx2</span><span class="op">&lt;-</span><span class="va">pvalsx3</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span><span class="op">(</span><span class="fl">0</span>,<span class="va">reps</span><span class="op">)</span> <span class="co">##initialize an array to store the pvalues from each test at each rep</span></span>
+<span><span class="va">siglevel</span><span class="op">&lt;-</span><span class="fl">0.05</span> <span class="co">##sig level</span></span>
+<span><span class="va">n</span><span class="op">&lt;-</span><span class="fl">5000</span> <span class="co">##number of draws for each rep</span></span>
+<span></span>
+<span><span class="va">mu_vector</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">5</span><span class="op">)</span> <span class="co">##mean vector</span></span>
+<span></span>
+<span><span class="co">##set up covariance matrix</span></span>
+<span><span class="va">sig12</span><span class="op">&lt;-</span><span class="fl">0.5</span></span>
+<span><span class="va">sig13</span><span class="op">&lt;-</span><span class="fl">0.6</span></span>
+<span><span class="va">sig23</span><span class="op">&lt;-</span><span class="fl">0.2</span></span>
+<span><span class="va">cov_mat</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="va">sig12</span>,<span class="va">sig13</span>,<span class="va">sig12</span>,<span class="fl">2</span>,<span class="va">sig23</span>,<span class="va">sig13</span>,<span class="va">sig23</span>,<span class="fl">4</span><span class="op">)</span>, nrow<span class="op">=</span><span class="fl">3</span>, ncol<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">##set.seed so you can replicate my result.</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">30</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">##run steps 1 and 2 for 10 000 times</span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">reps</span><span class="op">)</span></span>
+<span>  </span>
+<span><span class="op">{</span></span>
+<span></span>
+<span>  <span class="va">data</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/mvtnorm/man/Mvnorm.html">rmvnorm</a></span><span class="op">(</span><span class="va">n</span>, <span class="va">mu_vector</span>, <span class="va">cov_mat</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="va">x1</span><span class="op">&lt;-</span><span class="va">data</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span> <span class="co">##extract X1</span></span>
+<span>  <span class="va">x2</span><span class="op">&lt;-</span><span class="va">data</span><span class="op">[</span>,<span class="fl">2</span><span class="op">]</span> <span class="co">##extract X2</span></span>
+<span>  <span class="va">x3</span><span class="op">&lt;-</span><span class="va">data</span><span class="op">[</span>,<span class="fl">3</span><span class="op">]</span> <span class="co">##extract X3</span></span>
+<span>  </span>
+<span>  <span class="co">##store pvalue from Shapiro-Wilk test from each component</span></span>
+<span>  <span class="va">pvalsx1</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test</a></span><span class="op">(</span><span class="va">x1</span><span class="op">)</span><span class="op">$</span><span class="va">p.value</span> </span>
+<span>  <span class="va">pvalsx2</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test</a></span><span class="op">(</span><span class="va">x2</span><span class="op">)</span><span class="op">$</span><span class="va">p.value</span></span>
+<span>  <span class="va">pvalsx3</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test</a></span><span class="op">(</span><span class="va">x3</span><span class="op">)</span><span class="op">$</span><span class="va">p.value</span> </span>
+<span>  </span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co">##proportion of tests that wrongly reject the null</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">pvalsx1</span><span class="op">&lt;</span><span class="va">siglevel</span><span class="op">)</span><span class="op">/</span><span class="va">reps</span> <span class="co">##for X1</span></span></code></pre></div>
+<pre><code>## [1] 0.0471</code></pre>
+<div class="sourceCode" id="cb85"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">pvalsx2</span><span class="op">&lt;</span><span class="va">siglevel</span><span class="op">)</span><span class="op">/</span><span class="va">reps</span> <span class="co">##for X2</span></span></code></pre></div>
+<pre><code>## [1] 0.0414</code></pre>
+<div class="sourceCode" id="cb87"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">pvalsx3</span><span class="op">&lt;</span><span class="va">siglevel</span><span class="op">)</span><span class="op">/</span><span class="va">reps</span> <span class="co">##for X3</span></span></code></pre></div>
+<pre><code>## [1] 0.043</code></pre>
+<p>Since close to 5% of each hypothesis test rejected the null hypothesis, it appears that each component is consistent with a normal distribution. (Or more accurately, we do not have evidence to say that each component is not normal.) It does appear that if <span class="math inline">\(\boldsymbol{X} = (X_1, \cdots, X_k)\)</span> is MVN, the marginal distribution of each <span class="math inline">\(X_j\)</span> is normal. Our simulation does not provide evidence against this property.</p>
+<p>Note: What we have done is sometimes called a Monte Carlo simulation, and is often used in research to verify theorems. While you may not be involved in research, writing code to run simulations is a good way for you to understand these theorems and how they are applied. We will cover Monte Carlo simulations in a more detail in a later module.</p>
 
+</div>
 </div>
 </div>
 </div>
@@ -765,7 +883,7 @@ Corr(X_1,X_2) &amp;= \frac{Cov(X_1,X_2)}{\sqrt{Var(X_1) Var(X_2)}}\\
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2025-06-23.</p>
+    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2025-06-30.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
