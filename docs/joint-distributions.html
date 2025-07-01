@@ -70,21 +70,21 @@
 <li>Education: How do smaller class sizes and higher teacher pay impact student learning outcomes?</li>
 <li>Marketing: How does the design of a website influence the probability of a customer purchasing an item?</li>
 </ul>
-<p>This module will consider these variables jointly, in other words, how they relate to each other. A lot of the concepts like CDF, PDF, PMF, expectations, variances, and so on will have analogous versions when considering variables jointly.</p>
+<p>This module will consider these variables jointly, in other words, how they relate to each other. A lot of the concepts such as CDF, PDF, PMF, expectations, variances, and so on will have analogous versions when considering variables jointly.</p>
 </div>
 <div id="joint-distributions-for-discrete-rvs" class="section level2" number="5.2">
 <h2>
 <span class="header-section-number">5.2</span> Joint Distributions for Discrete RVs<a class="anchor" aria-label="anchor" href="#joint-distributions-for-discrete-rvs"><i class="fas fa-link"></i></a>
 </h2>
-<p>We will start with discrete random variables first, then move on to continuous random variables. To keep things simple, we will use two variables to explain concepts, which can be generalized to any number of random variables.</p>
+<p>We will start with discrete random variables, then move on to continuous random variables. To keep things simple, we will use two random variables to explain concepts, which can be generalized to any number of random variables.</p>
 <p>Recall that for a single discrete random variable <span class="math inline">\(X\)</span>, we use the PMF to inform us the support of <span class="math inline">\(X\)</span> and the probability associated with each value of the support. We said that the PMF informs us about the distribution of the random variable <span class="math inline">\(X\)</span>.</p>
 <p>We now have two discrete random variables, <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>. The <strong>joint distribution</strong> of <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> provides the probability associated with each possible combination of <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>. The <strong>joint PMF</strong> of <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> is</p>
 <p><span class="math display" id="eq:5-jointPMF">\[\begin{equation}
 p_{X,Y}(x,y) = P(X=x, Y=y).
 \tag{5.1}
 \end{equation}\]</span></p>
-<p>Equation <a href="joint-distributions.html#eq:5-jointPMF">(5.1)</a> can be read as the probability that the random variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are equal to <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> respectively. Recall that upper case letters are usually used to denote random variables, and lower case letters are usually used as a placeholder for an actual numerical that the random variable could take.</p>
-<p>Joint distributions are sometimes called <strong>multivariate distributions</strong>. If we are looking at the distribution of one random variable, its distribution can be called a **univariate distribution*.</p>
+<p>Equation <a href="joint-distributions.html#eq:5-jointPMF">(5.1)</a> can be read as the probability that the random variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are equal to <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> respectively. Recall that upper case letters are usually used to denote random variables, and lower case letters are usually used as a placeholder for an actual numerical value that the random variable could take.</p>
+<p>Joint distributions are sometimes called <strong>multivariate distributions</strong>. If we are looking at the distribution of one random variable, its distribution can be called a <strong>univariate distribution</strong>.</p>
 <p>Joint PMFs can be displayed via a table, like in Table <a href="joint-distributions.html#tab:simple-table">5.1</a> below. In this example, we consider how study time, <span class="math inline">\(X\)</span>, is related with grades, <span class="math inline">\(Y\)</span>, with</p>
 <ul>
 <li>
@@ -278,8 +278,8 @@ P(X=x) = \sum_x P(X=x, Y=y).
 <h3>
 <span class="header-section-number">5.2.2</span> Conditional Distributions for Discrete RVs<a class="anchor" aria-label="anchor" href="#conddist"><i class="fas fa-link"></i></a>
 </h3>
-<p>We have seen how we can derive the marginal PMFs from a joint PMF. We may need to update the distribution of one of the variables based on the observed value of the other variable, or we need the distribution of one of the variables based on a specific value of the other variable. This leads to the <strong>conditional PMF</strong>.</p>
-<p>Suppose we want to update the distribution of <span class="math inline">\(Y\)</span> based on the observed value <span class="math inline">\(X=x\)</span>, or we want the distribution of <span class="math inline">\(Y\)</span> only for observations where <span class="math inline">\(X=x\)</span>. If <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are both discrete, the conditional PMF of <span class="math inline">\(Y\)</span> given <span class="math inline">\(X=x\)</span> is:</p>
+<p>We may need to update the distribution of one of the variables based on the observed value of the other variable, or we need the distribution of one of the variables based on a specific value of the other variable. This leads to the <strong>conditional PMF</strong>.</p>
+<p>Suppose we want to update the distribution of <span class="math inline">\(Y\)</span> based on the observed value <span class="math inline">\(X=x\)</span>, or we want the distribution of <span class="math inline">\(Y\)</span> only for observations where <span class="math inline">\(X=x\)</span> (or in other words, <span class="math inline">\(X\)</span> is equal to a specific value <span class="math inline">\(x\)</span>). If <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are both discrete, the conditional PMF of <span class="math inline">\(Y\)</span> given <span class="math inline">\(X=x\)</span> is:</p>
 <p><span class="math display" id="eq:5-condPMFY">\[\begin{equation}
 P(Y=y|X=x) = \frac{P(X=x, Y=y)}{P(X=x)}.
 \tag{5.5}
@@ -322,7 +322,7 @@ P(X=x|Y=y) = \frac{P(X=x, Y=y)}{P(Y=y)}.
 <h3>
 <span class="header-section-number">5.2.3</span> Bayes’ Rule<a class="anchor" aria-label="anchor" href="#bayes-rule-1"><i class="fas fa-link"></i></a>
 </h3>
-<p>We can also apply Bayes’ Rule for an alternative way of finding the conditional PMF of <span class="math inline">\(Y\)</span> given <span class="math inline">\(X=x\)</span>. Equation <a href="joint-distributions.html#eq:5-condPMFY">(5.5)</a> can be written as:</p>
+<p>We can apply Bayes’ Rule for an alternative way of finding the conditional PMF of <span class="math inline">\(Y\)</span> given <span class="math inline">\(X=x\)</span>. Equation <a href="joint-distributions.html#eq:5-condPMFY">(5.5)</a> can be written as:</p>
 <p><span class="math display" id="eq:5-condPMFbayes">\[\begin{equation}
 P(Y=y|X=x) = \frac{P(X=x|Y=y) P(Y=y)}{P(X=x)}.
 \tag{5.7}
@@ -361,7 +361,7 @@ P(X=x | Y=y) = P(X=x),
 <p>To show that <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are independent, we need to show one of equations <a href="joint-distributions.html#eq:5-ind">(5.9)</a>, <a href="joint-distributions.html#eq:5-ind2">(5.10)</a>, or <a href="joint-distributions.html#eq:5-ind3">(5.11)</a> to be true for <strong>all values in the support</strong> of <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>. To show that <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are dependent, we need to show one of equations <a href="joint-distributions.html#eq:5-ind">(5.9)</a>, <a href="joint-distributions.html#eq:5-ind2">(5.10)</a>, or <a href="joint-distributions.html#eq:5-ind3">(5.11)</a> to be false for <strong>just one value</strong> of <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>.</p>
 <p>Equations <a href="joint-distributions.html#eq:5-ind2">(5.10)</a> and <a href="joint-distributions.html#eq:5-ind3">(5.11)</a> are pretty intuitive. These equations say that the conditional distribution of one variable, given the other, is the same as the marginal distribution of the variable. This means the distribution of the variable is not influenced by knowlege about the other variable.</p>
 <p>The first equation <a href="joint-distributions.html#eq:5-ind">(5.9)</a> informs us that if the discrete variables are independent, their joint PMF is equal to the product of their marginal PMFs.</p>
-<p>We go back to the study time and grades example shown in Table <a href="joint-distributions.html#tab:5-marg-table2">5.3</a>. Study time and grades are dependent (or not independent) since <span class="math inline">\(P(Y=1|X=1) = 0.25\)</span> but <span class="math inline">\(P(Y=1) = 0.5\)</span>. They are not equal so study time and grades are not independent. It is usually easier to prove a condition is not met by providing a <strong>counterexample</strong>.</p>
+<p>We go back to the study time and grades example shown in Table <a href="joint-distributions.html#tab:5-marg-table2">5.3</a>. Study time and grades are dependent (or not independent) since <span class="math inline">\(P(Y=1|X=1) = 0.25\)</span> but <span class="math inline">\(P(Y=1) = 0.5\)</span>. They are not equal so study time and grades are not independent. It is usually easier to prove a condition is not met by providing a <strong>counterexample</strong>: find one specific example where the condition is false.</p>
 <p>If study time and grades were independent, we needed to show <span class="math inline">\(P(Y=1|X=x) = P(Y=1)\)</span> when <span class="math inline">\(X=1,2,3\)</span>, <span class="math inline">\(P(Y=2|X=x) = P(Y=2)\)</span> when <span class="math inline">\(X=1,2,3\)</span>, and <span class="math inline">\(P(Y=3|X=x) = P(Y=3)\)</span> when <span class="math inline">\(X=1,2,3\)</span>. It is usually more tedious to prove a condition is met as we have to show the condition is met under all circumstances.</p>
 <p>Very often, knowing the context of the random variables helps. Since we expect students who study more to get better grades, we expect these variables to be dependent, so we know we just need to provide a counterexample.</p>
 </div>
@@ -425,7 +425,7 @@ f_{X|Y} (x|y) = f_X(x).
 <h2>
 <span class="header-section-number">5.4</span> Covariance and Correlation<a class="anchor" aria-label="anchor" href="#covariance-and-correlation"><i class="fas fa-link"></i></a>
 </h2>
-<p>In the previous modules, we used summaries such as the mean, variance, skewness, and kurtosis to provide some insight into the distribution of a single random variable. When we have multiple random variables, one question we have is how the random variables related to each other. Summaries that are used to quantify the <strong>linear relationship</strong> between two random variables are the covariance and correlation.</p>
+<p>In the previous modules, we used summaries such as the mean, variance, skewness, and kurtosis to provide some insight into the distribution of a single random variable. When we have multiple random variables, one question we have is how are the random variables related to each other. Summaries that are used to quantify the <strong>linear relationship</strong> between two random variables are the covariance and correlation.</p>
 <p>Generally speaking, two random variables have a positive covariance and correlation if they increase or decrease together, i.e. if <span class="math inline">\(X\)</span> increases, <span class="math inline">\(Y\)</span> also generally increases; if <span class="math inline">\(X\)</span> decreases, <span class="math inline">\(Y\)</span> also generally decreases.</p>
 <p>Two random variables have a negative covariance and correlation if they move in the opposite direction, i.e. if <span class="math inline">\(X\)</span> increases, <span class="math inline">\(Y\)</span> generally decreases; if <span class="math inline">\(X\)</span> decreases, <span class="math inline">\(Y\)</span> generally increases. Figure <a href="joint-distributions.html#fig:5-covs">5.1</a> below displays these ideas visually through scatter plots. The scatter plot on the left shows an example of a pair of random variables having positive covariance, and the scatter plot on the right shows an example of a pair of random variables having negative covariance.</p>
 <div class="figure">
@@ -439,7 +439,7 @@ Figure 5.1: Positive Covariance (Left), Negative Covariance (Right)
 <h3>
 <span class="header-section-number">5.4.1</span> Covariance<a class="anchor" aria-label="anchor" href="#id_5-cov"><i class="fas fa-link"></i></a>
 </h3>
-<p>We know define covariance. The <strong>covariance</strong> between random variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> is</p>
+<p>We now define covariance. The <strong>covariance</strong> between random variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> is</p>
 <p><span class="math display" id="eq:5-cov">\[\begin{equation}
 Cov(X,Y) = E\left[(X- \mu_X)(Y - \mu_Y) \right].
 \tag{5.20}
@@ -458,7 +458,7 @@ Cov(X,Y) = E\left[(X- \mu_X)(Y - \mu_Y) \right].
 <li>
 <span class="math inline">\(Var(X + Y) = Var(X) + Var(Y) + 2 Cov(X,Y)\)</span>.</li>
 <li>If <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are independent, then <span class="math inline">\(Cov(X,Y) = 0\)</span>.</li>
-<li>However, <span class="math inline">\(Cov(X,Y) = 0\)</span> does not mean that <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are independent. This is a common misconception. Remember that covariance measures linear relationship. The relationship between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> could be non linear, and in such instances, the covariance should not be used.Figure <a href="joint-distributions.html#fig:5-cov0">5.2</a> below provides an example this. In this figure, <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> have a quadratic relationship, so they are clearly not independent, yet their covariance is virtually 0.</li>
+<li>However, <span class="math inline">\(Cov(X,Y) = 0\)</span> does not mean that <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are independent. This is a common misconception. Remember that covariance measures linear relationship. The relationship between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> could be non linear, and in such instances, the covariance should not be used. Figure <a href="joint-distributions.html#fig:5-cov0">5.2</a> below provides an example this. In this figure, <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> have a quadratic relationship, so they are clearly not independent, yet their covariance is virtually 0.</li>
 </ul>
 <div class="sourceCode" id="cb77"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>,<span class="fl">1</span>, by<span class="op">=</span><span class="fl">0.01</span><span class="op">)</span></span>
@@ -475,7 +475,7 @@ Figure 5.2: Covariance with Non Linear Relationship
 <div class="sourceCode" id="cb78"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cov</a></span><span class="op">(</span><span class="va">x</span>,<span class="va">y</span><span class="op">)</span> <span class="co">##covariance is virtually 0</span></span></code></pre></div>
 <pre><code>## [1] 1.19967e-17</code></pre>
-<p>For two vectors of observed data, each of size <span class="math inline">\(n\)</span>: <span class="math inline">\(X = (x_1, x_2, \cdots, x_n)\)</span> and <span class="math inline">\(Y = (y_1, y_2, \cdots, y_n)\)</span>. Their <strong>sample covariance</strong> is</p>
+<p>Suppose we have two vectors of observed data, each of size <span class="math inline">\(n\)</span>: <span class="math inline">\(X = (x_1, x_2, \cdots, x_n)\)</span> and <span class="math inline">\(Y = (y_1, y_2, \cdots, y_n)\)</span>. Their <strong>sample covariance</strong> is</p>
 <p><span class="math display" id="eq:5-sampcov">\[\begin{equation}
 s_{x,y} = \frac{\sum_{i=1}^n (x_i - \bar{x})(y_i - \bar{y})}{n-1}
 \tag{5.21}
@@ -519,10 +519,10 @@ Figure 5.3: Strong Negative Correlation (Left), No Correlation (Middle), Moderat
 <h2>
 <span class="header-section-number">5.5</span> Conditional Expectation<a class="anchor" aria-label="anchor" href="#conditional-expectation"><i class="fas fa-link"></i></a>
 </h2>
-<p>In Section <a href="probability.html#condprob">2.3</a> and <a href="joint-distributions.html#conddist">5.2.2</a>, we explored the notion of conditional probabilities and conditional distributions:</p>
+<p>In Section <a href="probability.html#condprob">2.3</a> and <a href="joint-distributions.html#conddist">5.2.2</a>, we explored the notion of conditional probabilities and conditional distributions, whcih are used for:</p>
 <ul>
 <li>Updating the probability and distribution of a random variable <span class="math inline">\(Y\)</span>, after observing a certain outcome of another random variable <span class="math inline">\(X\)</span>, or</li>
-<li>Restricting the probability and distribution of a random variable <span class="math inline">\(Y\)</span> only for a certain value of another random variable.</li>
+<li>Restricting the probability and distribution of a random variable <span class="math inline">\(Y\)</span> to a certain value of another random variable.</li>
 </ul>
 <p>These represent the Bayesian and frequentist viewpoints of conditional probability and conditional distribution.</p>
 <p>It turns out a similar idea applies to the expected value of a random variable. Recall that the expected value of a random variable is the long-run average, in other words, the average value after observing the random variable an infinite number of times.</p>
@@ -531,7 +531,7 @@ Figure 5.3: Strong Negative Correlation (Left), No Correlation (Middle), Moderat
 <li>after observing a certain outcome of another variable or event, or</li>
 <li>after restricting our attention to cases when another random variable is fixed or equal to a specific value.</li>
 </ul>
-<p>Fairly often, we use statistical models to predict a response variable <span class="math inline">\(Y\)</span> based on a predictor <span class="math inline">\(X\)</span>. Predictions for values of <span class="math inline">\(Y\)</span> based on observed values of <span class="math inline">\(X\)</span> usually use the conditional expectation of <span class="math inline">\(Y\)</span> given <span class="math inline">\(X\)</span>. Given what we see with the predictor, the long run average of <span class="math inline">\(Y\)</span> ends up being used as the predicted value of the response variable.</p>
+<p>Fairly often, we use statistical models to predict a response variable <span class="math inline">\(Y\)</span> based on a predictor <span class="math inline">\(X\)</span>. Predictions for values of <span class="math inline">\(Y\)</span> based on observed values of <span class="math inline">\(X\)</span> usually use the conditional expectation of <span class="math inline">\(Y\)</span> given <span class="math inline">\(X\)</span>. Given what we see with the predictor, the long run average of <span class="math inline">\(Y\)</span> ends up being used as the predicted value of the response variable. This is the basis for most statistical models.</p>
 <p>There are two slightly different notions of conditional expectations:</p>
 <ul>
 <li>Conditional expectation of random variable <span class="math inline">\(Y\)</span> given event <span class="math inline">\(A\)</span>. If <span class="math inline">\(A\)</span> has happened, what is the expected value of <span class="math inline">\(Y\)</span>?</li>
@@ -553,13 +553,12 @@ E(Y|A) = \sum_y y P(Y=y|A)
 E(Y|A) = \int_{-\infty}^{\infty} y f(y|A) dy.
 \tag{5.25}
 \end{equation}\]</span></p>
-<p>The key is to understand the intuition behind conditional expectations, and we will use simulation to approximate this (the approximation works better if we use more simulated data). Simulation represents the frequentist viewpoint of conditional expectation.</p>
-<p>The code below does the following:</p>
+<p>The key is to understand the intuition behind conditional expectations, and we will use simulation to approximate this (the approximation works better if we use more simulated data). Simulation represents the frequentist viewpoint of conditional expectation. The code below does the following:</p>
 <ul>
 <li>Generate 100 values of <span class="math inline">\(X\)</span> uniformly on the support <span class="math inline">\(\{1,2,3,4\}\)</span>.</li>
 <li>Simulate <span class="math inline">\(Y\)</span> using <span class="math inline">\(Y = 10 + X + \epsilon\)</span> where <span class="math inline">\(\epsilon \sim N(0,1)\)</span>.</li>
 <li>Represent these values on a scatter plot, and also overlay a line that represents the sample mean of <span class="math inline">\(Y\)</span>, which estimates <span class="math inline">\(E(Y)\)</span>. This is simply the average value on the y-axis for all 100 data points. This is the plot on the left in Figure <a href="joint-distributions.html#fig:5-condexp">5.4</a> below.</li>
-<li>Represent these values on a scatter plot, but use blue color to denote the event <span class="math inline">\(A\)</span> which is when <span class="math inline">\(X=1\)</span>. A line that represents the sample mean of <span class="math inline">\(Y\)</span>, only for these blue data points (i.e. only when <span class="math inline">\(X=1\)</span>), is overlaid. This value estimates <span class="math inline">\(E(Y|A)\)</span> or <span class="math inline">\(E(Y|X=1)\)</span>. This is the plot on the right in Figure <a href="joint-distributions.html#fig:5-condexp">5.4</a> below. In calculating this sample mean, we could have completed disregarded the data points when <span class="math inline">\(X\)</span> was not 1.</li>
+<li>Represent these values on a scatter plot, but use blue to denote the event <span class="math inline">\(A\)</span> which is when <span class="math inline">\(X=1\)</span>. A line that represents the sample mean of <span class="math inline">\(Y\)</span>, only for these blue data points (i.e. only when <span class="math inline">\(X=1\)</span>), is overlaid. This value estimates <span class="math inline">\(E(Y|A)\)</span> or <span class="math inline">\(E(Y|X=1)\)</span>. This is the plot on the right in Figure <a href="joint-distributions.html#fig:5-condexp">5.4</a> below. In calculating this sample mean, we could have completed disregarded the black data points when <span class="math inline">\(X\)</span> was not 1.</li>
 </ul>
 <div class="sourceCode" id="cb80"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">40</span><span class="op">)</span></span>
@@ -589,7 +588,7 @@ Figure 5.4: Comparison of E(Y) and E(Y|X=1)
 <h3>
 <span class="header-section-number">5.5.2</span> Conditional Expectation Given Random Variable<a class="anchor" aria-label="anchor" href="#conditional-expectation-given-random-variable"><i class="fas fa-link"></i></a>
 </h3>
-<p>The conditional Expectation of <span class="math inline">\(Y\)</span> given a random variable <span class="math inline">\(X\)</span> is slightly different. In the simulated example in the previous subsection, we set <span class="math inline">\(X\)</span> to be a specific condition. Now, we consider the long-run average of <span class="math inline">\(Y\)</span> across all values in the support of <span class="math inline">\(X\)</span>.</p>
+<p>The conditional expectation of <span class="math inline">\(Y\)</span> given a random variable <span class="math inline">\(X\)</span> is slightly different. In the simulated example in the previous subsection, we set <span class="math inline">\(X\)</span> to be a specific value. Now, we consider the long-run average of <span class="math inline">\(Y\)</span> for each value, instead of a specific value, in the support of <span class="math inline">\(X\)</span>.</p>
 <p>One way to think about this is to consider <span class="math inline">\(E(Y|X=x)\)</span>, where <span class="math inline">\(x\)</span> is any value on the support for <span class="math inline">\(X\)</span>. If <span class="math inline">\(Y\)</span> is discrete, this conditional expectation is:</p>
 <p><span class="math display" id="eq:5-condexpdis2">\[\begin{equation}
 E(Y|A) = \sum_y y P(Y=y|X=x)
@@ -624,7 +623,7 @@ E(Y|X=x) &amp;= E(10 + X + \epsilon | X=x)\\
 <li>When <span class="math inline">\(X=3\)</span>, <span class="math inline">\(E(Y|X=1) = 13\)</span>, and</li>
 <li>When <span class="math inline">\(X=4\)</span>, <span class="math inline">\(E(Y|X=1) = 14\)</span>.</li>
 </ul>
-<p>Note: We set up <span class="math inline">\(Y = 10 + X + \epsilon\)</span> where <span class="math inline">\(\epsilon \sim N(0,1)\)</span>. This follows the framework for linear regression which sets up <span class="math inline">\(Y = \beta_0 + \beta_1 X + \epsilon\)</span> where <span class="math inline">\(\epsilon \sim N(0,\sigma^2)\)</span>, i.e. <span class="math inline">\(\epsilon\)</span> is normal with mean 0 and a variance that is a fixed value. The conditional expectation given <span class="math inline">\(X\)</span> ends up being the prediction for <span class="math inline">\(Y\)</span> that minimizes the mean squared error in linear regression.</p>
+<p>Note: We set up <span class="math inline">\(Y = 10 + X + \epsilon\)</span> where <span class="math inline">\(\epsilon \sim N(0,1)\)</span> in the simulation. This follows the framework for linear regression which sets up <span class="math inline">\(Y = \beta_0 + \beta_1 X + \epsilon\)</span> where <span class="math inline">\(\epsilon \sim N(0,\sigma^2)\)</span>, i.e. <span class="math inline">\(\epsilon\)</span> is normal with mean 0 and a variance that is a fixed value. The conditional expectation given <span class="math inline">\(X\)</span> ends up being the prediction for <span class="math inline">\(Y\)</span> that minimizes the mean squared error in linear regression.</p>
 </div>
 </div>
 <div id="common-multivariate-distributions" class="section level2" number="5.6">
@@ -636,15 +635,15 @@ E(Y|X=x) &amp;= E(10 + X + \epsilon | X=x)\\
 <h3>
 <span class="header-section-number">5.6.1</span> Multinomial<a class="anchor" aria-label="anchor" href="#multinomial"><i class="fas fa-link"></i></a>
 </h3>
-<p>The <strong>multinomial</strong> distribution can be viewed as a generalization of the binomial distribution into higher dimensions. Recall that for the binomial, we carry out <span class="math inline">\(n\)</span> trials, and for each trial we record whether it as a success or failure, in other words, there are only two outcomes for each trial. The multinomial distribution differs in that there can be more than two outcomes for each trial. For example, we randomly select <span class="math inline">\(n\)</span> adults and ask them for their political affiliation. The affiliation could be Democrat, Republican, other party, no affiliation, so there are four possible outcomes or categories for each person.</p>
+<p>The <strong>multinomial</strong> distribution can be viewed as a generalization of the binomial distribution into higher dimensions. Recall that for the binomial distribution, we carry out <span class="math inline">\(n\)</span> trials, and for each trial we record whether it as a success or failure, in other words, there are only two outcomes for each trial. The multinomial distribution differs in that there can be more than two outcomes for each trial. For example, we randomly select <span class="math inline">\(n\)</span> adults and ask them for their political affiliation. The affiliation could be Democrat, Republican, other party, or no affiliation, so there are four possible outcomes or categories for each person.</p>
 <p>The set up of the multinomial distribution is as follows:</p>
 <ul>
 <li>We have <span class="math inline">\(n\)</span> independent trials, and each trial belongs to one of <span class="math inline">\(k\)</span> categories.</li>
-<li>Each trial belongs to category <span class="math inline">\(j\)</span> with probability <span class="math inline">\(p_j\)</span>, where <span class="math inline">\(p_j\)</span> are non negative and <span class="math inline">\(\sum_{j=1}^k = 1\)</span>, i.e. they sum to one.</li>
+<li>Each trial belongs to category <span class="math inline">\(j\)</span> with probability <span class="math inline">\(p_j\)</span>, where <span class="math inline">\(p_j\)</span> is non negative and <span class="math inline">\(\sum_{j=1}^k p_j = 1\)</span>, i.e. they sum to one.</li>
 <li>Let <span class="math inline">\(X_1\)</span> denote the number of trials belonging to category 1, <span class="math inline">\(X_2\)</span> denote the number of trials belonging to category 2, and so on. Then <span class="math inline">\(X_1 + \cdots X_k = n\)</span>.</li>
 </ul>
 <p>We then say that <span class="math inline">\(\boldsymbol{X} = (X_1, \cdots, X_k)\)</span> is said to have a multinomial distribution with parameters <span class="math inline">\(n\)</span> and <span class="math inline">\(\boldsymbol{p} = (p_1, \cdots, p_k)\)</span>. This can be written as <span class="math inline">\(\boldsymbol{X} \sim Mult_k(n, \boldsymbol{p})\)</span>.</p>
-<p>Note that the vectors <span class="math inline">\(\boldsymbol{X}\)</span> and <span class="math inline">\(\boldsymbol{p}\)</span> are written in bold. Vectors and matrices are commonly written using bold to distinguish them from scalars, which are not bolded. <span class="math inline">\(\boldsymbol{X}\)</span> is an example of what we call a random vector, as it is a vector of random variables <span class="math inline">\(X_1, \cdots, X_k\)</span>.</p>
+<p>Note that the vectors <span class="math inline">\(\boldsymbol{X}\)</span> and <span class="math inline">\(\boldsymbol{p}\)</span> are written in bold. Vectors and matrices are commonly written using bold to distinguish them from scalars, which are not in bold. <span class="math inline">\(\boldsymbol{X}\)</span> is an example of what we call a random vector, as it is a vector of random variables <span class="math inline">\(X_1, \cdots, X_k\)</span>.</p>
 <p>If <span class="math inline">\(\boldsymbol{X} \sim Mult_k(n, \boldsymbol{p})\)</span>, its PMF is</p>
 <p><span class="math display" id="eq:5-multinomial">\[\begin{equation}
 P(X_1 = n_1, \cdots, X_k = n_k) = \frac{n!}{n_{1}! \cdots n_{k}!} p_1^{n_1} \cdots p_k^{n_k},
@@ -711,11 +710,11 @@ Corr(X_1,X_2) &amp;= \frac{Cov(X_1,X_2)}{\sqrt{Var(X_1) Var(X_2)}}\\
 <span class="header-section-number">5.6.2</span> Multivariate Normal<a class="anchor" aria-label="anchor" href="#multivariate-normal"><i class="fas fa-link"></i></a>
 </h3>
 <p>The <strong>multivariate normal</strong> (MVN) distribution can be viewed as a generalization of the normal distribution into higher dimensions. Just like the univariate normal distribution, the central limit theorem also applies to higher dimensions.</p>
-<p>A <span class="math inline">\(k\)</span>-dimensional random vector <span class="math inline">\(\boldsymbol{X} = (X_1, \cdots, X_k)\)</span> is said to have an MVN distribution if every linear combination of the <span class="math inline">\(X_j\)</span> is normal. This means that <span class="math inline">\(t_1 X_1 + \cdots + t_k X_k\)</span> is normally distributed for any constants <span class="math inline">\(t_1, \cdots, t_k\)</span>. When <span class="math inline">\(k=2\)</span>, the MVN is often called a <strong>bivarirate normal</strong>.</p>
+<p>A <span class="math inline">\(k\)</span>-dimensional random vector <span class="math inline">\(\boldsymbol{X} = (X_1, \cdots, X_k)\)</span> is said to have an MVN distribution if every linear combination of the <span class="math inline">\(X_j\)</span> is normal. This means that <span class="math inline">\(t_1 X_1 + \cdots + t_k X_k\)</span> is normally distributed for any constants <span class="math inline">\(t_1, \cdots, t_k\)</span>. When <span class="math inline">\(k=2\)</span>, the MVN is often called a <strong>bivariate normal</strong>.</p>
 <p>In Section <a href="continuous-random-variables.html#norm">4.5.2.2</a>, we mentioned that the parameters of a normal distribution are its mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^2\)</span>. This idea is generalized to a MVN <span class="math inline">\(\boldsymbol{X} = (X_1, \cdots, X_k)\)</span>. The parameters are:</p>
 <ul>
 <li><p>the <strong>mean vector</strong> <span class="math inline">\((\mu_1, \cdots, \mu_k)\)</span> where <span class="math inline">\(\mu_j = E(X_j)\)</span>. This is a vector of length <span class="math inline">\(k\)</span> where each entry is the expected value of that component.</p></li>
-<li><p>the <strong>covariance matrix</strong>. This is a <span class="math inline">\(k \times k\)</span> matrix where the <span class="math inline">\((i,j)\)</span>th entry (i.e. row <span class="math inline">\(i\)</span>, column <span class="math inline">\(j\)</span>) is the covariance between <span class="math inline">\(X_i\)</span> and <span class="math inline">\(X_j\)</span>. This implies that the diagonal entries give the variance of each component, and the covariance matrix is symmetric.</p></li>
+<li><p>the <strong>covariance matrix</strong>. This is a <span class="math inline">\(k \times k\)</span> matrix where the <span class="math inline">\((i,j)\)</span>th entry (i.e. row <span class="math inline">\(i\)</span>, column <span class="math inline">\(j\)</span>) is the covariance between <span class="math inline">\(X_i\)</span> and <span class="math inline">\(X_j\)</span>. This implies that the diagonal entries give the variance of each component (since <span class="math inline">\(Cov(X_i, X_i) = Var(X_i)\)</span>), and the covariance matrix is symmetric (since <span class="math inline">\(Cov(X_i, X_j) = Cov(X_j, X_i)\)</span>).</p></li>
 </ul>
 <p>For example, suppose we have <span class="math inline">\(\boldsymbol{X} = (X_1, X_2, X_3)\)</span> that is MVN with mean vector <span class="math inline">\((5, 2, 8)\)</span> and covariance matrix</p>
 <p><span class="math display">\[
@@ -738,13 +737,13 @@ Corr(X_1,X_2) &amp;= \frac{Cov(X_1,X_2)}{\sqrt{Var(X_1) Var(X_2)}}\\
 <li>
 <span class="math inline">\(Cov(X_2, X_3) = Cov(X_3, X_2) = 4.2\)</span>.</li>
 </ul>
-<p>Some properties of MVN distribution:</p>
+<p>Some properties of the MVN distribution:</p>
 <ol style="list-style-type: decimal">
 <li><p>If <span class="math inline">\(\boldsymbol{X} = (X_1, \cdots, X_k)\)</span> is MVN, the marginal distribution of each <span class="math inline">\(X_j\)</span> is normal, as we can set <span class="math inline">\(t_j =1\)</span> and all other constants to be 0.</p></li>
 <li><p>However, the converse is not necessarily true. If each <span class="math inline">\(X_1, \cdots, X_k\)</span> is normal, <span class="math inline">\((X_1, \cdots, X_k)\)</span> is not necessarily MVN.</p></li>
 <li><p>If <span class="math inline">\((X_1, \cdots, X_k)\)</span> is MVN, then so is any subvector, e.g. <span class="math inline">\((X_i, X_j)\)</span> is bivariate normal.</p></li>
-<li><p>If <span class="math inline">\(\boldsymbol{X} = (X_1, \cdots, X_k)\)</span> and <span class="math inline">\(\boldsymbol{Y} = (Y_1, \cdots, Y_m)\)</span> are MVN with <span class="math inline">\(\boldsymbol{X}\)</span> independent of <span class="math inline">\(\boldsymbol{Y}\)</span>, then <span class="math inline">\(\boldsymbol{W} = ((X_1, \cdots, X_k, Y_1, \cdots, Y_m)\)</span> is MVN.</p></li>
-<li><p>Within an MVN random vector, uncorrelated implies independence. If <span class="math inline">\(\boldsymbol{X}\)</span> is MVN and <span class="math inline">\(\boldsymbol{X} = (\boldsymbol{X_1, X_2})\)</span> where <span class="math inline">\(\boldsymbol{X_1}\)</span> and <span class="math inline">\(\boldsymbol{X_2}\)</span> are subvetors, and every component of <span class="math inline">\(\boldsymbol{X_1}\)</span> is uncorrelated with every component of <span class="math inline">\(\boldsymbol{X_2}\)</span>, then <span class="math inline">\(\boldsymbol{X_1}\)</span> and <span class="math inline">\(\boldsymbol{X_2}\)</span> are independent.</p></li>
+<li><p>If <span class="math inline">\(\boldsymbol{X} = (X_1, \cdots, X_k)\)</span> and <span class="math inline">\(\boldsymbol{Y} = (Y_1, \cdots, Y_m)\)</span> are MVN with <span class="math inline">\(\boldsymbol{X}\)</span> independent of <span class="math inline">\(\boldsymbol{Y}\)</span>, then <span class="math inline">\(\boldsymbol{W} = (X_1, \cdots, X_k, Y_1, \cdots, Y_m)\)</span> is MVN.</p></li>
+<li><p>Within an MVN random vector, uncorrelated implies independence. If <span class="math inline">\(\boldsymbol{X}\)</span> is MVN and <span class="math inline">\(\boldsymbol{X} = (\boldsymbol{X_1, X_2})\)</span> where <span class="math inline">\(\boldsymbol{X_1}\)</span> and <span class="math inline">\(\boldsymbol{X_2}\)</span> are subvectors, and every component of <span class="math inline">\(\boldsymbol{X_1}\)</span> is uncorrelated with every component of <span class="math inline">\(\boldsymbol{X_2}\)</span>, then <span class="math inline">\(\boldsymbol{X_1}\)</span> and <span class="math inline">\(\boldsymbol{X_2}\)</span> are independent.</p></li>
 </ol>
 <div id="simulations" class="section level4" number="5.6.2.1">
 <h4>
@@ -825,7 +824,7 @@ Corr(X_1,X_2) &amp;= \frac{Cov(X_1,X_2)}{\sqrt{Var(X_1) Var(X_2)}}\\
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">pvalsx3</span><span class="op">&lt;</span><span class="va">siglevel</span><span class="op">)</span><span class="op">/</span><span class="va">reps</span> <span class="co">##for X3</span></span></code></pre></div>
 <pre><code>## [1] 0.043</code></pre>
 <p>Since close to 5% of each hypothesis test rejected the null hypothesis, it appears that each component is consistent with a normal distribution. (Or more accurately, we do not have evidence to say that each component is not normal.) It does appear that if <span class="math inline">\(\boldsymbol{X} = (X_1, \cdots, X_k)\)</span> is MVN, the marginal distribution of each <span class="math inline">\(X_j\)</span> is normal. Our simulation does not provide evidence against this property.</p>
-<p>Note: What we have done is sometimes called a Monte Carlo simulation, and is often used in research to verify theorems. While you may not be involved in research, writing code to run simulations is a good way for you to understand these theorems and how they are applied. We will cover Monte Carlo simulations in a more detail in a later module.</p>
+<p>Note: What we have done is called a Monte Carlo simulation, and is often used in research to verify theorems. While you may not be involved in research, writing code to run simulations is a good way for you to understand these theorems and how they are applied. We will cover Monte Carlo simulations in more detail in a later module.</p>
 
 </div>
 </div>
@@ -883,7 +882,7 @@ Corr(X_1,X_2) &amp;= \frac{Cov(X_1,X_2)}{\sqrt{Var(X_1) Var(X_2)}}\\
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2025-06-30.</p>
+    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2025-07-01.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

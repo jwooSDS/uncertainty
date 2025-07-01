@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999996 (MiKTeX 24.4) (preloaded format=xelatex 2025.6.7)  30 JUN 2025 16:16
+This is XeTeX, Version 3.141592653-2.6-0.999996 (MiKTeX 24.4) (preloaded format=xelatex 2025.6.7)  1 JUL 2025 14:33
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1300,33 +1300,33 @@ File: bookdown-demo_files/figure-latex/5-condexp-1.pdf Graphic file (type pdf)
 
 [108]
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/b/n' will be
-(Font)              scaled to size 10.0pt on input line 3683.
+(Font)              scaled to size 10.0pt on input line 3681.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/b/n' will be
-(Font)              scaled to size 7.0pt on input line 3683.
+(Font)              scaled to size 7.0pt on input line 3681.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/b/n' will be
-(Font)              scaled to size 5.0pt on input line 3683.
+(Font)              scaled to size 5.0pt on input line 3681.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/b/n' will be
-(Font)              scaled to size 10.00092pt on input line 3683.
+(Font)              scaled to size 10.00092pt on input line 3681.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/b/n' will be
-(Font)              scaled to size 7.00064pt on input line 3683.
+(Font)              scaled to size 7.00064pt on input line 3681.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/b/n' will be
-(Font)              scaled to size 5.00046pt on input line 3683.
+(Font)              scaled to size 5.00046pt on input line 3681.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/b/n' will be
-(Font)              scaled to size 9.99893pt on input line 3683.
+(Font)              scaled to size 9.99893pt on input line 3681.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/b/n' will be
-(Font)              scaled to size 6.99925pt on input line 3683.
+(Font)              scaled to size 6.99925pt on input line 3681.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/b/n' will be
-(Font)              scaled to size 4.99947pt on input line 3683.
+(Font)              scaled to size 4.99947pt on input line 3681.
 
 
 [109]
-Underfull \hbox (badness 2277) in paragraph at lines 3696--3697
+Underfull \hbox (badness 2277) in paragraph at lines 3694--3695
 \TU/lmr/m/n/10 among American voters, 28% identify as Democrats, 29% identify a
 s
  []
 
 
-Underfull \hbox (badness 1701) in paragraph at lines 3696--3697
+Underfull \hbox (badness 1701) in paragraph at lines 3694--3695
 \TU/lmr/m/n/10 others, and independents. The joint distribution of $[][][] [][]
 [] [][][] [][]$ is
  []
@@ -1357,7 +1357,7 @@ LaTeX Warning: There were undefined references.
 Here is how much of TeX's memory you used:
  20017 strings out of 409029
  365463 string characters out of 5763847
- 1947612 words of memory out of 5000000
+ 1946612 words of memory out of 5000000
  42395 multiletter control sequences out of 15000+600000
  566021 words of font info for 104 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191

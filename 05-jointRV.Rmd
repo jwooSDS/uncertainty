@@ -14,11 +14,11 @@ In the previous two modules, we learned about ways to summarize the distribution
 - Education: How do smaller class sizes and higher teacher pay impact student learning outcomes?
 - Marketing: How does the design of a website influence the probability of a customer purchasing an item?
 
-This module will consider these variables jointly, in other words, how they relate to each other. A lot of the concepts like CDF, PDF, PMF, expectations, variances, and so on will have analogous versions when considering variables jointly. 
+This module will consider these variables jointly, in other words, how they relate to each other. A lot of the concepts such as CDF, PDF, PMF, expectations, variances, and so on will have analogous versions when considering variables jointly. 
 
 ## Joint Distributions for Discrete RVs
 
-We will start with discrete random variables first, then move on to continuous random variables. To keep things simple, we will use two variables to explain concepts, which can be generalized to any number of random variables. 
+We will start with discrete random variables, then move on to continuous random variables. To keep things simple, we will use two random variables to explain concepts, which can be generalized to any number of random variables. 
 
 Recall that for a single discrete random variable $X$, we use the PMF to inform us the support of $X$ and the probability associated with each value of the support. We said that the PMF informs us about the distribution of the random variable $X$.
 
@@ -29,9 +29,9 @@ p_{X,Y}(x,y) = P(X=x, Y=y).
 (\#eq:5-jointPMF)
 \end{equation}
 
-Equation \@ref(eq:5-jointPMF) can be read as the probability that the random variables $X$ and $Y$ are equal to $x$ and $y$ respectively. Recall that upper case letters are usually used to denote random variables, and lower case letters are usually used as a placeholder for an actual numerical that the random variable could take. 
+Equation \@ref(eq:5-jointPMF) can be read as the probability that the random variables $X$ and $Y$ are equal to $x$ and $y$ respectively. Recall that upper case letters are usually used to denote random variables, and lower case letters are usually used as a placeholder for an actual numerical value that the random variable could take. 
 
-Joint distributions are sometimes called **multivariate distributions**. If we are looking at the distribution of one random variable, its distribution can be called a **univariate distribution*.
+Joint distributions are sometimes called **multivariate distributions**. If we are looking at the distribution of one random variable, its distribution can be called a **univariate distribution**.
 
 Joint PMFs can be displayed via a table, like in Table \@ref(tab:simple-table) below. In this example, we consider how study time, $X$, is related with grades, $Y$, with 
 
@@ -154,9 +154,9 @@ Table: (\#tab:5-marg-table2) Example Joint PMF of Study Time ($X$) and Grades ($
 
 ### Conditional Distributions for Discrete RVs {#conddist}
 
-We have seen how we can derive the marginal PMFs from a joint PMF. We may need to update the distribution of one of the variables based on the observed value of the other variable, or we need the distribution of one of the variables based on a specific value of the other variable. This leads to the **conditional PMF**.
+We may need to update the distribution of one of the variables based on the observed value of the other variable, or we need the distribution of one of the variables based on a specific value of the other variable. This leads to the **conditional PMF**.
 
-Suppose we want to update the distribution of $Y$ based on the observed value $X=x$, or we want the distribution of $Y$ only for observations where $X=x$. If $X$ and $Y$ are both discrete, the conditional PMF of $Y$ given $X=x$ is:
+Suppose we want to update the distribution of $Y$ based on the observed value $X=x$, or we want the distribution of $Y$ only for observations where $X=x$ (or in other words, $X$ is equal to a specific value $x$). If $X$ and $Y$ are both discrete, the conditional PMF of $Y$ given $X=x$ is:
 
 \begin{equation} 
 P(Y=y|X=x) = \frac{P(X=x, Y=y)}{P(X=x)}.
@@ -209,7 +209,7 @@ P(X=x|Y=y) = \frac{P(X=x, Y=y)}{P(Y=y)}.
 
 ### Bayes' Rule
 
-We can also apply Bayes' Rule for an alternative way of finding the conditional PMF of $Y$ given $X=x$. Equation \@ref(eq:5-condPMFY) can be written as:
+We can apply Bayes' Rule for an alternative way of finding the conditional PMF of $Y$ given $X=x$. Equation \@ref(eq:5-condPMFY) can be written as:
 
 \begin{equation} 
 P(Y=y|X=x) = \frac{P(X=x|Y=y) P(Y=y)}{P(X=x)}.
@@ -256,7 +256,7 @@ Equations \@ref(eq:5-ind2) and \@ref(eq:5-ind3) are pretty intuitive. These equa
 
 The first equation \@ref(eq:5-ind) informs us that if the discrete variables are independent, their joint PMF is equal to the product of their marginal PMFs.
 
-We go back to the study time and grades example shown in Table \@ref(tab:5-marg-table2). Study time and grades are dependent (or not independent) since $P(Y=1|X=1) = 0.25$ but $P(Y=1) = 0.5$. They are not equal so study time and grades are not independent. It is usually easier to prove a condition is not met by providing a **counterexample**. 
+We go back to the study time and grades example shown in Table \@ref(tab:5-marg-table2). Study time and grades are dependent (or not independent) since $P(Y=1|X=1) = 0.25$ but $P(Y=1) = 0.5$. They are not equal so study time and grades are not independent. It is usually easier to prove a condition is not met by providing a **counterexample**: find one specific example where the condition is false. 
 
 If study time and grades were independent, we needed to show $P(Y=1|X=x) = P(Y=1)$ when $X=1,2,3$, $P(Y=2|X=x) = P(Y=2)$ when $X=1,2,3$, and $P(Y=3|X=x) = P(Y=3)$ when $X=1,2,3$. It is usually more tedious to prove a condition is met as we have to show the condition is met under all circumstances. 
 
@@ -333,7 +333,7 @@ f_{X|Y} (x|y) = f_X(x).
 
 ## Covariance and Correlation
 
-In the previous modules, we used summaries such as the mean, variance, skewness, and kurtosis to provide some insight into the distribution of a single random variable. When we have multiple random variables, one question we have is how the random variables related to each other. Summaries that are used to quantify the **linear relationship** between two random variables are the covariance and correlation. 
+In the previous modules, we used summaries such as the mean, variance, skewness, and kurtosis to provide some insight into the distribution of a single random variable. When we have multiple random variables, one question we have is how are the random variables related to each other. Summaries that are used to quantify the **linear relationship** between two random variables are the covariance and correlation. 
 
 Generally speaking, two random variables have a positive covariance and correlation if they increase or decrease together, i.e. if $X$ increases, $Y$ also generally increases; if $X$ decreases, $Y$ also generally decreases.
 
@@ -372,7 +372,7 @@ One more thing to note: covariance and correlations can be calculated for random
 
 ### Covariance {#5-cov}
 
-We know define covariance. The **covariance** between random variables $X$ and $Y$ is
+We now define covariance. The **covariance** between random variables $X$ and $Y$ is
 
 \begin{equation} 
 Cov(X,Y) = E\left[(X- \mu_X)(Y - \mu_Y) \right].
@@ -389,7 +389,7 @@ Some key properties for covariance:
 - $Cov(aX,Y) = a Cov(X,Y)$ for any constant $a$. This implies that covariance is affected by the units of $X$ and $Y$.
 - $Var(X + Y) = Var(X) + Var(Y) + 2 Cov(X,Y)$.
 - If $X$ and $Y$ are independent, then $Cov(X,Y) = 0$. 
-- However, $Cov(X,Y) = 0$ does not mean that $X$ and $Y$ are independent. This is a common misconception. Remember that covariance measures linear relationship. The relationship between $X$ and $Y$ could be non linear, and in such instances, the covariance should not be used.Figure \@ref(fig:5-cov0) below provides an example this. In this figure, $X$ and $Y$ have a quadratic relationship, so they are clearly not independent, yet their covariance is virtually 0. 
+- However, $Cov(X,Y) = 0$ does not mean that $X$ and $Y$ are independent. This is a common misconception. Remember that covariance measures linear relationship. The relationship between $X$ and $Y$ could be non linear, and in such instances, the covariance should not be used. Figure \@ref(fig:5-cov0) below provides an example this. In this figure, $X$ and $Y$ have a quadratic relationship, so they are clearly not independent, yet their covariance is virtually 0. 
 
 ```{r 5-cov0, fig.cap="Covariance with Non Linear Relationship"}
 x<-seq(-1,1, by=0.01)
@@ -401,7 +401,7 @@ plot(x,y, xlab="X", ylab="Y")
 cov(x,y) ##covariance is virtually 0
 ```
 
-For two vectors of observed data, each of size $n$: $X = (x_1, x_2, \cdots, x_n)$ and $Y = (y_1, y_2, \cdots, y_n)$. Their **sample covariance** is
+Suppose we have two vectors of observed data, each of size $n$: $X = (x_1, x_2, \cdots, x_n)$ and $Y = (y_1, y_2, \cdots, y_n)$. Their **sample covariance** is
 
 \begin{equation} 
 s_{x,y} = \frac{\sum_{i=1}^n (x_i - \bar{x})(y_i - \bar{y})}{n-1}
@@ -485,10 +485,10 @@ abline(lm(x6~x5), col="blue")
 
 ## Conditional Expectation
 
-In Section \@ref(condprob) and \@ref(conddist), we explored the notion of conditional probabilities and conditional distributions:
+In Section \@ref(condprob) and \@ref(conddist), we explored the notion of conditional probabilities and conditional distributions, whcih are used for:
 
 - Updating the probability and distribution of a random variable $Y$, after observing a certain outcome of another random variable $X$, or
-- Restricting the probability and distribution of a random variable $Y$ only for a certain value of another random variable.
+- Restricting the probability and distribution of a random variable $Y$ to a certain value of another random variable.
 
 These represent the Bayesian and frequentist viewpoints of conditional probability and conditional distribution.  
 
@@ -499,7 +499,7 @@ The conditional expectation of a random variable is its long run-average:
 - after observing a certain outcome of another variable or event, or
 - after restricting our attention to cases when another random variable is fixed or equal to a specific value. 
 
-Fairly often, we use statistical models to predict a response variable $Y$ based on a predictor $X$. Predictions for values of $Y$ based on observed values of $X$ usually use the conditional expectation of $Y$ given $X$. Given what we see with the predictor, the long run average of $Y$ ends up being used as the predicted value of the response variable. 
+Fairly often, we use statistical models to predict a response variable $Y$ based on a predictor $X$. Predictions for values of $Y$ based on observed values of $X$ usually use the conditional expectation of $Y$ given $X$. Given what we see with the predictor, the long run average of $Y$ ends up being used as the predicted value of the response variable. This is the basis for most statistical models. 
 
 There are two slightly different notions of conditional expectations:
 
@@ -526,14 +526,12 @@ E(Y|A) = \int_{-\infty}^{\infty} y f(y|A) dy.
 (\#eq:5-condexpcont)
 \end{equation}
 
-The key is to understand the intuition behind conditional expectations, and we will use simulation to approximate this (the approximation works better if we use more simulated data). Simulation represents the frequentist viewpoint of conditional expectation.
-
-The code below does the following:
+The key is to understand the intuition behind conditional expectations, and we will use simulation to approximate this (the approximation works better if we use more simulated data). Simulation represents the frequentist viewpoint of conditional expectation. The code below does the following:
 
 - Generate 100 values of $X$ uniformly on the support $\{1,2,3,4\}$.
 - Simulate $Y$ using $Y = 10 + X + \epsilon$ where $\epsilon \sim N(0,1)$.
 - Represent these values on a scatter plot, and also overlay a line that represents the sample mean of $Y$, which estimates $E(Y)$. This is simply the average value on the y-axis for all 100 data points. This is the plot on the left in Figure \@ref(fig:5-condexp) below.
-- Represent these values on a scatter plot, but use blue color to denote the event $A$ which is when $X=1$. A line that represents the sample mean of $Y$, only for these blue data points (i.e. only when $X=1$), is overlaid. This value estimates $E(Y|A)$ or $E(Y|X=1)$. This is the plot on the right in Figure \@ref(fig:5-condexp) below. In calculating this sample mean, we could have completed disregarded the data points when $X$ was not 1.
+- Represent these values on a scatter plot, but use blue to denote the event $A$ which is when $X=1$. A line that represents the sample mean of $Y$, only for these blue data points (i.e. only when $X=1$), is overlaid. This value estimates $E(Y|A)$ or $E(Y|X=1)$. This is the plot on the right in Figure \@ref(fig:5-condexp) below. In calculating this sample mean, we could have completed disregarded the black data points when $X$ was not 1.
 
 ```{r 5-condexp, fig.cap="Comparison of E(Y) and E(Y|X=1)"}
 set.seed(40)
@@ -557,7 +555,7 @@ So, we can interpret the conditional expectation $E(Y|A)$ as the long-run averag
 
 ### Conditional Expectation Given Random Variable
 
-The conditional Expectation of $Y$ given a random variable $X$ is slightly different. In the simulated example in the previous subsection, we set $X$ to be a specific condition. Now, we consider the long-run average of $Y$ across all values in the support of $X$. 
+The conditional expectation of $Y$ given a random variable $X$ is slightly different. In the simulated example in the previous subsection, we set $X$ to be a specific value. Now, we consider the long-run average of $Y$ for each value, instead of a specific value, in the support of $X$. 
 
 One way to think about this is to consider $E(Y|X=x)$, where $x$ is any value on the support for $X$. If $Y$ is discrete, this conditional expectation is:
 
@@ -600,7 +598,7 @@ So $E(Y|X) = 10 + X$. What this means is that:
 - When $X=3$, $E(Y|X=1) = 13$, and
 - When $X=4$, $E(Y|X=1) = 14$.
 
-Note: We set up $Y = 10 + X + \epsilon$ where $\epsilon \sim N(0,1)$. This follows the framework for linear regression which sets up $Y = \beta_0 + \beta_1 X + \epsilon$ where $\epsilon \sim N(0,\sigma^2)$, i.e. $\epsilon$ is normal with mean 0 and a variance that is a fixed value. The conditional expectation given $X$ ends up being the prediction for $Y$ that minimizes the mean squared error in linear regression. 
+Note: We set up $Y = 10 + X + \epsilon$ where $\epsilon \sim N(0,1)$ in the simulation. This follows the framework for linear regression which sets up $Y = \beta_0 + \beta_1 X + \epsilon$ where $\epsilon \sim N(0,\sigma^2)$, i.e. $\epsilon$ is normal with mean 0 and a variance that is a fixed value. The conditional expectation given $X$ ends up being the prediction for $Y$ that minimizes the mean squared error in linear regression. 
 
 
 ## Common Multivariate Distributions
@@ -609,17 +607,17 @@ We now cover two of the most common multivariate distributions: the multinomial 
 
 ### Multinomial 
 
-The **multinomial** distribution can be viewed as a generalization of the binomial distribution into higher dimensions. Recall that for the binomial, we carry out $n$ trials, and for each trial we record whether it as a success or failure, in other words, there are only two outcomes for each trial. The multinomial distribution differs in that there can be more than two outcomes for each trial. For example, we randomly select $n$ adults and ask them for their political affiliation. The affiliation could be Democrat, Republican, other party, no affiliation, so there are four possible outcomes or categories for each person. 
+The **multinomial** distribution can be viewed as a generalization of the binomial distribution into higher dimensions. Recall that for the binomial distribution, we carry out $n$ trials, and for each trial we record whether it as a success or failure, in other words, there are only two outcomes for each trial. The multinomial distribution differs in that there can be more than two outcomes for each trial. For example, we randomly select $n$ adults and ask them for their political affiliation. The affiliation could be Democrat, Republican, other party, or no affiliation, so there are four possible outcomes or categories for each person. 
 
 The set up of the multinomial distribution is as follows:
 
 - We have $n$ independent trials, and each trial belongs to one of $k$ categories.
-- Each trial belongs to category $j$ with probability $p_j$, where $p_j$ are non negative and $\sum_{j=1}^k = 1$, i.e. they sum to one. 
+- Each trial belongs to category $j$ with probability $p_j$, where $p_j$ is non negative and $\sum_{j=1}^k p_j = 1$, i.e. they sum to one. 
 - Let $X_1$ denote the number of trials belonging to category 1, $X_2$ denote the number of trials belonging to category 2, and so on. Then $X_1 + \cdots X_k = n$.
 
 We then say that $\boldsymbol{X} = (X_1, \cdots, X_k)$ is said to have a multinomial distribution with parameters $n$ and $\boldsymbol{p} = (p_1, \cdots, p_k)$. This can be written as $\boldsymbol{X} \sim Mult_k(n, \boldsymbol{p})$.
 
-Note that the vectors $\boldsymbol{X}$ and $\boldsymbol{p}$ are written in bold. Vectors and matrices are commonly written using bold to distinguish them from scalars, which are not bolded. $\boldsymbol{X}$ is an example of what we call a random vector, as it is a vector of random variables $X_1, \cdots, X_k$.
+Note that the vectors $\boldsymbol{X}$ and $\boldsymbol{p}$ are written in bold. Vectors and matrices are commonly written using bold to distinguish them from scalars, which are not in bold. $\boldsymbol{X}$ is an example of what we call a random vector, as it is a vector of random variables $X_1, \cdots, X_k$.
 
 If $\boldsymbol{X} \sim Mult_k(n, \boldsymbol{p})$, its PMF is
 
@@ -691,13 +689,13 @@ Sometimes, we have some observed data from a multinomial distribution, and wish 
 
 The **multivariate normal** (MVN) distribution can be viewed as a generalization of the normal distribution into higher dimensions. Just like the univariate normal distribution, the central limit theorem also applies to higher dimensions.
 
-A $k$-dimensional random vector $\boldsymbol{X} = (X_1, \cdots, X_k)$ is said to have an MVN distribution if every linear combination  of the $X_j$ is normal. This means that $t_1 X_1 + \cdots + t_k X_k$ is normally distributed for any constants $t_1, \cdots, t_k$. When $k=2$, the MVN is often called a **bivarirate normal**.
+A $k$-dimensional random vector $\boldsymbol{X} = (X_1, \cdots, X_k)$ is said to have an MVN distribution if every linear combination  of the $X_j$ is normal. This means that $t_1 X_1 + \cdots + t_k X_k$ is normally distributed for any constants $t_1, \cdots, t_k$. When $k=2$, the MVN is often called a **bivariate normal**.
 
 In Section \@ref(norm), we mentioned that the parameters of a normal distribution are its mean $\mu$ and variance $\sigma^2$. This idea is generalized to a MVN $\boldsymbol{X} = (X_1, \cdots, X_k)$. The parameters are:
 
 - the **mean vector** $(\mu_1, \cdots, \mu_k)$ where $\mu_j = E(X_j)$. This is a vector of length $k$ where each entry is the expected value of that component.
 
-- the **covariance matrix**. This is a $k \times k$ matrix where the $(i,j)$th entry (i.e. row $i$, column $j$) is the covariance between $X_i$ and $X_j$. This implies that the diagonal entries give the variance of each component, and the covariance matrix is symmetric. 
+- the **covariance matrix**. This is a $k \times k$ matrix where the $(i,j)$th entry (i.e. row $i$, column $j$) is the covariance between $X_i$ and $X_j$. This implies that the diagonal entries give the variance of each component (since $Cov(X_i, X_i) = Var(X_i)$), and the covariance matrix is symmetric (since $Cov(X_i, X_j) = Cov(X_j, X_i)$). 
 
 For example, suppose we have $\boldsymbol{X} = (X_1, X_2, X_3)$ that is MVN with mean vector $(5, 2, 8)$ and covariance matrix
 
@@ -717,7 +715,7 @@ then
 - $Cov(X_1, X_3) = Cov(X_3, X_1) = 2.5$, and 
 - $Cov(X_2, X_3) = Cov(X_3, X_2) = 4.2$.
 
-Some properties of MVN distribution:
+Some properties of the MVN distribution:
 
 1. If $\boldsymbol{X} = (X_1, \cdots, X_k)$ is MVN, the marginal distribution of each $X_j$ is normal, as we can set $t_j =1$ and all other constants to be 0.
 
@@ -798,4 +796,4 @@ sum(pvalsx3<siglevel)/reps ##for X3
 
 Since close to 5% of each hypothesis test rejected the null hypothesis, it appears that each component is consistent with a normal distribution. (Or more accurately, we do not have evidence to say that each component is not normal.) It does appear that if $\boldsymbol{X} = (X_1, \cdots, X_k)$ is MVN, the marginal distribution of each $X_j$ is normal. Our simulation does not provide evidence against this property.
 
-Note: What we have done is sometimes called a Monte Carlo simulation, and is often used in research to verify theorems. While you may not be involved in research, writing code to run simulations is a good way for you to understand these theorems and how they are applied. We will cover Monte Carlo simulations in a more detail in a later module.
+Note: What we have done is called a Monte Carlo simulation, and is often used in research to verify theorems. While you may not be involved in research, writing code to run simulations is a good way for you to understand these theorems and how they are applied. We will cover Monte Carlo simulations in more detail in a later module.
