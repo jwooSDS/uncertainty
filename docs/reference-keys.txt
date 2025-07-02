@@ -123,6 +123,7 @@ eq:5-condexpdis2
 eq:5-condexpcont2
 eq:5-multinomial
 eq:5-multinomialcov
+eq:6-CS
 examples
 example-1-mario-kart-auction-prices
 eg2
@@ -256,3 +257,15 @@ multinomial-covariance
 conditional-multinomial
 multivariate-normal
 simulations
+inequalities-limit-theorems-and-simulations
+introduction-2
+inequalities
+cauchy-schwartz-inequality
+jensens-inequality
+linear-and-non-linear-transformations
+concave-and-convex-functions
+chebyshevs-inequality
+limit-theorems
+law-of-large-numbers
+central-limit-theorem
+monte-carlo-simulations

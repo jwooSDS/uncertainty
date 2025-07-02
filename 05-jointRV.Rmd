@@ -416,7 +416,7 @@ We noted earlier that covariance is affected by the units of the variables. Supp
 The **correlation** between random variables $X$ and $Y$ is
 
 \begin{equation} 
-\rho = Corr(X,Y) = \frac{Cov(X,Y)}{\sqrt{Var(x) Var(Y)}}.
+\rho = Corr(X,Y) = \frac{Cov(X,Y)}{\sqrt{Var(X) Var(Y)}}.
 (\#eq:5-corr)
 \end{equation}
 
@@ -754,7 +754,7 @@ $$
 ```{r}
 library(mvtnorm) ##package to simulate from MVN
 
-reps<-10000 ## how many reps
+reps<-1000 ## how many reps
 pvalsx1<-pvalsx2<-pvalsx3<-array(0,reps) ##initialize an array to store the pvalues from each test at each rep
 siglevel<-0.05 ##sig level
 n<-5000 ##number of draws for each rep

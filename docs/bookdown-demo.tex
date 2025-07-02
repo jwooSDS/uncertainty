@@ -127,7 +127,7 @@
 
 \title{Understanding Uncertainty Course Notes}
 \author{Jeffrey Woo}
-\date{2025-07-01}
+\date{2025-07-02}
 
 \begin{document}
 \maketitle
@@ -3459,7 +3459,7 @@ We noted earlier that covariance is affected by the units of the variables. Supp
 The \textbf{correlation} between random variables \(X\) and \(Y\) is
 
 \begin{equation} 
-\rho = Corr(X,Y) = \frac{Cov(X,Y)}{\sqrt{Var(x) Var(Y)}}.
+\rho = Corr(X,Y) = \frac{Cov(X,Y)}{\sqrt{Var(X) Var(Y)}}.
 \label{eq:5-corr}
 \end{equation}
 
@@ -3859,7 +3859,7 @@ We can use simulations to verify the first property. For this simulation, we wil
 \begin{Highlighting}[]
 \FunctionTok{library}\NormalTok{(mvtnorm) }\DocumentationTok{\#\#package to simulate from MVN}
 
-\NormalTok{reps}\OtherTok{\textless{}{-}}\DecValTok{10000} \DocumentationTok{\#\# how many reps}
+\NormalTok{reps}\OtherTok{\textless{}{-}}\DecValTok{1000} \DocumentationTok{\#\# how many reps}
 \NormalTok{pvalsx1}\OtherTok{\textless{}{-}}\NormalTok{pvalsx2}\OtherTok{\textless{}{-}}\NormalTok{pvalsx3}\OtherTok{\textless{}{-}}\FunctionTok{array}\NormalTok{(}\DecValTok{0}\NormalTok{,reps) }\DocumentationTok{\#\#initialize an array to store the pvalues from each test at each rep}
 \NormalTok{siglevel}\OtherTok{\textless{}{-}}\FloatTok{0.05} \DocumentationTok{\#\#sig level}
 \NormalTok{n}\OtherTok{\textless{}{-}}\DecValTok{5000} \DocumentationTok{\#\#number of draws for each rep}
@@ -3899,7 +3899,7 @@ We can use simulations to verify the first property. For this simulation, we wil
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.0471
+## [1] 0.054
 \end{verbatim}
 
 \begin{Shaded}
@@ -3909,7 +3909,7 @@ We can use simulations to verify the first property. For this simulation, we wil
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.0414
+## [1] 0.037
 \end{verbatim}
 
 \begin{Shaded}
@@ -3919,12 +3919,131 @@ We can use simulations to verify the first property. For this simulation, we wil
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.043
+## [1] 0.047
 \end{verbatim}
 
 Since close to 5\% of each hypothesis test rejected the null hypothesis, it appears that each component is consistent with a normal distribution. (Or more accurately, we do not have evidence to say that each component is not normal.) It does appear that if \(\boldsymbol{X} = (X_1, \cdots, X_k)\) is MVN, the marginal distribution of each \(X_j\) is normal. Our simulation does not provide evidence against this property.
 
 Note: What we have done is called a Monte Carlo simulation, and is often used in research to verify theorems. While you may not be involved in research, writing code to run simulations is a good way for you to understand these theorems and how they are applied. We will cover Monte Carlo simulations in more detail in a later module.
+
+\chapter{Inequalities, Limit Theorems, and Simulations}\label{inequalities-limit-theorems-and-simulations}
+
+This module is based on Introduction to Probability (Blitzstein, Hwang), Chapter 10. You can access the book for free at \url{https://stat110.hsites.harvard.edu/} (and then click on Book). Please note that I cover additional topics, and skip certain topics from the book. You may skip ??? from the book.
+
+\section{Introduction}\label{introduction-2}
+
+It can be difficult to calculate probabilities and expected values, for example, when the PDF of a distribution is unknown, or its integral is too difficult to work out. You may notice that we used simulations to approximate probabilities and expected values in some of the examples in previous modules. With improvement in computing capabilities, simulations can now be performed faster and is a tool that is used more and more. Other tools include using inequalities to bound the probabilities (e.g.~the probability cannot be greater or less than a certain value), or approximating using known theorems. We'll look at these three tools in this module.
+
+\section{Inequalities}\label{inequalities}
+
+If a probability or expected value is difficult to calculate, it may be easier to find a bound via an inequality. This usually means that we can guarantee that a certain probability or expected value is within a certain range of values, so we can narrow down the possible values for the exact answer. For example, instead of being able to calculate the probability of a certain event, we may be able to show that its probability is no more than 0.1, so we know the event is unlikely to happen. We will cover a coupleof the most well-known inequalities in probability.
+
+\subsection{Cauchy-Schwartz Inequality}\label{cauchy-schwartz-inequality}
+
+The \textbf{Cauchy-Schwarz inequality} is one of the most famous inequalities in mathematics and has many applications. In the context of probability, it is written as: For any random variables \(X\) and \(Y\) with finite variances
+
+\begin{equation} 
+|E(XY)| \leq \sqrt{E(X^2)E(Y^2)}.
+\label{eq:6-CS}
+\end{equation}
+
+The Cauchy-Schwartz inequality can be used to show the correlation between any two random variables with finite variances must be between -1 and 1. A quick proof is as follows: we apply equation \eqref{eq:6-CS} to the \textbf{centered} random variables \(X - \mu_X\) and \(Y - \mu_Y\):
+
+\[
+\begin{split}
+|E[(X - \mu_X)(Y - \mu_Y)]| & \leq \sqrt{E[(X - \mu_X)^2] E[(Y - \mu_Y)^2]} \\
+\implies |Cov(X,Y)| & \leq \sqrt{Var(X) Var(Y)} \\
+\implies |Corr(X,Y)| & \leq 1.
+\end{split}
+\]
+
+The Cauchy-Schwarz inequality can also be used to show that the variance of any random variable has to be non negative. A quick proof is as follows: we apply equation \eqref{eq:6-CS} to the random variable \(X\) and to a constant 1:
+
+\[
+\begin{split}
+|E(X)| & \leq \sqrt{E(X^2)E(1^2)}. \\
+\implies |E(X)| & \leq \sqrt{E(X^2)} \\
+\implies E(X)^2 & \leq E(X^2) \\
+\implies 0 & \leq E(X^2) - E(X)^2 = Var(X).
+\end{split}
+\]
+Note: One other place that you may seen the Cauchy-Schwarz inequality is in the proof of the triangle inequality in geometry.
+
+\subsection{Jensen's Inequality}\label{jensens-inequality}
+
+You may have noticed in previous modules, we have written about transforming a random variable. One way of transforming a random variable is through a scale change, in other words, the value of the random variable is multiplied by a constant. This happens when we change the units of the variable. For example we want to convert a random variable based on weight from kilograms to pounds. If \(X\) and \(Y\) denote the weight in kilograms and pounds respectively, we can write \(Y = 2.2X\). If we know the expected value of \(X\), we can easily find the expected value for \(Y\) by multiplying \(E(X)\) by 2.2. This is fairly intuitive and is based on the linearity of expectations using equation \eqref{eq:3-linEX}.
+
+\subsubsection{Linear and Non Linear Transformations}\label{linear-and-non-linear-transformations}
+
+A way to think about transformations is to write \(Y = g(X)\), where \(g\) is a function that describes the transformation. In the kilograms to pounds example, \(g\) is exactly 2.2, so \(Y = 2.2X\). This transformation is a \textbf{linear transformation} since the graph of \(Y = 2.2X\) is a straight line. In this example, \(E(Y) = E(2.2X) = 2.2E(X)\).
+
+What if we use a \textbf{non linear transformation}? A popular non linear transformation is a log transformation. This is used when a random variable is right skewed (which happens pretty often in real data, such as wages, since only a few people make really high wages and the vast majority of people have wages on the lower end). Expected values are often used in statistical models for predictions; however, we know that the mean may not be the best measure of centrality with skewed data. One way to transform right skewed data to become less skewed is to log transform the data. In this example, we have \(Y = \log(X)\), so \(g(x) = \log(x)\). If we know the expected value of the original variable, \(E(X)\), can we easily find the expected value of \(Y\)? Can we write \(E(Y) = E(\log(X)) = \log E(X)\)? This is actually incorrect. It turns out that such operations do not work for non linear transformations, i.e.~if \(g\) is non linear, \(E(g(X))\) is not necessarily equal to \(g(E(X))\). A log transformation is not linear since the graph of \(Y = \log(X)\) is not a straight line.
+
+Let us use a toy example to show this. Suppose we roll a fair six-sided die, and let \(X\) denote the number of dots the die shows. For this game, we get to win money based on the result of the roll, specifically twice the result. Let \(D\) denote the winnings for this game, so \(D = 2X\). Since we know \(E(X) = 3.5\), this means that the expected winnings for this game is \(E(D) = E(2X) = 2E(X) = 7\), since we have linear transformation here. The code below verifies these:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{X}\OtherTok{\textless{}{-}}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{6}\NormalTok{) }\DocumentationTok{\#\#support for X}
+
+\NormalTok{D}\OtherTok{\textless{}{-}}\DecValTok{2}\SpecialCharTok{*}\NormalTok{ X }\DocumentationTok{\#\#winnings}
+
+\FunctionTok{mean}\NormalTok{(X) }\DocumentationTok{\#\#EX since fie is fair}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 3.5
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{mean}\NormalTok{(D) }\DocumentationTok{\#\#Expected winnings. This is equal to 2 times mean(X)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 7
+\end{verbatim}
+
+Now suppose the winnings is now defined as the squared of the number of dots the die shows. Let \(T\) denote the new winnings, so \(T = X^2\). Since this is a non linear transformation, \(E(T) = E(X^2)\) may not equal to \(E(X)^2\):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{X}\OtherTok{\textless{}{-}}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{6}\NormalTok{) }\DocumentationTok{\#\#support for X}
+
+\NormalTok{T}\OtherTok{\textless{}{-}}\NormalTok{X}\SpecialCharTok{\^{}}\DecValTok{2} \DocumentationTok{\#\#winnings}
+
+\FunctionTok{mean}\NormalTok{(T) }\DocumentationTok{\#\#Expected winnings. }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 15.16667
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{mean}\NormalTok{(X)}\SpecialCharTok{\^{}}\DecValTok{2} \DocumentationTok{\#\#not equal}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 12.25
+\end{verbatim}
+
+In this example, we see that \(E(T) > E(X)^2\), in other words, \(E(g(X)) > g(E(X))\), when \(g(x) = x^2\). Is \(E(g(X)) > g(E(X))\) always for any non linear function \(g\)? It turns out that this is not always the case, and it depends on whether the function \(g\) is concave or convex.
+
+\subsubsection{Concave and Convex Functions}\label{concave-and-convex-functions}
+
+\subsection{Chebyshev's Inequality}\label{chebyshevs-inequality}
+
+\section{Limit Theorems}\label{limit-theorems}
+
+\subsection{Law of Large Numbers}\label{law-of-large-numbers}
+
+\subsection{Central Limit Theorem}\label{central-limit-theorem}
+
+\section{Monte Carlo Simulations}\label{monte-carlo-simulations}
 
   \bibliography{book.bib,packages.bib}
 

@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 6 Inequalities, Limit Theorems, and Simulations | Understanding Uncertainty Course Notes</title>
+<meta name="author" content="Jeffrey Woo">
+<meta name="description" content="This module is based on Introduction to Probability (Blitzstein, Hwang), Chapter 10. You can access the book for free at https://stat110.hsites.harvard.edu/ (and then click on Book). Please note...">
+<meta name="generator" content="bookdown 0.43 with bs4_book()">
+<meta property="og:title" content="Chapter 6 Inequalities, Limit Theorems, and Simulations | Understanding Uncertainty Course Notes">
+<meta property="og:type" content="book">
+<meta property="og:description" content="This module is based on Introduction to Probability (Blitzstein, Hwang), Chapter 10. You can access the book for free at https://stat110.hsites.harvard.edu/ (and then click on Book). Please note...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 6 Inequalities, Limit Theorems, and Simulations | Understanding Uncertainty Course Notes">
+<meta name="twitter:description" content="This module is based on Introduction to Probability (Blitzstein, Hwang), Chapter 10. You can access the book for free at https://stat110.hsites.harvard.edu/ (and then click on Book). Please note...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.9.0/transition.js"></script><script src="libs/bs3compat-0.9.0/tabs.js"></script><script src="libs/bs3compat-0.9.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Understanding Uncertainty Course Notes</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Preface</a></li>
+<li><a class="" href="descriptive.html"><span class="header-section-number">1</span> Descriptive Statistics</a></li>
+<li><a class="" href="probability.html"><span class="header-section-number">2</span> Probability</a></li>
+<li><a class="" href="discrete-random-variables.html"><span class="header-section-number">3</span> Discrete Random Variables</a></li>
+<li><a class="" href="continuous-random-variables.html"><span class="header-section-number">4</span> Continuous Random Variables</a></li>
+<li><a class="" href="joint-distributions.html"><span class="header-section-number">5</span> Joint Distributions</a></li>
+<li><a class="active" href="inequalities-limit-theorems-and-simulations.html"><span class="header-section-number">6</span> Inequalities, Limit Theorems, and Simulations</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="inequalities-limit-theorems-and-simulations" class="section level1" number="6">
+<h1>
+<span class="header-section-number">6</span> Inequalities, Limit Theorems, and Simulations<a class="anchor" aria-label="anchor" href="#inequalities-limit-theorems-and-simulations"><i class="fas fa-link"></i></a>
+</h1>
+<p>This module is based on Introduction to Probability (Blitzstein, Hwang), Chapter 10. You can access the book for free at <a href="https://stat110.hsites.harvard.edu/" class="uri">https://stat110.hsites.harvard.edu/</a> (and then click on Book). Please note that I cover additional topics, and skip certain topics from the book. You may skip ??? from the book.</p>
+<div id="introduction-2" class="section level2" number="6.1">
+<h2>
+<span class="header-section-number">6.1</span> Introduction<a class="anchor" aria-label="anchor" href="#introduction-2"><i class="fas fa-link"></i></a>
+</h2>
+<p>It can be difficult to calculate probabilities and expected values, for example, when the PDF of a distribution is unknown, or its integral is too difficult to work out. You may notice that we used simulations to approximate probabilities and expected values in some of the examples in previous modules. With improvement in computing capabilities, simulations can now be performed faster and is a tool that is used more and more. Other tools include using inequalities to bound the probabilities (e.g. the probability cannot be greater or less than a certain value), or approximating using known theorems. We’ll look at these three tools in this module.</p>
+</div>
+<div id="inequalities" class="section level2" number="6.2">
+<h2>
+<span class="header-section-number">6.2</span> Inequalities<a class="anchor" aria-label="anchor" href="#inequalities"><i class="fas fa-link"></i></a>
+</h2>
+<p>If a probability or expected value is difficult to calculate, it may be easier to find a bound via an inequality. This usually means that we can guarantee that a certain probability or expected value is within a certain range of values, so we can narrow down the possible values for the exact answer. For example, instead of being able to calculate the probability of a certain event, we may be able to show that its probability is no more than 0.1, so we know the event is unlikely to happen. We will cover a coupleof the most well-known inequalities in probability.</p>
+<div id="cauchy-schwartz-inequality" class="section level3" number="6.2.1">
+<h3>
+<span class="header-section-number">6.2.1</span> Cauchy-Schwartz Inequality<a class="anchor" aria-label="anchor" href="#cauchy-schwartz-inequality"><i class="fas fa-link"></i></a>
+</h3>
+<p>The <strong>Cauchy-Schwarz inequality</strong> is one of the most famous inequalities in mathematics and has many applications. In the context of probability, it is written as: For any random variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> with finite variances</p>
+<p><span class="math display" id="eq:6-CS">\[\begin{equation}
+|E(XY)| \leq \sqrt{E(X^2)E(Y^2)}.
+\tag{6.1}
+\end{equation}\]</span></p>
+<p>The Cauchy-Schwartz inequality can be used to show the correlation between any two random variables with finite variances must be between -1 and 1. A quick proof is as follows: we apply equation <a href="inequalities-limit-theorems-and-simulations.html#eq:6-CS">(6.1)</a> to the <strong>centered</strong> random variables <span class="math inline">\(X - \mu_X\)</span> and <span class="math inline">\(Y - \mu_Y\)</span>:</p>
+<p><span class="math display">\[
+\begin{split}
+|E[(X - \mu_X)(Y - \mu_Y)]| &amp; \leq \sqrt{E[(X - \mu_X)^2] E[(Y - \mu_Y)^2]} \\
+\implies |Cov(X,Y)| &amp; \leq \sqrt{Var(X) Var(Y)} \\
+\implies |Corr(X,Y)| &amp; \leq 1.
+\end{split}
+\]</span></p>
+<p>The Cauchy-Schwarz inequality can also be used to show that the variance of any random variable has to be non negative. A quick proof is as follows: we apply equation <a href="inequalities-limit-theorems-and-simulations.html#eq:6-CS">(6.1)</a> to the random variable <span class="math inline">\(X\)</span> and to a constant 1:</p>
+<p><span class="math display">\[
+\begin{split}
+|E(X)| &amp; \leq \sqrt{E(X^2)E(1^2)}. \\
+\implies |E(X)| &amp; \leq \sqrt{E(X^2)} \\
+\implies E(X)^2 &amp; \leq E(X^2) \\
+\implies 0 &amp; \leq E(X^2) - E(X)^2 = Var(X).
+\end{split}
+\]</span>
+Note: One other place that you may seen the Cauchy-Schwarz inequality is in the proof of the triangle inequality in geometry.</p>
+</div>
+<div id="jensens-inequality" class="section level3" number="6.2.2">
+<h3>
+<span class="header-section-number">6.2.2</span> Jensen’s Inequality<a class="anchor" aria-label="anchor" href="#jensens-inequality"><i class="fas fa-link"></i></a>
+</h3>
+<p>You may have noticed in previous modules, we have written about transforming a random variable. One way of transforming a random variable is through a scale change, in other words, the value of the random variable is multiplied by a constant. This happens when we change the units of the variable. For example we want to convert a random variable based on weight from kilograms to pounds. If <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> denote the weight in kilograms and pounds respectively, we can write <span class="math inline">\(Y = 2.2X\)</span>. If we know the expected value of <span class="math inline">\(X\)</span>, we can easily find the expected value for <span class="math inline">\(Y\)</span> by multiplying <span class="math inline">\(E(X)\)</span> by 2.2. This is fairly intuitive and is based on the linearity of expectations using equation <a href="discrete-random-variables.html#eq:3-linEX">(3.3)</a>.</p>
+<div id="linear-and-non-linear-transformations" class="section level4" number="6.2.2.1">
+<h4>
+<span class="header-section-number">6.2.2.1</span> Linear and Non Linear Transformations<a class="anchor" aria-label="anchor" href="#linear-and-non-linear-transformations"><i class="fas fa-link"></i></a>
+</h4>
+<p>A way to think about transformations is to write <span class="math inline">\(Y = g(X)\)</span>, where <span class="math inline">\(g\)</span> is a function that describes the transformation. In the kilograms to pounds example, <span class="math inline">\(g\)</span> is exactly 2.2, so <span class="math inline">\(Y = 2.2X\)</span>. This transformation is a <strong>linear transformation</strong> since the graph of <span class="math inline">\(Y = 2.2X\)</span> is a straight line. In this example, <span class="math inline">\(E(Y) = E(2.2X) = 2.2E(X)\)</span>.</p>
+<p>What if we use a <strong>non linear transformation</strong>? A popular non linear transformation is a log transformation. This is used when a random variable is right skewed (which happens pretty often in real data, such as wages, since only a few people make really high wages and the vast majority of people have wages on the lower end). Expected values are often used in statistical models for predictions; however, we know that the mean may not be the best measure of centrality with skewed data. One way to transform right skewed data to become less skewed is to log transform the data. In this example, we have <span class="math inline">\(Y = \log(X)\)</span>, so <span class="math inline">\(g(x) = \log(x)\)</span>. If we know the expected value of the original variable, <span class="math inline">\(E(X)\)</span>, can we easily find the expected value of <span class="math inline">\(Y\)</span>? Can we write <span class="math inline">\(E(Y) = E(\log(X)) = \log E(X)\)</span>? This is actually incorrect. It turns out that such operations do not work for non linear transformations, i.e. if <span class="math inline">\(g\)</span> is non linear, <span class="math inline">\(E(g(X))\)</span> is not necessarily equal to <span class="math inline">\(g(E(X))\)</span>. A log transformation is not linear since the graph of <span class="math inline">\(Y = \log(X)\)</span> is not a straight line.</p>
+<p>Let us use a toy example to show this. Suppose we roll a fair six-sided die, and let <span class="math inline">\(X\)</span> denote the number of dots the die shows. For this game, we get to win money based on the result of the roll, specifically twice the result. Let <span class="math inline">\(D\)</span> denote the winnings for this game, so <span class="math inline">\(D = 2X\)</span>. Since we know <span class="math inline">\(E(X) = 3.5\)</span>, this means that the expected winnings for this game is <span class="math inline">\(E(D) = E(2X) = 2E(X) = 7\)</span>, since we have linear transformation here. The code below verifies these:</p>
+<div class="sourceCode" id="cb89"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">X</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">4</span>,<span class="fl">5</span>,<span class="fl">6</span><span class="op">)</span> <span class="co">##support for X</span></span>
+<span></span>
+<span><span class="va">D</span><span class="op">&lt;-</span><span class="fl">2</span><span class="op">*</span> <span class="va">X</span> <span class="co">##winnings</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">X</span><span class="op">)</span> <span class="co">##EX since fie is fair</span></span></code></pre></div>
+<pre><code>## [1] 3.5</code></pre>
+<div class="sourceCode" id="cb91"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">D</span><span class="op">)</span> <span class="co">##Expected winnings. This is equal to 2 times mean(X)</span></span></code></pre></div>
+<pre><code>## [1] 7</code></pre>
+<p>Now suppose the winnings is now defined as the squared of the number of dots the die shows. Let <span class="math inline">\(T\)</span> denote the new winnings, so <span class="math inline">\(T = X^2\)</span>. Since this is a non linear transformation, <span class="math inline">\(E(T) = E(X^2)\)</span> may not equal to <span class="math inline">\(E(X)^2\)</span>:</p>
+<div class="sourceCode" id="cb93"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">X</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">4</span>,<span class="fl">5</span>,<span class="fl">6</span><span class="op">)</span> <span class="co">##support for X</span></span>
+<span></span>
+<span><span class="cn">T</span><span class="op">&lt;-</span><span class="va">X</span><span class="op">^</span><span class="fl">2</span> <span class="co">##winnings</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="cn">T</span><span class="op">)</span> <span class="co">##Expected winnings. </span></span></code></pre></div>
+<pre><code>## [1] 15.16667</code></pre>
+<div class="sourceCode" id="cb95"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">X</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span> <span class="co">##not equal</span></span></code></pre></div>
+<pre><code>## [1] 12.25</code></pre>
+<p>In this example, we see that <span class="math inline">\(E(T) &gt; E(X)^2\)</span>, in other words, <span class="math inline">\(E(g(X)) &gt; g(E(X))\)</span>, when <span class="math inline">\(g(x) = x^2\)</span>. Is <span class="math inline">\(E(g(X)) &gt; g(E(X))\)</span> always for any non linear function <span class="math inline">\(g\)</span>? It turns out that this is not always the case, and it depends on whether the function <span class="math inline">\(g\)</span> is concave or convex.</p>
+</div>
+<div id="concave-and-convex-functions" class="section level4" number="6.2.2.2">
+<h4>
+<span class="header-section-number">6.2.2.2</span> Concave and Convex Functions<a class="anchor" aria-label="anchor" href="#concave-and-convex-functions"><i class="fas fa-link"></i></a>
+</h4>
+</div>
+</div>
+<div id="chebyshevs-inequality" class="section level3" number="6.2.3">
+<h3>
+<span class="header-section-number">6.2.3</span> Chebyshev’s Inequality<a class="anchor" aria-label="anchor" href="#chebyshevs-inequality"><i class="fas fa-link"></i></a>
+</h3>
+</div>
+</div>
+<div id="limit-theorems" class="section level2" number="6.3">
+<h2>
+<span class="header-section-number">6.3</span> Limit Theorems<a class="anchor" aria-label="anchor" href="#limit-theorems"><i class="fas fa-link"></i></a>
+</h2>
+<div id="law-of-large-numbers" class="section level3" number="6.3.1">
+<h3>
+<span class="header-section-number">6.3.1</span> Law of Large Numbers<a class="anchor" aria-label="anchor" href="#law-of-large-numbers"><i class="fas fa-link"></i></a>
+</h3>
+</div>
+<div id="central-limit-theorem" class="section level3" number="6.3.2">
+<h3>
+<span class="header-section-number">6.3.2</span> Central Limit Theorem<a class="anchor" aria-label="anchor" href="#central-limit-theorem"><i class="fas fa-link"></i></a>
+</h3>
+</div>
+</div>
+<div id="monte-carlo-simulations" class="section level2" number="6.4">
+<h2>
+<span class="header-section-number">6.4</span> Monte Carlo Simulations<a class="anchor" aria-label="anchor" href="#monte-carlo-simulations"><i class="fas fa-link"></i></a>
+</h2>
+
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="joint-distributions.html"><span class="header-section-number">5</span> Joint Distributions</a></div>
+<div class="empty"></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#inequalities-limit-theorems-and-simulations"><span class="header-section-number">6</span> Inequalities, Limit Theorems, and Simulations</a></li>
+<li><a class="nav-link" href="#introduction-2"><span class="header-section-number">6.1</span> Introduction</a></li>
+<li>
+<a class="nav-link" href="#inequalities"><span class="header-section-number">6.2</span> Inequalities</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#cauchy-schwartz-inequality"><span class="header-section-number">6.2.1</span> Cauchy-Schwartz Inequality</a></li>
+<li><a class="nav-link" href="#jensens-inequality"><span class="header-section-number">6.2.2</span> Jensen’s Inequality</a></li>
+<li><a class="nav-link" href="#chebyshevs-inequality"><span class="header-section-number">6.2.3</span> Chebyshev’s Inequality</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#limit-theorems"><span class="header-section-number">6.3</span> Limit Theorems</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#law-of-large-numbers"><span class="header-section-number">6.3.1</span> Law of Large Numbers</a></li>
+<li><a class="nav-link" href="#central-limit-theorem"><span class="header-section-number">6.3.2</span> Central Limit Theorem</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#monte-carlo-simulations"><span class="header-section-number">6.4</span> Monte Carlo Simulations</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2025-07-02.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

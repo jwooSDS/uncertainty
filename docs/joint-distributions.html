@@ -48,6 +48,7 @@
 <li><a class="" href="discrete-random-variables.html"><span class="header-section-number">3</span> Discrete Random Variables</a></li>
 <li><a class="" href="continuous-random-variables.html"><span class="header-section-number">4</span> Continuous Random Variables</a></li>
 <li><a class="active" href="joint-distributions.html"><span class="header-section-number">5</span> Joint Distributions</a></li>
+<li><a class="" href="inequalities-limit-theorems-and-simulations.html"><span class="header-section-number">6</span> Inequalities, Limit Theorems, and Simulations</a></li>
 </ul>
 
         <div class="book-extra">
@@ -488,7 +489,7 @@ s_{x,y} = \frac{\sum_{i=1}^n (x_i - \bar{x})(y_i - \bar{y})}{n-1}
 </h3>
 <p>The <strong>correlation</strong> between random variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> is</p>
 <p><span class="math display" id="eq:5-corr">\[\begin{equation}
-\rho = Corr(X,Y) = \frac{Cov(X,Y)}{\sqrt{Var(x) Var(Y)}}.
+\rho = Corr(X,Y) = \frac{Cov(X,Y)}{\sqrt{Var(X) Var(Y)}}.
 \tag{5.22}
 \end{equation}\]</span></p>
 <p>The <strong>sample correlation</strong> for two vectors of observed data, each of size <span class="math inline">\(n\)</span>: <span class="math inline">\(X = (x_1, x_2, \cdots, x_n)\)</span> and <span class="math inline">\(Y = (y_1, y_2, \cdots, y_n)\)</span>, is</p>
@@ -780,7 +781,7 @@ Corr(X_1,X_2) &amp;= \frac{Cov(X_1,X_2)}{\sqrt{Var(X_1) Var(X_2)}}\\
 <div class="sourceCode" id="cb83"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://mvtnorm.R-forge.R-project.org">mvtnorm</a></span><span class="op">)</span> <span class="co">##package to simulate from MVN</span></span>
 <span></span>
-<span><span class="va">reps</span><span class="op">&lt;-</span><span class="fl">10000</span> <span class="co">## how many reps</span></span>
+<span><span class="va">reps</span><span class="op">&lt;-</span><span class="fl">1000</span> <span class="co">## how many reps</span></span>
 <span><span class="va">pvalsx1</span><span class="op">&lt;-</span><span class="va">pvalsx2</span><span class="op">&lt;-</span><span class="va">pvalsx3</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span><span class="op">(</span><span class="fl">0</span>,<span class="va">reps</span><span class="op">)</span> <span class="co">##initialize an array to store the pvalues from each test at each rep</span></span>
 <span><span class="va">siglevel</span><span class="op">&lt;-</span><span class="fl">0.05</span> <span class="co">##sig level</span></span>
 <span><span class="va">n</span><span class="op">&lt;-</span><span class="fl">5000</span> <span class="co">##number of draws for each rep</span></span>
@@ -816,13 +817,13 @@ Corr(X_1,X_2) &amp;= \frac{Cov(X_1,X_2)}{\sqrt{Var(X_1) Var(X_2)}}\\
 <span></span>
 <span><span class="co">##proportion of tests that wrongly reject the null</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">pvalsx1</span><span class="op">&lt;</span><span class="va">siglevel</span><span class="op">)</span><span class="op">/</span><span class="va">reps</span> <span class="co">##for X1</span></span></code></pre></div>
-<pre><code>## [1] 0.0471</code></pre>
+<pre><code>## [1] 0.054</code></pre>
 <div class="sourceCode" id="cb85"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">pvalsx2</span><span class="op">&lt;</span><span class="va">siglevel</span><span class="op">)</span><span class="op">/</span><span class="va">reps</span> <span class="co">##for X2</span></span></code></pre></div>
-<pre><code>## [1] 0.0414</code></pre>
+<pre><code>## [1] 0.037</code></pre>
 <div class="sourceCode" id="cb87"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">pvalsx3</span><span class="op">&lt;</span><span class="va">siglevel</span><span class="op">)</span><span class="op">/</span><span class="va">reps</span> <span class="co">##for X3</span></span></code></pre></div>
-<pre><code>## [1] 0.043</code></pre>
+<pre><code>## [1] 0.047</code></pre>
 <p>Since close to 5% of each hypothesis test rejected the null hypothesis, it appears that each component is consistent with a normal distribution. (Or more accurately, we do not have evidence to say that each component is not normal.) It does appear that if <span class="math inline">\(\boldsymbol{X} = (X_1, \cdots, X_k)\)</span> is MVN, the marginal distribution of each <span class="math inline">\(X_j\)</span> is normal. Our simulation does not provide evidence against this property.</p>
 <p>Note: What we have done is called a Monte Carlo simulation, and is often used in research to verify theorems. While you may not be involved in research, writing code to run simulations is a good way for you to understand these theorems and how they are applied. We will cover Monte Carlo simulations in more detail in a later module.</p>
 
@@ -832,7 +833,7 @@ Corr(X_1,X_2) &amp;= \frac{Cov(X_1,X_2)}{\sqrt{Var(X_1) Var(X_2)}}\\
 </div>
   <div class="chapter-nav">
 <div class="prev"><a href="continuous-random-variables.html"><span class="header-section-number">4</span> Continuous Random Variables</a></div>
-<div class="empty"></div>
+<div class="next"><a href="inequalities-limit-theorems-and-simulations.html"><span class="header-section-number">6</span> Inequalities, Limit Theorems, and Simulations</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
@@ -882,7 +883,7 @@ Corr(X_1,X_2) &amp;= \frac{Cov(X_1,X_2)}{\sqrt{Var(X_1) Var(X_2)}}\\
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2025-07-01.</p>
+    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2025-07-02.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
