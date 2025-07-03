@@ -71,7 +71,7 @@
 <h2>
 <span class="header-section-number">6.2</span> Inequalities<a class="anchor" aria-label="anchor" href="#inequalities"><i class="fas fa-link"></i></a>
 </h2>
-<p>If a probability or expected value is difficult to calculate, it may be easier to find a bound via an inequality. This usually means that we can guarantee that a certain probability or expected value is within a certain range of values, so we can narrow down the possible values for the exact answer. For example, instead of being able to calculate the probability of a certain event, we may be able to show that its probability is no more than 0.1, so we know the event is unlikely to happen. We will cover a coupleof the most well-known inequalities in probability.</p>
+<p>If a probability or expected value is difficult to calculate, it may be easier to find a bound via an inequality. This usually means that we can guarantee that a certain probability or expected value is within a certain range of values, so we can narrow down the possible values for the exact answer. For example, instead of being able to calculate the probability of a certain event, we may be able to show that its probability is no more than 0.1, so we know the event is unlikely to happen. We will cover a couple of the most well-known inequalities in probability.</p>
 <div id="cauchy-schwartz-inequality" class="section level3" number="6.2.1">
 <h3>
 <span class="header-section-number">6.2.1</span> Cauchy-Schwartz Inequality<a class="anchor" aria-label="anchor" href="#cauchy-schwartz-inequality"><i class="fas fa-link"></i></a>
@@ -81,7 +81,10 @@
 |E(XY)| \leq \sqrt{E(X^2)E(Y^2)}.
 \tag{6.1}
 \end{equation}\]</span></p>
-<p>The Cauchy-Schwartz inequality can be used to show the correlation between any two random variables with finite variances must be between -1 and 1. A quick proof is as follows: we apply equation <a href="inequalities-limit-theorems-and-simulations.html#eq:6-CS">(6.1)</a> to the <strong>centered</strong> random variables <span class="math inline">\(X - \mu_X\)</span> and <span class="math inline">\(Y - \mu_Y\)</span>:</p>
+<p>Next, we use the Cauchy-Schwartz inequality to prove a couple of properties that we have stated in earlier modules:</p>
+<ol style="list-style-type: decimal">
+<li>The Cauchy-Schwartz inequality can be used to show the correlation between any two random variables with finite variances must be between -1 and 1. A quick proof is as follows: we apply equation <a href="inequalities-limit-theorems-and-simulations.html#eq:6-CS">(6.1)</a> to the <strong>centered</strong> random variables <span class="math inline">\(X - \mu_X\)</span> and <span class="math inline">\(Y - \mu_Y\)</span>:</li>
+</ol>
 <p><span class="math display">\[
 \begin{split}
 |E[(X - \mu_X)(Y - \mu_Y)]| &amp; \leq \sqrt{E[(X - \mu_X)^2] E[(Y - \mu_Y)^2]} \\
@@ -89,7 +92,9 @@
 \implies |Corr(X,Y)| &amp; \leq 1.
 \end{split}
 \]</span></p>
-<p>The Cauchy-Schwarz inequality can also be used to show that the variance of any random variable has to be non negative. A quick proof is as follows: we apply equation <a href="inequalities-limit-theorems-and-simulations.html#eq:6-CS">(6.1)</a> to the random variable <span class="math inline">\(X\)</span> and to a constant 1:</p>
+<ol start="2" style="list-style-type: decimal">
+<li>The Cauchy-Schwarz inequality can also be used to show that the variance of any random variable has to be non negative. A quick proof is as follows: we apply equation <a href="inequalities-limit-theorems-and-simulations.html#eq:6-CS">(6.1)</a> to the random variable <span class="math inline">\(X\)</span> and to a constant 1:</li>
+</ol>
 <p><span class="math display">\[
 \begin{split}
 |E(X)| &amp; \leq \sqrt{E(X^2)E(1^2)}. \\
@@ -105,9 +110,10 @@ Note: One other place that you may seen the Cauchy-Schwarz inequality is in the 
 <span class="header-section-number">6.2.2</span> Jensen’s Inequality<a class="anchor" aria-label="anchor" href="#jensens-inequality"><i class="fas fa-link"></i></a>
 </h3>
 <p>You may have noticed in previous modules, we have written about transforming a random variable. One way of transforming a random variable is through a scale change, in other words, the value of the random variable is multiplied by a constant. This happens when we change the units of the variable. For example we want to convert a random variable based on weight from kilograms to pounds. If <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> denote the weight in kilograms and pounds respectively, we can write <span class="math inline">\(Y = 2.2X\)</span>. If we know the expected value of <span class="math inline">\(X\)</span>, we can easily find the expected value for <span class="math inline">\(Y\)</span> by multiplying <span class="math inline">\(E(X)\)</span> by 2.2. This is fairly intuitive and is based on the linearity of expectations using equation <a href="discrete-random-variables.html#eq:3-linEX">(3.3)</a>.</p>
-<div id="linear-and-non-linear-transformations" class="section level4" number="6.2.2.1">
+<p>Before stating Jensen’s inequality, we have to cover a couple of concepts: linear vs non linear transformations, and convex vs concave functions.</p>
+<div id="linnonlin" class="section level4" number="6.2.2.1">
 <h4>
-<span class="header-section-number">6.2.2.1</span> Linear and Non Linear Transformations<a class="anchor" aria-label="anchor" href="#linear-and-non-linear-transformations"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6.2.2.1</span> Linear and Non Linear Transformations<a class="anchor" aria-label="anchor" href="#linnonlin"><i class="fas fa-link"></i></a>
 </h4>
 <p>A way to think about transformations is to write <span class="math inline">\(Y = g(X)\)</span>, where <span class="math inline">\(g\)</span> is a function that describes the transformation. In the kilograms to pounds example, <span class="math inline">\(g\)</span> is exactly 2.2, so <span class="math inline">\(Y = 2.2X\)</span>. This transformation is a <strong>linear transformation</strong> since the graph of <span class="math inline">\(Y = 2.2X\)</span> is a straight line. In this example, <span class="math inline">\(E(Y) = E(2.2X) = 2.2E(X)\)</span>.</p>
 <p>What if we use a <strong>non linear transformation</strong>? A popular non linear transformation is a log transformation. This is used when a random variable is right skewed (which happens pretty often in real data, such as wages, since only a few people make really high wages and the vast majority of people have wages on the lower end). Expected values are often used in statistical models for predictions; however, we know that the mean may not be the best measure of centrality with skewed data. One way to transform right skewed data to become less skewed is to log transform the data. In this example, we have <span class="math inline">\(Y = \log(X)\)</span>, so <span class="math inline">\(g(x) = \log(x)\)</span>. If we know the expected value of the original variable, <span class="math inline">\(E(X)\)</span>, can we easily find the expected value of <span class="math inline">\(Y\)</span>? Can we write <span class="math inline">\(E(Y) = E(\log(X)) = \log E(X)\)</span>? This is actually incorrect. It turns out that such operations do not work for non linear transformations, i.e. if <span class="math inline">\(g\)</span> is non linear, <span class="math inline">\(E(g(X))\)</span> is not necessarily equal to <span class="math inline">\(g(E(X))\)</span>. A log transformation is not linear since the graph of <span class="math inline">\(Y = \log(X)\)</span> is not a straight line.</p>
@@ -117,7 +123,7 @@ Note: One other place that you may seen the Cauchy-Schwarz inequality is in the 
 <span></span>
 <span><span class="va">D</span><span class="op">&lt;-</span><span class="fl">2</span><span class="op">*</span> <span class="va">X</span> <span class="co">##winnings</span></span>
 <span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">X</span><span class="op">)</span> <span class="co">##EX since fie is fair</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">X</span><span class="op">)</span> <span class="co">##EX since die is fair</span></span></code></pre></div>
 <pre><code>## [1] 3.5</code></pre>
 <div class="sourceCode" id="cb91"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">D</span><span class="op">)</span> <span class="co">##Expected winnings. This is equal to 2 times mean(X)</span></span></code></pre></div>
@@ -133,33 +139,291 @@ Note: One other place that you may seen the Cauchy-Schwarz inequality is in the 
 <div class="sourceCode" id="cb95"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">X</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span> <span class="co">##not equal</span></span></code></pre></div>
 <pre><code>## [1] 12.25</code></pre>
-<p>In this example, we see that <span class="math inline">\(E(T) &gt; E(X)^2\)</span>, in other words, <span class="math inline">\(E(g(X)) &gt; g(E(X))\)</span>, when <span class="math inline">\(g(x) = x^2\)</span>. Is <span class="math inline">\(E(g(X)) &gt; g(E(X))\)</span> always for any non linear function <span class="math inline">\(g\)</span>? It turns out that this is not always the case, and it depends on whether the function <span class="math inline">\(g\)</span> is concave or convex.</p>
+<p>In this example, we see that <span class="math inline">\(E(T) &gt; E(X)^2\)</span>, in other words, <span class="math inline">\(E(g(X)) &gt; g(E(X))\)</span>, when <span class="math inline">\(g(x) = x^2\)</span>. Is <span class="math inline">\(E(g(X)) &gt; g(E(X))\)</span> always for any non linear function <span class="math inline">\(g\)</span>? It turns out that this is not always the case.</p>
+<p>To summarize:</p>
+<ul>
+<li>If <span class="math inline">\(g\)</span> is linear, then <span class="math inline">\(E(g(X)) = g(E(X))\)</span>, and we can use linearity of expectations.</li>
+<li>If <span class="math inline">\(g\)</span> is non linear, then <span class="math inline">\(E(g(X)) \neq g(E(X))\)</span>.</li>
+</ul>
 </div>
-<div id="concave-and-convex-functions" class="section level4" number="6.2.2.2">
+<div id="convex-and-concave-functions" class="section level4" number="6.2.2.2">
 <h4>
-<span class="header-section-number">6.2.2.2</span> Concave and Convex Functions<a class="anchor" aria-label="anchor" href="#concave-and-convex-functions"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6.2.2.2</span> Convex and Concave Functions<a class="anchor" aria-label="anchor" href="#convex-and-concave-functions"><i class="fas fa-link"></i></a>
 </h4>
+<p>In the example above, we have an instance where <span class="math inline">\(E(g(X)) \neq g(E(X))\)</span>. The direction of the inequality depends on whether the function <span class="math inline">\(g\)</span> is convex or concave. There are a couple of ways to decide if a function is convex or concave:</p>
+<ul>
+<li>Using derivatives:
+<ul>
+<li>A function <span class="math inline">\(g(x)\)</span> is <strong>convex</strong> if its second derivative is non negative, i.e. <span class="math inline">\(g^{\prime \prime}(x) \geq 0\)</span> over its domain. The domain is the set of all values of <span class="math inline">\(x\)</span> for which <span class="math inline">\(g(x)\)</span> is defined.</li>
+<li>A function <span class="math inline">\(g(x)\)</span> is <strong>concave</strong> if its second derivative is non positive, i.e. <span class="math inline">\(g^{\prime \prime}(x) \leq 0\)</span> over its domain.</li>
+</ul>
+</li>
+<li>Using visuals:
+<ul>
+<li>A function <span class="math inline">\(g(x)\)</span> is <strong>convex</strong> if every line segment joining two points on its graph is never below the graph.</li>
+<li>A function <span class="math inline">\(g(x)\)</span> is <strong>concave</strong> if every line segment joining two points on its graph is never above the graph.</li>
+</ul>
+</li>
+</ul>
+<p>We now look at a couple of functions to see if they are convex or concave:</p>
+<ul>
+<li>
+<span class="math inline">\(g(x) = \log(x)\)</span> is a concave function.
+<ul>
+<li>Its second derivative is <span class="math inline">\(g^{\prime \prime}(x) = -\frac{1}{x^2}\)</span>. Note the domain of <span class="math inline">\(log(x)\)</span> is positive real numbers (it is undefined when <span class="math inline">\(x \leq 0\)</span>), so its second derivative is always negative.</li>
+<li>We can also look at a graph of <span class="math inline">\(y = \log(x)\)</span>, and draw line segments that join two points on its graph. All of these lines are never above the graph. Figure <a href="inequalities-limit-theorems-and-simulations.html#fig:concave">6.1</a> below shows an example with one line segment, but we can see that any line segment that joins two points on the graph will never be above the graph.</li>
+</ul>
+</li>
+</ul>
+<div class="figure">
+<span style="display:block;" id="fig:concave"></span>
+<img src="images/06-concave.jpeg" alt="Example of Concave Function"><p class="caption">
+Figure 6.1: Example of Concave Function
+</p>
+</div>
+<ul>
+<li>
+<span class="math inline">\(g(x) = x^2\)</span> is a convex function.
+<ul>
+<li>Its second derivative is <span class="math inline">\(g^{\prime \prime}(x) = 2\)</span>, which is always positive.</li>
+<li>We can also look at a graph of <span class="math inline">\(y = x^2\)</span>, and draw line segments that join two points on its graph. All of these lines are never below the graph. Figure <a href="inequalities-limit-theorems-and-simulations.html#fig:convex">6.2</a> below shows an example with one line segment, but we can see that any line segment that joins two points on the graph will never be velow the graph.</li>
+</ul>
+</li>
+</ul>
+<div class="figure">
+<span style="display:block;" id="fig:convex"></span>
+<img src="images/06-convex.jpeg" alt="Example of Convex Function"><p class="caption">
+Figure 6.2: Example of Convex Function
+</p>
+</div>
+<p><em>Thought question</em>: Consider the function <span class="math inline">\(g(x) = \frac{1}{x}\)</span>, i.e. the inverse function. Can you explain why this function is convex when <span class="math inline">\(x&gt;0\)</span> and is concave when <span class="math inline">\(x&lt;0\)</span>?</p>
+</div>
+<div id="jensens-inequality-1" class="section level4" number="6.2.2.3">
+<h4>
+<span class="header-section-number">6.2.2.3</span> Jensen’s Inequality<a class="anchor" aria-label="anchor" href="#jensens-inequality-1"><i class="fas fa-link"></i></a>
+</h4>
+<p>We are now ready to state <strong>Jensen’s inequality</strong>. Let <span class="math inline">\(X\)</span> denote a random variable. If <span class="math inline">\(g\)</span> is convex, then <span class="math inline">\(E(g(X)) \geq g(E(X))\)</span>. If <span class="math inline">\(g\)</span> is concave, then <span class="math inline">\(E(g(X)) \leq g(E(X))\)</span>.</p>
+<p>The equality holds only if <span class="math inline">\(g\)</span> is a linear function. It turns out linear functions are both convex and concave. The book goes through a simple proof of Jensen’s inequality and is worth reading. Next, we apply Jensen’s inequality to a few examples:</p>
+<ol style="list-style-type: decimal">
+<li><p>We apply Jensen’s inequality to the toy example in Section <a href="inequalities-limit-theorems-and-simulations.html#linnonlin">6.2.2.1</a>. As a reminder, suppose we roll a fair six-sided die, and let <span class="math inline">\(X\)</span> denote the number of dots the die shows. The winnings is defined as the squared of the number of dots the die shows. Let <span class="math inline">\(T\)</span> denote the new winnings, so <span class="math inline">\(T = X^2\)</span>, so <span class="math inline">\(g(x) = x^2\)</span> is the function representing this non linear transformation. We established that the quadratic function is convex, so Jensen’s inequality tells us that <span class="math inline">\(E(g(X)) \geq g(E(X))\)</span>, i.e. that <span class="math inline">\(E(T) &gt; E(X)^2\)</span> which we showed in the code.</p></li>
+<li><p>As mentioned in Section <a href="inequalities-limit-theorems-and-simulations.html#linnonlin">6.2.2.1</a>, a log transformation is often applied to make data that are right skewed less skewed, so that popular methods such as linear regression, tree based methods, <span class="math inline">\(K\)</span> nearest neighbors can be used (these methods can be sensitive to outliers since they are based on conditional expectations or conditional means). What often happens is the log transformation is applied to the variable of interest, the model is fit, a prediction is made for the log transformed variable using conditional expectations, and this predicted value is exponetiated to convert it back to the original variable. Jensen’s inequality tells us that the exponential of the average log variable is greater than the average variable, and our model over estimates.</p></li>
+<li><p>Jensen’s inequality can also be used to show that the sample standard deviation is a biased estimator of the population standard deviation, which appears counter intuitive, since the sample variance is an unbiased estimator of the population variance, i.e. <span class="math inline">\(E(s^2) = \sigma^2\)</span>, but <span class="math inline">\(E(s) \neq \sigma\)</span>. The quick proof is</p></li>
+</ol>
+<p><span class="math display">\[
+E(s) = E(\sqrt{s^2}) \leq \sqrt{E(s^2)} = \sigma.
+\]</span></p>
+<p>So the sample standard deviation underestimates the population standard deviation. However, this bias tends to be small if the sample size is large. We will cover ideas relating to unbiased estimators in a future module in more detail.</p>
 </div>
 </div>
 <div id="chebyshevs-inequality" class="section level3" number="6.2.3">
 <h3>
 <span class="header-section-number">6.2.3</span> Chebyshev’s Inequality<a class="anchor" aria-label="anchor" href="#chebyshevs-inequality"><i class="fas fa-link"></i></a>
 </h3>
+<p>A common inequality wthat is used for probability is <strong>Chebyshev’s inequality</strong>. It provides an upper bound on the probability that a random variable is at least a certain distance from its mean. Let <span class="math inline">\(X\)</span> be a random variable with mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^2\)</span>. Then for any <span class="math inline">\(a&gt;0\)</span>,</p>
+<p><span class="math display" id="eq:6-CI">\[\begin{equation}
+P(|X-\mu| \geq a) \leq \frac{\sigma^2}{a^2}.
+\tag{6.2}
+\end{equation}\]</span></p>
+<p>An alternative way of expressing Chebyshev’s inequality is to let <span class="math inline">\(a = c \sigma\)</span> in equation <a href="inequalities-limit-theorems-and-simulations.html#eq:6-CI">(6.2)</a>, so that it can be interpreted as providing an upper bound on the probability that a random variable is at least <span class="math inline">\(c\)</span> standard deviations from its mean:</p>
+<p><span class="math display" id="eq:6-CIalt">\[\begin{equation}
+P(|X-\mu| \geq c \sigma) \leq \frac{\sigma^2}{c^2 \sigma^2} = \frac{1}{c^2}.
+\tag{6.3}
+\end{equation}\]</span></p>
+<p>Using equation @ref(eq:6_CIalt), we can say the following about the upper bond on the probability that a random variable is at least 1, 2, and 3 standard deviations from its mean:</p>
+<ul>
+<li>When <span class="math inline">\(c=1\)</span>,</li>
+</ul>
+<p><span class="math display">\[
+P(|X-\mu| \geq \sigma) \leq \frac{1}{1^2} = 1.
+\]</span>
+This informs us that the probability that a random variable is at least one standard deviation from its mean is no more than 1. The upper bound is not very informative in this setting since we know probabilities cannot be greater than 1.</p>
+<ul>
+<li>When <span class="math inline">\(c=2\)</span>,</li>
+</ul>
+<p><span class="math display">\[
+P(|X-\mu| \geq 2\sigma) \leq \frac{1}{2^2} = 0.25.
+\]</span></p>
+<p>This informs us the probability that a random variable is at least two standard deviations from its mean is no more than 0.25. In other words, there cannot be more than a 25% chance that a random variable is at least 2 standard deviations from its mean, or there cannot be less than a 75% chance that a random variable is within 2 standard deviations from its mean, since <span class="math inline">\(P(|X-\mu| \leq 2\sigma)\)</span> is the complement of <span class="math inline">\(P(|X-\mu| \geq 2\sigma)\)</span>.</p>
+<ul>
+<li>When <span class="math inline">\(c=3\)</span>,</li>
+</ul>
+<p><span class="math display">\[
+P(|X-\mu| \geq 3\sigma) \leq \frac{1}{3^2} = \frac{1}{9}.
+\]</span></p>
+<p>There cannot be more than a 11.11% chance that a random variable is at least 3 standard deviations from its mean, or there cannot be less than a 88.89% chance that a random variable is within 3 standard deviations from its mean.</p>
+<p><em>Thought question</em>: Can you explain how these results are consistent with the 68-99-99.7% rule for normal distributions, as stated in Section <a href="continuous-random-variables.html#rulenorm">4.5.2.3</a>?</p>
+<p>Notice that Chebyshev’s inequality can be applied to any distribution, and can be used to provide bounds on how data can be spread out. It is more flexible than the 68-99-99.7% rule for normal distributions as it can be applied to any distribution, but the bounds are not as exact as they are an inequality. There can be a trade-off in relaxing assumptions and accuracy of results.</p>
 </div>
 </div>
 <div id="limit-theorems" class="section level2" number="6.3">
 <h2>
 <span class="header-section-number">6.3</span> Limit Theorems<a class="anchor" aria-label="anchor" href="#limit-theorems"><i class="fas fa-link"></i></a>
 </h2>
+<p>In the previous subsection, we used inequalities to provide bounds on probabilities and expectations that may be difficult to calculate. Another way of handing difficult calculations would be to use approximations for the distribution of the random variable, instead of the exact distribution of the random variable. Generally speaking, these approximations work better when we have more data (i.e. when the sample size is larger). These approximations are covered by two of the most important limit theorems: the Law of Large Numbers and the Central Limit Theorem. These theorems approximate the distribution of the sample mean of i.i.d. (independent and identically distributed) random variables as the sample size gets larger.</p>
+<p>Note: The idea of i.i.d. random variables implies that each observed value of the random variable is independent of each other, and that each observed value come from the same random variable. For example, let <span class="math inline">\(X\)</span> denote the number of dots from a roll of a 6-sided fair die, and let <span class="math inline">\(X_1, X_2\)</span> denote the value of the first and second roll respectively. <span class="math inline">\(X_1\)</span> and <span class="math inline">\(X_2\)</span> are i.i.d. since the outcomes from the first and second roll do not influence each other, so they are independent. <span class="math inline">\(X_1\)</span> and <span class="math inline">\(X_2\)</span> are identically distributed as they both follow the same distribution, <span class="math inline">\(Mult_6(1, (1/6, 1/6, 1/6, 1/6, 1/6, 1/6))\)</span>. In real life, this is achieved through carefully designed and planned surveys and experiments with random sampling, which is a whole field in statistics in its own right.</p>
+<p>For the rest of this section, assume we have i.i.d. <span class="math inline">\(X_1, \cdots, X_n\)</span> with finite mean <span class="math inline">\(\mu\)</span> and finite variance <span class="math inline">\(\sigma^2\)</span>. For all positive integers <span class="math inline">\(n\)</span> (i.e. for any possible sample size), define the sample mean as <span class="math inline">\(\bar{X}_n = \frac{X_1 + \cdots + X_n}{n}\)</span>. We can easily derive the expected value and variance of the sample mean using propertires of expectations and variances:</p>
+<p><span class="math display" id="eq:6-Emean">\[\begin{equation}
+\begin{split}
+E(\bar{X}_n) &amp;= E(\frac{X_1 + \cdots + X_n}{n}) \\
+             &amp;= \frac{1}{n}E(X_1 + \cdots + X_n) \\
+             &amp;= \frac{1}{n} (E(X_1) + \cdots + E(X_n)) \\
+             &amp;= \frac{1}{n} (\mu + \cdots + \mu) \\
+             &amp;= \mu.
+\end{split}
+\tag{6.4}
+\end{equation}\]</span></p>
+<p>Equation <a href="inequalities-limit-theorems-and-simulations.html#eq:6-Emean">(6.4)</a> informs us that the long-run average of sample means is equal to the population mean. We can imagine this if we had taken different random samples of size <span class="math inline">\(n\)</span> from a population, and for each random sample we find the sample mean, and then average all these sample means. This average equals to the population mean <span class="math inline">\(\mu\)</span>. The code below provides a demonstration of these steps:</p>
+<ul>
+<li>We simulate a random sample of <span class="math inline">\(X_1, \cdots, X_{500}\)</span> i.i.d. from standard normal.</li>
+<li>Compute the sample mean and store it.</li>
+<li>Repeat the previous steps for a total of 10 thousand reps.</li>
+<li>Find the average of the 10 thousand sample means.</li>
+</ul>
+<div class="sourceCode" id="cb97"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">reps</span><span class="op">&lt;-</span> <span class="fl">10000</span> <span class="co">##take 10000 random samples. This value should be large</span></span>
+<span><span class="va">n</span><span class="op">&lt;-</span><span class="fl">500</span> <span class="co">##sample size for each random sample</span></span>
+<span><span class="va">xbar</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span><span class="op">(</span><span class="fl">0</span>,<span class="va">reps</span><span class="op">)</span> <span class="co">##store the sample mean for each random sample</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">90</span><span class="op">)</span></span>
+<span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">reps</span><span class="op">)</span></span>
+<span>  </span>
+<span><span class="op">{</span></span>
+<span>  </span>
+<span>  <span class="va">xbar</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">)</span> <span class="co">##find and store sample mean for each random sample</span></span>
+<span>  </span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">xbar</span><span class="op">)</span> <span class="co">##average the sample means. This should be close to 0. </span></span></code></pre></div>
+<pre><code>## [1] -0.0001034368</code></pre>
+<p><span class="math display" id="eq:6-Varmean">\[\begin{equation}
+\begin{split}
+Var(\bar{X}_n) &amp;= Var(\frac{X_1 + \cdots + X_n}{n}) \\
+             &amp;= \frac{1}{n^2}Var(X_1 + \cdots + X_n) \\
+             &amp;= \frac{1}{n^2} (Var(X_1) + \cdots + Var(X_n)) \\
+             &amp;= \frac{1}{n^2} (\sigma^2 + \cdots + \sigma^2) \\
+             &amp;= \frac{\sigma^2}{n}.
+\end{split}
+\tag{6.5}
+\end{equation}\]</span></p>
+<p>Equation <a href="inequalities-limit-theorems-and-simulations.html#eq:6-Varmean">(6.5)</a> informs us how to calculate the variance of the sample means. We can imagine this if we had taken different random samples of size <span class="math inline">\(n\)</span> from a population, and for each random sample we find the sample mean, and then find the variance of all these sample means. It is the variance of the original random variable divided by <span class="math inline">\(n\)</span>. This means as the sample size gets larger, the variance of the sample means get smaller, in other words, the sample means tend to get closer to the population mean. We re run the code from above and also find the variance of the sample means.</p>
+<div class="sourceCode" id="cb99"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">reps</span><span class="op">&lt;-</span> <span class="fl">10000</span> <span class="co">##take 10000 random samples. This value should be large</span></span>
+<span><span class="va">n</span><span class="op">&lt;-</span><span class="fl">500</span> <span class="co">##sample size for each random sample</span></span>
+<span><span class="va">xbar</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span><span class="op">(</span><span class="fl">0</span>,<span class="va">reps</span><span class="op">)</span> <span class="co">##store the sample mean for each random sample</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">90</span><span class="op">)</span></span>
+<span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">reps</span><span class="op">)</span></span>
+<span>  </span>
+<span><span class="op">{</span></span>
+<span>  </span>
+<span>  <span class="va">xbar</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">)</span> <span class="co">##find and store sample mean for each random sample</span></span>
+<span>  </span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">xbar</span><span class="op">)</span> <span class="co">##average the sample means. This should be close to 0. </span></span></code></pre></div>
+<pre><code>## [1] -0.0001034368</code></pre>
+<div class="sourceCode" id="cb101"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html">var</a></span><span class="op">(</span><span class="va">xbar</span><span class="op">)</span> <span class="co">##variance of sample means. This should be close to 1/500, since n=500. </span></span></code></pre></div>
+<pre><code>## [1] 0.001979948</code></pre>
 <div id="law-of-large-numbers" class="section level3" number="6.3.1">
 <h3>
 <span class="header-section-number">6.3.1</span> Law of Large Numbers<a class="anchor" aria-label="anchor" href="#law-of-large-numbers"><i class="fas fa-link"></i></a>
 </h3>
+<p>The <strong>Law of Large Numbers (LLN)</strong> states that as <span class="math inline">\(n\)</span> gets larger, the sample mean <span class="math inline">\(\bar{X}_n\)</span> converges to the true mean <span class="math inline">\(\mu\)</span>. In other words,the sample mean tends to get closer to the population mean with larger sample sizes. The key word here is tends to, it is not a guarantee that the sample mean always gets closer to the population mean whenever <span class="math inline">\(n\)</span> gets larger, but it generally does.</p>
+<p>Some implications of the LLN:</p>
+<ul>
+<li><p>Sample means from larger samples (assuming the sample was obtained randomly) tend to be closer to the true mean than sample means from smaller samples. This is why we tend to trust results based on a larger sample size.</p></li>
+<li><p>We can use simulations to verify theoretical results, since these results usually require us to simulate data based on a large number of independent replications.</p></li>
+</ul>
+<p>The LLN is a by product of equations <a href="inequalities-limit-theorems-and-simulations.html#eq:6-Emean">(6.4)</a> and <a href="inequalities-limit-theorems-and-simulations.html#eq:6-Varmean">(6.5)</a>. Equation <a href="inequalities-limit-theorems-and-simulations.html#eq:6-Varmean">(6.5)</a> informs us that as <span class="math inline">\(n\)</span> gets larger, the variance of the sample mean gets smaller. Equation <a href="inequalities-limit-theorems-and-simulations.html#eq:6-Emean">(6.4)</a> informs us that the sample mean is unbiased, i.e. its long run average is equal to the true mean. Collectively, these inform us that as <span class="math inline">\(n\)</span> gets larger, the sample mean is more likely to be closer to the true mean.</p>
+<p>We use a couple of examples to illustrate the LLN.</p>
+<ol style="list-style-type: decimal">
+<li>The code below gives a visual representation of the LLN. The code does the following:</li>
+</ol>
+<ul>
+<li>Simulate an observation from a standard normal, <span class="math inline">\(X_1\)</span>.</li>
+<li>Find the sample mean of <span class="math inline">\(X_1\)</span>, i.e. <span class="math inline">\(\bar{X}_1\)</span>
+</li>
+<li>Simulate another observation from a standard normal, <span class="math inline">\(X_2\)</span>.</li>
+<li>Find the sample mean of <span class="math inline">\(X_1, X_2\)</span>, i.e. <span class="math inline">\(\bar{X}_2\)</span>
+</li>
+<li>Keep simulating another observation from a standard normal and find the sample mean of after each simulated observation, until we simulate 500 observations.</li>
+<li>Create a plot of <span class="math inline">\(\bar{X}_n\)</span> against <span class="math inline">\(n\)</span>, like in Figure <a href="inequalities-limit-theorems-and-simulations.html#fig:4-LLN1">6.3</a>.</li>
+<li>The LLN tells us that as <span class="math inline">\(n\)</span> gets larger, <span class="math inline">\(\bar{X}_n\)</span> should generally get closer to 0, since the true mean of <span class="math inline">\(X_1, \cdots, X_n\)</span> is 0.</li>
+</ul>
+<div class="sourceCode" id="cb103"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">n</span><span class="op">&lt;-</span><span class="fl">500</span> <span class="co">##make this big, but not too big otherwise picture is difficult to see</span></span>
+<span></span>
+<span><span class="va">X</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span><span class="op">(</span><span class="cn">NA</span>,<span class="va">n</span><span class="op">)</span> <span class="co">##initialize an array to store the value of each simulated data point</span></span>
+<span><span class="va">xbars</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span><span class="op">(</span><span class="fl">0</span>,<span class="va">n</span><span class="op">)</span> <span class="co">##initialize an array to store the value of the sample mean after each simulated data point</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">92</span><span class="op">)</span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">n</span><span class="op">)</span></span>
+<span></span>
+<span><span class="op">{</span></span>
+<span></span>
+<span>  <span class="va">X</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span> <span class="co">##simulate one data point from standard normal and store it</span></span>
+<span>  <span class="va">xbars</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">X</span>, na.rm<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span> <span class="co">##find the sample mean after each simulated data point is generated</span></span>
+<span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co">##create visual. LLN says that as n gets larger, the value of the sample mean tends to get closer to 0.</span></span>
+<span><span class="co">##remember that the true mean is 0 since each data point was simulated from standard normal</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">xbars</span>, type<span class="op">=</span><span class="st">"l"</span>, main<span class="op">=</span><span class="st">"Xbar vs Sample Size"</span>, ylab<span class="op">=</span><span class="st">"Sample Mean"</span>, xlab<span class="op">=</span><span class="st">"n"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span>h<span class="op">=</span><span class="fl">0</span>, col<span class="op">=</span><span class="st">"blue"</span><span class="op">)</span> <span class="co">##overlay true mean for easy comparison</span></span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:4-LLN1"></span>
+<img src="bookdown-demo_files/figure-html/4-LLN1-1.png" alt="LLN Example 1" width="672"><p class="caption">
+Figure 6.3: LLN Example 1
+</p>
+</div>
+<p>As expected, we see from Figure <a href="inequalities-limit-theorems-and-simulations.html#fig:4-LLN1">6.3</a> that as <span class="math inline">\(n\)</span> gets larger, the sample mean <span class="math inline">\(\bar{X}_n\)</span> tends to get closer to 0. The sample mean does not necessarily get closer to 0 each time we increase <span class="math inline">\(n\)</span> but it generally does.</p>
+<p>Note: <code><a href="https://rdrr.io/r/base/Random.html">set.seed()</a></code> was used so you can reproduce these results exactly. However, the observation that the sample mean tends to get closer to the true mean as <span class="math inline">\(n\)</span> increases will happen regardless of what <code><a href="https://rdrr.io/r/base/Random.html">set.seed()</a></code> was used, or even if <code><a href="https://rdrr.io/r/base/Random.html">set.seed()</a></code> was not used.</p>
+<ol start="2" style="list-style-type: decimal">
+<li>Another example to illustrate the LLN comes from flipping a fair coin. Let <span class="math inline">\(X\)</span> denote whether the coin lands heads or tails, and let <span class="math inline">\(X=1\)</span> for heads and <span class="math inline">\(X=0\)</span> for tails. We can say that <span class="math inline">\(X \sim Bern(0.5)\)</span> since the coin is fair. Imagine flipping the coin <span class="math inline">\(n\)</span> times, and record the outcome after each flip, so <span class="math inline">\(X_1, \cdots, X_n\)</span> denote the outcome of each flip. We know that <span class="math inline">\(E(X) = 0.5\)</span> since <span class="math inline">\(X \sim Bern(0.5)\)</span>. The LLN informs us that <span class="math inline">\(\bar{X}_1, \cdots, \bar{X}_n\)</span> should get closer to 0.5 as <span class="math inline">\(n\)</span> increases. In other words, the value of the sample proportion after each flip should get closer to 0.5 with more flips. The code below simulates this example for $n=500%, and Figure <a href="inequalities-limit-theorems-and-simulations.html#fig:4-LLN2">6.4</a> shows how the sample proportions get closer to 0.5, in general.</li>
+</ol>
+<div class="sourceCode" id="cb104"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">n</span><span class="op">&lt;-</span><span class="fl">500</span> <span class="co">##make this big, but not too big otherwise picture is difficult to see</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">23</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">X</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">rbinom</a></span><span class="op">(</span><span class="va">n</span>,<span class="fl">1</span>,<span class="fl">0.5</span><span class="op">)</span> <span class="co">##simulate 500 flips of fair coin</span></span>
+<span></span>
+<span><span class="va">totals</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/cumsum.html">cumsum</a></span><span class="op">(</span><span class="va">X</span><span class="op">)</span> <span class="co">##count total number of heads after each flip</span></span>
+<span><span class="va">index</span><span class="op">&lt;-</span><span class="fl">1</span><span class="op">:</span><span class="va">n</span></span>
+<span><span class="va">props</span><span class="op">&lt;-</span><span class="va">totals</span><span class="op">/</span><span class="va">index</span> <span class="co">##find proportion of heads after each flip</span></span>
+<span></span>
+<span><span class="co">##create visual. LLN says that as n gets larger, the value of the sample proportion tends to get closer to 0.5</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">props</span>, type<span class="op">=</span><span class="st">"l"</span>, main<span class="op">=</span><span class="st">"Prop vs Sample Size"</span>, ylab<span class="op">=</span><span class="st">"Proportion"</span>, xlab<span class="op">=</span><span class="st">"n"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span>h<span class="op">=</span><span class="fl">0.5</span>, col<span class="op">=</span><span class="st">"blue"</span><span class="op">)</span> <span class="co">##overlay 0.5 for easy comparison</span></span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:4-LLN2"></span>
+<img src="bookdown-demo_files/figure-html/4-LLN2-1.png" alt="LLN Example 2" width="672"><p class="caption">
+Figure 6.4: LLN Example 2
+</p>
+</div>
+<p>Note: The LLN actually comes in two versions, the Weak Law of Large Numbers (WLLN), and the Strong Law of Large Numbers (SLLN). The book goes into some detail about their definitions and differences. What I have written gives an intuitive explanation of what the LLN implies.</p>
+<div id="misconceptions-with-lln" class="section level4" number="6.3.1.1">
+<h4>
+<span class="header-section-number">6.3.1.1</span> Misconceptions with LLN<a class="anchor" aria-label="anchor" href="#misconceptions-with-lln"><i class="fas fa-link"></i></a>
+</h4>
+<p>One key idea with the LLN is that the sample mean <strong>tends to get closer to the true mean as <span class="math inline">\(n\)</span> gets larger</strong>. The key words here are “tends” and “as <span class="math inline">\(n\)</span> gets larger”.</p>
+<p>A misunderstanding of the LLN is the <strong>gambler’s fallacy</strong>, which erroneously believes that the sample mean must “self correct” and get closer to the population mean with small increments of <span class="math inline">\(n\)</span>.</p>
+<p>Using the example from flipping a fair coin. The gambler’s fallacy erroneously thinks that:</p>
+<ul>
+<li>The proportion of heads should be close to 0.5, even with small <span class="math inline">\(n\)</span>.</li>
+<li>The results of subsequent flips should self correct, i.e. the proportion of heads get closer to 0.5 with the next flip. For example, if the first 5 flips are heads, the next flip is “due” to be tails since the proportion should get closer to 0.5 with the next flip.</li>
+</ul>
+<p>The convergence to 0.5 comes from flipping the coin many times.</p>
+</div>
 </div>
 <div id="central-limit-theorem" class="section level3" number="6.3.2">
 <h3>
 <span class="header-section-number">6.3.2</span> Central Limit Theorem<a class="anchor" aria-label="anchor" href="#central-limit-theorem"><i class="fas fa-link"></i></a>
 </h3>
+<p>The LLN informs us that the sample mean converges to the true mean. Statistical theory informs us about the expected value and variance of the sample mean in equations <a href="inequalities-limit-theorems-and-simulations.html#eq:6-Emean">(6.4)</a> and <a href="inequalities-limit-theorems-and-simulations.html#eq:6-Varmean">(6.5)</a>. But these do not inform us about the distribution of <span class="math inline">\(\bar{X}_n\)</span>. This is where the Central Limit Theorem (CLT) comes in.</p>
 </div>
 </div>
 <div id="monte-carlo-simulations" class="section level2" number="6.4">
@@ -207,7 +471,7 @@ Note: One other place that you may seen the Cauchy-Schwarz inequality is in the 
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2025-07-02.</p>
+    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2025-07-03.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

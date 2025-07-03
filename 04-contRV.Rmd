@@ -426,7 +426,7 @@ f_X(x) = \frac{1}{\sigma \sqrt{2 \pi}} \exp \left(-\frac{(x - \mu)^2}{2 \sigma^2
 
 *Thought question*: Compare equations \@ref(eq:4-pdfNormal) and \@ref(eq:4-Z). Can you see how equation \@ref(eq:4-Z) can be derived from equation \@ref(eq:4-pdfNormal)?
 
-#### 68-95-99.7% Rule
+#### 68-95-99.7% Rule {#rulenorm}
 
 The following property holds for any normal distribution, and is often called the **68-99-99.7%** rule. For any normal distribution $X \sim N(\mu, \sigma^2)$:
 
