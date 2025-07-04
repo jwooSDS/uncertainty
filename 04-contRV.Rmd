@@ -361,7 +361,7 @@ So, we can see the purpose of the universality of the uniform:
 - For part 1, we can simulate reps from any distribution, as long as we know its CDF. The software you use may not be able to simulate reps from a particular distribution, but you can write code to simulate reps from this distribution based on the standard uniform. 
 - For part 2, we can convert a random variable with an unknown distribution to one that is known: the standard uniform. 
 
-### Normal
+### Normal {#normdist}
 
 Another widely used distribution for continuous random variables is the normal, or Gaussian distribution. This is a distribution that is symmetric and bell-shaped. This is probably the most important distribution in statistics and data science due to the central limit theorem. We will define this theorem in a later module, but loosely speaking, it says that if we take the average of a bunch of random variables, the average will approximate a normal distribution, even if the random variables are individually not normal. 
 

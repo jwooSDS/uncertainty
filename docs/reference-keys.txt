@@ -132,6 +132,9 @@ eq:6-Emean
 eq:6-Varmean
 fig:4-LLN1
 fig:4-LLN2
+eq:6-CLT
+fig:6-CLTnorm
+fig:6-CLTpois
 examples
 example-1-mario-kart-auction-prices
 eg2
@@ -234,7 +237,7 @@ kurtosis
 common-continuous-random-variables
 uniform
 universality-of-uniform
-normal
+normdist
 standard-normal
 norm
 rulenorm
@@ -278,4 +281,5 @@ limit-theorems
 law-of-large-numbers
 misconceptions-with-lln
 central-limit-theorem
+considerations-with-clt
 monte-carlo-simulations

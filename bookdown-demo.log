@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999996 (MiKTeX 24.4) (preloaded format=xelatex 2025.6.7)  3 JUL 2025 17:10
+This is XeTeX, Version 3.141592653-2.6-0.999996 (MiKTeX 24.4) (preloaded format=xelatex 2025.6.7)  4 JUL 2025 13:59
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1424,13 +1424,8 @@ D SIMULATIONS
 File: bookdown-demo_files/figure-latex/4-LLN2-1.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/4-LLN2-1.pdf>
 
-Underfull \vbox (badness 7203) has occurred while \output is active []
-
-
 
 [129]
-No file bookdown-demo.bbl.
-
 
 
 Overfull \hbox (6.04784pt too wide) has occurred while \output is active
@@ -1438,7 +1433,39 @@ Overfull \hbox (6.04784pt too wide) has occurred while \output is active
 D SIMULATIONS
  []
 
-[130] (bookdown-demo.aux)
+[130]
+File: bookdown-demo_files/figure-latex/6-CLTnorm-1.pdf Graphic file (type pdf)
+<use bookdown-demo_files/figure-latex/6-CLTnorm-1.pdf>
+
+
+[131]
+File: bookdown-demo_files/figure-latex/6-CLTpois-1.pdf Graphic file (type pdf)
+<use bookdown-demo_files/figure-latex/6-CLTpois-1.pdf>
+
+LaTeX Warning: Reference `fig:6-CLTpois' on page 132 undefined on input line 45
+08.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 4507--4509
+[][]
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+
+Overfull \hbox (6.04784pt too wide) has occurred while \output is active
+\TU/lmr/m/n/10 132 \TU/lmr/m/sl/10 CHAPTER 6.  INEQUALITIES, LIMIT THEOREMS, AN
+D SIMULATIONS
+ []
+
+[132]
+No file bookdown-demo.bbl.
+
+
+[133] (bookdown-demo.aux)
  ***********
 LaTeX2e <2024-06-01> patch level 2
 L3 programming layer <2024-07-20>
@@ -1448,12 +1475,12 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 20081 strings out of 409029
- 367257 string characters out of 5763847
+ 20103 strings out of 409029
+ 368250 string characters out of 5763847
  1946612 words of memory out of 5000000
- 42455 multiletter control sequences out of 15000+600000
+ 42475 multiletter control sequences out of 15000+600000
  566021 words of font info for 104 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  90i,21n,123p,1199b,585s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on bookdown-demo.pdf (130 pages).
+Output written on bookdown-demo.pdf (133 pages).
