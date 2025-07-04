@@ -4209,13 +4209,13 @@ There cannot be more than a 11.11\% chance that a random variable is at least 3 
 
 Notice that Chebyshev's inequality can be applied to any distribution, and can be used to provide bounds on how data can be spread out. It is more flexible than the 68-99-99.7\% rule for normal distributions as it can be applied to any distribution, but the bounds are not as exact as they are an inequality. There can be a trade-off in relaxing assumptions and accuracy of results.
 
-\section{Limit Theorems}\label{limit-theorems}
+\section{Limit Theorems}\label{limits}
 
 In the previous subsection, we used inequalities to provide bounds on probabilities and expectations that may be difficult to calculate. Another way of handing difficult calculations would be to use approximations for the distribution of the random variable, instead of the exact distribution of the random variable. Generally speaking, these approximations work better when we have more data (i.e.~when the sample size is larger). These approximations are covered by two of the most important limit theorems: the Law of Large Numbers and the Central Limit Theorem. These theorems approximate the distribution of the sample mean of i.i.d. (independent and identically distributed) random variables as the sample size gets larger.
 
 Note: The idea of i.i.d. random variables implies that each observed value of the random variable is independent of each other, and that each observed value come from the same random variable. For example, let \(X\) denote the number of dots from a roll of a 6-sided fair die, and let \(X_1, X_2\) denote the value of the first and second roll respectively. \(X_1\) and \(X_2\) are i.i.d. since the outcomes from the first and second roll do not influence each other, so they are independent. \(X_1\) and \(X_2\) are identically distributed as they both follow the same distribution, \(Mult_6(1, (1/6, 1/6, 1/6, 1/6, 1/6, 1/6))\). In real life, this is achieved through carefully designed and planned surveys and experiments with random sampling, which is a whole field in statistics in its own right.
 
-For the rest of this section, assume we have i.i.d. \(X_1, \cdots, X_n\) with finite mean \(\mu\) and finite variance \(\sigma^2\). For all positive integers \(n\) (i.e.~for any possible sample size), define the sample mean as \(\bar{X}_n = \frac{X_1 + \cdots + X_n}{n}\). We can easily derive the expected value and variance of the sample mean using propertires of expectations and variances:
+For the rest of this section, Section \ref{limits}, assume we have i.i.d. \(X_1, \cdots, X_n\) with finite mean \(\mu\) and finite variance \(\sigma^2\). For all positive integers \(n\) (i.e.~for any possible sample size), define the sample mean as \(\bar{X}_n = \frac{X_1 + \cdots + X_n}{n}\). We can easily derive the expected value and variance of the sample mean using propertires of expectations and variances:
 
 \begin{equation} 
 \begin{split}
@@ -4508,6 +4508,207 @@ Figure \ref{fig:6-CLTnorm} displays the histograms from this simulation, and mat
 Figure \ref{fig:6-CLTpois} displays the histograms from this simulation, and matches what we expect. When \(n\) is 1 or 5, the histograms are clearly not normal, so the CLT approximation will not work well. When \(n=30\) the histogram looks approximately normal, and when \(n=100\), the histogram looks even closer to a normal distribution.
 
 \section{Monte Carlo Simulations}\label{monte-carlo-simulations}
+
+You may have that we have used simulations in the earlier sections of this module (and previous modules) to help explain certain concepts. These simulations are called \textbf{Monte Carlo} methods, or Monte Carlo simulations. The idea behind Monte Carlo methods is to used repeated random sampling (and by repeated, we mean repeat a large number of times) to estimate features of data, usually probabilities and expected values. Monte Carlo methods are used for the following purposes:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  When the probability or expectation is too complicated to work out by hand. Recall that finding probabilities and expectations by hand involve summations or integrals, and it becomes obvious that working with summations and especially integrals can get onerous.
+\item
+  To verify theoretical results involving probability or expectations. While a lot of theory is proved using mathematics, most academic papers include Monte Carlo simulations to verify the theoretical results. We have done these to verify the LLN and CLT in the previous subsection, in some circumstances.
+\item
+  To help confirm that you understand the meaning of theoretical results. The only way your code matches the theory is if you understand the theory.
+\end{enumerate}
+
+\subsection{Monte Carlo Methods for Expected Values}\label{monte-carlo-methods-for-expected-values}
+
+Suppose we want to find some expectation for a continuous random variable \(X\), \(E(g(X))\), where \(g\) is some function. LOTUS says that we need to use equation \eqref{eq:4-lotus}, i.e.~\(E(g(X)) = \int_{-\infty}^{\infty} g(x) f_X(x).\) Monte Carlo methods avoid doing this integration by simulating \(X_1, \cdots, X_M\) from \(X\) and estimate \(E(g(X))\) with the sample mean of \(g(X)\), \(\frac{1}{M} \sum_{i=1}^M g(X_i)\). The LLN tells us that as \(M\) gets larger, this sample mean converges to \(E(g(X))\).
+
+Monte Carlo methods replace the integral (or summation) with simulating a random variable repeatedly many times. We use a simple example to illustrate this idea.
+
+Let \(X\) be a standard normal distribution. Suppose we want to find the value of \(E(X^2)\). If we try to find this using LOTUS, we will need to find \(\int_{-\infty}^{\infty} x^2 \frac{1}{\sqrt{2 \pi}} e^{-x^2/2} dx\). Instead of working out this integral by hand, we carry out a Monte Carlo simulation by doing these steps:
+
+\begin{itemize}
+\tightlist
+\item
+  Simulate \(M\) random values from a standard normal, where \(M\) is large.
+\item
+  Calculate \(X_1^2, \cdots, X_M^2\).
+\item
+  Find the sample average of \(X_1^2, \cdots, X_M^2\).
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{5}\NormalTok{)}
+
+\NormalTok{reps}\OtherTok{\textless{}{-}}\DecValTok{10000} \DocumentationTok{\#\# this is M}
+
+\NormalTok{Xs}\OtherTok{\textless{}{-}}\FunctionTok{rnorm}\NormalTok{(reps) }\DocumentationTok{\#\#generate M values of X}
+
+\NormalTok{squared.values}\OtherTok{\textless{}{-}}\NormalTok{Xs}\SpecialCharTok{\^{}}\DecValTok{2} \DocumentationTok{\#\#square each X}
+
+\FunctionTok{mean}\NormalTok{(squared.values) }\DocumentationTok{\#\#sample average of squared values. }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1.024546
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#when reps is large, this sample mean should be close to the true E(X\^{}2), which is 1}
+\end{Highlighting}
+\end{Shaded}
+
+Since \(X\) is standard normal, we know \(E(X) = 0\) and \(Var(X) = E(X^2) - E(X)^2 = E(X^2) = 1\). We see in our simulation that our estimated value for \(E(X^2)\) is pretty close to its theoretical value.
+
+\subsection{Monte Carlo Methods for Probabilities}\label{monte-carlo-methods-for-probabilities}
+
+Suppose we want to find the probability that a random variable satisfies some event \(E\), \(P(E)\). We could perform a summation or integral to find this probability, or estimate the probability using Monte Carlo methods. What we will do is simulate \(X_1, \cdots, X_M\) from \(X\), where \(M\) is large, in other words, simulate a large number of replicates of \(X\). We then count how many of the \(X_i\)s correspond to event \(E\) happening, and then divide this number by \(M\), the number of replicates. We use an example to illustrate this idea.
+
+Let \(X\) be a standard normal distribution. Suppose we want to find the probability \(P(X^2 > 1)\). We carry out a Monte Carlo simulation by doing these steps:
+
+\begin{itemize}
+\tightlist
+\item
+  Simulate \(M\) random values from a standard normal, where \(M\) is large.
+\item
+  Calculate \(X_1^2, \cdots, X_M^2\).
+\item
+  Count the number of times \(X_i^2\) is greater than 1.
+\item
+  Divide this number by \(M\) to estimate the probability, since probability can be interpreted as a long-run proportion.
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{5}\NormalTok{)}
+
+\NormalTok{reps}\OtherTok{\textless{}{-}}\DecValTok{10000} \DocumentationTok{\#\# this is M}
+
+\NormalTok{Xs}\OtherTok{\textless{}{-}}\FunctionTok{rnorm}\NormalTok{(reps) }\DocumentationTok{\#\#generate M values of X}
+
+\NormalTok{squared.values}\OtherTok{\textless{}{-}}\NormalTok{Xs}\SpecialCharTok{\^{}}\DecValTok{2} \DocumentationTok{\#\#square each X}
+
+\FunctionTok{sum}\NormalTok{(squared.values}\SpecialCharTok{\textgreater{}}\DecValTok{1}\NormalTok{)}\SpecialCharTok{/}\NormalTok{reps }\DocumentationTok{\#\#count the number of times X\^{}2 is greater than 1, and divide by M}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.3178
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#when reps is large, this proportion should be close to}
+\DecValTok{1}\SpecialCharTok{{-}}\FunctionTok{pchisq}\NormalTok{(}\DecValTok{1}\NormalTok{, }\AttributeTok{df=}\DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.3173105
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#it turns out that squaring a standard normal gives a chi{-}squared distribution with 1 df.}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Monte Carlo Methods for Other Purposes}\label{monte-carlo-methods-for-other-purposes}
+
+Monte Carlo methods are not exclusively used estimating expected values and probabilities. They are versatile and can be used for a number of purposes, as long we need repeated random sampling.
+
+A fun example that is pretty famous uses Monte Carlo simulations to estimate the value of \(\pi\). We can consider the following hypothetical dart throwing experiment to do so, based on the figure below:
+
+\begin{figure}
+\centering
+\includegraphics{images/06-circle.jpg}
+\caption{\label{fig:circle}Board for Dart Throwing Experiment}
+\end{figure}
+
+The experiment works in this way:
+
+\begin{itemize}
+\tightlist
+\item
+  The dart will always land in the square, and has an equal probability of landing on any spot on the square.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    We can let \(X \sim U(-1,1)\) to represent the position of the dart on the x-axis of the circle in Figure \ref{fig:circle}.
+  \item
+    We can let \(Y \sim U(-1,1)\) to represent the position of the dart on the y-axis of the circle in Figure \ref{fig:circle}.
+  \end{itemize}
+\item
+  We will throw a large number of darts. For each dart, we will see if it lands in the circle or not.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    To assess if a dart lies in the circle, we assess whether \(x_i^2 + y_i^2 \leq 1\) for dart \(i\). If this condition is met, we know dart \(i\) lies in the circle, if not, it lies outside the circle.
+  \end{itemize}
+\item
+  It stands to reason that \(\frac{\text{Area of circle}}{\text{Are of square}} = \frac{\pi}{4} \approx \frac{\text{Number of darts landing in circle}}{\text{Number of darts thrown}}\).
+\item
+  Therefore, after throwing a large number of darts, \(\pi \approx 4 \times \frac{\text{Number of darts landing in circle}}{\text{Number of darts thrown}}.\)
+\end{itemize}
+
+The code below carries out this experiment with 10 thousand reps (or 10 thousand dart throws):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{reps}\OtherTok{\textless{}{-}}\DecValTok{10000} \DocumentationTok{\#\#number of dart throws}
+
+\NormalTok{count}\OtherTok{\textless{}{-}}\DecValTok{0} \DocumentationTok{\#\#counter that keeps track of number of throws inside circle}
+
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{222}\NormalTok{)}
+
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{reps) \{}
+
+\NormalTok{x}\OtherTok{\textless{}{-}}\FunctionTok{runif}\NormalTok{(}\DecValTok{1}\NormalTok{,}\AttributeTok{min=}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{, }\AttributeTok{max=}\DecValTok{1}\NormalTok{) }\DocumentationTok{\#\#simulate landing spot on x axis}
+\NormalTok{y}\OtherTok{\textless{}{-}}\FunctionTok{runif}\NormalTok{(}\DecValTok{1}\NormalTok{,}\AttributeTok{min=}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{, }\AttributeTok{max=}\DecValTok{1}\NormalTok{) }\DocumentationTok{\#\#simulate landing spot on y axis}
+
+  \ControlFlowTok{if}\NormalTok{ (x}\SpecialCharTok{\^{}}\DecValTok{2} \SpecialCharTok{+}\NormalTok{ y}\SpecialCharTok{\^{}}\DecValTok{2} \SpecialCharTok{\textless{}=} \DecValTok{1}\NormalTok{)\{}
+\NormalTok{    count }\OtherTok{\textless{}{-}}\NormalTok{ count}\SpecialCharTok{+}\DecValTok{1} \DocumentationTok{\#\#counter adds 1 if dart lands in circle}
+\NormalTok{  \}}
+
+\NormalTok{\}}
+
+\DocumentationTok{\#\#estimate pi. should be close to real value of pi. Gets closer if we throw more darts}
+\NormalTok{count}\SpecialCharTok{/}\NormalTok{reps }\SpecialCharTok{*} \DecValTok{4} 
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 3.1436
+\end{verbatim}
+
+\subsection{Considerations with Monte Carlo Methods}\label{considerations-with-monte-carlo-methods}
+
+In the examples above, we compared estimated values using Monte Carlo methods with their real values, so we could see the methods work. However, if we do not know the real values, two questions will come to mind:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  How many replicates do we need? We only know the estimated values converge to the true values as we increase the number of replicates. Using more replicates will make the simulation run longer on your computer.
+\item
+  Related to the previous question, how close is close enough? How do you know your estimated value from the simulation is close enough to the truth? There is no way of knowing if the true value is unknown.
+\end{enumerate}
+
+\subsubsection{set.seed() in R}\label{set.seed-in-r}
+
+You may have noticed that in the provided simulations, we use a function \texttt{set.seed()} called and input a number. This is to enable others to replicate the exact same results, if someone wants to verify the code.
+
+With Monte Carlo simulations, we are generating numbers randomly. When we set the seed with \texttt{set.seed()} with a certain number, we ensure the same random numbers are generated each time the code is run.
+
+We will not go into the details of how R generates the random numbers, and random number generation is a whole field in itself.
+
+In terms of running the examples, you can choose to copy the code and exclude the line with \texttt{set.seed()}. You should still observe that the estimated values from the simulations are close to the true values.
 
   \bibliography{book.bib,packages.bib}
 

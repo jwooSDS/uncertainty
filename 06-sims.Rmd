@@ -181,13 +181,13 @@ There cannot be more than a 11.11% chance that a random variable is at least 3 s
 
 Notice that Chebyshev's inequality can be applied to any distribution, and can be used to provide bounds on how data can be spread out. It is more flexible than the 68-99-99.7% rule for normal distributions as it can be applied to any distribution, but the bounds are not as exact as they are an inequality. There can be a trade-off in relaxing assumptions and accuracy of results. 
 
-## Limit Theorems
+## Limit Theorems {#limits}
 
 In the previous subsection, we used inequalities to provide bounds on probabilities and expectations that may be difficult to calculate. Another way of handing difficult calculations would be to use approximations for the distribution of the random variable, instead of the exact distribution of the random variable. Generally speaking, these approximations work better when we have more data (i.e. when the sample size is larger). These approximations are covered by two of the most important limit theorems: the Law of Large Numbers and the Central Limit Theorem. These theorems approximate the distribution of the sample mean of i.i.d. (independent and identically distributed) random variables as the sample size gets larger.
 
 Note: The idea of i.i.d. random variables implies that each observed value of the random variable is independent of each other, and that each observed value come from the same random variable. For example, let $X$ denote the number of dots from a roll of a 6-sided fair die, and let $X_1, X_2$ denote the value of the first and second roll respectively. $X_1$ and $X_2$ are i.i.d. since the outcomes from the first and second roll do not influence each other, so they are independent. $X_1$ and $X_2$ are identically distributed as they both follow the same distribution, $Mult_6(1, (1/6, 1/6, 1/6, 1/6, 1/6, 1/6))$. In real life, this is achieved through carefully designed and planned surveys and experiments with random sampling, which is a whole field in statistics in its own right. 
 
-For the rest of this section, assume we have i.i.d. $X_1, \cdots, X_n$ with finite mean $\mu$ and finite variance $\sigma^2$. For all positive integers $n$ (i.e. for any possible sample size), define the sample mean as $\bar{X}_n = \frac{X_1 + \cdots + X_n}{n}$. We can easily derive the expected value and variance of the sample mean using propertires of expectations and variances:
+For the rest of this section, Section \@ref(limits), assume we have i.i.d. $X_1, \cdots, X_n$ with finite mean $\mu$ and finite variance $\sigma^2$. For all positive integers $n$ (i.e. for any possible sample size), define the sample mean as $\bar{X}_n = \frac{X_1 + \cdots + X_n}{n}$. We can easily derive the expected value and variance of the sample mean using propertires of expectations and variances:
 
 \begin{equation} 
 \begin{split}
@@ -435,3 +435,124 @@ Figure \@ref(fig:6-CLTpois) displays the histograms from this simulation, and ma
 
 ## Monte Carlo Simulations
 
+You may have that we have used simulations in the earlier sections of this module (and previous modules) to help explain certain concepts. These simulations are called **Monte Carlo** methods, or Monte Carlo simulations. The idea behind Monte Carlo methods is to used repeated random sampling (and by repeated, we mean repeat a large number of times) to estimate features of data, usually probabilities and expected values. Monte Carlo methods are used for the following purposes:
+
+1. When the probability or expectation is too complicated to work out by hand. Recall that finding probabilities and expectations by hand involve summations or integrals, and it becomes obvious that working with summations and especially integrals can get onerous. 
+
+2. To verify theoretical results involving probability or expectations. While a lot of theory is proved using mathematics, most academic papers include Monte Carlo simulations to verify the theoretical results. We have done these to verify the LLN and CLT in the previous subsection, in some circumstances. 
+
+3. To help confirm that you understand the meaning of theoretical results. The only way your code matches the theory is if you understand the theory. 
+
+### Monte Carlo Methods for Expected Values
+
+Suppose we want to find some expectation for a continuous random variable $X$, $E(g(X))$, where $g$ is some function. LOTUS says that we need to use equation \@ref(eq:4-lotus), i.e. $E(g(X)) = \int_{-\infty}^{\infty} g(x) f_X(x).$ Monte Carlo methods avoid doing this integration by simulating $X_1, \cdots, X_M$ from $X$ and estimate $E(g(X))$ with the sample mean of $g(X)$, $\frac{1}{M} \sum_{i=1}^M g(X_i)$. The LLN tells us that as $M$ gets larger, this sample mean converges to $E(g(X))$.
+
+Monte Carlo methods replace the integral (or summation) with simulating a random variable repeatedly many times. We use a simple example to illustrate this idea.
+
+Let $X$ be a standard normal distribution. Suppose we want to find the value of $E(X^2)$. If we try to find this using LOTUS, we will need to find $\int_{-\infty}^{\infty} x^2 \frac{1}{\sqrt{2 \pi}} e^{-x^2/2} dx$. Instead of working out this integral by hand, we carry out a Monte Carlo simulation by doing these steps:
+
+- Simulate $M$ random values from a standard normal, where $M$ is large.
+- Calculate $X_1^2, \cdots, X_M^2$.
+- Find the sample average of $X_1^2, \cdots, X_M^2$.
+
+```{r}
+set.seed(5)
+
+reps<-10000 ## this is M
+
+Xs<-rnorm(reps) ##generate M values of X
+
+squared.values<-Xs^2 ##square each X
+
+mean(squared.values) ##sample average of squared values. 
+
+##when reps is large, this sample mean should be close to the true E(X^2), which is 1
+```
+Since $X$ is standard normal, we know $E(X) = 0$ and $Var(X) = E(X^2) - E(X)^2 = E(X^2) = 1$. We see in our simulation that our estimated value for $E(X^2)$ is pretty close to its theoretical value. 
+
+### Monte Carlo Methods for Probabilities
+
+Suppose we want to find the probability that a random variable satisfies some event $E$, $P(E)$. We could perform a summation or integral to find this probability, or estimate the probability using Monte Carlo methods. What we will do is simulate $X_1, \cdots, X_M$ from $X$, where $M$ is large, in other words, simulate a large number of replicates of $X$. We then count how many of the $X_i$s correspond to event $E$ happening, and then divide this number by $M$, the number of replicates. We use an example to illustrate this idea.
+
+Let $X$ be a standard normal distribution. Suppose we want to find the probability $P(X^2 > 1)$. We carry out a Monte Carlo simulation by doing these steps:
+
+- Simulate $M$ random values from a standard normal, where $M$ is large.
+- Calculate $X_1^2, \cdots, X_M^2$.
+- Count the number of times $X_i^2$ is greater than 1.
+- Divide this number by $M$ to estimate the probability, since probability can be interpreted as a long-run proportion.
+
+```{r}
+set.seed(5)
+
+reps<-10000 ## this is M
+
+Xs<-rnorm(reps) ##generate M values of X
+
+squared.values<-Xs^2 ##square each X
+
+sum(squared.values>1)/reps ##count the number of times X^2 is greater than 1, and divide by M
+
+##when reps is large, this proportion should be close to
+1-pchisq(1, df=1)
+##it turns out that squaring a standard normal gives a chi-squared distribution with 1 df.
+```
+### Monte Carlo Methods for Other Purposes
+
+Monte Carlo methods are not exclusively used estimating expected values and probabilities. They are versatile and can be used for a number of purposes, as long we need repeated random sampling. 
+
+A fun example that is pretty famous uses Monte Carlo simulations to estimate the value of $\pi$.  We can consider the following hypothetical dart throwing experiment to do so, based on the figure below:
+
+```{r circle, fig.cap = "Board for Dart Throwing Experiment", echo = FALSE}
+knitr::include_graphics("images/06-circle.jpg")
+```
+
+The experiment works in this way:
+
+- The dart will always land in the square, and has an equal probability of landing on any spot on the square.
+    - We can let $X \sim U(-1,1)$ to represent the position of the dart on the x-axis of the circle in Figure \@ref(fig:circle).
+    - We can let $Y \sim U(-1,1)$ to represent the position of the dart on the y-axis of the circle in Figure \@ref(fig:circle).
+- We will throw a large number of darts. For each dart, we will see if it lands in the circle or not.
+    - To assess if a dart lies in the circle, we assess whether $x_i^2 + y_i^2 \leq 1$ for dart $i$. If this condition is met, we know dart $i$ lies in the circle, if not, it lies outside the circle.
+- It stands to reason that $\frac{\text{Area of circle}}{\text{Are of square}} = \frac{\pi}{4} \approx \frac{\text{Number of darts landing in circle}}{\text{Number of darts thrown}}$.
+- Therefore, after throwing a large number of darts, $\pi \approx 4 \times \frac{\text{Number of darts landing in circle}}{\text{Number of darts thrown}}.$
+
+The code below carries out this experiment with 10 thousand reps (or 10 thousand dart throws):
+
+```{r}
+reps<-10000 ##number of dart throws
+
+count<-0 ##counter that keeps track of number of throws inside circle
+
+set.seed(222)
+
+for (i in 1:reps) {
+
+x<-runif(1,min=-1, max=1) ##simulate landing spot on x axis
+y<-runif(1,min=-1, max=1) ##simulate landing spot on y axis
+
+  if (x^2 + y^2 <= 1){
+    count <- count+1 ##counter adds 1 if dart lands in circle
+  }
+
+}
+
+##estimate pi. should be close to real value of pi. Gets closer if we throw more darts
+count/reps * 4 
+```
+### Considerations with Monte Carlo Methods
+
+In the examples above, we compared estimated values using Monte Carlo methods with their real values, so we could see the methods work. However, if we do not know the real values, two questions will come to mind:
+
+1. How many replicates do we need? We only know the estimated values converge to the true values as we increase the number of replicates. Using more replicates will make the simulation run longer on your computer. 
+
+2. Related to the previous question, how close is close enough? How do you know your estimated value from the simulation is close enough to the truth? There is no way of knowing if the true value is unknown.
+
+#### set.seed() in R
+
+You may have noticed that in the provided simulations, we use  a function `set.seed()` called and input a number. This is to enable others to replicate the exact same results, if someone wants to verify the code.
+
+With Monte Carlo simulations, we are generating numbers randomly. When we set the seed with `set.seed()` with a certain number, we ensure the same random numbers are generated each time the code is run.
+
+We will not go into the details of how R generates the random numbers, and random number generation is a whole field in itself. 
+
+In terms of running the examples, you can choose to copy the code and exclude the line with `set.seed()`. You should still observe that the estimated values from the simulations are close to the true values. 

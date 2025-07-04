@@ -135,6 +135,7 @@ fig:4-LLN2
 eq:6-CLT
 fig:6-CLTnorm
 fig:6-CLTpois
+fig:circle
 examples
 example-1-mario-kart-auction-prices
 eg2
@@ -277,9 +278,14 @@ linnonlin
 convex-and-concave-functions
 jensens-inequality-1
 chebyshevs-inequality
-limit-theorems
+limits
 law-of-large-numbers
 misconceptions-with-lln
 central-limit-theorem
 considerations-with-clt
 monte-carlo-simulations
+monte-carlo-methods-for-expected-values
+monte-carlo-methods-for-probabilities
+monte-carlo-methods-for-other-purposes
+considerations-with-monte-carlo-methods
+set.seed-in-r

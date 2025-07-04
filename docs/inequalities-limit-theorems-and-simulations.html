@@ -255,13 +255,13 @@ P(|X-\mu| \geq 3\sigma) \leq \frac{1}{3^2} = \frac{1}{9}.
 <p>Notice that Chebyshev’s inequality can be applied to any distribution, and can be used to provide bounds on how data can be spread out. It is more flexible than the 68-99-99.7% rule for normal distributions as it can be applied to any distribution, but the bounds are not as exact as they are an inequality. There can be a trade-off in relaxing assumptions and accuracy of results.</p>
 </div>
 </div>
-<div id="limit-theorems" class="section level2" number="6.3">
+<div id="limits" class="section level2" number="6.3">
 <h2>
-<span class="header-section-number">6.3</span> Limit Theorems<a class="anchor" aria-label="anchor" href="#limit-theorems"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6.3</span> Limit Theorems<a class="anchor" aria-label="anchor" href="#limits"><i class="fas fa-link"></i></a>
 </h2>
 <p>In the previous subsection, we used inequalities to provide bounds on probabilities and expectations that may be difficult to calculate. Another way of handing difficult calculations would be to use approximations for the distribution of the random variable, instead of the exact distribution of the random variable. Generally speaking, these approximations work better when we have more data (i.e. when the sample size is larger). These approximations are covered by two of the most important limit theorems: the Law of Large Numbers and the Central Limit Theorem. These theorems approximate the distribution of the sample mean of i.i.d. (independent and identically distributed) random variables as the sample size gets larger.</p>
 <p>Note: The idea of i.i.d. random variables implies that each observed value of the random variable is independent of each other, and that each observed value come from the same random variable. For example, let <span class="math inline">\(X\)</span> denote the number of dots from a roll of a 6-sided fair die, and let <span class="math inline">\(X_1, X_2\)</span> denote the value of the first and second roll respectively. <span class="math inline">\(X_1\)</span> and <span class="math inline">\(X_2\)</span> are i.i.d. since the outcomes from the first and second roll do not influence each other, so they are independent. <span class="math inline">\(X_1\)</span> and <span class="math inline">\(X_2\)</span> are identically distributed as they both follow the same distribution, <span class="math inline">\(Mult_6(1, (1/6, 1/6, 1/6, 1/6, 1/6, 1/6))\)</span>. In real life, this is achieved through carefully designed and planned surveys and experiments with random sampling, which is a whole field in statistics in its own right.</p>
-<p>For the rest of this section, assume we have i.i.d. <span class="math inline">\(X_1, \cdots, X_n\)</span> with finite mean <span class="math inline">\(\mu\)</span> and finite variance <span class="math inline">\(\sigma^2\)</span>. For all positive integers <span class="math inline">\(n\)</span> (i.e. for any possible sample size), define the sample mean as <span class="math inline">\(\bar{X}_n = \frac{X_1 + \cdots + X_n}{n}\)</span>. We can easily derive the expected value and variance of the sample mean using propertires of expectations and variances:</p>
+<p>For the rest of this section, Section <a href="inequalities-limit-theorems-and-simulations.html#limits">6.3</a>, assume we have i.i.d. <span class="math inline">\(X_1, \cdots, X_n\)</span> with finite mean <span class="math inline">\(\mu\)</span> and finite variance <span class="math inline">\(\sigma^2\)</span>. For all positive integers <span class="math inline">\(n\)</span> (i.e. for any possible sample size), define the sample mean as <span class="math inline">\(\bar{X}_n = \frac{X_1 + \cdots + X_n}{n}\)</span>. We can easily derive the expected value and variance of the sample mean using propertires of expectations and variances:</p>
 <p><span class="math display" id="eq:6-Emean">\[\begin{equation}
 \begin{split}
 E(\bar{X}_n) &amp;= E(\frac{X_1 + \cdots + X_n}{n}) \\
@@ -473,7 +473,141 @@ Figure 6.6: Distribution of Sample Means when X is Pois(1), n varied
 <h2>
 <span class="header-section-number">6.4</span> Monte Carlo Simulations<a class="anchor" aria-label="anchor" href="#monte-carlo-simulations"><i class="fas fa-link"></i></a>
 </h2>
+<p>You may have that we have used simulations in the earlier sections of this module (and previous modules) to help explain certain concepts. These simulations are called <strong>Monte Carlo</strong> methods, or Monte Carlo simulations. The idea behind Monte Carlo methods is to used repeated random sampling (and by repeated, we mean repeat a large number of times) to estimate features of data, usually probabilities and expected values. Monte Carlo methods are used for the following purposes:</p>
+<ol style="list-style-type: decimal">
+<li><p>When the probability or expectation is too complicated to work out by hand. Recall that finding probabilities and expectations by hand involve summations or integrals, and it becomes obvious that working with summations and especially integrals can get onerous.</p></li>
+<li><p>To verify theoretical results involving probability or expectations. While a lot of theory is proved using mathematics, most academic papers include Monte Carlo simulations to verify the theoretical results. We have done these to verify the LLN and CLT in the previous subsection, in some circumstances.</p></li>
+<li><p>To help confirm that you understand the meaning of theoretical results. The only way your code matches the theory is if you understand the theory.</p></li>
+</ol>
+<div id="monte-carlo-methods-for-expected-values" class="section level3" number="6.4.1">
+<h3>
+<span class="header-section-number">6.4.1</span> Monte Carlo Methods for Expected Values<a class="anchor" aria-label="anchor" href="#monte-carlo-methods-for-expected-values"><i class="fas fa-link"></i></a>
+</h3>
+<p>Suppose we want to find some expectation for a continuous random variable <span class="math inline">\(X\)</span>, <span class="math inline">\(E(g(X))\)</span>, where <span class="math inline">\(g\)</span> is some function. LOTUS says that we need to use equation <a href="continuous-random-variables.html#eq:4-lotus">(4.4)</a>, i.e. <span class="math inline">\(E(g(X)) = \int_{-\infty}^{\infty} g(x) f_X(x).\)</span> Monte Carlo methods avoid doing this integration by simulating <span class="math inline">\(X_1, \cdots, X_M\)</span> from <span class="math inline">\(X\)</span> and estimate <span class="math inline">\(E(g(X))\)</span> with the sample mean of <span class="math inline">\(g(X)\)</span>, <span class="math inline">\(\frac{1}{M} \sum_{i=1}^M g(X_i)\)</span>. The LLN tells us that as <span class="math inline">\(M\)</span> gets larger, this sample mean converges to <span class="math inline">\(E(g(X))\)</span>.</p>
+<p>Monte Carlo methods replace the integral (or summation) with simulating a random variable repeatedly many times. We use a simple example to illustrate this idea.</p>
+<p>Let <span class="math inline">\(X\)</span> be a standard normal distribution. Suppose we want to find the value of <span class="math inline">\(E(X^2)\)</span>. If we try to find this using LOTUS, we will need to find <span class="math inline">\(\int_{-\infty}^{\infty} x^2 \frac{1}{\sqrt{2 \pi}} e^{-x^2/2} dx\)</span>. Instead of working out this integral by hand, we carry out a Monte Carlo simulation by doing these steps:</p>
+<ul>
+<li>Simulate <span class="math inline">\(M\)</span> random values from a standard normal, where <span class="math inline">\(M\)</span> is large.</li>
+<li>Calculate <span class="math inline">\(X_1^2, \cdots, X_M^2\)</span>.</li>
+<li>Find the sample average of <span class="math inline">\(X_1^2, \cdots, X_M^2\)</span>.</li>
+</ul>
+<div class="sourceCode" id="cb107"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">reps</span><span class="op">&lt;-</span><span class="fl">10000</span> <span class="co">## this is M</span></span>
+<span></span>
+<span><span class="va">Xs</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">reps</span><span class="op">)</span> <span class="co">##generate M values of X</span></span>
+<span></span>
+<span><span class="va">squared.values</span><span class="op">&lt;-</span><span class="va">Xs</span><span class="op">^</span><span class="fl">2</span> <span class="co">##square each X</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">squared.values</span><span class="op">)</span> <span class="co">##sample average of squared values. </span></span></code></pre></div>
+<pre><code>## [1] 1.024546</code></pre>
+<div class="sourceCode" id="cb109"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">##when reps is large, this sample mean should be close to the true E(X^2), which is 1</span></span></code></pre></div>
+<p>Since <span class="math inline">\(X\)</span> is standard normal, we know <span class="math inline">\(E(X) = 0\)</span> and <span class="math inline">\(Var(X) = E(X^2) - E(X)^2 = E(X^2) = 1\)</span>. We see in our simulation that our estimated value for <span class="math inline">\(E(X^2)\)</span> is pretty close to its theoretical value.</p>
+</div>
+<div id="monte-carlo-methods-for-probabilities" class="section level3" number="6.4.2">
+<h3>
+<span class="header-section-number">6.4.2</span> Monte Carlo Methods for Probabilities<a class="anchor" aria-label="anchor" href="#monte-carlo-methods-for-probabilities"><i class="fas fa-link"></i></a>
+</h3>
+<p>Suppose we want to find the probability that a random variable satisfies some event <span class="math inline">\(E\)</span>, <span class="math inline">\(P(E)\)</span>. We could perform a summation or integral to find this probability, or estimate the probability using Monte Carlo methods. What we will do is simulate <span class="math inline">\(X_1, \cdots, X_M\)</span> from <span class="math inline">\(X\)</span>, where <span class="math inline">\(M\)</span> is large, in other words, simulate a large number of replicates of <span class="math inline">\(X\)</span>. We then count how many of the <span class="math inline">\(X_i\)</span>s correspond to event <span class="math inline">\(E\)</span> happening, and then divide this number by <span class="math inline">\(M\)</span>, the number of replicates. We use an example to illustrate this idea.</p>
+<p>Let <span class="math inline">\(X\)</span> be a standard normal distribution. Suppose we want to find the probability <span class="math inline">\(P(X^2 &gt; 1)\)</span>. We carry out a Monte Carlo simulation by doing these steps:</p>
+<ul>
+<li>Simulate <span class="math inline">\(M\)</span> random values from a standard normal, where <span class="math inline">\(M\)</span> is large.</li>
+<li>Calculate <span class="math inline">\(X_1^2, \cdots, X_M^2\)</span>.</li>
+<li>Count the number of times <span class="math inline">\(X_i^2\)</span> is greater than 1.</li>
+<li>Divide this number by <span class="math inline">\(M\)</span> to estimate the probability, since probability can be interpreted as a long-run proportion.</li>
+</ul>
+<div class="sourceCode" id="cb110"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">reps</span><span class="op">&lt;-</span><span class="fl">10000</span> <span class="co">## this is M</span></span>
+<span></span>
+<span><span class="va">Xs</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">reps</span><span class="op">)</span> <span class="co">##generate M values of X</span></span>
+<span></span>
+<span><span class="va">squared.values</span><span class="op">&lt;-</span><span class="va">Xs</span><span class="op">^</span><span class="fl">2</span> <span class="co">##square each X</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">squared.values</span><span class="op">&gt;</span><span class="fl">1</span><span class="op">)</span><span class="op">/</span><span class="va">reps</span> <span class="co">##count the number of times X^2 is greater than 1, and divide by M</span></span></code></pre></div>
+<pre><code>## [1] 0.3178</code></pre>
+<div class="sourceCode" id="cb112"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">##when reps is large, this proportion should be close to</span></span>
+<span><span class="fl">1</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/stats/Chisquare.html">pchisq</a></span><span class="op">(</span><span class="fl">1</span>, df<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 0.3173105</code></pre>
+<div class="sourceCode" id="cb114"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">##it turns out that squaring a standard normal gives a chi-squared distribution with 1 df.</span></span></code></pre></div>
+</div>
+<div id="monte-carlo-methods-for-other-purposes" class="section level3" number="6.4.3">
+<h3>
+<span class="header-section-number">6.4.3</span> Monte Carlo Methods for Other Purposes<a class="anchor" aria-label="anchor" href="#monte-carlo-methods-for-other-purposes"><i class="fas fa-link"></i></a>
+</h3>
+<p>Monte Carlo methods are not exclusively used estimating expected values and probabilities. They are versatile and can be used for a number of purposes, as long we need repeated random sampling.</p>
+<p>A fun example that is pretty famous uses Monte Carlo simulations to estimate the value of <span class="math inline">\(\pi\)</span>. We can consider the following hypothetical dart throwing experiment to do so, based on the figure below:</p>
+<div class="figure">
+<span style="display:block;" id="fig:circle"></span>
+<img src="images/06-circle.jpg" alt="Board for Dart Throwing Experiment"><p class="caption">
+Figure 6.7: Board for Dart Throwing Experiment
+</p>
+</div>
+<p>The experiment works in this way:</p>
+<ul>
+<li>The dart will always land in the square, and has an equal probability of landing on any spot on the square.
+<ul>
+<li>We can let <span class="math inline">\(X \sim U(-1,1)\)</span> to represent the position of the dart on the x-axis of the circle in Figure <a href="inequalities-limit-theorems-and-simulations.html#fig:circle">6.7</a>.</li>
+<li>We can let <span class="math inline">\(Y \sim U(-1,1)\)</span> to represent the position of the dart on the y-axis of the circle in Figure <a href="inequalities-limit-theorems-and-simulations.html#fig:circle">6.7</a>.</li>
+</ul>
+</li>
+<li>We will throw a large number of darts. For each dart, we will see if it lands in the circle or not.
+<ul>
+<li>To assess if a dart lies in the circle, we assess whether <span class="math inline">\(x_i^2 + y_i^2 \leq 1\)</span> for dart <span class="math inline">\(i\)</span>. If this condition is met, we know dart <span class="math inline">\(i\)</span> lies in the circle, if not, it lies outside the circle.</li>
+</ul>
+</li>
+<li>It stands to reason that <span class="math inline">\(\frac{\text{Area of circle}}{\text{Are of square}} = \frac{\pi}{4} \approx \frac{\text{Number of darts landing in circle}}{\text{Number of darts thrown}}\)</span>.</li>
+<li>Therefore, after throwing a large number of darts, <span class="math inline">\(\pi \approx 4 \times \frac{\text{Number of darts landing in circle}}{\text{Number of darts thrown}}.\)</span>
+</li>
+</ul>
+<p>The code below carries out this experiment with 10 thousand reps (or 10 thousand dart throws):</p>
+<div class="sourceCode" id="cb115"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">reps</span><span class="op">&lt;-</span><span class="fl">10000</span> <span class="co">##number of dart throws</span></span>
+<span></span>
+<span><span class="va">count</span><span class="op">&lt;-</span><span class="fl">0</span> <span class="co">##counter that keeps track of number of throws inside circle</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">222</span><span class="op">)</span></span>
+<span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">reps</span><span class="op">)</span> <span class="op">{</span></span>
+<span></span>
+<span><span class="va">x</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="fl">1</span>,min<span class="op">=</span><span class="op">-</span><span class="fl">1</span>, max<span class="op">=</span><span class="fl">1</span><span class="op">)</span> <span class="co">##simulate landing spot on x axis</span></span>
+<span><span class="va">y</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="fl">1</span>,min<span class="op">=</span><span class="op">-</span><span class="fl">1</span>, max<span class="op">=</span><span class="fl">1</span><span class="op">)</span> <span class="co">##simulate landing spot on y axis</span></span>
+<span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="va">x</span><span class="op">^</span><span class="fl">2</span> <span class="op">+</span> <span class="va">y</span><span class="op">^</span><span class="fl">2</span> <span class="op">&lt;=</span> <span class="fl">1</span><span class="op">)</span><span class="op">{</span></span>
+<span>    <span class="va">count</span> <span class="op">&lt;-</span> <span class="va">count</span><span class="op">+</span><span class="fl">1</span> <span class="co">##counter adds 1 if dart lands in circle</span></span>
+<span>  <span class="op">}</span></span>
+<span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co">##estimate pi. should be close to real value of pi. Gets closer if we throw more darts</span></span>
+<span><span class="va">count</span><span class="op">/</span><span class="va">reps</span> <span class="op">*</span> <span class="fl">4</span> </span></code></pre></div>
+<pre><code>## [1] 3.1436</code></pre>
+</div>
+<div id="considerations-with-monte-carlo-methods" class="section level3" number="6.4.4">
+<h3>
+<span class="header-section-number">6.4.4</span> Considerations with Monte Carlo Methods<a class="anchor" aria-label="anchor" href="#considerations-with-monte-carlo-methods"><i class="fas fa-link"></i></a>
+</h3>
+<p>In the examples above, we compared estimated values using Monte Carlo methods with their real values, so we could see the methods work. However, if we do not know the real values, two questions will come to mind:</p>
+<ol style="list-style-type: decimal">
+<li><p>How many replicates do we need? We only know the estimated values converge to the true values as we increase the number of replicates. Using more replicates will make the simulation run longer on your computer.</p></li>
+<li><p>Related to the previous question, how close is close enough? How do you know your estimated value from the simulation is close enough to the truth? There is no way of knowing if the true value is unknown.</p></li>
+</ol>
+<div id="set.seed-in-r" class="section level4" number="6.4.4.1">
+<h4>
+<span class="header-section-number">6.4.4.1</span> set.seed() in R<a class="anchor" aria-label="anchor" href="#set.seed-in-r"><i class="fas fa-link"></i></a>
+</h4>
+<p>You may have noticed that in the provided simulations, we use a function <code><a href="https://rdrr.io/r/base/Random.html">set.seed()</a></code> called and input a number. This is to enable others to replicate the exact same results, if someone wants to verify the code.</p>
+<p>With Monte Carlo simulations, we are generating numbers randomly. When we set the seed with <code><a href="https://rdrr.io/r/base/Random.html">set.seed()</a></code> with a certain number, we ensure the same random numbers are generated each time the code is run.</p>
+<p>We will not go into the details of how R generates the random numbers, and random number generation is a whole field in itself.</p>
+<p>In terms of running the examples, you can choose to copy the code and exclude the line with <code><a href="https://rdrr.io/r/base/Random.html">set.seed()</a></code>. You should still observe that the estimated values from the simulations are close to the true values.</p>
 
+</div>
+</div>
 </div>
 </div>
   <div class="chapter-nav">
@@ -492,12 +626,19 @@ Figure 6.6: Distribution of Sample Means when X is Pois(1), n varied
 </ul>
 </li>
 <li>
-<a class="nav-link" href="#limit-theorems"><span class="header-section-number">6.3</span> Limit Theorems</a><ul class="nav navbar-nav">
+<a class="nav-link" href="#limits"><span class="header-section-number">6.3</span> Limit Theorems</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#law-of-large-numbers"><span class="header-section-number">6.3.1</span> Law of Large Numbers</a></li>
 <li><a class="nav-link" href="#central-limit-theorem"><span class="header-section-number">6.3.2</span> Central Limit Theorem</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#monte-carlo-simulations"><span class="header-section-number">6.4</span> Monte Carlo Simulations</a></li>
+<li>
+<a class="nav-link" href="#monte-carlo-simulations"><span class="header-section-number">6.4</span> Monte Carlo Simulations</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#monte-carlo-methods-for-expected-values"><span class="header-section-number">6.4.1</span> Monte Carlo Methods for Expected Values</a></li>
+<li><a class="nav-link" href="#monte-carlo-methods-for-probabilities"><span class="header-section-number">6.4.2</span> Monte Carlo Methods for Probabilities</a></li>
+<li><a class="nav-link" href="#monte-carlo-methods-for-other-purposes"><span class="header-section-number">6.4.3</span> Monte Carlo Methods for Other Purposes</a></li>
+<li><a class="nav-link" href="#considerations-with-monte-carlo-methods"><span class="header-section-number">6.4.4</span> Considerations with Monte Carlo Methods</a></li>
+</ul>
+</li>
 </ul>
 
       <div class="book-extra">
