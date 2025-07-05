@@ -4,7 +4,7 @@
 rm(list = ls())
 ```
 
-This module is based on Introduction to Probability (Blitzstein, Hwang), Chapter 10. You can access the book for free at https://stat110.hsites.harvard.edu/ (and then click on Book). Please note that I cover additional topics, and skip certain topics from the book. You may skip ??? from the book.
+This module is based on Introduction to Probability (Blitzstein, Hwang), Chapter 10. You can access the book for free at https://stat110.hsites.harvard.edu/ (and then click on Book). Please note that I cover additional topics, and skip certain topics from the book. You may skip Eample 10.1.3, 10.1.4, 10.1.7 to 10.1.9, Theorem 10.1.12, Example 10.2.5, 10.2.6, 10.3.7, and Section 10.4 from the book.
 
 ## Introduction
 
@@ -101,7 +101,7 @@ In the example above, we have an instance where $E(g(X)) \neq g(E(X))$. The dire
 We now look at a couple of functions to see if they are convex or concave:
 
 - $g(x) = \log(x)$ is a concave function. 
-    - Its second derivative is $g^{\prime \prime}(x) = -\frac{1}{x^2}$. Note the domain of $log(x)$ is positive real numbers (it is undefined when $x \leq 0$), so its second derivative is always negative. 
+    - Its second derivative is $g^{\prime \prime}(x) = -\frac{1}{x^2}$. Note the domain of $\log(x)$ is positive real numbers (it is undefined when $x \leq 0$), so its second derivative is always negative. 
     - We can also look at a graph of $y = \log(x)$, and draw line segments that join two points on its graph. All of these lines are never above the graph. Figure \@ref(fig:concave) below shows an example with one line segment, but we can see that any line segment that joins two points on the graph will never be above the graph.
     
 ```{r concave, fig.cap = "Example of Concave Function", echo = FALSE}
@@ -126,7 +126,7 @@ The equality holds only if $g$ is a linear function. It turns out linear functio
 
 1. We apply Jensen's inequality to the toy example in Section \@ref(linnonlin). As a reminder, suppose we roll a fair six-sided die, and let $X$ denote the number of dots the die shows. The winnings is defined as the squared of the number of dots the die shows. Let $T$ denote the new winnings, so $T = X^2$, so $g(x) = x^2$ is the function representing this non linear transformation. We established that the quadratic function is convex, so Jensen's inequality tells us that $E(g(X)) \geq g(E(X))$, i.e. that $E(T) > E(X)^2$ which we showed in the code. 
 
-2. As mentioned in Section \@ref(linnonlin), a log transformation is often applied to make data that are right skewed less skewed, so that popular methods such as linear regression, tree based methods, $K$ nearest neighbors can be used (these methods can be sensitive to outliers since they are based on conditional expectations or conditional means). What often happens is the log transformation is applied to the variable of interest, the model is fit, a prediction is made for the log transformed variable using conditional expectations, and this predicted value is exponetiated to convert it back to the original variable. Jensen's inequality tells us that the exponential of the average log variable is greater than the average variable, and our model over estimates. 
+2. As mentioned in Section \@ref(linnonlin), a log transformation is often applied to make data that are right skewed less skewed, so that popular methods such as linear regression, tree based methods, $K$ nearest neighbors can be used (these methods can be sensitive to outliers since they are based on conditional expectations or conditional means). What often happens is the log transformation is applied to the variable of interest, the model is fit, a prediction is made for the log transformed variable using conditional expectations, and the exponential is applied to this predicted value to convert it back to the original variable. Jensen's inequality tells us that the exponential of the average log variable is greater than the average variable, and our model over estimates. 
 
 3. Jensen's inequality can also be used to show that the sample standard deviation is a biased estimator of the population standard deviation, which appears counter intuitive, since the sample variance is an unbiased estimator of the population variance, i.e. $E(s^2) = \sigma^2$, but $E(s) \neq \sigma$. The quick proof is
 
@@ -138,7 +138,7 @@ So the sample standard deviation underestimates the population standard deviatio
 
 ### Chebyshev's Inequality
 
-A common inequality wthat is used for probability is **Chebyshev's inequality**. It provides an upper bound on the probability that a random variable is at least a certain distance from its mean. Let $X$ be a random variable with mean $\mu$ and variance $\sigma^2$. Then for any $a>0$, 
+A common inequality that is used for probability is **Chebyshev's inequality**. It provides an upper bound on the probability that a random variable is at least a certain distance from its mean. Let $X$ be a random variable with mean $\mu$ and variance $\sigma^2$. Then for any $a>0$, 
 
 \begin{equation} 
 P(|X-\mu| \geq a) \leq \frac{\sigma^2}{a^2}.
@@ -152,7 +152,7 @@ P(|X-\mu| \geq c \sigma) \leq \frac{\sigma^2}{c^2 \sigma^2} = \frac{1}{c^2}.
 (\#eq:6-CIalt)
 \end{equation}
 
-Using equation \@ref(eq:6_CIalt), we can say the following about the upper bond on the probability that a random variable is at least 1, 2, and 3 standard deviations from its mean:
+Using equation \@ref(eq:6-CIalt), we can say the following about the upper bond on the probability that a random variable is at least 1, 2, and 3 standard deviations from its mean:
 
 - When $c=1$,
 
@@ -187,7 +187,7 @@ In the previous subsection, we used inequalities to provide bounds on probabilit
 
 Note: The idea of i.i.d. random variables implies that each observed value of the random variable is independent of each other, and that each observed value come from the same random variable. For example, let $X$ denote the number of dots from a roll of a 6-sided fair die, and let $X_1, X_2$ denote the value of the first and second roll respectively. $X_1$ and $X_2$ are i.i.d. since the outcomes from the first and second roll do not influence each other, so they are independent. $X_1$ and $X_2$ are identically distributed as they both follow the same distribution, $Mult_6(1, (1/6, 1/6, 1/6, 1/6, 1/6, 1/6))$. In real life, this is achieved through carefully designed and planned surveys and experiments with random sampling, which is a whole field in statistics in its own right. 
 
-For the rest of this section, Section \@ref(limits), assume we have i.i.d. $X_1, \cdots, X_n$ with finite mean $\mu$ and finite variance $\sigma^2$. For all positive integers $n$ (i.e. for any possible sample size), define the sample mean as $\bar{X}_n = \frac{X_1 + \cdots + X_n}{n}$. We can easily derive the expected value and variance of the sample mean using propertires of expectations and variances:
+For the rest of this section, Section \@ref(limits), assume we have i.i.d. $X_1, \cdots, X_n$ with finite mean $\mu$ and finite variance $\sigma^2$. For all positive integers $n$ (i.e. for any possible sample size), define the sample mean as $\bar{X}_n = \frac{X_1 + \cdots + X_n}{n}$. We can easily derive the expected value and variance of the sample mean using properties of expectations and variances. Its expected value is
 
 \begin{equation} 
 \begin{split}
@@ -198,6 +198,19 @@ E(\bar{X}_n) &= E(\frac{X_1 + \cdots + X_n}{n}) \\
              &= \mu.
 \end{split}
 (\#eq:6-Emean)
+\end{equation}
+
+Its variance is
+
+\begin{equation} 
+\begin{split}
+Var(\bar{X}_n) &= Var(\frac{X_1 + \cdots + X_n}{n}) \\
+             &= \frac{1}{n^2}Var(X_1 + \cdots + X_n) \\
+             &= \frac{1}{n^2} (Var(X_1) + \cdots + Var(X_n)) \\
+             &= \frac{1}{n^2} (\sigma^2 + \cdots + \sigma^2) \\
+             &= \frac{\sigma^2}{n}.
+\end{split}
+(\#eq:6-Varmean)
 \end{equation}
 
 Equation \@ref(eq:6-Emean) informs us that the long-run average of sample means is equal to the population mean. We can imagine this if we had taken different random samples of size $n$ from a population, and for each random sample we find the sample mean, and then average all these sample means. This average equals to the population mean $\mu$. The code below provides a demonstration of these steps:
@@ -226,16 +239,7 @@ mean(xbar) ##average the sample means. This should be close to 0.
 ```
 
 
-\begin{equation} 
-\begin{split}
-Var(\bar{X}_n) &= Var(\frac{X_1 + \cdots + X_n}{n}) \\
-             &= \frac{1}{n^2}Var(X_1 + \cdots + X_n) \\
-             &= \frac{1}{n^2} (Var(X_1) + \cdots + Var(X_n)) \\
-             &= \frac{1}{n^2} (\sigma^2 + \cdots + \sigma^2) \\
-             &= \frac{\sigma^2}{n}.
-\end{split}
-(\#eq:6-Varmean)
-\end{equation}
+
 
 Equation \@ref(eq:6-Varmean) informs us how to calculate the variance of the sample means. We can imagine this if we had taken different random samples of size $n$ from a population, and for each random sample we find the sample mean, and then find the variance of all these sample means. It is the variance of the original random variable divided by $n$. This means as the sample size gets larger, the variance of the sample means get smaller, in other words, the sample means tend to get closer to the population mean. We re run the code from above and also find the variance of the sample means.
 
@@ -263,49 +267,11 @@ var(xbar) ##variance of sample means. This should be close to 1/500, since n=500
 
 The **Law of Large Numbers (LLN)** states that as $n$ gets larger and approaches infinity, the sample mean $\bar{X}_n$ converges to the true mean $\mu$. This implies that the sample mean tends to get closer to the population mean with larger sample sizes. The key word here is tends to, it is not a guarantee that the sample mean always gets closer to the population mean whenever $n$ gets larger, but it generally does. This explains why we tend to trust results from larger sample sizes. 
 
-Another implication of the LLN is that We can use simulations to verify theoretical results, since these results usually require us to simulate data based on a large number of independent replications. 
+Another implication of the LLN is that we can use simulations to verify theoretical results, since these results usually require us to simulate data based on a large number of independent replications. 
 
 The LLN is a by product of equations \@ref(eq:6-Emean) and \@ref(eq:6-Varmean). Equation \@ref(eq:6-Varmean) informs us that as $n$ gets larger, the variance of the sample mean gets smaller. Equation \@ref(eq:6-Emean) informs us that the sample mean is unbiased, i.e. its long run average is equal to the true mean. Collectively, these inform us that as $n$ gets larger, the sample mean is more likely to be closer to the true mean. 
 
-We use a couple of examples to illustrate the LLN. 
-
-1. The code below gives a visual representation of the LLN. The code does the following:
-
-- Simulate an observation from a standard normal, $X_1$.
-- Find the sample mean of $X_1$, i.e. $\bar{X}_1$
-- Simulate another observation from a standard normal, $X_2$.
-- Find the sample mean of $X_1, X_2$, i.e. $\bar{X}_2$
-- Keep simulating another observation from a standard normal and find the sample mean of after each simulated observation, until we simulate 500 observations. 
-- Create a plot of $\bar{X}_n$ against $n$, like in Figure \@ref(fig:4-LLN1).
-- The LLN tells us that as $n$ gets larger, $\bar{X}_n$ should generally get closer to 0, since the true mean of $X_1, \cdots, X_n$ is 0. 
-
-```{r 4-LLN1, fig.cap="LLN Example 1"}
-n<-500 ##make this big, but not too big otherwise picture is difficult to see
-
-X<-array(NA,n) ##initialize an array to store the value of each simulated data point
-xbars<-array(0,n) ##initialize an array to store the value of the sample mean after each simulated data point
-
-set.seed(92)
-for (i in 1:n)
-
-{
-
-  X[i]<-rnorm(1) ##simulate one data point from standard normal and store it
-  xbars[i]<-mean(X, na.rm=TRUE) ##find the sample mean after each simulated data point is generated
-
-}
-
-##create visual. LLN says that as n gets larger, the value of the sample mean tends to get closer to 0.
-##remember that the true mean is 0 since each data point was simulated from standard normal
-plot(xbars, type="l", main="Xbar vs Sample Size", ylab="Sample Mean", xlab="n")
-abline(h=0, col="blue") ##overlay true mean for easy comparison
-```
-
-As expected, we see from Figure \@ref(fig:4-LLN1) that as $n$ gets larger, the sample mean $\bar{X}_n$ tends to get closer to 0. The sample mean does not necessarily get closer to 0 each time we increase $n$ but it generally does.
-
-Note: `set.seed()` was used so you can reproduce these results exactly. However, the observation that the sample mean tends to get closer to the true mean as $n$ increases will happen regardless of what `set.seed()` was used, or even if `set.seed()` was not used. 
-
-2. Another example to illustrate the LLN comes from flipping a fair coin. Let $X$ denote whether the coin lands heads or tails, and let $X=1$ for heads and $X=0$ for tails. We can say that $X \sim Bern(0.5)$ since the coin is fair. Imagine flipping the coin $n$ times, and record the outcome after each flip, so $X_1, \cdots, X_n$ denote the outcome of each flip. We know that $E(X) = 0.5$ since $X \sim Bern(0.5)$. The LLN informs us that $\bar{X}_1, \cdots, \bar{X}_n$ should get closer to 0.5 as $n$ increases. In other words, the value of the sample proportion after each flip should get closer to 0.5 with more flips. The code below simulates this example for $n=500%, and Figure \@ref(fig:4-LLN2) shows how the sample proportions get closer to 0.5, in general. 
+We use an example to illustrate the LLN, which comes from flipping a fair coin. Let $X$ denote whether the coin lands heads or tails, and let $X=1$ for heads and $X=0$ for tails. We can say that $X \sim Bern(0.5)$ since the coin is fair. Imagine flipping the coin $n$ times, and record the outcome after each flip, so $X_1, \cdots, X_n$ denote the outcome of each flip. We know that $E(X) = 0.5$ since $X \sim Bern(0.5)$. The LLN informs us that $\bar{X}_1, \cdots, \bar{X}_n$ should usually get closer to 0.5 as $n$ increases. In other words, the value of the sample proportion after each flip should get usually closer to 0.5 with more flips. The code below simulates this example for $n=500$, and Figure \@ref(fig:4-LLN2) shows how the sample proportions get closer to 0.5, in general. 
 
 ```{r 4-LLN2, fig.cap="LLN Example 2"}
 n<-500 ##make this big, but not too big otherwise picture is difficult to see
@@ -322,6 +288,8 @@ props<-totals/index ##find proportion of heads after each flip
 plot(props, type="l", main="Prop vs Sample Size", ylab="Proportion", xlab="n")
 abline(h=0.5, col="blue") ##overlay 0.5 for easy comparison
 ```
+
+Note: `set.seed()` was used so you can reproduce these results exactly. However, the observation that the sample mean tends to get closer to the true mean as $n$ increases will happen regardless of what `set.seed()` was used, or even if `set.seed()` was not used. 
 
 Note: The LLN actually comes in two versions, the Weak Law of Large Numbers (WLLN), and the Strong Law of Large Numbers (SLLN). The book goes into some detail about their definitions and differences. What I have written gives an intuitive explanation of what the LLN implies. 
 

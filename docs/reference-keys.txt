@@ -130,7 +130,6 @@ eq:6-CI
 eq:6-CIalt
 eq:6-Emean
 eq:6-Varmean
-fig:4-LLN1
 fig:4-LLN2
 eq:6-CLT
 fig:6-CLTnorm
