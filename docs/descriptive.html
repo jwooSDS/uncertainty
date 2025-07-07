@@ -144,7 +144,7 @@ Figure 1.2: Historgram for 50 Interest Rates
 <ul>
 <li><p>If the histogram has the reverse characteristic, i.e. the data tail off to the left instead, the shape is said to be <strong>left-skewed</strong>. This implies that small values of the variable are much less common than large values of the variable; larger values are more likely to occur.</p></li>
 <li><p>Histograms that tail off similarly in both directions are called <strong>symmetric</strong>. Large and small values are of the variable are equally likely.</p></li>
-<li><p>Histograms that have a peak in the middle, and then trail off on both sides are not only symmetic, but also <strong>bell-shaped</strong>, or have a <strong>normal</strong> distribution. Note: it turns out one of the assumptions in linear regression is that the response variable follow a normal distribution. This may seem restrictive, however, we will see in later modules that this assumption is not particular crucial under some circumstances.</p></li>
+<li><p>Histograms that have a peak in the middle, and then tail off on both sides are not only symmetic, but also <strong>bell-shaped</strong>, or have a <strong>normal</strong> distribution. Note: it turns out one of the assumptions in linear regression is that the response variable follow a normal distribution. This may seem restrictive, however, we will see in later modules that this assumption is not particularly crucial under some circumstances.</p></li>
 </ul>
 <p><em>Thought question:</em> Can you think of real life variables that have symmetric, right-skewed, left-skewed distributions? Feel free to search the internet for examples.</p>
 </div>
@@ -193,7 +193,7 @@ Figure 1.4: Density Plot for 50 Interest Rates
 <p>Based on Figure <a href="descriptive.html#fig:dens">1.4</a>, we see that low interest rates (between 5 and 12.5 percent) are much more common and high interest rates (higher than 20 percent). A few things to note about interpreting density plots:</p>
 <ul>
 <li>The area under the density plot is always equals to 1.</li>
-<li>To find the proportion of interest rates that are between two values, for example between 10 and 15 percent, we would integrate this density plot over this range, i.e. <span class="math inline">\(\int_{10}^{15} f(x) dx\)</span>, where <span class="math inline">\(f(x)\)</span> is a mathematical equation that describes the density plot.</li>
+<li>To find the proportion of interest rates that are between two values, for example between 10 and 15 percent, we would integrate this density plot over this range, i.e. <span class="math inline">\(\int_{10}^{15} f(x) dx\)</span>, where <span class="math inline">\(f(x)\)</span> is a mathematical equation that describes the density plot. We will learn about this equation in more detail in a later module.</li>
 <li>The values on the vertical axis do not equal to probabilities (a common misconception).</li>
 </ul>
 <p>The density plot is found using a method called kernel density estimation (KDE). We will over details about KDE in Section <a href="continuous-random-variables.html#KDE">4.6.1</a> as we need to cover quite a bit of material before doing so.</p>
@@ -304,7 +304,7 @@ Figure 1.6: Box Plot of Interest Rates
 </ul>
 <p>Generally, when we have one quantitative variable, an outlier is an observation whose numerical value is far away from the rest of the data. In other words, it is a lot smaller or larger relative to the rest of the data.</p>
 <p>So for our 50 loans, there are two loan applicants with interest rates around 25 percent that are flagged as being a lot larger than the rest of the loans, which is reasonable since most of the loans are a lot smaller than 20 percent.</p>
-<p>We will not go over the details of how outliers are determined in box plots. If you are interested, you can read Chapter 2.1.5 from <a href="https://www.openintro.org/book/os/">OpenIntro Statistics (Diez, Ceytinka-Rundel, Barr)</a>.</p>
+<p>We will not go over the details of how outliers are determined in box plots. If you are interested, you can read Chapter 2.1.5 from <a href="https://www.openintro.org/book/os/">OpenIntro Statistics (Diez, Ceytinka-Rundel, Barr)</a>. Generally, when we are working with one variable, outliers are observations which are a lot larger or smaller than the rest of the observations.</p>
 <p>Notice how much further large values (<span class="math inline">\(Q_3\)</span> and maximum) are from the median, compared to the distance of the small values (<span class="math inline">\(Q_1\)</span> and minimum) from the median. This indicates that the distribution of interest rates are right-skewed. Compare the boxplot of the interest rates in Figure <a href="descriptive.html#fig:boxplot">1.6</a> with its corresponding histogram (Figure <a href="descriptive.html#fig:hist">1.2</a>) and density plot (Figure <a href="descriptive.html#fig:dens">1.4</a>).</p>
 <p><em>Thought question</em>: can you sketch a box plot that represents a variable that is left-skewed? How about a variable that is symmetric?</p>
 </div>
@@ -508,7 +508,7 @@ IQR = Q_3 - Q_1.
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2025-07-05.</p>
+    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2025-07-07.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

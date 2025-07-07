@@ -89,7 +89,7 @@ Histograms can also give us an idea about the **shape** of the distribution of i
 
 - Histograms that tail off similarly in both directions are called **symmetric**. Large and small values are of the variable are equally likely. 
 
-- Histograms that have a peak in the middle, and then trail off on both sides are not only symmetic, but also **bell-shaped**, or have a **normal** distribution. Note: it turns out one of the assumptions in linear regression is that the response variable follow a normal distribution. This may seem restrictive, however, we will see in later modules that this assumption is not particular crucial under some circumstances.
+- Histograms that have a peak in the middle, and then tail off on both sides are not only symmetic, but also **bell-shaped**, or have a **normal** distribution. Note: it turns out one of the assumptions in linear regression is that the response variable follow a normal distribution. This may seem restrictive, however, we will see in later modules that this assumption is not particularly crucial under some circumstances.
 
 *Thought question:* Can you think of real life variables that have symmetric, right-skewed, left-skewed distributions? Feel free to search the internet for examples.
 
@@ -130,7 +130,7 @@ plot(density(Data$interest_rate), main="Density Plot of Interest Rates")
 Based on Figure \@ref(fig:dens), we see that low interest rates (between 5 and 12.5 percent) are much more common and high interest rates (higher than 20 percent). A few things to note about interpreting density plots:
 
 - The area under the density plot is always equals to 1. 
-- To find the proportion of interest rates that are between two values, for example between 10 and 15 percent, we would integrate this density plot over this range, i.e. $\int_{10}^{15} f(x) dx$, where $f(x)$ is a mathematical equation that describes the density plot. 
+- To find the proportion of interest rates that are between two values, for example between 10 and 15 percent, we would integrate this density plot over this range, i.e. $\int_{10}^{15} f(x) dx$, where $f(x)$ is a mathematical equation that describes the density plot. We will learn about this equation in more detail in a later module. 
 - The values on the vertical axis do not equal to probabilities (a common misconception).
 
 The density plot is found using a method called kernel density estimation (KDE). We will over details about KDE in Section \@ref(KDE) as we need to cover quite a bit of material before doing so. 
@@ -233,7 +233,7 @@ Generally, when we have one quantitative variable, an outlier is an observation 
 
 So for our 50 loans, there are two loan applicants with interest rates around 25 percent that are flagged as being a lot larger than the rest of the loans, which is reasonable since most of the loans are a lot smaller than 20 percent. 
 
-We will not go over the details of how outliers are determined in box plots. If you are interested, you can read Chapter 2.1.5 from [OpenIntro Statistics (Diez, Ceytinka-Rundel, Barr)](https://www.openintro.org/book/os/).
+We will not go over the details of how outliers are determined in box plots. If you are interested, you can read Chapter 2.1.5 from [OpenIntro Statistics (Diez, Ceytinka-Rundel, Barr)](https://www.openintro.org/book/os/). Generally, when we are working with one variable, outliers are observations which are a lot larger or smaller than the rest of the observations. 
 
 Notice how much further large values ($Q_3$ and maximum) are from the median, compared to the distance of the small values ($Q_1$ and minimum) from the median. This indicates that the distribution of interest rates are right-skewed. Compare the boxplot of the interest rates in Figure \@ref(fig:boxplot) with its corresponding histogram (Figure \@ref(fig:hist)) and density plot (Figure \@ref(fig:dens)). 
 

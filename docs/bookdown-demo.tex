@@ -127,7 +127,7 @@
 
 \title{Understanding Uncertainty Course Notes}
 \author{Jeffrey Woo}
-\date{2025-07-05}
+\date{2025-07-07}
 
 \begin{document}
 \maketitle
@@ -382,7 +382,7 @@ Histograms can also give us an idea about the \textbf{shape} of the distribution
 \item
   Histograms that tail off similarly in both directions are called \textbf{symmetric}. Large and small values are of the variable are equally likely.
 \item
-  Histograms that have a peak in the middle, and then trail off on both sides are not only symmetic, but also \textbf{bell-shaped}, or have a \textbf{normal} distribution. Note: it turns out one of the assumptions in linear regression is that the response variable follow a normal distribution. This may seem restrictive, however, we will see in later modules that this assumption is not particular crucial under some circumstances.
+  Histograms that have a peak in the middle, and then tail off on both sides are not only symmetic, but also \textbf{bell-shaped}, or have a \textbf{normal} distribution. Note: it turns out one of the assumptions in linear regression is that the response variable follow a normal distribution. This may seem restrictive, however, we will see in later modules that this assumption is not particularly crucial under some circumstances.
 \end{itemize}
 
 \emph{Thought question:} Can you think of real life variables that have symmetric, right-skewed, left-skewed distributions? Feel free to search the internet for examples.
@@ -447,7 +447,7 @@ Based on Figure \ref{fig:dens}, we see that low interest rates (between 5 and 12
 \item
   The area under the density plot is always equals to 1.
 \item
-  To find the proportion of interest rates that are between two values, for example between 10 and 15 percent, we would integrate this density plot over this range, i.e.~\(\int_{10}^{15} f(x) dx\), where \(f(x)\) is a mathematical equation that describes the density plot.
+  To find the proportion of interest rates that are between two values, for example between 10 and 15 percent, we would integrate this density plot over this range, i.e.~\(\int_{10}^{15} f(x) dx\), where \(f(x)\) is a mathematical equation that describes the density plot. We will learn about this equation in more detail in a later module.
 \item
   The values on the vertical axis do not equal to probabilities (a common misconception).
 \end{itemize}
@@ -612,7 +612,7 @@ Generally, when we have one quantitative variable, an outlier is an observation 
 
 So for our 50 loans, there are two loan applicants with interest rates around 25 percent that are flagged as being a lot larger than the rest of the loans, which is reasonable since most of the loans are a lot smaller than 20 percent.
 
-We will not go over the details of how outliers are determined in box plots. If you are interested, you can read Chapter 2.1.5 from \href{https://www.openintro.org/book/os/}{OpenIntro Statistics (Diez, Ceytinka-Rundel, Barr)}.
+We will not go over the details of how outliers are determined in box plots. If you are interested, you can read Chapter 2.1.5 from \href{https://www.openintro.org/book/os/}{OpenIntro Statistics (Diez, Ceytinka-Rundel, Barr)}. Generally, when we are working with one variable, outliers are observations which are a lot larger or smaller than the rest of the observations.
 
 Notice how much further large values (\(Q_3\) and maximum) are from the median, compared to the distance of the small values (\(Q_1\) and minimum) from the median. This indicates that the distribution of interest rates are right-skewed. Compare the boxplot of the interest rates in Figure \ref{fig:boxplot} with its corresponding histogram (Figure \ref{fig:hist}) and density plot (Figure \ref{fig:dens}).
 
@@ -1135,7 +1135,7 @@ We know the probability for each branch, and we add them up to obtain the denomi
 P(E_1|F) = \frac{P(E_1 \cap F)}{P(F)} = \frac{0.198}{0.263} = 0.7528517.
 \]
 
-Note: If you compare the intermediate calculations in approach, you end up using the calculations in approach 1, without referring to any of the associated equations.
+Note: If you compare the intermediate calculations in approach 2, you end up using the calculations in approach 1, without referring to any of the associated equations.
 
 \section{Confusion of the Inverse}\label{confusion-of-the-inverse}
 

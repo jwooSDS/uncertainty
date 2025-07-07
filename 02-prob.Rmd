@@ -306,7 +306,7 @@ $$
 P(E_1|F) = \frac{P(E_1 \cap F)}{P(F)} = \frac{0.198}{0.263} = 0.7528517.
 $$
 
-Note: If you compare the intermediate calculations in approach, you end up using the calculations in approach 1, without referring to any of the associated equations. 
+Note: If you compare the intermediate calculations in approach 2, you end up using the calculations in approach 1, without referring to any of the associated equations. 
 
 ## Confusion of the Inverse
 
