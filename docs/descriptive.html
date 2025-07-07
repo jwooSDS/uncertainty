@@ -348,7 +348,9 @@ We shall use a simple toy example to illustrate how an ECDF is constructed. Supp
 Figure 1.7: ECDF Plot for Toy Example
 </p>
 </div>
-<p>We can easily find percentiles from this plot, for example, the 40th percentile is equal to 1, going to the gym once a week. About 20 percent of observations go to the gym less than 1 time a week.</p>
+<p>We can easily find percentiles from this plot, for example, the 40th percentile is equal to 1, going to the gym once a week. About 20 percent of observations go to the gym less than 1 time a week. The video below explains the construction of the ECDF:</p>
+<iframe width="560px" height="320px" allowfullscreen="true" allow="autoplay *" title="Mod 01: Empirical Cumulative Distribution Function" src="https://virginiauniversity.instructuremedia.com/embed/d6e01cbb-e682-4291-b969-dc3a1855e952" frameborder="0">
+</iframe>
 <p>Next, we create the ECDF plot for the interest rates from the 50 loan applicants.</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/ecdf.html">ecdf</a></span><span class="op">(</span><span class="va">Data</span><span class="op">$</span><span class="va">interest_rate</span><span class="op">)</span>, main <span class="op">=</span> <span class="st">"ECDF Plot of Interest Rates"</span><span class="op">)</span></span>
@@ -438,6 +440,9 @@ s^2 &amp;= \frac{\sum_{i=1}^n (x_i-\bar{x})^2}{n-1}\\
 \end{split}
 \]</span></p>
 <p>Notice what we did in the numerator of equation <a href="descriptive.html#eq:variance">(1.2)</a>: we take the difference between each observed value from the sample mean, square these differences, then add up the squared differences. We then divide by <span class="math inline">\(n-1\)</span>, rather than <span class="math inline">\(n\)</span>, hence the sample variance being the approximate averaged squared distance of the observations from the mean. There is some nuance in the mathematics as to why we divide by <span class="math inline">\(n-1\)</span> instead of <span class="math inline">\(n\)</span>, and may not be intuitive as to why we do so. It turns out dividing by <span class="math inline">\(n-1\)</span> makes the sample variance an unbiased estimator of the true variance in the population (denoted by <span class="math inline">\(\sigma^2\)</span>) and is more reliable than if we had divided by <span class="math inline">\(n\)</span>. We will go over this in more detail in a later module after covering a few additional concepts.</p>
+<p>The video below explains the calculation of the sample variance:</p>
+<iframe width="560px" height="320px" allowfullscreen="true" allow="autoplay *" title="Mod 01: Sample Variance" src="https://virginiauniversity.instructuremedia.com/embed/d4a39613-d29e-47de-b5b0-e3a7304d0e16" frameborder="0">
+</iframe>
 <p>Larger values of the sample variance indicate that the observations are generally further away from the sample mean, indicating larger spread, and a higher degree of uncertainty about future values.</p>
 <p><em>Thought question</em>: What does it mean if the sample variance of a set of observations is 0? Why does this indicate their there is little (or no) uncertainty about the set of observations?</p>
 <p>Another related measure is the sample <strong>standard deviation</strong>, which is the square root of the sample variance. Similar to the variance, larger values indicated more spread in the data.</p>

@@ -87,7 +87,7 @@ The union of $A$ and $B$ can be viewed as the event where either event $A$ or $B
 
 The **intersection** of events is when **all** of the events happen. Using our example, the intersection of events $A$ and $B$ is denoted by $A \cap B$, is the event that the card drawn is both a black suit and a picture card. Using Figure \@ref(fig:cardsAB), the outcomes belonging to $A \cap B$ are the cards that are outlined in blue and gold. This probability is $P(A \cap B) = \frac{6}{52}$.
 
-### Addition rule
+### Addition Rule
 
 A common mistake that can be made in calculating $P(A \cup B)$ is to just add up the probabilities of each individual event, so the mistake will say this probability is $\frac{26}{52} + \frac{12}{52} = \frac{38}{52}$. The problem with this approach is that the outcomes that belong to both events (black picture cards) get counted twice, when we only want to count them once. This leads to the following formula for calculating probabilities involving unions of two events, and is sometimes called the **addition rule** in probability:
 
@@ -97,6 +97,10 @@ P(A \cup B) = P(A) + P(B) - P(A \cap B).
 \end{equation}
 
 Using equation \@ref(eq:union), $P(A \cup B) = \frac{26}{52} + \frac{12}{52} - \frac{6}{32} = \frac{32}{52}$.
+
+The video below explains the addition rule with this example in a bit more detail:
+
+<iframe width="560px" height="320px" allowfullscreen="true" allow="autoplay *" title="Module 02: Addition Rule" src="https://virginiauniversity.instructuremedia.com/embed/87c82b1d-d796-46a3-8307-70f40eeda26c" frameborder="0"></iframe>
 
 ### Disjoint or Mutually Exclusive Events
 
@@ -162,7 +166,13 @@ We are told that our card is a black suit, so we have only 26 possible outcomes 
 
 We can also apply equation \@ref(eq:cond): $P(B|A) = \frac{\frac{6}{52}}{\frac{1}{2}} = \frac{6}{26}$ which gives the same answer. 
 
+The video explains conditional probability with this example in a bit more detail:
+
+<iframe width="560px" height="320px" allowfullscreen="true" allow="autoplay *" title="Module 02: Conditional Probability" src="https://virginiauniversity.instructuremedia.com/embed/3e9900ed-6464-47e4-9f7c-353e17e8b47a" frameborder="0"></iframe>
+
 *Thought question*: work out the probability that the card drawn is a black suit, given that we know the card is a picture card. 
+
+
 
 We can see from this example that in general $P(Y|X) \neq P(X|Y)$. This informs us that we need to be extremely careful when writing out our conditional probabilities and interpreting them, and knowing which one matters to our analysis. For example, the probability that I feel unwell given that I have the flu is close to 1, but the probability that I have the flu given that I feel unwell is not close to 1 (since there are many things that can make me feel unwell). This confusion regarding conditional probabilities is sometimes called the confusion of the inverse or the prosecutor's fallacy. This fallacy wrongly assumes that if the probability of a fingerprint match given that the person is innocent is small, it means that the probability that the person is innocent given a fingerprint match must also be small.  Before going over this fallacy in more detail, we need to cover a few more concepts. 
 
@@ -274,6 +284,10 @@ P(E_1|F) &= \frac{P(E_1 \cap F)}{P(F)}\\
 \end{split}
 $$
 
+The video below goes over this approach in a little bit more detail:
+
+<iframe width="560px" height="320px" allowfullscreen="true" allow="autoplay *" title="Module 02: Worked Example Approach 1" src="https://virginiauniversity.instructuremedia.com/embed/9bf7a1e1-aee5-4772-a5bc-3225c93727d5" frameborder="0"></iframe>
+
 #### Approach 2: Using Tree Diagrams
 
 A tree diagram is useful in finding conditional probabilities and probabilities involving intersections. It is a visual way of displaying the information you have at hand, when you have conditional probabilities over disjoint sets and probabilities for each disjoint set. In our toy example, the disjoint sets are the type of email I receive, $E_1, E_2, E_3$, and the conditional probabilities we have are over these disjoint sets, i.e. $P(F|E_1), P(F|E_2)$ and $P(F|E_3)$. We can put this information visual by first splitting our sample space into the disjoint sets $E_1, E_2, E_3$, and then splitting each disjoint set on whether the email has the word "free" ($F$) or not ($F^c$). This information is displayed in a tree diagram as in Figure \@ref(fig:tree).
@@ -307,6 +321,10 @@ P(E_1|F) = \frac{P(E_1 \cap F)}{P(F)} = \frac{0.198}{0.263} = 0.7528517.
 $$
 
 Note: If you compare the intermediate calculations in approach 2, you end up using the calculations in approach 1, without referring to any of the associated equations. 
+
+The video below goes over tree diagrams in a little bit more detail:
+
+<iframe width="560px" height="320px" allowfullscreen="true" allow="autoplay *" title="Module 02: Conditional Probability" src="https://virginiauniversity.instructuremedia.com/embed/3e9900ed-6464-47e4-9f7c-353e17e8b47a" frameborder="0"></iframe>
 
 ## Confusion of the Inverse
 

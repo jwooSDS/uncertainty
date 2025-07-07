@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999996 (MiKTeX 24.4) (preloaded format=xelatex 2025.6.7)  7 JUL 2025 17:04
+This is XeTeX, Version 3.141592653-2.6-0.999996 (MiKTeX 24.4) (preloaded format=xelatex 2025.6.7)  7 JUL 2025 19:02
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -949,7 +949,7 @@ File: bookdown-demo_files/figure-latex/ecdf-1.pdf Graphic file (type pdf)
 File: bookdown-demo_files/figure-latex/ecdfreal-1.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/ecdfreal-1.pdf>
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
+Underfull \vbox (badness 4036) has occurred while \output is active []
 
 
 
@@ -994,6 +994,9 @@ File: images/02-cardsBC.jpg Graphic file (type bmp)
 
 
 [32]
+Underfull \vbox (badness 6510) has occurred while \output is active []
+
+
 
 [33]
 File: images/02-cardscond.jpg Graphic file (type bmp)
@@ -1009,14 +1012,13 @@ File: images/02-cardscond.jpg Graphic file (type bmp)
 [37]
 File: images/02-tree.jpg Graphic file (type bmp)
 <images/02-tree.jpg>
-
-
-[38]
 File: images/02-treepath1.jpg Graphic file (type bmp)
 <images/02-treepath1.jpg>
 File: images/02-treepath2.jpg Graphic file (type bmp)
 <images/02-treepath2.jpg>
 
+
+[38]
 
 [39]
 
@@ -1029,28 +1031,32 @@ File: images/02-treepath2.jpg Graphic file (type bmp)
 [43]
 
 [44]
+
+[45]
+
+[46
+
+]
 Chapter 3.
 
-Underfull \hbox (badness 1264) in paragraph at lines 1236--1237
+Underfull \hbox (badness 1264) in paragraph at lines 1246--1247
 \TU/lmr/m/n/10 tails each time. The sample space for this experiment will be $[
 ] []
  []
 
 
-Underfull \hbox (badness 4647) in paragraph at lines 1236--1237
+Underfull \hbox (badness 4647) in paragraph at lines 1246--1247
 [][][][][] [][][][] [][][][] [][][][] [][][][] [][][][] [][][][] [][][][]$\TU/l
 mr/m/n/10 . Given that each
  []
 
 
 
-[45
-
-]
-
-[46]
-
 [47]
+
+[48]
+
+[49]
 File: bookdown-demo_files/figure-latex/3-pmf-1.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/3-pmf-1.pdf>
 
@@ -1058,7 +1064,7 @@ Underfull \vbox (badness 1043) has occurred while \output is active []
 
 
 
-[48]
+[50]
 File: bookdown-demo_files/figure-latex/3-sim-1.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/3-sim-1.pdf>
 
@@ -1066,14 +1072,14 @@ Underfull \vbox (badness 4120) has occurred while \output is active []
 
 
 
-[49]
+[51]
 
-LaTeX Warning: Reference `fig:3-cdf' on page 50 undefined on input line 1422.
+LaTeX Warning: Reference `fig:3-cdf' on page 52 undefined on input line 1432.
 
 File: bookdown-demo_files/figure-latex/3-cdf-1.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/3-cdf-1.pdf>
 
-Underfull \hbox (badness 10000) in paragraph at lines 1424--1426
+Underfull \hbox (badness 10000) in paragraph at lines 1434--1436
 [][]
  []
 
@@ -1082,98 +1088,98 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 
-[50]
-
-LaTeX Warning: Reference `fig:3-cdf' on page 51 undefined on input line 1441.
-
-
-
-[51]
-
 [52]
 
+LaTeX Warning: Reference `fig:3-cdf' on page 53 undefined on input line 1451.
+
+
+
 [53]
+
+[54]
+
+[55]
 File: bookdown-demo_files/figure-latex/3-pmf-lin-1.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/3-pmf-lin-1.pdf>
 
 
-[54]
+[56]
 File: bookdown-demo_files/figure-latex/3-pmf-lin2-1.pdf Graphic file (type pdf)
 
 <use bookdown-demo_files/figure-latex/3-pmf-lin2-1.pdf>
 
-
-[55]
-
-[56]
 
 [57]
 
 [58]
 
 [59]
-File: bookdown-demo_files/figure-latex/3-varBern-1.pdf Graphic file (type pdf)
-<use bookdown-demo_files/figure-latex/3-varBern-1.pdf>
-
 
 [60]
 
 [61]
+File: bookdown-demo_files/figure-latex/3-varBern-1.pdf Graphic file (type pdf)
+<use bookdown-demo_files/figure-latex/3-varBern-1.pdf>
+
 
 [62]
 
 [63]
-File: bookdown-demo_files/figure-latex/3-pmfs-1.pdf Graphic file (type pdf)
-<use bookdown-demo_files/figure-latex/3-pmfs-1.pdf>
-
 
 [64]
 
 [65]
-File: bookdown-demo_files/figure-latex/3-pmfs-lambda-1.pdf Graphic file (type p
-df)
-<use bookdown-demo_files/figure-latex/3-pmfs-lambda-1.pdf>
+File: bookdown-demo_files/figure-latex/3-pmfs-1.pdf Graphic file (type pdf)
+<use bookdown-demo_files/figure-latex/3-pmfs-1.pdf>
 
 
 [66]
 
 [67]
+File: bookdown-demo_files/figure-latex/3-pmfs-lambda-1.pdf Graphic file (type p
+df)
+<use bookdown-demo_files/figure-latex/3-pmfs-lambda-1.pdf>
+
 
 [68]
+
+[69]
+
+[70]
 Chapter 4.
 
 
-[69
+[71
 
 ]
 File: bookdown-demo_files/figure-latex/4-compare-1.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/4-compare-1.pdf>
 
 
-[70]
+[72]
 
-[71]
+[73]
 File: bookdown-demo_files/figure-latex/4-prob-1.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/4-prob-1.pdf>
 
 
-[72]
+[74]
 File: bookdown-demo_files/figure-latex/4-prob2-1.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/4-prob2-1.pdf>
 
 
-[73]
-
-[74]
-
 [75]
 
-LaTeX Warning: Reference `fig:4-symm' on page 76 undefined on input line 2352.
+[76]
+
+[77]
+
+LaTeX Warning: Reference `fig:4-symm' on page 78 undefined on input line 2362.
 
 File: bookdown-demo_files/figure-latex/4-symm-1.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/4-symm-1.pdf>
 
-Underfull \hbox (badness 10000) in paragraph at lines 2354--2356
+Underfull \hbox (badness 10000) in paragraph at lines 2364--2366
 [][]
  []
 
@@ -1182,60 +1188,60 @@ Underfull \vbox (badness 5260) has occurred while \output is active []
 
 
 
-[76]
+[78]
 File: bookdown-demo_files/figure-latex/4-kurt-1.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/4-kurt-1.pdf>
 
 
-[77]
+[79]
 
-[78]
+[80]
 File: images/04-U.png Graphic file (type bmp)
 <images/04-U.png>
 File: images/04-Ucdf.png Graphic file (type bmp)
 <images/04-Ucdf.png>
 
 
-[79]
+[81]
 
-[80]
+[82]
 File: bookdown-demo_files/figure-latex/4-universe-1.pdf Graphic file (type pdf)
 
 <use bookdown-demo_files/figure-latex/4-universe-1.pdf>
 
 
-[81]
+[83]
 
-[82]
+[84]
 File: bookdown-demo_files/figure-latex/4-Z-1.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/4-Z-1.pdf>
 
 
-[83]
+[85]
 Missing character: There is no 𝜇 in font [lmroman10-regular]:mapping=tex-text;!
 
 
-[84]
+[86]
 File: bookdown-demo_files/figure-latex/4-rule-1.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/4-rule-1.pdf>
 
 
-[85]
+[87]
 
-[86]
-Overfull \hbox (38.25pt too wide) in paragraph at lines 2804--2804
+[88]
+Overfull \hbox (38.25pt too wide) in paragraph at lines 2814--2814
 []\TU/lmtt/m/n/10 ##  [1] -1.6907436  1.5545476  5.7635360 -2.3911270  0.759244
 7  1.3972609[] 
  []
 
 
 
-[87]
+[89]
 File: images/04-KDE.png Graphic file (type bmp)
 <images/04-KDE.png>
 
 
-[88]
+[90]
 File: bookdown-demo_files/figure-latex/4-R-1.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/4-R-1.pdf>
 File: bookdown-demo_files/figure-latex/4-R2-1.pdf Graphic file (type pdf)
@@ -1244,23 +1250,19 @@ File: bookdown-demo_files/figure-latex/4-R3-1.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/4-R3-1.pdf>
 
 
-[89]
-
-[90]
-
 [91]
 
 [92]
+
+[93]
+
+[94]
 Chapter 5.
 
 
-[93
+[95
 
 ]
-
-[94]
-
-[95]
 
 [96]
 
@@ -1271,71 +1273,71 @@ Chapter 5.
 [99]
 
 [100]
-File: bookdown-demo_files/figure-latex/5-covs-1.pdf Graphic file (type pdf)
-<use bookdown-demo_files/figure-latex/5-covs-1.pdf>
-
 
 [101]
 
 [102]
+File: bookdown-demo_files/figure-latex/5-covs-1.pdf Graphic file (type pdf)
+<use bookdown-demo_files/figure-latex/5-covs-1.pdf>
+
+
+[103]
+
+[104]
 File: bookdown-demo_files/figure-latex/5-cov0-1.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/5-cov0-1.pdf>
 
 
-[103]
+[105]
 File: bookdown-demo_files/figure-latex/5-corrs-1.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/5-corrs-1.pdf>
 
 
-[104]
-
-[105]
-
 [106]
-File: bookdown-demo_files/figure-latex/5-condexp-1.pdf Graphic file (type pdf)
-<use bookdown-demo_files/figure-latex/5-condexp-1.pdf>
-
 
 [107]
 
 [108]
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/b/n' will be
-(Font)              scaled to size 10.0pt on input line 3681.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/b/n' will be
-(Font)              scaled to size 7.0pt on input line 3681.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/b/n' will be
-(Font)              scaled to size 5.0pt on input line 3681.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/b/n' will be
-(Font)              scaled to size 10.00092pt on input line 3681.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/b/n' will be
-(Font)              scaled to size 7.00064pt on input line 3681.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/b/n' will be
-(Font)              scaled to size 5.00046pt on input line 3681.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/b/n' will be
-(Font)              scaled to size 9.99893pt on input line 3681.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/b/n' will be
-(Font)              scaled to size 6.99925pt on input line 3681.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/b/n' will be
-(Font)              scaled to size 4.99947pt on input line 3681.
+File: bookdown-demo_files/figure-latex/5-condexp-1.pdf Graphic file (type pdf)
+<use bookdown-demo_files/figure-latex/5-condexp-1.pdf>
 
 
 [109]
-Underfull \hbox (badness 2277) in paragraph at lines 3694--3695
+
+[110]
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/b/n' will be
+(Font)              scaled to size 10.0pt on input line 3691.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/b/n' will be
+(Font)              scaled to size 7.0pt on input line 3691.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/b/n' will be
+(Font)              scaled to size 5.0pt on input line 3691.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/b/n' will be
+(Font)              scaled to size 10.00092pt on input line 3691.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/b/n' will be
+(Font)              scaled to size 7.00064pt on input line 3691.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/b/n' will be
+(Font)              scaled to size 5.00046pt on input line 3691.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/b/n' will be
+(Font)              scaled to size 9.99893pt on input line 3691.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/b/n' will be
+(Font)              scaled to size 6.99925pt on input line 3691.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/b/n' will be
+(Font)              scaled to size 4.99947pt on input line 3691.
+
+
+[111]
+Underfull \hbox (badness 2277) in paragraph at lines 3704--3705
 \TU/lmr/m/n/10 among American voters, 28% identify as Democrats, 29% identify a
 s
  []
 
 
-Underfull \hbox (badness 1701) in paragraph at lines 3694--3695
+Underfull \hbox (badness 1701) in paragraph at lines 3704--3705
 \TU/lmr/m/n/10 others, and independents. The joint distribution of $[][][] [][]
 [] [][][] [][]$ is
  []
 
 
-
-[110]
-
-[111]
 
 [112]
 
@@ -1345,21 +1347,15 @@ Underfull \hbox (badness 1701) in paragraph at lines 3694--3695
 
 [115]
 
-[116
+[116]
+
+[117]
+
+[118
 
 ]
 Chapter 6.
 
-
-[117]
-
-
-Overfull \hbox (6.04784pt too wide) has occurred while \output is active
-\TU/lmr/m/n/10 118 \TU/lmr/m/sl/10 CHAPTER 6.  INEQUALITIES, LIMIT THEOREMS, AN
-D SIMULATIONS
- []
-
-[118]
 
 [119]
 
@@ -1370,11 +1366,6 @@ D SIMULATIONS
  []
 
 [120]
-File: images/06-concave.jpeg Graphic file (type bmp)
-<images/06-concave.jpeg>
-File: images/06-convex.jpeg Graphic file (type bmp)
-<images/06-convex.jpeg>
-
 
 [121]
 
@@ -1385,6 +1376,11 @@ D SIMULATIONS
  []
 
 [122]
+File: images/06-concave.jpeg Graphic file (type bmp)
+<images/06-concave.jpeg>
+File: images/06-convex.jpeg Graphic file (type bmp)
+<images/06-convex.jpeg>
+
 
 [123]
 
@@ -1405,9 +1401,6 @@ D SIMULATIONS
  []
 
 [126]
-File: bookdown-demo_files/figure-latex/4-LLN2-1.pdf Graphic file (type pdf)
-<use bookdown-demo_files/figure-latex/4-LLN2-1.pdf>
-
 
 [127]
 
@@ -1418,11 +1411,11 @@ D SIMULATIONS
  []
 
 [128]
+File: bookdown-demo_files/figure-latex/4-LLN2-1.pdf Graphic file (type pdf)
+<use bookdown-demo_files/figure-latex/4-LLN2-1.pdf>
+
 
 [129]
-File: bookdown-demo_files/figure-latex/6-CLTnorm-1.pdf Graphic file (type pdf)
-<use bookdown-demo_files/figure-latex/6-CLTnorm-1.pdf>
-
 
 
 Overfull \hbox (6.04784pt too wide) has occurred while \output is active
@@ -1431,20 +1424,11 @@ D SIMULATIONS
  []
 
 [130]
-File: bookdown-demo_files/figure-latex/6-CLTpois-1.pdf Graphic file (type pdf)
-<use bookdown-demo_files/figure-latex/6-CLTpois-1.pdf>
-
-LaTeX Warning: Reference `fig:6-CLTpois' on page 131 undefined on input line 44
-45.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 4444--4446
-[][]
- []
-
-
 
 [131]
+File: bookdown-demo_files/figure-latex/6-CLTnorm-1.pdf Graphic file (type pdf)
+<use bookdown-demo_files/figure-latex/6-CLTnorm-1.pdf>
+
 
 
 Overfull \hbox (6.04784pt too wide) has occurred while \output is active
@@ -1453,14 +1437,20 @@ D SIMULATIONS
  []
 
 [132]
-Underfull \vbox (badness 5147) has occurred while \output is active []
+File: bookdown-demo_files/figure-latex/6-CLTpois-1.pdf Graphic file (type pdf)
+<use bookdown-demo_files/figure-latex/6-CLTpois-1.pdf>
+
+LaTeX Warning: Reference `fig:6-CLTpois' on page 133 undefined on input line 44
+55.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 4454--4456
+[][]
+ []
 
 
 
 [133]
-File: images/06-circle.jpg Graphic file (type bmp)
-<images/06-circle.jpg>
-
 
 
 Overfull \hbox (6.04784pt too wide) has occurred while \output is active
@@ -1469,15 +1459,13 @@ D SIMULATIONS
  []
 
 [134]
-Underfull \hbox (badness 2809) in paragraph at lines 4595--4596
-[]\TU/lmr/m/n/10 Therefore, after throwing a large number of darts, $[] [] [] [
-]
- []
+Underfull \vbox (badness 5147) has occurred while \output is active []
 
 
 
 [135]
-No file bookdown-demo.bbl.
+File: images/06-circle.jpg Graphic file (type bmp)
+<images/06-circle.jpg>
 
 
 
@@ -1486,7 +1474,25 @@ Overfull \hbox (6.04784pt too wide) has occurred while \output is active
 D SIMULATIONS
  []
 
-[136] (bookdown-demo.aux)
+[136]
+Underfull \hbox (badness 2809) in paragraph at lines 4605--4606
+[]\TU/lmr/m/n/10 Therefore, after throwing a large number of darts, $[] [] [] [
+]
+ []
+
+
+
+[137]
+No file bookdown-demo.bbl.
+
+
+
+Overfull \hbox (6.04784pt too wide) has occurred while \output is active
+\TU/lmr/m/n/10 138 \TU/lmr/m/sl/10 CHAPTER 6.  INEQUALITIES, LIMIT THEOREMS, AN
+D SIMULATIONS
+ []
+
+[138] (bookdown-demo.aux)
  ***********
 LaTeX2e <2024-06-01> patch level 2
 L3 programming layer <2024-07-20>
@@ -1504,4 +1510,4 @@ Here is how much of TeX's memory you used:
  1348 hyphenation exceptions out of 8191
  90i,21n,123p,1199b,585s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on bookdown-demo.pdf (136 pages).
+Output written on bookdown-demo.pdf (138 pages).

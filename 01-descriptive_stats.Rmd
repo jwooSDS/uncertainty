@@ -272,7 +272,9 @@ y<-c(3, 0, 1, 5, 3)
 plot(ecdf(y), main = "ECDF for Toy Example")
 ```
 
-We can easily find percentiles from this plot, for example, the 40th percentile is equal to 1, going to the gym once a week. About 20 percent of observations go to the gym less than 1 time a week. 
+We can easily find percentiles from this plot, for example, the 40th percentile is equal to 1, going to the gym once a week. About 20 percent of observations go to the gym less than 1 time a week. The video below explains the construction of the ECDF:
+
+<iframe width="560px" height="320px" allowfullscreen="true" allow="autoplay *" title="Mod 01: Empirical Cumulative Distribution Function" src="https://virginiauniversity.instructuremedia.com/embed/d6e01cbb-e682-4291-b969-dc3a1855e952" frameborder="0"></iframe>
 
 Next, we create the ECDF plot for the interest rates from the 50 loan applicants.
 
@@ -284,6 +286,8 @@ abline(h=0.8)
 I overlaid a horizontal line for the 80th percentile, so we can read on the horizontal axis that this corresponds to an interest rate of about 17 percent. So about 80 percent of loan applicants have an interest rate less than 17 percent. 
 
 *Thought question*: try using the histogram and density plot for the interest rates (Figures \@ref(fig:hist) and \@ref(fig:dens)) to find the interest rate that corresponds to the 80th percentile. Was this easy to perform?
+
+
 
 ## Measures of Centrality
 
@@ -356,6 +360,10 @@ s^2 &= \frac{\sum_{i=1}^n (x_i-\bar{x})^2}{n-1}\\
 $$
 
 Notice what we did in the numerator of equation \@ref(eq:variance): we take the difference between each observed value from the sample mean, square these differences, then add up the squared differences. We then divide by $n-1$, rather than $n$, hence the sample variance being the approximate averaged squared distance of the observations from the mean. There is some nuance in the mathematics as to why we divide by $n-1$ instead of $n$, and may not be intuitive as to why we do so. It turns out dividing by $n-1$ makes the sample variance an unbiased estimator of the true variance in the population (denoted by $\sigma^2$) and is more reliable than if we had divided by $n$. We will go over this in more detail in a later module after covering a few additional concepts. 
+
+The video below explains the calculation of the sample variance:
+
+<iframe width="560px" height="320px" allowfullscreen="true" allow="autoplay *" title="Mod 01: Sample Variance" src="https://virginiauniversity.instructuremedia.com/embed/d4a39613-d29e-47de-b5b0-e3a7304d0e16" frameborder="0"></iframe>
 
 Larger values of the sample variance indicate that the observations are generally further away from the sample mean, indicating larger spread, and a higher degree of uncertainty about future values. 
 

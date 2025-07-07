@@ -667,7 +667,7 @@ The corresponding ECDF plot is shown in Figure \ref{fig:ecdf}:
 \caption{\label{fig:ecdf}ECDF Plot for Toy Example}
 \end{figure}
 
-We can easily find percentiles from this plot, for example, the 40th percentile is equal to 1, going to the gym once a week. About 20 percent of observations go to the gym less than 1 time a week.
+We can easily find percentiles from this plot, for example, the 40th percentile is equal to 1, going to the gym once a week. About 20 percent of observations go to the gym less than 1 time a week. The video below explains the construction of the ECDF:
 
 Next, we create the ECDF plot for the interest rates from the 50 loan applicants.
 
@@ -779,6 +779,8 @@ s^2 &= \frac{\sum_{i=1}^n (x_i-\bar{x})^2}{n-1}\\
 \]
 
 Notice what we did in the numerator of equation \eqref{eq:variance}: we take the difference between each observed value from the sample mean, square these differences, then add up the squared differences. We then divide by \(n-1\), rather than \(n\), hence the sample variance being the approximate averaged squared distance of the observations from the mean. There is some nuance in the mathematics as to why we divide by \(n-1\) instead of \(n\), and may not be intuitive as to why we do so. It turns out dividing by \(n-1\) makes the sample variance an unbiased estimator of the true variance in the population (denoted by \(\sigma^2\)) and is more reliable than if we had divided by \(n\). We will go over this in more detail in a later module after covering a few additional concepts.
+
+The video below explains the calculation of the sample variance:
 
 Larger values of the sample variance indicate that the observations are generally further away from the sample mean, indicating larger spread, and a higher degree of uncertainty about future values.
 
@@ -893,7 +895,7 @@ The union of \(A\) and \(B\) can be viewed as the event where either event \(A\)
 
 The \textbf{intersection} of events is when \textbf{all} of the events happen. Using our example, the intersection of events \(A\) and \(B\) is denoted by \(A \cap B\), is the event that the card drawn is both a black suit and a picture card. Using Figure \ref{fig:cardsAB}, the outcomes belonging to \(A \cap B\) are the cards that are outlined in blue and gold. This probability is \(P(A \cap B) = \frac{6}{52}\).
 
-\subsection{Addition rule}\label{addition-rule}
+\subsection{Addition Rule}\label{addition-rule}
 
 A common mistake that can be made in calculating \(P(A \cup B)\) is to just add up the probabilities of each individual event, so the mistake will say this probability is \(\frac{26}{52} + \frac{12}{52} = \frac{38}{52}\). The problem with this approach is that the outcomes that belong to both events (black picture cards) get counted twice, when we only want to count them once. This leads to the following formula for calculating probabilities involving unions of two events, and is sometimes called the \textbf{addition rule} in probability:
 
@@ -903,6 +905,8 @@ P(A \cup B) = P(A) + P(B) - P(A \cap B).
 \end{equation}
 
 Using equation \eqref{eq:union}, \(P(A \cup B) = \frac{26}{52} + \frac{12}{52} - \frac{6}{32} = \frac{32}{52}\).
+
+The video below explains the addition rule with this example in a bit more detail:
 
 \subsection{Disjoint or Mutually Exclusive Events}\label{disjoint-or-mutually-exclusive-events}
 
@@ -978,6 +982,8 @@ Let us go back to the standard deck of cards example. Let us find \(P(B|A)\), th
 We are told that our card is a black suit, so we have only 26 possible outcomes to consider, as the red cards are eliminated and are crossed out in Figure \ref{fig:cardscond}. Out of these 26 outcomes, how many are picture cards? So this probability \(P(B|A)\) is \(\frac{6}{26}\). Figure \ref{fig:cardscond} represents the frequentist viewpoint of conditional probability: \(P(B|A)\) represents the long run proportion of picture cards among cards that are black suits.
 
 We can also apply equation \eqref{eq:cond}: \(P(B|A) = \frac{\frac{6}{52}}{\frac{1}{2}} = \frac{6}{26}\) which gives the same answer.
+
+The video explains conditional probability with this example in a bit more detail:
 
 \emph{Thought question}: work out the probability that the card drawn is a black suit, given that we know the card is a picture card.
 
@@ -1097,6 +1103,8 @@ P(E_1|F) &= \frac{P(E_1 \cap F)}{P(F)}\\
 \end{split}
 \]
 
+The video below goes over this approach in a little bit more detail:
+
 \subsubsection{Approach 2: Using Tree Diagrams}\label{approach-2-using-tree-diagrams}
 
 A tree diagram is useful in finding conditional probabilities and probabilities involving intersections. It is a visual way of displaying the information you have at hand, when you have conditional probabilities over disjoint sets and probabilities for each disjoint set. In our toy example, the disjoint sets are the type of email I receive, \(E_1, E_2, E_3\), and the conditional probabilities we have are over these disjoint sets, i.e.~\(P(F|E_1), P(F|E_2)\) and \(P(F|E_3)\). We can put this information visual by first splitting our sample space into the disjoint sets \(E_1, E_2, E_3\), and then splitting each disjoint set on whether the email has the word ``free'' (\(F\)) or not (\(F^c\)). This information is displayed in a tree diagram as in Figure \ref{fig:tree}.
@@ -1136,6 +1144,8 @@ P(E_1|F) = \frac{P(E_1 \cap F)}{P(F)} = \frac{0.198}{0.263} = 0.7528517.
 \]
 
 Note: If you compare the intermediate calculations in approach 2, you end up using the calculations in approach 1, without referring to any of the associated equations.
+
+The video below goes over tree diagrams in a little bit more detail:
 
 \section{Confusion of the Inverse}\label{confusion-of-the-inverse}
 
