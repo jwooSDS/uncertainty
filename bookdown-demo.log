@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999996 (MiKTeX 24.4) (preloaded format=xelatex 2025.6.7)  8 JUL 2025 17:03
+This is XeTeX, Version 3.141592653-2.6-0.999996 (MiKTeX 24.4) (preloaded format=xelatex 2025.6.7)  8 JUL 2025 17:10
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1226,7 +1226,7 @@ File: bookdown-demo_files/figure-latex/4-rule-1.pdf Graphic file (type pdf)
 [87]
 
 [88]
-Overfull \hbox (38.25pt too wide) in paragraph at lines 2820--2820
+Overfull \hbox (38.25pt too wide) in paragraph at lines 2824--2824
 []\TU/lmtt/m/n/10 ##  [1] -1.6907436  1.5545476  5.7635360 -2.3911270  0.759244
 7  1.3972609[] 
  []
@@ -1244,7 +1244,7 @@ File: bookdown-demo_files/figure-latex/4-R-1.pdf Graphic file (type pdf)
 File: bookdown-demo_files/figure-latex/4-R2-1.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/4-R2-1.pdf>
 
-LaTeX Warning: Reference `fig:4-R3' on page 91 undefined on input line 2915.
+LaTeX Warning: Reference `fig:4-R3' on page 91 undefined on input line 2919.
 
 
 
@@ -1254,7 +1254,7 @@ LaTeX Warning: Reference `fig:4-R3' on page 91 undefined on input line 2915.
 File: bookdown-demo_files/figure-latex/4-R3-1.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/4-R3-1.pdf>
 
-Underfull \hbox (badness 10000) in paragraph at lines 2926--2928
+Underfull \hbox (badness 10000) in paragraph at lines 2930--2932
 [][]
  []
 
@@ -1312,33 +1312,33 @@ File: bookdown-demo_files/figure-latex/5-condexp-1.pdf Graphic file (type pdf)
 
 [110]
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/b/n' will be
-(Font)              scaled to size 10.0pt on input line 3696.
+(Font)              scaled to size 10.0pt on input line 3700.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/b/n' will be
-(Font)              scaled to size 7.0pt on input line 3696.
+(Font)              scaled to size 7.0pt on input line 3700.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/b/n' will be
-(Font)              scaled to size 5.0pt on input line 3696.
+(Font)              scaled to size 5.0pt on input line 3700.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/b/n' will be
-(Font)              scaled to size 10.00092pt on input line 3696.
+(Font)              scaled to size 10.00092pt on input line 3700.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/b/n' will be
-(Font)              scaled to size 7.00064pt on input line 3696.
+(Font)              scaled to size 7.00064pt on input line 3700.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/b/n' will be
-(Font)              scaled to size 5.00046pt on input line 3696.
+(Font)              scaled to size 5.00046pt on input line 3700.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/b/n' will be
-(Font)              scaled to size 9.99893pt on input line 3696.
+(Font)              scaled to size 9.99893pt on input line 3700.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/b/n' will be
-(Font)              scaled to size 6.99925pt on input line 3696.
+(Font)              scaled to size 6.99925pt on input line 3700.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/b/n' will be
-(Font)              scaled to size 4.99947pt on input line 3696.
+(Font)              scaled to size 4.99947pt on input line 3700.
 
 
 [111]
-Underfull \hbox (badness 2277) in paragraph at lines 3709--3710
+Underfull \hbox (badness 2277) in paragraph at lines 3713--3714
 \TU/lmr/m/n/10 among American voters, 28% identify as Democrats, 29% identify a
 s
  []
 
 
-Underfull \hbox (badness 1701) in paragraph at lines 3709--3710
+Underfull \hbox (badness 1701) in paragraph at lines 3713--3714
 \TU/lmr/m/n/10 others, and independents. The joint distribution of $[][][] [][]
 [] [][][] [][]$ is
  []
@@ -1447,10 +1447,10 @@ File: bookdown-demo_files/figure-latex/6-CLTpois-1.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/6-CLTpois-1.pdf>
 
 LaTeX Warning: Reference `fig:6-CLTpois' on page 133 undefined on input line 44
-60.
+64.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 4459--4461
+Underfull \hbox (badness 10000) in paragraph at lines 4463--4465
 [][]
  []
 
@@ -1481,7 +1481,7 @@ D SIMULATIONS
  []
 
 [136]
-Underfull \hbox (badness 2809) in paragraph at lines 4610--4611
+Underfull \hbox (badness 2809) in paragraph at lines 4614--4615
 []\TU/lmr/m/n/10 Therefore, after throwing a large number of darts, $[] [] [] [
 ]
  []
