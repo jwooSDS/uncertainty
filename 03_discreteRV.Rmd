@@ -20,7 +20,7 @@ Suppose I want to find the probability that I get exactly 2 heads out of the 3 f
 - $P(HHT \cup HTH \cup THH)$, or
 - $P(A)$ where $A$ denotes the event of getting two heads out of three flips.
 
-Another way is to define a random variable $X$ that expresses this event a bit more efficiently. Let $X$ denote the number of heads out of three flips, so another way could be to write $P(X=2$). This is idea behind random variables: to assign events to a number. 
+Another way is to define a random variable $X$ that expresses this event a bit more efficiently. Let $X$ denote the number of heads out of three flips, so another way could be to write $P(X=2$). This is the idea behind random variables: to assign events to a number. 
 
 ### Definition
 
@@ -36,9 +36,9 @@ One of the key distinctions we have to make for random variables is to determine
 
 A **discrete random variable** can only take on a countable (finite or infinite) number of values.
 
-The number of heads in 3 coin flips, $X$ is countable and finite, since we can actually list all of the values it can take as $\{0,1,2,3 \}$ and there are 4 such values. $X$ must take on one of these 4 numerical values; it cannot be a number outside this list. So it is discrete.
+The number of heads in 3 coin flips, $X$ is **countable and finite**, since we can actually list all of the values it can take as $\{0,1,2,3 \}$ and there are 4 such values. $X$ must take on one of these 4 numerical values; it cannot be a number outside this list. So it is discrete.
 
-A random variable is countable and infinite if we can list the values it can take, but the list has no end. For example, the number of people using a crosswalk over a 10 year period could take on the values $\{0, 1, 2, 3, \cdots \}$. The number could take on any of an infinite number of values, but values in between these whole numbers cannot occur. So the number of people using a crosswalk over a 10 year period is a discrete random variable. 
+A random variable is **countable and infinite** if we can list the values it can take, but the list has no end. For example, the number of people using a crosswalk over a 10 year period could take on the values $\{0, 1, 2, 3, \cdots \}$. The number could take on any of an infinite number of values, but values in between these whole numbers cannot occur. So the number of people using a crosswalk over a 10 year period is a discrete random variable. 
 
 A **continuous random variable** can take on an uncountable number of values in an interval of real numbers. 
 
@@ -46,13 +46,13 @@ For example, height of an American adult is a continuous random variable, as hei
 
 For this module, we will focus on discrete random variables. 
 
-The **support** of a discrete random variable $X$ is the set of values $X$ can take such that $P(X = x) > 0$, i.e. the set of values that have non zero probability of happening. Using our 3 coin flips example, where $X$ is the number of heads out of the 3 coin slips, the support is $\{0,1,2,3 \}$. Usually, the support of discrete random variables are integers. 
+The **support** of a discrete random variable $X$ is the set of values $X$ can take such that $P(X = x) > 0$, i.e. the set of values that have non zero probability of happening. Using our 3 coin flips example, where $X$ is the number of heads out of the 3 coin slips, the support is $\{0,1,2,3 \}$. he support of discrete random variables is usually integers. 
 
 *Thought question*: Can you come of examples of discrete and continuous random variables on your own? Feel free to search the internet for examples as well. 
 
 ## Probability Mass Functions (PMFs)
 
-We use probability to describe the behavior of random variables.  This is called the **distribution** of a random variable. It specifies the probabilities of all events associated with the random variable. For example, what is the probability of obtaining 3 heads in 3 coin flips, or what is the probability of obtaining at least one head on 3 coin flips?
+We use probability to describe the behavior of random variables.  This is called the **distribution** of a random variable. The distribution of a random variable specifies the probabilities of all events associated with the random variable. 
 
 For discrete random variables, the distribution is specified by the **probability mass function (PMF)**. The PMF of a discrete random variable $X$ is the function $P_X(x) = P(X=x)$. It is positive when $x$ is in the support of $X$, and 0 otherwise. 
 
@@ -78,7 +78,7 @@ my_data <- data.frame(
 knitr::kable(my_data, caption = "PMF for X")
 ```
 
-Or use a simple plot like the one below in Figure \@ref(fig:3-pmf):
+Or the PMF can be represented using a simple plot like the one below in Figure \@ref(fig:3-pmf):
 
 ```{r 3-pmf, fig.cap="PMF for X"}
 ##support
@@ -123,7 +123,7 @@ reps<-1000000 ##how many times to run the experiment
 hist(rbinom(reps,n,p), breaks=-1:3, main="Hist with One Million Experiments", xlab="# of Successes")
 ```
 
-In general, the PMF of an experiment should match the histogram in the long run.
+In general, the PMF of a random variable should match the histogram in the long run.
 
 Note: What we have just done here was to use simulations to repeat an experiment a large number of times. 
 
@@ -182,7 +182,7 @@ The CDF $F_X(x)$ of $X$ must:
 
 In the previous section, we see how PMFs and CDFs can be used to describe the distribution of a random variable. As the PMF can be viewed as a long-run version of the histogram, it gives us an idea about the shape of the distribution. Similar to Section \@ref(descriptive), we will also be interested in measures of centrality and spread for random variables. 
 
-A measure of centrality for random variables is the **expectation**. The expectation of a random variable can be interpreted as the long-run mean of the random variable, i.e. if we were able to repeat the experiment an infinite number of times, the expectation of the random variable will be the average result among all the experiments. 
+A measure of centrality for random variables is the **expectation**, or **expected value**. The expectation of a random variable can be interpreted as the long-run mean of the random variable, i.e. if we were able to repeat the experiment an infinite number of times, the expectation of the random variable will be the average result among all the experiments. 
 
 For a discrete random variable $X$ with support $x_1, x_2, \cdots,$, the expected value, denoted by $E(X)$, is 
 
@@ -221,15 +221,15 @@ All of these examples involve new random variables, $T, R, G$ that can be based 
 These can be done through the **linearity of expectations**: Let $X$ and $Y$ denote random variables, and $a,b,c$ denote some constants, then
 
 \begin{equation} 
-E(aX + bY +c) = aE(X) + bE(Y) + c.
+E(aX + bY + c) = aE(X) + bE(Y) + c.
 (\#eq:3-linEX)
 \end{equation}
 
 Applying equation \@ref(eq:3-linEX) to the fishing examples:
 
-- $E(T) = E(Y) + E(W)$,
-- $E(R) = 10E(Y) + 15E(W)$,
-- $E(G) = 10E(Y) + 15E(W) - 5$.
+- $E(T) = R(Y + W) = E(Y) + E(W)$,
+- $E(R) = E(10Y + 15W) = 10E(Y) + 15E(W)$,
+- $E(G) = E(10Y + 15W - 5) = 10E(Y) + 15E(W) - 5$.
 
 All we need to find the expected values for the total number of fish, revenue generated, and gross income were the expected values for the number of fish each of us caught. We do not need the PMFs for $T,R,G$.
 
@@ -333,7 +333,7 @@ E(Y_i) &= -1 \times p_b + 0 \times p_s + 1 \times p_f \\
 \end{split}
 $$
 
-So therefore $E(Y) = E(Y_1) + E(Y_2) = 2(p_f - p_b)$. Both approaches resulted in the same answer,but notice how much simpler its was to obtain the solution using linearity of expectations. Imagine if we wanted to find the expected position after 500 steps? Writing out the sample space for 500 steps will be extremely long. 
+So therefore $E(Y) = E(Y_1 + Y_2) = E(Y_1) + E(Y_2) = 2(p_f - p_b)$. Both approaches resulted in the same answer, but notice how much simpler its was to obtain the solution using linearity of expectations. Imagine if we wanted to find the expected position after 500 steps? Writing out the sample space for 500 steps will be extremely long. 
 
 ### Law of the Unconscious Statistician
 
@@ -678,7 +678,7 @@ qbinom(0.5, 5, 0.3) ##supply the value of the percentile you need, then the para
 
 The median of a binomial distribution with 5 trials and success probability 0.3 is 1. 
 
-4. To simulate 10 realizations (repetitions) of $Y$, use:
+4. To simulate 10 realizations (replications) of $Y$, use:
 
 ```{r}
 set.seed(2) ##use set.seed() so we get the same random numbers each time the code is run

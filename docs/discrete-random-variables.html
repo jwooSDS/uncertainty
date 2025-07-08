@@ -80,7 +80,7 @@
 <li>
 <span class="math inline">\(P(A)\)</span> where <span class="math inline">\(A\)</span> denotes the event of getting two heads out of three flips.</li>
 </ul>
-<p>Another way is to define a random variable <span class="math inline">\(X\)</span> that expresses this event a bit more efficiently. Let <span class="math inline">\(X\)</span> denote the number of heads out of three flips, so another way could be to write <span class="math inline">\(P(X=2\)</span>). This is idea behind random variables: to assign events to a number.</p>
+<p>Another way is to define a random variable <span class="math inline">\(X\)</span> that expresses this event a bit more efficiently. Let <span class="math inline">\(X\)</span> denote the number of heads out of three flips, so another way could be to write <span class="math inline">\(P(X=2\)</span>). This is the idea behind random variables: to assign events to a number.</p>
 </div>
 <div id="definition" class="section level3" number="3.1.2">
 <h3>
@@ -96,12 +96,12 @@
 </h3>
 <p>One of the key distinctions we have to make for random variables is to determine if it is discrete or continuous. The way we express probabilities for random variables depends on whether the random variable is discrete or continuous.</p>
 <p>A <strong>discrete random variable</strong> can only take on a countable (finite or infinite) number of values.</p>
-<p>The number of heads in 3 coin flips, <span class="math inline">\(X\)</span> is countable and finite, since we can actually list all of the values it can take as <span class="math inline">\(\{0,1,2,3 \}\)</span> and there are 4 such values. <span class="math inline">\(X\)</span> must take on one of these 4 numerical values; it cannot be a number outside this list. So it is discrete.</p>
-<p>A random variable is countable and infinite if we can list the values it can take, but the list has no end. For example, the number of people using a crosswalk over a 10 year period could take on the values <span class="math inline">\(\{0, 1, 2, 3, \cdots \}\)</span>. The number could take on any of an infinite number of values, but values in between these whole numbers cannot occur. So the number of people using a crosswalk over a 10 year period is a discrete random variable.</p>
+<p>The number of heads in 3 coin flips, <span class="math inline">\(X\)</span> is <strong>countable and finite</strong>, since we can actually list all of the values it can take as <span class="math inline">\(\{0,1,2,3 \}\)</span> and there are 4 such values. <span class="math inline">\(X\)</span> must take on one of these 4 numerical values; it cannot be a number outside this list. So it is discrete.</p>
+<p>A random variable is <strong>countable and infinite</strong> if we can list the values it can take, but the list has no end. For example, the number of people using a crosswalk over a 10 year period could take on the values <span class="math inline">\(\{0, 1, 2, 3, \cdots \}\)</span>. The number could take on any of an infinite number of values, but values in between these whole numbers cannot occur. So the number of people using a crosswalk over a 10 year period is a discrete random variable.</p>
 <p>A <strong>continuous random variable</strong> can take on an uncountable number of values in an interval of real numbers.</p>
 <p>For example, height of an American adult is a continuous random variable, as height can take on any value in interval between any interval, say 40 and 100 inches. All values between 40 and 100 are possible.</p>
 <p>For this module, we will focus on discrete random variables.</p>
-<p>The <strong>support</strong> of a discrete random variable <span class="math inline">\(X\)</span> is the set of values <span class="math inline">\(X\)</span> can take such that <span class="math inline">\(P(X = x) &gt; 0\)</span>, i.e. the set of values that have non zero probability of happening. Using our 3 coin flips example, where <span class="math inline">\(X\)</span> is the number of heads out of the 3 coin slips, the support is <span class="math inline">\(\{0,1,2,3 \}\)</span>. Usually, the support of discrete random variables are integers.</p>
+<p>The <strong>support</strong> of a discrete random variable <span class="math inline">\(X\)</span> is the set of values <span class="math inline">\(X\)</span> can take such that <span class="math inline">\(P(X = x) &gt; 0\)</span>, i.e. the set of values that have non zero probability of happening. Using our 3 coin flips example, where <span class="math inline">\(X\)</span> is the number of heads out of the 3 coin slips, the support is <span class="math inline">\(\{0,1,2,3 \}\)</span>. he support of discrete random variables is usually integers.</p>
 <p><em>Thought question</em>: Can you come of examples of discrete and continuous random variables on your own? Feel free to search the internet for examples as well.</p>
 </div>
 </div>
@@ -109,7 +109,7 @@
 <h2>
 <span class="header-section-number">3.2</span> Probability Mass Functions (PMFs)<a class="anchor" aria-label="anchor" href="#probability-mass-functions-pmfs"><i class="fas fa-link"></i></a>
 </h2>
-<p>We use probability to describe the behavior of random variables. This is called the <strong>distribution</strong> of a random variable. It specifies the probabilities of all events associated with the random variable. For example, what is the probability of obtaining 3 heads in 3 coin flips, or what is the probability of obtaining at least one head on 3 coin flips?</p>
+<p>We use probability to describe the behavior of random variables. This is called the <strong>distribution</strong> of a random variable. The distribution of a random variable specifies the probabilities of all events associated with the random variable.</p>
 <p>For discrete random variables, the distribution is specified by the <strong>probability mass function (PMF)</strong>. The PMF of a discrete random variable <span class="math inline">\(X\)</span> is the function <span class="math inline">\(P_X(x) = P(X=x)\)</span>. It is positive when <span class="math inline">\(x\)</span> is in the support of <span class="math inline">\(X\)</span>, and 0 otherwise.</p>
 <p>Note: In the notation for random variables, capital letters such as <span class="math inline">\(X\)</span> denote random variables, and lower case letters such as <span class="math inline">\(x\)</span> denote actual numerical values. So if we want to find the probability that we have 2 heads in 3 coin flips, we write <span class="math inline">\(P(X=2)\)</span>, where <span class="math inline">\(x\)</span> is 2 in this example.</p>
 <p>Going back to our example where we record the number of heads out of 3 coin flips, we can write out the PMF for the random variable <span class="math inline">\(X\)</span>:</p>
@@ -150,7 +150,7 @@
 </tr>
 </tbody>
 </table></div>
-<p>Or use a simple plot like the one below in Figure <a href="discrete-random-variables.html#fig:3-pmf">3.1</a>:</p>
+<p>Or the PMF can be represented using a simple plot like the one below in Figure <a href="discrete-random-variables.html#fig:3-pmf">3.1</a>:</p>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##support</span></span>
 <span><span class="va">x</span><span class="op">&lt;-</span><span class="fl">0</span><span class="op">:</span><span class="fl">3</span></span>
@@ -191,7 +191,7 @@ Figure 3.1: PMF for X
 Figure 3.2: Histogram from Experiment Performed 1 Million Times
 </p>
 </div>
-<p>In general, the PMF of an experiment should match the histogram in the long run.</p>
+<p>In general, the PMF of a random variable should match the histogram in the long run.</p>
 <p>Note: What we have just done here was to use simulations to repeat an experiment a large number of times.</p>
 </div>
 </div>
@@ -269,7 +269,7 @@ Figure 3.3: CDF for X
 <span class="header-section-number">3.4</span> Expectations<a class="anchor" aria-label="anchor" href="#expectations"><i class="fas fa-link"></i></a>
 </h2>
 <p>In the previous section, we see how PMFs and CDFs can be used to describe the distribution of a random variable. As the PMF can be viewed as a long-run version of the histogram, it gives us an idea about the shape of the distribution. Similar to Section <a href="descriptive.html#descriptive">1</a>, we will also be interested in measures of centrality and spread for random variables.</p>
-<p>A measure of centrality for random variables is the <strong>expectation</strong>. The expectation of a random variable can be interpreted as the long-run mean of the random variable, i.e. if we were able to repeat the experiment an infinite number of times, the expectation of the random variable will be the average result among all the experiments.</p>
+<p>A measure of centrality for random variables is the <strong>expectation</strong>, or <strong>expected value</strong>. The expectation of a random variable can be interpreted as the long-run mean of the random variable, i.e. if we were able to repeat the experiment an infinite number of times, the expectation of the random variable will be the average result among all the experiments.</p>
 <p>For a discrete random variable <span class="math inline">\(X\)</span> with support <span class="math inline">\(x_1, x_2, \cdots,\)</span>, the expected value, denoted by <span class="math inline">\(E(X)\)</span>, is</p>
 <p><span class="math display" id="eq:3-EX">\[\begin{equation}
 E(X) = \sum_{j=1}^{\infty} x_j P(X=x_j).
@@ -298,17 +298,17 @@ E(X) &amp;= 0 \times \frac{1}{8} + 1 \times \frac{3}{8} + 2 \times \frac{3}{8} +
 <p>All of these examples involve new random variables, <span class="math inline">\(T, R, G\)</span> that can be based on previously defined random variables, <span class="math inline">\(Y, W\)</span>. It turns out that to find the expectations of the new random variables, all we need is the expectations of the previously defined random variables. We do not need to find the PMFs for <span class="math inline">\(T, R\)</span> and <span class="math inline">\(S\)</span> and then apply equation <a href="discrete-random-variables.html#eq:3-EX">(3.2)</a>.</p>
 <p>These can be done through the <strong>linearity of expectations</strong>: Let <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> denote random variables, and <span class="math inline">\(a,b,c\)</span> denote some constants, then</p>
 <p><span class="math display" id="eq:3-linEX">\[\begin{equation}
-E(aX + bY +c) = aE(X) + bE(Y) + c.
+E(aX + bY + c) = aE(X) + bE(Y) + c.
 \tag{3.3}
 \end{equation}\]</span></p>
 <p>Applying equation <a href="discrete-random-variables.html#eq:3-linEX">(3.3)</a> to the fishing examples:</p>
 <ul>
 <li>
-<span class="math inline">\(E(T) = E(Y) + E(W)\)</span>,</li>
+<span class="math inline">\(E(T) = R(Y + W) = E(Y) + E(W)\)</span>,</li>
 <li>
-<span class="math inline">\(E(R) = 10E(Y) + 15E(W)\)</span>,</li>
+<span class="math inline">\(E(R) = E(10Y + 15W) = 10E(Y) + 15E(W)\)</span>,</li>
 <li>
-<span class="math inline">\(E(G) = 10E(Y) + 15E(W) - 5\)</span>.</li>
+<span class="math inline">\(E(G) = E(10Y + 15W - 5) = 10E(Y) + 15E(W) - 5\)</span>.</li>
 </ul>
 <p>All we need to find the expected values for the total number of fish, revenue generated, and gross income were the expected values for the number of fish each of us caught. We do not need the PMFs for <span class="math inline">\(T,R,G\)</span>.</p>
 <div id="visual-explanation" class="section level4" number="3.4.1.1">
@@ -414,7 +414,7 @@ E(Y_i) &amp;= -1 \times p_b + 0 \times p_s + 1 \times p_f \\
        &amp;= p_f - p_b
 \end{split}
 \]</span></p>
-<p>So therefore <span class="math inline">\(E(Y) = E(Y_1) + E(Y_2) = 2(p_f - p_b)\)</span>. Both approaches resulted in the same answer,but notice how much simpler its was to obtain the solution using linearity of expectations. Imagine if we wanted to find the expected position after 500 steps? Writing out the sample space for 500 steps will be extremely long.</p>
+<p>So therefore <span class="math inline">\(E(Y) = E(Y_1 + Y_2) = E(Y_1) + E(Y_2) = 2(p_f - p_b)\)</span>. Both approaches resulted in the same answer, but notice how much simpler its was to obtain the solution using linearity of expectations. Imagine if we wanted to find the expected position after 500 steps? Writing out the sample space for 500 steps will be extremely long.</p>
 </div>
 </div>
 <div id="law-of-the-unconscious-statistician" class="section level3" number="3.4.2">
@@ -728,7 +728,7 @@ Figure 3.8: PMF for Poissons as Rate Parameter is Varied
 <pre><code>## [1] 1</code></pre>
 <p>The median of a binomial distribution with 5 trials and success probability 0.3 is 1.</p>
 <ol start="4" style="list-style-type: decimal">
-<li>To simulate 10 realizations (repetitions) of <span class="math inline">\(Y\)</span>, use:</li>
+<li>To simulate 10 realizations (replications) of <span class="math inline">\(Y\)</span>, use:</li>
 </ol>
 <div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span> <span class="co">##use set.seed() so we get the same random numbers each time the code is run</span></span>
@@ -802,7 +802,7 @@ Figure 3.8: PMF for Poissons as Rate Parameter is Varied
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2025-07-07.</p>
+    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2025-07-08.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
