@@ -3178,6 +3178,8 @@ You may notice that the marginal PMF of \(X\) ends up being just the PMF of \(X\
 
 \emph{Thought question}: Can you see how equation \eqref{eq:5-margPMF} is based on the Law of Total Probability in equation \eqref{eq:total}?
 
+View the video below for a more detailed explanation on deriving the marginal PMF of \(X\):
+
 Likewise, to obtain the marginal PMF of \(Y\) from the joint PMF of \(X\) and \(Y\):
 
 \begin{equation} 
@@ -3473,6 +3475,8 @@ s_{x,y} = \frac{\sum_{i=1}^n (x_i - \bar{x})(y_i - \bar{y})}{n-1}
 
 We noted earlier that covariance is affected by the units of the variables. Suppose one variable is measured in meters, and we convert it to become centimeters. The value of the covariance will get multiplied by 100. People find it easier to interpret a measure that does not depend on the units. This is where the correlation comes in: it is a unitless version of the covariance.
 
+View the video below for a visual explanation as to why the sample covariance is positive when the linear relationship is positive:
+
 \subsection{Correlation}\label{correlation}
 
 The \textbf{correlation} between random variables \(X\) and \(Y\) is
@@ -3617,6 +3621,8 @@ The key is to understand the intuition behind conditional expectations, and we w
 
 So, we can interpret the conditional expectation \(E(Y|A)\) as the long-run average of \(Y\) (only) when \(A\) has happened. It is the long-run average of \(Y\) when a certain condition is met.
 
+View the video below for a more detailed explanation for this simulation:
+
 \subsection{Conditional Expectation Given Random Variable}\label{conditional-expectation-given-random-variable}
 
 The conditional expectation of \(Y\) given a random variable \(X\) is slightly different. In the simulated example in the previous subsection, we set \(X\) to be a specific value. Now, we consider the long-run average of \(Y\) for each value, instead of a specific value, in the support of \(X\).
@@ -3676,6 +3682,8 @@ So \(E(Y|X) = 10 + X\). What this means is that:
 \end{itemize}
 
 Note: We set up \(Y = 10 + X + \epsilon\) where \(\epsilon \sim N(0,1)\) in the simulation. This follows the framework for linear regression which sets up \(Y = \beta_0 + \beta_1 X + \epsilon\) where \(\epsilon \sim N(0,\sigma^2)\), i.e.~\(\epsilon\) is normal with mean 0 and a variance that is a fixed value. The conditional expectation given \(X\) ends up being the prediction for \(Y\) that minimizes the mean squared error in linear regression.
+
+View the video below for a more detailed explanation of this example:
 
 \section{Common Multivariate Distributions}\label{common-multivariate-distributions}
 

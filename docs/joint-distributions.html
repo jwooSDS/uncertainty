@@ -226,6 +226,9 @@ P(X=3) &amp;= \sum_y P(X=3, Y=y)\\
 <p>Notice we just added the probabilities in each column to get the marginal PMF of <span class="math inline">\(X\)</span>, and write these probabilities to the margin of the table (hence the term marginal PMF).</p>
 <p>You may notice that the marginal PMF of <span class="math inline">\(X\)</span> ends up being just the PMF of <span class="math inline">\(X\)</span>. The term marginal is used to imply that the PMF was derived from a joint PMF, even if the information is the same.</p>
 <p><em>Thought question</em>: Can you see how equation <a href="joint-distributions.html#eq:5-margPMF">(5.3)</a> is based on the Law of Total Probability in equation <a href="probability.html#eq:total">(2.10)</a>?</p>
+<p>View the video below for a more detailed explanation on deriving the marginal PMF of <span class="math inline">\(X\)</span>:</p>
+<iframe width="560px" height="320px" allowfullscreen="true" allow="autoplay *" title="Module 05: Marginal PMF" src="https://virginiauniversity.instructuremedia.com/embed/5f81d56e-6dbe-432b-bddc-9f49de2ea101" frameborder="0">
+</iframe>
 <p>Likewise, to obtain the marginal PMF of <span class="math inline">\(Y\)</span> from the joint PMF of <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>:</p>
 <p><span class="math display" id="eq:5-margPMF2">\[\begin{equation}
 P(X=x) = \sum_x P(X=x, Y=y).
@@ -482,6 +485,9 @@ s_{x,y} = \frac{\sum_{i=1}^n (x_i - \bar{x})(y_i - \bar{y})}{n-1}
 \tag{5.21}
 \end{equation}\]</span></p>
 <p>We noted earlier that covariance is affected by the units of the variables. Suppose one variable is measured in meters, and we convert it to become centimeters. The value of the covariance will get multiplied by 100. People find it easier to interpret a measure that does not depend on the units. This is where the correlation comes in: it is a unitless version of the covariance.</p>
+<p>View the video below for a visual explanation as to why the sample covariance is positive when the linear relationship is positive:</p>
+<iframe width="560px" height="320px" allowfullscreen="true" allow="autoplay *" title="Module 05: Covariance" src="https://virginiauniversity.instructuremedia.com/embed/7dd5eca9-3cc1-4dc3-92aa-8e0cfde237d1" frameborder="0">
+</iframe>
 </div>
 <div id="correlation" class="section level3" number="5.4.2">
 <h3>
@@ -584,6 +590,9 @@ Figure 5.4: Comparison of E(Y) and E(Y|X=1)
 </p>
 </div>
 <p>So, we can interpret the conditional expectation <span class="math inline">\(E(Y|A)\)</span> as the long-run average of <span class="math inline">\(Y\)</span> (only) when <span class="math inline">\(A\)</span> has happened. It is the long-run average of <span class="math inline">\(Y\)</span> when a certain condition is met.</p>
+<p>View the video below for a more detailed explanation for this simulation:</p>
+<iframe width="560px" height="320px" allowfullscreen="true" allow="autoplay *" title="Module 05: Conditional Expectation Given Event" src="https://virginiauniversity.instructuremedia.com/embed/e0dedeed-6a34-4b2b-85ef-acce9cc61c4b" frameborder="0">
+</iframe>
 </div>
 <div id="conditional-expectation-given-random-variable" class="section level3" number="5.5.2">
 <h3>
@@ -625,6 +634,9 @@ E(Y|X=x) &amp;= E(10 + X + \epsilon | X=x)\\
 <li>When <span class="math inline">\(X=4\)</span>, <span class="math inline">\(E(Y|X=1) = 14\)</span>.</li>
 </ul>
 <p>Note: We set up <span class="math inline">\(Y = 10 + X + \epsilon\)</span> where <span class="math inline">\(\epsilon \sim N(0,1)\)</span> in the simulation. This follows the framework for linear regression which sets up <span class="math inline">\(Y = \beta_0 + \beta_1 X + \epsilon\)</span> where <span class="math inline">\(\epsilon \sim N(0,\sigma^2)\)</span>, i.e. <span class="math inline">\(\epsilon\)</span> is normal with mean 0 and a variance that is a fixed value. The conditional expectation given <span class="math inline">\(X\)</span> ends up being the prediction for <span class="math inline">\(Y\)</span> that minimizes the mean squared error in linear regression.</p>
+<p>View the video below for a more detailed explanation of this example:</p>
+<iframe width="560px" height="320px" allowfullscreen="true" allow="autoplay *" title="Module 05: Conditional Expectation Given RV" src="https://virginiauniversity.instructuremedia.com/embed/6c965b1d-bcb9-451e-8dca-de91284376bb" frameborder="0">
+</iframe>
 </div>
 </div>
 <div id="common-multivariate-distributions" class="section level2" number="5.6">

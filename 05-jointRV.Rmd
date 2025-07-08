@@ -132,6 +132,10 @@ You may notice that the marginal PMF of $X$ ends up being just the PMF of $X$. T
 
 *Thought question*: Can you see how equation \@ref(eq:5-margPMF) is based on the Law of Total Probability in equation \@ref(eq:total)?
 
+View the video below for a more detailed explanation on deriving the marginal PMF of $X$:
+
+<iframe width="560px" height="320px" allowfullscreen="true" allow="autoplay *" title="Module 05: Marginal PMF" src="https://virginiauniversity.instructuremedia.com/embed/5f81d56e-6dbe-432b-bddc-9f49de2ea101" frameborder="0"></iframe>
+
 Likewise, to obtain the marginal PMF of $Y$ from the joint PMF of $X$ and $Y$:
 
 \begin{equation} 
@@ -410,6 +414,10 @@ s_{x,y} = \frac{\sum_{i=1}^n (x_i - \bar{x})(y_i - \bar{y})}{n-1}
 
 We noted earlier that covariance is affected by the units of the variables. Suppose one variable is measured in meters, and we convert it to become centimeters. The value of the covariance will get multiplied by 100. People find it easier to interpret a measure that does not depend on the units. This is where the correlation comes in: it is a unitless version of the covariance. 
 
+View the video below for a visual explanation as to why the sample covariance is positive when the linear relationship is positive:
+
+<iframe width="560px" height="320px" allowfullscreen="true" allow="autoplay *" title="Module 05: Covariance" src="https://virginiauniversity.instructuremedia.com/embed/7dd5eca9-3cc1-4dc3-92aa-8e0cfde237d1" frameborder="0"></iframe>
+
 
 ### Correlation
 
@@ -553,6 +561,10 @@ abline(h=mean(y[x=1]), col="blue") ##add line to represent est E(Y|X=1)
 
 So, we can interpret the conditional expectation $E(Y|A)$ as the long-run average of $Y$ (only) when $A$ has happened. It is the long-run average of $Y$ when a certain condition is met. 
 
+View the video below for a more detailed explanation for this simulation:
+
+<iframe width="560px" height="320px" allowfullscreen="true" allow="autoplay *" title="Module 05: Conditional Expectation Given Event" src="https://virginiauniversity.instructuremedia.com/embed/e0dedeed-6a34-4b2b-85ef-acce9cc61c4b" frameborder="0"></iframe>
+
 ### Conditional Expectation Given Random Variable
 
 The conditional expectation of $Y$ given a random variable $X$ is slightly different. In the simulated example in the previous subsection, we set $X$ to be a specific value. Now, we consider the long-run average of $Y$ for each value, instead of a specific value, in the support of $X$. 
@@ -600,6 +612,9 @@ So $E(Y|X) = 10 + X$. What this means is that:
 
 Note: We set up $Y = 10 + X + \epsilon$ where $\epsilon \sim N(0,1)$ in the simulation. This follows the framework for linear regression which sets up $Y = \beta_0 + \beta_1 X + \epsilon$ where $\epsilon \sim N(0,\sigma^2)$, i.e. $\epsilon$ is normal with mean 0 and a variance that is a fixed value. The conditional expectation given $X$ ends up being the prediction for $Y$ that minimizes the mean squared error in linear regression. 
 
+View the video below for a more detailed explanation of this example:
+
+<iframe width="560px" height="320px" allowfullscreen="true" allow="autoplay *" title="Module 05: Conditional Expectation Given RV" src="https://virginiauniversity.instructuremedia.com/embed/6c965b1d-bcb9-451e-8dca-de91284376bb" frameborder="0"></iframe>
 
 ## Common Multivariate Distributions
 

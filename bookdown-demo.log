@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999996 (MiKTeX 24.4) (preloaded format=xelatex 2025.6.7)  8 JUL 2025 17:10
+This is XeTeX, Version 3.141592653-2.6-0.999996 (MiKTeX 24.4) (preloaded format=xelatex 2025.6.7)  8 JUL 2025 18:06
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1295,11 +1295,11 @@ File: bookdown-demo_files/figure-latex/5-cov0-1.pdf Graphic file (type pdf)
 
 
 [105]
+
+[106]
 File: bookdown-demo_files/figure-latex/5-corrs-1.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/5-corrs-1.pdf>
 
-
-[106]
 
 [107]
 
@@ -1311,34 +1311,34 @@ File: bookdown-demo_files/figure-latex/5-condexp-1.pdf Graphic file (type pdf)
 [109]
 
 [110]
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/b/n' will be
-(Font)              scaled to size 10.0pt on input line 3700.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/b/n' will be
-(Font)              scaled to size 7.0pt on input line 3700.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/b/n' will be
-(Font)              scaled to size 5.0pt on input line 3700.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/b/n' will be
-(Font)              scaled to size 10.00092pt on input line 3700.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/b/n' will be
-(Font)              scaled to size 7.00064pt on input line 3700.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/b/n' will be
-(Font)              scaled to size 5.00046pt on input line 3700.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/b/n' will be
-(Font)              scaled to size 9.99893pt on input line 3700.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/b/n' will be
-(Font)              scaled to size 6.99925pt on input line 3700.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/b/n' will be
-(Font)              scaled to size 4.99947pt on input line 3700.
-
 
 [111]
-Underfull \hbox (badness 2277) in paragraph at lines 3713--3714
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/b/n' will be
+(Font)              scaled to size 10.0pt on input line 3708.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/b/n' will be
+(Font)              scaled to size 7.0pt on input line 3708.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/b/n' will be
+(Font)              scaled to size 5.0pt on input line 3708.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/b/n' will be
+(Font)              scaled to size 10.00092pt on input line 3708.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/b/n' will be
+(Font)              scaled to size 7.00064pt on input line 3708.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/b/n' will be
+(Font)              scaled to size 5.00046pt on input line 3708.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/b/n' will be
+(Font)              scaled to size 9.99893pt on input line 3708.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/b/n' will be
+(Font)              scaled to size 6.99925pt on input line 3708.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/b/n' will be
+(Font)              scaled to size 4.99947pt on input line 3708.
+
+Underfull \hbox (badness 2277) in paragraph at lines 3721--3722
 \TU/lmr/m/n/10 among American voters, 28% identify as Democrats, 29% identify a
 s
  []
 
 
-Underfull \hbox (badness 1701) in paragraph at lines 3713--3714
+Underfull \hbox (badness 1701) in paragraph at lines 3721--3722
 \TU/lmr/m/n/10 others, and independents. The joint distribution of $[][][] [][]
 [] [][][] [][]$ is
  []
@@ -1346,6 +1346,9 @@ Underfull \hbox (badness 1701) in paragraph at lines 3713--3714
 
 
 [112]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
 
 [113]
 
@@ -1447,10 +1450,10 @@ File: bookdown-demo_files/figure-latex/6-CLTpois-1.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/6-CLTpois-1.pdf>
 
 LaTeX Warning: Reference `fig:6-CLTpois' on page 133 undefined on input line 44
-64.
+72.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 4463--4465
+Underfull \hbox (badness 10000) in paragraph at lines 4471--4473
 [][]
  []
 
@@ -1481,7 +1484,7 @@ D SIMULATIONS
  []
 
 [136]
-Underfull \hbox (badness 2809) in paragraph at lines 4614--4615
+Underfull \hbox (badness 2809) in paragraph at lines 4622--4623
 []\TU/lmr/m/n/10 Therefore, after throwing a large number of darts, $[] [] [] [
 ]
  []
@@ -1510,7 +1513,7 @@ LaTeX Warning: There were undefined references.
 Here is how much of TeX's memory you used:
  20108 strings out of 409029
  368203 string characters out of 5763847
- 1947612 words of memory out of 5000000
+ 1946612 words of memory out of 5000000
  42480 multiletter control sequences out of 15000+600000
  566021 words of font info for 104 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
