@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999996 (MiKTeX 24.4) (preloaded format=xelatex 2025.6.7)  8 JUL 2025 18:06
+This is XeTeX, Version 3.141592653-2.6-0.999996 (MiKTeX 24.4) (preloaded format=xelatex 2025.6.7)  8 JUL 2025 19:10
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1468,7 +1468,7 @@ D SIMULATIONS
  []
 
 [134]
-Underfull \vbox (badness 5147) has occurred while \output is active []
+Underfull \vbox (badness 1122) has occurred while \output is active []
 
 
 
@@ -1484,7 +1484,7 @@ D SIMULATIONS
  []
 
 [136]
-Underfull \hbox (badness 2809) in paragraph at lines 4622--4623
+Underfull \hbox (badness 2809) in paragraph at lines 4624--4625
 []\TU/lmr/m/n/10 Therefore, after throwing a large number of darts, $[] [] [] [
 ]
  []
