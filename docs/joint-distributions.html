@@ -65,7 +65,7 @@
 <h2>
 <span class="header-section-number">5.1</span> Introduction<a class="anchor" aria-label="anchor" href="#introduction-1"><i class="fas fa-link"></i></a>
 </h2>
-<p>In the previous two modules, we learned about ways to summarize the distribution of individual random variables. We are now ready to extend the concepts from these modules and apply them to a slightly different setting, where we are analyzing how multiple variables are related to each other. It is extremely common to want to analyze the relationship between at least two variables. The book lists a few examples, but here are a few more:</p>
+<p>In the previous two modules, we learned how to summarize the distribution of individual random variables. We are now ready to extend the concepts from these modules and apply them to a slightly different setting, where we are analyzing how multiple variables are related to each other. It is extremely common to want to analyze the relationship between at least two variables. The book lists a few examples, but here are a few more:</p>
 <ul>
 <li>Public policy: How does increasing expenditure on infrastructure impact economic development?</li>
 <li>Education: How do smaller class sizes and higher teacher pay impact student learning outcomes?</li>
@@ -77,7 +77,7 @@
 <h2>
 <span class="header-section-number">5.2</span> Joint Distributions for Discrete RVs<a class="anchor" aria-label="anchor" href="#joint-distributions-for-discrete-rvs"><i class="fas fa-link"></i></a>
 </h2>
-<p>We will start with discrete random variables, then move on to continuous random variables. To keep things simple, we will use two random variables to explain concepts, which can be generalized to any number of random variables.</p>
+<p>We will start with discrete random variables, then move on to continuous random variables. To keep things simple, we will use two random variables to explain concepts. These concepts can then be generalized to any number of random variables.</p>
 <p>Recall that for a single discrete random variable <span class="math inline">\(X\)</span>, we use the PMF to inform us the support of <span class="math inline">\(X\)</span> and the probability associated with each value of the support. We said that the PMF informs us about the distribution of the random variable <span class="math inline">\(X\)</span>.</p>
 <p>We now have two discrete random variables, <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>. The <strong>joint distribution</strong> of <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> provides the probability associated with each possible combination of <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>. The <strong>joint PMF</strong> of <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> is</p>
 <p><span class="math display" id="eq:5-jointPMF">\[\begin{equation}
@@ -426,7 +426,7 @@ f_{X|Y} (x|y) = f_X(x).
 <h2>
 <span class="header-section-number">5.4</span> Covariance and Correlation<a class="anchor" aria-label="anchor" href="#covariance-and-correlation"><i class="fas fa-link"></i></a>
 </h2>
-<p>In the previous modules, we used summaries such as the mean, variance, skewness, and kurtosis to provide some insight into the distribution of a single random variable. When we have multiple random variables, one question we have is how are the random variables related to each other. Summaries that are used to quantify the <strong>linear relationship</strong> between two random variables are the covariance and correlation.</p>
+<p>In the previous modules, we used summaries such as the mean, variance, skewness, and kurtosis to provide some insight into the distribution of a single random variable. When we have multiple random variables, one question we have is how are the random variables related to each other. Summaries that are used to quantify the <strong>linear relationship</strong> between two quantitative random variables are the covariance and correlation.</p>
 <p>Generally speaking, two random variables have a positive covariance and correlation if they increase or decrease together, i.e. if <span class="math inline">\(X\)</span> increases, <span class="math inline">\(Y\)</span> also generally increases; if <span class="math inline">\(X\)</span> decreases, <span class="math inline">\(Y\)</span> also generally decreases.</p>
 <p>Two random variables have a negative covariance and correlation if they move in the opposite direction, i.e. if <span class="math inline">\(X\)</span> increases, <span class="math inline">\(Y\)</span> generally decreases; if <span class="math inline">\(X\)</span> decreases, <span class="math inline">\(Y\)</span> generally increases. Figure <a href="joint-distributions.html#fig:5-covs">5.1</a> below displays these ideas visually through scatter plots. The scatter plot on the left shows an example of a pair of random variables having positive covariance, and the scatter plot on the right shows an example of a pair of random variables having negative covariance.</p>
 <div class="figure">
@@ -520,7 +520,7 @@ Figure 5.3: Strong Negative Correlation (Left), No Correlation (Middle), Moderat
 <h2>
 <span class="header-section-number">5.5</span> Conditional Expectation<a class="anchor" aria-label="anchor" href="#conditional-expectation"><i class="fas fa-link"></i></a>
 </h2>
-<p>In Section <a href="probability.html#condprob">2.3</a> and <a href="joint-distributions.html#conddist">5.2.2</a>, we explored the notion of conditional probabilities and conditional distributions, whcih are used for:</p>
+<p>In Section <a href="probability.html#condprob">2.3</a> and <a href="joint-distributions.html#conddist">5.2.2</a>, we explored the notion of conditional probabilities and conditional distributions, which are used for:</p>
 <ul>
 <li>Updating the probability and distribution of a random variable <span class="math inline">\(Y\)</span>, after observing a certain outcome of another random variable <span class="math inline">\(X\)</span>, or</li>
 <li>Restricting the probability and distribution of a random variable <span class="math inline">\(Y\)</span> to a certain value of another random variable.</li>
