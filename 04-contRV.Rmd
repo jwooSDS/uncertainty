@@ -92,7 +92,7 @@ We can find $P(X \leq 1)$ in two different ways:
 - from the CDF, find the value of 1 on the horizontal axis, and read off the corresponding value on the vertical axis (blue lines). This tells us that $P(X \leq 1) = 0.84$.
 - from the PDF, find the area under the PDF where $X \leq 1$. This area corresponds to the shaded region in blue, and will be equal to 0.84 if we performed the integration per equation \@ref(eq:4-PDFCDF).
 
-Compare equation \@ref(eq:4-PDFCDF) with equation \@ref(eq:3-CDF) and note the similarities and differences. For discrete CDFs, we sum the PMF over all values less than or equal to $x$, whereas for continuous CDFs, we integrate, or accumulate the area, under the PDF over all values less than or equal to $x$. Some people view the integral as a continuous version of a summation. 
+Compare equation \@ref(eq:4-PDFCDF) with equation \@ref(eq:3-CDF) and note the similarities and differences in the CDFs for continuous and discrete random variables. For discrete CDFs, we sum the PMF over all values less than or equal to $x$, whereas for continuous CDFs, we integrate, or accumulate the area, under the PDF over all values less than or equal to $x$. Some people view the integral as a continuous version of a summation. 
 
 From equation \@ref(eq:4-PDFCDF), we can generalize a way to find the probability $P(a<X<b)$  for a continuous random variable $X$:
 
@@ -131,7 +131,7 @@ Recall in Section \@ref(pmfhist), we learned that for discrete random variables,
 
 Similarly for continuous random variables, the PDF and the density plot are related. The PDF is associated with the distribution of a known random variable, while the density plot is estimated from our data, and if our data follows a known random variable, the PDF should match the density plot as the sample size gets larger. 
 
-We will go over some of the details on how density plots are created at the end of this module, in Section \@ref(KDE), as we still need to cover a bit more concepts. 
+We will go over some of the details on how density plots are created at the end of this module, in Section \@ref(KDE), as we still need to cover a few concepts. 
 
 ## Summaries of a Distribution
 
@@ -148,7 +148,7 @@ E(X) = \int_{-\infty}^{\infty} x f_X(x) dx.
 
 Another common notation for $E(X)$ is $\mu$, or sometimes $\mu_X$ show that we are writing the mean of the random variable $X$.
 
-If we compare equation \@ref(eq:4-EX) with equation \@ref(eq:3-EX), we notice that we use an integral instead of a summation now that we are working with continuous random variables. 
+If we compare equation \@ref(eq:4-EX) with equation \@ref(eq:3-EX), notice that we use an integral instead of a summation now that we are working with continuous random variables. 
 
 The interpretation of expected values is still the same: the expectation of a random variable can be interpreted as the long-run mean of the random variable, i.e. if we were able to repeat the experiment an infinite number of times, the expectation of the random variable will be the average result among all the experiments. It is still a measure of centrality of the random variable. 
 
@@ -173,15 +173,15 @@ Intuitively, the median is the value $m$ which splits the area under the PDF int
 
 #### Mode
 
-For a continuous random variable $X$, the mode is the value $c$ that maximizes the PDF: $f_X(c) \geq f_X(x)$ for all $x$.
+For a continuous random variable $X$, the **mode** is the value $c$ that maximizes the PDF: $f_X(c) \geq f_X(x)$ for all $x$.
 
 For a discrete random variable $X$, the mode is the value $c$ that maximizes the PMF: $P(X=c) \geq P(X=x)$ for all $x$. Intuitively, the mode is the most commonly occurring value of a discrete random variable
 
 #### Loss Functions
 
-A goal of statistical modeling is to use the model to make predictions. We want to be able to quantify the quality of our prediction, or the prediction error. Suppose we have an experiment that can be described by a random variable $X$, and we want to predict the value of the next experiment. The mean and median are natural guesses for the value of the next experiment.
+A goal of statistical modeling is to use a model to make predictions. We want to be able to quantify the quality of our prediction, or the prediction error. Suppose we have an experiment that can be described by a random variable $X$, and we want to predict the value of the next experiment. The mean and median are natural guesses for the value of the next experiment.
 
-It turns out there a several ways to quantify our prediction error. These are usually called loss functions. Suppose our predicted value is denoted by $x_{pred}$. A couple of common loss functions are:
+It turns out there a several ways to quantify our prediction error. These are usually called **loss functions**. Suppose our predicted value is denoted by $x_{pred}$. A couple of common loss functions are:
 
 - **Mean squared error (MSE)**: $E(X-x_{pred})^2$,
 - **Mean absolute error (MAE)**: $E|X-x_{pred}|$.
@@ -201,7 +201,7 @@ The properties of variance is still the same as in Section \@ref(var-prop). It d
 
 ### Moments
 
-Before talking about other measures that are used to describe distributions, we will cover some terminology that is used for these measures. Suppose we have a random variable $X$.
+Before talking about other measures that are used to describe continuous distributions, we will cover some terminology that is used for these measures. Suppose we have a random variable $X$.
 
 - The **$n$th moment** of $X$ is $E(X^n)$. So the expected value, or the mean, is sometimes called the first moment.
 - The **$n$th central moment** of $X$ is $E((X-\mu)^n)$. So the variance is sometimes called the second central moment.
@@ -233,8 +233,8 @@ The blue vertical lines indicate the mean of these distributions. Notice the mir
 If a distribution is not symmetric, we can say its distribution is asymmetric, or is skewed. The values of $Skew(X)$ that are associated with different shapes are:
 
 - $Skew(X) = 0$: $X$ is symmetric.
-- $Skew(X) > 0$: $X$ is right skewed.
-- $Skew(X) < 0$: $X$ is left skewed.
+- $Skew(X) > 0$: $X$ is right (or positively) skewed.
+- $Skew(X) < 0$: $X$ is left (or negatively) skewed.
 
 ### Kurtosis
 
@@ -363,7 +363,7 @@ So, we can see the purpose of the universality of the uniform:
 
 ### Normal {#normdist}
 
-Another widely used distribution for continuous random variables is the normal, or Gaussian distribution. This is a distribution that is symmetric and bell-shaped. This is probably the most important distribution in statistics and data science due to the central limit theorem. We will define this theorem in a later module, but loosely speaking, it says that if we take the average of a bunch of random variables, the average will approximate a normal distribution, even if the random variables are individually not normal. 
+Another widely used distribution for continuous random variables is the **normal**, or **Gaussian** distribution. This is a distribution that is symmetric and bell-shaped. This is probably the most important distribution in statistics and data science due to the Central Limit Theorem. We will define this theorem in a later module, but loosely speaking, it says that if we take the average of a bunch of random variables, the average will approximate a normal distribution, even if the random variables are individually not normal. 
 
 A lot of questions that we wish to answer are based on averages. For example
 
@@ -408,7 +408,7 @@ Note that some authors say the parameters are the mean $\mu$ and standard deviat
 
 *Thought question*: Can you use the linearity of expectations to explain why $X$ has mean $\mu$? Can you use properties of variance from Section \@ref(var-prop) to explain why $X$ has variance $\sigma^2$?
 
-Notice how we started from a standard normal $Z$, and transformed $Z$ by multiplying it by $\sigma$ and then adding $\mu$ to get any normal distribution. This transformation is called a **location-scale** transformation, or sometimes shifting and scaling. The scale changes since we multiply by a constant $\sigma$; the location is transformed since its mean changes from 0 to $\mu$. 
+Notice how we started from a standard normal $Z$, and transformed $Z$ by multiplying it by $\sigma$ and then adding $\mu$ to get any normal distribution. This transformation is called a **location-scale** transformation, or shifting and scaling. The scale changes since we multiply by a constant $\sigma$; the location is transformed since its mean changes from 0 to $\mu$. 
 
 We can also reverse this transformation and state the following: If $X \sim N(\mu, \sigma^2)$, then $Z = \frac{X-\mu}{\sigma} \sim N(0,1)$. If we start with $X \sim N(\mu, \sigma^2)$, then we can transform $X$ by subtracting \mu, and then dividing by $\sigma$, to obtain $Z$. This particular transformation is called **standardization**:
 
@@ -440,7 +440,7 @@ What these mean is that for any normal distribution:
 - About 95% of observed values will fall within 2 standard deviations of the mean, and
 - About 99.7% of observed values will fall within 3 standard deviations of the mean.
 
-The last statement is the basis for the term [six sigma](https://en.wikipedia.org/wiki/Six_Sigma) used in manufacturing, since the range virtually all data points should fall within a range that is six sigma wide (assuming they follow a normal distribution). Visually, this rule is shown in Figure \@ref(fig:4-rule) when applied to the standard normal:
+The last statement is the basis for the term [six sigma](https://en.wikipedia.org/wiki/Six_Sigma) used in manufacturing, since virtually all data points should fall within a range that is six sigma wide (assuming they follow a normal distribution). Visually, this rule is shown in Figure \@ref(fig:4-rule) when applied to the standard normal:
 
 ```{r 4-rule, fig.cap="68-95-99.7 Rule", echo=FALSE}
 colorArea <- function(from, to, density, ..., col="blue", dens=NULL){
@@ -516,7 +516,7 @@ which gives the same answer as `pnorm(2,1,3)`.
 qnorm(0.9, 1, 3) ##supply the value of the percentile you need, then the parameters mu and sigma
 ```
 
-The 90th percentile of $Y \sim N(1,3)$ is 4.844655. 
+The 90th percentile of $Y \sim N(1,9)$ is 4.844655. 
 
 If we want to use the standard normal, we could find its 90th percentile:
 
@@ -530,13 +530,13 @@ qnorm(0.9)*3 + 1 ##multiply by sigma, then add mu
 ```
 which is the same answer as `qnorm(0.9,1,3)`.
 
-4. To simulate 10 draws (repetitions) of $Y$, use:
+4. To simulate 10 draws (replicates) of $Y$, use:
 
 ```{r}
 set.seed(2) ##use set.seed() so we get the same random numbers each time the code is run
 rnorm(10, 1, 3) ##supply the number of simulated data you need, then the parameters mu and sigma
 ```
-This outputs a vector of length 10. Each value represents the result of each rep. So the first value drawn from $Y \sim N(1,3)$ -1.6907436, the second value drawn is 1.5545476 and so on.
+This outputs a vector of length 10. Each value represents the result of each rep. So the first value drawn from $Y \sim N(1,9)$ -1.6907436, the second value drawn is 1.5545476 and so on.
 
 Just like in Section \@ref(Rdis), notice these functions all ended with `norm`. We just added a different letter first, depending on whether we want the density (analogous to PDF), CDF, percentile, or random draw. The letters are `d`, `p`, `q`, and `r` respectively. 
 
@@ -558,7 +558,7 @@ Suppose we have $n$ observed values of an unknown random variable $X$: $x_1, x_2
 (\#eq:4-KDE)
 \end{equation}
 
-where $K$ is the **kernel** and $h$ is a smoothing parameter, often called the **bandwidth**. Looking at equation \@ref(eq:4-KDE), the KDE can be viewed as a weighted average of the relative likelihood of observing a particular value, with values nearer the specific value on the support receiving a higher weight. 
+where $K$ is the **kernel** and $h$ is a smoothing parameter, often called the **bandwidth**. Looking at equation \@ref(eq:4-KDE), the KDE can be viewed as a weighted average of the relative likelihood of observing a particular value.
 
 The kernel can be viewed as a weighting function, with the weights following the shape of a distribution that the user specifies (usually symmetric). Common kernel functions and their shapes are displayed in Figure \@ref(fig:4-KDE):
 
@@ -586,7 +586,7 @@ Data<-loan50
 plot(density(Data$interest_rate), main="Density Plot of Interest Rates")
 ```
 
-This actually uses KDE with the default settings: kernel is normal, and the bandwidth is based on  [Silverman's rule of thumb](https://en.wikipedia.org/wiki/Kernel_density_estimation#A_rule-of-thumb_bandwidth_estimator).
+This uses KDE with the default settings: kernel is normal, and the bandwidth is based on  [Silverman's rule of thumb](https://en.wikipedia.org/wiki/Kernel_density_estimation#A_rule-of-thumb_bandwidth_estimator).
 
 To change these, we add the `kernel` and `adjust` argument when using the `density()` function, for example, to use the Epanechnikov kernal with twice the default bandwidth:
 
@@ -596,6 +596,8 @@ To change these, we add the `kernel` and `adjust` argument when using the `densi
 plot(density(Data$interest_rate, kernel = "epanechnikov", adjust = 2), 
      main="Density Plot of Interest Rates")
 ```
+
+The density plot in Figure \@ref(fig:4-R2) looks smoother than the density plot in Figure \@ref(fig:4-R).
 
 ### Density Plots and Histograms
 
@@ -607,7 +609,7 @@ hist(Data$interest_rate, prob = TRUE, main = "Histogram with Density Plot", xlab
 ##create density plot using default
 lines(density(Data$interest_rate), col="blue")
 ```
-
+Notice how the density plot approximates the histogram.
 
 ### Numerical Summaries
 

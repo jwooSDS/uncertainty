@@ -206,6 +206,10 @@ We can see another interpretation of the expected value of a random variable fro
 
 Intuitively, this expected value of 1.5 should make sense. If we flip a coin 3 times, and the coin is fair, we expect half of these flips to land heads, or 1.5 flips to land heads.
 
+View the video below for a more detailed explanation on how to calculate expected values:
+
+<iframe width="560px" height="320px" allowfullscreen="true" allow="autoplay *" title="Module 03: Expected Values" src="https://virginiauniversity.instructuremedia.com/embed/f934fca0-6c0d-4b8c-b8b2-7accc784e30c" frameborder="0"></iframe>
+
 ### Linearity of Expectations
 
 We have seen how to calculate the expected value of a random variable $X$ using equation \@ref(eq:3-EX). What we need is the PMF of $X$. Sometimes our random variable can be viewed as a sum (or difference) of other random variables, or it could involve a multiplication and / or adding a constant to the random variable. Consider some of these scenarios:
@@ -335,6 +339,10 @@ $$
 
 So therefore $E(Y) = E(Y_1 + Y_2) = E(Y_1) + E(Y_2) = 2(p_f - p_b)$. Both approaches resulted in the same answer, but notice how much simpler its was to obtain the solution using linearity of expectations. Imagine if we wanted to find the expected position after 500 steps? Writing out the sample space for 500 steps will be extremely long. 
 
+View the video below for a more detailed explanation of this worked example:
+
+<iframe width="560px" height="320px" allowfullscreen="true" allow="autoplay *" title="Module 03: Worked Example" src="https://virginiauniversity.instructuremedia.com/embed/6528fdc7-39ac-4547-a9c7-dda7424f5f4d" frameborder="0"></iframe>
+
 ### Law of the Unconscious Statistician
 
 Suppose we have the PMF of a random variable $X$, and we want to find $E(g(X))$, where $g$ is a function of $X$ (you can think of $g$ as a transformation performed on $X$). One idea could be to find the PMF of $g(X)$ and then use the definition of expectation in equation \@ref(eq:3-EX). But we have seen in the previous subsection that finding the sample space after transforming the random variable can be challenging. It turns out we can find $E(g(X))$ based on the PMF of $X$, without having to find the PMF of $g(X)$. 
@@ -387,6 +395,10 @@ $$
 so $Var(x) = 3 - 1.5^2 = \frac{3}{4}$.
 
 *Thought question*: Try to find $Var(X)$ using equation \@ref(eq:3-var2) and LOTUS. You should arrive at the same answer but the steps may be a bit more complicated.
+
+View the video below for a more detailed explanation on how to calculate variance of discrete random variables using equations \@ref(eq:3-var) and \@ref(eq:3-var2):
+
+<iframe width="560px" height="320px" allowfullscreen="true" allow="autoplay *" title="Module 03: Variance" src="https://virginiauniversity.instructuremedia.com/embed/63538958-9ac6-4b72-a6cc-d32714330c28" frameborder="0"></iframe>
 
 #### Properties of Variance {#var-prop}
 

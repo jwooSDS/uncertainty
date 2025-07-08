@@ -127,7 +127,7 @@ Figure 4.2: Probabilities from CDF and PDF
 <li>from the CDF, find the value of 1 on the horizontal axis, and read off the corresponding value on the vertical axis (blue lines). This tells us that <span class="math inline">\(P(X \leq 1) = 0.84\)</span>.</li>
 <li>from the PDF, find the area under the PDF where <span class="math inline">\(X \leq 1\)</span>. This area corresponds to the shaded region in blue, and will be equal to 0.84 if we performed the integration per equation <a href="continuous-random-variables.html#eq:4-PDFCDF">(4.1)</a>.</li>
 </ul>
-<p>Compare equation <a href="continuous-random-variables.html#eq:4-PDFCDF">(4.1)</a> with equation <a href="discrete-random-variables.html#eq:3-CDF">(3.1)</a> and note the similarities and differences. For discrete CDFs, we sum the PMF over all values less than or equal to <span class="math inline">\(x\)</span>, whereas for continuous CDFs, we integrate, or accumulate the area, under the PDF over all values less than or equal to <span class="math inline">\(x\)</span>. Some people view the integral as a continuous version of a summation.</p>
+<p>Compare equation <a href="continuous-random-variables.html#eq:4-PDFCDF">(4.1)</a> with equation <a href="discrete-random-variables.html#eq:3-CDF">(3.1)</a> and note the similarities and differences in the CDFs for continuous and discrete random variables. For discrete CDFs, we sum the PMF over all values less than or equal to <span class="math inline">\(x\)</span>, whereas for continuous CDFs, we integrate, or accumulate the area, under the PDF over all values less than or equal to <span class="math inline">\(x\)</span>. Some people view the integral as a continuous version of a summation.</p>
 <p>From equation <a href="continuous-random-variables.html#eq:4-PDFCDF">(4.1)</a>, we can generalize a way to find the probability <span class="math inline">\(P(a&lt;X&lt;b)\)</span> for a continuous random variable <span class="math inline">\(X\)</span>:</p>
 <p><span class="math display" id="eq:4-integrate">\[\begin{equation}
 P(a&lt;X&lt;b) = F_X(b) - F_X(a) = \int_{a}^{b} f_X(x) dx.
@@ -157,7 +157,7 @@ Figure 4.3: Probabilities from PDF
 </h3>
 <p>Recall in Section <a href="discrete-random-variables.html#pmfhist">3.2.2</a>, we learned that for discrete random variables, the PMF and histogram are related. The PMF represents the long-run proportion, while the histogram represents the relative frequency based on our data. As the sample size gets larger, the PMF should match the histogram.</p>
 <p>Similarly for continuous random variables, the PDF and the density plot are related. The PDF is associated with the distribution of a known random variable, while the density plot is estimated from our data, and if our data follows a known random variable, the PDF should match the density plot as the sample size gets larger.</p>
-<p>We will go over some of the details on how density plots are created at the end of this module, in Section <a href="continuous-random-variables.html#KDE">4.6.1</a>, as we still need to cover a bit more concepts.</p>
+<p>We will go over some of the details on how density plots are created at the end of this module, in Section <a href="continuous-random-variables.html#KDE">4.6.1</a>, as we still need to cover a few concepts.</p>
 </div>
 </div>
 <div id="summaries-of-a-distribution" class="section level2" number="4.4">
@@ -175,7 +175,7 @@ E(X) = \int_{-\infty}^{\infty} x f_X(x) dx.
 \tag{4.3}
 \end{equation}\]</span></p>
 <p>Another common notation for <span class="math inline">\(E(X)\)</span> is <span class="math inline">\(\mu\)</span>, or sometimes <span class="math inline">\(\mu_X\)</span> show that we are writing the mean of the random variable <span class="math inline">\(X\)</span>.</p>
-<p>If we compare equation <a href="continuous-random-variables.html#eq:4-EX">(4.3)</a> with equation <a href="discrete-random-variables.html#eq:3-EX">(3.2)</a>, we notice that we use an integral instead of a summation now that we are working with continuous random variables.</p>
+<p>If we compare equation <a href="continuous-random-variables.html#eq:4-EX">(4.3)</a> with equation <a href="discrete-random-variables.html#eq:3-EX">(3.2)</a>, notice that we use an integral instead of a summation now that we are working with continuous random variables.</p>
 <p>The interpretation of expected values is still the same: the expectation of a random variable can be interpreted as the long-run mean of the random variable, i.e. if we were able to repeat the experiment an infinite number of times, the expectation of the random variable will be the average result among all the experiments. It is still a measure of centrality of the random variable.</p>
 <p>The <strong>linearity of expectations</strong> still hold in the same way, per equation <a href="discrete-random-variables.html#eq:3-linEX">(3.3)</a>. It does not matter if the random variable is discrete or continuous.</p>
 <p>The <strong>Law of the Unconscious Statistician (LOTUS)</strong> also still applies. For a continuous random variable <span class="math inline">\(X\)</span>, it is (unsurprisingly):</p>
@@ -196,15 +196,15 @@ E(g(X)) = \int_{-\infty}^{\infty} g(x) f_X(x).
 <h4>
 <span class="header-section-number">4.4.1.2</span> Mode<a class="anchor" aria-label="anchor" href="#mode-1"><i class="fas fa-link"></i></a>
 </h4>
-<p>For a continuous random variable <span class="math inline">\(X\)</span>, the mode is the value <span class="math inline">\(c\)</span> that maximizes the PDF: <span class="math inline">\(f_X(c) \geq f_X(x)\)</span> for all <span class="math inline">\(x\)</span>.</p>
+<p>For a continuous random variable <span class="math inline">\(X\)</span>, the <strong>mode</strong> is the value <span class="math inline">\(c\)</span> that maximizes the PDF: <span class="math inline">\(f_X(c) \geq f_X(x)\)</span> for all <span class="math inline">\(x\)</span>.</p>
 <p>For a discrete random variable <span class="math inline">\(X\)</span>, the mode is the value <span class="math inline">\(c\)</span> that maximizes the PMF: <span class="math inline">\(P(X=c) \geq P(X=x)\)</span> for all <span class="math inline">\(x\)</span>. Intuitively, the mode is the most commonly occurring value of a discrete random variable</p>
 </div>
 <div id="loss-functions" class="section level4" number="4.4.1.3">
 <h4>
 <span class="header-section-number">4.4.1.3</span> Loss Functions<a class="anchor" aria-label="anchor" href="#loss-functions"><i class="fas fa-link"></i></a>
 </h4>
-<p>A goal of statistical modeling is to use the model to make predictions. We want to be able to quantify the quality of our prediction, or the prediction error. Suppose we have an experiment that can be described by a random variable <span class="math inline">\(X\)</span>, and we want to predict the value of the next experiment. The mean and median are natural guesses for the value of the next experiment.</p>
-<p>It turns out there a several ways to quantify our prediction error. These are usually called loss functions. Suppose our predicted value is denoted by <span class="math inline">\(x_{pred}\)</span>. A couple of common loss functions are:</p>
+<p>A goal of statistical modeling is to use a model to make predictions. We want to be able to quantify the quality of our prediction, or the prediction error. Suppose we have an experiment that can be described by a random variable <span class="math inline">\(X\)</span>, and we want to predict the value of the next experiment. The mean and median are natural guesses for the value of the next experiment.</p>
+<p>It turns out there a several ways to quantify our prediction error. These are usually called <strong>loss functions</strong>. Suppose our predicted value is denoted by <span class="math inline">\(x_{pred}\)</span>. A couple of common loss functions are:</p>
 <ul>
 <li>
 <strong>Mean squared error (MSE)</strong>: <span class="math inline">\(E(X-x_{pred})^2\)</span>,</li>
@@ -229,7 +229,7 @@ Var(X) = \int_{-\infty}^{\infty} (x-\mu)^2 f_X(x) dx.
 <h3>
 <span class="header-section-number">4.4.3</span> Moments<a class="anchor" aria-label="anchor" href="#moments"><i class="fas fa-link"></i></a>
 </h3>
-<p>Before talking about other measures that are used to describe distributions, we will cover some terminology that is used for these measures. Suppose we have a random variable <span class="math inline">\(X\)</span>.</p>
+<p>Before talking about other measures that are used to describe continuous distributions, we will cover some terminology that is used for these measures. Suppose we have a random variable <span class="math inline">\(X\)</span>.</p>
 <ul>
 <li>The <strong><span class="math inline">\(n\)</span>th moment</strong> of <span class="math inline">\(X\)</span> is <span class="math inline">\(E(X^n)\)</span>. So the expected value, or the mean, is sometimes called the first moment.</li>
 <li>The <strong><span class="math inline">\(n\)</span>th central moment</strong> of <span class="math inline">\(X\)</span> is <span class="math inline">\(E((X-\mu)^n)\)</span>. So the variance is sometimes called the second central moment.</li>
@@ -259,9 +259,9 @@ Figure 4.4: PDFs for Symmetric RV vs Skewed RV
 <li>
 <span class="math inline">\(Skew(X) = 0\)</span>: <span class="math inline">\(X\)</span> is symmetric.</li>
 <li>
-<span class="math inline">\(Skew(X) &gt; 0\)</span>: <span class="math inline">\(X\)</span> is right skewed.</li>
+<span class="math inline">\(Skew(X) &gt; 0\)</span>: <span class="math inline">\(X\)</span> is right (or positively) skewed.</li>
 <li>
-<span class="math inline">\(Skew(X) &lt; 0\)</span>: <span class="math inline">\(X\)</span> is left skewed.</li>
+<span class="math inline">\(Skew(X) &lt; 0\)</span>: <span class="math inline">\(X\)</span> is left (or negatively) skewed.</li>
 </ul>
 </div>
 <div id="kurtosis" class="section level3" number="4.4.5">
@@ -394,7 +394,7 @@ Figure 4.8: Uniform to Logistic
 <h3>
 <span class="header-section-number">4.5.2</span> Normal<a class="anchor" aria-label="anchor" href="#normdist"><i class="fas fa-link"></i></a>
 </h3>
-<p>Another widely used distribution for continuous random variables is the normal, or Gaussian distribution. This is a distribution that is symmetric and bell-shaped. This is probably the most important distribution in statistics and data science due to the central limit theorem. We will define this theorem in a later module, but loosely speaking, it says that if we take the average of a bunch of random variables, the average will approximate a normal distribution, even if the random variables are individually not normal.</p>
+<p>Another widely used distribution for continuous random variables is the <strong>normal</strong>, or <strong>Gaussian</strong> distribution. This is a distribution that is symmetric and bell-shaped. This is probably the most important distribution in statistics and data science due to the Central Limit Theorem. We will define this theorem in a later module, but loosely speaking, it says that if we take the average of a bunch of random variables, the average will approximate a normal distribution, even if the random variables are individually not normal.</p>
 <p>A lot of questions that we wish to answer are based on averages. For example</p>
 <ul>
 <li>Does the implementation of certain technologies in a class improve test scores for students, on average?</li>
@@ -437,7 +437,7 @@ Figure 4.9: PDF of Standard Normal
 <p>If <span class="math inline">\(Z \sim N(0,1)\)</span>, then <span class="math inline">\(X = \mu + \sigma Z \sim N(\mu, \sigma^2)\)</span>. In other words, if <span class="math inline">\(Z\)</span> is standard normal, then <span class="math inline">\(X = \mu + \sigma Z\)</span> follows a normal distribution with mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^2\)</span>. The parameters of a normal distribution are the mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^2\)</span>.</p>
 <p>Note that some authors say the parameters are the mean <span class="math inline">\(\mu\)</span> and standard deviation <span class="math inline">\(\sigma\)</span> instead, so be careful when reading notation associated with normal distributions from various sources. For example, <span class="math inline">\(N(0,2)\)</span> in our class and our book means normal distribution with mean 0 and variance 2, but for some other authors, <span class="math inline">\(N(0,2)\)</span> means normal distribution with mean 0 and standard deviation 2. Indeed, the functions in R use this alternate parameterization, so you need to be careful.</p>
 <p><em>Thought question</em>: Can you use the linearity of expectations to explain why <span class="math inline">\(X\)</span> has mean <span class="math inline">\(\mu\)</span>? Can you use properties of variance from Section <a href="discrete-random-variables.html#var-prop">3.4.3.1</a> to explain why <span class="math inline">\(X\)</span> has variance <span class="math inline">\(\sigma^2\)</span>?</p>
-<p>Notice how we started from a standard normal <span class="math inline">\(Z\)</span>, and transformed <span class="math inline">\(Z\)</span> by multiplying it by <span class="math inline">\(\sigma\)</span> and then adding <span class="math inline">\(\mu\)</span> to get any normal distribution. This transformation is called a <strong>location-scale</strong> transformation, or sometimes shifting and scaling. The scale changes since we multiply by a constant <span class="math inline">\(\sigma\)</span>; the location is transformed since its mean changes from 0 to <span class="math inline">\(\mu\)</span>.</p>
+<p>Notice how we started from a standard normal <span class="math inline">\(Z\)</span>, and transformed <span class="math inline">\(Z\)</span> by multiplying it by <span class="math inline">\(\sigma\)</span> and then adding <span class="math inline">\(\mu\)</span> to get any normal distribution. This transformation is called a <strong>location-scale</strong> transformation, or shifting and scaling. The scale changes since we multiply by a constant <span class="math inline">\(\sigma\)</span>; the location is transformed since its mean changes from 0 to <span class="math inline">\(\mu\)</span>.</p>
 <p>We can also reverse this transformation and state the following: If <span class="math inline">\(X \sim N(\mu, \sigma^2)\)</span>, then <span class="math inline">\(Z = \frac{X-\mu}{\sigma} \sim N(0,1)\)</span>. If we start with <span class="math inline">\(X \sim N(\mu, \sigma^2)\)</span>, then we can transform <span class="math inline">\(X\)</span> by subtracting , and then dividing by <span class="math inline">\(\sigma\)</span>, to obtain <span class="math inline">\(Z\)</span>. This particular transformation is called <strong>standardization</strong>:</p>
 <p><span class="math display" id="eq:4-standardize">\[\begin{equation}
 Z = \frac{X-\mu}{\sigma}.
@@ -469,7 +469,7 @@ f_X(x) = \frac{1}{\sigma \sqrt{2 \pi}} \exp \left(-\frac{(x - \mu)^2}{2 \sigma^2
 <li>About 95% of observed values will fall within 2 standard deviations of the mean, and</li>
 <li>About 99.7% of observed values will fall within 3 standard deviations of the mean.</li>
 </ul>
-<p>The last statement is the basis for the term <a href="https://en.wikipedia.org/wiki/Six_Sigma">six sigma</a> used in manufacturing, since the range virtually all data points should fall within a range that is six sigma wide (assuming they follow a normal distribution). Visually, this rule is shown in Figure <a href="continuous-random-variables.html#fig:4-rule">4.10</a> when applied to the standard normal:</p>
+<p>The last statement is the basis for the term <a href="https://en.wikipedia.org/wiki/Six_Sigma">six sigma</a> used in manufacturing, since virtually all data points should fall within a range that is six sigma wide (assuming they follow a normal distribution). Visually, this rule is shown in Figure <a href="continuous-random-variables.html#fig:4-rule">4.10</a> when applied to the standard normal:</p>
 <div class="figure">
 <span style="display:block;" id="fig:4-rule"></span>
 <img src="bookdown-demo_files/figure-html/4-rule-1.png" alt="68-95-99.7 Rule" width="672"><p class="caption">
@@ -528,7 +528,7 @@ P(Y \leq 2) &amp;= P(\frac{Y-\mu}{\sigma} \leq \frac{2-1}{3}) \\
 <div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">qnorm</a></span><span class="op">(</span><span class="fl">0.9</span>, <span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span> <span class="co">##supply the value of the percentile you need, then the parameters mu and sigma</span></span></code></pre></div>
 <pre><code>## [1] 4.844655</code></pre>
-<p>The 90th percentile of <span class="math inline">\(Y \sim N(1,3)\)</span> is 4.844655.</p>
+<p>The 90th percentile of <span class="math inline">\(Y \sim N(1,9)\)</span> is 4.844655.</p>
 <p>If we want to use the standard normal, we could find its 90th percentile:</p>
 <div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">qnorm</a></span><span class="op">(</span><span class="fl">0.9</span><span class="op">)</span></span></code></pre></div>
@@ -539,14 +539,14 @@ P(Y \leq 2) &amp;= P(\frac{Y-\mu}{\sigma} \leq \frac{2-1}{3}) \\
 <pre><code>## [1] 4.844655</code></pre>
 <p>which is the same answer as <code>qnorm(0.9,1,3)</code>.</p>
 <ol start="4" style="list-style-type: decimal">
-<li>To simulate 10 draws (repetitions) of <span class="math inline">\(Y\)</span>, use:</li>
+<li>To simulate 10 draws (replicates) of <span class="math inline">\(Y\)</span>, use:</li>
 </ol>
 <div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span> <span class="co">##use set.seed() so we get the same random numbers each time the code is run</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span> <span class="co">##supply the number of simulated data you need, then the parameters mu and sigma</span></span></code></pre></div>
 <pre><code>##  [1] -1.6907436  1.5545476  5.7635360 -2.3911270  0.7592447  1.3972609
 ##  [7]  3.1238642  0.2809059  6.9534218  0.5836390</code></pre>
-<p>This outputs a vector of length 10. Each value represents the result of each rep. So the first value drawn from <span class="math inline">\(Y \sim N(1,3)\)</span> -1.6907436, the second value drawn is 1.5545476 and so on.</p>
+<p>This outputs a vector of length 10. Each value represents the result of each rep. So the first value drawn from <span class="math inline">\(Y \sim N(1,9)\)</span> -1.6907436, the second value drawn is 1.5545476 and so on.</p>
 <p>Just like in Section <a href="discrete-random-variables.html#Rdis">3.6</a>, notice these functions all ended with <code>norm</code>. We just added a different letter first, depending on whether we want the density (analogous to PDF), CDF, percentile, or random draw. The letters are <code>d</code>, <code>p</code>, <code>q</code>, and <code>r</code> respectively.</p>
 <p>One thing to note: if we do not supply the mean and standard deviation, for example we type <code>rnorm(10)</code>, R will assume you want to use a standard normal distribution, so <code>rnorm(10)</code> will draw 10 random numbers from a standard normal.</p>
 <div id="KDE" class="section level3" number="4.6.1">
@@ -564,7 +564,7 @@ P(Y \leq 2) &amp;= P(\frac{Y-\mu}{\sigma} \leq \frac{2-1}{3}) \\
 \hat{f}_h(x) = \frac{1}{nh} \sum_{i=1}^n K \left( \frac{x-x_i}{h}\right ),
 \tag{4.12}
 \end{equation}\]</span></p>
-<p>where <span class="math inline">\(K\)</span> is the <strong>kernel</strong> and <span class="math inline">\(h\)</span> is a smoothing parameter, often called the <strong>bandwidth</strong>. Looking at equation <a href="continuous-random-variables.html#eq:4-KDE">(4.12)</a>, the KDE can be viewed as a weighted average of the relative likelihood of observing a particular value, with values nearer the specific value on the support receiving a higher weight.</p>
+<p>where <span class="math inline">\(K\)</span> is the <strong>kernel</strong> and <span class="math inline">\(h\)</span> is a smoothing parameter, often called the <strong>bandwidth</strong>. Looking at equation <a href="continuous-random-variables.html#eq:4-KDE">(4.12)</a>, the KDE can be viewed as a weighted average of the relative likelihood of observing a particular value.</p>
 <p>The kernel can be viewed as a weighting function, with the weights following the shape of a distribution that the user specifies (usually symmetric). Common kernel functions and their shapes are displayed in Figure <a href="continuous-random-variables.html#fig:4-KDE">4.11</a>:</p>
 <div class="figure">
 <span style="display:block;" id="fig:4-KDE"></span>
@@ -594,7 +594,7 @@ Figure 4.11: Common Kernals. Picture adapted from <a href="https://tgstewart.clo
 Figure 4.12: Density Plot for 50 Interest Rates
 </p>
 </div>
-<p>This actually uses KDE with the default settings: kernel is normal, and the bandwidth is based on <a href="https://en.wikipedia.org/wiki/Kernel_density_estimation#A_rule-of-thumb_bandwidth_estimator">Silverman’s rule of thumb</a>.</p>
+<p>This uses KDE with the default settings: kernel is normal, and the bandwidth is based on <a href="https://en.wikipedia.org/wiki/Kernel_density_estimation#A_rule-of-thumb_bandwidth_estimator">Silverman’s rule of thumb</a>.</p>
 <p>To change these, we add the <code>kernel</code> and <code>adjust</code> argument when using the <code><a href="https://rdrr.io/r/stats/density.html">density()</a></code> function, for example, to use the Epanechnikov kernal with twice the default bandwidth:</p>
 <div class="sourceCode" id="cb67"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##create density plot using different settings</span></span>
@@ -606,6 +606,7 @@ Figure 4.12: Density Plot for 50 Interest Rates
 Figure 4.13: Density Plot for 50 Interest Rates, Epanechnikov Kernel, Twice the Bandwidth
 </p>
 </div>
+<p>The density plot in Figure <a href="continuous-random-variables.html#fig:4-R2">4.13</a> looks smoother than the density plot in Figure <a href="continuous-random-variables.html#fig:4-R">4.12</a>.</p>
 </div>
 <div id="density-plots-and-histograms" class="section level3" number="4.6.2">
 <h3>
@@ -623,6 +624,7 @@ Figure 4.13: Density Plot for 50 Interest Rates, Epanechnikov Kernel, Twice the 
 Figure 4.14: Histogram and Density Plot for 50 Interest Rates
 </p>
 </div>
+<p>Notice how the density plot approximates the histogram.</p>
 </div>
 <div id="numerical-summaries" class="section level3" number="4.6.3">
 <h3>
