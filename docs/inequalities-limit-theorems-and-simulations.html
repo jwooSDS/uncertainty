@@ -92,6 +92,9 @@
 \implies |Corr(X,Y)| &amp; \leq 1.
 \end{split}
 \]</span></p>
+<p>View the video below for a more detailed explanation of this proof:</p>
+<iframe width="560px" height="320px" allowfullscreen="true" allow="autoplay *" title="Module 06: Cauchy Schwartz and Correlation" src="https://virginiauniversity.instructuremedia.com/embed/bf9948b4-1c86-4529-9b49-53c808b4a0be" frameborder="0">
+</iframe>
 <ol start="2" style="list-style-type: decimal">
 <li>The Cauchy-Schwarz inequality can also be used to show that the variance of any random variable has to be non negative. A quick proof is as follows: we apply equation <a href="inequalities-limit-theorems-and-simulations.html#eq:6-CS">(6.1)</a> to the random variable <span class="math inline">\(X\)</span> and to a constant 1:</li>
 </ol>
@@ -103,7 +106,10 @@
 \implies 0 &amp; \leq E(X^2) - E(X)^2 = Var(X).
 \end{split}
 \]</span>
-Note: One other place that you may seen the Cauchy-Schwarz inequality is in the proof of the triangle inequality in geometry.</p>
+View the video below for a more detailed explanation of this proof:</p>
+<iframe width="560px" height="320px" allowfullscreen="true" allow="autoplay *" title="Module 06: Cauchy Schwartz and Variance" src="https://virginiauniversity.instructuremedia.com/embed/856ad59e-6e7f-4039-97e5-d1ce7397752c" frameborder="0">
+</iframe>
+<p>Note: One other place that you may seen the Cauchy-Schwarz inequality is in the proof of the triangle inequality in geometry.</p>
 </div>
 <div id="jensens-inequality" class="section level3" number="6.2.2">
 <h3>
@@ -283,6 +289,9 @@ Var(\bar{X}_n) &amp;= Var(\frac{X_1 + \cdots + X_n}{n}) \\
 \end{split}
 \tag{6.5}
 \end{equation}\]</span></p>
+<p>View the video below for a more detailed explanation of these results:</p>
+<iframe width="560px" height="320px" allowfullscreen="true" allow="autoplay *" title="Module 06: Properties of Sample Mean" src="https://virginiauniversity.instructuremedia.com/embed/86d05cc6-56b2-4186-96ce-c1a641acb2b0" frameborder="0">
+</iframe>
 <p>Equation <a href="inequalities-limit-theorems-and-simulations.html#eq:6-Emean">(6.4)</a> informs us that the long-run average of sample means is equal to the population mean. We can imagine this if we had taken different random samples of size <span class="math inline">\(n\)</span> from a population, and for each random sample we find the sample mean, and then average all these sample means. This average equals to the population mean <span class="math inline">\(\mu\)</span>. The code below provides a demonstration of these steps:</p>
 <ul>
 <li>We simulate a random sample of <span class="math inline">\(X_1, \cdots, X_{500}\)</span> i.i.d. from standard normal.</li>
@@ -356,6 +365,9 @@ Var(\bar{X}_n) &amp;= Var(\frac{X_1 + \cdots + X_n}{n}) \\
 Figure 6.3: LLN Example 2
 </p>
 </div>
+<p>View the video below for a more detailed explanation of the code:</p>
+<iframe width="560px" height="320px" allowfullscreen="true" allow="autoplay *" title="Module 06: Law of Large Numbers" src="https://virginiauniversity.instructuremedia.com/embed/d5516684-77b9-474c-a862-8f2a7377d0b8" frameborder="0">
+</iframe>
 <p>Note: <code><a href="https://rdrr.io/r/base/Random.html">set.seed()</a></code> was used so you can reproduce these results exactly. However, the observation that the sample mean tends to get closer to the true mean as <span class="math inline">\(n\)</span> increases will happen regardless of what <code><a href="https://rdrr.io/r/base/Random.html">set.seed()</a></code> was used, or even if <code><a href="https://rdrr.io/r/base/Random.html">set.seed()</a></code> was not used.</p>
 <p>Note: The LLN actually comes in two versions, the Weak Law of Large Numbers (WLLN), and the Strong Law of Large Numbers (SLLN). The book goes into some detail about their definitions and differences. What I have written gives an intuitive explanation of what the LLN implies.</p>
 <div id="misconceptions-with-lln" class="section level4" number="6.3.1.1">

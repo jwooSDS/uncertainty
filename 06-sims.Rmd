@@ -35,6 +35,10 @@ $$
 \end{split}
 $$
 
+View the video below for a more detailed explanation of this proof:
+
+<iframe width="560px" height="320px" allowfullscreen="true" allow="autoplay *" title="Module 06: Cauchy Schwartz and Correlation" src="https://virginiauniversity.instructuremedia.com/embed/bf9948b4-1c86-4529-9b49-53c808b4a0be" frameborder="0"></iframe>
+
 2. The Cauchy-Schwarz inequality can also be used to show that the variance of any random variable has to be non negative. A quick proof is as follows: we apply equation \@ref(eq:6-CS) to the random variable $X$ and to a constant 1:
 
 $$
@@ -45,6 +49,10 @@ $$
 \implies 0 & \leq E(X^2) - E(X)^2 = Var(X).
 \end{split}
 $$
+View the video below for a more detailed explanation of this proof:
+
+<iframe width="560px" height="320px" allowfullscreen="true" allow="autoplay *" title="Module 06: Cauchy Schwartz and Variance" src="https://virginiauniversity.instructuremedia.com/embed/856ad59e-6e7f-4039-97e5-d1ce7397752c" frameborder="0"></iframe>
+
 Note: One other place that you may seen the Cauchy-Schwarz inequality is in the proof of the triangle inequality in geometry. 
 
 ### Jensen's Inequality
@@ -213,6 +221,10 @@ Var(\bar{X}_n) &= Var(\frac{X_1 + \cdots + X_n}{n}) \\
 (\#eq:6-Varmean)
 \end{equation}
 
+View the video below for a more detailed explanation of these results:
+
+<iframe width="560px" height="320px" allowfullscreen="true" allow="autoplay *" title="Module 06: Properties of Sample Mean" src="https://virginiauniversity.instructuremedia.com/embed/86d05cc6-56b2-4186-96ce-c1a641acb2b0" frameborder="0"></iframe>
+
 Equation \@ref(eq:6-Emean) informs us that the long-run average of sample means is equal to the population mean. We can imagine this if we had taken different random samples of size $n$ from a population, and for each random sample we find the sample mean, and then average all these sample means. This average equals to the population mean $\mu$. The code below provides a demonstration of these steps:
 
 - We simulate a random sample of $X_1, \cdots, X_{500}$ i.i.d. from standard normal.
@@ -288,6 +300,10 @@ props<-totals/index ##find proportion of heads after each flip
 plot(props, type="l", main="Prop vs Sample Size", ylab="Proportion", xlab="n")
 abline(h=0.5, col="blue") ##overlay 0.5 for easy comparison
 ```
+
+View the video below for a more detailed explanation of the code:
+
+<iframe width="560px" height="320px" allowfullscreen="true" allow="autoplay *" title="Module 06: Law of Large Numbers" src="https://virginiauniversity.instructuremedia.com/embed/d5516684-77b9-474c-a862-8f2a7377d0b8" frameborder="0"></iframe>
 
 Note: `set.seed()` was used so you can reproduce these results exactly. However, the observation that the sample mean tends to get closer to the true mean as $n$ increases will happen regardless of what `set.seed()` was used, or even if `set.seed()` was not used. 
 
