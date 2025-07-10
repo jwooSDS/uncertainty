@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999996 (MiKTeX 24.4) (preloaded format=xelatex 2025.6.7)  8 JUL 2025 20:02
+This is XeTeX, Version 3.141592653-2.6-0.999996 (MiKTeX 24.4) (preloaded format=xelatex 2025.6.7)  10 JUL 2025 18:07
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1498,8 +1498,6 @@ D SIMULATIONS
 [136]
 
 [137]
-No file bookdown-demo.bbl.
-
 
 
 Overfull \hbox (6.04784pt too wide) has occurred while \output is active
@@ -1507,7 +1505,31 @@ Overfull \hbox (6.04784pt too wide) has occurred while \output is active
 D SIMULATIONS
  []
 
-[138] (bookdown-demo.aux)
+[138]
+Chapter 7.
+
+
+[139
+
+]
+File: images/07-dataframe.png Graphic file (type bmp)
+<images/07-dataframe.png>
+
+Underfull \vbox (badness 3219) has occurred while \output is active []
+
+
+
+[140]
+
+[141]
+
+[142]
+
+[143]
+No file bookdown-demo.bbl.
+
+
+[144] (bookdown-demo.aux)
  ***********
 LaTeX2e <2024-06-01> patch level 2
 L3 programming layer <2024-07-20>
@@ -1517,12 +1539,12 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 20108 strings out of 409029
- 368203 string characters out of 5763847
- 1947612 words of memory out of 5000000
- 42480 multiletter control sequences out of 15000+600000
+ 20136 strings out of 409029
+ 368794 string characters out of 5763847
+ 1949612 words of memory out of 5000000
+ 42507 multiletter control sequences out of 15000+600000
  566021 words of font info for 104 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  90i,21n,123p,1199b,585s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on bookdown-demo.pdf (138 pages).
+Output written on bookdown-demo.pdf (144 pages).

@@ -127,7 +127,7 @@
 
 \title{Understanding Uncertainty Course Notes}
 \author{Jeffrey Woo}
-\date{2025-07-08}
+\date{2025-07-10}
 
 \begin{document}
 \maketitle
@@ -2293,7 +2293,7 @@ The \textbf{linearity of expectations} still hold in the same way, per equation 
 The \textbf{Law of the Unconscious Statistician (LOTUS)} also still applies. For a continuous random variable \(X\), it is (unsurprisingly):
 
 \begin{equation} 
-E(g(X)) = \int_{-\infty}^{\infty} g(x) f_X(x).
+E(g(X)) = \int_{-\infty}^{\infty} g(x) f_X(x) dx.
 \label{eq:4-lotus}
 \end{equation}
 
@@ -2340,18 +2340,18 @@ Var(X) = \int_{-\infty}^{\infty} (x-\mu)^2 f_X(x) dx.
 
 The properties of variance is still the same as in Section \ref{var-prop}. It does not matter if the random variable is discrete or continuous. A common notation used for variance is \(\sigma^2\), or sometimes \(\sigma_X^2\) to show it is the variance of the random variable \(X\).
 
-\subsection{Moments}\label{moments}
+\subsection{Moments}\label{4-moments}
 
 Before talking about other measures that are used to describe continuous distributions, we will cover some terminology that is used for these measures. Suppose we have a random variable \(X\).
 
 \begin{itemize}
 \tightlist
 \item
-  The \textbf{\(n\)th moment} of \(X\) is \(E(X^n)\). So the expected value, or the mean, is sometimes called the first moment.
+  The \textbf{\(k\)th moment} of \(X\) is \(E(X^k)\). So the expected value, or the mean, is sometimes called the first moment.
 \item
-  The \textbf{\(n\)th central moment} of \(X\) is \(E((X-\mu)^n)\). So the variance is sometimes called the second central moment.
+  The \textbf{\(k\)th central moment} of \(X\) is \(E((X-\mu)^k)\). So the variance is sometimes called the second central moment.
 \item
-  The \textbf{\(n\) standardized moment} of \(X\) is \(E(\frac{(X-\mu)^n}{\sigma})\).
+  The \textbf{\(k\) standardized moment} of \(X\) is \(E(\frac{(X-\mu)^k}{\sigma})\).
 \end{itemize}
 
 \subsection{Skewness}\label{skewness}
@@ -3955,7 +3955,7 @@ Note: What we have done is called a Monte Carlo simulation, and is often used in
 
 \chapter{Inequalities, Limit Theorems, and Simulations}\label{inequalities-limit-theorems-and-simulations}
 
-This module is based on Introduction to Probability (Blitzstein, Hwang), Chapter 10. You can access the book for free at \url{https://stat110.hsites.harvard.edu/} (and then click on Book). Please note that I cover additional topics, and skip certain topics from the book. You may skip Eample 10.1.3, 10.1.4, 10.1.7 to 10.1.9, Theorem 10.1.12, Example 10.2.5, 10.2.6, 10.3.7, and Section 10.4 from the book.
+This module is based on Introduction to Probability (Blitzstein, Hwang), Chapter 10. You can access the book for free at \url{https://stat110.hsites.harvard.edu/} (and then click on Book). Please note that I cover additional topics, and skip certain topics from the book. You may skip Example 10.1.3, 10.1.4, 10.1.7 to 10.1.9, Theorem 10.1.12, Example 10.2.5, 10.2.6, 10.3.7, and Section 10.4 from the book.
 
 \section{Introduction}\label{introduction-2}
 
@@ -4685,6 +4685,175 @@ With Monte Carlo simulations, we are generating numbers randomly. When we set th
 We will not go into the details of how R generates the random numbers, and random number generation is a whole field in itself.
 
 In terms of running the examples, you can choose to copy the code and exclude the line with \texttt{set.seed()}. You should still observe that the estimated values from the simulations are close to the true values.
+
+\chapter{Estimation}\label{estimation}
+
+This module is based on Introduction to Probability for Data Science (Chan), Chapter 8. You can access the book for free at \url{https://probability4datascience.com}. Please note that I cover additional topics, and skip certain topics from the book. You may skip ??? from the book.
+
+\section{Introduction}\label{introduction-3}
+
+We consider building models based on the data we have. Many models are based on some distribution, for example, the linear regression model is based on the normal distribution, and the logistic regression model is based on the Bernoulli distribution. Recall that these distributions are specified by their parameters: the mean \(\mu\) and variance \(\sigma^2\) for the normal distribution, and the success probability \(p\) for a Bernoulli distribution. The value of the parameters are almost always unknown in real life. This module deals with estimation: how do we estimate the values of these parameters, as well as quantify the level of uncertainty we have with these estimated values.
+
+\subsection{Big Picture Idea with Estimation}\label{big-picture-idea-with-estimation}
+
+Consider this simple scenario. We want to find the distribution associated with the systolic blood pressure of American adults who work full-time. To be able to achieve this goal, we would have to get the systolic blood pressure of every single American adult who works full-time. This is usually not feasible as researchers are unlikely to have the time and money to interview every single American adult who works full-time. Instead, a representative sample of American adults will be obtained, for example, 750 randomly selected American adults who work full-time are interviewed. We can then create density plots, histograms, compute the mean, median, variance, skewness, and other summaries that may be of interest, based on these 750 American adults.
+
+\subsubsection{Population Vs Sample}\label{population-vs-sample}
+
+The above scenario illustrates a few concepts and terms that are fundamental in estimation. In any study, we must be clear as to who or what is the population of interest, and who or what is the sample.
+
+The \textbf{population} (sometimes called the population of interest) is the entire set of individuals, or objects, or events that a study is interested in. In the scenario described above, the population would be (all) American adults who work full-time.
+
+The \textbf{sample} is the set of individuals, or objects, or events which we have data on. In the scenario described above, the sample is the 750 randomly selected American adults who work full-time.
+
+Ideally, the sample should be \textbf{representative} of the population. A representative sample is often achieved through a simple random sample, where each unit in the population has the same chance of being selected to be in the sample. In this module, we will assume that we have a representative sample. Note: You may feel that obtaining a simple random sample may be difficult. We will not get into a discussion of sampling (sometimes called survey sampling), which is a field of statistics that handles how to obtain representative samples, or how calculations should be adjusted if the sample is not representative. There is still a lot of research that is being done in survey sampling.
+
+\subsubsection{Variables \& Observations}\label{variables-observations}
+
+A \textbf{variable} is a characteristic or attribute of individuals, or objects, or events that make up the population and sample. In the above scenario, a variable would be the systolic blood pressure of American adults. We can use the notation of random variables to describe variables. For example, we can let \(X\) denote the systolic blood pressure of an American adult who works full-time, so writing \(P(X<20,000)\) means we want to find the probability that an American adult who works full-time earns less than \$20,000.
+
+An \textbf{observation} is the individual person, object or event that we collect data from. In the above scenario, an observation is a single American adult who works full-time in our sample of 750.
+
+One way to think about variables and observations is through a spreadsheet. Typically, each row represents an observation and each column represents a variable. Figure \ref{fig:07-dataframe} below displays such an example, based on the described scenario. Each row represents an observation, i.e.~a single American adult who works full time in our sample, and the column represents the variable, which is systolic blood pressure.
+
+\begin{figure}
+\centering
+\includegraphics{images/07-dataframe.png}
+\caption{\label{fig:07-dataframe}Example of Data in a Spreadsheet}
+\end{figure}
+
+\subsubsection{Parameter Vs Estimator}\label{parameter-vs-estimator}
+
+Now that we have made the distinction between a population and a sample, we are ready to define parameters and estimators.
+
+A \textbf{parameter} is a numerical summary associated with a population. In the scenario described above, an example of a population parameter would be the population mean systolic blood pressure of American adults who work full-time.
+
+An \textbf{estimator} is a numerical summary associated with a sample. An estimator is typically connected with its corresponding version in the population. In the scenario described above, an estimator of the population mean systolic blood pressure of American adults who work full-time could be the average systolic blood pressure of the 750 American adults who work full-time in our sample. So the sample mean is an estimator of the population mean.
+
+An \textbf{estimated value} is the actual value of the estimator based on a sample. In the scenario described above, suppose the average systolic blood pressure of the 750 American adults who work full-time is \$60,000. We will say the estimated value of the mean systolic blood pressure of American adults who work full-time is \$60,000.
+
+So a parameter is a number that is associated with a population, while an estimator is a number that is associated with a sample. Some other differences between parameters and estimators:
+
+\begin{itemize}
+\tightlist
+\item
+  The value of parameters are unknown, while we can actually calculate numerical values of estimators.
+\item
+  The value of parameters are considered fixed (as there is only one population), while the numerical values of estimators can vary if we obtain multiple random samples of the same sample size. Using the scenario above again, suppose we obtain a second representative sample of 750 America adults who work full-time. The average systolic blood pressure of this second sample is likely to be different from the average systolic blood pressure of the first sample. This illustrates that there is variance, or uncertainty, associated with estimators due to random sampling.
+\end{itemize}
+
+Whenever we propose an estimator for a parameter, we want to assess how ``good'' the estimator is. In some situations, there is an obvious choice for an estimator, for example, using the sample mean, \(\bar{x} = \frac{\sum x_i}{n}\) to estimate the population mean. But in some instances, the choice may not be so obvious. For example, why do use the sample variance \(s^2 = \frac{\sum (x_i - \bar{x})}{n-1}\) as an estimator for the population variance, and not \(\frac{\sum (x_i - \bar{x})}{n}\)? We will cover a few measures that are used to assess an estimator, mainly its bias, variance, and its mean-squared error.
+
+We will also cover a couple of methods in estimating parameters: the method of moments, and the method of maximum likelihood. You will notice that we use probability rules in these methods.
+
+To sum up estimation: we use data from a sample to estimate unknown characteristics of a population, so that we can answer questions regarding variables in the population, as well as provide a measure of uncertainty for our answers.
+
+\section{Method of Moments Estimation}\label{method-of-moments-estimation}
+
+We will cover a couple of methods in estimation. The first method is the \textbf{method of moments}. It is the more intuitive method, although it lacks certain ideal properties. Before defining this method, we recall and define some terms.
+
+In Section \ref{4-moments}, we defined \textbf{moments}. As a reminder, for a random variable \(X\), its \(k\)th moment is \(E(X^k)\), which can be found using LOTUS \(\int_{-\infty}^{\infty} x^k f_X(x) dx\).
+
+Suppose we observe a random sample \(X_1, \cdots, X_n\) that comes from \(X\). The \(k\)th \textbf{sample moment} is \(M_k = \frac{1}{n} \sum_{i=1}^n X_i^k\).
+
+Using these definitions,
+
+\begin{itemize}
+\tightlist
+\item
+  The 1st moment is \(E(X) = \mu_x\), the population mean of \(X\).
+\item
+  The 1st sample moment is \(M_1 = \frac{1}{n} \sum_{i=1}^n X_i = \bar{X}\), the sample mean of \(X\).
+\item
+  The 2nd moment is \(E(X^2)\).
+\item
+  The 2nd sample moment is \(M_2 = \frac{1}{n} \sum_{i=1}^n X_i^2\).
+\end{itemize}
+
+And so on.
+
+The method of moments estimation is: Let \(X\) be a random variable with distribution depending on parameters \(\theta_1, \cdots, \theta_m\). The \textbf{method of moments (MOM) estimators} \(\hat{\theta}_1, \cdots, \hat{\theta}_m\) are found by equating the first \(m\) sample moments to the corresponding first \(m\) moments and solving for \(\theta_1, \cdots, \theta_m\).
+
+Note: By convention, parameters are typically denoted by Greek letters, and their estimators are denoted by Greek letters with a hat symbol over them.
+
+Let us look at a couple of examples:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Suppose I have a coin and I do not know if it is fair or not. There are only two outcomes on a flip, heads or tails. Each flip is independent of other flips. Let \(X_i\) denote whether the \(i\)th flip lands heads, where \(X_i = 1\) if heads and \(X_i = 0\) if tails. We can see that \(X_i \sim Bern(p)\), where \(p\) is the probability it lands heads. Derive the MOM estimator for \(p\).
+\end{enumerate}
+
+A Bernoulli distribution has only 1 parameter, \(p\), so when using the method of moments, we only need to equate the first sample moment to the first moment.
+
+\begin{itemize}
+\tightlist
+\item
+  The first moment is \(E(X_i) = p\), since \(X_i \sim Bern(p)\).
+\item
+  The first sample moment is \(M_1 = \frac{1}{n} \sum_{i=1}^n X_i = \bar{X}\).
+\end{itemize}
+
+Set \(E(X_i) = M_1\), i.e.~\(\hat{p} = \bar{X}\). Since \(X_i = 1\) if heads and \(X_i = 0\) if tails, \(\frac{1}{n} \sum_{i=1}^n X_i = \bar{X}\)\$ actually represents the proportion of flips that land on heads, based on \(n\) flips. So this is actually the sample proportion.
+
+The MOM estimator for this problem is \(\hat{p}\), the proportion of \(n\) flips that land on heads. This result should be fairly intuitive. If the true success probability is 0.7, we expect 70\% of \(n\) flips to land on heads.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Birth weights of newborn babies typically follow a normal distribution. We have data from births at Baystate Medical Center in Springfield, MA, during 1986. Assuming that the births at this hospital is representative of births in New England in 1986, derive the MOM estimators for \(\mu\) and \(\sigma^2\), the mean and variance of the distribution of birth weights in New England in 1986.
+\end{enumerate}
+
+A normal distribution has 2 parameters, \(\mu\) and \(\sigma^2\), so we need to equate the first two sample moments to the first two moments. Let \(X\) denote the birth weights in New England in 1986, so \(X \sim N(\mu, \sigma^2)\).
+
+\begin{itemize}
+\tightlist
+\item
+  The first moment is \(E(X) = \mu\), since \(X \sim N(\mu, \sigma^2)\).
+\item
+  The first sample moment is \(M_1 = \frac{1}{n} \sum_{i=1}^n X_i = \bar{X}\).
+\end{itemize}
+
+So we set \(E(X) = M_1\), i.e.~\(\hat{\mu} = \bar{X}\). This is just the sample average of the birth weights at Baystate Medical Center in 1986.
+
+\begin{itemize}
+\tightlist
+\item
+  The second moment is \(E(X^2)\). But we know that since \(X \sim N(\mu, \sigma^2)\).
+\end{itemize}
+
+\[
+\begin{split}
+Var(X) &= E(X^2) - E(X)^2\\
+\implies E(X^2) &= Var(X) + E(X)^2 \\
+\implies E(X^2) &= \sigma^2 + \mu^2
+\end{split}
+\]
+
+\begin{itemize}
+\tightlist
+\item
+  The second sample moment is \(M_2 = \frac{1}{n} \sum_{i=1}^n X_i^2\).
+\end{itemize}
+
+So we set \(E(X^2) = M_2\), i.e.~\(\hat{\sigma^2} + \hat{\mu}^2 = \frac{1}{n} \sum_{i=1}^n X_i^2\). Since we earlier found that \(\hat{\mu} = \bar{X}\), we get \(\hat{\sigma^2}  = \frac{1}{n} \sum_{i=1}^n X_i^2 - \bar{X}^2\)
+
+Therefore, the MOM estimators for \(\mu\) and \(\sigma^2\) are \(\hat{\mu} = \bar{X}\) and \(\hat{\sigma^2}  = \frac{1}{n} \sum_{i=1}^n X_i^2 - \bar{X}^2\) respectively.
+
+\section{Method of Maximum Likelihood Estimation}\label{method-of-maximum-likelihood-estimation}
+
+\section{Assessing Estimators}\label{assessing-estimators}
+
+\subsection{Bias}\label{bias}
+
+\subsection{Standard Error and Variance}\label{standard-error-and-variance}
+
+\subsubsection{Consistency}\label{consistency}
+
+\subsection{Mean-Squared Error}\label{mean-squared-error}
 
   \bibliography{book.bib,packages.bib}
 

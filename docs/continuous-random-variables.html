@@ -49,6 +49,7 @@
 <li><a class="active" href="continuous-random-variables.html"><span class="header-section-number">4</span> Continuous Random Variables</a></li>
 <li><a class="" href="joint-distributions.html"><span class="header-section-number">5</span> Joint Distributions</a></li>
 <li><a class="" href="inequalities-limit-theorems-and-simulations.html"><span class="header-section-number">6</span> Inequalities, Limit Theorems, and Simulations</a></li>
+<li><a class="" href="estimation.html"><span class="header-section-number">7</span> Estimation</a></li>
 </ul>
 
         <div class="book-extra">
@@ -180,7 +181,7 @@ E(X) = \int_{-\infty}^{\infty} x f_X(x) dx.
 <p>The <strong>linearity of expectations</strong> still hold in the same way, per equation <a href="discrete-random-variables.html#eq:3-linEX">(3.3)</a>. It does not matter if the random variable is discrete or continuous.</p>
 <p>The <strong>Law of the Unconscious Statistician (LOTUS)</strong> also still applies. For a continuous random variable <span class="math inline">\(X\)</span>, it is (unsurprisingly):</p>
 <p><span class="math display" id="eq:4-lotus">\[\begin{equation}
-E(g(X)) = \int_{-\infty}^{\infty} g(x) f_X(x).
+E(g(X)) = \int_{-\infty}^{\infty} g(x) f_X(x) dx.
 \tag{4.4}
 \end{equation}\]</span></p>
 <p>Notice again when we compare equation <a href="continuous-random-variables.html#eq:4-lotus">(4.4)</a> with its discrete counterpart in equation <a href="discrete-random-variables.html#eq:3-lotus">(3.4)</a>: we have just replaced the summation with an integral.</p>
@@ -225,15 +226,15 @@ Var(X) = \int_{-\infty}^{\infty} (x-\mu)^2 f_X(x) dx.
 \end{equation}\]</span></p>
 <p>The properties of variance is still the same as in Section <a href="discrete-random-variables.html#var-prop">3.4.3.1</a>. It does not matter if the random variable is discrete or continuous. A common notation used for variance is <span class="math inline">\(\sigma^2\)</span>, or sometimes <span class="math inline">\(\sigma_X^2\)</span> to show it is the variance of the random variable <span class="math inline">\(X\)</span>.</p>
 </div>
-<div id="moments" class="section level3" number="4.4.3">
+<div id="id_4-moments" class="section level3" number="4.4.3">
 <h3>
-<span class="header-section-number">4.4.3</span> Moments<a class="anchor" aria-label="anchor" href="#moments"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.4.3</span> Moments<a class="anchor" aria-label="anchor" href="#id_4-moments"><i class="fas fa-link"></i></a>
 </h3>
 <p>Before talking about other measures that are used to describe continuous distributions, we will cover some terminology that is used for these measures. Suppose we have a random variable <span class="math inline">\(X\)</span>.</p>
 <ul>
-<li>The <strong><span class="math inline">\(n\)</span>th moment</strong> of <span class="math inline">\(X\)</span> is <span class="math inline">\(E(X^n)\)</span>. So the expected value, or the mean, is sometimes called the first moment.</li>
-<li>The <strong><span class="math inline">\(n\)</span>th central moment</strong> of <span class="math inline">\(X\)</span> is <span class="math inline">\(E((X-\mu)^n)\)</span>. So the variance is sometimes called the second central moment.</li>
-<li>The <strong><span class="math inline">\(n\)</span> standardized moment</strong> of <span class="math inline">\(X\)</span> is <span class="math inline">\(E(\frac{(X-\mu)^n}{\sigma})\)</span>.</li>
+<li>The <strong><span class="math inline">\(k\)</span>th moment</strong> of <span class="math inline">\(X\)</span> is <span class="math inline">\(E(X^k)\)</span>. So the expected value, or the mean, is sometimes called the first moment.</li>
+<li>The <strong><span class="math inline">\(k\)</span>th central moment</strong> of <span class="math inline">\(X\)</span> is <span class="math inline">\(E((X-\mu)^k)\)</span>. So the variance is sometimes called the second central moment.</li>
+<li>The <strong><span class="math inline">\(k\)</span> standardized moment</strong> of <span class="math inline">\(X\)</span> is <span class="math inline">\(E(\frac{(X-\mu)^k}{\sigma})\)</span>.</li>
 </ul>
 </div>
 <div id="skewness" class="section level3" number="4.4.4">
@@ -695,7 +696,7 @@ s_X^2 =  \frac{1}{n-1} \sum_{i=1}^n (x_i - \bar{x})^2,
 <a class="nav-link" href="#summaries-of-a-distribution"><span class="header-section-number">4.4</span> Summaries of a Distribution</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#expectations-1"><span class="header-section-number">4.4.1</span> Expectations</a></li>
 <li><a class="nav-link" href="#variance-1"><span class="header-section-number">4.4.2</span> Variance</a></li>
-<li><a class="nav-link" href="#moments"><span class="header-section-number">4.4.3</span> Moments</a></li>
+<li><a class="nav-link" href="#id_4-moments"><span class="header-section-number">4.4.3</span> Moments</a></li>
 <li><a class="nav-link" href="#skewness"><span class="header-section-number">4.4.4</span> Skewness</a></li>
 <li><a class="nav-link" href="#kurtosis"><span class="header-section-number">4.4.5</span> Kurtosis</a></li>
 </ul>
@@ -729,7 +730,7 @@ s_X^2 =  \frac{1}{n-1} \sum_{i=1}^n (x_i - \bar{x})^2,
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2025-07-08.</p>
+    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2025-07-10.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

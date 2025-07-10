@@ -135,6 +135,7 @@ eq:6-CLT
 fig:6-CLTnorm
 fig:6-CLTpois
 fig:circle
+fig:07-dataframe
 examples
 example-1-mario-kart-auction-prices
 eg2
@@ -231,7 +232,7 @@ median-1
 mode-1
 loss-functions
 variance-1
-moments
+id_4-moments
 skewness
 kurtosis
 common-continuous-random-variables
@@ -288,3 +289,16 @@ monte-carlo-methods-for-probabilities
 monte-carlo-methods-for-other-purposes
 considerations-with-monte-carlo-methods
 set.seed-in-r
+estimation
+introduction-3
+big-picture-idea-with-estimation
+population-vs-sample
+variables-observations
+parameter-vs-estimator
+method-of-moments-estimation
+method-of-maximum-likelihood-estimation
+assessing-estimators
+bias
+standard-error-and-variance
+consistency
+mean-squared-error

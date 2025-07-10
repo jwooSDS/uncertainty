@@ -157,7 +157,7 @@ The **linearity of expectations** still hold in the same way, per equation \@ref
 The **Law of the Unconscious Statistician (LOTUS)** also still applies. For a continuous random variable $X$, it is (unsurprisingly):
 
 \begin{equation} 
-E(g(X)) = \int_{-\infty}^{\infty} g(x) f_X(x).
+E(g(X)) = \int_{-\infty}^{\infty} g(x) f_X(x) dx.
 (\#eq:4-lotus)
 \end{equation}
 
@@ -199,13 +199,13 @@ Var(X) = \int_{-\infty}^{\infty} (x-\mu)^2 f_X(x) dx.
 
 The properties of variance is still the same as in Section \@ref(var-prop). It does not matter if the random variable is discrete or continuous. A common notation used for variance is $\sigma^2$, or sometimes $\sigma_X^2$ to show it is the variance of the random variable $X$. 
 
-### Moments
+### Moments {#4-moments}
 
 Before talking about other measures that are used to describe continuous distributions, we will cover some terminology that is used for these measures. Suppose we have a random variable $X$.
 
-- The **$n$th moment** of $X$ is $E(X^n)$. So the expected value, or the mean, is sometimes called the first moment.
-- The **$n$th central moment** of $X$ is $E((X-\mu)^n)$. So the variance is sometimes called the second central moment.
-- The **$n$ standardized moment** of $X$ is $E(\frac{(X-\mu)^n}{\sigma})$.
+- The **$k$th moment** of $X$ is $E(X^k)$. So the expected value, or the mean, is sometimes called the first moment.
+- The **$k$th central moment** of $X$ is $E((X-\mu)^k)$. So the variance is sometimes called the second central moment.
+- The **$k$ standardized moment** of $X$ is $E(\frac{(X-\mu)^k}{\sigma})$.
 
 ### Skewness
 

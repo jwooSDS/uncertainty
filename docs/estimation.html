@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 7 Estimation | Understanding Uncertainty Course Notes</title>
+<meta name="author" content="Jeffrey Woo">
+<meta name="description" content="This module is based on Introduction to Probability for Data Science (Chan), Chapter 8. You can access the book for free at https://probability4datascience.com. Please note that I cover additional...">
+<meta name="generator" content="bookdown 0.43 with bs4_book()">
+<meta property="og:title" content="Chapter 7 Estimation | Understanding Uncertainty Course Notes">
+<meta property="og:type" content="book">
+<meta property="og:description" content="This module is based on Introduction to Probability for Data Science (Chan), Chapter 8. You can access the book for free at https://probability4datascience.com. Please note that I cover additional...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 7 Estimation | Understanding Uncertainty Course Notes">
+<meta name="twitter:description" content="This module is based on Introduction to Probability for Data Science (Chan), Chapter 8. You can access the book for free at https://probability4datascience.com. Please note that I cover additional...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.9.0/transition.js"></script><script src="libs/bs3compat-0.9.0/tabs.js"></script><script src="libs/bs3compat-0.9.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Understanding Uncertainty Course Notes</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Preface</a></li>
+<li><a class="" href="descriptive.html"><span class="header-section-number">1</span> Descriptive Statistics</a></li>
+<li><a class="" href="probability.html"><span class="header-section-number">2</span> Probability</a></li>
+<li><a class="" href="discrete-random-variables.html"><span class="header-section-number">3</span> Discrete Random Variables</a></li>
+<li><a class="" href="continuous-random-variables.html"><span class="header-section-number">4</span> Continuous Random Variables</a></li>
+<li><a class="" href="joint-distributions.html"><span class="header-section-number">5</span> Joint Distributions</a></li>
+<li><a class="" href="inequalities-limit-theorems-and-simulations.html"><span class="header-section-number">6</span> Inequalities, Limit Theorems, and Simulations</a></li>
+<li><a class="active" href="estimation.html"><span class="header-section-number">7</span> Estimation</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="estimation" class="section level1" number="7">
+<h1>
+<span class="header-section-number">7</span> Estimation<a class="anchor" aria-label="anchor" href="#estimation"><i class="fas fa-link"></i></a>
+</h1>
+<p>This module is based on Introduction to Probability for Data Science (Chan), Chapter 8. You can access the book for free at <a href="https://probability4datascience.com" class="uri">https://probability4datascience.com</a>. Please note that I cover additional topics, and skip certain topics from the book. You may skip ??? from the book.</p>
+<div id="introduction-3" class="section level2" number="7.1">
+<h2>
+<span class="header-section-number">7.1</span> Introduction<a class="anchor" aria-label="anchor" href="#introduction-3"><i class="fas fa-link"></i></a>
+</h2>
+<p>We consider building models based on the data we have. Many models are based on some distribution, for example, the linear regression model is based on the normal distribution, and the logistic regression model is based on the Bernoulli distribution. Recall that these distributions are specified by their parameters: the mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^2\)</span> for the normal distribution, and the success probability <span class="math inline">\(p\)</span> for a Bernoulli distribution. The value of the parameters are almost always unknown in real life. This module deals with estimation: how do we estimate the values of these parameters, as well as quantify the level of uncertainty we have with these estimated values.</p>
+<div id="big-picture-idea-with-estimation" class="section level3" number="7.1.1">
+<h3>
+<span class="header-section-number">7.1.1</span> Big Picture Idea with Estimation<a class="anchor" aria-label="anchor" href="#big-picture-idea-with-estimation"><i class="fas fa-link"></i></a>
+</h3>
+<p>Consider this simple scenario. We want to find the distribution associated with the systolic blood pressure of American adults who work full-time. To be able to achieve this goal, we would have to get the systolic blood pressure of every single American adult who works full-time. This is usually not feasible as researchers are unlikely to have the time and money to interview every single American adult who works full-time. Instead, a representative sample of American adults will be obtained, for example, 750 randomly selected American adults who work full-time are interviewed. We can then create density plots, histograms, compute the mean, median, variance, skewness, and other summaries that may be of interest, based on these 750 American adults.</p>
+<div id="population-vs-sample" class="section level4" number="7.1.1.1">
+<h4>
+<span class="header-section-number">7.1.1.1</span> Population Vs Sample<a class="anchor" aria-label="anchor" href="#population-vs-sample"><i class="fas fa-link"></i></a>
+</h4>
+<p>The above scenario illustrates a few concepts and terms that are fundamental in estimation. In any study, we must be clear as to who or what is the population of interest, and who or what is the sample.</p>
+<p>The <strong>population</strong> (sometimes called the population of interest) is the entire set of individuals, or objects, or events that a study is interested in. In the scenario described above, the population would be (all) American adults who work full-time.</p>
+<p>The <strong>sample</strong> is the set of individuals, or objects, or events which we have data on. In the scenario described above, the sample is the 750 randomly selected American adults who work full-time.</p>
+<p>Ideally, the sample should be <strong>representative</strong> of the population. A representative sample is often achieved through a simple random sample, where each unit in the population has the same chance of being selected to be in the sample. In this module, we will assume that we have a representative sample. Note: You may feel that obtaining a simple random sample may be difficult. We will not get into a discussion of sampling (sometimes called survey sampling), which is a field of statistics that handles how to obtain representative samples, or how calculations should be adjusted if the sample is not representative. There is still a lot of research that is being done in survey sampling.</p>
+</div>
+<div id="variables-observations" class="section level4" number="7.1.1.2">
+<h4>
+<span class="header-section-number">7.1.1.2</span> Variables &amp; Observations<a class="anchor" aria-label="anchor" href="#variables-observations"><i class="fas fa-link"></i></a>
+</h4>
+<p>A <strong>variable</strong> is a characteristic or attribute of individuals, or objects, or events that make up the population and sample. In the above scenario, a variable would be the systolic blood pressure of American adults. We can use the notation of random variables to describe variables. For example, we can let <span class="math inline">\(X\)</span> denote the systolic blood pressure of an American adult who works full-time, so writing <span class="math inline">\(P(X&lt;20,000)\)</span> means we want to find the probability that an American adult who works full-time earns less than $20,000.</p>
+<p>An <strong>observation</strong> is the individual person, object or event that we collect data from. In the above scenario, an observation is a single American adult who works full-time in our sample of 750.</p>
+<p>One way to think about variables and observations is through a spreadsheet. Typically, each row represents an observation and each column represents a variable. Figure <a href="estimation.html#fig:07-dataframe">7.1</a> below displays such an example, based on the described scenario. Each row represents an observation, i.e. a single American adult who works full time in our sample, and the column represents the variable, which is systolic blood pressure.</p>
+<div class="figure">
+<span style="display:block;" id="fig:07-dataframe"></span>
+<img src="images/07-dataframe.png" alt="Example of Data in a Spreadsheet"><p class="caption">
+Figure 7.1: Example of Data in a Spreadsheet
+</p>
+</div>
+</div>
+<div id="parameter-vs-estimator" class="section level4" number="7.1.1.3">
+<h4>
+<span class="header-section-number">7.1.1.3</span> Parameter Vs Estimator<a class="anchor" aria-label="anchor" href="#parameter-vs-estimator"><i class="fas fa-link"></i></a>
+</h4>
+<p>Now that we have made the distinction between a population and a sample, we are ready to define parameters and estimators.</p>
+<p>A <strong>parameter</strong> is a numerical summary associated with a population. In the scenario described above, an example of a population parameter would be the population mean systolic blood pressure of American adults who work full-time.</p>
+<p>An <strong>estimator</strong> is a numerical summary associated with a sample. An estimator is typically connected with its corresponding version in the population. In the scenario described above, an estimator of the population mean systolic blood pressure of American adults who work full-time could be the average systolic blood pressure of the 750 American adults who work full-time in our sample. So the sample mean is an estimator of the population mean.</p>
+<p>An <strong>estimated value</strong> is the actual value of the estimator based on a sample. In the scenario described above, suppose the average systolic blood pressure of the 750 American adults who work full-time is $60,000. We will say the estimated value of the mean systolic blood pressure of American adults who work full-time is $60,000.</p>
+<p>So a parameter is a number that is associated with a population, while an estimator is a number that is associated with a sample. Some other differences between parameters and estimators:</p>
+<ul>
+<li>The value of parameters are unknown, while we can actually calculate numerical values of estimators.</li>
+<li>The value of parameters are considered fixed (as there is only one population), while the numerical values of estimators can vary if we obtain multiple random samples of the same sample size. Using the scenario above again, suppose we obtain a second representative sample of 750 America adults who work full-time. The average systolic blood pressure of this second sample is likely to be different from the average systolic blood pressure of the first sample. This illustrates that there is variance, or uncertainty, associated with estimators due to random sampling.</li>
+</ul>
+<p>Whenever we propose an estimator for a parameter, we want to assess how “good” the estimator is. In some situations, there is an obvious choice for an estimator, for example, using the sample mean, <span class="math inline">\(\bar{x} = \frac{\sum x_i}{n}\)</span> to estimate the population mean. But in some instances, the choice may not be so obvious. For example, why do use the sample variance <span class="math inline">\(s^2 = \frac{\sum (x_i - \bar{x})}{n-1}\)</span> as an estimator for the population variance, and not <span class="math inline">\(\frac{\sum (x_i - \bar{x})}{n}\)</span>? We will cover a few measures that are used to assess an estimator, mainly its bias, variance, and its mean-squared error.</p>
+<p>We will also cover a couple of methods in estimating parameters: the method of moments, and the method of maximum likelihood. You will notice that we use probability rules in these methods.</p>
+<p>To sum up estimation: we use data from a sample to estimate unknown characteristics of a population, so that we can answer questions regarding variables in the population, as well as provide a measure of uncertainty for our answers.</p>
+</div>
+</div>
+</div>
+<div id="method-of-moments-estimation" class="section level2" number="7.2">
+<h2>
+<span class="header-section-number">7.2</span> Method of Moments Estimation<a class="anchor" aria-label="anchor" href="#method-of-moments-estimation"><i class="fas fa-link"></i></a>
+</h2>
+<p>We will cover a couple of methods in estimation. The first method is the <strong>method of moments</strong>. It is the more intuitive method, although it lacks certain ideal properties. Before defining this method, we recall and define some terms.</p>
+<p>In Section <a href="#4-moments"><strong>??</strong></a>, we defined <strong>moments</strong>. As a reminder, for a random variable <span class="math inline">\(X\)</span>, its <span class="math inline">\(k\)</span>th moment is <span class="math inline">\(E(X^k)\)</span>, which can be found using LOTUS <span class="math inline">\(\int_{-\infty}^{\infty} x^k f_X(x) dx\)</span>.</p>
+<p>Suppose we observe a random sample <span class="math inline">\(X_1, \cdots, X_n\)</span> that comes from <span class="math inline">\(X\)</span>. The <span class="math inline">\(k\)</span>th <strong>sample moment</strong> is <span class="math inline">\(M_k = \frac{1}{n} \sum_{i=1}^n X_i^k\)</span>.</p>
+<p>Using these definitions,</p>
+<ul>
+<li>The 1st moment is <span class="math inline">\(E(X) = \mu_x\)</span>, the population mean of <span class="math inline">\(X\)</span>.</li>
+<li>The 1st sample moment is <span class="math inline">\(M_1 = \frac{1}{n} \sum_{i=1}^n X_i = \bar{X}\)</span>, the sample mean of <span class="math inline">\(X\)</span>.</li>
+<li>The 2nd moment is <span class="math inline">\(E(X^2)\)</span>.</li>
+<li>The 2nd sample moment is <span class="math inline">\(M_2 = \frac{1}{n} \sum_{i=1}^n X_i^2\)</span>.</li>
+</ul>
+<p>And so on.</p>
+<p>The method of moments estimation is: Let <span class="math inline">\(X\)</span> be a random variable with distribution depending on parameters <span class="math inline">\(\theta_1, \cdots, \theta_m\)</span>. The <strong>method of moments (MOM) estimators</strong> <span class="math inline">\(\hat{\theta}_1, \cdots, \hat{\theta}_m\)</span> are found by equating the first <span class="math inline">\(m\)</span> sample moments to the corresponding first <span class="math inline">\(m\)</span> moments and solving for <span class="math inline">\(\theta_1, \cdots, \theta_m\)</span>.</p>
+<p>Note: By convention, parameters are typically denoted by Greek letters, and their estimators are denoted by Greek letters with a hat symbol over them.</p>
+<p>Let us look at a couple of examples:</p>
+<ol style="list-style-type: decimal">
+<li>Suppose I have a coin and I do not know if it is fair or not. There are only two outcomes on a flip, heads or tails. Each flip is independent of other flips. Let <span class="math inline">\(X_i\)</span> denote whether the <span class="math inline">\(i\)</span>th flip lands heads, where <span class="math inline">\(X_i = 1\)</span> if heads and <span class="math inline">\(X_i = 0\)</span> if tails. We can see that <span class="math inline">\(X_i \sim Bern(p)\)</span>, where <span class="math inline">\(p\)</span> is the probability it lands heads. Derive the MOM estimator for <span class="math inline">\(p\)</span>.</li>
+</ol>
+<p>A Bernoulli distribution has only 1 parameter, <span class="math inline">\(p\)</span>, so when using the method of moments, we only need to equate the first sample moment to the first moment.</p>
+<ul>
+<li>The first moment is <span class="math inline">\(E(X_i) = p\)</span>, since <span class="math inline">\(X_i \sim Bern(p)\)</span>.</li>
+<li>The first sample moment is <span class="math inline">\(M_1 = \frac{1}{n} \sum_{i=1}^n X_i = \bar{X}\)</span>.</li>
+</ul>
+<p>Set <span class="math inline">\(E(X_i) = M_1\)</span>, i.e. <span class="math inline">\(\hat{p} = \bar{X}\)</span>. Since <span class="math inline">\(X_i = 1\)</span> if heads and <span class="math inline">\(X_i = 0\)</span> if tails, <span class="math inline">\(\frac{1}{n} \sum_{i=1}^n X_i = \bar{X}\)</span>$ actually represents the proportion of flips that land on heads, based on <span class="math inline">\(n\)</span> flips. So this is actually the sample proportion.</p>
+<p>The MOM estimator for this problem is <span class="math inline">\(\hat{p}\)</span>, the proportion of <span class="math inline">\(n\)</span> flips that land on heads. This result should be fairly intuitive. If the true success probability is 0.7, we expect 70% of <span class="math inline">\(n\)</span> flips to land on heads.</p>
+<ol start="2" style="list-style-type: decimal">
+<li>Birth weights of newborn babies typically follow a normal distribution. We have data from births at Baystate Medical Center in Springfield, MA, during 1986. Assuming that the births at this hospital is representative of births in New England in 1986, derive the MOM estimators for <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma^2\)</span>, the mean and variance of the distribution of birth weights in New England in 1986.</li>
+</ol>
+<p>A normal distribution has 2 parameters, <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma^2\)</span>, so we need to equate the first two sample moments to the first two moments. Let <span class="math inline">\(X\)</span> denote the birth weights in New England in 1986, so <span class="math inline">\(X \sim N(\mu, \sigma^2)\)</span>.</p>
+<ul>
+<li>The first moment is <span class="math inline">\(E(X) = \mu\)</span>, since <span class="math inline">\(X \sim N(\mu, \sigma^2)\)</span>.</li>
+<li>The first sample moment is <span class="math inline">\(M_1 = \frac{1}{n} \sum_{i=1}^n X_i = \bar{X}\)</span>.</li>
+</ul>
+<p>So we set <span class="math inline">\(E(X) = M_1\)</span>, i.e. <span class="math inline">\(\hat{\mu} = \bar{X}\)</span>. This is just the sample average of the birth weights at Baystate Medical Center in 1986.</p>
+<ul>
+<li>The second moment is <span class="math inline">\(E(X^2)\)</span>. But we know that since <span class="math inline">\(X \sim N(\mu, \sigma^2)\)</span>.</li>
+</ul>
+<p><span class="math display">\[
+\begin{split}
+Var(X) &amp;= E(X^2) - E(X)^2\\
+\implies E(X^2) &amp;= Var(X) + E(X)^2 \\
+\implies E(X^2) &amp;= \sigma^2 + \mu^2
+\end{split}
+\]</span></p>
+<ul>
+<li>The second sample moment is <span class="math inline">\(M_2 = \frac{1}{n} \sum_{i=1}^n X_i^2\)</span>.</li>
+</ul>
+<p>So we set <span class="math inline">\(E(X^2) = M_2\)</span>, i.e. <span class="math inline">\(\hat{\sigma^2} + \hat{\mu}^2 = \frac{1}{n} \sum_{i=1}^n X_i^2\)</span>. Since we earlier found that <span class="math inline">\(\hat{\mu} = \bar{X}\)</span>, we get <span class="math inline">\(\hat{\sigma^2}  = \frac{1}{n} \sum_{i=1}^n X_i^2 - \bar{X}^2\)</span></p>
+<p>Therefore, the MOM estimators for <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma^2\)</span> are <span class="math inline">\(\hat{\mu} = \bar{X}\)</span> and <span class="math inline">\(\hat{\sigma^2}  = \frac{1}{n} \sum_{i=1}^n X_i^2 - \bar{X}^2\)</span> respectively.</p>
+</div>
+<div id="method-of-maximum-likelihood-estimation" class="section level2" number="7.3">
+<h2>
+<span class="header-section-number">7.3</span> Method of Maximum Likelihood Estimation<a class="anchor" aria-label="anchor" href="#method-of-maximum-likelihood-estimation"><i class="fas fa-link"></i></a>
+</h2>
+</div>
+<div id="assessing-estimators" class="section level2" number="7.4">
+<h2>
+<span class="header-section-number">7.4</span> Assessing Estimators<a class="anchor" aria-label="anchor" href="#assessing-estimators"><i class="fas fa-link"></i></a>
+</h2>
+<div id="bias" class="section level3" number="7.4.1">
+<h3>
+<span class="header-section-number">7.4.1</span> Bias<a class="anchor" aria-label="anchor" href="#bias"><i class="fas fa-link"></i></a>
+</h3>
+</div>
+<div id="standard-error-and-variance" class="section level3" number="7.4.2">
+<h3>
+<span class="header-section-number">7.4.2</span> Standard Error and Variance<a class="anchor" aria-label="anchor" href="#standard-error-and-variance"><i class="fas fa-link"></i></a>
+</h3>
+<div id="consistency" class="section level4" number="7.4.2.1">
+<h4>
+<span class="header-section-number">7.4.2.1</span> Consistency<a class="anchor" aria-label="anchor" href="#consistency"><i class="fas fa-link"></i></a>
+</h4>
+</div>
+</div>
+<div id="mean-squared-error" class="section level3" number="7.4.3">
+<h3>
+<span class="header-section-number">7.4.3</span> Mean-Squared Error<a class="anchor" aria-label="anchor" href="#mean-squared-error"><i class="fas fa-link"></i></a>
+</h3>
+
+</div>
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="inequalities-limit-theorems-and-simulations.html"><span class="header-section-number">6</span> Inequalities, Limit Theorems, and Simulations</a></div>
+<div class="empty"></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#estimation"><span class="header-section-number">7</span> Estimation</a></li>
+<li>
+<a class="nav-link" href="#introduction-3"><span class="header-section-number">7.1</span> Introduction</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#big-picture-idea-with-estimation"><span class="header-section-number">7.1.1</span> Big Picture Idea with Estimation</a></li></ul>
+</li>
+<li><a class="nav-link" href="#method-of-moments-estimation"><span class="header-section-number">7.2</span> Method of Moments Estimation</a></li>
+<li><a class="nav-link" href="#method-of-maximum-likelihood-estimation"><span class="header-section-number">7.3</span> Method of Maximum Likelihood Estimation</a></li>
+<li>
+<a class="nav-link" href="#assessing-estimators"><span class="header-section-number">7.4</span> Assessing Estimators</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#bias"><span class="header-section-number">7.4.1</span> Bias</a></li>
+<li><a class="nav-link" href="#standard-error-and-variance"><span class="header-section-number">7.4.2</span> Standard Error and Variance</a></li>
+<li><a class="nav-link" href="#mean-squared-error"><span class="header-section-number">7.4.3</span> Mean-Squared Error</a></li>
+</ul>
+</li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2025-07-10.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>
