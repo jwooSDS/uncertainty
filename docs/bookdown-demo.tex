@@ -2340,7 +2340,7 @@ Var(X) = \int_{-\infty}^{\infty} (x-\mu)^2 f_X(x) dx.
 
 The properties of variance is still the same as in Section \ref{var-prop}. It does not matter if the random variable is discrete or continuous. A common notation used for variance is \(\sigma^2\), or sometimes \(\sigma_X^2\) to show it is the variance of the random variable \(X\).
 
-\subsection{Moments}\label{4-moments}
+\subsection{Moments}\label{moments}
 
 Before talking about other measures that are used to describe continuous distributions, we will cover some terminology that is used for these measures. Suppose we have a random variable \(X\).
 
@@ -4752,7 +4752,7 @@ To sum up estimation: we use data from a sample to estimate unknown characterist
 
 We will cover a couple of methods in estimation. The first method is the \textbf{method of moments}. It is the more intuitive method, although it lacks certain ideal properties. Before defining this method, we recall and define some terms.
 
-In Section \ref{4-moments}, we defined \textbf{moments}. As a reminder, for a random variable \(X\), its \(k\)th moment is \(E(X^k)\), which can be found using LOTUS \(\int_{-\infty}^{\infty} x^k f_X(x) dx\).
+In Section \ref{moments}, we defined \textbf{moments}. As a reminder, for a random variable \(X\), its \(k\)th moment is \(E(X^k)\), which can be found using LOTUS \(\int_{-\infty}^{\infty} x^k f_X(x) dx\).
 
 Suppose we observe a random sample \(X_1, \cdots, X_n\) that comes from \(X\). The \(k\)th \textbf{sample moment} is \(M_k = \frac{1}{n} \sum_{i=1}^n X_i^k\).
 
@@ -4925,7 +4925,7 @@ We now use these MOM estimators on the data set of birth weights at Baystate Med
 
 \subsection{Alternative Form of Method of Moments Estimation}\label{alternative-form-of-method-of-moments-estimation}
 
-In Section \ref{4-moments}, we defined ** central moments**. As a reminder, for a random variable \(X\), its \(k\)th central moment is \(E((X-\mu)^k)\).
+In Section \ref{moments}, we defined ** central moments**. As a reminder, for a random variable \(X\), its \(k\)th central moment is \(E((X-\mu)^k)\).
 
 Suppose we observe a random sample \(X_1, \cdots, X_n\) that comes from \(X\). The \(k\)th \textbf{sample central moment} is \(M_k^* = \frac{1}{n} \sum_{i=1}^n (X_i - \bar{X})^k\).
 

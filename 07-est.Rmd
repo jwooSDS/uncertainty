@@ -61,7 +61,7 @@ To sum up estimation: we use data from a sample to estimate unknown characterist
 
 We will cover a couple of methods in estimation. The first method is the **method of moments**. It is the more intuitive method, although it lacks certain ideal properties. Before defining this method, we recall and define some terms.
 
-In Section \@ref(4-moments), we defined **moments**. As a reminder, for a random variable $X$, its $k$th moment is $E(X^k)$, which can be found using LOTUS $\int_{-\infty}^{\infty} x^k f_X(x) dx$. 
+In Section \@ref(moments), we defined **moments**. As a reminder, for a random variable $X$, its $k$th moment is $E(X^k)$, which can be found using LOTUS $\int_{-\infty}^{\infty} x^k f_X(x) dx$. 
 
 Suppose we observe a random sample $X_1, \cdots, X_n$ that comes from $X$. The $k$th **sample moment** is $M_k = \frac{1}{n} \sum_{i=1}^n X_i^k$.
 
@@ -141,7 +141,7 @@ curve(dnorm(x, mean=mu, sd=sqrt(sigma2)),
 
 ### Alternative Form of Method of Moments Estimation
 
-In Section \@ref(4-moments), we defined ** central moments**. As a reminder, for a random variable $X$, its $k$th central moment is $E((X-\mu)^k)$.
+In Section \@ref(moments), we defined ** central moments**. As a reminder, for a random variable $X$, its $k$th central moment is $E((X-\mu)^k)$.
 
 Suppose we observe a random sample $X_1, \cdots, X_n$ that comes from $X$. The $k$th **sample central moment** is $M_k^* = \frac{1}{n} \sum_{i=1}^n (X_i - \bar{X})^k$.
 

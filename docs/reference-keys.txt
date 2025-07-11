@@ -235,7 +235,7 @@ median-1
 mode-1
 loss-functions
 variance-1
-id_4-moments
+moments
 skewness
 kurtosis
 common-continuous-random-variables
