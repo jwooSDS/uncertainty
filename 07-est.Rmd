@@ -76,6 +76,8 @@ And so on.
 
 The method of moments estimation is: Let $X$ be a random variable with distribution depending on parameters $\theta_1, \cdots, \theta_m$. The **method of moments (MOM) estimators** $\hat{\theta}_1, \cdots, \hat{\theta}_m$ are found by equating the first $m$ sample moments to the corresponding first $m$ moments and solving for $\theta_1, \cdots, \theta_m$.
 
+You might have noticed that the method of moments is based on the Law of Large Numbers. 
+
 Note: By convention, parameters are typically denoted by Greek letters, and their estimators are denoted by Greek letters with a hat symbol over them. 
 
 Let us look at a couple of examples:
@@ -112,14 +114,120 @@ $$
 
 - The second sample moment is $M_2 = \frac{1}{n} \sum_{i=1}^n X_i^2$.
 
-So we set $E(X^2) = M_2$, i.e. $\hat{\sigma^2} + \hat{\mu}^2 = \frac{1}{n} \sum_{i=1}^n X_i^2$. Since we earlier found that $\hat{\mu} = \bar{X}$, we get $\hat{\sigma^2}  = \frac{1}{n} \sum_{i=1}^n X_i^2 - \bar{X}^2$
+So we set $E(X^2) = M_2$, i.e. $\hat{\sigma^2} + \hat{\mu}^2 = \frac{1}{n} \sum_{i=1}^n X_i^2$. Since we earlier found that $\hat{\mu} = \bar{X}$, we get $\hat{\sigma^2}  = \frac{1}{n} \sum_{i=1}^n X_i^2 - \bar{X}^2 = \frac{1}{n} \sum_{i=1}^n (X_i - \bar{X})^2$.
 
-Therefore, the MOM estimators for $\mu$ and $\sigma^2$ are $\hat{\mu} = \bar{X}$ and $\hat{\sigma^2}  = \frac{1}{n} \sum_{i=1}^n X_i^2 - \bar{X}^2$ respectively.
+Therefore, the MOM estimators for $\mu$ and $\sigma^2$ are $\hat{\mu} = \bar{X}$ and $\hat{\sigma^2}  = \frac{1}{n} \sum_{i=1}^n (X_i - \bar{X})^2$ respectively.
+
+We now use these MOM estimators on the data set of birth weights at Baystate Medical Center in 1986. It is well established in the literature that birth weights of babies follow a normal distribution. A quick check with the Shapiro-Wilk's test for normality shows no contradiction, so we proceed with finding the estimators for $\mu$ and $\sigma^2$. We then produce a density plot of the birth weights, and overlay a curve that corresponds to a normal distribution with $\hat{\mu} = \bar{X}$ and $\hat{\sigma^2}  = \frac{1}{n} \sum_{i=1}^n (X_i - \bar{X})^2$. This normal curve is pretty close to the density plot, so it appears reasonable to say that the birth weights follow a normal distribution with mean 2944.587 (grams) and variance 528940 (grams-squared).
+
+```{r 7-MOM, fig.cap="Density Plot of Birth Weights. Normal Curve with Parameters Estimated by MOM Overlaid"}
+library(MASS)
+data<-MASS::birthwt ##dataset comes from MASS package
+
+shapiro.test(data$bwt) ##check for normality
+
+mu<-mean(data$bwt) ##MOM estimator for mu
+mu
+
+sigma2<-mean((data$bwt-mu)^2) ##MOM estimator for sigma2
+sigma2
+
+##create density plot for data, and overlay Normal curve with parameters estimated by MOM
+plot(density(data$bwt), main="", ylim=c(0,6e-04))
+curve(dnorm(x, mean=mu, sd=sqrt(sigma2)), 
+      col="blue", lwd=2, add=TRUE)
+```
 
 
+### Alternative Form of Method of Moments Estimation
 
+In Section \@ref(4-moments), we defined ** central moments**. As a reminder, for a random variable $X$, its $k$th central moment is $E((X-\mu)^k)$.
+
+Suppose we observe a random sample $X_1, \cdots, X_n$ that comes from $X$. The $k$th **sample central moment** is $M_k^* = \frac{1}{n} \sum_{i=1}^n (X_i - \bar{X})^k$.
+
+An alternative form for the method of moments estimation is: Let $X$ be a random variable with distribution depending on parameters $\theta_1, \cdots, \theta_m$. The method of moments (MOM) estimators $\hat{\theta}_1, \cdots, \hat{\theta}_m$ are found by equating the first sample moment to the first moments, and equating subsequent sample central moments to the corresponding central moments, and solving for $\theta_1, \cdots, \theta_m$.
+
+We go back to the 2nd example in the previous subsection, where we are trying to find estimators for $\mu$ and $\sigma^2$ of a normal distribution. 
+
+- The first moment is $E(X) = \mu$, since $X \sim N(\mu, \sigma^2)$.
+- The first sample moment is $M_1 = \frac{1}{n} \sum_{i=1}^n X_i = \bar{X}$. 
+
+So we set $E(X) = M_1$, i.e. $\hat{\mu} = \bar{X}$. This is just the sample average of the birth weights at Baystate Medical Center in 1986.
+
+- The second central moment is $Var(x) = E[(X-\mu)^2] = \sigma^2$.
+- The second sample central moment is $M_2^* = \frac{1}{n} \sum_{i=1}^n (X_i - \bar{X})^2$.
+
+So we set $Var(X) = M_2^*$ i.e. $\hat{\sigma^2} = \frac{1}{n} \sum_{i=1}^n (X_i - \bar{X})^2$. If we compare this solution with the solution in the previous subsection, they are exactly the same. 
+
+This alternative form is sometimes easier to work with, since the 2nd central moment is actually the variance of $X$.
+
+The idea behind method of moments estimation is fairly intuitive; however, it has some drawbacks which we will talk about after introducing another method for estimation in the next section, the method of maximum likelihood.
 
 ## Method of Maximum Likelihood Estimation
+
+The method of maximum likelihood is a workhorse in statistics and data science since it is widely used in estimating models. It is preferred to the method of moments as it is built upon a stronger theoretical framework, and its estimators tend to have more desirable properties. You are virtually guaranteed to see the method of maximum likelihood again in the future. 
+
+As its name suggests, it is a method of estimating parameters by maximizing the likelihood. 
+
+### Likelihood Function
+
+Suppose we have $n$ observations, denoted by the vector $\boldsymbol{x} = (x_1, \cdots, x_n)^{T}$. We can use a PDF to generalize the distribution of these observations, $f_{\boldsymbol{X}}(\boldsymbol{x})$. This is a joint PDF of all the variables.
+
+We have seen that PDFs (and hence joint PDFs) are always described by their parameters (e.g. Normal distribution has $\mu, \sigma^2$, Bernoulli has $p$). For this section, we will let $\boldsymbol{\theta}$ denote the parameters of a PDF. For example, if we are working with multivariate normal distribution, $\boldsymbol{\theta} = (\boldsymbol{\mu}, \boldsymbol{\Sigma})$, the mean vector and covariance matrix. 
+
+To make it clear what the parameters are, we will write $f_{\boldsymbol{X}}(\boldsymbol{x}; \boldsymbol{\theta})$
+to express the PDF of the random vector $\boldsymbol{X}$ with parameter $\boldsymbol{\theta}$. So the PDF is a function of two items:
+
+- The first item is the vector $\boldsymbol{x} = (x_1, \cdots, x_n)^{T}$, which is basically a vector of the observed data. In previous modules, we expressed PDFs as a function of the observed data, since we calculate the PDF when $\boldsymbol{X} = \boldsymbol{x}$. In estimation, the vector of observed data is actually fixed as tt is something we are given in the data set. 
+
+- The second item is the parameter $\boldsymbol{\theta}$. Estimating the parameter is our focus in estimation. The general idea in maximum likelihood is to find the value of $\boldsymbol{\theta}$ that "best explains" or "is most consistent" with the observed values of the data $\boldsymbol{x}$. We maximize $f_{\boldsymbol{X}}(\boldsymbol{x}; \boldsymbol{\theta})$ to achieve this goal. 
+
+The **likelihood function** is the PDF, but written in a way that shifts the emphasis to the parameters. The likelihood function is denoted by $L(\boldsymbol{\theta} | \boldsymbol{x})$ and is defined as $f_{\boldsymbol{X}}(\boldsymbol{x})$.
+
+Note: the likelihood function should be viewed as a function of $\boldsymbol{\theta}$, and its shape changes depending on the values of the observed data $\boldsymbol{x}$.
+
+To simplify calculations involving the likelihood function, we make an assumption that the observations $\boldsymbol{x}$ are independent and come from an identical distribution with PDF $f_X(x)$, in other words, the observations are i.i.d. (independent and identically distributed). 
+
+Given i.i.d. random variables $X_1, \cdots, X_n$, each having PDF $f_X(x)$, the likelihood function is
+
+\begin{equation} 
+L(\boldsymbol{\theta} | \boldsymbol{x} ) = \prod_i^n f_X(x; \boldsymbol{\theta}).
+(\#eq:7-like)
+\end{equation}
+
+When maximizing the likelihood function, we often log transform the likelihood function first, then maximize the log transformed likelihood function. The log transformed likelihood function is called the **log-likelihood function**, and it is
+
+\begin{equation} 
+\ell(\boldsymbol{\theta} | \boldsymbol{x}) = \log L(\boldsymbol{x} | \boldsymbol{\theta}) = \sum_{i=1}^n \log f_X(x; \boldsymbol{\theta}).
+(\#eq:7-loglike)
+\end{equation}
+
+It turns out that maximizing the log-likelihood function is often easier computationally than maximizing the likelihood function.
+
+Note: As the logarithm is a monotonic increasing function (it never decreases), maximizing a log transformed function is equivalent to maximizing the original function. Next, we look at how to write the likelihood and log-likelihood functions with a couple of examples.
+
+#### Example 1: Bernoulli
+
+Let $X_1, \cdots, X_n$ be i.i.d. $Bern(p)$. Find the corresponding likelihood and log-likelihood functions.
+
+From equation \@ref(eq:3-bern), the PMF of $X \sim Bern(p)$ is $f_X(x) = p^x (1-p)^{1-x}$, where the support of $x$ is $\{0,1\}$.
+
+The likelihood function, per equation \@ref(eq:7-like), becomes
+
+$$
+L(p | \boldsymbol{x} ) = \prod_i^n f_X(x_i; p) = \prod_i^n p^{x_i} (1-p)^{1-x_i}.
+$$
+
+The log-likelihood function, per equation \@ref(eq:7-loglike), becomes
+
+$$
+\begin{split}
+\ell (p | \boldsymbol{x}) &= \sum_{i=1}^n \log f_X(x_i; \boldsymbol{\theta}) \\
+                          &= \sum_{i=1}^n \log \left( p^{x_i} (1-p)^{1-x_i} \right) \\
+                          &= \sum_{i=1}^n x_i \log p + (1-x_i) \log (1-p) \\
+                          &= \log p \left(\sum_{i=1}^n x_i \right) + \log (1-p) \left( n - \sum_{i=1}^n x_i \right)
+\end{split}
+$$
 
 ## Assessing Estimators
 

@@ -130,6 +130,7 @@ Figure 7.1: Example of Data in a Spreadsheet
 </ul>
 <p>And so on.</p>
 <p>The method of moments estimation is: Let <span class="math inline">\(X\)</span> be a random variable with distribution depending on parameters <span class="math inline">\(\theta_1, \cdots, \theta_m\)</span>. The <strong>method of moments (MOM) estimators</strong> <span class="math inline">\(\hat{\theta}_1, \cdots, \hat{\theta}_m\)</span> are found by equating the first <span class="math inline">\(m\)</span> sample moments to the corresponding first <span class="math inline">\(m\)</span> moments and solving for <span class="math inline">\(\theta_1, \cdots, \theta_m\)</span>.</p>
+<p>You might have noticed that the method of moments is based on the Law of Large Numbers.</p>
 <p>Note: By convention, parameters are typically denoted by Greek letters, and their estimators are denoted by Greek letters with a hat symbol over them.</p>
 <p>Let us look at a couple of examples:</p>
 <ol style="list-style-type: decimal">
@@ -164,13 +165,123 @@ Var(X) &amp;= E(X^2) - E(X)^2\\
 <ul>
 <li>The second sample moment is <span class="math inline">\(M_2 = \frac{1}{n} \sum_{i=1}^n X_i^2\)</span>.</li>
 </ul>
-<p>So we set <span class="math inline">\(E(X^2) = M_2\)</span>, i.e. <span class="math inline">\(\hat{\sigma^2} + \hat{\mu}^2 = \frac{1}{n} \sum_{i=1}^n X_i^2\)</span>. Since we earlier found that <span class="math inline">\(\hat{\mu} = \bar{X}\)</span>, we get <span class="math inline">\(\hat{\sigma^2}  = \frac{1}{n} \sum_{i=1}^n X_i^2 - \bar{X}^2\)</span></p>
-<p>Therefore, the MOM estimators for <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma^2\)</span> are <span class="math inline">\(\hat{\mu} = \bar{X}\)</span> and <span class="math inline">\(\hat{\sigma^2}  = \frac{1}{n} \sum_{i=1}^n X_i^2 - \bar{X}^2\)</span> respectively.</p>
+<p>So we set <span class="math inline">\(E(X^2) = M_2\)</span>, i.e. <span class="math inline">\(\hat{\sigma^2} + \hat{\mu}^2 = \frac{1}{n} \sum_{i=1}^n X_i^2\)</span>. Since we earlier found that <span class="math inline">\(\hat{\mu} = \bar{X}\)</span>, we get <span class="math inline">\(\hat{\sigma^2}  = \frac{1}{n} \sum_{i=1}^n X_i^2 - \bar{X}^2 = \frac{1}{n} \sum_{i=1}^n (X_i - \bar{X})^2\)</span>.</p>
+<p>Therefore, the MOM estimators for <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma^2\)</span> are <span class="math inline">\(\hat{\mu} = \bar{X}\)</span> and <span class="math inline">\(\hat{\sigma^2}  = \frac{1}{n} \sum_{i=1}^n (X_i - \bar{X})^2\)</span> respectively.</p>
+<p>We now use these MOM estimators on the data set of birth weights at Baystate Medical Center in 1986. It is well established in the literature that birth weights of babies follow a normal distribution. A quick check with the Shapiro-Wilk’s test for normality shows no contradiction, so we proceed with finding the estimators for <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma^2\)</span>. We then produce a density plot of the birth weights, and overlay a curve that corresponds to a normal distribution with <span class="math inline">\(\hat{\mu} = \bar{X}\)</span> and <span class="math inline">\(\hat{\sigma^2}  = \frac{1}{n} \sum_{i=1}^n (X_i - \bar{X})^2\)</span>. This normal curve is pretty close to the density plot, so it appears reasonable to say that the birth weights follow a normal distribution with mean 2944.587 (grams) and variance 528940 (grams-squared).</p>
+<div class="sourceCode" id="cb116"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://www.stats.ox.ac.uk/pub/MASS4/">MASS</a></span><span class="op">)</span></span></code></pre></div>
+<pre><code>## 
+## Attaching package: 'MASS'</code></pre>
+<pre><code>## The following object is masked from 'package:dplyr':
+## 
+##     select</code></pre>
+<pre><code>## The following objects are masked from 'package:openintro':
+## 
+##     housing, mammals</code></pre>
+<div class="sourceCode" id="cb120"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">data</span><span class="op">&lt;-</span><span class="fu">MASS</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/MASS/man/birthwt.html">birthwt</a></span> <span class="co">##dataset comes from MASS package</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test</a></span><span class="op">(</span><span class="va">data</span><span class="op">$</span><span class="va">bwt</span><span class="op">)</span> <span class="co">##check for normality</span></span></code></pre></div>
+<pre><code>## 
+##  Shapiro-Wilk normality test
+## 
+## data:  data$bwt
+## W = 0.99244, p-value = 0.4353</code></pre>
+<div class="sourceCode" id="cb122"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mu</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">data</span><span class="op">$</span><span class="va">bwt</span><span class="op">)</span> <span class="co">##MOM estimator for mu</span></span>
+<span><span class="va">mu</span></span></code></pre></div>
+<pre><code>## [1] 2944.587</code></pre>
+<div class="sourceCode" id="cb124"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">sigma2</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="op">(</span><span class="va">data</span><span class="op">$</span><span class="va">bwt</span><span class="op">-</span><span class="va">mu</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span> <span class="co">##MOM estimator for sigma2</span></span>
+<span><span class="va">sigma2</span></span></code></pre></div>
+<pre><code>## [1] 528940</code></pre>
+<div class="sourceCode" id="cb126"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">##create density plot for data, and overlay Normal curve with parameters estimated by MOM</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/density.html">density</a></span><span class="op">(</span><span class="va">data</span><span class="op">$</span><span class="va">bwt</span><span class="op">)</span>, main<span class="op">=</span><span class="st">""</span>, ylim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">6e-04</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/curve.html">curve</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">dnorm</a></span><span class="op">(</span><span class="va">x</span>, mean<span class="op">=</span><span class="va">mu</span>, sd<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">sigma2</span><span class="op">)</span><span class="op">)</span>, </span>
+<span>      col<span class="op">=</span><span class="st">"blue"</span>, lwd<span class="op">=</span><span class="fl">2</span>, add<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:7-MOM"></span>
+<img src="bookdown-demo_files/figure-html/7-MOM-1.png" alt="Density Plot of Birth Weights. Normal Curve with Parameters Estimated by MOM Overlaid" width="672"><p class="caption">
+Figure 7.2: Density Plot of Birth Weights. Normal Curve with Parameters Estimated by MOM Overlaid
+</p>
+</div>
+<div id="alternative-form-of-method-of-moments-estimation" class="section level3" number="7.2.1">
+<h3>
+<span class="header-section-number">7.2.1</span> Alternative Form of Method of Moments Estimation<a class="anchor" aria-label="anchor" href="#alternative-form-of-method-of-moments-estimation"><i class="fas fa-link"></i></a>
+</h3>
+<p>In Section <a href="#4-moments"><strong>??</strong></a>, we defined ** central moments**. As a reminder, for a random variable <span class="math inline">\(X\)</span>, its <span class="math inline">\(k\)</span>th central moment is <span class="math inline">\(E((X-\mu)^k)\)</span>.</p>
+<p>Suppose we observe a random sample <span class="math inline">\(X_1, \cdots, X_n\)</span> that comes from <span class="math inline">\(X\)</span>. The <span class="math inline">\(k\)</span>th <strong>sample central moment</strong> is <span class="math inline">\(M_k^* = \frac{1}{n} \sum_{i=1}^n (X_i - \bar{X})^k\)</span>.</p>
+<p>An alternative form for the method of moments estimation is: Let <span class="math inline">\(X\)</span> be a random variable with distribution depending on parameters <span class="math inline">\(\theta_1, \cdots, \theta_m\)</span>. The method of moments (MOM) estimators <span class="math inline">\(\hat{\theta}_1, \cdots, \hat{\theta}_m\)</span> are found by equating the first sample moment to the first moments, and equating subsequent sample central moments to the corresponding central moments, and solving for <span class="math inline">\(\theta_1, \cdots, \theta_m\)</span>.</p>
+<p>We go back to the 2nd example in the previous subsection, where we are trying to find estimators for <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma^2\)</span> of a normal distribution.</p>
+<ul>
+<li>The first moment is <span class="math inline">\(E(X) = \mu\)</span>, since <span class="math inline">\(X \sim N(\mu, \sigma^2)\)</span>.</li>
+<li>The first sample moment is <span class="math inline">\(M_1 = \frac{1}{n} \sum_{i=1}^n X_i = \bar{X}\)</span>.</li>
+</ul>
+<p>So we set <span class="math inline">\(E(X) = M_1\)</span>, i.e. <span class="math inline">\(\hat{\mu} = \bar{X}\)</span>. This is just the sample average of the birth weights at Baystate Medical Center in 1986.</p>
+<ul>
+<li>The second central moment is <span class="math inline">\(Var(x) = E[(X-\mu)^2] = \sigma^2\)</span>.</li>
+<li>The second sample central moment is <span class="math inline">\(M_2^* = \frac{1}{n} \sum_{i=1}^n (X_i - \bar{X})^2\)</span>.</li>
+</ul>
+<p>So we set <span class="math inline">\(Var(X) = M_2^*\)</span> i.e. <span class="math inline">\(\hat{\sigma^2} = \frac{1}{n} \sum_{i=1}^n (X_i - \bar{X})^2\)</span>. If we compare this solution with the solution in the previous subsection, they are exactly the same.</p>
+<p>This alternative form is sometimes easier to work with, since the 2nd central moment is actually the variance of <span class="math inline">\(X\)</span>.</p>
+<p>The idea behind method of moments estimation is fairly intuitive; however, it has some drawbacks which we will talk about after introducing another method for estimation in the next section, the method of maximum likelihood.</p>
+</div>
 </div>
 <div id="method-of-maximum-likelihood-estimation" class="section level2" number="7.3">
 <h2>
 <span class="header-section-number">7.3</span> Method of Maximum Likelihood Estimation<a class="anchor" aria-label="anchor" href="#method-of-maximum-likelihood-estimation"><i class="fas fa-link"></i></a>
 </h2>
+<p>The method of maximum likelihood is a workhorse in statistics and data science since it is widely used in estimating models. It is preferred to the method of moments as it is built upon a stronger theoretical framework, and its estimators tend to have more desirable properties. You are virtually guaranteed to see the method of maximum likelihood again in the future.</p>
+<p>As its name suggests, it is a method of estimating parameters by maximizing the likelihood.</p>
+<div id="likelihood-function" class="section level3" number="7.3.1">
+<h3>
+<span class="header-section-number">7.3.1</span> Likelihood Function<a class="anchor" aria-label="anchor" href="#likelihood-function"><i class="fas fa-link"></i></a>
+</h3>
+<p>Suppose we have <span class="math inline">\(n\)</span> observations, denoted by the vector <span class="math inline">\(\boldsymbol{x} = (x_1, \cdots, x_n)^{T}\)</span>. We can use a PDF to generalize the distribution of these observations, <span class="math inline">\(f_{\boldsymbol{X}}(\boldsymbol{x})\)</span>. This is a joint PDF of all the variables.</p>
+<p>We have seen that PDFs (and hence joint PDFs) are always described by their parameters (e.g. Normal distribution has <span class="math inline">\(\mu, \sigma^2\)</span>, Bernoulli has <span class="math inline">\(p\)</span>). For this section, we will let <span class="math inline">\(\boldsymbol{\theta}\)</span> denote the parameters of a PDF. For example, if we are working with multivariate normal distribution, <span class="math inline">\(\boldsymbol{\theta} = (\boldsymbol{\mu}, \boldsymbol{\Sigma})\)</span>, the mean vector and covariance matrix.</p>
+<p>To make it clear what the parameters are, we will write <span class="math inline">\(f_{\boldsymbol{X}}(\boldsymbol{x}; \boldsymbol{\theta})\)</span>
+to express the PDF of the random vector <span class="math inline">\(\boldsymbol{X}\)</span> with parameter <span class="math inline">\(\boldsymbol{\theta}\)</span>. So the PDF is a function of two items:</p>
+<ul>
+<li><p>The first item is the vector <span class="math inline">\(\boldsymbol{x} = (x_1, \cdots, x_n)^{T}\)</span>, which is basically a vector of the observed data. In previous modules, we expressed PDFs as a function of the observed data, since we calculate the PDF when <span class="math inline">\(\boldsymbol{X} = \boldsymbol{x}\)</span>. In estimation, the vector of observed data is actually fixed as tt is something we are given in the data set.</p></li>
+<li><p>The second item is the parameter <span class="math inline">\(\boldsymbol{\theta}\)</span>. Estimating the parameter is our focus in estimation. The general idea in maximum likelihood is to find the value of <span class="math inline">\(\boldsymbol{\theta}\)</span> that “best explains” or “is most consistent” with the observed values of the data <span class="math inline">\(\boldsymbol{x}\)</span>. We maximize <span class="math inline">\(f_{\boldsymbol{X}}(\boldsymbol{x}; \boldsymbol{\theta})\)</span> to achieve this goal.</p></li>
+</ul>
+<p>The <strong>likelihood function</strong> is the PDF, but written in a way that shifts the emphasis to the parameters. The likelihood function is denoted by <span class="math inline">\(L(\boldsymbol{\theta} | \boldsymbol{x})\)</span> and is defined as <span class="math inline">\(f_{\boldsymbol{X}}(\boldsymbol{x})\)</span>.</p>
+<p>Note: the likelihood function should be viewed as a function of <span class="math inline">\(\boldsymbol{\theta}\)</span>, and its shape changes depending on the values of the observed data <span class="math inline">\(\boldsymbol{x}\)</span>.</p>
+<p>To simplify calculations involving the likelihood function, we make an assumption that the observations <span class="math inline">\(\boldsymbol{x}\)</span> are independent and come from an identical distribution with PDF <span class="math inline">\(f_X(x)\)</span>, in other words, the observations are i.i.d. (independent and identically distributed).</p>
+<p>Given i.i.d. random variables <span class="math inline">\(X_1, \cdots, X_n\)</span>, each having PDF <span class="math inline">\(f_X(x)\)</span>, the likelihood function is</p>
+<p><span class="math display" id="eq:7-like">\[\begin{equation}
+L(\boldsymbol{\theta} | \boldsymbol{x} ) = \prod_i^n f_X(x; \boldsymbol{\theta}).
+\tag{7.1}
+\end{equation}\]</span></p>
+<p>When maximizing the likelihood function, we often log transform the likelihood function first, then maximize the log transformed likelihood function. The log transformed likelihood function is called the <strong>log-likelihood function</strong>, and it is</p>
+<p><span class="math display" id="eq:7-loglike">\[\begin{equation}
+\ell(\boldsymbol{\theta} | \boldsymbol{x}) = \log L(\boldsymbol{x} | \boldsymbol{\theta}) = \sum_{i=1}^n \log f_X(x; \boldsymbol{\theta}).
+\tag{7.2}
+\end{equation}\]</span></p>
+<p>It turns out that maximizing the log-likelihood function is often easier computationally than maximizing the likelihood function.</p>
+<p>Note: As the logarithm is a monotonic increasing function (it never decreases), maximizing a log transformed function is equivalent to maximizing the original function. Next, we look at how to write the likelihood and log-likelihood functions with a couple of examples.</p>
+<div id="example-1-bernoulli" class="section level4" number="7.3.1.1">
+<h4>
+<span class="header-section-number">7.3.1.1</span> Example 1: Bernoulli<a class="anchor" aria-label="anchor" href="#example-1-bernoulli"><i class="fas fa-link"></i></a>
+</h4>
+<p>Let <span class="math inline">\(X_1, \cdots, X_n\)</span> be i.i.d. <span class="math inline">\(Bern(p)\)</span>. Find the corresponding likelihood and log-likelihood functions.</p>
+<p>From equation <a href="discrete-random-variables.html#eq:3-bern">(3.8)</a>, the PMF of <span class="math inline">\(X \sim Bern(p)\)</span> is <span class="math inline">\(f_X(x) = p^x (1-p)^{1-x}\)</span>, where the support of <span class="math inline">\(x\)</span> is <span class="math inline">\(\{0,1\}\)</span>.</p>
+<p>The likelihood function, per equation <a href="estimation.html#eq:7-like">(7.1)</a>, becomes</p>
+<p><span class="math display">\[
+L(p | \boldsymbol{x} ) = \prod_i^n f_X(x_i; p) = \prod_i^n p^{x_i} (1-p)^{1-x_i}.
+\]</span></p>
+<p>The log-likelihood function, per equation <a href="estimation.html#eq:7-loglike">(7.2)</a>, becomes</p>
+<p><span class="math display">\[
+\begin{split}
+\ell (p | \boldsymbol{x}) &amp;= \sum_{i=1}^n \log f_X(x_i; \boldsymbol{\theta}) \\
+                          &amp;= \sum_{i=1}^n \log \left( p^{x_i} (1-p)^{1-x_i} \right) \\
+                          &amp;= \sum_{i=1}^n x_i \log p + (1-x_i) \log (1-p) \\
+                          &amp;= \log p \left(\sum_{i=1}^n x_i \right) + \log (1-p) \left( n - \sum_{i=1}^n x_i \right)
+\end{split}
+\]</span></p>
+</div>
+</div>
 </div>
 <div id="assessing-estimators" class="section level2" number="7.4">
 <h2>
@@ -209,8 +320,12 @@ Var(X) &amp;= E(X^2) - E(X)^2\\
 <li>
 <a class="nav-link" href="#introduction-3"><span class="header-section-number">7.1</span> Introduction</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#big-picture-idea-with-estimation"><span class="header-section-number">7.1.1</span> Big Picture Idea with Estimation</a></li></ul>
 </li>
-<li><a class="nav-link" href="#method-of-moments-estimation"><span class="header-section-number">7.2</span> Method of Moments Estimation</a></li>
-<li><a class="nav-link" href="#method-of-maximum-likelihood-estimation"><span class="header-section-number">7.3</span> Method of Maximum Likelihood Estimation</a></li>
+<li>
+<a class="nav-link" href="#method-of-moments-estimation"><span class="header-section-number">7.2</span> Method of Moments Estimation</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#alternative-form-of-method-of-moments-estimation"><span class="header-section-number">7.2.1</span> Alternative Form of Method of Moments Estimation</a></li></ul>
+</li>
+<li>
+<a class="nav-link" href="#method-of-maximum-likelihood-estimation"><span class="header-section-number">7.3</span> Method of Maximum Likelihood Estimation</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#likelihood-function"><span class="header-section-number">7.3.1</span> Likelihood Function</a></li></ul>
+</li>
 <li>
 <a class="nav-link" href="#assessing-estimators"><span class="header-section-number">7.4</span> Assessing Estimators</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#bias"><span class="header-section-number">7.4.1</span> Bias</a></li>
@@ -234,7 +349,7 @@ Var(X) &amp;= E(X^2) - E(X)^2\\
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2025-07-10.</p>
+    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2025-07-11.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
