@@ -127,7 +127,7 @@
 
 \title{Understanding Uncertainty Course Notes}
 \author{Jeffrey Woo}
-\date{2025-07-11}
+\date{2025-07-14}
 
 \begin{document}
 \maketitle
@@ -4696,23 +4696,23 @@ We consider building models based on the data we have. Many models are based on 
 
 \subsection{Big Picture Idea with Estimation}\label{big-picture-idea-with-estimation}
 
-Consider this simple scenario. We want to find the distribution associated with the systolic blood pressure of American adults who work full-time. To be able to achieve this goal, we would have to get the systolic blood pressure of every single American adult who works full-time. This is usually not feasible as researchers are unlikely to have the time and money to interview every single American adult who works full-time. Instead, a representative sample of American adults will be obtained, for example, 750 randomly selected American adults who work full-time are interviewed. We can then create density plots, histograms, compute the mean, median, variance, skewness, and other summaries that may be of interest, based on these 750 American adults.
+Consider this simple scenario. We want to find the distribution associated with the systolic blood pressure of American adults. To be able to achieve this goal, we would have to get the systolic blood pressure of every single American adult. This is usually not feasible as researchers are unlikely to have the time and money to interview every single American adult. Instead, a representative sample of American adults will be obtained, for example, 750 randomly selected American adults are interviewed. We can then create density plots, histograms, compute the mean, median, variance, skewness, and other summaries that may be of interest, based on these 750 American adults.
 
 \subsubsection{Population Vs Sample}\label{population-vs-sample}
 
 The above scenario illustrates a few concepts and terms that are fundamental in estimation. In any study, we must be clear as to who or what is the population of interest, and who or what is the sample.
 
-The \textbf{population} (sometimes called the population of interest) is the entire set of individuals, or objects, or events that a study is interested in. In the scenario described above, the population would be (all) American adults who work full-time.
+The \textbf{population} (sometimes called the population of interest) is the entire set of individuals, or objects, or events that a study is interested in. In the scenario described above, the population would be (all) American adults.
 
-The \textbf{sample} is the set of individuals, or objects, or events which we have data on. In the scenario described above, the sample is the 750 randomly selected American adults who work full-time.
+The \textbf{sample} is the set of individuals, or objects, or events which we have data on. In the scenario described above, the sample is the 750 randomly selected American adults.
 
 Ideally, the sample should be \textbf{representative} of the population. A representative sample is often achieved through a simple random sample, where each unit in the population has the same chance of being selected to be in the sample. In this module, we will assume that we have a representative sample. Note: You may feel that obtaining a simple random sample may be difficult. We will not get into a discussion of sampling (sometimes called survey sampling), which is a field of statistics that handles how to obtain representative samples, or how calculations should be adjusted if the sample is not representative. There is still a lot of research that is being done in survey sampling.
 
 \subsubsection{Variables \& Observations}\label{variables-observations}
 
-A \textbf{variable} is a characteristic or attribute of individuals, or objects, or events that make up the population and sample. In the above scenario, a variable would be the systolic blood pressure of American adults. We can use the notation of random variables to describe variables. For example, we can let \(X\) denote the systolic blood pressure of an American adult who works full-time, so writing \(P(X<20,000)\) means we want to find the probability that an American adult who works full-time earns less than \$20,000.
+A \textbf{variable} is a characteristic or attribute of individuals, or objects, or events that make up the population and sample. In the above scenario, a variable would be the systolic blood pressure of American adults. We can use the notation of random variables to describe variables. For example, we can let \(X\) denote the systolic blood pressure of an American adult, so writing \(P(X>200)\) means we want to find the probability that an American adult has systolic blood pressure greater than 200 mmHg .
 
-An \textbf{observation} is the individual person, object or event that we collect data from. In the above scenario, an observation is a single American adult who works full-time in our sample of 750.
+An \textbf{observation} is the individual person, object or event that we collect data from. In the above scenario, an observation is a single American adult in our sample of 750.
 
 One way to think about variables and observations is through a spreadsheet. Typically, each row represents an observation and each column represents a variable. Figure \ref{fig:07-dataframe} below displays such an example, based on the described scenario. Each row represents an observation, i.e.~a single American adult who works full time in our sample, and the column represents the variable, which is systolic blood pressure.
 
@@ -4726,11 +4726,11 @@ One way to think about variables and observations is through a spreadsheet. Typi
 
 Now that we have made the distinction between a population and a sample, we are ready to define parameters and estimators.
 
-A \textbf{parameter} is a numerical summary associated with a population. In the scenario described above, an example of a population parameter would be the population mean systolic blood pressure of American adults who work full-time.
+A \textbf{parameter} is a numerical summary associated with a population. In the scenario described above, an example of a population parameter would be the population mean systolic blood pressure of American adults.
 
-An \textbf{estimator} is a numerical summary associated with a sample. An estimator is typically connected with its corresponding version in the population. In the scenario described above, an estimator of the population mean systolic blood pressure of American adults who work full-time could be the average systolic blood pressure of the 750 American adults who work full-time in our sample. So the sample mean is an estimator of the population mean.
+An \textbf{estimator} is a numerical summary associated with samples. An estimator is typically used to estimate a parameter. In the scenario described above, an estimator of the population mean systolic blood pressure of American adults could be the average systolic blood pressure in our sample. So the sample mean is an estimator of the population mean.
 
-An \textbf{estimated value} is the actual value of the estimator based on a sample. In the scenario described above, suppose the average systolic blood pressure of the 750 American adults who work full-time is \$60,000. We will say the estimated value of the mean systolic blood pressure of American adults who work full-time is \$60,000.
+An \textbf{estimated value}, or \textbf{estimate}, is the actual value of the estimator based on a sample. In the scenario described above, suppose the average systolic blood pressure of the 750 American adults is 140 mmHg. We will say the estimated value of the mean systolic blood pressure of American adults is 140 mmHg.
 
 So a parameter is a number that is associated with a population, while an estimator is a number that is associated with a sample. Some other differences between parameters and estimators:
 
@@ -4739,10 +4739,10 @@ So a parameter is a number that is associated with a population, while an estima
 \item
   The value of parameters are unknown, while we can actually calculate numerical values of estimators.
 \item
-  The value of parameters are considered fixed (as there is only one population), while the numerical values of estimators can vary if we obtain multiple random samples of the same sample size. Using the scenario above again, suppose we obtain a second representative sample of 750 America adults who work full-time. The average systolic blood pressure of this second sample is likely to be different from the average systolic blood pressure of the first sample. This illustrates that there is variance, or uncertainty, associated with estimators due to random sampling.
+  The value of parameters are considered fixed (as there is only one population), while the numerical values of estimators can vary if we obtain multiple random samples of the same sample size. Using the scenario above again, suppose we obtain a second representative sample of 750 American adults. The average systolic blood pressure of this second sample is likely to be different from the average systolic blood pressure of the first sample. This illustrates that there is variance, or uncertainty, associated with estimators due to random sampling. This is the uncertainty that we will be focusing on in this section.
 \end{itemize}
 
-Whenever we propose an estimator for a parameter, we want to assess how ``good'' the estimator is. In some situations, there is an obvious choice for an estimator, for example, using the sample mean, \(\bar{x} = \frac{\sum x_i}{n}\) to estimate the population mean. But in some instances, the choice may not be so obvious. For example, why do use the sample variance \(s^2 = \frac{\sum (x_i - \bar{x})}{n-1}\) as an estimator for the population variance, and not \(\frac{\sum (x_i - \bar{x})}{n}\)? We will cover a few measures that are used to assess an estimator, mainly its bias, variance, and its mean-squared error.
+Whenever we propose an estimator for a parameter, we want to assess how ``good'' the estimator is. In some situations, there is an obvious choice for an estimator, for example, using the sample mean, \(\bar{x} = \frac{\sum x_i}{n}\) to estimate the population mean. But in some instances, the choice may not be so obvious. For example, why do use the sample variance \(s^2 = \frac{\sum (x_i - \bar{x})^2}{n-1}\) as an estimator for the population variance, and not \(\frac{\sum (x_i - \bar{x})^2}{n}\)? We will cover a few measures that are used to assess an estimator, mainly its bias, variance, and its mean-squared error.
 
 We will also cover a couple of methods in estimating parameters: the method of moments, and the method of maximum likelihood. You will notice that we use probability rules in these methods.
 
@@ -4750,11 +4750,11 @@ To sum up estimation: we use data from a sample to estimate unknown characterist
 
 \section{Method of Moments Estimation}\label{method-of-moments-estimation}
 
-We will cover a couple of methods in estimation. The first method is the \textbf{method of moments}. It is the more intuitive method, although it lacks certain ideal properties. Before defining this method, we recall and define some terms.
+We will cover a couple of methods in estimation. The first method is the \textbf{method of moments}. It is a more intuitive method, although it lacks certain ideal properties. Before defining this method, we recall and define some terms.
 
-In Section \ref{moments}, we defined \textbf{moments}. As a reminder, for a random variable \(X\), its \(k\)th moment is \(E(X^k)\), which can be found using LOTUS \(\int_{-\infty}^{\infty} x^k f_X(x) dx\).
+In Section \ref{moments}, we defined \textbf{moments}. As a reminder, for a random variable \(X\), its \(k\)th moment is \(E(X^k)\), which can be found using LOTUS: \(\int_{-\infty}^{\infty} x^k f_X(x) dx\).
 
-Suppose we observe a random sample \(X_1, \cdots, X_n\) that comes from \(X\). The \(k\)th \textbf{sample moment} is \(M_k = \frac{1}{n} \sum_{i=1}^n X_i^k\).
+Suppose we observe a random sample \(x_1, \cdots, x_n\) that comes from \(X\). The \(k\)th \textbf{sample moment} is \(M_k = \frac{1}{n} \sum_{i=1}^n x_i^k\).
 
 Using these definitions,
 
@@ -4763,20 +4763,20 @@ Using these definitions,
 \item
   The 1st moment is \(E(X) = \mu_x\), the population mean of \(X\).
 \item
-  The 1st sample moment is \(M_1 = \frac{1}{n} \sum_{i=1}^n X_i = \bar{X}\), the sample mean of \(X\).
+  The 1st sample moment is \(M_1 = \frac{1}{n} \sum_{i=1}^n x_i = \bar{x}\), the sample mean.
 \item
   The 2nd moment is \(E(X^2)\).
 \item
-  The 2nd sample moment is \(M_2 = \frac{1}{n} \sum_{i=1}^n X_i^2\).
+  The 2nd sample moment is \(M_2 = \frac{1}{n} \sum_{i=1}^n x_i^2\).
 \end{itemize}
 
 And so on.
 
-The method of moments estimation is: Let \(X\) be a random variable with distribution depending on parameters \(\theta_1, \cdots, \theta_m\). The \textbf{method of moments (MOM) estimators} \(\hat{\theta}_1, \cdots, \hat{\theta}_m\) are found by equating the first \(m\) sample moments to the corresponding first \(m\) moments and solving for \(\theta_1, \cdots, \theta_m\).
+The method of moments estimation is: Let \(X\) be a random variable with distribution depending on parameters \(\theta_1, \cdots, \theta_m\). The \textbf{method of moments (MOM) estimates} \(\hat{\theta}_1, \cdots, \hat{\theta}_m\) are found by equating the first \(m\) sample moments to the corresponding first \(m\) moments and solving for \(\theta_1, \cdots, \theta_m\).
 
 You might have noticed that the method of moments is based on the Law of Large Numbers.
 
-Note: By convention, parameters are typically denoted by Greek letters, and their estimators are denoted by Greek letters with a hat symbol over them.
+Note: By convention, parameters are typically denoted by Greek letters, and their estimators are denoted with a hat symbol over the corresponding letter.
 
 Let us look at a couple of examples:
 
@@ -4784,7 +4784,7 @@ Let us look at a couple of examples:
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  Suppose I have a coin and I do not know if it is fair or not. There are only two outcomes on a flip, heads or tails. Each flip is independent of other flips. Let \(X_i\) denote whether the \(i\)th flip lands heads, where \(X_i = 1\) if heads and \(X_i = 0\) if tails. We can see that \(X_i \sim Bern(p)\), where \(p\) is the probability it lands heads. Derive the MOM estimator for \(p\).
+  Suppose I have a coin and I do not know if it is fair or not. There are only two outcomes on a flip, heads or tails. Each flip is independent of other flips. Let \(X_i\) denote whether the \(i\)th flip lands heads, where \(X_i = 1\) if heads and \(X_i = 0\) if tails. We can see that \(X_i \sim Bern(p)\), where \(p\) is the probability it lands heads. Derive the MOM estimate for \(p\).
 \end{enumerate}
 
 A Bernoulli distribution has only 1 parameter, \(p\), so when using the method of moments, we only need to equate the first sample moment to the first moment.
@@ -4794,19 +4794,19 @@ A Bernoulli distribution has only 1 parameter, \(p\), so when using the method o
 \item
   The first moment is \(E(X_i) = p\), since \(X_i \sim Bern(p)\).
 \item
-  The first sample moment is \(M_1 = \frac{1}{n} \sum_{i=1}^n X_i = \bar{X}\).
+  The first sample moment is \(M_1 = \frac{1}{n} \sum_{i=1}^n x_i = \bar{x}\).
 \end{itemize}
 
-Set \(E(X_i) = M_1\), i.e.~\(\hat{p} = \bar{X}\). Since \(X_i = 1\) if heads and \(X_i = 0\) if tails, \(\frac{1}{n} \sum_{i=1}^n X_i = \bar{X}\)\$ actually represents the proportion of flips that land on heads, based on \(n\) flips. So this is actually the sample proportion.
+Set \(E(X_i) = M_1\), i.e.~\(\hat{p} = \bar{x}\). Since \(X_i = 1\) if heads and \(X_i = 0\) if tails, \(\frac{1}{n} \sum_{i=1}^n x_i = \bar{x}\) actually represents the proportion of flips that land on heads, based on \(n\) flips. So this is actually the sample proportion.
 
-The MOM estimator for this problem is \(\hat{p}\), the proportion of \(n\) flips that land on heads. This result should be fairly intuitive. If the true success probability is 0.7, we expect 70\% of \(n\) flips to land on heads.
+The MOM estimate for this problem is \(\hat{p}\), the proportion of \(n\) flips that land on heads. This result should be fairly intuitive. If we flip a coin a large number of times, and 70\% of the flips land on heads, the sample proportion is \(\hat{p} = 0.7\), and so the estimated value for \(p\), the success probability is 0.7.
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \setcounter{enumi}{1}
 \tightlist
 \item
-  Birth weights of newborn babies typically follow a normal distribution. We have data from births at Baystate Medical Center in Springfield, MA, during 1986. Assuming that the births at this hospital is representative of births in New England in 1986, derive the MOM estimators for \(\mu\) and \(\sigma^2\), the mean and variance of the distribution of birth weights in New England in 1986.
+  Birth weights of newborn babies typically follow a normal distribution. We have data from births at Baystate Medical Center in Springfield, MA, during 1986. Assuming that the births at this hospital is representative of births in New England in 1986, derive the MOM estimates for \(\mu\) and \(\sigma^2\), the mean and variance of the distribution of birth weights in New England in 1986.
 \end{enumerate}
 
 A normal distribution has 2 parameters, \(\mu\) and \(\sigma^2\), so we need to equate the first two sample moments to the first two moments. Let \(X\) denote the birth weights in New England in 1986, so \(X \sim N(\mu, \sigma^2)\).
@@ -4816,10 +4816,10 @@ A normal distribution has 2 parameters, \(\mu\) and \(\sigma^2\), so we need to 
 \item
   The first moment is \(E(X) = \mu\), since \(X \sim N(\mu, \sigma^2)\).
 \item
-  The first sample moment is \(M_1 = \frac{1}{n} \sum_{i=1}^n X_i = \bar{X}\).
+  The first sample moment is \(M_1 = \frac{1}{n} \sum_{i=1}^n x_i = \bar{x}\).
 \end{itemize}
 
-So we set \(E(X) = M_1\), i.e.~\(\hat{\mu} = \bar{X}\). This is just the sample average of the birth weights at Baystate Medical Center in 1986.
+So we set \(E(X) = M_1\), i.e.~\(\hat{\mu} = \bar{x}\). This is just the sample average of the birth weights at Baystate Medical Center in 1986.
 
 \begin{itemize}
 \tightlist
@@ -4838,40 +4838,18 @@ Var(X) &= E(X^2) - E(X)^2\\
 \begin{itemize}
 \tightlist
 \item
-  The second sample moment is \(M_2 = \frac{1}{n} \sum_{i=1}^n X_i^2\).
+  The second sample moment is \(M_2 = \frac{1}{n} \sum_{i=1}^n x_i^2\).
 \end{itemize}
 
-So we set \(E(X^2) = M_2\), i.e.~\(\hat{\sigma^2} + \hat{\mu}^2 = \frac{1}{n} \sum_{i=1}^n X_i^2\). Since we earlier found that \(\hat{\mu} = \bar{X}\), we get \(\hat{\sigma^2}  = \frac{1}{n} \sum_{i=1}^n X_i^2 - \bar{X}^2 = \frac{1}{n} \sum_{i=1}^n (X_i - \bar{X})^2\).
+So we set \(E(X^2) = M_2\), i.e.~\(\hat{\sigma^2} + \hat{\mu}^2 = \frac{1}{n} \sum_{i=1}^n x_i^2\). Since we earlier found that \(\hat{\mu} = \bar{X}\), we get \(\hat{\sigma^2}  = \frac{1}{n} \sum_{i=1}^n X_i^2 - \bar{X}^2 = \frac{1}{n} \sum_{i=1}^n (X_i - \bar{X})^2\).
 
-Therefore, the MOM estimators for \(\mu\) and \(\sigma^2\) are \(\hat{\mu} = \bar{X}\) and \(\hat{\sigma^2}  = \frac{1}{n} \sum_{i=1}^n (X_i - \bar{X})^2\) respectively.
+Therefore, the MOM estimates for \(\mu\) and \(\sigma^2\) are \(\hat{\mu} = \bar{x}\) and \(\hat{\sigma^2}  = \frac{1}{n} \sum_{i=1}^n (x_i - \bar{x})^2\) respectively.
 
-We now use these MOM estimators on the data set of birth weights at Baystate Medical Center in 1986. It is well established in the literature that birth weights of babies follow a normal distribution. A quick check with the Shapiro-Wilk's test for normality shows no contradiction, so we proceed with finding the estimators for \(\mu\) and \(\sigma^2\). We then produce a density plot of the birth weights, and overlay a curve that corresponds to a normal distribution with \(\hat{\mu} = \bar{X}\) and \(\hat{\sigma^2}  = \frac{1}{n} \sum_{i=1}^n (X_i - \bar{X})^2\). This normal curve is pretty close to the density plot, so it appears reasonable to say that the birth weights follow a normal distribution with mean 2944.587 (grams) and variance 528940 (grams-squared).
+We now use these MOM estimates on the data set of birth weights at Baystate Medical Center in 1986. It is well established in the literature that birth weights of babies follow a normal distribution. A quick check with the Shapiro-Wilk's test for normality shows no contradiction, so we proceed with finding the estimates for \(\mu\) and \(\sigma^2\). We then produce a density plot of the birth weights, and overlay a curve that corresponds to a normal distribution with \(\hat{\mu} = \bar{x}\) and \(\hat{\sigma^2}  = \frac{1}{n} \sum_{i=1}^n (x_i - \bar{x})^2\). This normal curve is pretty close to the density plot, so it appears reasonable to say that the birth weights follow a normal distribution with mean 2944.587 (grams) and variance 528940 (grams-squared).
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{library}\NormalTok{(MASS)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## 
-## Attaching package: 'MASS'
-\end{verbatim}
-
-\begin{verbatim}
-## The following object is masked from 'package:dplyr':
-## 
-##     select
-\end{verbatim}
-
-\begin{verbatim}
-## The following objects are masked from 'package:openintro':
-## 
-##     housing, mammals
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \NormalTok{data}\OtherTok{\textless{}{-}}\NormalTok{MASS}\SpecialCharTok{::}\NormalTok{birthwt }\DocumentationTok{\#\#dataset comes from MASS package}
 
 \FunctionTok{shapiro.test}\NormalTok{(data}\SpecialCharTok{$}\NormalTok{bwt) }\DocumentationTok{\#\#check for normality}
@@ -4888,7 +4866,7 @@ We now use these MOM estimators on the data set of birth weights at Baystate Med
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{mu}\OtherTok{\textless{}{-}}\FunctionTok{mean}\NormalTok{(data}\SpecialCharTok{$}\NormalTok{bwt) }\DocumentationTok{\#\#MOM estimator for mu}
+\NormalTok{mu}\OtherTok{\textless{}{-}}\FunctionTok{mean}\NormalTok{(data}\SpecialCharTok{$}\NormalTok{bwt) }\DocumentationTok{\#\#MOM estimate for mu}
 \NormalTok{mu}
 \end{Highlighting}
 \end{Shaded}
@@ -4899,7 +4877,7 @@ We now use these MOM estimators on the data set of birth weights at Baystate Med
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{sigma2}\OtherTok{\textless{}{-}}\FunctionTok{mean}\NormalTok{((data}\SpecialCharTok{$}\NormalTok{bwt}\SpecialCharTok{{-}}\NormalTok{mu)}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{) }\DocumentationTok{\#\#MOM estimator for sigma2}
+\NormalTok{sigma2}\OtherTok{\textless{}{-}}\FunctionTok{mean}\NormalTok{((data}\SpecialCharTok{$}\NormalTok{bwt}\SpecialCharTok{{-}}\NormalTok{mu)}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{) }\DocumentationTok{\#\#MOM estimate for sigma2}
 \NormalTok{sigma2}
 \end{Highlighting}
 \end{Shaded}
@@ -4925,43 +4903,43 @@ We now use these MOM estimators on the data set of birth weights at Baystate Med
 
 \subsection{Alternative Form of Method of Moments Estimation}\label{alternative-form-of-method-of-moments-estimation}
 
-In Section \ref{moments}, we defined ** central moments**. As a reminder, for a random variable \(X\), its \(k\)th central moment is \(E((X-\mu)^k)\).
+In Section \ref{moments}, we defined \textbf{central moments}. As a reminder, for a random variable \(X\), its \(k\)th central moment is \(E((X-\mu)^k)\).
 
-Suppose we observe a random sample \(X_1, \cdots, X_n\) that comes from \(X\). The \(k\)th \textbf{sample central moment} is \(M_k^* = \frac{1}{n} \sum_{i=1}^n (X_i - \bar{X})^k\).
+Suppose we observe a random sample \(x_1, \cdots, x_n\) that comes from \(X\). The \(k\)th \textbf{sample central moment} is \(M_k^* = \frac{1}{n} \sum_{i=1}^n (x_i - \bar{x})^k\).
 
-An alternative form for the method of moments estimation is: Let \(X\) be a random variable with distribution depending on parameters \(\theta_1, \cdots, \theta_m\). The method of moments (MOM) estimators \(\hat{\theta}_1, \cdots, \hat{\theta}_m\) are found by equating the first sample moment to the first moments, and equating subsequent sample central moments to the corresponding central moments, and solving for \(\theta_1, \cdots, \theta_m\).
+An alternative form for the method of moments estimation is: Let \(X\) be a random variable with distribution depending on parameters \(\theta_1, \cdots, \theta_m\). The method of moments (MOM) estimates \(\hat{\theta}_1, \cdots, \hat{\theta}_m\) are found by equating the first sample moment to the first moments, and equating subsequent sample central moments to the corresponding central moments, and solving for \(\theta_1, \cdots, \theta_m\).
 
-We go back to the 2nd example in the previous subsection, where we are trying to find estimators for \(\mu\) and \(\sigma^2\) of a normal distribution.
+We go back to the 2nd example in the previous subsection, where we are trying to find estimates for \(\mu\) and \(\sigma^2\) of a normal distribution.
 
 \begin{itemize}
 \tightlist
 \item
   The first moment is \(E(X) = \mu\), since \(X \sim N(\mu, \sigma^2)\).
 \item
-  The first sample moment is \(M_1 = \frac{1}{n} \sum_{i=1}^n X_i = \bar{X}\).
+  The first sample moment is \(M_1 = \frac{1}{n} \sum_{i=1}^n x_i = \bar{xX}\).
 \end{itemize}
 
-So we set \(E(X) = M_1\), i.e.~\(\hat{\mu} = \bar{X}\). This is just the sample average of the birth weights at Baystate Medical Center in 1986.
+So we set \(E(X) = M_1\), i.e.~\(\hat{\mu} = \bar{x}\). This is just the sample average of the birth weights at Baystate Medical Center in 1986.
 
 \begin{itemize}
 \tightlist
 \item
   The second central moment is \(Var(x) = E[(X-\mu)^2] = \sigma^2\).
 \item
-  The second sample central moment is \(M_2^* = \frac{1}{n} \sum_{i=1}^n (X_i - \bar{X})^2\).
+  The second sample central moment is \(M_2^* = \frac{1}{n} \sum_{i=1}^n (x_i - \bar{x})^2\).
 \end{itemize}
 
-So we set \(Var(X) = M_2^*\) i.e.~\(\hat{\sigma^2} = \frac{1}{n} \sum_{i=1}^n (X_i - \bar{X})^2\). If we compare this solution with the solution in the previous subsection, they are exactly the same.
+So we set \(Var(X) = M_2^*\) i.e.~\(\hat{\sigma^2} = \frac{1}{n} \sum_{i=1}^n (x_i - \bar{x})^2\). If we compare this solution with the solution in the previous subsection, they are exactly the same.
 
-This alternative form is sometimes easier to work with, since the 2nd central moment is actually the variance of \(X\).
+This alternative form is often easier to work with, since the 2nd central moment is actually the variance of \(X\).
 
 The idea behind method of moments estimation is fairly intuitive; however, it has some drawbacks which we will talk about after introducing another method for estimation in the next section, the method of maximum likelihood.
 
 \section{Method of Maximum Likelihood Estimation}\label{method-of-maximum-likelihood-estimation}
 
-The method of maximum likelihood is a workhorse in statistics and data science since it is widely used in estimating models. It is preferred to the method of moments as it is built upon a stronger theoretical framework, and its estimators tend to have more desirable properties. You are virtually guaranteed to see the method of maximum likelihood again in the future.
+The method of maximum likelihood is a workhorse in statistics and data science since it is widely used in estimating models. It is preferred to the method of moments as it is built upon a stronger theoretical framework, and its estimators tend to have more desirable properties. You are guaranteed to see the method of maximum likelihood again in the future.
 
-As its name suggests, it is a method of estimating parameters by maximizing the likelihood.
+As its name suggests, it is a method of estimating parameters by maximizing the likelihood. We will go over the idea behind the likelihood next.
 
 \subsection{Likelihood Function}\label{likelihood-function}
 
@@ -4969,12 +4947,12 @@ Suppose we have \(n\) observations, denoted by the vector \(\boldsymbol{x} = (x_
 
 We have seen that PDFs (and hence joint PDFs) are always described by their parameters (e.g.~Normal distribution has \(\mu, \sigma^2\), Bernoulli has \(p\)). For this section, we will let \(\boldsymbol{\theta}\) denote the parameters of a PDF. For example, if we are working with multivariate normal distribution, \(\boldsymbol{\theta} = (\boldsymbol{\mu}, \boldsymbol{\Sigma})\), the mean vector and covariance matrix.
 
-To make it clear what the parameters are, we will write \(f_{\boldsymbol{X}}(\boldsymbol{x}; \boldsymbol{\theta})\)
+We write \(f_{\boldsymbol{X}}(\boldsymbol{x}; \boldsymbol{\theta})\)
 to express the PDF of the random vector \(\boldsymbol{X}\) with parameter \(\boldsymbol{\theta}\). So the PDF is a function of two items:
 
 \begin{itemize}
 \item
-  The first item is the vector \(\boldsymbol{x} = (x_1, \cdots, x_n)^{T}\), which is basically a vector of the observed data. In previous modules, we expressed PDFs as a function of the observed data, since we calculate the PDF when \(\boldsymbol{X} = \boldsymbol{x}\). In estimation, the vector of observed data is actually fixed as tt is something we are given in the data set.
+  The first item is the vector \(\boldsymbol{x} = (x_1, \cdots, x_n)^{T}\), which is basically a vector of the observed data. In previous modules, we expressed PDFs as a function of the observed data, since we calculate the PDF when \(\boldsymbol{X} = \boldsymbol{x}\). In estimation, the vector of observed data is actually fixed as it is something we are given in the data set.
 \item
   The second item is the parameter \(\boldsymbol{\theta}\). Estimating the parameter is our focus in estimation. The general idea in maximum likelihood is to find the value of \(\boldsymbol{\theta}\) that ``best explains'' or ``is most consistent'' with the observed values of the data \(\boldsymbol{x}\). We maximize \(f_{\boldsymbol{X}}(\boldsymbol{x}; \boldsymbol{\theta})\) to achieve this goal.
 \end{itemize}
@@ -5012,7 +4990,7 @@ From equation \eqref{eq:3-bern}, the PMF of \(X \sim Bern(p)\) is \(f_X(x) = p^x
 The likelihood function, per equation \eqref{eq:7-like}, becomes
 
 \[
-L(p | \boldsymbol{x} ) = \prod_i^n f_X(x_i; p) = \prod_i^n p^{x_i} (1-p)^{1-x_i}.
+L(p | \boldsymbol{x} ) = \prod_{i=1}^n f_X(x_i; p) = \prod_{i=1}^n p^{x_i} (1-p)^{1-x_i}.
 \]
 
 The log-likelihood function, per equation \eqref{eq:7-loglike}, becomes
@@ -5026,9 +5004,343 @@ The log-likelihood function, per equation \eqref{eq:7-loglike}, becomes
 \end{split}
 \]
 
-\section{Assessing Estimators}\label{assessing-estimators}
+\subsubsection{Example 1 Continued: Visualizing Likelihood and Log-Likelihood Functions}\label{example-1-continued-visualizing-likelihood-and-log-likelihood-functions}
+
+We mentioned that the likelihood and log-likelihood functions, \(L(\boldsymbol{\theta} | \boldsymbol{x} )\) and \(\ell(\boldsymbol{\theta} | \boldsymbol{x} )\), are functions of the parameters \(\boldsymbol{\theta}\) and the observed data \(\boldsymbol{x}\). We typically view these functions after observing our data \(\boldsymbol{x}\).
+
+Suppose we are trying to estimate the proportion of college students who use passphrases for their university email account. We randomly select 20 students and ask them if they use passphrases for their university email account. Let \(x_i\) denote the response for student \(i\), where \(x_i = 1\) if student \(i\) uses passphrases and \(x_i=0\) otherwise. We can say that \(X \sim Bern(p)\) where \(p\) denotes the proportion of all college students who use passphrases for their university email account. For our sample of 20 students, 7 of them said they use passphrases for their university email account. From example 1, we know the likelihood function now is
+
+\[
+\begin{split}
+L(p | \boldsymbol{x} ) &= \prod_{i=1}^n p^{x_i} (1-p)^{1-x_i} \\
+                       &= p^7 (1-p)^{13}
+\end{split}
+\]
+
+and the log-likelihood function becomes
+
+\[
+\begin{split}
+\ell (p | \boldsymbol{x}) &= \log p \left(\sum_{i=1}^n x_i \right) + \log (1-p) \left( n - \sum_{i=1}^n x_i \right)\\
+                          &= 7 \log p + 13 \log(1-p)
+\end{split}
+\]
+We can create plots of \(L(p | \boldsymbol{x} )\) and \(\ell(p | \boldsymbol{x} )\) based on the observed data, as we vary the value of \(p\) from 0 to 1 (the support of \(p\)). These plots are displayed in Figure \ref{fig:7-bernlikelihood} below
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#function to compute likelihood function }
+\NormalTok{bern\_like}\OtherTok{\textless{}{-}}\ControlFlowTok{function}\NormalTok{(x, p) }\DocumentationTok{\#\#supply vector of data, and value of success probability}
+  
+\NormalTok{\{}
+  
+\NormalTok{  n}\OtherTok{\textless{}{-}}\FunctionTok{length}\NormalTok{(x) }\DocumentationTok{\#\#sample size}
+\NormalTok{  S}\OtherTok{\textless{}{-}}\FunctionTok{sum}\NormalTok{(x) }
+  
+\NormalTok{  likelihood}\OtherTok{\textless{}{-}}\NormalTok{p}\SpecialCharTok{\^{}}\NormalTok{S }\SpecialCharTok{*}\NormalTok{ (}\DecValTok{1}\SpecialCharTok{{-}}\NormalTok{p)}\SpecialCharTok{\^{}}\NormalTok{(n}\SpecialCharTok{{-}}\NormalTok{S) }\DocumentationTok{\#\#formula for likelihood function from Example 1}
+  \FunctionTok{return}\NormalTok{(likelihood)}
+  
+\NormalTok{\}}
+
+\DocumentationTok{\#\#function to compute loglikelihood function}
+
+\NormalTok{bern\_loglike}\OtherTok{\textless{}{-}}\ControlFlowTok{function}\NormalTok{(x,p)}
+  
+\NormalTok{\{}
+  
+\NormalTok{  n}\OtherTok{\textless{}{-}}\FunctionTok{length}\NormalTok{(x) }\DocumentationTok{\#\#sample size}
+\NormalTok{  S}\OtherTok{\textless{}{-}}\FunctionTok{sum}\NormalTok{(x) }
+  
+\NormalTok{  loglike}\OtherTok{\textless{}{-}}\NormalTok{ S}\SpecialCharTok{*}\FunctionTok{log}\NormalTok{(p) }\SpecialCharTok{+}\NormalTok{ (n}\SpecialCharTok{{-}}\NormalTok{S)}\SpecialCharTok{*}\FunctionTok{log}\NormalTok{(}\DecValTok{1}\SpecialCharTok{{-}}\NormalTok{p) }\DocumentationTok{\#\#formula for log{-}likelihood function from Example 1}
+  \FunctionTok{return}\NormalTok{(loglike) }
+  
+\NormalTok{\}}
+
+\DocumentationTok{\#\#our "data" according to described scenario}
+\NormalTok{data}\OtherTok{\textless{}{-}}\FunctionTok{c}\NormalTok{(}\FunctionTok{rep}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{7}\NormalTok{), }\FunctionTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{13}\NormalTok{)) }
+\DocumentationTok{\#\#vary the value of p, from 0 to 1, in increments of 0.01}
+\NormalTok{props}\OtherTok{\textless{}{-}}\FunctionTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{,}\AttributeTok{by=}\FloatTok{0.01}\NormalTok{) }
+
+\FunctionTok{par}\NormalTok{(}\AttributeTok{mfrow=}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{))}
+\DocumentationTok{\#\#plot the likelihood function on y axis, against the value of p}
+\FunctionTok{plot}\NormalTok{(props, }\FunctionTok{bern\_like}\NormalTok{(data, props), }\AttributeTok{type=}\StringTok{"l"}\NormalTok{, }\AttributeTok{xlab=}\StringTok{"p"}\NormalTok{, }\AttributeTok{ylab=}\StringTok{"Likelihood Function"}\NormalTok{)}
+\DocumentationTok{\#\#overlay line on x{-}axis that corresponds to max value for likelihood function}
+\FunctionTok{abline}\NormalTok{(}\AttributeTok{v=}\NormalTok{props[}\FunctionTok{which.max}\NormalTok{(}\FunctionTok{bern\_like}\NormalTok{(data, props))], }\AttributeTok{col=}\StringTok{"blue"}\NormalTok{)}
+\DocumentationTok{\#\#plot the loglikelihood function on y axis, against the value of p}
+\FunctionTok{plot}\NormalTok{(props, }\FunctionTok{bern\_loglike}\NormalTok{(data, props), }\AttributeTok{type=}\StringTok{"l"}\NormalTok{, }\AttributeTok{xlab=}\StringTok{"p"}\NormalTok{, }\AttributeTok{ylab=}\StringTok{"Log{-}Likelihood Function"}\NormalTok{)}
+\DocumentationTok{\#\#overlay line on x{-}axis that corresponds to max value for loglikelihood function}
+\FunctionTok{abline}\NormalTok{(}\AttributeTok{v=}\NormalTok{props[}\FunctionTok{which.max}\NormalTok{(}\FunctionTok{bern\_loglike}\NormalTok{(data, props))], }\AttributeTok{col=}\StringTok{"blue"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\centering
+\includegraphics{bookdown-demo_files/figure-latex/7-bernlikelihood-1.pdf}
+\caption{\label{fig:7-bernlikelihood}Likelihood (left) and Log-Likelihood (right) Functions of Bernoulli, when n=20, and 7 Yeses}
+\end{figure}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# what value of p had maximum value of likelihood}
+\NormalTok{props[}\FunctionTok{which.max}\NormalTok{(}\FunctionTok{bern\_like}\NormalTok{(data, props))]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.35
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# what value of p had maximum value of loglikelihood}
+\NormalTok{props[}\FunctionTok{which.max}\NormalTok{(}\FunctionTok{bern\_loglike}\NormalTok{(data, props))]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.35
+\end{verbatim}
+
+The plots in Figure \ref{fig:7-bernlikelihood} show us how the likelihood and log-likelihood functions behave, given our data (i.e.~that 7 out of 20 students said they use passphrases), and as we vary the value of the parameter \(p\). We note that the value of \(p\) that maximized the likelihood and log-likelihood functions is 0.35. This is the idea behind the method of maximum likelihood estimation: what value of the parameter maximizes the likelihood and log-likelihood functions? Or in more regular language, what value of the parameter best explains our data?
+
+Note: the value of 0.35 corresponds to the sample proportion of students who use passphrases. It should make intuitive sense that if 7 out of 20 students in our sample say they use passphrases, we would say that our best estimate for the proportion of college students who use passphrases for their university email is 0.35.
+
+\subsubsection{Example 2: Normal}\label{example-2-normal}
+
+Let \(X_1, \cdots, X_n\) be i.i.d. \(N(\mu, \sigma^2)\). Find the corresponding likelihood and log-likelihood functions.
+
+From equation \eqref{eq:4-pdfNormal}, the PDF of \(X \sim N(\mu, \sigma^2)\) is \(f_X(x) =  \frac{1}{\sigma \sqrt{2 \pi}} \exp \left(-\frac{(x - \mu)^2}{2 \sigma^2} \right)\), where the support of \(x\) is all real numbers.
+
+The likelihood function, per equation \eqref{eq:7-like}, becomes
+
+\[
+L(\mu, \sigma^2 | \boldsymbol{x} ) = \prod_{i=1}^n f_X(x_i; \mu, \sigma^2) = \prod_{i=1}^n \frac{1}{\sigma \sqrt{2 \pi}} \exp \left(-\frac{(x_i - \mu)^2}{2 \sigma^2} \right).
+\]
+
+The log-likelihood function, per equation \eqref{eq:7-loglike}, becomes
+
+\[
+\begin{split}
+\ell (\mu, \sigma^2 | \boldsymbol{x}) &= \sum_{i=1}^n \log f_X(x_i; \boldsymbol{\theta}) \\
+                          &= \sum_{i=1}^n \log \left\{ \frac{1}{\sigma \sqrt{2 \pi}} \exp \left(-\frac{(x_i - \mu)^2}{2 \sigma^2} \right) \right\} \\
+                          &= \sum_{i=1}^n \left\{-\frac{1}{2} \log (2 \pi \sigma^2) -\frac{(x_i - \mu)^2}{2 \sigma^2} \right\} \\
+                          &= -\frac{n}{2} \log (2 \pi \sigma^2) - \frac{1}{2 \sigma^2} \sum_{i=1}^n (x_i - \mu)^2
+\end{split}
+\]
+
+\subsection{Maximum Likelihood Estimation}\label{maximum-likelihood-estimation}
+
+We are now ready to formally define the method of maximimum likelihood estimation. The \textbf{maximum likelihood (ML) estimates} \(\hat{\theta}_1, \cdots, \hat{\theta}_m\) of the parameters \(\theta_1, \cdots, \theta_m\) are found by maximizing the likelihood function \(L(\boldsymbol{\theta} | \boldsymbol{x} )\).
+
+Remember the following when finding ML estimates:
+
+\begin{itemize}
+\tightlist
+\item
+  The values of \(\boldsymbol{x}\) are considered fixed as they are given in our data.
+\item
+  We are varying the values of the parameters \(\boldsymbol{\theta}\) and finding what specific values of \(\boldsymbol{\theta}\) will maximize the likelihood function.
+\item
+  We could choose to maximize the log-likelihood function instead. It is often easier to work with the log-likelihood function. The solution will be the same.
+\end{itemize}
+
+We re-visit Examples 1 and 2 from the previous subsection.
+
+\subsubsection{Example 1: Bernoulli}\label{example-1-bernoulli-1}
+
+Let \(X_1, \cdots, X_n\) be i.i.d. \(Bern(p)\). Find the ML estimate for \(p\). We will work with the log-likelihood function, which we had found to be
+
+\[
+\ell (p | \boldsymbol{x}) = \log p \left(\sum_{i=1}^n x_i \right) + \log (1-p) \left( n - \sum_{i=1}^n x_i \right).
+\]
+
+To find the ML estimate for \(p\), we need to find the value of \(p\) that maximizes \(\ell (p | \boldsymbol{x})\). In the previous subsection, we provided a visual way to represent the log-likelihood function as \(p\) is varied, and find the value of \(p\) that corresponded to the peak of the graph. The visual approach only works for a specific scenario when we had 7 out of 20 students who say yes. Can we generalize the ML estimate for the Bernoulli distribution?
+
+We can easily maximize any function by taking its first derivative and setting it to 0. So we take the first derivative of \(\ell (p | \boldsymbol{x})\):
+
+\[
+\begin{split}
+\frac{d}{d p}\ell (p | \boldsymbol{x}) &= \frac{d}{d p} \left\{ \log p \left(\sum_{i=1}^n x_i \right) + \log (1-p) \left( n - \sum_{i=1}^n x_i \right) \right\}\\
+                          &= \frac{\sum_{i=1}^n x_i}{p} - \frac{n - \sum_{i=1}^n x_i}{1-p}
+\end{split}
+\]
+which we then set to 0:
+
+\[
+\begin{split}
+\frac{\sum_{i=1}^n x_i}{p} - \frac{n - \sum_{i=1}^n x_i}{1-p} &= 0\\
+                                               \implies p     &= \frac{\sum_{i=1}^n x_i}{n}
+\end{split}
+\]
+
+So the ML estimate for \(p\) is \(\hat{p}_{ML} = \frac{\sum_{i=1}^n x_i}{n}\). This is just the sample proportion of observed data where \(X_i = 1\). This result means that for any data that comes from a Bernoulli distribution, the sample proportion of the data that is a ``success'' is the ML estimate for the success probability \(p\).
+
+If we go back to our example where 7 out of 20 students say they use passphrases, the ML estimate of \(p\) is \(\hat{p}_{ML} = \frac{7}{20} = 0.35\), which matches the result we obtained when we viewed the log-likelihood function visually in Figure \ref{fig:7-bernlikelihood}.
+
+\emph{Thought question}: Play around with the code that produced Figure \ref{fig:7-bernlikelihood}. Change the vector \texttt{data} (to anything you'd like). You should find that the value of \(p\) that maximizes the likelihood and log-likelihood functions will always be \(\hat{p}_{ML} = \frac{\sum_{i=1}^n x_i}{n}\), the sample proportion of ``success'' in our sample.
+
+\subsubsection{Example 2: Normal}\label{example-2-normal-1}
+
+Let \(X_1, \cdots, X_n\) be i.i.d. \(N(\mu, \sigma^2)\). Find the ML estimates for \(\mu\) and \(\sigma^2\). Again, we will work with the log-likelihood function, which we had found to be
+
+\[
+\ell (\mu, \sigma^2 | \boldsymbol{x}) = -\frac{n}{2} \log (2 \pi \sigma^2) - \frac{1}{2 \sigma^2} \sum_{i=1}^n (x_i - \mu)^2.
+\]
+
+Notice we have two parameters \(\mu\) and \(\sigma^2\), so we have to take partial derivatives for both:
+
+\begin{itemize}
+\tightlist
+\item
+  Partial derivative with respect to \(\mu\):
+\end{itemize}
+
+\[
+\begin{split}
+\frac{d}{d \mu}\ell (\mu, \sigma^2 | \boldsymbol{x}) &= \frac{d}{d \mu} \left\{ -\frac{n}{2} \log (2 \pi \sigma^2) - \frac{1}{2 \sigma^2} \sum_{i=1}^n (x_i - \mu)^2 \right \} \\
+                                                     &= \frac{1}{\sigma^2} \sum_{i=1}^n (x_i - \mu).
+\end{split}
+\]
+
+\begin{itemize}
+\tightlist
+\item
+  Partial derivative with respect to \(\sigma^2\):
+\end{itemize}
+
+\[
+\begin{split}
+\frac{d}{d \sigma^2}\ell (\mu, \sigma^2 | \boldsymbol{x}) &= \frac{d}{d \sigma^2} \left\{ -\frac{n}{2} \log (2 \pi \sigma^2) - \frac{1}{2 \sigma^2} \sum_{i=1}^n (x_i - \mu)^2 \right \} \\
+                                                     &= -\frac{n}{2}\frac{2\pi}{2 \pi \sigma^2} + \frac{1}{2 \sigma^4} \sum_{i=1}^n (x_i - \mu)^2 \\
+                                                     &= -\frac{n}{2 \sigma^2} + \frac{1}{2 \sigma^4} \sum_{i=1}^n (x_i - \mu)^2
+\end{split}
+\]
+We then set both partial derivatives to 0:
+
+\begin{itemize}
+\tightlist
+\item
+\end{itemize}
+
+\[
+\begin{split}
+\frac{d}{d \mu}\ell (\mu, \sigma^2 | \boldsymbol{x}) &= 0 \\
+\implies \frac{1}{\sigma^2} \sum_{i=1}^n (x_i - \mu) &= 0 \\
+\implies \mu  &= \frac{\sum_{i=1}^n x_i}{n} = \bar{x}.
+\end{split}
+\]
+So the ML estimate for \(\mu\) is \(\hat{\mu_{ML}} = \bar{x}\), i.e.~the sample mean.
+
+\begin{itemize}
+\tightlist
+\item
+\end{itemize}
+
+\[
+\begin{split}
+\frac{d}{d \sigma^2}\ell (\mu, \sigma^2 | \boldsymbol{x}) &= 0 \\
+\implies -\frac{n}{2 \sigma^2} + \frac{1}{2 \sigma^4} \sum_{i=1}^n (x_i - \mu)^2 &= 0 \\
+\implies \sigma^2 &= \frac{\sum_{i=1}^n (x_i - \mu)^2}{n}.
+\end{split}
+\]
+
+So the ML estimate for \(\sigma^2\) is \(\hat{\sigma_{ML}^2} = \frac{\sum_{i=1}^n (x_i - \mu)^2}{n}\). Note that this is not the same as how we normally calculate sample variance, per equation \eqref{eq:variance}: \(\frac{\sum_{i=1}^n (x_i-\bar{x})^2}{n-1}\).
+
+\subsubsection{Calculating Maximum Likelihood Estimates}\label{calculating-maximum-likelihood-estimates}
+
+In the examples that we have worked with, we found the values of maximum likelihood estimates using a couple of approaches, one using a plot of the likelihood function over different values of the parameter, based on observed data, and another using calculus, by setting the derivative of the log-likelihood function to 0.
+
+There are times when these approaches may not be feasible, for example, there is no closed form solution for the first derivative. In these instances, numerical methods are used. Numerical methods are typically algorithms that perform complex computations to approximate a mathematical result. We will not go into the details of these algorithms, and numerical methods are still an active area of research.
+
+\section{Properties of Estimators}\label{properties-of-estimators}
+
+We have learned about a couple of different methods to estimate parameters. While these two methods are common, there are not the only methods to estimate parameters. One question will be evaluating how ``good'' are our estimates? Before going into this evaluation, we define a few concepts that are used in this evaluation.
+
+\subsection{Estimators VS Estimates}\label{estimators-vs-estimates}
+
+We wrote about estimators and estimates earlier in this module, but as a quick reminder on what these are:
+
+\begin{itemize}
+\item
+  An \textbf{estimator} is a numerical summary associated with samples.
+\item
+  An \textbf{estimated value}, or \textbf{estimate}, is the actual value of the estimator based on a sample.
+\end{itemize}
+
+We have previously said that the ML estimate is found by maximizing the likelihood function, i.e.~\(\hat{\theta}_{ML}(\boldsymbol{x})\) is the value of \(\theta\) that maximizes \(L(\theta| \boldsymbol{x})\). We write \(\hat{\theta}_{ML}(\boldsymbol{x})\) to emphasize that the ML estimate is a function of the observed data \(\boldsymbol{x} = (x_1,\cdots, x_n)^T\). So, if our ML estimate is the sample mean, we write \(\hat{\theta}_{ML}(\boldsymbol{x}) = \frac{\sum_{i=1}^n x_i}{n}\). This value is calculated based on our observed data.
+We can also view the sample mean as a random variable, especially if we want to analyze the uncertainty associated with the sample mean. In other words, what is the distribution of the sample mean, if we had obtained many different random samples and calculated the sample mean from each random sample? When viewing the sample mean as a random variable, we write \(\hat{\Theta}_{ML}(\boldsymbol{X}) = \frac{\sum_{i=1}^n X_i}{n}\), and we call \(\hat{\Theta}_{ML}\) the ML estimator of the parameter \(\theta\).
+
+Note: we consider one parameter \(\theta\) in this subsection, to simplify notation with the introduction of \(\Theta\). The ideas can be applied to any number of parameters.
+
+The ML estimators are just one kind of estimators. These are found by maximizing the likelihood function. We can find estiamtors in other ways (method of moments, or any other method). An estimator is any function that uses the data and calculates a number from the data. As estimator is \(\hat{\Theta}(\boldsymbol{X})\). We call \(\hat{\Theta}\) an estimator of \(\theta\).
+
+Consider \(X_1, \cdots, X_n\) i.i.d. Normal with unknown mean \(\mu\) and variance \(\sigma^2\) that is known. we can define two estimators of \(\mu\) as \(\hat{\Theta}_1(\boldsymbol{X}) = \frac{\sum_{i=1}^n X_i}{n}\) and \(\hat{\Theta}_2(\boldsymbol{X}) = X_1 + 2\). The first estimator takes the average value of the \(n\) data points. The second estimator uses the first data point and adds 2 to it. The first estimator is an ML estimator, while the second estimator is not.
+
+We can see that we are free to define estimators in various ways. The question now is how do we evaluate whether an estimator is ``good'' or not. There are a few metrics to evaluate estimators.
 
 \subsection{Bias}\label{bias}
+
+One metric used to evaluate estimators is to consider the long-run average of an estimator. An estimator is \textbf{unbiased} if the long run average of an estimator is equal to the true value of the parameter. Mathematically, an estimator \(\hat{\Theta}\) is unbiased if \(E(\hat{\Theta}) = \theta\).
+
+So, while the value of the estimator could vary from sample to sample, the estimator is unbiased if it is equal to the true parameter, on average in the long-run.
+
+We can go back to the example from the previous subsection. Consider \(X_1, \cdots, X_n\) i.i.d. Normal with unknown mean \(\mu\) and variance \(\sigma^2\) that is known. we can define two estimators of \(\mu\) as \(\hat{\Theta}_1(\boldsymbol{X}) = \frac{\sum_{i=1}^n X_i}{n}\) and \(\hat{\Theta}_2(\boldsymbol{X}) = X_1 + 2\). Assess whether \(\hat{\Theta}_1(\boldsymbol{X})\) and \(\hat{\Theta}_2(\boldsymbol{X})\) are unbiased or not.
+
+The mathematical way of answering this question is to evaluate the expected value of both estimators:
+
+\begin{itemize}
+\item
+  \(E(\hat{\Theta}_1) = \frac{1}{n}E(\sum_{i=1}^n X_i) = \frac{1}{n}\sum_{i=1}^n E(X_i) = \frac{1}{n}(\mu + \cdots + \mu) = \mu\), so it is unbiased.
+\item
+  \(E(\hat{\Theta}_2)  = E(X_1 + 2) = E(X_1) + 2 = \mu +2\) which is not equal to \(\mu\), so it is biased.
+\end{itemize}
+
+We can also use Monte Carlo simulations to show these results:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{reps}\OtherTok{\textless{}{-}}\DecValTok{10000}
+
+\NormalTok{est1}\OtherTok{\textless{}{-}}\NormalTok{est2}\OtherTok{\textless{}{-}}\FunctionTok{array}\NormalTok{(}\DecValTok{0}\NormalTok{,reps) }\DocumentationTok{\#\#array to store est1 \& est2 from each rep}
+
+\NormalTok{n}\OtherTok{\textless{}{-}}\DecValTok{100}
+
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{7}\NormalTok{)}
+
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{reps)}
+  
+\NormalTok{\{}
+  
+\NormalTok{  X}\OtherTok{\textless{}{-}}\FunctionTok{rnorm}\NormalTok{(n) }\DocumentationTok{\#\#Xi iid N(0,1) with n=100}
+  
+\NormalTok{  est1[i]}\OtherTok{\textless{}{-}}\FunctionTok{mean}\NormalTok{(X) }\DocumentationTok{\#\#est 1}
+\NormalTok{  est2[i]}\OtherTok{\textless{}{-}}\NormalTok{X[}\DecValTok{1}\NormalTok{] }\SpecialCharTok{+} \DecValTok{2} \DocumentationTok{\#\#est 2}
+  
+\NormalTok{\}}
+
+\FunctionTok{mean}\NormalTok{(est1) }\DocumentationTok{\#\#should be close to 0, indicating sample mean is unbiased}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] -0.0009093132
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{mean}\NormalTok{(est2) }\DocumentationTok{\#\#should not be close to 0, indicating first obs + 2 is biased}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2.003234
+\end{verbatim}
+
+The code simulates \(X_1, \cdots, X_{100}\) i.i.d. standard normal. We generate 10 thousand replicates of \(X_1, \cdots, X_{100}\). For each replicate of \(X_1, \cdots, X_{100}\), we calculate \(\hat{\Theta}_1(\boldsymbol{X}) = \frac{\sum_{i=1}^n X_i}{n}\) and \(\hat{\Theta}_2(\boldsymbol{X}) = X_1 + 2\). We then find the average of \(\hat{\Theta}_1(\boldsymbol{X})\) and \(\hat{\Theta}_2(\boldsymbol{X})\) across the 10 thousand replicates. If the estimator is unbiased, the average from the Monte Carlo simulation should be close to 0, since the true mean of a standard normal is 0.
+
+The results from the MC simulation matches with theory. \(\hat{\Theta}_1(\boldsymbol{X}) = \frac{\sum_{i=1}^n X_i}{n}\) is an unbiased estimator for \(\mu\), whereas \(\hat{\Theta}_2(\boldsymbol{X}) = X_1 + 2\) is a biased estimator.
+
+So, based on bias, the sample mean is a better estimator for the population mean than using the first data point and adding 2 to it.
 
 \subsection{Standard Error and Variance}\label{standard-error-and-variance}
 

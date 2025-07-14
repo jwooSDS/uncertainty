@@ -139,6 +139,7 @@ fig:07-dataframe
 fig:7-MOM
 eq:7-like
 eq:7-loglike
+fig:7-bernlikelihood
 examples
 example-1-mario-kart-auction-prices
 eg2
@@ -303,7 +304,14 @@ alternative-form-of-method-of-moments-estimation
 method-of-maximum-likelihood-estimation
 likelihood-function
 example-1-bernoulli
-assessing-estimators
+example-1-continued-visualizing-likelihood-and-log-likelihood-functions
+example-2-normal
+maximum-likelihood-estimation
+example-1-bernoulli-1
+example-2-normal-1
+calculating-maximum-likelihood-estimates
+properties-of-estimators
+estimators-vs-estimates
 bias
 standard-error-and-variance
 consistency
