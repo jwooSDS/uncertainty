@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999996 (MiKTeX 24.4) (preloaded format=xelatex 2025.6.7)  15 JUL 2025 15:22
+This is XeTeX, Version 3.141592653-2.6-0.999996 (MiKTeX 24.4) (preloaded format=xelatex 2025.6.7)  15 JUL 2025 17:56
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1516,6 +1516,9 @@ File: images/07-dataframe.png Graphic file (type bmp)
 [140]
 
 [141]
+Underfull \vbox (badness 1708) has occurred while \output is active []
+
+
 
 [142]
 
@@ -1557,7 +1560,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 [154]
 
 [155]
-Underfull \hbox (badness 10000) in paragraph at lines 5286--5288
+Underfull \hbox (badness 10000) in paragraph at lines 5290--5292
 
  []
 
@@ -1573,12 +1576,8 @@ File: bookdown-demo_files/figure-latex/7-bias-1.pdf Graphic file (type pdf)
 [158]
 
 [159]
-Underfull \hbox (badness 10000) in paragraph at lines 5455--5457
+Underfull \hbox (badness 10000) in paragraph at lines 5457--5459
 
- []
-
-
-Overfull \vbox (1.30646pt too high) detected at line 5511
  []
 
 

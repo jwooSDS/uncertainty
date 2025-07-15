@@ -4664,11 +4664,11 @@ In terms of running the examples, you can choose to copy the code and exclude th
 
 \chapter{Estimation}\label{estimation}
 
-This module is based on Introduction to Probability for Data Science (Chan), Chapter 8.1 and 8.2. You can access the book for free at \url{https://probability4datascience.com}. Please note that I cover additional topics.
+This module is based on Introduction to Probability for Data Science (Chan), Chapter 8.1 and 8.2. You can access the book for free at \url{https://probability4datascience.com}. Please note that I cover additional topics, and skip certain topics from the book. You may skip Section 8.1.3, 8.1.4, and 8.1.6 from the book.
 
 \section{Introduction}\label{introduction-3}
 
-We consider building models based on the data we have. Many models are based on some distribution, for example, the linear regression model is based on the normal distribution, and the logistic regression model is based on the Bernoulli distribution. Recall that these distributions are specified by their parameters: the mean \(\mu\) and variance \(\sigma^2\) for the normal distribution, and the success probability \(p\) for a Bernoulli distribution. The value of the parameters are almost always unknown in real life. This module deals with estimation: how do we estimate the values of these parameters, as well as quantify the level of uncertainty we have with these estimated values.
+We consider building models based on the data we have. Many models are based on some distribution, for example, the linear regression model is based on the normal distribution, and the logistic regression model is based on the Bernoulli distribution. Recall that these distributions are specified by their parameters: the mean \(\mu\) and variance \(\sigma^2\) for the normal distribution, and the success probability \(p\) for a Bernoulli distribution. The value of the parameters are almost always unknown in real life. This module deals with estimation: how we estimate the values of these parameters, as well as quantify the level of uncertainty we have with these estimated values, given the data we have.
 
 \subsection{Big Picture Idea with Estimation}\label{big-picture-idea-with-estimation}
 
@@ -4690,7 +4690,7 @@ A \textbf{variable} is a characteristic or attribute of individuals, or objects,
 
 An \textbf{observation} is the individual person, object or event that we collect data from. In the above scenario, an observation is a single American adult in our sample of 750.
 
-One way to think about variables and observations is through a spreadsheet. Typically, each row represents an observation and each column represents a variable. Figure \ref{fig:07-dataframe} below displays such an example, based on the described scenario. Each row represents an observation, i.e.~a single American adult who works full time in our sample, and the column represents the variable, which is systolic blood pressure.
+One way to think about variables and observations is through a spreadsheet. Typically, each row represents an observation and each column represents a variable. Figure \ref{fig:07-dataframe} below displays such an example, based on the described scenario. Each row represents an observation, i.e.~a single American adult in our sample, and the column represents the variable, which is systolic blood pressure.
 
 \begin{figure}
 \centering
@@ -4715,10 +4715,10 @@ So a parameter is a number that is associated with a population, while an estima
 \item
   The value of parameters are unknown, while we can actually calculate numerical values of estimators.
 \item
-  The value of parameters are considered fixed (as there is only one population), while the numerical values of estimators can vary if we obtain multiple random samples of the same sample size. Using the scenario above again, suppose we obtain a second representative sample of 750 American adults. The average systolic blood pressure of this second sample is likely to be different from the average systolic blood pressure of the first sample. This illustrates that there is variance, or uncertainty, associated with estimators due to random sampling. This is the uncertainty that we will be focusing on in this section.
+  The value of parameters are considered fixed (as there is only one population), while the numerical values of estimators can vary if we obtain multiple random samples of the same sample size. Using the scenario above again, suppose we obtain a second representative sample of 750 American adults. The average systolic blood pressure of this second sample is likely to be different from the average systolic blood pressure of the first sample. This illustrates that there is \textbf{variance, or uncertainty, associated with estimators due to random sampling}. This is the uncertainty that we will be focusing on in this section.
 \end{itemize}
 
-Whenever we propose an estimator for a parameter, we want to assess how ``good'' the estimator is. In some situations, there is an obvious choice for an estimator, for example, using the sample mean, \(\bar{x} = \frac{\sum x_i}{n}\) to estimate the population mean. But in some instances, the choice may not be so obvious. For example, why do use the sample variance \(s^2 = \frac{\sum (x_i - \bar{x})^2}{n-1}\) as an estimator for the population variance, and not \(\frac{\sum (x_i - \bar{x})^2}{n}\)? We will cover a few measures that are used to assess an estimator, mainly its bias, variance, and its mean-squared error.
+Whenever we propose an estimator for a parameter, we want to assess how ``good'' the estimator is. In some situations, there is an obvious choice for an estimator, for example, using the sample mean, \(\bar{x} = \frac{\sum x_i}{n}\) to estimate the population mean. But in some instances, the choice may not be so obvious. For example, why do use the sample variance \(s^2 = \frac{\sum (x_i - \bar{x})^2}{n-1}\) as an estimator for the population variance, and not \(\frac{\sum (x_i - \bar{x})^2}{n}\)? We will cover a few measures that are used to assess an estimator: bias, variance, and mean-squared error.
 
 We will also cover a couple of methods in estimating parameters: the method of moments, and the method of maximum likelihood. You will notice that we use probability rules in these methods.
 
@@ -4817,7 +4817,7 @@ Var(X) &= E(X^2) - E(X)^2\\
   The second sample moment is \(M_2 = \frac{1}{n} \sum_{i=1}^n x_i^2\).
 \end{itemize}
 
-So we set \(E(X^2) = M_2\), i.e.~\(\hat{\sigma^2} + \hat{\mu}^2 = \frac{1}{n} \sum_{i=1}^n x_i^2\). Since we earlier found that \(\hat{\mu} = \bar{X}\), we get \(\hat{\sigma^2}  = \frac{1}{n} \sum_{i=1}^n X_i^2 - \bar{X}^2 = \frac{1}{n} \sum_{i=1}^n (X_i - \bar{X})^2\).
+So we set \(E(X^2) = M_2\), i.e.~\(\hat{\sigma^2} + \hat{\mu}^2 = \frac{1}{n} \sum_{i=1}^n x_i^2\). Since we earlier found that \(\hat{\mu} = \bar{x}\), we get \(\hat{\sigma^2}  = \frac{1}{n} \sum_{i=1}^n x_i^2 - \bar{x}^2 = \frac{1}{n} \sum_{i=1}^n (x_i - \bar{x})^2\).
 
 Therefore, the MOM estimates for \(\mu\) and \(\sigma^2\) are \(\hat{\mu} = \bar{x}\) and \(\hat{\sigma^2}  = \frac{1}{n} \sum_{i=1}^n (x_i - \bar{x})^2\) respectively.
 
@@ -4874,7 +4874,7 @@ We now use these MOM estimates on the data set of birth weights at Baystate Medi
 \begin{figure}
 \centering
 \includegraphics{bookdown-demo_files/figure-latex/7-MOM-1.pdf}
-\caption{\label{fig:7-MOM}Density Plot of Birth Weights. Normal Curve with Parameters Estimated by MOM Overlaid}
+\caption{\label{fig:7-MOM}Density Plot of Birth Weights. Normal Curve (in Blue) with Parameters Estimated by MOM Overlaid}
 \end{figure}
 
 \subsection{Alternative Form of Method of Moments Estimation}\label{alternative-form-of-method-of-moments-estimation}
@@ -4885,6 +4885,8 @@ Suppose we observe a random sample \(x_1, \cdots, x_n\) that comes from \(X\). T
 
 An alternative form for the method of moments estimation is: Let \(X\) be a random variable with distribution depending on parameters \(\theta_1, \cdots, \theta_m\). The method of moments (MOM) estimates \(\hat{\theta}_1, \cdots, \hat{\theta}_m\) are found by equating the first sample moment to the first moments, and equating subsequent sample central moments to the corresponding central moments, and solving for \(\theta_1, \cdots, \theta_m\).
 
+This alternative form is often easier to work with, since the 2nd central moment is actually the variance of \(X\).
+
 We go back to the 2nd example in the previous subsection, where we are trying to find estimates for \(\mu\) and \(\sigma^2\) of a normal distribution.
 
 \begin{itemize}
@@ -4892,7 +4894,7 @@ We go back to the 2nd example in the previous subsection, where we are trying to
 \item
   The first moment is \(E(X) = \mu\), since \(X \sim N(\mu, \sigma^2)\).
 \item
-  The first sample moment is \(M_1 = \frac{1}{n} \sum_{i=1}^n x_i = \bar{xX}\).
+  The first sample moment is \(M_1 = \frac{1}{n} \sum_{i=1}^n x_i = \bar{x}\).
 \end{itemize}
 
 So we set \(E(X) = M_1\), i.e.~\(\hat{\mu} = \bar{x}\). This is just the sample average of the birth weights at Baystate Medical Center in 1986.
@@ -4906,8 +4908,6 @@ So we set \(E(X) = M_1\), i.e.~\(\hat{\mu} = \bar{x}\). This is just the sample 
 \end{itemize}
 
 So we set \(Var(X) = M_2^*\) i.e.~\(\hat{\sigma^2} = \frac{1}{n} \sum_{i=1}^n (x_i - \bar{x})^2\). If we compare this solution with the solution in the previous subsection, they are exactly the same.
-
-This alternative form is often easier to work with, since the 2nd central moment is actually the variance of \(X\).
 
 The idea behind method of moments estimation is fairly intuitive; however, it has some drawbacks which we will talk about after introducing another method for estimation in the next section, the method of maximum likelihood.
 
@@ -4955,7 +4955,7 @@ When maximizing the likelihood function, we often log transform the likelihood f
 
 It turns out that maximizing the log-likelihood function is often easier computationally than maximizing the likelihood function.
 
-Note: As the logarithm is a monotonic increasing function (it never decreases), maximizing a log transformed function is equivalent to maximizing the original function. Next, we look at how to write the likelihood and log-likelihood functions with a couple of examples.
+As the logarithm is a monotonic increasing function (it never decreases), maximizing a log transformed function is equivalent to maximizing the original function. Next, we look at how to write the likelihood and log-likelihood functions with a couple of examples.
 
 \subsubsection{Example 1: Bernoulli}\label{example-1-bernoulli}
 
@@ -4973,10 +4973,10 @@ The log-likelihood function, per equation \eqref{eq:7-loglike}, becomes
 
 \[
 \begin{split}
-\ell (p | \boldsymbol{x}) &= \sum_{i=1}^n \log f_X(x_i; \boldsymbol{\theta}) \\
+\ell (p | \boldsymbol{x}) &= \sum_{i=1}^n \log f_X(x_i;p) \\
                           &= \sum_{i=1}^n \log \left( p^{x_i} (1-p)^{1-x_i} \right) \\
                           &= \sum_{i=1}^n x_i \log p + (1-x_i) \log (1-p) \\
-                          &= \log p \left(\sum_{i=1}^n x_i \right) + \log (1-p) \left( n - \sum_{i=1}^n x_i \right)
+                          &= \log p \left(\sum_{i=1}^n x_i \right) + \log (1-p) \left( n - \sum_{i=1}^n x_i \right).
 \end{split}
 \]
 
@@ -4998,7 +4998,7 @@ and the log-likelihood function becomes
 \[
 \begin{split}
 \ell (p | \boldsymbol{x}) &= \log p \left(\sum_{i=1}^n x_i \right) + \log (1-p) \left( n - \sum_{i=1}^n x_i \right)\\
-                          &= 7 \log p + 13 \log(1-p)
+                          &= 7 \log p + 13 \log(1-p).
 \end{split}
 \]
 We can create plots of \(L(p | \boldsymbol{x} )\) and \(\ell(p | \boldsymbol{x} )\) based on the observed data, as we vary the value of \(p\) from 0 to 1 (the support of \(p\)). These plots are displayed in Figure \ref{fig:7-bernlikelihood} below
@@ -5100,7 +5100,7 @@ The log-likelihood function, per equation \eqref{eq:7-loglike}, becomes
 \ell (\mu, \sigma^2 | \boldsymbol{x}) &= \sum_{i=1}^n \log f_X(x_i; \boldsymbol{\theta}) \\
                           &= \sum_{i=1}^n \log \left\{ \frac{1}{\sigma \sqrt{2 \pi}} \exp \left(-\frac{(x_i - \mu)^2}{2 \sigma^2} \right) \right\} \\
                           &= \sum_{i=1}^n \left\{-\frac{1}{2} \log (2 \pi \sigma^2) -\frac{(x_i - \mu)^2}{2 \sigma^2} \right\} \\
-                          &= -\frac{n}{2} \log (2 \pi \sigma^2) - \frac{1}{2 \sigma^2} \sum_{i=1}^n (x_i - \mu)^2
+                          &= -\frac{n}{2} \log (2 \pi \sigma^2) - \frac{1}{2 \sigma^2} \sum_{i=1}^n (x_i - \mu)^2.
 \end{split}
 \]
 
@@ -5117,14 +5117,16 @@ Remember the following when finding ML estimates:
 \item
   We are varying the values of the parameters \(\boldsymbol{\theta}\) and finding what specific values of \(\boldsymbol{\theta}\) will maximize the likelihood function.
 \item
-  We could choose to maximize the log-likelihood function instead. It is often easier to work with the log-likelihood function. The solution will be the same.
+  We could choose to maximize the log-likelihood function instead. It is often easier to work with the log-likelihood function, as likelihood functions often have exponents (powers) in them, which makes maximizing them more complicated. The solution will be the same.
 \end{itemize}
 
 We re-visit Examples 1 and 2 from the previous subsection.
 
 \subsubsection{Example 1: Bernoulli}\label{example-1-bernoulli-1}
 
-Let \(X_1, \cdots, X_n\) be i.i.d. \(Bern(p)\). Find the ML estimate for \(p\). We will work with the log-likelihood function, which we had found to be
+Let \(X_1, \cdots, X_n\) be i.i.d. \(Bern(p)\). Find the ML estimate for \(p\).
+
+We will work with the log-likelihood function, which we had found to be
 
 \[
 \ell (p | \boldsymbol{x}) = \log p \left(\sum_{i=1}^n x_i \right) + \log (1-p) \left( n - \sum_{i=1}^n x_i \right).
@@ -5132,7 +5134,7 @@ Let \(X_1, \cdots, X_n\) be i.i.d. \(Bern(p)\). Find the ML estimate for \(p\). 
 
 To find the ML estimate for \(p\), we need to find the value of \(p\) that maximizes \(\ell (p | \boldsymbol{x})\). In the previous subsection, we provided a visual way to represent the log-likelihood function as \(p\) is varied, and find the value of \(p\) that corresponded to the peak of the graph. The visual approach only works for a specific scenario when we had 7 out of 20 students who say yes. Can we generalize the ML estimate for the Bernoulli distribution?
 
-We can easily maximize any function by taking its first derivative and setting it to 0. So we take the first derivative of \(\ell (p | \boldsymbol{x})\):
+We can easily maximize any function by taking its first derivative and setting it to 0. So we take the first derivative of \(\ell (p | \boldsymbol{x})\) with respect to the parameter \(p\):
 
 \[
 \begin{split}
@@ -5149,7 +5151,7 @@ which we then set to 0:
 \end{split}
 \]
 
-So the ML estimate for \(p\) is \(\hat{p}_{ML} = \frac{\sum_{i=1}^n x_i}{n}\). This is just the sample proportion of observed data where \(X_i = 1\). This result means that for any data that comes from a Bernoulli distribution, the sample proportion of the data that is a ``success'' is the ML estimate for the success probability \(p\).
+So the ML estimate for \(p\) is \(\hat{p}_{ML} = \frac{\sum_{i=1}^n x_i}{n}\). This is just the sample proportion of observed data where \(x_i = 1\). This result means that for any data that comes from a Bernoulli distribution, the sample proportion of the data that is a ``success'' is the ML estimate for the success probability \(p\).
 
 If we go back to our example where 7 out of 20 students say they use passphrases, the ML estimate of \(p\) is \(\hat{p}_{ML} = \frac{7}{20} = 0.35\), which matches the result we obtained when we viewed the log-likelihood function visually in Figure \ref{fig:7-bernlikelihood}.
 
@@ -5157,13 +5159,15 @@ If we go back to our example where 7 out of 20 students say they use passphrases
 
 \subsubsection{Example 2: Normal}\label{example-2-normal-1}
 
-Let \(X_1, \cdots, X_n\) be i.i.d. \(N(\mu, \sigma^2)\). Find the ML estimates for \(\mu\) and \(\sigma^2\). Again, we will work with the log-likelihood function, which we had found to be
+Let \(X_1, \cdots, X_n\) be i.i.d. \(N(\mu, \sigma^2)\). Find the ML estimates for \(\mu\) and \(\sigma^2\).
+
+Again, we will work with the log-likelihood function, which we had found to be
 
 \[
 \ell (\mu, \sigma^2 | \boldsymbol{x}) = -\frac{n}{2} \log (2 \pi \sigma^2) - \frac{1}{2 \sigma^2} \sum_{i=1}^n (x_i - \mu)^2.
 \]
 
-Notice we have two parameters \(\mu\) and \(\sigma^2\), so we have to take partial derivatives for both:
+Notice we have two parameters \(\mu\) and \(\sigma^2\), so we have to take partial derivatives \(\ell (\mu, \sigma^2 | \boldsymbol{x})\) for with respect to each parameter:
 
 \begin{itemize}
 \tightlist
@@ -5230,7 +5234,7 @@ There are times when these approaches may not be feasible, for example, there is
 
 \section{Properties of Estimators}\label{properties-of-estimators}
 
-We have learned about a couple of different methods to estimate parameters. While these two methods are common, there are not the only methods to estimate parameters. One question will be evaluating how ``good'' are our estimates? Before going into this evaluation, we define a few concepts that are used in this evaluation.
+We have learned about a couple of different methods to estimate parameters. While these two methods are common, there are not the only methods to estimate parameters. One question how do we assess if our estimates are ``good'' or not? We define a few concepts that are used in this asessment.
 
 \subsection{Estimators VS Estimates}\label{estimators-vs-estimates}
 
@@ -5248,9 +5252,9 @@ We can also view the sample mean as a random variable, especially if we want to 
 
 Note: we consider one parameter \(\theta\) in this subsection, to simplify notation with the introduction of \(\Theta\). The ideas can be applied to any number of parameters.
 
-The ML estimators are just one kind of estimators. These are found by maximizing the likelihood function. We can find estimators in other ways (method of moments, or any other method). An estimator is any function that uses the data and calculates a number from the data. As estimator is \(\hat{\Theta}(\boldsymbol{X})\). We call \(\hat{\Theta}\) an estimator of \(\theta\).
+The ML estimators are just one kind of estimators. We can find estimators in other ways (method of moments, or any other method). An estimator is any function that uses the data and calculates a number from the data and can be denoted as \(\hat{\Theta}(\boldsymbol{X})\). We call \(\hat{\Theta}\) an estimator of \(\theta\).
 
-Consider \(X_1, \cdots, X_n\) i.i.d. Normal with unknown mean \(\mu\) and variance \(\sigma^2\) that is known. we can define two estimators of \(\mu\) as \(\hat{\Theta}_1(\boldsymbol{X}) = \frac{\sum_{i=1}^n X_i}{n}\) and \(\hat{\Theta}_2(\boldsymbol{X}) = X_1 + 2\). The first estimator takes the average value of the \(n\) data points. The second estimator uses the first data point and adds 2 to it. The first estimator is an ML estimator, while the second estimator is not.
+Consider \(X_1, \cdots, X_n\) i.i.d. Normal with unknown mean \(\mu\) and variance \(\sigma^2\) that is known. We can define two estimators of \(\mu\) as \(\hat{\Theta}_1(\boldsymbol{X}) = \frac{\sum_{i=1}^n X_i}{n}\) and \(\hat{\Theta}_2(\boldsymbol{X}) = X_1 + 2\). The first estimator takes the average value of the \(n\) data points. The second estimator uses the first data point and adds 2 to it. The first estimator is an ML estimator, while the second estimator is not.
 
 We can see that we are free to define estimators in various ways. The question now is how do we evaluate whether an estimator is ``good'' or not. There are a few metrics to evaluate estimators.
 
@@ -5353,7 +5357,7 @@ If the estimator is unbiased, the average from the Monte Carlo simulation should
 
 Figure \ref{fig:7-bias} displays the distribution of the 10 thousand \(\hat{\Theta}_1(\boldsymbol{X})\)s and \(\hat{\Theta}_2(\boldsymbol{X})\)s. Visually, an estimator is unbiased if its ``middle'' is equal to the value of the parameter, which is 0. We can see this is clearly not the case for \(\hat{\Theta}_2(\boldsymbol{X})\) so it is biased.
 
-The results from the MC simulation matches with theory. \(\hat{\Theta}_1(\boldsymbol{X}) = \frac{\sum_{i=1}^n X_i}{n}\) is an unbiased estimator for \(\mu\), whereas \(\hat{\Theta}_2(\boldsymbol{X}) = X_1 + 2\) is a biased estimator.
+The results from the MC simulation matches with the math. We had shown that \(\hat{\Theta}_1(\boldsymbol{X}) = \frac{\sum_{i=1}^n X_i}{n}\) is an unbiased estimator for \(\mu\), whereas \(\hat{\Theta}_2(\boldsymbol{X}) = X_1 + 2\) is a biased estimator.
 
 So, based on bias, the sample mean is a better estimator for the population mean than using the first data point and adding 2 to it.
 
@@ -5361,11 +5365,9 @@ The bias deals with the centrality of the estimator, i.e.~is the estimator equal
 
 \subsection{Standard Error and Variance}\label{standard-error-and-variance}
 
-It turns out that the concept of variance can also be applied to estimators, as they can be viewed as random variables, and not just to individual data points.
+It turns out that the concept of variance can also be applied to estimators, as they can be viewed as random variables, and not just to individual data points. Estimators with smaller variances have a smaller degree of uncertainty: the value of the estimators do not change as much from random sample to random sample.
 
-Estimators with smaller variances have a smaller degree of uncertainty: the value of the estimators do not change as much from random sample to random sample.
-
-We can go back to the example from the previous subsection. Consider \(X_1, \cdots, X_n\) i.i.d. Normal with unknown mean \(\mu\) and variance \(\sigma^2\) that is known. we can define two estimators of \(\mu\) as \(\hat{\Theta}_1(\boldsymbol{X}) = \frac{\sum_{i=1}^n X_i}{n}\) and \(\hat{\Theta}_2(\boldsymbol{X}) = X_1 + 2\). Derive the variance of both estimators.
+We can go back to the example from the previous subsection. Consider \(X_1, \cdots, X_n\) i.i.d. Normal with unknown mean \(\mu\) and variance \(\sigma^2\) that is known. We defined two estimators of \(\mu\) as \(\hat{\Theta}_1(\boldsymbol{X}) = \frac{\sum_{i=1}^n X_i}{n}\) and \(\hat{\Theta}_2(\boldsymbol{X}) = X_1 + 2\). Derive the variance of both estimators.
 
 The mathematical way of answering this question is to evaluate the variance of both estimators:
 
@@ -5376,7 +5378,7 @@ The mathematical way of answering this question is to evaluate the variance of b
   \(Var(\hat{\Theta}_2) = Var(X_1 + 2) = Var(X_1) = \sigma^2\).
 \end{itemize}
 
-There is also a separate term used when evaluating the variance of an estimator: this is the \textbf{standard error} of an estimator. This is essentially the standard deviation of the estimator, i.e.~\(SE(\hat{\Theta}) = \sqrt{Var(\hat{\Theta})}\). Going back to our example: \(SE(\hat{\Theta}_1) = \frac{\sigma}{\sqrt{n}}\) and \(SE(\hat{\Theta}_2 = \sigma\).
+There is also a separate term used when evaluating the variance of an estimator: this is the \textbf{standard error} of an estimator. This is essentially the standard deviation of the estimator, i.e.~\(SE(\hat{\Theta}) = \sqrt{Var(\hat{\Theta})}\). Going back to our example: \(SE(\hat{\Theta}_1) = \frac{\sigma}{\sqrt{n}}\) and \(SE(\hat{\Theta}_2) = \sigma\).
 
 Note: The term standard error is only applied to estimators. It is not used when finding the standard deviation of data points.
 
@@ -5434,7 +5436,7 @@ Notice how we have denoted an estimator as \(\hat{\Theta}(\boldsymbol{X})\), whe
 
 An estimator is \textbf{consistent} if \(\hat{\Theta}_n\) gets closer to and approaches the true value of \(\theta\) as \(n\) gets larger and approaches infinity. This means as the sample size \(n\) gets larger, the estimator tends to get closer to the true value of the parameter.
 
-We go back to the example from the previous subsection. Consider \(X_1, \cdots, X_n\) i.i.d. Normal with unknown mean \(\mu\) and variance \(\sigma^2\) that is known. we can define two estimators of \(\mu\) as \(\hat{\Theta}_1(\boldsymbol{X}) = \frac{\sum_{i=1}^n X_i}{n}\) and \(\hat{\Theta}_2(\boldsymbol{X}) = X_1 + 2\). Assess whether \(\hat{\Theta}_1(\boldsymbol{X})\) and \(\hat{\Theta}_2(\boldsymbol{X})\) are consistent or not.
+We go back to the example from the previous subsection. Consider \(X_1, \cdots, X_n\) i.i.d. Normal with unknown mean \(\mu\) and variance \(\sigma^2\) that is known. We defined two estimators of \(\mu\) as \(\hat{\Theta}_1(\boldsymbol{X}) = \frac{\sum_{i=1}^n X_i}{n}\) and \(\hat{\Theta}_2(\boldsymbol{X}) = X_1 + 2\). Assess whether \(\hat{\Theta}_1(\boldsymbol{X})\) and \(\hat{\Theta}_2(\boldsymbol{X})\) are consistent or not.
 
 \begin{itemize}
 \item
@@ -5526,13 +5528,13 @@ Note that unbiased estimators and consistent estimators are two different concep
 
 The plots in Figure \ref{fig:7-bias} and Figure \ref{fig:7-consistent} give rise to the idea that there is a distribution associated with an estimator. There is a term for this, called the \textbf{sampling distribution} of an estimator.
 
-Some estimators have known distributions, for example the sample mean, \(\bar{X}\). From Section \ref{CLT}, we know that as long as \(X_1, \cdots, X_n\) are i.i.d. from any distribution with finite mean \(\mu\) and finite variance \(\sigma^2\), and it \(n\) is large enough, then \(\bar{X}\) is approximately \(N(\mu, \frac{\sigma^2}{n})\). Looking at the plots in Figure \ref{fig:7-bias} and Figure \ref{fig:7-consistent}, we see that the density plots for \(\bar{X}\) are bell-shaped, which verifies the CLT.
+Some estimators have known distributions, for example the sample mean, \(\bar{X}\). Using the CLT from Section \ref{CLT}, we know that as long as \(X_1, \cdots, X_n\) are i.i.d. from any distribution with finite mean \(\mu\) and finite variance \(\sigma^2\), and it \(n\) is large enough, then \(\bar{X}\) is approximately \(N(\mu, \frac{\sigma^2}{n})\). Looking at the plots in Figure \ref{fig:7-bias} and Figure \ref{fig:7-consistent}, we see that the density plots for \(\bar{X}\) are bell-shaped, which verifies the CLT.
 
-Some other common estimators also have known distributions, such as the sample proportion as an estimator for the population proportion, the sample variance as an estimator for the population variance, as well as ML estimators for linear regression and logistic regression models. Feel free to look these up on the internet.
+Some other common estimators also have known distributions, such as the sample proportion as an estimator for the population proportion, the sample variance as an estimator for the population variance, as well as ML estimators for linear regression and logistic regression models.
 
-If the sampling distribution of an estimator is known and follows well known distributions, we can easily perform probability calculations involving estimators, for example, how likely are we to observe a sample mean that is more than 2 standard errors away from its true mean? We will see how to carry these calculations in the next couple of modules.
+If the sampling distribution of an estimator is known and follows well known distributions, we can easily perform probability calculations involving estimators, for example, how likely are we to observe a sample mean that is more than 2 standard errors away from its true mean?
 
-However, other estimators may not have known distributions, for example, the sample median as an estimator for the population median has no known sampling distribution. We are unable to calculate probabilities associated with such estimators? It turns out there exist methods called resampling methods that allow us to approximate these calculations. We will cover the bootstrap, which is a commonly used resampling method, in a future module.
+However, other estimators may not have known distributions, for example, the sample median as an estimator for the population median has no known sampling distribution. Does this mean that we are unable to calculate probabilities associated with such estimators? It turns out there exist methods called resampling methods that allow us to approximate these calculations. We will cover the bootstrap, which is a commonly used resampling method, in a future module.
 
 \subsection{Mean-Squared Error}\label{mean-squared-error}
 
@@ -5552,15 +5554,15 @@ MSE(\hat{\Theta}) = Var(\hat{\Theta}) + Bias(\hat{\Theta})^2.
 
 In other words, the MSE of an estimator is equal to the variance of an estimator plus the squared bias of an estimator. Equation \eqref{eq:7-MSEdecomp} is often called the bias-variance decomposition of the MSE. If an estimator is unbiased, equation Equation \eqref{eq:7-MSEdecomp} tells us that the MSE of an estimator is equal to its variance.
 
-What the MSE of an estimator suggests is that we need to consider both the bias and variance of an estimator. People often think that an unbiased estimator is the ``best''. However, an unbiased estimator could have high variance. Such an estimator could have high MSE. In such a setting, it may be worth considering another estimator that may be biased, but have much smaller variance, resulting in a lower MSE. An example of where this can happen is in linear regression. Classical methods with linear regression yield unbiased estimators, but under specific scenarios, these estimators could have high variances. Another model, called the ridge regression model, considers biased estimators which may have smaller variances, which can result in lower MSEs. You will learn about these models in greater detail in a future class.
+What the MSE of an estimator suggests is that we need to consider both the bias and variance of an estimator. People often think that an unbiased estimator is the ``best''. However, an unbiased estimator could have high variance. Such an estimator could have high MSE. In such a setting, it may be worth considering another estimator that may be biased, but have much smaller variance, resulting in a lower MSE. An example of where this can happen is in linear regression. Classical methods with linear regression yield unbiased estimators, but under specific scenarios, these estimators could have high variances. Another model, called the ridge regression model, considers biased estimators which may have smaller variances, which can result in lower MSEs in these specific scenarios. You will learn about these models in greater detail in a future class.
 
 \section{Final Comments on Estimation}\label{final-comments-on-estimation}
 
 We have covered the method of moments and method of maximum likelihood when estimating parameters. These methods are also called \textbf{parametric methods} as they involve making an assumption that the data follow some well-known distribution with unknown parameters, and we are then using our data, and our assumed distribution, to estimate the numerical value of the unknown parameters.
 
-There exist \textbf{nonparametric methods} in estimation. We have actually seen one such method (without calling it nonparametric), which is kernel density estimation (KDE) in Section @(KDE). KDE is used to estimate the PDF of a random variable so that we can visualize its distribution. If you look back at KDE, you will notice we made no assumption abou the distribution of the random variable. This is one of the fundamental differences between parametric and nonparametric estimation: the former assumes a distribution for the data, the latter does not.
+There exist \textbf{nonparametric methods} in estimation. We have actually seen one such method (without calling it nonparametric), which is kernel density estimation (KDE) in Section \ref{KDE}. KDE is used to estimate the PDF of a random variable so that we can visualize its distribution. If you look back at KDE, you will notice we made no assumption abou the distribution of the random variable. This is one of the fundamental differences between parametric and nonparametric estimation: the former assumes a distribution for the data, the latter does not.
 
-\subsection{Why ML Estimators}\label{why-ml-estimators}
+\subsection{Why ML Estimators?}\label{why-ml-estimators}
 
 I had mentioned earlier that ML estimators are considered the workhorse in statistics and data science and is likely the most common type of estimator used. ML estimators have these properties:
 
@@ -5577,6 +5579,8 @@ I had mentioned earlier that ML estimators are considered the workhorse in stati
 \end{itemize}
 
 What these properties imply is that if your sample size is large enough, estimates from ML estimators are highly likely to be close to the value of the parameter, ML estimators are virtually unbiased, are approximately normally distributed, and have the smallest variance among other possible unbiased estimators. These properties do not exist when the sample size is small.
+
+The MOM estimators do not necessarily have these properties.
 
 These properties require what are called regularity conditions. The definitions get fairly technical and are beyond the scope of the class. One of the conditions is that the data have to be i.i.d..
 
