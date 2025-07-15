@@ -6,14 +6,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Chapter 7 Estimation | Understanding Uncertainty Course Notes</title>
 <meta name="author" content="Jeffrey Woo">
-<meta name="description" content="This module is based on Introduction to Probability for Data Science (Chan), Chapter 8. You can access the book for free at https://probability4datascience.com. Please note that I cover additional...">
+<meta name="description" content="This module is based on Introduction to Probability for Data Science (Chan), Chapter 8.1 and 8.2. You can access the book for free at https://probability4datascience.com. Please note that I cover...">
 <meta name="generator" content="bookdown 0.43 with bs4_book()">
 <meta property="og:title" content="Chapter 7 Estimation | Understanding Uncertainty Course Notes">
 <meta property="og:type" content="book">
-<meta property="og:description" content="This module is based on Introduction to Probability for Data Science (Chan), Chapter 8. You can access the book for free at https://probability4datascience.com. Please note that I cover additional...">
+<meta property="og:description" content="This module is based on Introduction to Probability for Data Science (Chan), Chapter 8.1 and 8.2. You can access the book for free at https://probability4datascience.com. Please note that I cover...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter 7 Estimation | Understanding Uncertainty Course Notes">
-<meta name="twitter:description" content="This module is based on Introduction to Probability for Data Science (Chan), Chapter 8. You can access the book for free at https://probability4datascience.com. Please note that I cover additional...">
+<meta name="twitter:description" content="This module is based on Introduction to Probability for Data Science (Chan), Chapter 8.1 and 8.2. You can access the book for free at https://probability4datascience.com. Please note that I cover...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.9.0/transition.js"></script><script src="libs/bs3compat-0.9.0/tabs.js"></script><script src="libs/bs3compat-0.9.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -61,7 +61,7 @@
 <h1>
 <span class="header-section-number">7</span> Estimation<a class="anchor" aria-label="anchor" href="#estimation"><i class="fas fa-link"></i></a>
 </h1>
-<p>This module is based on Introduction to Probability for Data Science (Chan), Chapter 8. You can access the book for free at <a href="https://probability4datascience.com" class="uri">https://probability4datascience.com</a>. Please note that I cover additional topics, and skip certain topics from the book. You may skip ??? from the book.</p>
+<p>This module is based on Introduction to Probability for Data Science (Chan), Chapter 8.1 and 8.2. You can access the book for free at <a href="https://probability4datascience.com" class="uri">https://probability4datascience.com</a>. Please note that I cover additional topics.</p>
 <div id="introduction-3" class="section level2" number="7.1">
 <h2>
 <span class="header-section-number">7.1</span> Introduction<a class="anchor" aria-label="anchor" href="#introduction-3"><i class="fas fa-link"></i></a>
@@ -497,15 +497,33 @@ We can also view the sample mean as a random variable, especially if we want to 
 <h3>
 <span class="header-section-number">7.4.2</span> Bias<a class="anchor" aria-label="anchor" href="#bias"><i class="fas fa-link"></i></a>
 </h3>
-<p>One metric used to evaluate estimators is to consider the long-run average of an estimator. An estimator is <strong>unbiased</strong> if the long run average of an estimator is equal to the true value of the parameter. Mathematically, an estimator <span class="math inline">\(\hat{\Theta}\)</span> is unbiased if <span class="math inline">\(E(\hat{\Theta}) = \theta\)</span>.</p>
+<p>One metric used to evaluate estimators is to consider the long-run average of an estimator. An estimator is <strong>unbiased</strong> if the long run average of an estimator is equal to the true value of the parameter. Mathematically, an estimator <span class="math inline">\(\hat{\Theta}\)</span> is unbiased if <span class="math inline">\(E(\hat{\Theta}) = \theta\)</span>. From this definition of an unbiased estimator, we have the definition of the <strong>bias</strong> of an estimator:</p>
+<p><span class="math display" id="eq:7-bias">\[\begin{equation}
+Bias(\hat{\Theta}) = E(\hat{\Theta}) - \theta.
+\tag{7.3}
+\end{equation}\]</span></p>
 <p>So, while the value of the estimator could vary from sample to sample, the estimator is unbiased if it is equal to the true parameter, on average in the long-run.</p>
-<p>We can go back to the example from the previous subsection. Consider <span class="math inline">\(X_1, \cdots, X_n\)</span> i.i.d. Normal with unknown mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^2\)</span> that is known. we can define two estimators of <span class="math inline">\(\mu\)</span> as <span class="math inline">\(\hat{\Theta}_1(\boldsymbol{X}) = \frac{\sum_{i=1}^n X_i}{n}\)</span> and <span class="math inline">\(\hat{\Theta}_2(\boldsymbol{X}) = X_1 + 2\)</span>. Assess whether <span class="math inline">\(\hat{\Theta}_1(\boldsymbol{X})\)</span> and <span class="math inline">\(\hat{\Theta}_2(\boldsymbol{X})\)</span> are unbiased or not.</p>
+<p>We go back to the example from the previous subsection. Consider <span class="math inline">\(X_1, \cdots, X_n\)</span> i.i.d. Normal with unknown mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^2\)</span> that is known. we can define two estimators of <span class="math inline">\(\mu\)</span> as <span class="math inline">\(\hat{\Theta}_1(\boldsymbol{X}) = \frac{\sum_{i=1}^n X_i}{n}\)</span> and <span class="math inline">\(\hat{\Theta}_2(\boldsymbol{X}) = X_1 + 2\)</span>. Assess whether <span class="math inline">\(\hat{\Theta}_1(\boldsymbol{X})\)</span> and <span class="math inline">\(\hat{\Theta}_2(\boldsymbol{X})\)</span> are unbiased or not.</p>
+<ul>
+<li>
 <p>The mathematical way of answering this question is to evaluate the expected value of both estimators:</p>
 <ul>
 <li><p><span class="math inline">\(E(\hat{\Theta}_1) = \frac{1}{n}E(\sum_{i=1}^n X_i) = \frac{1}{n}\sum_{i=1}^n E(X_i) = \frac{1}{n}(\mu + \cdots + \mu) = \mu\)</span>, so it is unbiased.</p></li>
 <li><p><span class="math inline">\(E(\hat{\Theta}_2)  = E(X_1 + 2) = E(X_1) + 2 = \mu +2\)</span> which is not equal to <span class="math inline">\(\mu\)</span>, so it is biased.</p></li>
 </ul>
-<p>We can also use Monte Carlo simulations to show these results:</p>
+</li>
+<li>
+<p>We can also use Monte Carlo simulations to show these results. The simulation should do the following:</p>
+<ul>
+<li>The code simulates <span class="math inline">\(X_1, \cdots, X_{n}\)</span> i.i.d. from a known distribution, and with <span class="math inline">\(n\)</span> fixed. In the code below, I used a standard normal, with <span class="math inline">\(n=100\)</span>.<br>
+</li>
+<li>Generate a large number of replicates (I used 10 thousand replicates) of <span class="math inline">\(X_1, \cdots, X_{n}\)</span>.</li>
+<li>For each replicate of <span class="math inline">\(X_1, \cdots, X_{n}\)</span>, calculate <span class="math inline">\(\hat{\Theta}_1(\boldsymbol{X}) = \frac{\sum_{i=1}^n X_i}{n}\)</span> and <span class="math inline">\(\hat{\Theta}_2(\boldsymbol{X}) = X_1 + 2\)</span>.</li>
+<li>We then find the average of <span class="math inline">\(\hat{\Theta}_1(\boldsymbol{X})\)</span> and <span class="math inline">\(\hat{\Theta}_2(\boldsymbol{X})\)</span> across the replicates.</li>
+</ul>
+</li>
+</ul>
+<p>If the estimator is unbiased, the average from the Monte Carlo simulation should be close to 0, since the true mean of a standard normal is 0.</p>
 <div class="sourceCode" id="cb126"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">reps</span><span class="op">&lt;-</span><span class="fl">10000</span></span>
 <span></span>
@@ -544,7 +562,6 @@ We can also view the sample mean as a random variable, especially if we want to 
 Figure 7.4: Dist of Theta1 (left) and Theta2 (right)
 </p>
 </div>
-<p>The code simulates <span class="math inline">\(X_1, \cdots, X_{100}\)</span> i.i.d. standard normal. We generate 10 thousand replicates of <span class="math inline">\(X_1, \cdots, X_{100}\)</span>. For each replicate of <span class="math inline">\(X_1, \cdots, X_{100}\)</span>, we calculate <span class="math inline">\(\hat{\Theta}_1(\boldsymbol{X}) = \frac{\sum_{i=1}^n X_i}{n}\)</span> and <span class="math inline">\(\hat{\Theta}_2(\boldsymbol{X}) = X_1 + 2\)</span>. We then find the average of <span class="math inline">\(\hat{\Theta}_1(\boldsymbol{X})\)</span> and <span class="math inline">\(\hat{\Theta}_2(\boldsymbol{X})\)</span> across the 10 thousand replicates. If the estimator is unbiased, the average from the Monte Carlo simulation should be close to 0, since the true mean of a standard normal is 0.</p>
 <p>Figure <a href="estimation.html#fig:7-bias">7.4</a> displays the distribution of the 10 thousand <span class="math inline">\(\hat{\Theta}_1(\boldsymbol{X})\)</span>s and <span class="math inline">\(\hat{\Theta}_2(\boldsymbol{X})\)</span>s. Visually, an estimator is unbiased if its “middle” is equal to the value of the parameter, which is 0. We can see this is clearly not the case for <span class="math inline">\(\hat{\Theta}_2(\boldsymbol{X})\)</span> so it is biased.</p>
 <p>The results from the MC simulation matches with theory. <span class="math inline">\(\hat{\Theta}_1(\boldsymbol{X}) = \frac{\sum_{i=1}^n X_i}{n}\)</span> is an unbiased estimator for <span class="math inline">\(\mu\)</span>, whereas <span class="math inline">\(\hat{\Theta}_2(\boldsymbol{X}) = X_1 + 2\)</span> is a biased estimator.</p>
 <p>So, based on bias, the sample mean is a better estimator for the population mean than using the first data point and adding 2 to it.</p>
@@ -586,17 +603,127 @@ Figure 7.4: Dist of Theta1 (left) and Theta2 (right)
 <p>An associated concept with variance and standard errors of estimators is consistency. The definition of consistency in estimators is fairly technical, so we will give a broad overview of its concept.</p>
 <p>Notice how we have denoted an estimator as <span class="math inline">\(\hat{\Theta}(\boldsymbol{X})\)</span>, where <span class="math inline">\(\boldsymbol{X} = (X_1, \cdots, X_n)^T\)</span>. So it stands to reason that the behavior of <span class="math inline">\(\hat{\Theta}(\boldsymbol{X})\)</span> may change as the number of data points <span class="math inline">\(n\)</span> changes. We will use the notation <span class="math inline">\(\hat{\Theta}_n\)</span> to denote an estimator that is based on <span class="math inline">\(n\)</span> data points, to emphasize that we are focusing on how the estimator changes as <span class="math inline">\(n\)</span> changes.</p>
 <p>An estimator is <strong>consistent</strong> if <span class="math inline">\(\hat{\Theta}_n\)</span> gets closer to and approaches the true value of <span class="math inline">\(\theta\)</span> as <span class="math inline">\(n\)</span> gets larger and approaches infinity. This means as the sample size <span class="math inline">\(n\)</span> gets larger, the estimator tends to get closer to the true value of the parameter.</p>
+<p>We go back to the example from the previous subsection. Consider <span class="math inline">\(X_1, \cdots, X_n\)</span> i.i.d. Normal with unknown mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^2\)</span> that is known. we can define two estimators of <span class="math inline">\(\mu\)</span> as <span class="math inline">\(\hat{\Theta}_1(\boldsymbol{X}) = \frac{\sum_{i=1}^n X_i}{n}\)</span> and <span class="math inline">\(\hat{\Theta}_2(\boldsymbol{X}) = X_1 + 2\)</span>. Assess whether <span class="math inline">\(\hat{\Theta}_1(\boldsymbol{X})\)</span> and <span class="math inline">\(\hat{\Theta}_2(\boldsymbol{X})\)</span> are consistent or not.</p>
+<ul>
+<li>
+<p>The mathematical way of answering this question involves a few more mathematical concepts that we will not get into. A general way of assessing if an estimator is consistent is to see if its variance shrinks towards zero as <span class="math inline">\(n\)</span> gets larger and goes to infinity.</p>
+<ul>
+<li><p>We had earlier showed that <span class="math inline">\(Var(\hat{\Theta}_1) = \frac{\sigma^2}{n}\)</span>, which shrinks towards zero as <span class="math inline">\(n\)</span> gets larger, so it is consistent.</p></li>
+<li><p>We had earlier showed that <span class="math inline">\(Var(\hat{\Theta}_2) = \sigma^2\)</span>, which does not strink towards zero as <span class="math inline">\(n\)</span> gets larger, so it is not consistent.</p></li>
+</ul>
+</li>
+<li>
+<p>We can also use Monte Carlo simulations to show these results:</p>
+<ul>
+<li>The code simulates <span class="math inline">\(X_1, \cdots, X_{n}\)</span> i.i.d. from a known distribution, and with <span class="math inline">\(n\)</span> varied from small values to large values. In the code below, I used a standard normal, with <span class="math inline">\(n=10, 100, 1000\)</span>.<br>
+</li>
+<li>For each value of <span class="math inline">\(n\)</span>, generate a large number of replicates (I used 10 thousand replicates) of <span class="math inline">\(X_1, \cdots, X_{n}\)</span>.</li>
+<li>For each replicate of <span class="math inline">\(X_1, \cdots, X_{n}\)</span>, calculate <span class="math inline">\(\hat{\Theta}_1(\boldsymbol{X}) = \frac{\sum_{i=1}^n X_i}{n}\)</span> and <span class="math inline">\(\hat{\Theta}_2(\boldsymbol{X}) = X_1 + 2\)</span>.</li>
+<li>We then produce density plots of <span class="math inline">\(\hat{\Theta}_1\)</span> and <span class="math inline">\(\hat{\Theta}_2\)</span> when <span class="math inline">\(n=10, 100, 1000\)</span>.</li>
+</ul>
+</li>
+</ul>
+<p>If an estimator is consistent, we should notice the spread of its density plot get narrower as <span class="math inline">\(n\)</span> gets larger.</p>
+<div class="sourceCode" id="cb139"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">n</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">10</span>,<span class="fl">100</span>,<span class="fl">1000</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">reps</span><span class="op">&lt;-</span><span class="fl">10000</span></span>
+<span></span>
+<span><span class="va">est1</span><span class="op">&lt;-</span><span class="va">est2</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span>,<span class="va">reps</span><span class="op">)</span><span class="op">)</span> <span class="co">##arrays to store est 1 and est 2 as n changes</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">50</span><span class="op">)</span></span>
+<span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">)</span></span>
+<span>  </span>
+<span><span class="op">{</span></span>
+<span>  </span>
+<span>  <span class="kw">for</span> <span class="op">(</span><span class="va">j</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">reps</span><span class="op">)</span></span>
+<span>    </span>
+<span>  <span class="op">{</span></span>
+<span>    </span>
+<span>    <span class="va">X</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">n</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">)</span></span>
+<span>    <span class="va">est1</span><span class="op">[</span><span class="va">i</span>,<span class="va">j</span><span class="op">]</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">X</span><span class="op">)</span> <span class="co">##est 1</span></span>
+<span>    <span class="va">est2</span><span class="op">[</span><span class="va">i</span>,<span class="va">j</span><span class="op">]</span><span class="op">&lt;-</span><span class="va">X</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">+</span><span class="fl">2</span> <span class="co">##est 2</span></span>
+<span>    </span>
+<span>  <span class="op">}</span></span>
+<span>  </span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">##find max value of density plots for est 1 so plots all show up complete</span></span>
+<span><span class="va">max_y1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/density.html">density</a></span><span class="op">(</span><span class="va">est1</span><span class="op">[</span><span class="fl">1</span>,<span class="op">]</span><span class="op">)</span><span class="op">$</span><span class="va">y</span>, <span class="fu"><a href="https://rdrr.io/r/stats/density.html">density</a></span><span class="op">(</span><span class="va">est1</span><span class="op">[</span><span class="fl">2</span>,<span class="op">]</span><span class="op">)</span><span class="op">$</span><span class="va">y</span>, <span class="fu"><a href="https://rdrr.io/r/stats/density.html">density</a></span><span class="op">(</span><span class="va">est1</span><span class="op">[</span><span class="fl">3</span>,<span class="op">]</span><span class="op">)</span><span class="op">$</span><span class="va">y</span><span class="op">)</span> </span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/density.html">density</a></span><span class="op">(</span><span class="va">est1</span><span class="op">[</span><span class="fl">1</span>,<span class="op">]</span><span class="op">)</span>, ylim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="va">max_y1</span><span class="op">)</span>, main<span class="op">=</span><span class="st">"Density Plot of Est1 with n Varied"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/density.html">density</a></span><span class="op">(</span><span class="va">est1</span><span class="op">[</span><span class="fl">2</span>,<span class="op">]</span><span class="op">)</span>, col<span class="op">=</span><span class="st">"blue"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/density.html">density</a></span><span class="op">(</span><span class="va">est1</span><span class="op">[</span><span class="fl">3</span>,<span class="op">]</span><span class="op">)</span>, col<span class="op">=</span><span class="st">"red"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">"topright"</span>, legend <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"n=10"</span>, <span class="st">"n=100"</span>, <span class="st">"n=1000"</span><span class="op">)</span>, col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"black"</span>,<span class="st">"blue"</span>, <span class="st">"red"</span><span class="op">)</span>, lty <span class="op">=</span> <span class="fl">1</span>, cex<span class="op">=</span><span class="fl">0.7</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">##find max value of density plots for est 2 so plots all show up complete</span></span>
+<span><span class="va">max_y2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/density.html">density</a></span><span class="op">(</span><span class="va">est2</span><span class="op">[</span><span class="fl">1</span>,<span class="op">]</span><span class="op">)</span><span class="op">$</span><span class="va">y</span>, <span class="fu"><a href="https://rdrr.io/r/stats/density.html">density</a></span><span class="op">(</span><span class="va">est2</span><span class="op">[</span><span class="fl">2</span>,<span class="op">]</span><span class="op">)</span><span class="op">$</span><span class="va">y</span>, <span class="fu"><a href="https://rdrr.io/r/stats/density.html">density</a></span><span class="op">(</span><span class="va">est2</span><span class="op">[</span><span class="fl">3</span>,<span class="op">]</span><span class="op">)</span><span class="op">$</span><span class="va">y</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/density.html">density</a></span><span class="op">(</span><span class="va">est2</span><span class="op">[</span><span class="fl">1</span>,<span class="op">]</span><span class="op">)</span>, ylim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="va">max_y2</span><span class="op">)</span>, main<span class="op">=</span><span class="st">"Density Plot of Est2 with n Varied"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/density.html">density</a></span><span class="op">(</span><span class="va">est2</span><span class="op">[</span><span class="fl">2</span>,<span class="op">]</span><span class="op">)</span>, col<span class="op">=</span><span class="st">"blue"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/density.html">density</a></span><span class="op">(</span><span class="va">est2</span><span class="op">[</span><span class="fl">3</span>,<span class="op">]</span><span class="op">)</span>, col<span class="op">=</span><span class="st">"red"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">"topright"</span>, legend <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"n=10"</span>, <span class="st">"n=100"</span>, <span class="st">"n=1000"</span><span class="op">)</span>, col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"black"</span>,<span class="st">"blue"</span>, <span class="st">"red"</span><span class="op">)</span>, lty <span class="op">=</span> <span class="fl">1</span>, cex<span class="op">=</span><span class="fl">0.7</span><span class="op">)</span></span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:7-consistent"></span>
+<img src="bookdown-demo_files/figure-html/7-consistent-1.png" alt="Dist of Theta1 (left) and Theta2 (right) as n is Varied" width="672"><p class="caption">
+Figure 7.5: Dist of Theta1 (left) and Theta2 (right) as n is Varied
+</p>
+</div>
+<p>Figure <a href="estimation.html#fig:7-consistent">7.5</a> displays the distribution of the 10 thousand <span class="math inline">\(\hat{\Theta}_1(\boldsymbol{X})\)</span>s and <span class="math inline">\(\hat{\Theta}_2(\boldsymbol{X})\)</span>s when <span class="math inline">\(n=10, 100, 1000\)</span>. Visually, an estimator is consistent if its density plot becomes narrower as <span class="math inline">\(n\)</span> gets larger. We see this in the left plot, so <span class="math inline">\(\hat{\Theta}_1(\boldsymbol{X})\)</span> is consistent, but we do not see this in the right plot, so <span class="math inline">\(\hat{\Theta}_2(\boldsymbol{X})\)</span> is not consistent.</p>
+<p>Note that unbiased estimators and consistent estimators are two different concepts. An estimator could be unbiased but inconsistent, or it could be biased but consistent.</p>
+<p><em>Thought question</em>: Suppose <span class="math inline">\(X_1, \cdots, X_n\)</span> i.i.d. standard normal. Consider an estimator for <span class="math inline">\(\mu\)</span>, <span class="math inline">\(\hat{\Theta}_3 = X_1\)</span>, and an estimator for <span class="math inline">\(\sigma^2\)</span>, <span class="math inline">\(\hat{\Theta}_4 = \frac{1}{n} \sum_{i=1}^n (X_i - \mu)^2\)</span>. The book says that <span class="math inline">\(\hat{\Theta}_3\)</span> is an unbiased but inconsistent estimator for <span class="math inline">\(\mu\)</span>, and <span class="math inline">\(\hat{\Theta}_4\)</span> is a biased but consistent estimator for <span class="math inline">\(\sigma^2\)</span>. Can you use Monte Carlo simulations to verify these claims?</p>
 </div>
 </div>
 <div id="sampling-distribution" class="section level3" number="7.4.4">
 <h3>
 <span class="header-section-number">7.4.4</span> Sampling Distribution<a class="anchor" aria-label="anchor" href="#sampling-distribution"><i class="fas fa-link"></i></a>
 </h3>
+<p>The plots in Figure <a href="estimation.html#fig:7-bias">7.4</a> and Figure <a href="estimation.html#fig:7-consistent">7.5</a> give rise to the idea that there is a distribution associated with an estimator. There is a term for this, called the <strong>sampling distribution</strong> of an estimator.</p>
+<p>Some estimators have known distributions, for example the sample mean, <span class="math inline">\(\bar{X}\)</span>. From Section <a href="inequalities-limit-theorems-and-simulations.html#CLT">6.3.2</a>, we know that as long as <span class="math inline">\(X_1, \cdots, X_n\)</span> are i.i.d. from any distribution with finite mean <span class="math inline">\(\mu\)</span> and finite variance <span class="math inline">\(\sigma^2\)</span>, and it <span class="math inline">\(n\)</span> is large enough, then <span class="math inline">\(\bar{X}\)</span> is approximately <span class="math inline">\(N(\mu, \frac{\sigma^2}{n})\)</span>. Looking at the plots in Figure <a href="estimation.html#fig:7-bias">7.4</a> and Figure <a href="estimation.html#fig:7-consistent">7.5</a>, we see that the density plots for <span class="math inline">\(\bar{X}\)</span> are bell-shaped, which verifies the CLT.</p>
+<p>Some other common estimators also have known distributions, such as the sample proportion as an estimator for the population proportion, the sample variance as an estimator for the population variance, as well as ML estimators for linear regression and logistic regression models. Feel free to look these up on the internet.</p>
+<p>If the sampling distribution of an estimator is known and follows well known distributions, we can easily perform probability calculations involving estimators, for example, how likely are we to observe a sample mean that is more than 2 standard errors away from its true mean? We will see how to carry these calculations in the next couple of modules.</p>
+<p>However, other estimators may not have known distributions, for example, the sample median as an estimator for the population median has no known sampling distribution. We are unable to calculate probabilities associated with such estimators? It turns out there exist methods called resampling methods that allow us to approximate these calculations. We will cover the bootstrap, which is a commonly used resampling method, in a future module.</p>
 </div>
 <div id="mean-squared-error" class="section level3" number="7.4.5">
 <h3>
 <span class="header-section-number">7.4.5</span> Mean-Squared Error<a class="anchor" aria-label="anchor" href="#mean-squared-error"><i class="fas fa-link"></i></a>
 </h3>
+<p>We introduced the mean-squared error (MSE) in the context of evaluating prediction errors in Section <a href="continuous-random-variables.html#lossfunc">4.4.1.3</a>. The MSE can also be used to evaluate an estimator. In this context, the MSE of an estimator <span class="math inline">\(\hat{\Theta}\)</span> is</p>
+<p><span class="math display" id="eq:7-MSE">\[\begin{equation}
+MSE(\hat{\Theta}) = E\left[(\hat{\Theta} - \theta)^2 \right].
+\tag{7.4}
+\end{equation}\]</span></p>
+<p>The MSE of an estimator can be interpreted as the average squared difference between an estimator and the value of its parameter. It turns out that the MSE of an estimator is related to two other metrics: the bias of an estimator and the variance of an estimator:</p>
+<p><span class="math display" id="eq:7-MSEdecomp">\[\begin{equation}
+MSE(\hat{\Theta}) = Var(\hat{\Theta}) + Bias(\hat{\Theta})^2.
+\tag{7.5}
+\end{equation}\]</span></p>
+<p>In other words, the MSE of an estimator is equal to the variance of an estimator plus the squared bias of an estimator. Equation <a href="estimation.html#eq:7-MSEdecomp">(7.5)</a> is often called the bias-variance decomposition of the MSE. If an estimator is unbiased, equation Equation <a href="estimation.html#eq:7-MSEdecomp">(7.5)</a> tells us that the MSE of an estimator is equal to its variance.</p>
+<p>What the MSE of an estimator suggests is that we need to consider both the bias and variance of an estimator. People often think that an unbiased estimator is the “best”. However, an unbiased estimator could have high variance. Such an estimator could have high MSE. In such a setting, it may be worth considering another estimator that may be biased, but have much smaller variance, resulting in a lower MSE. An example of where this can happen is in linear regression. Classical methods with linear regression yield unbiased estimators, but under specific scenarios, these estimators could have high variances. Another model, called the ridge regression model, considers biased estimators which may have smaller variances, which can result in lower MSEs. You will learn about these models in greater detail in a future class.</p>
+</div>
+</div>
+<div id="final-comments-on-estimation" class="section level2" number="7.5">
+<h2>
+<span class="header-section-number">7.5</span> Final Comments on Estimation<a class="anchor" aria-label="anchor" href="#final-comments-on-estimation"><i class="fas fa-link"></i></a>
+</h2>
+<p>We have covered the method of moments and method of maximum likelihood when estimating parameters. These methods are also called <strong>parametric methods</strong> as they involve making an assumption that the data follow some well-known distribution with unknown parameters, and we are then using our data, and our assumed distribution, to estimate the numerical value of the unknown parameters.</p>
+<p>There exist <strong>nonparametric methods</strong> in estimation. We have actually seen one such method (without calling it nonparametric), which is kernel density estimation (KDE) in Section @(KDE). KDE is used to estimate the PDF of a random variable so that we can visualize its distribution. If you look back at KDE, you will notice we made no assumption abou the distribution of the random variable. This is one of the fundamental differences between parametric and nonparametric estimation: the former assumes a distribution for the data, the latter does not.</p>
+<div id="why-ml-estimators" class="section level3" number="7.5.1">
+<h3>
+<span class="header-section-number">7.5.1</span> Why ML Estimators<a class="anchor" aria-label="anchor" href="#why-ml-estimators"><i class="fas fa-link"></i></a>
+</h3>
+<p>I had mentioned earlier that ML estimators are considered the workhorse in statistics and data science and is likely the most common type of estimator used. ML estimators have these properties:</p>
+<ul>
+<li>ML estimators are consistent.</li>
+<li>ML estimators are <strong>asymptotically Normal</strong>, i.e. <span class="math inline">\(\frac{\hat{\Theta} - \theta}{SE(\hat{\Theta})}\)</span> is approximately standard normal as <span class="math inline">\(n\)</span> approaches infinity. This also implies that ML estimators are <strong>asymptotically unbiased</strong>, i.e. for large <span class="math inline">\(n\)</span>, the bias shrinks towards 0.</li>
+<li>ML estimators are <strong>efficient</strong>. As <span class="math inline">\(n\)</span> approaches infinity, ML estimators have lowest variance among all unbiased estimators. However, for smaller sample sizes, ML estimators may be biased and so other unbiased estimators could have smaller variances.</li>
+<li>ML estimators are <strong>equivariant</strong>. If <span class="math inline">\(\hat{\Theta}\)</span> is the ML estimator of <span class="math inline">\(\theta\)</span>, then <span class="math inline">\(g(\hat{\Theta})\)</span> is the ML estimator for <span class="math inline">\(g(\theta)\)</span>.</li>
+</ul>
+<p>What these properties imply is that if your sample size is large enough, estimates from ML estimators are highly likely to be close to the value of the parameter, ML estimators are virtually unbiased, are approximately normally distributed, and have the smallest variance among other possible unbiased estimators. These properties do not exist when the sample size is small.</p>
+<p>These properties require what are called regularity conditions. The definitions get fairly technical and are beyond the scope of the class. One of the conditions is that the data have to be i.i.d..</p>
 
 </div>
 </div>
@@ -629,6 +756,9 @@ Figure 7.4: Dist of Theta1 (left) and Theta2 (right)
 <li><a class="nav-link" href="#mean-squared-error"><span class="header-section-number">7.4.5</span> Mean-Squared Error</a></li>
 </ul>
 </li>
+<li>
+<a class="nav-link" href="#final-comments-on-estimation"><span class="header-section-number">7.5</span> Final Comments on Estimation</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#why-ml-estimators"><span class="header-section-number">7.5.1</span> Why ML Estimators</a></li></ul>
+</li>
 </ul>
 
       <div class="book-extra">
@@ -645,7 +775,7 @@ Figure 7.4: Dist of Theta1 (left) and Theta2 (right)
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2025-07-14.</p>
+    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2025-07-15.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

@@ -177,7 +177,7 @@ For a continuous random variable $X$, the **mode** is the value $c$ that maximiz
 
 For a discrete random variable $X$, the mode is the value $c$ that maximizes the PMF: $P(X=c) \geq P(X=x)$ for all $x$. Intuitively, the mode is the most commonly occurring value of a discrete random variable
 
-#### Loss Functions
+#### Loss Functions {#lossfunc}
 
 A goal of statistical modeling is to use a model to make predictions. We want to be able to quantify the quality of our prediction, or the prediction error. Suppose we have an experiment that can be described by a random variable $X$, and we want to predict the value of the next experiment. The mean and median are natural guesses for the value of the next experiment.
 

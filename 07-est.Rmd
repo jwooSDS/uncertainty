@@ -4,7 +4,7 @@
 rm(list = ls())
 ```
 
-This module is based on Introduction to Probability for Data Science (Chan), Chapter 8. You can access the book for free at https://probability4datascience.com. Please note that I cover additional topics, and skip certain topics from the book. You may skip ??? from the book.
+This module is based on Introduction to Probability for Data Science (Chan), Chapter 8.1 and 8.2. You can access the book for free at https://probability4datascience.com. Please note that I cover additional topics.
 
 ## Introduction
 
@@ -458,19 +458,31 @@ We can see that we are free to define estimators in various ways. The question n
 
 ### Bias
 
-One metric used to evaluate estimators is to consider the long-run average of an estimator. An estimator is **unbiased** if the long run average of an estimator is equal to the true value of the parameter. Mathematically, an estimator $\hat{\Theta}$ is unbiased if $E(\hat{\Theta}) = \theta$.
+One metric used to evaluate estimators is to consider the long-run average of an estimator. An estimator is **unbiased** if the long run average of an estimator is equal to the true value of the parameter. Mathematically, an estimator $\hat{\Theta}$ is unbiased if $E(\hat{\Theta}) = \theta$. From this definition of an unbiased estimator, we have the definition of the **bias** of an estimator:
+
+\begin{equation} 
+Bias(\hat{\Theta}) = E(\hat{\Theta}) - \theta.
+(\#eq:7-bias)
+\end{equation}
 
 So, while the value of the estimator could vary from sample to sample, the estimator is unbiased if it is equal to the true parameter, on average in the long-run. 
 
-We can go back to the example from the previous subsection. Consider $X_1, \cdots, X_n$ i.i.d. Normal with unknown mean $\mu$ and variance $\sigma^2$ that is known. we can define two estimators of $\mu$ as $\hat{\Theta}_1(\boldsymbol{X}) = \frac{\sum_{i=1}^n X_i}{n}$ and $\hat{\Theta}_2(\boldsymbol{X}) = X_1 + 2$. Assess whether $\hat{\Theta}_1(\boldsymbol{X})$ and $\hat{\Theta}_2(\boldsymbol{X})$ are unbiased or not. 
+We go back to the example from the previous subsection. Consider $X_1, \cdots, X_n$ i.i.d. Normal with unknown mean $\mu$ and variance $\sigma^2$ that is known. we can define two estimators of $\mu$ as $\hat{\Theta}_1(\boldsymbol{X}) = \frac{\sum_{i=1}^n X_i}{n}$ and $\hat{\Theta}_2(\boldsymbol{X}) = X_1 + 2$. Assess whether $\hat{\Theta}_1(\boldsymbol{X})$ and $\hat{\Theta}_2(\boldsymbol{X})$ are unbiased or not. 
 
-The mathematical way of answering this question is to evaluate the expected value of both estimators:
+- The mathematical way of answering this question is to evaluate the expected value of both estimators:
 
-- $E(\hat{\Theta}_1) = \frac{1}{n}E(\sum_{i=1}^n X_i) = \frac{1}{n}\sum_{i=1}^n E(X_i) = \frac{1}{n}(\mu + \cdots + \mu) = \mu$, so it is unbiased.
+  - $E(\hat{\Theta}_1) = \frac{1}{n}E(\sum_{i=1}^n X_i) = \frac{1}{n}\sum_{i=1}^n E(X_i) = \frac{1}{n}(\mu + \cdots + \mu) = \mu$, so it is unbiased.
 
-- $E(\hat{\Theta}_2)  = E(X_1 + 2) = E(X_1) + 2 = \mu +2$ which is not equal to $\mu$, so it is biased. 
+  - $E(\hat{\Theta}_2)  = E(X_1 + 2) = E(X_1) + 2 = \mu +2$ which is not equal to $\mu$, so it is biased. 
 
-We can also use Monte Carlo simulations to show these results:
+- We can also use Monte Carlo simulations to show these results. The simulation should do the following:
+
+  - The code simulates $X_1, \cdots, X_{n}$ i.i.d. from a known distribution, and with $n$ fixed. In the code below, I used a standard normal, with $n=100$.  
+  - Generate a large number of replicates (I used 10 thousand replicates) of $X_1, \cdots, X_{n}$. 
+  - For each replicate of $X_1, \cdots, X_{n}$, calculate $\hat{\Theta}_1(\boldsymbol{X}) = \frac{\sum_{i=1}^n X_i}{n}$ and $\hat{\Theta}_2(\boldsymbol{X}) = X_1 + 2$. 
+  - We then find the average of $\hat{\Theta}_1(\boldsymbol{X})$ and $\hat{\Theta}_2(\boldsymbol{X})$ across the replicates. 
+  
+If the estimator is unbiased, the average from the Monte Carlo simulation should be close to 0, since the true mean of a standard normal is 0. 
 
 ```{r 7-bias, fig.cap="Dist of Theta1 (left) and Theta2 (right)"}
 reps<-10000
@@ -502,8 +514,6 @@ abline(v=0, col="blue")
 plot(density(est2), main="Density Plot for Theta2")
 abline(v=0, col="blue")
 ```
-
-The code simulates $X_1, \cdots, X_{100}$ i.i.d. standard normal. We generate 10 thousand replicates of $X_1, \cdots, X_{100}$. For each replicate of $X_1, \cdots, X_{100}$, we calculate $\hat{\Theta}_1(\boldsymbol{X}) = \frac{\sum_{i=1}^n X_i}{n}$ and $\hat{\Theta}_2(\boldsymbol{X}) = X_1 + 2$. We then find the average of $\hat{\Theta}_1(\boldsymbol{X})$ and $\hat{\Theta}_2(\boldsymbol{X})$ across the 10 thousand replicates. If the estimator is unbiased, the average from the Monte Carlo simulation should be close to 0, since the true mean of a standard normal is 0. 
 
 Figure \@ref(fig:7-bias) displays the distribution of the 10 thousand $\hat{\Theta}_1(\boldsymbol{X})$s and $\hat{\Theta}_2(\boldsymbol{X})$s. Visually, an estimator is unbiased if its "middle" is equal to the value of the parameter, which is 0. We can see this is clearly not the case for $\hat{\Theta}_2(\boldsymbol{X})$ so it is biased. 
 
@@ -552,9 +562,121 @@ Notice how we have denoted an estimator as $\hat{\Theta}(\boldsymbol{X})$, where
 
 An estimator is **consistent** if $\hat{\Theta}_n$ gets closer to and approaches the true value of $\theta$ as $n$ gets larger and approaches infinity. This means as the sample size $n$ gets larger, the estimator tends to get closer to the true value of the parameter.
 
+We go back to the example from the previous subsection. Consider $X_1, \cdots, X_n$ i.i.d. Normal with unknown mean $\mu$ and variance $\sigma^2$ that is known. we can define two estimators of $\mu$ as $\hat{\Theta}_1(\boldsymbol{X}) = \frac{\sum_{i=1}^n X_i}{n}$ and $\hat{\Theta}_2(\boldsymbol{X}) = X_1 + 2$. Assess whether $\hat{\Theta}_1(\boldsymbol{X})$ and $\hat{\Theta}_2(\boldsymbol{X})$ are consistent or not. 
+
+- The mathematical way of answering this question involves a few more mathematical concepts that we will not get into. A general way of assessing if an estimator is consistent is to see if its variance shrinks towards zero as $n$ gets larger and goes to infinity. 
+
+  - We had earlier showed that $Var(\hat{\Theta}_1) = \frac{\sigma^2}{n}$, which shrinks towards zero as $n$ gets larger, so it is consistent. 
+
+  - We had earlier showed that $Var(\hat{\Theta}_2) = \sigma^2$, which does not strink towards zero as $n$ gets larger, so it is not consistent. 
+
+- We can also use Monte Carlo simulations to show these results:
+
+  - The code simulates $X_1, \cdots, X_{n}$ i.i.d. from a known distribution, and with $n$ varied from small values to large values. In the code below, I used a standard normal, with $n=10, 100, 1000$.  
+  - For each value of $n$, generate a large number of replicates (I used 10 thousand replicates) of $X_1, \cdots, X_{n}$. 
+  - For each replicate of $X_1, \cdots, X_{n}$, calculate $\hat{\Theta}_1(\boldsymbol{X}) = \frac{\sum_{i=1}^n X_i}{n}$ and $\hat{\Theta}_2(\boldsymbol{X}) = X_1 + 2$. 
+  - We then produce density plots of $\hat{\Theta}_1$ and $\hat{\Theta}_2$ when $n=10, 100, 1000$.
+  
+If an estimator is consistent, we should notice the spread of its density plot get narrower as $n$ gets larger.
+
+```{r 7-consistent, fig.cap="Dist of Theta1 (left) and Theta2 (right) as n is Varied"}
+n<-c(10,100,1000)
+
+reps<-10000
+
+est1<-est2<-array(0,c(length(n),reps)) ##arrays to store est 1 and est 2 as n changes
+
+set.seed(50)
+
+for (i in 1:length(n))
+  
+{
+  
+  for (j in 1:reps)
+    
+  {
+    
+    X<-rnorm(n[i])
+    est1[i,j]<-mean(X) ##est 1
+    est2[i,j]<-X[1]+2 ##est 2
+    
+  }
+  
+}
+
+par(mfrow=c(1,2))
+
+##find max value of density plots for est 1 so plots all show up complete
+max_y1 <- max(density(est1[1,])$y, density(est1[2,])$y, density(est1[3,])$y) 
+
+plot(density(est1[1,]), ylim=c(0, max_y1), main="Density Plot of Est1 with n Varied")
+lines(density(est1[2,]), col="blue")
+lines(density(est1[3,]), col="red")
+legend("topright", legend = c("n=10", "n=100", "n=1000"), col = c("black","blue", "red"), lty = 1, cex=0.7)
+
+##find max value of density plots for est 2 so plots all show up complete
+max_y2 <- max(density(est2[1,])$y, density(est2[2,])$y, density(est2[3,])$y)
+
+plot(density(est2[1,]), ylim=c(0, max_y2), main="Density Plot of Est2 with n Varied")
+lines(density(est2[2,]), col="blue")
+lines(density(est2[3,]), col="red")
+legend("topright", legend = c("n=10", "n=100", "n=1000"), col = c("black","blue", "red"), lty = 1, cex=0.7)
+```
+
+Figure \@ref(fig:7-consistent) displays the distribution of the 10 thousand $\hat{\Theta}_1(\boldsymbol{X})$s and $\hat{\Theta}_2(\boldsymbol{X})$s when $n=10, 100, 1000$. Visually, an estimator is consistent if its density plot becomes narrower as $n$ gets larger. We see this in the left plot, so $\hat{\Theta}_1(\boldsymbol{X})$ is consistent, but we do not see this in the right plot, so $\hat{\Theta}_2(\boldsymbol{X})$ is not consistent. 
+
+Note that unbiased estimators and consistent estimators are two different concepts. An estimator could be unbiased but inconsistent, or it could be biased but consistent. 
+
+*Thought question*: Suppose $X_1, \cdots, X_n$ i.i.d. standard normal. Consider an estimator for $\mu$, $\hat{\Theta}_3 = X_1$, and an estimator for $\sigma^2$, $\hat{\Theta}_4 = \frac{1}{n} \sum_{i=1}^n (X_i - \mu)^2$. The book says that $\hat{\Theta}_3$ is an unbiased but inconsistent estimator for $\mu$, and $\hat{\Theta}_4$ is a biased but consistent estimator for $\sigma^2$. Can you use Monte Carlo simulations to verify these claims?
 
 ### Sampling Distribution
 
+The plots in Figure \@ref(fig:7-bias) and Figure \@ref(fig:7-consistent) give rise to the idea that there is a distribution associated with an estimator. There is a term for this, called the **sampling distribution** of an estimator. 
+
+Some estimators have known distributions, for example the sample mean, $\bar{X}$. From Section \@ref(CLT), we know that as long as $X_1, \cdots, X_n$ are i.i.d. from any distribution with finite mean $\mu$ and finite variance $\sigma^2$, and it $n$ is large enough, then $\bar{X}$ is approximately $N(\mu, \frac{\sigma^2}{n})$. Looking at the plots in Figure \@ref(fig:7-bias) and Figure \@ref(fig:7-consistent), we see that the density plots for $\bar{X}$ are bell-shaped, which verifies the CLT.
+
+Some other common estimators also have known distributions, such as the sample proportion as an estimator for the population proportion, the sample variance as an estimator for the population variance, as well as ML estimators for linear regression and logistic regression models. Feel free to look these up on the internet. 
+
+If the sampling distribution of an estimator is known and follows well known distributions, we can easily perform probability calculations involving estimators, for example, how likely are we to observe a sample mean that is more than 2 standard errors away from its true mean? We will see how to carry these calculations in the next couple of modules.
+
+However, other estimators may not have known distributions, for example, the sample median as an estimator for the population median has no known sampling distribution. We are unable to calculate probabilities associated with such estimators? It turns out there exist methods called resampling methods that allow us to approximate these calculations. We will cover the bootstrap, which is a commonly used resampling method, in a future module. 
+
 ### Mean-Squared Error
 
+We introduced the mean-squared error (MSE) in the context of evaluating prediction errors in Section \@ref(lossfunc). The MSE can also be used to evaluate an estimator. In this context, the MSE of an estimator $\hat{\Theta}$ is
+
+\begin{equation} 
+MSE(\hat{\Theta}) = E\left[(\hat{\Theta} - \theta)^2 \right].
+(\#eq:7-MSE)
+\end{equation}
+
+The MSE of an estimator can be interpreted as the average squared difference between an estimator and the value of its parameter. It turns out that the MSE of an estimator is related to two other metrics: the bias of an estimator and the variance of an estimator:
+
+\begin{equation} 
+MSE(\hat{\Theta}) = Var(\hat{\Theta}) + Bias(\hat{\Theta})^2.
+(\#eq:7-MSEdecomp)
+\end{equation}
+
+In other words, the MSE of an estimator is equal to the variance of an estimator plus the squared bias of an estimator. Equation \@ref(eq:7-MSEdecomp) is often called the bias-variance decomposition of the MSE. If an estimator is unbiased, equation Equation \@ref(eq:7-MSEdecomp) tells us that the MSE of an estimator is equal to its variance. 
+
+What the MSE of an estimator suggests is that we need to consider both the bias and variance of an estimator. People often think that an unbiased estimator is the "best". However, an unbiased estimator could have high variance. Such an estimator could have high MSE. In such a setting, it may be worth considering another estimator that may be biased, but have much smaller variance, resulting in a lower MSE. An example of where this can happen is in linear regression. Classical methods with linear regression yield unbiased estimators, but under specific scenarios, these estimators could have high variances. Another model, called the ridge regression model, considers biased estimators which may have smaller variances, which can result in lower MSEs. You will learn about these models in greater detail in a future class. 
+
+## Final Comments on Estimation
+
+We have covered the method of moments and method of maximum likelihood when estimating parameters. These methods are also called **parametric methods** as they involve making an assumption that the data follow some well-known distribution with unknown parameters, and we are then using our data, and our assumed distribution, to estimate the numerical value of the unknown parameters.
+
+There exist **nonparametric methods** in estimation. We have actually seen one such method (without calling it nonparametric), which is kernel density estimation (KDE) in Section \@(KDE). KDE is used to estimate the PDF of a random variable so that we can visualize its distribution. If you look back at KDE, you will notice we made no assumption abou the distribution of the random variable. This is one of the fundamental differences between parametric and nonparametric estimation: the former assumes a distribution for the data, the latter does not. 
+
+### Why ML Estimators
+
+I had mentioned earlier that ML estimators are considered the workhorse in statistics and data science and is likely the most common type of estimator used. ML estimators have these properties:
+
+- ML estimators are consistent.
+- ML estimators are **asymptotically Normal**, i.e. $\frac{\hat{\Theta} - \theta}{SE(\hat{\Theta})}$ is approximately standard normal as $n$ approaches infinity. This also implies that ML estimators are **asymptotically unbiased**, i.e. for large $n$, the bias shrinks towards 0.
+- ML estimators are **efficient**. As $n$ approaches infinity, ML estimators have lowest variance among all unbiased estimators. However, for smaller sample sizes, ML estimators may be biased and so other unbiased estimators could have smaller variances.
+- ML estimators are **equivariant**. If $\hat{\Theta}$ is the ML estimator of $\theta$, then $g(\hat{\Theta})$ is the ML estimator for $g(\theta)$.
+
+What these properties imply is that if your sample size is large enough, estimates from ML estimators are highly likely to be close to the value of the parameter, ML estimators are virtually unbiased, are approximately normally distributed, and have the smallest variance among other possible unbiased estimators. These properties do not exist when the sample size is small.
+
+These properties require what are called regularity conditions. The definitions get fairly technical and are beyond the scope of the class. One of the conditions is that the data have to be i.i.d..
 

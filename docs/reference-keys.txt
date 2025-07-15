@@ -140,7 +140,11 @@ fig:7-MOM
 eq:7-like
 eq:7-loglike
 fig:7-bernlikelihood
+eq:7-bias
 fig:7-bias
+fig:7-consistent
+eq:7-MSE
+eq:7-MSEdecomp
 examples
 example-1-mario-kart-auction-prices
 eg2
@@ -235,7 +239,7 @@ summaries-of-a-distribution
 expectations-1
 median-1
 mode-1
-loss-functions
+lossfunc
 variance-1
 moments
 skewness
@@ -286,7 +290,7 @@ chebyshevs-inequality
 limits
 law-of-large-numbers
 misconceptions-with-lln
-central-limit-theorem
+CLT
 considerations-with-clt
 monte-carlo-simulations
 monte-carlo-methods-for-expected-values
@@ -318,3 +322,5 @@ standard-error-and-variance
 consistency
 sampling-distribution
 mean-squared-error
+final-comments-on-estimation
+why-ml-estimators

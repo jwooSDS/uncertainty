@@ -305,7 +305,7 @@ Using the example from flipping a fair coin. The gambler's fallacy erroneously t
 
 The convergence to 0.5 comes from flipping the coin many times. 
 
-### Central Limit Theorem
+### Central Limit Theorem {#CLT}
 
 The LLN informs us that the sample mean converges to the true mean. Statistical theory informs us about the expected value and variance of the sample mean in equations \@ref(eq:6-Emean) and \@ref(eq:6-Varmean). But these do not inform us about the distribution of $\bar{X}_n$. This is where the **Central Limit Theorem (CLT)** comes in. 
 
