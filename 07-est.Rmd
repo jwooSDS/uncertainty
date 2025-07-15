@@ -450,7 +450,7 @@ We can also view the sample mean as a random variable, especially if we want to 
 
 Note: we consider one parameter $\theta$ in this subsection, to simplify notation with the introduction of $\Theta$. The ideas can be applied to any number of parameters. 
 
-The ML estimators are just one kind of estimators. These are found by maximizing the likelihood function. We can find estiamtors in other ways (method of moments, or any other method). An estimator is any function that uses the data and calculates a number from the data. As estimator is $\hat{\Theta}(\boldsymbol{X})$. We call $\hat{\Theta}$ an estimator of $\theta$.
+The ML estimators are just one kind of estimators. These are found by maximizing the likelihood function. We can find estimators in other ways (method of moments, or any other method). An estimator is any function that uses the data and calculates a number from the data. As estimator is $\hat{\Theta}(\boldsymbol{X})$. We call $\hat{\Theta}$ an estimator of $\theta$.
 
 Consider $X_1, \cdots, X_n$ i.i.d. Normal with unknown mean $\mu$ and variance $\sigma^2$ that is known. we can define two estimators of $\mu$ as $\hat{\Theta}_1(\boldsymbol{X}) = \frac{\sum_{i=1}^n X_i}{n}$ and $\hat{\Theta}_2(\boldsymbol{X}) = X_1 + 2$. The first estimator takes the average value of the $n$ data points. The second estimator uses the first data point and adds 2 to it. The first estimator is an ML estimator, while the second estimator is not. 
 
@@ -472,7 +472,7 @@ The mathematical way of answering this question is to evaluate the expected valu
 
 We can also use Monte Carlo simulations to show these results:
 
-```{r}
+```{r 7-bias, fig.cap="Dist of Theta1 (left) and Theta2 (right)"}
 reps<-10000
 
 est1<-est2<-array(0,reps) ##array to store est1 & est2 from each rep
@@ -494,17 +494,66 @@ for (i in 1:reps)
 
 mean(est1) ##should be close to 0, indicating sample mean is unbiased
 mean(est2) ##should not be close to 0, indicating first obs + 2 is biased
+
+##create density plots to show distribution for est1 and est 2, and overlay line to show true value of mu
+par(mfrow=c(1,2))
+plot(density(est1), main="Density Plot for Theta1")
+abline(v=0, col="blue")
+plot(density(est2), main="Density Plot for Theta2")
+abline(v=0, col="blue")
 ```
 
 The code simulates $X_1, \cdots, X_{100}$ i.i.d. standard normal. We generate 10 thousand replicates of $X_1, \cdots, X_{100}$. For each replicate of $X_1, \cdots, X_{100}$, we calculate $\hat{\Theta}_1(\boldsymbol{X}) = \frac{\sum_{i=1}^n X_i}{n}$ and $\hat{\Theta}_2(\boldsymbol{X}) = X_1 + 2$. We then find the average of $\hat{\Theta}_1(\boldsymbol{X})$ and $\hat{\Theta}_2(\boldsymbol{X})$ across the 10 thousand replicates. If the estimator is unbiased, the average from the Monte Carlo simulation should be close to 0, since the true mean of a standard normal is 0. 
 
+Figure \@ref(fig:7-bias) displays the distribution of the 10 thousand $\hat{\Theta}_1(\boldsymbol{X})$s and $\hat{\Theta}_2(\boldsymbol{X})$s. Visually, an estimator is unbiased if its "middle" is equal to the value of the parameter, which is 0. We can see this is clearly not the case for $\hat{\Theta}_2(\boldsymbol{X})$ so it is biased. 
+
 The results from the MC simulation matches with theory.  $\hat{\Theta}_1(\boldsymbol{X}) = \frac{\sum_{i=1}^n X_i}{n}$ is an unbiased estimator for $\mu$, whereas $\hat{\Theta}_2(\boldsymbol{X}) = X_1 + 2$ is a biased estimator.
 
-So, based on bias, the sample mean is a better estimator for the population mean than using the first data point and adding 2 to it.
+So, based on bias, the sample mean is a better estimator for the population mean than using the first data point and adding 2 to it. 
+
+The bias deals with the centrality of the estimator, i.e. is the estimator equal to the true parameter, on average. As we have seen in previous modules, we are not only concerned with measures of centrality, but also with measures of uncertainty. For example, how likely is it to observe a random sample where its estimated value is far from the true parameter?
 
 ### Standard Error and Variance
 
+It turns out that the concept of variance can also be applied to estimators, as they can be viewed as random variables, and not just to individual data points.
+
+Estimators with smaller variances have a smaller degree of uncertainty: the value of the estimators do not change as much from random sample to random sample. 
+
+We can go back to the example from the previous subsection. Consider $X_1, \cdots, X_n$ i.i.d. Normal with unknown mean $\mu$ and variance $\sigma^2$ that is known. we can define two estimators of $\mu$ as $\hat{\Theta}_1(\boldsymbol{X}) = \frac{\sum_{i=1}^n X_i}{n}$ and $\hat{\Theta}_2(\boldsymbol{X}) = X_1 + 2$. Derive the variance of both estimators.
+
+The mathematical way of answering this question is to evaluate the variance of both estimators:
+
+- $Var(\hat{\Theta}_1) = \frac{1}{n^2}Var(\sum_{i=1}^n X_i) = \frac{1}{n^2} \sum_{i=1}^n Var(X_i) = \frac{1}{n^2} (\sigma^2 + \cdots + \sigma^2) = \frac{\sigma^2}{n}$.
+
+- $Var(\hat{\Theta}_2) = Var(X_1 + 2) = Var(X_1) = \sigma^2$.
+
+There is also a separate term used when evaluating the variance of an estimator: this is the **standard error** of an estimator. This is essentially the standard deviation of the estimator, i.e. $SE(\hat{\Theta}) = \sqrt{Var(\hat{\Theta})}$. Going back to our example: $SE(\hat{\Theta}_1) = \frac{\sigma}{\sqrt{n}}$ and $SE(\hat{\Theta}_2 = \sigma$. 
+
+Note: The term standard error is only applied to estimators. It is not used when finding the standard deviation of data points. 
+
+We can also use our Monte Carlo simulation from the previous subsection to estimate these values:
+
+```{r}
+var(est1) ##should be close to 1/100, since n=1000
+var(est2) ##should be close to 1
+sd(est1) ##should be close to 1/10
+sd(est2) ##should be close to 1
+```
+
+These results are reflected in Figure \@ref(fig:7-bias). Notice the scale of the x-axis for the plot of $\hat{\Theta}_2$ (on the right) is much larger, so $\hat{\Theta}_2$ has larger variability than $\hat{\Theta}_1$, i.e. we are more uncertain about the value of $\hat{\Theta}_2$, since they deviate more from each other. 
+
+It should be clear by now that estimators with smaller standard errors (or variances) are desired. So, based on standard error, the sample mean is a better estimator for the population mean than using the first data point and adding 2 to it. 
+
 #### Consistency
+
+An associated concept with variance and standard errors of estimators is consistency. The definition of consistency in estimators is fairly technical, so we will give a broad overview of its concept.
+
+Notice how we have denoted an estimator as $\hat{\Theta}(\boldsymbol{X})$, where $\boldsymbol{X} = (X_1, \cdots, X_n)^T$. So it stands to reason that the behavior of $\hat{\Theta}(\boldsymbol{X})$ may change as the number of data points $n$ changes. We will use the notation $\hat{\Theta}_n$ to denote an estimator that is based on $n$ data points, to emphasize that we are focusing on how the estimator changes as $n$ changes.
+
+An estimator is **consistent** if $\hat{\Theta}_n$ gets closer to and approaches the true value of $\theta$ as $n$ gets larger and approaches infinity. This means as the sample size $n$ gets larger, the estimator tends to get closer to the true value of the parameter.
+
+
+### Sampling Distribution
 
 ### Mean-Squared Error
 

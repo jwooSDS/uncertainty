@@ -319,23 +319,6 @@ Var(\bar{X}_n) &amp;= Var(\frac{X_1 + \cdots + X_n}{n}) \\
 <pre><code>## [1] -0.0001034368</code></pre>
 <p>Equation <a href="inequalities-limit-theorems-and-simulations.html#eq:6-Varmean">(6.5)</a> informs us how to calculate the variance of the sample means. We can imagine this if we had taken different random samples of size <span class="math inline">\(n\)</span> from a population, and for each random sample we find the sample mean, and then find the variance of all these sample means. It is the variance of the original random variable divided by <span class="math inline">\(n\)</span>. This means as the sample size gets larger, the variance of the sample means get smaller, in other words, the sample means tend to get closer to the population mean. We re run the code from above and also find the variance of the sample means.</p>
 <div class="sourceCode" id="cb99"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">reps</span><span class="op">&lt;-</span> <span class="fl">10000</span> <span class="co">##take 10000 random samples. This value should be large</span></span>
-<span><span class="va">n</span><span class="op">&lt;-</span><span class="fl">500</span> <span class="co">##sample size for each random sample</span></span>
-<span><span class="va">xbar</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span><span class="op">(</span><span class="fl">0</span>,<span class="va">reps</span><span class="op">)</span> <span class="co">##store the sample mean for each random sample</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">90</span><span class="op">)</span></span>
-<span></span>
-<span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">reps</span><span class="op">)</span></span>
-<span>  </span>
-<span><span class="op">{</span></span>
-<span>  </span>
-<span>  <span class="va">xbar</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">)</span> <span class="co">##find and store sample mean for each random sample</span></span>
-<span>  </span>
-<span><span class="op">}</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">xbar</span><span class="op">)</span> <span class="co">##average the sample means. This should be close to 0. </span></span></code></pre></div>
-<pre><code>## [1] -0.0001034368</code></pre>
-<div class="sourceCode" id="cb101"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html">var</a></span><span class="op">(</span><span class="va">xbar</span><span class="op">)</span> <span class="co">##variance of sample means. This should be close to 1/500, since n=500. </span></span></code></pre></div>
 <pre><code>## [1] 0.001979948</code></pre>
 <div id="law-of-large-numbers" class="section level3" number="6.3.1">
@@ -346,7 +329,7 @@ Var(\bar{X}_n) &amp;= Var(\frac{X_1 + \cdots + X_n}{n}) \\
 <p>Another implication of the LLN is that we can use simulations to verify theoretical results, since these results usually require us to simulate data based on a large number of independent replications.</p>
 <p>The LLN is a by product of equations <a href="inequalities-limit-theorems-and-simulations.html#eq:6-Emean">(6.4)</a> and <a href="inequalities-limit-theorems-and-simulations.html#eq:6-Varmean">(6.5)</a>. Equation <a href="inequalities-limit-theorems-and-simulations.html#eq:6-Varmean">(6.5)</a> informs us that as <span class="math inline">\(n\)</span> gets larger, the variance of the sample mean gets smaller. Equation <a href="inequalities-limit-theorems-and-simulations.html#eq:6-Emean">(6.4)</a> informs us that the sample mean is unbiased, i.e. its long run average is equal to the true mean. Collectively, these inform us that as <span class="math inline">\(n\)</span> gets larger, the sample mean is more likely to be closer to the true mean.</p>
 <p>We use an example to illustrate the LLN, which comes from flipping a fair coin. Let <span class="math inline">\(X\)</span> denote whether the coin lands heads or tails, and let <span class="math inline">\(X=1\)</span> for heads and <span class="math inline">\(X=0\)</span> for tails. We can say that <span class="math inline">\(X \sim Bern(0.5)\)</span> since the coin is fair. Imagine flipping the coin <span class="math inline">\(n\)</span> times, and record the outcome after each flip, so <span class="math inline">\(X_1, \cdots, X_n\)</span> denote the outcome of each flip. We know that <span class="math inline">\(E(X) = 0.5\)</span> since <span class="math inline">\(X \sim Bern(0.5)\)</span>. The LLN informs us that <span class="math inline">\(\bar{X}_1, \cdots, \bar{X}_n\)</span> should usually get closer to 0.5 as <span class="math inline">\(n\)</span> increases. In other words, the value of the sample proportion after each flip should get usually closer to 0.5 with more flips. The code below simulates this example for <span class="math inline">\(n=500\)</span>, and Figure <a href="inequalities-limit-theorems-and-simulations.html#fig:4-LLN2">6.3</a> shows how the sample proportions get closer to 0.5, in general, as <span class="math inline">\(n\)</span> increases.</p>
-<div class="sourceCode" id="cb103"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb101"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">n</span><span class="op">&lt;-</span><span class="fl">500</span> <span class="co">##make this big, but not too big otherwise picture is difficult to see</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">23</span><span class="op">)</span></span>
@@ -399,7 +382,7 @@ Figure 6.3: LLN Example 2
 <p>The implication of the CLT is that even if our data do not follow a normal distribution, the average value of the data can be approximated by a normal distribution if our sample size is large enough. As mentioned in Section <a href="continuous-random-variables.html#normdist">4.5.2</a>, a lot of questions in research deal with averages.</p>
 <p>We consider this hypothetical situation. Suppose the waiting time for customers calling customer service during lunch time is known have a mean of 600 seconds with standard deviation 30 seconds. The company decides to cut costs and reduces staffing at the call center, and claims that wait times are not affected negatively. The customers are convinced otherwise. A researchers obtains the wait times from 500 customers who call in during lunch time after staffing is reduced. The sample mean of the wait times for these customers is 700 seconds. Can this data be used to counter the company’s claim that wait times have been affected?</p>
 <p>One possible calculation will be to assume the company is correct, that wait times have not changed, on average. If so, the sample means will be approximately normal, with mean 600 and variance <span class="math inline">\(\frac{30^2}{\sqrt{500}}\)</span>, i.e. <span class="math inline">\(\bar{X}_{500} \sim N(600, \frac{30^2}{\sqrt{500}})\)</span>. We then calculate <span class="math inline">\(P(\bar{X}_{500} \geq 700)\)</span>, the probability that we have sample mean that is equal to or greater than 700 seconds. Using R, this probability is about 0.0065, which is very small, indicating that our data is inconsistent with the company’s claim.</p>
-<div class="sourceCode" id="cb104"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb102"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fl">1</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">pnorm</a></span><span class="op">(</span><span class="fl">700</span>, <span class="fl">600</span>, <span class="fl">30</span><span class="op">^</span><span class="fl">2</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="fl">500</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 0.006486311</code></pre>
 <p>The CLT is traditionally associated with the distribution of the sample mean <span class="math inline">\(\bar{X}_n\)</span>. It can be applied to the sum as well, due to properties of expectations and variances. Let <span class="math inline">\(T_n = X_1 + \cdots + X_n = n \bar{X}_n\)</span> denote the sum of <span class="math inline">\(n\)</span> i.i.d. random variables. The CLT says that, for large <span class="math inline">\(n\)</span>, the distribution of <span class="math inline">\(T_n\)</span> is approximately <span class="math inline">\(N(n\mu, n\sigma^2)\)</span>.</p>
@@ -461,7 +444,7 @@ Figure 6.5: Distribution of Sample Means when X is Pois(1), n varied
 <li>Calculate <span class="math inline">\(X_1^2, \cdots, X_M^2\)</span>.</li>
 <li>Find the sample average of <span class="math inline">\(X_1^2, \cdots, X_M^2\)</span>.</li>
 </ul>
-<div class="sourceCode" id="cb106"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb104"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">reps</span><span class="op">&lt;-</span><span class="fl">10000</span> <span class="co">## this is M</span></span>
@@ -472,7 +455,7 @@ Figure 6.5: Distribution of Sample Means when X is Pois(1), n varied
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">squared.values</span><span class="op">)</span> <span class="co">##sample average of squared values. </span></span></code></pre></div>
 <pre><code>## [1] 1.024546</code></pre>
-<div class="sourceCode" id="cb108"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb106"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##when reps is large, this sample mean should be close to the true E(X^2), which is 1</span></span></code></pre></div>
 <p>Since <span class="math inline">\(X\)</span> is standard normal, we know <span class="math inline">\(E(X) = 0\)</span> and <span class="math inline">\(Var(X) = E(X^2) - E(X)^2 = E(X^2) = 1\)</span>. We see in our simulation that our estimated value for <span class="math inline">\(E(X^2)\)</span> is pretty close to its theoretical value.</p>
 </div>
@@ -488,7 +471,7 @@ Figure 6.5: Distribution of Sample Means when X is Pois(1), n varied
 <li>Count the number of times <span class="math inline">\(X_i^2\)</span> is greater than 1.</li>
 <li>Divide this number by <span class="math inline">\(M\)</span> to estimate the probability, since probability can be interpreted as a long-run proportion.</li>
 </ul>
-<div class="sourceCode" id="cb109"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb107"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">reps</span><span class="op">&lt;-</span><span class="fl">10000</span> <span class="co">## this is M</span></span>
@@ -499,11 +482,11 @@ Figure 6.5: Distribution of Sample Means when X is Pois(1), n varied
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">squared.values</span><span class="op">&gt;</span><span class="fl">1</span><span class="op">)</span><span class="op">/</span><span class="va">reps</span> <span class="co">##count the number of times X^2 is greater than 1, and divide by M</span></span></code></pre></div>
 <pre><code>## [1] 0.3178</code></pre>
-<div class="sourceCode" id="cb111"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb109"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##when reps is large, this proportion should be close to</span></span>
 <span><span class="fl">1</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/stats/Chisquare.html">pchisq</a></span><span class="op">(</span><span class="fl">1</span>, df<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 0.3173105</code></pre>
-<div class="sourceCode" id="cb113"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb111"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##it turns out that squaring a standard normal gives a chi-squared distribution with 1 df.</span></span></code></pre></div>
 <p>We see the estimated probability <span class="math inline">\(P(X^2 &gt; 1)\)</span> is close to its theoretical probability.</p>
 </div>
@@ -537,7 +520,7 @@ Figure 6.6: Board for Dart Throwing Experiment
 </li>
 </ul>
 <p>The code below carries out this experiment with 10 thousand reps (or 10 thousand dart throws):</p>
-<div class="sourceCode" id="cb114"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb112"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">reps</span><span class="op">&lt;-</span><span class="fl">10000</span> <span class="co">##number of dart throws</span></span>
 <span></span>
 <span><span class="va">count</span><span class="op">&lt;-</span><span class="fl">0</span> <span class="co">##counter that keeps track of number of throws inside circle</span></span>

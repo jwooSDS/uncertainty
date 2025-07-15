@@ -140,6 +140,7 @@ fig:7-MOM
 eq:7-like
 eq:7-loglike
 fig:7-bernlikelihood
+fig:7-bias
 examples
 example-1-mario-kart-auction-prices
 eg2
@@ -315,4 +316,5 @@ estimators-vs-estimates
 bias
 standard-error-and-variance
 consistency
+sampling-distribution
 mean-squared-error

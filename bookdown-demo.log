@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999996 (MiKTeX 24.4) (preloaded format=xelatex 2025.6.7)  14 JUL 2025 18:15
+This is XeTeX, Version 3.141592653-2.6-0.999996 (MiKTeX 24.4) (preloaded format=xelatex 2025.6.7)  14 JUL 2025 20:06
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1423,11 +1423,11 @@ D SIMULATIONS
  []
 
 [128]
-
-[129]
 File: bookdown-demo_files/figure-latex/4-LLN2-1.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/4-LLN2-1.pdf>
 
+
+[129]
 
 
 Overfull \hbox (6.04784pt too wide) has occurred while \output is active
@@ -1440,20 +1440,6 @@ D SIMULATIONS
 [131]
 File: bookdown-demo_files/figure-latex/6-CLTnorm-1.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/6-CLTnorm-1.pdf>
-File: bookdown-demo_files/figure-latex/6-CLTpois-1.pdf Graphic file (type pdf)
-<use bookdown-demo_files/figure-latex/6-CLTpois-1.pdf>
-
-LaTeX Warning: Reference `fig:6-CLTpois' on page 132 undefined on input line 44
-80.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 4479--4481
-[][]
- []
-
-
-Underfull \vbox (badness 1365) has occurred while \output is active []
-
 
 
 
@@ -1463,6 +1449,18 @@ D SIMULATIONS
  []
 
 [132]
+File: bookdown-demo_files/figure-latex/6-CLTpois-1.pdf Graphic file (type pdf)
+<use bookdown-demo_files/figure-latex/6-CLTpois-1.pdf>
+
+LaTeX Warning: Reference `fig:6-CLTpois' on page 133 undefined on input line 44
+56.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 4455--4457
+[][]
+ []
+
+
 
 [133]
 
@@ -1473,21 +1471,11 @@ D SIMULATIONS
  []
 
 [134]
-Overfull \vbox (1.27286pt too high) detected at line 4570
- []
-
-
-
-[135]
 File: images/06-circle.jpg Graphic file (type bmp)
 <images/06-circle.jpg>
 
-Underfull \hbox (badness 2809) in paragraph at lines 4632--4633
-[]\TU/lmr/m/n/10 Therefore, after throwing a large number of darts, $[] [] [] [
-]
- []
 
-
+[135]
 
 
 Overfull \hbox (6.04784pt too wide) has occurred while \output is active
@@ -1496,6 +1484,15 @@ D SIMULATIONS
  []
 
 [136]
+Underfull \hbox (badness 2809) in paragraph at lines 4608--4609
+[]\TU/lmr/m/n/10 Therefore, after throwing a large number of darts, $[] [] [] [
+]
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
 
 [137]
 
@@ -1562,10 +1559,19 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 [155]
 
 [156]
+File: bookdown-demo_files/figure-latex/7-bias-1.pdf Graphic file (type pdf)
+<use bookdown-demo_files/figure-latex/7-bias-1.pdf>
+
+
+[157]
+
+[158]
+
+[159]
 No file bookdown-demo.bbl.
 
 
-[157] (bookdown-demo.aux)
+[160] (bookdown-demo.aux)
  ***********
 LaTeX2e <2024-06-01> patch level 2
 L3 programming layer <2024-07-20>
@@ -1575,12 +1581,12 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 20168 strings out of 409029
- 370131 string characters out of 5763847
+ 20179 strings out of 409029
+ 370602 string characters out of 5763847
  1954612 words of memory out of 5000000
- 42537 multiletter control sequences out of 15000+600000
+ 42547 multiletter control sequences out of 15000+600000
  566021 words of font info for 104 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  90i,21n,123p,1199b,585s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on bookdown-demo.pdf (157 pages).
+Output written on bookdown-demo.pdf (160 pages).
