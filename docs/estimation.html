@@ -167,6 +167,9 @@ Var(X) &amp;= E(X^2) - E(X)^2\\
 </ul>
 <p>So we set <span class="math inline">\(E(X^2) = M_2\)</span>, i.e. <span class="math inline">\(\hat{\sigma^2} + \hat{\mu}^2 = \frac{1}{n} \sum_{i=1}^n x_i^2\)</span>. Since we earlier found that <span class="math inline">\(\hat{\mu} = \bar{x}\)</span>, we get <span class="math inline">\(\hat{\sigma^2}  = \frac{1}{n} \sum_{i=1}^n x_i^2 - \bar{x}^2 = \frac{1}{n} \sum_{i=1}^n (x_i - \bar{x})^2\)</span>.</p>
 <p>Therefore, the MOM estimates for <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma^2\)</span> are <span class="math inline">\(\hat{\mu} = \bar{x}\)</span> and <span class="math inline">\(\hat{\sigma^2}  = \frac{1}{n} \sum_{i=1}^n (x_i - \bar{x})^2\)</span> respectively.</p>
+<p>View the video below for a more detailed explanation on deriving the MOM estimates for the normal distribution below:</p>
+<iframe width="560px" height="320px" allowfullscreen="true" allow="autoplay *" title="Module 07: MOM Estimation for Normal" src="https://virginiauniversity.instructuremedia.com/embed/cd5ff3c8-0e95-4790-aefd-e1ee23d70170" frameborder="0">
+</iframe>
 <p>We now use these MOM estimates on the data set of birth weights at Baystate Medical Center in 1986. It is well established in the literature that birth weights of babies follow a normal distribution. A quick check with the Shapiro-Wilk’s test for normality shows no contradiction, so we proceed with finding the estimates for <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma^2\)</span>. We then produce a density plot of the birth weights, and overlay a curve that corresponds to a normal distribution with <span class="math inline">\(\hat{\mu} = \bar{x}\)</span> and <span class="math inline">\(\hat{\sigma^2}  = \frac{1}{n} \sum_{i=1}^n (x_i - \bar{x})^2\)</span>. This normal curve is pretty close to the density plot, so it appears reasonable to say that the birth weights follow a normal distribution with mean 2944.587 (grams) and variance 528940 (grams-squared).</p>
 <div class="sourceCode" id="cb114"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://www.stats.ox.ac.uk/pub/MASS4/">MASS</a></span><span class="op">)</span></span>
@@ -350,6 +353,9 @@ Figure 7.3: Likelihood (left) and Log-Likelihood (right) Functions of Bernoulli,
 <pre><code>## [1] 0.35</code></pre>
 <p>The plots in Figure <a href="estimation.html#fig:7-bernlikelihood">7.3</a> show us how the likelihood and log-likelihood functions behave, given our data (i.e. that 7 out of 20 students said they use passphrases), and as we vary the value of the parameter <span class="math inline">\(p\)</span>. We note that the value of <span class="math inline">\(p\)</span> that maximized the likelihood and log-likelihood functions is 0.35. This is the idea behind the method of maximum likelihood estimation: what value of the parameter maximizes the likelihood and log-likelihood functions? Or in more regular language, what value of the parameter best explains our data?</p>
 <p>Note: the value of 0.35 corresponds to the sample proportion of students who use passphrases. It should make intuitive sense that if 7 out of 20 students in our sample say they use passphrases, we would say that our best estimate for the proportion of college students who use passphrases for their university email is 0.35.</p>
+<p>View the video below that provides a bit more detail on finding and visualizing the likelihood and log-likelihood functions for a Bernoulli distribution:</p>
+<iframe width="560px" height="320px" allowfullscreen="true" allow="autoplay *" title="Module 07: Likelihood &amp; Log-Likelihood for Bernoulli" src="https://virginiauniversity.instructuremedia.com/embed/205c0b39-43bc-4670-887c-06263c9b32e8" frameborder="0">
+</iframe>
 </div>
 <div id="example-2-normal" class="section level4" number="7.3.1.3">
 <h4>
@@ -370,6 +376,9 @@ L(\mu, \sigma^2 | \boldsymbol{x} ) = \prod_{i=1}^n f_X(x_i; \mu, \sigma^2) = \pr
                           &amp;= -\frac{n}{2} \log (2 \pi \sigma^2) - \frac{1}{2 \sigma^2} \sum_{i=1}^n (x_i - \mu)^2.
 \end{split}
 \]</span></p>
+<p>View the video below that provides a bit more detail on finding and visualizing the likelihood and log-likelihood functions for a normal distribution:</p>
+<iframe width="560px" height="320px" allowfullscreen="true" allow="autoplay *" title="Module 07: Likelihood &amp; Log-Likelihood for Normal" src="https://virginiauniversity.instructuremedia.com/embed/878fa699-b219-4300-8ac8-495a5534790e" frameborder="0">
+</iframe>
 </div>
 </div>
 <div id="maximum-likelihood-estimation" class="section level3" number="7.3.2">
@@ -410,6 +419,9 @@ which we then set to 0:</p>
 \]</span></p>
 <p>So the ML estimate for <span class="math inline">\(p\)</span> is <span class="math inline">\(\hat{p}_{ML} = \frac{\sum_{i=1}^n x_i}{n}\)</span>. This is just the sample proportion of observed data where <span class="math inline">\(x_i = 1\)</span>. This result means that for any data that comes from a Bernoulli distribution, the sample proportion of the data that is a “success” is the ML estimate for the success probability <span class="math inline">\(p\)</span>.</p>
 <p>If we go back to our example where 7 out of 20 students say they use passphrases, the ML estimate of <span class="math inline">\(p\)</span> is <span class="math inline">\(\hat{p}_{ML} = \frac{7}{20} = 0.35\)</span>, which matches the result we obtained when we viewed the log-likelihood function visually in Figure <a href="estimation.html#fig:7-bernlikelihood">7.3</a>.</p>
+<p>View the video below that provides a bit more detail on deriving the ML estimates for a Bernoulli distribution:</p>
+<iframe width="560px" height="320px" allowfullscreen="true" allow="autoplay *" title="Module 07: ML Estimation for Bernoulli" src="https://virginiauniversity.instructuremedia.com/embed/e2f8bb25-f5fb-438c-ae2f-2f8c5af643a7" frameborder="0">
+</iframe>
 <p><em>Thought question</em>: Play around with the code that produced Figure <a href="estimation.html#fig:7-bernlikelihood">7.3</a>. Change the vector <code>data</code> (to anything you’d like). You should find that the value of <span class="math inline">\(p\)</span> that maximizes the likelihood and log-likelihood functions will always be <span class="math inline">\(\hat{p}_{ML} = \frac{\sum_{i=1}^n x_i}{n}\)</span>, the sample proportion of “success” in our sample.</p>
 </div>
 <div id="example-2-normal-1" class="section level4" number="7.3.2.2">
@@ -464,6 +476,9 @@ So the ML estimate for <span class="math inline">\(\mu\)</span> is <span class="
 \end{split}
 \]</span></p>
 <p>So the ML estimate for <span class="math inline">\(\sigma^2\)</span> is <span class="math inline">\(\hat{\sigma_{ML}^2} = \frac{\sum_{i=1}^n (x_i - \mu)^2}{n}\)</span>. Note that this is not the same as how we normally calculate sample variance, per equation <a href="descriptive.html#eq:variance">(1.2)</a>: <span class="math inline">\(\frac{\sum_{i=1}^n (x_i-\bar{x})^2}{n-1}\)</span>.</p>
+<p>View the video below that provides a bit more detail on deriving the ML estimates for a normal distribution:</p>
+<iframe width="560px" height="320px" allowfullscreen="true" allow="autoplay *" title="Module 07: ML Estimation for Normal" src="https://virginiauniversity.instructuremedia.com/embed/0946c5ad-2ef0-4027-96e6-a3a23c5f9666" frameborder="0">
+</iframe>
 </div>
 <div id="calculating-maximum-likelihood-estimates" class="section level4" number="7.3.2.3">
 <h4>
@@ -777,7 +792,7 @@ MSE(\hat{\Theta}) = Var(\hat{\Theta}) + Bias(\hat{\Theta})^2.
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2025-07-15.</p>
+    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2025-07-16.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

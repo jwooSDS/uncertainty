@@ -118,6 +118,10 @@ So we set $E(X^2) = M_2$, i.e. $\hat{\sigma^2} + \hat{\mu}^2 = \frac{1}{n} \sum_
 
 Therefore, the MOM estimates for $\mu$ and $\sigma^2$ are $\hat{\mu} = \bar{x}$ and $\hat{\sigma^2}  = \frac{1}{n} \sum_{i=1}^n (x_i - \bar{x})^2$ respectively.
 
+View the video below for a more detailed explanation on deriving the MOM estimates for the normal distribution below:
+
+<iframe width="560px" height="320px" allowfullscreen="true" allow="autoplay *" title="Module 07: MOM Estimation for Normal" src="https://virginiauniversity.instructuremedia.com/embed/cd5ff3c8-0e95-4790-aefd-e1ee23d70170" frameborder="0"></iframe>
+
 We now use these MOM estimates on the data set of birth weights at Baystate Medical Center in 1986. It is well established in the literature that birth weights of babies follow a normal distribution. A quick check with the Shapiro-Wilk's test for normality shows no contradiction, so we proceed with finding the estimates for $\mu$ and $\sigma^2$. We then produce a density plot of the birth weights, and overlay a curve that corresponds to a normal distribution with $\hat{\mu} = \bar{x}$ and $\hat{\sigma^2}  = \frac{1}{n} \sum_{i=1}^n (x_i - \bar{x})^2$. This normal curve is pretty close to the density plot, so it appears reasonable to say that the birth weights follow a normal distribution with mean 2944.587 (grams) and variance 528940 (grams-squared).
 
 ```{r 7-MOM, fig.cap="Density Plot of Birth Weights. Normal Curve (in Blue) with Parameters Estimated by MOM Overlaid", message=FALSE}
@@ -306,6 +310,10 @@ The plots in Figure \@ref(fig:7-bernlikelihood) show us how the likelihood and l
 
 Note: the value of 0.35 corresponds to the sample proportion of students who use passphrases. It should make intuitive sense that if 7 out of 20 students in our sample say they use passphrases, we would say that our best estimate for the proportion of college students who use passphrases for their university email is 0.35.
 
+View the video below that provides a bit more detail on finding and visualizing the likelihood and log-likelihood functions for a Bernoulli distribution:
+
+<iframe width="560px" height="320px" allowfullscreen="true" allow="autoplay *" title="Module 07: Likelihood & Log-Likelihood for Bernoulli" src="https://virginiauniversity.instructuremedia.com/embed/205c0b39-43bc-4670-887c-06263c9b32e8" frameborder="0"></iframe>
+
 #### Example 2: Normal
 
 Let $X_1, \cdots, X_n$ be i.i.d. $N(\mu, \sigma^2)$. Find the corresponding likelihood and log-likelihood functions.
@@ -328,6 +336,10 @@ $$
                           &= -\frac{n}{2} \log (2 \pi \sigma^2) - \frac{1}{2 \sigma^2} \sum_{i=1}^n (x_i - \mu)^2.
 \end{split}
 $$
+
+View the video below that provides a bit more detail on finding and visualizing the likelihood and log-likelihood functions for a normal distribution:
+
+<iframe width="560px" height="320px" allowfullscreen="true" allow="autoplay *" title="Module 07: Likelihood & Log-Likelihood for Normal" src="https://virginiauniversity.instructuremedia.com/embed/878fa699-b219-4300-8ac8-495a5534790e" frameborder="0"></iframe>
 
 ### Maximum Likelihood Estimation
 
@@ -373,6 +385,10 @@ $$
 So the ML estimate for $p$ is $\hat{p}_{ML} = \frac{\sum_{i=1}^n x_i}{n}$. This is just the sample proportion of observed data where $x_i = 1$. This result means that for any data that comes from a Bernoulli distribution, the sample proportion of the data that is a "success" is the ML estimate for the success probability $p$. 
 
 If we go back to our example where 7 out of 20 students say they use passphrases, the ML estimate of $p$ is $\hat{p}_{ML} = \frac{7}{20} = 0.35$, which matches the result we obtained when we viewed the log-likelihood function visually in Figure \@ref(fig:7-bernlikelihood). 
+
+View the video below that provides a bit more detail on deriving the ML estimates for a Bernoulli distribution:
+
+<iframe width="560px" height="320px" allowfullscreen="true" allow="autoplay *" title="Module 07: ML Estimation for Bernoulli" src="https://virginiauniversity.instructuremedia.com/embed/e2f8bb25-f5fb-438c-ae2f-2f8c5af643a7" frameborder="0"></iframe>
 
 *Thought question*: Play around with the code that produced Figure \@ref(fig:7-bernlikelihood). Change the vector `data` (to anything you'd like). You should find that the value of $p$ that maximizes the likelihood and log-likelihood functions will always be $\hat{p}_{ML} = \frac{\sum_{i=1}^n x_i}{n}$, the sample proportion of "success" in our sample. 
 
@@ -430,6 +446,10 @@ $$
 $$
 
 So the ML estimate for $\sigma^2$ is $\hat{\sigma_{ML}^2} = \frac{\sum_{i=1}^n (x_i - \mu)^2}{n}$. Note that this is not the same as how we normally calculate sample variance, per equation \@ref(eq:variance): $\frac{\sum_{i=1}^n (x_i-\bar{x})^2}{n-1}$.
+
+View the video below that provides a bit more detail on deriving the ML estimates for a normal distribution:
+
+<iframe width="560px" height="320px" allowfullscreen="true" allow="autoplay *" title="Module 07: ML Estimation for Normal" src="https://virginiauniversity.instructuremedia.com/embed/0946c5ad-2ef0-4027-96e6-a3a23c5f9666" frameborder="0"></iframe>
 
 #### Calculating Maximum Likelihood Estimates
 

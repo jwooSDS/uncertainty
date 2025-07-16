@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999996 (MiKTeX 24.4) (preloaded format=xelatex 2025.6.7)  15 JUL 2025 17:56
+This is XeTeX, Version 3.141592653-2.6-0.999996 (MiKTeX 24.4) (preloaded format=xelatex 2025.6.7)  16 JUL 2025 14:35
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1542,12 +1542,9 @@ File: bookdown-demo_files/figure-latex/7-bernlikelihood-1.pdf Graphic file (typ
 e pdf)
 <use bookdown-demo_files/figure-latex/7-bernlikelihood-1.pdf>
 
-Underfull \vbox (badness 2088) has occurred while \output is active []
-
-
 
 [150]
-Underfull \vbox (badness 10000) has occurred while \output is active []
+Underfull \vbox (badness 3735) has occurred while \output is active []
 
 
 
@@ -1560,24 +1557,28 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 [154]
 
 [155]
-Underfull \hbox (badness 10000) in paragraph at lines 5290--5292
+
+[156]
+Underfull \hbox (badness 10000) in paragraph at lines 5300--5302
 
  []
 
 
 
-[156]
+[157]
 File: bookdown-demo_files/figure-latex/7-bias-1.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/7-bias-1.pdf>
 
 
-[157]
-
 [158]
 
 [159]
-Underfull \hbox (badness 10000) in paragraph at lines 5457--5459
+Underfull \hbox (badness 10000) in paragraph at lines 5467--5469
 
+ []
+
+
+Overfull \vbox (1.30646pt too high) detected at line 5523
  []
 
 
