@@ -127,7 +127,7 @@
 
 \title{Understanding Uncertainty Course Notes}
 \author{Jeffrey Woo}
-\date{2025-07-16}
+\date{2025-07-17}
 
 \begin{document}
 \maketitle
@@ -2682,7 +2682,7 @@ We will work out the first statement, that about 68\% of the observed values wil
 
 \emph{Thought question}: how would you tweak this code to verify the other two statements associated with the 68-95-99.7\% rule?
 
-\section{Using R}\label{using-r}
+\section{Using R}\label{usingR}
 
 R has built in functions to compute the density, CDF, percentiles, as well as simulate data of common distributions. We will start with a random variable \(Y \sim N(1, 9)\) as an example.
 
@@ -4662,7 +4662,7 @@ We will not go into the details of how R generates the random numbers, and rando
 
 In terms of running the examples, you can choose to copy the code and exclude the line with \texttt{set.seed()}. You should still observe that the estimated values from the simulations are close to the true values.
 
-\chapter{Estimation}\label{estimation}
+\chapter{Estimation}\label{est}
 
 This module is based on Introduction to Probability for Data Science (Chan), Chapter 8.1 and 8.2. You can access the book for free at \url{https://probability4datascience.com}. Please note that I cover additional topics, and skip certain topics from the book. You may skip Section 8.1.3, 8.1.4, and 8.1.6 from the book.
 
@@ -5242,7 +5242,7 @@ In the examples that we have worked with, we found the values of maximum likelih
 
 There are times when these approaches may not be feasible, for example, there is no closed form solution for the first derivative. In these instances, numerical methods are used. Numerical methods are typically algorithms that perform complex computations to approximate a mathematical result. We will not go into the details of these algorithms, and numerical methods are still an active area of research.
 
-\section{Properties of Estimators}\label{properties-of-estimators}
+\section{Properties of Estimators}\label{estprops}
 
 We have learned about a couple of different methods to estimate parameters. While these two methods are common, there are not the only methods to estimate parameters. One question how do we assess if our estimates are ``good'' or not? We define a few concepts that are used in this asessment.
 
@@ -5538,13 +5538,36 @@ Note that unbiased estimators and consistent estimators are two different concep
 
 The plots in Figure \ref{fig:7-bias} and Figure \ref{fig:7-consistent} give rise to the idea that there is a distribution associated with an estimator. There is a term for this, called the \textbf{sampling distribution} of an estimator.
 
-Some estimators have known distributions, for example the sample mean, \(\bar{X}\). Using the CLT from Section \ref{CLT}, we know that as long as \(X_1, \cdots, X_n\) are i.i.d. from any distribution with finite mean \(\mu\) and finite variance \(\sigma^2\), and it \(n\) is large enough, then \(\bar{X}\) is approximately \(N(\mu, \frac{\sigma^2}{n})\). Looking at the plots in Figure \ref{fig:7-bias} and Figure \ref{fig:7-consistent}, we see that the density plots for \(\bar{X}\) are bell-shaped, which verifies the CLT.
+Some estimators have known distributions, for example the sample mean, \(\bar{X}\). Using the CLT from Section \ref{CLT}, we know that as long as \(X_1, \cdots, X_n\) are i.i.d. from any distribution with finite mean \(\mu\) and finite variance \(\sigma^2\), and if \(n\) is large enough, then \(\bar{X}\) is approximately \(N(\mu, \frac{\sigma^2}{n})\). Looking at the plots in Figure \ref{fig:7-bias} and Figure \ref{fig:7-consistent}, we see that the density plots for \(\bar{X}\) are bell-shaped, which verifies the CLT.
 
 Some other common estimators also have known distributions, such as the sample proportion as an estimator for the population proportion, the sample variance as an estimator for the population variance, as well as ML estimators for linear regression and logistic regression models.
 
 If the sampling distribution of an estimator is known and follows well known distributions, we can easily perform probability calculations involving estimators, for example, how likely are we to observe a sample mean that is more than 2 standard errors away from its true mean?
 
 However, other estimators may not have known distributions, for example, the sample median as an estimator for the population median has no known sampling distribution. Does this mean that we are unable to calculate probabilities associated with such estimators? It turns out there exist methods called resampling methods that allow us to approximate these calculations. We will cover the bootstrap, which is a commonly used resampling method, in a future module.
+
+\subsubsection{Sampling Distribution of Sample Mean}\label{sampdistmean}
+
+We will state the sampling distribution of the sample mean, \(\bar{X}_n\). There are a couple of scenarios to consider:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \(X_1, \cdots, X_n\) are i.i.d. from a normal distribution with finite mean \(\mu\) and finite variance \(\sigma^2\). Then \(\bar{X}_n \sim N(\mu, \frac{\sigma^2}{n})\).
+\end{enumerate}
+
+This means that if the data are originally normally distributed, the sample mean will be normally distributed, regardless of the sample size.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  \(X_1, \cdots, X_n\) are i.i.d. from any distribution with finite mean \(\mu\) and finite variance \(\sigma^2\), and if \(n\) is large enough, then \(\bar{X}_n\) is approximately \(N(\mu, \frac{\sigma^2}{n})\). This is based on the CLT in section \ref{CLT}.
+\end{enumerate}
+
+This means that even if the data are not originally normally distributed, the sample mean will be approximately normally distributed if the sample size is large enough.
 
 \subsection{Mean-Squared Error}\label{mean-squared-error}
 
@@ -5593,6 +5616,263 @@ What these properties imply is that if your sample size is large enough, estimat
 The MOM estimators do not necessarily have these properties.
 
 These properties require what are called regularity conditions. The definitions get fairly technical and are beyond the scope of the class. One of the conditions is that the data have to be i.i.d..
+
+\chapter{Confidence Intervals}\label{confidence-intervals}
+
+This module is based on Introduction to Probability for Data Science (Chan), Chapter 9.1 and 9.2. You can access the book for free at \url{https://probability4datascience.com}. Please note that I cover additional topics, and skip certain topics from the book. You may skip Section ??? from the book.
+
+\section{Introduction}\label{introduction-4}
+
+In Section \ref{est}, we use data from our sample to estimate parameters of a population. For example, we could use the sample mean systolic blood pressure of 750 randomly selected American adults to estimate the mean systolic blood pressure of all American adults. We also established that estimators such as the sample mean have randomness in them. If we were to obtain another random sample of 750 American adults, the sample mean blood pressure from this other sample is likely to be different from the original random sample. So is there uncertainty in our estimator due to random sampling. We also learned about ways to measure how ``well'' an estimator does in estimating the parameter, such as bias, variance, standard error, and mean-squared error of the estimator.
+
+In this section, we will introduce confidence intervals. Confidence intervals build on the ideas from Section \ref{est}: that estimators are random and we can quantify their uncertainty. The purpose of a confidence interval is to provide a range of plausible values for an unknown population parameter, based on a sample. A confidence interval not only provides the estimated value of the parameter, but also a measure of uncertainty associated with the estimation.
+
+We will first cover confidence intervals for the mean and confidence intervals for the proportion, two of the most basic confidence intervals. These intervals are based on the fact that the distribution of their corresponding estimators, the sample mean and sample proportion, are known as long certain conditions are met. You will notice that the general ideas in finding confidence intervals are pretty similar; confidence intervals for other estimators that have known distributions will be constructed similarly. In the last subsection of this module, we will learn about the bootstrap, which is used when the distribution of an estimator is unknown.
+
+\section{Confidence Interval for the Mean}\label{confidence-interval-for-the-mean}
+
+\subsection{Randomness of an Estimator}\label{randomness-of-an-estimator}
+
+Suppose we are trying to estimate the mean systolic blood pressure of all American adults, by using the sample mean of 750 randomly selected American adults. The sample mean is an estimator for the population mean. We want to be able to report the value of the estimator, as well as our uncertainty about the estimator. A way to measure the uncertainty of an estimator is through the variance or standard error of the estimator. Larger values indicate a higher degree of uncertainty, as an estimator with larger variance means that the value of the estimator is likely to be different among random samples.
+
+The Monte Carlo simulations in Section \ref{estprops} show that there is a distribution associated with an estimator. We will start with the sample mean, since its distribution is known (see Section \ref{sampdistmean}). We will talk about the confidence interval for the mean first, before generalizing these ideas to other estimators with known distributions.
+
+\subsection{Randomness of Confidence Intervals}\label{randomness-of-confidence-intervals}
+
+The \textbf{confidence interval} is a probability applied to the estimator \(\bar{X}_n\). Instead of focusing on the estimated value of the sample mean and its variance, we construct a confidence interval for the mean that takes the form:
+
+\begin{equation} 
+I = \left(\bar{X}_n - \epsilon, \bar{X}_n + \epsilon \right).
+\label{eq:8-CIbasic}
+\end{equation}
+
+Some terminology associated with intervals of the form in equation \eqref{eq:8-CIbasic}:
+
+\begin{itemize}
+\item
+  \(\epsilon\) is often called the \textbf{margin of error}. (Yes that margin of error that you often see reported in elections polls). This value is a function of the standard error of the estimator, so it gives a measure of uncertainty of the estimated value.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Remember that the uncertainty being measured is the uncertainty due to random sampling, not due to other sources of uncertainty such as not getting a representative sample, people lying, etc. As mentioned in earlier modules, other methods are used to handle such issues and belong to the field of survey sampling, which is very interesting and an active area of research. We will not get into these issues in this class.
+  \end{itemize}
+\item
+  The value of \(\bar{X}_n - \epsilon\) is often called the \textbf{lower bound} of the confidence interval.
+\item
+  The value of \(\bar{X}_n + \epsilon\) is often called the \textbf{upper bound} of the confidence interval.
+\item
+  The value of \(\bar{X}_n\) is often called the \textbf{point estimate} of the the population mean.
+\end{itemize}
+
+Equation \eqref{eq:8-CIbasic} is sometimes expressed as
+
+\begin{equation} 
+\text{point estimate } \pm \text{ margin of error}.
+\label{eq:8-CIbasic2}
+\end{equation}
+
+Given the interval for the mean expressed in equation \eqref{eq:8-CIbasic}, we ask what is the probability that the interval \(I\) includes the true value of the parameter \(\mu\), i.e.~we want to evaluate
+
+\begin{equation} 
+P(\mu \in  I) = P(\bar{X}_n - \epsilon \leq \mu \leq \bar{X}_n + \epsilon).
+\label{eq:8-CIprob}
+\end{equation}
+
+It is important to bear in mind that since the estimator, the sample mean \(\bar{X}_n\) is a random variable, there will also be randomness in the interval \(I\). The numerical values of the lower and upper bounds will change with a different random sample, since the value of \(\bar{X}_n\) will change.
+
+The idea of the interval \(I\) being random is represented in Figure \ref{fig:8-CI} below:
+
+\begin{figure}
+\centering
+\includegraphics{images/08-CI.png}
+\caption{\label{fig:8-CI}Randomness of Confidence Interval. Picture from \url{https://en.wikipedia.org/wiki/Confidence_interval}}
+\end{figure}
+
+\begin{itemize}
+\tightlist
+\item
+  The density curve in the top of Figure \ref{fig:8-CI} represents the PDF of a random variable.
+\item
+  Each row of dots represents the values of 10 randomly sampled data points from the PDF.
+\item
+  The colored lines in each row represent the lower and upper bounds of a 50\% confidence interval calculated from the sampled data points in the row.
+\item
+  The colored dot in the center of the confidence interval represents \(\bar{x}\) for the sampled data points in the row.
+\item
+  The intervals in blue represent confidence intervals that contain the value of \(\mu\), while the intervals in red represent confidence intervals that do not contain the value of \(\mu\).
+\end{itemize}
+
+In Figure \ref{fig:8-CI}, we note that 50\% of the confidence intervals capture the value of \(\mu\), so the probability per equation \eqref{eq:8-CIprob} is 0.5.
+
+If we were to create 95\% confidence intervals for each row in Figure \ref{fig:8-CI}, the upper and lower bounds of the intervals will be adjusted so that we will expect 19 of these 20 intervals to contain the value of \(\mu\).
+
+This illustration gives us an interpretation of the probability associated with a confidence interval per equation \eqref{eq:8-CIprob}: When we construct a 95\% confidence interval, there is a 95\% chance the random interval \(I\) will contain the true value of the parameter. In other words, if we have 100 random samples and we construct 95\% confidence intervals based on each sample, we expect 95 of these intervals to contain the value of the parameter.
+
+The idea of the probability that the random interval \(I\) captures the true parameter gives rise to the \textbf{confidence level}. The confidence level of a confidence interval is denoted by \(1-\alpha\). So if we construct an interval at 95\% confidence, \(\alpha=0.05\). Then equation \eqref{eq:8-CIprob} can be written as
+
+\begin{equation} 
+P(\bar{X}_n - \epsilon \leq \mu \leq \bar{X}_n + \epsilon) = 1 - \alpha.
+\label{eq:8-CIalpha}
+\end{equation}
+
+We will then say \(I\) is a \((1-\alpha) \times 100\%\) confidence interval, or \(I\) is a confidence interval with confidence level of \((1-\alpha) \times 100\%\).
+
+Now that we have established that confidence intervals are random and the definition of the confidence level, we are ready to go into the details of constructing the confidence interval for the mean.
+
+\subsection{Sampling Distribution of Sample Mean}\label{sampling-distribution-of-sample-mean}
+
+We remind ourselves of the sampling distribution of the sample mean, \(\bar{X}_n\), from Section \ref{sampdistmean}. There are a couple of scenarios to consider:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \(X_1, \cdots, X_n\) are i.i.d. from a normal distribution with finite mean \(\mu\) and finite variance \(\sigma^2\). Then \(\bar{X}_n \sim N(\mu, \frac{\sigma^2}{n})\).
+\item
+  \(X_1, \cdots, X_n\) are i.i.d. from any distribution with finite mean \(\mu\) and finite variance \(\sigma^2\), and if \(n\) is large enough, then \(\bar{X}_n\) is approximately \(N(\mu, \frac{\sigma^2}{n})\). This is based on the CLT in section \ref{CLT}.
+\end{enumerate}
+
+If either of these scenarios are met, then the distribution of \(\bar{X}_n\) after standardization is either a standard normal or approaches a standard normal distribution, so \(\frac{\bar{X}_n - \mu}{\frac{\sigma}{\sqrt{n}}} = \frac{\bar{X}_n - \mu}{\sqrt{Var(\bar{X})}} = \frac{\bar{X}_n - \mu}{SE(\bar{X}_n)}\) is either standard normal or approximately standard normal when \(n\) is large enough.
+
+To simplify the notation as it pertains to the confidence interval for the mean, we will let \(\hat{Z} = \frac{\bar{X}_n - \mu}{SE(\bar{X})}\), so \(\hat{Z}\) is standard normal or approximately standard normal. \(\hat{Z}\) can be called the \textbf{standardized version of the sample mean} or a \textbf{standardized score}.
+
+\subsubsection{Critical Value}\label{critical-value}
+
+We perform some math operations on equation \eqref{eq:8-CIprob} to see how we can construct a confidence interval for the mean:
+
+\begin{equation} 
+\begin{split}
+P(\bar{X}_n - \epsilon \leq \mu \leq \bar{X}_n + \epsilon) &= 1 - \alpha \\
+\implies P(|\bar{X}_n - \mu| \leq \epsilon) &= 1 - \alpha \\
+\implies P \left(|\hat{Z}| = |\frac{\bar{X}_n - \mu}{SE(\bar{X}_n)}|  \leq \frac{\epsilon}{SE(\bar{X}_n)} = z^{*} \right) &= 1 - \alpha \\
+\implies P(|\hat{Z}| \leq z^{*}) &= 1 - \alpha \\
+\implies P(-z^{*} \leq \hat{Z} \leq z^{*}) &= 1 - \alpha.
+\end{split}
+\label{eq:8-CIcrit}
+\end{equation}
+
+In equation \eqref{eq:8-CIcrit}, \(z^*\) is called the \textbf{critical value}. So we can see how it is related to the margin of error, \(\epsilon\): the margin of error is the critical value multiplied by the standard error of the estimator (which in this case is the standard error of the sample mean since we are constructing the confidence interval for the mean).
+
+In words, equation \eqref{eq:8-CIcrit} says that we want to find the critical value \(z^*\) so that the probability that a standardized score is between \(-z^*\) and \(z^*\) is \(1 - \alpha\). Visually, this probability is displayed in Figure \ref{fig:8-crit} below when \(\alpha=0.05\). We want to find the values on the horizontal axis so that the blue shaded area corresponds to a value of 0.95 (recall that area under a PDF represents probability).
+
+\begin{figure}
+\centering
+\includegraphics{bookdown-demo_files/figure-latex/8-crit-1.pdf}
+\caption{\label{fig:8-crit}Finding Critical Value with 95\% Confidence}
+\end{figure}
+
+We continue working with equation \eqref{eq:8-CIcrit} to see how we obtain the value of \(z^*\), as long as either of the two scenarios for the sampling distribution of \(\bar{X}_n\) to be known are met:
+
+\begin{equation} 
+\begin{split}
+P(-z^{*} \leq \hat{Z} \leq z^{*}) &= P(\hat{Z} \leq z^{*}) - P(\hat{Z} \leq -z^{*}) \\
+                                  &= \Phi(z^{*}) - \Phi(-z^{*}) = 1 - \alpha.
+\end{split}
+\label{eq:8-CIcrit2}
+\end{equation}
+
+where \(\Phi(z) = P(\hat{Z} \leq z)\) is the CDF of a standard normal. Due to the symmetry of the standard normal, \(\Phi(-z^{*}) = 1- \Phi(z^{*})\), and we sub this into equation \eqref{eq:8-CIcrit2} and continue working with it to solve for \(z^*\):
+
+\begin{equation} 
+\begin{split}
+P(-z^{*} \leq \hat{Z} \leq z^{*}) &= 2 \Phi(z^*) - 1 = 1 - \alpha \\
+\implies \Phi(z^*) &= 1 - \frac{\alpha}{2} \\
+\implies z^* &= \Phi^{-1} \left(1 - \frac{\alpha}{2} \right)
+\end{split}
+\label{eq:8-CIcrit3}
+\end{equation}
+
+So \(z^*\) is found by inverting the CDF of a standard normal evaluated at \(1 - \frac{\alpha}{2}\). This quantity can be easily be found using R. For example, for 95\% confidence, \(\alpha = 0.05\), so we type:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{alpha}\OtherTok{\textless{}{-}}\FloatTok{0.05}
+\FunctionTok{qnorm}\NormalTok{(}\DecValTok{1}\SpecialCharTok{{-}}\NormalTok{alpha}\SpecialCharTok{/}\DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1.959964
+\end{verbatim}
+
+which tells us the critical value is 1.96 for 95\% confidence.
+
+Note: the \texttt{qnorm()} function was introduced in a bit more detail in Section \ref{usingR}, so feel free to go back to review.
+
+\emph{Thought question}: Can you show that the critical value for 96\% confidence is about 2.054? Can you show that the critical value for 98\% confidence is about 2.326?
+
+\subsubsection{Constructing Confidence Interval for the Mean}\label{constructing-confidence-interval-for-the-mean}
+
+We are now ready to put the pieces together to work on the confidence interval for the mean:
+
+\begin{equation} 
+\begin{split}
+P(-z^{*} \leq \hat{Z} \leq z^{*}) &= P(-z^{*} \leq \frac{\bar{X}_n - \mu}{SE(\bar{X}_n)} \leq z^{*}) \\
+                                  &= P\left(-z^{*}SE(\bar{X}_n) \leq \bar{X}_n - \mu \leq z^{*}SE(\bar{X}_n)\right) \\
+                                  &= P\left(\bar{X}_n - z^{*}SE(\bar{X}_n) \leq \mu \leq \bar{X}_n + z^{*}SE(\bar{X}_n)\right) \\
+                                  &= P\left(\bar{X}_n - z^{*} \frac{\sigma}{\sqrt{n}} \leq \mu \leq \bar{X}_n + z^{*}) \frac{\sigma}{\sqrt{n}}\right).
+\end{split}
+\label{eq:8-CImeanwork}
+\end{equation}
+
+Therefore, the \((1-\alpha) \times 100\%\) confidence interval for the mean is
+
+\begin{equation} 
+\left( \bar{x}_n - z^{*} \frac{\sigma}{\sqrt{n}}, \bar{x}_n + z^{*} \frac{\sigma}{\sqrt{n}} \right).
+\label{eq:8-CImean}
+\end{equation}
+
+Again, the formula in equation \eqref{eq:8-CImean} is only valid if either of the two scenarios in Section \ref{sampdistmean} is met, i.e.~either the data are originally normal, or if the sample size is large enough.
+
+\subsubsection{Worked Example}\label{worked-example-1}
+
+On the basis of extensive tests, the yield point of a particular type of mild steel reinforcing bar is known to be normally distributed with \(\sigma=100\) pounds. The composition of the bar has been slightly modified, but the modification is not believed to have affected either the normality or the value of \(\sigma\). If a random sample of 25 modified bars resulted in a sample average yield point of 8439 pounds, compute a 90\% CI for the true average yield point of the modified bars.
+
+From the question, we summarize the information as:
+
+\begin{itemize}
+\tightlist
+\item
+  \(n = 25\),
+\item
+  \(\bar{x} = 8439\),
+\item
+  \(\sigma = 100\),
+\item
+  \(\alpha = 0.1\), so \(z^*\) is found using \texttt{qnorm(1-0.1/2)} which is 1.644854.
+\end{itemize}
+
+Since we are assuming the distribution of the yield points to be normally distribution, the sample means will be normally distributed regardless of the sample size, so we can proceed computing the confidence interval for the true average yield point using equation \eqref{eq:8-CImean}:
+
+\[
+\left( 8439 - 1.644854 \frac{100}{\sqrt{25}} , 8439 - 1.644854 \frac{100}{\sqrt{25}} \right).
+\]
+Working everything out, we get (8406.103, 8471.891).
+
+Interpreting the CI: There is 90\% probability that the random interval (8406.103, 8471.891) will include the true average yield point of modified bars.
+
+What else can we say from the confidence interval?
+
+\begin{itemize}
+\item
+  Values outside the confidence interval are considered to be ``ruled out'' as plausible values of the parameter. So if we wanted to assess if the average yield point of modified bars is 8000 pounds, our interval does not support this claim, since the value of 8000 lies outside the interval. We can say our data do not support the claim that the average yield point of modified bars is 8000 pounds.
+\item
+  Values inside the confidence interval are considered to be plausible values of the parameter. Any value inside the interval is considered plausible. A common mistake will be to specify a certain value in the interval, and conclude that the parameter is equal to that specific value. For example, it will be a mistake to say that since the value 8410 lies inside the interval, the interval supports the claim that the average yield point of modified bars is 8410 pounds. This is because other values in the interval are still considered plausible.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    In such a situation, we will say that our data do not support the claim that the average yield point of modified bars is different from 8410 pounds, since 8410 lies inside the interval. We cannot rule out the value of 8410.
+  \end{itemize}
+\end{itemize}
+
+\subsubsection{Factors Affecting the Precision of Confidence Interval}\label{factors-affecting-the-precision-of-confidence-interval}
+
+\subsection{Confidence Interval for the Mean Using t Distribution}\label{confidence-interval-for-the-mean-using-t-distribution}
+
+\section{Confidence Interval for the Proportion}\label{confidence-interval-for-the-proportion}
+
+\section{The Bootstrap}\label{the-bootstrap}
 
   \bibliography{book.bib,packages.bib}
 

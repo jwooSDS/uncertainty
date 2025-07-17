@@ -4,15 +4,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 8 Estimation | Understanding Uncertainty Course Notes</title>
+<title>Chapter 8 Confidence Intervals | Understanding Uncertainty Course Notes</title>
 <meta name="author" content="Jeffrey Woo">
 <meta name="description" content="This module is based on Introduction to Probability for Data Science (Chan), Chapter 9.1 and 9.2. You can access the book for free at https://probability4datascience.com. Please note that I cover...">
 <meta name="generator" content="bookdown 0.43 with bs4_book()">
-<meta property="og:title" content="Chapter 8 Estimation | Understanding Uncertainty Course Notes">
+<meta property="og:title" content="Chapter 8 Confidence Intervals | Understanding Uncertainty Course Notes">
 <meta property="og:type" content="book">
 <meta property="og:description" content="This module is based on Introduction to Probability for Data Science (Chan), Chapter 9.1 and 9.2. You can access the book for free at https://probability4datascience.com. Please note that I cover...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 8 Estimation | Understanding Uncertainty Course Notes">
+<meta name="twitter:title" content="Chapter 8 Confidence Intervals | Understanding Uncertainty Course Notes">
 <meta name="twitter:description" content="This module is based on Introduction to Probability for Data Science (Chan), Chapter 9.1 and 9.2. You can access the book for free at https://probability4datascience.com. Please note that I cover...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
@@ -50,7 +50,7 @@
 <li><a class="" href="joint-distributions.html"><span class="header-section-number">5</span> Joint Distributions</a></li>
 <li><a class="" href="inequalities-limit-theorems-and-simulations.html"><span class="header-section-number">6</span> Inequalities, Limit Theorems, and Simulations</a></li>
 <li><a class="" href="est.html"><span class="header-section-number">7</span> Estimation</a></li>
-<li><a class="active" href="estimation.html"><span class="header-section-number">8</span> Estimation</a></li>
+<li><a class="active" href="confidence-intervals.html"><span class="header-section-number">8</span> Confidence Intervals</a></li>
 </ul>
 
         <div class="book-extra">
@@ -58,9 +58,9 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="estimation" class="section level1" number="8">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="confidence-intervals" class="section level1" number="8">
 <h1>
-<span class="header-section-number">8</span> Estimation<a class="anchor" aria-label="anchor" href="#estimation"><i class="fas fa-link"></i></a>
+<span class="header-section-number">8</span> Confidence Intervals<a class="anchor" aria-label="anchor" href="#confidence-intervals"><i class="fas fa-link"></i></a>
 </h1>
 <p>This module is based on Introduction to Probability for Data Science (Chan), Chapter 9.1 and 9.2. You can access the book for free at <a href="https://probability4datascience.com" class="uri">https://probability4datascience.com</a>. Please note that I cover additional topics, and skip certain topics from the book. You may skip Section ??? from the book.</p>
 <div id="introduction-4" class="section level2" number="8.1">
@@ -91,7 +91,7 @@
 I = \left(\bar{X}_n - \epsilon, \bar{X}_n + \epsilon \right).
 \tag{8.1}
 \end{equation}\]</span></p>
-<p>Some terminology associated with intervals of the form in equation <a href="estimation.html#eq:8-CIbasic">(8.1)</a>:</p>
+<p>Some terminology associated with intervals of the form in equation <a href="confidence-intervals.html#eq:8-CIbasic">(8.1)</a>:</p>
 <ul>
 <li>
 <p><span class="math inline">\(\epsilon\)</span> is often called the <strong>margin of error</strong>. (Yes that margin of error that you often see reported in elections polls). This value is a function of the standard error of the estimator, so it gives a measure of uncertainty of the estimated value.</p>
@@ -103,18 +103,18 @@ I = \left(\bar{X}_n - \epsilon, \bar{X}_n + \epsilon \right).
 <li><p>The value of <span class="math inline">\(\bar{X}_n + \epsilon\)</span> is often called the <strong>upper bound</strong> of the confidence interval.</p></li>
 <li><p>The value of <span class="math inline">\(\bar{X}_n\)</span> is often called the <strong>point estimate</strong> of the the population mean.</p></li>
 </ul>
-<p>Equation <a href="estimation.html#eq:8-CIbasic">(8.1)</a> is sometimes expressed as</p>
+<p>Equation <a href="confidence-intervals.html#eq:8-CIbasic">(8.1)</a> is sometimes expressed as</p>
 <p><span class="math display" id="eq:8-CIbasic2">\[\begin{equation}
 \text{point estimate } \pm \text{ margin of error}.
 \tag{8.2}
 \end{equation}\]</span></p>
-<p>Given the interval for the mean expressed in equation <a href="estimation.html#eq:8-CIbasic">(8.1)</a>, we ask what is the probability that the interval <span class="math inline">\(I\)</span> includes the true value of the parameter <span class="math inline">\(\mu\)</span>, i.e. we want to evaluate</p>
+<p>Given the interval for the mean expressed in equation <a href="confidence-intervals.html#eq:8-CIbasic">(8.1)</a>, we ask what is the probability that the interval <span class="math inline">\(I\)</span> includes the true value of the parameter <span class="math inline">\(\mu\)</span>, i.e. we want to evaluate</p>
 <p><span class="math display" id="eq:8-CIprob">\[\begin{equation}
 P(\mu \in  I) = P(\bar{X}_n - \epsilon \leq \mu \leq \bar{X}_n + \epsilon).
 \tag{8.3}
 \end{equation}\]</span></p>
 <p>It is important to bear in mind that since the estimator, the sample mean <span class="math inline">\(\bar{X}_n\)</span> is a random variable, there will also be randomness in the interval <span class="math inline">\(I\)</span>. The numerical values of the lower and upper bounds will change with a different random sample, since the value of <span class="math inline">\(\bar{X}_n\)</span> will change.</p>
-<p>The idea of the interval <span class="math inline">\(I\)</span> being random is represented in Figure <a href="estimation.html#fig:8-CI">8.1</a> below:</p>
+<p>The idea of the interval <span class="math inline">\(I\)</span> being random is represented in Figure <a href="confidence-intervals.html#fig:8-CI">8.1</a> below:</p>
 <div class="figure">
 <span style="display:block;" id="fig:8-CI"></span>
 <img src="images/08-CI.png" alt="Randomness of Confidence Interval. Picture from  https://en.wikipedia.org/wiki/Confidence_interval"><p class="caption">
@@ -122,16 +122,16 @@ Figure 8.1: Randomness of Confidence Interval. Picture from <a href="https://en.
 </p>
 </div>
 <ul>
-<li>The density curve in the top of Figure <a href="estimation.html#fig:8-CI">8.1</a> represents the PDF of a random variable.</li>
+<li>The density curve in the top of Figure <a href="confidence-intervals.html#fig:8-CI">8.1</a> represents the PDF of a random variable.</li>
 <li>Each row of dots represents the values of 10 randomly sampled data points from the PDF.</li>
 <li>The colored lines in each row represent the lower and upper bounds of a 50% confidence interval calculated from the sampled data points in the row.</li>
 <li>The colored dot in the center of the confidence interval represents <span class="math inline">\(\bar{x}\)</span> for the sampled data points in the row.</li>
 <li>The intervals in blue represent confidence intervals that contain the value of <span class="math inline">\(\mu\)</span>, while the intervals in red represent confidence intervals that do not contain the value of <span class="math inline">\(\mu\)</span>.</li>
 </ul>
-<p>In Figure <a href="estimation.html#fig:8-CI">8.1</a>, we note that 50% of the confidence intervals capture the value of <span class="math inline">\(\mu\)</span>, so the probability per equation <a href="estimation.html#eq:8-CIprob">(8.3)</a> is 0.5.</p>
-<p>If we were to create 95% confidence intervals for each row in Figure <a href="estimation.html#fig:8-CI">8.1</a>, the upper and lower bounds of the intervals will be adjusted so that we will expect 19 of these 20 intervals to contain the value of <span class="math inline">\(\mu\)</span>.</p>
-<p>This illustration gives us an interpretation of the probability associated with a confidence interval per equation <a href="estimation.html#eq:8-CIprob">(8.3)</a>: When we construct a 95% confidence interval, there is a 95% chance the random interval <span class="math inline">\(I\)</span> will contain the true value of the parameter. In other words, if we have 100 random samples and we construct 95% confidence intervals based on each sample, we expect 95 of these intervals to contain the value of the parameter.</p>
-<p>The idea of the probability that the random interval <span class="math inline">\(I\)</span> captures the true parameter gives rise to the <strong>confidence level</strong>. The confidence level of a confidence interval is denoted by <span class="math inline">\(1-\alpha\)</span>. So if we construct an interval at 95% confidence, <span class="math inline">\(\alpha=0.05\)</span>. Then equation <a href="estimation.html#eq:8-CIprob">(8.3)</a> can be written as</p>
+<p>In Figure <a href="confidence-intervals.html#fig:8-CI">8.1</a>, we note that 50% of the confidence intervals capture the value of <span class="math inline">\(\mu\)</span>, so the probability per equation <a href="confidence-intervals.html#eq:8-CIprob">(8.3)</a> is 0.5.</p>
+<p>If we were to create 95% confidence intervals for each row in Figure <a href="confidence-intervals.html#fig:8-CI">8.1</a>, the upper and lower bounds of the intervals will be adjusted so that we will expect 19 of these 20 intervals to contain the value of <span class="math inline">\(\mu\)</span>.</p>
+<p>This illustration gives us an interpretation of the probability associated with a confidence interval per equation <a href="confidence-intervals.html#eq:8-CIprob">(8.3)</a>: When we construct a 95% confidence interval, there is a 95% chance the random interval <span class="math inline">\(I\)</span> will contain the true value of the parameter. In other words, if we have 100 random samples and we construct 95% confidence intervals based on each sample, we expect 95 of these intervals to contain the value of the parameter.</p>
+<p>The idea of the probability that the random interval <span class="math inline">\(I\)</span> captures the true parameter gives rise to the <strong>confidence level</strong>. The confidence level of a confidence interval is denoted by <span class="math inline">\(1-\alpha\)</span>. So if we construct an interval at 95% confidence, <span class="math inline">\(\alpha=0.05\)</span>. Then equation <a href="confidence-intervals.html#eq:8-CIprob">(8.3)</a> can be written as</p>
 <p><span class="math display" id="eq:8-CIalpha">\[\begin{equation}
 P(\bar{X}_n - \epsilon \leq \mu \leq \bar{X}_n + \epsilon) = 1 - \alpha.
 \tag{8.4}
@@ -154,7 +154,7 @@ P(\bar{X}_n - \epsilon \leq \mu \leq \bar{X}_n + \epsilon) = 1 - \alpha.
 <h4>
 <span class="header-section-number">8.2.3.1</span> Critical Value<a class="anchor" aria-label="anchor" href="#critical-value"><i class="fas fa-link"></i></a>
 </h4>
-<p>We perform some math operations on equation <a href="estimation.html#eq:8-CIprob">(8.3)</a> to see how we can construct a confidence interval for the mean:</p>
+<p>We perform some math operations on equation <a href="confidence-intervals.html#eq:8-CIprob">(8.3)</a> to see how we can construct a confidence interval for the mean:</p>
 <p><span class="math display" id="eq:8-CIcrit">\[\begin{equation}
 \begin{split}
 P(\bar{X}_n - \epsilon \leq \mu \leq \bar{X}_n + \epsilon) &amp;= 1 - \alpha \\
@@ -165,15 +165,15 @@ P(\bar{X}_n - \epsilon \leq \mu \leq \bar{X}_n + \epsilon) &amp;= 1 - \alpha \\
 \end{split}
 \tag{8.5}
 \end{equation}\]</span></p>
-<p>In equation <a href="estimation.html#eq:8-CIcrit">(8.5)</a>, <span class="math inline">\(z^*\)</span> is called the <strong>critical value</strong>. So we can see how it is related to the margin of error, <span class="math inline">\(\epsilon\)</span>: the margin of error is the critical value multiplied by the standard error of the estimator (which in this case is the standard error of the sample mean since we are constructing the confidence interval for the mean).</p>
-<p>In words, equation <a href="estimation.html#eq:8-CIcrit">(8.5)</a> says that we want to find the critical value <span class="math inline">\(z^*\)</span> so that the probability that a standardized score is between <span class="math inline">\(-z^*\)</span> and <span class="math inline">\(z^*\)</span> is <span class="math inline">\(1 - \alpha\)</span>. Visually, this probability is displayed in Figure <a href="estimation.html#fig:8-crit">8.2</a> below when <span class="math inline">\(\alpha=0.05\)</span>. We want to find the values on the horizontal axis so that the blue shaded area corresponds to a value of 0.95 (recall that area under a PDF represents probability).</p>
+<p>In equation <a href="confidence-intervals.html#eq:8-CIcrit">(8.5)</a>, <span class="math inline">\(z^*\)</span> is called the <strong>critical value</strong>. So we can see how it is related to the margin of error, <span class="math inline">\(\epsilon\)</span>: the margin of error is the critical value multiplied by the standard error of the estimator (which in this case is the standard error of the sample mean since we are constructing the confidence interval for the mean).</p>
+<p>In words, equation <a href="confidence-intervals.html#eq:8-CIcrit">(8.5)</a> says that we want to find the critical value <span class="math inline">\(z^*\)</span> so that the probability that a standardized score is between <span class="math inline">\(-z^*\)</span> and <span class="math inline">\(z^*\)</span> is <span class="math inline">\(1 - \alpha\)</span>. Visually, this probability is displayed in Figure <a href="confidence-intervals.html#fig:8-crit">8.2</a> below when <span class="math inline">\(\alpha=0.05\)</span>. We want to find the values on the horizontal axis so that the blue shaded area corresponds to a value of 0.95 (recall that area under a PDF represents probability).</p>
 <div class="figure">
 <span style="display:block;" id="fig:8-crit"></span>
 <img src="bookdown-demo_files/figure-html/8-crit-1.png" alt="Finding Critical Value with 95% Confidence" width="672"><p class="caption">
 Figure 8.2: Finding Critical Value with 95% Confidence
 </p>
 </div>
-<p>We continue working with equation <a href="estimation.html#eq:8-CIcrit">(8.5)</a> to see how we obtain the value of <span class="math inline">\(z^*\)</span>, as long as either of the two scenarios for the sampling distribution of <span class="math inline">\(\bar{X}_n\)</span> to be known are met:</p>
+<p>We continue working with equation <a href="confidence-intervals.html#eq:8-CIcrit">(8.5)</a> to see how we obtain the value of <span class="math inline">\(z^*\)</span>, as long as either of the two scenarios for the sampling distribution of <span class="math inline">\(\bar{X}_n\)</span> to be known are met:</p>
 <p><span class="math display" id="eq:8-CIcrit2">\[\begin{equation}
 \begin{split}
 P(-z^{*} \leq \hat{Z} \leq z^{*}) &amp;= P(\hat{Z} \leq z^{*}) - P(\hat{Z} \leq -z^{*}) \\
@@ -181,7 +181,7 @@ P(-z^{*} \leq \hat{Z} \leq z^{*}) &amp;= P(\hat{Z} \leq z^{*}) - P(\hat{Z} \leq 
 \end{split}
 \tag{8.6}
 \end{equation}\]</span></p>
-<p>where <span class="math inline">\(\Phi(z) = P(\hat{Z} \leq z)\)</span> is the CDF of a standard normal. Due to the symmetry of the standard normal, <span class="math inline">\(\Phi(-z^{*}) = 1- \Phi(z^{*})\)</span>, and we sub this into equation <a href="estimation.html#eq:8-CIcrit2">(8.6)</a> and continue working with it to solve for <span class="math inline">\(z^*\)</span>:</p>
+<p>where <span class="math inline">\(\Phi(z) = P(\hat{Z} \leq z)\)</span> is the CDF of a standard normal. Due to the symmetry of the standard normal, <span class="math inline">\(\Phi(-z^{*}) = 1- \Phi(z^{*})\)</span>, and we sub this into equation <a href="confidence-intervals.html#eq:8-CIcrit2">(8.6)</a> and continue working with it to solve for <span class="math inline">\(z^*\)</span>:</p>
 <p><span class="math display" id="eq:8-CIcrit3">\[\begin{equation}
 \begin{split}
 P(-z^{*} \leq \hat{Z} \leq z^{*}) &amp;= 2 \Phi(z^*) - 1 = 1 - \alpha \\
@@ -218,7 +218,7 @@ P(-z^{*} \leq \hat{Z} \leq z^{*}) &amp;= P(-z^{*} \leq \frac{\bar{X}_n - \mu}{SE
 \left( \bar{x}_n - z^{*} \frac{\sigma}{\sqrt{n}}, \bar{x}_n + z^{*} \frac{\sigma}{\sqrt{n}} \right).
 \tag{8.9}
 \end{equation}\]</span></p>
-<p>Again, the formula in equation <a href="estimation.html#eq:8-CImean">(8.9)</a> is only valid if either of the two scenarios in Section <a href="est.html#sampdistmean">7.4.4.1</a> is met, i.e. either the data are originally normal, or if the sample size is large enough.</p>
+<p>Again, the formula in equation <a href="confidence-intervals.html#eq:8-CImean">(8.9)</a> is only valid if either of the two scenarios in Section <a href="est.html#sampdistmean">7.4.4.1</a> is met, i.e. either the data are originally normal, or if the sample size is large enough.</p>
 </div>
 <div id="worked-example-1" class="section level4" number="8.2.3.3">
 <h4>
@@ -236,7 +236,7 @@ P(-z^{*} \leq \hat{Z} \leq z^{*}) &amp;= P(-z^{*} \leq \frac{\bar{X}_n - \mu}{SE
 <li>
 <span class="math inline">\(\alpha = 0.1\)</span>, so <span class="math inline">\(z^*\)</span> is found using <code>qnorm(1-0.1/2)</code> which is 1.644854.</li>
 </ul>
-<p>Since we are assuming the distribution of the yield points to be normally distribution, the sample means will be normally distributed regardless of the sample size, so we can proceed computing the confidence interval for the true average yield point using equation <a href="estimation.html#eq:8-CImean">(8.9)</a>:</p>
+<p>Since we are assuming the distribution of the yield points to be normally distribution, the sample means will be normally distributed regardless of the sample size, so we can proceed computing the confidence interval for the true average yield point using equation <a href="confidence-intervals.html#eq:8-CImean">(8.9)</a>:</p>
 <p><span class="math display">\[
 \left( 8439 - 1.644854 \frac{100}{\sqrt{25}} , 8439 - 1.644854 \frac{100}{\sqrt{25}} \right).
 \]</span>
@@ -283,7 +283,7 @@ Working everything out, we get (8406.103, 8471.891).</p>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#estimation"><span class="header-section-number">8</span> Estimation</a></li>
+<li><a class="nav-link" href="#confidence-intervals"><span class="header-section-number">8</span> Confidence Intervals</a></li>
 <li><a class="nav-link" href="#introduction-4"><span class="header-section-number">8.1</span> Introduction</a></li>
 <li>
 <a class="nav-link" href="#confidence-interval-for-the-mean"><span class="header-section-number">8.2</span> Confidence Interval for the Mean</a><ul class="nav navbar-nav">

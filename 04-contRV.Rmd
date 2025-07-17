@@ -471,7 +471,7 @@ upper1-lower1 ## find proportion in between 1 SD above and below mean.
 ```
 *Thought question*: how would you tweak this code to verify the other two statements associated with the 68-95-99.7% rule?
 
-## Using R 
+## Using R {#usingR}
 
 R has built in functions to compute the density, CDF, percentiles, as well as simulate data of common distributions. We will start with a random variable $Y \sim N(1, 9)$ as an example.
 

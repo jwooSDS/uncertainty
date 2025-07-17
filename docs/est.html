@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 7 Estimation | Understanding Uncertainty Course Notes</title>
+<meta name="author" content="Jeffrey Woo">
+<meta name="description" content="This module is based on Introduction to Probability for Data Science (Chan), Chapter 8.1 and 8.2. You can access the book for free at https://probability4datascience.com. Please note that I cover...">
+<meta name="generator" content="bookdown 0.43 with bs4_book()">
+<meta property="og:title" content="Chapter 7 Estimation | Understanding Uncertainty Course Notes">
+<meta property="og:type" content="book">
+<meta property="og:description" content="This module is based on Introduction to Probability for Data Science (Chan), Chapter 8.1 and 8.2. You can access the book for free at https://probability4datascience.com. Please note that I cover...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 7 Estimation | Understanding Uncertainty Course Notes">
+<meta name="twitter:description" content="This module is based on Introduction to Probability for Data Science (Chan), Chapter 8.1 and 8.2. You can access the book for free at https://probability4datascience.com. Please note that I cover...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.9.0/transition.js"></script><script src="libs/bs3compat-0.9.0/tabs.js"></script><script src="libs/bs3compat-0.9.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Understanding Uncertainty Course Notes</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Preface</a></li>
+<li><a class="" href="descriptive.html"><span class="header-section-number">1</span> Descriptive Statistics</a></li>
+<li><a class="" href="probability.html"><span class="header-section-number">2</span> Probability</a></li>
+<li><a class="" href="discrete-random-variables.html"><span class="header-section-number">3</span> Discrete Random Variables</a></li>
+<li><a class="" href="continuous-random-variables.html"><span class="header-section-number">4</span> Continuous Random Variables</a></li>
+<li><a class="" href="joint-distributions.html"><span class="header-section-number">5</span> Joint Distributions</a></li>
+<li><a class="" href="inequalities-limit-theorems-and-simulations.html"><span class="header-section-number">6</span> Inequalities, Limit Theorems, and Simulations</a></li>
+<li><a class="active" href="est.html"><span class="header-section-number">7</span> Estimation</a></li>
+<li><a class="" href="confidence-intervals.html"><span class="header-section-number">8</span> Confidence Intervals</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="est" class="section level1" number="7">
+<h1>
+<span class="header-section-number">7</span> Estimation<a class="anchor" aria-label="anchor" href="#est"><i class="fas fa-link"></i></a>
+</h1>
+<p>This module is based on Introduction to Probability for Data Science (Chan), Chapter 8.1 and 8.2. You can access the book for free at <a href="https://probability4datascience.com" class="uri">https://probability4datascience.com</a>. Please note that I cover additional topics, and skip certain topics from the book. You may skip Section 8.1.3, 8.1.4, and 8.1.6 from the book.</p>
+<div id="introduction-3" class="section level2" number="7.1">
+<h2>
+<span class="header-section-number">7.1</span> Introduction<a class="anchor" aria-label="anchor" href="#introduction-3"><i class="fas fa-link"></i></a>
+</h2>
+<p>We consider building models based on the data we have. Many models are based on some distribution, for example, the linear regression model is based on the normal distribution, and the logistic regression model is based on the Bernoulli distribution. Recall that these distributions are specified by their parameters: the mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^2\)</span> for the normal distribution, and the success probability <span class="math inline">\(p\)</span> for a Bernoulli distribution. The value of the parameters are almost always unknown in real life. This module deals with estimation: how we estimate the values of these parameters, as well as quantify the level of uncertainty we have with these estimated values, given the data we have.</p>
+<div id="big-picture-idea-with-estimation" class="section level3" number="7.1.1">
+<h3>
+<span class="header-section-number">7.1.1</span> Big Picture Idea with Estimation<a class="anchor" aria-label="anchor" href="#big-picture-idea-with-estimation"><i class="fas fa-link"></i></a>
+</h3>
+<p>Consider this simple scenario. We want to find the distribution associated with the systolic blood pressure of American adults. To be able to achieve this goal, we would have to get the systolic blood pressure of every single American adult. This is usually not feasible as researchers are unlikely to have the time and money to interview every single American adult. Instead, a representative sample of American adults will be obtained, for example, 750 randomly selected American adults are interviewed. We can then create density plots, histograms, compute the mean, median, variance, skewness, and other summaries that may be of interest, based on these 750 American adults.</p>
+<div id="population-vs-sample" class="section level4" number="7.1.1.1">
+<h4>
+<span class="header-section-number">7.1.1.1</span> Population Vs Sample<a class="anchor" aria-label="anchor" href="#population-vs-sample"><i class="fas fa-link"></i></a>
+</h4>
+<p>The above scenario illustrates a few concepts and terms that are fundamental in estimation. In any study, we must be clear as to who or what is the population of interest, and who or what is the sample.</p>
+<p>The <strong>population</strong> (sometimes called the population of interest) is the entire set of individuals, or objects, or events that a study is interested in. In the scenario described above, the population would be (all) American adults.</p>
+<p>The <strong>sample</strong> is the set of individuals, or objects, or events which we have data on. In the scenario described above, the sample is the 750 randomly selected American adults.</p>
+<p>Ideally, the sample should be <strong>representative</strong> of the population. A representative sample is often achieved through a simple random sample, where each unit in the population has the same chance of being selected to be in the sample. In this module, we will assume that we have a representative sample. Note: You may feel that obtaining a simple random sample may be difficult. We will not get into a discussion of sampling (sometimes called survey sampling), which is a field of statistics that handles how to obtain representative samples, or how calculations should be adjusted if the sample is not representative. There is still a lot of research that is being done in survey sampling.</p>
+</div>
+<div id="variables-observations" class="section level4" number="7.1.1.2">
+<h4>
+<span class="header-section-number">7.1.1.2</span> Variables &amp; Observations<a class="anchor" aria-label="anchor" href="#variables-observations"><i class="fas fa-link"></i></a>
+</h4>
+<p>A <strong>variable</strong> is a characteristic or attribute of individuals, or objects, or events that make up the population and sample. In the above scenario, a variable would be the systolic blood pressure of American adults. We can use the notation of random variables to describe variables. For example, we can let <span class="math inline">\(X\)</span> denote the systolic blood pressure of an American adult, so writing <span class="math inline">\(P(X&gt;200)\)</span> means we want to find the probability that an American adult has systolic blood pressure greater than 200 mmHg .</p>
+<p>An <strong>observation</strong> is the individual person, object or event that we collect data from. In the above scenario, an observation is a single American adult in our sample of 750.</p>
+<p>One way to think about variables and observations is through a spreadsheet. Typically, each row represents an observation and each column represents a variable. Figure <a href="est.html#fig:07-dataframe">7.1</a> below displays such an example, based on the described scenario. Each row represents an observation, i.e. a single American adult in our sample, and the column represents the variable, which is systolic blood pressure.</p>
+<div class="figure">
+<span style="display:block;" id="fig:07-dataframe"></span>
+<img src="images/07-dataframe.png" alt="Example of Data in a Spreadsheet"><p class="caption">
+Figure 7.1: Example of Data in a Spreadsheet
+</p>
+</div>
+</div>
+<div id="parameter-vs-estimator" class="section level4" number="7.1.1.3">
+<h4>
+<span class="header-section-number">7.1.1.3</span> Parameter Vs Estimator<a class="anchor" aria-label="anchor" href="#parameter-vs-estimator"><i class="fas fa-link"></i></a>
+</h4>
+<p>Now that we have made the distinction between a population and a sample, we are ready to define parameters and estimators.</p>
+<p>A <strong>parameter</strong> is a numerical summary associated with a population. In the scenario described above, an example of a population parameter would be the population mean systolic blood pressure of American adults.</p>
+<p>An <strong>estimator</strong> is a numerical summary associated with samples. An estimator is typically used to estimate a parameter. In the scenario described above, an estimator of the population mean systolic blood pressure of American adults could be the average systolic blood pressure in our sample. So the sample mean is an estimator of the population mean.</p>
+<p>An <strong>estimated value</strong>, or <strong>estimate</strong>, is the actual value of the estimator based on a sample. In the scenario described above, suppose the average systolic blood pressure of the 750 American adults is 140 mmHg. We will say the estimated value of the mean systolic blood pressure of American adults is 140 mmHg.</p>
+<p>So a parameter is a number that is associated with a population, while an estimator is a number that is associated with a sample. Some other differences between parameters and estimators:</p>
+<ul>
+<li>The value of parameters are unknown, while we can actually calculate numerical values of estimators.</li>
+<li>The value of parameters are considered fixed (as there is only one population), while the numerical values of estimators can vary if we obtain multiple random samples of the same sample size. Using the scenario above again, suppose we obtain a second representative sample of 750 American adults. The average systolic blood pressure of this second sample is likely to be different from the average systolic blood pressure of the first sample. This illustrates that there is <strong>variance, or uncertainty, associated with estimators due to random sampling</strong>. This is the uncertainty that we will be focusing on in this section.</li>
+</ul>
+<p>Whenever we propose an estimator for a parameter, we want to assess how “good” the estimator is. In some situations, there is an obvious choice for an estimator, for example, using the sample mean, <span class="math inline">\(\bar{x} = \frac{\sum x_i}{n}\)</span> to estimate the population mean. But in some instances, the choice may not be so obvious. For example, why do use the sample variance <span class="math inline">\(s^2 = \frac{\sum (x_i - \bar{x})^2}{n-1}\)</span> as an estimator for the population variance, and not <span class="math inline">\(\frac{\sum (x_i - \bar{x})^2}{n}\)</span>? We will cover a few measures that are used to assess an estimator: bias, variance, and mean-squared error.</p>
+<p>We will also cover a couple of methods in estimating parameters: the method of moments, and the method of maximum likelihood. You will notice that we use probability rules in these methods.</p>
+<p>To sum up estimation: we use data from a sample to estimate unknown characteristics of a population, so that we can answer questions regarding variables in the population, as well as provide a measure of uncertainty for our answers.</p>
+</div>
+</div>
+</div>
+<div id="method-of-moments-estimation" class="section level2" number="7.2">
+<h2>
+<span class="header-section-number">7.2</span> Method of Moments Estimation<a class="anchor" aria-label="anchor" href="#method-of-moments-estimation"><i class="fas fa-link"></i></a>
+</h2>
+<p>We will cover a couple of methods in estimation. The first method is the <strong>method of moments</strong>. It is a more intuitive method, although it lacks certain ideal properties. Before defining this method, we recall and define some terms.</p>
+<p>In Section <a href="continuous-random-variables.html#moments">4.4.3</a>, we defined <strong>moments</strong>. As a reminder, for a random variable <span class="math inline">\(X\)</span>, its <span class="math inline">\(k\)</span>th moment is <span class="math inline">\(E(X^k)\)</span>, which can be found using LOTUS: <span class="math inline">\(\int_{-\infty}^{\infty} x^k f_X(x) dx\)</span>.</p>
+<p>Suppose we observe a random sample <span class="math inline">\(x_1, \cdots, x_n\)</span> that comes from <span class="math inline">\(X\)</span>. The <span class="math inline">\(k\)</span>th <strong>sample moment</strong> is <span class="math inline">\(M_k = \frac{1}{n} \sum_{i=1}^n x_i^k\)</span>.</p>
+<p>Using these definitions,</p>
+<ul>
+<li>The 1st moment is <span class="math inline">\(E(X) = \mu_x\)</span>, the population mean of <span class="math inline">\(X\)</span>.</li>
+<li>The 1st sample moment is <span class="math inline">\(M_1 = \frac{1}{n} \sum_{i=1}^n x_i = \bar{x}\)</span>, the sample mean.</li>
+<li>The 2nd moment is <span class="math inline">\(E(X^2)\)</span>.</li>
+<li>The 2nd sample moment is <span class="math inline">\(M_2 = \frac{1}{n} \sum_{i=1}^n x_i^2\)</span>.</li>
+</ul>
+<p>And so on.</p>
+<p>The method of moments estimation is: Let <span class="math inline">\(X\)</span> be a random variable with distribution depending on parameters <span class="math inline">\(\theta_1, \cdots, \theta_m\)</span>. The <strong>method of moments (MOM) estimates</strong> <span class="math inline">\(\hat{\theta}_1, \cdots, \hat{\theta}_m\)</span> are found by equating the first <span class="math inline">\(m\)</span> sample moments to the corresponding first <span class="math inline">\(m\)</span> moments and solving for <span class="math inline">\(\theta_1, \cdots, \theta_m\)</span>.</p>
+<p>You might have noticed that the method of moments is based on the Law of Large Numbers.</p>
+<p>Note: By convention, parameters are typically denoted by Greek letters, and their estimators are denoted with a hat symbol over the corresponding letter.</p>
+<p>Let us look at a couple of examples:</p>
+<ol style="list-style-type: decimal">
+<li>Suppose I have a coin and I do not know if it is fair or not. There are only two outcomes on a flip, heads or tails. Each flip is independent of other flips. Let <span class="math inline">\(X_i\)</span> denote whether the <span class="math inline">\(i\)</span>th flip lands heads, where <span class="math inline">\(X_i = 1\)</span> if heads and <span class="math inline">\(X_i = 0\)</span> if tails. We can see that <span class="math inline">\(X_i \sim Bern(p)\)</span>, where <span class="math inline">\(p\)</span> is the probability it lands heads. Derive the MOM estimate for <span class="math inline">\(p\)</span>.</li>
+</ol>
+<p>A Bernoulli distribution has only 1 parameter, <span class="math inline">\(p\)</span>, so when using the method of moments, we only need to equate the first sample moment to the first moment.</p>
+<ul>
+<li>The first moment is <span class="math inline">\(E(X_i) = p\)</span>, since <span class="math inline">\(X_i \sim Bern(p)\)</span>.</li>
+<li>The first sample moment is <span class="math inline">\(M_1 = \frac{1}{n} \sum_{i=1}^n x_i = \bar{x}\)</span>.</li>
+</ul>
+<p>Set <span class="math inline">\(E(X_i) = M_1\)</span>, i.e. <span class="math inline">\(\hat{p} = \bar{x}\)</span>. Since <span class="math inline">\(X_i = 1\)</span> if heads and <span class="math inline">\(X_i = 0\)</span> if tails, <span class="math inline">\(\frac{1}{n} \sum_{i=1}^n x_i = \bar{x}\)</span> actually represents the proportion of flips that land on heads, based on <span class="math inline">\(n\)</span> flips. So this is actually the sample proportion.</p>
+<p>The MOM estimate for this problem is <span class="math inline">\(\hat{p}\)</span>, the proportion of <span class="math inline">\(n\)</span> flips that land on heads. This result should be fairly intuitive. If we flip a coin a large number of times, and 70% of the flips land on heads, the sample proportion is <span class="math inline">\(\hat{p} = 0.7\)</span>, and so the estimated value for <span class="math inline">\(p\)</span>, the success probability is 0.7.</p>
+<ol start="2" style="list-style-type: decimal">
+<li>Birth weights of newborn babies typically follow a normal distribution. We have data from births at Baystate Medical Center in Springfield, MA, during 1986. Assuming that the births at this hospital is representative of births in New England in 1986, derive the MOM estimates for <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma^2\)</span>, the mean and variance of the distribution of birth weights in New England in 1986.</li>
+</ol>
+<p>A normal distribution has 2 parameters, <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma^2\)</span>, so we need to equate the first two sample moments to the first two moments. Let <span class="math inline">\(X\)</span> denote the birth weights in New England in 1986, so <span class="math inline">\(X \sim N(\mu, \sigma^2)\)</span>.</p>
+<ul>
+<li>The first moment is <span class="math inline">\(E(X) = \mu\)</span>, since <span class="math inline">\(X \sim N(\mu, \sigma^2)\)</span>.</li>
+<li>The first sample moment is <span class="math inline">\(M_1 = \frac{1}{n} \sum_{i=1}^n x_i = \bar{x}\)</span>.</li>
+</ul>
+<p>So we set <span class="math inline">\(E(X) = M_1\)</span>, i.e. <span class="math inline">\(\hat{\mu} = \bar{x}\)</span>. This is just the sample average of the birth weights at Baystate Medical Center in 1986.</p>
+<ul>
+<li>The second moment is <span class="math inline">\(E(X^2)\)</span>. But we know that since <span class="math inline">\(X \sim N(\mu, \sigma^2)\)</span>.</li>
+</ul>
+<p><span class="math display">\[
+\begin{split}
+Var(X) &amp;= E(X^2) - E(X)^2\\
+\implies E(X^2) &amp;= Var(X) + E(X)^2 \\
+\implies E(X^2) &amp;= \sigma^2 + \mu^2
+\end{split}
+\]</span></p>
+<ul>
+<li>The second sample moment is <span class="math inline">\(M_2 = \frac{1}{n} \sum_{i=1}^n x_i^2\)</span>.</li>
+</ul>
+<p>So we set <span class="math inline">\(E(X^2) = M_2\)</span>, i.e. <span class="math inline">\(\hat{\sigma^2} + \hat{\mu}^2 = \frac{1}{n} \sum_{i=1}^n x_i^2\)</span>. Since we earlier found that <span class="math inline">\(\hat{\mu} = \bar{x}\)</span>, we get <span class="math inline">\(\hat{\sigma^2}  = \frac{1}{n} \sum_{i=1}^n x_i^2 - \bar{x}^2 = \frac{1}{n} \sum_{i=1}^n (x_i - \bar{x})^2\)</span>.</p>
+<p>Therefore, the MOM estimates for <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma^2\)</span> are <span class="math inline">\(\hat{\mu} = \bar{x}\)</span> and <span class="math inline">\(\hat{\sigma^2}  = \frac{1}{n} \sum_{i=1}^n (x_i - \bar{x})^2\)</span> respectively.</p>
+<p>View the video below for a more detailed explanation on deriving the MOM estimates for the normal distribution below:</p>
+<iframe width="560px" height="320px" allowfullscreen="true" allow="autoplay *" title="Module 07: MOM Estimation for Normal" src="https://virginiauniversity.instructuremedia.com/embed/cd5ff3c8-0e95-4790-aefd-e1ee23d70170" frameborder="0">
+</iframe>
+<p>We now use these MOM estimates on the data set of birth weights at Baystate Medical Center in 1986. It is well established in the literature that birth weights of babies follow a normal distribution. A quick check with the Shapiro-Wilk’s test for normality shows no contradiction, so we proceed with finding the estimates for <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma^2\)</span>. We then produce a density plot of the birth weights, and overlay a curve that corresponds to a normal distribution with <span class="math inline">\(\hat{\mu} = \bar{x}\)</span> and <span class="math inline">\(\hat{\sigma^2}  = \frac{1}{n} \sum_{i=1}^n (x_i - \bar{x})^2\)</span>. This normal curve is pretty close to the density plot, so it appears reasonable to say that the birth weights follow a normal distribution with mean 2944.587 (grams) and variance 528940 (grams-squared).</p>
+<div class="sourceCode" id="cb114"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://www.stats.ox.ac.uk/pub/MASS4/">MASS</a></span><span class="op">)</span></span>
+<span><span class="va">data</span><span class="op">&lt;-</span><span class="fu">MASS</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/MASS/man/birthwt.html">birthwt</a></span> <span class="co">##dataset comes from MASS package</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test</a></span><span class="op">(</span><span class="va">data</span><span class="op">$</span><span class="va">bwt</span><span class="op">)</span> <span class="co">##check for normality</span></span></code></pre></div>
+<pre><code>## 
+##  Shapiro-Wilk normality test
+## 
+## data:  data$bwt
+## W = 0.99244, p-value = 0.4353</code></pre>
+<div class="sourceCode" id="cb116"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mu</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">data</span><span class="op">$</span><span class="va">bwt</span><span class="op">)</span> <span class="co">##MOM estimate for mu</span></span>
+<span><span class="va">mu</span></span></code></pre></div>
+<pre><code>## [1] 2944.587</code></pre>
+<div class="sourceCode" id="cb118"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">sigma2</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="op">(</span><span class="va">data</span><span class="op">$</span><span class="va">bwt</span><span class="op">-</span><span class="va">mu</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span> <span class="co">##MOM estimate for sigma2</span></span>
+<span><span class="va">sigma2</span></span></code></pre></div>
+<pre><code>## [1] 528940</code></pre>
+<div class="sourceCode" id="cb120"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">##create density plot for data, and overlay Normal curve with parameters estimated by MOM</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/density.html">density</a></span><span class="op">(</span><span class="va">data</span><span class="op">$</span><span class="va">bwt</span><span class="op">)</span>, main<span class="op">=</span><span class="st">""</span>, ylim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">6e-04</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/curve.html">curve</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">dnorm</a></span><span class="op">(</span><span class="va">x</span>, mean<span class="op">=</span><span class="va">mu</span>, sd<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">sigma2</span><span class="op">)</span><span class="op">)</span>, </span>
+<span>      col<span class="op">=</span><span class="st">"blue"</span>, lwd<span class="op">=</span><span class="fl">2</span>, add<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:7-MOM"></span>
+<img src="bookdown-demo_files/figure-html/7-MOM-1.png" alt="Density Plot of Birth Weights. Normal Curve (in Blue) with Parameters Estimated by MOM Overlaid" width="672"><p class="caption">
+Figure 7.2: Density Plot of Birth Weights. Normal Curve (in Blue) with Parameters Estimated by MOM Overlaid
+</p>
+</div>
+<div id="alternative-form-of-method-of-moments-estimation" class="section level3" number="7.2.1">
+<h3>
+<span class="header-section-number">7.2.1</span> Alternative Form of Method of Moments Estimation<a class="anchor" aria-label="anchor" href="#alternative-form-of-method-of-moments-estimation"><i class="fas fa-link"></i></a>
+</h3>
+<p>In Section <a href="continuous-random-variables.html#moments">4.4.3</a>, we defined <strong>central moments</strong>. As a reminder, for a random variable <span class="math inline">\(X\)</span>, its <span class="math inline">\(k\)</span>th central moment is <span class="math inline">\(E((X-\mu)^k)\)</span>.</p>
+<p>Suppose we observe a random sample <span class="math inline">\(x_1, \cdots, x_n\)</span> that comes from <span class="math inline">\(X\)</span>. The <span class="math inline">\(k\)</span>th <strong>sample central moment</strong> is <span class="math inline">\(M_k^* = \frac{1}{n} \sum_{i=1}^n (x_i - \bar{x})^k\)</span>.</p>
+<p>An alternative form for the method of moments estimation is: Let <span class="math inline">\(X\)</span> be a random variable with distribution depending on parameters <span class="math inline">\(\theta_1, \cdots, \theta_m\)</span>. The method of moments (MOM) estimates <span class="math inline">\(\hat{\theta}_1, \cdots, \hat{\theta}_m\)</span> are found by equating the first sample moment to the first moments, and equating subsequent sample central moments to the corresponding central moments, and solving for <span class="math inline">\(\theta_1, \cdots, \theta_m\)</span>.</p>
+<p>This alternative form is often easier to work with, since the 2nd central moment is actually the variance of <span class="math inline">\(X\)</span>.</p>
+<p>We go back to the 2nd example in the previous subsection, where we are trying to find estimates for <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma^2\)</span> of a normal distribution.</p>
+<ul>
+<li>The first moment is <span class="math inline">\(E(X) = \mu\)</span>, since <span class="math inline">\(X \sim N(\mu, \sigma^2)\)</span>.</li>
+<li>The first sample moment is <span class="math inline">\(M_1 = \frac{1}{n} \sum_{i=1}^n x_i = \bar{x}\)</span>.</li>
+</ul>
+<p>So we set <span class="math inline">\(E(X) = M_1\)</span>, i.e. <span class="math inline">\(\hat{\mu} = \bar{x}\)</span>. This is just the sample average of the birth weights at Baystate Medical Center in 1986.</p>
+<ul>
+<li>The second central moment is <span class="math inline">\(Var(x) = E[(X-\mu)^2] = \sigma^2\)</span>.</li>
+<li>The second sample central moment is <span class="math inline">\(M_2^* = \frac{1}{n} \sum_{i=1}^n (x_i - \bar{x})^2\)</span>.</li>
+</ul>
+<p>So we set <span class="math inline">\(Var(X) = M_2^*\)</span> i.e. <span class="math inline">\(\hat{\sigma^2} = \frac{1}{n} \sum_{i=1}^n (x_i - \bar{x})^2\)</span>. If we compare this solution with the solution in the previous subsection, they are exactly the same.</p>
+<p>The idea behind method of moments estimation is fairly intuitive; however, it has some drawbacks which we will talk about after introducing another method for estimation in the next section, the method of maximum likelihood.</p>
+</div>
+</div>
+<div id="method-of-maximum-likelihood-estimation" class="section level2" number="7.3">
+<h2>
+<span class="header-section-number">7.3</span> Method of Maximum Likelihood Estimation<a class="anchor" aria-label="anchor" href="#method-of-maximum-likelihood-estimation"><i class="fas fa-link"></i></a>
+</h2>
+<p>The method of maximum likelihood is a workhorse in statistics and data science since it is widely used in estimating models. It is preferred to the method of moments as it is built upon a stronger theoretical framework, and its estimators tend to have more desirable properties. You are guaranteed to see the method of maximum likelihood again in the future.</p>
+<p>As its name suggests, it is a method of estimating parameters by maximizing the likelihood. We will go over the idea behind the likelihood next.</p>
+<div id="likelihood-function" class="section level3" number="7.3.1">
+<h3>
+<span class="header-section-number">7.3.1</span> Likelihood Function<a class="anchor" aria-label="anchor" href="#likelihood-function"><i class="fas fa-link"></i></a>
+</h3>
+<p>Suppose we have <span class="math inline">\(n\)</span> observations, denoted by the vector <span class="math inline">\(\boldsymbol{x} = (x_1, \cdots, x_n)^{T}\)</span>. We can use a PDF to generalize the distribution of these observations, <span class="math inline">\(f_{\boldsymbol{X}}(\boldsymbol{x})\)</span>. This is a joint PDF of all the variables.</p>
+<p>We have seen that PDFs (and hence joint PDFs) are always described by their parameters (e.g. Normal distribution has <span class="math inline">\(\mu, \sigma^2\)</span>, Bernoulli has <span class="math inline">\(p\)</span>). For this section, we will let <span class="math inline">\(\boldsymbol{\theta}\)</span> denote the parameters of a PDF. For example, if we are working with multivariate normal distribution, <span class="math inline">\(\boldsymbol{\theta} = (\boldsymbol{\mu}, \boldsymbol{\Sigma})\)</span>, the mean vector and covariance matrix.</p>
+<p>We write <span class="math inline">\(f_{\boldsymbol{X}}(\boldsymbol{x}; \boldsymbol{\theta})\)</span>
+to express the PDF of the random vector <span class="math inline">\(\boldsymbol{X}\)</span> with parameter <span class="math inline">\(\boldsymbol{\theta}\)</span>. So the PDF is a function of two items:</p>
+<ul>
+<li><p>The first item is the vector <span class="math inline">\(\boldsymbol{x} = (x_1, \cdots, x_n)^{T}\)</span>, which is basically a vector of the observed data. In previous modules, we expressed PDFs as a function of the observed data, since we calculate the PDF when <span class="math inline">\(\boldsymbol{X} = \boldsymbol{x}\)</span>. In estimation, the vector of observed data is actually fixed as it is something we are given in the data set.</p></li>
+<li><p>The second item is the parameter <span class="math inline">\(\boldsymbol{\theta}\)</span>. Estimating the parameter is our focus in estimation. The general idea in maximum likelihood is to find the value of <span class="math inline">\(\boldsymbol{\theta}\)</span> that “best explains” or “is most consistent” with the observed values of the data <span class="math inline">\(\boldsymbol{x}\)</span>. We maximize <span class="math inline">\(f_{\boldsymbol{X}}(\boldsymbol{x}; \boldsymbol{\theta})\)</span> to achieve this goal.</p></li>
+</ul>
+<p>The <strong>likelihood function</strong> is the PDF, but written in a way that shifts the emphasis to the parameters. The likelihood function is denoted by <span class="math inline">\(L(\boldsymbol{\theta} | \boldsymbol{x})\)</span> and is defined as <span class="math inline">\(f_{\boldsymbol{X}}(\boldsymbol{x})\)</span>.</p>
+<p>Note: the likelihood function should be viewed as a function of <span class="math inline">\(\boldsymbol{\theta}\)</span>, and its shape changes depending on the values of the observed data <span class="math inline">\(\boldsymbol{x}\)</span>.</p>
+<p>To simplify calculations involving the likelihood function, we make an assumption that the observations <span class="math inline">\(\boldsymbol{x}\)</span> are independent and come from an identical distribution with PDF <span class="math inline">\(f_X(x)\)</span>, in other words, the observations are i.i.d. (independent and identically distributed).</p>
+<p>Given i.i.d. random variables <span class="math inline">\(X_1, \cdots, X_n\)</span>, each having PDF <span class="math inline">\(f_X(x)\)</span>, the likelihood function is</p>
+<p><span class="math display" id="eq:7-like">\[\begin{equation}
+L(\boldsymbol{\theta} | \boldsymbol{x} ) = \prod_i^n f_X(x; \boldsymbol{\theta}).
+\tag{7.1}
+\end{equation}\]</span></p>
+<p>When maximizing the likelihood function, we often log transform the likelihood function first, then maximize the log transformed likelihood function. The log transformed likelihood function is called the <strong>log-likelihood function</strong>, and it is</p>
+<p><span class="math display" id="eq:7-loglike">\[\begin{equation}
+\ell(\boldsymbol{\theta} | \boldsymbol{x}) = \log L(\boldsymbol{x} | \boldsymbol{\theta}) = \sum_{i=1}^n \log f_X(x; \boldsymbol{\theta}).
+\tag{7.2}
+\end{equation}\]</span></p>
+<p>It turns out that maximizing the log-likelihood function is often easier computationally than maximizing the likelihood function.</p>
+<p>As the logarithm is a monotonic increasing function (it never decreases), maximizing a log transformed function is equivalent to maximizing the original function. Next, we look at how to write the likelihood and log-likelihood functions with a couple of examples.</p>
+<div id="example-1-bernoulli" class="section level4" number="7.3.1.1">
+<h4>
+<span class="header-section-number">7.3.1.1</span> Example 1: Bernoulli<a class="anchor" aria-label="anchor" href="#example-1-bernoulli"><i class="fas fa-link"></i></a>
+</h4>
+<p>Let <span class="math inline">\(X_1, \cdots, X_n\)</span> be i.i.d. <span class="math inline">\(Bern(p)\)</span>. Find the corresponding likelihood and log-likelihood functions.</p>
+<p>From equation <a href="discrete-random-variables.html#eq:3-bern">(3.8)</a>, the PMF of <span class="math inline">\(X \sim Bern(p)\)</span> is <span class="math inline">\(f_X(x) = p^x (1-p)^{1-x}\)</span>, where the support of <span class="math inline">\(x\)</span> is <span class="math inline">\(\{0,1\}\)</span>.</p>
+<p>The likelihood function, per equation <a href="est.html#eq:7-like">(7.1)</a>, becomes</p>
+<p><span class="math display">\[
+L(p | \boldsymbol{x} ) = \prod_{i=1}^n f_X(x_i; p) = \prod_{i=1}^n p^{x_i} (1-p)^{1-x_i}.
+\]</span></p>
+<p>The log-likelihood function, per equation <a href="est.html#eq:7-loglike">(7.2)</a>, becomes</p>
+<p><span class="math display">\[
+\begin{split}
+\ell (p | \boldsymbol{x}) &amp;= \sum_{i=1}^n \log f_X(x_i;p) \\
+                          &amp;= \sum_{i=1}^n \log \left( p^{x_i} (1-p)^{1-x_i} \right) \\
+                          &amp;= \sum_{i=1}^n x_i \log p + (1-x_i) \log (1-p) \\
+                          &amp;= \log p \left(\sum_{i=1}^n x_i \right) + \log (1-p) \left( n - \sum_{i=1}^n x_i \right).
+\end{split}
+\]</span></p>
+</div>
+<div id="example-1-continued-visualizing-likelihood-and-log-likelihood-functions" class="section level4" number="7.3.1.2">
+<h4>
+<span class="header-section-number">7.3.1.2</span> Example 1 Continued: Visualizing Likelihood and Log-Likelihood Functions<a class="anchor" aria-label="anchor" href="#example-1-continued-visualizing-likelihood-and-log-likelihood-functions"><i class="fas fa-link"></i></a>
+</h4>
+<p>We mentioned that the likelihood and log-likelihood functions, <span class="math inline">\(L(\boldsymbol{\theta} | \boldsymbol{x} )\)</span> and <span class="math inline">\(\ell(\boldsymbol{\theta} | \boldsymbol{x} )\)</span>, are functions of the parameters <span class="math inline">\(\boldsymbol{\theta}\)</span> and the observed data <span class="math inline">\(\boldsymbol{x}\)</span>. We typically view these functions after observing our data <span class="math inline">\(\boldsymbol{x}\)</span>.</p>
+<p>Suppose we are trying to estimate the proportion of college students who use passphrases for their university email account. We randomly select 20 students and ask them if they use passphrases for their university email account. Let <span class="math inline">\(x_i\)</span> denote the response for student <span class="math inline">\(i\)</span>, where <span class="math inline">\(x_i = 1\)</span> if student <span class="math inline">\(i\)</span> uses passphrases and <span class="math inline">\(x_i=0\)</span> otherwise. We can say that <span class="math inline">\(X \sim Bern(p)\)</span> where <span class="math inline">\(p\)</span> denotes the proportion of all college students who use passphrases for their university email account. For our sample of 20 students, 7 of them said they use passphrases for their university email account. From example 1, we know the likelihood function now is</p>
+<p><span class="math display">\[
+\begin{split}
+L(p | \boldsymbol{x} ) &amp;= \prod_{i=1}^n p^{x_i} (1-p)^{1-x_i} \\
+                       &amp;= p^7 (1-p)^{13}
+\end{split}
+\]</span></p>
+<p>and the log-likelihood function becomes</p>
+<p><span class="math display">\[
+\begin{split}
+\ell (p | \boldsymbol{x}) &amp;= \log p \left(\sum_{i=1}^n x_i \right) + \log (1-p) \left( n - \sum_{i=1}^n x_i \right)\\
+                          &amp;= 7 \log p + 13 \log(1-p).
+\end{split}
+\]</span>
+We can create plots of <span class="math inline">\(L(p | \boldsymbol{x} )\)</span> and <span class="math inline">\(\ell(p | \boldsymbol{x} )\)</span> based on the observed data, as we vary the value of <span class="math inline">\(p\)</span> from 0 to 1 (the support of <span class="math inline">\(p\)</span>). These plots are displayed in Figure <a href="est.html#fig:7-bernlikelihood">7.3</a> below</p>
+<div class="sourceCode" id="cb121"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">##function to compute likelihood function </span></span>
+<span><span class="va">bern_like</span><span class="op">&lt;-</span><span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">p</span><span class="op">)</span> <span class="co">##supply vector of data, and value of success probability</span></span>
+<span>  </span>
+<span><span class="op">{</span></span>
+<span>  </span>
+<span>  <span class="va">n</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="co">##sample size</span></span>
+<span>  <span class="va">S</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> </span>
+<span>  </span>
+<span>  <span class="va">likelihood</span><span class="op">&lt;-</span><span class="va">p</span><span class="op">^</span><span class="va">S</span> <span class="op">*</span> <span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">p</span><span class="op">)</span><span class="op">^</span><span class="op">(</span><span class="va">n</span><span class="op">-</span><span class="va">S</span><span class="op">)</span> <span class="co">##formula for likelihood function from Example 1</span></span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">likelihood</span><span class="op">)</span></span>
+<span>  </span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co">##function to compute loglikelihood function</span></span>
+<span></span>
+<span><span class="va">bern_loglike</span><span class="op">&lt;-</span><span class="kw">function</span><span class="op">(</span><span class="va">x</span>,<span class="va">p</span><span class="op">)</span></span>
+<span>  </span>
+<span><span class="op">{</span></span>
+<span>  </span>
+<span>  <span class="va">n</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="co">##sample size</span></span>
+<span>  <span class="va">S</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> </span>
+<span>  </span>
+<span>  <span class="va">loglike</span><span class="op">&lt;-</span> <span class="va">S</span><span class="op">*</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span> <span class="op">+</span> <span class="op">(</span><span class="va">n</span><span class="op">-</span><span class="va">S</span><span class="op">)</span><span class="op">*</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">p</span><span class="op">)</span> <span class="co">##formula for log-likelihood function from Example 1</span></span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">loglike</span><span class="op">)</span> </span>
+<span>  </span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co">##our "data" according to described scenario</span></span>
+<span><span class="va">data</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">7</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">13</span><span class="op">)</span><span class="op">)</span> </span>
+<span><span class="co">##vary the value of p, from 0 to 1, in increments of 0.01</span></span>
+<span><span class="va">props</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span>,by<span class="op">=</span><span class="fl">0.01</span><span class="op">)</span> </span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">##plot the likelihood function on y axis, against the value of p</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">props</span>, <span class="fu">bern_like</span><span class="op">(</span><span class="va">data</span>, <span class="va">props</span><span class="op">)</span>, type<span class="op">=</span><span class="st">"l"</span>, xlab<span class="op">=</span><span class="st">"p"</span>, ylab<span class="op">=</span><span class="st">"Likelihood Function"</span><span class="op">)</span></span>
+<span><span class="co">##overlay line on x-axis that corresponds to max value for likelihood function</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span>v<span class="op">=</span><span class="va">props</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/which.min.html">which.max</a></span><span class="op">(</span><span class="fu">bern_like</span><span class="op">(</span><span class="va">data</span>, <span class="va">props</span><span class="op">)</span><span class="op">)</span><span class="op">]</span>, col<span class="op">=</span><span class="st">"blue"</span><span class="op">)</span></span>
+<span><span class="co">##plot the loglikelihood function on y axis, against the value of p</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">props</span>, <span class="fu">bern_loglike</span><span class="op">(</span><span class="va">data</span>, <span class="va">props</span><span class="op">)</span>, type<span class="op">=</span><span class="st">"l"</span>, xlab<span class="op">=</span><span class="st">"p"</span>, ylab<span class="op">=</span><span class="st">"Log-Likelihood Function"</span><span class="op">)</span></span>
+<span><span class="co">##overlay line on x-axis that corresponds to max value for loglikelihood function</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span>v<span class="op">=</span><span class="va">props</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/which.min.html">which.max</a></span><span class="op">(</span><span class="fu">bern_loglike</span><span class="op">(</span><span class="va">data</span>, <span class="va">props</span><span class="op">)</span><span class="op">)</span><span class="op">]</span>, col<span class="op">=</span><span class="st">"blue"</span><span class="op">)</span></span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:7-bernlikelihood"></span>
+<img src="bookdown-demo_files/figure-html/7-bernlikelihood-1.png" alt="Likelihood (left) and Log-Likelihood (right) Functions of Bernoulli, when n=20, and 7 Yeses" width="672"><p class="caption">
+Figure 7.3: Likelihood (left) and Log-Likelihood (right) Functions of Bernoulli, when n=20, and 7 Yeses
+</p>
+</div>
+<div class="sourceCode" id="cb122"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## what value of p had maximum value of likelihood</span></span>
+<span><span class="va">props</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/which.min.html">which.max</a></span><span class="op">(</span><span class="fu">bern_like</span><span class="op">(</span><span class="va">data</span>, <span class="va">props</span><span class="op">)</span><span class="op">)</span><span class="op">]</span></span></code></pre></div>
+<pre><code>## [1] 0.35</code></pre>
+<div class="sourceCode" id="cb124"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## what value of p had maximum value of loglikelihood</span></span>
+<span><span class="va">props</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/which.min.html">which.max</a></span><span class="op">(</span><span class="fu">bern_loglike</span><span class="op">(</span><span class="va">data</span>, <span class="va">props</span><span class="op">)</span><span class="op">)</span><span class="op">]</span></span></code></pre></div>
+<pre><code>## [1] 0.35</code></pre>
+<p>The plots in Figure <a href="est.html#fig:7-bernlikelihood">7.3</a> show us how the likelihood and log-likelihood functions behave, given our data (i.e. that 7 out of 20 students said they use passphrases), and as we vary the value of the parameter <span class="math inline">\(p\)</span>. We note that the value of <span class="math inline">\(p\)</span> that maximized the likelihood and log-likelihood functions is 0.35. This is the idea behind the method of maximum likelihood estimation: what value of the parameter maximizes the likelihood and log-likelihood functions? Or in more regular language, what value of the parameter best explains our data?</p>
+<p>Note: the value of 0.35 corresponds to the sample proportion of students who use passphrases. It should make intuitive sense that if 7 out of 20 students in our sample say they use passphrases, we would say that our best estimate for the proportion of college students who use passphrases for their university email is 0.35.</p>
+<p>View the video below that provides a bit more detail on finding and visualizing the likelihood and log-likelihood functions for a Bernoulli distribution:</p>
+<iframe width="560px" height="320px" allowfullscreen="true" allow="autoplay *" title="Module 07: Likelihood &amp; Log-Likelihood for Bernoulli" src="https://virginiauniversity.instructuremedia.com/embed/205c0b39-43bc-4670-887c-06263c9b32e8" frameborder="0">
+</iframe>
+</div>
+<div id="example-2-normal" class="section level4" number="7.3.1.3">
+<h4>
+<span class="header-section-number">7.3.1.3</span> Example 2: Normal<a class="anchor" aria-label="anchor" href="#example-2-normal"><i class="fas fa-link"></i></a>
+</h4>
+<p>Let <span class="math inline">\(X_1, \cdots, X_n\)</span> be i.i.d. <span class="math inline">\(N(\mu, \sigma^2)\)</span>. Find the corresponding likelihood and log-likelihood functions.</p>
+<p>From equation <a href="continuous-random-variables.html#eq:4-pdfNormal">(4.11)</a>, the PDF of <span class="math inline">\(X \sim N(\mu, \sigma^2)\)</span> is <span class="math inline">\(f_X(x) =  \frac{1}{\sigma \sqrt{2 \pi}} \exp \left(-\frac{(x - \mu)^2}{2 \sigma^2} \right)\)</span>, where the support of <span class="math inline">\(x\)</span> is all real numbers.</p>
+<p>The likelihood function, per equation <a href="est.html#eq:7-like">(7.1)</a>, becomes</p>
+<p><span class="math display">\[
+L(\mu, \sigma^2 | \boldsymbol{x} ) = \prod_{i=1}^n f_X(x_i; \mu, \sigma^2) = \prod_{i=1}^n \frac{1}{\sigma \sqrt{2 \pi}} \exp \left(-\frac{(x_i - \mu)^2}{2 \sigma^2} \right).
+\]</span></p>
+<p>The log-likelihood function, per equation <a href="est.html#eq:7-loglike">(7.2)</a>, becomes</p>
+<p><span class="math display">\[
+\begin{split}
+\ell (\mu, \sigma^2 | \boldsymbol{x}) &amp;= \sum_{i=1}^n \log f_X(x_i; \boldsymbol{\theta}) \\
+                          &amp;= \sum_{i=1}^n \log \left\{ \frac{1}{\sigma \sqrt{2 \pi}} \exp \left(-\frac{(x_i - \mu)^2}{2 \sigma^2} \right) \right\} \\
+                          &amp;= \sum_{i=1}^n \left\{-\frac{1}{2} \log (2 \pi \sigma^2) -\frac{(x_i - \mu)^2}{2 \sigma^2} \right\} \\
+                          &amp;= -\frac{n}{2} \log (2 \pi \sigma^2) - \frac{1}{2 \sigma^2} \sum_{i=1}^n (x_i - \mu)^2.
+\end{split}
+\]</span></p>
+<p>View the video below that provides a bit more detail on finding and visualizing the likelihood and log-likelihood functions for a normal distribution:</p>
+<iframe width="560px" height="320px" allowfullscreen="true" allow="autoplay *" title="Module 07: Likelihood &amp; Log-Likelihood for Normal" src="https://virginiauniversity.instructuremedia.com/embed/878fa699-b219-4300-8ac8-495a5534790e" frameborder="0">
+</iframe>
+</div>
+</div>
+<div id="maximum-likelihood-estimation" class="section level3" number="7.3.2">
+<h3>
+<span class="header-section-number">7.3.2</span> Maximum Likelihood Estimation<a class="anchor" aria-label="anchor" href="#maximum-likelihood-estimation"><i class="fas fa-link"></i></a>
+</h3>
+<p>We are now ready to formally define the method of maximimum likelihood estimation. The <strong>maximum likelihood (ML) estimates</strong> <span class="math inline">\(\hat{\theta}_1, \cdots, \hat{\theta}_m\)</span> of the parameters <span class="math inline">\(\theta_1, \cdots, \theta_m\)</span> are found by maximizing the likelihood function <span class="math inline">\(L(\boldsymbol{\theta} | \boldsymbol{x} )\)</span>.</p>
+<p>Remember the following when finding ML estimates:</p>
+<ul>
+<li>The values of <span class="math inline">\(\boldsymbol{x}\)</span> are considered fixed as they are given in our data.</li>
+<li>We are varying the values of the parameters <span class="math inline">\(\boldsymbol{\theta}\)</span> and finding what specific values of <span class="math inline">\(\boldsymbol{\theta}\)</span> will maximize the likelihood function.</li>
+<li>We could choose to maximize the log-likelihood function instead. It is often easier to work with the log-likelihood function, as likelihood functions often have exponents (powers) in them, which makes maximizing them more complicated. The solution will be the same.</li>
+</ul>
+<p>We re-visit Examples 1 and 2 from the previous subsection.</p>
+<div id="example-1-bernoulli-1" class="section level4" number="7.3.2.1">
+<h4>
+<span class="header-section-number">7.3.2.1</span> Example 1: Bernoulli<a class="anchor" aria-label="anchor" href="#example-1-bernoulli-1"><i class="fas fa-link"></i></a>
+</h4>
+<p>Let <span class="math inline">\(X_1, \cdots, X_n\)</span> be i.i.d. <span class="math inline">\(Bern(p)\)</span>. Find the ML estimate for <span class="math inline">\(p\)</span>.</p>
+<p>We will work with the log-likelihood function, which we had found to be</p>
+<p><span class="math display">\[
+\ell (p | \boldsymbol{x}) = \log p \left(\sum_{i=1}^n x_i \right) + \log (1-p) \left( n - \sum_{i=1}^n x_i \right).
+\]</span></p>
+<p>To find the ML estimate for <span class="math inline">\(p\)</span>, we need to find the value of <span class="math inline">\(p\)</span> that maximizes <span class="math inline">\(\ell (p | \boldsymbol{x})\)</span>. In the previous subsection, we provided a visual way to represent the log-likelihood function as <span class="math inline">\(p\)</span> is varied, and find the value of <span class="math inline">\(p\)</span> that corresponded to the peak of the graph. The visual approach only works for a specific scenario when we had 7 out of 20 students who say yes. Can we generalize the ML estimate for the Bernoulli distribution?</p>
+<p>We can easily maximize any function by taking its first derivative and setting it to 0. So we take the first derivative of <span class="math inline">\(\ell (p | \boldsymbol{x})\)</span> with respect to the parameter <span class="math inline">\(p\)</span>:</p>
+<p><span class="math display">\[
+\begin{split}
+\frac{d}{d p}\ell (p | \boldsymbol{x}) &amp;= \frac{d}{d p} \left\{ \log p \left(\sum_{i=1}^n x_i \right) + \log (1-p) \left( n - \sum_{i=1}^n x_i \right) \right\}\\
+                          &amp;= \frac{\sum_{i=1}^n x_i}{p} - \frac{n - \sum_{i=1}^n x_i}{1-p}
+\end{split}
+\]</span>
+which we then set to 0:</p>
+<p><span class="math display">\[
+\begin{split}
+\frac{\sum_{i=1}^n x_i}{p} - \frac{n - \sum_{i=1}^n x_i}{1-p} &amp;= 0\\
+                                               \implies p     &amp;= \frac{\sum_{i=1}^n x_i}{n}
+\end{split}
+\]</span></p>
+<p>So the ML estimate for <span class="math inline">\(p\)</span> is <span class="math inline">\(\hat{p}_{ML} = \frac{\sum_{i=1}^n x_i}{n}\)</span>. This is just the sample proportion of observed data where <span class="math inline">\(x_i = 1\)</span>. This result means that for any data that comes from a Bernoulli distribution, the sample proportion of the data that is a “success” is the ML estimate for the success probability <span class="math inline">\(p\)</span>.</p>
+<p>If we go back to our example where 7 out of 20 students say they use passphrases, the ML estimate of <span class="math inline">\(p\)</span> is <span class="math inline">\(\hat{p}_{ML} = \frac{7}{20} = 0.35\)</span>, which matches the result we obtained when we viewed the log-likelihood function visually in Figure <a href="est.html#fig:7-bernlikelihood">7.3</a>.</p>
+<p>View the video below that provides a bit more detail on deriving the ML estimates for a Bernoulli distribution:</p>
+<iframe width="560px" height="320px" allowfullscreen="true" allow="autoplay *" title="Module 07: ML Estimation for Bernoulli" src="https://virginiauniversity.instructuremedia.com/embed/e2f8bb25-f5fb-438c-ae2f-2f8c5af643a7" frameborder="0">
+</iframe>
+<p><em>Thought question</em>: Play around with the code that produced Figure <a href="est.html#fig:7-bernlikelihood">7.3</a>. Change the vector <code>data</code> (to anything you’d like). You should find that the value of <span class="math inline">\(p\)</span> that maximizes the likelihood and log-likelihood functions will always be <span class="math inline">\(\hat{p}_{ML} = \frac{\sum_{i=1}^n x_i}{n}\)</span>, the sample proportion of “success” in our sample.</p>
+</div>
+<div id="example-2-normal-1" class="section level4" number="7.3.2.2">
+<h4>
+<span class="header-section-number">7.3.2.2</span> Example 2: Normal<a class="anchor" aria-label="anchor" href="#example-2-normal-1"><i class="fas fa-link"></i></a>
+</h4>
+<p>Let <span class="math inline">\(X_1, \cdots, X_n\)</span> be i.i.d. <span class="math inline">\(N(\mu, \sigma^2)\)</span>. Find the ML estimates for <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma^2\)</span>.</p>
+<p>Again, we will work with the log-likelihood function, which we had found to be</p>
+<p><span class="math display">\[
+\ell (\mu, \sigma^2 | \boldsymbol{x}) = -\frac{n}{2} \log (2 \pi \sigma^2) - \frac{1}{2 \sigma^2} \sum_{i=1}^n (x_i - \mu)^2.
+\]</span></p>
+<p>Notice we have two parameters <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma^2\)</span>, so we have to take partial derivatives <span class="math inline">\(\ell (\mu, \sigma^2 | \boldsymbol{x})\)</span> for with respect to each parameter:</p>
+<ul>
+<li>Partial derivative with respect to <span class="math inline">\(\mu\)</span>:</li>
+</ul>
+<p><span class="math display">\[
+\begin{split}
+\frac{d}{d \mu}\ell (\mu, \sigma^2 | \boldsymbol{x}) &amp;= \frac{d}{d \mu} \left\{ -\frac{n}{2} \log (2 \pi \sigma^2) - \frac{1}{2 \sigma^2} \sum_{i=1}^n (x_i - \mu)^2 \right \} \\
+                                                     &amp;= \frac{1}{\sigma^2} \sum_{i=1}^n (x_i - \mu).
+\end{split}
+\]</span></p>
+<ul>
+<li>Partial derivative with respect to <span class="math inline">\(\sigma^2\)</span>:</li>
+</ul>
+<p><span class="math display">\[
+\begin{split}
+\frac{d}{d \sigma^2}\ell (\mu, \sigma^2 | \boldsymbol{x}) &amp;= \frac{d}{d \sigma^2} \left\{ -\frac{n}{2} \log (2 \pi \sigma^2) - \frac{1}{2 \sigma^2} \sum_{i=1}^n (x_i - \mu)^2 \right \} \\
+                                                     &amp;= -\frac{n}{2}\frac{2\pi}{2 \pi \sigma^2} + \frac{1}{2 \sigma^4} \sum_{i=1}^n (x_i - \mu)^2 \\
+                                                     &amp;= -\frac{n}{2 \sigma^2} + \frac{1}{2 \sigma^4} \sum_{i=1}^n (x_i - \mu)^2
+\end{split}
+\]</span>
+We then set both partial derivatives to 0:</p>
+<ul>
+<li>
+</ul>
+<p><span class="math display">\[
+\begin{split}
+\frac{d}{d \mu}\ell (\mu, \sigma^2 | \boldsymbol{x}) &amp;= 0 \\
+\implies \frac{1}{\sigma^2} \sum_{i=1}^n (x_i - \mu) &amp;= 0 \\
+\implies \mu  &amp;= \frac{\sum_{i=1}^n x_i}{n} = \bar{x}.
+\end{split}
+\]</span>
+So the ML estimate for <span class="math inline">\(\mu\)</span> is <span class="math inline">\(\hat{\mu_{ML}} = \bar{x}\)</span>, i.e. the sample mean.</p>
+<ul>
+<li>
+</ul>
+<p><span class="math display">\[
+\begin{split}
+\frac{d}{d \sigma^2}\ell (\mu, \sigma^2 | \boldsymbol{x}) &amp;= 0 \\
+\implies -\frac{n}{2 \sigma^2} + \frac{1}{2 \sigma^4} \sum_{i=1}^n (x_i - \mu)^2 &amp;= 0 \\
+\implies \sigma^2 &amp;= \frac{\sum_{i=1}^n (x_i - \mu)^2}{n}.
+\end{split}
+\]</span></p>
+<p>So the ML estimate for <span class="math inline">\(\sigma^2\)</span> is <span class="math inline">\(\hat{\sigma_{ML}^2} = \frac{\sum_{i=1}^n (x_i - \mu)^2}{n}\)</span>. Note that this is not the same as how we normally calculate sample variance, per equation <a href="descriptive.html#eq:variance">(1.2)</a>: <span class="math inline">\(\frac{\sum_{i=1}^n (x_i-\bar{x})^2}{n-1}\)</span>.</p>
+<p>View the video below that provides a bit more detail on deriving the ML estimates for a normal distribution:</p>
+<iframe width="560px" height="320px" allowfullscreen="true" allow="autoplay *" title="Module 07: ML Estimation for Normal" src="https://virginiauniversity.instructuremedia.com/embed/0946c5ad-2ef0-4027-96e6-a3a23c5f9666" frameborder="0">
+</iframe>
+</div>
+<div id="calculating-maximum-likelihood-estimates" class="section level4" number="7.3.2.3">
+<h4>
+<span class="header-section-number">7.3.2.3</span> Calculating Maximum Likelihood Estimates<a class="anchor" aria-label="anchor" href="#calculating-maximum-likelihood-estimates"><i class="fas fa-link"></i></a>
+</h4>
+<p>In the examples that we have worked with, we found the values of maximum likelihood estimates using a couple of approaches, one using a plot of the likelihood function over different values of the parameter, based on observed data, and another using calculus, by setting the derivative of the log-likelihood function to 0.</p>
+<p>There are times when these approaches may not be feasible, for example, there is no closed form solution for the first derivative. In these instances, numerical methods are used. Numerical methods are typically algorithms that perform complex computations to approximate a mathematical result. We will not go into the details of these algorithms, and numerical methods are still an active area of research.</p>
+</div>
+</div>
+</div>
+<div id="estprops" class="section level2" number="7.4">
+<h2>
+<span class="header-section-number">7.4</span> Properties of Estimators<a class="anchor" aria-label="anchor" href="#estprops"><i class="fas fa-link"></i></a>
+</h2>
+<p>We have learned about a couple of different methods to estimate parameters. While these two methods are common, there are not the only methods to estimate parameters. One question how do we assess if our estimates are “good” or not? We define a few concepts that are used in this asessment.</p>
+<div id="estimators-vs-estimates" class="section level3" number="7.4.1">
+<h3>
+<span class="header-section-number">7.4.1</span> Estimators VS Estimates<a class="anchor" aria-label="anchor" href="#estimators-vs-estimates"><i class="fas fa-link"></i></a>
+</h3>
+<p>We wrote about estimators and estimates earlier in this module, but as a quick reminder on what these are:</p>
+<ul>
+<li><p>An <strong>estimator</strong> is a numerical summary associated with samples.</p></li>
+<li><p>An <strong>estimated value</strong>, or <strong>estimate</strong>, is the actual value of the estimator based on a sample.</p></li>
+</ul>
+<p>We have previously said that the ML estimate is found by maximizing the likelihood function, i.e. <span class="math inline">\(\hat{\theta}_{ML}(\boldsymbol{x})\)</span> is the value of <span class="math inline">\(\theta\)</span> that maximizes <span class="math inline">\(L(\theta| \boldsymbol{x})\)</span>. We write <span class="math inline">\(\hat{\theta}_{ML}(\boldsymbol{x})\)</span> to emphasize that the ML estimate is a function of the observed data <span class="math inline">\(\boldsymbol{x} = (x_1,\cdots, x_n)^T\)</span>. So, if our ML estimate is the sample mean, we write <span class="math inline">\(\hat{\theta}_{ML}(\boldsymbol{x}) = \frac{\sum_{i=1}^n x_i}{n}\)</span>. This value is calculated based on our observed data.
+We can also view the sample mean as a random variable, especially if we want to analyze the uncertainty associated with the sample mean. In other words, what is the distribution of the sample mean, if we had obtained many different random samples and calculated the sample mean from each random sample? When viewing the sample mean as a random variable, we write <span class="math inline">\(\hat{\Theta}_{ML}(\boldsymbol{X}) = \frac{\sum_{i=1}^n X_i}{n}\)</span>, and we call <span class="math inline">\(\hat{\Theta}_{ML}\)</span> the ML estimator of the parameter <span class="math inline">\(\theta\)</span>.</p>
+<p>Note: we consider one parameter <span class="math inline">\(\theta\)</span> in this subsection, to simplify notation with the introduction of <span class="math inline">\(\Theta\)</span>. The ideas can be applied to any number of parameters.</p>
+<p>The ML estimators are just one kind of estimators. We can find estimators in other ways (method of moments, or any other method). An estimator is any function that uses the data and calculates a number from the data and can be denoted as <span class="math inline">\(\hat{\Theta}(\boldsymbol{X})\)</span>. We call <span class="math inline">\(\hat{\Theta}\)</span> an estimator of <span class="math inline">\(\theta\)</span>.</p>
+<p>Consider <span class="math inline">\(X_1, \cdots, X_n\)</span> i.i.d. Normal with unknown mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^2\)</span> that is known. We can define two estimators of <span class="math inline">\(\mu\)</span> as <span class="math inline">\(\hat{\Theta}_1(\boldsymbol{X}) = \frac{\sum_{i=1}^n X_i}{n}\)</span> and <span class="math inline">\(\hat{\Theta}_2(\boldsymbol{X}) = X_1 + 2\)</span>. The first estimator takes the average value of the <span class="math inline">\(n\)</span> data points. The second estimator uses the first data point and adds 2 to it. The first estimator is an ML estimator, while the second estimator is not.</p>
+<p>We can see that we are free to define estimators in various ways. The question now is how do we evaluate whether an estimator is “good” or not. There are a few metrics to evaluate estimators.</p>
+</div>
+<div id="bias" class="section level3" number="7.4.2">
+<h3>
+<span class="header-section-number">7.4.2</span> Bias<a class="anchor" aria-label="anchor" href="#bias"><i class="fas fa-link"></i></a>
+</h3>
+<p>One metric used to evaluate estimators is to consider the long-run average of an estimator. An estimator is <strong>unbiased</strong> if the long run average of an estimator is equal to the true value of the parameter. Mathematically, an estimator <span class="math inline">\(\hat{\Theta}\)</span> is unbiased if <span class="math inline">\(E(\hat{\Theta}) = \theta\)</span>. From this definition of an unbiased estimator, we have the definition of the <strong>bias</strong> of an estimator:</p>
+<p><span class="math display" id="eq:7-bias">\[\begin{equation}
+Bias(\hat{\Theta}) = E(\hat{\Theta}) - \theta.
+\tag{7.3}
+\end{equation}\]</span></p>
+<p>So, while the value of the estimator could vary from sample to sample, the estimator is unbiased if it is equal to the true parameter, on average in the long-run.</p>
+<p>We go back to the example from the previous subsection. Consider <span class="math inline">\(X_1, \cdots, X_n\)</span> i.i.d. Normal with unknown mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^2\)</span> that is known. we can define two estimators of <span class="math inline">\(\mu\)</span> as <span class="math inline">\(\hat{\Theta}_1(\boldsymbol{X}) = \frac{\sum_{i=1}^n X_i}{n}\)</span> and <span class="math inline">\(\hat{\Theta}_2(\boldsymbol{X}) = X_1 + 2\)</span>. Assess whether <span class="math inline">\(\hat{\Theta}_1(\boldsymbol{X})\)</span> and <span class="math inline">\(\hat{\Theta}_2(\boldsymbol{X})\)</span> are unbiased or not.</p>
+<ul>
+<li>
+<p>The mathematical way of answering this question is to evaluate the expected value of both estimators:</p>
+<ul>
+<li><p><span class="math inline">\(E(\hat{\Theta}_1) = \frac{1}{n}E(\sum_{i=1}^n X_i) = \frac{1}{n}\sum_{i=1}^n E(X_i) = \frac{1}{n}(\mu + \cdots + \mu) = \mu\)</span>, so it is unbiased.</p></li>
+<li><p><span class="math inline">\(E(\hat{\Theta}_2)  = E(X_1 + 2) = E(X_1) + 2 = \mu +2\)</span> which is not equal to <span class="math inline">\(\mu\)</span>, so it is biased.</p></li>
+</ul>
+</li>
+<li>
+<p>We can also use Monte Carlo simulations to show these results. The simulation should do the following:</p>
+<ul>
+<li>The code simulates <span class="math inline">\(X_1, \cdots, X_{n}\)</span> i.i.d. from a known distribution, and with <span class="math inline">\(n\)</span> fixed. In the code below, I used a standard normal, with <span class="math inline">\(n=100\)</span>.<br>
+</li>
+<li>Generate a large number of replicates (I used 10 thousand replicates) of <span class="math inline">\(X_1, \cdots, X_{n}\)</span>.</li>
+<li>For each replicate of <span class="math inline">\(X_1, \cdots, X_{n}\)</span>, calculate <span class="math inline">\(\hat{\Theta}_1(\boldsymbol{X}) = \frac{\sum_{i=1}^n X_i}{n}\)</span> and <span class="math inline">\(\hat{\Theta}_2(\boldsymbol{X}) = X_1 + 2\)</span>.</li>
+<li>We then find the average of <span class="math inline">\(\hat{\Theta}_1(\boldsymbol{X})\)</span> and <span class="math inline">\(\hat{\Theta}_2(\boldsymbol{X})\)</span> across the replicates.</li>
+</ul>
+</li>
+</ul>
+<p>If the estimator is unbiased, the average from the Monte Carlo simulation should be close to 0, since the true mean of a standard normal is 0.</p>
+<div class="sourceCode" id="cb126"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">reps</span><span class="op">&lt;-</span><span class="fl">10000</span></span>
+<span></span>
+<span><span class="va">est1</span><span class="op">&lt;-</span><span class="va">est2</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span><span class="op">(</span><span class="fl">0</span>,<span class="va">reps</span><span class="op">)</span> <span class="co">##array to store est1 &amp; est2 from each rep</span></span>
+<span></span>
+<span><span class="va">n</span><span class="op">&lt;-</span><span class="fl">100</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">7</span><span class="op">)</span></span>
+<span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">reps</span><span class="op">)</span></span>
+<span>  </span>
+<span><span class="op">{</span></span>
+<span>  </span>
+<span>  <span class="va">X</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span> <span class="co">##Xi iid N(0,1) with n=100</span></span>
+<span>  </span>
+<span>  <span class="va">est1</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">X</span><span class="op">)</span> <span class="co">##est 1</span></span>
+<span>  <span class="va">est2</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">&lt;-</span><span class="va">X</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">+</span> <span class="fl">2</span> <span class="co">##est 2</span></span>
+<span>  </span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">est1</span><span class="op">)</span> <span class="co">##should be close to 0, indicating sample mean is unbiased</span></span></code></pre></div>
+<pre><code>## [1] -0.0009093132</code></pre>
+<div class="sourceCode" id="cb128"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">est2</span><span class="op">)</span> <span class="co">##should not be close to 0, indicating first obs + 2 is biased</span></span></code></pre></div>
+<pre><code>## [1] 2.003234</code></pre>
+<div class="sourceCode" id="cb130"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">##create density plots to show distribution for est1 and est 2, and overlay line to show true value of mu</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/density.html">density</a></span><span class="op">(</span><span class="va">est1</span><span class="op">)</span>, main<span class="op">=</span><span class="st">"Density Plot for Theta1"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span>v<span class="op">=</span><span class="fl">0</span>, col<span class="op">=</span><span class="st">"blue"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/density.html">density</a></span><span class="op">(</span><span class="va">est2</span><span class="op">)</span>, main<span class="op">=</span><span class="st">"Density Plot for Theta2"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span>v<span class="op">=</span><span class="fl">0</span>, col<span class="op">=</span><span class="st">"blue"</span><span class="op">)</span></span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:7-bias"></span>
+<img src="bookdown-demo_files/figure-html/7-bias-1.png" alt="Dist of Theta1 (left) and Theta2 (right)" width="672"><p class="caption">
+Figure 7.4: Dist of Theta1 (left) and Theta2 (right)
+</p>
+</div>
+<p>Figure <a href="est.html#fig:7-bias">7.4</a> displays the distribution of the 10 thousand <span class="math inline">\(\hat{\Theta}_1(\boldsymbol{X})\)</span>s and <span class="math inline">\(\hat{\Theta}_2(\boldsymbol{X})\)</span>s. Visually, an estimator is unbiased if its “middle” is equal to the value of the parameter, which is 0. We can see this is clearly not the case for <span class="math inline">\(\hat{\Theta}_2(\boldsymbol{X})\)</span> so it is biased.</p>
+<p>The results from the MC simulation matches with the math. We had shown that <span class="math inline">\(\hat{\Theta}_1(\boldsymbol{X}) = \frac{\sum_{i=1}^n X_i}{n}\)</span> is an unbiased estimator for <span class="math inline">\(\mu\)</span>, whereas <span class="math inline">\(\hat{\Theta}_2(\boldsymbol{X}) = X_1 + 2\)</span> is a biased estimator.</p>
+<p>So, based on bias, the sample mean is a better estimator for the population mean than using the first data point and adding 2 to it.</p>
+<p>The bias deals with the centrality of the estimator, i.e. is the estimator equal to the true parameter, on average. As we have seen in previous modules, we are not only concerned with measures of centrality, but also with measures of uncertainty. For example, how likely is it to observe a random sample where its estimated value is far from the true parameter?</p>
+</div>
+<div id="standard-error-and-variance" class="section level3" number="7.4.3">
+<h3>
+<span class="header-section-number">7.4.3</span> Standard Error and Variance<a class="anchor" aria-label="anchor" href="#standard-error-and-variance"><i class="fas fa-link"></i></a>
+</h3>
+<p>It turns out that the concept of variance can also be applied to estimators, as they can be viewed as random variables, and not just to individual data points. Estimators with smaller variances have a smaller degree of uncertainty: the value of the estimators do not change as much from random sample to random sample.</p>
+<p>We can go back to the example from the previous subsection. Consider <span class="math inline">\(X_1, \cdots, X_n\)</span> i.i.d. Normal with unknown mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^2\)</span> that is known. We defined two estimators of <span class="math inline">\(\mu\)</span> as <span class="math inline">\(\hat{\Theta}_1(\boldsymbol{X}) = \frac{\sum_{i=1}^n X_i}{n}\)</span> and <span class="math inline">\(\hat{\Theta}_2(\boldsymbol{X}) = X_1 + 2\)</span>. Derive the variance of both estimators.</p>
+<p>The mathematical way of answering this question is to evaluate the variance of both estimators:</p>
+<ul>
+<li><p><span class="math inline">\(Var(\hat{\Theta}_1) = \frac{1}{n^2}Var(\sum_{i=1}^n X_i) = \frac{1}{n^2} \sum_{i=1}^n Var(X_i) = \frac{1}{n^2} (\sigma^2 + \cdots + \sigma^2) = \frac{\sigma^2}{n}\)</span>.</p></li>
+<li><p><span class="math inline">\(Var(\hat{\Theta}_2) = Var(X_1 + 2) = Var(X_1) = \sigma^2\)</span>.</p></li>
+</ul>
+<p>There is also a separate term used when evaluating the variance of an estimator: this is the <strong>standard error</strong> of an estimator. This is essentially the standard deviation of the estimator, i.e. <span class="math inline">\(SE(\hat{\Theta}) = \sqrt{Var(\hat{\Theta})}\)</span>. Going back to our example: <span class="math inline">\(SE(\hat{\Theta}_1) = \frac{\sigma}{\sqrt{n}}\)</span> and <span class="math inline">\(SE(\hat{\Theta}_2) = \sigma\)</span>.</p>
+<p>Note: The term standard error is only applied to estimators. It is not used when finding the standard deviation of data points.</p>
+<p>We can also use our Monte Carlo simulation from the previous subsection to estimate these values:</p>
+<div class="sourceCode" id="cb131"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html">var</a></span><span class="op">(</span><span class="va">est1</span><span class="op">)</span> <span class="co">##should be close to 1/100, since n=1000</span></span></code></pre></div>
+<pre><code>## [1] 0.009956095</code></pre>
+<div class="sourceCode" id="cb133"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html">var</a></span><span class="op">(</span><span class="va">est2</span><span class="op">)</span> <span class="co">##should be close to 1</span></span></code></pre></div>
+<pre><code>## [1] 0.9988228</code></pre>
+<div class="sourceCode" id="cb135"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">est1</span><span class="op">)</span> <span class="co">##should be close to 1/10</span></span></code></pre></div>
+<pre><code>## [1] 0.09978023</code></pre>
+<div class="sourceCode" id="cb137"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">est2</span><span class="op">)</span> <span class="co">##should be close to 1</span></span></code></pre></div>
+<pre><code>## [1] 0.9994112</code></pre>
+<p>These results are reflected in Figure <a href="est.html#fig:7-bias">7.4</a>. Notice the scale of the x-axis for the plot of <span class="math inline">\(\hat{\Theta}_2\)</span> (on the right) is much larger, so <span class="math inline">\(\hat{\Theta}_2\)</span> has larger variability than <span class="math inline">\(\hat{\Theta}_1\)</span>, i.e. we are more uncertain about the value of <span class="math inline">\(\hat{\Theta}_2\)</span>, since they deviate more from each other.</p>
+<p>It should be clear by now that estimators with smaller standard errors (or variances) are desired. So, based on standard error, the sample mean is a better estimator for the population mean than using the first data point and adding 2 to it.</p>
+<div id="consistency" class="section level4" number="7.4.3.1">
+<h4>
+<span class="header-section-number">7.4.3.1</span> Consistency<a class="anchor" aria-label="anchor" href="#consistency"><i class="fas fa-link"></i></a>
+</h4>
+<p>An associated concept with variance and standard errors of estimators is consistency. The definition of consistency in estimators is fairly technical, so we will give a broad overview of its concept.</p>
+<p>Notice how we have denoted an estimator as <span class="math inline">\(\hat{\Theta}(\boldsymbol{X})\)</span>, where <span class="math inline">\(\boldsymbol{X} = (X_1, \cdots, X_n)^T\)</span>. So it stands to reason that the behavior of <span class="math inline">\(\hat{\Theta}(\boldsymbol{X})\)</span> may change as the number of data points <span class="math inline">\(n\)</span> changes. We will use the notation <span class="math inline">\(\hat{\Theta}_n\)</span> to denote an estimator that is based on <span class="math inline">\(n\)</span> data points, to emphasize that we are focusing on how the estimator changes as <span class="math inline">\(n\)</span> changes.</p>
+<p>An estimator is <strong>consistent</strong> if <span class="math inline">\(\hat{\Theta}_n\)</span> gets closer to and approaches the true value of <span class="math inline">\(\theta\)</span> as <span class="math inline">\(n\)</span> gets larger and approaches infinity. This means as the sample size <span class="math inline">\(n\)</span> gets larger, the estimator tends to get closer to the true value of the parameter.</p>
+<p>We go back to the example from the previous subsection. Consider <span class="math inline">\(X_1, \cdots, X_n\)</span> i.i.d. Normal with unknown mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^2\)</span> that is known. We defined two estimators of <span class="math inline">\(\mu\)</span> as <span class="math inline">\(\hat{\Theta}_1(\boldsymbol{X}) = \frac{\sum_{i=1}^n X_i}{n}\)</span> and <span class="math inline">\(\hat{\Theta}_2(\boldsymbol{X}) = X_1 + 2\)</span>. Assess whether <span class="math inline">\(\hat{\Theta}_1(\boldsymbol{X})\)</span> and <span class="math inline">\(\hat{\Theta}_2(\boldsymbol{X})\)</span> are consistent or not.</p>
+<ul>
+<li>
+<p>The mathematical way of answering this question involves a few more mathematical concepts that we will not get into. A general way of assessing if an estimator is consistent is to see if its variance shrinks towards zero as <span class="math inline">\(n\)</span> gets larger and goes to infinity.</p>
+<ul>
+<li><p>We had earlier showed that <span class="math inline">\(Var(\hat{\Theta}_1) = \frac{\sigma^2}{n}\)</span>, which shrinks towards zero as <span class="math inline">\(n\)</span> gets larger, so it is consistent.</p></li>
+<li><p>We had earlier showed that <span class="math inline">\(Var(\hat{\Theta}_2) = \sigma^2\)</span>, which does not strink towards zero as <span class="math inline">\(n\)</span> gets larger, so it is not consistent.</p></li>
+</ul>
+</li>
+<li>
+<p>We can also use Monte Carlo simulations to show these results:</p>
+<ul>
+<li>The code simulates <span class="math inline">\(X_1, \cdots, X_{n}\)</span> i.i.d. from a known distribution, and with <span class="math inline">\(n\)</span> varied from small values to large values. In the code below, I used a standard normal, with <span class="math inline">\(n=10, 100, 1000\)</span>.<br>
+</li>
+<li>For each value of <span class="math inline">\(n\)</span>, generate a large number of replicates (I used 10 thousand replicates) of <span class="math inline">\(X_1, \cdots, X_{n}\)</span>.</li>
+<li>For each replicate of <span class="math inline">\(X_1, \cdots, X_{n}\)</span>, calculate <span class="math inline">\(\hat{\Theta}_1(\boldsymbol{X}) = \frac{\sum_{i=1}^n X_i}{n}\)</span> and <span class="math inline">\(\hat{\Theta}_2(\boldsymbol{X}) = X_1 + 2\)</span>.</li>
+<li>We then produce density plots of <span class="math inline">\(\hat{\Theta}_1\)</span> and <span class="math inline">\(\hat{\Theta}_2\)</span> when <span class="math inline">\(n=10, 100, 1000\)</span>.</li>
+</ul>
+</li>
+</ul>
+<p>If an estimator is consistent, we should notice the spread of its density plot get narrower as <span class="math inline">\(n\)</span> gets larger.</p>
+<div class="sourceCode" id="cb139"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">n</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">10</span>,<span class="fl">100</span>,<span class="fl">1000</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">reps</span><span class="op">&lt;-</span><span class="fl">10000</span></span>
+<span></span>
+<span><span class="va">est1</span><span class="op">&lt;-</span><span class="va">est2</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span>,<span class="va">reps</span><span class="op">)</span><span class="op">)</span> <span class="co">##arrays to store est 1 and est 2 as n changes</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">50</span><span class="op">)</span></span>
+<span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">)</span></span>
+<span>  </span>
+<span><span class="op">{</span></span>
+<span>  </span>
+<span>  <span class="kw">for</span> <span class="op">(</span><span class="va">j</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">reps</span><span class="op">)</span></span>
+<span>    </span>
+<span>  <span class="op">{</span></span>
+<span>    </span>
+<span>    <span class="va">X</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">n</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">)</span></span>
+<span>    <span class="va">est1</span><span class="op">[</span><span class="va">i</span>,<span class="va">j</span><span class="op">]</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">X</span><span class="op">)</span> <span class="co">##est 1</span></span>
+<span>    <span class="va">est2</span><span class="op">[</span><span class="va">i</span>,<span class="va">j</span><span class="op">]</span><span class="op">&lt;-</span><span class="va">X</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">+</span><span class="fl">2</span> <span class="co">##est 2</span></span>
+<span>    </span>
+<span>  <span class="op">}</span></span>
+<span>  </span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">##find max value of density plots for est 1 so plots all show up complete</span></span>
+<span><span class="va">max_y1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/density.html">density</a></span><span class="op">(</span><span class="va">est1</span><span class="op">[</span><span class="fl">1</span>,<span class="op">]</span><span class="op">)</span><span class="op">$</span><span class="va">y</span>, <span class="fu"><a href="https://rdrr.io/r/stats/density.html">density</a></span><span class="op">(</span><span class="va">est1</span><span class="op">[</span><span class="fl">2</span>,<span class="op">]</span><span class="op">)</span><span class="op">$</span><span class="va">y</span>, <span class="fu"><a href="https://rdrr.io/r/stats/density.html">density</a></span><span class="op">(</span><span class="va">est1</span><span class="op">[</span><span class="fl">3</span>,<span class="op">]</span><span class="op">)</span><span class="op">$</span><span class="va">y</span><span class="op">)</span> </span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/density.html">density</a></span><span class="op">(</span><span class="va">est1</span><span class="op">[</span><span class="fl">1</span>,<span class="op">]</span><span class="op">)</span>, ylim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="va">max_y1</span><span class="op">)</span>, main<span class="op">=</span><span class="st">"Density Plot of Est1 with n Varied"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/density.html">density</a></span><span class="op">(</span><span class="va">est1</span><span class="op">[</span><span class="fl">2</span>,<span class="op">]</span><span class="op">)</span>, col<span class="op">=</span><span class="st">"blue"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/density.html">density</a></span><span class="op">(</span><span class="va">est1</span><span class="op">[</span><span class="fl">3</span>,<span class="op">]</span><span class="op">)</span>, col<span class="op">=</span><span class="st">"red"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">"topright"</span>, legend <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"n=10"</span>, <span class="st">"n=100"</span>, <span class="st">"n=1000"</span><span class="op">)</span>, col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"black"</span>,<span class="st">"blue"</span>, <span class="st">"red"</span><span class="op">)</span>, lty <span class="op">=</span> <span class="fl">1</span>, cex<span class="op">=</span><span class="fl">0.7</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">##find max value of density plots for est 2 so plots all show up complete</span></span>
+<span><span class="va">max_y2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/density.html">density</a></span><span class="op">(</span><span class="va">est2</span><span class="op">[</span><span class="fl">1</span>,<span class="op">]</span><span class="op">)</span><span class="op">$</span><span class="va">y</span>, <span class="fu"><a href="https://rdrr.io/r/stats/density.html">density</a></span><span class="op">(</span><span class="va">est2</span><span class="op">[</span><span class="fl">2</span>,<span class="op">]</span><span class="op">)</span><span class="op">$</span><span class="va">y</span>, <span class="fu"><a href="https://rdrr.io/r/stats/density.html">density</a></span><span class="op">(</span><span class="va">est2</span><span class="op">[</span><span class="fl">3</span>,<span class="op">]</span><span class="op">)</span><span class="op">$</span><span class="va">y</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/density.html">density</a></span><span class="op">(</span><span class="va">est2</span><span class="op">[</span><span class="fl">1</span>,<span class="op">]</span><span class="op">)</span>, ylim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="va">max_y2</span><span class="op">)</span>, main<span class="op">=</span><span class="st">"Density Plot of Est2 with n Varied"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/density.html">density</a></span><span class="op">(</span><span class="va">est2</span><span class="op">[</span><span class="fl">2</span>,<span class="op">]</span><span class="op">)</span>, col<span class="op">=</span><span class="st">"blue"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/density.html">density</a></span><span class="op">(</span><span class="va">est2</span><span class="op">[</span><span class="fl">3</span>,<span class="op">]</span><span class="op">)</span>, col<span class="op">=</span><span class="st">"red"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">"topright"</span>, legend <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"n=10"</span>, <span class="st">"n=100"</span>, <span class="st">"n=1000"</span><span class="op">)</span>, col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"black"</span>,<span class="st">"blue"</span>, <span class="st">"red"</span><span class="op">)</span>, lty <span class="op">=</span> <span class="fl">1</span>, cex<span class="op">=</span><span class="fl">0.7</span><span class="op">)</span></span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:7-consistent"></span>
+<img src="bookdown-demo_files/figure-html/7-consistent-1.png" alt="Dist of Theta1 (left) and Theta2 (right) as n is Varied" width="672"><p class="caption">
+Figure 7.5: Dist of Theta1 (left) and Theta2 (right) as n is Varied
+</p>
+</div>
+<p>Figure <a href="est.html#fig:7-consistent">7.5</a> displays the distribution of the 10 thousand <span class="math inline">\(\hat{\Theta}_1(\boldsymbol{X})\)</span>s and <span class="math inline">\(\hat{\Theta}_2(\boldsymbol{X})\)</span>s when <span class="math inline">\(n=10, 100, 1000\)</span>. Visually, an estimator is consistent if its density plot becomes narrower as <span class="math inline">\(n\)</span> gets larger. We see this in the left plot, so <span class="math inline">\(\hat{\Theta}_1(\boldsymbol{X})\)</span> is consistent, but we do not see this in the right plot, so <span class="math inline">\(\hat{\Theta}_2(\boldsymbol{X})\)</span> is not consistent.</p>
+<p>Note that unbiased estimators and consistent estimators are two different concepts. An estimator could be unbiased but inconsistent, or it could be biased but consistent.</p>
+<p><em>Thought question</em>: Suppose <span class="math inline">\(X_1, \cdots, X_n\)</span> i.i.d. standard normal. Consider an estimator for <span class="math inline">\(\mu\)</span>, <span class="math inline">\(\hat{\Theta}_3 = X_1\)</span>, and an estimator for <span class="math inline">\(\sigma^2\)</span>, <span class="math inline">\(\hat{\Theta}_4 = \frac{1}{n} \sum_{i=1}^n (X_i - \mu)^2\)</span>. The book says that <span class="math inline">\(\hat{\Theta}_3\)</span> is an unbiased but inconsistent estimator for <span class="math inline">\(\mu\)</span>, and <span class="math inline">\(\hat{\Theta}_4\)</span> is a biased but consistent estimator for <span class="math inline">\(\sigma^2\)</span>. Can you use Monte Carlo simulations to verify these claims?</p>
+</div>
+</div>
+<div id="sampling-distribution" class="section level3" number="7.4.4">
+<h3>
+<span class="header-section-number">7.4.4</span> Sampling Distribution<a class="anchor" aria-label="anchor" href="#sampling-distribution"><i class="fas fa-link"></i></a>
+</h3>
+<p>The plots in Figure <a href="est.html#fig:7-bias">7.4</a> and Figure <a href="est.html#fig:7-consistent">7.5</a> give rise to the idea that there is a distribution associated with an estimator. There is a term for this, called the <strong>sampling distribution</strong> of an estimator.</p>
+<p>Some estimators have known distributions, for example the sample mean, <span class="math inline">\(\bar{X}\)</span>. Using the CLT from Section <a href="inequalities-limit-theorems-and-simulations.html#CLT">6.3.2</a>, we know that as long as <span class="math inline">\(X_1, \cdots, X_n\)</span> are i.i.d. from any distribution with finite mean <span class="math inline">\(\mu\)</span> and finite variance <span class="math inline">\(\sigma^2\)</span>, and if <span class="math inline">\(n\)</span> is large enough, then <span class="math inline">\(\bar{X}\)</span> is approximately <span class="math inline">\(N(\mu, \frac{\sigma^2}{n})\)</span>. Looking at the plots in Figure <a href="est.html#fig:7-bias">7.4</a> and Figure <a href="est.html#fig:7-consistent">7.5</a>, we see that the density plots for <span class="math inline">\(\bar{X}\)</span> are bell-shaped, which verifies the CLT.</p>
+<p>Some other common estimators also have known distributions, such as the sample proportion as an estimator for the population proportion, the sample variance as an estimator for the population variance, as well as ML estimators for linear regression and logistic regression models.</p>
+<p>If the sampling distribution of an estimator is known and follows well known distributions, we can easily perform probability calculations involving estimators, for example, how likely are we to observe a sample mean that is more than 2 standard errors away from its true mean?</p>
+<p>However, other estimators may not have known distributions, for example, the sample median as an estimator for the population median has no known sampling distribution. Does this mean that we are unable to calculate probabilities associated with such estimators? It turns out there exist methods called resampling methods that allow us to approximate these calculations. We will cover the bootstrap, which is a commonly used resampling method, in a future module.</p>
+<div id="sampdistmean" class="section level4" number="7.4.4.1">
+<h4>
+<span class="header-section-number">7.4.4.1</span> Sampling Distribution of Sample Mean<a class="anchor" aria-label="anchor" href="#sampdistmean"><i class="fas fa-link"></i></a>
+</h4>
+<p>We will state the sampling distribution of the sample mean, <span class="math inline">\(\bar{X}_n\)</span>. There are a couple of scenarios to consider:</p>
+<ol style="list-style-type: decimal">
+<li>
+<span class="math inline">\(X_1, \cdots, X_n\)</span> are i.i.d. from a normal distribution with finite mean <span class="math inline">\(\mu\)</span> and finite variance <span class="math inline">\(\sigma^2\)</span>. Then <span class="math inline">\(\bar{X}_n \sim N(\mu, \frac{\sigma^2}{n})\)</span>.</li>
+</ol>
+<p>This means that if the data are originally normally distributed, the sample mean will be normally distributed, regardless of the sample size.</p>
+<ol start="2" style="list-style-type: decimal">
+<li>
+<span class="math inline">\(X_1, \cdots, X_n\)</span> are i.i.d. from any distribution with finite mean <span class="math inline">\(\mu\)</span> and finite variance <span class="math inline">\(\sigma^2\)</span>, and if <span class="math inline">\(n\)</span> is large enough, then <span class="math inline">\(\bar{X}_n\)</span> is approximately <span class="math inline">\(N(\mu, \frac{\sigma^2}{n})\)</span>. This is based on the CLT in section <a href="inequalities-limit-theorems-and-simulations.html#CLT">6.3.2</a>.</li>
+</ol>
+<p>This means that even if the data are not originally normally distributed, the sample mean will be approximately normally distributed if the sample size is large enough.</p>
+</div>
+</div>
+<div id="mean-squared-error" class="section level3" number="7.4.5">
+<h3>
+<span class="header-section-number">7.4.5</span> Mean-Squared Error<a class="anchor" aria-label="anchor" href="#mean-squared-error"><i class="fas fa-link"></i></a>
+</h3>
+<p>We introduced the mean-squared error (MSE) in the context of evaluating prediction errors in Section <a href="continuous-random-variables.html#lossfunc">4.4.1.3</a>. The MSE can also be used to evaluate an estimator. In this context, the MSE of an estimator <span class="math inline">\(\hat{\Theta}\)</span> is</p>
+<p><span class="math display" id="eq:7-MSE">\[\begin{equation}
+MSE(\hat{\Theta}) = E\left[(\hat{\Theta} - \theta)^2 \right].
+\tag{7.4}
+\end{equation}\]</span></p>
+<p>The MSE of an estimator can be interpreted as the average squared difference between an estimator and the value of its parameter. It turns out that the MSE of an estimator is related to two other metrics: the bias of an estimator and the variance of an estimator:</p>
+<p><span class="math display" id="eq:7-MSEdecomp">\[\begin{equation}
+MSE(\hat{\Theta}) = Var(\hat{\Theta}) + Bias(\hat{\Theta})^2.
+\tag{7.5}
+\end{equation}\]</span></p>
+<p>In other words, the MSE of an estimator is equal to the variance of an estimator plus the squared bias of an estimator. Equation <a href="est.html#eq:7-MSEdecomp">(7.5)</a> is often called the bias-variance decomposition of the MSE. If an estimator is unbiased, equation Equation <a href="est.html#eq:7-MSEdecomp">(7.5)</a> tells us that the MSE of an estimator is equal to its variance.</p>
+<p>What the MSE of an estimator suggests is that we need to consider both the bias and variance of an estimator. People often think that an unbiased estimator is the “best”. However, an unbiased estimator could have high variance. Such an estimator could have high MSE. In such a setting, it may be worth considering another estimator that may be biased, but have much smaller variance, resulting in a lower MSE. An example of where this can happen is in linear regression. Classical methods with linear regression yield unbiased estimators, but under specific scenarios, these estimators could have high variances. Another model, called the ridge regression model, considers biased estimators which may have smaller variances, which can result in lower MSEs in these specific scenarios. You will learn about these models in greater detail in a future class.</p>
+</div>
+</div>
+<div id="final-comments-on-estimation" class="section level2" number="7.5">
+<h2>
+<span class="header-section-number">7.5</span> Final Comments on Estimation<a class="anchor" aria-label="anchor" href="#final-comments-on-estimation"><i class="fas fa-link"></i></a>
+</h2>
+<p>We have covered the method of moments and method of maximum likelihood when estimating parameters. These methods are also called <strong>parametric methods</strong> as they involve making an assumption that the data follow some well-known distribution with unknown parameters, and we are then using our data, and our assumed distribution, to estimate the numerical value of the unknown parameters.</p>
+<p>There exist <strong>nonparametric methods</strong> in estimation. We have actually seen one such method (without calling it nonparametric), which is kernel density estimation (KDE) in Section <a href="continuous-random-variables.html#KDE">4.6.1</a>. KDE is used to estimate the PDF of a random variable so that we can visualize its distribution. If you look back at KDE, you will notice we made no assumption abou the distribution of the random variable. This is one of the fundamental differences between parametric and nonparametric estimation: the former assumes a distribution for the data, the latter does not.</p>
+<div id="why-ml-estimators" class="section level3" number="7.5.1">
+<h3>
+<span class="header-section-number">7.5.1</span> Why ML Estimators?<a class="anchor" aria-label="anchor" href="#why-ml-estimators"><i class="fas fa-link"></i></a>
+</h3>
+<p>I had mentioned earlier that ML estimators are considered the workhorse in statistics and data science and is likely the most common type of estimator used. ML estimators have these properties:</p>
+<ul>
+<li>ML estimators are consistent.</li>
+<li>ML estimators are <strong>asymptotically Normal</strong>, i.e. <span class="math inline">\(\frac{\hat{\Theta} - \theta}{SE(\hat{\Theta})}\)</span> is approximately standard normal as <span class="math inline">\(n\)</span> approaches infinity. This also implies that ML estimators are <strong>asymptotically unbiased</strong>, i.e. for large <span class="math inline">\(n\)</span>, the bias shrinks towards 0.</li>
+<li>ML estimators are <strong>efficient</strong>. As <span class="math inline">\(n\)</span> approaches infinity, ML estimators have lowest variance among all unbiased estimators. However, for smaller sample sizes, ML estimators may be biased and so other unbiased estimators could have smaller variances.</li>
+<li>ML estimators are <strong>equivariant</strong>. If <span class="math inline">\(\hat{\Theta}\)</span> is the ML estimator of <span class="math inline">\(\theta\)</span>, then <span class="math inline">\(g(\hat{\Theta})\)</span> is the ML estimator for <span class="math inline">\(g(\theta)\)</span>.</li>
+</ul>
+<p>What these properties imply is that if your sample size is large enough, estimates from ML estimators are highly likely to be close to the value of the parameter, ML estimators are virtually unbiased, are approximately normally distributed, and have the smallest variance among other possible unbiased estimators. These properties do not exist when the sample size is small.</p>
+<p>The MOM estimators do not necessarily have these properties.</p>
+<p>These properties require what are called regularity conditions. The definitions get fairly technical and are beyond the scope of the class. One of the conditions is that the data have to be i.i.d..</p>
+
+</div>
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="inequalities-limit-theorems-and-simulations.html"><span class="header-section-number">6</span> Inequalities, Limit Theorems, and Simulations</a></div>
+<div class="next"><a href="confidence-intervals.html"><span class="header-section-number">8</span> Confidence Intervals</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#est"><span class="header-section-number">7</span> Estimation</a></li>
+<li>
+<a class="nav-link" href="#introduction-3"><span class="header-section-number">7.1</span> Introduction</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#big-picture-idea-with-estimation"><span class="header-section-number">7.1.1</span> Big Picture Idea with Estimation</a></li></ul>
+</li>
+<li>
+<a class="nav-link" href="#method-of-moments-estimation"><span class="header-section-number">7.2</span> Method of Moments Estimation</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#alternative-form-of-method-of-moments-estimation"><span class="header-section-number">7.2.1</span> Alternative Form of Method of Moments Estimation</a></li></ul>
+</li>
+<li>
+<a class="nav-link" href="#method-of-maximum-likelihood-estimation"><span class="header-section-number">7.3</span> Method of Maximum Likelihood Estimation</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#likelihood-function"><span class="header-section-number">7.3.1</span> Likelihood Function</a></li>
+<li><a class="nav-link" href="#maximum-likelihood-estimation"><span class="header-section-number">7.3.2</span> Maximum Likelihood Estimation</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#estprops"><span class="header-section-number">7.4</span> Properties of Estimators</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#estimators-vs-estimates"><span class="header-section-number">7.4.1</span> Estimators VS Estimates</a></li>
+<li><a class="nav-link" href="#bias"><span class="header-section-number">7.4.2</span> Bias</a></li>
+<li><a class="nav-link" href="#standard-error-and-variance"><span class="header-section-number">7.4.3</span> Standard Error and Variance</a></li>
+<li><a class="nav-link" href="#sampling-distribution"><span class="header-section-number">7.4.4</span> Sampling Distribution</a></li>
+<li><a class="nav-link" href="#mean-squared-error"><span class="header-section-number">7.4.5</span> Mean-Squared Error</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#final-comments-on-estimation"><span class="header-section-number">7.5</span> Final Comments on Estimation</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#why-ml-estimators"><span class="header-section-number">7.5.1</span> Why ML Estimators?</a></li></ul>
+</li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2025-07-17.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

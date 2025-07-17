@@ -1,4 +1,4 @@
-# Estimation
+# Estimation {#est}
 
 ```{r, echo=FALSE}
 rm(list = ls())
@@ -457,7 +457,7 @@ In the examples that we have worked with, we found the values of maximum likelih
 
 There are times when these approaches may not be feasible, for example, there is no closed form solution for the first derivative. In these instances, numerical methods are used. Numerical methods are typically algorithms that perform complex computations to approximate a mathematical result. We will not go into the details of these algorithms, and numerical methods are still an active area of research. 
 
-## Properties of Estimators
+## Properties of Estimators {#estprops}
 
 We have learned about a couple of different methods to estimate parameters. While these two methods are common, there are not the only methods to estimate parameters. One question how do we assess if our estimates are "good" or not? We define a few concepts that are used in this asessment. 
 
@@ -655,13 +655,25 @@ Note that unbiased estimators and consistent estimators are two different concep
 
 The plots in Figure \@ref(fig:7-bias) and Figure \@ref(fig:7-consistent) give rise to the idea that there is a distribution associated with an estimator. There is a term for this, called the **sampling distribution** of an estimator. 
 
-Some estimators have known distributions, for example the sample mean, $\bar{X}$. Using the CLT from Section \@ref(CLT), we know that as long as $X_1, \cdots, X_n$ are i.i.d. from any distribution with finite mean $\mu$ and finite variance $\sigma^2$, and it $n$ is large enough, then $\bar{X}$ is approximately $N(\mu, \frac{\sigma^2}{n})$. Looking at the plots in Figure \@ref(fig:7-bias) and Figure \@ref(fig:7-consistent), we see that the density plots for $\bar{X}$ are bell-shaped, which verifies the CLT.
+Some estimators have known distributions, for example the sample mean, $\bar{X}$. Using the CLT from Section \@ref(CLT), we know that as long as $X_1, \cdots, X_n$ are i.i.d. from any distribution with finite mean $\mu$ and finite variance $\sigma^2$, and if $n$ is large enough, then $\bar{X}$ is approximately $N(\mu, \frac{\sigma^2}{n})$. Looking at the plots in Figure \@ref(fig:7-bias) and Figure \@ref(fig:7-consistent), we see that the density plots for $\bar{X}$ are bell-shaped, which verifies the CLT.
 
 Some other common estimators also have known distributions, such as the sample proportion as an estimator for the population proportion, the sample variance as an estimator for the population variance, as well as ML estimators for linear regression and logistic regression models. 
 
 If the sampling distribution of an estimator is known and follows well known distributions, we can easily perform probability calculations involving estimators, for example, how likely are we to observe a sample mean that is more than 2 standard errors away from its true mean? 
 
 However, other estimators may not have known distributions, for example, the sample median as an estimator for the population median has no known sampling distribution. Does this mean that we are unable to calculate probabilities associated with such estimators? It turns out there exist methods called resampling methods that allow us to approximate these calculations. We will cover the bootstrap, which is a commonly used resampling method, in a future module. 
+
+#### Sampling Distribution of Sample Mean {#sampdistmean}
+
+We will state the sampling distribution of the sample mean, $\bar{X}_n$. There are a couple of scenarios to consider:
+
+1. $X_1, \cdots, X_n$ are i.i.d. from a normal distribution with finite mean $\mu$ and finite variance $\sigma^2$. Then $\bar{X}_n \sim N(\mu, \frac{\sigma^2}{n})$.
+
+This means that if the data are originally normally distributed, the sample mean will be normally distributed, regardless of the sample size. 
+
+2. $X_1, \cdots, X_n$ are i.i.d. from any distribution with finite mean $\mu$ and finite variance $\sigma^2$, and if $n$ is large enough, then $\bar{X}_n$ is approximately $N(\mu, \frac{\sigma^2}{n})$. This is based on the CLT in section \@ref(CLT).
+
+This means that even if the data are not originally normally distributed, the sample mean will be approximately normally distributed if the sample size is large enough. 
 
 ### Mean-Squared Error
 
