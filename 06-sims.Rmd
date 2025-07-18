@@ -329,7 +329,7 @@ One possible calculation will be to assume the company is correct, that wait tim
 ```
 The CLT is traditionally associated with the distribution of the sample mean $\bar{X}_n$. It can be applied to the sum as well, due to properties of expectations and variances. Let $T_n = X_1 + \cdots + X_n = n \bar{X}_n$ denote the sum of $n$ i.i.d. random variables. The CLT says that, for large $n$, the distribution of $T_n$ is approximately $N(n\mu, n\sigma^2)$.
 
-#### Considerations with CLT
+#### Considerations with CLT {#considerCLT}
 
 One question that is raised when the CLT is used is how large does the sample size $n$ have to be for the approximation to be accurate? While suggestions are plentiful (usually along the lines to sample size being at least 25 or 30), there is no fixed answer to this question. It depends on the distribution of $X$. In general, the more skewed $X$ is, $n$ needs to be larger for the approximation to work. On the other hand, if $X$ is already normal, then the distribution of $\bar{X}_n$ is exactly $N(\mu, \frac{\sigma^2}{n})$ for any sample size $n$. We look at a couple of examples based on different distributions.
 

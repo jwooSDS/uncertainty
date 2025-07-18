@@ -387,9 +387,9 @@ Figure 6.3: LLN Example 2
 <code class="sourceCode R"><span><span class="fl">1</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">pnorm</a></span><span class="op">(</span><span class="fl">700</span>, <span class="fl">600</span>, <span class="fl">30</span><span class="op">^</span><span class="fl">2</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="fl">500</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 0.006486311</code></pre>
 <p>The CLT is traditionally associated with the distribution of the sample mean <span class="math inline">\(\bar{X}_n\)</span>. It can be applied to the sum as well, due to properties of expectations and variances. Let <span class="math inline">\(T_n = X_1 + \cdots + X_n = n \bar{X}_n\)</span> denote the sum of <span class="math inline">\(n\)</span> i.i.d. random variables. The CLT says that, for large <span class="math inline">\(n\)</span>, the distribution of <span class="math inline">\(T_n\)</span> is approximately <span class="math inline">\(N(n\mu, n\sigma^2)\)</span>.</p>
-<div id="considerations-with-clt" class="section level4" number="6.3.2.1">
+<div id="considerCLT" class="section level4" number="6.3.2.1">
 <h4>
-<span class="header-section-number">6.3.2.1</span> Considerations with CLT<a class="anchor" aria-label="anchor" href="#considerations-with-clt"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6.3.2.1</span> Considerations with CLT<a class="anchor" aria-label="anchor" href="#considerCLT"><i class="fas fa-link"></i></a>
 </h4>
 <p>One question that is raised when the CLT is used is how large does the sample size <span class="math inline">\(n\)</span> have to be for the approximation to be accurate? While suggestions are plentiful (usually along the lines to sample size being at least 25 or 30), there is no fixed answer to this question. It depends on the distribution of <span class="math inline">\(X\)</span>. In general, the more skewed <span class="math inline">\(X\)</span> is, <span class="math inline">\(n\)</span> needs to be larger for the approximation to work. On the other hand, if <span class="math inline">\(X\)</span> is already normal, then the distribution of <span class="math inline">\(\bar{X}_n\)</span> is exactly <span class="math inline">\(N(\mu, \frac{\sigma^2}{n})\)</span> for any sample size <span class="math inline">\(n\)</span>. We look at a couple of examples based on different distributions.</p>
 <ol style="list-style-type: decimal">
@@ -611,7 +611,7 @@ Figure 6.6: Board for Dart Throwing Experiment
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2025-07-17.</p>
+    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2025-07-18.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

@@ -69,15 +69,15 @@
 </h2>
 <p>In Section <a href="est.html#est">7</a>, we use data from our sample to estimate parameters of a population. For example, we could use the sample mean systolic blood pressure of 750 randomly selected American adults to estimate the mean systolic blood pressure of all American adults. We also established that estimators such as the sample mean have randomness in them. If we were to obtain another random sample of 750 American adults, the sample mean blood pressure from this other sample is likely to be different from the original random sample. So is there uncertainty in our estimator due to random sampling. We also learned about ways to measure how “well” an estimator does in estimating the parameter, such as bias, variance, standard error, and mean-squared error of the estimator.</p>
 <p>In this section, we will introduce confidence intervals. Confidence intervals build on the ideas from Section <a href="est.html#est">7</a>: that estimators are random and we can quantify their uncertainty. The purpose of a confidence interval is to provide a range of plausible values for an unknown population parameter, based on a sample. A confidence interval not only provides the estimated value of the parameter, but also a measure of uncertainty associated with the estimation.</p>
-<p>We will first cover confidence intervals for the mean and confidence intervals for the proportion, two of the most basic confidence intervals. These intervals are based on the fact that the distribution of their corresponding estimators, the sample mean and sample proportion, are known as long certain conditions are met. You will notice that the general ideas in finding confidence intervals are pretty similar; confidence intervals for other estimators that have known distributions will be constructed similarly. In the last subsection of this module, we will learn about the bootstrap, which is used when the distribution of an estimator is unknown.</p>
+<p>We will first cover confidence intervals for the mean and confidence intervals for the proportion, two of the most basic confidence intervals. These intervals are based on the fact that the distribution of their corresponding estimators, the sample mean and sample proportion, are known as long as certain conditions are met. You will notice that the general ideas in finding confidence intervals are pretty similar; confidence intervals for other estimators that have known distributions will be constructed similarly. In the last subsection of this module, we will learn about the bootstrap, which is used when the distribution of an estimator is unknown.</p>
 </div>
 <div id="confidence-interval-for-the-mean" class="section level2" number="8.2">
 <h2>
 <span class="header-section-number">8.2</span> Confidence Interval for the Mean<a class="anchor" aria-label="anchor" href="#confidence-interval-for-the-mean"><i class="fas fa-link"></i></a>
 </h2>
-<div id="randomness-of-an-estimator" class="section level3" number="8.2.1">
+<div id="randomness-of-estimators" class="section level3" number="8.2.1">
 <h3>
-<span class="header-section-number">8.2.1</span> Randomness of an Estimator<a class="anchor" aria-label="anchor" href="#randomness-of-an-estimator"><i class="fas fa-link"></i></a>
+<span class="header-section-number">8.2.1</span> Randomness of Estimators<a class="anchor" aria-label="anchor" href="#randomness-of-estimators"><i class="fas fa-link"></i></a>
 </h3>
 <p>Suppose we are trying to estimate the mean systolic blood pressure of all American adults, by using the sample mean of 750 randomly selected American adults. The sample mean is an estimator for the population mean. We want to be able to report the value of the estimator, as well as our uncertainty about the estimator. A way to measure the uncertainty of an estimator is through the variance or standard error of the estimator. Larger values indicate a higher degree of uncertainty, as an estimator with larger variance means that the value of the estimator is likely to be different among random samples.</p>
 <p>The Monte Carlo simulations in Section <a href="est.html#estprops">7.4</a> show that there is a distribution associated with an estimator. We will start with the sample mean, since its distribution is known (see Section <a href="est.html#sampdistmean">7.4.4.1</a>). We will talk about the confidence interval for the mean first, before generalizing these ideas to other estimators with known distributions.</p>
@@ -122,16 +122,16 @@ Figure 8.1: Randomness of Confidence Interval. Picture from <a href="https://en.
 </p>
 </div>
 <ul>
-<li>The density curve in the top of Figure <a href="confidence-intervals.html#fig:8-CI">8.1</a> represents the PDF of a random variable.</li>
+<li>The density curve in the top of Figure <a href="confidence-intervals.html#fig:8-CI">8.1</a> represents the PDF of a random variable, that represents the distribution of some variable in the population that we wish to study.</li>
 <li>Each row of dots represents the values of 10 randomly sampled data points from the PDF.</li>
 <li>The colored lines in each row represent the lower and upper bounds of a 50% confidence interval calculated from the sampled data points in the row.</li>
 <li>The colored dot in the center of the confidence interval represents <span class="math inline">\(\bar{x}\)</span> for the sampled data points in the row.</li>
 <li>The intervals in blue represent confidence intervals that contain the value of <span class="math inline">\(\mu\)</span>, while the intervals in red represent confidence intervals that do not contain the value of <span class="math inline">\(\mu\)</span>.</li>
 </ul>
-<p>In Figure <a href="confidence-intervals.html#fig:8-CI">8.1</a>, we note that 50% of the confidence intervals capture the value of <span class="math inline">\(\mu\)</span>, so the probability per equation <a href="confidence-intervals.html#eq:8-CIprob">(8.3)</a> is 0.5.</p>
+<p>In Figure <a href="confidence-intervals.html#fig:8-CI">8.1</a>, we note that 50% of the confidence intervals capture the value of <span class="math inline">\(\mu\)</span>, so the probability per equation <a href="confidence-intervals.html#eq:8-CIprob">(8.3)</a> is 0.5. This matches with theory since each confidence interval was computed at 50% confidence.</p>
 <p>If we were to create 95% confidence intervals for each row in Figure <a href="confidence-intervals.html#fig:8-CI">8.1</a>, the upper and lower bounds of the intervals will be adjusted so that we will expect 19 of these 20 intervals to contain the value of <span class="math inline">\(\mu\)</span>.</p>
 <p>This illustration gives us an interpretation of the probability associated with a confidence interval per equation <a href="confidence-intervals.html#eq:8-CIprob">(8.3)</a>: When we construct a 95% confidence interval, there is a 95% chance the random interval <span class="math inline">\(I\)</span> will contain the true value of the parameter. In other words, if we have 100 random samples and we construct 95% confidence intervals based on each sample, we expect 95 of these intervals to contain the value of the parameter.</p>
-<p>The idea of the probability that the random interval <span class="math inline">\(I\)</span> captures the true parameter gives rise to the <strong>confidence level</strong>. The confidence level of a confidence interval is denoted by <span class="math inline">\(1-\alpha\)</span>. So if we construct an interval at 95% confidence, <span class="math inline">\(\alpha=0.05\)</span>. Then equation <a href="confidence-intervals.html#eq:8-CIprob">(8.3)</a> can be written as</p>
+<p>The idea of the probability that the random interval <span class="math inline">\(I\)</span> captures the true parameter gives rise to the <strong>confidence level</strong>. The confidence level of a confidence interval is denoted by <span class="math inline">\(1-\alpha\)</span>, i.e. if we construct an interval at 95% confidence, <span class="math inline">\(\alpha=0.05\)</span>. Equation <a href="confidence-intervals.html#eq:8-CIprob">(8.3)</a> can be written as</p>
 <p><span class="math display" id="eq:8-CIalpha">\[\begin{equation}
 P(\bar{X}_n - \epsilon \leq \mu \leq \bar{X}_n + \epsilon) = 1 - \alpha.
 \tag{8.4}
@@ -139,22 +139,22 @@ P(\bar{X}_n - \epsilon \leq \mu \leq \bar{X}_n + \epsilon) = 1 - \alpha.
 <p>We will then say <span class="math inline">\(I\)</span> is a <span class="math inline">\((1-\alpha) \times 100\%\)</span> confidence interval, or <span class="math inline">\(I\)</span> is a confidence interval with confidence level of <span class="math inline">\((1-\alpha) \times 100\%\)</span>.</p>
 <p>Now that we have established that confidence intervals are random and the definition of the confidence level, we are ready to go into the details of constructing the confidence interval for the mean.</p>
 </div>
-<div id="sampling-distribution-of-sample-mean" class="section level3" number="8.2.3">
+<div id="constructing-confidence-interval-for-the-mean" class="section level3" number="8.2.3">
 <h3>
-<span class="header-section-number">8.2.3</span> Sampling Distribution of Sample Mean<a class="anchor" aria-label="anchor" href="#sampling-distribution-of-sample-mean"><i class="fas fa-link"></i></a>
+<span class="header-section-number">8.2.3</span> Constructing Confidence Interval for the Mean<a class="anchor" aria-label="anchor" href="#constructing-confidence-interval-for-the-mean"><i class="fas fa-link"></i></a>
 </h3>
-<p>We remind ourselves of the sampling distribution of the sample mean, <span class="math inline">\(\bar{X}_n\)</span>, from Section <a href="est.html#sampdistmean">7.4.4.1</a>. There are a couple of scenarios to consider:</p>
+<p>We remind ourselves of the sampling distribution of the sample mean, <span class="math inline">\(\bar{X}_n\)</span>, from Section <a href="est.html#sampdistmean">7.4.4.1</a>. There are a couple of conditions to consider:</p>
 <ol style="list-style-type: decimal">
 <li><p><span class="math inline">\(X_1, \cdots, X_n\)</span> are i.i.d. from a normal distribution with finite mean <span class="math inline">\(\mu\)</span> and finite variance <span class="math inline">\(\sigma^2\)</span>. Then <span class="math inline">\(\bar{X}_n \sim N(\mu, \frac{\sigma^2}{n})\)</span>.</p></li>
-<li><p><span class="math inline">\(X_1, \cdots, X_n\)</span> are i.i.d. from any distribution with finite mean <span class="math inline">\(\mu\)</span> and finite variance <span class="math inline">\(\sigma^2\)</span>, and if <span class="math inline">\(n\)</span> is large enough, then <span class="math inline">\(\bar{X}_n\)</span> is approximately <span class="math inline">\(N(\mu, \frac{\sigma^2}{n})\)</span>. This is based on the CLT in section <a href="inequalities-limit-theorems-and-simulations.html#CLT">6.3.2</a>.</p></li>
+<li><p><span class="math inline">\(X_1, \cdots, X_n\)</span> are i.i.d. from any distribution with finite mean <span class="math inline">\(\mu\)</span> and finite variance <span class="math inline">\(\sigma^2\)</span>, and if <span class="math inline">\(n\)</span> is large enough, then <span class="math inline">\(\bar{X}_n\)</span> is approximately <span class="math inline">\(N(\mu, \frac{\sigma^2}{n})\)</span>.</p></li>
 </ol>
-<p>If either of these scenarios are met, then the distribution of <span class="math inline">\(\bar{X}_n\)</span> after standardization is either a standard normal or approaches a standard normal distribution, so <span class="math inline">\(\frac{\bar{X}_n - \mu}{\frac{\sigma}{\sqrt{n}}} = \frac{\bar{X}_n - \mu}{\sqrt{Var(\bar{X})}} = \frac{\bar{X}_n - \mu}{SE(\bar{X}_n)}\)</span> is either standard normal or approximately standard normal when <span class="math inline">\(n\)</span> is large enough.</p>
+<p>If either of these conditions are met, then the distribution of <span class="math inline">\(\bar{X}_n\)</span> after standardization is either a standard normal or approaches a standard normal distribution, so <span class="math inline">\(\frac{\bar{X}_n - \mu}{\frac{\sigma}{\sqrt{n}}} = \frac{\bar{X}_n - \mu}{\sqrt{Var(\bar{X})}} = \frac{\bar{X}_n - \mu}{SE(\bar{X}_n)}\)</span> is either standard normal or approximately standard normal when <span class="math inline">\(n\)</span> is large enough.</p>
 <p>To simplify the notation as it pertains to the confidence interval for the mean, we will let <span class="math inline">\(\hat{Z} = \frac{\bar{X}_n - \mu}{SE(\bar{X})}\)</span>, so <span class="math inline">\(\hat{Z}\)</span> is standard normal or approximately standard normal. <span class="math inline">\(\hat{Z}\)</span> can be called the <strong>standardized version of the sample mean</strong> or a <strong>standardized score</strong>.</p>
 <div id="critical-value" class="section level4" number="8.2.3.1">
 <h4>
 <span class="header-section-number">8.2.3.1</span> Critical Value<a class="anchor" aria-label="anchor" href="#critical-value"><i class="fas fa-link"></i></a>
 </h4>
-<p>We perform some math operations on equation <a href="confidence-intervals.html#eq:8-CIprob">(8.3)</a> to see how we can construct a confidence interval for the mean:</p>
+<p>We perform some math operations on equation <a href="confidence-intervals.html#eq:8-CIalpha">(8.4)</a> to see how we can construct a confidence interval for the mean:</p>
 <p><span class="math display" id="eq:8-CIcrit">\[\begin{equation}
 \begin{split}
 P(\bar{X}_n - \epsilon \leq \mu \leq \bar{X}_n + \epsilon) &amp;= 1 - \alpha \\
@@ -173,7 +173,7 @@ P(\bar{X}_n - \epsilon \leq \mu \leq \bar{X}_n + \epsilon) &amp;= 1 - \alpha \\
 Figure 8.2: Finding Critical Value with 95% Confidence
 </p>
 </div>
-<p>We continue working with equation <a href="confidence-intervals.html#eq:8-CIcrit">(8.5)</a> to see how we obtain the value of <span class="math inline">\(z^*\)</span>, as long as either of the two scenarios for the sampling distribution of <span class="math inline">\(\bar{X}_n\)</span> to be known are met:</p>
+<p>We continue working with equation <a href="confidence-intervals.html#eq:8-CIcrit">(8.5)</a> to see how we obtain the value of <span class="math inline">\(z^*\)</span>, as long as either of the two conditions for the sampling distribution of <span class="math inline">\(\bar{X}_n\)</span> to be known are met:</p>
 <p><span class="math display" id="eq:8-CIcrit2">\[\begin{equation}
 \begin{split}
 P(-z^{*} \leq \hat{Z} \leq z^{*}) &amp;= P(\hat{Z} \leq z^{*}) - P(\hat{Z} \leq -z^{*}) \\
@@ -199,9 +199,9 @@ P(-z^{*} \leq \hat{Z} \leq z^{*}) &amp;= 2 \Phi(z^*) - 1 = 1 - \alpha \\
 <p>Note: the <code><a href="https://rdrr.io/r/stats/Normal.html">qnorm()</a></code> function was introduced in a bit more detail in Section <a href="continuous-random-variables.html#usingR">4.6</a>, so feel free to go back to review.</p>
 <p><em>Thought question</em>: Can you show that the critical value for 96% confidence is about 2.054? Can you show that the critical value for 98% confidence is about 2.326?</p>
 </div>
-<div id="constructing-confidence-interval-for-the-mean" class="section level4" number="8.2.3.2">
+<div id="confidence-interval-for-the-mean-1" class="section level4" number="8.2.3.2">
 <h4>
-<span class="header-section-number">8.2.3.2</span> Constructing Confidence Interval for the Mean<a class="anchor" aria-label="anchor" href="#constructing-confidence-interval-for-the-mean"><i class="fas fa-link"></i></a>
+<span class="header-section-number">8.2.3.2</span> Confidence Interval for the Mean<a class="anchor" aria-label="anchor" href="#confidence-interval-for-the-mean-1"><i class="fas fa-link"></i></a>
 </h4>
 <p>We are now ready to put the pieces together to work on the confidence interval for the mean:</p>
 <p><span class="math display" id="eq:8-CImeanwork">\[\begin{equation}
@@ -209,7 +209,7 @@ P(-z^{*} \leq \hat{Z} \leq z^{*}) &amp;= 2 \Phi(z^*) - 1 = 1 - \alpha \\
 P(-z^{*} \leq \hat{Z} \leq z^{*}) &amp;= P(-z^{*} \leq \frac{\bar{X}_n - \mu}{SE(\bar{X}_n)} \leq z^{*}) \\
                                   &amp;= P\left(-z^{*}SE(\bar{X}_n) \leq \bar{X}_n - \mu \leq z^{*}SE(\bar{X}_n)\right) \\
                                   &amp;= P\left(\bar{X}_n - z^{*}SE(\bar{X}_n) \leq \mu \leq \bar{X}_n + z^{*}SE(\bar{X}_n)\right) \\
-                                  &amp;= P\left(\bar{X}_n - z^{*} \frac{\sigma}{\sqrt{n}} \leq \mu \leq \bar{X}_n + z^{*}) \frac{\sigma}{\sqrt{n}}\right).
+                                  &amp;= P\left(\bar{X}_n - z^{*} \frac{\sigma}{\sqrt{n}} \leq \mu \leq \bar{X}_n + z^{*} \frac{\sigma}{\sqrt{n}}\right).
 \end{split}
 \tag{8.8}
 \end{equation}\]</span></p>
@@ -218,11 +218,57 @@ P(-z^{*} \leq \hat{Z} \leq z^{*}) &amp;= P(-z^{*} \leq \frac{\bar{X}_n - \mu}{SE
 \left( \bar{x}_n - z^{*} \frac{\sigma}{\sqrt{n}}, \bar{x}_n + z^{*} \frac{\sigma}{\sqrt{n}} \right).
 \tag{8.9}
 \end{equation}\]</span></p>
-<p>Again, the formula in equation <a href="confidence-intervals.html#eq:8-CImean">(8.9)</a> is only valid if either of the two scenarios in Section <a href="est.html#sampdistmean">7.4.4.1</a> is met, i.e. either the data are originally normal, or if the sample size is large enough.</p>
+<p>Again, the formula in equation <a href="confidence-intervals.html#eq:8-CImean">(8.9)</a> is only valid if either of the two conditions in Section <a href="est.html#sampdistmean">7.4.4.1</a> is met, i.e. either the data are originally normal, or if the sample size is large enough.</p>
+<p>There are several rules of thumb that exist to assess if the “sample size is large enough” (usually at least 25 or 30 is suggested). However, as we mentioned in Section @(considerCLT), there is no fixed answer to this question. It depends on the distribution of the data. In general, the more skewed data is, <span class="math inline">\(n\)</span> needs to be larger for the approximation to work.</p>
 </div>
-<div id="worked-example-1" class="section level4" number="8.2.3.3">
+<div id="CP" class="section level4" number="8.2.3.3">
 <h4>
-<span class="header-section-number">8.2.3.3</span> Worked Example<a class="anchor" aria-label="anchor" href="#worked-example-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">8.2.3.3</span> Coverage Probability<a class="anchor" aria-label="anchor" href="#CP"><i class="fas fa-link"></i></a>
+</h4>
+<p>Figure <a href="confidence-intervals.html#fig:8-CI">8.1</a> illustrates the concept of <strong>coverage probability</strong>. 20 random samples were drawn, and corresponding 50% confidence intervals were constructed, and we find that 10 out of 20 of these intervals contained the true value of the parameter. The coverage probability is 50%, since 10 out of 20 intervals contained the true value value of the parameter. This matches the confidence level of 50%. The coverage probability should match the confidence level, if not, the distribution that we used for the sampling distribution of the estimator is probably incorrect.</p>
+<p>So in general, for confidence intervals constructed at <span class="math inline">\((1-\alpha) \times 100\%\)</span> confidence, the coverage probability of the confidence intervals should be <span class="math inline">\((1-\alpha) \times 100\%\)</span>.</p>
+<p>We run a Monte Carlo simulation to show that the coverage probability of confidence intervals for the mean using equation <a href="confidence-intervals.html#eq:8-CImean">(8.9)</a>. The code below does the following:</p>
+<ul>
+<li>Simulate <span class="math inline">\(X_1, \cdots, X_{10}\)</span> i.i.d. from standard normal.</li>
+<li>Calculate 95% confidence interval for the mean using <a href="confidence-intervals.html#eq:8-CImean">(8.9)</a>.</li>
+<li>Assess if the calculated confidence interval contains 0, since the true mean is 0 (we simulated data from standard normal)</li>
+<li>Repeat these steps for a total of 10 thousand replicates.</li>
+<li>Count the number of confidence intervals that contain 0, and divide by the number of replicates. This value estimates the coverage probability.</li>
+<li>If we did things correctly (correct use of formula, correct distribution for estimator), this estimated coverage probability should be close to the confidence level of 95%.</li>
+</ul>
+<div class="sourceCode" id="cb142"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">n</span><span class="op">&lt;-</span><span class="fl">10</span> <span class="co">## sample size of each random sample</span></span>
+<span><span class="va">alpha</span><span class="op">&lt;-</span><span class="fl">0.05</span></span>
+<span><span class="va">reps</span><span class="op">&lt;-</span><span class="fl">10000</span> </span>
+<span></span>
+<span><span class="va">CIs</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">reps</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="co">##store lower and upper bounds of CI</span></span>
+<span><span class="va">contain</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span><span class="op">(</span><span class="fl">0</span>, <span class="va">reps</span><span class="op">)</span> <span class="co">##store assessment if the true mean is contained within bounds of CI</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">reps</span><span class="op">)</span></span>
+<span>  </span>
+<span><span class="op">{</span></span>
+<span>  </span>
+<span>  <span class="va">X</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span> <span class="co">##draw n data points from standard normal</span></span>
+<span>  <span class="co">##calculate elements needed for CI of mean</span></span>
+<span>  <span class="va">xbar</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">X</span><span class="op">)</span> <span class="co">##sample mean</span></span>
+<span>  <span class="va">SE</span><span class="op">&lt;-</span><span class="fl">1</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span> <span class="co">##SE of sample mean</span></span>
+<span>  <span class="va">crit</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">qnorm</a></span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">alpha</span><span class="op">/</span><span class="fl">2</span><span class="op">)</span> <span class="co">##critical value</span></span>
+<span>  <span class="va">ME</span><span class="op">&lt;-</span><span class="va">crit</span><span class="op">*</span><span class="va">SE</span> <span class="co">##margin of error</span></span>
+<span>  <span class="va">CIs</span><span class="op">[</span><span class="va">i</span>,<span class="fl">1</span><span class="op">]</span><span class="op">&lt;-</span><span class="va">xbar</span><span class="op">-</span><span class="va">ME</span> <span class="co">##lower bound of CI</span></span>
+<span>  <span class="va">CIs</span><span class="op">[</span><span class="va">i</span>,<span class="fl">2</span><span class="op">]</span><span class="op">&lt;-</span><span class="va">xbar</span><span class="op">+</span><span class="va">ME</span> <span class="co">##upper bound of CI</span></span>
+<span>  <span class="va">contain</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">&lt;-</span><span class="va">CIs</span><span class="op">[</span><span class="va">i</span>,<span class="fl">1</span><span class="op">]</span><span class="op">&lt;</span><span class="fl">0</span> <span class="op">&amp;</span> <span class="va">CIs</span><span class="op">[</span><span class="va">i</span>,<span class="fl">2</span><span class="op">]</span><span class="op">&gt;</span><span class="fl">0</span> <span class="co">##assess if CI contains 0, the true mean</span></span>
+<span>  </span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co">##find proportion of CIs from random samples that contain 0, should be close to 1 - alpha</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">contain</span><span class="op">)</span><span class="op">/</span><span class="va">reps</span> </span></code></pre></div>
+<pre><code>## [1] 0.9493</code></pre>
+<p>The estimated coverage probability based on 10 thousand replicates is 94.93%, very close to the confidence level of 95%. This informs us that the distribution assumed for the sample mean was correct.</p>
+</div>
+<div id="worked-example-1" class="section level4" number="8.2.3.4">
+<h4>
+<span class="header-section-number">8.2.3.4</span> Worked Example<a class="anchor" aria-label="anchor" href="#worked-example-1"><i class="fas fa-link"></i></a>
 </h4>
 <p>On the basis of extensive tests, the yield point of a particular type of mild steel reinforcing bar is known to be normally distributed with <span class="math inline">\(\sigma=100\)</span> pounds. The composition of the bar has been slightly modified, but the modification is not believed to have affected either the normality or the value of <span class="math inline">\(\sigma\)</span>. If a random sample of 25 modified bars resulted in a sample average yield point of 8439 pounds, compute a 90% CI for the true average yield point of the modified bars.</p>
 <p>From the question, we summarize the information as:</p>
@@ -238,7 +284,7 @@ P(-z^{*} \leq \hat{Z} \leq z^{*}) &amp;= P(-z^{*} \leq \frac{\bar{X}_n - \mu}{SE
 </ul>
 <p>Since we are assuming the distribution of the yield points to be normally distribution, the sample means will be normally distributed regardless of the sample size, so we can proceed computing the confidence interval for the true average yield point using equation <a href="confidence-intervals.html#eq:8-CImean">(8.9)</a>:</p>
 <p><span class="math display">\[
-\left( 8439 - 1.644854 \frac{100}{\sqrt{25}} , 8439 - 1.644854 \frac{100}{\sqrt{25}} \right).
+\left( 8439 - 1.644854 \frac{100}{\sqrt{25}} , 8439 + 1.644854 \frac{100}{\sqrt{25}} \right).
 \]</span>
 Working everything out, we get (8406.103, 8471.891).</p>
 <p>Interpreting the CI: There is 90% probability that the random interval (8406.103, 8471.891) will include the true average yield point of modified bars.</p>
@@ -253,28 +299,234 @@ Working everything out, we get (8406.103, 8471.891).</p>
 </li>
 </ul>
 </div>
-<div id="factors-affecting-the-precision-of-confidence-interval" class="section level4" number="8.2.3.4">
-<h4>
-<span class="header-section-number">8.2.3.4</span> Factors Affecting the Precision of Confidence Interval<a class="anchor" aria-label="anchor" href="#factors-affecting-the-precision-of-confidence-interval"><i class="fas fa-link"></i></a>
-</h4>
-</div>
 </div>
 <div id="confidence-interval-for-the-mean-using-t-distribution" class="section level3" number="8.2.4">
 <h3>
 <span class="header-section-number">8.2.4</span> Confidence Interval for the Mean Using t Distribution<a class="anchor" aria-label="anchor" href="#confidence-interval-for-the-mean-using-t-distribution"><i class="fas fa-link"></i></a>
 </h3>
+<p>You may have noticed that when we calculate a confidence interval for the mean using equation <a href="confidence-intervals.html#eq:8-CImean">(8.9)</a>, it involves knowing the value of <span class="math inline">\(\sigma^2\)</span>, the variance of the variable in the population, which is a parameter. However, we have mentioned that the whole purpose of estimation and confidence intervals is to estimate the value of unknown parameters and quantify the uncertainty associated with the estimate. The numerical value of parameters are very rarely known! So how could we actually use equation <a href="confidence-intervals.html#eq:8-CImean">(8.9)</a> in real life?</p>
+<p>The solution to this is fairly intuitive, we use the sample variance <span class="math inline">\(s^2 = \frac{1}{n-1} \sum_{i=1}^n (x_i - \bar{x})^2\)</span> to estimate <span class="math inline">\(\sigma^2\)</span>. What is less intuitive is that the distribution of the standardized version of the sample mean changes.</p>
+<p>We had earlier mentioned that if certain conditions are met, then <span class="math inline">\(\hat{Z} = \frac{\bar{X}_n - \mu}{\frac{\sigma}{\sqrt{n}}}\)</span> is either standard normal or approximately standard normal. If we estimate <span class="math inline">\(\sigma^2\)</span> with <span class="math inline">\(s^2\)</span> and replace <span class="math inline">\(\sigma\)</span> with <span class="math inline">\(s\)</span> in <span class="math inline">\(\hat{Z}\)</span>, we get a new random variable</p>
+<p><span class="math display" id="eq:8-tstat">\[\begin{equation}
+T =  \frac{\bar{X}_n - \mu}{\frac{s}{\sqrt{n}}} = \frac{\bar{X}_n - \mu}{SE(\bar{X}_n)},
+\tag{8.10}
+\end{equation}\]</span></p>
+<p>where <span class="math inline">\(SE(\bar{X}_n)\)</span> is now <span class="math inline">\(\frac{s}{\sqrt{n}}\)</span>. It turns out that <span class="math inline">\(T\)</span> follows another well-known distribution, called the <strong><span class="math inline">\(t\)</span> distribution with <span class="math inline">\(n-1\)</span> degrees of freedom</strong>. The PDF of a <span class="math inline">\(t\)</span> distribution is pretty long and is not needed for this course (you can look it up on your own), but we take a look at the plot of its PDF and compare with the plot of the PDF of a standard normal, in Figure <a href="confidence-intervals.html#fig:8-t">8.3</a> below.</p>
+<div class="sourceCode" id="cb144"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">##plot PDF from -5 to 5</span></span>
+<span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">5</span>, <span class="fl">5</span>, length.out <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">##plot the standard normal </span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/curve.html">curve</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">dnorm</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>, from <span class="op">=</span> <span class="op">-</span><span class="fl">5</span>, to <span class="op">=</span> <span class="fl">5</span>, lwd <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>      ylab <span class="op">=</span> <span class="st">"Density"</span>, xlab <span class="op">=</span> <span class="st">"x"</span>, </span>
+<span>      main <span class="op">=</span> <span class="st">"Pdf of Standard Normal and t-Distribution"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">##overlay the t-distribution with 1 and 10 degree of freedom</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/curve.html">curve</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/TDist.html">dt</a></span><span class="op">(</span><span class="va">x</span>, df <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>, from <span class="op">=</span> <span class="op">-</span><span class="fl">5</span>, to <span class="op">=</span> <span class="fl">5</span>, col <span class="op">=</span> <span class="st">"red"</span>, lwd <span class="op">=</span> <span class="fl">2</span>, add <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/curve.html">curve</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/TDist.html">dt</a></span><span class="op">(</span><span class="va">x</span>, df <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>, from <span class="op">=</span> <span class="op">-</span><span class="fl">5</span>, to <span class="op">=</span> <span class="fl">5</span>, col <span class="op">=</span> <span class="st">"blue"</span>, lwd <span class="op">=</span> <span class="fl">2</span>, add <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">"topright"</span>, legend <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Standard Normal"</span>, <span class="st">"t-Distribution (df=1)"</span>, <span class="st">"t-Distribution (df=10)"</span><span class="op">)</span>,</span>
+<span>       col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"black"</span>, <span class="st">"red"</span>, <span class="st">"blue"</span><span class="op">)</span>, lty <span class="op">=</span> <span class="fl">1</span>, lwd <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:8-t"></span>
+<img src="bookdown-demo_files/figure-html/8-t-1.png" alt="Plot of PDF for Z and t Distributions" width="672"><p class="caption">
+Figure 8.3: Plot of PDF for Z and t Distributions
+</p>
+</div>
+<p>From Figure <a href="confidence-intervals.html#fig:8-t">8.3</a>, we note a few things about the <span class="math inline">\(t\)</span> distribution:</p>
+<ul>
+<li>It is centered at 0, just like a standard normal.</li>
+<li>It is also symmetric and bell-shaped, just like a standard normal.</li>
+<li>It has heavier tails than the standard normal. In other words, extreme values (large or small) have slightly higher probabilities of occurring for a <span class="math inline">\(t\)</span> distribution than for a standard normal.</li>
+<li>As the degree of freedom increases, the <span class="math inline">\(t\)</span> distribution gets closer to a standard normal. Notice how the blue curve is closer to the standard normal curve in black, than the red curve is with the black curve. In fact, one can show mathematically that the PDF of a <span class="math inline">\(t\)</span> distribution converges to the PDF of a standard normal as the degree of freedom increases to infinity.</li>
+</ul>
+<p>How does the fact that we are working with a <span class="math inline">\(t\)</span> distribution instead of a standard normal affect how we calculate a confidence interval for the mean? How does equation <a href="confidence-intervals.html#eq:8-CImean">(8.9)</a> change? We replace <span class="math inline">\(\sigma^2\)</span> with <span class="math inline">\(s^2\)</span> and <span class="math inline">\(z^*\)</span> with <span class="math inline">\(t^*\)</span>. The critical value is now denoted by <span class="math inline">\(t^*\)</span> to emphasize that it is based on the <span class="math inline">\(t\)</span> distribution.</p>
+<p>Therefore, the <span class="math inline">\((1-\alpha) \times 100\%\)</span> confidence interval for the mean , when <span class="math inline">\(\sigma^2\)</span> is unknown, is</p>
+<p><span class="math display" id="eq:8-CImeant">\[\begin{equation}
+\left( \bar{x}_n - t^{*} \frac{s}{\sqrt{n}}, \bar{x}_n + t^{*} \frac{s}{\sqrt{n}} \right).
+\tag{8.11}
+\end{equation}\]</span></p>
+<p>To find the critical value of a <span class="math inline">\(t\)</span> distribution with 10 degrees of freedom and with 95% confidence:</p>
+<div class="sourceCode" id="cb145"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">alpha</span><span class="op">&lt;-</span><span class="fl">0.05</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/TDist.html">qt</a></span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">alpha</span><span class="op">/</span><span class="fl">2</span>, <span class="fl">10</span><span class="op">)</span> <span class="co">##supply percentile first, then value of df</span></span></code></pre></div>
+<pre><code>## [1] 2.228139</code></pre>
+<p>Again, the formula in equation <a href="confidence-intervals.html#eq:8-CImeant">(8.11)</a> is only valid if either of the two conditions in Section <a href="est.html#sampdistmean">7.4.4.1</a> is met, i.e. either the data are originally normal, or if the sample size is large enough.</p>
+<div id="worked-example-2" class="section level4" number="8.2.4.1">
+<h4>
+<span class="header-section-number">8.2.4.1</span> Worked Example<a class="anchor" aria-label="anchor" href="#worked-example-2"><i class="fas fa-link"></i></a>
+</h4>
+<p>A sample of 66 obese adults was put on a low-carbohydrate diet for a year. The average weight loss was 11 lb and the
+standard deviation was 19 lb. Calculate a 99% confidence interval for the true average weight loss. Does the confidence interval provide support for the claim that the mean weight loss is positive?</p>
+<p>From the question, we summarize the information as:</p>
+<ul>
+<li>
+<span class="math inline">\(n = 66\)</span>,</li>
+<li><span class="math inline">\(df = n-1 = 65\)</span></li>
+<li>
+<span class="math inline">\(\bar{x} = 11\)</span>,</li>
+<li>
+<span class="math inline">\(s = 19\)</span>,</li>
+<li>
+<span class="math inline">\(\alpha = 0.01\)</span>, so <span class="math inline">\(t^*\)</span> is found using <code>qt(1-0.01/2, 65)</code> which is 2.653604.</li>
+</ul>
+<p>We have no information about the distribution of the data. However, the sample size is 66, which is usually large enough to use the CLT, so we can use equation <a href="confidence-intervals.html#eq:8-CImeant">(8.11)</a>:</p>
+<p><span class="math display">\[
+\left( 11 - 2.653604 \frac{19}{\sqrt{66}} , 11 + 2.653604 \frac{19}{\sqrt{66}} \right)
+\]</span>
+which gives (4.793914, 17.20609). Since the entire confidence interval lies above 0, our data support the claim that the mean weight loss is positive.</p>
+</div>
+<div id="confidence-interval-for-mean-using-t-vs-using-z" class="section level4" number="8.2.4.2">
+<h4>
+<span class="header-section-number">8.2.4.2</span> Confidence Interval for Mean Using <span class="math inline">\(t\)</span> VS Using <span class="math inline">\(z\)</span><a class="anchor" aria-label="anchor" href="#confidence-interval-for-mean-using-t-vs-using-z"><i class="fas fa-link"></i></a>
+</h4>
+<p>A couple of interesting things to note with critical values associated with the <span class="math inline">\(t\)</span> distribution:</p>
+<ul>
+<li>For the same level of confidence, <span class="math inline">\(t^*\)</span> will never be smaller than <span class="math inline">\(z^*\)</span>.</li>
+</ul>
+<p><em>Thought question</em>: Can you give an intuitive explanation as to why? Using Figure <a href="confidence-intervals.html#fig:8-t">8.3</a> may be helpful.</p>
+<ul>
+<li>The value of <span class="math inline">\(t^*\)</span> gets closer to the value of <span class="math inline">\(z^*\)</span> as the degree of freedom gets larger.</li>
+</ul>
+<p>Recall that the margin of error is the critical value multiplied by the standard error of the estimator. So margin of errors tend to be larger when <span class="math inline">\(\sigma^2\)</span> is unknown. It should make intuitive sense that we have a higher degree of uncertainty since we have an additional parameter to estimate.</p>
+<p>Since the margin of error tends to be larger when <span class="math inline">\(\sigma^2\)</span> is unknown, it means the <strong>width</strong> of the confidence interval for the mean tends to be wider when <span class="math inline">\(\sigma^2\)</span> is unknown. The width of a confidence interval is the difference between its upper and lower bound, or twice the margin of error.</p>
+<p><em>Thought question</em>: Imagine running the Monte Carlo simulation in Section <a href="confidence-intervals.html#CP">8.2.3.3</a>, but now use the sample variance instead of the population variance. Find the coverage probabilities of the confidence interval if we use the correct formula in equation <a href="confidence-intervals.html#eq:8-CImeant">(8.11)</a>, and if we use a <span class="math inline">\(z^*\)</span> as the critical value with the sample variance?</p>
+</div>
+<div id="degrees-of-freedom" class="section level4" number="8.2.4.3">
+<h4>
+<span class="header-section-number">8.2.4.3</span> Degrees of Freedom<a class="anchor" aria-label="anchor" href="#degrees-of-freedom"><i class="fas fa-link"></i></a>
+</h4>
+<p>An intuitive explanation of degrees of freedom is the number of independent pieces of information that can take on any numerical value, when estimating a parameter</p>
+<p>Generally speaking, we lose 1 degree of freedom for every equation that must be satisfied. In the context of estimating the population mean using the sample mean, we must always satisfy the equation <span class="math inline">\(\bar{x} = \frac{\sum_{i=1}^n x_i}{n}\)</span>, so we lose 1 from an original set of <span class="math inline">\(n\)</span> observations, so the degree of freedom is <span class="math inline">\(n-1\)</span> when calculating the CI for the mean.</p>
+</div>
+</div>
+<div id="factors-affecting-precision-of-confidence-intervals" class="section level3" number="8.2.5">
+<h3>
+<span class="header-section-number">8.2.5</span> Factors Affecting Precision of Confidence Intervals<a class="anchor" aria-label="anchor" href="#factors-affecting-precision-of-confidence-intervals"><i class="fas fa-link"></i></a>
+</h3>
+<p>The width of a confidence interval is used as a measure of <strong>precision</strong>. A wider width indicates less precision and a higher degree of uncertainty with our estimate. Narrower widths are preferred, as we are able to narrow the range of plausible values for the unknown parameter by ruling out more values. The factors (that are within the researcher’s control) affecting the width of a confidence interval are the items used in calculating the margin of error:</p>
+<ul>
+<li>The level of confidence, <span class="math inline">\(1 - \alpha\)</span>: The width increases as the level of confidence increases.</li>
+</ul>
+<p><em>Though question</em>: Can you use Figure <a href="confidence-intervals.html#fig:8-crit">8.2</a> to help you explain the width increases as level of confidence increases?</p>
+<ul>
+<li>The sample size, <span class="math inline">\(n\)</span>: As <span class="math inline">\(n\)</span> increases, the width decreases. This implies that we have more precision, and a lower degree of uncertainty, with larger sample sizes.</li>
+</ul>
+<p>Other factors such as whether <span class="math inline">\(\sigma^2\)</span> is unknown or not, and the value of the variance, are usually not controllable by the researcher.</p>
 </div>
 </div>
 <div id="confidence-interval-for-the-proportion" class="section level2" number="8.3">
 <h2>
 <span class="header-section-number">8.3</span> Confidence Interval for the Proportion<a class="anchor" aria-label="anchor" href="#confidence-interval-for-the-proportion"><i class="fas fa-link"></i></a>
 </h2>
+<p>Next, we will go over the confidence interval for the proportion. This is another common confidence interval. The sample proportion is an estimator for the population proportion.</p>
+<p>Proportions are used to summarize categorical variables, whereas means are used to summarize quantitative variables. One way to decide if the variable is categorical or quantitative is to ask whether arithmetic operations make sense when performed on the variable. If such operations make sense, the variable is quantitative, if not, the variable is categorical.</p>
+<ul>
+<li><p>We measure the systolic blood pressure of a sample of American adults. The variable is quantitative, since the answer is a numeric value where arithmetic operations can be applied. We then calculate the average systolic blood pressure of American adults. So we can work on a confidence interval for the mean, using equation <a href="confidence-intervals.html#eq:8-CImeant">(8.11)</a>.</p></li>
+<li><p>We ask a sample of voters whether they support a particular candidate. The variable is categorical, since the answer is yes or no, and we cannot apply arithmetic operations to the answer. We then calculate the proportion of voters who support the candidate. So we need a confidence interval for the proportion.</p></li>
+</ul>
+<div id="sampling-distribution-of-sample-proportions" class="section level3" number="8.3.1">
+<h3>
+<span class="header-section-number">8.3.1</span> Sampling Distribution of Sample Proportions<a class="anchor" aria-label="anchor" href="#sampling-distribution-of-sample-proportions"><i class="fas fa-link"></i></a>
+</h3>
+<p>We can use the Central Limit Theorem (CLT) to approximate the sampling distribution of sample proportions. A sketch of how to derive this sampling distribution is provided.</p>
+<p>Let <span class="math inline">\(X_1, \cdots, X_n\)</span> be i.i.d. Bernoulli with success probability p. Using equations <a href="discrete-random-variables.html#eq:3-bern-EX">(3.9)</a> and <a href="discrete-random-variables.html#eq:3-bern-var">(3.10)</a>, we know that <span class="math inline">\(E(X_i) = p\)</span> and <span class="math inline">\(Var(X_i) - p(1-p)\)</span>.</p>
+<p>Let <span class="math inline">\(S = X_1 + \cdots + X_n = \sum_{i=1}^n X_i\)</span> denote the number of successes in a sample of size <span class="math inline">\(n\)</span>. Using properties of expectations and variances, we know that <span class="math inline">\(E(S) = np\)</span> and <span class="math inline">\(Var(S) = np(1-p)\)</span>.</p>
+<p>The sample proportion, <span class="math inline">\(\hat{p}\)</span>, is just the number of successes divided by the sample size, so <span class="math inline">\(\hat{p} = \frac{S}{n} = \frac{\sum_{i=1}^n X_i}{n} = \bar{X}_n\)</span>. Therefore, using property of expectations and variances, we know that <span class="math inline">\(E(\hat{p}) = p\)</span> and <span class="math inline">\(Var(\hat{p}) = \frac{p(1-p)}{n}\)</span>.</p>
+<p>The CLT informs us if <span class="math inline">\(n\)</span> is large enough, then <span class="math inline">\(\hat{p}\)</span> is approximately <span class="math inline">\(N\left(p, \frac{p(1-p)}{n}\right)\)</span>. Also, the distribution of <span class="math inline">\(\hat{p}\)</span> after standardization is approximately standard normal, i.e. the standardized score <span class="math inline">\(\hat{Z} = \frac{\hat{p}-p}{\sqrt{\frac{p(1-p)}{n}}}\)</span> is approximately standard normal.</p>
+</div>
+<div id="constructing-confidence-interval-for-the-proportion" class="section level3" number="8.3.2">
+<h3>
+<span class="header-section-number">8.3.2</span> Constructing Confidence Interval for the Proportion<a class="anchor" aria-label="anchor" href="#constructing-confidence-interval-for-the-proportion"><i class="fas fa-link"></i></a>
+</h3>
+<p>A lot of the concepts and math from the confidence interval for the mean carry over to the confidence interval for the proportion. We will skip the math for the confidence interval for the proportion (although you should be able to derive this result by following the steps and adjusting).</p>
+<p>The <span class="math inline">\((1-\alpha) \times 100\%\)</span> confidence interval for the proportion is</p>
+<p><span class="math display" id="eq:8-CIprop">\[\begin{equation}
+\left( \hat{p} - z^{*} \sqrt{\frac{\hat{p}(1-\hat{p})}{n}}, \hat{p} + z^{*} \sqrt{\frac{\hat{p}(1-\hat{p})}{n}} \right).
+\tag{8.12}
+\end{equation}\]</span></p>
+<p>From equation <a href="confidence-intervals.html#eq:8-CIprop">(8.12)</a>, we can see that</p>
+<ul>
+<li>The point estimate is <span class="math inline">\(\hat{p}\)</span>.</li>
+<li>The standard error of <span class="math inline">\(\hat{p}\)</span> is <span class="math inline">\(SE(\hat{p}) = \sqrt{\frac{\hat{p}(1-\hat{p})}{n}}\)</span>.</li>
+<li>The margin of error is <span class="math inline">\(z^{*} \sqrt{\frac{\hat{p}(1-\hat{p})}{n}}\)</span>.</li>
+</ul>
+<p>The framework of confidence intervals usually takes on the form given in equation <a href="confidence-intervals.html#eq:8-CIbasic2">(8.2)</a>: we add and subtract the margin of error to and from the point estimate. The margin of error is the critical value multiplied by the standard error of the estimator. We see the confidence intervals for the mean and proportion take on this framework, and so do most confidence intervals of other estimators.</p>
+<p>Note: equation <a href="confidence-intervals.html#eq:8-CIprop">(8.12)</a> is based on proportions, and not percentages. After calculating the confidence interval for the proportion, reporters often convert these values to percentages by multiplying them by a hundred.</p>
+<p>From equation <a href="confidence-intervals.html#eq:8-CIprop">(8.12)</a>, we can also see that we have the factors that affect the width of the confidence interval for the proportion is the same as the confidence interval for the mean.</p>
+<div id="conditions-for-confidence-interval-for-the-proportion" class="section level4" number="8.3.2.1">
+<h4>
+<span class="header-section-number">8.3.2.1</span> Conditions for Confidence Interval for the Proportion<a class="anchor" aria-label="anchor" href="#conditions-for-confidence-interval-for-the-proportion"><i class="fas fa-link"></i></a>
+</h4>
+<p>We wrote that if <span class="math inline">\(n\)</span> is large enough, the CLT informs us that the sample proportion <span class="math inline">\(\hat{p}\)</span> can be approximated by a normal distribution. How large is large enough? Again, various rules of thumb are recommended, and they usually follow along the lines of needing at least a certain number of successes, <span class="math inline">\(n\hat{p}\)</span>, and failures, <span class="math inline">\(n(1-\hat{p})\)</span> in our sample. Values of 5 or 10 are usually recommended. Just bear in mind that the approximation works better as the number of successes and failures, <span class="math inline">\(n\hat{p}\)</span> and <span class="math inline">\(n(1-\hat{p})\)</span>, increases.</p>
+</div>
+<div id="worked-example-3" class="section level4" number="8.3.2.2">
+<h4>
+<span class="header-section-number">8.3.2.2</span> Worked Example<a class="anchor" aria-label="anchor" href="#worked-example-3"><i class="fas fa-link"></i></a>
+</h4>
+<p>The Texas College Tobacco Project survey administered in 2016 found that in a sample of 5767 undergraduates ages 18–25, 525 said they had used electronic cigarettes at least once during the previous 30 days. Find a 95% confidence interval for the proportion of all students in the population sampled who used e-cigarettes during the previous 30 days. Also report the margin of error. Do the data support the claim that more than 5% of students in the population used e-cigarettes during the previous 30 days?</p>
+<p>From the question, we summarize the information as:</p>
+<ul>
+<li>
+<span class="math inline">\(n = 5767\)</span>,</li>
+<li>
+<span class="math inline">\(\hat{p} = \frac{525}{5767}\)</span>,</li>
+<li>
+<span class="math inline">\(\alpha = 0.05\)</span>, so <span class="math inline">\(z^*\)</span> is found using <code>qnorm(1-0.05/2)</code> which is 1.959964.</li>
+</ul>
+<p>The number of “successes” is 525 and the number of “failures” is <span class="math inline">\(5767-525 = 5242\)</span>. These are both a lot larger than 10, so we can work with sampling distribution of <span class="math inline">\(\hat{p}\)</span> and calculate a confidence interval using equation <a href="confidence-intervals.html#eq:8-CIprop">(8.12)</a>:</p>
+<p><span class="math display">\[
+\left( \frac{525}{5767} - 1.959964 \sqrt{\frac{\frac{525}{5767}(1-\frac{525}{5767})}{5767}} , \frac{525}{5767} + 1.959964 \sqrt{\frac{\frac{525}{5767}(1-\frac{525}{5767})}{5767}} \right)
+\]</span></p>
+<p>which gives (0.08361097, 0.09845943), with margin of error 0.007424228. The data support the claim that more than 5% of students in the population used e-cigarettes in the previous 30 days, since the entire interval lies above 0.05.</p>
+<p>There is a 95% probability that the random interval (0.08361097, 0.09845943) contains the true proportion of students in the population used e-cigarettes in the previous 30 days.</p>
+</div>
+</div>
+<div id="minimum-sample-size" class="section level3" number="8.3.3">
+<h3>
+<span class="header-section-number">8.3.3</span> Minimum Sample Size<a class="anchor" aria-label="anchor" href="#minimum-sample-size"><i class="fas fa-link"></i></a>
+</h3>
+<p>Fairly often, researchers want to know what is the sample size needed in order to achieve a margin of error that is no more than some specific value, as they want to guarantee a certain level of precision in their report. Mathematically, we want to set <span class="math inline">\(z^{*} \sqrt{\frac{\hat{p}(1-\hat{p})}{n}} \leq M\)</span> where <span class="math inline">\(M\)</span> denotes some value of the margin of error that needs to be guaranteed.</p>
+<p>While we will not know the value of <span class="math inline">\(\hat{p}\)</span> before collecting data, we mentioned in Section <a href="discrete-random-variables.html#bernprop">3.5.1.1</a> that the value of <span class="math inline">\(p(1-p)\)</span> is maximized at <span class="math inline">\(p=\frac{1}{2}\)</span>. This implies that the <span class="math inline">\(SE(\hat{p})\)</span> is maximized at <span class="math inline">\(\hat{p} = \frac{1}{2}\)</span>. As long as the <span class="math inline">\(M\)</span> is satisfied when <span class="math inline">\(\hat{p} = \frac{1}{2}\)</span>, <span class="math inline">\(M\)</span> will be satisfied for any value of <span class="math inline">\(\hat{p}\)</span>. So subbing in <span class="math inline">\(\hat{p} = \frac{1}{2}\)</span> into <span class="math inline">\(z^{*} \sqrt{\frac{\hat{p}(1-\hat{p})}{n}} \leq M\)</span>, we have</p>
+<p><span class="math display" id="eq:8-minsamp">\[\begin{equation}
+\begin{split}
+z^{*} \sqrt{\frac{\hat{p}(1-\hat{p})}{n}} &amp; \leq M \\
+\implies z^* \sqrt{\frac{\frac{1}{2}\frac{1}{2}}{n}}  &amp; \leq M \\
+\implies \left(\frac{z^*}{2M}\right)^2 &amp; \leq n.
+\end{split}
+\tag{8.13}
+\end{equation}\]</span></p>
+<p>Note: always be sure to round up to the nearest whole number, after working out the LHS of the inequality <a href="confidence-intervals.html#eq:8-minsamp">(8.13)</a>, to guarantee that your margin of error is no more than <span class="math inline">\(M\)</span>.</p>
+<div id="worked-example-4" class="section level4" number="8.3.3.1">
+<h4>
+<span class="header-section-number">8.3.3.1</span> Worked Example<a class="anchor" aria-label="anchor" href="#worked-example-4"><i class="fas fa-link"></i></a>
+</h4>
+<p>A state legislator wishes to survey residents of her district to see what proportion of the electorate is aware of her position on using state funds to pay for abortions. What sample size is necessary if the 95% CI for p is to have a margin of error that is no more than 3 percentage points?</p>
+<p>Using the inequality <a href="confidence-intervals.html#eq:8-minsamp">(8.13)</a>,</p>
+<p><span class="math display">\[
+\begin{split}
+\left(\frac{1.959964}{2 \times 0.03}\right)^2 \leq n \\
+1067.072 \leq n.
+\end{split}
+\]</span>
+So she will need to sample at least 1068 residents to guanrantee a margin of error that is no more than 3 percentage points.</p>
+</div>
+</div>
 </div>
 <div id="the-bootstrap" class="section level2" number="8.4">
 <h2>
 <span class="header-section-number">8.4</span> The Bootstrap<a class="anchor" aria-label="anchor" href="#the-bootstrap"><i class="fas fa-link"></i></a>
 </h2>
+<div id="the-algorithm" class="section level3" number="8.4.1">
+<h3>
+<span class="header-section-number">8.4.1</span> The Algorithm<a class="anchor" aria-label="anchor" href="#the-algorithm"><i class="fas fa-link"></i></a>
+</h3>
+</div>
+<div id="worked-example-5" class="section level3" number="8.4.2">
+<h3>
+<span class="header-section-number">8.4.2</span> Worked Example<a class="anchor" aria-label="anchor" href="#worked-example-5"><i class="fas fa-link"></i></a>
+</h3>
 
+</div>
 </div>
 </div>
   <div class="chapter-nav">
@@ -287,14 +539,26 @@ Working everything out, we get (8406.103, 8471.891).</p>
 <li><a class="nav-link" href="#introduction-4"><span class="header-section-number">8.1</span> Introduction</a></li>
 <li>
 <a class="nav-link" href="#confidence-interval-for-the-mean"><span class="header-section-number">8.2</span> Confidence Interval for the Mean</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#randomness-of-an-estimator"><span class="header-section-number">8.2.1</span> Randomness of an Estimator</a></li>
+<li><a class="nav-link" href="#randomness-of-estimators"><span class="header-section-number">8.2.1</span> Randomness of Estimators</a></li>
 <li><a class="nav-link" href="#randomness-of-confidence-intervals"><span class="header-section-number">8.2.2</span> Randomness of Confidence Intervals</a></li>
-<li><a class="nav-link" href="#sampling-distribution-of-sample-mean"><span class="header-section-number">8.2.3</span> Sampling Distribution of Sample Mean</a></li>
+<li><a class="nav-link" href="#constructing-confidence-interval-for-the-mean"><span class="header-section-number">8.2.3</span> Constructing Confidence Interval for the Mean</a></li>
 <li><a class="nav-link" href="#confidence-interval-for-the-mean-using-t-distribution"><span class="header-section-number">8.2.4</span> Confidence Interval for the Mean Using t Distribution</a></li>
+<li><a class="nav-link" href="#factors-affecting-precision-of-confidence-intervals"><span class="header-section-number">8.2.5</span> Factors Affecting Precision of Confidence Intervals</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#confidence-interval-for-the-proportion"><span class="header-section-number">8.3</span> Confidence Interval for the Proportion</a></li>
-<li><a class="nav-link" href="#the-bootstrap"><span class="header-section-number">8.4</span> The Bootstrap</a></li>
+<li>
+<a class="nav-link" href="#confidence-interval-for-the-proportion"><span class="header-section-number">8.3</span> Confidence Interval for the Proportion</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#sampling-distribution-of-sample-proportions"><span class="header-section-number">8.3.1</span> Sampling Distribution of Sample Proportions</a></li>
+<li><a class="nav-link" href="#constructing-confidence-interval-for-the-proportion"><span class="header-section-number">8.3.2</span> Constructing Confidence Interval for the Proportion</a></li>
+<li><a class="nav-link" href="#minimum-sample-size"><span class="header-section-number">8.3.3</span> Minimum Sample Size</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#the-bootstrap"><span class="header-section-number">8.4</span> The Bootstrap</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#the-algorithm"><span class="header-section-number">8.4.1</span> The Algorithm</a></li>
+<li><a class="nav-link" href="#worked-example-5"><span class="header-section-number">8.4.2</span> Worked Example</a></li>
+</ul>
+</li>
 </ul>
 
       <div class="book-extra">
@@ -311,7 +575,7 @@ Working everything out, we get (8406.103, 8471.891).</p>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2025-07-17.</p>
+    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2025-07-18.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

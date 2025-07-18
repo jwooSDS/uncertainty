@@ -655,9 +655,7 @@ Note that unbiased estimators and consistent estimators are two different concep
 
 The plots in Figure \@ref(fig:7-bias) and Figure \@ref(fig:7-consistent) give rise to the idea that there is a distribution associated with an estimator. There is a term for this, called the **sampling distribution** of an estimator. 
 
-Some estimators have known distributions, for example the sample mean, $\bar{X}$. Using the CLT from Section \@ref(CLT), we know that as long as $X_1, \cdots, X_n$ are i.i.d. from any distribution with finite mean $\mu$ and finite variance $\sigma^2$, and if $n$ is large enough, then $\bar{X}$ is approximately $N(\mu, \frac{\sigma^2}{n})$. Looking at the plots in Figure \@ref(fig:7-bias) and Figure \@ref(fig:7-consistent), we see that the density plots for $\bar{X}$ are bell-shaped, which verifies the CLT.
-
-Some other common estimators also have known distributions, such as the sample proportion as an estimator for the population proportion, the sample variance as an estimator for the population variance, as well as ML estimators for linear regression and logistic regression models. 
+Some estimators have known distributions, for example the sample mean, $\bar{X}$. Some other common estimators also have known distributions, such as the sample proportion as an estimator for the population proportion, the sample variance as an estimator for the population variance, as well as ML estimators for linear regression and logistic regression models. 
 
 If the sampling distribution of an estimator is known and follows well known distributions, we can easily perform probability calculations involving estimators, for example, how likely are we to observe a sample mean that is more than 2 standard errors away from its true mean? 
 
@@ -665,15 +663,23 @@ However, other estimators may not have known distributions, for example, the sam
 
 #### Sampling Distribution of Sample Mean {#sampdistmean}
 
-We will state the sampling distribution of the sample mean, $\bar{X}_n$. There are a couple of scenarios to consider:
+We will state the sampling distribution of the sample mean, $\bar{X}_n$. There are a couple of conditions to consider:
 
-1. $X_1, \cdots, X_n$ are i.i.d. from a normal distribution with finite mean $\mu$ and finite variance $\sigma^2$. Then $\bar{X}_n \sim N(\mu, \frac{\sigma^2}{n})$.
+1. $X_1, \cdots, X_n$ are i.i.d. from a normal distribution with finite mean $\mu$ and finite variance $\sigma^2$. Then $\bar{X}_n \sim N(\mu, \frac{\sigma^2}{n})$. This result is based on the fact that the sum of independent normals result in a normal distribution. 
 
 This means that if the data are originally normally distributed, the sample mean will be normally distributed, regardless of the sample size. 
 
 2. $X_1, \cdots, X_n$ are i.i.d. from any distribution with finite mean $\mu$ and finite variance $\sigma^2$, and if $n$ is large enough, then $\bar{X}_n$ is approximately $N(\mu, \frac{\sigma^2}{n})$. This is based on the CLT in section \@ref(CLT).
 
 This means that even if the data are not originally normally distributed, the sample mean will be approximately normally distributed if the sample size is large enough. 
+
+We apply the sampling distribution of the sample mean to the left plot in Figure \@ref(fig:7-consistent), which visually displays the distribution of the sample mean with $n=10, 100, 1000$. The data were i.i.d. standard normal, so we meet the first scenario and know that the sample means follow a normal distribution: 
+
+- When $n=10$, $\bar{X}_n \sim N(0, \frac{1}{10}) = N(0, 0.1)$.
+- When $n=100$, $\bar{X}_n \sim N(0, \frac{1}{100}) = N(0,0.01)$.
+- When $n=1000$, $\bar{X}_n \sim N(0, \frac{1}{1000}) = N(0,0.001)$.
+
+We see that when the sample size gets larger, the variance of the sample mean decreases, so there is less spread and their resulting density plot is more concentrated around the mean. This matches with what we see in the left plot in Figure \@ref(fig:7-consistent).
 
 ### Mean-Squared Error
 
@@ -699,7 +705,7 @@ What the MSE of an estimator suggests is that we need to consider both the bias 
 
 We have covered the method of moments and method of maximum likelihood when estimating parameters. These methods are also called **parametric methods** as they involve making an assumption that the data follow some well-known distribution with unknown parameters, and we are then using our data, and our assumed distribution, to estimate the numerical value of the unknown parameters.
 
-There exist **nonparametric methods** in estimation. We have actually seen one such method (without calling it nonparametric), which is kernel density estimation (KDE) in Section \@ref(KDE). KDE is used to estimate the PDF of a random variable so that we can visualize its distribution. If you look back at KDE, you will notice we made no assumption abou the distribution of the random variable. This is one of the fundamental differences between parametric and nonparametric estimation: the former assumes a distribution for the data, the latter does not. 
+There exist **nonparametric methods** in estimation. We have actually seen one such method (without calling it nonparametric), which is kernel density estimation (KDE) in Section \@ref(KDE). KDE is used to estimate the PDF of a random variable so that we can visualize its distribution. If you look back at KDE, you will notice we made no assumption about the distribution of the random variable. This is one of the fundamental differences between parametric and nonparametric estimation: the former assumes a distribution for the data, the latter does not. 
 
 ### Why ML Estimators?
 

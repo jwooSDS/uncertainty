@@ -127,7 +127,7 @@
 
 \title{Understanding Uncertainty Course Notes}
 \author{Jeffrey Woo}
-\date{2025-07-17}
+\date{2025-07-18}
 
 \begin{document}
 \maketitle
@@ -1751,7 +1751,7 @@ Fairly often, when we have a Bernoulli random variable, the event that results i
 
 If you go back to the second example in section \ref{eg2}, we were modeling whether a job applicant receives a callback or not. In this example, we could let \(V\) be the random variable that an applicant receives a callback, with \(V=1\) denoting the applicant received a callback, and \(V=0\) when the applicant did not receive a callback. We used logistic regression in the example. It turns out that logistic regression is used when the variable of interest follows a Bernoulli distribution.
 
-\subsubsection{Properties of Bernoulli}\label{properties-of-bernoulli}
+\subsubsection{Properties of Bernoulli}\label{bernprop}
 
 Consider \(X\) is a Bernoulli distribution with parameter \(p\). The expectation of a Bernoulli distribution is
 
@@ -4413,7 +4413,7 @@ One possible calculation will be to assume the company is correct, that wait tim
 
 The CLT is traditionally associated with the distribution of the sample mean \(\bar{X}_n\). It can be applied to the sum as well, due to properties of expectations and variances. Let \(T_n = X_1 + \cdots + X_n = n \bar{X}_n\) denote the sum of \(n\) i.i.d. random variables. The CLT says that, for large \(n\), the distribution of \(T_n\) is approximately \(N(n\mu, n\sigma^2)\).
 
-\subsubsection{Considerations with CLT}\label{considerations-with-clt}
+\subsubsection{Considerations with CLT}\label{considerCLT}
 
 One question that is raised when the CLT is used is how large does the sample size \(n\) have to be for the approximation to be accurate? While suggestions are plentiful (usually along the lines to sample size being at least 25 or 30), there is no fixed answer to this question. It depends on the distribution of \(X\). In general, the more skewed \(X\) is, \(n\) needs to be larger for the approximation to work. On the other hand, if \(X\) is already normal, then the distribution of \(\bar{X}_n\) is exactly \(N(\mu, \frac{\sigma^2}{n})\) for any sample size \(n\). We look at a couple of examples based on different distributions.
 
@@ -5538,9 +5538,7 @@ Note that unbiased estimators and consistent estimators are two different concep
 
 The plots in Figure \ref{fig:7-bias} and Figure \ref{fig:7-consistent} give rise to the idea that there is a distribution associated with an estimator. There is a term for this, called the \textbf{sampling distribution} of an estimator.
 
-Some estimators have known distributions, for example the sample mean, \(\bar{X}\). Using the CLT from Section \ref{CLT}, we know that as long as \(X_1, \cdots, X_n\) are i.i.d. from any distribution with finite mean \(\mu\) and finite variance \(\sigma^2\), and if \(n\) is large enough, then \(\bar{X}\) is approximately \(N(\mu, \frac{\sigma^2}{n})\). Looking at the plots in Figure \ref{fig:7-bias} and Figure \ref{fig:7-consistent}, we see that the density plots for \(\bar{X}\) are bell-shaped, which verifies the CLT.
-
-Some other common estimators also have known distributions, such as the sample proportion as an estimator for the population proportion, the sample variance as an estimator for the population variance, as well as ML estimators for linear regression and logistic regression models.
+Some estimators have known distributions, for example the sample mean, \(\bar{X}\). Some other common estimators also have known distributions, such as the sample proportion as an estimator for the population proportion, the sample variance as an estimator for the population variance, as well as ML estimators for linear regression and logistic regression models.
 
 If the sampling distribution of an estimator is known and follows well known distributions, we can easily perform probability calculations involving estimators, for example, how likely are we to observe a sample mean that is more than 2 standard errors away from its true mean?
 
@@ -5548,13 +5546,13 @@ However, other estimators may not have known distributions, for example, the sam
 
 \subsubsection{Sampling Distribution of Sample Mean}\label{sampdistmean}
 
-We will state the sampling distribution of the sample mean, \(\bar{X}_n\). There are a couple of scenarios to consider:
+We will state the sampling distribution of the sample mean, \(\bar{X}_n\). There are a couple of conditions to consider:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  \(X_1, \cdots, X_n\) are i.i.d. from a normal distribution with finite mean \(\mu\) and finite variance \(\sigma^2\). Then \(\bar{X}_n \sim N(\mu, \frac{\sigma^2}{n})\).
+  \(X_1, \cdots, X_n\) are i.i.d. from a normal distribution with finite mean \(\mu\) and finite variance \(\sigma^2\). Then \(\bar{X}_n \sim N(\mu, \frac{\sigma^2}{n})\). This result is based on the fact that the sum of independent normals result in a normal distribution.
 \end{enumerate}
 
 This means that if the data are originally normally distributed, the sample mean will be normally distributed, regardless of the sample size.
@@ -5568,6 +5566,20 @@ This means that if the data are originally normally distributed, the sample mean
 \end{enumerate}
 
 This means that even if the data are not originally normally distributed, the sample mean will be approximately normally distributed if the sample size is large enough.
+
+We apply the sampling distribution of the sample mean to the left plot in Figure \ref{fig:7-consistent}, which visually displays the distribution of the sample mean with \(n=10, 100, 1000\). The data were i.i.d. standard normal, so we meet the first scenario and know that the sample means follow a normal distribution:
+
+\begin{itemize}
+\tightlist
+\item
+  When \(n=10\), \(\bar{X}_n \sim N(0, \frac{1}{10}) = N(0, 0.1)\).
+\item
+  When \(n=100\), \(\bar{X}_n \sim N(0, \frac{1}{100}) = N(0,0.01)\).
+\item
+  When \(n=1000\), \(\bar{X}_n \sim N(0, \frac{1}{1000}) = N(0,0.001)\).
+\end{itemize}
+
+We see that when the sample size gets larger, the variance of the sample mean decreases, so there is less spread and their resulting density plot is more concentrated around the mean. This matches with what we see in the left plot in Figure \ref{fig:7-consistent}.
 
 \subsection{Mean-Squared Error}\label{mean-squared-error}
 
@@ -5593,7 +5605,7 @@ What the MSE of an estimator suggests is that we need to consider both the bias 
 
 We have covered the method of moments and method of maximum likelihood when estimating parameters. These methods are also called \textbf{parametric methods} as they involve making an assumption that the data follow some well-known distribution with unknown parameters, and we are then using our data, and our assumed distribution, to estimate the numerical value of the unknown parameters.
 
-There exist \textbf{nonparametric methods} in estimation. We have actually seen one such method (without calling it nonparametric), which is kernel density estimation (KDE) in Section \ref{KDE}. KDE is used to estimate the PDF of a random variable so that we can visualize its distribution. If you look back at KDE, you will notice we made no assumption abou the distribution of the random variable. This is one of the fundamental differences between parametric and nonparametric estimation: the former assumes a distribution for the data, the latter does not.
+There exist \textbf{nonparametric methods} in estimation. We have actually seen one such method (without calling it nonparametric), which is kernel density estimation (KDE) in Section \ref{KDE}. KDE is used to estimate the PDF of a random variable so that we can visualize its distribution. If you look back at KDE, you will notice we made no assumption about the distribution of the random variable. This is one of the fundamental differences between parametric and nonparametric estimation: the former assumes a distribution for the data, the latter does not.
 
 \subsection{Why ML Estimators?}\label{why-ml-estimators}
 
@@ -5627,11 +5639,11 @@ In Section \ref{est}, we use data from our sample to estimate parameters of a po
 
 In this section, we will introduce confidence intervals. Confidence intervals build on the ideas from Section \ref{est}: that estimators are random and we can quantify their uncertainty. The purpose of a confidence interval is to provide a range of plausible values for an unknown population parameter, based on a sample. A confidence interval not only provides the estimated value of the parameter, but also a measure of uncertainty associated with the estimation.
 
-We will first cover confidence intervals for the mean and confidence intervals for the proportion, two of the most basic confidence intervals. These intervals are based on the fact that the distribution of their corresponding estimators, the sample mean and sample proportion, are known as long certain conditions are met. You will notice that the general ideas in finding confidence intervals are pretty similar; confidence intervals for other estimators that have known distributions will be constructed similarly. In the last subsection of this module, we will learn about the bootstrap, which is used when the distribution of an estimator is unknown.
+We will first cover confidence intervals for the mean and confidence intervals for the proportion, two of the most basic confidence intervals. These intervals are based on the fact that the distribution of their corresponding estimators, the sample mean and sample proportion, are known as long as certain conditions are met. You will notice that the general ideas in finding confidence intervals are pretty similar; confidence intervals for other estimators that have known distributions will be constructed similarly. In the last subsection of this module, we will learn about the bootstrap, which is used when the distribution of an estimator is unknown.
 
 \section{Confidence Interval for the Mean}\label{confidence-interval-for-the-mean}
 
-\subsection{Randomness of an Estimator}\label{randomness-of-an-estimator}
+\subsection{Randomness of Estimators}\label{randomness-of-estimators}
 
 Suppose we are trying to estimate the mean systolic blood pressure of all American adults, by using the sample mean of 750 randomly selected American adults. The sample mean is an estimator for the population mean. We want to be able to report the value of the estimator, as well as our uncertainty about the estimator. A way to measure the uncertainty of an estimator is through the variance or standard error of the estimator. Larger values indicate a higher degree of uncertainty, as an estimator with larger variance means that the value of the estimator is likely to be different among random samples.
 
@@ -5692,7 +5704,7 @@ The idea of the interval \(I\) being random is represented in Figure \ref{fig:8-
 \begin{itemize}
 \tightlist
 \item
-  The density curve in the top of Figure \ref{fig:8-CI} represents the PDF of a random variable.
+  The density curve in the top of Figure \ref{fig:8-CI} represents the PDF of a random variable, that represents the distribution of some variable in the population that we wish to study.
 \item
   Each row of dots represents the values of 10 randomly sampled data points from the PDF.
 \item
@@ -5703,13 +5715,13 @@ The idea of the interval \(I\) being random is represented in Figure \ref{fig:8-
   The intervals in blue represent confidence intervals that contain the value of \(\mu\), while the intervals in red represent confidence intervals that do not contain the value of \(\mu\).
 \end{itemize}
 
-In Figure \ref{fig:8-CI}, we note that 50\% of the confidence intervals capture the value of \(\mu\), so the probability per equation \eqref{eq:8-CIprob} is 0.5.
+In Figure \ref{fig:8-CI}, we note that 50\% of the confidence intervals capture the value of \(\mu\), so the probability per equation \eqref{eq:8-CIprob} is 0.5. This matches with theory since each confidence interval was computed at 50\% confidence.
 
 If we were to create 95\% confidence intervals for each row in Figure \ref{fig:8-CI}, the upper and lower bounds of the intervals will be adjusted so that we will expect 19 of these 20 intervals to contain the value of \(\mu\).
 
 This illustration gives us an interpretation of the probability associated with a confidence interval per equation \eqref{eq:8-CIprob}: When we construct a 95\% confidence interval, there is a 95\% chance the random interval \(I\) will contain the true value of the parameter. In other words, if we have 100 random samples and we construct 95\% confidence intervals based on each sample, we expect 95 of these intervals to contain the value of the parameter.
 
-The idea of the probability that the random interval \(I\) captures the true parameter gives rise to the \textbf{confidence level}. The confidence level of a confidence interval is denoted by \(1-\alpha\). So if we construct an interval at 95\% confidence, \(\alpha=0.05\). Then equation \eqref{eq:8-CIprob} can be written as
+The idea of the probability that the random interval \(I\) captures the true parameter gives rise to the \textbf{confidence level}. The confidence level of a confidence interval is denoted by \(1-\alpha\), i.e.~if we construct an interval at 95\% confidence, \(\alpha=0.05\). Equation \eqref{eq:8-CIprob} can be written as
 
 \begin{equation} 
 P(\bar{X}_n - \epsilon \leq \mu \leq \bar{X}_n + \epsilon) = 1 - \alpha.
@@ -5720,25 +5732,25 @@ We will then say \(I\) is a \((1-\alpha) \times 100\%\) confidence interval, or 
 
 Now that we have established that confidence intervals are random and the definition of the confidence level, we are ready to go into the details of constructing the confidence interval for the mean.
 
-\subsection{Sampling Distribution of Sample Mean}\label{sampling-distribution-of-sample-mean}
+\subsection{Constructing Confidence Interval for the Mean}\label{constructing-confidence-interval-for-the-mean}
 
-We remind ourselves of the sampling distribution of the sample mean, \(\bar{X}_n\), from Section \ref{sampdistmean}. There are a couple of scenarios to consider:
+We remind ourselves of the sampling distribution of the sample mean, \(\bar{X}_n\), from Section \ref{sampdistmean}. There are a couple of conditions to consider:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \item
   \(X_1, \cdots, X_n\) are i.i.d. from a normal distribution with finite mean \(\mu\) and finite variance \(\sigma^2\). Then \(\bar{X}_n \sim N(\mu, \frac{\sigma^2}{n})\).
 \item
-  \(X_1, \cdots, X_n\) are i.i.d. from any distribution with finite mean \(\mu\) and finite variance \(\sigma^2\), and if \(n\) is large enough, then \(\bar{X}_n\) is approximately \(N(\mu, \frac{\sigma^2}{n})\). This is based on the CLT in section \ref{CLT}.
+  \(X_1, \cdots, X_n\) are i.i.d. from any distribution with finite mean \(\mu\) and finite variance \(\sigma^2\), and if \(n\) is large enough, then \(\bar{X}_n\) is approximately \(N(\mu, \frac{\sigma^2}{n})\).
 \end{enumerate}
 
-If either of these scenarios are met, then the distribution of \(\bar{X}_n\) after standardization is either a standard normal or approaches a standard normal distribution, so \(\frac{\bar{X}_n - \mu}{\frac{\sigma}{\sqrt{n}}} = \frac{\bar{X}_n - \mu}{\sqrt{Var(\bar{X})}} = \frac{\bar{X}_n - \mu}{SE(\bar{X}_n)}\) is either standard normal or approximately standard normal when \(n\) is large enough.
+If either of these conditions are met, then the distribution of \(\bar{X}_n\) after standardization is either a standard normal or approaches a standard normal distribution, so \(\frac{\bar{X}_n - \mu}{\frac{\sigma}{\sqrt{n}}} = \frac{\bar{X}_n - \mu}{\sqrt{Var(\bar{X})}} = \frac{\bar{X}_n - \mu}{SE(\bar{X}_n)}\) is either standard normal or approximately standard normal when \(n\) is large enough.
 
 To simplify the notation as it pertains to the confidence interval for the mean, we will let \(\hat{Z} = \frac{\bar{X}_n - \mu}{SE(\bar{X})}\), so \(\hat{Z}\) is standard normal or approximately standard normal. \(\hat{Z}\) can be called the \textbf{standardized version of the sample mean} or a \textbf{standardized score}.
 
 \subsubsection{Critical Value}\label{critical-value}
 
-We perform some math operations on equation \eqref{eq:8-CIprob} to see how we can construct a confidence interval for the mean:
+We perform some math operations on equation \eqref{eq:8-CIalpha} to see how we can construct a confidence interval for the mean:
 
 \begin{equation} 
 \begin{split}
@@ -5761,7 +5773,7 @@ In words, equation \eqref{eq:8-CIcrit} says that we want to find the critical va
 \caption{\label{fig:8-crit}Finding Critical Value with 95\% Confidence}
 \end{figure}
 
-We continue working with equation \eqref{eq:8-CIcrit} to see how we obtain the value of \(z^*\), as long as either of the two scenarios for the sampling distribution of \(\bar{X}_n\) to be known are met:
+We continue working with equation \eqref{eq:8-CIcrit} to see how we obtain the value of \(z^*\), as long as either of the two conditions for the sampling distribution of \(\bar{X}_n\) to be known are met:
 
 \begin{equation} 
 \begin{split}
@@ -5801,7 +5813,7 @@ Note: the \texttt{qnorm()} function was introduced in a bit more detail in Secti
 
 \emph{Thought question}: Can you show that the critical value for 96\% confidence is about 2.054? Can you show that the critical value for 98\% confidence is about 2.326?
 
-\subsubsection{Constructing Confidence Interval for the Mean}\label{constructing-confidence-interval-for-the-mean}
+\subsubsection{Confidence Interval for the Mean}\label{confidence-interval-for-the-mean-1}
 
 We are now ready to put the pieces together to work on the confidence interval for the mean:
 
@@ -5810,7 +5822,7 @@ We are now ready to put the pieces together to work on the confidence interval f
 P(-z^{*} \leq \hat{Z} \leq z^{*}) &= P(-z^{*} \leq \frac{\bar{X}_n - \mu}{SE(\bar{X}_n)} \leq z^{*}) \\
                                   &= P\left(-z^{*}SE(\bar{X}_n) \leq \bar{X}_n - \mu \leq z^{*}SE(\bar{X}_n)\right) \\
                                   &= P\left(\bar{X}_n - z^{*}SE(\bar{X}_n) \leq \mu \leq \bar{X}_n + z^{*}SE(\bar{X}_n)\right) \\
-                                  &= P\left(\bar{X}_n - z^{*} \frac{\sigma}{\sqrt{n}} \leq \mu \leq \bar{X}_n + z^{*}) \frac{\sigma}{\sqrt{n}}\right).
+                                  &= P\left(\bar{X}_n - z^{*} \frac{\sigma}{\sqrt{n}} \leq \mu \leq \bar{X}_n + z^{*} \frac{\sigma}{\sqrt{n}}\right).
 \end{split}
 \label{eq:8-CImeanwork}
 \end{equation}
@@ -5822,7 +5834,70 @@ Therefore, the \((1-\alpha) \times 100\%\) confidence interval for the mean is
 \label{eq:8-CImean}
 \end{equation}
 
-Again, the formula in equation \eqref{eq:8-CImean} is only valid if either of the two scenarios in Section \ref{sampdistmean} is met, i.e.~either the data are originally normal, or if the sample size is large enough.
+Again, the formula in equation \eqref{eq:8-CImean} is only valid if either of the two conditions in Section \ref{sampdistmean} is met, i.e.~either the data are originally normal, or if the sample size is large enough.
+
+There are several rules of thumb that exist to assess if the ``sample size is large enough'' (usually at least 25 or 30 is suggested). However, as we mentioned in Section @(considerCLT), there is no fixed answer to this question. It depends on the distribution of the data. In general, the more skewed data is, \(n\) needs to be larger for the approximation to work.
+
+\subsubsection{Coverage Probability}\label{CP}
+
+Figure \ref{fig:8-CI} illustrates the concept of \textbf{coverage probability}. 20 random samples were drawn, and corresponding 50\% confidence intervals were constructed, and we find that 10 out of 20 of these intervals contained the true value of the parameter. The coverage probability is 50\%, since 10 out of 20 intervals contained the true value value of the parameter. This matches the confidence level of 50\%. The coverage probability should match the confidence level, if not, the distribution that we used for the sampling distribution of the estimator is probably incorrect.
+
+So in general, for confidence intervals constructed at \((1-\alpha) \times 100\%\) confidence, the coverage probability of the confidence intervals should be \((1-\alpha) \times 100\%\).
+
+We run a Monte Carlo simulation to show that the coverage probability of confidence intervals for the mean using equation \eqref{eq:8-CImean}. The code below does the following:
+
+\begin{itemize}
+\tightlist
+\item
+  Simulate \(X_1, \cdots, X_{10}\) i.i.d. from standard normal.
+\item
+  Calculate 95\% confidence interval for the mean using \eqref{eq:8-CImean}.
+\item
+  Assess if the calculated confidence interval contains 0, since the true mean is 0 (we simulated data from standard normal)
+\item
+  Repeat these steps for a total of 10 thousand replicates.
+\item
+  Count the number of confidence intervals that contain 0, and divide by the number of replicates. This value estimates the coverage probability.
+\item
+  If we did things correctly (correct use of formula, correct distribution for estimator), this estimated coverage probability should be close to the confidence level of 95\%.
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{n}\OtherTok{\textless{}{-}}\DecValTok{10} \DocumentationTok{\#\# sample size of each random sample}
+\NormalTok{alpha}\OtherTok{\textless{}{-}}\FloatTok{0.05}
+\NormalTok{reps}\OtherTok{\textless{}{-}}\DecValTok{10000} 
+
+\NormalTok{CIs}\OtherTok{\textless{}{-}}\FunctionTok{array}\NormalTok{(}\DecValTok{0}\NormalTok{, }\FunctionTok{c}\NormalTok{(reps,}\DecValTok{2}\NormalTok{)) }\DocumentationTok{\#\#store lower and upper bounds of CI}
+\NormalTok{contain}\OtherTok{\textless{}{-}}\FunctionTok{array}\NormalTok{(}\DecValTok{0}\NormalTok{, reps) }\DocumentationTok{\#\#store assessment if the true mean is contained within bounds of CI}
+
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{100}\NormalTok{)}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{reps)}
+  
+\NormalTok{\{}
+  
+\NormalTok{  X}\OtherTok{\textless{}{-}}\FunctionTok{rnorm}\NormalTok{(n) }\DocumentationTok{\#\#draw n data points from standard normal}
+  \DocumentationTok{\#\#calculate elements needed for CI of mean}
+\NormalTok{  xbar}\OtherTok{\textless{}{-}}\FunctionTok{mean}\NormalTok{(X) }\DocumentationTok{\#\#sample mean}
+\NormalTok{  SE}\OtherTok{\textless{}{-}}\DecValTok{1}\SpecialCharTok{/}\FunctionTok{sqrt}\NormalTok{(n) }\DocumentationTok{\#\#SE of sample mean}
+\NormalTok{  crit}\OtherTok{\textless{}{-}}\FunctionTok{qnorm}\NormalTok{(}\DecValTok{1}\SpecialCharTok{{-}}\NormalTok{alpha}\SpecialCharTok{/}\DecValTok{2}\NormalTok{) }\DocumentationTok{\#\#critical value}
+\NormalTok{  ME}\OtherTok{\textless{}{-}}\NormalTok{crit}\SpecialCharTok{*}\NormalTok{SE }\DocumentationTok{\#\#margin of error}
+\NormalTok{  CIs[i,}\DecValTok{1}\NormalTok{]}\OtherTok{\textless{}{-}}\NormalTok{xbar}\SpecialCharTok{{-}}\NormalTok{ME }\DocumentationTok{\#\#lower bound of CI}
+\NormalTok{  CIs[i,}\DecValTok{2}\NormalTok{]}\OtherTok{\textless{}{-}}\NormalTok{xbar}\SpecialCharTok{+}\NormalTok{ME }\DocumentationTok{\#\#upper bound of CI}
+\NormalTok{  contain[i]}\OtherTok{\textless{}{-}}\NormalTok{CIs[i,}\DecValTok{1}\NormalTok{]}\SpecialCharTok{\textless{}}\DecValTok{0} \SpecialCharTok{\&}\NormalTok{ CIs[i,}\DecValTok{2}\NormalTok{]}\SpecialCharTok{\textgreater{}}\DecValTok{0} \DocumentationTok{\#\#assess if CI contains 0, the true mean}
+  
+\NormalTok{\}}
+
+\DocumentationTok{\#\#find proportion of CIs from random samples that contain 0, should be close to 1 {-} alpha}
+\FunctionTok{sum}\NormalTok{(contain)}\SpecialCharTok{/}\NormalTok{reps }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.9493
+\end{verbatim}
+
+The estimated coverage probability based on 10 thousand replicates is 94.93\%, very close to the confidence level of 95\%. This informs us that the distribution assumed for the sample mean was correct.
 
 \subsubsection{Worked Example}\label{worked-example-1}
 
@@ -5845,7 +5920,7 @@ From the question, we summarize the information as:
 Since we are assuming the distribution of the yield points to be normally distribution, the sample means will be normally distributed regardless of the sample size, so we can proceed computing the confidence interval for the true average yield point using equation \eqref{eq:8-CImean}:
 
 \[
-\left( 8439 - 1.644854 \frac{100}{\sqrt{25}} , 8439 - 1.644854 \frac{100}{\sqrt{25}} \right).
+\left( 8439 - 1.644854 \frac{100}{\sqrt{25}} , 8439 + 1.644854 \frac{100}{\sqrt{25}} \right).
 \]
 Working everything out, we get (8406.103, 8471.891).
 
@@ -5866,13 +5941,281 @@ What else can we say from the confidence interval?
   \end{itemize}
 \end{itemize}
 
-\subsubsection{Factors Affecting the Precision of Confidence Interval}\label{factors-affecting-the-precision-of-confidence-interval}
-
 \subsection{Confidence Interval for the Mean Using t Distribution}\label{confidence-interval-for-the-mean-using-t-distribution}
+
+You may have noticed that when we calculate a confidence interval for the mean using equation \eqref{eq:8-CImean}, it involves knowing the value of \(\sigma^2\), the variance of the variable in the population, which is a parameter. However, we have mentioned that the whole purpose of estimation and confidence intervals is to estimate the value of unknown parameters and quantify the uncertainty associated with the estimate. The numerical value of parameters are very rarely known! So how could we actually use equation \eqref{eq:8-CImean} in real life?
+
+The solution to this is fairly intuitive, we use the sample variance \(s^2 = \frac{1}{n-1} \sum_{i=1}^n (x_i - \bar{x})^2\) to estimate \(\sigma^2\). What is less intuitive is that the distribution of the standardized version of the sample mean changes.
+
+We had earlier mentioned that if certain conditions are met, then \(\hat{Z} = \frac{\bar{X}_n - \mu}{\frac{\sigma}{\sqrt{n}}}\) is either standard normal or approximately standard normal. If we estimate \(\sigma^2\) with \(s^2\) and replace \(\sigma\) with \(s\) in \(\hat{Z}\), we get a new random variable
+
+\begin{equation} 
+T =  \frac{\bar{X}_n - \mu}{\frac{s}{\sqrt{n}}} = \frac{\bar{X}_n - \mu}{SE(\bar{X}_n)},
+\label{eq:8-tstat}
+\end{equation}
+
+where \(SE(\bar{X}_n)\) is now \(\frac{s}{\sqrt{n}}\). It turns out that \(T\) follows another well-known distribution, called the \textbf{\(t\) distribution with \(n-1\) degrees of freedom}. The PDF of a \(t\) distribution is pretty long and is not needed for this course (you can look it up on your own), but we take a look at the plot of its PDF and compare with the plot of the PDF of a standard normal, in Figure \ref{fig:8-t} below.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#plot PDF from {-}5 to 5}
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{seq}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{5}\NormalTok{, }\DecValTok{5}\NormalTok{, }\AttributeTok{length.out =} \DecValTok{100}\NormalTok{)}
+
+\DocumentationTok{\#\#plot the standard normal }
+\FunctionTok{curve}\NormalTok{(}\FunctionTok{dnorm}\NormalTok{(x), }\AttributeTok{from =} \SpecialCharTok{{-}}\DecValTok{5}\NormalTok{, }\AttributeTok{to =} \DecValTok{5}\NormalTok{, }\AttributeTok{lwd =} \DecValTok{2}\NormalTok{,}
+      \AttributeTok{ylab =} \StringTok{"Density"}\NormalTok{, }\AttributeTok{xlab =} \StringTok{"x"}\NormalTok{, }
+      \AttributeTok{main =} \StringTok{"Pdf of Standard Normal and t{-}Distribution"}\NormalTok{)}
+
+\DocumentationTok{\#\#overlay the t{-}distribution with 1 and 10 degree of freedom}
+\FunctionTok{curve}\NormalTok{(}\FunctionTok{dt}\NormalTok{(x, }\AttributeTok{df =} \DecValTok{1}\NormalTok{), }\AttributeTok{from =} \SpecialCharTok{{-}}\DecValTok{5}\NormalTok{, }\AttributeTok{to =} \DecValTok{5}\NormalTok{, }\AttributeTok{col =} \StringTok{"red"}\NormalTok{, }\AttributeTok{lwd =} \DecValTok{2}\NormalTok{, }\AttributeTok{add =} \ConstantTok{TRUE}\NormalTok{)}
+\FunctionTok{curve}\NormalTok{(}\FunctionTok{dt}\NormalTok{(x, }\AttributeTok{df =} \DecValTok{10}\NormalTok{), }\AttributeTok{from =} \SpecialCharTok{{-}}\DecValTok{5}\NormalTok{, }\AttributeTok{to =} \DecValTok{5}\NormalTok{, }\AttributeTok{col =} \StringTok{"blue"}\NormalTok{, }\AttributeTok{lwd =} \DecValTok{2}\NormalTok{, }\AttributeTok{add =} \ConstantTok{TRUE}\NormalTok{)}
+\FunctionTok{legend}\NormalTok{(}\StringTok{"topright"}\NormalTok{, }\AttributeTok{legend =} \FunctionTok{c}\NormalTok{(}\StringTok{"Standard Normal"}\NormalTok{, }\StringTok{"t{-}Distribution (df=1)"}\NormalTok{, }\StringTok{"t{-}Distribution (df=10)"}\NormalTok{),}
+       \AttributeTok{col =} \FunctionTok{c}\NormalTok{(}\StringTok{"black"}\NormalTok{, }\StringTok{"red"}\NormalTok{, }\StringTok{"blue"}\NormalTok{), }\AttributeTok{lty =} \DecValTok{1}\NormalTok{, }\AttributeTok{lwd =} \DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\centering
+\includegraphics{bookdown-demo_files/figure-latex/8-t-1.pdf}
+\caption{\label{fig:8-t}Plot of PDF for Z and t Distributions}
+\end{figure}
+
+From Figure \ref{fig:8-t}, we note a few things about the \(t\) distribution:
+
+\begin{itemize}
+\tightlist
+\item
+  It is centered at 0, just like a standard normal.
+\item
+  It is also symmetric and bell-shaped, just like a standard normal.
+\item
+  It has heavier tails than the standard normal. In other words, extreme values (large or small) have slightly higher probabilities of occurring for a \(t\) distribution than for a standard normal.
+\item
+  As the degree of freedom increases, the \(t\) distribution gets closer to a standard normal. Notice how the blue curve is closer to the standard normal curve in black, than the red curve is with the black curve. In fact, one can show mathematically that the PDF of a \(t\) distribution converges to the PDF of a standard normal as the degree of freedom increases to infinity.
+\end{itemize}
+
+How does the fact that we are working with a \(t\) distribution instead of a standard normal affect how we calculate a confidence interval for the mean? How does equation \eqref{eq:8-CImean} change? We replace \(\sigma^2\) with \(s^2\) and \(z^*\) with \(t^*\). The critical value is now denoted by \(t^*\) to emphasize that it is based on the \(t\) distribution.
+
+Therefore, the \((1-\alpha) \times 100\%\) confidence interval for the mean , when \(\sigma^2\) is unknown, is
+
+\begin{equation} 
+\left( \bar{x}_n - t^{*} \frac{s}{\sqrt{n}}, \bar{x}_n + t^{*} \frac{s}{\sqrt{n}} \right).
+\label{eq:8-CImeant}
+\end{equation}
+
+To find the critical value of a \(t\) distribution with 10 degrees of freedom and with 95\% confidence:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{alpha}\OtherTok{\textless{}{-}}\FloatTok{0.05}
+\FunctionTok{qt}\NormalTok{(}\DecValTok{1}\SpecialCharTok{{-}}\NormalTok{alpha}\SpecialCharTok{/}\DecValTok{2}\NormalTok{, }\DecValTok{10}\NormalTok{) }\DocumentationTok{\#\#supply percentile first, then value of df}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2.228139
+\end{verbatim}
+
+Again, the formula in equation \eqref{eq:8-CImeant} is only valid if either of the two conditions in Section \ref{sampdistmean} is met, i.e.~either the data are originally normal, or if the sample size is large enough.
+
+\subsubsection{Worked Example}\label{worked-example-2}
+
+A sample of 66 obese adults was put on a low-carbohydrate diet for a year. The average weight loss was 11 lb and the
+standard deviation was 19 lb. Calculate a 99\% confidence interval for the true average weight loss. Does the confidence interval provide support for the claim that the mean weight loss is positive?
+
+From the question, we summarize the information as:
+
+\begin{itemize}
+\tightlist
+\item
+  \(n = 66\),
+\item
+  \(df = n-1 = 65\)
+\item
+  \(\bar{x} = 11\),
+\item
+  \(s = 19\),
+\item
+  \(\alpha = 0.01\), so \(t^*\) is found using \texttt{qt(1-0.01/2,\ 65)} which is 2.653604.
+\end{itemize}
+
+We have no information about the distribution of the data. However, the sample size is 66, which is usually large enough to use the CLT, so we can use equation \eqref{eq:8-CImeant}:
+
+\[
+\left( 11 - 2.653604 \frac{19}{\sqrt{66}} , 11 + 2.653604 \frac{19}{\sqrt{66}} \right)
+\]
+which gives (4.793914, 17.20609). Since the entire confidence interval lies above 0, our data support the claim that the mean weight loss is positive.
+
+\subsubsection{\texorpdfstring{Confidence Interval for Mean Using \(t\) VS Using \(z\)}{Confidence Interval for Mean Using t VS Using z}}\label{confidence-interval-for-mean-using-t-vs-using-z}
+
+A couple of interesting things to note with critical values associated with the \(t\) distribution:
+
+\begin{itemize}
+\tightlist
+\item
+  For the same level of confidence, \(t^*\) will never be smaller than \(z^*\).
+\end{itemize}
+
+\emph{Thought question}: Can you give an intuitive explanation as to why? Using Figure \ref{fig:8-t} may be helpful.
+
+\begin{itemize}
+\tightlist
+\item
+  The value of \(t^*\) gets closer to the value of \(z^*\) as the degree of freedom gets larger.
+\end{itemize}
+
+Recall that the margin of error is the critical value multiplied by the standard error of the estimator. So margin of errors tend to be larger when \(\sigma^2\) is unknown. It should make intuitive sense that we have a higher degree of uncertainty since we have an additional parameter to estimate.
+
+Since the margin of error tends to be larger when \(\sigma^2\) is unknown, it means the \textbf{width} of the confidence interval for the mean tends to be wider when \(\sigma^2\) is unknown. The width of a confidence interval is the difference between its upper and lower bound, or twice the margin of error.
+
+\emph{Thought question}: Imagine running the Monte Carlo simulation in Section \ref{CP}, but now use the sample variance instead of the population variance. Find the coverage probabilities of the confidence interval if we use the correct formula in equation \eqref{eq:8-CImeant}, and if we use a \(z^*\) as the critical value with the sample variance?
+
+\subsubsection{Degrees of Freedom}\label{degrees-of-freedom}
+
+An intuitive explanation of degrees of freedom is the number of independent pieces of information that can take on any numerical value, when estimating a parameter
+
+Generally speaking, we lose 1 degree of freedom for every equation that must be satisfied. In the context of estimating the population mean using the sample mean, we must always satisfy the equation \(\bar{x} = \frac{\sum_{i=1}^n x_i}{n}\), so we lose 1 from an original set of \(n\) observations, so the degree of freedom is \(n-1\) when calculating the CI for the mean.
+
+\subsection{Factors Affecting Precision of Confidence Intervals}\label{factors-affecting-precision-of-confidence-intervals}
+
+The width of a confidence interval is used as a measure of \textbf{precision}. A wider width indicates less precision and a higher degree of uncertainty with our estimate. Narrower widths are preferred, as we are able to narrow the range of plausible values for the unknown parameter by ruling out more values. The factors (that are within the researcher's control) affecting the width of a confidence interval are the items used in calculating the margin of error:
+
+\begin{itemize}
+\tightlist
+\item
+  The level of confidence, \(1 - \alpha\): The width increases as the level of confidence increases.
+\end{itemize}
+
+\emph{Though question}: Can you use Figure \ref{fig:8-crit} to help you explain the width increases as level of confidence increases?
+
+\begin{itemize}
+\tightlist
+\item
+  The sample size, \(n\): As \(n\) increases, the width decreases. This implies that we have more precision, and a lower degree of uncertainty, with larger sample sizes.
+\end{itemize}
+
+Other factors such as whether \(\sigma^2\) is unknown or not, and the value of the variance, are usually not controllable by the researcher.
 
 \section{Confidence Interval for the Proportion}\label{confidence-interval-for-the-proportion}
 
+Next, we will go over the confidence interval for the proportion. This is another common confidence interval. The sample proportion is an estimator for the population proportion.
+
+Proportions are used to summarize categorical variables, whereas means are used to summarize quantitative variables. One way to decide if the variable is categorical or quantitative is to ask whether arithmetic operations make sense when performed on the variable. If such operations make sense, the variable is quantitative, if not, the variable is categorical.
+
+\begin{itemize}
+\item
+  We measure the systolic blood pressure of a sample of American adults. The variable is quantitative, since the answer is a numeric value where arithmetic operations can be applied. We then calculate the average systolic blood pressure of American adults. So we can work on a confidence interval for the mean, using equation \eqref{eq:8-CImeant}.
+\item
+  We ask a sample of voters whether they support a particular candidate. The variable is categorical, since the answer is yes or no, and we cannot apply arithmetic operations to the answer. We then calculate the proportion of voters who support the candidate. So we need a confidence interval for the proportion.
+\end{itemize}
+
+\subsection{Sampling Distribution of Sample Proportions}\label{sampling-distribution-of-sample-proportions}
+
+We can use the Central Limit Theorem (CLT) to approximate the sampling distribution of sample proportions. A sketch of how to derive this sampling distribution is provided.
+
+Let \(X_1, \cdots, X_n\) be i.i.d. Bernoulli with success probability p.~Using equations \eqref{eq:3-bern-EX} and \eqref{eq:3-bern-var}, we know that \(E(X_i) = p\) and \(Var(X_i) - p(1-p)\).
+
+Let \(S = X_1 + \cdots + X_n = \sum_{i=1}^n X_i\) denote the number of successes in a sample of size \(n\). Using properties of expectations and variances, we know that \(E(S) = np\) and \(Var(S) = np(1-p)\).
+
+The sample proportion, \(\hat{p}\), is just the number of successes divided by the sample size, so \(\hat{p} = \frac{S}{n} = \frac{\sum_{i=1}^n X_i}{n} = \bar{X}_n\). Therefore, using property of expectations and variances, we know that \(E(\hat{p}) = p\) and \(Var(\hat{p}) = \frac{p(1-p)}{n}\).
+
+The CLT informs us if \(n\) is large enough, then \(\hat{p}\) is approximately \(N\left(p, \frac{p(1-p)}{n}\right)\). Also, the distribution of \(\hat{p}\) after standardization is approximately standard normal, i.e.~the standardized score \(\hat{Z} = \frac{\hat{p}-p}{\sqrt{\frac{p(1-p)}{n}}}\) is approximately standard normal.
+
+\subsection{Constructing Confidence Interval for the Proportion}\label{constructing-confidence-interval-for-the-proportion}
+
+A lot of the concepts and math from the confidence interval for the mean carry over to the confidence interval for the proportion. We will skip the math for the confidence interval for the proportion (although you should be able to derive this result by following the steps and adjusting).
+
+The \((1-\alpha) \times 100\%\) confidence interval for the proportion is
+
+\begin{equation} 
+\left( \hat{p} - z^{*} \sqrt{\frac{\hat{p}(1-\hat{p})}{n}}, \hat{p} + z^{*} \sqrt{\frac{\hat{p}(1-\hat{p})}{n}} \right).
+\label{eq:8-CIprop}
+\end{equation}
+
+From equation \eqref{eq:8-CIprop}, we can see that
+
+\begin{itemize}
+\tightlist
+\item
+  The point estimate is \(\hat{p}\).
+\item
+  The standard error of \(\hat{p}\) is \(SE(\hat{p}) = \sqrt{\frac{\hat{p}(1-\hat{p})}{n}}\).
+\item
+  The margin of error is \(z^{*} \sqrt{\frac{\hat{p}(1-\hat{p})}{n}}\).
+\end{itemize}
+
+The framework of confidence intervals usually takes on the form given in equation \eqref{eq:8-CIbasic2}: we add and subtract the margin of error to and from the point estimate. The margin of error is the critical value multiplied by the standard error of the estimator. We see the confidence intervals for the mean and proportion take on this framework, and so do most confidence intervals of other estimators.
+
+Note: equation \eqref{eq:8-CIprop} is based on proportions, and not percentages. After calculating the confidence interval for the proportion, reporters often convert these values to percentages by multiplying them by a hundred.
+
+From equation \eqref{eq:8-CIprop}, we can also see that we have the factors that affect the width of the confidence interval for the proportion is the same as the confidence interval for the mean.
+
+\subsubsection{Conditions for Confidence Interval for the Proportion}\label{conditions-for-confidence-interval-for-the-proportion}
+
+We wrote that if \(n\) is large enough, the CLT informs us that the sample proportion \(\hat{p}\) can be approximated by a normal distribution. How large is large enough? Again, various rules of thumb are recommended, and they usually follow along the lines of needing at least a certain number of successes, \(n\hat{p}\), and failures, \(n(1-\hat{p})\) in our sample. Values of 5 or 10 are usually recommended. Just bear in mind that the approximation works better as the number of successes and failures, \(n\hat{p}\) and \(n(1-\hat{p})\), increases.
+
+\subsubsection{Worked Example}\label{worked-example-3}
+
+The Texas College Tobacco Project survey administered in 2016 found that in a sample of 5767 undergraduates ages 18--25, 525 said they had used electronic cigarettes at least once during the previous 30 days. Find a 95\% confidence interval for the proportion of all students in the population sampled who used e-cigarettes during the previous 30 days. Also report the margin of error. Do the data support the claim that more than 5\% of students in the population used e-cigarettes during the previous 30 days?
+
+From the question, we summarize the information as:
+
+\begin{itemize}
+\tightlist
+\item
+  \(n = 5767\),
+\item
+  \(\hat{p} = \frac{525}{5767}\),
+\item
+  \(\alpha = 0.05\), so \(z^*\) is found using \texttt{qnorm(1-0.05/2)} which is 1.959964.
+\end{itemize}
+
+The number of ``successes'' is 525 and the number of ``failures'' is \(5767-525 = 5242\). These are both a lot larger than 10, so we can work with sampling distribution of \(\hat{p}\) and calculate a confidence interval using equation \eqref{eq:8-CIprop}:
+
+\[
+\left( \frac{525}{5767} - 1.959964 \sqrt{\frac{\frac{525}{5767}(1-\frac{525}{5767})}{5767}} , \frac{525}{5767} + 1.959964 \sqrt{\frac{\frac{525}{5767}(1-\frac{525}{5767})}{5767}} \right)
+\]
+
+which gives (0.08361097, 0.09845943), with margin of error 0.007424228. The data support the claim that more than 5\% of students in the population used e-cigarettes in the previous 30 days, since the entire interval lies above 0.05.
+
+There is a 95\% probability that the random interval (0.08361097, 0.09845943) contains the true proportion of students in the population used e-cigarettes in the previous 30 days.
+
+\subsection{Minimum Sample Size}\label{minimum-sample-size}
+
+Fairly often, researchers want to know what is the sample size needed in order to achieve a margin of error that is no more than some specific value, as they want to guarantee a certain level of precision in their report. Mathematically, we want to set \(z^{*} \sqrt{\frac{\hat{p}(1-\hat{p})}{n}} \leq M\) where \(M\) denotes some value of the margin of error that needs to be guaranteed.
+
+While we will not know the value of \(\hat{p}\) before collecting data, we mentioned in Section \ref{bernprop} that the value of \(p(1-p)\) is maximized at \(p=\frac{1}{2}\). This implies that the \(SE(\hat{p})\) is maximized at \(\hat{p} = \frac{1}{2}\). As long as the \(M\) is satisfied when \(\hat{p} = \frac{1}{2}\), \(M\) will be satisfied for any value of \(\hat{p}\). So subbing in \(\hat{p} = \frac{1}{2}\) into \(z^{*} \sqrt{\frac{\hat{p}(1-\hat{p})}{n}} \leq M\), we have
+
+\begin{equation} 
+\begin{split}
+z^{*} \sqrt{\frac{\hat{p}(1-\hat{p})}{n}} & \leq M \\
+\implies z^* \sqrt{\frac{\frac{1}{2}\frac{1}{2}}{n}}  & \leq M \\
+\implies \left(\frac{z^*}{2M}\right)^2 & \leq n.
+\end{split}
+\label{eq:8-minsamp}
+\end{equation}
+
+Note: always be sure to round up to the nearest whole number, after working out the LHS of the inequality \eqref{eq:8-minsamp}, to guarantee that your margin of error is no more than \(M\).
+
+\subsubsection{Worked Example}\label{worked-example-4}
+
+A state legislator wishes to survey residents of her district to see what proportion of the electorate is aware of her position on using state funds to pay for abortions. What sample size is necessary if the 95\% CI for p is to have a margin of error that is no more than 3 percentage points?
+
+Using the inequality \eqref{eq:8-minsamp},
+
+\[
+\begin{split}
+\left(\frac{1.959964}{2 \times 0.03}\right)^2 \leq n \\
+1067.072 \leq n.
+\end{split}
+\]
+So she will need to sample at least 1068 residents to guanrantee a margin of error that is no more than 3 percentage points.
+
 \section{The Bootstrap}\label{the-bootstrap}
+
+\subsection{The Algorithm}\label{the-algorithm}
+
+\subsection{Worked Example}\label{worked-example-5}
 
   \bibliography{book.bib,packages.bib}
 

@@ -699,18 +699,17 @@ Figure 7.5: Dist of Theta1 (left) and Theta2 (right) as n is Varied
 <span class="header-section-number">7.4.4</span> Sampling Distribution<a class="anchor" aria-label="anchor" href="#sampling-distribution"><i class="fas fa-link"></i></a>
 </h3>
 <p>The plots in Figure <a href="est.html#fig:7-bias">7.4</a> and Figure <a href="est.html#fig:7-consistent">7.5</a> give rise to the idea that there is a distribution associated with an estimator. There is a term for this, called the <strong>sampling distribution</strong> of an estimator.</p>
-<p>Some estimators have known distributions, for example the sample mean, <span class="math inline">\(\bar{X}\)</span>. Using the CLT from Section <a href="inequalities-limit-theorems-and-simulations.html#CLT">6.3.2</a>, we know that as long as <span class="math inline">\(X_1, \cdots, X_n\)</span> are i.i.d. from any distribution with finite mean <span class="math inline">\(\mu\)</span> and finite variance <span class="math inline">\(\sigma^2\)</span>, and if <span class="math inline">\(n\)</span> is large enough, then <span class="math inline">\(\bar{X}\)</span> is approximately <span class="math inline">\(N(\mu, \frac{\sigma^2}{n})\)</span>. Looking at the plots in Figure <a href="est.html#fig:7-bias">7.4</a> and Figure <a href="est.html#fig:7-consistent">7.5</a>, we see that the density plots for <span class="math inline">\(\bar{X}\)</span> are bell-shaped, which verifies the CLT.</p>
-<p>Some other common estimators also have known distributions, such as the sample proportion as an estimator for the population proportion, the sample variance as an estimator for the population variance, as well as ML estimators for linear regression and logistic regression models.</p>
+<p>Some estimators have known distributions, for example the sample mean, <span class="math inline">\(\bar{X}\)</span>. Some other common estimators also have known distributions, such as the sample proportion as an estimator for the population proportion, the sample variance as an estimator for the population variance, as well as ML estimators for linear regression and logistic regression models.</p>
 <p>If the sampling distribution of an estimator is known and follows well known distributions, we can easily perform probability calculations involving estimators, for example, how likely are we to observe a sample mean that is more than 2 standard errors away from its true mean?</p>
 <p>However, other estimators may not have known distributions, for example, the sample median as an estimator for the population median has no known sampling distribution. Does this mean that we are unable to calculate probabilities associated with such estimators? It turns out there exist methods called resampling methods that allow us to approximate these calculations. We will cover the bootstrap, which is a commonly used resampling method, in a future module.</p>
 <div id="sampdistmean" class="section level4" number="7.4.4.1">
 <h4>
 <span class="header-section-number">7.4.4.1</span> Sampling Distribution of Sample Mean<a class="anchor" aria-label="anchor" href="#sampdistmean"><i class="fas fa-link"></i></a>
 </h4>
-<p>We will state the sampling distribution of the sample mean, <span class="math inline">\(\bar{X}_n\)</span>. There are a couple of scenarios to consider:</p>
+<p>We will state the sampling distribution of the sample mean, <span class="math inline">\(\bar{X}_n\)</span>. There are a couple of conditions to consider:</p>
 <ol style="list-style-type: decimal">
 <li>
-<span class="math inline">\(X_1, \cdots, X_n\)</span> are i.i.d. from a normal distribution with finite mean <span class="math inline">\(\mu\)</span> and finite variance <span class="math inline">\(\sigma^2\)</span>. Then <span class="math inline">\(\bar{X}_n \sim N(\mu, \frac{\sigma^2}{n})\)</span>.</li>
+<span class="math inline">\(X_1, \cdots, X_n\)</span> are i.i.d. from a normal distribution with finite mean <span class="math inline">\(\mu\)</span> and finite variance <span class="math inline">\(\sigma^2\)</span>. Then <span class="math inline">\(\bar{X}_n \sim N(\mu, \frac{\sigma^2}{n})\)</span>. This result is based on the fact that the sum of independent normals result in a normal distribution.</li>
 </ol>
 <p>This means that if the data are originally normally distributed, the sample mean will be normally distributed, regardless of the sample size.</p>
 <ol start="2" style="list-style-type: decimal">
@@ -718,6 +717,13 @@ Figure 7.5: Dist of Theta1 (left) and Theta2 (right) as n is Varied
 <span class="math inline">\(X_1, \cdots, X_n\)</span> are i.i.d. from any distribution with finite mean <span class="math inline">\(\mu\)</span> and finite variance <span class="math inline">\(\sigma^2\)</span>, and if <span class="math inline">\(n\)</span> is large enough, then <span class="math inline">\(\bar{X}_n\)</span> is approximately <span class="math inline">\(N(\mu, \frac{\sigma^2}{n})\)</span>. This is based on the CLT in section <a href="inequalities-limit-theorems-and-simulations.html#CLT">6.3.2</a>.</li>
 </ol>
 <p>This means that even if the data are not originally normally distributed, the sample mean will be approximately normally distributed if the sample size is large enough.</p>
+<p>We apply the sampling distribution of the sample mean to the left plot in Figure <a href="est.html#fig:7-consistent">7.5</a>, which visually displays the distribution of the sample mean with <span class="math inline">\(n=10, 100, 1000\)</span>. The data were i.i.d. standard normal, so we meet the first scenario and know that the sample means follow a normal distribution:</p>
+<ul>
+<li>When <span class="math inline">\(n=10\)</span>, <span class="math inline">\(\bar{X}_n \sim N(0, \frac{1}{10}) = N(0, 0.1)\)</span>.</li>
+<li>When <span class="math inline">\(n=100\)</span>, <span class="math inline">\(\bar{X}_n \sim N(0, \frac{1}{100}) = N(0,0.01)\)</span>.</li>
+<li>When <span class="math inline">\(n=1000\)</span>, <span class="math inline">\(\bar{X}_n \sim N(0, \frac{1}{1000}) = N(0,0.001)\)</span>.</li>
+</ul>
+<p>We see that when the sample size gets larger, the variance of the sample mean decreases, so there is less spread and their resulting density plot is more concentrated around the mean. This matches with what we see in the left plot in Figure <a href="est.html#fig:7-consistent">7.5</a>.</p>
 </div>
 </div>
 <div id="mean-squared-error" class="section level3" number="7.4.5">
@@ -743,7 +749,7 @@ MSE(\hat{\Theta}) = Var(\hat{\Theta}) + Bias(\hat{\Theta})^2.
 <span class="header-section-number">7.5</span> Final Comments on Estimation<a class="anchor" aria-label="anchor" href="#final-comments-on-estimation"><i class="fas fa-link"></i></a>
 </h2>
 <p>We have covered the method of moments and method of maximum likelihood when estimating parameters. These methods are also called <strong>parametric methods</strong> as they involve making an assumption that the data follow some well-known distribution with unknown parameters, and we are then using our data, and our assumed distribution, to estimate the numerical value of the unknown parameters.</p>
-<p>There exist <strong>nonparametric methods</strong> in estimation. We have actually seen one such method (without calling it nonparametric), which is kernel density estimation (KDE) in Section <a href="continuous-random-variables.html#KDE">4.6.1</a>. KDE is used to estimate the PDF of a random variable so that we can visualize its distribution. If you look back at KDE, you will notice we made no assumption abou the distribution of the random variable. This is one of the fundamental differences between parametric and nonparametric estimation: the former assumes a distribution for the data, the latter does not.</p>
+<p>There exist <strong>nonparametric methods</strong> in estimation. We have actually seen one such method (without calling it nonparametric), which is kernel density estimation (KDE) in Section <a href="continuous-random-variables.html#KDE">4.6.1</a>. KDE is used to estimate the PDF of a random variable so that we can visualize its distribution. If you look back at KDE, you will notice we made no assumption about the distribution of the random variable. This is one of the fundamental differences between parametric and nonparametric estimation: the former assumes a distribution for the data, the latter does not.</p>
 <div id="why-ml-estimators" class="section level3" number="7.5.1">
 <h3>
 <span class="header-section-number">7.5.1</span> Why ML Estimators?<a class="anchor" aria-label="anchor" href="#why-ml-estimators"><i class="fas fa-link"></i></a>
@@ -809,7 +815,7 @@ MSE(\hat{\Theta}) = Var(\hat{\Theta}) + Bias(\hat{\Theta})^2.
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2025-07-17.</p>
+    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2025-07-18.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

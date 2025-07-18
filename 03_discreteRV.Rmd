@@ -437,7 +437,7 @@ Fairly often, when we have a Bernoulli random variable, the event that results i
 
 If you go back to the second example in section \@ref(eg2), we were modeling whether a job applicant receives a callback or not. In this example, we could let $V$ be the random variable that an applicant receives a callback, with $V=1$ denoting the applicant received a callback, and $V=0$ when the applicant did not receive a callback. We used logistic regression in the example. It turns out that logistic regression is used when the variable of interest follows a Bernoulli distribution. 
 
-#### Properties of Bernoulli
+#### Properties of Bernoulli {#bernprop}
 
 Consider $X$ is a Bernoulli distribution with parameter $p$. The expectation of a Bernoulli distribution is
 

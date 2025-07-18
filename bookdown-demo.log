@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999996 (MiKTeX 24.4) (preloaded format=xelatex 2025.6.7)  17 JUL 2025 17:24
+This is XeTeX, Version 3.141592653-2.6-0.999996 (MiKTeX 24.4) (preloaded format=xelatex 2025.6.7)  18 JUL 2025 19:26
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1626,10 +1626,37 @@ File: bookdown-demo_files/figure-latex/8-crit-1.pdf Graphic file (type pdf)
 [173]
 
 [174]
+
+[175]
+Underfull \hbox (badness 2980) in paragraph at lines 5948--5949
+[]\TU/lmr/m/n/10 The solution to this is fairly intuitive, we use the sample va
+riance
+ []
+
+
+
+[176]
+File: bookdown-demo_files/figure-latex/8-t-1.pdf Graphic file (type pdf)
+<use bookdown-demo_files/figure-latex/8-t-1.pdf>
+
+
+[177]
+
+[178]
+
+[179]
+
+[180]
+
+[181]
+
+[182]
+
+[183]
 No file bookdown-demo.bbl.
 
 
-[175] (bookdown-demo.aux)
+[184] (bookdown-demo.aux)
  ***********
 LaTeX2e <2024-06-01> patch level 2
 L3 programming layer <2024-07-20>
@@ -1639,12 +1666,12 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 20243 strings out of 409029
- 372389 string characters out of 5763847
+ 20269 strings out of 409029
+ 373160 string characters out of 5763847
  1958612 words of memory out of 5000000
- 42608 multiletter control sequences out of 15000+600000
+ 42633 multiletter control sequences out of 15000+600000
  566021 words of font info for 104 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  90i,21n,123p,1199b,585s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on bookdown-demo.pdf (175 pages).
+Output written on bookdown-demo.pdf (184 pages).
