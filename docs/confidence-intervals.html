@@ -219,7 +219,7 @@ P(-z^{*} \leq \hat{Z} \leq z^{*}) &amp;= P(-z^{*} \leq \frac{\bar{X}_n - \mu}{SE
 \tag{8.9}
 \end{equation}\]</span></p>
 <p>Again, the formula in equation <a href="confidence-intervals.html#eq:8-CImean">(8.9)</a> is only valid if either of the two conditions in Section <a href="est.html#sampdistmean">7.4.4.1</a> is met, i.e. either the data are originally normal, or if the sample size is large enough.</p>
-<p>There are several rules of thumb that exist to assess if the “sample size is large enough” (usually at least 25 or 30 is suggested). However, as we mentioned in Section @(considerCLT), there is no fixed answer to this question. It depends on the distribution of the data. In general, the more skewed data is, <span class="math inline">\(n\)</span> needs to be larger for the approximation to work.</p>
+<p>There are several rules of thumb that exist to assess if the “sample size is large enough” (usually at least 25 or 30 is suggested). However, as we mentioned in Section (considerCLT), there is no fixed answer to this question. It depends on the distribution of the data. In general, the more skewed data is, <span class="math inline">\(n\)</span> needs to be larger for the approximation to work.</p>
 </div>
 <div id="CP" class="section level4" number="8.2.3.3">
 <h4>
@@ -311,7 +311,7 @@ Working everything out, we get (8406.103, 8471.891).</p>
 T =  \frac{\bar{X}_n - \mu}{\frac{s}{\sqrt{n}}} = \frac{\bar{X}_n - \mu}{SE(\bar{X}_n)},
 \tag{8.10}
 \end{equation}\]</span></p>
-<p>where <span class="math inline">\(SE(\bar{X}_n)\)</span> is now <span class="math inline">\(\frac{s}{\sqrt{n}}\)</span>. It turns out that <span class="math inline">\(T\)</span> follows another well-known distribution, called the <strong><span class="math inline">\(t\)</span> distribution with <span class="math inline">\(n-1\)</span> degrees of freedom</strong>. The PDF of a <span class="math inline">\(t\)</span> distribution is pretty long and is not needed for this course (you can look it up on your own), but we take a look at the plot of its PDF and compare with the plot of the PDF of a standard normal, in Figure <a href="confidence-intervals.html#fig:8-t">8.3</a> below.</p>
+<p>where <span class="math inline">\(SE(\bar{X}_n)\)</span> is now <span class="math inline">\(\frac{s}{\sqrt{n}}\)</span>. It turns out that <span class="math inline">\(T\)</span> follows another well-known distribution, called the <strong><span class="math inline">\(t\)</span> distribution with <span class="math inline">\(n-1\)</span> degrees of freedom</strong>. The PDF of a <span class="math inline">\(t\)</span> distribution is pretty long and is not needed for this course (you can look it up on your own), but we take a look at the plot of its PDF and compare it with the plot of the PDF of a standard normal, in Figure <a href="confidence-intervals.html#fig:8-t">8.3</a> below.</p>
 <div class="sourceCode" id="cb144"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##plot PDF from -5 to 5</span></span>
 <span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">5</span>, <span class="fl">5</span>, length.out <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span>
@@ -340,16 +340,16 @@ Figure 8.3: Plot of PDF for Z and t Distributions
 <li>As the degree of freedom increases, the <span class="math inline">\(t\)</span> distribution gets closer to a standard normal. Notice how the blue curve is closer to the standard normal curve in black, than the red curve is with the black curve. In fact, one can show mathematically that the PDF of a <span class="math inline">\(t\)</span> distribution converges to the PDF of a standard normal as the degree of freedom increases to infinity.</li>
 </ul>
 <p>How does the fact that we are working with a <span class="math inline">\(t\)</span> distribution instead of a standard normal affect how we calculate a confidence interval for the mean? How does equation <a href="confidence-intervals.html#eq:8-CImean">(8.9)</a> change? We replace <span class="math inline">\(\sigma^2\)</span> with <span class="math inline">\(s^2\)</span> and <span class="math inline">\(z^*\)</span> with <span class="math inline">\(t^*\)</span>. The critical value is now denoted by <span class="math inline">\(t^*\)</span> to emphasize that it is based on the <span class="math inline">\(t\)</span> distribution.</p>
+<p>As an example to find the critical value of a <span class="math inline">\(t\)</span> distribution with 10 degrees of freedom and with 95% confidence:</p>
+<div class="sourceCode" id="cb145"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">alpha</span><span class="op">&lt;-</span><span class="fl">0.05</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/TDist.html">qt</a></span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">alpha</span><span class="op">/</span><span class="fl">2</span>, <span class="fl">10</span><span class="op">)</span> <span class="co">##supply percentile first, then value of df</span></span></code></pre></div>
+<pre><code>## [1] 2.228139</code></pre>
 <p>Therefore, the <span class="math inline">\((1-\alpha) \times 100\%\)</span> confidence interval for the mean , when <span class="math inline">\(\sigma^2\)</span> is unknown, is</p>
 <p><span class="math display" id="eq:8-CImeant">\[\begin{equation}
 \left( \bar{x}_n - t^{*} \frac{s}{\sqrt{n}}, \bar{x}_n + t^{*} \frac{s}{\sqrt{n}} \right).
 \tag{8.11}
 \end{equation}\]</span></p>
-<p>To find the critical value of a <span class="math inline">\(t\)</span> distribution with 10 degrees of freedom and with 95% confidence:</p>
-<div class="sourceCode" id="cb145"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">alpha</span><span class="op">&lt;-</span><span class="fl">0.05</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/stats/TDist.html">qt</a></span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">alpha</span><span class="op">/</span><span class="fl">2</span>, <span class="fl">10</span><span class="op">)</span> <span class="co">##supply percentile first, then value of df</span></span></code></pre></div>
-<pre><code>## [1] 2.228139</code></pre>
 <p>Again, the formula in equation <a href="confidence-intervals.html#eq:8-CImeant">(8.11)</a> is only valid if either of the two conditions in Section <a href="est.html#sampdistmean">7.4.4.1</a> is met, i.e. either the data are originally normal, or if the sample size is large enough.</p>
 <div id="worked-example-2" class="section level4" number="8.2.4.1">
 <h4>
@@ -385,11 +385,11 @@ which gives (4.793914, 17.20609). Since the entire confidence interval lies abov
 </ul>
 <p><em>Thought question</em>: Can you give an intuitive explanation as to why? Using Figure <a href="confidence-intervals.html#fig:8-t">8.3</a> may be helpful.</p>
 <ul>
-<li>The value of <span class="math inline">\(t^*\)</span> gets closer to the value of <span class="math inline">\(z^*\)</span> as the degree of freedom gets larger.</li>
+<li>The value of <span class="math inline">\(t^*\)</span> gets closer to the value of <span class="math inline">\(z^*\)</span> as the degree of freedom gets larger. This implies that <span class="math inline">\(t^*\)</span> is approximately equal to <span class="math inline">\(z^*\)</span> for large sample sizes.</li>
 </ul>
 <p>Recall that the margin of error is the critical value multiplied by the standard error of the estimator. So margin of errors tend to be larger when <span class="math inline">\(\sigma^2\)</span> is unknown. It should make intuitive sense that we have a higher degree of uncertainty since we have an additional parameter to estimate.</p>
 <p>Since the margin of error tends to be larger when <span class="math inline">\(\sigma^2\)</span> is unknown, it means the <strong>width</strong> of the confidence interval for the mean tends to be wider when <span class="math inline">\(\sigma^2\)</span> is unknown. The width of a confidence interval is the difference between its upper and lower bound, or twice the margin of error.</p>
-<p><em>Thought question</em>: Imagine running the Monte Carlo simulation in Section <a href="confidence-intervals.html#CP">8.2.3.3</a>, but now use the sample variance instead of the population variance. Find the coverage probabilities of the confidence interval if we use the correct formula in equation <a href="confidence-intervals.html#eq:8-CImeant">(8.11)</a>, and if we use a <span class="math inline">\(z^*\)</span> as the critical value with the sample variance?</p>
+<p><em>Thought question</em>: Try running the Monte Carlo simulation in Section <a href="confidence-intervals.html#CP">8.2.3.3</a>, but now use the sample variance instead of the population variance. Find the coverage probabilities of the confidence interval if we use the correct formula in equation <a href="confidence-intervals.html#eq:8-CImeant">(8.11)</a>, and if we use a <span class="math inline">\(z^*\)</span> as the critical value with the sample variance.</p>
 </div>
 <div id="degrees-of-freedom" class="section level4" number="8.2.4.3">
 <h4>
@@ -419,7 +419,7 @@ which gives (4.793914, 17.20609). Since the entire confidence interval lies abov
 <span class="header-section-number">8.3</span> Confidence Interval for the Proportion<a class="anchor" aria-label="anchor" href="#confidence-interval-for-the-proportion"><i class="fas fa-link"></i></a>
 </h2>
 <p>Next, we will go over the confidence interval for the proportion. This is another common confidence interval. The sample proportion is an estimator for the population proportion.</p>
-<p>Proportions are used to summarize categorical variables, whereas means are used to summarize quantitative variables. One way to decide if the variable is categorical or quantitative is to ask whether arithmetic operations make sense when performed on the variable. If such operations make sense, the variable is quantitative, if not, the variable is categorical.</p>
+<p>Proportions are used to summarize categorical variables, whereas means are used to summarize quantitative variables. One way to decide if the variable is categorical or quantitative is to ask whether arithmetic operations make sense when performed on the variable. If such operations make sense, the variable is quantitative, if not, the variable is categorical. Consider the following two research questions:</p>
 <ul>
 <li><p>We measure the systolic blood pressure of a sample of American adults. The variable is quantitative, since the answer is a numeric value where arithmetic operations can be applied. We then calculate the average systolic blood pressure of American adults. So we can work on a confidence interval for the mean, using equation <a href="confidence-intervals.html#eq:8-CImeant">(8.11)</a>.</p></li>
 <li><p>We ask a sample of voters whether they support a particular candidate. The variable is categorical, since the answer is yes or no, and we cannot apply arithmetic operations to the answer. We then calculate the proportion of voters who support the candidate. So we need a confidence interval for the proportion.</p></li>
@@ -428,11 +428,13 @@ which gives (4.793914, 17.20609). Since the entire confidence interval lies abov
 <h3>
 <span class="header-section-number">8.3.1</span> Sampling Distribution of Sample Proportions<a class="anchor" aria-label="anchor" href="#sampling-distribution-of-sample-proportions"><i class="fas fa-link"></i></a>
 </h3>
-<p>We can use the Central Limit Theorem (CLT) to approximate the sampling distribution of sample proportions. A sketch of how to derive this sampling distribution is provided.</p>
-<p>Let <span class="math inline">\(X_1, \cdots, X_n\)</span> be i.i.d. Bernoulli with success probability p. Using equations <a href="discrete-random-variables.html#eq:3-bern-EX">(3.9)</a> and <a href="discrete-random-variables.html#eq:3-bern-var">(3.10)</a>, we know that <span class="math inline">\(E(X_i) = p\)</span> and <span class="math inline">\(Var(X_i) - p(1-p)\)</span>.</p>
-<p>Let <span class="math inline">\(S = X_1 + \cdots + X_n = \sum_{i=1}^n X_i\)</span> denote the number of successes in a sample of size <span class="math inline">\(n\)</span>. Using properties of expectations and variances, we know that <span class="math inline">\(E(S) = np\)</span> and <span class="math inline">\(Var(S) = np(1-p)\)</span>.</p>
-<p>The sample proportion, <span class="math inline">\(\hat{p}\)</span>, is just the number of successes divided by the sample size, so <span class="math inline">\(\hat{p} = \frac{S}{n} = \frac{\sum_{i=1}^n X_i}{n} = \bar{X}_n\)</span>. Therefore, using property of expectations and variances, we know that <span class="math inline">\(E(\hat{p}) = p\)</span> and <span class="math inline">\(Var(\hat{p}) = \frac{p(1-p)}{n}\)</span>.</p>
-<p>The CLT informs us if <span class="math inline">\(n\)</span> is large enough, then <span class="math inline">\(\hat{p}\)</span> is approximately <span class="math inline">\(N\left(p, \frac{p(1-p)}{n}\right)\)</span>. Also, the distribution of <span class="math inline">\(\hat{p}\)</span> after standardization is approximately standard normal, i.e. the standardized score <span class="math inline">\(\hat{Z} = \frac{\hat{p}-p}{\sqrt{\frac{p(1-p)}{n}}}\)</span> is approximately standard normal.</p>
+<p>We can use the Central Limit Theorem (CLT) to approximate the sampling distribution of sample proportions. A sketch of how to derive this sampling distribution is as follows:</p>
+<ul>
+<li><p>Let <span class="math inline">\(X_1, \cdots, X_n\)</span> be i.i.d. Bernoulli with success probability p. Using equations <a href="discrete-random-variables.html#eq:3-bern-EX">(3.9)</a> and <a href="discrete-random-variables.html#eq:3-bern-var">(3.10)</a>, we know that <span class="math inline">\(E(X_i) = p\)</span> and <span class="math inline">\(Var(X_i) - p(1-p)\)</span>.</p></li>
+<li><p>Let <span class="math inline">\(S = X_1 + \cdots + X_n = \sum_{i=1}^n X_i\)</span> denote the number of successes in a sample of size <span class="math inline">\(n\)</span>. Using properties of expectations and variances, we know that <span class="math inline">\(E(S) = np\)</span> and <span class="math inline">\(Var(S) = np(1-p)\)</span>.</p></li>
+<li><p>The sample proportion, <span class="math inline">\(\hat{p}\)</span>, is just the number of successes divided by the sample size, so <span class="math inline">\(\hat{p} = \frac{S}{n} = \frac{\sum_{i=1}^n X_i}{n} = \bar{X}_n\)</span>. Therefore, using property of expectations and variances, we know that <span class="math inline">\(E(\hat{p}) = p\)</span> and <span class="math inline">\(Var(\hat{p}) = \frac{p(1-p)}{n}\)</span>.</p></li>
+<li><p>The CLT informs us if <span class="math inline">\(n\)</span> is large enough, then <span class="math inline">\(\hat{p}\)</span> is approximately <span class="math inline">\(N\left(p, \frac{p(1-p)}{n}\right)\)</span>. Also, the distribution of <span class="math inline">\(\hat{p}\)</span> after standardization is approximately standard normal, i.e. the standardized score <span class="math inline">\(\hat{Z} = \frac{\hat{p}-p}{\sqrt{\frac{p(1-p)}{n}}}\)</span> is approximately standard normal.</p></li>
+</ul>
 </div>
 <div id="constructing-confidence-interval-for-the-proportion" class="section level3" number="8.3.2">
 <h3>
@@ -450,7 +452,7 @@ which gives (4.793914, 17.20609). Since the entire confidence interval lies abov
 <li>The standard error of <span class="math inline">\(\hat{p}\)</span> is <span class="math inline">\(SE(\hat{p}) = \sqrt{\frac{\hat{p}(1-\hat{p})}{n}}\)</span>.</li>
 <li>The margin of error is <span class="math inline">\(z^{*} \sqrt{\frac{\hat{p}(1-\hat{p})}{n}}\)</span>.</li>
 </ul>
-<p>The framework of confidence intervals usually takes on the form given in equation <a href="confidence-intervals.html#eq:8-CIbasic2">(8.2)</a>: we add and subtract the margin of error to and from the point estimate. The margin of error is the critical value multiplied by the standard error of the estimator. We see the confidence intervals for the mean and proportion take on this framework, and so do most confidence intervals of other estimators.</p>
+<p>The framework of confidence intervals usually takes on the form given in equation <a href="confidence-intervals.html#eq:8-CIbasic2">(8.2)</a>: we add and subtract the margin of error to and from the point estimate. The margin of error is the critical value multiplied by the standard error of the estimator. We see the confidence intervals for the mean and proportion take on this framework, and so do most confidence intervals of other estimators, as long as the sampling distribution of the estimator is symmetric.</p>
 <p>Note: equation <a href="confidence-intervals.html#eq:8-CIprop">(8.12)</a> is based on proportions, and not percentages. After calculating the confidence interval for the proportion, reporters often convert these values to percentages by multiplying them by a hundred.</p>
 <p>From equation <a href="confidence-intervals.html#eq:8-CIprop">(8.12)</a>, we can also see that we have the factors that affect the width of the confidence interval for the proportion is the same as the confidence interval for the mean.</p>
 <div id="conditions-for-confidence-interval-for-the-proportion" class="section level4" number="8.3.2.1">
@@ -485,7 +487,7 @@ which gives (4.793914, 17.20609). Since the entire confidence interval lies abov
 <h3>
 <span class="header-section-number">8.3.3</span> Minimum Sample Size<a class="anchor" aria-label="anchor" href="#minimum-sample-size"><i class="fas fa-link"></i></a>
 </h3>
-<p>Fairly often, researchers want to know what is the sample size needed in order to achieve a margin of error that is no more than some specific value, as they want to guarantee a certain level of precision in their report. Mathematically, we want to set <span class="math inline">\(z^{*} \sqrt{\frac{\hat{p}(1-\hat{p})}{n}} \leq M\)</span> where <span class="math inline">\(M\)</span> denotes some value of the margin of error that needs to be guaranteed.</p>
+<p>Fairly often, researchers want to know what sample size needed in order to guarantee a margin of error that is no more than some specific value, as they want to guarantee a certain level of precision in their report. Mathematically, we want to set <span class="math inline">\(z^{*} \sqrt{\frac{\hat{p}(1-\hat{p})}{n}} \leq M\)</span> where <span class="math inline">\(M\)</span> denotes some value of the margin of error that needs to be guaranteed.</p>
 <p>While we will not know the value of <span class="math inline">\(\hat{p}\)</span> before collecting data, we mentioned in Section <a href="discrete-random-variables.html#bernprop">3.5.1.1</a> that the value of <span class="math inline">\(p(1-p)\)</span> is maximized at <span class="math inline">\(p=\frac{1}{2}\)</span>. This implies that the <span class="math inline">\(SE(\hat{p})\)</span> is maximized at <span class="math inline">\(\hat{p} = \frac{1}{2}\)</span>. As long as the <span class="math inline">\(M\)</span> is satisfied when <span class="math inline">\(\hat{p} = \frac{1}{2}\)</span>, <span class="math inline">\(M\)</span> will be satisfied for any value of <span class="math inline">\(\hat{p}\)</span>. So subbing in <span class="math inline">\(\hat{p} = \frac{1}{2}\)</span> into <span class="math inline">\(z^{*} \sqrt{\frac{\hat{p}(1-\hat{p})}{n}} \leq M\)</span>, we have</p>
 <p><span class="math display" id="eq:8-minsamp">\[\begin{equation}
 \begin{split}
@@ -508,7 +510,7 @@ z^{*} \sqrt{\frac{\hat{p}(1-\hat{p})}{n}} &amp; \leq M \\
 1067.072 \leq n.
 \end{split}
 \]</span>
-So she will need to sample at least 1068 residents to guanrantee a margin of error that is no more than 3 percentage points.</p>
+So she will need to sample at least 1068 residents to guarantee a margin of error that is no more than 3 percentage points.</p>
 </div>
 </div>
 </div>
@@ -516,16 +518,137 @@ So she will need to sample at least 1068 residents to guanrantee a margin of err
 <h2>
 <span class="header-section-number">8.4</span> The Bootstrap<a class="anchor" aria-label="anchor" href="#the-bootstrap"><i class="fas fa-link"></i></a>
 </h2>
-<div id="the-algorithm" class="section level3" number="8.4.1">
+<p>In the previous subsections, we work out the confidence interval of an estimator by using the framework in equation <a href="confidence-intervals.html#eq:8-CIbasic2">(8.2)</a>: we add and subtract the margin of error to and from the point estimate. The margin of error is the critical value multiplied by the standard error of the estimator. The critical value is based on the sampling distribution of the estimator. This framework requires us to know the sampling distribution and the standard error of the estimator.</p>
+<p>However, there are estimators where its sampling distribution and standard error are unknown (i.e. no known formula on how to calculate the standard error of the sample median), for example, the sample median How can we construct confidence intervals for the median? Or how can we quantify our uncertainty of the sample median as an estimator of the population median?</p>
+<p>One idea could be to collect many random samples, compute the sample median from each sample, and create a density plot like we did in Monte Carlo simulations in Figure <a href="est.html#fig:7-bias">7.4</a>. However, this is not feasible in real life as we rarely have the time and money to go around obtaining many random samples. We are only able to work with the one random sample that we have.</p>
+<p>A method to work around these issues is the <strong>bootstrap</strong>. The bootstrap will enable us to:</p>
+<ul>
+<li><p>Estimate the standard error and variance of estimators if there are no known formulas for them.</p></li>
+<li><p>Construct confidence intervals for estimators with unknown sampling distributions and unknown formulas for their standard errors.</p></li>
+</ul>
+<p>We can do these without having to collect data from many random samples. Before going into how the bootstrap works, we remind ourselves of how Monte Carlo simulations work in terms of finding the sampling distribution and standard errors of estimators.</p>
+<div id="estimating-sampling-distributions-using-many-random-samples" class="section level3" number="8.4.1">
 <h3>
-<span class="header-section-number">8.4.1</span> The Algorithm<a class="anchor" aria-label="anchor" href="#the-algorithm"><i class="fas fa-link"></i></a>
+<span class="header-section-number">8.4.1</span> Estimating Sampling Distributions Using Many Random Samples<a class="anchor" aria-label="anchor" href="#estimating-sampling-distributions-using-many-random-samples"><i class="fas fa-link"></i></a>
 </h3>
+<p>When using Monte Carlo simulations to estimate the sampling distribution of estimators (see the code that generated Figures <a href="est.html#fig:7-bias">7.4</a> and <a href="est.html#fig:7-consistent">7.5</a> as examples), we typically did the following:</p>
+<ol style="list-style-type: decimal">
+<li><p>Assume the data follow some known distribution with PDF <span class="math inline">\(f_X\)</span> and CDF <span class="math inline">\(F_X\)</span>.</p></li>
+<li><p>Simulate <span class="math inline">\(n\)</span> data points from this assumed distribution <span class="math inline">\(K\)</span> times, with <span class="math inline">\(K\)</span> being large, to obtain <span class="math inline">\(K\)</span> replicate datasets of size <span class="math inline">\(n\)</span> denoted by <span class="math inline">\(\mathcal{X}^{1}, \cdots, \mathcal{X}^{K}\)</span>. (In a lot of my code <span class="math inline">\(K\)</span> is called <code>reps</code>).</p></li>
+<li><p>For each dataset, calculate the value of the estimator <span class="math inline">\(\hat{\Theta}\)</span>. Since we have <span class="math inline">\(K\)</span> datasets, we will have <span class="math inline">\(K\)</span> values for the estimators, denoted by <span class="math inline">\(\hat{\Theta}^{1}, \cdots, \hat{\Theta}^{K}\)</span>.</p></li>
+<li><p>We estimate the true mean of <span class="math inline">\(\hat{\Theta}\)</span> by taking the sample mean of <span class="math inline">\(\hat{\Theta}^{1}, \cdots, \hat{\Theta}^{K}\)</span>.</p></li>
+<li><p>We estimate the true variance of <span class="math inline">\(\hat{\Theta}\)</span> by taking the sample variance of <span class="math inline">\(\hat{\Theta}^{1}, \cdots, \hat{\Theta}^{K}\)</span>. Square-rooting this value gives an estimate for the standard error of <span class="math inline">\(\hat{\Theta}\)</span>.</p></li>
+</ol>
+<p>Note: this step is a bit different than what is described in the book. In the book, the author uses the population variance, instead of the sample variance. The population variance divides the sum of the squared deviations from the mean by <span class="math inline">\(K\)</span>, while the sample variance divides by <span class="math inline">\(K-1\)</span>. I have seen some authors divide by <span class="math inline">\(K\)</span>, and others divide by <span class="math inline">\(K-1\)</span>. The <code><a href="https://rdrr.io/r/stats/cor.html">var()</a></code> function in R calculates the sample variance, so I will admit that there is a level of convenience to use the sample variance so I can use an R function. <span class="math inline">\(K\)</span> needs to be large for the bootstrap to work well, so the end result is the numerical values are very close to each other.</p>
+<ol start="6" style="list-style-type: decimal">
+<li>We create a density plot of <span class="math inline">\(\hat{\Theta}^{1}, \cdots, \hat{\Theta}^{K}\)</span> to estimate the sampling distribution of <span class="math inline">\(\hat{\Theta}\)</span>.</li>
+</ol>
+<p>As written earlier, the problem applying this idea to an estimator that has an unknown sampling distribution is that we do not know its associated PDF <span class="math inline">\(f_X\)</span> and CDF <span class="math inline">\(F_X\)</span>. So we cannot carry out the steps listed. What the bootstrap does is to mimic these steps, when we only have access to data from one random sample. Next, we describe the steps that are carried out in the bootstrap. Pay attention to the similarities and differences in these steps with the steps above.</p>
 </div>
-<div id="worked-example-5" class="section level3" number="8.4.2">
+<div id="the-bootstrap-algorithm" class="section level3" number="8.4.2">
 <h3>
-<span class="header-section-number">8.4.2</span> Worked Example<a class="anchor" aria-label="anchor" href="#worked-example-5"><i class="fas fa-link"></i></a>
+<span class="header-section-number">8.4.2</span> The Bootstrap Algorithm<a class="anchor" aria-label="anchor" href="#the-bootstrap-algorithm"><i class="fas fa-link"></i></a>
 </h3>
-
+<p>Instead of simulating <span class="math inline">\(K\)</span> replicate datasets from an assumed distribution, we simulate <span class="math inline">\(K\)</span> replicate datasets by sampling, <strong>with replacement</strong>, <span class="math inline">\(n\)</span> data points from the original dataset.</p>
+<p>Let <span class="math inline">\(\mathcal{X}\)</span> denote the original dataset with <span class="math inline">\(n\)</span> observations. Let <span class="math inline">\(\theta\)</span> denote the value of the estimator from the original dataset.</p>
+<ol style="list-style-type: decimal">
+<li>Synthesize <span class="math inline">\(K\)</span> bootstrapped datasets <span class="math inline">\(\mathcal{Y}^{(1)}, \cdots, \mathcal{Y}^{(K)}\)</span> where each bootstrapped dataset is derived by sampling <span class="math inline">\(n\)</span> data points from the original dataset, with replacement. The “with replacement” term is key: it means that when a data point is sampled, it is returned to the orignal dataset and it can be sampled again.</li>
+</ol>
+<p>See the video below for a visual representation of sampling with replacement:</p>
+<ol start="2" style="list-style-type: decimal">
+<li><p>For each dataset, calculate the value of the estimator <span class="math inline">\(\hat{\Theta}\)</span>. Since we have <span class="math inline">\(K\)</span> bootstrapped datasets, we will have <span class="math inline">\(K\)</span> values for the estimators, denoted by <span class="math inline">\(\hat{\Theta}^{(1)}, \cdots, \hat{\Theta}^{(K)}\)</span>.</p></li>
+<li><p>We estimate the true mean of <span class="math inline">\(\hat{\Theta}\)</span> by taking the sample mean of <span class="math inline">\(\hat{\Theta}^{(1)}, \cdots, \hat{\Theta}^{(K)}\)</span>. This value is denoted by <span class="math inline">\(M_b(\hat{\Theta})\)</span>.</p></li>
+<li><p>We estimate the true variance of <span class="math inline">\(\hat{\Theta}\)</span> by taking the sample variance of <span class="math inline">\(\hat{\Theta}^{(1)}, \cdots, \hat{\Theta}^{(K)}\)</span>. This value is denoted by <span class="math inline">\(V_b(\hat{\Theta})\)</span>. Square-rooting <span class="math inline">\(V_b(\hat{\Theta})\)</span> gives an estimate for the standard error of <span class="math inline">\(\hat{\Theta}\)</span>, denoted by <span class="math inline">\(SE_b(\Theta)\)</span>. If <span class="math inline">\(K\)</span> is large enough, <span class="math inline">\(V_b(\hat{\Theta})\)</span> will approximate the true variance of the estimator.</p></li>
+</ol>
+<p>Note: see the note in step 5 in the previous subsection. The same note applies here.</p>
+<ol start="5" style="list-style-type: decimal">
+<li>We create a density plot of <span class="math inline">\(\hat{\Theta}^{(1)}, \cdots, \hat{\Theta}^{(K)}\)</span> to estimate the sampling distribution of <span class="math inline">\(\hat{\Theta}\)</span>. If <span class="math inline">\(K\)</span> is large enough, this density plot will approximate the true PDF <span class="math inline">\(f_X\)</span> well.</li>
+</ol>
+<p>Comparing this algorithm with Monte Carlo simulations, the main differences are:</p>
+<ul>
+<li><p>With the bootstrap, we do not assume any distribution for the original data. With Monte Carlo simulations, we do make an assumption on the distribution for the original data.</p></li>
+<li><p>The <span class="math inline">\(K\)</span> datasets are produced slightly differently. For the bootstrap, they are synthesized by sampling with replacement <span class="math inline">\(n\)</span> data points from the original dataset of size <span class="math inline">\(n\)</span>. With Monte Carlo simulations, we draw <span class="math inline">\(n\)</span> data points from its assumed distribution.</p></li>
+</ul>
+<p>The math that proves the bootstrap works is beyond the level of this class, although it is freely available online.</p>
+<p>The bootstrap estimate for the variance of an estimator, <span class="math inline">\(V_b(\hat{\Theta})\)</span>, tends to work better as <span class="math inline">\(K\)</span> increases and as <span class="math inline">\(n\)</span> increases.</p>
+</div>
+<div id="confidence-intervals-using-the-bootstrap" class="section level3" number="8.4.3">
+<h3>
+<span class="header-section-number">8.4.3</span> Confidence Intervals using the Bootstrap<a class="anchor" aria-label="anchor" href="#confidence-intervals-using-the-bootstrap"><i class="fas fa-link"></i></a>
+</h3>
+<p>The bootstrap <span class="math inline">\((1-\alpha) \times 100\%\)</span> confidence interval for <span class="math inline">\(\theta\)</span> is</p>
+<p><span class="math display" id="eq:8-CIboot">\[\begin{equation}
+\left( 2 \hat{\theta} - \hat{\theta}_{1-\alpha/2}^*, 2 \hat{\theta} - \hat{\theta}_{\alpha/2}^* \right),
+\tag{8.14}
+\end{equation}\]</span></p>
+<p>where <span class="math inline">\(\hat{\theta}_{\beta}^*\)</span> is the <span class="math inline">\(\beta \times 100\)</span>th percentile of <span class="math inline">\(\hat{\Theta}^{(1)}, \cdots, \hat{\Theta}^{(K)}\)</span>, the <span class="math inline">\(K\)</span> numerical values of the estimator from each bootstrapped sample.</p>
+<p>You may notice that the confidence interval in equation <a href="confidence-intervals.html#eq:8-CIboot">(8.14)</a> does not fit the general framework given in equation <a href="confidence-intervals.html#eq:8-CIbasic2">(8.2)</a>. This is because the sampling distribution of the estimator may not be symmetric.</p>
+<p>The math that derives this confidence interval is beyond the level of this class, although it is freely available online.</p>
+<p>The bootstrap confidence interval tends to work better as <span class="math inline">\(K\)</span> increases and as <span class="math inline">\(n\)</span> increases.</p>
+</div>
+<div id="worked-example-5" class="section level3" number="8.4.4">
+<h3>
+<span class="header-section-number">8.4.4</span> Worked Example<a class="anchor" aria-label="anchor" href="#worked-example-5"><i class="fas fa-link"></i></a>
+</h3>
+<p>We have data on 400 credit card customers. A density plot of their credit limits is shown below:</p>
+<div class="sourceCode" id="cb147"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://www.statlearning.com">ISLR2</a></span><span class="op">)</span></span></code></pre></div>
+<pre><code>## 
+## Attaching package: 'ISLR2'</code></pre>
+<pre><code>## The following object is masked from 'package:MASS':
+## 
+##     Boston</code></pre>
+<div class="sourceCode" id="cb150"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">Data</span><span class="op">&lt;-</span><span class="fu">ISLR2</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/ISLR2/man/Credit.html">Credit</a></span><span class="op">$</span><span class="va">Limit</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/density.html">density</a></span><span class="op">(</span><span class="va">Data</span><span class="op">)</span>, xlab<span class="op">=</span><span class="st">"Credit Limit"</span>, main<span class="op">=</span><span class="st">"Density Plot of Credit Limits"</span><span class="op">)</span></span></code></pre></div>
+<div class="figure">
+<span style="display:block;" id="fig:8-credit"></span>
+<img src="bookdown-demo_files/figure-html/8-credit-1.png" alt="Density Plot of Credit Limits" width="672"><p class="caption">
+Figure 8.4: Density Plot of Credit Limits
+</p>
+</div>
+<p>The density plot in Figure <a href="confidence-intervals.html#fig:8-credit">8.4</a> informs us that the values of credit limits is skewed, so the median is a better measure of centrality for credit limits. We wish to estimate the population median credit limit, give a measure of uncertainty, as well as report a 95% confidence interval for the median credit limit. Since the sampling distribution of the sample median is unknown, we use the bootstrap:</p>
+<div class="sourceCode" id="cb151"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">##get sample size</span></span>
+<span><span class="va">n</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">Data</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">K</span><span class="op">&lt;-</span><span class="fl">1000</span> <span class="co">##Number of bootstrap samples</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">77</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">##the sample function, with replace=TRUE, samples with replacement. </span></span>
+<span><span class="co">##The replicate function repeats the sample function K times</span></span>
+<span><span class="va">boot.samples</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html">replicate</a></span><span class="op">(</span><span class="va">K</span>,<span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="va">Data</span>,<span class="va">n</span>,replace<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">##Each column in boot.samples represents each bootstrap sample</span></span>
+<span></span>
+<span><span class="co">##find the sample median of each column, since each column represents a bootstrap sample</span></span>
+<span><span class="va">boot.medians</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">boot.samples</span>,<span class="fl">2</span>,<span class="va">median</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">##bootstrap SE of the median is just the SD of the sample medians from each bootstrap sample</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">boot.medians</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 152.0525</code></pre>
+<div class="sourceCode" id="cb153"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">##bootstrap variance of the median is just the variance of the sample medians from each bootstrap sample</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html">var</a></span><span class="op">(</span><span class="va">boot.medians</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 23119.95</code></pre>
+<div class="sourceCode" id="cb155"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">##find bootstrap CI</span></span>
+<span><span class="va">alpha</span><span class="op">&lt;-</span><span class="fl">0.05</span></span>
+<span></span>
+<span><span class="co">##median from original sample</span></span>
+<span><span class="va">orig.median</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span><span class="va">Data</span><span class="op">)</span></span>
+<span><span class="va">orig.median</span></span></code></pre></div>
+<pre><code>## [1] 4622.5</code></pre>
+<div class="sourceCode" id="cb157"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">##lower and upper bound of the CI</span></span>
+<span><span class="fl">2</span><span class="op">*</span><span class="va">orig.median</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">boot.medians</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">alpha</span><span class="op">/</span><span class="fl">2</span>,<span class="va">alpha</span><span class="op">/</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##    97.5%     2.5% 
+## 4380.000 4948.525</code></pre>
+<p>We report the following:</p>
+<ul>
+<li>The sample median is $4622.5.</li>
+<li>The standard error of the sample median is $152.0525.</li>
+<li>The 95% confidence interval for the median credit limit is (4380.000, 4948.525). There is 95% probability that the true population median credit limit lies in the random interval between $4380 and $4948.525.</li>
+</ul>
 </div>
 </div>
 </div>
@@ -555,8 +678,10 @@ So she will need to sample at least 1068 residents to guanrantee a margin of err
 </li>
 <li>
 <a class="nav-link" href="#the-bootstrap"><span class="header-section-number">8.4</span> The Bootstrap</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#the-algorithm"><span class="header-section-number">8.4.1</span> The Algorithm</a></li>
-<li><a class="nav-link" href="#worked-example-5"><span class="header-section-number">8.4.2</span> Worked Example</a></li>
+<li><a class="nav-link" href="#estimating-sampling-distributions-using-many-random-samples"><span class="header-section-number">8.4.1</span> Estimating Sampling Distributions Using Many Random Samples</a></li>
+<li><a class="nav-link" href="#the-bootstrap-algorithm"><span class="header-section-number">8.4.2</span> The Bootstrap Algorithm</a></li>
+<li><a class="nav-link" href="#confidence-intervals-using-the-bootstrap"><span class="header-section-number">8.4.3</span> Confidence Intervals using the Bootstrap</a></li>
+<li><a class="nav-link" href="#worked-example-5"><span class="header-section-number">8.4.4</span> Worked Example</a></li>
 </ul>
 </li>
 </ul>
@@ -575,7 +700,7 @@ So she will need to sample at least 1068 residents to guanrantee a margin of err
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2025-07-18.</p>
+    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2025-07-19.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

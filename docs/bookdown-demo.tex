@@ -127,7 +127,7 @@
 
 \title{Understanding Uncertainty Course Notes}
 \author{Jeffrey Woo}
-\date{2025-07-18}
+\date{2025-07-19}
 
 \begin{document}
 \maketitle
@@ -5836,7 +5836,7 @@ Therefore, the \((1-\alpha) \times 100\%\) confidence interval for the mean is
 
 Again, the formula in equation \eqref{eq:8-CImean} is only valid if either of the two conditions in Section \ref{sampdistmean} is met, i.e.~either the data are originally normal, or if the sample size is large enough.
 
-There are several rules of thumb that exist to assess if the ``sample size is large enough'' (usually at least 25 or 30 is suggested). However, as we mentioned in Section @(considerCLT), there is no fixed answer to this question. It depends on the distribution of the data. In general, the more skewed data is, \(n\) needs to be larger for the approximation to work.
+There are several rules of thumb that exist to assess if the ``sample size is large enough'' (usually at least 25 or 30 is suggested). However, as we mentioned in Section \ref@(considerCLT), there is no fixed answer to this question. It depends on the distribution of the data. In general, the more skewed data is, \(n\) needs to be larger for the approximation to work.
 
 \subsubsection{Coverage Probability}\label{CP}
 
@@ -5954,7 +5954,7 @@ T =  \frac{\bar{X}_n - \mu}{\frac{s}{\sqrt{n}}} = \frac{\bar{X}_n - \mu}{SE(\bar
 \label{eq:8-tstat}
 \end{equation}
 
-where \(SE(\bar{X}_n)\) is now \(\frac{s}{\sqrt{n}}\). It turns out that \(T\) follows another well-known distribution, called the \textbf{\(t\) distribution with \(n-1\) degrees of freedom}. The PDF of a \(t\) distribution is pretty long and is not needed for this course (you can look it up on your own), but we take a look at the plot of its PDF and compare with the plot of the PDF of a standard normal, in Figure \ref{fig:8-t} below.
+where \(SE(\bar{X}_n)\) is now \(\frac{s}{\sqrt{n}}\). It turns out that \(T\) follows another well-known distribution, called the \textbf{\(t\) distribution with \(n-1\) degrees of freedom}. The PDF of a \(t\) distribution is pretty long and is not needed for this course (you can look it up on your own), but we take a look at the plot of its PDF and compare it with the plot of the PDF of a standard normal, in Figure \ref{fig:8-t} below.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5996,14 +5996,7 @@ From Figure \ref{fig:8-t}, we note a few things about the \(t\) distribution:
 
 How does the fact that we are working with a \(t\) distribution instead of a standard normal affect how we calculate a confidence interval for the mean? How does equation \eqref{eq:8-CImean} change? We replace \(\sigma^2\) with \(s^2\) and \(z^*\) with \(t^*\). The critical value is now denoted by \(t^*\) to emphasize that it is based on the \(t\) distribution.
 
-Therefore, the \((1-\alpha) \times 100\%\) confidence interval for the mean , when \(\sigma^2\) is unknown, is
-
-\begin{equation} 
-\left( \bar{x}_n - t^{*} \frac{s}{\sqrt{n}}, \bar{x}_n + t^{*} \frac{s}{\sqrt{n}} \right).
-\label{eq:8-CImeant}
-\end{equation}
-
-To find the critical value of a \(t\) distribution with 10 degrees of freedom and with 95\% confidence:
+As an example to find the critical value of a \(t\) distribution with 10 degrees of freedom and with 95\% confidence:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -6015,6 +6008,13 @@ To find the critical value of a \(t\) distribution with 10 degrees of freedom an
 \begin{verbatim}
 ## [1] 2.228139
 \end{verbatim}
+
+Therefore, the \((1-\alpha) \times 100\%\) confidence interval for the mean , when \(\sigma^2\) is unknown, is
+
+\begin{equation} 
+\left( \bar{x}_n - t^{*} \frac{s}{\sqrt{n}}, \bar{x}_n + t^{*} \frac{s}{\sqrt{n}} \right).
+\label{eq:8-CImeant}
+\end{equation}
 
 Again, the formula in equation \eqref{eq:8-CImeant} is only valid if either of the two conditions in Section \ref{sampdistmean} is met, i.e.~either the data are originally normal, or if the sample size is large enough.
 
@@ -6061,14 +6061,14 @@ A couple of interesting things to note with critical values associated with the 
 \begin{itemize}
 \tightlist
 \item
-  The value of \(t^*\) gets closer to the value of \(z^*\) as the degree of freedom gets larger.
+  The value of \(t^*\) gets closer to the value of \(z^*\) as the degree of freedom gets larger. This implies that \(t^*\) is approximately equal to \(z^*\) for large sample sizes.
 \end{itemize}
 
 Recall that the margin of error is the critical value multiplied by the standard error of the estimator. So margin of errors tend to be larger when \(\sigma^2\) is unknown. It should make intuitive sense that we have a higher degree of uncertainty since we have an additional parameter to estimate.
 
 Since the margin of error tends to be larger when \(\sigma^2\) is unknown, it means the \textbf{width} of the confidence interval for the mean tends to be wider when \(\sigma^2\) is unknown. The width of a confidence interval is the difference between its upper and lower bound, or twice the margin of error.
 
-\emph{Thought question}: Imagine running the Monte Carlo simulation in Section \ref{CP}, but now use the sample variance instead of the population variance. Find the coverage probabilities of the confidence interval if we use the correct formula in equation \eqref{eq:8-CImeant}, and if we use a \(z^*\) as the critical value with the sample variance?
+\emph{Thought question}: Try running the Monte Carlo simulation in Section \ref{CP}, but now use the sample variance instead of the population variance. Find the coverage probabilities of the confidence interval if we use the correct formula in equation \eqref{eq:8-CImeant}, and if we use a \(z^*\) as the critical value with the sample variance.
 
 \subsubsection{Degrees of Freedom}\label{degrees-of-freedom}
 
@@ -6100,7 +6100,7 @@ Other factors such as whether \(\sigma^2\) is unknown or not, and the value of t
 
 Next, we will go over the confidence interval for the proportion. This is another common confidence interval. The sample proportion is an estimator for the population proportion.
 
-Proportions are used to summarize categorical variables, whereas means are used to summarize quantitative variables. One way to decide if the variable is categorical or quantitative is to ask whether arithmetic operations make sense when performed on the variable. If such operations make sense, the variable is quantitative, if not, the variable is categorical.
+Proportions are used to summarize categorical variables, whereas means are used to summarize quantitative variables. One way to decide if the variable is categorical or quantitative is to ask whether arithmetic operations make sense when performed on the variable. If such operations make sense, the variable is quantitative, if not, the variable is categorical. Consider the following two research questions:
 
 \begin{itemize}
 \item
@@ -6111,15 +6111,18 @@ Proportions are used to summarize categorical variables, whereas means are used 
 
 \subsection{Sampling Distribution of Sample Proportions}\label{sampling-distribution-of-sample-proportions}
 
-We can use the Central Limit Theorem (CLT) to approximate the sampling distribution of sample proportions. A sketch of how to derive this sampling distribution is provided.
+We can use the Central Limit Theorem (CLT) to approximate the sampling distribution of sample proportions. A sketch of how to derive this sampling distribution is as follows:
 
-Let \(X_1, \cdots, X_n\) be i.i.d. Bernoulli with success probability p.~Using equations \eqref{eq:3-bern-EX} and \eqref{eq:3-bern-var}, we know that \(E(X_i) = p\) and \(Var(X_i) - p(1-p)\).
-
-Let \(S = X_1 + \cdots + X_n = \sum_{i=1}^n X_i\) denote the number of successes in a sample of size \(n\). Using properties of expectations and variances, we know that \(E(S) = np\) and \(Var(S) = np(1-p)\).
-
-The sample proportion, \(\hat{p}\), is just the number of successes divided by the sample size, so \(\hat{p} = \frac{S}{n} = \frac{\sum_{i=1}^n X_i}{n} = \bar{X}_n\). Therefore, using property of expectations and variances, we know that \(E(\hat{p}) = p\) and \(Var(\hat{p}) = \frac{p(1-p)}{n}\).
-
-The CLT informs us if \(n\) is large enough, then \(\hat{p}\) is approximately \(N\left(p, \frac{p(1-p)}{n}\right)\). Also, the distribution of \(\hat{p}\) after standardization is approximately standard normal, i.e.~the standardized score \(\hat{Z} = \frac{\hat{p}-p}{\sqrt{\frac{p(1-p)}{n}}}\) is approximately standard normal.
+\begin{itemize}
+\item
+  Let \(X_1, \cdots, X_n\) be i.i.d. Bernoulli with success probability p.~Using equations \eqref{eq:3-bern-EX} and \eqref{eq:3-bern-var}, we know that \(E(X_i) = p\) and \(Var(X_i) - p(1-p)\).
+\item
+  Let \(S = X_1 + \cdots + X_n = \sum_{i=1}^n X_i\) denote the number of successes in a sample of size \(n\). Using properties of expectations and variances, we know that \(E(S) = np\) and \(Var(S) = np(1-p)\).
+\item
+  The sample proportion, \(\hat{p}\), is just the number of successes divided by the sample size, so \(\hat{p} = \frac{S}{n} = \frac{\sum_{i=1}^n X_i}{n} = \bar{X}_n\). Therefore, using property of expectations and variances, we know that \(E(\hat{p}) = p\) and \(Var(\hat{p}) = \frac{p(1-p)}{n}\).
+\item
+  The CLT informs us if \(n\) is large enough, then \(\hat{p}\) is approximately \(N\left(p, \frac{p(1-p)}{n}\right)\). Also, the distribution of \(\hat{p}\) after standardization is approximately standard normal, i.e.~the standardized score \(\hat{Z} = \frac{\hat{p}-p}{\sqrt{\frac{p(1-p)}{n}}}\) is approximately standard normal.
+\end{itemize}
 
 \subsection{Constructing Confidence Interval for the Proportion}\label{constructing-confidence-interval-for-the-proportion}
 
@@ -6144,7 +6147,7 @@ From equation \eqref{eq:8-CIprop}, we can see that
   The margin of error is \(z^{*} \sqrt{\frac{\hat{p}(1-\hat{p})}{n}}\).
 \end{itemize}
 
-The framework of confidence intervals usually takes on the form given in equation \eqref{eq:8-CIbasic2}: we add and subtract the margin of error to and from the point estimate. The margin of error is the critical value multiplied by the standard error of the estimator. We see the confidence intervals for the mean and proportion take on this framework, and so do most confidence intervals of other estimators.
+The framework of confidence intervals usually takes on the form given in equation \eqref{eq:8-CIbasic2}: we add and subtract the margin of error to and from the point estimate. The margin of error is the critical value multiplied by the standard error of the estimator. We see the confidence intervals for the mean and proportion take on this framework, and so do most confidence intervals of other estimators, as long as the sampling distribution of the estimator is symmetric.
 
 Note: equation \eqref{eq:8-CIprop} is based on proportions, and not percentages. After calculating the confidence interval for the proportion, reporters often convert these values to percentages by multiplying them by a hundred.
 
@@ -6182,7 +6185,7 @@ There is a 95\% probability that the random interval (0.08361097, 0.09845943) co
 
 \subsection{Minimum Sample Size}\label{minimum-sample-size}
 
-Fairly often, researchers want to know what is the sample size needed in order to achieve a margin of error that is no more than some specific value, as they want to guarantee a certain level of precision in their report. Mathematically, we want to set \(z^{*} \sqrt{\frac{\hat{p}(1-\hat{p})}{n}} \leq M\) where \(M\) denotes some value of the margin of error that needs to be guaranteed.
+Fairly often, researchers want to know what sample size needed in order to guarantee a margin of error that is no more than some specific value, as they want to guarantee a certain level of precision in their report. Mathematically, we want to set \(z^{*} \sqrt{\frac{\hat{p}(1-\hat{p})}{n}} \leq M\) where \(M\) denotes some value of the margin of error that needs to be guaranteed.
 
 While we will not know the value of \(\hat{p}\) before collecting data, we mentioned in Section \ref{bernprop} that the value of \(p(1-p)\) is maximized at \(p=\frac{1}{2}\). This implies that the \(SE(\hat{p})\) is maximized at \(\hat{p} = \frac{1}{2}\). As long as the \(M\) is satisfied when \(\hat{p} = \frac{1}{2}\), \(M\) will be satisfied for any value of \(\hat{p}\). So subbing in \(\hat{p} = \frac{1}{2}\) into \(z^{*} \sqrt{\frac{\hat{p}(1-\hat{p})}{n}} \leq M\), we have
 
@@ -6209,13 +6212,233 @@ Using the inequality \eqref{eq:8-minsamp},
 1067.072 \leq n.
 \end{split}
 \]
-So she will need to sample at least 1068 residents to guanrantee a margin of error that is no more than 3 percentage points.
+So she will need to sample at least 1068 residents to guarantee a margin of error that is no more than 3 percentage points.
 
 \section{The Bootstrap}\label{the-bootstrap}
 
-\subsection{The Algorithm}\label{the-algorithm}
+In the previous subsections, we work out the confidence interval of an estimator by using the framework in equation \eqref{eq:8-CIbasic2}: we add and subtract the margin of error to and from the point estimate. The margin of error is the critical value multiplied by the standard error of the estimator. The critical value is based on the sampling distribution of the estimator. This framework requires us to know the sampling distribution and the standard error of the estimator.
+
+However, there are estimators where its sampling distribution and standard error are unknown (i.e.~no known formula on how to calculate the standard error of the sample median), for example, the sample median How can we construct confidence intervals for the median? Or how can we quantify our uncertainty of the sample median as an estimator of the population median?
+
+One idea could be to collect many random samples, compute the sample median from each sample, and create a density plot like we did in Monte Carlo simulations in Figure \ref{fig:7-bias}. However, this is not feasible in real life as we rarely have the time and money to go around obtaining many random samples. We are only able to work with the one random sample that we have.
+
+A method to work around these issues is the \textbf{bootstrap}. The bootstrap will enable us to:
+
+\begin{itemize}
+\item
+  Estimate the standard error and variance of estimators if there are no known formulas for them.
+\item
+  Construct confidence intervals for estimators with unknown sampling distributions and unknown formulas for their standard errors.
+\end{itemize}
+
+We can do these without having to collect data from many random samples. Before going into how the bootstrap works, we remind ourselves of how Monte Carlo simulations work in terms of finding the sampling distribution and standard errors of estimators.
+
+\subsection{Estimating Sampling Distributions Using Many Random Samples}\label{estimating-sampling-distributions-using-many-random-samples}
+
+When using Monte Carlo simulations to estimate the sampling distribution of estimators (see the code that generated Figures \ref{fig:7-bias} and \ref{fig:7-consistent} as examples), we typically did the following:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Assume the data follow some known distribution with PDF \(f_X\) and CDF \(F_X\).
+\item
+  Simulate \(n\) data points from this assumed distribution \(K\) times, with \(K\) being large, to obtain \(K\) replicate datasets of size \(n\) denoted by \(\mathcal{X}^{1}, \cdots, \mathcal{X}^{K}\). (In a lot of my code \(K\) is called \texttt{reps}).
+\item
+  For each dataset, calculate the value of the estimator \(\hat{\Theta}\). Since we have \(K\) datasets, we will have \(K\) values for the estimators, denoted by \(\hat{\Theta}^{1}, \cdots, \hat{\Theta}^{K}\).
+\item
+  We estimate the true mean of \(\hat{\Theta}\) by taking the sample mean of \(\hat{\Theta}^{1}, \cdots, \hat{\Theta}^{K}\).
+\item
+  We estimate the true variance of \(\hat{\Theta}\) by taking the sample variance of \(\hat{\Theta}^{1}, \cdots, \hat{\Theta}^{K}\). Square-rooting this value gives an estimate for the standard error of \(\hat{\Theta}\).
+\end{enumerate}
+
+Note: this step is a bit different than what is described in the book. In the book, the author uses the population variance, instead of the sample variance. The population variance divides the sum of the squared deviations from the mean by \(K\), while the sample variance divides by \(K-1\). I have seen some authors divide by \(K\), and others divide by \(K-1\). The \texttt{var()} function in R calculates the sample variance, so I will admit that there is a level of convenience to use the sample variance so I can use an R function. \(K\) needs to be large for the bootstrap to work well, so the end result is the numerical values are very close to each other.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{5}
+\tightlist
+\item
+  We create a density plot of \(\hat{\Theta}^{1}, \cdots, \hat{\Theta}^{K}\) to estimate the sampling distribution of \(\hat{\Theta}\).
+\end{enumerate}
+
+As written earlier, the problem applying this idea to an estimator that has an unknown sampling distribution is that we do not know its associated PDF \(f_X\) and CDF \(F_X\). So we cannot carry out the steps listed. What the bootstrap does is to mimic these steps, when we only have access to data from one random sample. Next, we describe the steps that are carried out in the bootstrap. Pay attention to the similarities and differences in these steps with the steps above.
+
+\subsection{The Bootstrap Algorithm}\label{the-bootstrap-algorithm}
+
+Instead of simulating \(K\) replicate datasets from an assumed distribution, we simulate \(K\) replicate datasets by sampling, \textbf{with replacement}, \(n\) data points from the original dataset.
+
+Let \(\mathcal{X}\) denote the original dataset with \(n\) observations. Let \(\theta\) denote the value of the estimator from the original dataset.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Synthesize \(K\) bootstrapped datasets \(\mathcal{Y}^{(1)}, \cdots, \mathcal{Y}^{(K)}\) where each bootstrapped dataset is derived by sampling \(n\) data points from the original dataset, with replacement. The ``with replacement'' term is key: it means that when a data point is sampled, it is returned to the orignal dataset and it can be sampled again.
+\end{enumerate}
+
+See the video below for a visual representation of sampling with replacement:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\item
+  For each dataset, calculate the value of the estimator \(\hat{\Theta}\). Since we have \(K\) bootstrapped datasets, we will have \(K\) values for the estimators, denoted by \(\hat{\Theta}^{(1)}, \cdots, \hat{\Theta}^{(K)}\).
+\item
+  We estimate the true mean of \(\hat{\Theta}\) by taking the sample mean of \(\hat{\Theta}^{(1)}, \cdots, \hat{\Theta}^{(K)}\). This value is denoted by \(M_b(\hat{\Theta})\).
+\item
+  We estimate the true variance of \(\hat{\Theta}\) by taking the sample variance of \(\hat{\Theta}^{(1)}, \cdots, \hat{\Theta}^{(K)}\). This value is denoted by \(V_b(\hat{\Theta})\). Square-rooting \(V_b(\hat{\Theta})\) gives an estimate for the standard error of \(\hat{\Theta}\), denoted by \(SE_b(\Theta)\). If \(K\) is large enough, \(V_b(\hat{\Theta})\) will approximate the true variance of the estimator.
+\end{enumerate}
+
+Note: see the note in step 5 in the previous subsection. The same note applies here.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{4}
+\tightlist
+\item
+  We create a density plot of \(\hat{\Theta}^{(1)}, \cdots, \hat{\Theta}^{(K)}\) to estimate the sampling distribution of \(\hat{\Theta}\). If \(K\) is large enough, this density plot will approximate the true PDF \(f_X\) well.
+\end{enumerate}
+
+Comparing this algorithm with Monte Carlo simulations, the main differences are:
+
+\begin{itemize}
+\item
+  With the bootstrap, we do not assume any distribution for the original data. With Monte Carlo simulations, we do make an assumption on the distribution for the original data.
+\item
+  The \(K\) datasets are produced slightly differently. For the bootstrap, they are synthesized by sampling with replacement \(n\) data points from the original dataset of size \(n\). With Monte Carlo simulations, we draw \(n\) data points from its assumed distribution.
+\end{itemize}
+
+The math that proves the bootstrap works is beyond the level of this class, although it is freely available online.
+
+The bootstrap estimate for the variance of an estimator, \(V_b(\hat{\Theta})\), tends to work better as \(K\) increases and as \(n\) increases.
+
+\subsection{Confidence Intervals using the Bootstrap}\label{confidence-intervals-using-the-bootstrap}
+
+The bootstrap \((1-\alpha) \times 100\%\) confidence interval for \(\theta\) is
+
+\begin{equation} 
+\left( 2 \hat{\theta} - \hat{\theta}_{1-\alpha/2}^*, 2 \hat{\theta} - \hat{\theta}_{\alpha/2}^* \right), 
+\label{eq:8-CIboot}
+\end{equation}
+
+where \(\hat{\theta}_{\beta}^*\) is the \(\beta \times 100\)th percentile of \(\hat{\Theta}^{(1)}, \cdots, \hat{\Theta}^{(K)}\), the \(K\) numerical values of the estimator from each bootstrapped sample.
+
+You may notice that the confidence interval in equation \eqref{eq:8-CIboot} does not fit the general framework given in equation \eqref{eq:8-CIbasic2}. This is because the sampling distribution of the estimator may not be symmetric.
+
+The math that derives this confidence interval is beyond the level of this class, although it is freely available online.
+
+The bootstrap confidence interval tends to work better as \(K\) increases and as \(n\) increases.
 
 \subsection{Worked Example}\label{worked-example-5}
+
+We have data on 400 credit card customers. A density plot of their credit limits is shown below:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(ISLR2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Attaching package: 'ISLR2'
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:MASS':
+## 
+##     Boston
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Data}\OtherTok{\textless{}{-}}\NormalTok{ISLR2}\SpecialCharTok{::}\NormalTok{Credit}\SpecialCharTok{$}\NormalTok{Limit}
+\FunctionTok{plot}\NormalTok{(}\FunctionTok{density}\NormalTok{(Data), }\AttributeTok{xlab=}\StringTok{"Credit Limit"}\NormalTok{, }\AttributeTok{main=}\StringTok{"Density Plot of Credit Limits"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\centering
+\includegraphics{bookdown-demo_files/figure-latex/8-credit-1.pdf}
+\caption{\label{fig:8-credit}Density Plot of Credit Limits}
+\end{figure}
+
+The density plot in Figure \ref{fig:8-credit} informs us that the values of credit limits is skewed, so the median is a better measure of centrality for credit limits. We wish to estimate the population median credit limit, give a measure of uncertainty, as well as report a 95\% confidence interval for the median credit limit. Since the sampling distribution of the sample median is unknown, we use the bootstrap:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#get sample size}
+\NormalTok{n}\OtherTok{\textless{}{-}}\FunctionTok{length}\NormalTok{(Data)}
+
+\NormalTok{K}\OtherTok{\textless{}{-}}\DecValTok{1000} \DocumentationTok{\#\#Number of bootstrap samples}
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{77}\NormalTok{)}
+
+\DocumentationTok{\#\#the sample function, with replace=TRUE, samples with replacement. }
+\DocumentationTok{\#\#The replicate function repeats the sample function K times}
+\NormalTok{boot.samples}\OtherTok{\textless{}{-}}\FunctionTok{replicate}\NormalTok{(K,}\FunctionTok{sample}\NormalTok{(Data,n,}\AttributeTok{replace=}\ConstantTok{TRUE}\NormalTok{))}
+\DocumentationTok{\#\#Each column in boot.samples represents each bootstrap sample}
+
+\DocumentationTok{\#\#find the sample median of each column, since each column represents a bootstrap sample}
+\NormalTok{boot.medians}\OtherTok{\textless{}{-}}\FunctionTok{apply}\NormalTok{(boot.samples,}\DecValTok{2}\NormalTok{,median)}
+
+\DocumentationTok{\#\#bootstrap SE of the median is just the SD of the sample medians from each bootstrap sample}
+\FunctionTok{sd}\NormalTok{(boot.medians)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 152.0525
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#bootstrap variance of the median is just the variance of the sample medians from each bootstrap sample}
+\FunctionTok{var}\NormalTok{(boot.medians)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 23119.95
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#find bootstrap CI}
+\NormalTok{alpha}\OtherTok{\textless{}{-}}\FloatTok{0.05}
+
+\DocumentationTok{\#\#median from original sample}
+\NormalTok{orig.median}\OtherTok{\textless{}{-}}\FunctionTok{median}\NormalTok{(Data)}
+\NormalTok{orig.median}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 4622.5
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#lower and upper bound of the CI}
+\DecValTok{2}\SpecialCharTok{*}\NormalTok{orig.median}\SpecialCharTok{{-}}\FunctionTok{quantile}\NormalTok{(boot.medians,}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\SpecialCharTok{{-}}\NormalTok{alpha}\SpecialCharTok{/}\DecValTok{2}\NormalTok{,alpha}\SpecialCharTok{/}\DecValTok{2}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    97.5%     2.5% 
+## 4380.000 4948.525
+\end{verbatim}
+
+We report the following:
+
+\begin{itemize}
+\tightlist
+\item
+  The sample median is \$4622.5.
+\item
+  The standard error of the sample median is \$152.0525.
+\item
+  The 95\% confidence interval for the median credit limit is (4380.000, 4948.525). There is 95\% probability that the true population median credit limit lies in the random interval between \$4380 and \$4948.525.
+\end{itemize}
 
   \bibliography{book.bib,packages.bib}
 

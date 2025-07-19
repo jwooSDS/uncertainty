@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999996 (MiKTeX 24.4) (preloaded format=xelatex 2025.6.7)  18 JUL 2025 19:26
+This is XeTeX, Version 3.141592653-2.6-0.999996 (MiKTeX 24.4) (preloaded format=xelatex 2025.6.7)  19 JUL 2025 17:52
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1625,6 +1625,10 @@ File: bookdown-demo_files/figure-latex/8-crit-1.pdf Graphic file (type pdf)
 
 [173]
 
+LaTeX Warning: Reference `@' on page 174 undefined on input line 5839.
+
+
+
 [174]
 
 [175]
@@ -1653,10 +1657,40 @@ File: bookdown-demo_files/figure-latex/8-t-1.pdf Graphic file (type pdf)
 [182]
 
 [183]
+Underfull \hbox (badness 1762) in paragraph at lines 6236--6236
+[]\TU/lmr/bx/n/12 Estimating Sampling Distributions Using Many
+ []
+
+
+
+[184]
+Underfull \hbox (badness 1365) in paragraph at lines 6276--6277
+[]\TU/lmr/m/n/10 Synthesize $[]$ bootstrapped datasets $[][][] [] [] [][]$ wher
+e each boot-
+ []
+
+
+
+[185]
+Underfull \hbox (badness 1194) in paragraph at lines 6287--6289
+[]\TU/lmr/m/n/10 We estimate the true mean of $[]$ by taking the sample mean of
+
+ []
+
+
+
+[186]
+File: bookdown-demo_files/figure-latex/8-credit-1.pdf Graphic file (type pdf)
+<use bookdown-demo_files/figure-latex/8-credit-1.pdf>
+
+
+[187]
+
+[188]
 No file bookdown-demo.bbl.
 
 
-[184] (bookdown-demo.aux)
+[189] (bookdown-demo.aux)
  ***********
 LaTeX2e <2024-06-01> patch level 2
 L3 programming layer <2024-07-20>
@@ -1666,12 +1700,12 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 20269 strings out of 409029
- 373160 string characters out of 5763847
+ 20283 strings out of 409029
+ 373757 string characters out of 5763847
  1958612 words of memory out of 5000000
- 42633 multiletter control sequences out of 15000+600000
+ 42646 multiletter control sequences out of 15000+600000
  566021 words of font info for 104 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  90i,21n,123p,1199b,585s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on bookdown-demo.pdf (184 pages).
+Output written on bookdown-demo.pdf (189 pages).

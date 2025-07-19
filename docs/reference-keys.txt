@@ -161,6 +161,8 @@ fig:8-t
 eq:8-CImeant
 eq:8-CIprop
 eq:8-minsamp
+eq:8-CIboot
+fig:8-credit
 examples
 example-1-mario-kart-auction-prices
 eg2
@@ -364,5 +366,7 @@ worked-example-3
 minimum-sample-size
 worked-example-4
 the-bootstrap
-the-algorithm
+estimating-sampling-distributions-using-many-random-samples
+the-bootstrap-algorithm
+confidence-intervals-using-the-bootstrap
 worked-example-5
