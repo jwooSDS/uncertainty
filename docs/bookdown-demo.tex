@@ -127,7 +127,7 @@
 
 \title{Understanding Uncertainty Course Notes}
 \author{Jeffrey Woo}
-\date{2025-07-19}
+\date{2025-07-21}
 
 \begin{document}
 \maketitle
@@ -6218,7 +6218,7 @@ So she will need to sample at least 1068 residents to guarantee a margin of erro
 
 In the previous subsections, we work out the confidence interval of an estimator by using the framework in equation \eqref{eq:8-CIbasic2}: we add and subtract the margin of error to and from the point estimate. The margin of error is the critical value multiplied by the standard error of the estimator. The critical value is based on the sampling distribution of the estimator. This framework requires us to know the sampling distribution and the standard error of the estimator.
 
-However, there are estimators where its sampling distribution and standard error are unknown (i.e.~no known formula on how to calculate the standard error of the sample median), for example, the sample median How can we construct confidence intervals for the median? Or how can we quantify our uncertainty of the sample median as an estimator of the population median?
+However, there are estimators whose sampling distributions and standard errors are unknown, for example, the sample median. How can we construct confidence intervals for the median? Or how can we quantify our uncertainty of the sample median as an estimator of the population median?
 
 One idea could be to collect many random samples, compute the sample median from each sample, and create a density plot like we did in Monte Carlo simulations in Figure \ref{fig:7-bias}. However, this is not feasible in real life as we rarely have the time and money to go around obtaining many random samples. We are only able to work with the one random sample that we have.
 
@@ -6261,32 +6261,26 @@ Note: this step is a bit different than what is described in the book. In the bo
   We create a density plot of \(\hat{\Theta}^{1}, \cdots, \hat{\Theta}^{K}\) to estimate the sampling distribution of \(\hat{\Theta}\).
 \end{enumerate}
 
-As written earlier, the problem applying this idea to an estimator that has an unknown sampling distribution is that we do not know its associated PDF \(f_X\) and CDF \(F_X\). So we cannot carry out the steps listed. What the bootstrap does is to mimic these steps, when we only have access to data from one random sample. Next, we describe the steps that are carried out in the bootstrap. Pay attention to the similarities and differences in these steps with the steps above.
+As written earlier, the problem with applying this idea to an estimator that has an unknown sampling distribution is that we do not know its associated PDF \(f_X\) and CDF \(F_X\). So we cannot carry out the steps listed. What the bootstrap does is to mimic these steps, when we only have access to data from one random sample. Next, we describe the steps that are carried out in the bootstrap. Pay attention to the similarities and differences in these steps with the steps above.
 
 \subsection{The Bootstrap Algorithm}\label{the-bootstrap-algorithm}
 
-Instead of simulating \(K\) replicate datasets from an assumed distribution, we simulate \(K\) replicate datasets by sampling, \textbf{with replacement}, \(n\) data points from the original dataset.
-
-Let \(\mathcal{X}\) denote the original dataset with \(n\) observations. Let \(\theta\) denote the value of the estimator from the original dataset.
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  Synthesize \(K\) bootstrapped datasets \(\mathcal{Y}^{(1)}, \cdots, \mathcal{Y}^{(K)}\) where each bootstrapped dataset is derived by sampling \(n\) data points from the original dataset, with replacement. The ``with replacement'' term is key: it means that when a data point is sampled, it is returned to the orignal dataset and it can be sampled again.
-\end{enumerate}
+Instead of simulating \(K\) replicate datasets from an assumed distribution, we simulate \(K\) replicate datasets by sampling, \textbf{with replacement}, \(n\) data points from the original dataset. The ``with replacement'' term is key: it means that when a data point is sampled, it is returned to the orignal dataset and it can be sampled again.
 
 See the video below for a visual representation of sampling with replacement:
 
+Let \(\mathcal{X}\) denote the original dataset with \(n\) observations. Let \(\hat{\theta}\) denote the value of the estimator from the original dataset.
+
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
-\setcounter{enumi}{1}
+\item
+  Synthesize \(K\) bootstrapped datasets \(\mathcal{Y}^{(1)}, \cdots, \mathcal{Y}^{(K)}\) where each bootstrapped dataset is derived by sampling \(n\) data points from the original dataset, with replacement.
 \item
   For each dataset, calculate the value of the estimator \(\hat{\Theta}\). Since we have \(K\) bootstrapped datasets, we will have \(K\) values for the estimators, denoted by \(\hat{\Theta}^{(1)}, \cdots, \hat{\Theta}^{(K)}\).
 \item
   We estimate the true mean of \(\hat{\Theta}\) by taking the sample mean of \(\hat{\Theta}^{(1)}, \cdots, \hat{\Theta}^{(K)}\). This value is denoted by \(M_b(\hat{\Theta})\).
 \item
-  We estimate the true variance of \(\hat{\Theta}\) by taking the sample variance of \(\hat{\Theta}^{(1)}, \cdots, \hat{\Theta}^{(K)}\). This value is denoted by \(V_b(\hat{\Theta})\). Square-rooting \(V_b(\hat{\Theta})\) gives an estimate for the standard error of \(\hat{\Theta}\), denoted by \(SE_b(\Theta)\). If \(K\) is large enough, \(V_b(\hat{\Theta})\) will approximate the true variance of the estimator.
+  We estimate the true variance of \(\hat{\Theta}\) by taking the sample variance of \(\hat{\Theta}^{(1)}, \cdots, \hat{\Theta}^{(K)}\). This value is denoted by \(V_b(\hat{\Theta})\), which we call the bootstrap variance of the estimator. Square-rooting \(V_b(\hat{\Theta})\) gives an estimate for the standard error of \(\hat{\Theta}\), denoted by \(SE_b(\Theta)\). If \(K\) is large enough, \(V_b(\hat{\Theta})\) will approximate the true variance of the estimator.
 \end{enumerate}
 
 Note: see the note in step 5 in the previous subsection. The same note applies here.
@@ -6296,7 +6290,7 @@ Note: see the note in step 5 in the previous subsection. The same note applies h
 \setcounter{enumi}{4}
 \tightlist
 \item
-  We create a density plot of \(\hat{\Theta}^{(1)}, \cdots, \hat{\Theta}^{(K)}\) to estimate the sampling distribution of \(\hat{\Theta}\). If \(K\) is large enough, this density plot will approximate the true PDF \(f_X\) well.
+  We can create a density plot of \(\hat{\Theta}^{(1)}, \cdots, \hat{\Theta}^{(K)}\) to estimate the sampling distribution of \(\hat{\Theta}\). If \(K\) is large enough, this density plot will approximate the true PDF \(f_X\) well.
 \end{enumerate}
 
 Comparing this algorithm with Monte Carlo simulations, the main differences are:
@@ -6310,7 +6304,7 @@ Comparing this algorithm with Monte Carlo simulations, the main differences are:
 
 The math that proves the bootstrap works is beyond the level of this class, although it is freely available online.
 
-The bootstrap estimate for the variance of an estimator, \(V_b(\hat{\Theta})\), tends to work better as \(K\) increases and as \(n\) increases.
+The bootstrap variance of an estimator, \(V_b(\hat{\Theta})\), tends to work better as \(K\) increases and as \(n\) increases.
 
 \subsection{Confidence Intervals using the Bootstrap}\label{confidence-intervals-using-the-bootstrap}
 

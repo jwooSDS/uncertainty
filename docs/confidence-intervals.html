@@ -519,7 +519,7 @@ So she will need to sample at least 1068 residents to guarantee a margin of erro
 <span class="header-section-number">8.4</span> The Bootstrap<a class="anchor" aria-label="anchor" href="#the-bootstrap"><i class="fas fa-link"></i></a>
 </h2>
 <p>In the previous subsections, we work out the confidence interval of an estimator by using the framework in equation <a href="confidence-intervals.html#eq:8-CIbasic2">(8.2)</a>: we add and subtract the margin of error to and from the point estimate. The margin of error is the critical value multiplied by the standard error of the estimator. The critical value is based on the sampling distribution of the estimator. This framework requires us to know the sampling distribution and the standard error of the estimator.</p>
-<p>However, there are estimators where its sampling distribution and standard error are unknown (i.e. no known formula on how to calculate the standard error of the sample median), for example, the sample median How can we construct confidence intervals for the median? Or how can we quantify our uncertainty of the sample median as an estimator of the population median?</p>
+<p>However, there are estimators whose sampling distributions and standard errors are unknown, for example, the sample median. How can we construct confidence intervals for the median? Or how can we quantify our uncertainty of the sample median as an estimator of the population median?</p>
 <p>One idea could be to collect many random samples, compute the sample median from each sample, and create a density plot like we did in Monte Carlo simulations in Figure <a href="est.html#fig:7-bias">7.4</a>. However, this is not feasible in real life as we rarely have the time and money to go around obtaining many random samples. We are only able to work with the one random sample that we have.</p>
 <p>A method to work around these issues is the <strong>bootstrap</strong>. The bootstrap will enable us to:</p>
 <ul>
@@ -543,26 +543,24 @@ So she will need to sample at least 1068 residents to guarantee a margin of erro
 <ol start="6" style="list-style-type: decimal">
 <li>We create a density plot of <span class="math inline">\(\hat{\Theta}^{1}, \cdots, \hat{\Theta}^{K}\)</span> to estimate the sampling distribution of <span class="math inline">\(\hat{\Theta}\)</span>.</li>
 </ol>
-<p>As written earlier, the problem applying this idea to an estimator that has an unknown sampling distribution is that we do not know its associated PDF <span class="math inline">\(f_X\)</span> and CDF <span class="math inline">\(F_X\)</span>. So we cannot carry out the steps listed. What the bootstrap does is to mimic these steps, when we only have access to data from one random sample. Next, we describe the steps that are carried out in the bootstrap. Pay attention to the similarities and differences in these steps with the steps above.</p>
+<p>As written earlier, the problem with applying this idea to an estimator that has an unknown sampling distribution is that we do not know its associated PDF <span class="math inline">\(f_X\)</span> and CDF <span class="math inline">\(F_X\)</span>. So we cannot carry out the steps listed. What the bootstrap does is to mimic these steps, when we only have access to data from one random sample. Next, we describe the steps that are carried out in the bootstrap. Pay attention to the similarities and differences in these steps with the steps above.</p>
 </div>
 <div id="the-bootstrap-algorithm" class="section level3" number="8.4.2">
 <h3>
 <span class="header-section-number">8.4.2</span> The Bootstrap Algorithm<a class="anchor" aria-label="anchor" href="#the-bootstrap-algorithm"><i class="fas fa-link"></i></a>
 </h3>
-<p>Instead of simulating <span class="math inline">\(K\)</span> replicate datasets from an assumed distribution, we simulate <span class="math inline">\(K\)</span> replicate datasets by sampling, <strong>with replacement</strong>, <span class="math inline">\(n\)</span> data points from the original dataset.</p>
-<p>Let <span class="math inline">\(\mathcal{X}\)</span> denote the original dataset with <span class="math inline">\(n\)</span> observations. Let <span class="math inline">\(\theta\)</span> denote the value of the estimator from the original dataset.</p>
-<ol style="list-style-type: decimal">
-<li>Synthesize <span class="math inline">\(K\)</span> bootstrapped datasets <span class="math inline">\(\mathcal{Y}^{(1)}, \cdots, \mathcal{Y}^{(K)}\)</span> where each bootstrapped dataset is derived by sampling <span class="math inline">\(n\)</span> data points from the original dataset, with replacement. The “with replacement” term is key: it means that when a data point is sampled, it is returned to the orignal dataset and it can be sampled again.</li>
-</ol>
+<p>Instead of simulating <span class="math inline">\(K\)</span> replicate datasets from an assumed distribution, we simulate <span class="math inline">\(K\)</span> replicate datasets by sampling, <strong>with replacement</strong>, <span class="math inline">\(n\)</span> data points from the original dataset. The “with replacement” term is key: it means that when a data point is sampled, it is returned to the orignal dataset and it can be sampled again.</p>
 <p>See the video below for a visual representation of sampling with replacement:</p>
-<ol start="2" style="list-style-type: decimal">
+<p>Let <span class="math inline">\(\mathcal{X}\)</span> denote the original dataset with <span class="math inline">\(n\)</span> observations. Let <span class="math inline">\(\hat{\theta}\)</span> denote the value of the estimator from the original dataset.</p>
+<ol style="list-style-type: decimal">
+<li><p>Synthesize <span class="math inline">\(K\)</span> bootstrapped datasets <span class="math inline">\(\mathcal{Y}^{(1)}, \cdots, \mathcal{Y}^{(K)}\)</span> where each bootstrapped dataset is derived by sampling <span class="math inline">\(n\)</span> data points from the original dataset, with replacement.</p></li>
 <li><p>For each dataset, calculate the value of the estimator <span class="math inline">\(\hat{\Theta}\)</span>. Since we have <span class="math inline">\(K\)</span> bootstrapped datasets, we will have <span class="math inline">\(K\)</span> values for the estimators, denoted by <span class="math inline">\(\hat{\Theta}^{(1)}, \cdots, \hat{\Theta}^{(K)}\)</span>.</p></li>
 <li><p>We estimate the true mean of <span class="math inline">\(\hat{\Theta}\)</span> by taking the sample mean of <span class="math inline">\(\hat{\Theta}^{(1)}, \cdots, \hat{\Theta}^{(K)}\)</span>. This value is denoted by <span class="math inline">\(M_b(\hat{\Theta})\)</span>.</p></li>
-<li><p>We estimate the true variance of <span class="math inline">\(\hat{\Theta}\)</span> by taking the sample variance of <span class="math inline">\(\hat{\Theta}^{(1)}, \cdots, \hat{\Theta}^{(K)}\)</span>. This value is denoted by <span class="math inline">\(V_b(\hat{\Theta})\)</span>. Square-rooting <span class="math inline">\(V_b(\hat{\Theta})\)</span> gives an estimate for the standard error of <span class="math inline">\(\hat{\Theta}\)</span>, denoted by <span class="math inline">\(SE_b(\Theta)\)</span>. If <span class="math inline">\(K\)</span> is large enough, <span class="math inline">\(V_b(\hat{\Theta})\)</span> will approximate the true variance of the estimator.</p></li>
+<li><p>We estimate the true variance of <span class="math inline">\(\hat{\Theta}\)</span> by taking the sample variance of <span class="math inline">\(\hat{\Theta}^{(1)}, \cdots, \hat{\Theta}^{(K)}\)</span>. This value is denoted by <span class="math inline">\(V_b(\hat{\Theta})\)</span>, which we call the bootstrap variance of the estimator. Square-rooting <span class="math inline">\(V_b(\hat{\Theta})\)</span> gives an estimate for the standard error of <span class="math inline">\(\hat{\Theta}\)</span>, denoted by <span class="math inline">\(SE_b(\Theta)\)</span>. If <span class="math inline">\(K\)</span> is large enough, <span class="math inline">\(V_b(\hat{\Theta})\)</span> will approximate the true variance of the estimator.</p></li>
 </ol>
 <p>Note: see the note in step 5 in the previous subsection. The same note applies here.</p>
 <ol start="5" style="list-style-type: decimal">
-<li>We create a density plot of <span class="math inline">\(\hat{\Theta}^{(1)}, \cdots, \hat{\Theta}^{(K)}\)</span> to estimate the sampling distribution of <span class="math inline">\(\hat{\Theta}\)</span>. If <span class="math inline">\(K\)</span> is large enough, this density plot will approximate the true PDF <span class="math inline">\(f_X\)</span> well.</li>
+<li>We can create a density plot of <span class="math inline">\(\hat{\Theta}^{(1)}, \cdots, \hat{\Theta}^{(K)}\)</span> to estimate the sampling distribution of <span class="math inline">\(\hat{\Theta}\)</span>. If <span class="math inline">\(K\)</span> is large enough, this density plot will approximate the true PDF <span class="math inline">\(f_X\)</span> well.</li>
 </ol>
 <p>Comparing this algorithm with Monte Carlo simulations, the main differences are:</p>
 <ul>
@@ -570,7 +568,7 @@ So she will need to sample at least 1068 residents to guarantee a margin of erro
 <li><p>The <span class="math inline">\(K\)</span> datasets are produced slightly differently. For the bootstrap, they are synthesized by sampling with replacement <span class="math inline">\(n\)</span> data points from the original dataset of size <span class="math inline">\(n\)</span>. With Monte Carlo simulations, we draw <span class="math inline">\(n\)</span> data points from its assumed distribution.</p></li>
 </ul>
 <p>The math that proves the bootstrap works is beyond the level of this class, although it is freely available online.</p>
-<p>The bootstrap estimate for the variance of an estimator, <span class="math inline">\(V_b(\hat{\Theta})\)</span>, tends to work better as <span class="math inline">\(K\)</span> increases and as <span class="math inline">\(n\)</span> increases.</p>
+<p>The bootstrap variance of an estimator, <span class="math inline">\(V_b(\hat{\Theta})\)</span>, tends to work better as <span class="math inline">\(K\)</span> increases and as <span class="math inline">\(n\)</span> increases.</p>
 </div>
 <div id="confidence-intervals-using-the-bootstrap" class="section level3" number="8.4.3">
 <h3>
@@ -700,7 +698,7 @@ Figure 8.4: Density Plot of Credit Limits
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2025-07-19.</p>
+    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2025-07-21.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

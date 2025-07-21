@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999996 (MiKTeX 24.4) (preloaded format=xelatex 2025.6.7)  19 JUL 2025 17:52
+This is XeTeX, Version 3.141592653-2.6-0.999996 (MiKTeX 24.4) (preloaded format=xelatex 2025.6.7)  21 JUL 2025 13:49
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1664,7 +1664,7 @@ Underfull \hbox (badness 1762) in paragraph at lines 6236--6236
 
 
 [184]
-Underfull \hbox (badness 1365) in paragraph at lines 6276--6277
+Underfull \hbox (badness 1365) in paragraph at lines 6277--6279
 []\TU/lmr/m/n/10 Synthesize $[]$ bootstrapped datasets $[][][] [] [] [][]$ wher
 e each boot-
  []
@@ -1672,7 +1672,7 @@ e each boot-
 
 
 [185]
-Underfull \hbox (badness 1194) in paragraph at lines 6287--6289
+Underfull \hbox (badness 1194) in paragraph at lines 6281--6283
 []\TU/lmr/m/n/10 We estimate the true mean of $[]$ by taking the sample mean of
 
  []
