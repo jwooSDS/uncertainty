@@ -4,7 +4,7 @@
 rm(list = ls())
 ```
 
-This module is based on Introduction to Probability for Data Science (Chan), Chapter 9.1 and 9.2. You can access the book for free at https://probability4datascience.com. Please note that I cover additional topics, and skip certain topics from the book. You may skip Section ??? from the book.
+This module is based on Introduction to Probability for Data Science (Chan), Chapter 9.1 and 9.2. You can access the book for free at https://probability4datascience.com. Please note that I cover additional topics, and skip certain topics from the book. 
 
 ## Introduction
 
