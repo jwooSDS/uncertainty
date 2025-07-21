@@ -5684,7 +5684,7 @@ Equation \eqref{eq:8-CIbasic} is sometimes expressed as
 \label{eq:8-CIbasic2}
 \end{equation}
 
-Given the interval for the mean expressed in equation \eqref{eq:8-CIbasic}, we ask what is the probability that the interval \(I\) includes the true value of the parameter \(\mu\), i.e.~we want to evaluate
+Indeed, a lot of confidence intervals take on the form expressed in equation \eqref{eq:8-CIbasic2}. Given the interval for the mean expressed in equation \eqref{eq:8-CIbasic}, we ask what is the probability that the interval \(I\) includes the true value of the parameter \(\mu\), i.e.~we want to evaluate
 
 \begin{equation} 
 P(\mu \in  I) = P(\bar{X}_n - \epsilon \leq \mu \leq \bar{X}_n + \epsilon).
@@ -5715,7 +5715,7 @@ The idea of the interval \(I\) being random is represented in Figure \ref{fig:8-
   The intervals in blue represent confidence intervals that contain the value of \(\mu\), while the intervals in red represent confidence intervals that do not contain the value of \(\mu\).
 \end{itemize}
 
-In Figure \ref{fig:8-CI}, we note that 50\% of the confidence intervals capture the value of \(\mu\), so the probability per equation \eqref{eq:8-CIprob} is 0.5. This matches with theory since each confidence interval was computed at 50\% confidence.
+In Figure \ref{fig:8-CI}, we note that 50\% of the confidence intervals capture the value of \(\mu\), so the probability per equation \eqref{eq:8-CIprob} is 0.5. This matches with theory since each confidence interval in Figure \ref{fig:8-CI} was computed at 50\% confidence.
 
 If we were to create 95\% confidence intervals for each row in Figure \ref{fig:8-CI}, the upper and lower bounds of the intervals will be adjusted so that we will expect 19 of these 20 intervals to contain the value of \(\mu\).
 
@@ -5811,6 +5811,8 @@ which tells us the critical value is 1.96 for 95\% confidence.
 
 Note: the \texttt{qnorm()} function was introduced in a bit more detail in Section \ref{usingR}, so feel free to go back to review.
 
+View the video below that explains these steps in a bit more detail:
+
 \emph{Thought question}: Can you show that the critical value for 96\% confidence is about 2.054? Can you show that the critical value for 98\% confidence is about 2.326?
 
 \subsubsection{Confidence Interval for the Mean}\label{confidence-interval-for-the-mean-1}
@@ -5833,6 +5835,8 @@ Therefore, the \((1-\alpha) \times 100\%\) confidence interval for the mean is
 \left( \bar{x}_n - z^{*} \frac{\sigma}{\sqrt{n}}, \bar{x}_n + z^{*} \frac{\sigma}{\sqrt{n}} \right).
 \label{eq:8-CImean}
 \end{equation}
+
+View the video below that explains these steps in a bit more detail:
 
 Again, the formula in equation \eqref{eq:8-CImean} is only valid if either of the two conditions in Section \ref{sampdistmean} is met, i.e.~either the data are originally normal, or if the sample size is large enough.
 
@@ -5898,6 +5902,8 @@ We run a Monte Carlo simulation to show that the coverage probability of confide
 \end{verbatim}
 
 The estimated coverage probability based on 10 thousand replicates is 94.93\%, very close to the confidence level of 95\%. This informs us that the distribution assumed for the sample mean was correct.
+
+View the video below which explains the Monte Carlo simulation in a bit more detail:
 
 \subsubsection{Worked Example}\label{worked-example-1}
 
@@ -6072,9 +6078,11 @@ Since the margin of error tends to be larger when \(\sigma^2\) is unknown, it me
 
 \subsubsection{Degrees of Freedom}\label{degrees-of-freedom}
 
-An intuitive explanation of degrees of freedom is the number of independent pieces of information that can take on any numerical value, when estimating a parameter
+An intuitive explanation of degrees of freedom is the number of independent pieces of information that can take on any numerical value, when estimating a parameter.
 
-Generally speaking, we lose 1 degree of freedom for every equation that must be satisfied. In the context of estimating the population mean using the sample mean, we must always satisfy the equation \(\bar{x} = \frac{\sum_{i=1}^n x_i}{n}\), so we lose 1 from an original set of \(n\) observations, so the degree of freedom is \(n-1\) when calculating the CI for the mean.
+Generally speaking, we lose 1 degree of freedom for every equation that must be satisfied. In the context of estimating the population mean using the sample mean, we must always satisfy the equation \(\bar{x} = \frac{\sum_{i=1}^n x_i}{n}\), so we lose 1 degree of freedom from an original set of \(n\) observations, so the degree of freedom is \(n-1\) when calculating the CI for the mean.
+
+View the video below that explains the idea behind degrees of freedom with a toy example:
 
 \subsection{Factors Affecting Precision of Confidence Intervals}\label{factors-affecting-precision-of-confidence-intervals}
 
@@ -6115,7 +6123,7 @@ We can use the Central Limit Theorem (CLT) to approximate the sampling distribut
 
 \begin{itemize}
 \item
-  Let \(X_1, \cdots, X_n\) be i.i.d. Bernoulli with success probability p.~Using equations \eqref{eq:3-bern-EX} and \eqref{eq:3-bern-var}, we know that \(E(X_i) = p\) and \(Var(X_i) - p(1-p)\).
+  Let \(X_1, \cdots, X_n\) be i.i.d. Bernoulli with success probability p.~Using equations \eqref{eq:3-bern-EX} and \eqref{eq:3-bern-var}, we know that \(E(X_i) = p\) and \(Var(X_i) = p(1-p)\).
 \item
   Let \(S = X_1 + \cdots + X_n = \sum_{i=1}^n X_i\) denote the number of successes in a sample of size \(n\). Using properties of expectations and variances, we know that \(E(S) = np\) and \(Var(S) = np(1-p)\).
 \item
@@ -6123,6 +6131,8 @@ We can use the Central Limit Theorem (CLT) to approximate the sampling distribut
 \item
   The CLT informs us if \(n\) is large enough, then \(\hat{p}\) is approximately \(N\left(p, \frac{p(1-p)}{n}\right)\). Also, the distribution of \(\hat{p}\) after standardization is approximately standard normal, i.e.~the standardized score \(\hat{Z} = \frac{\hat{p}-p}{\sqrt{\frac{p(1-p)}{n}}}\) is approximately standard normal.
 \end{itemize}
+
+View the video below for a more detailed explanation of the sampling distribution of sample proportions:
 
 \subsection{Constructing Confidence Interval for the Proportion}\label{constructing-confidence-interval-for-the-proportion}
 
@@ -6433,6 +6443,8 @@ We report the following:
 \item
   The 95\% confidence interval for the median credit limit is (4380.000, 4948.525). There is 95\% probability that the true population median credit limit lies in the random interval between \$4380 and \$4948.525.
 \end{itemize}
+
+View the video below that explains the functions used in the code:
 
   \bibliography{book.bib,packages.bib}
 

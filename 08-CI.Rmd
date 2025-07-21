@@ -50,7 +50,7 @@ Equation \@ref(eq:8-CIbasic) is sometimes expressed as
 (\#eq:8-CIbasic2)
 \end{equation}
 
-Given the interval for the mean expressed in equation \@ref(eq:8-CIbasic), we ask what is the probability that the interval $I$ includes the true value of the parameter $\mu$, i.e. we want to evaluate
+Indeed, a lot of confidence intervals take on the form expressed in equation \@ref(eq:8-CIbasic2). Given the interval for the mean expressed in equation \@ref(eq:8-CIbasic), we ask what is the probability that the interval $I$ includes the true value of the parameter $\mu$, i.e. we want to evaluate
 
 \begin{equation} 
 P(\mu \in  I) = P(\bar{X}_n - \epsilon \leq \mu \leq \bar{X}_n + \epsilon).
@@ -71,7 +71,7 @@ knitr::include_graphics("images/08-CI.png")
 - The colored dot in the center of the confidence interval represents $\bar{x}$ for the sampled data points in the row.
 - The intervals in blue represent confidence intervals that contain the value of $\mu$, while the intervals in red represent confidence intervals that do not contain the value of $\mu$.
 
-In Figure \@ref(fig:8-CI), we note that 50% of the confidence intervals capture the value of $\mu$, so the probability per equation \@ref(eq:8-CIprob) is 0.5. This matches with theory since each confidence interval was computed at 50\% confidence. 
+In Figure \@ref(fig:8-CI), we note that 50% of the confidence intervals capture the value of $\mu$, so the probability per equation \@ref(eq:8-CIprob) is 0.5. This matches with theory since each confidence interval in Figure \@ref(fig:8-CI) was computed at 50\% confidence. 
 
 If we were to create 95% confidence intervals for each row in Figure \@ref(fig:8-CI), the upper and lower bounds of the intervals will be adjusted so that we will expect 19 of these 20 intervals to contain the value of $\mu$. 
 
@@ -163,7 +163,12 @@ which tells us the critical value is 1.96 for 95\% confidence.
 
 Note: the `qnorm()` function was introduced in a bit more detail in Section \@ref(usingR), so feel free to go back to review.
 
+View the video below that explains these steps in a bit more detail:
+
+<iframe width="560px" height="320px" allowfullscreen="true" allow="autoplay *" title="Module 08: Critical Value" src="https://virginiauniversity.instructuremedia.com/embed/74aa9eff-5d3f-4c24-be5d-5798d93f7aa7" frameborder="0"></iframe>
+
 *Thought question*: Can you show that the critical value for 96\% confidence is about 2.054? Can you show that the critical value for 98\% confidence is about 2.326? 
+
 
 #### Confidence Interval for the Mean
 
@@ -185,6 +190,10 @@ Therefore, the $(1-\alpha) \times 100\%$ confidence interval for the mean is
 \left( \bar{x}_n - z^{*} \frac{\sigma}{\sqrt{n}}, \bar{x}_n + z^{*} \frac{\sigma}{\sqrt{n}} \right).
 (\#eq:8-CImean)
 \end{equation}
+
+View the video below that explains these steps in a bit more detail:
+
+<iframe width="560px" height="320px" allowfullscreen="true" allow="autoplay *" title="Module 08: CI for Mean" src="https://virginiauniversity.instructuremedia.com/embed/a1569325-fe99-49d4-80ff-dd7c3967b450" frameborder="0"></iframe>
 
 Again, the formula in equation \@ref(eq:8-CImean) is only valid if either of the two conditions in Section \@ref(sampdistmean) is met, i.e. either the data are originally normal, or if the sample size is large enough.
 
@@ -234,6 +243,10 @@ for (i in 1:reps)
 sum(contain)/reps 
 ```
 The estimated coverage probability based on 10 thousand replicates is 94.93%, very close to the confidence level of 95%. This informs us that the distribution assumed for the sample mean was correct. 
+
+View the video below which explains the Monte Carlo simulation in a bit more detail:
+
+<iframe width="560px" height="320px" allowfullscreen="true" allow="autoplay *" title="Module 08: Coverage Probability" src="https://virginiauniversity.instructuremedia.com/embed/5e91e2c8-f648-4f9a-9831-4ac51f666f90" frameborder="0"></iframe>
 
 #### Worked Example 
 
@@ -357,9 +370,13 @@ Since the margin of error tends to be larger when $\sigma^2$ is unknown, it mean
 
 #### Degrees of Freedom
 
-An intuitive explanation of degrees of freedom is the number of independent pieces of information that can take on any numerical value, when estimating a parameter
+An intuitive explanation of degrees of freedom is the number of independent pieces of information that can take on any numerical value, when estimating a parameter.
 
-Generally speaking, we lose 1 degree of freedom for every equation that must be satisfied. In the context of estimating the population mean using the sample mean, we must always satisfy the equation $\bar{x} = \frac{\sum_{i=1}^n x_i}{n}$, so we lose 1 from an original set of $n$ observations, so the degree of freedom is $n-1$ when calculating the CI for the mean. 
+Generally speaking, we lose 1 degree of freedom for every equation that must be satisfied. In the context of estimating the population mean using the sample mean, we must always satisfy the equation $\bar{x} = \frac{\sum_{i=1}^n x_i}{n}$, so we lose 1 degree of freedom from an original set of $n$ observations, so the degree of freedom is $n-1$ when calculating the CI for the mean. 
+
+View the video below that explains the idea behind degrees of freedom with a toy example:
+
+<iframe width="560px" height="320px" allowfullscreen="true" allow="autoplay *" title="Module 08: Degrees of Freedom" src="https://virginiauniversity.instructuremedia.com/embed/d231fbbc-16a4-4a0d-85c0-e5ae3db0dee2" frameborder="0"></iframe>
 
 ### Factors Affecting Precision of Confidence Intervals
 
@@ -387,13 +404,17 @@ Proportions are used to summarize categorical variables, whereas means are used 
 
 We can use the Central Limit Theorem (CLT) to approximate the sampling distribution of sample proportions. A sketch of how to derive this sampling distribution is as follows:
 
-- Let $X_1, \cdots, X_n$ be i.i.d. Bernoulli with success probability p. Using equations \@ref(eq:3-bern-EX) and \@ref(eq:3-bern-var), we know that $E(X_i) = p$ and $Var(X_i) - p(1-p)$.
+- Let $X_1, \cdots, X_n$ be i.i.d. Bernoulli with success probability p. Using equations \@ref(eq:3-bern-EX) and \@ref(eq:3-bern-var), we know that $E(X_i) = p$ and $Var(X_i) = p(1-p)$.
 
 - Let $S = X_1 + \cdots + X_n = \sum_{i=1}^n X_i$ denote the number of successes in a sample of size $n$. Using properties of expectations and variances, we know that $E(S) = np$ and $Var(S) = np(1-p)$.
 
 - The sample proportion, $\hat{p}$, is just the number of successes divided by the sample size, so $\hat{p} = \frac{S}{n} = \frac{\sum_{i=1}^n X_i}{n} = \bar{X}_n$. Therefore, using property of expectations and variances, we know that $E(\hat{p}) = p$ and $Var(\hat{p}) = \frac{p(1-p)}{n}$.
 
 - The CLT informs us if $n$ is large enough, then $\hat{p}$ is approximately $N\left(p, \frac{p(1-p)}{n}\right)$. Also, the distribution of $\hat{p}$ after standardization is approximately standard normal, i.e. the standardized score $\hat{Z} = \frac{\hat{p}-p}{\sqrt{\frac{p(1-p)}{n}}}$ is approximately standard normal. 
+
+View the video below for a more detailed explanation of the sampling distribution of sample proportions:
+
+<iframe width="560px" height="320px" allowfullscreen="true" allow="autoplay *" title="Module 08: Sampling Distribution of Sample Proportion" src="https://virginiauniversity.instructuremedia.com/embed/84d115c1-bacb-429f-b777-560eda3f4e6b" frameborder="0"></iframe>
 
 ### Constructing Confidence Interval for the Proportion
 
@@ -515,6 +536,8 @@ Instead of simulating $K$ replicate datasets from an assumed distribution, we si
 
 See the video below for a visual representation of sampling with replacement:
 
+<iframe width="560px" height="320px" allowfullscreen="true" allow="autoplay *" title="Module 08: Sampling with Replacement" src="https://virginiauniversity.instructuremedia.com/embed/7e81e93d-dd67-4034-9823-fb6a42135dcb" frameborder="0"></iframe>
+
 Let $\mathcal{X}$ denote the original dataset with $n$ observations. Let $\hat{\theta}$ denote the value of the estimator from the original dataset. 
 
 1. Synthesize $K$ bootstrapped datasets $\mathcal{Y}^{(1)}, \cdots, \mathcal{Y}^{(K)}$ where each bootstrapped dataset is derived by sampling $n$ data points from the original dataset, with replacement. 
@@ -605,3 +628,7 @@ We report the following:
 - The sample median is \$4622.5.
 - The standard error of the sample median is \$152.0525.
 - The 95% confidence interval for the median credit limit is (4380.000, 4948.525). There is 95% probability that the true population median credit limit lies in the random interval between \$4380 and \$4948.525.
+
+View the video below that explains the functions used in the code:
+
+<iframe width="560px" height="320px" allowfullscreen="true" allow="autoplay *" title="Module 08: Code for Bootstrap" src="https://virginiauniversity.instructuremedia.com/embed/14a288a6-29e6-4bc3-aa1b-39ea2959c85d" frameborder="0"></iframe>

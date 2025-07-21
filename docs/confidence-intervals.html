@@ -108,7 +108,7 @@ I = \left(\bar{X}_n - \epsilon, \bar{X}_n + \epsilon \right).
 \text{point estimate } \pm \text{ margin of error}.
 \tag{8.2}
 \end{equation}\]</span></p>
-<p>Given the interval for the mean expressed in equation <a href="confidence-intervals.html#eq:8-CIbasic">(8.1)</a>, we ask what is the probability that the interval <span class="math inline">\(I\)</span> includes the true value of the parameter <span class="math inline">\(\mu\)</span>, i.e. we want to evaluate</p>
+<p>Indeed, a lot of confidence intervals take on the form expressed in equation <a href="confidence-intervals.html#eq:8-CIbasic2">(8.2)</a>. Given the interval for the mean expressed in equation <a href="confidence-intervals.html#eq:8-CIbasic">(8.1)</a>, we ask what is the probability that the interval <span class="math inline">\(I\)</span> includes the true value of the parameter <span class="math inline">\(\mu\)</span>, i.e. we want to evaluate</p>
 <p><span class="math display" id="eq:8-CIprob">\[\begin{equation}
 P(\mu \in  I) = P(\bar{X}_n - \epsilon \leq \mu \leq \bar{X}_n + \epsilon).
 \tag{8.3}
@@ -128,7 +128,7 @@ Figure 8.1: Randomness of Confidence Interval. Picture from <a href="https://en.
 <li>The colored dot in the center of the confidence interval represents <span class="math inline">\(\bar{x}\)</span> for the sampled data points in the row.</li>
 <li>The intervals in blue represent confidence intervals that contain the value of <span class="math inline">\(\mu\)</span>, while the intervals in red represent confidence intervals that do not contain the value of <span class="math inline">\(\mu\)</span>.</li>
 </ul>
-<p>In Figure <a href="confidence-intervals.html#fig:8-CI">8.1</a>, we note that 50% of the confidence intervals capture the value of <span class="math inline">\(\mu\)</span>, so the probability per equation <a href="confidence-intervals.html#eq:8-CIprob">(8.3)</a> is 0.5. This matches with theory since each confidence interval was computed at 50% confidence.</p>
+<p>In Figure <a href="confidence-intervals.html#fig:8-CI">8.1</a>, we note that 50% of the confidence intervals capture the value of <span class="math inline">\(\mu\)</span>, so the probability per equation <a href="confidence-intervals.html#eq:8-CIprob">(8.3)</a> is 0.5. This matches with theory since each confidence interval in Figure <a href="confidence-intervals.html#fig:8-CI">8.1</a> was computed at 50% confidence.</p>
 <p>If we were to create 95% confidence intervals for each row in Figure <a href="confidence-intervals.html#fig:8-CI">8.1</a>, the upper and lower bounds of the intervals will be adjusted so that we will expect 19 of these 20 intervals to contain the value of <span class="math inline">\(\mu\)</span>.</p>
 <p>This illustration gives us an interpretation of the probability associated with a confidence interval per equation <a href="confidence-intervals.html#eq:8-CIprob">(8.3)</a>: When we construct a 95% confidence interval, there is a 95% chance the random interval <span class="math inline">\(I\)</span> will contain the true value of the parameter. In other words, if we have 100 random samples and we construct 95% confidence intervals based on each sample, we expect 95 of these intervals to contain the value of the parameter.</p>
 <p>The idea of the probability that the random interval <span class="math inline">\(I\)</span> captures the true parameter gives rise to the <strong>confidence level</strong>. The confidence level of a confidence interval is denoted by <span class="math inline">\(1-\alpha\)</span>, i.e. if we construct an interval at 95% confidence, <span class="math inline">\(\alpha=0.05\)</span>. Equation <a href="confidence-intervals.html#eq:8-CIprob">(8.3)</a> can be written as</p>
@@ -197,6 +197,9 @@ P(-z^{*} \leq \hat{Z} \leq z^{*}) &amp;= 2 \Phi(z^*) - 1 = 1 - \alpha \\
 <pre><code>## [1] 1.959964</code></pre>
 <p>which tells us the critical value is 1.96 for 95% confidence.</p>
 <p>Note: the <code><a href="https://rdrr.io/r/stats/Normal.html">qnorm()</a></code> function was introduced in a bit more detail in Section <a href="continuous-random-variables.html#usingR">4.6</a>, so feel free to go back to review.</p>
+<p>View the video below that explains these steps in a bit more detail:</p>
+<iframe width="560px" height="320px" allowfullscreen="true" allow="autoplay *" title="Module 08: Critical Value" src="https://virginiauniversity.instructuremedia.com/embed/74aa9eff-5d3f-4c24-be5d-5798d93f7aa7" frameborder="0">
+</iframe>
 <p><em>Thought question</em>: Can you show that the critical value for 96% confidence is about 2.054? Can you show that the critical value for 98% confidence is about 2.326?</p>
 </div>
 <div id="confidence-interval-for-the-mean-1" class="section level4" number="8.2.3.2">
@@ -218,6 +221,9 @@ P(-z^{*} \leq \hat{Z} \leq z^{*}) &amp;= P(-z^{*} \leq \frac{\bar{X}_n - \mu}{SE
 \left( \bar{x}_n - z^{*} \frac{\sigma}{\sqrt{n}}, \bar{x}_n + z^{*} \frac{\sigma}{\sqrt{n}} \right).
 \tag{8.9}
 \end{equation}\]</span></p>
+<p>View the video below that explains these steps in a bit more detail:</p>
+<iframe width="560px" height="320px" allowfullscreen="true" allow="autoplay *" title="Module 08: CI for Mean" src="https://virginiauniversity.instructuremedia.com/embed/a1569325-fe99-49d4-80ff-dd7c3967b450" frameborder="0">
+</iframe>
 <p>Again, the formula in equation <a href="confidence-intervals.html#eq:8-CImean">(8.9)</a> is only valid if either of the two conditions in Section <a href="est.html#sampdistmean">7.4.4.1</a> is met, i.e. either the data are originally normal, or if the sample size is large enough.</p>
 <p>There are several rules of thumb that exist to assess if the “sample size is large enough” (usually at least 25 or 30 is suggested). However, as we mentioned in Section (considerCLT), there is no fixed answer to this question. It depends on the distribution of the data. In general, the more skewed data is, <span class="math inline">\(n\)</span> needs to be larger for the approximation to work.</p>
 </div>
@@ -265,6 +271,9 @@ P(-z^{*} \leq \hat{Z} \leq z^{*}) &amp;= P(-z^{*} \leq \frac{\bar{X}_n - \mu}{SE
 <span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">contain</span><span class="op">)</span><span class="op">/</span><span class="va">reps</span> </span></code></pre></div>
 <pre><code>## [1] 0.9493</code></pre>
 <p>The estimated coverage probability based on 10 thousand replicates is 94.93%, very close to the confidence level of 95%. This informs us that the distribution assumed for the sample mean was correct.</p>
+<p>View the video below which explains the Monte Carlo simulation in a bit more detail:</p>
+<iframe width="560px" height="320px" allowfullscreen="true" allow="autoplay *" title="Module 08: Coverage Probability" src="https://virginiauniversity.instructuremedia.com/embed/5e91e2c8-f648-4f9a-9831-4ac51f666f90" frameborder="0">
+</iframe>
 </div>
 <div id="worked-example-1" class="section level4" number="8.2.3.4">
 <h4>
@@ -395,8 +404,11 @@ which gives (4.793914, 17.20609). Since the entire confidence interval lies abov
 <h4>
 <span class="header-section-number">8.2.4.3</span> Degrees of Freedom<a class="anchor" aria-label="anchor" href="#degrees-of-freedom"><i class="fas fa-link"></i></a>
 </h4>
-<p>An intuitive explanation of degrees of freedom is the number of independent pieces of information that can take on any numerical value, when estimating a parameter</p>
-<p>Generally speaking, we lose 1 degree of freedom for every equation that must be satisfied. In the context of estimating the population mean using the sample mean, we must always satisfy the equation <span class="math inline">\(\bar{x} = \frac{\sum_{i=1}^n x_i}{n}\)</span>, so we lose 1 from an original set of <span class="math inline">\(n\)</span> observations, so the degree of freedom is <span class="math inline">\(n-1\)</span> when calculating the CI for the mean.</p>
+<p>An intuitive explanation of degrees of freedom is the number of independent pieces of information that can take on any numerical value, when estimating a parameter.</p>
+<p>Generally speaking, we lose 1 degree of freedom for every equation that must be satisfied. In the context of estimating the population mean using the sample mean, we must always satisfy the equation <span class="math inline">\(\bar{x} = \frac{\sum_{i=1}^n x_i}{n}\)</span>, so we lose 1 degree of freedom from an original set of <span class="math inline">\(n\)</span> observations, so the degree of freedom is <span class="math inline">\(n-1\)</span> when calculating the CI for the mean.</p>
+<p>View the video below that explains the idea behind degrees of freedom with a toy example:</p>
+<iframe width="560px" height="320px" allowfullscreen="true" allow="autoplay *" title="Module 08: Degrees of Freedom" src="https://virginiauniversity.instructuremedia.com/embed/d231fbbc-16a4-4a0d-85c0-e5ae3db0dee2" frameborder="0">
+</iframe>
 </div>
 </div>
 <div id="factors-affecting-precision-of-confidence-intervals" class="section level3" number="8.2.5">
@@ -430,11 +442,14 @@ which gives (4.793914, 17.20609). Since the entire confidence interval lies abov
 </h3>
 <p>We can use the Central Limit Theorem (CLT) to approximate the sampling distribution of sample proportions. A sketch of how to derive this sampling distribution is as follows:</p>
 <ul>
-<li><p>Let <span class="math inline">\(X_1, \cdots, X_n\)</span> be i.i.d. Bernoulli with success probability p. Using equations <a href="discrete-random-variables.html#eq:3-bern-EX">(3.9)</a> and <a href="discrete-random-variables.html#eq:3-bern-var">(3.10)</a>, we know that <span class="math inline">\(E(X_i) = p\)</span> and <span class="math inline">\(Var(X_i) - p(1-p)\)</span>.</p></li>
+<li><p>Let <span class="math inline">\(X_1, \cdots, X_n\)</span> be i.i.d. Bernoulli with success probability p. Using equations <a href="discrete-random-variables.html#eq:3-bern-EX">(3.9)</a> and <a href="discrete-random-variables.html#eq:3-bern-var">(3.10)</a>, we know that <span class="math inline">\(E(X_i) = p\)</span> and <span class="math inline">\(Var(X_i) = p(1-p)\)</span>.</p></li>
 <li><p>Let <span class="math inline">\(S = X_1 + \cdots + X_n = \sum_{i=1}^n X_i\)</span> denote the number of successes in a sample of size <span class="math inline">\(n\)</span>. Using properties of expectations and variances, we know that <span class="math inline">\(E(S) = np\)</span> and <span class="math inline">\(Var(S) = np(1-p)\)</span>.</p></li>
 <li><p>The sample proportion, <span class="math inline">\(\hat{p}\)</span>, is just the number of successes divided by the sample size, so <span class="math inline">\(\hat{p} = \frac{S}{n} = \frac{\sum_{i=1}^n X_i}{n} = \bar{X}_n\)</span>. Therefore, using property of expectations and variances, we know that <span class="math inline">\(E(\hat{p}) = p\)</span> and <span class="math inline">\(Var(\hat{p}) = \frac{p(1-p)}{n}\)</span>.</p></li>
 <li><p>The CLT informs us if <span class="math inline">\(n\)</span> is large enough, then <span class="math inline">\(\hat{p}\)</span> is approximately <span class="math inline">\(N\left(p, \frac{p(1-p)}{n}\right)\)</span>. Also, the distribution of <span class="math inline">\(\hat{p}\)</span> after standardization is approximately standard normal, i.e. the standardized score <span class="math inline">\(\hat{Z} = \frac{\hat{p}-p}{\sqrt{\frac{p(1-p)}{n}}}\)</span> is approximately standard normal.</p></li>
 </ul>
+<p>View the video below for a more detailed explanation of the sampling distribution of sample proportions:</p>
+<iframe width="560px" height="320px" allowfullscreen="true" allow="autoplay *" title="Module 08: Sampling Distribution of Sample Proportion" src="https://virginiauniversity.instructuremedia.com/embed/84d115c1-bacb-429f-b777-560eda3f4e6b" frameborder="0">
+</iframe>
 </div>
 <div id="constructing-confidence-interval-for-the-proportion" class="section level3" number="8.3.2">
 <h3>
@@ -551,6 +566,8 @@ So she will need to sample at least 1068 residents to guarantee a margin of erro
 </h3>
 <p>Instead of simulating <span class="math inline">\(K\)</span> replicate datasets from an assumed distribution, we simulate <span class="math inline">\(K\)</span> replicate datasets by sampling, <strong>with replacement</strong>, <span class="math inline">\(n\)</span> data points from the original dataset. The “with replacement” term is key: it means that when a data point is sampled, it is returned to the orignal dataset and it can be sampled again.</p>
 <p>See the video below for a visual representation of sampling with replacement:</p>
+<iframe width="560px" height="320px" allowfullscreen="true" allow="autoplay *" title="Module 08: Sampling with Replacement" src="https://virginiauniversity.instructuremedia.com/embed/7e81e93d-dd67-4034-9823-fb6a42135dcb" frameborder="0">
+</iframe>
 <p>Let <span class="math inline">\(\mathcal{X}\)</span> denote the original dataset with <span class="math inline">\(n\)</span> observations. Let <span class="math inline">\(\hat{\theta}\)</span> denote the value of the estimator from the original dataset.</p>
 <ol style="list-style-type: decimal">
 <li><p>Synthesize <span class="math inline">\(K\)</span> bootstrapped datasets <span class="math inline">\(\mathcal{Y}^{(1)}, \cdots, \mathcal{Y}^{(K)}\)</span> where each bootstrapped dataset is derived by sampling <span class="math inline">\(n\)</span> data points from the original dataset, with replacement.</p></li>
@@ -647,6 +664,10 @@ Figure 8.4: Density Plot of Credit Limits
 <li>The standard error of the sample median is $152.0525.</li>
 <li>The 95% confidence interval for the median credit limit is (4380.000, 4948.525). There is 95% probability that the true population median credit limit lies in the random interval between $4380 and $4948.525.</li>
 </ul>
+<p>View the video below that explains the functions used in the code:</p>
+<iframe width="560px" height="320px" allowfullscreen="true" allow="autoplay *" title="Module 08: Code for Bootstrap" src="https://virginiauniversity.instructuremedia.com/embed/14a288a6-29e6-4bc3-aa1b-39ea2959c85d" frameborder="0">
+</iframe>
+
 </div>
 </div>
 </div>
