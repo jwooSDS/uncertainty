@@ -51,6 +51,7 @@
 <li><a class="" href="inequalities-limit-theorems-and-simulations.html"><span class="header-section-number">6</span> Inequalities, Limit Theorems, and Simulations</a></li>
 <li><a class="" href="est.html"><span class="header-section-number">7</span> Estimation</a></li>
 <li><a class="active" href="confidence-intervals.html"><span class="header-section-number">8</span> Confidence Intervals</a></li>
+<li><a class="" href="hypothesis-testing.html"><span class="header-section-number">9</span> Hypothesis Testing</a></li>
 </ul>
 
         <div class="book-extra">
@@ -309,9 +310,9 @@ Working everything out, we get (8406.103, 8471.891).</p>
 </ul>
 </div>
 </div>
-<div id="confidence-interval-for-the-mean-using-t-distribution" class="section level3" number="8.2.4">
+<div id="CImeant" class="section level3" number="8.2.4">
 <h3>
-<span class="header-section-number">8.2.4</span> Confidence Interval for the Mean Using t Distribution<a class="anchor" aria-label="anchor" href="#confidence-interval-for-the-mean-using-t-distribution"><i class="fas fa-link"></i></a>
+<span class="header-section-number">8.2.4</span> Confidence Interval for the Mean Using t Distribution<a class="anchor" aria-label="anchor" href="#CImeant"><i class="fas fa-link"></i></a>
 </h3>
 <p>You may have noticed that when we calculate a confidence interval for the mean using equation <a href="confidence-intervals.html#eq:8-CImean">(8.9)</a>, it involves knowing the value of <span class="math inline">\(\sigma^2\)</span>, the variance of the variable in the population, which is a parameter. However, we have mentioned that the whole purpose of estimation and confidence intervals is to estimate the value of unknown parameters and quantify the uncertainty associated with the estimate. The numerical value of parameters are very rarely known! So how could we actually use equation <a href="confidence-intervals.html#eq:8-CImean">(8.9)</a> in real life?</p>
 <p>The solution to this is fairly intuitive, we use the sample variance <span class="math inline">\(s^2 = \frac{1}{n-1} \sum_{i=1}^n (x_i - \bar{x})^2\)</span> to estimate <span class="math inline">\(\sigma^2\)</span>. What is less intuitive is that the distribution of the standardized version of the sample mean changes.</p>
@@ -673,7 +674,7 @@ Figure 8.4: Density Plot of Credit Limits
 </div>
   <div class="chapter-nav">
 <div class="prev"><a href="est.html"><span class="header-section-number">7</span> Estimation</a></div>
-<div class="empty"></div>
+<div class="next"><a href="hypothesis-testing.html"><span class="header-section-number">9</span> Hypothesis Testing</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
@@ -684,7 +685,7 @@ Figure 8.4: Density Plot of Credit Limits
 <li><a class="nav-link" href="#randomness-of-estimators"><span class="header-section-number">8.2.1</span> Randomness of Estimators</a></li>
 <li><a class="nav-link" href="#randomness-of-confidence-intervals"><span class="header-section-number">8.2.2</span> Randomness of Confidence Intervals</a></li>
 <li><a class="nav-link" href="#constructing-confidence-interval-for-the-mean"><span class="header-section-number">8.2.3</span> Constructing Confidence Interval for the Mean</a></li>
-<li><a class="nav-link" href="#confidence-interval-for-the-mean-using-t-distribution"><span class="header-section-number">8.2.4</span> Confidence Interval for the Mean Using t Distribution</a></li>
+<li><a class="nav-link" href="#CImeant"><span class="header-section-number">8.2.4</span> Confidence Interval for the Mean Using t Distribution</a></li>
 <li><a class="nav-link" href="#factors-affecting-precision-of-confidence-intervals"><span class="header-section-number">8.2.5</span> Factors Affecting Precision of Confidence Intervals</a></li>
 </ul>
 </li>
@@ -719,7 +720,7 @@ Figure 8.4: Density Plot of Credit Limits
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2025-07-21.</p>
+    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2025-07-23.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

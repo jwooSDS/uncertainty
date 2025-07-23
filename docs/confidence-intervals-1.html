@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 9 Confidence Intervals | Understanding Uncertainty Course Notes</title>
+  <meta name="description" content="DS 5030" />
+  <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 9 Confidence Intervals | Understanding Uncertainty Course Notes" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="DS 5030" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 9 Confidence Intervals | Understanding Uncertainty Course Notes" />
+  
+  <meta name="twitter:description" content="DS 5030" />
+  
+
+<meta name="author" content="Jeffrey Woo" />
+
+
+<meta name="date" content="2025-07-21" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="confidence-intervals.html"/>
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a>
+<ul>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#examples"><i class="fa fa-check"></i><b>0.1</b> Examples</a>
+<ul>
+<li class="chapter" data-level="0.1.1" data-path="index.html"><a href="index.html#example-1-mario-kart-auction-prices"><i class="fa fa-check"></i><b>0.1.1</b> Example 1: Mario Kart Auction Prices</a></li>
+<li class="chapter" data-level="0.1.2" data-path="index.html"><a href="index.html#eg2"><i class="fa fa-check"></i><b>0.1.2</b> Example 2: Job Application Callback Rates</a></li>
+</ul></li>
+<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#how-were-estimated-parameters-calculated"><i class="fa fa-check"></i><b>0.2</b> How were Estimated Parameters Calculated?</a></li>
+<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#the-course-understanding-uncertainty"><i class="fa fa-check"></i><b>0.3</b> The Course: Understanding Uncertainty</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="descriptive.html"><a href="descriptive.html"><i class="fa fa-check"></i><b>1</b> Descriptive Statistics</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="descriptive.html"><a href="descriptive.html#uncertainty-with-data"><i class="fa fa-check"></i><b>1.1</b> Uncertainty with Data</a></li>
+<li class="chapter" data-level="1.2" data-path="descriptive.html"><a href="descriptive.html#visualizing-data"><i class="fa fa-check"></i><b>1.2</b> Visualizing Data</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="descriptive.html"><a href="descriptive.html#dot-plots"><i class="fa fa-check"></i><b>1.2.1</b> Dot Plots</a></li>
+<li class="chapter" data-level="1.2.2" data-path="descriptive.html"><a href="descriptive.html#histograms"><i class="fa fa-check"></i><b>1.2.2</b> Histograms</a></li>
+<li class="chapter" data-level="1.2.3" data-path="descriptive.html"><a href="descriptive.html#densplots"><i class="fa fa-check"></i><b>1.2.3</b> Density Plots</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="descriptive.html"><a href="descriptive.html#ordered-statistics"><i class="fa fa-check"></i><b>1.3</b> Ordered Statistics</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="descriptive.html"><a href="descriptive.html#quantiles"><i class="fa fa-check"></i><b>1.3.1</b> Quantiles</a></li>
+<li class="chapter" data-level="1.3.2" data-path="descriptive.html"><a href="descriptive.html#box-plots"><i class="fa fa-check"></i><b>1.3.2</b> Box Plots</a></li>
+<li class="chapter" data-level="1.3.3" data-path="descriptive.html"><a href="descriptive.html#ecdf"><i class="fa fa-check"></i><b>1.3.3</b> Empirical Cumulative Distribution Function</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="descriptive.html"><a href="descriptive.html#measures-of-centrality"><i class="fa fa-check"></i><b>1.4</b> Measures of Centrality</a>
+<ul>
+<li class="chapter" data-level="1.4.1" data-path="descriptive.html"><a href="descriptive.html#mean"><i class="fa fa-check"></i><b>1.4.1</b> Mean</a></li>
+<li class="chapter" data-level="1.4.2" data-path="descriptive.html"><a href="descriptive.html#median"><i class="fa fa-check"></i><b>1.4.2</b> Median</a></li>
+<li class="chapter" data-level="1.4.3" data-path="descriptive.html"><a href="descriptive.html#mode"><i class="fa fa-check"></i><b>1.4.3</b> Mode</a></li>
+<li class="chapter" data-level="1.4.4" data-path="descriptive.html"><a href="descriptive.html#considerations"><i class="fa fa-check"></i><b>1.4.4</b> Considerations</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="descriptive.html"><a href="descriptive.html#measures-of-spread"><i class="fa fa-check"></i><b>1.5</b> Measures of Spread</a>
+<ul>
+<li class="chapter" data-level="1.5.1" data-path="descriptive.html"><a href="descriptive.html#variance-and-standard-deviation"><i class="fa fa-check"></i><b>1.5.1</b> Variance and Standard Deviation</a></li>
+<li class="chapter" data-level="1.5.2" data-path="descriptive.html"><a href="descriptive.html#interquartile-range"><i class="fa fa-check"></i><b>1.5.2</b> Interquartile Range</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="probability.html"><a href="probability.html"><i class="fa fa-check"></i><b>2</b> Probability</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="probability.html"><a href="probability.html#introduction-to-probability"><i class="fa fa-check"></i><b>2.1</b> Introduction to Probability</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="probability.html"><a href="probability.html#why-study-probability"><i class="fa fa-check"></i><b>2.1.1</b> Why Study Probability?</a></li>
+<li class="chapter" data-level="2.1.2" data-path="probability.html"><a href="probability.html#frequentiest-and-bayesian-view-of-probability"><i class="fa fa-check"></i><b>2.1.2</b> Frequentiest and Bayesian View of Probability</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="probability.html"><a href="probability.html#key-concepts-in-probability"><i class="fa fa-check"></i><b>2.2</b> Key Concepts in Probability</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="probability.html"><a href="probability.html#sample-space"><i class="fa fa-check"></i><b>2.2.1</b> Sample Space</a></li>
+<li class="chapter" data-level="2.2.2" data-path="probability.html"><a href="probability.html#event"><i class="fa fa-check"></i><b>2.2.2</b> Event</a></li>
+<li class="chapter" data-level="2.2.3" data-path="probability.html"><a href="probability.html#complements"><i class="fa fa-check"></i><b>2.2.3</b> Complements</a></li>
+<li class="chapter" data-level="2.2.4" data-path="probability.html"><a href="probability.html#unions"><i class="fa fa-check"></i><b>2.2.4</b> Unions</a></li>
+<li class="chapter" data-level="2.2.5" data-path="probability.html"><a href="probability.html#intersections"><i class="fa fa-check"></i><b>2.2.5</b> Intersections</a></li>
+<li class="chapter" data-level="2.2.6" data-path="probability.html"><a href="probability.html#addition-rule"><i class="fa fa-check"></i><b>2.2.6</b> Addition Rule</a></li>
+<li class="chapter" data-level="2.2.7" data-path="probability.html"><a href="probability.html#disjoint-or-mutually-exclusive-events"><i class="fa fa-check"></i><b>2.2.7</b> Disjoint or Mutually Exclusive Events</a></li>
+<li class="chapter" data-level="2.2.8" data-path="probability.html"><a href="probability.html#axioms-of-probability"><i class="fa fa-check"></i><b>2.2.8</b> Axioms of Probability</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="probability.html"><a href="probability.html#condprob"><i class="fa fa-check"></i><b>2.3</b> Conditional Probability</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="probability.html"><a href="probability.html#def"><i class="fa fa-check"></i><b>2.3.1</b> Definition</a></li>
+<li class="chapter" data-level="2.3.2" data-path="probability.html"><a href="probability.html#multiplication-rule"><i class="fa fa-check"></i><b>2.3.2</b> Multiplication Rule</a></li>
+<li class="chapter" data-level="2.3.3" data-path="probability.html"><a href="probability.html#independent-events"><i class="fa fa-check"></i><b>2.3.3</b> Independent Events</a></li>
+<li class="chapter" data-level="2.3.4" data-path="probability.html"><a href="probability.html#bayes-rule"><i class="fa fa-check"></i><b>2.3.4</b> Bayes’ Rule</a></li>
+<li class="chapter" data-level="2.3.5" data-path="probability.html"><a href="probability.html#odds"><i class="fa fa-check"></i><b>2.3.5</b> Odds</a></li>
+<li class="chapter" data-level="2.3.6" data-path="probability.html"><a href="probability.html#odds-form-of-bayes-rule"><i class="fa fa-check"></i><b>2.3.6</b> Odds Form of Bayes’ Rule</a></li>
+<li class="chapter" data-level="2.3.7" data-path="probability.html"><a href="probability.html#law-of-total-probability"><i class="fa fa-check"></i><b>2.3.7</b> Law of Total Probability</a></li>
+<li class="chapter" data-level="2.3.8" data-path="probability.html"><a href="probability.html#worked-example"><i class="fa fa-check"></i><b>2.3.8</b> Worked Example</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="probability.html"><a href="probability.html#confusion-of-the-inverse"><i class="fa fa-check"></i><b>2.4</b> Confusion of the Inverse</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="probability.html"><a href="probability.html#disease-diagnostics"><i class="fa fa-check"></i><b>2.4.1</b> Disease Diagnostics</a></li>
+<li class="chapter" data-level="2.4.2" data-path="probability.html"><a href="probability.html#prosecutors-fallacy"><i class="fa fa-check"></i><b>2.4.2</b> Prosecutor’s Fallacy</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="discrete-random-variables.html"><a href="discrete-random-variables.html"><i class="fa fa-check"></i><b>3</b> Discrete Random Variables</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="discrete-random-variables.html"><a href="discrete-random-variables.html#random-variables"><i class="fa fa-check"></i><b>3.1</b> Random Variables</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="discrete-random-variables.html"><a href="discrete-random-variables.html#example"><i class="fa fa-check"></i><b>3.1.1</b> Example</a></li>
+<li class="chapter" data-level="3.1.2" data-path="discrete-random-variables.html"><a href="discrete-random-variables.html#definition"><i class="fa fa-check"></i><b>3.1.2</b> Definition</a></li>
+<li class="chapter" data-level="3.1.3" data-path="discrete-random-variables.html"><a href="discrete-random-variables.html#discrete-vs-continuous"><i class="fa fa-check"></i><b>3.1.3</b> Discrete Vs Continuous</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="discrete-random-variables.html"><a href="discrete-random-variables.html#probability-mass-functions-pmfs"><i class="fa fa-check"></i><b>3.2</b> Probability Mass Functions (PMFs)</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="discrete-random-variables.html"><a href="discrete-random-variables.html#valid-pmfs"><i class="fa fa-check"></i><b>3.2.1</b> Valid PMFs</a></li>
+<li class="chapter" data-level="3.2.2" data-path="discrete-random-variables.html"><a href="discrete-random-variables.html#pmfhist"><i class="fa fa-check"></i><b>3.2.2</b> PMFs and Histograms</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="discrete-random-variables.html"><a href="discrete-random-variables.html#cumulative-distribution-functions-cdfs"><i class="fa fa-check"></i><b>3.3</b> Cumulative Distribution Functions (CDFs)</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="discrete-random-variables.html"><a href="discrete-random-variables.html#valid-cdfs"><i class="fa fa-check"></i><b>3.3.1</b> Valid CDFs</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="discrete-random-variables.html"><a href="discrete-random-variables.html#expectations"><i class="fa fa-check"></i><b>3.4</b> Expectations</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="discrete-random-variables.html"><a href="discrete-random-variables.html#linearity-of-expectations"><i class="fa fa-check"></i><b>3.4.1</b> Linearity of Expectations</a></li>
+<li class="chapter" data-level="3.4.2" data-path="discrete-random-variables.html"><a href="discrete-random-variables.html#law-of-the-unconscious-statistician"><i class="fa fa-check"></i><b>3.4.2</b> Law of the Unconscious Statistician</a></li>
+<li class="chapter" data-level="3.4.3" data-path="discrete-random-variables.html"><a href="discrete-random-variables.html#variance"><i class="fa fa-check"></i><b>3.4.3</b> Variance</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="discrete-random-variables.html"><a href="discrete-random-variables.html#common-discrete-random-variables"><i class="fa fa-check"></i><b>3.5</b> Common Discrete Random Variables</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="discrete-random-variables.html"><a href="discrete-random-variables.html#bernoulli"><i class="fa fa-check"></i><b>3.5.1</b> Bernoulli</a></li>
+<li class="chapter" data-level="3.5.2" data-path="discrete-random-variables.html"><a href="discrete-random-variables.html#binomial"><i class="fa fa-check"></i><b>3.5.2</b> Binomial</a></li>
+<li class="chapter" data-level="3.5.3" data-path="discrete-random-variables.html"><a href="discrete-random-variables.html#poisson"><i class="fa fa-check"></i><b>3.5.3</b> Poisson</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="discrete-random-variables.html"><a href="discrete-random-variables.html#Rdis"><i class="fa fa-check"></i><b>3.6</b> Using R</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="continuous-random-variables.html"><a href="continuous-random-variables.html"><i class="fa fa-check"></i><b>4</b> Continuous Random Variables</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="continuous-random-variables.html"><a href="continuous-random-variables.html#introduction"><i class="fa fa-check"></i><b>4.1</b> Introduction</a></li>
+<li class="chapter" data-level="4.2" data-path="continuous-random-variables.html"><a href="continuous-random-variables.html#cumulative-distribution-functions-cdfs-1"><i class="fa fa-check"></i><b>4.2</b> Cumulative Distribution Functions (CDFs)</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="continuous-random-variables.html"><a href="continuous-random-variables.html#valid-cdfs-1"><i class="fa fa-check"></i><b>4.2.1</b> Valid CDFs</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="continuous-random-variables.html"><a href="continuous-random-variables.html#probability-density-functions-pdfs"><i class="fa fa-check"></i><b>4.3</b> Probability Density Functions (PDFs)</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="continuous-random-variables.html"><a href="continuous-random-variables.html#valid-pdfs"><i class="fa fa-check"></i><b>4.3.1</b> Valid PDFs</a></li>
+<li class="chapter" data-level="4.3.2" data-path="continuous-random-variables.html"><a href="continuous-random-variables.html#pdfs-and-density-plots"><i class="fa fa-check"></i><b>4.3.2</b> PDFs and Density Plots</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="continuous-random-variables.html"><a href="continuous-random-variables.html#summaries-of-a-distribution"><i class="fa fa-check"></i><b>4.4</b> Summaries of a Distribution</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="continuous-random-variables.html"><a href="continuous-random-variables.html#expectations-1"><i class="fa fa-check"></i><b>4.4.1</b> Expectations</a></li>
+<li class="chapter" data-level="4.4.2" data-path="continuous-random-variables.html"><a href="continuous-random-variables.html#variance-1"><i class="fa fa-check"></i><b>4.4.2</b> Variance</a></li>
+<li class="chapter" data-level="4.4.3" data-path="continuous-random-variables.html"><a href="continuous-random-variables.html#moments"><i class="fa fa-check"></i><b>4.4.3</b> Moments</a></li>
+<li class="chapter" data-level="4.4.4" data-path="continuous-random-variables.html"><a href="continuous-random-variables.html#skewness"><i class="fa fa-check"></i><b>4.4.4</b> Skewness</a></li>
+<li class="chapter" data-level="4.4.5" data-path="continuous-random-variables.html"><a href="continuous-random-variables.html#kurtosis"><i class="fa fa-check"></i><b>4.4.5</b> Kurtosis</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="continuous-random-variables.html"><a href="continuous-random-variables.html#common-continuous-random-variables"><i class="fa fa-check"></i><b>4.5</b> Common Continuous Random Variables</a>
+<ul>
+<li class="chapter" data-level="4.5.1" data-path="continuous-random-variables.html"><a href="continuous-random-variables.html#uniform"><i class="fa fa-check"></i><b>4.5.1</b> Uniform</a></li>
+<li class="chapter" data-level="4.5.2" data-path="continuous-random-variables.html"><a href="continuous-random-variables.html#normdist"><i class="fa fa-check"></i><b>4.5.2</b> Normal</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="continuous-random-variables.html"><a href="continuous-random-variables.html#usingR"><i class="fa fa-check"></i><b>4.6</b> Using R</a>
+<ul>
+<li class="chapter" data-level="4.6.1" data-path="continuous-random-variables.html"><a href="continuous-random-variables.html#KDE"><i class="fa fa-check"></i><b>4.6.1</b> Density Plots and Kernel Density Estimation</a></li>
+<li class="chapter" data-level="4.6.2" data-path="continuous-random-variables.html"><a href="continuous-random-variables.html#density-plots-and-histograms"><i class="fa fa-check"></i><b>4.6.2</b> Density Plots and Histograms</a></li>
+<li class="chapter" data-level="4.6.3" data-path="continuous-random-variables.html"><a href="continuous-random-variables.html#numerical-summaries"><i class="fa fa-check"></i><b>4.6.3</b> Numerical Summaries</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="joint-distributions.html"><a href="joint-distributions.html"><i class="fa fa-check"></i><b>5</b> Joint Distributions</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="joint-distributions.html"><a href="joint-distributions.html#introduction-1"><i class="fa fa-check"></i><b>5.1</b> Introduction</a></li>
+<li class="chapter" data-level="5.2" data-path="joint-distributions.html"><a href="joint-distributions.html#joint-distributions-for-discrete-rvs"><i class="fa fa-check"></i><b>5.2</b> Joint Distributions for Discrete RVs</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="joint-distributions.html"><a href="joint-distributions.html#marginal-distributions-for-discrete-rvs"><i class="fa fa-check"></i><b>5.2.1</b> Marginal Distributions for Discrete RVs</a></li>
+<li class="chapter" data-level="5.2.2" data-path="joint-distributions.html"><a href="joint-distributions.html#conddist"><i class="fa fa-check"></i><b>5.2.2</b> Conditional Distributions for Discrete RVs</a></li>
+<li class="chapter" data-level="5.2.3" data-path="joint-distributions.html"><a href="joint-distributions.html#bayes-rule-1"><i class="fa fa-check"></i><b>5.2.3</b> Bayes’ Rule</a></li>
+<li class="chapter" data-level="5.2.4" data-path="joint-distributions.html"><a href="joint-distributions.html#law-of-total-probability-1"><i class="fa fa-check"></i><b>5.2.4</b> Law of Total Probability</a></li>
+<li class="chapter" data-level="5.2.5" data-path="joint-distributions.html"><a href="joint-distributions.html#indepdence-of-discrete-rvs"><i class="fa fa-check"></i><b>5.2.5</b> Indepdence of Discrete RVs</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="joint-distributions.html"><a href="joint-distributions.html#joint-marginal-conditional-distributions-for-continuous-rvs"><i class="fa fa-check"></i><b>5.3</b> Joint, Marginal, Conditional Distributions for Continuous RVs</a></li>
+<li class="chapter" data-level="5.4" data-path="joint-distributions.html"><a href="joint-distributions.html#covariance-and-correlation"><i class="fa fa-check"></i><b>5.4</b> Covariance and Correlation</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="joint-distributions.html"><a href="joint-distributions.html#id_5-cov"><i class="fa fa-check"></i><b>5.4.1</b> Covariance</a></li>
+<li class="chapter" data-level="5.4.2" data-path="joint-distributions.html"><a href="joint-distributions.html#correlation"><i class="fa fa-check"></i><b>5.4.2</b> Correlation</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="joint-distributions.html"><a href="joint-distributions.html#conditional-expectation"><i class="fa fa-check"></i><b>5.5</b> Conditional Expectation</a>
+<ul>
+<li class="chapter" data-level="5.5.1" data-path="joint-distributions.html"><a href="joint-distributions.html#conditional-expectation-given-event"><i class="fa fa-check"></i><b>5.5.1</b> Conditional Expectation Given Event</a></li>
+<li class="chapter" data-level="5.5.2" data-path="joint-distributions.html"><a href="joint-distributions.html#conditional-expectation-given-random-variable"><i class="fa fa-check"></i><b>5.5.2</b> Conditional Expectation Given Random Variable</a></li>
+</ul></li>
+<li class="chapter" data-level="5.6" data-path="joint-distributions.html"><a href="joint-distributions.html#common-multivariate-distributions"><i class="fa fa-check"></i><b>5.6</b> Common Multivariate Distributions</a>
+<ul>
+<li class="chapter" data-level="5.6.1" data-path="joint-distributions.html"><a href="joint-distributions.html#multinomial"><i class="fa fa-check"></i><b>5.6.1</b> Multinomial</a></li>
+<li class="chapter" data-level="5.6.2" data-path="joint-distributions.html"><a href="joint-distributions.html#multivariate-normal"><i class="fa fa-check"></i><b>5.6.2</b> Multivariate Normal</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="inequalities-limit-theorems-and-simulations.html"><a href="inequalities-limit-theorems-and-simulations.html"><i class="fa fa-check"></i><b>6</b> Inequalities, Limit Theorems, and Simulations</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="inequalities-limit-theorems-and-simulations.html"><a href="inequalities-limit-theorems-and-simulations.html#introduction-2"><i class="fa fa-check"></i><b>6.1</b> Introduction</a></li>
+<li class="chapter" data-level="6.2" data-path="inequalities-limit-theorems-and-simulations.html"><a href="inequalities-limit-theorems-and-simulations.html#inequalities"><i class="fa fa-check"></i><b>6.2</b> Inequalities</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="inequalities-limit-theorems-and-simulations.html"><a href="inequalities-limit-theorems-and-simulations.html#cauchy-schwartz-inequality"><i class="fa fa-check"></i><b>6.2.1</b> Cauchy-Schwartz Inequality</a></li>
+<li class="chapter" data-level="6.2.2" data-path="inequalities-limit-theorems-and-simulations.html"><a href="inequalities-limit-theorems-and-simulations.html#jensens-inequality"><i class="fa fa-check"></i><b>6.2.2</b> Jensen’s Inequality</a></li>
+<li class="chapter" data-level="6.2.3" data-path="inequalities-limit-theorems-and-simulations.html"><a href="inequalities-limit-theorems-and-simulations.html#chebyshevs-inequality"><i class="fa fa-check"></i><b>6.2.3</b> Chebyshev’s Inequality</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="inequalities-limit-theorems-and-simulations.html"><a href="inequalities-limit-theorems-and-simulations.html#limits"><i class="fa fa-check"></i><b>6.3</b> Limit Theorems</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="inequalities-limit-theorems-and-simulations.html"><a href="inequalities-limit-theorems-and-simulations.html#law-of-large-numbers"><i class="fa fa-check"></i><b>6.3.1</b> Law of Large Numbers</a></li>
+<li class="chapter" data-level="6.3.2" data-path="inequalities-limit-theorems-and-simulations.html"><a href="inequalities-limit-theorems-and-simulations.html#CLT"><i class="fa fa-check"></i><b>6.3.2</b> Central Limit Theorem</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="inequalities-limit-theorems-and-simulations.html"><a href="inequalities-limit-theorems-and-simulations.html#monte-carlo-simulations"><i class="fa fa-check"></i><b>6.4</b> Monte Carlo Simulations</a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="inequalities-limit-theorems-and-simulations.html"><a href="inequalities-limit-theorems-and-simulations.html#monte-carlo-methods-for-expected-values"><i class="fa fa-check"></i><b>6.4.1</b> Monte Carlo Methods for Expected Values</a></li>
+<li class="chapter" data-level="6.4.2" data-path="inequalities-limit-theorems-and-simulations.html"><a href="inequalities-limit-theorems-and-simulations.html#monte-carlo-methods-for-probabilities"><i class="fa fa-check"></i><b>6.4.2</b> Monte Carlo Methods for Probabilities</a></li>
+<li class="chapter" data-level="6.4.3" data-path="inequalities-limit-theorems-and-simulations.html"><a href="inequalities-limit-theorems-and-simulations.html#monte-carlo-methods-for-other-purposes"><i class="fa fa-check"></i><b>6.4.3</b> Monte Carlo Methods for Other Purposes</a></li>
+<li class="chapter" data-level="6.4.4" data-path="inequalities-limit-theorems-and-simulations.html"><a href="inequalities-limit-theorems-and-simulations.html#considerations-with-monte-carlo-methods"><i class="fa fa-check"></i><b>6.4.4</b> Considerations with Monte Carlo Methods</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="est.html"><a href="est.html"><i class="fa fa-check"></i><b>7</b> Estimation</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="est.html"><a href="est.html#introduction-3"><i class="fa fa-check"></i><b>7.1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="est.html"><a href="est.html#big-picture-idea-with-estimation"><i class="fa fa-check"></i><b>7.1.1</b> Big Picture Idea with Estimation</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="est.html"><a href="est.html#method-of-moments-estimation"><i class="fa fa-check"></i><b>7.2</b> Method of Moments Estimation</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="est.html"><a href="est.html#alternative-form-of-method-of-moments-estimation"><i class="fa fa-check"></i><b>7.2.1</b> Alternative Form of Method of Moments Estimation</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="est.html"><a href="est.html#method-of-maximum-likelihood-estimation"><i class="fa fa-check"></i><b>7.3</b> Method of Maximum Likelihood Estimation</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="est.html"><a href="est.html#likelihood-function"><i class="fa fa-check"></i><b>7.3.1</b> Likelihood Function</a></li>
+<li class="chapter" data-level="7.3.2" data-path="est.html"><a href="est.html#maximum-likelihood-estimation"><i class="fa fa-check"></i><b>7.3.2</b> Maximum Likelihood Estimation</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="est.html"><a href="est.html#estprops"><i class="fa fa-check"></i><b>7.4</b> Properties of Estimators</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="est.html"><a href="est.html#estimators-vs-estimates"><i class="fa fa-check"></i><b>7.4.1</b> Estimators VS Estimates</a></li>
+<li class="chapter" data-level="7.4.2" data-path="est.html"><a href="est.html#bias"><i class="fa fa-check"></i><b>7.4.2</b> Bias</a></li>
+<li class="chapter" data-level="7.4.3" data-path="est.html"><a href="est.html#standard-error-and-variance"><i class="fa fa-check"></i><b>7.4.3</b> Standard Error and Variance</a></li>
+<li class="chapter" data-level="7.4.4" data-path="est.html"><a href="est.html#sampling-distribution"><i class="fa fa-check"></i><b>7.4.4</b> Sampling Distribution</a></li>
+<li class="chapter" data-level="7.4.5" data-path="est.html"><a href="est.html#mean-squared-error"><i class="fa fa-check"></i><b>7.4.5</b> Mean-Squared Error</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="est.html"><a href="est.html#final-comments-on-estimation"><i class="fa fa-check"></i><b>7.5</b> Final Comments on Estimation</a>
+<ul>
+<li class="chapter" data-level="7.5.1" data-path="est.html"><a href="est.html#why-ml-estimators"><i class="fa fa-check"></i><b>7.5.1</b> Why ML Estimators?</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="confidence-intervals.html"><a href="confidence-intervals.html"><i class="fa fa-check"></i><b>8</b> Confidence Intervals</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="confidence-intervals.html"><a href="confidence-intervals.html#introduction-4"><i class="fa fa-check"></i><b>8.1</b> Introduction</a></li>
+<li class="chapter" data-level="8.2" data-path="confidence-intervals.html"><a href="confidence-intervals.html#confidence-interval-for-the-mean"><i class="fa fa-check"></i><b>8.2</b> Confidence Interval for the Mean</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="confidence-intervals.html"><a href="confidence-intervals.html#randomness-of-estimators"><i class="fa fa-check"></i><b>8.2.1</b> Randomness of Estimators</a></li>
+<li class="chapter" data-level="8.2.2" data-path="confidence-intervals.html"><a href="confidence-intervals.html#randomness-of-confidence-intervals"><i class="fa fa-check"></i><b>8.2.2</b> Randomness of Confidence Intervals</a></li>
+<li class="chapter" data-level="8.2.3" data-path="confidence-intervals.html"><a href="confidence-intervals.html#constructing-confidence-interval-for-the-mean"><i class="fa fa-check"></i><b>8.2.3</b> Constructing Confidence Interval for the Mean</a></li>
+<li class="chapter" data-level="8.2.4" data-path="confidence-intervals.html"><a href="confidence-intervals.html#confidence-interval-for-the-mean-using-t-distribution"><i class="fa fa-check"></i><b>8.2.4</b> Confidence Interval for the Mean Using t Distribution</a></li>
+<li class="chapter" data-level="8.2.5" data-path="confidence-intervals.html"><a href="confidence-intervals.html#factors-affecting-precision-of-confidence-intervals"><i class="fa fa-check"></i><b>8.2.5</b> Factors Affecting Precision of Confidence Intervals</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="confidence-intervals.html"><a href="confidence-intervals.html#confidence-interval-for-the-proportion"><i class="fa fa-check"></i><b>8.3</b> Confidence Interval for the Proportion</a>
+<ul>
+<li class="chapter" data-level="8.3.1" data-path="confidence-intervals.html"><a href="confidence-intervals.html#sampling-distribution-of-sample-proportions"><i class="fa fa-check"></i><b>8.3.1</b> Sampling Distribution of Sample Proportions</a></li>
+<li class="chapter" data-level="8.3.2" data-path="confidence-intervals.html"><a href="confidence-intervals.html#constructing-confidence-interval-for-the-proportion"><i class="fa fa-check"></i><b>8.3.2</b> Constructing Confidence Interval for the Proportion</a></li>
+<li class="chapter" data-level="8.3.3" data-path="confidence-intervals.html"><a href="confidence-intervals.html#minimum-sample-size"><i class="fa fa-check"></i><b>8.3.3</b> Minimum Sample Size</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="confidence-intervals.html"><a href="confidence-intervals.html#the-bootstrap"><i class="fa fa-check"></i><b>8.4</b> The Bootstrap</a>
+<ul>
+<li class="chapter" data-level="8.4.1" data-path="confidence-intervals.html"><a href="confidence-intervals.html#estimating-sampling-distributions-using-many-random-samples"><i class="fa fa-check"></i><b>8.4.1</b> Estimating Sampling Distributions Using Many Random Samples</a></li>
+<li class="chapter" data-level="8.4.2" data-path="confidence-intervals.html"><a href="confidence-intervals.html#the-bootstrap-algorithm"><i class="fa fa-check"></i><b>8.4.2</b> The Bootstrap Algorithm</a></li>
+<li class="chapter" data-level="8.4.3" data-path="confidence-intervals.html"><a href="confidence-intervals.html#confidence-intervals-using-the-bootstrap"><i class="fa fa-check"></i><b>8.4.3</b> Confidence Intervals using the Bootstrap</a></li>
+<li class="chapter" data-level="8.4.4" data-path="confidence-intervals.html"><a href="confidence-intervals.html#worked-example-5"><i class="fa fa-check"></i><b>8.4.4</b> Worked Example</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="confidence-intervals-1.html"><a href="confidence-intervals-1.html"><i class="fa fa-check"></i><b>9</b> Confidence Intervals</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="confidence-intervals-1.html"><a href="confidence-intervals-1.html#introduction-5"><i class="fa fa-check"></i><b>9.1</b> Introduction</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Understanding Uncertainty Course Notes</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="confidence-intervals-1" class="section level1 hasAnchor" number="9">
+<h1><span class="header-section-number">Chapter 9</span> Confidence Intervals<a href="confidence-intervals-1.html#confidence-intervals-1" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>This module is based on Introduction to Probability for Data Science (Chan), Chapter 9.3. You can access the book for free at <a href="https://probability4datascience.com" class="uri">https://probability4datascience.com</a>. Please note that I cover additional topics, and skip certain topics from the book. You may skip Section ??? from the book.</p>
+<div id="introduction-5" class="section level2 hasAnchor" number="9.1">
+<h2><span class="header-section-number">9.1</span> Introduction<a href="confidence-intervals-1.html#introduction-5" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="confidence-intervals.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": "https://github.com/rstudio/bookdown-demo/edit/master/09-hyp.Rmd",
+    "text": "Edit"
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": ["bookdown-demo.pdf", "bookdown-demo.epub"],
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
+  }
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

@@ -120,7 +120,7 @@ In equation \@ref(eq:8-CIcrit), $z^*$ is called the **critical value**. So we ca
 In words, equation \@ref(eq:8-CIcrit) says that we want to find the critical value $z^*$ so that the probability that a standardized score is between $-z^*$ and $z^*$ is $1 - \alpha$. Visually, this probability is displayed in Figure \@ref(fig:8-crit) below when $\alpha=0.05$. We want to find the values on the horizontal axis so that the blue shaded area corresponds to a value of 0.95 (recall that area under a PDF represents probability).
 
 ```{r 8-crit, fig.cap="Finding Critical Value with 95% Confidence", echo=FALSE}
-curve(dnorm, from = -4, to = 4, main = "PDF for Continuous RV", ylab="Density", xlab="")
+curve(dnorm, from = -4, to = 4, main = "PDF for Standard Normal", ylab="Density", xlab="")
 
 colorArea <- function(from, to, density, ..., col="blue", dens=NULL){
     y_seq <- seq(from, to, length.out=500)
@@ -276,7 +276,7 @@ What else can we say from the confidence interval?
 
   - In such a situation, we will say that our data do not support the claim that the average yield point of modified bars is different from 8410 pounds, since 8410 lies inside the interval. We cannot rule out the value of 8410.
 
-### Confidence Interval for the Mean Using t Distribution
+### Confidence Interval for the Mean Using t Distribution {#CImeant}
 
 You may have noticed that when we calculate a confidence interval for the mean using equation \@ref(eq:8-CImean), it involves knowing the value of $\sigma^2$, the variance of the variable in the population, which is a parameter. However, we have mentioned that the whole purpose of estimation and confidence intervals is to estimate the value of unknown parameters and quantify the uncertainty associated with the estimate. The numerical value of parameters are very rarely known! So how could we actually use equation \@ref(eq:8-CImean) in real life?
 

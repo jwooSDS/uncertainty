@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 9 Hypothesis Testing | Understanding Uncertainty Course Notes</title>
+<meta name="author" content="Jeffrey Woo">
+<meta name="description" content="This module is based on Introduction to Probability for Data Science (Chan), Chapter 9.3. You can access the book for free at https://probability4datascience.com. Please note that I cover...">
+<meta name="generator" content="bookdown 0.43 with bs4_book()">
+<meta property="og:title" content="Chapter 9 Hypothesis Testing | Understanding Uncertainty Course Notes">
+<meta property="og:type" content="book">
+<meta property="og:description" content="This module is based on Introduction to Probability for Data Science (Chan), Chapter 9.3. You can access the book for free at https://probability4datascience.com. Please note that I cover...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 9 Hypothesis Testing | Understanding Uncertainty Course Notes">
+<meta name="twitter:description" content="This module is based on Introduction to Probability for Data Science (Chan), Chapter 9.3. You can access the book for free at https://probability4datascience.com. Please note that I cover...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.9.0/transition.js"></script><script src="libs/bs3compat-0.9.0/tabs.js"></script><script src="libs/bs3compat-0.9.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Understanding Uncertainty Course Notes</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Preface</a></li>
+<li><a class="" href="descriptive.html"><span class="header-section-number">1</span> Descriptive Statistics</a></li>
+<li><a class="" href="probability.html"><span class="header-section-number">2</span> Probability</a></li>
+<li><a class="" href="discrete-random-variables.html"><span class="header-section-number">3</span> Discrete Random Variables</a></li>
+<li><a class="" href="continuous-random-variables.html"><span class="header-section-number">4</span> Continuous Random Variables</a></li>
+<li><a class="" href="joint-distributions.html"><span class="header-section-number">5</span> Joint Distributions</a></li>
+<li><a class="" href="inequalities-limit-theorems-and-simulations.html"><span class="header-section-number">6</span> Inequalities, Limit Theorems, and Simulations</a></li>
+<li><a class="" href="est.html"><span class="header-section-number">7</span> Estimation</a></li>
+<li><a class="" href="confidence-intervals.html"><span class="header-section-number">8</span> Confidence Intervals</a></li>
+<li><a class="active" href="hypothesis-testing.html"><span class="header-section-number">9</span> Hypothesis Testing</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="hypothesis-testing" class="section level1" number="9">
+<h1>
+<span class="header-section-number">9</span> Hypothesis Testing<a class="anchor" aria-label="anchor" href="#hypothesis-testing"><i class="fas fa-link"></i></a>
+</h1>
+<p>This module is based on Introduction to Probability for Data Science (Chan), Chapter 9.3. You can access the book for free at <a href="https://probability4datascience.com" class="uri">https://probability4datascience.com</a>. Please note that I cover additional topics, and skip certain topics from the book. You may skip Section ??? from the book.</p>
+<div id="introduction-5" class="section level2" number="9.1">
+<h2>
+<span class="header-section-number">9.1</span> Introduction<a class="anchor" aria-label="anchor" href="#introduction-5"><i class="fas fa-link"></i></a>
+</h2>
+<p>Consider this scenario: you are conducting clinical trials to assess whether a new vaccine is more effective than existing vaccines. Suppose the efficacy of existing vaccines on a certain disease is 80%, and you conduct clinical trials on 30 patients, and the new vaccine is effective on 25 patients. How strong is this result in trying to prove that the new vaccine is more effective than existing vaccines? Or could this result in the clinical trial be due to random sampling, since we know that just because existing vaccines is 80% effective, it is possible that the the effectiveness in a smaller sample could differ a little from 80% just due to random sampling? Questions like these lead to hypothesis testing.</p>
+<p>In previous modules, we have established the fact that estimators are likely to deviate from the value from their corresponding parameter, just due to random sampling. Confidence intervals allow us to provide a measure of uncertainty over our estimator as well as a range of plausible values for the parameter, using concepts regarding the sampling distribution of estimators. These concepts can also be used to assess whether our observed value for the estimator is different enough from a potential value of the parameter that random sampling alone is unlikely to be the only reason for the difference. Once this assessment is done, we then want to make a conclusion and decision about the unknown parameter. <strong>Hypothesis testing</strong> is a method for making a systematic decision with statistical guarantees.</p>
+<p>Hypothesis testing typically has the following steps:</p>
+<ol style="list-style-type: decimal">
+<li>State a hypothesis, based on the research question.</li>
+<li>Assume the hypothesis is true, and then compute a metric that measures how much our observed data deviates from the assumed hypothesis.</li>
+<li>Compare the metric with some sort of threshold to assess if our observed data deviates “far enough” or not, and then make a decision.</li>
+</ol>
+<p>For ease of exposition, we will introduce these ideas in the framework of the hypothesis test for the mean. We then show how the framework applies in two other situations: hypothesis test for the proportion, and goodness of fit tests which are used to assess if our data is consistent with a certain distribution or not.</p>
+<p>A hypothesis is a statement that we are using our observed data to assess whether the statement is true or not. In the framework of hypothesis testing, we state two competing hypotheses:</p>
+<ul>
+<li><p>The first hypothesis is the <strong>null hypothesis</strong>. This is normally the “status quo”.</p></li>
+<li><p>The other hypothesis is the <strong>alternative hypothesis</strong>. This can be viewed as a statement that is “opposite” of the null hypothesis.</p></li>
+</ul>
+<p>The book presents these hypotheses and hypothesis testing in the framework of a court trial. Defendants are assumed to be “innocent until proven guilty”. The “null hypothesis” or status quo in this setting is that the defendant is innocent, and the “alternative hypothesis” is that the defendant is guilty. The prosecutor needs to then present evidence that contradicts the null hypothesis in order to prove guilt. The jurors, who come into the trial assuming the defendant is innocent, then assess how strong is the evidence presented: if its strength is beyond a certain threshold (i.e. beyond “reasonable doubt”) then there is evidence to reject the null hypothesis and decide the defendant is guilty. However, if the evidence is not strong enough, there is not enough evidence to reject the null hypothesis and the jury renders a not guilty verdict.</p>
+</div>
+<div id="hypothesis-test-for-the-mean" class="section level2" number="9.2">
+<h2>
+<span class="header-section-number">9.2</span> Hypothesis Test for the Mean<a class="anchor" aria-label="anchor" href="#hypothesis-test-for-the-mean"><i class="fas fa-link"></i></a>
+</h2>
+<p>When testing for the mean, the parameter is the population mean. This happens when the variable we are measuring is quantitative. Consider this example:</p>
+<p>The term “Freshman 15” is an expression that says that college students gain 15 pounds (on average), in their first year in college. Researchers claim that with better education regarding healthier lifestyle habits, this gain is less than 15 pounds, on average.</p>
+<p>Next, we cover the first step in hypothesis testing: how to write the null and alternative hypothesis statements.</p>
+<div id="null-and-alternative-hypotheses" class="section level3" number="9.2.1">
+<h3>
+<span class="header-section-number">9.2.1</span> Null and Alternative Hypotheses<a class="anchor" aria-label="anchor" href="#null-and-alternative-hypotheses"><i class="fas fa-link"></i></a>
+</h3>
+<p>Null and alternative hypotheses are statements regarding the value of a parameter.</p>
+<p>For the Freshman 15 example, the null hypothesis is that the average weight gain for first year college students is 15 pounds. This is denoted as <span class="math inline">\(H_0: \mu = 15\)</span>, where <span class="math inline">\(H_0\)</span> denotes the null hypothesis. The alternative hypothesis is that the average weight gain for first year college students is less than 15 pounds. This is denoted as <span class="math inline">\(H_a: \mu &lt; 15\)</span>, where <span class="math inline">\(H_a\)</span> denotes the alternative hypothesis.</p>
+<div id="features-of-null-and-alternative-hypotheses" class="section level4" number="9.2.1.1">
+<h4>
+<span class="header-section-number">9.2.1.1</span> Features of Null and Alternative Hypotheses<a class="anchor" aria-label="anchor" href="#features-of-null-and-alternative-hypotheses"><i class="fas fa-link"></i></a>
+</h4>
+<ul>
+<li><p>Null and alternative hypotheses are always about a population parameter, not a sample estimator. The reason is that we want to make a claim about the population, based on data in our sample. Notice in the Freshman 15 example, that our null and alternative hypotheses are about the population mean <span class="math inline">\(\mu\)</span> and not the sample mean <span class="math inline">\(\bar{x}\)</span>.</p></li>
+<li><p>The <strong>null hypothesis</strong> is a statement that says the parameter is equal to some specific value. Let <span class="math inline">\(\mu_0\)</span> denote this specific value. So we write <span class="math inline">\(H_0: \mu = \mu_0\)</span>. In the Freshman 15 example, <span class="math inline">\(\mu_0 = 15\)</span>.</p></li>
+<li>
+<p>The <strong>alternative hypothesis</strong> is a statement against the null hypothesis. For the hypothesis test for the mean, there are a few possible alternative hypotheses. Which one we use is <strong>driven by the research question</strong>. The alternative hypothesis could say the the parameter is:</p>
+<ul>
+<li><p>Different from some specific value, i.e. <span class="math inline">\(H_a: \mu \neq \mu_0\)</span>. This is called a <strong>two-sided alternative</strong> since the parameter could be greater or less than some specific value.</p></li>
+<li><p>Greater than some specific value, i.e. <span class="math inline">\(H_a: \mu &gt; \mu_0\)</span>. This is called a <strong>one-sided alternative</strong> since the parameter is greater than some specific value.</p></li>
+<li><p>Less than some specific value, i.e. <span class="math inline">\(H_a: \mu &lt; \mu_0\)</span>. This is also called a one-sided alternative since the parameter is less than some specific value.</p></li>
+</ul>
+</li>
+</ul>
+<p>So for the hypothesis test for the mean, there are 3 options for the alternative hypothesis.</p>
+<p>In the Freshman 15 example, researchers claim that with better education, the average weight gain is less than 15 pounds, so that is why we write <span class="math inline">\(H_a: \mu &lt; 15\)</span>.</p>
+</div>
+<div id="some-comments-about-the-null-hypothesis-with-a-one-sided-alternative" class="section level4" number="9.2.1.2">
+<h4>
+<span class="header-section-number">9.2.1.2</span> Some Comments about the Null Hypothesis with a One-sided Alternative<a class="anchor" aria-label="anchor" href="#some-comments-about-the-null-hypothesis-with-a-one-sided-alternative"><i class="fas fa-link"></i></a>
+</h4>
+<p>A number of textbooks (including the one we are using!) take the view that the null and alternative hypotheses are opposites, so if we write <span class="math inline">\(H_a: \mu &lt; \mu_0\)</span>, then we must write <span class="math inline">\(H_0: \mu \geq \mu_0\)</span>. This way of writing a null hypothesis is different from that I wrote earlier: that the null hypothesis says the parameter is equal to <span class="math inline">\(\mu_0\)</span>. There are a couple of reasons why I think of the null hypothesis as a statement involving an equality, rather than an inequality:</p>
+<ol style="list-style-type: decimal">
+<li><p>The calculations performed to assess the evidence our data provides are done assuming the null hypothesis is true. You will realize in the later subsections that one can only perform these calculations if the null hypothesis says the parameter is equal to some specific value.</p></li>
+<li><p>I have seen many people get confused with the null and alternative hypotheses if they insist the the null and alternative must be opposite with a one-sided alternative. Indeed, if you look at Practice Exercise 9.3 and 9.4 in our book, the author has gotten these confused in the proposed solutions.</p></li>
+</ol>
+</div>
+</div>
+<div id="test-statistic" class="section level3" number="9.2.2">
+<h3>
+<span class="header-section-number">9.2.2</span> Test Statistic<a class="anchor" aria-label="anchor" href="#test-statistic"><i class="fas fa-link"></i></a>
+</h3>
+<p>After writing the null and alternative hypotheses, the next step is to compute a value that measures how far our sample data are from its expected value if the null hypothesis is true. This value is called the <strong>test statistic</strong>. How a test statistic is calculated is based on the sampling distribution of the estimator being used.</p>
+<p>We remind ourselves of the sampling distribution of the sample mean, <span class="math inline">\(\bar{X}_n\)</span>, from Section <a href="est.html#sampdistmean">7.4.4.1</a>. There are a couple of conditions to consider:</p>
+<ol style="list-style-type: decimal">
+<li><p><span class="math inline">\(X_1, \cdots, X_n\)</span> are i.i.d. from a normal distribution with finite mean <span class="math inline">\(\mu\)</span> and finite variance <span class="math inline">\(\sigma^2\)</span>. Then <span class="math inline">\(\bar{X}_n \sim N(\mu, \frac{\sigma^2}{n})\)</span>.</p></li>
+<li><p><span class="math inline">\(X_1, \cdots, X_n\)</span> are i.i.d. from any distribution with finite mean <span class="math inline">\(\mu\)</span> and finite variance <span class="math inline">\(\sigma^2\)</span>, and if <span class="math inline">\(n\)</span> is large enough, then <span class="math inline">\(\bar{X}_n\)</span> is approximately <span class="math inline">\(N(\mu, \frac{\sigma^2}{n})\)</span>.</p></li>
+</ol>
+<p>If either of these conditions are met, then the distribution of <span class="math inline">\(\bar{X}_n\)</span> after standardization is either a standard normal or approaches a standard normal distribution, so <span class="math inline">\(\frac{\bar{X}_n - \mu}{\frac{\sigma}{\sqrt{n}}} = \frac{\bar{X}_n - \mu}{\sqrt{Var(\bar{X})}} = \frac{\bar{X}_n - \mu}{SE(\bar{X}_n)}\)</span> is either standard normal or approximately standard normal when <span class="math inline">\(n\)</span> is large enough.</p>
+<p>We then learned in Section <a href="confidence-intervals.html#CImeant">8.2.4</a> that since the value of the population variance <span class="math inline">\(\sigma^2\)</span> is almost always unknown in real life, we use the sample variance <span class="math inline">\(s^2\)</span> instead. So we work with <span class="math inline">\(\frac{\bar{X}_n - \mu}{\frac{s}{\sqrt{n}}}\)</span> instead, which follows a <span class="math inline">\(t\)</span> distribution with <span class="math inline">\(n-1\)</span> degrees of freedom.</p>
+<p>Based on this distribution, the test statistic for a hypothesis test for the mean is</p>
+<p><span class="math display" id="eq:8-teststatMean">\[\begin{equation}
+\hat{t} =  \frac{\bar{x}_n - \mu_0}{\frac{s}{\sqrt{n}}} = \frac{\bar{x}_n - \mu_0}{SE(\bar{x}_n)},
+\tag{9.1}
+\end{equation}\]</span></p>
+<p>where <span class="math inline">\(SE(\bar{x}_n)\)</span> is <span class="math inline">\(\frac{s}{\sqrt{n}}\)</span>. This can be called a <strong><span class="math inline">\(t\)</span> statistic</strong> to reflect that our test statistic is based on the <span class="math inline">\(t\)</span> distribution.</p>
+<p>We go back to the Freshman 15 example. Suppose researchers collect a random sample of 50 first-year college students. Their average weight loss is 14 pounds, with standard deviation of 3 pounds. Derive the value of the <span class="math inline">\(t\)</span> statistic.</p>
+<p>Using equation <a href="hypothesis-testing.html#eq:8-teststatMean">(9.1)</a>, the <span class="math inline">\(t\)</span> statistic is:</p>
+<p><span class="math display">\[
+\begin{split}
+\hat{t} &amp;= \frac{14-15}{\frac{3}{\sqrt{50}}} \\
+        &amp;= -2.357023.
+\end{split}
+\]</span></p>
+<p>Remember that the test statistic is a measure of how far our sample data are from its expected value if the null hypothesis is true. Larger values of the test statistic (in magnitude) imply that our data deviate further from the null hypothesis, i.e. our data provides more evidence against the null hypothesis.</p>
+<p>The <span class="math inline">\(t\)</span> statistic also has this nice definition: it is the distance between our sample estimator and the value of the parameter if the null hypothesis is true, in terms of number of standard errors. So for our Freshman 15 example, the sample mean is 2.357 standard errors smaller than the hypothesized value of 15.</p>
+<div id="factors-affecting-t-statistic-for-mean" class="section level4" number="9.2.2.1">
+<h4>
+<span class="header-section-number">9.2.2.1</span> Factors Affecting <span class="math inline">\(t\)</span> Statistic for Mean<a class="anchor" aria-label="anchor" href="#factors-affecting-t-statistic-for-mean"><i class="fas fa-link"></i></a>
+</h4>
+<p>We have established that larger values of the test statistic imply more evidence against the null hypothesis. For the <span class="math inline">\(t\)</span> statistic for the mean, the factor that affect its magnitude are:</p>
+<ul>
+<li><p>The difference between the sample mean <span class="math inline">\(\bar{x}\)</span> of our data and the value of the population mean if the null is true, which is <span class="math inline">\(\mu_0\)</span>. This difference is called the <strong>effect size</strong>. Larger effect sizes lead to larger test statistics, in magnitude. This should make sense since a larger effect size implies the sample mean is deviates more from the expected mean if the null hypothesis is true.</p></li>
+<li><p>The sample size <span class="math inline">\(n\)</span>. Larger sample sizes lead to larger magnitudes for the <span class="math inline">\(t\)</span> statistic, since <span class="math inline">\(\frac{\bar{x}_n - \mu_0}{\frac{s}{\sqrt{n}}}\)</span> can be written as <span class="math inline">\(\sqrt{n}\frac{\bar{x}_n - \mu_0}{s}\)</span>. This implies that even if the effect size stays the same, larger sample sizes provide more evidence against the null.</p></li>
+</ul>
+</div>
+</div>
+<div id="making-a-decision" class="section level3" number="9.2.3">
+<h3>
+<span class="header-section-number">9.2.3</span> Making a Decision<a class="anchor" aria-label="anchor" href="#making-a-decision"><i class="fas fa-link"></i></a>
+</h3>
+<p>After calculating the value of the test statistic, we need to assess if our data provides enough evidence against the null hypothesis or not. There are two approaches to making this assessment: one involves the p-value, and the other involves the critical value.</p>
+<ul>
+<li>Using the p-value, we reject the null hypothesis (i.e. our data have enough evidence against the null hypothesis) if our p-value is less than the significance level. Otherwise, we fail to reject the null hypothesis (i.e. our data do not have enough evidence against the null hypothesis)</li>
+</ul>
+<p>The <strong>significance level</strong> of the test, <span class="math inline">\(\alpha\)</span>, is the probability of wrongly rejecting the null hypothesis when the null hypothesis is actually true. This error is called a type I error, which we will define more formally in a later subsection. So if we conduct a hypothesis test with significance level <span class="math inline">\(\alpha = 0.05\)</span>, we are saying that we are willing to have a 5% probability of wrongly concluding that we have enough evidence against the null hypothesis, when it is actually true.</p>
+<ul>
+<li>Using the critical value, we reject the null hypothesis (i.e. our data have enough evidence against the null hypothesis) if our test statistic is more extreme than the critical value in the direction of the alternative hypothesis. Otherwise, we fail to reject the null hypothesis (i.e. our data do not have enough evidence against the null hypothesis).</li>
+</ul>
+<p>Both of these approaches are based on the sampling distribution of the estimator, and on the value of the significance level.</p>
+<div id="p-value" class="section level4" number="9.2.3.1">
+<h4>
+<span class="header-section-number">9.2.3.1</span> P-Value<a class="anchor" aria-label="anchor" href="#p-value"><i class="fas fa-link"></i></a>
+</h4>
+<p>The <strong>p-value</strong> is the probability of observing the value of our test statistic, or a value more extreme in the direction of the alternative hypothesis, if the null hypothesis is true.</p>
+<p>Informally, this is also the probability of observing the value of our sample mean, or a value more extreme in the direction of the alternative hypothesis, if the null hypothesis is true.</p>
+<p>Recall that for a hypothesis test of the mean, the <span class="math inline">\(t\)</span> statistic follows a <span class="math inline">\(t_{n-1}\)</span> distribution (the subscript refers to the degrees of freedom). Visually, we can find areas under the PDF of a <span class="math inline">\(t_{n-1}\)</span> to illustrate how the p-value is found. The specific area under the PDF depends on the alternative hypothesis. In the Figures <a href="hypothesis-testing.html#fig:9-pvalneq">9.1</a>, <a href="hypothesis-testing.html#fig:9-pvalgreater">9.2</a>, and <a href="hypothesis-testing.html#fig:9-pvalless">9.3</a> below, let us assume that the value of the <span class="math inline">\(t\)</span> statistic is <span class="math inline">\(\hat{t} = 1\)</span>.</p>
+<ul>
+<li>If <span class="math inline">\(H_a: \mu  \neq \mu_0\)</span>, i.e. we have a two-sided alternative, the corresponding areas under the PDF of the <span class="math inline">\(t_{n-1}\)</span> distribution that is the p-value is shown below in Figure <a href="hypothesis-testing.html#fig:9-pvalneq">9.1</a>:</li>
+</ul>
+<div class="figure">
+<span style="display:block;" id="fig:9-pvalneq"></span>
+<img src="bookdown-demo_files/figure-html/9-pvalneq-1.png" alt="Finding P-value, with Two-Sided Alternative" width="672"><p class="caption">
+Figure 9.1: Finding P-value, with Two-Sided Alternative
+</p>
+</div>
+<p>Using probability notation, this is <span class="math inline">\(P(|t_{n-1}| \geq 1)\)</span>.</p>
+<ul>
+<li>If <span class="math inline">\(H_a: \mu &gt; \mu_0\)</span>, i.e. the population mean is greater than a specified value, the corresponding area under the PDF of the <span class="math inline">\(t_{n-1}\)</span> distribution that is the p-value is shown below in Figure <a href="hypothesis-testing.html#fig:9-pvalgreater">9.2</a>:</li>
+</ul>
+<div class="figure">
+<span style="display:block;" id="fig:9-pvalgreater"></span>
+<img src="bookdown-demo_files/figure-html/9-pvalgreater-1.png" alt="Finding P-value, with Greater Than Alternative" width="672"><p class="caption">
+Figure 9.2: Finding P-value, with Greater Than Alternative
+</p>
+</div>
+<p>Using probability notation, this is <span class="math inline">\(P(t_{n-1} \geq 1)\)</span>.</p>
+<ul>
+<li>If <span class="math inline">\(H_a: \mu &lt; \mu_0\)</span>, i.e. the population mean is less than a specified value, the corresponding area under the PDF of the <span class="math inline">\(t_{n-1}\)</span> distribution that is the p-value is shown below in Figure <a href="hypothesis-testing.html#fig:9-pvalless">9.3</a>:</li>
+</ul>
+<div class="figure">
+<span style="display:block;" id="fig:9-pvalless"></span>
+<img src="bookdown-demo_files/figure-html/9-pvalless-1.png" alt="Finding P-value, with Less Than Alternative" width="672"><p class="caption">
+Figure 9.3: Finding P-value, with Less Than Alternative
+</p>
+</div>
+<p>Using probability notation, this is <span class="math inline">\(P( t_{n-1} \leq 1)\)</span>.</p>
+<p>Going back to the Freshman 15 example, we found the <span class="math inline">\(t\)</span> statistic to be −2.357023. We had earlier written the alternative hypothesis as <span class="math inline">\(\mu &lt; 15\)</span>, so we find the PDF under a <span class="math inline">\(t_49\)</span> distribution using the area to the left of <span class="math inline">\(-2.357023\)</span>, in a manner similar to Figure <a href="hypothesis-testing.html#fig:9-pvalless">9.3</a>.</p>
+<div class="figure">
+<span style="display:block;" id="fig:9-pvaleg"></span>
+<img src="bookdown-demo_files/figure-html/9-pvaleg-1.png" alt="Finding P-value, For Freshman 15 Example" width="672"><p class="caption">
+Figure 9.4: Finding P-value, For Freshman 15 Example
+</p>
+</div>
+<p>Using R, this p-value is 0.01123. If our test is conducted at 5% significance level, we reject the null hypothesis, since this p-value is less than 0.05.</p>
+<div class="sourceCode" id="cb159"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/TDist.html">pt</a></span><span class="op">(</span><span class="op">-</span><span class="fl">2.357023</span>, <span class="fl">49</span><span class="op">)</span> <span class="co">##enter t stat, then df</span></span></code></pre></div>
+<pre><code>## [1] 0.01123111</code></pre>
+</div>
+<div id="critical-value-1" class="section level4" number="9.2.3.2">
+<h4>
+<span class="header-section-number">9.2.3.2</span> Critical Value<a class="anchor" aria-label="anchor" href="#critical-value-1"><i class="fas fa-link"></i></a>
+</h4>
+<p>Informally, the critical value is the value of the test statistic that is considered “enough” to say that we have enough evidence against the null hypothesis to reject it, based on the value of the significance level.</p>
+<p>Let’s think of the critical value using a PDF of the <span class="math inline">\(t\)</span> distribution. We want to find the “cut off” value of the distribution where the area under its PDF in the direction of the alternative hypothesis is equal to the significance level <span class="math inline">\(\alpha\)</span>. Since we have three options for the alternative hypothesis, we have 3 different areas under the PDF to consider.</p>
+</div>
+<div id="writing-conclusions" class="section level4" number="9.2.3.3">
+<h4>
+<span class="header-section-number">9.2.3.3</span> Writing Conclusions<a class="anchor" aria-label="anchor" href="#writing-conclusions"><i class="fas fa-link"></i></a>
+</h4>
+</div>
+<div id="type-i-and-type-ii-errors" class="section level4" number="9.2.3.4">
+<h4>
+<span class="header-section-number">9.2.3.4</span> Type I and Type II Errors<a class="anchor" aria-label="anchor" href="#type-i-and-type-ii-errors"><i class="fas fa-link"></i></a>
+</h4>
+</div>
+</div>
+</div>
+<div id="hypothesis-test-for-the-proportion" class="section level2" number="9.3">
+<h2>
+<span class="header-section-number">9.3</span> Hypothesis Test for the Proportion<a class="anchor" aria-label="anchor" href="#hypothesis-test-for-the-proportion"><i class="fas fa-link"></i></a>
+</h2>
+</div>
+<div id="goodness-of-fit-tests" class="section level2" number="9.4">
+<h2>
+<span class="header-section-number">9.4</span> Goodness of Fit Tests<a class="anchor" aria-label="anchor" href="#goodness-of-fit-tests"><i class="fas fa-link"></i></a>
+</h2>
+
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="confidence-intervals.html"><span class="header-section-number">8</span> Confidence Intervals</a></div>
+<div class="empty"></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#hypothesis-testing"><span class="header-section-number">9</span> Hypothesis Testing</a></li>
+<li><a class="nav-link" href="#introduction-5"><span class="header-section-number">9.1</span> Introduction</a></li>
+<li>
+<a class="nav-link" href="#hypothesis-test-for-the-mean"><span class="header-section-number">9.2</span> Hypothesis Test for the Mean</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#null-and-alternative-hypotheses"><span class="header-section-number">9.2.1</span> Null and Alternative Hypotheses</a></li>
+<li><a class="nav-link" href="#test-statistic"><span class="header-section-number">9.2.2</span> Test Statistic</a></li>
+<li><a class="nav-link" href="#making-a-decision"><span class="header-section-number">9.2.3</span> Making a Decision</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#hypothesis-test-for-the-proportion"><span class="header-section-number">9.3</span> Hypothesis Test for the Proportion</a></li>
+<li><a class="nav-link" href="#goodness-of-fit-tests"><span class="header-section-number">9.4</span> Goodness of Fit Tests</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2025-07-23.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

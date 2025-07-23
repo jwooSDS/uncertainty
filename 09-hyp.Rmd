@@ -1,0 +1,217 @@
+# Hypothesis Testing
+
+```{r, echo=FALSE}
+rm(list = ls())
+```
+
+This module is based on Introduction to Probability for Data Science (Chan), Chapter 9.3. You can access the book for free at https://probability4datascience.com. Please note that I cover additional topics, and skip certain topics from the book. You may skip Section ??? from the book.
+
+## Introduction
+
+Consider this scenario: you are conducting clinical trials to assess whether a new vaccine is more effective than existing vaccines. Suppose the efficacy of existing vaccines on a certain disease is 80%, and you conduct clinical trials on 30 patients, and the new vaccine is effective on 25 patients. How strong is this result in trying to prove that the new vaccine is more effective than existing vaccines? Or could this result in the clinical trial be due to random sampling, since we know that just because existing vaccines is 80% effective, it is possible that the the effectiveness in a smaller sample could differ a little from 80% just due to random sampling? Questions like these lead to hypothesis testing.
+
+In previous modules, we have established the fact that estimators are likely to deviate from the value from their corresponding parameter, just due to random sampling. Confidence intervals allow us to provide a measure of uncertainty over our estimator as well as a range of plausible values for the parameter, using concepts regarding the sampling distribution of estimators. These concepts can also be used to assess whether our observed value for the estimator is different enough from a potential value of the parameter that random sampling alone is unlikely to be the only reason for the difference. Once this assessment is done, we then want to make a conclusion and decision about the unknown parameter. **Hypothesis testing** is a method for making a systematic decision with statistical guarantees.
+
+Hypothesis testing typically has the following steps:
+
+1. State a hypothesis, based on the research question.
+2. Assume the hypothesis is true, and then compute a metric that measures how much our observed data deviates from the assumed hypothesis.
+3. Compare the metric with some sort of threshold to assess if our observed data deviates "far enough" or not, and then make a decision. 
+
+For ease of exposition, we will introduce these ideas in the framework of the hypothesis test for the mean. We then show how the framework applies in two other situations: hypothesis test for the proportion, and goodness of fit tests which are used to assess if our data is consistent with a certain distribution or not. 
+
+A hypothesis is a statement that we are using our observed data to assess whether the statement is true or not. In the framework of hypothesis testing, we state two competing hypotheses:
+
+- The first hypothesis is the **null hypothesis**. This is normally the "status quo".
+
+- The other hypothesis is the **alternative hypothesis**. This can be viewed as a statement that is "opposite" of the null hypothesis. 
+
+The book presents these hypotheses and hypothesis testing in the framework of a court trial. Defendants are assumed to be "innocent until proven guilty". The "null hypothesis" or status quo in this setting is that the defendant is innocent, and the "alternative hypothesis" is that the defendant is guilty. The prosecutor needs to then present evidence that contradicts the null hypothesis in order to prove guilt. The jurors, who come into the trial assuming the defendant is innocent, then assess how strong is the evidence presented: if its strength is beyond a certain threshold (i.e. beyond "reasonable doubt") then there is evidence to reject the null hypothesis and decide the defendant is guilty. However, if the evidence is not strong enough, there is not enough evidence to reject the null hypothesis and the jury renders a not guilty verdict. 
+
+## Hypothesis Test for the Mean
+
+When testing for the mean, the parameter is the population mean. This happens when the variable we are measuring is quantitative. Consider this example: 
+
+The term "Freshman 15" is an expression that says that college students gain 15 pounds (on average), in their first year in college. Researchers claim that with better education regarding healthier lifestyle habits, this gain is less than 15 pounds, on average. 
+
+Next, we cover the first step in hypothesis testing: how to write the null and alternative hypothesis statements.
+
+### Null and Alternative Hypotheses
+
+Null and alternative hypotheses are statements regarding the value of a parameter. 
+
+For the Freshman 15 example, the null hypothesis is that the average weight gain for first year college students is 15 pounds. This is denoted as $H_0: \mu = 15$, where $H_0$ denotes the null hypothesis. The alternative hypothesis is that the average weight gain for first year college students is less than 15 pounds. This is denoted as $H_a: \mu < 15$, where $H_a$ denotes the alternative hypothesis. 
+
+#### Features of Null and Alternative Hypotheses
+
+- Null and alternative hypotheses are always about a population parameter, not a sample estimator. The reason is that we want to make a claim about the population, based on data in our sample. Notice in the Freshman 15 example, that our null and alternative hypotheses are about the population mean $\mu$ and not the sample mean $\bar{x}$.
+
+- The **null hypothesis** is a statement that says the parameter is equal to some specific value. Let $\mu_0$ denote this specific value. So we write $H_0: \mu = \mu_0$. In the Freshman 15 example, $\mu_0 = 15$.
+
+- The **alternative hypothesis** is a statement against the null hypothesis. For the hypothesis test for the mean, there are a few possible alternative hypotheses. Which one we use is **driven by the research question**. The alternative hypothesis could say the the parameter is:
+
+  - Different from some specific value, i.e. $H_a: \mu \neq \mu_0$. This is called a **two-sided alternative** since the parameter could be greater or less than some specific value. 
+  
+  - Greater than some specific value, i.e. $H_a: \mu > \mu_0$. This is called a **one-sided alternative** since the parameter is greater than some specific value.
+  
+  - Less than some specific value, i.e. $H_a: \mu < \mu_0$. This is also called a one-sided alternative since the parameter is less than some specific value. 
+  
+So for the hypothesis test for the mean, there are 3 options for the alternative hypothesis.
+  
+In the Freshman 15 example, researchers claim that with better education, the average weight gain is less than 15 pounds, so that is why we write $H_a: \mu < 15$. 
+
+#### Some Comments about the Null Hypothesis with a One-sided Alternative 
+
+A number of textbooks (including the one we are using!) take the view that the null and alternative hypotheses are opposites, so if we write $H_a: \mu < \mu_0$, then we must write $H_0: \mu \geq \mu_0$. This way of writing a null hypothesis is different from that I wrote earlier: that the null hypothesis says the parameter is equal to $\mu_0$. There are a couple of reasons why I think of the null hypothesis as a statement involving an equality, rather than an inequality:
+
+1. The calculations performed to assess the evidence our data provides are done assuming the null hypothesis is true. You will realize in the later subsections that one can only perform these calculations if the null hypothesis says the parameter is equal to some specific value.
+
+2. I have seen many people get confused with the null and alternative hypotheses if they insist the the null and alternative must be opposite with a one-sided alternative. Indeed, if you look at Practice Exercise 9.3 and 9.4 in our book, the author has gotten these confused in the proposed solutions. 
+
+### Test Statistic
+
+After writing the null and alternative hypotheses, the next step is to compute a value that measures how far our sample data are from its expected value if the null hypothesis is true. This value is called the **test statistic**. How a test statistic is calculated is based on the sampling distribution of the estimator being used. 
+
+We remind ourselves of the sampling distribution of the sample mean, $\bar{X}_n$, from Section \@ref(sampdistmean). There are a couple of conditions to consider:
+
+1. $X_1, \cdots, X_n$ are i.i.d. from a normal distribution with finite mean $\mu$ and finite variance $\sigma^2$. Then $\bar{X}_n \sim N(\mu, \frac{\sigma^2}{n})$.
+
+2. $X_1, \cdots, X_n$ are i.i.d. from any distribution with finite mean $\mu$ and finite variance $\sigma^2$, and if $n$ is large enough, then $\bar{X}_n$ is approximately $N(\mu, \frac{\sigma^2}{n})$. 
+
+If either of these conditions are met, then the distribution of $\bar{X}_n$ after standardization is either a standard normal or approaches a standard normal distribution, so $\frac{\bar{X}_n - \mu}{\frac{\sigma}{\sqrt{n}}} = \frac{\bar{X}_n - \mu}{\sqrt{Var(\bar{X})}} = \frac{\bar{X}_n - \mu}{SE(\bar{X}_n)}$ is either standard normal or approximately standard normal when $n$ is large enough. 
+
+We then learned in Section \@ref(CImeant) that since the value of the population variance $\sigma^2$ is almost always unknown in real life, we use the sample variance $s^2$ instead. So we work with $\frac{\bar{X}_n - \mu}{\frac{s}{\sqrt{n}}}$ instead, which follows a $t$ distribution with $n-1$ degrees of freedom. 
+
+Based on this distribution, the test statistic for a hypothesis test for the mean is
+
+\begin{equation} 
+\hat{t} =  \frac{\bar{x}_n - \mu_0}{\frac{s}{\sqrt{n}}} = \frac{\bar{x}_n - \mu_0}{SE(\bar{x}_n)},
+(\#eq:8-teststatMean)
+\end{equation}
+
+where $SE(\bar{x}_n)$ is $\frac{s}{\sqrt{n}}$. This can be called a **$t$ statistic** to reflect that our test statistic is based on the $t$ distribution. 
+
+We go back to the Freshman 15 example. Suppose researchers collect a random sample of 50 first-year college students. Their average weight loss is 14 pounds, with standard deviation of 3 pounds. Derive the value of the $t$ statistic.
+
+Using equation \@ref(eq:8-teststatMean), the $t$ statistic is:
+
+$$
+\begin{split}
+\hat{t} &= \frac{14-15}{\frac{3}{\sqrt{50}}} \\
+        &= -2.357023.
+\end{split}
+$$
+
+Remember that the test statistic is a measure of how far our sample data are from its expected value if the null hypothesis is true. Larger values of the test statistic (in magnitude) imply that our data deviate further from the null hypothesis, i.e. our data provides more evidence against the null hypothesis. 
+
+The $t$ statistic also has this nice definition: it is the distance between our sample estimator and the value of the parameter if the null hypothesis is true, in terms of number of standard errors. So for our Freshman 15 example, the sample mean is 2.357 standard errors smaller than the hypothesized value of 15.
+
+#### Factors Affecting $t$ Statistic for Mean
+
+We have established that larger values of the test statistic imply more evidence against the null hypothesis. For the $t$ statistic for the mean, the factor that affect its magnitude are:
+
+- The difference between the sample mean $\bar{x}$ of our data and the value of the population mean if the null is true, which is $\mu_0$. This difference is called the **effect size**. Larger effect sizes lead to larger test statistics, in magnitude. This should make sense since a larger effect size implies the sample mean is deviates more from the expected mean if the null hypothesis is true. 
+
+- The sample size $n$. Larger sample sizes lead to larger magnitudes for the $t$ statistic, since $\frac{\bar{x}_n - \mu_0}{\frac{s}{\sqrt{n}}}$ can be written as $\sqrt{n}\frac{\bar{x}_n - \mu_0}{s}$. This implies that even if the effect size stays the same, larger sample sizes provide more evidence against the null. 
+
+### Making a Decision
+
+After calculating the value of the test statistic, we need to assess if our data provides enough evidence against the null hypothesis or not. There are two approaches to making this assessment: one involves the p-value, and the other involves the  critical value.
+
+- Using the p-value, we reject the null hypothesis (i.e. our data have enough evidence against the null hypothesis) if our p-value is less than the significance level. Otherwise, we fail to reject the null hypothesis (i.e. our data do not have enough evidence against the null hypothesis)
+
+The **significance level** of the test, $\alpha$, is the probability of wrongly rejecting the null hypothesis when the null hypothesis is actually true. This error is called a type I error, which we will define more formally in a later subsection. So if we conduct a hypothesis test with significance level $\alpha = 0.05$, we are saying that we are willing to have a 5% probability of wrongly concluding that we have enough evidence against the null hypothesis, when it is actually true.
+
+- Using the critical value, we reject the null hypothesis (i.e. our data have enough evidence against the null hypothesis) if our test statistic is more extreme than the critical value in the direction of the alternative hypothesis. Otherwise, we fail to reject the null hypothesis (i.e. our data do not have enough evidence against the null hypothesis).
+
+Both of these approaches are based on the sampling distribution of the estimator, and on the value of the significance level. 
+
+#### P-Value
+
+The **p-value** is the probability of observing the value of our test statistic, or a value more extreme in the direction of the alternative hypothesis, if the null hypothesis is true. 
+
+Informally, this is also the probability of observing the value of our sample mean, or a value more extreme in the direction of the alternative hypothesis, if the null hypothesis is true. 
+
+Recall that for a hypothesis test of the mean, the $t$ statistic follows a $t_{n-1}$ distribution (the subscript refers to the degrees of freedom). Visually, we can find areas under the PDF of a $t_{n-1}$ to illustrate how the p-value is found. The specific area under the PDF depends on the alternative hypothesis. In the Figures \@ref(fig:9-pvalneq), \@ref(fig:9-pvalgreater), and \@ref(fig:9-pvalless) below, let us assume that the value of the $t$ statistic is $\hat{t} = 1$.
+
+- If $H_a: \mu  \neq \mu_0$, i.e. we have a two-sided alternative, the corresponding areas under the PDF of the $t_{n-1}$ distribution that is the p-value is shown below in Figure \@ref(fig:9-pvalneq):
+
+```{r 9-pvalneq, fig.cap="Finding P-value, with Two-Sided Alternative", echo=FALSE}
+curve(dnorm, from = -4, to = 4, main = "PDF for t Dist with df=49", ylab="Density", xlab="")
+
+colorArea <- function(from, to, density, ..., col="blue", dens=NULL){
+    y_seq <- seq(from, to, length.out=500)
+    d <- c(0, density(y_seq, ...), 0)
+    polygon(c(from, y_seq, to), d, col=col, density=dens)
+}
+
+colorArea(from=-4, to=-1, dnorm)
+colorArea(from=1, to=4, dnorm)
+```
+Using probability notation, this is $P(|t_{n-1}| \geq 1)$. 
+
+- If $H_a: \mu > \mu_0$, i.e. the population mean is greater than a specified value, the corresponding area under the PDF of the $t_{n-1}$ distribution that is the p-value is shown below in Figure \@ref(fig:9-pvalgreater):
+
+```{r 9-pvalgreater, fig.cap="Finding P-value, with Greater Than Alternative", echo=FALSE}
+curve(dnorm, from = -4, to = 4, main = "PDF for t Dist", ylab="Density", xlab="")
+
+colorArea <- function(from, to, density, ..., col="blue", dens=NULL){
+    y_seq <- seq(from, to, length.out=500)
+    d <- c(0, density(y_seq, ...), 0)
+    polygon(c(from, y_seq, to), d, col=col, density=dens)
+}
+
+colorArea(from=1, to=4, dnorm)
+```
+
+Using probability notation, this is $P(t_{n-1} \geq 1)$. 
+
+- If $H_a: \mu < \mu_0$, i.e. the population mean is less than a specified value, the corresponding area under the PDF of the $t_{n-1}$ distribution that is the p-value is shown below in Figure \@ref(fig:9-pvalless):
+
+```{r 9-pvalless, fig.cap="Finding P-value, with Less Than Alternative", echo=FALSE}
+curve(dnorm, from = -4, to = 4, main = "PDF for t Dist", ylab="Density", xlab="")
+
+colorArea <- function(from, to, density, ..., col="blue", dens=NULL){
+    y_seq <- seq(from, to, length.out=500)
+    d <- c(0, density(y_seq, ...), 0)
+    polygon(c(from, y_seq, to), d, col=col, density=dens)
+}
+
+colorArea(from=-4, to=1, dnorm)
+```
+
+Using probability notation, this is $P( t_{n-1} \leq 1)$. 
+
+Going back to the Freshman 15 example, we found the $t$ statistic to be −2.357023. We had earlier written the alternative hypothesis as $\mu < 15$, so we find the PDF under a $t_49$ distribution using the area to the left of $-2.357023$, in a manner similar to Figure \@ref(fig:9-pvalless).
+
+```{r 9-pvaleg, fig.cap="Finding P-value, For Freshman 15 Example", echo=FALSE}
+curve(dnorm, from = -4, to = 4, main = "PDF for t Dist", ylab="Density", xlab="")
+
+colorArea <- function(from, to, density, ..., col="blue", dens=NULL){
+    y_seq <- seq(from, to, length.out=500)
+    d <- c(0, density(y_seq, ...), 0)
+    polygon(c(from, y_seq, to), d, col=col, density=dens)
+}
+
+colorArea(from=-4, to= -2.357023, dnorm)
+```
+
+Using R, this p-value is 0.01123. If our test is conducted at 5% significance level, we reject the null hypothesis, since this p-value is less than 0.05.
+
+```{r}
+pt(-2.357023, 49) ##enter t stat, then df
+```
+
+#### Critical Value
+
+Informally, the critical value is the value of the test statistic that is considered "enough" to say that we have enough evidence against the null hypothesis to reject it, based on the value of the significance level. 
+
+Let's think of the critical value using a PDF of the $t$ distribution. We want to find the "cut off" value of the distribution where the area under its PDF in the direction of the alternative hypothesis is equal to the significance level $\alpha$. Since we have three options for the alternative hypothesis, we have 3 different areas under the PDF to consider.
+
+#### Writing Conclusions
+
+#### Type I and Type II Errors
+
+## Hypothesis Test for the Proportion
+
+## Goodness of Fit Tests
