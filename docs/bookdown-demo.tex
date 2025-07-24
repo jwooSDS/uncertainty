@@ -127,7 +127,7 @@
 
 \title{Understanding Uncertainty Course Notes}
 \author{Jeffrey Woo}
-\date{2025-07-23}
+\date{2025-07-24}
 
 \begin{document}
 \maketitle
@@ -6117,7 +6117,7 @@ Proportions are used to summarize categorical variables, whereas means are used 
   We ask a sample of voters whether they support a particular candidate. The variable is categorical, since the answer is yes or no, and we cannot apply arithmetic operations to the answer. We then calculate the proportion of voters who support the candidate. So we need a confidence interval for the proportion.
 \end{itemize}
 
-\subsection{Sampling Distribution of Sample Proportions}\label{sampling-distribution-of-sample-proportions}
+\subsection{Sampling Distribution of Sample Proportions}\label{sampdistprops}
 
 We can use the Central Limit Theorem (CLT) to approximate the sampling distribution of sample proportions. A sketch of how to derive this sampling distribution is as follows:
 
@@ -6129,7 +6129,7 @@ We can use the Central Limit Theorem (CLT) to approximate the sampling distribut
 \item
   The sample proportion, \(\hat{p}\), is just the number of successes divided by the sample size, so \(\hat{p} = \frac{S}{n} = \frac{\sum_{i=1}^n X_i}{n} = \bar{X}_n\). Therefore, using property of expectations and variances, we know that \(E(\hat{p}) = p\) and \(Var(\hat{p}) = \frac{p(1-p)}{n}\).
 \item
-  The CLT informs us if \(n\) is large enough, then \(\hat{p}\) is approximately \(N\left(p, \frac{p(1-p)}{n}\right)\). Also, the distribution of \(\hat{p}\) after standardization is approximately standard normal, i.e.~the standardized score \(\hat{Z} = \frac{\hat{p}-p}{\sqrt{\frac{p(1-p)}{n}}}\) is approximately standard normal.
+  The CLT informs us if \(n\) is large enough, then \(\hat{p}\) is approximately \(N\left(p, \frac{p(1-p)}{n}\right)\). Therefore, the distribution of \(\hat{p}\) after standardization is approximately standard normal, i.e.~the standardized score \(\hat{Z} = \frac{\hat{p}-p}{\sqrt{\frac{p(1-p)}{n}}}\) is approximately standard normal.
 \end{itemize}
 
 View the video below for a more detailed explanation of the sampling distribution of sample proportions:
@@ -6165,7 +6165,7 @@ From equation \eqref{eq:8-CIprop}, we can also see that we have the factors that
 
 \subsubsection{Conditions for Confidence Interval for the Proportion}\label{conditions-for-confidence-interval-for-the-proportion}
 
-We wrote that if \(n\) is large enough, the CLT informs us that the sample proportion \(\hat{p}\) can be approximated by a normal distribution. How large is large enough? Again, various rules of thumb are recommended, and they usually follow along the lines of needing at least a certain number of successes, \(n\hat{p}\), and failures, \(n(1-\hat{p})\) in our sample. Values of 5 or 10 are usually recommended. Just bear in mind that the approximation works better as the number of successes and failures, \(n\hat{p}\) and \(n(1-\hat{p})\), increases.
+We wrote that if \(n\) is large enough, the CLT informs us that the sample proportion \(\hat{p}\) can be approximated by a normal distribution. How large is large enough? Again, various rules of thumb are recommended, and they usually follow along the lines of needing at least a certain number of successes, \(n\hat{p}\), and failures, \(n(1-\hat{p})\) in our sample. Values of at least 5 or 10 are usually recommended. Just bear in mind that the approximation works better as the number of successes and failures, \(n\hat{p}\) and \(n(1-\hat{p})\), increases.
 
 \subsubsection{Worked Example}\label{worked-example-3}
 
@@ -6452,9 +6452,9 @@ This module is based on Introduction to Probability for Data Science (Chan), Cha
 
 \section{Introduction}\label{introduction-5}
 
-Consider this scenario: you are conducting clinical trials to assess whether a new vaccine is more effective than existing vaccines. Suppose the efficacy of existing vaccines on a certain disease is 80\%, and you conduct clinical trials on 30 patients, and the new vaccine is effective on 25 patients. How strong is this result in trying to prove that the new vaccine is more effective than existing vaccines? Or could this result in the clinical trial be due to random sampling, since we know that just because existing vaccines is 80\% effective, it is possible that the the effectiveness in a smaller sample could differ a little from 80\% just due to random sampling? Questions like these lead to hypothesis testing.
+Consider this scenario: you are conducting clinical trials to assess whether a new vaccine is more effective than existing vaccines. Suppose the efficacy of existing vaccines on a certain disease is 80\%, and you conduct clinical trials on 30 patients, and the new vaccine is effective on 25 patients. How strong is this result in trying to prove that the new vaccine is more effective than existing vaccines? Questions like these lead to hypothesis testing.
 
-In previous modules, we have established the fact that estimators are likely to deviate from the value from their corresponding parameter, just due to random sampling. Confidence intervals allow us to provide a measure of uncertainty over our estimator as well as a range of plausible values for the parameter, using concepts regarding the sampling distribution of estimators. These concepts can also be used to assess whether our observed value for the estimator is different enough from a potential value of the parameter that random sampling alone is unlikely to be the only reason for the difference. Once this assessment is done, we then want to make a conclusion and decision about the unknown parameter. \textbf{Hypothesis testing} is a method for making a systematic decision with statistical guarantees.
+In previous modules, we have established the fact that estimators are likely to deviate from the value from their corresponding parameter, just due to random sampling. Confidence intervals allow us to provide a measure of uncertainty over our estimator as well as a range of plausible values for the parameter, using concepts regarding the sampling distribution of estimators. These concepts can also be used to assess whether our observed value for the estimator is different enough from a potential value of the parameter that random sampling alone is unlikely to be the only reason for the difference. Once this assessment is done, we then want to make a conclusion and decision about the unknown parameter. This is the big picture idea behind hypothesis testing. \textbf{Hypothesis testing} is a method for making a systematic decision with statistical guarantees.
 
 Hypothesis testing typically has the following steps:
 
@@ -6466,12 +6466,12 @@ Hypothesis testing typically has the following steps:
 \item
   Assume the hypothesis is true, and then compute a metric that measures how much our observed data deviates from the assumed hypothesis.
 \item
-  Compare the metric with some sort of threshold to assess if our observed data deviates ``far enough'' or not, and then make a decision.
+  Compare the metric with some sort of threshold to assess if our observed data deviates ``far enough'' from the assumed hypothesis, and then make a decision.
 \end{enumerate}
 
 For ease of exposition, we will introduce these ideas in the framework of the hypothesis test for the mean. We then show how the framework applies in two other situations: hypothesis test for the proportion, and goodness of fit tests which are used to assess if our data is consistent with a certain distribution or not.
 
-A hypothesis is a statement that we are using our observed data to assess whether the statement is true or not. In the framework of hypothesis testing, we state two competing hypotheses:
+A hypothesis is a statement which we assess whether is is true or not using our observed data. In the framework of hypothesis testing, we state two competing hypotheses:
 
 \begin{itemize}
 \item
@@ -6480,7 +6480,7 @@ A hypothesis is a statement that we are using our observed data to assess whethe
   The other hypothesis is the \textbf{alternative hypothesis}. This can be viewed as a statement that is ``opposite'' of the null hypothesis.
 \end{itemize}
 
-The book presents these hypotheses and hypothesis testing in the framework of a court trial. Defendants are assumed to be ``innocent until proven guilty''. The ``null hypothesis'' or status quo in this setting is that the defendant is innocent, and the ``alternative hypothesis'' is that the defendant is guilty. The prosecutor needs to then present evidence that contradicts the null hypothesis in order to prove guilt. The jurors, who come into the trial assuming the defendant is innocent, then assess how strong is the evidence presented: if its strength is beyond a certain threshold (i.e.~beyond ``reasonable doubt'') then there is evidence to reject the null hypothesis and decide the defendant is guilty. However, if the evidence is not strong enough, there is not enough evidence to reject the null hypothesis and the jury renders a not guilty verdict.
+The book presents these hypotheses and hypothesis testing using a court trial as an analogy. Defendants are assumed to be ``innocent until proven guilty''. The ``null hypothesis'' or status quo in this setting is that the defendant is innocent, and the ``alternative hypothesis'' is that the defendant is guilty. The prosecutor needs to then present evidence that contradicts the null hypothesis in order to prove guilt. The jurors, who come into the trial assuming the defendant is innocent, then assess how strong is the evidence presented: if its strength is beyond a certain threshold (i.e.~beyond ``reasonable doubt'') then there is evidence to reject the null hypothesis and decide the defendant is guilty. However, if the evidence is not strong enough, there is not enough evidence to reject the null hypothesis and the jury renders a not guilty verdict.
 
 \section{Hypothesis Test for the Mean}\label{hypothesis-test-for-the-mean}
 
@@ -6522,7 +6522,7 @@ In the Freshman 15 example, researchers claim that with better education, the av
 
 \subsubsection{Some Comments about the Null Hypothesis with a One-sided Alternative}\label{some-comments-about-the-null-hypothesis-with-a-one-sided-alternative}
 
-A number of textbooks (including the one we are using!) take the view that the null and alternative hypotheses are opposites, so if we write \(H_a: \mu < \mu_0\), then we must write \(H_0: \mu \geq \mu_0\). This way of writing a null hypothesis is different from that I wrote earlier: that the null hypothesis says the parameter is equal to \(\mu_0\). There are a couple of reasons why I think of the null hypothesis as a statement involving an equality, rather than an inequality:
+A number of textbooks (including the one we are using!) take the view that the null and alternative hypotheses are opposites, so if we write \(H_a: \mu < \mu_0\), then we must write \(H_0: \mu \geq \mu_0\). This way of writing a null hypothesis is different from that I wrote earlier: that the null hypothesis says the parameter is equal to \(\mu_0\). There are a couple of reasons why I say the null hypothesis is a statement involving an equality, rather than an inequality:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -6554,14 +6554,23 @@ Based on this distribution, the test statistic for a hypothesis test for the mea
 
 \begin{equation} 
 \hat{t} =  \frac{\bar{x}_n - \mu_0}{\frac{s}{\sqrt{n}}} = \frac{\bar{x}_n - \mu_0}{SE(\bar{x}_n)},
-\label{eq:8-teststatMean}
+\label{eq:9-teststatMean}
 \end{equation}
 
-where \(SE(\bar{x}_n)\) is \(\frac{s}{\sqrt{n}}\). This can be called a \textbf{\(t\) statistic} to reflect that our test statistic is based on the \(t\) distribution.
+where \(SE(\bar{x}_n)\) is \(\frac{s}{\sqrt{n}}\). This can be called a \textbf{\(t\) statistic} to reflect that our test statistic is based on the \(t\) distribution. The \(t\) statistic follows a \(t_{n-1}\) distribution (the subscript refers to the degrees of freedom) if either of the 2 conditions are met for the sampling distribution of \(\bar{X}_n\) to be valid, and if we assume the null hypothesis is true, that the true mean of the data is \(\mu_0\).
+
+Note: A number of hypothesis tests involving other estimators and parameters are also based on the \(t_{df}\) distribution, and have their own \(t\) statistics. However, \(t\) statistics will take on the general form
+
+\begin{equation} 
+\hat{t} =  \frac{\text{estimated value }- \text{ value in } H_0}{\text{standard error of estimator}}.
+\label{eq:9-tstatGen}
+\end{equation}
+
+Notice how equation \eqref{eq:9-tstatGen} is a generalization of equation \eqref{eq:9-teststatMean}.
 
 We go back to the Freshman 15 example. Suppose researchers collect a random sample of 50 first-year college students. Their average weight loss is 14 pounds, with standard deviation of 3 pounds. Derive the value of the \(t\) statistic.
 
-Using equation \eqref{eq:8-teststatMean}, the \(t\) statistic is:
+Using equation \eqref{eq:9-teststatMean}, the \(t\) statistic is:
 
 \[
 \begin{split}
@@ -6569,6 +6578,7 @@ Using equation \eqref{eq:8-teststatMean}, the \(t\) statistic is:
         &= -2.357023.
 \end{split}
 \]
+This \(t\) statistic is valid since our sample size is 50, which is usually large enough for the approximation to the \(t\) distribution to be valid.
 
 Remember that the test statistic is a measure of how far our sample data are from its expected value if the null hypothesis is true. Larger values of the test statistic (in magnitude) imply that our data deviate further from the null hypothesis, i.e.~our data provides more evidence against the null hypothesis.
 
@@ -6576,7 +6586,7 @@ The \(t\) statistic also has this nice definition: it is the distance between ou
 
 \subsubsection{\texorpdfstring{Factors Affecting \(t\) Statistic for Mean}{Factors Affecting t Statistic for Mean}}\label{factors-affecting-t-statistic-for-mean}
 
-We have established that larger values of the test statistic imply more evidence against the null hypothesis. For the \(t\) statistic for the mean, the factor that affect its magnitude are:
+We have established that larger values of the test statistic (in magnitude) imply more evidence against the null hypothesis. For the \(t\) statistic for the mean, the factors that affect its magnitude are:
 
 \begin{itemize}
 \item
@@ -6592,15 +6602,15 @@ After calculating the value of the test statistic, we need to assess if our data
 \begin{itemize}
 \tightlist
 \item
-  Using the p-value, we reject the null hypothesis (i.e.~our data have enough evidence against the null hypothesis) if our p-value is less than the significance level. Otherwise, we fail to reject the null hypothesis (i.e.~our data do not have enough evidence against the null hypothesis)
+  Using the p-value, we \textbf{reject the null hypothesis if our p-value is less than the significance level} (i.e.~our data have enough evidence against the null hypothesis). Otherwise, we fail to reject the null hypothesis (i.e.~our data do not have enough evidence against the null hypothesis)
 \end{itemize}
 
-The \textbf{significance level} of the test, \(\alpha\), is the probability of wrongly rejecting the null hypothesis when the null hypothesis is actually true. This error is called a type I error, which we will define more formally in a later subsection. So if we conduct a hypothesis test with significance level \(\alpha = 0.05\), we are saying that we are willing to have a 5\% probability of wrongly concluding that we have enough evidence against the null hypothesis, when it is actually true.
+The \textbf{significance level} of the test, denoted by \(\alpha\), is the probability of wrongly rejecting the null hypothesis when the null hypothesis is actually true. This error is called a type I error, which we will define more formally in a later subsection. So if we conduct a hypothesis test with significance level \(\alpha = 0.05\), we are saying that we are willing to have a 5\% probability of wrongly concluding that we have enough evidence against the null hypothesis, when it is actually true.
 
 \begin{itemize}
 \tightlist
 \item
-  Using the critical value, we reject the null hypothesis (i.e.~our data have enough evidence against the null hypothesis) if our test statistic is more extreme than the critical value in the direction of the alternative hypothesis. Otherwise, we fail to reject the null hypothesis (i.e.~our data do not have enough evidence against the null hypothesis).
+  Using the critical value, we \textbf{reject the null hypothesis if our test statistic is more extreme than the critical value in the direction of the alternative hypothesis} (i.e.~our data have enough evidence against the null hypothesis). Otherwise, we fail to reject the null hypothesis (i.e.~our data do not have enough evidence against the null hypothesis).
 \end{itemize}
 
 Both of these approaches are based on the sampling distribution of the estimator, and on the value of the significance level.
@@ -6611,22 +6621,25 @@ The \textbf{p-value} is the probability of observing the value of our test stati
 
 Informally, this is also the probability of observing the value of our sample mean, or a value more extreme in the direction of the alternative hypothesis, if the null hypothesis is true.
 
-Recall that for a hypothesis test of the mean, the \(t\) statistic follows a \(t_{n-1}\) distribution (the subscript refers to the degrees of freedom). Visually, we can find areas under the PDF of a \(t_{n-1}\) to illustrate how the p-value is found. The specific area under the PDF depends on the alternative hypothesis. In the Figures \ref{fig:9-pvalneq}, \ref{fig:9-pvalgreater}, and \ref{fig:9-pvalless} below, let us assume that the value of the \(t\) statistic is \(\hat{t} = 1\).
+Recall that for a hypothesis test of the mean, the \(t\) statistic follows a \(t_{n-1}\) distribution, as our calculations assume the null hypothesis is true. Visually, we can use areas under the PDF of a \(t_{n-1}\) to illustrate how the p-value is found. The specific area under the PDF depends on which of the three alternative hypotheses we are using. In Figures \ref{fig:9-pvalneq}, \ref{fig:9-pvalgreater}, and \ref{fig:9-pvalless} below, we have examples on the relevant areas under the PDF if the value of the \(t\) statistic is \(\hat{t} = 1\).
 
-\begin{itemize}
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
   If \(H_a: \mu  \neq \mu_0\), i.e.~we have a two-sided alternative, the corresponding areas under the PDF of the \(t_{n-1}\) distribution that is the p-value is shown below in Figure \ref{fig:9-pvalneq}:
-\end{itemize}
+\end{enumerate}
 
 \includegraphics{bookdown-demo_files/figure-latex/9-pvalneq-1.pdf}
-Using probability notation, this is \(P(|t_{n-1}| \geq 1)\).
+It is the area to the right of \(|\hat{t}|\) and the area to the left of -\(|\hat{t}|\). Using probability notation, this is \(P(|t_{n-1}| \geq 1)\).
 
-\begin{itemize}
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
 \tightlist
 \item
   If \(H_a: \mu > \mu_0\), i.e.~the population mean is greater than a specified value, the corresponding area under the PDF of the \(t_{n-1}\) distribution that is the p-value is shown below in Figure \ref{fig:9-pvalgreater}:
-\end{itemize}
+\end{enumerate}
 
 \begin{figure}
 \centering
@@ -6634,13 +6647,15 @@ Using probability notation, this is \(P(|t_{n-1}| \geq 1)\).
 \caption{\label{fig:9-pvalgreater}Finding P-value, with Greater Than Alternative}
 \end{figure}
 
-Using probability notation, this is \(P(t_{n-1} \geq 1)\).
+It is the area to the right of \(\hat{t}\). Using probability notation, this is \(P(t_{n-1} \geq 1)\).
 
-\begin{itemize}
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
 \tightlist
 \item
   If \(H_a: \mu < \mu_0\), i.e.~the population mean is less than a specified value, the corresponding area under the PDF of the \(t_{n-1}\) distribution that is the p-value is shown below in Figure \ref{fig:9-pvalless}:
-\end{itemize}
+\end{enumerate}
 
 \begin{figure}
 \centering
@@ -6648,9 +6663,9 @@ Using probability notation, this is \(P(t_{n-1} \geq 1)\).
 \caption{\label{fig:9-pvalless}Finding P-value, with Less Than Alternative}
 \end{figure}
 
-Using probability notation, this is \(P( t_{n-1} \leq 1)\).
+It is the area to the left of \(\hat{t}\). Using probability notation, this is \(P( t_{n-1} \leq 1)\).
 
-Going back to the Freshman 15 example, we found the \(t\) statistic to be −2.357023. We had earlier written the alternative hypothesis as \(\mu < 15\), so we find the PDF under a \(t_49\) distribution using the area to the left of \(-2.357023\), in a manner similar to Figure \ref{fig:9-pvalless}.
+Going back to the Freshman 15 example, we found the \(t\) statistic to be −2.357023. We had earlier written the alternative hypothesis as \(\mu < 15\), so we find the PDF under a \(t_{49}\) distribution using the area to the left of \(-2.357023\), in a manner similar to Figure \ref{fig:9-pvalless}.
 
 \begin{figure}
 \centering
@@ -6670,17 +6685,360 @@ Using R, this p-value is 0.01123. If our test is conducted at 5\% significance l
 ## [1] 0.01123111
 \end{verbatim}
 
+\emph{Though question}: Consider that the research question for the Freshman 15 example was tweaked, so the alternative hypothesis is \(H_a:\mu > 15\). Assuming everything else stays the same, show that the p-value is now 0.98877. If the alternative hypothesis is \(H_a: \mu \neq 15\), show that the p-value is 0.02246.
+
 \subsubsection{Critical Value}\label{critical-value-1}
 
 Informally, the critical value is the value of the test statistic that is considered ``enough'' to say that we have enough evidence against the null hypothesis to reject it, based on the value of the significance level.
 
-Let's think of the critical value using a PDF of the \(t\) distribution. We want to find the ``cut off'' value of the distribution where the area under its PDF in the direction of the alternative hypothesis is equal to the significance level \(\alpha\). Since we have three options for the alternative hypothesis, we have 3 different areas under the PDF to consider.
+We can think of the critical value using a PDF of the \(t\) distribution. We want to find the ``cut off'' value, denoted by \(t_{n-1}^*\), of the distribution where the area under its PDF in the direction of the alternative hypothesis is equal to the significance level \(\alpha\). Since we have three options for the alternative hypothesis, we have 3 different areas under the PDF to consider. In Figures \ref{fig:9-critneq}, \ref{fig:9-critgreater}, and \ref{fig:9-critless} below, we have examples on the relevant areas under the PDF if \(\alpha=0.05\) and \(n=50\):
 
-\subsubsection{Writing Conclusions}\label{writing-conclusions}
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  If \(H_a: \mu \neq \mu_0\), i.e.~we have a two-sided alternative, we want the areas under the PDF of the \(t_{49}\) distribution to the right of \(t_{49}^*\) and to the left of \(-t_{49}^*\) to be equal to 0.05. This is shown in Figure \ref{fig:9-critneq}:
+\end{enumerate}
 
-\subsubsection{Type I and Type II Errors}\label{type-i-and-type-ii-errors}
+\begin{figure}
+\centering
+\includegraphics{images/09-crit_2sided.jpeg}
+\caption{\label{fig:9-critneq}Critical Value for 2-Sided Alternative, with 0.05 Sig Level}
+\end{figure}
+
+Note that since the \(t\) distribution is symmetric and both areas in blue add up to 0.05, each shaded area must be 0.025. So \(-t_{49}^*\) and \(t_{49}^*\) correspond to the 2.5th and 97.5th percentiles of a \(t_{49}\) distribution respectively. We can show that \(-t_{49}^*\) is -2.009575 by typing
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{alpha}\OtherTok{\textless{}{-}}\FloatTok{0.05}
+\NormalTok{n}\OtherTok{\textless{}{-}}\DecValTok{50}
+\FunctionTok{qt}\NormalTok{(alpha}\SpecialCharTok{/}\DecValTok{2}\NormalTok{, n}\DecValTok{{-}1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] -2.009575
+\end{verbatim}
+
+and by symmetry of the \(t\) distribution, \(t_{49}^*\) is 2.009575. The critical value is therefore \(t_{49}^* = 2.009575\) for a 2-sided test. We will reject the null hypothesis if our \(t\) statistic is to the right of 2.009575 or if it is to the left of -2.009575.
+
+In general, for any significance level \(\alpha\), the negative critical value \(-t_{n-1}^*\) corresponds to the \((\alpha/2) \times 100\)th percentile, and the positive critical value \(t_{n-1}^*\) corresponds to the \((1 - \alpha/2) \times 100\)th percentile of the appropriate \(t_{n-1}\) distribution, if \(H_a: \mu \neq \mu_0\).
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  If \(H_a: \mu > \mu_0\), i.e.~the population mean is greater than some specified value, we want the area under the PDF of the \(t_{49}\) distribution to the right of \(t_{49}^*\) to be equal to 0.05. This is shown in Figure \ref{fig:9-critgreater}:
+\end{enumerate}
+
+\begin{figure}
+\centering
+\includegraphics{images/09-crit_greater.jpeg}
+\caption{\label{fig:9-critgreater}Critical Value for Greater Than Alternative, with 0.05 Sig Level}
+\end{figure}
+
+Note that \(|t_{49}^*|\) corresponds to the 95th percentile of a \(t_{49}\) distribution. We can show that \(t_{49}^*\) is 1.677 by typing
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{alpha}\OtherTok{\textless{}{-}}\FloatTok{0.05}
+\NormalTok{n}\OtherTok{\textless{}{-}}\DecValTok{50}
+\FunctionTok{qt}\NormalTok{(}\DecValTok{1}\SpecialCharTok{{-}}\NormalTok{alpha, n}\DecValTok{{-}1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1.676551
+\end{verbatim}
+
+The critical value is therefore \(t_{49}^* = 1.676551\) when \(H_a: \mu > \mu_0\). We will reject the null hypothesis if our \(t\) statistic is to the right of 1.676551.
+
+In general, for any significance level \(\alpha\), the critical value \(t_{n-1}^*\) corresponds to the \((1 - \alpha) \times 100\)th percentile of the appropriate \(t_{n-1}\) distribution, if \(H_a: \mu > \mu_0\).
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  If \(H_a: \mu < \mu_0\), i.e.~the population mean is less than some specified value, we want the area under the PDF of the \(t_{49}\) distribution to the left of \(t_{49}^*\) to be equal to 0.05. This is shown in Figure \ref{fig:9-critless}:
+\end{enumerate}
+
+\begin{figure}
+\centering
+\includegraphics{images/09-crit_less.jpeg}
+\caption{\label{fig:9-critless}Critical Value for Less Than Alternative, with 0.05 Sig Level}
+\end{figure}
+
+Note that \(t_{49}^*\) corresponds to the 5th percentile of a \(t_{49}\) distribution. We can show that \(t_{49}^*\) is -1.677 by typing
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{alpha}\OtherTok{\textless{}{-}}\FloatTok{0.05}
+\NormalTok{n}\OtherTok{\textless{}{-}}\DecValTok{50}
+\FunctionTok{qt}\NormalTok{(alpha, n}\DecValTok{{-}1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] -1.676551
+\end{verbatim}
+
+The critical value is therefore \(t_{49}^* = -1.676551\) when \(H_a: \mu < \mu_0\). We will reject the null hypothesis if our \(t\) statistic is to the left of -1.676551.
+
+In general, for any significance level \(\alpha\), the critical value \(t_{n-1}^*\) corresponds to the \((\alpha) \times 100\)th percentile of the appropriate \(t_{n-1}\) distribution, if \(H_a: \mu < \mu_0\).
+
+Going back to the Freshman 15 example, we found the \(t\) statistic to be −2.357023. We had earlier written the alternative hypothesis as \(\mu < 15\), so the critical value is the 5th percentile of a \(t_{49}\) distribution, which we found to be -1.676551. Since our \(t\) statistic is to the left of this critical value, we reject the null hypothesis.
+
+\emph{Thought question}: Consider a hypothesis test for the mean with \(n=10\). Assume the conditions for the sampling distribution of the sample mean to be met. Suppose \(\alpha=0.10\). If the alternative hypothesis is 2-sided, show that the critical value is 1.833113. If the alternative hypothesis is 1-sided, show that \(t_{9}^*\) is 1.383029.
+
+\subsection{Writing Conclusions}\label{writing-conclusions}
+
+In the previous subsection, we decide whether to reject the null hypothesis based on two approaches:
+
+\begin{itemize}
+\tightlist
+\item
+  If the p-value of our test is less than the significance level.
+\item
+  If the test statistic of our test is more extreme than the critical value, in the direction of the alternative hypothesis.
+\end{itemize}
+
+The decision based on both approaches should always be the same and never contradict each other. All you need is to use one of these approaches, the other is redundant. It is up to you to choose which one you want to use, but you must be clear which one you are using.
+
+We decide between:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Rejecting the null hypothesis. This implies that we have enough evidence against the null hypothesis to reject it and support the alternative hypothesis. Our data support the claim in the alternative hypothesis. Using the court trial analogy, this is equivalent to saying we have enough evidence to prove a defendants guilt as we reject the assumption that the defendant is innocent, and give a guilty verdict.
+\item
+  Failing to reject the null hypothesis. This implies that we do not have enough evidence against the null hypothesis and so we do not reject it. Our data do not support the claim in the alternative hypothesis. Using the court trial analogy, this is equivalent to saying we do not have enough evidence to prove a defendants and so give a not guilty verdict.
+\end{enumerate}
+
+A common mistake with failing to reject the null hypothesis is to say that our data support and proves the null hypothesis is true. Using the court trial analogy, a not guilty verdict is not the same as saying the defendant is innocent.
+
+After making a decision, we write a conclusion in the context of our research question. Using the Freshman 15 example, we rejected the null hypothesis. So our conclusion is is our data support the claim that the average weight gain among first-year college students is less than 15 pounds.
+
+We look at one more example to show how a hypothesis test is done from start to finish.
+
+\subsection{Worked Example}\label{wafer}
+
+The target thickness for silicon wafers used in a type of integrated circuit is 245 micrometers. A sample of 50 wafers is obtained and the thickness of each one is determined, resulting in a sample mean thickness of 245.88 micrometers
+and a sample standard deviation of 3.60 micrometers. Does this data suggest that true average wafer thickness is something other than the target value? Test at the 0.05 significance level.
+
+The variable we are investigating is the thickness for silicon wafers, which is quantitative, so we performing a hypothesis test for the mean.
+
+The null and alternative hypotheses are \(H_0: \mu = 245, H_a: \mu \neq 245\).
+
+We do not know the distribution of the thickness for silicon wafers. But we have a sample of 50, which is usually large enough so the CLT applies, and the relevant distributions for the test statistic apply.
+
+The \(t\) statistic is
+
+\[
+\begin{split}
+\hat{t} &= \frac{245.88 - 245}{\frac{3.6}{\sqrt{50}}} \\
+        &= 1.728483.
+\end{split}
+\]
+Since this is a two-sided test, the p-value can derived by finding the following area under the PDF of a \(t_{49}\) distribution, as shown in Figure \ref{fig:9-pvalworked} below.
+
+\begin{figure}
+\centering
+\includegraphics{bookdown-demo_files/figure-latex/9-pvalworked-1.pdf}
+\caption{\label{fig:9-pvalworked}Finding P-value, For Silicon Wafer Example}
+\end{figure}
+
+Using R, we can find the p-value by typing:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{pt}\NormalTok{(}\SpecialCharTok{{-}}\FloatTok{1.728483}\NormalTok{, }\DecValTok{49}\NormalTok{)}\SpecialCharTok{*}\DecValTok{2} 
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.09019905
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#supply test stat, then DF.}
+\DocumentationTok{\#\#multiply by 2 since pt only gives area to left of {-}1.728483, }
+\DocumentationTok{\#\#but we also want area to right of 1.728483. }
+\end{Highlighting}
+\end{Shaded}
+
+Alternatively, we can work out the critical value by typing:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{alpha}\OtherTok{\textless{}{-}}\FloatTok{0.05}
+\FunctionTok{qt}\NormalTok{(}\DecValTok{1}\SpecialCharTok{{-}}\NormalTok{alpha}\SpecialCharTok{/}\DecValTok{2}\NormalTok{, }\DecValTok{49}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2.009575
+\end{verbatim}
+
+Since our p-value is 0.09, which is greater than the significance level of 0.05, (or since our test statistic is 1.728483 which is not to the right of the critical value of 2.009575 ), we fail to reject the null hypothesis. Our data do not provide evidence against the null hypothesis.
+
+Our conclusion is the data do not support the claim that the average thickness of silicon wafers is different from the target value of 250 micrometers.
 
 \section{Hypothesis Test for the Proportion}\label{hypothesis-test-for-the-proportion}
+
+Next, we will go over the hypothesis test for the proportion. This is another common hypothesis test. The sample proportion is an estimator for the population proportion. Proportions are used to summarize categorical variables, whereas means are used to summarize quantitative variables.
+
+The general steps are the same as the hypothesis test for the mean, with some changes to some of the details. The differences are:
+
+\begin{itemize}
+\item
+  We are now using the sample proportion, \(\hat{p}\), to estimate the population proportion, \(p\), instead of using the sample mean, \(\bar{x}\), to estimate the population mean, \(\mu\).
+\item
+  The test statistic is based on a standard normal distribution, not a \(t_{df}\) distribution.
+\item
+  The exact components involved in calculating the test statistic is a bit different, although it still takes the general form suggested by equation \eqref{eq:9-tstatGen}.
+\end{itemize}
+
+\emph{Thought question}: Can you make an educated guess as to what is the formula for the test statistic when testing the proportion, before reading further?
+
+\subsection{Null and Alternative Hypotheses}\label{null-and-alternative-hypotheses-1}
+
+\begin{itemize}
+\item
+  The \textbf{null hypothesis} is still a statement that says the parameter is equal to some specific value. Let \(p_0\) denote this specific value. So we write \(H_0: p = p_0\).
+\item
+  The \textbf{alternative hypothesis} is a statement against the null hypothesis. For the hypothesis test for the proportion, there are a few possible alternative hypotheses. Which one we use is \textbf{driven by the research question}. The alternative hypothesis could say the the parameter is:
+
+  \begin{itemize}
+  \item
+    Different from some specific value, i.e.~\(H_a: p \neq p_0\).
+  \item
+    Greater than some specific value, i.e.~\(H_a: p > p_0\).
+  \item
+    Less than some specific value, i.e.~\(H_a: p < p_0\).
+  \end{itemize}
+\end{itemize}
+
+\subsection{Test Statistic}\label{test-statistic-1}
+
+In Section \ref{sampdistprops}, we established the sampling distribution of sample proportions. If conditions are met, \(\hat{p}\) is approximately \(N\left(p, \frac{p(1-p)}{n}\right)\), where \(p\) denotes the true population proportion. Therefore, the distribution of \(\hat{p}\) after standardization is approximately standard normal, i.e.~\(\frac{\hat{p}-p}{\sqrt{\frac{p(1-p)}{n}}}\) is approximately standard normal.
+
+Based on this distribution, the test statistic for a hypothesis test for the proportion is
+
+\begin{equation} 
+\hat{z} =  \frac{\hat{p} - p_0}{\sqrt{\frac{p_0(1-p_0)}{n}}} .
+\label{eq:9-teststatProp}
+\end{equation}
+
+The test statistic is a \(z\) statistic, since it follows a standard normal distribution.
+
+Notice how in equation \eqref{eq:9-teststatProp}, we use \(p_0\), the value of the population proportion when we assume the null hypothesis to be true, in place of the population proportion, which is unknown. The test statistic is still calculated by assuming the null hypothesis to be true.
+
+Also notice how equation \eqref{eq:9-teststatProp} follows the general form suggested by equation \eqref{eq:9-tstatGen}. It turns out that \(z\) statistics also take on this general form.
+
+\subsubsection{Conditions for Hypothesis Test for the Proportion}\label{conditions-for-hypothesis-test-for-the-proportion}
+
+The CLT informs us that if \(n\) is large enough, the sample proportion \(\hat{p}\) can be approximated by a normal distribution. How large is large enough? Again, various rules of thumb are recommended, and they usually follow along the lines of needing at least a certain number of expected successes, \(n p_0\), and expected failures, \(n(1-p_0)\) in our sample. Values of at least 5 or 10 are usually recommended. Just bear in mind that the approximation works better as the number of successes and failures, \(n\hat{p}\) and \(n(1-\hat{p})\), increases.
+
+\subsection{Making a Decision and Writing Conclusions}\label{making-a-decision-and-writing-conclusions}
+
+We make our decision on whether to reject the null hypothesis in the same manner as the hypothesis test for the mean. The only difference is that our test statistic follows a standard normal instead of a \(t\) distribution. Visually a lot of the ideas are similar, since these are both bell-shaped distributions.
+
+Conclusions are also written in the same manner.
+
+\subsection{Worked Example}\label{worked-example-6}
+
+A university library ordinarily has a complete shelf inventory done once every year. Because of new shelving rules instituted the previous year, the head librarian believes it may be possible to save money by postponing the inventory. The librarian decides to select at random 1000 books from the library's collection and have them searched in a preliminary manner. If evidence indicates strongly that the true proportion of misshelved or unlocatable books is less than 2\%, then the inventory will be postponed. Among the 1000 books searched, 15 were misshelved or unlocatable. Test the relevant hypotheses and advise the librarian what to do, using significance level of 0.05.
+
+The variable we are investigating is whether the book is misshelved or unlocatable, which is categorical, so we performing a hypothesis test for the proportion.
+
+The null and alternative hypotheses are \(H_0: p = 0.02, H_a: p < 0.02\).
+
+To assess if we can conduct the hypothesis test for the proportion, we need to check if \(n p_0 \geq 10\) and \(n(1-p_0) \geq 10\). For our data, we have
+
+\begin{itemize}
+\tightlist
+\item
+  \(n p_0 = 1000 \times 0.02 = 20 \geq 10\),
+\item
+  \(n (1-p_0) = 1000 \times 0.98 = 980 \geq 10\),
+\end{itemize}
+
+so we can proceed.
+
+The \(z\) statistic is
+
+\[
+\begin{split}
+\hat{z} &= \frac{\frac{15}{1000} - 0.02}{\sqrt{\frac{0.02 \times 0.98}{1000}}} \\
+        &= -1.129385.
+\end{split}
+\]
+
+Since this is a one-sided test with a less than alternative hypothesis, the p-value can derived by finding the following area under the PDF of a \(Z\) distribution, as shown in Figure \ref{fig:9-pvalworked2} below.
+
+\begin{figure}
+\centering
+\includegraphics{bookdown-demo_files/figure-latex/9-pvalworked2-1.pdf}
+\caption{\label{fig:9-pvalworked2}Finding P-value, For Library Example}
+\end{figure}
+
+Using R, we can find the p-value by typing:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{pnorm}\NormalTok{(}\SpecialCharTok{{-}}\FloatTok{1.129385}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.1293677
+\end{verbatim}
+
+Alternatively, we can work out the critical value by typing:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{qnorm}\NormalTok{(}\FloatTok{0.05}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] -1.644854
+\end{verbatim}
+
+Since our p-value is 0.129, which is greater than the significance level of 0.05, (or since our test statistic is -1.129385 which is not to the left of the critical value of -1.644854), we fail to reject the null hypothesis. Our data do not provide evidence against the null hypothesis.
+
+Our conclusion is the data do not support the claim that the true proportion of misshelved or unlocatable books is less than 2\%. So there is not enough evidence to postpone the inventory.
+
+\section{Additional Comments on Hypothesis Test of Parameters}\label{additional-comments-on-hypothesis-test-of-parameters}
+
+\subsection{Two-Sided Tests and Confidence Intervals}\label{two-sided-tests-and-confidence-intervals}
+
+Notice how hypothesis tests and confidence intervals are based on the sampling distribution of the relevant estimator? If you look at how the critical value of a two-sided test and the critical value of a confidence interval are derived, you will notice that they are found in the exact same manner. Refer to Figure \ref{fig:9-critneq} and Figure \ref{fig:8-crit}, and notice how these pictures look exactly the same, with the middle portion of the PDF having an area of \(1-\alpha\) and the two tail ends having an area of \(\alpha\).
+
+What this implies is that conclusions from a \((1-\alpha) \times 100\%\) confidence interval will be consistent with a 2-sided hypothesis test conducted at significance \(\alpha\). Also notice how we use the same notation \(\alpha\) for the confidence level and significance level?
+
+\begin{itemize}
+\item
+  If the null hypothesis is \textbf{rejected} for a 2-sided test, than the value of the parameter under the null hypothesis will lie \textbf{outside} the corresponding confidence interval. This should make sense since the confidence interval provides a range of plausible values for the parameter and values outside the interval are considered to be ``ruled out''.
+\item
+  If the null hypothesis is \textbf{not rejected} for a 2-sided test, than the value of the parameter under the null hypothesis will lie \textbf{inside} the corresponding confidence interval. This should make sense since the confidence interval provides a range of plausible values for the parameter and values outside the interval are considered to be ``ruled out''.
+\end{itemize}
+
+We go back to the thickness of silicon wafers worked example in Section \ref{wafer}. The null and alternative hypotheses were \(H_0: \mu = 245, H_a: \mu \neq 245\) and we ended up failing to reject the null hypothesis at 0.05 significance level. This informs us that if we were to construct a 95\% confidence interval for the mean, the interval will include the value of 245, the value of the parameter under the null hypothesis.
+
+\emph{Thought question}: Show that the 95\% confidence interval for the mean thickness of silicon wafers in the worked example is (244.8569, 246.9031) which contains the value of 245.
+
+\subsection{Type I and Type II Errors}\label{type-i-and-type-ii-errors}
+
+The decision we make from hypothesis testing is not going to be perfect, as we have inherent uncertainty in estimators due to random sampling. So we may sometimes reject a null hypothesis when it is true, or we may fail to reject a null hypothesis when the alternative hypothesis is true. These errors are called \textbf{type I} and \textbf{type II} errors respectively.
+
+\subsection{Power}\label{power}
+
+\subsection{Statistical Vs Practical Significance}\label{statistical-vs-practical-significance}
 
 \section{Goodness of Fit Tests}\label{goodness-of-fit-tests}
 

@@ -68,21 +68,21 @@
 <h2>
 <span class="header-section-number">9.1</span> Introduction<a class="anchor" aria-label="anchor" href="#introduction-5"><i class="fas fa-link"></i></a>
 </h2>
-<p>Consider this scenario: you are conducting clinical trials to assess whether a new vaccine is more effective than existing vaccines. Suppose the efficacy of existing vaccines on a certain disease is 80%, and you conduct clinical trials on 30 patients, and the new vaccine is effective on 25 patients. How strong is this result in trying to prove that the new vaccine is more effective than existing vaccines? Or could this result in the clinical trial be due to random sampling, since we know that just because existing vaccines is 80% effective, it is possible that the the effectiveness in a smaller sample could differ a little from 80% just due to random sampling? Questions like these lead to hypothesis testing.</p>
-<p>In previous modules, we have established the fact that estimators are likely to deviate from the value from their corresponding parameter, just due to random sampling. Confidence intervals allow us to provide a measure of uncertainty over our estimator as well as a range of plausible values for the parameter, using concepts regarding the sampling distribution of estimators. These concepts can also be used to assess whether our observed value for the estimator is different enough from a potential value of the parameter that random sampling alone is unlikely to be the only reason for the difference. Once this assessment is done, we then want to make a conclusion and decision about the unknown parameter. <strong>Hypothesis testing</strong> is a method for making a systematic decision with statistical guarantees.</p>
+<p>Consider this scenario: you are conducting clinical trials to assess whether a new vaccine is more effective than existing vaccines. Suppose the efficacy of existing vaccines on a certain disease is 80%, and you conduct clinical trials on 30 patients, and the new vaccine is effective on 25 patients. How strong is this result in trying to prove that the new vaccine is more effective than existing vaccines? Questions like these lead to hypothesis testing.</p>
+<p>In previous modules, we have established the fact that estimators are likely to deviate from the value from their corresponding parameter, just due to random sampling. Confidence intervals allow us to provide a measure of uncertainty over our estimator as well as a range of plausible values for the parameter, using concepts regarding the sampling distribution of estimators. These concepts can also be used to assess whether our observed value for the estimator is different enough from a potential value of the parameter that random sampling alone is unlikely to be the only reason for the difference. Once this assessment is done, we then want to make a conclusion and decision about the unknown parameter. This is the big picture idea behind hypothesis testing. <strong>Hypothesis testing</strong> is a method for making a systematic decision with statistical guarantees.</p>
 <p>Hypothesis testing typically has the following steps:</p>
 <ol style="list-style-type: decimal">
 <li>State a hypothesis, based on the research question.</li>
 <li>Assume the hypothesis is true, and then compute a metric that measures how much our observed data deviates from the assumed hypothesis.</li>
-<li>Compare the metric with some sort of threshold to assess if our observed data deviates “far enough” or not, and then make a decision.</li>
+<li>Compare the metric with some sort of threshold to assess if our observed data deviates “far enough” from the assumed hypothesis, and then make a decision.</li>
 </ol>
 <p>For ease of exposition, we will introduce these ideas in the framework of the hypothesis test for the mean. We then show how the framework applies in two other situations: hypothesis test for the proportion, and goodness of fit tests which are used to assess if our data is consistent with a certain distribution or not.</p>
-<p>A hypothesis is a statement that we are using our observed data to assess whether the statement is true or not. In the framework of hypothesis testing, we state two competing hypotheses:</p>
+<p>A hypothesis is a statement which we assess whether is is true or not using our observed data. In the framework of hypothesis testing, we state two competing hypotheses:</p>
 <ul>
 <li><p>The first hypothesis is the <strong>null hypothesis</strong>. This is normally the “status quo”.</p></li>
 <li><p>The other hypothesis is the <strong>alternative hypothesis</strong>. This can be viewed as a statement that is “opposite” of the null hypothesis.</p></li>
 </ul>
-<p>The book presents these hypotheses and hypothesis testing in the framework of a court trial. Defendants are assumed to be “innocent until proven guilty”. The “null hypothesis” or status quo in this setting is that the defendant is innocent, and the “alternative hypothesis” is that the defendant is guilty. The prosecutor needs to then present evidence that contradicts the null hypothesis in order to prove guilt. The jurors, who come into the trial assuming the defendant is innocent, then assess how strong is the evidence presented: if its strength is beyond a certain threshold (i.e. beyond “reasonable doubt”) then there is evidence to reject the null hypothesis and decide the defendant is guilty. However, if the evidence is not strong enough, there is not enough evidence to reject the null hypothesis and the jury renders a not guilty verdict.</p>
+<p>The book presents these hypotheses and hypothesis testing using a court trial as an analogy. Defendants are assumed to be “innocent until proven guilty”. The “null hypothesis” or status quo in this setting is that the defendant is innocent, and the “alternative hypothesis” is that the defendant is guilty. The prosecutor needs to then present evidence that contradicts the null hypothesis in order to prove guilt. The jurors, who come into the trial assuming the defendant is innocent, then assess how strong is the evidence presented: if its strength is beyond a certain threshold (i.e. beyond “reasonable doubt”) then there is evidence to reject the null hypothesis and decide the defendant is guilty. However, if the evidence is not strong enough, there is not enough evidence to reject the null hypothesis and the jury renders a not guilty verdict.</p>
 </div>
 <div id="hypothesis-test-for-the-mean" class="section level2" number="9.2">
 <h2>
@@ -120,7 +120,7 @@
 <h4>
 <span class="header-section-number">9.2.1.2</span> Some Comments about the Null Hypothesis with a One-sided Alternative<a class="anchor" aria-label="anchor" href="#some-comments-about-the-null-hypothesis-with-a-one-sided-alternative"><i class="fas fa-link"></i></a>
 </h4>
-<p>A number of textbooks (including the one we are using!) take the view that the null and alternative hypotheses are opposites, so if we write <span class="math inline">\(H_a: \mu &lt; \mu_0\)</span>, then we must write <span class="math inline">\(H_0: \mu \geq \mu_0\)</span>. This way of writing a null hypothesis is different from that I wrote earlier: that the null hypothesis says the parameter is equal to <span class="math inline">\(\mu_0\)</span>. There are a couple of reasons why I think of the null hypothesis as a statement involving an equality, rather than an inequality:</p>
+<p>A number of textbooks (including the one we are using!) take the view that the null and alternative hypotheses are opposites, so if we write <span class="math inline">\(H_a: \mu &lt; \mu_0\)</span>, then we must write <span class="math inline">\(H_0: \mu \geq \mu_0\)</span>. This way of writing a null hypothesis is different from that I wrote earlier: that the null hypothesis says the parameter is equal to <span class="math inline">\(\mu_0\)</span>. There are a couple of reasons why I say the null hypothesis is a statement involving an equality, rather than an inequality:</p>
 <ol style="list-style-type: decimal">
 <li><p>The calculations performed to assess the evidence our data provides are done assuming the null hypothesis is true. You will realize in the later subsections that one can only perform these calculations if the null hypothesis says the parameter is equal to some specific value.</p></li>
 <li><p>I have seen many people get confused with the null and alternative hypotheses if they insist the the null and alternative must be opposite with a one-sided alternative. Indeed, if you look at Practice Exercise 9.3 and 9.4 in our book, the author has gotten these confused in the proposed solutions.</p></li>
@@ -140,26 +140,33 @@
 <p>If either of these conditions are met, then the distribution of <span class="math inline">\(\bar{X}_n\)</span> after standardization is either a standard normal or approaches a standard normal distribution, so <span class="math inline">\(\frac{\bar{X}_n - \mu}{\frac{\sigma}{\sqrt{n}}} = \frac{\bar{X}_n - \mu}{\sqrt{Var(\bar{X})}} = \frac{\bar{X}_n - \mu}{SE(\bar{X}_n)}\)</span> is either standard normal or approximately standard normal when <span class="math inline">\(n\)</span> is large enough.</p>
 <p>We then learned in Section <a href="confidence-intervals.html#CImeant">8.2.4</a> that since the value of the population variance <span class="math inline">\(\sigma^2\)</span> is almost always unknown in real life, we use the sample variance <span class="math inline">\(s^2\)</span> instead. So we work with <span class="math inline">\(\frac{\bar{X}_n - \mu}{\frac{s}{\sqrt{n}}}\)</span> instead, which follows a <span class="math inline">\(t\)</span> distribution with <span class="math inline">\(n-1\)</span> degrees of freedom.</p>
 <p>Based on this distribution, the test statistic for a hypothesis test for the mean is</p>
-<p><span class="math display" id="eq:8-teststatMean">\[\begin{equation}
+<p><span class="math display" id="eq:9-teststatMean">\[\begin{equation}
 \hat{t} =  \frac{\bar{x}_n - \mu_0}{\frac{s}{\sqrt{n}}} = \frac{\bar{x}_n - \mu_0}{SE(\bar{x}_n)},
 \tag{9.1}
 \end{equation}\]</span></p>
-<p>where <span class="math inline">\(SE(\bar{x}_n)\)</span> is <span class="math inline">\(\frac{s}{\sqrt{n}}\)</span>. This can be called a <strong><span class="math inline">\(t\)</span> statistic</strong> to reflect that our test statistic is based on the <span class="math inline">\(t\)</span> distribution.</p>
+<p>where <span class="math inline">\(SE(\bar{x}_n)\)</span> is <span class="math inline">\(\frac{s}{\sqrt{n}}\)</span>. This can be called a <strong><span class="math inline">\(t\)</span> statistic</strong> to reflect that our test statistic is based on the <span class="math inline">\(t\)</span> distribution. The <span class="math inline">\(t\)</span> statistic follows a <span class="math inline">\(t_{n-1}\)</span> distribution (the subscript refers to the degrees of freedom) if either of the 2 conditions are met for the sampling distribution of <span class="math inline">\(\bar{X}_n\)</span> to be valid, and if we assume the null hypothesis is true, that the true mean of the data is <span class="math inline">\(\mu_0\)</span>.</p>
+<p>Note: A number of hypothesis tests involving other estimators and parameters are also based on the <span class="math inline">\(t_{df}\)</span> distribution, and have their own <span class="math inline">\(t\)</span> statistics. However, <span class="math inline">\(t\)</span> statistics will take on the general form</p>
+<p><span class="math display" id="eq:9-tstatGen">\[\begin{equation}
+\hat{t} =  \frac{\text{estimated value }- \text{ value in } H_0}{\text{standard error of estimator}}.
+\tag{9.2}
+\end{equation}\]</span></p>
+<p>Notice how equation <a href="hypothesis-testing.html#eq:9-tstatGen">(9.2)</a> is a generalization of equation <a href="hypothesis-testing.html#eq:9-teststatMean">(9.1)</a>.</p>
 <p>We go back to the Freshman 15 example. Suppose researchers collect a random sample of 50 first-year college students. Their average weight loss is 14 pounds, with standard deviation of 3 pounds. Derive the value of the <span class="math inline">\(t\)</span> statistic.</p>
-<p>Using equation <a href="hypothesis-testing.html#eq:8-teststatMean">(9.1)</a>, the <span class="math inline">\(t\)</span> statistic is:</p>
+<p>Using equation <a href="hypothesis-testing.html#eq:9-teststatMean">(9.1)</a>, the <span class="math inline">\(t\)</span> statistic is:</p>
 <p><span class="math display">\[
 \begin{split}
 \hat{t} &amp;= \frac{14-15}{\frac{3}{\sqrt{50}}} \\
         &amp;= -2.357023.
 \end{split}
-\]</span></p>
+\]</span>
+This <span class="math inline">\(t\)</span> statistic is valid since our sample size is 50, which is usually large enough for the approximation to the <span class="math inline">\(t\)</span> distribution to be valid.</p>
 <p>Remember that the test statistic is a measure of how far our sample data are from its expected value if the null hypothesis is true. Larger values of the test statistic (in magnitude) imply that our data deviate further from the null hypothesis, i.e. our data provides more evidence against the null hypothesis.</p>
 <p>The <span class="math inline">\(t\)</span> statistic also has this nice definition: it is the distance between our sample estimator and the value of the parameter if the null hypothesis is true, in terms of number of standard errors. So for our Freshman 15 example, the sample mean is 2.357 standard errors smaller than the hypothesized value of 15.</p>
 <div id="factors-affecting-t-statistic-for-mean" class="section level4" number="9.2.2.1">
 <h4>
 <span class="header-section-number">9.2.2.1</span> Factors Affecting <span class="math inline">\(t\)</span> Statistic for Mean<a class="anchor" aria-label="anchor" href="#factors-affecting-t-statistic-for-mean"><i class="fas fa-link"></i></a>
 </h4>
-<p>We have established that larger values of the test statistic imply more evidence against the null hypothesis. For the <span class="math inline">\(t\)</span> statistic for the mean, the factor that affect its magnitude are:</p>
+<p>We have established that larger values of the test statistic (in magnitude) imply more evidence against the null hypothesis. For the <span class="math inline">\(t\)</span> statistic for the mean, the factors that affect its magnitude are:</p>
 <ul>
 <li><p>The difference between the sample mean <span class="math inline">\(\bar{x}\)</span> of our data and the value of the population mean if the null is true, which is <span class="math inline">\(\mu_0\)</span>. This difference is called the <strong>effect size</strong>. Larger effect sizes lead to larger test statistics, in magnitude. This should make sense since a larger effect size implies the sample mean is deviates more from the expected mean if the null hypothesis is true.</p></li>
 <li><p>The sample size <span class="math inline">\(n\)</span>. Larger sample sizes lead to larger magnitudes for the <span class="math inline">\(t\)</span> statistic, since <span class="math inline">\(\frac{\bar{x}_n - \mu_0}{\frac{s}{\sqrt{n}}}\)</span> can be written as <span class="math inline">\(\sqrt{n}\frac{\bar{x}_n - \mu_0}{s}\)</span>. This implies that even if the effect size stays the same, larger sample sizes provide more evidence against the null.</p></li>
@@ -172,11 +179,11 @@
 </h3>
 <p>After calculating the value of the test statistic, we need to assess if our data provides enough evidence against the null hypothesis or not. There are two approaches to making this assessment: one involves the p-value, and the other involves the critical value.</p>
 <ul>
-<li>Using the p-value, we reject the null hypothesis (i.e. our data have enough evidence against the null hypothesis) if our p-value is less than the significance level. Otherwise, we fail to reject the null hypothesis (i.e. our data do not have enough evidence against the null hypothesis)</li>
+<li>Using the p-value, we <strong>reject the null hypothesis if our p-value is less than the significance level</strong> (i.e. our data have enough evidence against the null hypothesis). Otherwise, we fail to reject the null hypothesis (i.e. our data do not have enough evidence against the null hypothesis)</li>
 </ul>
-<p>The <strong>significance level</strong> of the test, <span class="math inline">\(\alpha\)</span>, is the probability of wrongly rejecting the null hypothesis when the null hypothesis is actually true. This error is called a type I error, which we will define more formally in a later subsection. So if we conduct a hypothesis test with significance level <span class="math inline">\(\alpha = 0.05\)</span>, we are saying that we are willing to have a 5% probability of wrongly concluding that we have enough evidence against the null hypothesis, when it is actually true.</p>
+<p>The <strong>significance level</strong> of the test, denoted by <span class="math inline">\(\alpha\)</span>, is the probability of wrongly rejecting the null hypothesis when the null hypothesis is actually true. This error is called a type I error, which we will define more formally in a later subsection. So if we conduct a hypothesis test with significance level <span class="math inline">\(\alpha = 0.05\)</span>, we are saying that we are willing to have a 5% probability of wrongly concluding that we have enough evidence against the null hypothesis, when it is actually true.</p>
 <ul>
-<li>Using the critical value, we reject the null hypothesis (i.e. our data have enough evidence against the null hypothesis) if our test statistic is more extreme than the critical value in the direction of the alternative hypothesis. Otherwise, we fail to reject the null hypothesis (i.e. our data do not have enough evidence against the null hypothesis).</li>
+<li>Using the critical value, we <strong>reject the null hypothesis if our test statistic is more extreme than the critical value in the direction of the alternative hypothesis</strong> (i.e. our data have enough evidence against the null hypothesis). Otherwise, we fail to reject the null hypothesis (i.e. our data do not have enough evidence against the null hypothesis).</li>
 </ul>
 <p>Both of these approaches are based on the sampling distribution of the estimator, and on the value of the significance level.</p>
 <div id="p-value" class="section level4" number="9.2.3.1">
@@ -185,38 +192,38 @@
 </h4>
 <p>The <strong>p-value</strong> is the probability of observing the value of our test statistic, or a value more extreme in the direction of the alternative hypothesis, if the null hypothesis is true.</p>
 <p>Informally, this is also the probability of observing the value of our sample mean, or a value more extreme in the direction of the alternative hypothesis, if the null hypothesis is true.</p>
-<p>Recall that for a hypothesis test of the mean, the <span class="math inline">\(t\)</span> statistic follows a <span class="math inline">\(t_{n-1}\)</span> distribution (the subscript refers to the degrees of freedom). Visually, we can find areas under the PDF of a <span class="math inline">\(t_{n-1}\)</span> to illustrate how the p-value is found. The specific area under the PDF depends on the alternative hypothesis. In the Figures <a href="hypothesis-testing.html#fig:9-pvalneq">9.1</a>, <a href="hypothesis-testing.html#fig:9-pvalgreater">9.2</a>, and <a href="hypothesis-testing.html#fig:9-pvalless">9.3</a> below, let us assume that the value of the <span class="math inline">\(t\)</span> statistic is <span class="math inline">\(\hat{t} = 1\)</span>.</p>
-<ul>
+<p>Recall that for a hypothesis test of the mean, the <span class="math inline">\(t\)</span> statistic follows a <span class="math inline">\(t_{n-1}\)</span> distribution, as our calculations assume the null hypothesis is true. Visually, we can use areas under the PDF of a <span class="math inline">\(t_{n-1}\)</span> to illustrate how the p-value is found. The specific area under the PDF depends on which of the three alternative hypotheses we are using. In Figures <a href="hypothesis-testing.html#fig:9-pvalneq">9.1</a>, <a href="hypothesis-testing.html#fig:9-pvalgreater">9.2</a>, and <a href="hypothesis-testing.html#fig:9-pvalless">9.3</a> below, we have examples on the relevant areas under the PDF if the value of the <span class="math inline">\(t\)</span> statistic is <span class="math inline">\(\hat{t} = 1\)</span>.</p>
+<ol style="list-style-type: decimal">
 <li>If <span class="math inline">\(H_a: \mu  \neq \mu_0\)</span>, i.e. we have a two-sided alternative, the corresponding areas under the PDF of the <span class="math inline">\(t_{n-1}\)</span> distribution that is the p-value is shown below in Figure <a href="hypothesis-testing.html#fig:9-pvalneq">9.1</a>:</li>
-</ul>
+</ol>
 <div class="figure">
 <span style="display:block;" id="fig:9-pvalneq"></span>
 <img src="bookdown-demo_files/figure-html/9-pvalneq-1.png" alt="Finding P-value, with Two-Sided Alternative" width="672"><p class="caption">
 Figure 9.1: Finding P-value, with Two-Sided Alternative
 </p>
 </div>
-<p>Using probability notation, this is <span class="math inline">\(P(|t_{n-1}| \geq 1)\)</span>.</p>
-<ul>
+<p>It is the area to the right of <span class="math inline">\(|\hat{t}|\)</span> and the area to the left of -<span class="math inline">\(|\hat{t}|\)</span>. Using probability notation, this is <span class="math inline">\(P(|t_{n-1}| \geq 1)\)</span>.</p>
+<ol start="2" style="list-style-type: decimal">
 <li>If <span class="math inline">\(H_a: \mu &gt; \mu_0\)</span>, i.e. the population mean is greater than a specified value, the corresponding area under the PDF of the <span class="math inline">\(t_{n-1}\)</span> distribution that is the p-value is shown below in Figure <a href="hypothesis-testing.html#fig:9-pvalgreater">9.2</a>:</li>
-</ul>
+</ol>
 <div class="figure">
 <span style="display:block;" id="fig:9-pvalgreater"></span>
 <img src="bookdown-demo_files/figure-html/9-pvalgreater-1.png" alt="Finding P-value, with Greater Than Alternative" width="672"><p class="caption">
 Figure 9.2: Finding P-value, with Greater Than Alternative
 </p>
 </div>
-<p>Using probability notation, this is <span class="math inline">\(P(t_{n-1} \geq 1)\)</span>.</p>
-<ul>
+<p>It is the area to the right of <span class="math inline">\(\hat{t}\)</span>. Using probability notation, this is <span class="math inline">\(P(t_{n-1} \geq 1)\)</span>.</p>
+<ol start="3" style="list-style-type: decimal">
 <li>If <span class="math inline">\(H_a: \mu &lt; \mu_0\)</span>, i.e. the population mean is less than a specified value, the corresponding area under the PDF of the <span class="math inline">\(t_{n-1}\)</span> distribution that is the p-value is shown below in Figure <a href="hypothesis-testing.html#fig:9-pvalless">9.3</a>:</li>
-</ul>
+</ol>
 <div class="figure">
 <span style="display:block;" id="fig:9-pvalless"></span>
 <img src="bookdown-demo_files/figure-html/9-pvalless-1.png" alt="Finding P-value, with Less Than Alternative" width="672"><p class="caption">
 Figure 9.3: Finding P-value, with Less Than Alternative
 </p>
 </div>
-<p>Using probability notation, this is <span class="math inline">\(P( t_{n-1} \leq 1)\)</span>.</p>
-<p>Going back to the Freshman 15 example, we found the <span class="math inline">\(t\)</span> statistic to be −2.357023. We had earlier written the alternative hypothesis as <span class="math inline">\(\mu &lt; 15\)</span>, so we find the PDF under a <span class="math inline">\(t_49\)</span> distribution using the area to the left of <span class="math inline">\(-2.357023\)</span>, in a manner similar to Figure <a href="hypothesis-testing.html#fig:9-pvalless">9.3</a>.</p>
+<p>It is the area to the left of <span class="math inline">\(\hat{t}\)</span>. Using probability notation, this is <span class="math inline">\(P( t_{n-1} \leq 1)\)</span>.</p>
+<p>Going back to the Freshman 15 example, we found the <span class="math inline">\(t\)</span> statistic to be −2.357023. We had earlier written the alternative hypothesis as <span class="math inline">\(\mu &lt; 15\)</span>, so we find the PDF under a <span class="math inline">\(t_{49}\)</span> distribution using the area to the left of <span class="math inline">\(-2.357023\)</span>, in a manner similar to Figure <a href="hypothesis-testing.html#fig:9-pvalless">9.3</a>.</p>
 <div class="figure">
 <span style="display:block;" id="fig:9-pvaleg"></span>
 <img src="bookdown-demo_files/figure-html/9-pvaleg-1.png" alt="Finding P-value, For Freshman 15 Example" width="672"><p class="caption">
@@ -227,34 +234,261 @@ Figure 9.4: Finding P-value, For Freshman 15 Example
 <div class="sourceCode" id="cb159"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/TDist.html">pt</a></span><span class="op">(</span><span class="op">-</span><span class="fl">2.357023</span>, <span class="fl">49</span><span class="op">)</span> <span class="co">##enter t stat, then df</span></span></code></pre></div>
 <pre><code>## [1] 0.01123111</code></pre>
+<p><em>Though question</em>: Consider that the research question for the Freshman 15 example was tweaked, so the alternative hypothesis is <span class="math inline">\(H_a:\mu &gt; 15\)</span>. Assuming everything else stays the same, show that the p-value is now 0.98877. If the alternative hypothesis is <span class="math inline">\(H_a: \mu \neq 15\)</span>, show that the p-value is 0.02246.</p>
 </div>
 <div id="critical-value-1" class="section level4" number="9.2.3.2">
 <h4>
 <span class="header-section-number">9.2.3.2</span> Critical Value<a class="anchor" aria-label="anchor" href="#critical-value-1"><i class="fas fa-link"></i></a>
 </h4>
 <p>Informally, the critical value is the value of the test statistic that is considered “enough” to say that we have enough evidence against the null hypothesis to reject it, based on the value of the significance level.</p>
-<p>Let’s think of the critical value using a PDF of the <span class="math inline">\(t\)</span> distribution. We want to find the “cut off” value of the distribution where the area under its PDF in the direction of the alternative hypothesis is equal to the significance level <span class="math inline">\(\alpha\)</span>. Since we have three options for the alternative hypothesis, we have 3 different areas under the PDF to consider.</p>
+<p>We can think of the critical value using a PDF of the <span class="math inline">\(t\)</span> distribution. We want to find the “cut off” value, denoted by <span class="math inline">\(t_{n-1}^*\)</span>, of the distribution where the area under its PDF in the direction of the alternative hypothesis is equal to the significance level <span class="math inline">\(\alpha\)</span>. Since we have three options for the alternative hypothesis, we have 3 different areas under the PDF to consider. In Figures <a href="hypothesis-testing.html#fig:9-critneq">9.5</a>, <a href="hypothesis-testing.html#fig:9-critgreater">9.6</a>, and <a href="hypothesis-testing.html#fig:9-critless">9.7</a> below, we have examples on the relevant areas under the PDF if <span class="math inline">\(\alpha=0.05\)</span> and <span class="math inline">\(n=50\)</span>:</p>
+<ol style="list-style-type: decimal">
+<li>If <span class="math inline">\(H_a: \mu \neq \mu_0\)</span>, i.e. we have a two-sided alternative, we want the areas under the PDF of the <span class="math inline">\(t_{49}\)</span> distribution to the right of <span class="math inline">\(t_{49}^*\)</span> and to the left of <span class="math inline">\(-t_{49}^*\)</span> to be equal to 0.05. This is shown in Figure <a href="hypothesis-testing.html#fig:9-critneq">9.5</a>:</li>
+</ol>
+<div class="figure">
+<span style="display:block;" id="fig:9-critneq"></span>
+<img src="images/09-crit_2sided.jpeg" alt="Critical Value for 2-Sided Alternative, with 0.05 Sig Level"><p class="caption">
+Figure 9.5: Critical Value for 2-Sided Alternative, with 0.05 Sig Level
+</p>
 </div>
-<div id="writing-conclusions" class="section level4" number="9.2.3.3">
-<h4>
-<span class="header-section-number">9.2.3.3</span> Writing Conclusions<a class="anchor" aria-label="anchor" href="#writing-conclusions"><i class="fas fa-link"></i></a>
-</h4>
+<p>Note that since the <span class="math inline">\(t\)</span> distribution is symmetric and both areas in blue add up to 0.05, each shaded area must be 0.025. So <span class="math inline">\(-t_{49}^*\)</span> and <span class="math inline">\(t_{49}^*\)</span> correspond to the 2.5th and 97.5th percentiles of a <span class="math inline">\(t_{49}\)</span> distribution respectively. We can show that <span class="math inline">\(-t_{49}^*\)</span> is -2.009575 by typing</p>
+<div class="sourceCode" id="cb161"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">alpha</span><span class="op">&lt;-</span><span class="fl">0.05</span></span>
+<span><span class="va">n</span><span class="op">&lt;-</span><span class="fl">50</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/TDist.html">qt</a></span><span class="op">(</span><span class="va">alpha</span><span class="op">/</span><span class="fl">2</span>, <span class="va">n</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] -2.009575</code></pre>
+<p>and by symmetry of the <span class="math inline">\(t\)</span> distribution, <span class="math inline">\(t_{49}^*\)</span> is 2.009575. The critical value is therefore <span class="math inline">\(t_{49}^* = 2.009575\)</span> for a 2-sided test. We will reject the null hypothesis if our <span class="math inline">\(t\)</span> statistic is to the right of 2.009575 or if it is to the left of -2.009575.</p>
+<p>In general, for any significance level <span class="math inline">\(\alpha\)</span>, the negative critical value <span class="math inline">\(-t_{n-1}^*\)</span> corresponds to the <span class="math inline">\((\alpha/2) \times 100\)</span>th percentile, and the positive critical value <span class="math inline">\(t_{n-1}^*\)</span> corresponds to the <span class="math inline">\((1 - \alpha/2) \times 100\)</span>th percentile of the appropriate <span class="math inline">\(t_{n-1}\)</span> distribution, if <span class="math inline">\(H_a: \mu \neq \mu_0\)</span>.</p>
+<ol start="2" style="list-style-type: decimal">
+<li>If <span class="math inline">\(H_a: \mu &gt; \mu_0\)</span>, i.e. the population mean is greater than some specified value, we want the area under the PDF of the <span class="math inline">\(t_{49}\)</span> distribution to the right of <span class="math inline">\(t_{49}^*\)</span> to be equal to 0.05. This is shown in Figure <a href="hypothesis-testing.html#fig:9-critgreater">9.6</a>:</li>
+</ol>
+<div class="figure">
+<span style="display:block;" id="fig:9-critgreater"></span>
+<img src="images/09-crit_greater.jpeg" alt="Critical Value for Greater Than Alternative, with 0.05 Sig Level"><p class="caption">
+Figure 9.6: Critical Value for Greater Than Alternative, with 0.05 Sig Level
+</p>
 </div>
-<div id="type-i-and-type-ii-errors" class="section level4" number="9.2.3.4">
-<h4>
-<span class="header-section-number">9.2.3.4</span> Type I and Type II Errors<a class="anchor" aria-label="anchor" href="#type-i-and-type-ii-errors"><i class="fas fa-link"></i></a>
-</h4>
+<p>Note that <span class="math inline">\(|t_{49}^*|\)</span> corresponds to the 95th percentile of a <span class="math inline">\(t_{49}\)</span> distribution. We can show that <span class="math inline">\(t_{49}^*\)</span> is 1.677 by typing</p>
+<div class="sourceCode" id="cb163"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">alpha</span><span class="op">&lt;-</span><span class="fl">0.05</span></span>
+<span><span class="va">n</span><span class="op">&lt;-</span><span class="fl">50</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/TDist.html">qt</a></span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">alpha</span>, <span class="va">n</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 1.676551</code></pre>
+<p>The critical value is therefore <span class="math inline">\(t_{49}^* = 1.676551\)</span> when <span class="math inline">\(H_a: \mu &gt; \mu_0\)</span>. We will reject the null hypothesis if our <span class="math inline">\(t\)</span> statistic is to the right of 1.676551.</p>
+<p>In general, for any significance level <span class="math inline">\(\alpha\)</span>, the critical value <span class="math inline">\(t_{n-1}^*\)</span> corresponds to the <span class="math inline">\((1 - \alpha) \times 100\)</span>th percentile of the appropriate <span class="math inline">\(t_{n-1}\)</span> distribution, if <span class="math inline">\(H_a: \mu &gt; \mu_0\)</span>.</p>
+<ol start="3" style="list-style-type: decimal">
+<li>If <span class="math inline">\(H_a: \mu &lt; \mu_0\)</span>, i.e. the population mean is less than some specified value, we want the area under the PDF of the <span class="math inline">\(t_{49}\)</span> distribution to the left of <span class="math inline">\(t_{49}^*\)</span> to be equal to 0.05. This is shown in Figure <a href="hypothesis-testing.html#fig:9-critless">9.7</a>:</li>
+</ol>
+<div class="figure">
+<span style="display:block;" id="fig:9-critless"></span>
+<img src="images/09-crit_less.jpeg" alt="Critical Value for Less Than Alternative, with 0.05 Sig Level"><p class="caption">
+Figure 9.7: Critical Value for Less Than Alternative, with 0.05 Sig Level
+</p>
 </div>
+<p>Note that <span class="math inline">\(t_{49}^*\)</span> corresponds to the 5th percentile of a <span class="math inline">\(t_{49}\)</span> distribution. We can show that <span class="math inline">\(t_{49}^*\)</span> is -1.677 by typing</p>
+<div class="sourceCode" id="cb165"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">alpha</span><span class="op">&lt;-</span><span class="fl">0.05</span></span>
+<span><span class="va">n</span><span class="op">&lt;-</span><span class="fl">50</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/TDist.html">qt</a></span><span class="op">(</span><span class="va">alpha</span>, <span class="va">n</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] -1.676551</code></pre>
+<p>The critical value is therefore <span class="math inline">\(t_{49}^* = -1.676551\)</span> when <span class="math inline">\(H_a: \mu &lt; \mu_0\)</span>. We will reject the null hypothesis if our <span class="math inline">\(t\)</span> statistic is to the left of -1.676551.</p>
+<p>In general, for any significance level <span class="math inline">\(\alpha\)</span>, the critical value <span class="math inline">\(t_{n-1}^*\)</span> corresponds to the <span class="math inline">\((\alpha) \times 100\)</span>th percentile of the appropriate <span class="math inline">\(t_{n-1}\)</span> distribution, if <span class="math inline">\(H_a: \mu &lt; \mu_0\)</span>.</p>
+<p>Going back to the Freshman 15 example, we found the <span class="math inline">\(t\)</span> statistic to be −2.357023. We had earlier written the alternative hypothesis as <span class="math inline">\(\mu &lt; 15\)</span>, so the critical value is the 5th percentile of a <span class="math inline">\(t_{49}\)</span> distribution, which we found to be -1.676551. Since our <span class="math inline">\(t\)</span> statistic is to the left of this critical value, we reject the null hypothesis.</p>
+<p><em>Thought question</em>: Consider a hypothesis test for the mean with <span class="math inline">\(n=10\)</span>. Assume the conditions for the sampling distribution of the sample mean to be met. Suppose <span class="math inline">\(\alpha=0.10\)</span>. If the alternative hypothesis is 2-sided, show that the critical value is 1.833113. If the alternative hypothesis is 1-sided, show that <span class="math inline">\(t_{9}^*\)</span> is 1.383029.</p>
+</div>
+</div>
+<div id="writing-conclusions" class="section level3" number="9.2.4">
+<h3>
+<span class="header-section-number">9.2.4</span> Writing Conclusions<a class="anchor" aria-label="anchor" href="#writing-conclusions"><i class="fas fa-link"></i></a>
+</h3>
+<p>In the previous subsection, we decide whether to reject the null hypothesis based on two approaches:</p>
+<ul>
+<li>If the p-value of our test is less than the significance level.</li>
+<li>If the test statistic of our test is more extreme than the critical value, in the direction of the alternative hypothesis.</li>
+</ul>
+<p>The decision based on both approaches should always be the same and never contradict each other. All you need is to use one of these approaches, the other is redundant. It is up to you to choose which one you want to use, but you must be clear which one you are using.</p>
+<p>We decide between:</p>
+<ol style="list-style-type: decimal">
+<li><p>Rejecting the null hypothesis. This implies that we have enough evidence against the null hypothesis to reject it and support the alternative hypothesis. Our data support the claim in the alternative hypothesis. Using the court trial analogy, this is equivalent to saying we have enough evidence to prove a defendants guilt as we reject the assumption that the defendant is innocent, and give a guilty verdict.</p></li>
+<li><p>Failing to reject the null hypothesis. This implies that we do not have enough evidence against the null hypothesis and so we do not reject it. Our data do not support the claim in the alternative hypothesis. Using the court trial analogy, this is equivalent to saying we do not have enough evidence to prove a defendants and so give a not guilty verdict.</p></li>
+</ol>
+<p>A common mistake with failing to reject the null hypothesis is to say that our data support and proves the null hypothesis is true. Using the court trial analogy, a not guilty verdict is not the same as saying the defendant is innocent.</p>
+<p>After making a decision, we write a conclusion in the context of our research question. Using the Freshman 15 example, we rejected the null hypothesis. So our conclusion is is our data support the claim that the average weight gain among first-year college students is less than 15 pounds.</p>
+<p>We look at one more example to show how a hypothesis test is done from start to finish.</p>
+</div>
+<div id="wafer" class="section level3" number="9.2.5">
+<h3>
+<span class="header-section-number">9.2.5</span> Worked Example<a class="anchor" aria-label="anchor" href="#wafer"><i class="fas fa-link"></i></a>
+</h3>
+<p>The target thickness for silicon wafers used in a type of integrated circuit is 245 micrometers. A sample of 50 wafers is obtained and the thickness of each one is determined, resulting in a sample mean thickness of 245.88 micrometers
+and a sample standard deviation of 3.60 micrometers. Does this data suggest that true average wafer thickness is something other than the target value? Test at the 0.05 significance level.</p>
+<p>The variable we are investigating is the thickness for silicon wafers, which is quantitative, so we performing a hypothesis test for the mean.</p>
+<p>The null and alternative hypotheses are <span class="math inline">\(H_0: \mu = 245, H_a: \mu \neq 245\)</span>.</p>
+<p>We do not know the distribution of the thickness for silicon wafers. But we have a sample of 50, which is usually large enough so the CLT applies, and the relevant distributions for the test statistic apply.</p>
+<p>The <span class="math inline">\(t\)</span> statistic is</p>
+<p><span class="math display">\[
+\begin{split}
+\hat{t} &amp;= \frac{245.88 - 245}{\frac{3.6}{\sqrt{50}}} \\
+        &amp;= 1.728483.
+\end{split}
+\]</span>
+Since this is a two-sided test, the p-value can derived by finding the following area under the PDF of a <span class="math inline">\(t_{49}\)</span> distribution, as shown in Figure <a href="hypothesis-testing.html#fig:9-pvalworked">9.8</a> below.</p>
+<div class="figure">
+<span style="display:block;" id="fig:9-pvalworked"></span>
+<img src="bookdown-demo_files/figure-html/9-pvalworked-1.png" alt="Finding P-value, For Silicon Wafer Example" width="672"><p class="caption">
+Figure 9.8: Finding P-value, For Silicon Wafer Example
+</p>
+</div>
+<p>Using R, we can find the p-value by typing:</p>
+<div class="sourceCode" id="cb167"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/TDist.html">pt</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1.728483</span>, <span class="fl">49</span><span class="op">)</span><span class="op">*</span><span class="fl">2</span> </span></code></pre></div>
+<pre><code>## [1] 0.09019905</code></pre>
+<div class="sourceCode" id="cb169"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">##supply test stat, then DF.</span></span>
+<span><span class="co">##multiply by 2 since pt only gives area to left of -1.728483, </span></span>
+<span><span class="co">##but we also want area to right of 1.728483. </span></span></code></pre></div>
+<p>Alternatively, we can work out the critical value by typing:</p>
+<div class="sourceCode" id="cb170"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">alpha</span><span class="op">&lt;-</span><span class="fl">0.05</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/TDist.html">qt</a></span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">alpha</span><span class="op">/</span><span class="fl">2</span>, <span class="fl">49</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 2.009575</code></pre>
+<p>Since our p-value is 0.09, which is greater than the significance level of 0.05, (or since our test statistic is 1.728483 which is not to the right of the critical value of 2.009575 ), we fail to reject the null hypothesis. Our data do not provide evidence against the null hypothesis.</p>
+<p>Our conclusion is the data do not support the claim that the average thickness of silicon wafers is different from the target value of 250 micrometers.</p>
 </div>
 </div>
 <div id="hypothesis-test-for-the-proportion" class="section level2" number="9.3">
 <h2>
 <span class="header-section-number">9.3</span> Hypothesis Test for the Proportion<a class="anchor" aria-label="anchor" href="#hypothesis-test-for-the-proportion"><i class="fas fa-link"></i></a>
 </h2>
+<p>Next, we will go over the hypothesis test for the proportion. This is another common hypothesis test. The sample proportion is an estimator for the population proportion. Proportions are used to summarize categorical variables, whereas means are used to summarize quantitative variables.</p>
+<p>The general steps are the same as the hypothesis test for the mean, with some changes to some of the details. The differences are:</p>
+<ul>
+<li><p>We are now using the sample proportion, <span class="math inline">\(\hat{p}\)</span>, to estimate the population proportion, <span class="math inline">\(p\)</span>, instead of using the sample mean, <span class="math inline">\(\bar{x}\)</span>, to estimate the population mean, <span class="math inline">\(\mu\)</span>.</p></li>
+<li><p>The test statistic is based on a standard normal distribution, not a <span class="math inline">\(t_{df}\)</span> distribution.</p></li>
+<li><p>The exact components involved in calculating the test statistic is a bit different, although it still takes the general form suggested by equation <a href="hypothesis-testing.html#eq:9-tstatGen">(9.2)</a>.</p></li>
+</ul>
+<p><em>Thought question</em>: Can you make an educated guess as to what is the formula for the test statistic when testing the proportion, before reading further?</p>
+<div id="null-and-alternative-hypotheses-1" class="section level3" number="9.3.1">
+<h3>
+<span class="header-section-number">9.3.1</span> Null and Alternative Hypotheses<a class="anchor" aria-label="anchor" href="#null-and-alternative-hypotheses-1"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li><p>The <strong>null hypothesis</strong> is still a statement that says the parameter is equal to some specific value. Let <span class="math inline">\(p_0\)</span> denote this specific value. So we write <span class="math inline">\(H_0: p = p_0\)</span>.</p></li>
+<li>
+<p>The <strong>alternative hypothesis</strong> is a statement against the null hypothesis. For the hypothesis test for the proportion, there are a few possible alternative hypotheses. Which one we use is <strong>driven by the research question</strong>. The alternative hypothesis could say the the parameter is:</p>
+<ul>
+<li><p>Different from some specific value, i.e. <span class="math inline">\(H_a: p \neq p_0\)</span>.</p></li>
+<li><p>Greater than some specific value, i.e. <span class="math inline">\(H_a: p &gt; p_0\)</span>.</p></li>
+<li><p>Less than some specific value, i.e. <span class="math inline">\(H_a: p &lt; p_0\)</span>.</p></li>
+</ul>
+</li>
+</ul>
 </div>
-<div id="goodness-of-fit-tests" class="section level2" number="9.4">
+<div id="test-statistic-1" class="section level3" number="9.3.2">
+<h3>
+<span class="header-section-number">9.3.2</span> Test Statistic<a class="anchor" aria-label="anchor" href="#test-statistic-1"><i class="fas fa-link"></i></a>
+</h3>
+<p>In Section <a href="confidence-intervals.html#sampdistprops">8.3.1</a>, we established the sampling distribution of sample proportions. If conditions are met, <span class="math inline">\(\hat{p}\)</span> is approximately <span class="math inline">\(N\left(p, \frac{p(1-p)}{n}\right)\)</span>, where <span class="math inline">\(p\)</span> denotes the true population proportion. Therefore, the distribution of <span class="math inline">\(\hat{p}\)</span> after standardization is approximately standard normal, i.e. <span class="math inline">\(\frac{\hat{p}-p}{\sqrt{\frac{p(1-p)}{n}}}\)</span> is approximately standard normal.</p>
+<p>Based on this distribution, the test statistic for a hypothesis test for the proportion is</p>
+<p><span class="math display" id="eq:9-teststatProp">\[\begin{equation}
+\hat{z} =  \frac{\hat{p} - p_0}{\sqrt{\frac{p_0(1-p_0)}{n}}} .
+\tag{9.3}
+\end{equation}\]</span></p>
+<p>The test statistic is a <span class="math inline">\(z\)</span> statistic, since it follows a standard normal distribution.</p>
+<p>Notice how in equation <a href="hypothesis-testing.html#eq:9-teststatProp">(9.3)</a>, we use <span class="math inline">\(p_0\)</span>, the value of the population proportion when we assume the null hypothesis to be true, in place of the population proportion, which is unknown. The test statistic is still calculated by assuming the null hypothesis to be true.</p>
+<p>Also notice how equation <a href="hypothesis-testing.html#eq:9-teststatProp">(9.3)</a> follows the general form suggested by equation <a href="hypothesis-testing.html#eq:9-tstatGen">(9.2)</a>. It turns out that <span class="math inline">\(z\)</span> statistics also take on this general form.</p>
+<div id="conditions-for-hypothesis-test-for-the-proportion" class="section level4" number="9.3.2.1">
+<h4>
+<span class="header-section-number">9.3.2.1</span> Conditions for Hypothesis Test for the Proportion<a class="anchor" aria-label="anchor" href="#conditions-for-hypothesis-test-for-the-proportion"><i class="fas fa-link"></i></a>
+</h4>
+<p>The CLT informs us that if <span class="math inline">\(n\)</span> is large enough, the sample proportion <span class="math inline">\(\hat{p}\)</span> can be approximated by a normal distribution. How large is large enough? Again, various rules of thumb are recommended, and they usually follow along the lines of needing at least a certain number of expected successes, <span class="math inline">\(n p_0\)</span>, and expected failures, <span class="math inline">\(n(1-p_0)\)</span> in our sample. Values of at least 5 or 10 are usually recommended. Just bear in mind that the approximation works better as the number of successes and failures, <span class="math inline">\(n\hat{p}\)</span> and <span class="math inline">\(n(1-\hat{p})\)</span>, increases.</p>
+</div>
+</div>
+<div id="making-a-decision-and-writing-conclusions" class="section level3" number="9.3.3">
+<h3>
+<span class="header-section-number">9.3.3</span> Making a Decision and Writing Conclusions<a class="anchor" aria-label="anchor" href="#making-a-decision-and-writing-conclusions"><i class="fas fa-link"></i></a>
+</h3>
+<p>We make our decision on whether to reject the null hypothesis in the same manner as the hypothesis test for the mean. The only difference is that our test statistic follows a standard normal instead of a <span class="math inline">\(t\)</span> distribution. Visually a lot of the ideas are similar, since these are both bell-shaped distributions.</p>
+<p>Conclusions are also written in the same manner.</p>
+</div>
+<div id="worked-example-6" class="section level3" number="9.3.4">
+<h3>
+<span class="header-section-number">9.3.4</span> Worked Example<a class="anchor" aria-label="anchor" href="#worked-example-6"><i class="fas fa-link"></i></a>
+</h3>
+<p>A university library ordinarily has a complete shelf inventory done once every year. Because of new shelving rules instituted the previous year, the head librarian believes it may be possible to save money by postponing the inventory. The librarian decides to select at random 1000 books from the library’s collection and have them searched in a preliminary manner. If evidence indicates strongly that the true proportion of misshelved or unlocatable books is less than 2%, then the inventory will be postponed. Among the 1000 books searched, 15 were misshelved or unlocatable. Test the relevant hypotheses and advise the librarian what to do, using significance level of 0.05.</p>
+<p>The variable we are investigating is whether the book is misshelved or unlocatable, which is categorical, so we performing a hypothesis test for the proportion.</p>
+<p>The null and alternative hypotheses are <span class="math inline">\(H_0: p = 0.02, H_a: p &lt; 0.02\)</span>.</p>
+<p>To assess if we can conduct the hypothesis test for the proportion, we need to check if <span class="math inline">\(n p_0 \geq 10\)</span> and <span class="math inline">\(n(1-p_0) \geq 10\)</span>. For our data, we have</p>
+<ul>
+<li>
+<span class="math inline">\(n p_0 = 1000 \times 0.02 = 20 \geq 10\)</span>,</li>
+<li>
+<span class="math inline">\(n (1-p_0) = 1000 \times 0.98 = 980 \geq 10\)</span>,</li>
+</ul>
+<p>so we can proceed.</p>
+<p>The <span class="math inline">\(z\)</span> statistic is</p>
+<p><span class="math display">\[
+\begin{split}
+\hat{z} &amp;= \frac{\frac{15}{1000} - 0.02}{\sqrt{\frac{0.02 \times 0.98}{1000}}} \\
+        &amp;= -1.129385.
+\end{split}
+\]</span></p>
+<p>Since this is a one-sided test with a less than alternative hypothesis, the p-value can derived by finding the following area under the PDF of a <span class="math inline">\(Z\)</span> distribution, as shown in Figure <a href="hypothesis-testing.html#fig:9-pvalworked2">9.9</a> below.</p>
+<div class="figure">
+<span style="display:block;" id="fig:9-pvalworked2"></span>
+<img src="bookdown-demo_files/figure-html/9-pvalworked2-1.png" alt="Finding P-value, For Library Example" width="672"><p class="caption">
+Figure 9.9: Finding P-value, For Library Example
+</p>
+</div>
+<p>Using R, we can find the p-value by typing:</p>
+<div class="sourceCode" id="cb172"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">pnorm</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1.129385</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 0.1293677</code></pre>
+<p>Alternatively, we can work out the critical value by typing:</p>
+<div class="sourceCode" id="cb174"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">qnorm</a></span><span class="op">(</span><span class="fl">0.05</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] -1.644854</code></pre>
+<p>Since our p-value is 0.129, which is greater than the significance level of 0.05, (or since our test statistic is -1.129385 which is not to the left of the critical value of -1.644854), we fail to reject the null hypothesis. Our data do not provide evidence against the null hypothesis.</p>
+<p>Our conclusion is the data do not support the claim that the true proportion of misshelved or unlocatable books is less than 2%. So there is not enough evidence to postpone the inventory.</p>
+</div>
+</div>
+<div id="additional-comments-on-hypothesis-test-of-parameters" class="section level2" number="9.4">
 <h2>
-<span class="header-section-number">9.4</span> Goodness of Fit Tests<a class="anchor" aria-label="anchor" href="#goodness-of-fit-tests"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9.4</span> Additional Comments on Hypothesis Test of Parameters<a class="anchor" aria-label="anchor" href="#additional-comments-on-hypothesis-test-of-parameters"><i class="fas fa-link"></i></a>
+</h2>
+<div id="two-sided-tests-and-confidence-intervals" class="section level3" number="9.4.1">
+<h3>
+<span class="header-section-number">9.4.1</span> Two-Sided Tests and Confidence Intervals<a class="anchor" aria-label="anchor" href="#two-sided-tests-and-confidence-intervals"><i class="fas fa-link"></i></a>
+</h3>
+<p>Notice how hypothesis tests and confidence intervals are based on the sampling distribution of the relevant estimator? If you look at how the critical value of a two-sided test and the critical value of a confidence interval are derived, you will notice that they are found in the exact same manner. Refer to Figure <a href="hypothesis-testing.html#fig:9-critneq">9.5</a> and Figure <a href="confidence-intervals.html#fig:8-crit">8.2</a>, and notice how these pictures look exactly the same, with the middle portion of the PDF having an area of <span class="math inline">\(1-\alpha\)</span> and the two tail ends having an area of <span class="math inline">\(\alpha\)</span>.</p>
+<p>What this implies is that conclusions from a <span class="math inline">\((1-\alpha) \times 100\%\)</span> confidence interval will be consistent with a 2-sided hypothesis test conducted at significance <span class="math inline">\(\alpha\)</span>. Also notice how we use the same notation <span class="math inline">\(\alpha\)</span> for the confidence level and significance level?</p>
+<ul>
+<li><p>If the null hypothesis is <strong>rejected</strong> for a 2-sided test, than the value of the parameter under the null hypothesis will lie <strong>outside</strong> the corresponding confidence interval. This should make sense since the confidence interval provides a range of plausible values for the parameter and values outside the interval are considered to be “ruled out”.</p></li>
+<li><p>If the null hypothesis is <strong>not rejected</strong> for a 2-sided test, than the value of the parameter under the null hypothesis will lie <strong>inside</strong> the corresponding confidence interval. This should make sense since the confidence interval provides a range of plausible values for the parameter and values outside the interval are considered to be “ruled out”.</p></li>
+</ul>
+<p>We go back to the thickness of silicon wafers worked example in Section <a href="hypothesis-testing.html#wafer">9.2.5</a>. The null and alternative hypotheses were <span class="math inline">\(H_0: \mu = 245, H_a: \mu \neq 245\)</span> and we ended up failing to reject the null hypothesis at 0.05 significance level. This informs us that if we were to construct a 95% confidence interval for the mean, the interval will include the value of 245, the value of the parameter under the null hypothesis.</p>
+<p><em>Thought question</em>: Show that the 95% confidence interval for the mean thickness of silicon wafers in the worked example is (244.8569, 246.9031) which contains the value of 245.</p>
+</div>
+<div id="type-i-and-type-ii-errors" class="section level3" number="9.4.2">
+<h3>
+<span class="header-section-number">9.4.2</span> Type I and Type II Errors<a class="anchor" aria-label="anchor" href="#type-i-and-type-ii-errors"><i class="fas fa-link"></i></a>
+</h3>
+<p>The decision we make from hypothesis testing is not going to be perfect, as we have inherent uncertainty in estimators due to random sampling. So we may sometimes reject a null hypothesis when it is true, or we may fail to reject a null hypothesis when the alternative hypothesis is true. These errors are called <strong>type I</strong> and <strong>type II</strong> errors respectively.</p>
+</div>
+<div id="power" class="section level3" number="9.4.3">
+<h3>
+<span class="header-section-number">9.4.3</span> Power<a class="anchor" aria-label="anchor" href="#power"><i class="fas fa-link"></i></a>
+</h3>
+</div>
+<div id="statistical-vs-practical-significance" class="section level3" number="9.4.4">
+<h3>
+<span class="header-section-number">9.4.4</span> Statistical Vs Practical Significance<a class="anchor" aria-label="anchor" href="#statistical-vs-practical-significance"><i class="fas fa-link"></i></a>
+</h3>
+</div>
+</div>
+<div id="goodness-of-fit-tests" class="section level2" number="9.5">
+<h2>
+<span class="header-section-number">9.5</span> Goodness of Fit Tests<a class="anchor" aria-label="anchor" href="#goodness-of-fit-tests"><i class="fas fa-link"></i></a>
 </h2>
 
 </div>
@@ -272,10 +506,27 @@ Figure 9.4: Finding P-value, For Freshman 15 Example
 <li><a class="nav-link" href="#null-and-alternative-hypotheses"><span class="header-section-number">9.2.1</span> Null and Alternative Hypotheses</a></li>
 <li><a class="nav-link" href="#test-statistic"><span class="header-section-number">9.2.2</span> Test Statistic</a></li>
 <li><a class="nav-link" href="#making-a-decision"><span class="header-section-number">9.2.3</span> Making a Decision</a></li>
+<li><a class="nav-link" href="#writing-conclusions"><span class="header-section-number">9.2.4</span> Writing Conclusions</a></li>
+<li><a class="nav-link" href="#wafer"><span class="header-section-number">9.2.5</span> Worked Example</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#hypothesis-test-for-the-proportion"><span class="header-section-number">9.3</span> Hypothesis Test for the Proportion</a></li>
-<li><a class="nav-link" href="#goodness-of-fit-tests"><span class="header-section-number">9.4</span> Goodness of Fit Tests</a></li>
+<li>
+<a class="nav-link" href="#hypothesis-test-for-the-proportion"><span class="header-section-number">9.3</span> Hypothesis Test for the Proportion</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#null-and-alternative-hypotheses-1"><span class="header-section-number">9.3.1</span> Null and Alternative Hypotheses</a></li>
+<li><a class="nav-link" href="#test-statistic-1"><span class="header-section-number">9.3.2</span> Test Statistic</a></li>
+<li><a class="nav-link" href="#making-a-decision-and-writing-conclusions"><span class="header-section-number">9.3.3</span> Making a Decision and Writing Conclusions</a></li>
+<li><a class="nav-link" href="#worked-example-6"><span class="header-section-number">9.3.4</span> Worked Example</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#additional-comments-on-hypothesis-test-of-parameters"><span class="header-section-number">9.4</span> Additional Comments on Hypothesis Test of Parameters</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#two-sided-tests-and-confidence-intervals"><span class="header-section-number">9.4.1</span> Two-Sided Tests and Confidence Intervals</a></li>
+<li><a class="nav-link" href="#type-i-and-type-ii-errors"><span class="header-section-number">9.4.2</span> Type I and Type II Errors</a></li>
+<li><a class="nav-link" href="#power"><span class="header-section-number">9.4.3</span> Power</a></li>
+<li><a class="nav-link" href="#statistical-vs-practical-significance"><span class="header-section-number">9.4.4</span> Statistical Vs Practical Significance</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#goodness-of-fit-tests"><span class="header-section-number">9.5</span> Goodness of Fit Tests</a></li>
 </ul>
 
       <div class="book-extra">
@@ -292,7 +543,7 @@ Figure 9.4: Finding P-value, For Freshman 15 Example
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2025-07-23.</p>
+    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2025-07-24.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

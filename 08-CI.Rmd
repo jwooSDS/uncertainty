@@ -400,7 +400,7 @@ Proportions are used to summarize categorical variables, whereas means are used 
 
 - We ask a sample of voters whether they support a particular candidate. The variable is categorical, since the answer is yes or no, and we cannot apply arithmetic operations to the answer. We then calculate the proportion of voters who support the candidate. So we need a confidence interval for the proportion. 
 
-### Sampling Distribution of Sample Proportions
+### Sampling Distribution of Sample Proportions {#sampdistprops}
 
 We can use the Central Limit Theorem (CLT) to approximate the sampling distribution of sample proportions. A sketch of how to derive this sampling distribution is as follows:
 
@@ -410,7 +410,7 @@ We can use the Central Limit Theorem (CLT) to approximate the sampling distribut
 
 - The sample proportion, $\hat{p}$, is just the number of successes divided by the sample size, so $\hat{p} = \frac{S}{n} = \frac{\sum_{i=1}^n X_i}{n} = \bar{X}_n$. Therefore, using property of expectations and variances, we know that $E(\hat{p}) = p$ and $Var(\hat{p}) = \frac{p(1-p)}{n}$.
 
-- The CLT informs us if $n$ is large enough, then $\hat{p}$ is approximately $N\left(p, \frac{p(1-p)}{n}\right)$. Also, the distribution of $\hat{p}$ after standardization is approximately standard normal, i.e. the standardized score $\hat{Z} = \frac{\hat{p}-p}{\sqrt{\frac{p(1-p)}{n}}}$ is approximately standard normal. 
+- The CLT informs us if $n$ is large enough, then $\hat{p}$ is approximately $N\left(p, \frac{p(1-p)}{n}\right)$. Therefore, the distribution of $\hat{p}$ after standardization is approximately standard normal, i.e. the standardized score $\hat{Z} = \frac{\hat{p}-p}{\sqrt{\frac{p(1-p)}{n}}}$ is approximately standard normal. 
 
 View the video below for a more detailed explanation of the sampling distribution of sample proportions:
 
@@ -441,7 +441,7 @@ From equation \@ref(eq:8-CIprop), we can also see that we have the factors that 
 
 #### Conditions for Confidence Interval for the Proportion
 
-We wrote that if $n$ is large enough, the CLT informs us that the sample proportion $\hat{p}$ can be approximated by a normal distribution. How large is large enough? Again, various rules of thumb are recommended, and they usually follow along the lines of needing at least a certain number of successes, $n\hat{p}$, and failures, $n(1-\hat{p})$ in our sample. Values of 5 or 10 are usually recommended. Just bear in mind that the approximation works better as the number of successes and failures, $n\hat{p}$ and $n(1-\hat{p})$, increases.
+We wrote that if $n$ is large enough, the CLT informs us that the sample proportion $\hat{p}$ can be approximated by a normal distribution. How large is large enough? Again, various rules of thumb are recommended, and they usually follow along the lines of needing at least a certain number of successes, $n\hat{p}$, and failures, $n(1-\hat{p})$ in our sample. Values of at least 5 or 10 are usually recommended. Just bear in mind that the approximation works better as the number of successes and failures, $n\hat{p}$ and $n(1-\hat{p})$, increases.
 
 #### Worked Example
 

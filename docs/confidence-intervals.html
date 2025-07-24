@@ -437,16 +437,16 @@ which gives (4.793914, 17.20609). Since the entire confidence interval lies abov
 <li><p>We measure the systolic blood pressure of a sample of American adults. The variable is quantitative, since the answer is a numeric value where arithmetic operations can be applied. We then calculate the average systolic blood pressure of American adults. So we can work on a confidence interval for the mean, using equation <a href="confidence-intervals.html#eq:8-CImeant">(8.11)</a>.</p></li>
 <li><p>We ask a sample of voters whether they support a particular candidate. The variable is categorical, since the answer is yes or no, and we cannot apply arithmetic operations to the answer. We then calculate the proportion of voters who support the candidate. So we need a confidence interval for the proportion.</p></li>
 </ul>
-<div id="sampling-distribution-of-sample-proportions" class="section level3" number="8.3.1">
+<div id="sampdistprops" class="section level3" number="8.3.1">
 <h3>
-<span class="header-section-number">8.3.1</span> Sampling Distribution of Sample Proportions<a class="anchor" aria-label="anchor" href="#sampling-distribution-of-sample-proportions"><i class="fas fa-link"></i></a>
+<span class="header-section-number">8.3.1</span> Sampling Distribution of Sample Proportions<a class="anchor" aria-label="anchor" href="#sampdistprops"><i class="fas fa-link"></i></a>
 </h3>
 <p>We can use the Central Limit Theorem (CLT) to approximate the sampling distribution of sample proportions. A sketch of how to derive this sampling distribution is as follows:</p>
 <ul>
 <li><p>Let <span class="math inline">\(X_1, \cdots, X_n\)</span> be i.i.d. Bernoulli with success probability p. Using equations <a href="discrete-random-variables.html#eq:3-bern-EX">(3.9)</a> and <a href="discrete-random-variables.html#eq:3-bern-var">(3.10)</a>, we know that <span class="math inline">\(E(X_i) = p\)</span> and <span class="math inline">\(Var(X_i) = p(1-p)\)</span>.</p></li>
 <li><p>Let <span class="math inline">\(S = X_1 + \cdots + X_n = \sum_{i=1}^n X_i\)</span> denote the number of successes in a sample of size <span class="math inline">\(n\)</span>. Using properties of expectations and variances, we know that <span class="math inline">\(E(S) = np\)</span> and <span class="math inline">\(Var(S) = np(1-p)\)</span>.</p></li>
 <li><p>The sample proportion, <span class="math inline">\(\hat{p}\)</span>, is just the number of successes divided by the sample size, so <span class="math inline">\(\hat{p} = \frac{S}{n} = \frac{\sum_{i=1}^n X_i}{n} = \bar{X}_n\)</span>. Therefore, using property of expectations and variances, we know that <span class="math inline">\(E(\hat{p}) = p\)</span> and <span class="math inline">\(Var(\hat{p}) = \frac{p(1-p)}{n}\)</span>.</p></li>
-<li><p>The CLT informs us if <span class="math inline">\(n\)</span> is large enough, then <span class="math inline">\(\hat{p}\)</span> is approximately <span class="math inline">\(N\left(p, \frac{p(1-p)}{n}\right)\)</span>. Also, the distribution of <span class="math inline">\(\hat{p}\)</span> after standardization is approximately standard normal, i.e. the standardized score <span class="math inline">\(\hat{Z} = \frac{\hat{p}-p}{\sqrt{\frac{p(1-p)}{n}}}\)</span> is approximately standard normal.</p></li>
+<li><p>The CLT informs us if <span class="math inline">\(n\)</span> is large enough, then <span class="math inline">\(\hat{p}\)</span> is approximately <span class="math inline">\(N\left(p, \frac{p(1-p)}{n}\right)\)</span>. Therefore, the distribution of <span class="math inline">\(\hat{p}\)</span> after standardization is approximately standard normal, i.e. the standardized score <span class="math inline">\(\hat{Z} = \frac{\hat{p}-p}{\sqrt{\frac{p(1-p)}{n}}}\)</span> is approximately standard normal.</p></li>
 </ul>
 <p>View the video below for a more detailed explanation of the sampling distribution of sample proportions:</p>
 <iframe width="560px" height="320px" allowfullscreen="true" allow="autoplay *" title="Module 08: Sampling Distribution of Sample Proportion" src="https://virginiauniversity.instructuremedia.com/embed/84d115c1-bacb-429f-b777-560eda3f4e6b" frameborder="0">
@@ -475,7 +475,7 @@ which gives (4.793914, 17.20609). Since the entire confidence interval lies abov
 <h4>
 <span class="header-section-number">8.3.2.1</span> Conditions for Confidence Interval for the Proportion<a class="anchor" aria-label="anchor" href="#conditions-for-confidence-interval-for-the-proportion"><i class="fas fa-link"></i></a>
 </h4>
-<p>We wrote that if <span class="math inline">\(n\)</span> is large enough, the CLT informs us that the sample proportion <span class="math inline">\(\hat{p}\)</span> can be approximated by a normal distribution. How large is large enough? Again, various rules of thumb are recommended, and they usually follow along the lines of needing at least a certain number of successes, <span class="math inline">\(n\hat{p}\)</span>, and failures, <span class="math inline">\(n(1-\hat{p})\)</span> in our sample. Values of 5 or 10 are usually recommended. Just bear in mind that the approximation works better as the number of successes and failures, <span class="math inline">\(n\hat{p}\)</span> and <span class="math inline">\(n(1-\hat{p})\)</span>, increases.</p>
+<p>We wrote that if <span class="math inline">\(n\)</span> is large enough, the CLT informs us that the sample proportion <span class="math inline">\(\hat{p}\)</span> can be approximated by a normal distribution. How large is large enough? Again, various rules of thumb are recommended, and they usually follow along the lines of needing at least a certain number of successes, <span class="math inline">\(n\hat{p}\)</span>, and failures, <span class="math inline">\(n(1-\hat{p})\)</span> in our sample. Values of at least 5 or 10 are usually recommended. Just bear in mind that the approximation works better as the number of successes and failures, <span class="math inline">\(n\hat{p}\)</span> and <span class="math inline">\(n(1-\hat{p})\)</span>, increases.</p>
 </div>
 <div id="worked-example-3" class="section level4" number="8.3.2.2">
 <h4>
@@ -691,7 +691,7 @@ Figure 8.4: Density Plot of Credit Limits
 </li>
 <li>
 <a class="nav-link" href="#confidence-interval-for-the-proportion"><span class="header-section-number">8.3</span> Confidence Interval for the Proportion</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#sampling-distribution-of-sample-proportions"><span class="header-section-number">8.3.1</span> Sampling Distribution of Sample Proportions</a></li>
+<li><a class="nav-link" href="#sampdistprops"><span class="header-section-number">8.3.1</span> Sampling Distribution of Sample Proportions</a></li>
 <li><a class="nav-link" href="#constructing-confidence-interval-for-the-proportion"><span class="header-section-number">8.3.2</span> Constructing Confidence Interval for the Proportion</a></li>
 <li><a class="nav-link" href="#minimum-sample-size"><span class="header-section-number">8.3.3</span> Minimum Sample Size</a></li>
 </ul>
@@ -720,7 +720,7 @@ Figure 8.4: Density Plot of Credit Limits
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2025-07-23.</p>
+    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2025-07-24.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
