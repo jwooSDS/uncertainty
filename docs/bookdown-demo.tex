@@ -127,7 +127,7 @@
 
 \title{Understanding Uncertainty Course Notes}
 \author{Jeffrey Woo}
-\date{2025-07-24}
+\date{2025-07-25}
 
 \begin{document}
 \maketitle
@@ -3839,7 +3839,7 @@ Some properties of the MVN distribution:
   Within an MVN random vector, uncorrelated implies independence. If \(\boldsymbol{X}\) is MVN and \(\boldsymbol{X} = (\boldsymbol{X_1, X_2})\) where \(\boldsymbol{X_1}\) and \(\boldsymbol{X_2}\) are subvectors, and every component of \(\boldsymbol{X_1}\) is uncorrelated with every component of \(\boldsymbol{X_2}\), then \(\boldsymbol{X_1}\) and \(\boldsymbol{X_2}\) are independent.
 \end{enumerate}
 
-\subsubsection{Simulations}\label{simulations}
+\subsubsection{Simulations}\label{SW1}
 
 We can use simulations to verify the first property. For this simulation, we will do the following:
 
@@ -4724,7 +4724,7 @@ We will also cover a couple of methods in estimating parameters: the method of m
 
 To sum up estimation: we use data from a sample to estimate unknown characteristics of a population, so that we can answer questions regarding variables in the population, as well as provide a measure of uncertainty for our answers.
 
-\section{Method of Moments Estimation}\label{method-of-moments-estimation}
+\section{Method of Moments Estimation}\label{MOM}
 
 We will cover a couple of methods in estimation. The first method is the \textbf{method of moments}. It is a more intuitive method, although it lacks certain ideal properties. Before defining this method, we recall and define some terms.
 
@@ -5862,8 +5862,12 @@ We run a Monte Carlo simulation to show that the coverage probability of confide
   Repeat these steps for a total of 10 thousand replicates.
 \item
   Count the number of confidence intervals that contain 0, and divide by the number of replicates. This value estimates the coverage probability.
-\item
-  If we did things correctly (correct use of formula, correct distribution for estimator), this estimated coverage probability should be close to the confidence level of 95\%.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    If we did things correctly (correct use of formula, correct distribution for estimator), this estimated coverage probability should be close to the confidence level of 95\%.
+  \end{itemize}
 \end{itemize}
 
 \begin{Shaded}
@@ -6448,7 +6452,7 @@ View the video below that explains the functions used in the code:
 
 \chapter{Hypothesis Testing}\label{hypothesis-testing}
 
-This module is based on Introduction to Probability for Data Science (Chan), Chapter 9.3. You can access the book for free at \url{https://probability4datascience.com}. Please note that I cover additional topics, and skip certain topics from the book. You may skip Section ??? from the book.
+This module is based on Introduction to Probability for Data Science (Chan), Chapter 9.3. You can access the book for free at \url{https://probability4datascience.com}. Please note that I cover additional topics.
 
 \section{Introduction}\label{introduction-5}
 
@@ -6534,7 +6538,7 @@ A number of textbooks (including the one we are using!) take the view that the n
 
 \subsection{Test Statistic}\label{test-statistic}
 
-After writing the null and alternative hypotheses, the next step is to compute a value that measures how far our sample data are from its expected value if the null hypothesis is true. This value is called the \textbf{test statistic}. How a test statistic is calculated is based on the sampling distribution of the estimator being used.
+After writing the null and alternative hypotheses, the next step is to compute a value that measures how far our sample data are from their expected value if the null hypothesis is true. This value is called the \textbf{test statistic}. How a test statistic is calculated is based on the sampling distribution of the estimator being used.
 
 We remind ourselves of the sampling distribution of the sample mean, \(\bar{X}_n\), from Section \ref{sampdistmean}. There are a couple of conditions to consider:
 
@@ -6568,7 +6572,7 @@ Note: A number of hypothesis tests involving other estimators and parameters are
 
 Notice how equation \eqref{eq:9-tstatGen} is a generalization of equation \eqref{eq:9-teststatMean}.
 
-We go back to the Freshman 15 example. Suppose researchers collect a random sample of 50 first-year college students. Their average weight loss is 14 pounds, with standard deviation of 3 pounds. Derive the value of the \(t\) statistic.
+We go back to the Freshman 15 example. Suppose researchers collect a random sample of 50 first-year college students. Their average weight gain is 14 pounds, with standard deviation of 3 pounds. Derive the value of the \(t\) statistic.
 
 Using equation \eqref{eq:9-teststatMean}, the \(t\) statistic is:
 
@@ -6580,24 +6584,24 @@ Using equation \eqref{eq:9-teststatMean}, the \(t\) statistic is:
 \]
 This \(t\) statistic is valid since our sample size is 50, which is usually large enough for the approximation to the \(t\) distribution to be valid.
 
-Remember that the test statistic is a measure of how far our sample data are from its expected value if the null hypothesis is true. Larger values of the test statistic (in magnitude) imply that our data deviate further from the null hypothesis, i.e.~our data provides more evidence against the null hypothesis.
+Remember that the test statistic is a measure of how far our sample data are from their expected value if the null hypothesis is true. Larger values of the test statistic (in magnitude) imply that our data deviate further from the null hypothesis, i.e.~our data provide more evidence against the null hypothesis.
 
 The \(t\) statistic also has this nice definition: it is the distance between our sample estimator and the value of the parameter if the null hypothesis is true, in terms of number of standard errors. So for our Freshman 15 example, the sample mean is 2.357 standard errors smaller than the hypothesized value of 15.
 
-\subsubsection{\texorpdfstring{Factors Affecting \(t\) Statistic for Mean}{Factors Affecting t Statistic for Mean}}\label{factors-affecting-t-statistic-for-mean}
+\subsubsection{\texorpdfstring{Factors Affecting \(t\) Statistic for Mean}{Factors Affecting t Statistic for Mean}}\label{factors}
 
 We have established that larger values of the test statistic (in magnitude) imply more evidence against the null hypothesis. For the \(t\) statistic for the mean, the factors that affect its magnitude are:
 
 \begin{itemize}
 \item
-  The difference between the sample mean \(\bar{x}\) of our data and the value of the population mean if the null is true, which is \(\mu_0\). This difference is called the \textbf{effect size}. Larger effect sizes lead to larger test statistics, in magnitude. This should make sense since a larger effect size implies the sample mean is deviates more from the expected mean if the null hypothesis is true.
+  The difference between the sample mean \(\bar{x}\) of our data and the value of the population mean if the null is true \(\mu_0\). This difference is called the \textbf{effect size}. Larger effect sizes lead to larger test statistics, in magnitude. This should make sense since a larger effect size implies the sample mean deviates more from the expected mean if the null hypothesis is true.
 \item
   The sample size \(n\). Larger sample sizes lead to larger magnitudes for the \(t\) statistic, since \(\frac{\bar{x}_n - \mu_0}{\frac{s}{\sqrt{n}}}\) can be written as \(\sqrt{n}\frac{\bar{x}_n - \mu_0}{s}\). This implies that even if the effect size stays the same, larger sample sizes provide more evidence against the null.
 \end{itemize}
 
-\subsection{Making a Decision}\label{making-a-decision}
+\subsection{Making a Decision}\label{decision}
 
-After calculating the value of the test statistic, we need to assess if our data provides enough evidence against the null hypothesis or not. There are two approaches to making this assessment: one involves the p-value, and the other involves the critical value.
+After calculating the value of the test statistic, we need to assess if our data provide enough evidence against the null hypothesis or not. There are two approaches to making this assessment: one involves the p-value, and the other involves the critical value.
 
 \begin{itemize}
 \tightlist
@@ -6665,7 +6669,7 @@ It is the area to the right of \(\hat{t}\). Using probability notation, this is 
 
 It is the area to the left of \(\hat{t}\). Using probability notation, this is \(P( t_{n-1} \leq 1)\).
 
-Going back to the Freshman 15 example, we found the \(t\) statistic to be −2.357023. We had earlier written the alternative hypothesis as \(\mu < 15\), so we find the PDF under a \(t_{49}\) distribution using the area to the left of \(-2.357023\), in a manner similar to Figure \ref{fig:9-pvalless}.
+Going back to the Freshman 15 example, we found the \(t\) statistic to be −2.357023. We had earlier written the alternative hypothesis as \(H_a: \mu < 15\), so we find the PDF under a \(t_{49}\) distribution using the area to the left of \(-2.357023\), in a manner similar to Figure \ref{fig:9-pvalless}.
 
 \begin{figure}
 \centering
@@ -6685,13 +6689,13 @@ Using R, this p-value is 0.01123. If our test is conducted at 5\% significance l
 ## [1] 0.01123111
 \end{verbatim}
 
-\emph{Though question}: Consider that the research question for the Freshman 15 example was tweaked, so the alternative hypothesis is \(H_a:\mu > 15\). Assuming everything else stays the same, show that the p-value is now 0.98877. If the alternative hypothesis is \(H_a: \mu \neq 15\), show that the p-value is 0.02246.
+\emph{Thought question}: Suppose the research question for the Freshman 15 example was tweaked, so the alternative hypothesis is \(H_a:\mu > 15\). Assuming everything else stays the same, show that the p-value is now 0.98877. If the alternative hypothesis is \(H_a: \mu \neq 15\), show that the p-value is 0.02246.
 
 \subsubsection{Critical Value}\label{critical-value-1}
 
 Informally, the critical value is the value of the test statistic that is considered ``enough'' to say that we have enough evidence against the null hypothesis to reject it, based on the value of the significance level.
 
-We can think of the critical value using a PDF of the \(t\) distribution. We want to find the ``cut off'' value, denoted by \(t_{n-1}^*\), of the distribution where the area under its PDF in the direction of the alternative hypothesis is equal to the significance level \(\alpha\). Since we have three options for the alternative hypothesis, we have 3 different areas under the PDF to consider. In Figures \ref{fig:9-critneq}, \ref{fig:9-critgreater}, and \ref{fig:9-critless} below, we have examples on the relevant areas under the PDF if \(\alpha=0.05\) and \(n=50\):
+We PDF of the \(t\) distribution to visualize what a critical is. We want to find the ``cut off'' value, denoted by \(t_{n-1}^*\), of the distribution where the area under its PDF in the direction of the alternative hypothesis is equal to the significance level \(\alpha\). Since we have three options for the alternative hypothesis, we have 3 different areas under the PDF to consider. In Figures \ref{fig:9-critneq}, \ref{fig:9-critgreater}, and \ref{fig:9-critless} below, we have examples on the relevant areas under the PDF if \(\alpha=0.05\) and \(n=50\):
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -6738,7 +6742,7 @@ In general, for any significance level \(\alpha\), the negative critical value \
 \caption{\label{fig:9-critgreater}Critical Value for Greater Than Alternative, with 0.05 Sig Level}
 \end{figure}
 
-Note that \(|t_{49}^*|\) corresponds to the 95th percentile of a \(t_{49}\) distribution. We can show that \(t_{49}^*\) is 1.677 by typing
+Note that \(t_{49}^*\) corresponds to the 95th percentile of a \(t_{49}\) distribution. We can show that \(t_{49}^*\) is 1.677 by typing
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -6788,9 +6792,9 @@ The critical value is therefore \(t_{49}^* = -1.676551\) when \(H_a: \mu < \mu_0
 
 In general, for any significance level \(\alpha\), the critical value \(t_{n-1}^*\) corresponds to the \((\alpha) \times 100\)th percentile of the appropriate \(t_{n-1}\) distribution, if \(H_a: \mu < \mu_0\).
 
-Going back to the Freshman 15 example, we found the \(t\) statistic to be −2.357023. We had earlier written the alternative hypothesis as \(\mu < 15\), so the critical value is the 5th percentile of a \(t_{49}\) distribution, which we found to be -1.676551. Since our \(t\) statistic is to the left of this critical value, we reject the null hypothesis.
+Going back to the Freshman 15 example, we found the \(t\) statistic to be −2.357023. We had earlier written the alternative hypothesis as \(H_a: \mu < 15\), so the critical value is the 5th percentile of a \(t_{49}\) distribution, which we found to be -1.676551. Since our \(t\) statistic is to the left of this critical value, we reject the null hypothesis.
 
-\emph{Thought question}: Consider a hypothesis test for the mean with \(n=10\). Assume the conditions for the sampling distribution of the sample mean to be met. Suppose \(\alpha=0.10\). If the alternative hypothesis is 2-sided, show that the critical value is 1.833113. If the alternative hypothesis is 1-sided, show that \(t_{9}^*\) is 1.383029.
+\emph{Thought question}: Consider a hypothesis test for the mean with \(n=10\). Assume the conditions for the sampling distribution of the sample mean to be met. Suppose \(\alpha=0.10\). If the alternative hypothesis is 2-sided, show that the critical value is 1.833113. If the alternative hypothesis is 1-sided, show that the critical value is 1.383029.
 
 \subsection{Writing Conclusions}\label{writing-conclusions}
 
@@ -6824,8 +6828,7 @@ We look at one more example to show how a hypothesis test is done from start to 
 
 \subsection{Worked Example}\label{wafer}
 
-The target thickness for silicon wafers used in a type of integrated circuit is 245 micrometers. A sample of 50 wafers is obtained and the thickness of each one is determined, resulting in a sample mean thickness of 245.88 micrometers
-and a sample standard deviation of 3.60 micrometers. Does this data suggest that true average wafer thickness is something other than the target value? Test at the 0.05 significance level.
+The target thickness for silicon wafers used in a type of integrated circuit is 245 micrometers. As part of an assessment if the silicon wafers are meeting the target thickness, a sample of 50 wafers is obtained and the thickness of each one is determined, resulting in a sample mean thickness of 245.88 micrometers and a sample standard deviation of 3.60 micrometers. Does this data suggest that true average wafer thickness is something other than the target value? Test at the 0.05 significance level.
 
 The variable we are investigating is the thickness for silicon wafers, which is quantitative, so we performing a hypothesis test for the mean.
 
@@ -6907,9 +6910,9 @@ The general steps are the same as the hypothesis test for the mean, with some ch
 
 \begin{itemize}
 \item
-  The \textbf{null hypothesis} is still a statement that says the parameter is equal to some specific value. Let \(p_0\) denote this specific value. So we write \(H_0: p = p_0\).
+  The null hypothesis is still a statement that says the parameter is equal to some specific value. Let \(p_0\) denote this specific value. So we write \(H_0: p = p_0\).
 \item
-  The \textbf{alternative hypothesis} is a statement against the null hypothesis. For the hypothesis test for the proportion, there are a few possible alternative hypotheses. Which one we use is \textbf{driven by the research question}. The alternative hypothesis could say the the parameter is:
+  The \textbf{alternative hypothesis} is a statement against the null hypothesis. The alternative hypothesis could say the the parameter is:
 
   \begin{itemize}
   \item
@@ -7015,7 +7018,7 @@ Our conclusion is the data do not support the claim that the true proportion of 
 
 \section{Additional Comments on Hypothesis Test of Parameters}\label{additional-comments-on-hypothesis-test-of-parameters}
 
-\subsection{Two-Sided Tests and Confidence Intervals}\label{two-sided-tests-and-confidence-intervals}
+\subsection{Two-Sided Tests and Confidence Intervals}\label{inference}
 
 Notice how hypothesis tests and confidence intervals are based on the sampling distribution of the relevant estimator? If you look at how the critical value of a two-sided test and the critical value of a confidence interval are derived, you will notice that they are found in the exact same manner. Refer to Figure \ref{fig:9-critneq} and Figure \ref{fig:8-crit}, and notice how these pictures look exactly the same, with the middle portion of the PDF having an area of \(1-\alpha\) and the two tail ends having an area of \(\alpha\).
 
@@ -7036,11 +7039,337 @@ We go back to the thickness of silicon wafers worked example in Section \ref{waf
 
 The decision we make from hypothesis testing is not going to be perfect, as we have inherent uncertainty in estimators due to random sampling. So we may sometimes reject a null hypothesis when it is true, or we may fail to reject a null hypothesis when the alternative hypothesis is true. These errors are called \textbf{type I} and \textbf{type II} errors respectively.
 
-\subsection{Power}\label{power}
+We go back to the thickness of silicon wafers worked example in Section \ref{wafer}. The null and alternative hypotheses were \(H_0: \mu = 245, H_a: \mu \neq 245\).
+
+\begin{itemize}
+\item
+  The type I error in this study is saying that the thickness of silicon wafers is not meeting the target thickness when it actually does.
+\item
+  The type II error in this study is saying that there is not enough evidence that the thickness of silicon wafers is not meeting the target thickness when it actually does not.
+\end{itemize}
+
+Next, we discuss how we can measure or control the probability of making these errors.
+
+\subsubsection{Significance Level and Type I Error}\label{significance-level-and-type-i-error}
+
+The probability of making a type I error is controlled \textbf{significance level}, \(\alpha\), of the test. The significance level is the probability of wrongly rejecting the null hypothesis when the null hypothesis is actually true. So if we conduct a hypothesis test with significance level \(\alpha = 0.05\), we are saying that we are willing to have a 5\% probability of making a type I error if the null hypothesis is true.
+
+The value of the significance level for a hypothesis should be made in consultation with a subject matter expert and understanding the practical cost of making a type I error. From an ethical standpoint, this value should be decided upon before collecting and evaluating any data, as the significance level should not be adjusted in order to be able to conclude that the null hypothesis is rejected.
+
+We will run a Monte Carlo simulation to demonstrate the significance level determines the probability of making a type I error. This simulation is very similar to the one that was done in Section \ref{CP} to explain coverage probabilities. You should realize that the probability of making a type I error is directly related to coverage probability which continues with the idea written in Section \ref{inference} about how confidence intervals and 2-sided hypothesis tests are consistent. The code below does the following:
+
+\begin{itemize}
+\tightlist
+\item
+  Simulate \(X_1, \cdots, X_{10}\) i.i.d. from standard normal.
+\item
+  Calculate a \(t\) statistic for the hypothesis test using equation \eqref{eq:9-teststatMean}.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    The hypotheses will be \(H_0: \mu = 0, H_a: \mu \neq 0\).
+  \item
+    Note that our data are simulated from a standard normal, so the null hypothesis is true in this simulation.
+  \end{itemize}
+\item
+  Assess if the calculated \(t\) statistic is more extreme than the critical value.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    We set the significance level to be \(\alpha = 0.05\).
+  \item
+    The critical value is \(t_9^* = 2.262157\) since we are conducting a 2-sided test with \(n=10\).
+  \end{itemize}
+\item
+  Repeat these steps for a total of 10 thousand replicates.
+\item
+  Count the number of times we reject the null hypothesis, and divide by the number of replicates. This value estimates the probability of making a type I error.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    If we did things correctly the estimated probability of making a type I error should be close to the value of the significance level of 0.05.
+  \end{itemize}
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#Prob of Type I Error }
+
+\NormalTok{n}\OtherTok{\textless{}{-}}\DecValTok{10} \DocumentationTok{\#\# sample size of each random sample}
+\NormalTok{alpha}\OtherTok{\textless{}{-}}\FloatTok{0.05} \DocumentationTok{\#\#sig level}
+\NormalTok{reps}\OtherTok{\textless{}{-}}\DecValTok{10000} \DocumentationTok{\#\#no of replicates}
+
+\NormalTok{rejected}\OtherTok{\textless{}{-}}\FunctionTok{array}\NormalTok{(}\DecValTok{0}\NormalTok{, reps) }\DocumentationTok{\#\#store assessment if the H0 is rejected or not for sample}
+
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{100}\NormalTok{)}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{reps)}
+  
+\NormalTok{\{}
+  
+\NormalTok{  X}\OtherTok{\textless{}{-}}\FunctionTok{rnorm}\NormalTok{(n) }\DocumentationTok{\#\#draw n data points from standard normal}
+  \DocumentationTok{\#\#calculate elements needed for CI of mean}
+\NormalTok{  xbar}\OtherTok{\textless{}{-}}\FunctionTok{mean}\NormalTok{(X) }\DocumentationTok{\#\#sample mean}
+\NormalTok{  SE}\OtherTok{\textless{}{-}}\FunctionTok{sd}\NormalTok{(X)}\SpecialCharTok{/}\FunctionTok{sqrt}\NormalTok{(n) }\DocumentationTok{\#\#SE of sample mean}
+\NormalTok{  t.stat}\OtherTok{\textless{}{-}}\NormalTok{xbar}\SpecialCharTok{/}\NormalTok{SE}
+\NormalTok{  crit}\OtherTok{\textless{}{-}}\FunctionTok{qt}\NormalTok{(}\DecValTok{1}\SpecialCharTok{{-}}\NormalTok{alpha}\SpecialCharTok{/}\DecValTok{2}\NormalTok{, n}\DecValTok{{-}1}\NormalTok{) }\DocumentationTok{\#\#critical value}
+\NormalTok{  rejected[i]}\OtherTok{\textless{}{-}}\FunctionTok{abs}\NormalTok{(t.stat) }\SpecialCharTok{\textgreater{}}\NormalTok{ crit }\DocumentationTok{\#\#assess if absolute value of t.stat is greater than critical value}
+  
+\NormalTok{\}}
+
+\DocumentationTok{\#\#find proportion of random samples that wrongly rejected H0}
+\DocumentationTok{\#\#this is estimated prob of making type I error}
+\FunctionTok{sum}\NormalTok{(rejected)}\SpecialCharTok{/}\NormalTok{reps }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.0516
+\end{verbatim}
+
+The estimated probability of making a type I error is 0.0516, which matches the significance level which was set to be 0.05.
+
+\emph{Thought question}: Feel free to play around with the code and adjust the value of the significance level, change the alternative hypothesis to a 1-sided test, or any other factor. The estimated probability of making a type I error should always match the significance level.
+
+\subsubsection{Power and Type II Error}\label{power}
+
+The \textbf{power} of a test is inversely related to the probability of making a type II error. The power of a test is its probability of being able to correctly reject the null alternative hypothesis, when the alternative hypothesis is true. Based on this definition, the power is the complement of the probability of making a type II error, i.e.~Power of a test is 1 minus the probability of making a type II error.
+
+Ideally, we would like the power of our hypothesis test to be large. We discuss factors that lead to a hypothesis test having a larger power. Recall that power measures the probability of being able to correctly reject a null hypothesis, and that larger values (in magnitude) of a test statistic provide more evidence against the null hypothesis. So the factors that make a test statistic larger (in magnitude) also lead to an increase in the power of a hypothesis test. As mentioned in Section \ref{factors}, these are:
+
+\begin{itemize}
+\item
+  The effect size, which is the difference between the sample mean \(\bar{x}\) of our data and the value of the population mean if the null is true \(\mu_0\). Larger effect sizes lead to larger test statistics, in magnitude. This should make sense since a larger effect size implies the sample mean deviates more from the expected mean if the null hypothesis is true.
+\item
+  The sample size \(n\). Larger sample sizes lead to larger magnitudes for the test statistic, see equations \eqref{eq:9-teststatMean} and \eqref{eq:9-teststatProp}.
+\end{itemize}
+
+Another factor that increases the power of a hypothesis test is to raise the significance level \(\alpha\). We think think of an extreme example. Suppose we set the significance level to be as low as possible, \(\alpha=0\). Then the hypothesis test will always not reject the null hypothesis, and we never make a type I error. But always not rejecting the null hypothesis means that if the alternative hypothesis is true, we will always make a type II error, so the power will be 0. This illustrates the the probabilities of making a type I and type II error have an inverse relationship. Reducing one is done at the expense of the other.
+
+Please view the video below which provides a visual explanation as to why probabilities of making a type I and type II error have an inverse relationship:
+
+Calculations involving can be done by hand but is not usually a simple exercise. We will use Monte Carlo simulations to estimate the power of a hypothesis test.
+
+Suppose we want to estimate the power of the hypothesis test for the mean if the data are i.i.d from \(N(1,1)\) (and so has a population mean of 1), with sample size of 10, and significance level set to 0.05, and the hypotheses are \(H_0: \mu = 0, H_a: \mu \neq 0\). The code below does the following:
+
+\begin{itemize}
+\tightlist
+\item
+  Simulate \(X_1, \cdots, X_{10}\) i.i.d. from \(N(1,1)\).
+\item
+  Calculate a \(t\) statistic for the hypothesis test using equation \eqref{eq:9-teststatMean}.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    The hypotheses are \(H_0: \mu = 0, H_a: \mu \neq 0\).
+  \item
+    Note that our data are simulated from \(N(1,1)\), so the alternative hypothesis is true in this simulation.
+  \end{itemize}
+\item
+  Assess if the calculated \(t\) statistic is more extreme than the critical value.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    We set the significance level to be \(\alpha = 0.05\).
+  \item
+    The critical value is \(t_9^* = 2.262157\) since we are conducting a 2-sided test with \(n=10\).
+  \end{itemize}
+\item
+  Repeat these steps for a total of 10 thousand replicates.
+\item
+  Count the number of times we reject the null hypothesis, and divide by the number of replicates. This value estimates the probability of correctly rejecting the null hypothesis, i.e.~the power of this test.
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{n}\OtherTok{\textless{}{-}}\DecValTok{10} \DocumentationTok{\#\# sample size of each random sample}
+\NormalTok{alpha}\OtherTok{\textless{}{-}}\FloatTok{0.05} \DocumentationTok{\#\#sig level}
+\NormalTok{reps}\OtherTok{\textless{}{-}}\DecValTok{10000} \DocumentationTok{\#\# no of replicates}
+
+\NormalTok{rejected}\OtherTok{\textless{}{-}}\FunctionTok{array}\NormalTok{(}\DecValTok{0}\NormalTok{, reps) }\DocumentationTok{\#\#store assessment if the H0 is rejected or not}
+
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{100}\NormalTok{)}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{reps)}
+  
+\NormalTok{\{}
+  
+\NormalTok{  X}\OtherTok{\textless{}{-}}\FunctionTok{rnorm}\NormalTok{(n, }\AttributeTok{mean=}\DecValTok{1}\NormalTok{, }\AttributeTok{sd=}\DecValTok{1}\NormalTok{) }\DocumentationTok{\#\#draw n data points from N(1,1)}
+  \DocumentationTok{\#\#calculate elements needed for CI of mean}
+\NormalTok{  xbar}\OtherTok{\textless{}{-}}\FunctionTok{mean}\NormalTok{(X) }\DocumentationTok{\#\#sample mean}
+\NormalTok{  SE}\OtherTok{\textless{}{-}}\FunctionTok{sd}\NormalTok{(X)}\SpecialCharTok{/}\FunctionTok{sqrt}\NormalTok{(n) }\DocumentationTok{\#\#SE of sample mean}
+\NormalTok{  t.stat}\OtherTok{\textless{}{-}}\NormalTok{xbar}\SpecialCharTok{/}\NormalTok{SE}
+\NormalTok{  crit}\OtherTok{\textless{}{-}}\FunctionTok{qt}\NormalTok{(}\DecValTok{1}\SpecialCharTok{{-}}\NormalTok{alpha}\SpecialCharTok{/}\DecValTok{2}\NormalTok{, n}\DecValTok{{-}1}\NormalTok{) }\DocumentationTok{\#\#critical value}
+\NormalTok{  rejected[i]}\OtherTok{\textless{}{-}}\FunctionTok{abs}\NormalTok{(t.stat) }\SpecialCharTok{\textgreater{}}\NormalTok{ crit }\DocumentationTok{\#\#assess if absolute value of t.stat is greater than critical value}
+  
+\NormalTok{\}}
+
+\DocumentationTok{\#\#find proportion of random samples that correctly rejected H0}
+\DocumentationTok{\#\#this estimates power since mu=1 so Ha is true}
+\FunctionTok{sum}\NormalTok{(rejected)}\SpecialCharTok{/}\NormalTok{reps }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.8044
+\end{verbatim}
+
+The estimated power of this test is 0.8044. So if the data come from a \(N(1,1)\), the power of testing \(H_0: \mu = 0, H_a: \mu \neq 0\) using a sample of size 10 and significance level of 0.05, is 0.8044.
+
+Note: we must specify a specific value for the parameter that makes the alternative hypothesis true. In this simulation, we simulated data from a distribution with population mean 1. The value of the power will change if we used another value for the mean of the distribution. This value directly affects the effect size. The power is specific to this value for the alternative hypothesis, as well as to the specific values of \(n\) and \(\alpha\).
+
+\textbf{Power analysis} or power calculations are often done in well-designed experiments to determine what minimum sample size is needed for a hypothesis test to guarantee the hypothesis test achieves a certain power with a pre-determined significance level.
+
+\emph{Thought question}: How would you tweak the code above to do a power analysis to find the minimum sample size needed to have an estimated power of at least 0.90 (assuming every other factor remains the same)?
+
+\subsection{Reporting Conclusions}\label{reporting-conclusions}
+
+You may have noticed that we make a binary decision at the end of a hypothesis test: we either reject or fail to reject a null hypothesis, by comparing our test statistic with a critical value or by comparing a p-value (which depends on the value of the test statistic) with a significance level.
+
+While the decision is binary, note that the numerical value of a test statistic is not binary. We have mentioned that larger values (in magnitude) imply more evidence against the null hypothesis. So the p-value also can be interpreted in the same manner: smaller values imply more evidence against the null hypothesis.
+
+Therefore, when writing conclusions, it is recommended to also provide the p-value or the value of the test statistic, instead of just reporting that the ``null hypothesis is rejected'' or ``the null hypothesis is not rejected''. Readers than then make an assessment of how strong the evidence is against the null hypothesis, based on their judgement of what the value of the significance level should be.
 
 \subsection{Statistical Vs Practical Significance}\label{statistical-vs-practical-significance}
 
+However, even with a p-value being reported, we need to be careful with conflating a ``statistically significant'' result (i.e.~null hypothesis is rejected) with a ``practically significant'' result.
+
+We had earlier mentioned in Section \ref{power} that the power of a hypothesis test can be increased when the sample size gets larger. This implies that we may be able to reject the null hypothesis when we have a small effect size but we have a huge sample size.
+
+Consider this hypothetical example. We have \(H_0: \mu = 100, H_a: \mu \neq 100\), with \(\bar{x} = 101, \sigma=10\), and various values for the sample size \(n\). Suppose these values represent IQ scores. We work out the p-values as well as the corresponding 95\% confidence intervals for the mean, and present the results in Table \ref{tab:practical} below.
+
+\begin{longtable}[]{@{}lll@{}}
+\caption{\label{tab:practical} Sample Size on P-Values and CIs}\tabularnewline
+\toprule\noalign{}
+\(n\) & p-value & 95\% CI \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+\(n\) & p-value & 95\% CI \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+25 & 0.617 & (97.080, 104.920) \\
+350 & 0.061 & (99.952, 102.408) \\
+400 & 0.455 & (100.020, 101.980) \\
+2,500 & \(5.7 \times 10^{-7}\) & (100.608, 101.392) \\
+\end{longtable}
+
+Most would probably agree that the effect size in this example is small, yet for a sample size of 400 or more, we will reject the null hypothesis. When the sample size is huge, the p-value is extremely small, which we may interpret as having strong evidence against the null hypothesis, so we have ``statistical significance''. On the other hand, the small effect size tells us that the practical significance may be of little consequence.
+
+A couple of recommendations when reporting results from a hypothesis test:
+
+\begin{itemize}
+\item
+  If possible, report the corresponding confidence interval, so the reader can see what is the range of plausible values for the parameter and make their own decision. However, not every hypothesis test has an associated confidence interval; we will see one such class of hypothesis tests in the next subsection.
+\item
+  Researchers need to establish the minimum effect size for a result to be considered practically significant. From an ethical standpoint, this value should be decided upon before collecting and evaluating any data, as the this value should not be adjusted in order to be able to conclude that the null hypothesis is rejected.
+\end{itemize}
+
+To remind ourselves, we use hypothesis tests to test for ``statistical significance''. What we are testing is whether the deviation of our sample estimate from its value if the null hypothesis is true can be attributed to random sampling alone or not. If we reject the null hypothesis, the deviation is unlikely to be attributed to random sampling alone.
+
+To summarize, hypothesis testing is used to assess ``statistical significance'', but we use subject matter knowledge to assess ``practical significance''.
+
 \section{Goodness of Fit Tests}\label{goodness-of-fit-tests}
+
+\textbf{Goodness of Fit (GOF)} tests are a class of hypothesis tests that assess the deviation of observed data from a hypothesized distribution or model, instead of the deviation of estimators from parameters. The framework is still the same:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  State a hypothesis, based on the research question.
+\item
+  Assume the hypothesis is true, and then compute a metric that measures how much our observed data deviate from the assumed hypothesis.
+\item
+  Compare the metric with some sort of threshold to assess if our observed data deviates ``far enough'' from the assumed hypothesis, and then make a decision.
+\end{enumerate}
+
+For GOF tests, the hypotheses are:
+
+\begin{itemize}
+\tightlist
+\item
+  \(H_0:\) the data follow some assumed distribution.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Remember that the null hypothesis is a statement involving an equality. One way to remember is theat if the data folloow some assumed distribution, they are consistent with the PDF of the assumed distribution.
+  \end{itemize}
+\item
+  \(H_a:\) the data do not follow some assumed distribution.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    There is only one alternative hypothesis for GOF tests.
+  \end{itemize}
+\end{itemize}
+
+There are a lot of different test statistics, we just need to remember that larger values (in magnitude) indicate our data deviate more from the null hypothesis.
+
+We make conclusions in the same manner, by comparing the test statistic with a critical value, or the p-value with the significance level.
+
+One interesting thing to note with GOF tests is that they are usually used to assess if our data are consistent with some distribution or model. This may be done to see if we can then proceed with another procedure which depends on whether the data follow some distribution. In such instances, we would like to fail to reject the null hypothesis. Even though failing to reject the null hypothesis does not imply that we have proven the data follow the assumed distribution, we don't have evidence to suggest they do not follow the assumed distribution, and typically proceed.
+
+\subsection{Shapiro-Wilk Test for Normality}\label{shapiro-wilk-test-for-normality}
+
+We have actually seen one such test in Sections \ref{SW1} and \ref{MOM}: the Shapiro-Wilk test for normality. This test is used to assess if the data follow a normal distribution. The hypotheses are: \(H_0:\) the data follow a normal distribution, \(H_a:\) the data do not follow a normal distribution.
+
+We will not go into the details of the test statistic and the sampling distribution of the test statistic.
+
+Next, we will use a couple of examples from simulated data:
+
+\begin{itemize}
+\tightlist
+\item
+  In the first example, we simulate 25 data points from a standard normal, and apply the Shapiro-Wilk test. As expected, the test fails to reject the null hypothesis, as the p-value is 0.1489.
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{n}\OtherTok{\textless{}{-}}\DecValTok{25}
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{8}\NormalTok{)}
+\NormalTok{X}\OtherTok{\textless{}{-}}\FunctionTok{rnorm}\NormalTok{(n)}
+\FunctionTok{shapiro.test}\NormalTok{(X)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Shapiro-Wilk normality test
+## 
+## data:  X
+## W = 0.94011, p-value = 0.1489
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  In the second example, we simulate 25 data points from a non-normal distribution. We used a \(\chi_1^2\) distribution (called chi-squared distribution with 1 degree of freedom), and apply the Shapiro-Wilk test. As expected, the test rejects the null hypothesis based on an extremely small p-value.
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{n}\OtherTok{\textless{}{-}}\DecValTok{25}
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{8}\NormalTok{)}
+\NormalTok{X}\OtherTok{\textless{}{-}}\FunctionTok{rchisq}\NormalTok{(n, }\AttributeTok{df=}\DecValTok{1}\NormalTok{)}
+\FunctionTok{shapiro.test}\NormalTok{(X)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Shapiro-Wilk normality test
+## 
+## data:  X
+## W = 0.77791, p-value = 9.951e-05
+\end{verbatim}
 
   \bibliography{book.bib,packages.bib}
 

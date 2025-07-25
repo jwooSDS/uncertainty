@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999996 (MiKTeX 24.4) (preloaded format=xelatex 2025.6.7)  24 JUL 2025 17:23
+This is XeTeX, Version 3.141592653-2.6-0.999996 (MiKTeX 24.4) (preloaded format=xelatex 2025.6.7)  25 JUL 2025 16:57
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1637,7 +1637,7 @@ LaTeX Warning: Reference `@' on page 174 undefined on input line 5843.
 [175]
 
 [176]
-Underfull \hbox (badness 2980) in paragraph at lines 5954--5955
+Underfull \hbox (badness 2980) in paragraph at lines 5958--5959
 []\TU/lmr/m/n/10 The solution to this is fairly intuitive, we use the sample va
 riance
  []
@@ -1661,20 +1661,20 @@ File: bookdown-demo_files/figure-latex/8-t-1.pdf Graphic file (type pdf)
 [183]
 
 [184]
-Underfull \hbox (badness 1762) in paragraph at lines 6246--6246
+Underfull \hbox (badness 1762) in paragraph at lines 6250--6250
 []\TU/lmr/bx/n/12 Estimating Sampling Distributions Using Many
  []
 
 
 
 [185]
-Underfull \hbox (badness 1365) in paragraph at lines 6287--6289
+Underfull \hbox (badness 1365) in paragraph at lines 6291--6293
 []\TU/lmr/m/n/10 Synthesize $[]$ bootstrapped datasets $[][][] [] [] [][]$ wher
 e each boot-
  []
 
 
-Underfull \hbox (badness 1194) in paragraph at lines 6291--6293
+Underfull \hbox (badness 1194) in paragraph at lines 6295--6297
 []\TU/lmr/m/n/10 We estimate the true mean of $[]$ by taking the sample mean of
 
  []
@@ -1709,19 +1709,19 @@ Chapter 9.
 [195]
 
 LaTeX Warning: Reference `fig:9-pvalneq' on page 196 undefined on input line 66
-24.
+28.
 
 
 
 [196]
 
 LaTeX Warning: Reference `fig:9-pvalneq' on page 197 undefined on input line 66
-30.
+34.
 
 File: bookdown-demo_files/figure-latex/9-pvalneq-1.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/9-pvalneq-1.pdf>
 
-Underfull \hbox (badness 10000) in paragraph at lines 6633--6635
+Underfull \hbox (badness 10000) in paragraph at lines 6637--6639
 [][]
  []
 
@@ -1754,9 +1754,6 @@ File: images/09-crit_less.jpeg Graphic file (type bmp)
 [201]
 
 [202]
-Underfull \vbox (badness 1371) has occurred while \output is active []
-
-
 
 [203]
 File: bookdown-demo_files/figure-latex/9-pvalworked-1.pdf Graphic file (type pd
@@ -1777,10 +1774,45 @@ df)
 [207]
 
 [208]
+
+
+Overfull \hbox (25.36343pt too wide) has occurred while \output is active
+\TU/lmr/m/sl/10 9.4.  ADDITIONAL COMMENTS ON HYPOTHESIS TEST OF PARAMETERS \TU/
+lmr/m/n/10 209
+ []
+
+[209]
+
+[210]
+
+
+Overfull \hbox (25.36343pt too wide) has occurred while \output is active
+\TU/lmr/m/sl/10 9.4.  ADDITIONAL COMMENTS ON HYPOTHESIS TEST OF PARAMETERS \TU/
+lmr/m/n/10 211
+ []
+
+[211]
+
+[212]
+Underfull \vbox (badness 2134) has occurred while \output is active []
+
+
+
+
+Overfull \hbox (25.36343pt too wide) has occurred while \output is active
+\TU/lmr/m/sl/10 9.4.  ADDITIONAL COMMENTS ON HYPOTHESIS TEST OF PARAMETERS \TU/
+lmr/m/n/10 213
+ []
+
+[213]
+
+[214]
+
+[215]
 No file bookdown-demo.bbl.
 
 
-[209] (bookdown-demo.aux)
+[216] (bookdown-demo.aux)
  ***********
 LaTeX2e <2024-06-01> patch level 2
 L3 programming layer <2024-07-20>
@@ -1790,12 +1822,12 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 20407 strings out of 409029
- 378342 string characters out of 5763847
- 1959612 words of memory out of 5000000
- 42761 multiletter control sequences out of 15000+600000
+ 20412 strings out of 409029
+ 378350 string characters out of 5763847
+ 1958612 words of memory out of 5000000
+ 42766 multiletter control sequences out of 15000+600000
  566021 words of font info for 104 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  90i,21n,123p,1199b,585s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on bookdown-demo.pdf (209 pages).
+Output written on bookdown-demo.pdf (216 pages).

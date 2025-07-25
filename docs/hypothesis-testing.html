@@ -63,7 +63,7 @@
 <h1>
 <span class="header-section-number">9</span> Hypothesis Testing<a class="anchor" aria-label="anchor" href="#hypothesis-testing"><i class="fas fa-link"></i></a>
 </h1>
-<p>This module is based on Introduction to Probability for Data Science (Chan), Chapter 9.3. You can access the book for free at <a href="https://probability4datascience.com" class="uri">https://probability4datascience.com</a>. Please note that I cover additional topics, and skip certain topics from the book. You may skip Section ??? from the book.</p>
+<p>This module is based on Introduction to Probability for Data Science (Chan), Chapter 9.3. You can access the book for free at <a href="https://probability4datascience.com" class="uri">https://probability4datascience.com</a>. Please note that I cover additional topics.</p>
 <div id="introduction-5" class="section level2" number="9.1">
 <h2>
 <span class="header-section-number">9.1</span> Introduction<a class="anchor" aria-label="anchor" href="#introduction-5"><i class="fas fa-link"></i></a>
@@ -131,7 +131,7 @@
 <h3>
 <span class="header-section-number">9.2.2</span> Test Statistic<a class="anchor" aria-label="anchor" href="#test-statistic"><i class="fas fa-link"></i></a>
 </h3>
-<p>After writing the null and alternative hypotheses, the next step is to compute a value that measures how far our sample data are from its expected value if the null hypothesis is true. This value is called the <strong>test statistic</strong>. How a test statistic is calculated is based on the sampling distribution of the estimator being used.</p>
+<p>After writing the null and alternative hypotheses, the next step is to compute a value that measures how far our sample data are from their expected value if the null hypothesis is true. This value is called the <strong>test statistic</strong>. How a test statistic is calculated is based on the sampling distribution of the estimator being used.</p>
 <p>We remind ourselves of the sampling distribution of the sample mean, <span class="math inline">\(\bar{X}_n\)</span>, from Section <a href="est.html#sampdistmean">7.4.4.1</a>. There are a couple of conditions to consider:</p>
 <ol style="list-style-type: decimal">
 <li><p><span class="math inline">\(X_1, \cdots, X_n\)</span> are i.i.d. from a normal distribution with finite mean <span class="math inline">\(\mu\)</span> and finite variance <span class="math inline">\(\sigma^2\)</span>. Then <span class="math inline">\(\bar{X}_n \sim N(\mu, \frac{\sigma^2}{n})\)</span>.</p></li>
@@ -151,7 +151,7 @@
 \tag{9.2}
 \end{equation}\]</span></p>
 <p>Notice how equation <a href="hypothesis-testing.html#eq:9-tstatGen">(9.2)</a> is a generalization of equation <a href="hypothesis-testing.html#eq:9-teststatMean">(9.1)</a>.</p>
-<p>We go back to the Freshman 15 example. Suppose researchers collect a random sample of 50 first-year college students. Their average weight loss is 14 pounds, with standard deviation of 3 pounds. Derive the value of the <span class="math inline">\(t\)</span> statistic.</p>
+<p>We go back to the Freshman 15 example. Suppose researchers collect a random sample of 50 first-year college students. Their average weight gain is 14 pounds, with standard deviation of 3 pounds. Derive the value of the <span class="math inline">\(t\)</span> statistic.</p>
 <p>Using equation <a href="hypothesis-testing.html#eq:9-teststatMean">(9.1)</a>, the <span class="math inline">\(t\)</span> statistic is:</p>
 <p><span class="math display">\[
 \begin{split}
@@ -160,24 +160,24 @@
 \end{split}
 \]</span>
 This <span class="math inline">\(t\)</span> statistic is valid since our sample size is 50, which is usually large enough for the approximation to the <span class="math inline">\(t\)</span> distribution to be valid.</p>
-<p>Remember that the test statistic is a measure of how far our sample data are from its expected value if the null hypothesis is true. Larger values of the test statistic (in magnitude) imply that our data deviate further from the null hypothesis, i.e. our data provides more evidence against the null hypothesis.</p>
+<p>Remember that the test statistic is a measure of how far our sample data are from their expected value if the null hypothesis is true. Larger values of the test statistic (in magnitude) imply that our data deviate further from the null hypothesis, i.e. our data provide more evidence against the null hypothesis.</p>
 <p>The <span class="math inline">\(t\)</span> statistic also has this nice definition: it is the distance between our sample estimator and the value of the parameter if the null hypothesis is true, in terms of number of standard errors. So for our Freshman 15 example, the sample mean is 2.357 standard errors smaller than the hypothesized value of 15.</p>
-<div id="factors-affecting-t-statistic-for-mean" class="section level4" number="9.2.2.1">
+<div id="factors" class="section level4" number="9.2.2.1">
 <h4>
-<span class="header-section-number">9.2.2.1</span> Factors Affecting <span class="math inline">\(t\)</span> Statistic for Mean<a class="anchor" aria-label="anchor" href="#factors-affecting-t-statistic-for-mean"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9.2.2.1</span> Factors Affecting <span class="math inline">\(t\)</span> Statistic for Mean<a class="anchor" aria-label="anchor" href="#factors"><i class="fas fa-link"></i></a>
 </h4>
 <p>We have established that larger values of the test statistic (in magnitude) imply more evidence against the null hypothesis. For the <span class="math inline">\(t\)</span> statistic for the mean, the factors that affect its magnitude are:</p>
 <ul>
-<li><p>The difference between the sample mean <span class="math inline">\(\bar{x}\)</span> of our data and the value of the population mean if the null is true, which is <span class="math inline">\(\mu_0\)</span>. This difference is called the <strong>effect size</strong>. Larger effect sizes lead to larger test statistics, in magnitude. This should make sense since a larger effect size implies the sample mean is deviates more from the expected mean if the null hypothesis is true.</p></li>
+<li><p>The difference between the sample mean <span class="math inline">\(\bar{x}\)</span> of our data and the value of the population mean if the null is true <span class="math inline">\(\mu_0\)</span>. This difference is called the <strong>effect size</strong>. Larger effect sizes lead to larger test statistics, in magnitude. This should make sense since a larger effect size implies the sample mean deviates more from the expected mean if the null hypothesis is true.</p></li>
 <li><p>The sample size <span class="math inline">\(n\)</span>. Larger sample sizes lead to larger magnitudes for the <span class="math inline">\(t\)</span> statistic, since <span class="math inline">\(\frac{\bar{x}_n - \mu_0}{\frac{s}{\sqrt{n}}}\)</span> can be written as <span class="math inline">\(\sqrt{n}\frac{\bar{x}_n - \mu_0}{s}\)</span>. This implies that even if the effect size stays the same, larger sample sizes provide more evidence against the null.</p></li>
 </ul>
 </div>
 </div>
-<div id="making-a-decision" class="section level3" number="9.2.3">
+<div id="decision" class="section level3" number="9.2.3">
 <h3>
-<span class="header-section-number">9.2.3</span> Making a Decision<a class="anchor" aria-label="anchor" href="#making-a-decision"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9.2.3</span> Making a Decision<a class="anchor" aria-label="anchor" href="#decision"><i class="fas fa-link"></i></a>
 </h3>
-<p>After calculating the value of the test statistic, we need to assess if our data provides enough evidence against the null hypothesis or not. There are two approaches to making this assessment: one involves the p-value, and the other involves the critical value.</p>
+<p>After calculating the value of the test statistic, we need to assess if our data provide enough evidence against the null hypothesis or not. There are two approaches to making this assessment: one involves the p-value, and the other involves the critical value.</p>
 <ul>
 <li>Using the p-value, we <strong>reject the null hypothesis if our p-value is less than the significance level</strong> (i.e. our data have enough evidence against the null hypothesis). Otherwise, we fail to reject the null hypothesis (i.e. our data do not have enough evidence against the null hypothesis)</li>
 </ul>
@@ -223,7 +223,7 @@ Figure 9.3: Finding P-value, with Less Than Alternative
 </p>
 </div>
 <p>It is the area to the left of <span class="math inline">\(\hat{t}\)</span>. Using probability notation, this is <span class="math inline">\(P( t_{n-1} \leq 1)\)</span>.</p>
-<p>Going back to the Freshman 15 example, we found the <span class="math inline">\(t\)</span> statistic to be −2.357023. We had earlier written the alternative hypothesis as <span class="math inline">\(\mu &lt; 15\)</span>, so we find the PDF under a <span class="math inline">\(t_{49}\)</span> distribution using the area to the left of <span class="math inline">\(-2.357023\)</span>, in a manner similar to Figure <a href="hypothesis-testing.html#fig:9-pvalless">9.3</a>.</p>
+<p>Going back to the Freshman 15 example, we found the <span class="math inline">\(t\)</span> statistic to be −2.357023. We had earlier written the alternative hypothesis as <span class="math inline">\(H_a: \mu &lt; 15\)</span>, so we find the PDF under a <span class="math inline">\(t_{49}\)</span> distribution using the area to the left of <span class="math inline">\(-2.357023\)</span>, in a manner similar to Figure <a href="hypothesis-testing.html#fig:9-pvalless">9.3</a>.</p>
 <div class="figure">
 <span style="display:block;" id="fig:9-pvaleg"></span>
 <img src="bookdown-demo_files/figure-html/9-pvaleg-1.png" alt="Finding P-value, For Freshman 15 Example" width="672"><p class="caption">
@@ -234,14 +234,14 @@ Figure 9.4: Finding P-value, For Freshman 15 Example
 <div class="sourceCode" id="cb159"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/TDist.html">pt</a></span><span class="op">(</span><span class="op">-</span><span class="fl">2.357023</span>, <span class="fl">49</span><span class="op">)</span> <span class="co">##enter t stat, then df</span></span></code></pre></div>
 <pre><code>## [1] 0.01123111</code></pre>
-<p><em>Though question</em>: Consider that the research question for the Freshman 15 example was tweaked, so the alternative hypothesis is <span class="math inline">\(H_a:\mu &gt; 15\)</span>. Assuming everything else stays the same, show that the p-value is now 0.98877. If the alternative hypothesis is <span class="math inline">\(H_a: \mu \neq 15\)</span>, show that the p-value is 0.02246.</p>
+<p><em>Thought question</em>: Suppose the research question for the Freshman 15 example was tweaked, so the alternative hypothesis is <span class="math inline">\(H_a:\mu &gt; 15\)</span>. Assuming everything else stays the same, show that the p-value is now 0.98877. If the alternative hypothesis is <span class="math inline">\(H_a: \mu \neq 15\)</span>, show that the p-value is 0.02246.</p>
 </div>
 <div id="critical-value-1" class="section level4" number="9.2.3.2">
 <h4>
 <span class="header-section-number">9.2.3.2</span> Critical Value<a class="anchor" aria-label="anchor" href="#critical-value-1"><i class="fas fa-link"></i></a>
 </h4>
 <p>Informally, the critical value is the value of the test statistic that is considered “enough” to say that we have enough evidence against the null hypothesis to reject it, based on the value of the significance level.</p>
-<p>We can think of the critical value using a PDF of the <span class="math inline">\(t\)</span> distribution. We want to find the “cut off” value, denoted by <span class="math inline">\(t_{n-1}^*\)</span>, of the distribution where the area under its PDF in the direction of the alternative hypothesis is equal to the significance level <span class="math inline">\(\alpha\)</span>. Since we have three options for the alternative hypothesis, we have 3 different areas under the PDF to consider. In Figures <a href="hypothesis-testing.html#fig:9-critneq">9.5</a>, <a href="hypothesis-testing.html#fig:9-critgreater">9.6</a>, and <a href="hypothesis-testing.html#fig:9-critless">9.7</a> below, we have examples on the relevant areas under the PDF if <span class="math inline">\(\alpha=0.05\)</span> and <span class="math inline">\(n=50\)</span>:</p>
+<p>We PDF of the <span class="math inline">\(t\)</span> distribution to visualize what a critical is. We want to find the “cut off” value, denoted by <span class="math inline">\(t_{n-1}^*\)</span>, of the distribution where the area under its PDF in the direction of the alternative hypothesis is equal to the significance level <span class="math inline">\(\alpha\)</span>. Since we have three options for the alternative hypothesis, we have 3 different areas under the PDF to consider. In Figures <a href="hypothesis-testing.html#fig:9-critneq">9.5</a>, <a href="hypothesis-testing.html#fig:9-critgreater">9.6</a>, and <a href="hypothesis-testing.html#fig:9-critless">9.7</a> below, we have examples on the relevant areas under the PDF if <span class="math inline">\(\alpha=0.05\)</span> and <span class="math inline">\(n=50\)</span>:</p>
 <ol style="list-style-type: decimal">
 <li>If <span class="math inline">\(H_a: \mu \neq \mu_0\)</span>, i.e. we have a two-sided alternative, we want the areas under the PDF of the <span class="math inline">\(t_{49}\)</span> distribution to the right of <span class="math inline">\(t_{49}^*\)</span> and to the left of <span class="math inline">\(-t_{49}^*\)</span> to be equal to 0.05. This is shown in Figure <a href="hypothesis-testing.html#fig:9-critneq">9.5</a>:</li>
 </ol>
@@ -268,7 +268,7 @@ Figure 9.5: Critical Value for 2-Sided Alternative, with 0.05 Sig Level
 Figure 9.6: Critical Value for Greater Than Alternative, with 0.05 Sig Level
 </p>
 </div>
-<p>Note that <span class="math inline">\(|t_{49}^*|\)</span> corresponds to the 95th percentile of a <span class="math inline">\(t_{49}\)</span> distribution. We can show that <span class="math inline">\(t_{49}^*\)</span> is 1.677 by typing</p>
+<p>Note that <span class="math inline">\(t_{49}^*\)</span> corresponds to the 95th percentile of a <span class="math inline">\(t_{49}\)</span> distribution. We can show that <span class="math inline">\(t_{49}^*\)</span> is 1.677 by typing</p>
 <div class="sourceCode" id="cb163"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">alpha</span><span class="op">&lt;-</span><span class="fl">0.05</span></span>
 <span><span class="va">n</span><span class="op">&lt;-</span><span class="fl">50</span></span>
@@ -293,8 +293,8 @@ Figure 9.7: Critical Value for Less Than Alternative, with 0.05 Sig Level
 <pre><code>## [1] -1.676551</code></pre>
 <p>The critical value is therefore <span class="math inline">\(t_{49}^* = -1.676551\)</span> when <span class="math inline">\(H_a: \mu &lt; \mu_0\)</span>. We will reject the null hypothesis if our <span class="math inline">\(t\)</span> statistic is to the left of -1.676551.</p>
 <p>In general, for any significance level <span class="math inline">\(\alpha\)</span>, the critical value <span class="math inline">\(t_{n-1}^*\)</span> corresponds to the <span class="math inline">\((\alpha) \times 100\)</span>th percentile of the appropriate <span class="math inline">\(t_{n-1}\)</span> distribution, if <span class="math inline">\(H_a: \mu &lt; \mu_0\)</span>.</p>
-<p>Going back to the Freshman 15 example, we found the <span class="math inline">\(t\)</span> statistic to be −2.357023. We had earlier written the alternative hypothesis as <span class="math inline">\(\mu &lt; 15\)</span>, so the critical value is the 5th percentile of a <span class="math inline">\(t_{49}\)</span> distribution, which we found to be -1.676551. Since our <span class="math inline">\(t\)</span> statistic is to the left of this critical value, we reject the null hypothesis.</p>
-<p><em>Thought question</em>: Consider a hypothesis test for the mean with <span class="math inline">\(n=10\)</span>. Assume the conditions for the sampling distribution of the sample mean to be met. Suppose <span class="math inline">\(\alpha=0.10\)</span>. If the alternative hypothesis is 2-sided, show that the critical value is 1.833113. If the alternative hypothesis is 1-sided, show that <span class="math inline">\(t_{9}^*\)</span> is 1.383029.</p>
+<p>Going back to the Freshman 15 example, we found the <span class="math inline">\(t\)</span> statistic to be −2.357023. We had earlier written the alternative hypothesis as <span class="math inline">\(H_a: \mu &lt; 15\)</span>, so the critical value is the 5th percentile of a <span class="math inline">\(t_{49}\)</span> distribution, which we found to be -1.676551. Since our <span class="math inline">\(t\)</span> statistic is to the left of this critical value, we reject the null hypothesis.</p>
+<p><em>Thought question</em>: Consider a hypothesis test for the mean with <span class="math inline">\(n=10\)</span>. Assume the conditions for the sampling distribution of the sample mean to be met. Suppose <span class="math inline">\(\alpha=0.10\)</span>. If the alternative hypothesis is 2-sided, show that the critical value is 1.833113. If the alternative hypothesis is 1-sided, show that the critical value is 1.383029.</p>
 </div>
 </div>
 <div id="writing-conclusions" class="section level3" number="9.2.4">
@@ -320,8 +320,7 @@ Figure 9.7: Critical Value for Less Than Alternative, with 0.05 Sig Level
 <h3>
 <span class="header-section-number">9.2.5</span> Worked Example<a class="anchor" aria-label="anchor" href="#wafer"><i class="fas fa-link"></i></a>
 </h3>
-<p>The target thickness for silicon wafers used in a type of integrated circuit is 245 micrometers. A sample of 50 wafers is obtained and the thickness of each one is determined, resulting in a sample mean thickness of 245.88 micrometers
-and a sample standard deviation of 3.60 micrometers. Does this data suggest that true average wafer thickness is something other than the target value? Test at the 0.05 significance level.</p>
+<p>The target thickness for silicon wafers used in a type of integrated circuit is 245 micrometers. As part of an assessment if the silicon wafers are meeting the target thickness, a sample of 50 wafers is obtained and the thickness of each one is determined, resulting in a sample mean thickness of 245.88 micrometers and a sample standard deviation of 3.60 micrometers. Does this data suggest that true average wafer thickness is something other than the target value? Test at the 0.05 significance level.</p>
 <p>The variable we are investigating is the thickness for silicon wafers, which is quantitative, so we performing a hypothesis test for the mean.</p>
 <p>The null and alternative hypotheses are <span class="math inline">\(H_0: \mu = 245, H_a: \mu \neq 245\)</span>.</p>
 <p>We do not know the distribution of the thickness for silicon wafers. But we have a sample of 50, which is usually large enough so the CLT applies, and the relevant distributions for the test statistic apply.</p>
@@ -373,9 +372,9 @@ Figure 9.8: Finding P-value, For Silicon Wafer Example
 <span class="header-section-number">9.3.1</span> Null and Alternative Hypotheses<a class="anchor" aria-label="anchor" href="#null-and-alternative-hypotheses-1"><i class="fas fa-link"></i></a>
 </h3>
 <ul>
-<li><p>The <strong>null hypothesis</strong> is still a statement that says the parameter is equal to some specific value. Let <span class="math inline">\(p_0\)</span> denote this specific value. So we write <span class="math inline">\(H_0: p = p_0\)</span>.</p></li>
+<li><p>The null hypothesis is still a statement that says the parameter is equal to some specific value. Let <span class="math inline">\(p_0\)</span> denote this specific value. So we write <span class="math inline">\(H_0: p = p_0\)</span>.</p></li>
 <li>
-<p>The <strong>alternative hypothesis</strong> is a statement against the null hypothesis. For the hypothesis test for the proportion, there are a few possible alternative hypotheses. Which one we use is <strong>driven by the research question</strong>. The alternative hypothesis could say the the parameter is:</p>
+<p>The <strong>alternative hypothesis</strong> is a statement against the null hypothesis. The alternative hypothesis could say the the parameter is:</p>
 <ul>
 <li><p>Different from some specific value, i.e. <span class="math inline">\(H_a: p \neq p_0\)</span>.</p></li>
 <li><p>Greater than some specific value, i.e. <span class="math inline">\(H_a: p &gt; p_0\)</span>.</p></li>
@@ -456,9 +455,9 @@ Figure 9.9: Finding P-value, For Library Example
 <h2>
 <span class="header-section-number">9.4</span> Additional Comments on Hypothesis Test of Parameters<a class="anchor" aria-label="anchor" href="#additional-comments-on-hypothesis-test-of-parameters"><i class="fas fa-link"></i></a>
 </h2>
-<div id="two-sided-tests-and-confidence-intervals" class="section level3" number="9.4.1">
+<div id="inference" class="section level3" number="9.4.1">
 <h3>
-<span class="header-section-number">9.4.1</span> Two-Sided Tests and Confidence Intervals<a class="anchor" aria-label="anchor" href="#two-sided-tests-and-confidence-intervals"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9.4.1</span> Two-Sided Tests and Confidence Intervals<a class="anchor" aria-label="anchor" href="#inference"><i class="fas fa-link"></i></a>
 </h3>
 <p>Notice how hypothesis tests and confidence intervals are based on the sampling distribution of the relevant estimator? If you look at how the critical value of a two-sided test and the critical value of a confidence interval are derived, you will notice that they are found in the exact same manner. Refer to Figure <a href="hypothesis-testing.html#fig:9-critneq">9.5</a> and Figure <a href="confidence-intervals.html#fig:8-crit">8.2</a>, and notice how these pictures look exactly the same, with the middle portion of the PDF having an area of <span class="math inline">\(1-\alpha\)</span> and the two tail ends having an area of <span class="math inline">\(\alpha\)</span>.</p>
 <p>What this implies is that conclusions from a <span class="math inline">\((1-\alpha) \times 100\%\)</span> confidence interval will be consistent with a 2-sided hypothesis test conducted at significance <span class="math inline">\(\alpha\)</span>. Also notice how we use the same notation <span class="math inline">\(\alpha\)</span> for the confidence level and significance level?</p>
@@ -474,23 +473,253 @@ Figure 9.9: Finding P-value, For Library Example
 <span class="header-section-number">9.4.2</span> Type I and Type II Errors<a class="anchor" aria-label="anchor" href="#type-i-and-type-ii-errors"><i class="fas fa-link"></i></a>
 </h3>
 <p>The decision we make from hypothesis testing is not going to be perfect, as we have inherent uncertainty in estimators due to random sampling. So we may sometimes reject a null hypothesis when it is true, or we may fail to reject a null hypothesis when the alternative hypothesis is true. These errors are called <strong>type I</strong> and <strong>type II</strong> errors respectively.</p>
+<p>We go back to the thickness of silicon wafers worked example in Section <a href="hypothesis-testing.html#wafer">9.2.5</a>. The null and alternative hypotheses were <span class="math inline">\(H_0: \mu = 245, H_a: \mu \neq 245\)</span>.</p>
+<ul>
+<li><p>The type I error in this study is saying that the thickness of silicon wafers is not meeting the target thickness when it actually does.</p></li>
+<li><p>The type II error in this study is saying that there is not enough evidence that the thickness of silicon wafers is not meeting the target thickness when it actually does not.</p></li>
+</ul>
+<p>Next, we discuss how we can measure or control the probability of making these errors.</p>
+<div id="significance-level-and-type-i-error" class="section level4" number="9.4.2.1">
+<h4>
+<span class="header-section-number">9.4.2.1</span> Significance Level and Type I Error<a class="anchor" aria-label="anchor" href="#significance-level-and-type-i-error"><i class="fas fa-link"></i></a>
+</h4>
+<p>The probability of making a type I error is controlled <strong>significance level</strong>, <span class="math inline">\(\alpha\)</span>, of the test. The significance level is the probability of wrongly rejecting the null hypothesis when the null hypothesis is actually true. So if we conduct a hypothesis test with significance level <span class="math inline">\(\alpha = 0.05\)</span>, we are saying that we are willing to have a 5% probability of making a type I error if the null hypothesis is true.</p>
+<p>The value of the significance level for a hypothesis should be made in consultation with a subject matter expert and understanding the practical cost of making a type I error. From an ethical standpoint, this value should be decided upon before collecting and evaluating any data, as the significance level should not be adjusted in order to be able to conclude that the null hypothesis is rejected.</p>
+<p>We will run a Monte Carlo simulation to demonstrate the significance level determines the probability of making a type I error. This simulation is very similar to the one that was done in Section <a href="confidence-intervals.html#CP">8.2.3.3</a> to explain coverage probabilities. You should realize that the probability of making a type I error is directly related to coverage probability which continues with the idea written in Section <a href="hypothesis-testing.html#inference">9.4.1</a> about how confidence intervals and 2-sided hypothesis tests are consistent. The code below does the following:</p>
+<ul>
+<li>Simulate <span class="math inline">\(X_1, \cdots, X_{10}\)</span> i.i.d. from standard normal.</li>
+<li>Calculate a <span class="math inline">\(t\)</span> statistic for the hypothesis test using equation <a href="hypothesis-testing.html#eq:9-teststatMean">(9.1)</a>.
+<ul>
+<li>The hypotheses will be <span class="math inline">\(H_0: \mu = 0, H_a: \mu \neq 0\)</span>.</li>
+<li>Note that our data are simulated from a standard normal, so the null hypothesis is true in this simulation.</li>
+</ul>
+</li>
+<li>Assess if the calculated <span class="math inline">\(t\)</span> statistic is more extreme than the critical value.
+<ul>
+<li>We set the significance level to be <span class="math inline">\(\alpha = 0.05\)</span>.</li>
+<li>The critical value is <span class="math inline">\(t_9^* = 2.262157\)</span> since we are conducting a 2-sided test with <span class="math inline">\(n=10\)</span>.</li>
+</ul>
+</li>
+<li>Repeat these steps for a total of 10 thousand replicates.</li>
+<li>Count the number of times we reject the null hypothesis, and divide by the number of replicates. This value estimates the probability of making a type I error.
+<ul>
+<li>If we did things correctly the estimated probability of making a type I error should be close to the value of the significance level of 0.05.</li>
+</ul>
+</li>
+</ul>
+<div class="sourceCode" id="cb176"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">##Prob of Type I Error </span></span>
+<span></span>
+<span><span class="va">n</span><span class="op">&lt;-</span><span class="fl">10</span> <span class="co">## sample size of each random sample</span></span>
+<span><span class="va">alpha</span><span class="op">&lt;-</span><span class="fl">0.05</span> <span class="co">##sig level</span></span>
+<span><span class="va">reps</span><span class="op">&lt;-</span><span class="fl">10000</span> <span class="co">##no of replicates</span></span>
+<span></span>
+<span><span class="va">rejected</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span><span class="op">(</span><span class="fl">0</span>, <span class="va">reps</span><span class="op">)</span> <span class="co">##store assessment if the H0 is rejected or not for sample</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">reps</span><span class="op">)</span></span>
+<span>  </span>
+<span><span class="op">{</span></span>
+<span>  </span>
+<span>  <span class="va">X</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span> <span class="co">##draw n data points from standard normal</span></span>
+<span>  <span class="co">##calculate elements needed for CI of mean</span></span>
+<span>  <span class="va">xbar</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">X</span><span class="op">)</span> <span class="co">##sample mean</span></span>
+<span>  <span class="va">SE</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">X</span><span class="op">)</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span> <span class="co">##SE of sample mean</span></span>
+<span>  <span class="va">t.stat</span><span class="op">&lt;-</span><span class="va">xbar</span><span class="op">/</span><span class="va">SE</span></span>
+<span>  <span class="va">crit</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/TDist.html">qt</a></span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">alpha</span><span class="op">/</span><span class="fl">2</span>, <span class="va">n</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span> <span class="co">##critical value</span></span>
+<span>  <span class="va">rejected</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">t.stat</span><span class="op">)</span> <span class="op">&gt;</span> <span class="va">crit</span> <span class="co">##assess if absolute value of t.stat is greater than critical value</span></span>
+<span>  </span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co">##find proportion of random samples that wrongly rejected H0</span></span>
+<span><span class="co">##this is estimated prob of making type I error</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">rejected</span><span class="op">)</span><span class="op">/</span><span class="va">reps</span> </span></code></pre></div>
+<pre><code>## [1] 0.0516</code></pre>
+<p>The estimated probability of making a type I error is 0.0516, which matches the significance level which was set to be 0.05.</p>
+<p><em>Thought question</em>: Feel free to play around with the code and adjust the value of the significance level, change the alternative hypothesis to a 1-sided test, or any other factor. The estimated probability of making a type I error should always match the significance level.</p>
 </div>
-<div id="power" class="section level3" number="9.4.3">
+<div id="power" class="section level4" number="9.4.2.2">
+<h4>
+<span class="header-section-number">9.4.2.2</span> Power and Type II Error<a class="anchor" aria-label="anchor" href="#power"><i class="fas fa-link"></i></a>
+</h4>
+<p>The <strong>power</strong> of a test is inversely related to the probability of making a type II error. The power of a test is its probability of being able to correctly reject the null alternative hypothesis, when the alternative hypothesis is true. Based on this definition, the power is the complement of the probability of making a type II error, i.e. Power of a test is 1 minus the probability of making a type II error.</p>
+<p>Ideally, we would like the power of our hypothesis test to be large. We discuss factors that lead to a hypothesis test having a larger power. Recall that power measures the probability of being able to correctly reject a null hypothesis, and that larger values (in magnitude) of a test statistic provide more evidence against the null hypothesis. So the factors that make a test statistic larger (in magnitude) also lead to an increase in the power of a hypothesis test. As mentioned in Section <a href="hypothesis-testing.html#factors">9.2.2.1</a>, these are:</p>
+<ul>
+<li><p>The effect size, which is the difference between the sample mean <span class="math inline">\(\bar{x}\)</span> of our data and the value of the population mean if the null is true <span class="math inline">\(\mu_0\)</span>. Larger effect sizes lead to larger test statistics, in magnitude. This should make sense since a larger effect size implies the sample mean deviates more from the expected mean if the null hypothesis is true.</p></li>
+<li><p>The sample size <span class="math inline">\(n\)</span>. Larger sample sizes lead to larger magnitudes for the test statistic, see equations <a href="hypothesis-testing.html#eq:9-teststatMean">(9.1)</a> and <a href="hypothesis-testing.html#eq:9-teststatProp">(9.3)</a>.</p></li>
+</ul>
+<p>Another factor that increases the power of a hypothesis test is to raise the significance level <span class="math inline">\(\alpha\)</span>. We think think of an extreme example. Suppose we set the significance level to be as low as possible, <span class="math inline">\(\alpha=0\)</span>. Then the hypothesis test will always not reject the null hypothesis, and we never make a type I error. But always not rejecting the null hypothesis means that if the alternative hypothesis is true, we will always make a type II error, so the power will be 0. This illustrates the the probabilities of making a type I and type II error have an inverse relationship. Reducing one is done at the expense of the other.</p>
+<p>Please view the video below which provides a visual explanation as to why probabilities of making a type I and type II error have an inverse relationship:</p>
+<p>Calculations involving can be done by hand but is not usually a simple exercise. We will use Monte Carlo simulations to estimate the power of a hypothesis test.</p>
+<p>Suppose we want to estimate the power of the hypothesis test for the mean if the data are i.i.d from <span class="math inline">\(N(1,1)\)</span> (and so has a population mean of 1), with sample size of 10, and significance level set to 0.05, and the hypotheses are <span class="math inline">\(H_0: \mu = 0, H_a: \mu \neq 0\)</span>. The code below does the following:</p>
+<ul>
+<li>Simulate <span class="math inline">\(X_1, \cdots, X_{10}\)</span> i.i.d. from <span class="math inline">\(N(1,1)\)</span>.</li>
+<li>Calculate a <span class="math inline">\(t\)</span> statistic for the hypothesis test using equation <a href="hypothesis-testing.html#eq:9-teststatMean">(9.1)</a>.
+<ul>
+<li>The hypotheses are <span class="math inline">\(H_0: \mu = 0, H_a: \mu \neq 0\)</span>.</li>
+<li>Note that our data are simulated from <span class="math inline">\(N(1,1)\)</span>, so the alternative hypothesis is true in this simulation.</li>
+</ul>
+</li>
+<li>Assess if the calculated <span class="math inline">\(t\)</span> statistic is more extreme than the critical value.
+<ul>
+<li>We set the significance level to be <span class="math inline">\(\alpha = 0.05\)</span>.</li>
+<li>The critical value is <span class="math inline">\(t_9^* = 2.262157\)</span> since we are conducting a 2-sided test with <span class="math inline">\(n=10\)</span>.</li>
+</ul>
+</li>
+<li>Repeat these steps for a total of 10 thousand replicates.</li>
+<li>Count the number of times we reject the null hypothesis, and divide by the number of replicates. This value estimates the probability of correctly rejecting the null hypothesis, i.e. the power of this test.</li>
+</ul>
+<div class="sourceCode" id="cb178"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">n</span><span class="op">&lt;-</span><span class="fl">10</span> <span class="co">## sample size of each random sample</span></span>
+<span><span class="va">alpha</span><span class="op">&lt;-</span><span class="fl">0.05</span> <span class="co">##sig level</span></span>
+<span><span class="va">reps</span><span class="op">&lt;-</span><span class="fl">10000</span> <span class="co">## no of replicates</span></span>
+<span></span>
+<span><span class="va">rejected</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span><span class="op">(</span><span class="fl">0</span>, <span class="va">reps</span><span class="op">)</span> <span class="co">##store assessment if the H0 is rejected or not</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">reps</span><span class="op">)</span></span>
+<span>  </span>
+<span><span class="op">{</span></span>
+<span>  </span>
+<span>  <span class="va">X</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">n</span>, mean<span class="op">=</span><span class="fl">1</span>, sd<span class="op">=</span><span class="fl">1</span><span class="op">)</span> <span class="co">##draw n data points from N(1,1)</span></span>
+<span>  <span class="co">##calculate elements needed for CI of mean</span></span>
+<span>  <span class="va">xbar</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">X</span><span class="op">)</span> <span class="co">##sample mean</span></span>
+<span>  <span class="va">SE</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">X</span><span class="op">)</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span> <span class="co">##SE of sample mean</span></span>
+<span>  <span class="va">t.stat</span><span class="op">&lt;-</span><span class="va">xbar</span><span class="op">/</span><span class="va">SE</span></span>
+<span>  <span class="va">crit</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/TDist.html">qt</a></span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">alpha</span><span class="op">/</span><span class="fl">2</span>, <span class="va">n</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span> <span class="co">##critical value</span></span>
+<span>  <span class="va">rejected</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">t.stat</span><span class="op">)</span> <span class="op">&gt;</span> <span class="va">crit</span> <span class="co">##assess if absolute value of t.stat is greater than critical value</span></span>
+<span>  </span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co">##find proportion of random samples that correctly rejected H0</span></span>
+<span><span class="co">##this estimates power since mu=1 so Ha is true</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">rejected</span><span class="op">)</span><span class="op">/</span><span class="va">reps</span> </span></code></pre></div>
+<pre><code>## [1] 0.8044</code></pre>
+<p>The estimated power of this test is 0.8044. So if the data come from a <span class="math inline">\(N(1,1)\)</span>, the power of testing <span class="math inline">\(H_0: \mu = 0, H_a: \mu \neq 0\)</span> using a sample of size 10 and significance level of 0.05, is 0.8044.</p>
+<p>Note: we must specify a specific value for the parameter that makes the alternative hypothesis true. In this simulation, we simulated data from a distribution with population mean 1. The value of the power will change if we used another value for the mean of the distribution. This value directly affects the effect size. The power is specific to this value for the alternative hypothesis, as well as to the specific values of <span class="math inline">\(n\)</span> and <span class="math inline">\(\alpha\)</span>.</p>
+<p><strong>Power analysis</strong> or power calculations are often done in well-designed experiments to determine what minimum sample size is needed for a hypothesis test to guarantee the hypothesis test achieves a certain power with a pre-determined significance level.</p>
+<p><em>Thought question</em>: How would you tweak the code above to do a power analysis to find the minimum sample size needed to have an estimated power of at least 0.90 (assuming every other factor remains the same)?</p>
+</div>
+</div>
+<div id="reporting-conclusions" class="section level3" number="9.4.3">
 <h3>
-<span class="header-section-number">9.4.3</span> Power<a class="anchor" aria-label="anchor" href="#power"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9.4.3</span> Reporting Conclusions<a class="anchor" aria-label="anchor" href="#reporting-conclusions"><i class="fas fa-link"></i></a>
 </h3>
+<p>You may have noticed that we make a binary decision at the end of a hypothesis test: we either reject or fail to reject a null hypothesis, by comparing our test statistic with a critical value or by comparing a p-value (which depends on the value of the test statistic) with a significance level.</p>
+<p>While the decision is binary, note that the numerical value of a test statistic is not binary. We have mentioned that larger values (in magnitude) imply more evidence against the null hypothesis. So the p-value also can be interpreted in the same manner: smaller values imply more evidence against the null hypothesis.</p>
+<p>Therefore, when writing conclusions, it is recommended to also provide the p-value or the value of the test statistic, instead of just reporting that the “null hypothesis is rejected” or “the null hypothesis is not rejected”. Readers than then make an assessment of how strong the evidence is against the null hypothesis, based on their judgement of what the value of the significance level should be.</p>
 </div>
 <div id="statistical-vs-practical-significance" class="section level3" number="9.4.4">
 <h3>
 <span class="header-section-number">9.4.4</span> Statistical Vs Practical Significance<a class="anchor" aria-label="anchor" href="#statistical-vs-practical-significance"><i class="fas fa-link"></i></a>
 </h3>
+<p>However, even with a p-value being reported, we need to be careful with conflating a “statistically significant” result (i.e. null hypothesis is rejected) with a “practically significant” result.</p>
+<p>We had earlier mentioned in Section <a href="hypothesis-testing.html#power">9.4.2.2</a> that the power of a hypothesis test can be increased when the sample size gets larger. This implies that we may be able to reject the null hypothesis when we have a small effect size but we have a huge sample size.</p>
+<p>Consider this hypothetical example. We have <span class="math inline">\(H_0: \mu = 100, H_a: \mu \neq 100\)</span>, with <span class="math inline">\(\bar{x} = 101, \sigma=10\)</span>, and various values for the sample size <span class="math inline">\(n\)</span>. Suppose these values represent IQ scores. We work out the p-values as well as the corresponding 95% confidence intervals for the mean, and present the results in Table <a href="hypothesis-testing.html#tab:practical">9.1</a> below.</p>
+<div class="inline-table"><table class="table table-sm">
+<caption>
+<span id="tab:practical">Table 9.1: </span> Sample Size on P-Values and CIs</caption>
+<thead><tr class="header">
+<th align="left"><span class="math inline">\(n\)</span></th>
+<th align="left">p-value</th>
+<th align="left">95% CI</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">25</td>
+<td align="left">0.617</td>
+<td align="left">(97.080, 104.920)</td>
+</tr>
+<tr class="even">
+<td align="left">350</td>
+<td align="left">0.061</td>
+<td align="left">(99.952, 102.408)</td>
+</tr>
+<tr class="odd">
+<td align="left">400</td>
+<td align="left">0.455</td>
+<td align="left">(100.020, 101.980)</td>
+</tr>
+<tr class="even">
+<td align="left">2,500</td>
+<td align="left"><span class="math inline">\(5.7 \times 10^{-7}\)</span></td>
+<td align="left">(100.608, 101.392)</td>
+</tr>
+</tbody>
+</table></div>
+<p>Most would probably agree that the effect size in this example is small, yet for a sample size of 400 or more, we will reject the null hypothesis. When the sample size is huge, the p-value is extremely small, which we may interpret as having strong evidence against the null hypothesis, so we have “statistical significance”. On the other hand, the small effect size tells us that the practical significance may be of little consequence.</p>
+<p>A couple of recommendations when reporting results from a hypothesis test:</p>
+<ul>
+<li><p>If possible, report the corresponding confidence interval, so the reader can see what is the range of plausible values for the parameter and make their own decision. However, not every hypothesis test has an associated confidence interval; we will see one such class of hypothesis tests in the next subsection.</p></li>
+<li><p>Researchers need to establish the minimum effect size for a result to be considered practically significant. From an ethical standpoint, this value should be decided upon before collecting and evaluating any data, as the this value should not be adjusted in order to be able to conclude that the null hypothesis is rejected.</p></li>
+</ul>
+<p>To remind ourselves, we use hypothesis tests to test for “statistical significance”. What we are testing is whether the deviation of our sample estimate from its value if the null hypothesis is true can be attributed to random sampling alone or not. If we reject the null hypothesis, the deviation is unlikely to be attributed to random sampling alone.</p>
+<p>To summarize, hypothesis testing is used to assess “statistical significance”, but we use subject matter knowledge to assess “practical significance”.</p>
 </div>
 </div>
 <div id="goodness-of-fit-tests" class="section level2" number="9.5">
 <h2>
 <span class="header-section-number">9.5</span> Goodness of Fit Tests<a class="anchor" aria-label="anchor" href="#goodness-of-fit-tests"><i class="fas fa-link"></i></a>
 </h2>
+<p><strong>Goodness of Fit (GOF)</strong> tests are a class of hypothesis tests that assess the deviation of observed data from a hypothesized distribution or model, instead of the deviation of estimators from parameters. The framework is still the same:</p>
+<ol style="list-style-type: decimal">
+<li>State a hypothesis, based on the research question.</li>
+<li>Assume the hypothesis is true, and then compute a metric that measures how much our observed data deviate from the assumed hypothesis.</li>
+<li>Compare the metric with some sort of threshold to assess if our observed data deviates “far enough” from the assumed hypothesis, and then make a decision.</li>
+</ol>
+<p>For GOF tests, the hypotheses are:</p>
+<ul>
+<li>
+<span class="math inline">\(H_0:\)</span> the data follow some assumed distribution.
+<ul>
+<li>Remember that the null hypothesis is a statement involving an equality. One way to remember is theat if the data folloow some assumed distribution, they are consistent with the PDF of the assumed distribution.</li>
+</ul>
+</li>
+<li>
+<span class="math inline">\(H_a:\)</span> the data do not follow some assumed distribution.
+<ul>
+<li>There is only one alternative hypothesis for GOF tests.</li>
+</ul>
+</li>
+</ul>
+<p>There are a lot of different test statistics, we just need to remember that larger values (in magnitude) indicate our data deviate more from the null hypothesis.</p>
+<p>We make conclusions in the same manner, by comparing the test statistic with a critical value, or the p-value with the significance level.</p>
+<p>One interesting thing to note with GOF tests is that they are usually used to assess if our data are consistent with some distribution or model. This may be done to see if we can then proceed with another procedure which depends on whether the data follow some distribution. In such instances, we would like to fail to reject the null hypothesis. Even though failing to reject the null hypothesis does not imply that we have proven the data follow the assumed distribution, we don’t have evidence to suggest they do not follow the assumed distribution, and typically proceed.</p>
+<div id="shapiro-wilk-test-for-normality" class="section level3" number="9.5.1">
+<h3>
+<span class="header-section-number">9.5.1</span> Shapiro-Wilk Test for Normality<a class="anchor" aria-label="anchor" href="#shapiro-wilk-test-for-normality"><i class="fas fa-link"></i></a>
+</h3>
+<p>We have actually seen one such test in Sections <a href="joint-distributions.html#SW1">5.6.2.1</a> and <a href="est.html#MOM">7.2</a>: the Shapiro-Wilk test for normality. This test is used to assess if the data follow a normal distribution. The hypotheses are: <span class="math inline">\(H_0:\)</span> the data follow a normal distribution, <span class="math inline">\(H_a:\)</span> the data do not follow a normal distribution.</p>
+<p>We will not go into the details of the test statistic and the sampling distribution of the test statistic.</p>
+<p>Next, we will use a couple of examples from simulated data:</p>
+<ul>
+<li>In the first example, we simulate 25 data points from a standard normal, and apply the Shapiro-Wilk test. As expected, the test fails to reject the null hypothesis, as the p-value is 0.1489.</li>
+</ul>
+<div class="sourceCode" id="cb180"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">n</span><span class="op">&lt;-</span><span class="fl">25</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">8</span><span class="op">)</span></span>
+<span><span class="va">X</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test</a></span><span class="op">(</span><span class="va">X</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## 
+##  Shapiro-Wilk normality test
+## 
+## data:  X
+## W = 0.94011, p-value = 0.1489</code></pre>
+<ul>
+<li>In the second example, we simulate 25 data points from a non-normal distribution. We used a <span class="math inline">\(\chi_1^2\)</span> distribution (called chi-squared distribution with 1 degree of freedom), and apply the Shapiro-Wilk test. As expected, the test rejects the null hypothesis based on an extremely small p-value.</li>
+</ul>
+<div class="sourceCode" id="cb182"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">n</span><span class="op">&lt;-</span><span class="fl">25</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">8</span><span class="op">)</span></span>
+<span><span class="va">X</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/Chisquare.html">rchisq</a></span><span class="op">(</span><span class="va">n</span>, df<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test</a></span><span class="op">(</span><span class="va">X</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## 
+##  Shapiro-Wilk normality test
+## 
+## data:  X
+## W = 0.77791, p-value = 9.951e-05</code></pre>
 
+</div>
 </div>
 </div>
   <div class="chapter-nav">
@@ -505,7 +734,7 @@ Figure 9.9: Finding P-value, For Library Example
 <a class="nav-link" href="#hypothesis-test-for-the-mean"><span class="header-section-number">9.2</span> Hypothesis Test for the Mean</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#null-and-alternative-hypotheses"><span class="header-section-number">9.2.1</span> Null and Alternative Hypotheses</a></li>
 <li><a class="nav-link" href="#test-statistic"><span class="header-section-number">9.2.2</span> Test Statistic</a></li>
-<li><a class="nav-link" href="#making-a-decision"><span class="header-section-number">9.2.3</span> Making a Decision</a></li>
+<li><a class="nav-link" href="#decision"><span class="header-section-number">9.2.3</span> Making a Decision</a></li>
 <li><a class="nav-link" href="#writing-conclusions"><span class="header-section-number">9.2.4</span> Writing Conclusions</a></li>
 <li><a class="nav-link" href="#wafer"><span class="header-section-number">9.2.5</span> Worked Example</a></li>
 </ul>
@@ -520,13 +749,15 @@ Figure 9.9: Finding P-value, For Library Example
 </li>
 <li>
 <a class="nav-link" href="#additional-comments-on-hypothesis-test-of-parameters"><span class="header-section-number">9.4</span> Additional Comments on Hypothesis Test of Parameters</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#two-sided-tests-and-confidence-intervals"><span class="header-section-number">9.4.1</span> Two-Sided Tests and Confidence Intervals</a></li>
+<li><a class="nav-link" href="#inference"><span class="header-section-number">9.4.1</span> Two-Sided Tests and Confidence Intervals</a></li>
 <li><a class="nav-link" href="#type-i-and-type-ii-errors"><span class="header-section-number">9.4.2</span> Type I and Type II Errors</a></li>
-<li><a class="nav-link" href="#power"><span class="header-section-number">9.4.3</span> Power</a></li>
+<li><a class="nav-link" href="#reporting-conclusions"><span class="header-section-number">9.4.3</span> Reporting Conclusions</a></li>
 <li><a class="nav-link" href="#statistical-vs-practical-significance"><span class="header-section-number">9.4.4</span> Statistical Vs Practical Significance</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#goodness-of-fit-tests"><span class="header-section-number">9.5</span> Goodness of Fit Tests</a></li>
+<li>
+<a class="nav-link" href="#goodness-of-fit-tests"><span class="header-section-number">9.5</span> Goodness of Fit Tests</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#shapiro-wilk-test-for-normality"><span class="header-section-number">9.5.1</span> Shapiro-Wilk Test for Normality</a></li></ul>
+</li>
 </ul>
 
       <div class="book-extra">
@@ -543,7 +774,7 @@ Figure 9.9: Finding P-value, For Library Example
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2025-07-24.</p>
+    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2025-07-25.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

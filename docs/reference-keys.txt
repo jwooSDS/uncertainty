@@ -175,6 +175,7 @@ fig:9-critless
 fig:9-pvalworked
 eq:9-teststatProp
 fig:9-pvalworked2
+tab:practical
 examples
 example-1-mario-kart-auction-prices
 eg2
@@ -307,7 +308,7 @@ multinomial-lumping
 multinomial-covariance
 conditional-multinomial
 multivariate-normal
-simulations
+SW1
 inequalities-limit-theorems-and-simulations
 introduction-2
 inequalities
@@ -334,7 +335,7 @@ big-picture-idea-with-estimation
 population-vs-sample
 variables-observations
 parameter-vs-estimator
-method-of-moments-estimation
+MOM
 alternative-form-of-method-of-moments-estimation
 method-of-maximum-likelihood-estimation
 likelihood-function
@@ -389,8 +390,8 @@ null-and-alternative-hypotheses
 features-of-null-and-alternative-hypotheses
 some-comments-about-the-null-hypothesis-with-a-one-sided-alternative
 test-statistic
-factors-affecting-t-statistic-for-mean
-making-a-decision
+factors
+decision
 p-value
 critical-value-1
 writing-conclusions
@@ -402,8 +403,11 @@ conditions-for-hypothesis-test-for-the-proportion
 making-a-decision-and-writing-conclusions
 worked-example-6
 additional-comments-on-hypothesis-test-of-parameters
-two-sided-tests-and-confidence-intervals
+inference
 type-i-and-type-ii-errors
+significance-level-and-type-i-error
 power
+reporting-conclusions
 statistical-vs-practical-significance
 goodness-of-fit-tests
+shapiro-wilk-test-for-normality

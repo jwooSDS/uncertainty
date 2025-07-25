@@ -212,7 +212,7 @@ We run a Monte Carlo simulation to show that the coverage probability of confide
 - Assess if the calculated confidence interval contains 0, since the true mean is 0 (we simulated data from standard normal)
 - Repeat these steps for a total of 10 thousand replicates.
 - Count the number of confidence intervals that contain 0, and divide by the number of replicates. This value estimates the coverage probability.
-- If we did things correctly (correct use of formula, correct distribution for estimator), this estimated coverage probability should be close to the confidence level of 95%.
+  - If we did things correctly (correct use of formula, correct distribution for estimator), this estimated coverage probability should be close to the confidence level of 95%.
 
 ```{r}
 n<-10 ## sample size of each random sample

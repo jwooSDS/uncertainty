@@ -742,7 +742,7 @@ Some properties of the MVN distribution:
 
 5. Within an MVN random vector, uncorrelated implies independence. If $\boldsymbol{X}$ is MVN and $\boldsymbol{X} = (\boldsymbol{X_1, X_2})$ where $\boldsymbol{X_1}$ and $\boldsymbol{X_2}$ are subvectors, and every component of $\boldsymbol{X_1}$ is uncorrelated with every component of $\boldsymbol{X_2}$, then $\boldsymbol{X_1}$ and $\boldsymbol{X_2}$ are independent. 
 
-#### Simulations
+#### Simulations {#SW1}
 
 We can use simulations to verify the first property. For this simulation, we will do the following:
 

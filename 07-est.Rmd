@@ -57,7 +57,7 @@ We will also cover a couple of methods in estimating parameters: the method of m
 
 To sum up estimation: we use data from a sample to estimate unknown characteristics of a population, so that we can answer questions regarding variables in the population, as well as provide a measure of uncertainty for our answers. 
 
-## Method of Moments Estimation
+## Method of Moments Estimation {#MOM}
 
 We will cover a couple of methods in estimation. The first method is the **method of moments**. It is a more intuitive method, although it lacks certain ideal properties. Before defining this method, we recall and define some terms.
 

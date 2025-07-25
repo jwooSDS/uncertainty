@@ -240,8 +240,11 @@ P(-z^{*} \leq \hat{Z} \leq z^{*}) &amp;= P(-z^{*} \leq \frac{\bar{X}_n - \mu}{SE
 <li>Calculate 95% confidence interval for the mean using <a href="confidence-intervals.html#eq:8-CImean">(8.9)</a>.</li>
 <li>Assess if the calculated confidence interval contains 0, since the true mean is 0 (we simulated data from standard normal)</li>
 <li>Repeat these steps for a total of 10 thousand replicates.</li>
-<li>Count the number of confidence intervals that contain 0, and divide by the number of replicates. This value estimates the coverage probability.</li>
+<li>Count the number of confidence intervals that contain 0, and divide by the number of replicates. This value estimates the coverage probability.
+<ul>
 <li>If we did things correctly (correct use of formula, correct distribution for estimator), this estimated coverage probability should be close to the confidence level of 95%.</li>
+</ul>
+</li>
 </ul>
 <div class="sourceCode" id="cb142"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">n</span><span class="op">&lt;-</span><span class="fl">10</span> <span class="co">## sample size of each random sample</span></span>
@@ -720,7 +723,7 @@ Figure 8.4: Density Plot of Credit Limits
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2025-07-24.</p>
+    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2025-07-25.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
