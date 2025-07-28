@@ -192,6 +192,11 @@ colorArea(from=-4, to=1, dnorm)
 
 It is the area to the left of $\hat{t}$. Using probability notation, this is $P( t_{n-1} \leq 1)$. 
 
+View the video below that explains finding the p-value a little bit more:
+
+<iframe width="560px" height="320px" allowfullscreen="true" allow="autoplay *" title="Module 09: P-Values" src="https://virginiauniversity.instructuremedia.com/embed/6f752a78-f7e1-47c2-a298-44dfa328310b" frameborder="0"></iframe>
+
+
 Going back to the Freshman 15 example, we found the $t$ statistic to be −2.357023. We had earlier written the alternative hypothesis as $H_a: \mu < 15$, so we find the PDF under a $t_{49}$ distribution using the area to the left of $-2.357023$, in a manner similar to Figure \@ref(fig:9-pvalless).
 
 ```{r 9-pvaleg, fig.cap="Finding P-value, For Freshman 15 Example", echo=FALSE}
@@ -272,6 +277,10 @@ qt(alpha, n-1)
 The critical value is therefore $t_{49}^* = -1.676551$ when $H_a: \mu < \mu_0$. We will reject the null hypothesis if our $t$ statistic is to the left of -1.676551.
 
 In general, for any significance level $\alpha$, the critical value $t_{n-1}^*$ corresponds to the $(\alpha) \times 100$th percentile of the appropriate $t_{n-1}$ distribution, if $H_a: \mu < \mu_0$.
+
+View the video below that explains finding the critical value a little bit more:
+
+<iframe width="560px" height="320px" allowfullscreen="true" allow="autoplay *" title="Module 09: Critical Values" src="https://virginiauniversity.instructuremedia.com/embed/b4fcecb8-a8f6-484d-9777-470b4660599c" frameborder="0"></iframe>
 
 Going back to the Freshman 15 example, we found the $t$ statistic to be −2.357023. We had earlier written the alternative hypothesis as $H_a: \mu < 15$, so the critical value is the 5th percentile of a $t_{49}$ distribution, which we found to be -1.676551. Since our $t$ statistic is to the left of this critical value, we reject the null hypothesis. 
 
@@ -546,9 +555,11 @@ Ideally, we would like the power of our hypothesis test to be large. So what are
 
 - The sample size $n$. Larger sample sizes lead to larger magnitudes for the test statistic, see equations \@ref(eq:9-teststatMean) and \@ref(eq:9-teststatProp).
 
-Another factor that increases the power of a hypothesis test is to raise the significance level $\alpha$. We Think of the following extreme example: Suppose we set the significance level to be as low as possible, $\alpha=0$. Then the hypothesis test will always not reject the null hypothesis, and we never make a type I error. But always not rejecting the null hypothesis means that if the alternative hypothesis is true, we will always make a type II error, so the power will be 0. This illustrates the the probabilities of making a type I and type II error have an inverse relationship. Reducing one is done at the expense of the other. 
+Another factor that increases the power of a hypothesis test is to raise the significance level $\alpha$. Think of the following extreme example: Suppose we set the significance level to be as low as possible, $\alpha=0$. Then the hypothesis test will always not reject the null hypothesis, and we never make a type I error. But always not rejecting the null hypothesis means that if the alternative hypothesis is true, we will always make a type II error, so the power will be 0. This illustrates the the probabilities of making a type I and type II error have an inverse relationship. Reducing one is done at the expense of the other. 
 
 Please view the video below which provides a visual explanation as to why probabilities of making a type I and type II error have an inverse relationship:
+
+<iframe width="560px" height="320px" allowfullscreen="true" allow="autoplay *" title="Module 09: Significance Level & Power" src="https://virginiauniversity.instructuremedia.com/embed/014c19d2-6cfb-49a2-a1ec-b13226f1f9be" frameborder="0"></iframe>
 
 Calculating the power of a hypothesis test can be done by hand but is not usually a simple exercise. We will instead use Monte Carlo simulations to estimate the power of a hypothesis test. 
 
