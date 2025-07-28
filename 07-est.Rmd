@@ -26,7 +26,7 @@ Ideally, the sample should be **representative** of the population. A representa
 
 #### Variables & Observations
 
-A **variable** is a characteristic or attribute of individuals, or objects, or events that make up the population and sample.  In the above scenario, a variable would be the systolic blood pressure of American adults. We can use the notation of random variables to describe variables. For example, we can let $X$ denote the systolic blood pressure of an American adult, so writing $P(X>200)$ means we want to find the probability that an American adult has systolic blood pressure greater than 200 mmHg .
+A **variable** is a characteristic or attribute of individuals, or objects, or events that make up the population and sample.  In the above scenario, a variable would be the systolic blood pressure of American adults. We can use the notation of random variables to describe variables. For example, we can let $X$ denote the systolic blood pressure of an American adult, so writing $P(X>200)$ means we want to find the probability that an American adult has systolic blood pressure greater than 200 mm Hg .
 
 An **observation** is the individual person, object or event that we collect data from. In the above scenario, an observation is a single American adult in our sample of 750.
 
@@ -44,7 +44,7 @@ A **parameter** is a numerical summary associated with a population. In the scen
 
 An **estimator** is a numerical summary associated with samples. An estimator is typically used to estimate a parameter. In the scenario described above, an estimator of the population mean systolic blood pressure of American adults could be the average systolic blood pressure in our sample. So the sample mean is an estimator of the population mean. 
 
-An **estimated value**, or **estimate**, is the actual value of the estimator based on a sample. In the scenario described above, suppose the average systolic blood pressure of the 750 American adults is 140 mmHg. We will say the estimated value of the mean systolic blood pressure of American adults is 140 mmHg. 
+An **estimated value**, or **estimate**, is the actual value of the estimator based on a sample. In the scenario described above, suppose the average systolic blood pressure of the 750 American adults is 140 mm Hg. We will say the estimated value of the mean systolic blood pressure of American adults is 140 mm Hg. 
 
 So a parameter is a number that is associated with a population, while an estimator is a number that is associated with a sample. Some other differences between parameters and estimators:
 
@@ -122,7 +122,7 @@ View the video below for a more detailed explanation on deriving the MOM estimat
 
 <iframe width="560px" height="320px" allowfullscreen="true" allow="autoplay *" title="Module 07: MOM Estimation for Normal" src="https://virginiauniversity.instructuremedia.com/embed/cd5ff3c8-0e95-4790-aefd-e1ee23d70170" frameborder="0"></iframe>
 
-We now use these MOM estimates on the data set of birth weights at Baystate Medical Center in 1986. It is well established in the literature that birth weights of babies follow a normal distribution. A quick check with the Shapiro-Wilk's test for normality shows no contradiction, so we proceed with finding the estimates for $\mu$ and $\sigma^2$. We then produce a density plot of the birth weights, and overlay a curve that corresponds to a normal distribution with $\hat{\mu} = \bar{x}$ and $\hat{\sigma^2}  = \frac{1}{n} \sum_{i=1}^n (x_i - \bar{x})^2$. This normal curve is pretty close to the density plot, so it appears reasonable to say that the birth weights follow a normal distribution with mean 2944.587 (grams) and variance 528940 (grams-squared).
+We now use these MOM estimates on the data set of birth weights at Baystate Medical Center in 1986. It is well established in the literature that birth weights of babies follow a normal distribution. A quick check with the Shapiro-Wilk test for normality shows no contradiction, so we proceed with finding the estimates for $\mu$ and $\sigma^2$. We then produce a density plot of the birth weights, and overlay a curve that corresponds to a normal distribution with $\hat{\mu} = \bar{x}$ and $\hat{\sigma^2}  = \frac{1}{n} \sum_{i=1}^n (x_i - \bar{x})^2$. This normal curve is pretty close to the density plot, so it appears reasonable to say that the birth weights follow a normal distribution with mean 2944.587 (grams) and variance 528940 (grams-squared).
 
 ```{r 7-MOM, fig.cap="Density Plot of Birth Weights. Normal Curve (in Blue) with Parameters Estimated by MOM Overlaid", message=FALSE}
 library(MASS)
@@ -343,7 +343,7 @@ View the video below that provides a bit more detail on finding and visualizing 
 
 ### Maximum Likelihood Estimation
 
-We are now ready to formally define the method of maximimum likelihood estimation. The **maximum likelihood (ML) estimates** $\hat{\theta}_1, \cdots, \hat{\theta}_m$ of the parameters  $\theta_1, \cdots, \theta_m$ are found by maximizing the likelihood function $L(\boldsymbol{\theta} | \boldsymbol{x} )$.
+We are now ready to formally define the method of maximum likelihood estimation. The **maximum likelihood (ML) estimates** $\hat{\theta}_1, \cdots, \hat{\theta}_m$ of the parameters  $\theta_1, \cdots, \theta_m$ are found by maximizing the likelihood function $L(\boldsymbol{\theta} | \boldsymbol{x} )$.
 
 Remember the following when finding ML estimates:
 
@@ -459,7 +459,7 @@ There are times when these approaches may not be feasible, for example, there is
 
 ## Properties of Estimators {#estprops}
 
-We have learned about a couple of different methods to estimate parameters. While these two methods are common, there are not the only methods to estimate parameters. One question how do we assess if our estimates are "good" or not? We define a few concepts that are used in this asessment. 
+We have learned about a couple of different methods to estimate parameters. While these two methods are common, there are not the only methods to estimate parameters. One question how do we assess if our estimates are "good" or not? We define a few concepts that are used in this assessment. 
 
 ### Estimators VS Estimates
 
@@ -590,7 +590,7 @@ We go back to the example from the previous subsection. Consider $X_1, \cdots, X
 
   - We had earlier showed that $Var(\hat{\Theta}_1) = \frac{\sigma^2}{n}$, which shrinks towards zero as $n$ gets larger, so it is consistent. 
 
-  - We had earlier showed that $Var(\hat{\Theta}_2) = \sigma^2$, which does not strink towards zero as $n$ gets larger, so it is not consistent. 
+  - We had earlier showed that $Var(\hat{\Theta}_2) = \sigma^2$, which does not shrink towards zero as $n$ gets larger, so it is not consistent. 
 
 - We can also use Monte Carlo simulations to show these results:
 

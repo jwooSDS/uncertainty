@@ -604,7 +604,7 @@ Figure 4.12: Density Plot for 50 Interest Rates
 </p>
 </div>
 <p>This uses KDE with the default settings: kernel is normal, and the bandwidth is based on <a href="https://en.wikipedia.org/wiki/Kernel_density_estimation#A_rule-of-thumb_bandwidth_estimator">Silverman’s rule of thumb</a>.</p>
-<p>To change these, we add the <code>kernel</code> and <code>adjust</code> argument when using the <code><a href="https://rdrr.io/r/stats/density.html">density()</a></code> function, for example, to use the Epanechnikov kernal with twice the default bandwidth:</p>
+<p>To change these, we add the <code>kernel</code> and <code>adjust</code> argument when using the <code><a href="https://rdrr.io/r/stats/density.html">density()</a></code> function, for example, to use the Epanechnikov kernel with twice the default bandwidth:</p>
 <div class="sourceCode" id="cb67"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##create density plot using different settings</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/density.html">density</a></span><span class="op">(</span><span class="va">Data</span><span class="op">$</span><span class="va">interest_rate</span>, kernel <span class="op">=</span> <span class="st">"epanechnikov"</span>, adjust <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>, </span>
@@ -732,7 +732,7 @@ s_X^2 =  \frac{1}{n-1} \sum_{i=1}^n (x_i - \bar{x})^2,
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2025-07-25.</p>
+    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2025-07-28.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

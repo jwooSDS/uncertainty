@@ -118,7 +118,7 @@ knitr::include_graphics("images/06-concave.jpeg")
 
 - $g(x) = x^2$ is a convex function.
     - Its second derivative is $g^{\prime \prime}(x) = 2$, which is always positive.
-    - We can also look at a graph of $y = x^2$, and draw line segments that join two points on its graph. All of these lines are never below the graph. Figure \@ref(fig:convex) below shows an example with one line segment, but we can see that any line segment that joins two points on the graph will never be velow the graph.
+    - We can also look at a graph of $y = x^2$, and draw line segments that join two points on its graph. All of these lines are never below the graph. Figure \@ref(fig:convex) below shows an example with one line segment, but we can see that any line segment that joins two points on the graph will never be below the graph.
     
 ```{r convex, fig.cap = "Example of Convex Function", echo = FALSE}
 knitr::include_graphics("images/06-convex.jpeg")

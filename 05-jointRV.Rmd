@@ -256,7 +256,7 @@ P(X=x | Y=y) = P(X=x),
 
 To show that $X$ and $Y$ are independent, we need to show one of equations \@ref(eq:5-ind), \@ref(eq:5-ind2), or \@ref(eq:5-ind3) to be true for **all values in the support** of $X$ and $Y$. To show that $X$ and $Y$ are dependent, we need to show one of equations \@ref(eq:5-ind), \@ref(eq:5-ind2), or \@ref(eq:5-ind3) to be false for **just one value** of $X$ and $Y$.
 
-Equations \@ref(eq:5-ind2) and \@ref(eq:5-ind3) are pretty intuitive. These equations say that the conditional distribution of one variable, given the other, is the same as the marginal distribution of the variable. This means the distribution of the variable is not influenced by knowlege about the other variable. 
+Equations \@ref(eq:5-ind2) and \@ref(eq:5-ind3) are pretty intuitive. These equations say that the conditional distribution of one variable, given the other, is the same as the marginal distribution of the variable. This means the distribution of the variable is not influenced by knowledge about the other variable. 
 
 The first equation \@ref(eq:5-ind) informs us that if the discrete variables are independent, their joint PMF is equal to the product of their marginal PMFs.
 

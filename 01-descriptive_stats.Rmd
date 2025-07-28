@@ -89,7 +89,7 @@ Histograms can also give us an idea about the **shape** of the distribution of i
 
 - Histograms that tail off similarly in both directions are called **symmetric**. Large and small values are of the variable are equally likely. 
 
-- Histograms that have a peak in the middle, and then tail off on both sides are not only symmetic, but also **bell-shaped**, or have a **normal** distribution. Note: it turns out one of the assumptions in linear regression is that the response variable follow a normal distribution. This may seem restrictive, however, we will see in later modules that this assumption is not particularly crucial under some circumstances.
+- Histograms that have a peak in the middle, and then tail off on both sides are not only symmetric, but also **bell-shaped**, or have a **normal** distribution. Note: it turns out one of the assumptions in linear regression is that the response variable follow a normal distribution. This may seem restrictive, however, we will see in later modules that this assumption is not particularly crucial under some circumstances.
 
 *Thought question:* Can you think of real life variables that have symmetric, right-skewed, left-skewed distributions? Feel free to search the internet for examples.
 
@@ -245,7 +245,7 @@ From the previous sections, we can see how we could use histograms, density plot
 
 A plot that can easily give us values of the variable that correspond to percentiles is the **empirical cumulative distribution function (ECDF)** plot.
 
-Let $X$ denote a random variable, and we have observed $n$ observations of $X$ denoted by $x_1, \cdots, x_n$. Let $x_{(1)}, \cdots x_{(n)}$ denote the ordered statstics of the $n$ observations. The ECDF, denoted by $\hat{F}_n(x)$ is the proportion of sample observations less than or equal to the value $x$ of the random variable. Mathematically, the ECDF is:
+Let $X$ denote a random variable, and we have observed $n$ observations of $X$ denoted by $x_1, \cdots, x_n$. Let $x_{(1)}, \cdots x_{(n)}$ denote the ordered statistics of the $n$ observations. The ECDF, denoted by $\hat{F}_n(x)$ is the proportion of sample observations less than or equal to the value $x$ of the random variable. Mathematically, the ECDF is:
 
 $$
  \hat{F}_n(x) = 
@@ -373,7 +373,7 @@ Another related measure is the sample **standard deviation**, which is the squar
 
 ### Interquartile Range 
 
-Another measure of spread is the **interquartile range (IQR)**, and it is the difference between the third and first queartiles,
+Another measure of spread is the **interquartile range (IQR)**, and it is the difference between the third and first quartiles,
 
 \begin{equation} 
 IQR = Q_3 - Q_1.

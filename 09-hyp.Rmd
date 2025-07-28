@@ -32,7 +32,7 @@ The book presents these hypotheses and hypothesis testing using a court trial as
 
 When testing for the mean, the parameter is the population mean. This happens when the variable we are measuring is quantitative. Consider this example: 
 
-The term "Freshman 15" is an expression that says that college students gain 15 pounds (on average), in their first year in college. Researchers claim that with better education regarding healthier lifestyle habits, this gain is less than 15 pounds, on average. 
+The term "Freshman 15" is an expression which says that college students gain 15 pounds (on average), in their first year in college. Researchers claim that with better education regarding healthier lifestyle habits, this gain is less than 15 pounds, on average. 
 
 Next, we cover the first step in hypothesis testing: how to write the null and alternative hypothesis statements.
 
@@ -134,7 +134,7 @@ The **significance level** of the test, denoted by $\alpha$, is the probability 
 
 - Using the critical value, we **reject the null hypothesis if our test statistic is more extreme than the critical value in the direction of the alternative hypothesis** (i.e. our data have enough evidence against the null hypothesis). Otherwise, we fail to reject the null hypothesis (i.e. our data do not have enough evidence against the null hypothesis).
 
-Both of these approaches are based on the sampling distribution of the estimator, and on the value of the significance level. 
+Both of these approaches are based on the sampling distribution of the estimator, and on the value of the significance level. Both of these approaches will always lead to the same conclusion, so you only need to use one of them. 
 
 #### P-Value 
 
@@ -218,7 +218,7 @@ pt(-2.357023, 49) ##enter t stat, then df
 
 Informally, the critical value is the value of the test statistic that is considered "enough" to say that we have enough evidence against the null hypothesis to reject it, based on the value of the significance level. 
 
-We PDF of the $t$ distribution to visualize what a critical is. We want to find the "cut off" value, denoted by $t_{n-1}^*$, of the distribution where the area under its PDF in the direction of the alternative hypothesis is equal to the significance level $\alpha$. Since we have three options for the alternative hypothesis, we have 3 different areas under the PDF to consider. In Figures \@ref(fig:9-critneq), \@ref(fig:9-critgreater), and \@ref(fig:9-critless) below, we have examples on the relevant areas under the PDF if $\alpha=0.05$ and $n=50$:
+We use the PDF of a $t$ distribution to visualize what a critical is. We want to find the "cut off" value, denoted by $t_{n-1}^*$, of the distribution where the area under its PDF in the direction of the alternative hypothesis is equal to the significance level $\alpha$. Since we have three options for the alternative hypothesis, we have 3 different areas under the PDF to consider. In Figures \@ref(fig:9-critneq), \@ref(fig:9-critgreater), and \@ref(fig:9-critless) below, we have examples on the relevant areas under the PDF if $\alpha=0.05$ and $n=50$:
 
 1. If $H_a: \mu \neq \mu_0$, i.e. we have a two-sided alternative, we want the areas under the PDF of the $t_{49}$ distribution to the right of $t_{49}^*$ and to the left of $-t_{49}^*$ to be equal to 0.05. This is shown in Figure \@ref(fig:9-critneq):
 
@@ -478,15 +478,15 @@ The decision we make from hypothesis testing is not going to be perfect, as we h
 
 We go back to the thickness of silicon wafers worked example in Section \@ref(wafer). The null and alternative hypotheses were $H_0: \mu = 245, H_a: \mu \neq 245$. 
 
-- The type I error in this study is saying that the thickness of silicon wafers is not meeting the target thickness when it actually does.
+- The type I error in this study is concluding that the thickness of silicon wafers is not meeting the target thickness when it actually does.
 
-- The type II error in this study is saying that there is not enough evidence that the thickness of silicon wafers is not meeting the target thickness when it actually does not. 
+- The type II error in this study is concluding that there is not enough evidence that the thickness of silicon wafers is not meeting the target thickness when it actually does not. 
 
 Next, we discuss how we can measure or control the probability of making these errors. 
 
 #### Significance Level and Type I Error
 
-The probability of making a type I error is controlled **significance level**, $\alpha$, of the test. The significance level is the probability of wrongly rejecting the null hypothesis when the null hypothesis is actually true. So if we conduct a hypothesis test with significance level $\alpha = 0.05$, we are saying that we are willing to have a 5% probability of making a type I error if the null hypothesis is true.
+The probability of making a type I error is controlled by the **significance level**, $\alpha$, of the hypothesis test. The significance level is the probability of wrongly rejecting the null hypothesis when the null hypothesis is actually true. So if we conduct a hypothesis test with significance level $\alpha = 0.05$, we are saying that we are willing to have a 5% probability of making a type I error if the null hypothesis is true.
 
 The value of the significance level for a hypothesis should be made in consultation with a subject matter expert and understanding the practical cost of making a type I error. From an ethical standpoint, this value should be decided upon before collecting and evaluating any data, as the significance level should not be adjusted in order to be able to conclude that the null hypothesis is rejected. 
 
@@ -538,19 +538,19 @@ The estimated probability of making a type I error is 0.0516, which matches the 
 
 #### Power and Type II Error {#power}
 
-The **power** of a test is inversely related to the probability of making a type II error. The power of a test is its probability of being able to correctly reject the null alternative hypothesis, when the alternative hypothesis is true. Based on this definition, the power is the complement of the probability of making a type II error, i.e. Power of a test is 1 minus the probability of making a type II error. 
+The **power** of a test is inversely related to the probability of making a type II error. The power of a test is its probability of being able to correctly reject the null alternative hypothesis, when the alternative hypothesis is true. Based on this definition, the power is the complement of the probability of making a type II error, i.e. power of a test is 1 minus the probability of making a type II error. 
 
-Ideally, we would like the power of our hypothesis test to be large. We discuss factors that lead to a hypothesis test having a larger power. Recall that power measures the probability of being able to correctly reject a null hypothesis, and that larger values (in magnitude) of a test statistic provide more evidence against the null hypothesis. So the factors that make a test statistic larger (in magnitude) also lead to an increase in the power of a hypothesis test. As mentioned in Section \@ref(factors), these are:
+Ideally, we would like the power of our hypothesis test to be large. So what are the factors of the power of a hypothesis test? Recall that power measures the probability of being able to correctly reject a null hypothesis, and that larger values (in magnitude) of a test statistic provide more evidence against the null hypothesis. So the factors that make a test statistic larger (in magnitude) also lead to an increase in the power of a hypothesis test. As mentioned in Section \@ref(factors), these are:
 
 - The effect size, which is the difference between the sample mean $\bar{x}$ of our data and the value of the population mean if the null is true $\mu_0$. Larger effect sizes lead to larger test statistics, in magnitude. This should make sense since a larger effect size implies the sample mean deviates more from the expected mean if the null hypothesis is true. 
 
 - The sample size $n$. Larger sample sizes lead to larger magnitudes for the test statistic, see equations \@ref(eq:9-teststatMean) and \@ref(eq:9-teststatProp).
 
-Another factor that increases the power of a hypothesis test is to raise the significance level $\alpha$. We think think of an extreme example. Suppose we set the significance level to be as low as possible, $\alpha=0$. Then the hypothesis test will always not reject the null hypothesis, and we never make a type I error. But always not rejecting the null hypothesis means that if the alternative hypothesis is true, we will always make a type II error, so the power will be 0. This illustrates the the probabilities of making a type I and type II error have an inverse relationship. Reducing one is done at the expense of the other. 
+Another factor that increases the power of a hypothesis test is to raise the significance level $\alpha$. We Think of the following extreme example: Suppose we set the significance level to be as low as possible, $\alpha=0$. Then the hypothesis test will always not reject the null hypothesis, and we never make a type I error. But always not rejecting the null hypothesis means that if the alternative hypothesis is true, we will always make a type II error, so the power will be 0. This illustrates the the probabilities of making a type I and type II error have an inverse relationship. Reducing one is done at the expense of the other. 
 
 Please view the video below which provides a visual explanation as to why probabilities of making a type I and type II error have an inverse relationship:
 
-Calculations involving can be done by hand but is not usually a simple exercise. We will use Monte Carlo simulations to estimate the power of a hypothesis test. 
+Calculating the power of a hypothesis test can be done by hand but is not usually a simple exercise. We will instead use Monte Carlo simulations to estimate the power of a hypothesis test. 
 
 Suppose we want to estimate the power of the hypothesis test for the mean if the data are i.i.d from $N(1,1)$ (and so has a population mean of 1), with sample size of 10, and significance level set to 0.05, and the hypotheses are $H_0: \mu = 0, H_a: \mu \neq 0$. The code below does the following:
 
@@ -595,7 +595,7 @@ The estimated power of this test is 0.8044. So if the data come from a $N(1,1)$,
 
 Note: we must specify a specific value for the parameter that makes the alternative hypothesis true. In this simulation, we simulated data from a distribution with population mean 1. The value of the power will change if we used another value for the mean of the distribution. This value directly affects the effect size. The power is specific to this value for the alternative hypothesis, as well as to the specific values of $n$ and $\alpha$. 
 
-**Power analysis** or power calculations are often done in well-designed experiments to determine what minimum sample size is needed for a hypothesis test to guarantee the hypothesis test achieves a certain power with a pre-determined significance level. 
+**Power analysis** or power calculations are often done in well-designed experiments to determine what minimum sample size is needed for a hypothesis test to guarantee the hypothesis test achieves a certain power with a pre-determined significance level and specific alternative hypothesis (which impacts the effect size).
 
 *Thought question*: How would you tweak the code above to do a power analysis to find the minimum sample size needed to have an estimated power of at least 0.90 (assuming every other factor remains the same)?
 
@@ -603,7 +603,7 @@ Note: we must specify a specific value for the parameter that makes the alternat
 
 You may have noticed that we make a binary decision at the end of a hypothesis test: we either reject or fail to reject a null hypothesis, by comparing our test statistic with a critical value or by comparing a p-value (which depends on the value of the test statistic) with a significance level. 
 
-While the decision is binary, note that the numerical value of a test statistic is not binary. We have mentioned that larger values (in magnitude) imply more evidence against the null hypothesis. So the p-value also can be interpreted in the same manner: smaller values imply more evidence against the null hypothesis.
+While the decision is binary, note that the numerical value of a test statistic is not binary. We have mentioned that larger values (in magnitude) imply more evidence against the null hypothesis. Are p-values of 0.049 and 0.051 really that much different? So the p-value also can be interpreted in the same manner: smaller values imply more evidence against the null hypothesis.
 
 Therefore, when writing conclusions, it is recommended to also provide the p-value or the value of the test statistic, instead of just reporting that the "null hypothesis is rejected" or "the null hypothesis is not rejected". Readers than then make an assessment of how strong the evidence is against the null hypothesis, based on their judgement of what the value of the significance level should be.
 
@@ -647,7 +647,7 @@ To summarize, hypothesis testing is used to assess "statistical significance", b
 For GOF tests, the hypotheses are:
 
 - $H_0:$ the data follow some assumed distribution.
-  - Remember that the null hypothesis is a statement involving an equality. One way to remember is theat if the data folloow some assumed distribution, they are consistent with the PDF of the assumed distribution. 
+  - Remember that the null hypothesis is a statement involving an equality. One way to remember is if the data follow some assumed distribution, their density plot should be consistent with the PDF of the assumed distribution. 
 - $H_a:$ the data do not follow some assumed distribution.
   - There is only one alternative hypothesis for GOF tests.
   

@@ -127,7 +127,7 @@
 
 \title{Understanding Uncertainty Course Notes}
 \author{Jeffrey Woo}
-\date{2025-07-25}
+\date{2025-07-28}
 
 \begin{document}
 \maketitle
@@ -382,7 +382,7 @@ Histograms can also give us an idea about the \textbf{shape} of the distribution
 \item
   Histograms that tail off similarly in both directions are called \textbf{symmetric}. Large and small values are of the variable are equally likely.
 \item
-  Histograms that have a peak in the middle, and then tail off on both sides are not only symmetic, but also \textbf{bell-shaped}, or have a \textbf{normal} distribution. Note: it turns out one of the assumptions in linear regression is that the response variable follow a normal distribution. This may seem restrictive, however, we will see in later modules that this assumption is not particularly crucial under some circumstances.
+  Histograms that have a peak in the middle, and then tail off on both sides are not only symmetric, but also \textbf{bell-shaped}, or have a \textbf{normal} distribution. Note: it turns out one of the assumptions in linear regression is that the response variable follow a normal distribution. This may seem restrictive, however, we will see in later modules that this assumption is not particularly crucial under some circumstances.
 \end{itemize}
 
 \emph{Thought question:} Can you think of real life variables that have symmetric, right-skewed, left-skewed distributions? Feel free to search the internet for examples.
@@ -624,7 +624,7 @@ From the previous sections, we can see how we could use histograms, density plot
 
 A plot that can easily give us values of the variable that correspond to percentiles is the \textbf{empirical cumulative distribution function (ECDF)} plot.
 
-Let \(X\) denote a random variable, and we have observed \(n\) observations of \(X\) denoted by \(x_1, \cdots, x_n\). Let \(x_{(1)}, \cdots x_{(n)}\) denote the ordered statstics of the \(n\) observations. The ECDF, denoted by \(\hat{F}_n(x)\) is the proportion of sample observations less than or equal to the value \(x\) of the random variable. Mathematically, the ECDF is:
+Let \(X\) denote a random variable, and we have observed \(n\) observations of \(X\) denoted by \(x_1, \cdots, x_n\). Let \(x_{(1)}, \cdots x_{(n)}\) denote the ordered statistics of the \(n\) observations. The ECDF, denoted by \(\hat{F}_n(x)\) is the proportion of sample observations less than or equal to the value \(x\) of the random variable. Mathematically, the ECDF is:
 
 \[
  \hat{F}_n(x) = 
@@ -790,7 +790,7 @@ Another related measure is the sample \textbf{standard deviation}, which is the 
 
 \subsection{Interquartile Range}\label{interquartile-range}
 
-Another measure of spread is the \textbf{interquartile range (IQR)}, and it is the difference between the third and first queartiles,
+Another measure of spread is the \textbf{interquartile range (IQR)}, and it is the difference between the third and first quartiles,
 
 \begin{equation} 
 IQR = Q_3 - Q_1.
@@ -864,7 +864,7 @@ We assign a probability to each event. The probability of event \(A\) happening 
 
 \subsection{Complements}\label{complements}
 
-The \textbf{complement} of an event is the set of all outcomes that do not belong to the event. For example, the complement of \(A\), denoted by \(A^c\), will be drawing a card with a red suit (hearts or diamonds). One way to think about complements is that the complement of an event is the event not happening. Loking at Figure \ref{fig:cardsA}, this will be the cards that are not outlined in blue. In this example, \(P(A^c) = \frac{26}{52} = \frac{1}{2}\).
+The \textbf{complement} of an event is the set of all outcomes that do not belong to the event. For example, the complement of \(A\), denoted by \(A^c\), will be drawing a card with a red suit (hearts or diamonds). One way to think about complements is that the complement of an event is the event not happening. Looking at Figure \ref{fig:cardsA}, this will be the cards that are not outlined in blue. In this example, \(P(A^c) = \frac{26}{52} = \frac{1}{2}\).
 
 \emph{Thought question}: What is the probability of drawing a non picture card?
 
@@ -998,7 +998,7 @@ P(Y \cap X) = P(Y|X) \times P(X) = P(X|Y) \times P(Y).
 \label{eq:mult}
 \end{equation}
 
-The multiplication rule is useful in finding the probability of multiple events happening, aespecially if the events happen sequentially. As an example, consider drawing two cards, without replacement, from a standard deck of cards. Without replacement means that after drawing the first card, it is not returned to the deck, so there will be 51 cards remaining after the first draw. Let \(D_1\) and \(D_2\) denote the events that the first draw is a diamond suit and the second draw is a diamond suit respectively. We want to find the probability that both cards drawn are diamond suits. This probability can be written as \(P(D_1 \cap D_2) = P(D_1) \times P(D_2|D_1)  = \frac{13}{52} \times \frac{12}{51}  = \frac{156}{2652}\).
+The multiplication rule is useful in finding the probability of multiple events happening, especially if the events happen sequentially. As an example, consider drawing two cards, without replacement, from a standard deck of cards. Without replacement means that after drawing the first card, it is not returned to the deck, so there will be 51 cards remaining after the first draw. Let \(D_1\) and \(D_2\) denote the events that the first draw is a diamond suit and the second draw is a diamond suit respectively. We want to find the probability that both cards drawn are diamond suits. This probability can be written as \(P(D_1 \cap D_2) = P(D_1) \times P(D_2|D_1)  = \frac{13}{52} \times \frac{12}{51}  = \frac{156}{2652}\).
 
 \subsection{Independent Events}\label{independent-events}
 
@@ -1674,7 +1674,7 @@ Var(X) = E[(X - EX)^2]
 \label{eq:3-var2}
 \end{equation}
 
-and the \textbf{standard deviation} of a random variable \(X\) is the squareroot of its variance
+and the \textbf{standard deviation} of a random variable \(X\) is the square root of its variance
 
 \begin{equation} 
 SD(X) = \sqrt{Var(X)}.
@@ -2896,7 +2896,7 @@ Let us go back to an old example. We will use the \texttt{loan50} dataset from t
 
 This uses KDE with the default settings: kernel is normal, and the bandwidth is based on \href{https://en.wikipedia.org/wiki/Kernel_density_estimation\#A_rule-of-thumb_bandwidth_estimator}{Silverman's rule of thumb}.
 
-To change these, we add the \texttt{kernel} and \texttt{adjust} argument when using the \texttt{density()} function, for example, to use the Epanechnikov kernal with twice the default bandwidth:
+To change these, we add the \texttt{kernel} and \texttt{adjust} argument when using the \texttt{density()} function, for example, to use the Epanechnikov kernel with twice the default bandwidth:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3309,7 +3309,7 @@ P(X=x | Y=y) = P(X=x),
 
 To show that \(X\) and \(Y\) are independent, we need to show one of equations \eqref{eq:5-ind}, \eqref{eq:5-ind2}, or \eqref{eq:5-ind3} to be true for \textbf{all values in the support} of \(X\) and \(Y\). To show that \(X\) and \(Y\) are dependent, we need to show one of equations \eqref{eq:5-ind}, \eqref{eq:5-ind2}, or \eqref{eq:5-ind3} to be false for \textbf{just one value} of \(X\) and \(Y\).
 
-Equations \eqref{eq:5-ind2} and \eqref{eq:5-ind3} are pretty intuitive. These equations say that the conditional distribution of one variable, given the other, is the same as the marginal distribution of the variable. This means the distribution of the variable is not influenced by knowlege about the other variable.
+Equations \eqref{eq:5-ind2} and \eqref{eq:5-ind3} are pretty intuitive. These equations say that the conditional distribution of one variable, given the other, is the same as the marginal distribution of the variable. This means the distribution of the variable is not influenced by knowledge about the other variable.
 
 The first equation \eqref{eq:5-ind} informs us that if the discrete variables are independent, their joint PMF is equal to the product of their marginal PMFs.
 
@@ -4149,7 +4149,7 @@ We now look at a couple of functions to see if they are convex or concave:
   \item
     Its second derivative is \(g^{\prime \prime}(x) = 2\), which is always positive.
   \item
-    We can also look at a graph of \(y = x^2\), and draw line segments that join two points on its graph. All of these lines are never below the graph. Figure \ref{fig:convex} below shows an example with one line segment, but we can see that any line segment that joins two points on the graph will never be velow the graph.
+    We can also look at a graph of \(y = x^2\), and draw line segments that join two points on its graph. All of these lines are never below the graph. Figure \ref{fig:convex} below shows an example with one line segment, but we can see that any line segment that joins two points on the graph will never be below the graph.
   \end{itemize}
 \end{itemize}
 
@@ -4686,7 +4686,7 @@ Ideally, the sample should be \textbf{representative} of the population. A repre
 
 \subsubsection{Variables \& Observations}\label{variables-observations}
 
-A \textbf{variable} is a characteristic or attribute of individuals, or objects, or events that make up the population and sample. In the above scenario, a variable would be the systolic blood pressure of American adults. We can use the notation of random variables to describe variables. For example, we can let \(X\) denote the systolic blood pressure of an American adult, so writing \(P(X>200)\) means we want to find the probability that an American adult has systolic blood pressure greater than 200 mmHg .
+A \textbf{variable} is a characteristic or attribute of individuals, or objects, or events that make up the population and sample. In the above scenario, a variable would be the systolic blood pressure of American adults. We can use the notation of random variables to describe variables. For example, we can let \(X\) denote the systolic blood pressure of an American adult, so writing \(P(X>200)\) means we want to find the probability that an American adult has systolic blood pressure greater than 200 mm Hg .
 
 An \textbf{observation} is the individual person, object or event that we collect data from. In the above scenario, an observation is a single American adult in our sample of 750.
 
@@ -4706,7 +4706,7 @@ A \textbf{parameter} is a numerical summary associated with a population. In the
 
 An \textbf{estimator} is a numerical summary associated with samples. An estimator is typically used to estimate a parameter. In the scenario described above, an estimator of the population mean systolic blood pressure of American adults could be the average systolic blood pressure in our sample. So the sample mean is an estimator of the population mean.
 
-An \textbf{estimated value}, or \textbf{estimate}, is the actual value of the estimator based on a sample. In the scenario described above, suppose the average systolic blood pressure of the 750 American adults is 140 mmHg. We will say the estimated value of the mean systolic blood pressure of American adults is 140 mmHg.
+An \textbf{estimated value}, or \textbf{estimate}, is the actual value of the estimator based on a sample. In the scenario described above, suppose the average systolic blood pressure of the 750 American adults is 140 mm Hg. We will say the estimated value of the mean systolic blood pressure of American adults is 140 mm Hg.
 
 So a parameter is a number that is associated with a population, while an estimator is a number that is associated with a sample. Some other differences between parameters and estimators:
 
@@ -4823,7 +4823,7 @@ Therefore, the MOM estimates for \(\mu\) and \(\sigma^2\) are \(\hat{\mu} = \bar
 
 View the video below for a more detailed explanation on deriving the MOM estimates for the normal distribution below:
 
-We now use these MOM estimates on the data set of birth weights at Baystate Medical Center in 1986. It is well established in the literature that birth weights of babies follow a normal distribution. A quick check with the Shapiro-Wilk's test for normality shows no contradiction, so we proceed with finding the estimates for \(\mu\) and \(\sigma^2\). We then produce a density plot of the birth weights, and overlay a curve that corresponds to a normal distribution with \(\hat{\mu} = \bar{x}\) and \(\hat{\sigma^2}  = \frac{1}{n} \sum_{i=1}^n (x_i - \bar{x})^2\). This normal curve is pretty close to the density plot, so it appears reasonable to say that the birth weights follow a normal distribution with mean 2944.587 (grams) and variance 528940 (grams-squared).
+We now use these MOM estimates on the data set of birth weights at Baystate Medical Center in 1986. It is well established in the literature that birth weights of babies follow a normal distribution. A quick check with the Shapiro-Wilk test for normality shows no contradiction, so we proceed with finding the estimates for \(\mu\) and \(\sigma^2\). We then produce a density plot of the birth weights, and overlay a curve that corresponds to a normal distribution with \(\hat{\mu} = \bar{x}\) and \(\hat{\sigma^2}  = \frac{1}{n} \sum_{i=1}^n (x_i - \bar{x})^2\). This normal curve is pretty close to the density plot, so it appears reasonable to say that the birth weights follow a normal distribution with mean 2944.587 (grams) and variance 528940 (grams-squared).
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5112,7 +5112,7 @@ View the video below that provides a bit more detail on finding and visualizing 
 
 \subsection{Maximum Likelihood Estimation}\label{maximum-likelihood-estimation}
 
-We are now ready to formally define the method of maximimum likelihood estimation. The \textbf{maximum likelihood (ML) estimates} \(\hat{\theta}_1, \cdots, \hat{\theta}_m\) of the parameters \(\theta_1, \cdots, \theta_m\) are found by maximizing the likelihood function \(L(\boldsymbol{\theta} | \boldsymbol{x} )\).
+We are now ready to formally define the method of maximum likelihood estimation. The \textbf{maximum likelihood (ML) estimates} \(\hat{\theta}_1, \cdots, \hat{\theta}_m\) of the parameters \(\theta_1, \cdots, \theta_m\) are found by maximizing the likelihood function \(L(\boldsymbol{\theta} | \boldsymbol{x} )\).
 
 Remember the following when finding ML estimates:
 
@@ -5244,7 +5244,7 @@ There are times when these approaches may not be feasible, for example, there is
 
 \section{Properties of Estimators}\label{estprops}
 
-We have learned about a couple of different methods to estimate parameters. While these two methods are common, there are not the only methods to estimate parameters. One question how do we assess if our estimates are ``good'' or not? We define a few concepts that are used in this asessment.
+We have learned about a couple of different methods to estimate parameters. While these two methods are common, there are not the only methods to estimate parameters. One question how do we assess if our estimates are ``good'' or not? We define a few concepts that are used in this assessment.
 
 \subsection{Estimators VS Estimates}\label{estimators-vs-estimates}
 
@@ -5456,7 +5456,7 @@ We go back to the example from the previous subsection. Consider \(X_1, \cdots, 
   \item
     We had earlier showed that \(Var(\hat{\Theta}_1) = \frac{\sigma^2}{n}\), which shrinks towards zero as \(n\) gets larger, so it is consistent.
   \item
-    We had earlier showed that \(Var(\hat{\Theta}_2) = \sigma^2\), which does not strink towards zero as \(n\) gets larger, so it is not consistent.
+    We had earlier showed that \(Var(\hat{\Theta}_2) = \sigma^2\), which does not shrink towards zero as \(n\) gets larger, so it is not consistent.
   \end{itemize}
 \item
   We can also use Monte Carlo simulations to show these results:
@@ -6279,7 +6279,7 @@ As written earlier, the problem with applying this idea to an estimator that has
 
 \subsection{The Bootstrap Algorithm}\label{the-bootstrap-algorithm}
 
-Instead of simulating \(K\) replicate datasets from an assumed distribution, we simulate \(K\) replicate datasets by sampling, \textbf{with replacement}, \(n\) data points from the original dataset. The ``with replacement'' term is key: it means that when a data point is sampled, it is returned to the orignal dataset and it can be sampled again.
+Instead of simulating \(K\) replicate datasets from an assumed distribution, we simulate \(K\) replicate datasets by sampling, \textbf{with replacement}, \(n\) data points from the original dataset. The ``with replacement'' term is key: it means that when a data point is sampled, it is returned to the original dataset and it can be sampled again.
 
 See the video below for a visual representation of sampling with replacement:
 
@@ -6490,7 +6490,7 @@ The book presents these hypotheses and hypothesis testing using a court trial as
 
 When testing for the mean, the parameter is the population mean. This happens when the variable we are measuring is quantitative. Consider this example:
 
-The term ``Freshman 15'' is an expression that says that college students gain 15 pounds (on average), in their first year in college. Researchers claim that with better education regarding healthier lifestyle habits, this gain is less than 15 pounds, on average.
+The term ``Freshman 15'' is an expression which says that college students gain 15 pounds (on average), in their first year in college. Researchers claim that with better education regarding healthier lifestyle habits, this gain is less than 15 pounds, on average.
 
 Next, we cover the first step in hypothesis testing: how to write the null and alternative hypothesis statements.
 
@@ -6617,7 +6617,7 @@ The \textbf{significance level} of the test, denoted by \(\alpha\), is the proba
   Using the critical value, we \textbf{reject the null hypothesis if our test statistic is more extreme than the critical value in the direction of the alternative hypothesis} (i.e.~our data have enough evidence against the null hypothesis). Otherwise, we fail to reject the null hypothesis (i.e.~our data do not have enough evidence against the null hypothesis).
 \end{itemize}
 
-Both of these approaches are based on the sampling distribution of the estimator, and on the value of the significance level.
+Both of these approaches are based on the sampling distribution of the estimator, and on the value of the significance level. Both of these approaches will always lead to the same conclusion, so you only need to use one of them.
 
 \subsubsection{P-Value}\label{p-value}
 
@@ -6695,7 +6695,7 @@ Using R, this p-value is 0.01123. If our test is conducted at 5\% significance l
 
 Informally, the critical value is the value of the test statistic that is considered ``enough'' to say that we have enough evidence against the null hypothesis to reject it, based on the value of the significance level.
 
-We PDF of the \(t\) distribution to visualize what a critical is. We want to find the ``cut off'' value, denoted by \(t_{n-1}^*\), of the distribution where the area under its PDF in the direction of the alternative hypothesis is equal to the significance level \(\alpha\). Since we have three options for the alternative hypothesis, we have 3 different areas under the PDF to consider. In Figures \ref{fig:9-critneq}, \ref{fig:9-critgreater}, and \ref{fig:9-critless} below, we have examples on the relevant areas under the PDF if \(\alpha=0.05\) and \(n=50\):
+We use the PDF of a \(t\) distribution to visualize what a critical is. We want to find the ``cut off'' value, denoted by \(t_{n-1}^*\), of the distribution where the area under its PDF in the direction of the alternative hypothesis is equal to the significance level \(\alpha\). Since we have three options for the alternative hypothesis, we have 3 different areas under the PDF to consider. In Figures \ref{fig:9-critneq}, \ref{fig:9-critgreater}, and \ref{fig:9-critless} below, we have examples on the relevant areas under the PDF if \(\alpha=0.05\) and \(n=50\):
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -7043,16 +7043,16 @@ We go back to the thickness of silicon wafers worked example in Section \ref{waf
 
 \begin{itemize}
 \item
-  The type I error in this study is saying that the thickness of silicon wafers is not meeting the target thickness when it actually does.
+  The type I error in this study is concluding that the thickness of silicon wafers is not meeting the target thickness when it actually does.
 \item
-  The type II error in this study is saying that there is not enough evidence that the thickness of silicon wafers is not meeting the target thickness when it actually does not.
+  The type II error in this study is concluding that there is not enough evidence that the thickness of silicon wafers is not meeting the target thickness when it actually does not.
 \end{itemize}
 
 Next, we discuss how we can measure or control the probability of making these errors.
 
 \subsubsection{Significance Level and Type I Error}\label{significance-level-and-type-i-error}
 
-The probability of making a type I error is controlled \textbf{significance level}, \(\alpha\), of the test. The significance level is the probability of wrongly rejecting the null hypothesis when the null hypothesis is actually true. So if we conduct a hypothesis test with significance level \(\alpha = 0.05\), we are saying that we are willing to have a 5\% probability of making a type I error if the null hypothesis is true.
+The probability of making a type I error is controlled by the \textbf{significance level}, \(\alpha\), of the hypothesis test. The significance level is the probability of wrongly rejecting the null hypothesis when the null hypothesis is actually true. So if we conduct a hypothesis test with significance level \(\alpha = 0.05\), we are saying that we are willing to have a 5\% probability of making a type I error if the null hypothesis is true.
 
 The value of the significance level for a hypothesis should be made in consultation with a subject matter expert and understanding the practical cost of making a type I error. From an ethical standpoint, this value should be decided upon before collecting and evaluating any data, as the significance level should not be adjusted in order to be able to conclude that the null hypothesis is rejected.
 
@@ -7135,9 +7135,9 @@ The estimated probability of making a type I error is 0.0516, which matches the 
 
 \subsubsection{Power and Type II Error}\label{power}
 
-The \textbf{power} of a test is inversely related to the probability of making a type II error. The power of a test is its probability of being able to correctly reject the null alternative hypothesis, when the alternative hypothesis is true. Based on this definition, the power is the complement of the probability of making a type II error, i.e.~Power of a test is 1 minus the probability of making a type II error.
+The \textbf{power} of a test is inversely related to the probability of making a type II error. The power of a test is its probability of being able to correctly reject the null alternative hypothesis, when the alternative hypothesis is true. Based on this definition, the power is the complement of the probability of making a type II error, i.e.~power of a test is 1 minus the probability of making a type II error.
 
-Ideally, we would like the power of our hypothesis test to be large. We discuss factors that lead to a hypothesis test having a larger power. Recall that power measures the probability of being able to correctly reject a null hypothesis, and that larger values (in magnitude) of a test statistic provide more evidence against the null hypothesis. So the factors that make a test statistic larger (in magnitude) also lead to an increase in the power of a hypothesis test. As mentioned in Section \ref{factors}, these are:
+Ideally, we would like the power of our hypothesis test to be large. So what are the factors of the power of a hypothesis test? Recall that power measures the probability of being able to correctly reject a null hypothesis, and that larger values (in magnitude) of a test statistic provide more evidence against the null hypothesis. So the factors that make a test statistic larger (in magnitude) also lead to an increase in the power of a hypothesis test. As mentioned in Section \ref{factors}, these are:
 
 \begin{itemize}
 \item
@@ -7146,11 +7146,11 @@ Ideally, we would like the power of our hypothesis test to be large. We discuss 
   The sample size \(n\). Larger sample sizes lead to larger magnitudes for the test statistic, see equations \eqref{eq:9-teststatMean} and \eqref{eq:9-teststatProp}.
 \end{itemize}
 
-Another factor that increases the power of a hypothesis test is to raise the significance level \(\alpha\). We think think of an extreme example. Suppose we set the significance level to be as low as possible, \(\alpha=0\). Then the hypothesis test will always not reject the null hypothesis, and we never make a type I error. But always not rejecting the null hypothesis means that if the alternative hypothesis is true, we will always make a type II error, so the power will be 0. This illustrates the the probabilities of making a type I and type II error have an inverse relationship. Reducing one is done at the expense of the other.
+Another factor that increases the power of a hypothesis test is to raise the significance level \(\alpha\). We Think of the following extreme example: Suppose we set the significance level to be as low as possible, \(\alpha=0\). Then the hypothesis test will always not reject the null hypothesis, and we never make a type I error. But always not rejecting the null hypothesis means that if the alternative hypothesis is true, we will always make a type II error, so the power will be 0. This illustrates the the probabilities of making a type I and type II error have an inverse relationship. Reducing one is done at the expense of the other.
 
 Please view the video below which provides a visual explanation as to why probabilities of making a type I and type II error have an inverse relationship:
 
-Calculations involving can be done by hand but is not usually a simple exercise. We will use Monte Carlo simulations to estimate the power of a hypothesis test.
+Calculating the power of a hypothesis test can be done by hand but is not usually a simple exercise. We will instead use Monte Carlo simulations to estimate the power of a hypothesis test.
 
 Suppose we want to estimate the power of the hypothesis test for the mean if the data are i.i.d from \(N(1,1)\) (and so has a population mean of 1), with sample size of 10, and significance level set to 0.05, and the hypotheses are \(H_0: \mu = 0, H_a: \mu \neq 0\). The code below does the following:
 
@@ -7221,7 +7221,7 @@ The estimated power of this test is 0.8044. So if the data come from a \(N(1,1)\
 
 Note: we must specify a specific value for the parameter that makes the alternative hypothesis true. In this simulation, we simulated data from a distribution with population mean 1. The value of the power will change if we used another value for the mean of the distribution. This value directly affects the effect size. The power is specific to this value for the alternative hypothesis, as well as to the specific values of \(n\) and \(\alpha\).
 
-\textbf{Power analysis} or power calculations are often done in well-designed experiments to determine what minimum sample size is needed for a hypothesis test to guarantee the hypothesis test achieves a certain power with a pre-determined significance level.
+\textbf{Power analysis} or power calculations are often done in well-designed experiments to determine what minimum sample size is needed for a hypothesis test to guarantee the hypothesis test achieves a certain power with a pre-determined significance level and specific alternative hypothesis (which impacts the effect size).
 
 \emph{Thought question}: How would you tweak the code above to do a power analysis to find the minimum sample size needed to have an estimated power of at least 0.90 (assuming every other factor remains the same)?
 
@@ -7229,7 +7229,7 @@ Note: we must specify a specific value for the parameter that makes the alternat
 
 You may have noticed that we make a binary decision at the end of a hypothesis test: we either reject or fail to reject a null hypothesis, by comparing our test statistic with a critical value or by comparing a p-value (which depends on the value of the test statistic) with a significance level.
 
-While the decision is binary, note that the numerical value of a test statistic is not binary. We have mentioned that larger values (in magnitude) imply more evidence against the null hypothesis. So the p-value also can be interpreted in the same manner: smaller values imply more evidence against the null hypothesis.
+While the decision is binary, note that the numerical value of a test statistic is not binary. We have mentioned that larger values (in magnitude) imply more evidence against the null hypothesis. Are p-values of 0.049 and 0.051 really that much different? So the p-value also can be interpreted in the same manner: smaller values imply more evidence against the null hypothesis.
 
 Therefore, when writing conclusions, it is recommended to also provide the p-value or the value of the test statistic, instead of just reporting that the ``null hypothesis is rejected'' or ``the null hypothesis is not rejected''. Readers than then make an assessment of how strong the evidence is against the null hypothesis, based on their judgement of what the value of the significance level should be.
 
@@ -7299,7 +7299,7 @@ For GOF tests, the hypotheses are:
   \begin{itemize}
   \tightlist
   \item
-    Remember that the null hypothesis is a statement involving an equality. One way to remember is theat if the data folloow some assumed distribution, they are consistent with the PDF of the assumed distribution.
+    Remember that the null hypothesis is a statement involving an equality. One way to remember is if the data follow some assumed distribution, their density plot should be consistent with the PDF of the assumed distribution.
   \end{itemize}
 \item
   \(H_a:\) the data do not follow some assumed distribution.

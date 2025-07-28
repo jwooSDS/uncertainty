@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999996 (MiKTeX 24.4) (preloaded format=xelatex 2025.6.7)  25 JUL 2025 16:57
+This is XeTeX, Version 3.141592653-2.6-0.999996 (MiKTeX 24.4) (preloaded format=xelatex 2025.6.7)  28 JUL 2025 14:12
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1794,9 +1794,6 @@ lmr/m/n/10 211
 [211]
 
 [212]
-Underfull \vbox (badness 2134) has occurred while \output is active []
-
-
 
 
 Overfull \hbox (25.36343pt too wide) has occurred while \output is active

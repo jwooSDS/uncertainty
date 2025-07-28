@@ -58,7 +58,7 @@ We assign a probability to each event. The probability of event $A$ happening is
 
 ### Complements
 
-The **complement** of an event is the set of all outcomes that do not belong to the event. For example, the complement of $A$, denoted by $A^c$, will be drawing a card with a red suit (hearts or diamonds). One way to think about complements is that the complement of an event is the event not happening. Loking at Figure \@ref(fig:cardsA), this will be the cards that are not outlined in blue. In this example, $P(A^c) = \frac{26}{52} = \frac{1}{2}$.
+The **complement** of an event is the set of all outcomes that do not belong to the event. For example, the complement of $A$, denoted by $A^c$, will be drawing a card with a red suit (hearts or diamonds). One way to think about complements is that the complement of an event is the event not happening. Looking at Figure \@ref(fig:cardsA), this will be the cards that are not outlined in blue. In this example, $P(A^c) = \frac{26}{52} = \frac{1}{2}$.
 
 *Thought question*: What is the probability of drawing a non picture card?
 
@@ -185,7 +185,7 @@ P(Y \cap X) = P(Y|X) \times P(X) = P(X|Y) \times P(Y).
 (\#eq:mult)
 \end{equation}
 
-The multiplication rule is useful in finding the probability of multiple events happening, aespecially if the events happen sequentially. As an example, consider drawing two cards, without replacement, from a standard deck of cards. Without replacement means that after drawing the first card, it is not returned to the deck, so there will be 51 cards remaining after the first draw. Let $D_1$ and $D_2$ denote the events that the first draw is a diamond suit and the second draw is a diamond suit respectively. We want to find the probability that both cards drawn are diamond suits. This probability can be written as $P(D_1 \cap D_2) = P(D_1) \times P(D_2|D_1)  = \frac{13}{52} \times \frac{12}{51}  = \frac{156}{2652}$.
+The multiplication rule is useful in finding the probability of multiple events happening, especially if the events happen sequentially. As an example, consider drawing two cards, without replacement, from a standard deck of cards. Without replacement means that after drawing the first card, it is not returned to the deck, so there will be 51 cards remaining after the first draw. Let $D_1$ and $D_2$ denote the events that the first draw is a diamond suit and the second draw is a diamond suit respectively. We want to find the probability that both cards drawn are diamond suits. This probability can be written as $P(D_1 \cap D_2) = P(D_1) \times P(D_2|D_1)  = \frac{13}{52} \times \frac{12}{51}  = \frac{156}{2652}$.
 
 ### Independent Events
 

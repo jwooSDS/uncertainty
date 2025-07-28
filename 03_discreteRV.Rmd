@@ -367,7 +367,7 @@ Var(X) = E[(X - EX)^2]
 (\#eq:3-var2)
 \end{equation}
 
-and the **standard deviation** of a random variable $X$ is the squareroot of its variance
+and the **standard deviation** of a random variable $X$ is the square root of its variance
 
 \begin{equation} 
 SD(X) = \sqrt{Var(X)}.

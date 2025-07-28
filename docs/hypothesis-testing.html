@@ -89,7 +89,7 @@
 <span class="header-section-number">9.2</span> Hypothesis Test for the Mean<a class="anchor" aria-label="anchor" href="#hypothesis-test-for-the-mean"><i class="fas fa-link"></i></a>
 </h2>
 <p>When testing for the mean, the parameter is the population mean. This happens when the variable we are measuring is quantitative. Consider this example:</p>
-<p>The term “Freshman 15” is an expression that says that college students gain 15 pounds (on average), in their first year in college. Researchers claim that with better education regarding healthier lifestyle habits, this gain is less than 15 pounds, on average.</p>
+<p>The term “Freshman 15” is an expression which says that college students gain 15 pounds (on average), in their first year in college. Researchers claim that with better education regarding healthier lifestyle habits, this gain is less than 15 pounds, on average.</p>
 <p>Next, we cover the first step in hypothesis testing: how to write the null and alternative hypothesis statements.</p>
 <div id="null-and-alternative-hypotheses" class="section level3" number="9.2.1">
 <h3>
@@ -185,7 +185,7 @@ This <span class="math inline">\(t\)</span> statistic is valid since our sample 
 <ul>
 <li>Using the critical value, we <strong>reject the null hypothesis if our test statistic is more extreme than the critical value in the direction of the alternative hypothesis</strong> (i.e. our data have enough evidence against the null hypothesis). Otherwise, we fail to reject the null hypothesis (i.e. our data do not have enough evidence against the null hypothesis).</li>
 </ul>
-<p>Both of these approaches are based on the sampling distribution of the estimator, and on the value of the significance level.</p>
+<p>Both of these approaches are based on the sampling distribution of the estimator, and on the value of the significance level. Both of these approaches will always lead to the same conclusion, so you only need to use one of them.</p>
 <div id="p-value" class="section level4" number="9.2.3.1">
 <h4>
 <span class="header-section-number">9.2.3.1</span> P-Value<a class="anchor" aria-label="anchor" href="#p-value"><i class="fas fa-link"></i></a>
@@ -241,7 +241,7 @@ Figure 9.4: Finding P-value, For Freshman 15 Example
 <span class="header-section-number">9.2.3.2</span> Critical Value<a class="anchor" aria-label="anchor" href="#critical-value-1"><i class="fas fa-link"></i></a>
 </h4>
 <p>Informally, the critical value is the value of the test statistic that is considered “enough” to say that we have enough evidence against the null hypothesis to reject it, based on the value of the significance level.</p>
-<p>We PDF of the <span class="math inline">\(t\)</span> distribution to visualize what a critical is. We want to find the “cut off” value, denoted by <span class="math inline">\(t_{n-1}^*\)</span>, of the distribution where the area under its PDF in the direction of the alternative hypothesis is equal to the significance level <span class="math inline">\(\alpha\)</span>. Since we have three options for the alternative hypothesis, we have 3 different areas under the PDF to consider. In Figures <a href="hypothesis-testing.html#fig:9-critneq">9.5</a>, <a href="hypothesis-testing.html#fig:9-critgreater">9.6</a>, and <a href="hypothesis-testing.html#fig:9-critless">9.7</a> below, we have examples on the relevant areas under the PDF if <span class="math inline">\(\alpha=0.05\)</span> and <span class="math inline">\(n=50\)</span>:</p>
+<p>We use the PDF of a <span class="math inline">\(t\)</span> distribution to visualize what a critical is. We want to find the “cut off” value, denoted by <span class="math inline">\(t_{n-1}^*\)</span>, of the distribution where the area under its PDF in the direction of the alternative hypothesis is equal to the significance level <span class="math inline">\(\alpha\)</span>. Since we have three options for the alternative hypothesis, we have 3 different areas under the PDF to consider. In Figures <a href="hypothesis-testing.html#fig:9-critneq">9.5</a>, <a href="hypothesis-testing.html#fig:9-critgreater">9.6</a>, and <a href="hypothesis-testing.html#fig:9-critless">9.7</a> below, we have examples on the relevant areas under the PDF if <span class="math inline">\(\alpha=0.05\)</span> and <span class="math inline">\(n=50\)</span>:</p>
 <ol style="list-style-type: decimal">
 <li>If <span class="math inline">\(H_a: \mu \neq \mu_0\)</span>, i.e. we have a two-sided alternative, we want the areas under the PDF of the <span class="math inline">\(t_{49}\)</span> distribution to the right of <span class="math inline">\(t_{49}^*\)</span> and to the left of <span class="math inline">\(-t_{49}^*\)</span> to be equal to 0.05. This is shown in Figure <a href="hypothesis-testing.html#fig:9-critneq">9.5</a>:</li>
 </ol>
@@ -475,15 +475,15 @@ Figure 9.9: Finding P-value, For Library Example
 <p>The decision we make from hypothesis testing is not going to be perfect, as we have inherent uncertainty in estimators due to random sampling. So we may sometimes reject a null hypothesis when it is true, or we may fail to reject a null hypothesis when the alternative hypothesis is true. These errors are called <strong>type I</strong> and <strong>type II</strong> errors respectively.</p>
 <p>We go back to the thickness of silicon wafers worked example in Section <a href="hypothesis-testing.html#wafer">9.2.5</a>. The null and alternative hypotheses were <span class="math inline">\(H_0: \mu = 245, H_a: \mu \neq 245\)</span>.</p>
 <ul>
-<li><p>The type I error in this study is saying that the thickness of silicon wafers is not meeting the target thickness when it actually does.</p></li>
-<li><p>The type II error in this study is saying that there is not enough evidence that the thickness of silicon wafers is not meeting the target thickness when it actually does not.</p></li>
+<li><p>The type I error in this study is concluding that the thickness of silicon wafers is not meeting the target thickness when it actually does.</p></li>
+<li><p>The type II error in this study is concluding that there is not enough evidence that the thickness of silicon wafers is not meeting the target thickness when it actually does not.</p></li>
 </ul>
 <p>Next, we discuss how we can measure or control the probability of making these errors.</p>
 <div id="significance-level-and-type-i-error" class="section level4" number="9.4.2.1">
 <h4>
 <span class="header-section-number">9.4.2.1</span> Significance Level and Type I Error<a class="anchor" aria-label="anchor" href="#significance-level-and-type-i-error"><i class="fas fa-link"></i></a>
 </h4>
-<p>The probability of making a type I error is controlled <strong>significance level</strong>, <span class="math inline">\(\alpha\)</span>, of the test. The significance level is the probability of wrongly rejecting the null hypothesis when the null hypothesis is actually true. So if we conduct a hypothesis test with significance level <span class="math inline">\(\alpha = 0.05\)</span>, we are saying that we are willing to have a 5% probability of making a type I error if the null hypothesis is true.</p>
+<p>The probability of making a type I error is controlled by the <strong>significance level</strong>, <span class="math inline">\(\alpha\)</span>, of the hypothesis test. The significance level is the probability of wrongly rejecting the null hypothesis when the null hypothesis is actually true. So if we conduct a hypothesis test with significance level <span class="math inline">\(\alpha = 0.05\)</span>, we are saying that we are willing to have a 5% probability of making a type I error if the null hypothesis is true.</p>
 <p>The value of the significance level for a hypothesis should be made in consultation with a subject matter expert and understanding the practical cost of making a type I error. From an ethical standpoint, this value should be decided upon before collecting and evaluating any data, as the significance level should not be adjusted in order to be able to conclude that the null hypothesis is rejected.</p>
 <p>We will run a Monte Carlo simulation to demonstrate the significance level determines the probability of making a type I error. This simulation is very similar to the one that was done in Section <a href="confidence-intervals.html#CP">8.2.3.3</a> to explain coverage probabilities. You should realize that the probability of making a type I error is directly related to coverage probability which continues with the idea written in Section <a href="hypothesis-testing.html#inference">9.4.1</a> about how confidence intervals and 2-sided hypothesis tests are consistent. The code below does the following:</p>
 <ul>
@@ -542,15 +542,15 @@ Figure 9.9: Finding P-value, For Library Example
 <h4>
 <span class="header-section-number">9.4.2.2</span> Power and Type II Error<a class="anchor" aria-label="anchor" href="#power"><i class="fas fa-link"></i></a>
 </h4>
-<p>The <strong>power</strong> of a test is inversely related to the probability of making a type II error. The power of a test is its probability of being able to correctly reject the null alternative hypothesis, when the alternative hypothesis is true. Based on this definition, the power is the complement of the probability of making a type II error, i.e. Power of a test is 1 minus the probability of making a type II error.</p>
-<p>Ideally, we would like the power of our hypothesis test to be large. We discuss factors that lead to a hypothesis test having a larger power. Recall that power measures the probability of being able to correctly reject a null hypothesis, and that larger values (in magnitude) of a test statistic provide more evidence against the null hypothesis. So the factors that make a test statistic larger (in magnitude) also lead to an increase in the power of a hypothesis test. As mentioned in Section <a href="hypothesis-testing.html#factors">9.2.2.1</a>, these are:</p>
+<p>The <strong>power</strong> of a test is inversely related to the probability of making a type II error. The power of a test is its probability of being able to correctly reject the null alternative hypothesis, when the alternative hypothesis is true. Based on this definition, the power is the complement of the probability of making a type II error, i.e. power of a test is 1 minus the probability of making a type II error.</p>
+<p>Ideally, we would like the power of our hypothesis test to be large. So what are the factors of the power of a hypothesis test? Recall that power measures the probability of being able to correctly reject a null hypothesis, and that larger values (in magnitude) of a test statistic provide more evidence against the null hypothesis. So the factors that make a test statistic larger (in magnitude) also lead to an increase in the power of a hypothesis test. As mentioned in Section <a href="hypothesis-testing.html#factors">9.2.2.1</a>, these are:</p>
 <ul>
 <li><p>The effect size, which is the difference between the sample mean <span class="math inline">\(\bar{x}\)</span> of our data and the value of the population mean if the null is true <span class="math inline">\(\mu_0\)</span>. Larger effect sizes lead to larger test statistics, in magnitude. This should make sense since a larger effect size implies the sample mean deviates more from the expected mean if the null hypothesis is true.</p></li>
 <li><p>The sample size <span class="math inline">\(n\)</span>. Larger sample sizes lead to larger magnitudes for the test statistic, see equations <a href="hypothesis-testing.html#eq:9-teststatMean">(9.1)</a> and <a href="hypothesis-testing.html#eq:9-teststatProp">(9.3)</a>.</p></li>
 </ul>
-<p>Another factor that increases the power of a hypothesis test is to raise the significance level <span class="math inline">\(\alpha\)</span>. We think think of an extreme example. Suppose we set the significance level to be as low as possible, <span class="math inline">\(\alpha=0\)</span>. Then the hypothesis test will always not reject the null hypothesis, and we never make a type I error. But always not rejecting the null hypothesis means that if the alternative hypothesis is true, we will always make a type II error, so the power will be 0. This illustrates the the probabilities of making a type I and type II error have an inverse relationship. Reducing one is done at the expense of the other.</p>
+<p>Another factor that increases the power of a hypothesis test is to raise the significance level <span class="math inline">\(\alpha\)</span>. We Think of the following extreme example: Suppose we set the significance level to be as low as possible, <span class="math inline">\(\alpha=0\)</span>. Then the hypothesis test will always not reject the null hypothesis, and we never make a type I error. But always not rejecting the null hypothesis means that if the alternative hypothesis is true, we will always make a type II error, so the power will be 0. This illustrates the the probabilities of making a type I and type II error have an inverse relationship. Reducing one is done at the expense of the other.</p>
 <p>Please view the video below which provides a visual explanation as to why probabilities of making a type I and type II error have an inverse relationship:</p>
-<p>Calculations involving can be done by hand but is not usually a simple exercise. We will use Monte Carlo simulations to estimate the power of a hypothesis test.</p>
+<p>Calculating the power of a hypothesis test can be done by hand but is not usually a simple exercise. We will instead use Monte Carlo simulations to estimate the power of a hypothesis test.</p>
 <p>Suppose we want to estimate the power of the hypothesis test for the mean if the data are i.i.d from <span class="math inline">\(N(1,1)\)</span> (and so has a population mean of 1), with sample size of 10, and significance level set to 0.05, and the hypotheses are <span class="math inline">\(H_0: \mu = 0, H_a: \mu \neq 0\)</span>. The code below does the following:</p>
 <ul>
 <li>Simulate <span class="math inline">\(X_1, \cdots, X_{10}\)</span> i.i.d. from <span class="math inline">\(N(1,1)\)</span>.</li>
@@ -597,7 +597,7 @@ Figure 9.9: Finding P-value, For Library Example
 <pre><code>## [1] 0.8044</code></pre>
 <p>The estimated power of this test is 0.8044. So if the data come from a <span class="math inline">\(N(1,1)\)</span>, the power of testing <span class="math inline">\(H_0: \mu = 0, H_a: \mu \neq 0\)</span> using a sample of size 10 and significance level of 0.05, is 0.8044.</p>
 <p>Note: we must specify a specific value for the parameter that makes the alternative hypothesis true. In this simulation, we simulated data from a distribution with population mean 1. The value of the power will change if we used another value for the mean of the distribution. This value directly affects the effect size. The power is specific to this value for the alternative hypothesis, as well as to the specific values of <span class="math inline">\(n\)</span> and <span class="math inline">\(\alpha\)</span>.</p>
-<p><strong>Power analysis</strong> or power calculations are often done in well-designed experiments to determine what minimum sample size is needed for a hypothesis test to guarantee the hypothesis test achieves a certain power with a pre-determined significance level.</p>
+<p><strong>Power analysis</strong> or power calculations are often done in well-designed experiments to determine what minimum sample size is needed for a hypothesis test to guarantee the hypothesis test achieves a certain power with a pre-determined significance level and specific alternative hypothesis (which impacts the effect size).</p>
 <p><em>Thought question</em>: How would you tweak the code above to do a power analysis to find the minimum sample size needed to have an estimated power of at least 0.90 (assuming every other factor remains the same)?</p>
 </div>
 </div>
@@ -606,7 +606,7 @@ Figure 9.9: Finding P-value, For Library Example
 <span class="header-section-number">9.4.3</span> Reporting Conclusions<a class="anchor" aria-label="anchor" href="#reporting-conclusions"><i class="fas fa-link"></i></a>
 </h3>
 <p>You may have noticed that we make a binary decision at the end of a hypothesis test: we either reject or fail to reject a null hypothesis, by comparing our test statistic with a critical value or by comparing a p-value (which depends on the value of the test statistic) with a significance level.</p>
-<p>While the decision is binary, note that the numerical value of a test statistic is not binary. We have mentioned that larger values (in magnitude) imply more evidence against the null hypothesis. So the p-value also can be interpreted in the same manner: smaller values imply more evidence against the null hypothesis.</p>
+<p>While the decision is binary, note that the numerical value of a test statistic is not binary. We have mentioned that larger values (in magnitude) imply more evidence against the null hypothesis. Are p-values of 0.049 and 0.051 really that much different? So the p-value also can be interpreted in the same manner: smaller values imply more evidence against the null hypothesis.</p>
 <p>Therefore, when writing conclusions, it is recommended to also provide the p-value or the value of the test statistic, instead of just reporting that the “null hypothesis is rejected” or “the null hypothesis is not rejected”. Readers than then make an assessment of how strong the evidence is against the null hypothesis, based on their judgement of what the value of the significance level should be.</p>
 </div>
 <div id="statistical-vs-practical-significance" class="section level3" number="9.4.4">
@@ -672,7 +672,7 @@ Figure 9.9: Finding P-value, For Library Example
 <li>
 <span class="math inline">\(H_0:\)</span> the data follow some assumed distribution.
 <ul>
-<li>Remember that the null hypothesis is a statement involving an equality. One way to remember is theat if the data folloow some assumed distribution, they are consistent with the PDF of the assumed distribution.</li>
+<li>Remember that the null hypothesis is a statement involving an equality. One way to remember is if the data follow some assumed distribution, their density plot should be consistent with the PDF of the assumed distribution.</li>
 </ul>
 </li>
 <li>
@@ -774,7 +774,7 @@ Figure 9.9: Finding P-value, For Library Example
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2025-07-25.</p>
+    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2025-07-28.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

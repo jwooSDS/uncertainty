@@ -532,7 +532,7 @@ As written earlier, the problem with applying this idea to an estimator that has
 
 ### The Bootstrap Algorithm
 
-Instead of simulating $K$ replicate datasets from an assumed distribution, we simulate $K$ replicate datasets by sampling, **with replacement**, $n$ data points from the original dataset. The "with replacement" term is key: it means that when a data point is sampled, it is returned to the orignal dataset and it can be sampled again.
+Instead of simulating $K$ replicate datasets from an assumed distribution, we simulate $K$ replicate datasets by sampling, **with replacement**, $n$ data points from the original dataset. The "with replacement" term is key: it means that when a data point is sampled, it is returned to the original dataset and it can be sampled again.
 
 See the video below for a visual representation of sampling with replacement:
 

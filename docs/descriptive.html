@@ -147,7 +147,7 @@ Figure 1.2: Historgram for 50 Interest Rates
 <ul>
 <li><p>If the histogram has the reverse characteristic, i.e. the data tail off to the left instead, the shape is said to be <strong>left-skewed</strong>. This implies that small values of the variable are much less common than large values of the variable; larger values are more likely to occur.</p></li>
 <li><p>Histograms that tail off similarly in both directions are called <strong>symmetric</strong>. Large and small values are of the variable are equally likely.</p></li>
-<li><p>Histograms that have a peak in the middle, and then tail off on both sides are not only symmetic, but also <strong>bell-shaped</strong>, or have a <strong>normal</strong> distribution. Note: it turns out one of the assumptions in linear regression is that the response variable follow a normal distribution. This may seem restrictive, however, we will see in later modules that this assumption is not particularly crucial under some circumstances.</p></li>
+<li><p>Histograms that have a peak in the middle, and then tail off on both sides are not only symmetric, but also <strong>bell-shaped</strong>, or have a <strong>normal</strong> distribution. Note: it turns out one of the assumptions in linear regression is that the response variable follow a normal distribution. This may seem restrictive, however, we will see in later modules that this assumption is not particularly crucial under some circumstances.</p></li>
 </ul>
 <p><em>Thought question:</em> Can you think of real life variables that have symmetric, right-skewed, left-skewed distributions? Feel free to search the internet for examples.</p>
 </div>
@@ -317,7 +317,7 @@ Figure 1.6: Box Plot of Interest Rates
 </h3>
 <p>From the previous sections, we can see how we could use histograms, density plots, and box plots to inform us about what proportion of observations take certain values, and the values of the data that correspond to certain percentiles. However, we are limited to quartiles and not any percentile when using box plots, and we need to find areas under the density plot (using integration, not a trivial task), or add up frequencies on a histogram (can be time consuming).</p>
 <p>A plot that can easily give us values of the variable that correspond to percentiles is the <strong>empirical cumulative distribution function (ECDF)</strong> plot.</p>
-<p>Let <span class="math inline">\(X\)</span> denote a random variable, and we have observed <span class="math inline">\(n\)</span> observations of <span class="math inline">\(X\)</span> denoted by <span class="math inline">\(x_1, \cdots, x_n\)</span>. Let <span class="math inline">\(x_{(1)}, \cdots x_{(n)}\)</span> denote the ordered statstics of the <span class="math inline">\(n\)</span> observations. The ECDF, denoted by <span class="math inline">\(\hat{F}_n(x)\)</span> is the proportion of sample observations less than or equal to the value <span class="math inline">\(x\)</span> of the random variable. Mathematically, the ECDF is:</p>
+<p>Let <span class="math inline">\(X\)</span> denote a random variable, and we have observed <span class="math inline">\(n\)</span> observations of <span class="math inline">\(X\)</span> denoted by <span class="math inline">\(x_1, \cdots, x_n\)</span>. Let <span class="math inline">\(x_{(1)}, \cdots x_{(n)}\)</span> denote the ordered statistics of the <span class="math inline">\(n\)</span> observations. The ECDF, denoted by <span class="math inline">\(\hat{F}_n(x)\)</span> is the proportion of sample observations less than or equal to the value <span class="math inline">\(x\)</span> of the random variable. Mathematically, the ECDF is:</p>
 <p><span class="math display">\[
 \hat{F}_n(x) =
   \begin{cases}
@@ -454,7 +454,7 @@ s^2 &amp;= \frac{\sum_{i=1}^n (x_i-\bar{x})^2}{n-1}\\
 <h3>
 <span class="header-section-number">1.5.2</span> Interquartile Range<a class="anchor" aria-label="anchor" href="#interquartile-range"><i class="fas fa-link"></i></a>
 </h3>
-<p>Another measure of spread is the <strong>interquartile range (IQR)</strong>, and it is the difference between the third and first queartiles,</p>
+<p>Another measure of spread is the <strong>interquartile range (IQR)</strong>, and it is the difference between the third and first quartiles,</p>
 <p><span class="math display" id="eq:IQR">\[\begin{equation}
 IQR = Q_3 - Q_1.
 \tag{1.3}
@@ -516,7 +516,7 @@ IQR = Q_3 - Q_1.
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2025-07-25.</p>
+    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2025-07-28.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

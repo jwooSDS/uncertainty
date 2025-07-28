@@ -596,7 +596,7 @@ plot(density(Data$interest_rate), main="Density Plot of Interest Rates")
 
 This uses KDE with the default settings: kernel is normal, and the bandwidth is based on  [Silverman's rule of thumb](https://en.wikipedia.org/wiki/Kernel_density_estimation#A_rule-of-thumb_bandwidth_estimator).
 
-To change these, we add the `kernel` and `adjust` argument when using the `density()` function, for example, to use the Epanechnikov kernal with twice the default bandwidth:
+To change these, we add the `kernel` and `adjust` argument when using the `density()` function, for example, to use the Epanechnikov kernel with twice the default bandwidth:
 
 ```{r 4-R2, fig.cap="Density Plot for 50 Interest Rates, Epanechnikov Kernel, Twice the Bandwidth", message=FALSE, warning=FALSE}
 

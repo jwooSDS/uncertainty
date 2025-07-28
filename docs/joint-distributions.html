@@ -366,7 +366,7 @@ P(X=x | Y=y) = P(X=x),
 \tag{5.11}
 \end{equation}\]</span></p>
 <p>To show that <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are independent, we need to show one of equations <a href="joint-distributions.html#eq:5-ind">(5.9)</a>, <a href="joint-distributions.html#eq:5-ind2">(5.10)</a>, or <a href="joint-distributions.html#eq:5-ind3">(5.11)</a> to be true for <strong>all values in the support</strong> of <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>. To show that <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are dependent, we need to show one of equations <a href="joint-distributions.html#eq:5-ind">(5.9)</a>, <a href="joint-distributions.html#eq:5-ind2">(5.10)</a>, or <a href="joint-distributions.html#eq:5-ind3">(5.11)</a> to be false for <strong>just one value</strong> of <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>.</p>
-<p>Equations <a href="joint-distributions.html#eq:5-ind2">(5.10)</a> and <a href="joint-distributions.html#eq:5-ind3">(5.11)</a> are pretty intuitive. These equations say that the conditional distribution of one variable, given the other, is the same as the marginal distribution of the variable. This means the distribution of the variable is not influenced by knowlege about the other variable.</p>
+<p>Equations <a href="joint-distributions.html#eq:5-ind2">(5.10)</a> and <a href="joint-distributions.html#eq:5-ind3">(5.11)</a> are pretty intuitive. These equations say that the conditional distribution of one variable, given the other, is the same as the marginal distribution of the variable. This means the distribution of the variable is not influenced by knowledge about the other variable.</p>
 <p>The first equation <a href="joint-distributions.html#eq:5-ind">(5.9)</a> informs us that if the discrete variables are independent, their joint PMF is equal to the product of their marginal PMFs.</p>
 <p>We go back to the study time and grades example shown in Table <a href="joint-distributions.html#tab:5-marg-table2">5.3</a>. Study time and grades are dependent (or not independent) since <span class="math inline">\(P(Y=1|X=1) = 0.25\)</span> but <span class="math inline">\(P(Y=1) = 0.5\)</span>. They are not equal so study time and grades are not independent. It is usually easier to prove a condition is not met by providing a <strong>counterexample</strong>: find one specific example where the condition is false.</p>
 <p>If study time and grades were independent, we needed to show <span class="math inline">\(P(Y=1|X=x) = P(Y=1)\)</span> when <span class="math inline">\(X=1,2,3\)</span>, <span class="math inline">\(P(Y=2|X=x) = P(Y=2)\)</span> when <span class="math inline">\(X=1,2,3\)</span>, and <span class="math inline">\(P(Y=3|X=x) = P(Y=3)\)</span> when <span class="math inline">\(X=1,2,3\)</span>. It is usually more tedious to prove a condition is met as we have to show the condition is met under all circumstances.</p>
@@ -898,7 +898,7 @@ Corr(X_1,X_2) &amp;= \frac{Cov(X_1,X_2)}{\sqrt{Var(X_1) Var(X_2)}}\\
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2025-07-25.</p>
+    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2025-07-28.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

@@ -87,7 +87,7 @@
 <h4>
 <span class="header-section-number">7.1.1.2</span> Variables &amp; Observations<a class="anchor" aria-label="anchor" href="#variables-observations"><i class="fas fa-link"></i></a>
 </h4>
-<p>A <strong>variable</strong> is a characteristic or attribute of individuals, or objects, or events that make up the population and sample. In the above scenario, a variable would be the systolic blood pressure of American adults. We can use the notation of random variables to describe variables. For example, we can let <span class="math inline">\(X\)</span> denote the systolic blood pressure of an American adult, so writing <span class="math inline">\(P(X&gt;200)\)</span> means we want to find the probability that an American adult has systolic blood pressure greater than 200 mmHg .</p>
+<p>A <strong>variable</strong> is a characteristic or attribute of individuals, or objects, or events that make up the population and sample. In the above scenario, a variable would be the systolic blood pressure of American adults. We can use the notation of random variables to describe variables. For example, we can let <span class="math inline">\(X\)</span> denote the systolic blood pressure of an American adult, so writing <span class="math inline">\(P(X&gt;200)\)</span> means we want to find the probability that an American adult has systolic blood pressure greater than 200 mm Hg .</p>
 <p>An <strong>observation</strong> is the individual person, object or event that we collect data from. In the above scenario, an observation is a single American adult in our sample of 750.</p>
 <p>One way to think about variables and observations is through a spreadsheet. Typically, each row represents an observation and each column represents a variable. Figure <a href="est.html#fig:07-dataframe">7.1</a> below displays such an example, based on the described scenario. Each row represents an observation, i.e. a single American adult in our sample, and the column represents the variable, which is systolic blood pressure.</p>
 <div class="figure">
@@ -104,7 +104,7 @@ Figure 7.1: Example of Data in a Spreadsheet
 <p>Now that we have made the distinction between a population and a sample, we are ready to define parameters and estimators.</p>
 <p>A <strong>parameter</strong> is a numerical summary associated with a population. In the scenario described above, an example of a population parameter would be the population mean systolic blood pressure of American adults.</p>
 <p>An <strong>estimator</strong> is a numerical summary associated with samples. An estimator is typically used to estimate a parameter. In the scenario described above, an estimator of the population mean systolic blood pressure of American adults could be the average systolic blood pressure in our sample. So the sample mean is an estimator of the population mean.</p>
-<p>An <strong>estimated value</strong>, or <strong>estimate</strong>, is the actual value of the estimator based on a sample. In the scenario described above, suppose the average systolic blood pressure of the 750 American adults is 140 mmHg. We will say the estimated value of the mean systolic blood pressure of American adults is 140 mmHg.</p>
+<p>An <strong>estimated value</strong>, or <strong>estimate</strong>, is the actual value of the estimator based on a sample. In the scenario described above, suppose the average systolic blood pressure of the 750 American adults is 140 mm Hg. We will say the estimated value of the mean systolic blood pressure of American adults is 140 mm Hg.</p>
 <p>So a parameter is a number that is associated with a population, while an estimator is a number that is associated with a sample. Some other differences between parameters and estimators:</p>
 <ul>
 <li>The value of parameters are unknown, while we can actually calculate numerical values of estimators.</li>
@@ -172,7 +172,7 @@ Var(X) &amp;= E(X^2) - E(X)^2\\
 <p>View the video below for a more detailed explanation on deriving the MOM estimates for the normal distribution below:</p>
 <iframe width="560px" height="320px" allowfullscreen="true" allow="autoplay *" title="Module 07: MOM Estimation for Normal" src="https://virginiauniversity.instructuremedia.com/embed/cd5ff3c8-0e95-4790-aefd-e1ee23d70170" frameborder="0">
 </iframe>
-<p>We now use these MOM estimates on the data set of birth weights at Baystate Medical Center in 1986. It is well established in the literature that birth weights of babies follow a normal distribution. A quick check with the Shapiro-Wilk’s test for normality shows no contradiction, so we proceed with finding the estimates for <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma^2\)</span>. We then produce a density plot of the birth weights, and overlay a curve that corresponds to a normal distribution with <span class="math inline">\(\hat{\mu} = \bar{x}\)</span> and <span class="math inline">\(\hat{\sigma^2}  = \frac{1}{n} \sum_{i=1}^n (x_i - \bar{x})^2\)</span>. This normal curve is pretty close to the density plot, so it appears reasonable to say that the birth weights follow a normal distribution with mean 2944.587 (grams) and variance 528940 (grams-squared).</p>
+<p>We now use these MOM estimates on the data set of birth weights at Baystate Medical Center in 1986. It is well established in the literature that birth weights of babies follow a normal distribution. A quick check with the Shapiro-Wilk test for normality shows no contradiction, so we proceed with finding the estimates for <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma^2\)</span>. We then produce a density plot of the birth weights, and overlay a curve that corresponds to a normal distribution with <span class="math inline">\(\hat{\mu} = \bar{x}\)</span> and <span class="math inline">\(\hat{\sigma^2}  = \frac{1}{n} \sum_{i=1}^n (x_i - \bar{x})^2\)</span>. This normal curve is pretty close to the density plot, so it appears reasonable to say that the birth weights follow a normal distribution with mean 2944.587 (grams) and variance 528940 (grams-squared).</p>
 <div class="sourceCode" id="cb114"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://www.stats.ox.ac.uk/pub/MASS4/">MASS</a></span><span class="op">)</span></span>
 <span><span class="va">data</span><span class="op">&lt;-</span><span class="fu">MASS</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/MASS/man/birthwt.html">birthwt</a></span> <span class="co">##dataset comes from MASS package</span></span>
@@ -387,7 +387,7 @@ L(\mu, \sigma^2 | \boldsymbol{x} ) = \prod_{i=1}^n f_X(x_i; \mu, \sigma^2) = \pr
 <h3>
 <span class="header-section-number">7.3.2</span> Maximum Likelihood Estimation<a class="anchor" aria-label="anchor" href="#maximum-likelihood-estimation"><i class="fas fa-link"></i></a>
 </h3>
-<p>We are now ready to formally define the method of maximimum likelihood estimation. The <strong>maximum likelihood (ML) estimates</strong> <span class="math inline">\(\hat{\theta}_1, \cdots, \hat{\theta}_m\)</span> of the parameters <span class="math inline">\(\theta_1, \cdots, \theta_m\)</span> are found by maximizing the likelihood function <span class="math inline">\(L(\boldsymbol{\theta} | \boldsymbol{x} )\)</span>.</p>
+<p>We are now ready to formally define the method of maximum likelihood estimation. The <strong>maximum likelihood (ML) estimates</strong> <span class="math inline">\(\hat{\theta}_1, \cdots, \hat{\theta}_m\)</span> of the parameters <span class="math inline">\(\theta_1, \cdots, \theta_m\)</span> are found by maximizing the likelihood function <span class="math inline">\(L(\boldsymbol{\theta} | \boldsymbol{x} )\)</span>.</p>
 <p>Remember the following when finding ML estimates:</p>
 <ul>
 <li>The values of <span class="math inline">\(\boldsymbol{x}\)</span> are considered fixed as they are given in our data.</li>
@@ -495,7 +495,7 @@ So the ML estimate for <span class="math inline">\(\mu\)</span> is <span class="
 <h2>
 <span class="header-section-number">7.4</span> Properties of Estimators<a class="anchor" aria-label="anchor" href="#estprops"><i class="fas fa-link"></i></a>
 </h2>
-<p>We have learned about a couple of different methods to estimate parameters. While these two methods are common, there are not the only methods to estimate parameters. One question how do we assess if our estimates are “good” or not? We define a few concepts that are used in this asessment.</p>
+<p>We have learned about a couple of different methods to estimate parameters. While these two methods are common, there are not the only methods to estimate parameters. One question how do we assess if our estimates are “good” or not? We define a few concepts that are used in this assessment.</p>
 <div id="estimators-vs-estimates" class="section level3" number="7.4.1">
 <h3>
 <span class="header-section-number">7.4.1</span> Estimators VS Estimates<a class="anchor" aria-label="anchor" href="#estimators-vs-estimates"><i class="fas fa-link"></i></a>
@@ -627,7 +627,7 @@ Figure 7.4: Dist of Theta1 (left) and Theta2 (right)
 <p>The mathematical way of answering this question involves a few more mathematical concepts that we will not get into. A general way of assessing if an estimator is consistent is to see if its variance shrinks towards zero as <span class="math inline">\(n\)</span> gets larger and goes to infinity.</p>
 <ul>
 <li><p>We had earlier showed that <span class="math inline">\(Var(\hat{\Theta}_1) = \frac{\sigma^2}{n}\)</span>, which shrinks towards zero as <span class="math inline">\(n\)</span> gets larger, so it is consistent.</p></li>
-<li><p>We had earlier showed that <span class="math inline">\(Var(\hat{\Theta}_2) = \sigma^2\)</span>, which does not strink towards zero as <span class="math inline">\(n\)</span> gets larger, so it is not consistent.</p></li>
+<li><p>We had earlier showed that <span class="math inline">\(Var(\hat{\Theta}_2) = \sigma^2\)</span>, which does not shrink towards zero as <span class="math inline">\(n\)</span> gets larger, so it is not consistent.</p></li>
 </ul>
 </li>
 <li>
@@ -816,7 +816,7 @@ MSE(\hat{\Theta}) = Var(\hat{\Theta}) + Bias(\hat{\Theta})^2.
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2025-07-25.</p>
+    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2025-07-28.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
