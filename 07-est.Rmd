@@ -202,7 +202,7 @@ L(\boldsymbol{\theta} | \boldsymbol{x} ) = \prod_i^n f_X(x; \boldsymbol{\theta})
 When maximizing the likelihood function, we often log transform the likelihood function first, then maximize the log transformed likelihood function. The log transformed likelihood function is called the **log-likelihood function**, and it is
 
 \begin{equation} 
-\ell(\boldsymbol{\theta} | \boldsymbol{x}) = \log L(\boldsymbol{x} | \boldsymbol{\theta}) = \sum_{i=1}^n \log f_X(x; \boldsymbol{\theta}).
+\ell(\boldsymbol{\theta} | \boldsymbol{x}) = \log L(\boldsymbol{\theta} | \boldsymbol{x}) = \sum_{i=1}^n \log f_X(x; \boldsymbol{\theta}).
 (\#eq:7-loglike)
 \end{equation}
 

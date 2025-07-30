@@ -127,7 +127,7 @@
 
 \title{Understanding Uncertainty Course Notes}
 \author{Jeffrey Woo}
-\date{2025-07-28}
+\date{2025-07-30}
 
 \begin{document}
 \maketitle
@@ -4951,7 +4951,7 @@ L(\boldsymbol{\theta} | \boldsymbol{x} ) = \prod_i^n f_X(x; \boldsymbol{\theta})
 When maximizing the likelihood function, we often log transform the likelihood function first, then maximize the log transformed likelihood function. The log transformed likelihood function is called the \textbf{log-likelihood function}, and it is
 
 \begin{equation} 
-\ell(\boldsymbol{\theta} | \boldsymbol{x}) = \log L(\boldsymbol{x} | \boldsymbol{\theta}) = \sum_{i=1}^n \log f_X(x; \boldsymbol{\theta}).
+\ell(\boldsymbol{\theta} | \boldsymbol{x}) = \log L(\boldsymbol{\theta} | \boldsymbol{x}) = \sum_{i=1}^n \log f_X(x; \boldsymbol{\theta}).
 \label{eq:7-loglike}
 \end{equation}
 
@@ -7374,6 +7374,528 @@ Next, we will use a couple of examples from simulated data:
 ## data:  X
 ## W = 0.77791, p-value = 9.951e-05
 \end{verbatim}
+
+\chapter{Linear Regression}\label{linear-regression}
+
+\section{Introduction}\label{introduction-6}
+
+There is a broad range of statistical methods available for us to learn about data. Broadly speaking, these methods can be classified as \textbf{supervised} and \textbf{unsupervised}. Supervised methods involve relating a response variable with predictors, whereas unsupervised methods do not make a distinction between response variables and predictors and instead want to find structure or patterns in the data.
+
+Supervised methods generally have two primary uses:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Association}: Quantify the relationship between variables. How does a change in the predictor variable change the value of the response variable?
+\item
+  \textbf{Prediction}: Predict a future value of a response variable, using information from predictor variables.
+\end{enumerate}
+
+We always distinguish between a \textbf{response variable}, denoted by \(y\), and a \textbf{predictor variable}, denoted by \(x\). In most supervised methods, we say that the response variable can be approximated by some mathematical function, denoted by \(f\), of the predictor variable, i.e.
+
+\[
+y \approx f(x).
+\]
+
+Oftentimes, we write this relationship as
+
+\[
+y = f(x) + \epsilon,
+\]
+
+where \(\epsilon\) denotes a \textbf{random error term}, with a mean of 0. The error term cannot be predicted based on the data we have.
+
+There are various methods to estimate \(f\). Once we estimate \(f\), we can use our method for association and / or prediction.
+
+In this module, we will introduce one of the most traditional supervised methods: \textbf{linear regression}. It is used when there is a single response variable that is quantitative. The predictors could be quantitative or categorical.
+
+\subsection{Motivation}\label{motivation}
+
+Why do we learn about linear regression?
+
+\begin{itemize}
+\item
+  Linear regression is widely used in many fields, and, under certain conditions, does well in the two primary purposes of supervised methods: association and prediction. Other methods may be better at one of these purposes, but usually at the expense of the other purpose. The most important thing is to know what questions you have in order to select the right method that is best for your question.
+\item
+  Linear regression is fairly easy to interpret and explain to others who may want to know how the method works. Other methods are generally more complicated and can feel like a black-box when explaining to others, leading to less confidence in the method.
+\item
+  A lot of the ideas used in other methods can be viewed as an extension or a variation of linear regression. Once you understand how linear regression works, it becomes easier to understand how other methods work.
+\end{itemize}
+
+\subsection{Toy Example}\label{toy-example}
+
+The most common way of visualizing the relationship between one quantitative predictor variable and one quantitative response variable is with a scatter plot. In the simulated example below, we have data from 6000 UVa undergraduate students on the amount of time they spend studying in a week (in minutes), and how many courses they are taking in the semester (3 or 4 credit courses). Figure \ref{fig:10-scatter} displays the scatter plot.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#create dataframe}
+\NormalTok{df}\OtherTok{\textless{}{-}}\FunctionTok{data.frame}\NormalTok{(study,courses)}
+
+\DocumentationTok{\#\#fit regression}
+\NormalTok{result}\OtherTok{\textless{}{-}}\FunctionTok{lm}\NormalTok{(study}\SpecialCharTok{\textasciitilde{}}\NormalTok{courses, }\AttributeTok{data=}\NormalTok{df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#create scatterplot with regression line overlaid}
+\FunctionTok{plot}\NormalTok{(df}\SpecialCharTok{$}\NormalTok{courses, df}\SpecialCharTok{$}\NormalTok{study, }\AttributeTok{xlab=}\StringTok{"\# of Courses"}\NormalTok{, }\AttributeTok{ylab=}\StringTok{"Study Time (Mins)"}\NormalTok{)}
+\FunctionTok{abline}\NormalTok{(result)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\centering
+\includegraphics{bookdown-demo_files/figure-latex/10-scatter-1.pdf}
+\caption{\label{fig:10-scatter}Scatterplot of Study Time against Number of Courses Taken}
+\end{figure}
+
+Figure \ref{fig:10-scatter} could help us with the following questions:
+
+\begin{itemize}
+\tightlist
+\item
+  Are study time and the number of courses taken related to one another?
+\item
+  How strong is this relationship?
+\item
+  Could we use the data to make a prediction for the study time of a student who is not in this scatterplot?
+\end{itemize}
+
+These questions can be answered using linear regression.
+
+\section{Simple Linear Regression}\label{simple-linear-regression}
+
+In this module, we will keep things simple by only considering a single quantitative predictor. Such a regression is called \textbf{simple linear regression (SLR)} to emphasize that only one predictor is being considered. We will briefly touch on multiple linear regression (MLR) when multiple predictors are involved later in this module, and you will learn more about linear regression next semester.
+
+\subsection{Model Setup}\label{model-setup}
+
+In SLR, the function \(f\) that relates the predictor variable with the response variable is typically \(\beta_0 + \beta_1 x\). Mathematically, we express this as
+
+\[
+y \approx f(x) = \beta_0 + \beta_1 x,
+\]
+
+or in other words, that the response variable has an approximately linear relationship with the predictor variable. So the SLR model is written as
+
+\begin{equation} 
+y_i=\beta_0+\beta_{1}x_i + \epsilon_i,
+\label{eq:10-SLRmod}
+\end{equation}
+
+where
+
+\begin{itemize}
+\tightlist
+\item
+  \(y_i\) denotes the value of the response variable for observation \(i\),
+\item
+  \(x_i\) denotes the value of the predictor for observation \(i\),
+\item
+  \(\epsilon_i\) denotes the value of the error for observation \(i\),
+\item
+  \(\beta_0\) and \(\beta_1\) are parameters in the SLR model, and we want to estimate them. These parameters are sometimes called \textbf{regression coefficients}.
+\item
+  \(\beta_1\) is also called the \textbf{slope}.
+\item
+  \(\beta_0\) is also called the \textbf{intercept}.
+\end{itemize}
+
+In linear regression, we make some assumptions about the error term \(\epsilon\):
+
+\begin{equation} 
+\epsilon_1,\ldots,\epsilon_n \ i.i.d. \sim N(0,\sigma^2).
+\label{eq:10-assumptions}
+\end{equation}
+
+What these assumptions mean is that for each value of the predictor variable \(x\), the response variable:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  follows a normal distribution,
+\item
+  with expected value equal to \(\beta_0+\beta_{1} x\), i.e.
+\end{enumerate}
+
+\begin{equation} 
+E(Y|X=x) = \beta_0+\beta_{1} x 
+\label{eq:10-SLR}
+\end{equation}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  and variance equal to \(\sigma^2\).
+\end{enumerate}
+
+View the video below that explains how these are derived:
+
+In other words, the conditional distribution of \(Y|X=x\) is \(N(\beta_0+\beta_{1} x, \sigma^2)\). Applying this to our study time example, it implies that:
+
+\begin{itemize}
+\tightlist
+\item
+  for students who take 3 courses, their study time follows a \(N(\beta_0 + 3\beta_1, \sigma^2)\) distribution,
+\item
+  for students who take 4 courses, their study time follows a \(N(\beta_0 + 4\beta_1, \sigma^2)\) distribution,
+\item
+  for students who take 5 courses, their study time follows a \(N(\beta_0 + 5\beta_1, \sigma^2)\) distribution.
+\end{itemize}
+
+So if we were to subset our dataframe into three subsets, one with students who take 3 courses, another subset for students who take 4 courses, and another subset for students who take 5 courses, and then create a density plot of study times for each subset, each density plot should follow a normal distribution, with different means, and the same spread.
+
+Let us take a look at these density plots below in Figures \ref{fig:10-conddist3}, \ref{fig:10-conddist4}, and \ref{fig:10-conddis5} below:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#subset dataframe}
+\NormalTok{x}\FloatTok{.3}\OtherTok{\textless{}{-}}\NormalTok{df[}\FunctionTok{which}\NormalTok{(df}\SpecialCharTok{$}\NormalTok{courses}\SpecialCharTok{==}\DecValTok{3}\NormalTok{),]}
+\DocumentationTok{\#\#density plot of study time for students taking 3 courses}
+\FunctionTok{ggplot}\NormalTok{(x}\FloatTok{.3}\NormalTok{,}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{study))}\SpecialCharTok{+}
+  \FunctionTok{geom\_density}\NormalTok{()}\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x=}\StringTok{"Study Time (Mins)"}\NormalTok{, }\AttributeTok{title=}\StringTok{"Dist of Study Times with 3 Courses"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\centering
+\includegraphics{bookdown-demo_files/figure-latex/10-conddist3-1.pdf}
+\caption{\label{fig:10-conddist3}Distribution of Study Time for 3, 4, 5 Classes Taken}
+\end{figure}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#subset dataframe}
+\NormalTok{x}\FloatTok{.4}\OtherTok{\textless{}{-}}\NormalTok{df[}\FunctionTok{which}\NormalTok{(df}\SpecialCharTok{$}\NormalTok{courses}\SpecialCharTok{==}\DecValTok{4}\NormalTok{),]}
+\DocumentationTok{\#\#density plot of study time for students taking 4 courses}
+\FunctionTok{ggplot}\NormalTok{(x}\FloatTok{.4}\NormalTok{,}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{study))}\SpecialCharTok{+}
+  \FunctionTok{geom\_density}\NormalTok{()}\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x=}\StringTok{"Study Time (Mins)"}\NormalTok{, }\AttributeTok{title=}\StringTok{"Dist of Study Times with 4 Courses"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\centering
+\includegraphics{bookdown-demo_files/figure-latex/10-conddist4-1.pdf}
+\caption{\label{fig:10-conddist4}Distribution of Study Time for 3, 4, 5 Classes Taken}
+\end{figure}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#subset dataframe}
+\NormalTok{x}\FloatTok{.5}\OtherTok{\textless{}{-}}\NormalTok{df[}\FunctionTok{which}\NormalTok{(df}\SpecialCharTok{$}\NormalTok{courses}\SpecialCharTok{==}\DecValTok{5}\NormalTok{),]}
+\DocumentationTok{\#\#density plot of study time for students taking 5 courses}
+\FunctionTok{ggplot}\NormalTok{(x}\FloatTok{.5}\NormalTok{,}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{study))}\SpecialCharTok{+}
+  \FunctionTok{geom\_density}\NormalTok{()}\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x=}\StringTok{"Study Time (Mins)"}\NormalTok{, }\AttributeTok{title=}\StringTok{"Dist of Study Times with 5 Courses"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\centering
+\includegraphics{bookdown-demo_files/figure-latex/10-conddist5-1.pdf}
+\caption{\label{fig:10-conddist5}Distribution of Study Time for 3, 4, 5 Classes Taken}
+\end{figure}
+
+Notice all of these plots are normal, with different means (centers), and similar spreads.
+
+The notation on the left hand side of \eqref{eq:10-SLR} denotes the \textbf{expected value} of the response variable, for a fixed value of the predictor variable. Therefore, the regression coefficients can be interpreted in the following manner:
+
+\begin{itemize}
+\tightlist
+\item
+  \(\beta_1\) denotes the change in the response variable, on average, when the predictor increases by one unit.
+\item
+  \(\beta_0\) denotes the mean of the response variable when the predictor is 0.
+\end{itemize}
+
+\subsection{Assessing Assumptions}\label{assessing-assumptions}
+
+The assumptions for the error terms, \(\epsilon\), expressed in equation \eqref{eq:10-assumptions}, can be re-stated with words as the following 4 assumptions:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  For each value of the predictor, the errors have mean 0.
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  This implies that \(f(x) = \beta_0 + \beta_1 x\) approximates the relationship between the variables well.
+\item
+  A scatter plot of the variables should show a linear relationship.
+\item
+  This is the most important assumption of the 4. If it is not met, predictions will be biased, in other words, predictions will systematically over- or under- predict the value of the response variable.
+\end{itemize}
+
+The plots in Figure \ref{fig:10-ass1} are based on simulated data. The scatter plot shown in Figure \ref{fig:10-ass1}(a) is an example of when this assumption is met. As we move from left to right on the plot, the data points are generally evenly scattered on both sides of the regression line that is overlaid.
+
+The scatter plot shown in Figure \ref{fig:10-ass1}(b) is an example of when this assumption is not met. As we move from left to right on the plot in Figure \ref{fig:10-ass1}(b), the data points are generally not evenly scattered on both sides of the regression line that is overlaid. The shape of the plots look more like a cruve rather than a straight line.
+
+\begin{figure}
+\centering
+\includegraphics{images/10-ass1.jpg}
+\caption{\label{fig:10-ass1}Assumption 1 Assessment}
+\end{figure}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  For each value of the predictor, the errors have variance denoted by \(\sigma^2\).
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  This implies that in a scatter plot, the vertical variation of data points around the regression equation has the same magnitude everywhere.
+\item
+  If this assumption is not met, hypothesis tests and confidence intervals from the linear regression will be unreliable.
+\end{itemize}
+
+The plots in Figure \ref{fig:10-ass2} are based on simulated data. The scatter plot shown in Figure \ref{fig:10-ass2}(a) is an example of when this assumption is met (this figure is actually the same as Figure \ref{fig:10-ass1}(a), so the data that produced these plots satisfy both assumptions). As we move from left to right on the plot, the vertical variation of the data points about the regression line is approximately constant.
+
+The scatter plot shown in Figure \ref{fig:10-ass2}(b) is an example of when this assumption is not met. As we move from left to right on the plot in Figure \ref{fig:10-ass2}(b), the vertical variation of the data points about the regression line becomes larger as the value of the response variable gets larger, so the variance is not constant.
+
+\begin{figure}
+\centering
+\includegraphics{images/10-ass2.jpg}
+\caption{\label{fig:10-ass2}Assumption 2}
+\end{figure}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  The errors are independent.
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  This implies that the observations are independent. This is usually a by-product of how the observations were sampled. So knowing the data collection method will help assess whether this assumption is met.
+\item
+  If this assumption is not met, hypothesis tests and confidence intervals from the linear regression will be unreliable.
+\end{itemize}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  The errors are normally distributed.
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  This is considered the least important of the 4 assumptions, especially with large sample sizes. This is due to the Central Limit Theorem, and that in linear regression, we write the conditional expectation (or mean) of the response variable to be equal to \(f(x) = \beta_0 + \beta_1 x\), so hypothesis tests and confidence intervals from the linear regression are likely to be reliable.
+\end{itemize}
+
+\emph{Thought question}: Look at the scatter plot of the toy example in Figure \eqref{eq:10-scatter}. Can you explain why this scatter plot shows the first two assumptions are met for linear regression?
+
+\section{Estimating Regression Coefficients}\label{estimating-regression-coefficients}
+
+There are two methods in estimating the regression coefficients: the method of least squares and the method of maximum likelihood. For large sample sizes, these methods give similar results.
+
+We will go over the method of least squares first, since this is the method that is usually used to explain to new learners and is conceptually easier to understand.
+
+\subsection{Method of Least Squares}\label{method-of-least-squares}
+
+From \eqref{eq:10-SLR} and \eqref{eq:10-SLRmod}, we noted that we have to estimate the regression coefficients \(\beta_0, \beta_1\). We are unable to obtain numerical values of these parameters as we do not have data from the entire population. So what we do is use the data from our sample to estimate these parameters. We estimate \(\beta_0,\beta_1\) using \(\hat{\beta}_0,\hat{\beta}_1\) based on a sample of observations \((x_i,y_i)\) of size \(n\).
+
+Following \eqref{eq:10-SLR} and \eqref{eq:10-SLRmod}, the sample versions are
+
+\begin{equation} 
+\hat{y}=\hat{\beta}_0+\hat{\beta}_1 x
+\label{eq:10-fitted}
+\end{equation}
+
+and
+
+\begin{equation} 
+y=\hat{\beta}_0+\hat{\beta}_1 x + e
+\label{eq:10-fitted-model}
+\end{equation}
+
+respectively. \eqref{eq:10-fitted} is called the \textbf{fitted line}. The line that was overlaid in the scatter plot for the toy example in Figure \ref{fig:10-scatter} represents the fitted line. \eqref{eq:10-fitted-model} is called the \textbf{estimated SLR model}.
+
+\(\hat{\beta}_1,\hat{\beta}_0\) are the estimators for \(\beta_1,\beta_0\) respectively. These estimators can be interpreted in the following manner:
+
+\begin{itemize}
+\tightlist
+\item
+  \(\hat{\beta}_1\) denotes the change in the predicted \(y\) when \(x\) increases by 1 unit. Alternatively, it estimates the change in \(y\), on average, when \(x\) increases by 1 unit.
+\item
+  \(\hat{\beta}_0\) denotes the predicted \(y\) when \(x=0\). Alternatively, it estimates the average of \(y\) when \(x=0\).
+\end{itemize}
+
+From \eqref{eq:10-fitted-model}, notice we use \(e\) to denote the \textbf{residual}, or in other words, the ``error'' in the sample.
+
+From \eqref{eq:10-fitted} and \eqref{eq:10-fitted-model}, we have the following quantities that we can compute:
+
+\begin{itemize}
+\tightlist
+\item
+  Fitted values:
+\end{itemize}
+
+\begin{equation}
+\hat{y}_i = \hat{\beta}_0+\hat{\beta}_1 x_i.
+\label{eq:10-fits}
+\end{equation}
+
+The \textbf{fitted values} are the predicted values of the response variable when the predictor is equal to some specific value. Visually, the fitted line represents each fitted value as we vary the value of the predictor.
+
+\begin{itemize}
+\tightlist
+\item
+  Residuals:
+\end{itemize}
+
+\begin{equation} 
+e_i = y_i-\hat{y}_i.
+\label{eq:10-res}
+\end{equation}
+
+The \textbf{residuals} are the differences between the actual values of the response variable and their corresponding predicted values based on the fitted line. Visually, a residual is the vertical distance of a data point in the scatter plot from the fitted line, as shwon in Figure \ref{fig:10-res} below:
+
+\begin{figure}
+\centering
+\includegraphics{images/10-residuals.png}
+\caption{\label{fig:10-res}Example of Residuals. Picture from \url{https://www.statology.org/residuals/}}
+\end{figure}
+
+\begin{itemize}
+\tightlist
+\item
+  Sum of Squared Errors:
+\end{itemize}
+
+\begin{equation} 
+SS_{res} =  \sum\limits_{i=1}^n(y_i-\hat{y}_i)^2.
+\label{eq:10-SSres}
+\end{equation}
+
+We compute the estimated coefficients \(\hat{\beta}_1,\hat{\beta}_0\) using the \textbf{method of least squares}, i.e.~choose the numerical values of \(\hat{\beta}_1,\hat{\beta}_0\) that minimize \(SS_{res}\) as given in \eqref{eq:10-SSres}. We find the line which minimizes the sum of all the squared residuals on the scatter plot, hence the name method of least squares.
+
+By minimizing \(SS_{res}\) with respect to \(\hat{\beta}_0\) and \(\hat{\beta}_1\), the estimated coefficients in the simple linear regression equation are
+
+\begin{equation} 
+\hat{\beta}_1 = \frac{\sum\limits_{i=1}^n(x_i-\bar{x})(y_i-\bar{y})}{\sum\limits_{i=1}^n(x_i-\bar{x})^2}
+\label{eq:10-b1}
+\end{equation}
+
+and
+
+\begin{equation} 
+\hat{\beta}_0 = \bar{y}- \hat{\beta}_1 \bar{x}
+\label{eq:10-b0}
+\end{equation}
+
+\(\hat{\beta}_1, \hat{\beta}_0\) are called \textbf{least squares estimators}, to emphasize that these values are found by minimizing \(SS_{res}\).
+
+The minimization of \(SS_{res}\) with respect to \(\hat{\beta}_0\) and \(\hat{\beta}_1\) is done by taking the partial derivatives of \eqref{eq:SSres} with respect to \(\hat{\beta}_1\) and \(\hat{\beta}_0\), setting these two partial derivatives equal to 0, and solving these two equations for \(\hat{\beta}_1\) and \(\hat{\beta}_0\).
+
+Let's take a look at the estimated coefficients for our study time example:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#fit regression}
+\NormalTok{result}\OtherTok{\textless{}{-}}\FunctionTok{lm}\NormalTok{(study}\SpecialCharTok{\textasciitilde{}}\NormalTok{courses, }\AttributeTok{data=}\NormalTok{df) }\DocumentationTok{\#\#supply y, then x, and specify dataframe via data}
+\DocumentationTok{\#\#print out the estimated coefficients}
+\NormalTok{result}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = study ~ courses, data = df)
+## 
+## Coefficients:
+## (Intercept)      courses  
+##       58.45       120.39
+\end{verbatim}
+
+From our sample of 6000 students, we have
+
+\begin{itemize}
+\tightlist
+\item
+  \(\hat{\beta}_1\) = 120.3930985. The predicted study time increases by 120.3930985 minutes for each additional course taken.
+\item
+  \(\hat{\beta}_0\) = 58.4482853. The predicted study time is 58.4482853 when no courses are taken. Notice this value does not make sense, as a student cannot be taking 0 courses. If you look at our data, the number of courses taken is 3, 4, or 5. So we should only use our regression when \(3 \leq x \leq 5\). We cannot use it for values of \(x\) outside the range of our data. Making predictions of the response variable for predictors outside the range of the data is called \textbf{extrapolation} and should not be done.
+\end{itemize}
+
+\emph{Thought question}: The response variable for the toy example is study time, in minutes. Suppose we convert these values to hours by dividing by 60. How will the numerical value of the estimated coefficients change? How will the interpretation of the estimated coefficients change?
+
+\subsection{Method of Maximum Likelihood}\label{method-of-maximum-likelihood}
+
+We will give a brief overview of maximum likelihood estimation is carried out for simple linear regression. We had earlier written that the conditional distribution of \(Y|X=x\) is \(N(\beta_0+\beta_{1} x, \sigma^2)\). We know the PDF of any normal distribution takes the form in equation \eqref{eq:4-pdfNormal}, which implies that we can write the PDF of this distribution as
+
+\begin{equation} 
+f_{Y|X}(y|x) = \frac{1}{\sigma \sqrt{2 \pi}} \exp \left(-\frac{(y - (\beta_0+\beta_{1} x))^2}{2 \sigma^2} \right).
+\label{eq:10-SLRpdf}
+\end{equation}
+
+We can then write the corresponding log-likelihood function, using equation \eqref{eq:7-loglike}, as
+
+\begin{equation}
+\ell(\beta_0, \beta_1, \sigma^2 | \boldsymbol{y}, \boldsymbol{x}) = -\frac{n}{2} \log(2\pi) - n \log(\sigma) - \frac{1}{2 \sigma^2} \sum_{i=1}^n \left(y_i - (\beta_0 + \beta_1 x_i) \right)^2.
+\label{eq:10-SLRloglike}
+\end{equation}
+
+We then take the partial derivatives of \eqref{eq:10-SLRloglike} with respect to \(\hat{\beta}_1\) and \(\hat{\beta}_0\), setting these two partial derivatives equal to 0, and solving these two equations for \(\hat{\beta}_1\) and \(\hat{\beta}_0\). We end up with the same solutions as the method of least squares.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#fit regression}
+\NormalTok{result.mle}\OtherTok{\textless{}{-}}\FunctionTok{glm}\NormalTok{(study}\SpecialCharTok{\textasciitilde{}}\NormalTok{courses, }\AttributeTok{data=}\NormalTok{df) }\DocumentationTok{\#\#we use glm() function for ML instead}
+\DocumentationTok{\#\#print out the estimated coefficients. Notice they are the same. }
+\NormalTok{result.mle}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:  glm(formula = study ~ courses, data = df)
+## 
+## Coefficients:
+## (Intercept)      courses  
+##       58.45       120.39  
+## 
+## Degrees of Freedom: 5999 Total (i.e. Null);  5998 Residual
+## Null Deviance:       63300000 
+## Residual Deviance: 5317000   AIC: 57750
+\end{verbatim}
+
+\section{Inference with Simple Linear Regression}\label{inference-with-simple-linear-regression}
+
+The process of using data from a sample to draw a conclusion about the population is called (statistical) \textbf{inference}. Two methods associated with inference are confidence intervals and hypothesis testing.
+
+The most common inference deals with the slope, \(\beta_1\). We are usually assessing whether the slope is 0 or not, as a slope of 0 implies that there is no linear relationship between the variables (if the slope is 0, the value of the response is not affected by the value of the predictor).
+
+We will cover the confidence interval and hypothesis test for the slope.
+
+\subsection{Confidence Interval}\label{confidence-interval}
+
+\subsection{Hypothesis Testing}\label{hypothesis-testing-1}
 
   \bibliography{book.bib,packages.bib}
 

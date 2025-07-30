@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999996 (MiKTeX 24.4) (preloaded format=xelatex 2025.6.7)  28 JUL 2025 15:20
+This is XeTeX, Version 3.141592653-2.6-0.999996 (MiKTeX 24.4) (preloaded format=xelatex 2025.6.7)  30 JUL 2025 17:32
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1806,10 +1806,76 @@ lmr/m/n/10 213
 [214]
 
 [215]
+
+[216]
+Chapter 10.
+
+
+[217
+
+]
+File: bookdown-demo_files/figure-latex/10-scatter-1.pdf Graphic file (type pdf)
+
+<use bookdown-demo_files/figure-latex/10-scatter-1.pdf>
+
+
+[218]
+
+[219]
+
+LaTeX Warning: Reference `fig:10-conddis5' on page 220 undefined on input line 
+7552.
+
+
+
+[220]
+File: bookdown-demo_files/figure-latex/10-conddist3-1.pdf Graphic file (type pd
+f)
+<use bookdown-demo_files/figure-latex/10-conddist3-1.pdf>
+File: bookdown-demo_files/figure-latex/10-conddist4-1.pdf Graphic file (type pd
+f)
+<use bookdown-demo_files/figure-latex/10-conddist4-1.pdf>
+File: bookdown-demo_files/figure-latex/10-conddist5-1.pdf Graphic file (type pd
+f)
+<use bookdown-demo_files/figure-latex/10-conddist5-1.pdf>
+
+
+[221]
+
+[222]
+File: images/10-ass1.jpg Graphic file (type bmp)
+<images/10-ass1.jpg>
+
+
+[223]
+File: images/10-ass2.jpg Graphic file (type bmp)
+<images/10-ass2.jpg>
+
+LaTeX Warning: Reference `eq:10-scatter' on page 224 undefined on input line 77
+10.
+
+
+
+[224]
+
+[225]
+File: images/10-residuals.png Graphic file (type bmp)
+<images/10-residuals.png>
+
+
+[226]
+
+LaTeX Warning: Reference `eq:SSres' on page 227 undefined on input line 7813.
+
+
+
+[227]
+
+[228]
 No file bookdown-demo.bbl.
 
 
-[216] (bookdown-demo.aux)
+[229] (bookdown-demo.aux)
  ***********
 LaTeX2e <2024-06-01> patch level 2
 L3 programming layer <2024-07-20>
@@ -1819,12 +1885,12 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 20412 strings out of 409029
- 378350 string characters out of 5763847
+ 20515 strings out of 409029
+ 381589 string characters out of 5763847
  1958612 words of memory out of 5000000
- 42766 multiletter control sequences out of 15000+600000
+ 42862 multiletter control sequences out of 15000+600000
  566021 words of font info for 104 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  90i,21n,123p,1199b,585s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on bookdown-demo.pdf (216 pages).
+Output written on bookdown-demo.pdf (229 pages).
