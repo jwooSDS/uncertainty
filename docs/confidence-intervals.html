@@ -110,7 +110,7 @@ I = \left(\bar{X}_n - \epsilon, \bar{X}_n + \epsilon \right).
 \text{point estimate } \pm \text{ margin of error}.
 \tag{8.2}
 \end{equation}\]</span></p>
-<p>Indeed, a lot of confidence intervals take on the form expressed in equation <a href="confidence-intervals.html#eq:8-CIbasic2">(8.2)</a>. Given the interval for the mean expressed in equation <a href="confidence-intervals.html#eq:8-CIbasic">(8.1)</a>, we ask what is the probability that the interval <span class="math inline">\(I\)</span> includes the true value of the parameter <span class="math inline">\(\mu\)</span>, i.e. we want to evaluate</p>
+<p>Indeed, a lot of confidence intervals take on the form expressed in equation <a href="confidence-intervals.html#eq:8-CIbasic2">(8.2)</a>, as long as the sampling distribution of the estimator is symmetric. Given the interval for the mean expressed in equation <a href="confidence-intervals.html#eq:8-CIbasic">(8.1)</a>, we ask what is the probability that the interval <span class="math inline">\(I\)</span> includes the true value of the parameter <span class="math inline">\(\mu\)</span>, i.e. we want to evaluate</p>
 <p><span class="math display" id="eq:8-CIprob">\[\begin{equation}
 P(\mu \in  I) = P(\bar{X}_n - \epsilon \leq \mu \leq \bar{X}_n + \epsilon).
 \tag{8.3}
@@ -405,9 +405,9 @@ which gives (4.793914, 17.20609). Since the entire confidence interval lies abov
 <p>Since the margin of error tends to be larger when <span class="math inline">\(\sigma^2\)</span> is unknown, it means the <strong>width</strong> of the confidence interval for the mean tends to be wider when <span class="math inline">\(\sigma^2\)</span> is unknown. The width of a confidence interval is the difference between its upper and lower bound, or twice the margin of error.</p>
 <p><em>Thought question</em>: Try running the Monte Carlo simulation in Section <a href="confidence-intervals.html#CP">8.2.3.3</a>, but now use the sample variance instead of the population variance. Find the coverage probabilities of the confidence interval if we use the correct formula in equation <a href="confidence-intervals.html#eq:8-CImeant">(8.11)</a>, and if we use a <span class="math inline">\(z^*\)</span> as the critical value with the sample variance.</p>
 </div>
-<div id="degrees-of-freedom" class="section level4" number="8.2.4.3">
+<div id="df" class="section level4" number="8.2.4.3">
 <h4>
-<span class="header-section-number">8.2.4.3</span> Degrees of Freedom<a class="anchor" aria-label="anchor" href="#degrees-of-freedom"><i class="fas fa-link"></i></a>
+<span class="header-section-number">8.2.4.3</span> Degrees of Freedom<a class="anchor" aria-label="anchor" href="#df"><i class="fas fa-link"></i></a>
 </h4>
 <p>An intuitive explanation of degrees of freedom is the number of independent pieces of information that can take on any numerical value, when estimating a parameter.</p>
 <p>Generally speaking, we lose 1 degree of freedom for every equation that must be satisfied. In the context of estimating the population mean using the sample mean, we must always satisfy the equation <span class="math inline">\(\bar{x} = \frac{\sum_{i=1}^n x_i}{n}\)</span>, so we lose 1 degree of freedom from an original set of <span class="math inline">\(n\)</span> observations, so the degree of freedom is <span class="math inline">\(n-1\)</span> when calculating the CI for the mean.</p>
@@ -724,7 +724,7 @@ Figure 8.4: Density Plot of Credit Limits
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2025-07-30.</p>
+    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2025-07-31.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

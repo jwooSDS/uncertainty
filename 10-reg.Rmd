@@ -145,7 +145,7 @@ In other words, the conditional distribution of $Y|X=x$ is $N(\beta_0+\beta_{1} 
   
 So if we were to subset our dataframe into three subsets, one with students who take 3 courses, another subset for students who take 4 courses, and another subset for students who take 5 courses, and then create a density plot of study times for each subset, each density plot should follow a normal distribution, with different means, and the same spread.
 
-Let us take a look at these density plots below in Figures \@ref(fig:10-conddist3), \@ref(fig:10-conddist4), and \@ref(fig:10-conddis5) below:
+Let us take a look at these density plots below in Figures \@ref(fig:10-conddist3), \@ref(fig:10-conddist4), and \@ref(fig:10-conddist5) below:
 
 ```{r, warning=FALSE, message=FALSE}
 library(tidyverse)
@@ -211,7 +211,7 @@ The plots in Figure \@ref(fig:10-ass2) are based on simulated data. The scatter 
 
 The scatter plot shown in Figure \@ref(fig:10-ass2)(b) is an example of when this assumption is not met. As we move from left to right on the plot in Figure \@ref(fig:10-ass2)(b), the vertical variation of the data points about the regression line becomes larger as the value of the response variable gets larger, so the variance is not constant.
 
-```{r 10-ass2, fig.cap='Assumption 2', echo=FALSE, message=FALSE}
+```{r 10-ass2, fig.cap='Assumption 2 Assessment', echo=FALSE, message=FALSE}
 knitr::include_graphics("images/10-ass2.jpg")
 ```
 
@@ -222,7 +222,7 @@ knitr::include_graphics("images/10-ass2.jpg")
 4. The errors are normally distributed.
   - This is considered the least important of the 4 assumptions, especially with large sample sizes. This is due to the Central Limit Theorem, and that in linear regression, we write the conditional expectation (or mean) of the response variable to be equal to $f(x) = \beta_0 + \beta_1 x$, so hypothesis tests and confidence intervals from the linear regression are likely to be reliable. 
 
-*Thought question*: Look at the scatter plot of the toy example in Figure \@ref(eq:10-scatter). Can you explain why this scatter plot shows the first two assumptions are met for linear regression?
+*Thought question*: Look at the scatter plot of the toy example in Figure \@ref(fig:10-scatter). Can you explain why this scatter plot shows the first two assumptions are met for linear regression?
 
 ## Estimating Regression Coefficients 
 
@@ -324,6 +324,8 @@ From our sample of 6000 students, we have
 
 *Thought question*: The response variable for the toy example is study time, in minutes. Suppose we convert these values to hours by dividing by 60. How will the numerical value of the estimated coefficients change? How will the interpretation of the estimated coefficients change?
 
+Note: I often get a question about why we minimize $SS_{res}$ and not some other quantity such as minimizing the sum of the absolute value of the residuals $\sum_{i=1}^n |y_i - \hat{y}_i|$? We will state a famous theorem here without proving it. **Gauss Markov Theorem**: Under assumptions for a regression model (as stated in \@ref(eq:10-assumptions)), the least squares estimators $\hat{\beta}_1$ and $\hat{\beta}_0$ are unbiased and have minimum variance among all unbiased linear estimators. This means that any other way of deriving unbiased estimators will result in the estimators having larger variance than least squares estimators. 
+
 ### Method of Maximum Likelihood
 
 We will give a brief overview of maximum likelihood estimation is carried out for simple linear regression. We had earlier written that the conditional distribution of $Y|X=x$ is $N(\beta_0+\beta_{1} x, \sigma^2)$. We know the PDF of any normal distribution takes the form in equation \@ref(eq:4-pdfNormal), which implies that we can write the PDF of this distribution as 
@@ -349,7 +351,7 @@ result.mle<-glm(study~courses, data=df) ##we use glm() function for ML instead
 result.mle
 ```
 
-## Inference with Simple Linear Regression
+## Inference with Simple Linear Regression {#SLRinf}
 
 The process of using data from a sample to draw a conclusion about the population is called (statistical) **inference**. Two methods associated with inference are confidence intervals and hypothesis testing. 
 
@@ -357,6 +359,297 @@ The most common inference deals with the slope, $\beta_1$. We are usually assess
 
 We will cover the confidence interval and hypothesis test for the slope. 
 
+### Properties of Least Squares Estimators
+
+Before proceeding, we will state a few properties associated with the least squares estimators $\hat{\beta}_1, \hat{\beta}_0$. The key here is to realize that the sampling distribution of the least squares estimators are known. Do not be too torn up about these formulas as a lot of these are computed using R. The proof of these are beyond the scope of this class, and there are countless books that provide these proofs if you are interested.
+
+1. $\mbox{E}(\hat{\beta}_1) = \beta_1$, $\mbox{E}(\hat{\beta}_0) = \beta_0$. In other words, the least squares estimators are unbiased. 
+
+2. The variance of $\hat{\beta}_1$ is
+
+\begin{equation} 
+\mbox{Var}(\hat{\beta}_1) = \frac{\sigma^{2}}{\sum_{i=1}^n{(x_{i}-\bar{x})^{2}}}
+(\#eq:10-varb1)
+\end{equation}
+
+3. The variance of $\hat{\beta}_0$ is
+
+\begin{equation} 
+\mbox{Var}(\hat{\beta}_0) = \sigma^2 \left[\frac{1}{n} + \frac{\bar{x}^2}{\sum_{i=1}^n (x_i -\bar{x})^2}\right]
+(\#eq:10-varb0)
+\end{equation}
+
+4. $\hat{\beta}_1$ and $\hat{\beta}_0$ both follow a normal distribution.
+
+Note that in \@ref(eq:10-varb1) and \@ref(eq:10-varb0), we use $s^2 = \frac{SS_{res}}{n-2} = MS_{res}$ to estimate $\sigma^2$ since $\sigma^2$ is a unknown value.
+
+What these imply is that if we standardize $\hat{\beta}_1$ and $\hat{\beta}_0$, these standardized quantities will follow a $t_{n-2}$ distribution, i.e.
+
+\begin{equation} 
+\frac{\hat{\beta}_1 - \beta_1}{se(\hat{\beta}_1)}\sim t_{n-2}
+(\#eq:10-distb1)
+\end{equation}
+
+and
+
+\begin{equation} 
+\frac{\hat{\beta}_0 - \beta_0}{se(\hat{\beta}_0)}\sim t_{n-2},
+(\#eq:10-distb0)
+\end{equation}
+
+where 
+
+\begin{equation}
+se(\hat{\beta}_1) = \sqrt{\frac{MS_{res}}{\sum_{i=1}^n{(x_{i}-\bar{x})^{2}}}} = \frac{s}{\sqrt{\sum_{i=1}^n{(x_{i}-\bar{x})^{2}}}}
+(\#eq:10-seb1)
+\end{equation}
+
+and 
+
+\begin{equation} 
+se(\hat{\beta}_0) = \sqrt{MS_{res}\left[\frac{1}{n} + \frac{\bar{x}^2}{\sum_{i=1}^n (x_i -\bar{x})^2}\right]} = s \sqrt{\frac{1}{n} + \frac{\bar{x}^2}{\sum_{i=1}^n (x_i -\bar{x})^2}}
+(\#eq:10-seb0)
+\end{equation}
+
+Note: The standardized quantities in equations \@ref(eq:10-distb1) and \@ref(eq:10-distb0) follow $t_{n-2}$ distribution. As mentioned in Section \@ref(df), we lose 1 degree of freedom for every equation that must be satisfied. In SLR, we have 2 equations, equations \@ref(eq:10-b1) and \@ref(eq:10-b0), that must be satisfied when calculating the least squares estimators, therefore we have $n-2$ degrees of freedom. 
+
 ### Confidence Interval
 
+From equation \@ref(eq:10-distb1), we note that the standardized $\hat{\beta}_1$ follows a $t_{n-2}$ distribution, which is symmetric. This implies that the confidence interval for the slope takes on the form expressed in equation \@ref(eq:8-CIbasic2), which is $\text{point estimate } \pm \text{ margin of error}$. We also know that the margin of error is the critical value multiplied by the standard error of the estimator.
+
+*Thought question*: Before scrolling any further, can you write out the formula for a confidence interval for the slope?
+
+The $100(1-\alpha)\%$ CI for $\beta_1$ is
+
+\begin{equation} 
+\hat{\beta}_1 \pm t_{n-2}^*  se(\hat{\beta}_1) = \hat{\beta}_1 \pm t_{n-2}^* {\sqrt\frac{MS_{res}}{\sum_{i=1}^n(x_i - \bar{x})^{2}}}.
+(\#eq:10-CIb1)
+\end{equation}
+
+The critical value $t_{n-2}^*$ is found in the usual manner; it corresponds to the $(1 - \alpha/2) \times 100$th percentile from a $t_{n-2}$ distribution. 
+
+Going back to our study time example, the 95% CI for the slope is (`r confint(result,level = 0.95)[2,1]`, `r confint(result,level = 0.95)[2,2]`).
+
+```{r}
+##CI for coefficients
+confint(result,level = 0.95)[2,]
+```
+
+An interpretation of this CI is that there is 95% probability that the random interval  (`r confint(result,level = 0.95)[2,1]`, `r confint(result,level = 0.95)[2,2]`) contains the true value of the slop.
+
+The interval excludes 0, so there is a linear relationship between number of courses and study time.
+
 ### Hypothesis Testing
+
+In the context of SLR, we usually want to test if the slope $\beta_1$ is 0 or not. If the slope is 0, there is no linear relationship between the variables. So the hypotheses are typically $H_0: \beta_1 = 0, H_a: \beta_1 \neq 0.$
+
+In equation \@ref(eq:10-distb1), we noted that the standardized $\hat{\beta}_1$ follows a $t_{n-2}$ distribution, so the test statistic will be a t-statistic which takes on the general form in equation \@ref(eq:9-tstatGen).
+
+*Thought question*: Before scrolling down any further, can you make an educated guess as to the formula of the t-statistic when testing the slope?
+
+The test statistic is
+
+\begin{equation} 
+t = \frac{\hat{\beta}_1 - \text{ value in null}}{se(\hat{\beta}_1)}.
+(\#eq:10-testslope)
+\end{equation}
+
+The p-value and critical value are found in the usual manner, based on a $t_{n-2}$ distribution, and are used in the usual manner. 
+
+We go back to the study time example:
+
+```{r}
+summary(result)$coefficients ##print out est coeffs, SEs, t statistics, and p-vals
+```
+From R, the reported t-statistic and p-value are 255.74125 and approximately 0 respectively. So we reject the null hypothesis: our data support the claim that there is a linear relationship between study time and number of courses taken. 
+
+Note: The reported values are based on a two-sided alternative hypothesis and a null hypothesis of $H_0: \beta_1 = 0$. If we have different hypotheses we will have to perform these calculations on our own. 
+
+### Correlation
+
+Another commonly used measure in linear regression is the correlation, which we explored earlier in Section \@ref(corr). Visually, variables with a higher correlation (in magnitude) means their observations will fall closer to the fitted line. A correlation of 1 or -1 will mean the observations fall perfectly on the fitted line.
+
+### Coefficient of Determination
+
+Another measure that is commonly used in linear regression is the **coefficient of determination**, usually denoted by $R^2$. The value represents the proportion of variation in the response variable that can be explained by our linear regression. In SLR, it is numerically equal to the squared of the sample correlation. 
+
+A few notes about $R^2$:
+
+- $0 \leq R^2 \leq 1$.
+- Values closer to 1 indicate a better fit; values closer to 0 indicate a poorer fit.
+- Often reported as a percentage. 
+
+### Linear Regression in R
+
+Next, we will perform a simple linear regression on a real dataset using R. We will work with the dataset `elmhurst` from the `openintro` package in R.
+
+```{r, echo=FALSE}
+rm(list = ls())
+```
+
+```{r, warning=FALSE, message=FALSE}
+library(tidyverse)
+library(openintro)
+Data<-openintro::elmhurst
+```
+
+Type `?openintro::elmhurst` to read the documentation for datasets in R. Always seek to understand the background of your data! The key pieces of information are:
+
+- A random sample of 50 students (all freshman from the 2011 class at Elmhurst College).
+- Family income of the student (units are missing).
+- Gift aid, in $1000s.
+
+We want to explore how family income may be related to gift aid, in a simple linear regression framework.
+
+#### Visualization {-}
+
+We should always verify with scatter plot that the relationship is (approximately) linear before proceeding with correlation and simple linear regression! 
+
+```{r 10-scatter-eg, fig.cap='Scatter Plot for Worked Example'}
+##scatterplot of gift aid against family income
+ggplot2::ggplot(Data, aes(x=family_income,y=gift_aid))+
+  geom_point()+
+  geom_smooth(method = "lm", se=FALSE)+
+  labs(x="Family Income", y="Gift Aid", title="Scatterplot of Gift Aid against Family")
+```
+
+We note that the observations are fairly evenly scattered on both sides of the regression line, so a linear association exists. We see a negative linear association. As family income increases, the gift aid, on average, decreases. 
+
+We also do not see any observation with weird values that may warrant further investigation.
+
+#### Regression {-}
+
+We use the `lm()` function to fit a regression model. We supply the response variable, then the predictor, with a ``~`` in between, then specify the dataframe via the `data` argument.
+
+```{r}
+##regress gift aid against family income
+result<-lm(gift_aid~family_income, data=Data)
+```
+
+Use the `summary()` function to display relevant information from this regression:
+
+```{r}
+##look at information regarding regression
+summary(result)
+```
+
+We see the following values:
+
+- $\hat{\beta}_1 =$ `r summary(result)$coefficients[2,1]`. The estimated slope informs us the the predicted gift aid decreases by `r -summary(result)$coefficients[2,1]` thousands of dollars (or \$43.07) per unit increase in family income.
+- $\hat{\beta}_0 =$ `r summary(result)$coefficients[1,1]`. For students with no family income, their predicted gift aid is \$24 319.33. Note: from the scatter plot, we have an observation with 0 family income. We must be careful in not extrapolating when making predictions with our regression. We should only make predictions for family incomes between the minimum and maximum values of family incomes in our data.
+- $s$  = `r summary(result)$sigma`, is the estimate of the standard deviation of the error terms, $\sigma$. This is reported as residual standard error in R. Squaring this gives the estimated variance of the error terms.
+- $R^2 =$ `r summary(result)$r.squared`. The coefficient of determination informs us that about 24.86% of the variation in gift aid can be explained by family income. This is reported as multiple R-squared in R.
+
+#### Hypothesis Testing {-}
+
+Under coefficients, we can see the results of the hypothesis tests for $\beta_1$ and $\beta_0$. Specifically, for $\beta_1$:
+
+- $\hat{\beta}_1$ = `r summary(result)$coefficients[2,1]`
+- $se(\hat{\beta}_1)$ = `r summary(result)$coefficients[2,2]`
+- the test statistic is $t$ = `r summary(result)$coefficients[2,3]`
+- the corresponding p-value is `r summary(result)$coefficients[2,4]`
+
+You can work out the p-value using R (slight difference due to rounding):
+
+```{r}
+##pvalue
+2*pt(-abs(-3.985), df = 50-2)
+```
+
+Or find the critical value using R:
+
+```{r}
+##critical value
+qt(1-0.05/2, df = 50-2)
+```
+
+Either way, we end up rejecting the null hypothesis. The data support the claim that there is a linear association between gift aid and family income.
+
+Remember the $t$ tests for the regression coefficients are based on $H_0: \beta_j = 0, H_a: \beta_j \neq 0$. The reported p-value is based on this set of null and alternative hypotheses. If your null and alternative hypotheses are different, you will need to compute your own test statistic and p-value.
+
+#### Confidence Intervals {-}
+
+To find the 95% confidence intervals for the coefficients, we use the `confint()` function:
+
+```{r}
+##to produce 95% CIs for all regression coefficients
+confint(result,level = 0.95)
+```
+
+The 95% CI for $\beta_1$ is (`r confint(result,level = 0.95)[2,1]`, `r confint(result,level = 0.95)[2,2]`). We have 95% confidence that for each additional thousand dollars in family income, the predicted gift aid decreases between \$21.3378 and \$64.8056.
+
+#### Extract Values from R Objects {-}
+
+We can actually extract these values that are being reported from `summary(result)`. To see what can be extracted from an R object, use the `names()` function:
+
+```{r}
+##see what can be extracted from summary(result)
+names(summary(result))
+```
+
+To extract the estimated coefficients:
+
+```{r}
+##extract coefficients
+summary(result)$coefficients
+```
+
+Notice the information is presented in a table. To extract a specific value, we can specify the row and column indices:
+
+```{r}
+##extract slope
+summary(result)$coefficients[2,1]
+##extract intercept
+summary(result)$coefficients[1,1]
+```
+
+On your own, extract the values of the residual standard error and $R^2$.
+
+#### Prediction {-}
+
+A use of regression models is prediction. Suppose I want to predict the gift aid of a student with family income of 50 thousand dollars (assuming the unit is in thousands of dollars). We use the `predict()` function:
+
+```{r}
+##create data point for prediction
+newdata<-data.frame(family_income=50)
+##predicted gift aid when x=50
+predict(result,newdata)
+```
+
+This student's predicted gift aid is \$22 165.75. Alternatively, you could have calculated this by plugging $x=50$ into the estimated SLR equation:
+
+```{r}
+summary(result)$coefficients[1,1] + summary(result)$coefficients[2,1]*50
+```
+
+#### Correlation {-}
+
+We use the `cor()` function to find the correlation between two quantitative variables:
+
+```{r}
+##correlation
+cor(Data$family_income,Data$gift_aid)
+```
+
+The correlation is `r cor(Data$family_income,Data$gift_aid)`. We have a moderate, negative linear association between family income and gift aid. 
+
+## Assessing Model Accuracy
+
+In the introduction of this module, we wrote that supervised methods such as linear regression have two primary uses:
+
+1. Association: Quantify the relationship between variables. How does a change in the predictor variable change the value of the response variable?
+2. Prediction: Predict a future value of a response variable, using information from predictor variables.
+
+In Section \@ref(SLRinf), we focused on the sampling distribution of the least squares estimators which was then used to construct confidence intervals and perform hypothesis tests. These tools are useful in trying to explain the relationship between the response variable and predictor, which is the first primary use of supervised methods. This has been the focus of a lot of traditional research in a wide variety of applications, for example:
+
+- Medicine: Does increasing the dose of a medication reduce severity of symptoms? 
+- Advertising: How does advertising in various media affect sales?
+- Environmental science: How does increased greenhouse emissions affect air quality?
+- Education: Does the use of AI tools aid in student learning outcomes?
+
+In this section, we will focus on the second primary use of supervised methods: prediction. When we focus on prediction, we mainly care about how close are the predicted (or fitted) values with their true values. A lot of what was mentioned in Section \@ref(SLRinf) can actually be ignored (other than assumption 1 of the regression assumptions, since predictions will definitely suffer if this is not met) when our focus is on prediction. Prediction is in the domain of predictive analytics. While predictive analytics can be used in a wide variety of applications, the kind of questions they answer differ from the earlier questions, for example:
+
+- Hospitality: Determining staffing needs for a casino. We want to be able to predict the right number of staff to hire: overstaffing costs money and understaffing results in unhappy customers. 
+- Online ads: Based on a user's history on Amazon, Amazon would like to be able to recommend products that the user is highly likely to purchase.
+- Personalized medicine: Based on a patient's history, what is the most effective treatment plan?
+- Dynamic pricing: airlines use dynamic pricing that adjusts price to maximize profits, based on real-time market conditions. 

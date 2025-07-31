@@ -127,7 +127,7 @@
 
 \title{Understanding Uncertainty Course Notes}
 \author{Jeffrey Woo}
-\date{2025-07-30}
+\date{2025-07-31}
 
 \begin{document}
 \maketitle
@@ -3477,7 +3477,7 @@ We noted earlier that covariance is affected by the units of the variables. Supp
 
 View the video below for a visual explanation as to why the sample covariance is positive when the linear relationship is positive:
 
-\subsection{Correlation}\label{correlation}
+\subsection{Correlation}\label{corr}
 
 The \textbf{correlation} between random variables \(X\) and \(Y\) is
 
@@ -5684,7 +5684,7 @@ Equation \eqref{eq:8-CIbasic} is sometimes expressed as
 \label{eq:8-CIbasic2}
 \end{equation}
 
-Indeed, a lot of confidence intervals take on the form expressed in equation \eqref{eq:8-CIbasic2}. Given the interval for the mean expressed in equation \eqref{eq:8-CIbasic}, we ask what is the probability that the interval \(I\) includes the true value of the parameter \(\mu\), i.e.~we want to evaluate
+Indeed, a lot of confidence intervals take on the form expressed in equation \eqref{eq:8-CIbasic2}, as long as the sampling distribution of the estimator is symmetric. Given the interval for the mean expressed in equation \eqref{eq:8-CIbasic}, we ask what is the probability that the interval \(I\) includes the true value of the parameter \(\mu\), i.e.~we want to evaluate
 
 \begin{equation} 
 P(\mu \in  I) = P(\bar{X}_n - \epsilon \leq \mu \leq \bar{X}_n + \epsilon).
@@ -6080,7 +6080,7 @@ Since the margin of error tends to be larger when \(\sigma^2\) is unknown, it me
 
 \emph{Thought question}: Try running the Monte Carlo simulation in Section \ref{CP}, but now use the sample variance instead of the population variance. Find the coverage probabilities of the confidence interval if we use the correct formula in equation \eqref{eq:8-CImeant}, and if we use a \(z^*\) as the critical value with the sample variance.
 
-\subsubsection{Degrees of Freedom}\label{degrees-of-freedom}
+\subsubsection{Degrees of Freedom}\label{df}
 
 An intuitive explanation of degrees of freedom is the number of independent pieces of information that can take on any numerical value, when estimating a parameter.
 
@@ -7549,7 +7549,7 @@ In other words, the conditional distribution of \(Y|X=x\) is \(N(\beta_0+\beta_{
 
 So if we were to subset our dataframe into three subsets, one with students who take 3 courses, another subset for students who take 4 courses, and another subset for students who take 5 courses, and then create a density plot of study times for each subset, each density plot should follow a normal distribution, with different means, and the same spread.
 
-Let us take a look at these density plots below in Figures \ref{fig:10-conddist3}, \ref{fig:10-conddist4}, and \ref{fig:10-conddis5} below:
+Let us take a look at these density plots below in Figures \ref{fig:10-conddist3}, \ref{fig:10-conddist4}, and \ref{fig:10-conddist5} below:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -7674,7 +7674,7 @@ The scatter plot shown in Figure \ref{fig:10-ass2}(b) is an example of when this
 \begin{figure}
 \centering
 \includegraphics{images/10-ass2.jpg}
-\caption{\label{fig:10-ass2}Assumption 2}
+\caption{\label{fig:10-ass2}Assumption 2 Assessment}
 \end{figure}
 
 \begin{enumerate}
@@ -7707,7 +7707,7 @@ The scatter plot shown in Figure \ref{fig:10-ass2}(b) is an example of when this
   This is considered the least important of the 4 assumptions, especially with large sample sizes. This is due to the Central Limit Theorem, and that in linear regression, we write the conditional expectation (or mean) of the response variable to be equal to \(f(x) = \beta_0 + \beta_1 x\), so hypothesis tests and confidence intervals from the linear regression are likely to be reliable.
 \end{itemize}
 
-\emph{Thought question}: Look at the scatter plot of the toy example in Figure \eqref{eq:10-scatter}. Can you explain why this scatter plot shows the first two assumptions are met for linear regression?
+\emph{Thought question}: Look at the scatter plot of the toy example in Figure \ref{fig:10-scatter}. Can you explain why this scatter plot shows the first two assumptions are met for linear regression?
 
 \section{Estimating Regression Coefficients}\label{estimating-regression-coefficients}
 
@@ -7845,6 +7845,8 @@ From our sample of 6000 students, we have
 
 \emph{Thought question}: The response variable for the toy example is study time, in minutes. Suppose we convert these values to hours by dividing by 60. How will the numerical value of the estimated coefficients change? How will the interpretation of the estimated coefficients change?
 
+Note: I often get a question about why we minimize \(SS_{res}\) and not some other quantity such as minimizing the sum of the absolute value of the residuals \(\sum_{i=1}^n |y_i - \hat{y}_i|\)? We will state a famous theorem here without proving it. \textbf{Gauss Markov Theorem}: Under assumptions for a regression model (as stated in \eqref{eq:10-assumptions}), the least squares estimators \(\hat{\beta}_1\) and \(\hat{\beta}_0\) are unbiased and have minimum variance among all unbiased linear estimators. This means that any other way of deriving unbiased estimators will result in the estimators having larger variance than least squares estimators.
+
 \subsection{Method of Maximum Likelihood}\label{method-of-maximum-likelihood}
 
 We will give a brief overview of maximum likelihood estimation is carried out for simple linear regression. We had earlier written that the conditional distribution of \(Y|X=x\) is \(N(\beta_0+\beta_{1} x, \sigma^2)\). We know the PDF of any normal distribution takes the form in equation \eqref{eq:4-pdfNormal}, which implies that we can write the PDF of this distribution as
@@ -7885,7 +7887,7 @@ We then take the partial derivatives of \eqref{eq:10-SLRloglike} with respect to
 ## Residual Deviance: 5317000   AIC: 57750
 \end{verbatim}
 
-\section{Inference with Simple Linear Regression}\label{inference-with-simple-linear-regression}
+\section{Inference with Simple Linear Regression}\label{SLRinf}
 
 The process of using data from a sample to draw a conclusion about the population is called (statistical) \textbf{inference}. Two methods associated with inference are confidence intervals and hypothesis testing.
 
@@ -7893,9 +7895,490 @@ The most common inference deals with the slope, \(\beta_1\). We are usually asse
 
 We will cover the confidence interval and hypothesis test for the slope.
 
+\subsection{Properties of Least Squares Estimators}\label{properties-of-least-squares-estimators}
+
+Before proceeding, we will state a few properties associated with the least squares estimators \(\hat{\beta}_1, \hat{\beta}_0\). The key here is to realize that the sampling distribution of the least squares estimators are known. Do not be too torn up about these formulas as a lot of these are computed using R. The proof of these are beyond the scope of this class, and there are countless books that provide these proofs if you are interested.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \(\mbox{E}(\hat{\beta}_1) = \beta_1\), \(\mbox{E}(\hat{\beta}_0) = \beta_0\). In other words, the least squares estimators are unbiased.
+\item
+  The variance of \(\hat{\beta}_1\) is
+\end{enumerate}
+
+\begin{equation} 
+\mbox{Var}(\hat{\beta}_1) = \frac{\sigma^{2}}{\sum_{i=1}^n{(x_{i}-\bar{x})^{2}}}
+\label{eq:10-varb1}
+\end{equation}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  The variance of \(\hat{\beta}_0\) is
+\end{enumerate}
+
+\begin{equation} 
+\mbox{Var}(\hat{\beta}_0) = \sigma^2 \left[\frac{1}{n} + \frac{\bar{x}^2}{\sum_{i=1}^n (x_i -\bar{x})^2}\right]
+\label{eq:10-varb0}
+\end{equation}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  \(\hat{\beta}_1\) and \(\hat{\beta}_0\) both follow a normal distribution.
+\end{enumerate}
+
+Note that in \eqref{eq:10-varb1} and \eqref{eq:10-varb0}, we use \(s^2 = \frac{SS_{res}}{n-2} = MS_{res}\) to estimate \(\sigma^2\) since \(\sigma^2\) is a unknown value.
+
+What these imply is that if we standardize \(\hat{\beta}_1\) and \(\hat{\beta}_0\), these standardized quantities will follow a \(t_{n-2}\) distribution, i.e.
+
+\begin{equation} 
+\frac{\hat{\beta}_1 - \beta_1}{se(\hat{\beta}_1)}\sim t_{n-2}
+\label{eq:10-distb1}
+\end{equation}
+
+and
+
+\begin{equation} 
+\frac{\hat{\beta}_0 - \beta_0}{se(\hat{\beta}_0)}\sim t_{n-2},
+\label{eq:10-distb0}
+\end{equation}
+
+where
+
+\begin{equation}
+se(\hat{\beta}_1) = \sqrt{\frac{MS_{res}}{\sum_{i=1}^n{(x_{i}-\bar{x})^{2}}}} = \frac{s}{\sqrt{\sum_{i=1}^n{(x_{i}-\bar{x})^{2}}}}
+\label{eq:10-seb1}
+\end{equation}
+
+and
+
+\begin{equation} 
+se(\hat{\beta}_0) = \sqrt{MS_{res}\left[\frac{1}{n} + \frac{\bar{x}^2}{\sum_{i=1}^n (x_i -\bar{x})^2}\right]} = s \sqrt{\frac{1}{n} + \frac{\bar{x}^2}{\sum_{i=1}^n (x_i -\bar{x})^2}}
+\label{eq:10-seb0}
+\end{equation}
+
+Note: The standardized quantities in equations \eqref{eq:10-distb1} and \eqref{eq:10-distb0} follow \(t_{n-2}\) distribution. As mentioned in Section \ref{df}, we lose 1 degree of freedom for every equation that must be satisfied. In SLR, we have 2 equations, equations \eqref{eq:10-b1} and \eqref{eq:10-b0}, that must be satisfied when calculating the least squares estimators, therefore we have \(n-2\) degrees of freedom.
+
 \subsection{Confidence Interval}\label{confidence-interval}
 
+From equation \eqref{eq:10-distb1}, we note that the standardized \(\hat{\beta}_1\) follows a \(t_{n-2}\) distribution, which is symmetric. This implies that the confidence interval for the slope takes on the form expressed in equation \eqref{eq:8-CIbasic2}, which is \(\text{point estimate } \pm \text{ margin of error}\). We also know that the margin of error is the critical value multiplied by the standard error of the estimator.
+
+\emph{Thought question}: Before scrolling any further, can you write out the formula for a confidence interval for the slope?
+
+The \(100(1-\alpha)\%\) CI for \(\beta_1\) is
+
+\begin{equation} 
+\hat{\beta}_1 \pm t_{n-2}^*  se(\hat{\beta}_1) = \hat{\beta}_1 \pm t_{n-2}^* {\sqrt\frac{MS_{res}}{\sum_{i=1}^n(x_i - \bar{x})^{2}}}.
+\label{eq:10-CIb1}
+\end{equation}
+
+The critical value \(t_{n-2}^*\) is found in the usual manner; it corresponds to the \((1 - \alpha/2) \times 100\)th percentile from a \(t_{n-2}\) distribution.
+
+Going back to our study time example, the 95\% CI for the slope is (119.470237, 121.3159601).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#CI for coefficients}
+\FunctionTok{confint}\NormalTok{(result,}\AttributeTok{level =} \FloatTok{0.95}\NormalTok{)[}\DecValTok{2}\NormalTok{,]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    2.5 %   97.5 % 
+## 119.4702 121.3160
+\end{verbatim}
+
+An interpretation of this CI is that there is 95\% probability that the random interval (119.470237, 121.3159601) contains the true value of the slop.
+
+The interval excludes 0, so there is a linear relationship between number of courses and study time.
+
 \subsection{Hypothesis Testing}\label{hypothesis-testing-1}
+
+In the context of SLR, we usually want to test if the slope \(\beta_1\) is 0 or not. If the slope is 0, there is no linear relationship between the variables. So the hypotheses are typically \(H_0: \beta_1 = 0, H_a: \beta_1 \neq 0.\)
+
+In equation \eqref{eq:10-distb1}, we noted that the standardized \(\hat{\beta}_1\) follows a \(t_{n-2}\) distribution, so the test statistic will be a t-statistic which takes on the general form in equation \eqref{eq:9-tstatGen}.
+
+\emph{Thought question}: Before scrolling down any further, can you make an educated guess as to the formula of the t-statistic when testing the slope?
+
+The test statistic is
+
+\begin{equation} 
+t = \frac{\hat{\beta}_1 - \text{ value in null}}{se(\hat{\beta}_1)}.
+\label{eq:10-testslope}
+\end{equation}
+
+The p-value and critical value are found in the usual manner, based on a \(t_{n-2}\) distribution, and are used in the usual manner.
+
+We go back to the study time example:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(result)}\SpecialCharTok{$}\NormalTok{coefficients }\DocumentationTok{\#\#print out est coeffs, SEs, t statistics, and p{-}vals}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##              Estimate Std. Error   t value      Pr(>|t|)
+## (Intercept)  58.44829  1.9218752  30.41211 4.652442e-189
+## courses     120.39310  0.4707614 255.74125  0.000000e+00
+\end{verbatim}
+
+From R, the reported t-statistic and p-value are 255.74125 and approximately 0 respectively. So we reject the null hypothesis: our data support the claim that there is a linear relationship between study time and number of courses taken.
+
+Note: The reported values are based on a two-sided alternative hypothesis and a null hypothesis of \(H_0: \beta_1 = 0\). If we have different hypotheses we will have to perform these calculations on our own.
+
+\subsection{Correlation}\label{correlation}
+
+Another commonly used measure in linear regression is the correlation, which we explored earlier in Section \ref{corr}. Visually, variables with a higher correlation (in magnitude) means their observations will fall closer to the fitted line. A correlation of 1 or -1 will mean the observations fall perfectly on the fitted line.
+
+\subsection{Coefficient of Determination}\label{coefficient-of-determination}
+
+Another measure that is commonly used in linear regression is the \textbf{coefficient of determination}, usually denoted by \(R^2\). The value represents the proportion of variation in the response variable that can be explained by our linear regression. In SLR, it is numerically equal to the squared of the sample correlation.
+
+A few notes about \(R^2\):
+
+\begin{itemize}
+\tightlist
+\item
+  \(0 \leq R^2 \leq 1\).
+\item
+  Values closer to 1 indicate a better fit; values closer to 0 indicate a poorer fit.
+\item
+  Often reported as a percentage.
+\end{itemize}
+
+\subsection{Linear Regression in R}\label{linear-regression-in-r}
+
+Next, we will perform a simple linear regression on a real dataset using R. We will work with the dataset \texttt{elmhurst} from the \texttt{openintro} package in R.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\FunctionTok{library}\NormalTok{(openintro)}
+\NormalTok{Data}\OtherTok{\textless{}{-}}\NormalTok{openintro}\SpecialCharTok{::}\NormalTok{elmhurst}
+\end{Highlighting}
+\end{Shaded}
+
+Type \texttt{?openintro::elmhurst} to read the documentation for datasets in R. Always seek to understand the background of your data! The key pieces of information are:
+
+\begin{itemize}
+\tightlist
+\item
+  A random sample of 50 students (all freshman from the 2011 class at Elmhurst College).
+\item
+  Family income of the student (units are missing).
+\item
+  Gift aid, in \$1000s.
+\end{itemize}
+
+We want to explore how family income may be related to gift aid, in a simple linear regression framework.
+
+\subsubsection*{Visualization}\label{visualization}
+\addcontentsline{toc}{subsubsection}{Visualization}
+
+We should always verify with scatter plot that the relationship is (approximately) linear before proceeding with correlation and simple linear regression!
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#scatterplot of gift aid against family income}
+\NormalTok{ggplot2}\SpecialCharTok{::}\FunctionTok{ggplot}\NormalTok{(Data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{family\_income,}\AttributeTok{y=}\NormalTok{gift\_aid))}\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{()}\SpecialCharTok{+}
+  \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{method =} \StringTok{"lm"}\NormalTok{, }\AttributeTok{se=}\ConstantTok{FALSE}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x=}\StringTok{"Family Income"}\NormalTok{, }\AttributeTok{y=}\StringTok{"Gift Aid"}\NormalTok{, }\AttributeTok{title=}\StringTok{"Scatterplot of Gift Aid against Family"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `geom_smooth()` using formula = 'y ~ x'
+\end{verbatim}
+
+\begin{figure}
+\centering
+\includegraphics{bookdown-demo_files/figure-latex/10-scatter-eg-1.pdf}
+\caption{\label{fig:10-scatter-eg}Scatter Plot for Worked Example}
+\end{figure}
+
+We note that the observations are fairly evenly scattered on both sides of the regression line, so a linear association exists. We see a negative linear association. As family income increases, the gift aid, on average, decreases.
+
+We also do not see any observation with weird values that may warrant further investigation.
+
+\subsubsection*{Regression}\label{regression}
+\addcontentsline{toc}{subsubsection}{Regression}
+
+We use the \texttt{lm()} function to fit a regression model. We supply the response variable, then the predictor, with a \texttt{\textasciitilde{}} in between, then specify the dataframe via the \texttt{data} argument.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#regress gift aid against family income}
+\NormalTok{result}\OtherTok{\textless{}{-}}\FunctionTok{lm}\NormalTok{(gift\_aid}\SpecialCharTok{\textasciitilde{}}\NormalTok{family\_income, }\AttributeTok{data=}\NormalTok{Data)}
+\end{Highlighting}
+\end{Shaded}
+
+Use the \texttt{summary()} function to display relevant information from this regression:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#look at information regarding regression}
+\FunctionTok{summary}\NormalTok{(result)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = gift_aid ~ family_income, data = Data)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -10.1128  -3.6234  -0.2161   3.1587  11.5707 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)   24.31933    1.29145  18.831  < 2e-16 ***
+## family_income -0.04307    0.01081  -3.985 0.000229 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 4.783 on 48 degrees of freedom
+## Multiple R-squared:  0.2486, Adjusted R-squared:  0.2329 
+## F-statistic: 15.88 on 1 and 48 DF,  p-value: 0.0002289
+\end{verbatim}
+
+We see the following values:
+
+\begin{itemize}
+\tightlist
+\item
+  \(\hat{\beta}_1 =\) -0.0430717. The estimated slope informs us the the predicted gift aid decreases by 0.0430717 thousands of dollars (or \$43.07) per unit increase in family income.
+\item
+  \(\hat{\beta}_0 =\) 24.319329. For students with no family income, their predicted gift aid is \$24 319.33. Note: from the scatter plot, we have an observation with 0 family income. We must be careful in not extrapolating when making predictions with our regression. We should only make predictions for family incomes between the minimum and maximum values of family incomes in our data.
+\item
+  \(s\) = 4.7825989, is the estimate of the standard deviation of the error terms, \(\sigma\). This is reported as residual standard error in R. Squaring this gives the estimated variance of the error terms.
+\item
+  \(R^2 =\) 0.2485582. The coefficient of determination informs us that about 24.86\% of the variation in gift aid can be explained by family income. This is reported as multiple R-squared in R.
+\end{itemize}
+
+\subsubsection*{Hypothesis Testing}\label{hypothesis-testing-2}
+\addcontentsline{toc}{subsubsection}{Hypothesis Testing}
+
+Under coefficients, we can see the results of the hypothesis tests for \(\beta_1\) and \(\beta_0\). Specifically, for \(\beta_1\):
+
+\begin{itemize}
+\tightlist
+\item
+  \(\hat{\beta}_1\) = -0.0430717
+\item
+  \(se(\hat{\beta}_1)\) = 0.0108095
+\item
+  the test statistic is \(t\) = -3.984621
+\item
+  the corresponding p-value is \ensuremath{2.2887345\times 10^{-4}}
+\end{itemize}
+
+You can work out the p-value using R (slight difference due to rounding):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#pvalue}
+\DecValTok{2}\SpecialCharTok{*}\FunctionTok{pt}\NormalTok{(}\SpecialCharTok{{-}}\FunctionTok{abs}\NormalTok{(}\SpecialCharTok{{-}}\FloatTok{3.985}\NormalTok{), }\AttributeTok{df =} \DecValTok{50{-}2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.0002285996
+\end{verbatim}
+
+Or find the critical value using R:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#critical value}
+\FunctionTok{qt}\NormalTok{(}\DecValTok{1}\FloatTok{{-}0.05}\SpecialCharTok{/}\DecValTok{2}\NormalTok{, }\AttributeTok{df =} \DecValTok{50{-}2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2.010635
+\end{verbatim}
+
+Either way, we end up rejecting the null hypothesis. The data support the claim that there is a linear association between gift aid and family income.
+
+Remember the \(t\) tests for the regression coefficients are based on \(H_0: \beta_j = 0, H_a: \beta_j \neq 0\). The reported p-value is based on this set of null and alternative hypotheses. If your null and alternative hypotheses are different, you will need to compute your own test statistic and p-value.
+
+\subsubsection*{Confidence Intervals}\label{confidence-intervals-1}
+\addcontentsline{toc}{subsubsection}{Confidence Intervals}
+
+To find the 95\% confidence intervals for the coefficients, we use the \texttt{confint()} function:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#to produce 95\% CIs for all regression coefficients}
+\FunctionTok{confint}\NormalTok{(result,}\AttributeTok{level =} \FloatTok{0.95}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                     2.5 %      97.5 %
+## (Intercept)   21.72269421 26.91596380
+## family_income -0.06480555 -0.02133775
+\end{verbatim}
+
+The 95\% CI for \(\beta_1\) is (-0.0648056, -0.0213378). We have 95\% confidence that for each additional thousand dollars in family income, the predicted gift aid decreases between \$21.3378 and \$64.8056.
+
+\subsubsection*{Extract Values from R Objects}\label{extract-values-from-r-objects}
+\addcontentsline{toc}{subsubsection}{Extract Values from R Objects}
+
+We can actually extract these values that are being reported from \texttt{summary(result)}. To see what can be extracted from an R object, use the \texttt{names()} function:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#see what can be extracted from summary(result)}
+\FunctionTok{names}\NormalTok{(}\FunctionTok{summary}\NormalTok{(result))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] "call"          "terms"         "residuals"     "coefficients" 
+##  [5] "aliased"       "sigma"         "df"            "r.squared"    
+##  [9] "adj.r.squared" "fstatistic"    "cov.unscaled"
+\end{verbatim}
+
+To extract the estimated coefficients:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#extract coefficients}
+\FunctionTok{summary}\NormalTok{(result)}\SpecialCharTok{$}\NormalTok{coefficients}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                  Estimate Std. Error   t value     Pr(>|t|)
+## (Intercept)   24.31932901 1.29145027 18.831022 8.281020e-24
+## family_income -0.04307165 0.01080947 -3.984621 2.288734e-04
+\end{verbatim}
+
+Notice the information is presented in a table. To extract a specific value, we can specify the row and column indices:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#extract slope}
+\FunctionTok{summary}\NormalTok{(result)}\SpecialCharTok{$}\NormalTok{coefficients[}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] -0.04307165
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#extract intercept}
+\FunctionTok{summary}\NormalTok{(result)}\SpecialCharTok{$}\NormalTok{coefficients[}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 24.31933
+\end{verbatim}
+
+On your own, extract the values of the residual standard error and \(R^2\).
+
+\subsubsection*{Prediction}\label{prediction}
+\addcontentsline{toc}{subsubsection}{Prediction}
+
+A use of regression models is prediction. Suppose I want to predict the gift aid of a student with family income of 50 thousand dollars (assuming the unit is in thousands of dollars). We use the \texttt{predict()} function:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#create data point for prediction}
+\NormalTok{newdata}\OtherTok{\textless{}{-}}\FunctionTok{data.frame}\NormalTok{(}\AttributeTok{family\_income=}\DecValTok{50}\NormalTok{)}
+\DocumentationTok{\#\#predicted gift aid when x=50}
+\FunctionTok{predict}\NormalTok{(result,newdata)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##        1 
+## 22.16575
+\end{verbatim}
+
+This student's predicted gift aid is \$22 165.75. Alternatively, you could have calculated this by plugging \(x=50\) into the estimated SLR equation:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(result)}\SpecialCharTok{$}\NormalTok{coefficients[}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{] }\SpecialCharTok{+} \FunctionTok{summary}\NormalTok{(result)}\SpecialCharTok{$}\NormalTok{coefficients[}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{]}\SpecialCharTok{*}\DecValTok{50}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 22.16575
+\end{verbatim}
+
+\subsubsection*{Correlation}\label{correlation-1}
+\addcontentsline{toc}{subsubsection}{Correlation}
+
+We use the \texttt{cor()} function to find the correlation between two quantitative variables:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#correlation}
+\FunctionTok{cor}\NormalTok{(Data}\SpecialCharTok{$}\NormalTok{family\_income,Data}\SpecialCharTok{$}\NormalTok{gift\_aid)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] -0.4985561
+\end{verbatim}
+
+The correlation is -0.4985561. We have a moderate, negative linear association between family income and gift aid.
+
+\section{Assessing Model Accuracy}\label{assessing-model-accuracy}
+
+In the introduction of this module, we wrote that supervised methods such as linear regression have two primary uses:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Association: Quantify the relationship between variables. How does a change in the predictor variable change the value of the response variable?
+\item
+  Prediction: Predict a future value of a response variable, using information from predictor variables.
+\end{enumerate}
+
+In Section \ref{SLRinf}, we focused on the sampling distribution of the least squares estimators which was then used to construct confidence intervals and perform hypothesis tests. These tools are useful in trying to explain the relationship between the response variable and predictor, which is the first primary use of supervised methods. This has been the focus of a lot of traditional research in a wide variety of applications, for example:
+
+\begin{itemize}
+\tightlist
+\item
+  Medicine: Does increasing the dose of a medication reduce severity of symptoms?
+\item
+  Advertising: How does advertising in various media affect sales?
+\item
+  Environmental science: How does increased greenhouse emissions affect air quality?
+\item
+  Education: Does the use of AI tools aid in student learning outcomes?
+\end{itemize}
+
+In this section, we will focus on the second primary use of supervised methods: prediction. When we focus on prediction, we mainly care about how close are the predicted (or fitted) values with their true values. A lot of what was mentioned in Section \ref{SLRinf} can actually be ignored (other than assumption 1 of the regression assumptions, since predictions will definitely suffer if this is not met) when our focus is on prediction. Prediction is in the domain of predictive analytics. While predictive analytics can be used in a wide variety of applications, the kind of questions they answer differ from the earlier questions, for example:
+
+\begin{itemize}
+\tightlist
+\item
+  Hospitality: Determining staffing needs for a casino. We want to be able to predict the right number of staff to hire: overstaffing costs money and understaffing results in unhappy customers.
+\item
+  Online ads: Based on a user's history on Amazon, Amazon would like to be able to recommend products that the user is highly likely to purchase.
+\item
+  Personalized medicine: Based on a patient's history, what is the most effective treatment plan?
+\item
+  Dynamic pricing: airlines use dynamic pricing that adjusts price to maximize profits, based on real-time market conditions.
+\end{itemize}
 
   \bibliography{book.bib,packages.bib}
 

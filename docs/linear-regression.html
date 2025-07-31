@@ -186,7 +186,7 @@ E(Y|X=x) = \beta_0+\beta_{1} x
 <li>for students who take 5 courses, their study time follows a <span class="math inline">\(N(\beta_0 + 5\beta_1, \sigma^2)\)</span> distribution.</li>
 </ul>
 <p>So if we were to subset our dataframe into three subsets, one with students who take 3 courses, another subset for students who take 4 courses, and another subset for students who take 5 courses, and then create a density plot of study times for each subset, each density plot should follow a normal distribution, with different means, and the same spread.</p>
-<p>Let us take a look at these density plots below in Figures <a href="linear-regression.html#fig:10-conddist3">10.2</a>, <a href="linear-regression.html#fig:10-conddist4">10.3</a>, and <a href="#fig:10-conddis5"><strong>??</strong></a> below:</p>
+<p>Let us take a look at these density plots below in Figures <a href="linear-regression.html#fig:10-conddist3">10.2</a>, <a href="linear-regression.html#fig:10-conddist4">10.3</a>, and <a href="linear-regression.html#fig:10-conddist5">10.4</a> below:</p>
 <div class="sourceCode" id="cb186"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb187"><pre class="downlit sourceCode r">
@@ -269,8 +269,8 @@ Figure 10.5: Assumption 1 Assessment
 <p>The scatter plot shown in Figure <a href="linear-regression.html#fig:10-ass2">10.6</a>(b) is an example of when this assumption is not met. As we move from left to right on the plot in Figure <a href="linear-regression.html#fig:10-ass2">10.6</a>(b), the vertical variation of the data points about the regression line becomes larger as the value of the response variable gets larger, so the variance is not constant.</p>
 <div class="figure">
 <span style="display:block;" id="fig:10-ass2"></span>
-<img src="images/10-ass2.jpg" alt="Assumption 2"><p class="caption">
-Figure 10.6: Assumption 2
+<img src="images/10-ass2.jpg" alt="Assumption 2 Assessment"><p class="caption">
+Figure 10.6: Assumption 2 Assessment
 </p>
 </div>
 <ol start="3" style="list-style-type: decimal">
@@ -286,7 +286,7 @@ Figure 10.6: Assumption 2
 <ul>
 <li>This is considered the least important of the 4 assumptions, especially with large sample sizes. This is due to the Central Limit Theorem, and that in linear regression, we write the conditional expectation (or mean) of the response variable to be equal to <span class="math inline">\(f(x) = \beta_0 + \beta_1 x\)</span>, so hypothesis tests and confidence intervals from the linear regression are likely to be reliable.</li>
 </ul>
-<p><em>Thought question</em>: Look at the scatter plot of the toy example in Figure <a href="#eq:10-scatter">(<strong>??</strong>)</a>. Can you explain why this scatter plot shows the first two assumptions are met for linear regression?</p>
+<p><em>Thought question</em>: Look at the scatter plot of the toy example in Figure <a href="linear-regression.html#fig:10-scatter">10.1</a>. Can you explain why this scatter plot shows the first two assumptions are met for linear regression?</p>
 </div>
 </div>
 <div id="estimating-regression-coefficients" class="section level2" number="10.3">
@@ -383,6 +383,7 @@ SS_{res} =  \sum\limits_{i=1}^n(y_i-\hat{y}_i)^2.
 <span class="math inline">\(\hat{\beta}_0\)</span> = 58.4482853. The predicted study time is 58.4482853 when no courses are taken. Notice this value does not make sense, as a student cannot be taking 0 courses. If you look at our data, the number of courses taken is 3, 4, or 5. So we should only use our regression when <span class="math inline">\(3 \leq x \leq 5\)</span>. We cannot use it for values of <span class="math inline">\(x\)</span> outside the range of our data. Making predictions of the response variable for predictors outside the range of the data is called <strong>extrapolation</strong> and should not be done.</li>
 </ul>
 <p><em>Thought question</em>: The response variable for the toy example is study time, in minutes. Suppose we convert these values to hours by dividing by 60. How will the numerical value of the estimated coefficients change? How will the interpretation of the estimated coefficients change?</p>
+<p>Note: I often get a question about why we minimize <span class="math inline">\(SS_{res}\)</span> and not some other quantity such as minimizing the sum of the absolute value of the residuals <span class="math inline">\(\sum_{i=1}^n |y_i - \hat{y}_i|\)</span>? We will state a famous theorem here without proving it. <strong>Gauss Markov Theorem</strong>: Under assumptions for a regression model (as stated in <a href="linear-regression.html#eq:10-assumptions">(10.2)</a>), the least squares estimators <span class="math inline">\(\hat{\beta}_1\)</span> and <span class="math inline">\(\hat{\beta}_0\)</span> are unbiased and have minimum variance among all unbiased linear estimators. This means that any other way of deriving unbiased estimators will result in the estimators having larger variance than least squares estimators.</p>
 </div>
 <div id="method-of-maximum-likelihood" class="section level3" number="10.3.2">
 <h3>
@@ -416,24 +417,315 @@ f_{Y|X}(y|x) = \frac{1}{\sigma \sqrt{2 \pi}} \exp \left(-\frac{(y - (\beta_0+\be
 ## Residual Deviance: 5317000   AIC: 57750</code></pre>
 </div>
 </div>
-<div id="inference-with-simple-linear-regression" class="section level2" number="10.4">
+<div id="SLRinf" class="section level2" number="10.4">
 <h2>
-<span class="header-section-number">10.4</span> Inference with Simple Linear Regression<a class="anchor" aria-label="anchor" href="#inference-with-simple-linear-regression"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.4</span> Inference with Simple Linear Regression<a class="anchor" aria-label="anchor" href="#SLRinf"><i class="fas fa-link"></i></a>
 </h2>
 <p>The process of using data from a sample to draw a conclusion about the population is called (statistical) <strong>inference</strong>. Two methods associated with inference are confidence intervals and hypothesis testing.</p>
 <p>The most common inference deals with the slope, <span class="math inline">\(\beta_1\)</span>. We are usually assessing whether the slope is 0 or not, as a slope of 0 implies that there is no linear relationship between the variables (if the slope is 0, the value of the response is not affected by the value of the predictor).</p>
 <p>We will cover the confidence interval and hypothesis test for the slope.</p>
-<div id="confidence-interval" class="section level3" number="10.4.1">
+<div id="properties-of-least-squares-estimators" class="section level3" number="10.4.1">
 <h3>
-<span class="header-section-number">10.4.1</span> Confidence Interval<a class="anchor" aria-label="anchor" href="#confidence-interval"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.4.1</span> Properties of Least Squares Estimators<a class="anchor" aria-label="anchor" href="#properties-of-least-squares-estimators"><i class="fas fa-link"></i></a>
 </h3>
+<p>Before proceeding, we will state a few properties associated with the least squares estimators <span class="math inline">\(\hat{\beta}_1, \hat{\beta}_0\)</span>. The key here is to realize that the sampling distribution of the least squares estimators are known. Do not be too torn up about these formulas as a lot of these are computed using R. The proof of these are beyond the scope of this class, and there are countless books that provide these proofs if you are interested.</p>
+<ol style="list-style-type: decimal">
+<li><p><span class="math inline">\(\mbox{E}(\hat{\beta}_1) = \beta_1\)</span>, <span class="math inline">\(\mbox{E}(\hat{\beta}_0) = \beta_0\)</span>. In other words, the least squares estimators are unbiased.</p></li>
+<li><p>The variance of <span class="math inline">\(\hat{\beta}_1\)</span> is</p></li>
+</ol>
+<p><span class="math display" id="eq:10-varb1">\[\begin{equation}
+\mbox{Var}(\hat{\beta}_1) = \frac{\sigma^{2}}{\sum_{i=1}^n{(x_{i}-\bar{x})^{2}}}
+\tag{10.13}
+\end{equation}\]</span></p>
+<ol start="3" style="list-style-type: decimal">
+<li>The variance of <span class="math inline">\(\hat{\beta}_0\)</span> is</li>
+</ol>
+<p><span class="math display" id="eq:10-varb0">\[\begin{equation}
+\mbox{Var}(\hat{\beta}_0) = \sigma^2 \left[\frac{1}{n} + \frac{\bar{x}^2}{\sum_{i=1}^n (x_i -\bar{x})^2}\right]
+\tag{10.14}
+\end{equation}\]</span></p>
+<ol start="4" style="list-style-type: decimal">
+<li>
+<span class="math inline">\(\hat{\beta}_1\)</span> and <span class="math inline">\(\hat{\beta}_0\)</span> both follow a normal distribution.</li>
+</ol>
+<p>Note that in <a href="linear-regression.html#eq:10-varb1">(10.13)</a> and <a href="linear-regression.html#eq:10-varb0">(10.14)</a>, we use <span class="math inline">\(s^2 = \frac{SS_{res}}{n-2} = MS_{res}\)</span> to estimate <span class="math inline">\(\sigma^2\)</span> since <span class="math inline">\(\sigma^2\)</span> is a unknown value.</p>
+<p>What these imply is that if we standardize <span class="math inline">\(\hat{\beta}_1\)</span> and <span class="math inline">\(\hat{\beta}_0\)</span>, these standardized quantities will follow a <span class="math inline">\(t_{n-2}\)</span> distribution, i.e.</p>
+<p><span class="math display" id="eq:10-distb1">\[\begin{equation}
+\frac{\hat{\beta}_1 - \beta_1}{se(\hat{\beta}_1)}\sim t_{n-2}
+\tag{10.15}
+\end{equation}\]</span></p>
+<p>and</p>
+<p><span class="math display" id="eq:10-distb0">\[\begin{equation}
+\frac{\hat{\beta}_0 - \beta_0}{se(\hat{\beta}_0)}\sim t_{n-2},
+\tag{10.16}
+\end{equation}\]</span></p>
+<p>where</p>
+<p><span class="math display" id="eq:10-seb1">\[\begin{equation}
+se(\hat{\beta}_1) = \sqrt{\frac{MS_{res}}{\sum_{i=1}^n{(x_{i}-\bar{x})^{2}}}} = \frac{s}{\sqrt{\sum_{i=1}^n{(x_{i}-\bar{x})^{2}}}}
+\tag{10.17}
+\end{equation}\]</span></p>
+<p>and</p>
+<p><span class="math display" id="eq:10-seb0">\[\begin{equation}
+se(\hat{\beta}_0) = \sqrt{MS_{res}\left[\frac{1}{n} + \frac{\bar{x}^2}{\sum_{i=1}^n (x_i -\bar{x})^2}\right]} = s \sqrt{\frac{1}{n} + \frac{\bar{x}^2}{\sum_{i=1}^n (x_i -\bar{x})^2}}
+\tag{10.18}
+\end{equation}\]</span></p>
+<p>Note: The standardized quantities in equations <a href="linear-regression.html#eq:10-distb1">(10.15)</a> and <a href="linear-regression.html#eq:10-distb0">(10.16)</a> follow <span class="math inline">\(t_{n-2}\)</span> distribution. As mentioned in Section <a href="confidence-intervals.html#df">8.2.4.3</a>, we lose 1 degree of freedom for every equation that must be satisfied. In SLR, we have 2 equations, equations <a href="linear-regression.html#eq:10-b1">(10.9)</a> and <a href="linear-regression.html#eq:10-b0">(10.10)</a>, that must be satisfied when calculating the least squares estimators, therefore we have <span class="math inline">\(n-2\)</span> degrees of freedom.</p>
 </div>
-<div id="hypothesis-testing-1" class="section level3" number="10.4.2">
+<div id="confidence-interval" class="section level3" number="10.4.2">
 <h3>
-<span class="header-section-number">10.4.2</span> Hypothesis Testing<a class="anchor" aria-label="anchor" href="#hypothesis-testing-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.4.2</span> Confidence Interval<a class="anchor" aria-label="anchor" href="#confidence-interval"><i class="fas fa-link"></i></a>
 </h3>
-
+<p>From equation <a href="linear-regression.html#eq:10-distb1">(10.15)</a>, we note that the standardized <span class="math inline">\(\hat{\beta}_1\)</span> follows a <span class="math inline">\(t_{n-2}\)</span> distribution, which is symmetric. This implies that the confidence interval for the slope takes on the form expressed in equation <a href="confidence-intervals.html#eq:8-CIbasic2">(8.2)</a>, which is <span class="math inline">\(\text{point estimate } \pm \text{ margin of error}\)</span>. We also know that the margin of error is the critical value multiplied by the standard error of the estimator.</p>
+<p><em>Thought question</em>: Before scrolling any further, can you write out the formula for a confidence interval for the slope?</p>
+<p>The <span class="math inline">\(100(1-\alpha)\%\)</span> CI for <span class="math inline">\(\beta_1\)</span> is</p>
+<p><span class="math display" id="eq:10-CIb1">\[\begin{equation}
+\hat{\beta}_1 \pm t_{n-2}^*  se(\hat{\beta}_1) = \hat{\beta}_1 \pm t_{n-2}^* {\sqrt\frac{MS_{res}}{\sum_{i=1}^n(x_i - \bar{x})^{2}}}.
+\tag{10.19}
+\end{equation}\]</span></p>
+<p>The critical value <span class="math inline">\(t_{n-2}^*\)</span> is found in the usual manner; it corresponds to the <span class="math inline">\((1 - \alpha/2) \times 100\)</span>th percentile from a <span class="math inline">\(t_{n-2}\)</span> distribution.</p>
+<p>Going back to our study time example, the 95% CI for the slope is (119.470237, 121.3159601).</p>
+<div class="sourceCode" id="cb194"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">##CI for coefficients</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/confint.html">confint</a></span><span class="op">(</span><span class="va">result</span>,level <span class="op">=</span> <span class="fl">0.95</span><span class="op">)</span><span class="op">[</span><span class="fl">2</span>,<span class="op">]</span></span></code></pre></div>
+<pre><code>##    2.5 %   97.5 % 
+## 119.4702 121.3160</code></pre>
+<p>An interpretation of this CI is that there is 95% probability that the random interval (119.470237, 121.3159601) contains the true value of the slop.</p>
+<p>The interval excludes 0, so there is a linear relationship between number of courses and study time.</p>
 </div>
+<div id="hypothesis-testing-1" class="section level3" number="10.4.3">
+<h3>
+<span class="header-section-number">10.4.3</span> Hypothesis Testing<a class="anchor" aria-label="anchor" href="#hypothesis-testing-1"><i class="fas fa-link"></i></a>
+</h3>
+<p>In the context of SLR, we usually want to test if the slope <span class="math inline">\(\beta_1\)</span> is 0 or not. If the slope is 0, there is no linear relationship between the variables. So the hypotheses are typically <span class="math inline">\(H_0: \beta_1 = 0, H_a: \beta_1 \neq 0.\)</span></p>
+<p>In equation <a href="linear-regression.html#eq:10-distb1">(10.15)</a>, we noted that the standardized <span class="math inline">\(\hat{\beta}_1\)</span> follows a <span class="math inline">\(t_{n-2}\)</span> distribution, so the test statistic will be a t-statistic which takes on the general form in equation <a href="hypothesis-testing.html#eq:9-tstatGen">(9.2)</a>.</p>
+<p><em>Thought question</em>: Before scrolling down any further, can you make an educated guess as to the formula of the t-statistic when testing the slope?</p>
+<p>The test statistic is</p>
+<p><span class="math display" id="eq:10-testslope">\[\begin{equation}
+t = \frac{\hat{\beta}_1 - \text{ value in null}}{se(\hat{\beta}_1)}.
+\tag{10.20}
+\end{equation}\]</span></p>
+<p>The p-value and critical value are found in the usual manner, based on a <span class="math inline">\(t_{n-2}\)</span> distribution, and are used in the usual manner.</p>
+<p>We go back to the study time example:</p>
+<div class="sourceCode" id="cb196"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span><span class="op">$</span><span class="va">coefficients</span> <span class="co">##print out est coeffs, SEs, t statistics, and p-vals</span></span></code></pre></div>
+<pre><code>##              Estimate Std. Error   t value      Pr(&gt;|t|)
+## (Intercept)  58.44829  1.9218752  30.41211 4.652442e-189
+## courses     120.39310  0.4707614 255.74125  0.000000e+00</code></pre>
+<p>From R, the reported t-statistic and p-value are 255.74125 and approximately 0 respectively. So we reject the null hypothesis: our data support the claim that there is a linear relationship between study time and number of courses taken.</p>
+<p>Note: The reported values are based on a two-sided alternative hypothesis and a null hypothesis of <span class="math inline">\(H_0: \beta_1 = 0\)</span>. If we have different hypotheses we will have to perform these calculations on our own.</p>
+</div>
+<div id="correlation" class="section level3" number="10.4.4">
+<h3>
+<span class="header-section-number">10.4.4</span> Correlation<a class="anchor" aria-label="anchor" href="#correlation"><i class="fas fa-link"></i></a>
+</h3>
+<p>Another commonly used measure in linear regression is the correlation, which we explored earlier in Section <a href="joint-distributions.html#corr">5.4.2</a>. Visually, variables with a higher correlation (in magnitude) means their observations will fall closer to the fitted line. A correlation of 1 or -1 will mean the observations fall perfectly on the fitted line.</p>
+</div>
+<div id="coefficient-of-determination" class="section level3" number="10.4.5">
+<h3>
+<span class="header-section-number">10.4.5</span> Coefficient of Determination<a class="anchor" aria-label="anchor" href="#coefficient-of-determination"><i class="fas fa-link"></i></a>
+</h3>
+<p>Another measure that is commonly used in linear regression is the <strong>coefficient of determination</strong>, usually denoted by <span class="math inline">\(R^2\)</span>. The value represents the proportion of variation in the response variable that can be explained by our linear regression. In SLR, it is numerically equal to the squared of the sample correlation.</p>
+<p>A few notes about <span class="math inline">\(R^2\)</span>:</p>
+<ul>
+<li>
+<span class="math inline">\(0 \leq R^2 \leq 1\)</span>.</li>
+<li>Values closer to 1 indicate a better fit; values closer to 0 indicate a poorer fit.</li>
+<li>Often reported as a percentage.</li>
+</ul>
+</div>
+<div id="linear-regression-in-r" class="section level3" number="10.4.6">
+<h3>
+<span class="header-section-number">10.4.6</span> Linear Regression in R<a class="anchor" aria-label="anchor" href="#linear-regression-in-r"><i class="fas fa-link"></i></a>
+</h3>
+<p>Next, we will perform a simple linear regression on a real dataset using R. We will work with the dataset <code>elmhurst</code> from the <code>openintro</code> package in R.</p>
+<div class="sourceCode" id="cb198"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://openintrostat.github.io/openintro/">openintro</a></span><span class="op">)</span></span>
+<span><span class="va">Data</span><span class="op">&lt;-</span><span class="fu">openintro</span><span class="fu">::</span><span class="va"><a href="https://openintrostat.github.io/openintro/reference/elmhurst.html">elmhurst</a></span></span></code></pre></div>
+<p>Type <code><a href="https://openintrostat.github.io/openintro/reference/elmhurst.html">?openintro::elmhurst</a></code> to read the documentation for datasets in R. Always seek to understand the background of your data! The key pieces of information are:</p>
+<ul>
+<li>A random sample of 50 students (all freshman from the 2011 class at Elmhurst College).</li>
+<li>Family income of the student (units are missing).</li>
+<li>Gift aid, in $1000s.</li>
+</ul>
+<p>We want to explore how family income may be related to gift aid, in a simple linear regression framework.</p>
+<div id="visualization" class="section level4 unnumbered">
+<h4>Visualization<a class="anchor" aria-label="anchor" href="#visualization"><i class="fas fa-link"></i></a>
+</h4>
+<p>We should always verify with scatter plot that the relationship is (approximately) linear before proceeding with correlation and simple linear regression!</p>
+<div class="sourceCode" id="cb199"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">##scatterplot of gift aid against family income</span></span>
+<span><span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">Data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">family_income</span>,y<span class="op">=</span><span class="va">gift_aid</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"lm"</span>, se<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x<span class="op">=</span><span class="st">"Family Income"</span>, y<span class="op">=</span><span class="st">"Gift Aid"</span>, title<span class="op">=</span><span class="st">"Scatterplot of Gift Aid against Family"</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## `geom_smooth()` using formula = 'y ~ x'</code></pre>
+<div class="figure">
+<span style="display:block;" id="fig:10-scatter-eg"></span>
+<img src="bookdown-demo_files/figure-html/10-scatter-eg-1.png" alt="Scatter Plot for Worked Example" width="672"><p class="caption">
+Figure 10.8: Scatter Plot for Worked Example
+</p>
+</div>
+<p>We note that the observations are fairly evenly scattered on both sides of the regression line, so a linear association exists. We see a negative linear association. As family income increases, the gift aid, on average, decreases.</p>
+<p>We also do not see any observation with weird values that may warrant further investigation.</p>
+</div>
+<div id="regression" class="section level4 unnumbered">
+<h4>Regression<a class="anchor" aria-label="anchor" href="#regression"><i class="fas fa-link"></i></a>
+</h4>
+<p>We use the <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> function to fit a regression model. We supply the response variable, then the predictor, with a <code>~</code> in between, then specify the dataframe via the <code>data</code> argument.</p>
+<div class="sourceCode" id="cb201"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">##regress gift aid against family income</span></span>
+<span><span class="va">result</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">gift_aid</span><span class="op">~</span><span class="va">family_income</span>, data<span class="op">=</span><span class="va">Data</span><span class="op">)</span></span></code></pre></div>
+<p>Use the <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code> function to display relevant information from this regression:</p>
+<div class="sourceCode" id="cb202"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">##look at information regarding regression</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = gift_aid ~ family_income, data = Data)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -10.1128  -3.6234  -0.2161   3.1587  11.5707 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)   24.31933    1.29145  18.831  &lt; 2e-16 ***
+## family_income -0.04307    0.01081  -3.985 0.000229 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 4.783 on 48 degrees of freedom
+## Multiple R-squared:  0.2486, Adjusted R-squared:  0.2329 
+## F-statistic: 15.88 on 1 and 48 DF,  p-value: 0.0002289</code></pre>
+<p>We see the following values:</p>
+<ul>
+<li>
+<span class="math inline">\(\hat{\beta}_1 =\)</span> -0.0430717. The estimated slope informs us the the predicted gift aid decreases by 0.0430717 thousands of dollars (or $43.07) per unit increase in family income.</li>
+<li>
+<span class="math inline">\(\hat{\beta}_0 =\)</span> 24.319329. For students with no family income, their predicted gift aid is $24 319.33. Note: from the scatter plot, we have an observation with 0 family income. We must be careful in not extrapolating when making predictions with our regression. We should only make predictions for family incomes between the minimum and maximum values of family incomes in our data.</li>
+<li>
+<span class="math inline">\(s\)</span> = 4.7825989, is the estimate of the standard deviation of the error terms, <span class="math inline">\(\sigma\)</span>. This is reported as residual standard error in R. Squaring this gives the estimated variance of the error terms.</li>
+<li>
+<span class="math inline">\(R^2 =\)</span> 0.2485582. The coefficient of determination informs us that about 24.86% of the variation in gift aid can be explained by family income. This is reported as multiple R-squared in R.</li>
+</ul>
+</div>
+<div id="hypothesis-testing-2" class="section level4 unnumbered">
+<h4>Hypothesis Testing<a class="anchor" aria-label="anchor" href="#hypothesis-testing-2"><i class="fas fa-link"></i></a>
+</h4>
+<p>Under coefficients, we can see the results of the hypothesis tests for <span class="math inline">\(\beta_1\)</span> and <span class="math inline">\(\beta_0\)</span>. Specifically, for <span class="math inline">\(\beta_1\)</span>:</p>
+<ul>
+<li>
+<span class="math inline">\(\hat{\beta}_1\)</span> = -0.0430717</li>
+<li>
+<span class="math inline">\(se(\hat{\beta}_1)\)</span> = 0.0108095</li>
+<li>the test statistic is <span class="math inline">\(t\)</span> = -3.984621</li>
+<li>the corresponding p-value is 2.2887345^{-4}</li>
+</ul>
+<p>You can work out the p-value using R (slight difference due to rounding):</p>
+<div class="sourceCode" id="cb204"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">##pvalue</span></span>
+<span><span class="fl">2</span><span class="op">*</span><span class="fu"><a href="https://rdrr.io/r/stats/TDist.html">pt</a></span><span class="op">(</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="op">-</span><span class="fl">3.985</span><span class="op">)</span>, df <span class="op">=</span> <span class="fl">50</span><span class="op">-</span><span class="fl">2</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 0.0002285996</code></pre>
+<p>Or find the critical value using R:</p>
+<div class="sourceCode" id="cb206"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">##critical value</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/TDist.html">qt</a></span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="fl">0.05</span><span class="op">/</span><span class="fl">2</span>, df <span class="op">=</span> <span class="fl">50</span><span class="op">-</span><span class="fl">2</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 2.010635</code></pre>
+<p>Either way, we end up rejecting the null hypothesis. The data support the claim that there is a linear association between gift aid and family income.</p>
+<p>Remember the <span class="math inline">\(t\)</span> tests for the regression coefficients are based on <span class="math inline">\(H_0: \beta_j = 0, H_a: \beta_j \neq 0\)</span>. The reported p-value is based on this set of null and alternative hypotheses. If your null and alternative hypotheses are different, you will need to compute your own test statistic and p-value.</p>
+</div>
+<div id="confidence-intervals-1" class="section level4 unnumbered">
+<h4>Confidence Intervals<a class="anchor" aria-label="anchor" href="#confidence-intervals-1"><i class="fas fa-link"></i></a>
+</h4>
+<p>To find the 95% confidence intervals for the coefficients, we use the <code><a href="https://rdrr.io/r/stats/confint.html">confint()</a></code> function:</p>
+<div class="sourceCode" id="cb208"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">##to produce 95% CIs for all regression coefficients</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/confint.html">confint</a></span><span class="op">(</span><span class="va">result</span>,level <span class="op">=</span> <span class="fl">0.95</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##                     2.5 %      97.5 %
+## (Intercept)   21.72269421 26.91596380
+## family_income -0.06480555 -0.02133775</code></pre>
+<p>The 95% CI for <span class="math inline">\(\beta_1\)</span> is (-0.0648056, -0.0213378). We have 95% confidence that for each additional thousand dollars in family income, the predicted gift aid decreases between $21.3378 and $64.8056.</p>
+</div>
+<div id="extract-values-from-r-objects" class="section level4 unnumbered">
+<h4>Extract Values from R Objects<a class="anchor" aria-label="anchor" href="#extract-values-from-r-objects"><i class="fas fa-link"></i></a>
+</h4>
+<p>We can actually extract these values that are being reported from <code>summary(result)</code>. To see what can be extracted from an R object, use the <code><a href="https://rdrr.io/r/base/names.html">names()</a></code> function:</p>
+<div class="sourceCode" id="cb210"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">##see what can be extracted from summary(result)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##  [1] "call"          "terms"         "residuals"     "coefficients" 
+##  [5] "aliased"       "sigma"         "df"            "r.squared"    
+##  [9] "adj.r.squared" "fstatistic"    "cov.unscaled"</code></pre>
+<p>To extract the estimated coefficients:</p>
+<div class="sourceCode" id="cb212"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">##extract coefficients</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span><span class="op">$</span><span class="va">coefficients</span></span></code></pre></div>
+<pre><code>##                  Estimate Std. Error   t value     Pr(&gt;|t|)
+## (Intercept)   24.31932901 1.29145027 18.831022 8.281020e-24
+## family_income -0.04307165 0.01080947 -3.984621 2.288734e-04</code></pre>
+<p>Notice the information is presented in a table. To extract a specific value, we can specify the row and column indices:</p>
+<div class="sourceCode" id="cb214"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">##extract slope</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span><span class="op">$</span><span class="va">coefficients</span><span class="op">[</span><span class="fl">2</span>,<span class="fl">1</span><span class="op">]</span></span></code></pre></div>
+<pre><code>## [1] -0.04307165</code></pre>
+<div class="sourceCode" id="cb216"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">##extract intercept</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span><span class="op">$</span><span class="va">coefficients</span><span class="op">[</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">]</span></span></code></pre></div>
+<pre><code>## [1] 24.31933</code></pre>
+<p>On your own, extract the values of the residual standard error and <span class="math inline">\(R^2\)</span>.</p>
+</div>
+<div id="prediction" class="section level4 unnumbered">
+<h4>Prediction<a class="anchor" aria-label="anchor" href="#prediction"><i class="fas fa-link"></i></a>
+</h4>
+<p>A use of regression models is prediction. Suppose I want to predict the gift aid of a student with family income of 50 thousand dollars (assuming the unit is in thousands of dollars). We use the <code><a href="https://rdrr.io/r/stats/predict.html">predict()</a></code> function:</p>
+<div class="sourceCode" id="cb218"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">##create data point for prediction</span></span>
+<span><span class="va">newdata</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>family_income<span class="op">=</span><span class="fl">50</span><span class="op">)</span></span>
+<span><span class="co">##predicted gift aid when x=50</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">result</span>,<span class="va">newdata</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##        1 
+## 22.16575</code></pre>
+<p>This student’s predicted gift aid is $22 165.75. Alternatively, you could have calculated this by plugging <span class="math inline">\(x=50\)</span> into the estimated SLR equation:</p>
+<div class="sourceCode" id="cb220"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span><span class="op">$</span><span class="va">coefficients</span><span class="op">[</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">]</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span><span class="op">$</span><span class="va">coefficients</span><span class="op">[</span><span class="fl">2</span>,<span class="fl">1</span><span class="op">]</span><span class="op">*</span><span class="fl">50</span></span></code></pre></div>
+<pre><code>## [1] 22.16575</code></pre>
+</div>
+<div id="correlation-1" class="section level4 unnumbered">
+<h4>Correlation<a class="anchor" aria-label="anchor" href="#correlation-1"><i class="fas fa-link"></i></a>
+</h4>
+<p>We use the <code><a href="https://rdrr.io/r/stats/cor.html">cor()</a></code> function to find the correlation between two quantitative variables:</p>
+<div class="sourceCode" id="cb222"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">##correlation</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span><span class="op">(</span><span class="va">Data</span><span class="op">$</span><span class="va">family_income</span>,<span class="va">Data</span><span class="op">$</span><span class="va">gift_aid</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] -0.4985561</code></pre>
+<p>The correlation is -0.4985561. We have a moderate, negative linear association between family income and gift aid.</p>
+</div>
+</div>
+</div>
+<div id="assessing-model-accuracy" class="section level2" number="10.5">
+<h2>
+<span class="header-section-number">10.5</span> Assessing Model Accuracy<a class="anchor" aria-label="anchor" href="#assessing-model-accuracy"><i class="fas fa-link"></i></a>
+</h2>
+<p>In the introduction of this module, we wrote that supervised methods such as linear regression have two primary uses:</p>
+<ol style="list-style-type: decimal">
+<li>Association: Quantify the relationship between variables. How does a change in the predictor variable change the value of the response variable?</li>
+<li>Prediction: Predict a future value of a response variable, using information from predictor variables.</li>
+</ol>
+<p>In Section <a href="linear-regression.html#SLRinf">10.4</a>, we focused on the sampling distribution of the least squares estimators which was then used to construct confidence intervals and perform hypothesis tests. These tools are useful in trying to explain the relationship between the response variable and predictor, which is the first primary use of supervised methods. This has been the focus of a lot of traditional research in a wide variety of applications, for example:</p>
+<ul>
+<li>Medicine: Does increasing the dose of a medication reduce severity of symptoms?</li>
+<li>Advertising: How does advertising in various media affect sales?</li>
+<li>Environmental science: How does increased greenhouse emissions affect air quality?</li>
+<li>Education: Does the use of AI tools aid in student learning outcomes?</li>
+</ul>
+<p>In this section, we will focus on the second primary use of supervised methods: prediction. When we focus on prediction, we mainly care about how close are the predicted (or fitted) values with their true values. A lot of what was mentioned in Section <a href="linear-regression.html#SLRinf">10.4</a> can actually be ignored (other than assumption 1 of the regression assumptions, since predictions will definitely suffer if this is not met) when our focus is on prediction. Prediction is in the domain of predictive analytics. While predictive analytics can be used in a wide variety of applications, the kind of questions they answer differ from the earlier questions, for example:</p>
+<ul>
+<li>Hospitality: Determining staffing needs for a casino. We want to be able to predict the right number of staff to hire: overstaffing costs money and understaffing results in unhappy customers.</li>
+<li>Online ads: Based on a user’s history on Amazon, Amazon would like to be able to recommend products that the user is highly likely to purchase.</li>
+<li>Personalized medicine: Based on a patient’s history, what is the most effective treatment plan?</li>
+<li>Dynamic pricing: airlines use dynamic pricing that adjusts price to maximize profits, based on real-time market conditions.</li>
+</ul>
 </div>
 </div>
   <div class="chapter-nav">
@@ -462,11 +754,16 @@ f_{Y|X}(y|x) = \frac{1}{\sigma \sqrt{2 \pi}} \exp \left(-\frac{(y - (\beta_0+\be
 </ul>
 </li>
 <li>
-<a class="nav-link" href="#inference-with-simple-linear-regression"><span class="header-section-number">10.4</span> Inference with Simple Linear Regression</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#confidence-interval"><span class="header-section-number">10.4.1</span> Confidence Interval</a></li>
-<li><a class="nav-link" href="#hypothesis-testing-1"><span class="header-section-number">10.4.2</span> Hypothesis Testing</a></li>
+<a class="nav-link" href="#SLRinf"><span class="header-section-number">10.4</span> Inference with Simple Linear Regression</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#properties-of-least-squares-estimators"><span class="header-section-number">10.4.1</span> Properties of Least Squares Estimators</a></li>
+<li><a class="nav-link" href="#confidence-interval"><span class="header-section-number">10.4.2</span> Confidence Interval</a></li>
+<li><a class="nav-link" href="#hypothesis-testing-1"><span class="header-section-number">10.4.3</span> Hypothesis Testing</a></li>
+<li><a class="nav-link" href="#correlation"><span class="header-section-number">10.4.4</span> Correlation</a></li>
+<li><a class="nav-link" href="#coefficient-of-determination"><span class="header-section-number">10.4.5</span> Coefficient of Determination</a></li>
+<li><a class="nav-link" href="#linear-regression-in-r"><span class="header-section-number">10.4.6</span> Linear Regression in R</a></li>
 </ul>
 </li>
+<li><a class="nav-link" href="#assessing-model-accuracy"><span class="header-section-number">10.5</span> Assessing Model Accuracy</a></li>
 </ul>
 
       <div class="book-extra">
@@ -483,7 +780,7 @@ f_{Y|X}(y|x) = \frac{1}{\sigma \sqrt{2 \pi}} \exp \left(-\frac{(y - (\beta_0+\be
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2025-07-30.</p>
+    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2025-07-31.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

@@ -195,6 +195,15 @@ eq:10-b1
 eq:10-b0
 eq:10-SLRpdf
 eq:10-SLRloglike
+eq:10-varb1
+eq:10-varb0
+eq:10-distb1
+eq:10-distb0
+eq:10-seb1
+eq:10-seb0
+eq:10-CIb1
+eq:10-testslope
+fig:10-scatter-eg
 examples
 example-1-mario-kart-auction-prices
 eg2
@@ -316,7 +325,7 @@ indepdence-of-discrete-rvs
 joint-marginal-conditional-distributions-for-continuous-rvs
 covariance-and-correlation
 id_5-cov
-correlation
+corr
 conditional-expectation
 conditional-expectation-given-event
 conditional-expectation-given-random-variable
@@ -388,7 +397,7 @@ worked-example-1
 CImeant
 worked-example-2
 confidence-interval-for-mean-using-t-vs-using-z
-degrees-of-freedom
+df
 factors-affecting-precision-of-confidence-intervals
 confidence-interval-for-the-proportion
 sampdistprops
@@ -440,6 +449,11 @@ assessing-assumptions
 estimating-regression-coefficients
 method-of-least-squares
 method-of-maximum-likelihood
-inference-with-simple-linear-regression
+SLRinf
+properties-of-least-squares-estimators
 confidence-interval
 hypothesis-testing-1
+correlation
+coefficient-of-determination
+linear-regression-in-r
+assessing-model-accuracy

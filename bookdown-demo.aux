@@ -435,7 +435,7 @@
 \newlabel{fig:5-cov0}{{5.2}{105}{Covariance with Non Linear Relationship}{figure.5.2}{}}
 \newlabel{eq:5-sampcov}{{5.21}{106}{Covariance}{equation.5.4.21}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {5.4.2}Correlation}{106}{subsection.5.4.2}\protected@file@percent }
-\newlabel{correlation}{{5.4.2}{106}{Correlation}{subsection.5.4.2}{}}
+\newlabel{corr}{{5.4.2}{106}{Correlation}{subsection.5.4.2}{}}
 \newlabel{eq:5-corr}{{5.22}{106}{Correlation}{equation.5.4.22}{}}
 \newlabel{eq:5-sampcorr}{{5.23}{106}{Correlation}{equation.5.4.23}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {5.3}{\ignorespaces Strong Negative Correlation (Left), No Correlation (Middle), Moderate Positive Correlation (Right)}}{107}{figure.5.3}\protected@file@percent }
@@ -645,7 +645,7 @@
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {8.2.4.2}Confidence Interval for Mean Using \(t\) VS Using \(z\)}{179}{subsubsection.8.2.4.2}\protected@file@percent }
 \newlabel{confidence-interval-for-mean-using-t-vs-using-z}{{8.2.4.2}{179}{\texorpdfstring {Confidence Interval for Mean Using \(t\) VS Using \(z\)}{Confidence Interval for Mean Using t VS Using z}}{subsubsection.8.2.4.2}{}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {8.2.4.3}Degrees of Freedom}{180}{subsubsection.8.2.4.3}\protected@file@percent }
-\newlabel{degrees-of-freedom}{{8.2.4.3}{180}{Degrees of Freedom}{subsubsection.8.2.4.3}{}}
+\newlabel{df}{{8.2.4.3}{180}{Degrees of Freedom}{subsubsection.8.2.4.3}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {8.2.5}Factors Affecting Precision of Confidence Intervals}{180}{subsection.8.2.5}\protected@file@percent }
 \newlabel{factors-affecting-precision-of-confidence-intervals}{{8.2.5}{180}{Factors Affecting Precision of Confidence Intervals}{subsection.8.2.5}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {8.3}Confidence Interval for the Proportion}{181}{section.8.3}\protected@file@percent }
@@ -789,8 +789,8 @@
 \newlabel{assessing-assumptions}{{10.2.2}{223}{Assessing Assumptions}{subsection.10.2.2}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {10.5}{\ignorespaces Assumption 1 Assessment}}{223}{figure.10.5}\protected@file@percent }
 \newlabel{fig:10-ass1}{{10.5}{223}{Assumption 1 Assessment}{figure.10.5}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {10.6}{\ignorespaces Assumption 2}}{224}{figure.10.6}\protected@file@percent }
-\newlabel{fig:10-ass2}{{10.6}{224}{Assumption 2}{figure.10.6}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {10.6}{\ignorespaces Assumption 2 Assessment}}{224}{figure.10.6}\protected@file@percent }
+\newlabel{fig:10-ass2}{{10.6}{224}{Assumption 2 Assessment}{figure.10.6}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {10.3}Estimating Regression Coefficients}{225}{section.10.3}\protected@file@percent }
 \newlabel{estimating-regression-coefficients}{{10.3}{225}{Estimating Regression Coefficients}{section.10.3}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {10.3.1}Method of Least Squares}{225}{subsection.10.3.1}\protected@file@percent }
@@ -808,11 +808,45 @@
 \newlabel{method-of-maximum-likelihood}{{10.3.2}{228}{Method of Maximum Likelihood}{subsection.10.3.2}{}}
 \newlabel{eq:10-SLRpdf}{{10.11}{228}{Method of Maximum Likelihood}{equation.10.3.11}{}}
 \newlabel{eq:10-SLRloglike}{{10.12}{228}{Method of Maximum Likelihood}{equation.10.3.12}{}}
-\bibdata{book.bib,packages.bib}
 \@writefile{toc}{\contentsline {section}{\numberline {10.4}Inference with Simple Linear Regression}{229}{section.10.4}\protected@file@percent }
-\newlabel{inference-with-simple-linear-regression}{{10.4}{229}{Inference with Simple Linear Regression}{section.10.4}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {10.4.1}Confidence Interval}{229}{subsection.10.4.1}\protected@file@percent }
-\newlabel{confidence-interval}{{10.4.1}{229}{Confidence Interval}{subsection.10.4.1}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {10.4.2}Hypothesis Testing}{229}{subsection.10.4.2}\protected@file@percent }
-\newlabel{hypothesis-testing-1}{{10.4.2}{229}{Hypothesis Testing}{subsection.10.4.2}{}}
-\gdef \@abspage@last{229}
+\newlabel{SLRinf}{{10.4}{229}{Inference with Simple Linear Regression}{section.10.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.4.1}Properties of Least Squares Estimators}{229}{subsection.10.4.1}\protected@file@percent }
+\newlabel{properties-of-least-squares-estimators}{{10.4.1}{229}{Properties of Least Squares Estimators}{subsection.10.4.1}{}}
+\newlabel{eq:10-varb1}{{10.13}{229}{Properties of Least Squares Estimators}{equation.10.4.13}{}}
+\newlabel{eq:10-varb0}{{10.14}{229}{Properties of Least Squares Estimators}{equation.10.4.14}{}}
+\newlabel{eq:10-distb1}{{10.15}{230}{Properties of Least Squares Estimators}{equation.10.4.15}{}}
+\newlabel{eq:10-distb0}{{10.16}{230}{Properties of Least Squares Estimators}{equation.10.4.16}{}}
+\newlabel{eq:10-seb1}{{10.17}{230}{Properties of Least Squares Estimators}{equation.10.4.17}{}}
+\newlabel{eq:10-seb0}{{10.18}{230}{Properties of Least Squares Estimators}{equation.10.4.18}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.4.2}Confidence Interval}{230}{subsection.10.4.2}\protected@file@percent }
+\newlabel{confidence-interval}{{10.4.2}{230}{Confidence Interval}{subsection.10.4.2}{}}
+\newlabel{eq:10-CIb1}{{10.19}{231}{Confidence Interval}{equation.10.4.19}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.4.3}Hypothesis Testing}{231}{subsection.10.4.3}\protected@file@percent }
+\newlabel{hypothesis-testing-1}{{10.4.3}{231}{Hypothesis Testing}{subsection.10.4.3}{}}
+\newlabel{eq:10-testslope}{{10.20}{231}{Hypothesis Testing}{equation.10.4.20}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.4.4}Correlation}{232}{subsection.10.4.4}\protected@file@percent }
+\newlabel{correlation}{{10.4.4}{232}{Correlation}{subsection.10.4.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.4.5}Coefficient of Determination}{232}{subsection.10.4.5}\protected@file@percent }
+\newlabel{coefficient-of-determination}{{10.4.5}{232}{Coefficient of Determination}{subsection.10.4.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.4.6}Linear Regression in R}{232}{subsection.10.4.6}\protected@file@percent }
+\newlabel{linear-regression-in-r}{{10.4.6}{232}{Linear Regression in R}{subsection.10.4.6}{}}
+\newlabel{visualization}{{10.4.6}{233}{Visualization}{section*.3}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Visualization}{233}{section*.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {10.8}{\ignorespaces Scatter Plot for Worked Example}}{233}{figure.10.8}\protected@file@percent }
+\newlabel{fig:10-scatter-eg}{{10.8}{233}{Scatter Plot for Worked Example}{figure.10.8}{}}
+\newlabel{regression}{{10.4.6}{233}{Regression}{section*.4}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Regression}{233}{section*.4}\protected@file@percent }
+\newlabel{hypothesis-testing-2}{{10.4.6}{235}{Hypothesis Testing}{section*.5}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Hypothesis Testing}{235}{section*.5}\protected@file@percent }
+\newlabel{confidence-intervals-1}{{10.4.6}{235}{Confidence Intervals}{section*.6}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Confidence Intervals}{235}{section*.6}\protected@file@percent }
+\newlabel{extract-values-from-r-objects}{{10.4.6}{235}{Extract Values from R Objects}{section*.7}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Extract Values from R Objects}{235}{section*.7}\protected@file@percent }
+\newlabel{prediction}{{10.4.6}{236}{Prediction}{section*.8}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Prediction}{236}{section*.8}\protected@file@percent }
+\newlabel{correlation-1}{{10.4.6}{237}{Correlation}{section*.9}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Correlation}{237}{section*.9}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {10.5}Assessing Model Accuracy}{237}{section.10.5}\protected@file@percent }
+\newlabel{assessing-model-accuracy}{{10.5}{237}{Assessing Model Accuracy}{section.10.5}{}}
+\bibdata{book.bib,packages.bib}
+\gdef \@abspage@last{238}

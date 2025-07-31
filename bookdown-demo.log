@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999996 (MiKTeX 24.4) (preloaded format=xelatex 2025.6.7)  30 JUL 2025 17:32
+This is XeTeX, Version 3.141592653-2.6-0.999996 (MiKTeX 24.4) (preloaded format=xelatex 2025.6.7)  31 JUL 2025 14:57
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1823,11 +1823,6 @@ File: bookdown-demo_files/figure-latex/10-scatter-1.pdf Graphic file (type pdf)
 
 [219]
 
-LaTeX Warning: Reference `fig:10-conddis5' on page 220 undefined on input line 
-7552.
-
-
-
 [220]
 File: bookdown-demo_files/figure-latex/10-conddist3-1.pdf Graphic file (type pd
 f)
@@ -1851,10 +1846,6 @@ File: images/10-ass1.jpg Graphic file (type bmp)
 File: images/10-ass2.jpg Graphic file (type bmp)
 <images/10-ass2.jpg>
 
-LaTeX Warning: Reference `eq:10-scatter' on page 224 undefined on input line 77
-10.
-
-
 
 [224]
 
@@ -1872,10 +1863,53 @@ LaTeX Warning: Reference `eq:SSres' on page 227 undefined on input line 7813.
 [227]
 
 [228]
+
+[229]
+
+[230]
+
+[231]
+
+[232]
+File: bookdown-demo_files/figure-latex/10-scatter-eg-1.pdf Graphic file (type p
+df)
+<use bookdown-demo_files/figure-latex/10-scatter-eg-1.pdf>
+
+
+[233]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+[234]
+Underfull \hbox (badness 3872) in paragraph at lines 8237--8238
+\TU/lmr/m/n/10 We can actually extract these values that are being reported fro
+m
+ []
+
+
+
+[235]
+Overfull \hbox (22.5pt too wide) in paragraph at lines 8250--8250
+[]\TU/lmtt/m/n/10 ##  [1] "call"          "terms"         "residuals"     "coef
+ficients"[] 
+ []
+
+
+Overfull \hbox (6.75pt too wide) in paragraph at lines 8250--8250
+[]\TU/lmtt/m/n/10 ##  [5] "aliased"       "sigma"         "df"            "r.sq
+uared"[] 
+ []
+
+
+
+[236]
+
+[237]
 No file bookdown-demo.bbl.
 
 
-[229] (bookdown-demo.aux)
+[238] (bookdown-demo.aux)
  ***********
 LaTeX2e <2024-06-01> patch level 2
 L3 programming layer <2024-07-20>
@@ -1885,12 +1919,12 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 20515 strings out of 409029
- 381589 string characters out of 5763847
- 1958612 words of memory out of 5000000
- 42862 multiletter control sequences out of 15000+600000
+ 20544 strings out of 409029
+ 382396 string characters out of 5763847
+ 1960612 words of memory out of 5000000
+ 42890 multiletter control sequences out of 15000+600000
  566021 words of font info for 104 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  90i,21n,123p,1199b,585s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on bookdown-demo.pdf (229 pages).
+Output written on bookdown-demo.pdf (238 pages).

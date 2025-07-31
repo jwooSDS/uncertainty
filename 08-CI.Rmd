@@ -50,7 +50,7 @@ Equation \@ref(eq:8-CIbasic) is sometimes expressed as
 (\#eq:8-CIbasic2)
 \end{equation}
 
-Indeed, a lot of confidence intervals take on the form expressed in equation \@ref(eq:8-CIbasic2). Given the interval for the mean expressed in equation \@ref(eq:8-CIbasic), we ask what is the probability that the interval $I$ includes the true value of the parameter $\mu$, i.e. we want to evaluate
+Indeed, a lot of confidence intervals take on the form expressed in equation \@ref(eq:8-CIbasic2), as long as the sampling distribution of the estimator is symmetric. Given the interval for the mean expressed in equation \@ref(eq:8-CIbasic), we ask what is the probability that the interval $I$ includes the true value of the parameter $\mu$, i.e. we want to evaluate
 
 \begin{equation} 
 P(\mu \in  I) = P(\bar{X}_n - \epsilon \leq \mu \leq \bar{X}_n + \epsilon).
@@ -368,7 +368,7 @@ Since the margin of error tends to be larger when $\sigma^2$ is unknown, it mean
 
 *Thought question*: Try running the Monte Carlo simulation in Section \@ref(CP), but now use the sample variance instead of the population variance. Find the coverage probabilities of the confidence interval if we use the correct formula in equation \@ref(eq:8-CImeant), and if we use a $z^*$ as the critical value with the sample variance.
 
-#### Degrees of Freedom
+#### Degrees of Freedom {#df}
 
 An intuitive explanation of degrees of freedom is the number of independent pieces of information that can take on any numerical value, when estimating a parameter.
 

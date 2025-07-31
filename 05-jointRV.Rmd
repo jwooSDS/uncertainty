@@ -419,7 +419,7 @@ View the video below for a visual explanation as to why the sample covariance is
 <iframe width="560px" height="320px" allowfullscreen="true" allow="autoplay *" title="Module 05: Covariance" src="https://virginiauniversity.instructuremedia.com/embed/7dd5eca9-3cc1-4dc3-92aa-8e0cfde237d1" frameborder="0"></iframe>
 
 
-### Correlation
+### Correlation {#corr}
 
 The **correlation** between random variables $X$ and $Y$ is
 
