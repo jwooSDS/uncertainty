@@ -88,7 +88,14 @@ Figure \@ref(fig:10-scatter) could help us with the following questions:
 
 These questions can be answered using linear regression.
 
-## Simple Linear Regression 
+### Module Roadmap
+
+- Section \@ref(SLR) sets up the linear regression model and covers the assumptions made.
+- Section \@ref(estSLR) goes over how the linear regression model is estimated.
+- Section \@ref(SLRinf) goes over the sampling distribution of the estimators in linear regression, as well as associated confidence intervals and hypothesis tests. These are the main tools used when we are focused on the primary goal of association.
+- Section \@ref(SLRacc) goes over how we measure model accuracy in linear regression. These measures are used when we are focused on prediction. 
+
+## Simple Linear Regression {#SLR}
 
 In this module, we will keep things simple by only considering a single quantitative predictor. Such a regression is called **simple linear regression (SLR)** to emphasize that only one predictor is being considered. We will briefly touch on multiple linear regression (MLR) when multiple predictors are involved later in this module, and you will learn more about linear regression next semester. 
 
@@ -224,7 +231,7 @@ knitr::include_graphics("images/10-ass2.jpg")
 
 *Thought question*: Look at the scatter plot of the toy example in Figure \@ref(fig:10-scatter). Can you explain why this scatter plot shows the first two assumptions are met for linear regression?
 
-## Estimating Regression Coefficients 
+## Estimating Regression Coefficients {#estSLR}
 
 There are two methods in estimating the regression coefficients: the method of least squares and the method of maximum likelihood. For large sample sizes, these methods give similar results.
 
@@ -633,7 +640,7 @@ cor(Data$family_income,Data$gift_aid)
 
 The correlation is `r cor(Data$family_income,Data$gift_aid)`. We have a moderate, negative linear association between family income and gift aid. 
 
-## Assessing Model Accuracy
+## Assessing Model Accuracy {#SLRacc}
 
 In the introduction of this module, we wrote that supervised methods such as linear regression have two primary uses:
 

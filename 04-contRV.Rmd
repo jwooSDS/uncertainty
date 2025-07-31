@@ -23,7 +23,15 @@ This is different from a discrete random variable where we would list the sample
 
 Similar to discrete random variables, we want to describe the shape of the distribution, the centrality, and the spread of a continuous random distribution so we have an idea of probabilities associated with different ranges of values of the random variable. 
 
-## Cumulative Distribution Functions (CDFs)
+### Module Roadmap
+
+- Section \@ref(contCDFs) covers CDFs when used on continuous random variables. Note the similarities and differences when used on discrete random variables. 
+- Section \@ref(PDFs) introduces PDFs, which are analogous to the PMFs of discrete random variables.
+- Section \@ref(summsDist) introduces common measures that are used to summarize the distribution of continuous random variables. 
+- Section \@ref(commContRVs) introduces some commonly used continuous random variables. These random variables are the basis of many statistical models.
+- Section \@ref(RCont) goes over how to use R with continuous random variables.
+
+## Cumulative Distribution Functions (CDFs) {#contCDFs}
 
 We start by talking about the cumulative distribution function, as its definition applies to both discrete and continuous random variables. The CDF of a random variable $X$ is $F_X(x) = P(X \leq x)$. The difference lies in how a CDF looks visually. 
 
@@ -55,7 +63,7 @@ The criteria for a valid CDF is the same, it does not matter if the random varia
 
 *Thought question*: Look at the CDFs for our example in Figure \@ref(fig:4-compare), and see how they satisfy the criteria listed above for a valid CDF. 
 
-## Probability Density Functions (PDFs)
+## Probability Density Functions (PDFs) {#PDFs}
 
 The **probability density function (PDF)** of a continuous random variable is analogous to the PMF of a discrete random variable. 
 
@@ -133,7 +141,7 @@ Similarly for continuous random variables, the PDF and the density plot are rela
 
 We will go over some of the details on how density plots are created at the end of this module, in Section \@ref(KDE), as we still need to cover a few concepts. 
 
-## Summaries of a Distribution
+## Summaries of a Distribution {#summsDist}
 
 Next, we will talk about some common summaries associated with a distribution. These involve measures of centrality and variance, which we have covered before. We will also talk about a couple of other measures: skewness and kurtosis.
 
@@ -265,7 +273,7 @@ The values of $Kurt(X)$ that are associated with tail behaviors are:
 - $Kurt(X) > 0$: $X$ has heavier tails compared to Gaussian distribution (extreme values more likely).
 - $Kurt(X) < 0$: $X$ has smaller tails compared to Gaussian distribution (extreme values less likely).
 
-## Common Continuous Random Variables
+## Common Continuous Random Variables {#commContRVs}
 
 Next, we will introduce some commonly used distributions that may be used for continuous random variables. A number of common statistical models (for example, linear regression) are based on these distributions.
 
@@ -471,7 +479,7 @@ upper1-lower1 ## find proportion in between 1 SD above and below mean.
 ```
 *Thought question*: how would you tweak this code to verify the other two statements associated with the 68-95-99.7% rule?
 
-## Using R {#usingR}
+## Using R {#RCont}
 
 R has built in functions to compute the density, CDF, percentiles, as well as simulate data of common distributions. We will start with a random variable $Y \sim N(1, 9)$ as an example.
 

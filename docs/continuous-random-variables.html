@@ -79,10 +79,22 @@
 <p>The sample space associated with a continuous random variable will be difficult to list, since it takes on an uncountable number of values. Using the example of heights of American adults, any real number between 40 and 100 inches is possible.</p>
 <p>This is different from a discrete random variable where we would list the sample space, or support, and then find the probability associated with each value in the support.</p>
 <p>Similar to discrete random variables, we want to describe the shape of the distribution, the centrality, and the spread of a continuous random distribution so we have an idea of probabilities associated with different ranges of values of the random variable.</p>
+<div id="module-roadmap-2" class="section level3" number="4.1.1">
+<h3>
+<span class="header-section-number">4.1.1</span> Module Roadmap<a class="anchor" aria-label="anchor" href="#module-roadmap-2"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li>Section <a href="continuous-random-variables.html#contCDFs">4.2</a> covers CDFs when used on continuous random variables. Note the similarities and differences when used on discrete random variables.</li>
+<li>Section <a href="continuous-random-variables.html#PDFs">4.3</a> introduces PDFs, which are analogous to the PMFs of discrete random variables.</li>
+<li>Section <a href="continuous-random-variables.html#summsDist">4.4</a> introduces common measures that are used to summarize the distribution of continuous random variables.</li>
+<li>Section <a href="continuous-random-variables.html#commContRVs">4.5</a> introduces some commonly used continuous random variables. These random variables are the basis of many statistical models.</li>
+<li>Section <a href="continuous-random-variables.html#RCont">4.6</a> goes over how to use R with continuous random variables.</li>
+</ul>
 </div>
-<div id="cumulative-distribution-functions-cdfs-1" class="section level2" number="4.2">
+</div>
+<div id="contCDFs" class="section level2" number="4.2">
 <h2>
-<span class="header-section-number">4.2</span> Cumulative Distribution Functions (CDFs)<a class="anchor" aria-label="anchor" href="#cumulative-distribution-functions-cdfs-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.2</span> Cumulative Distribution Functions (CDFs)<a class="anchor" aria-label="anchor" href="#contCDFs"><i class="fas fa-link"></i></a>
 </h2>
 <p>We start by talking about the cumulative distribution function, as its definition applies to both discrete and continuous random variables. The CDF of a random variable <span class="math inline">\(X\)</span> is <span class="math inline">\(F_X(x) = P(X \leq x)\)</span>. The difference lies in how a CDF looks visually.</p>
 <p>Take a look at the CDF of a discrete random variable and the CDF of a continuous random variable below in Figure <a href="continuous-random-variables.html#fig:4-compare">4.1</a>:</p>
@@ -108,9 +120,9 @@ Figure 4.1: CDF for Discrete RV vs CDF for Continuous RV
 <p><em>Thought question</em>: Look at the CDFs for our example in Figure <a href="continuous-random-variables.html#fig:4-compare">4.1</a>, and see how they satisfy the criteria listed above for a valid CDF.</p>
 </div>
 </div>
-<div id="probability-density-functions-pdfs" class="section level2" number="4.3">
+<div id="PDFs" class="section level2" number="4.3">
 <h2>
-<span class="header-section-number">4.3</span> Probability Density Functions (PDFs)<a class="anchor" aria-label="anchor" href="#probability-density-functions-pdfs"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.3</span> Probability Density Functions (PDFs)<a class="anchor" aria-label="anchor" href="#PDFs"><i class="fas fa-link"></i></a>
 </h2>
 <p>The <strong>probability density function (PDF)</strong> of a continuous random variable is analogous to the PMF of a discrete random variable.</p>
 <p>The definition of the PDF for continuous random variables is the following: for a continuous random variable <span class="math inline">\(X\)</span> with CDF <span class="math inline">\(F_X(x)\)</span>, the PDF of <span class="math inline">\(X\)</span>, <span class="math inline">\(f_X(x)\)</span>, is the derivative of its CDF, in other words, <span class="math inline">\(f_X(x) = F_X^{\prime}(x)\)</span>. The support of <span class="math inline">\(X\)</span> is the set of <span class="math inline">\(x\)</span> where <span class="math inline">\(f_X(x) &gt;0\)</span>.</p>
@@ -164,9 +176,9 @@ Figure 4.3: Probabilities from PDF
 <p>We will go over some of the details on how density plots are created at the end of this module, in Section <a href="continuous-random-variables.html#KDE">4.6.1</a>, as we still need to cover a few concepts.</p>
 </div>
 </div>
-<div id="summaries-of-a-distribution" class="section level2" number="4.4">
+<div id="summsDist" class="section level2" number="4.4">
 <h2>
-<span class="header-section-number">4.4</span> Summaries of a Distribution<a class="anchor" aria-label="anchor" href="#summaries-of-a-distribution"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.4</span> Summaries of a Distribution<a class="anchor" aria-label="anchor" href="#summsDist"><i class="fas fa-link"></i></a>
 </h2>
 <p>Next, we will talk about some common summaries associated with a distribution. These involve measures of centrality and variance, which we have covered before. We will also talk about a couple of other measures: skewness and kurtosis.</p>
 <div id="expectations-1" class="section level3" number="4.4.1">
@@ -296,9 +308,9 @@ Kurt(X) = E \left(\frac{(X-\mu)^4}{\sigma} \right) - 3.
 </ul>
 </div>
 </div>
-<div id="common-continuous-random-variables" class="section level2" number="4.5">
+<div id="commContRVs" class="section level2" number="4.5">
 <h2>
-<span class="header-section-number">4.5</span> Common Continuous Random Variables<a class="anchor" aria-label="anchor" href="#common-continuous-random-variables"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.5</span> Common Continuous Random Variables<a class="anchor" aria-label="anchor" href="#commContRVs"><i class="fas fa-link"></i></a>
 </h2>
 <p>Next, we will introduce some commonly used distributions that may be used for continuous random variables. A number of common statistical models (for example, linear regression) are based on these distributions.</p>
 <div id="uniform" class="section level3" number="4.5.1">
@@ -493,9 +505,9 @@ Figure 4.10: 68-95-99.7 Rule
 </div>
 </div>
 </div>
-<div id="usingR" class="section level2" number="4.6">
+<div id="RCont" class="section level2" number="4.6">
 <h2>
-<span class="header-section-number">4.6</span> Using R<a class="anchor" aria-label="anchor" href="#usingR"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.6</span> Using R<a class="anchor" aria-label="anchor" href="#RCont"><i class="fas fa-link"></i></a>
 </h2>
 <p>R has built in functions to compute the density, CDF, percentiles, as well as simulate data of common distributions. We will start with a random variable <span class="math inline">\(Y \sim N(1, 9)\)</span> as an example.</p>
 <ol style="list-style-type: decimal">
@@ -685,18 +697,20 @@ s_X^2 =  \frac{1}{n-1} \sum_{i=1}^n (x_i - \bar{x})^2,
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
 <li><a class="nav-link" href="#continuous-random-variables"><span class="header-section-number">4</span> Continuous Random Variables</a></li>
-<li><a class="nav-link" href="#introduction"><span class="header-section-number">4.1</span> Introduction</a></li>
 <li>
-<a class="nav-link" href="#cumulative-distribution-functions-cdfs-1"><span class="header-section-number">4.2</span> Cumulative Distribution Functions (CDFs)</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#valid-cdfs-1"><span class="header-section-number">4.2.1</span> Valid CDFs</a></li></ul>
+<a class="nav-link" href="#introduction"><span class="header-section-number">4.1</span> Introduction</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#module-roadmap-2"><span class="header-section-number">4.1.1</span> Module Roadmap</a></li></ul>
 </li>
 <li>
-<a class="nav-link" href="#probability-density-functions-pdfs"><span class="header-section-number">4.3</span> Probability Density Functions (PDFs)</a><ul class="nav navbar-nav">
+<a class="nav-link" href="#contCDFs"><span class="header-section-number">4.2</span> Cumulative Distribution Functions (CDFs)</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#valid-cdfs-1"><span class="header-section-number">4.2.1</span> Valid CDFs</a></li></ul>
+</li>
+<li>
+<a class="nav-link" href="#PDFs"><span class="header-section-number">4.3</span> Probability Density Functions (PDFs)</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#valid-pdfs"><span class="header-section-number">4.3.1</span> Valid PDFs</a></li>
 <li><a class="nav-link" href="#pdfs-and-density-plots"><span class="header-section-number">4.3.2</span> PDFs and Density Plots</a></li>
 </ul>
 </li>
 <li>
-<a class="nav-link" href="#summaries-of-a-distribution"><span class="header-section-number">4.4</span> Summaries of a Distribution</a><ul class="nav navbar-nav">
+<a class="nav-link" href="#summsDist"><span class="header-section-number">4.4</span> Summaries of a Distribution</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#expectations-1"><span class="header-section-number">4.4.1</span> Expectations</a></li>
 <li><a class="nav-link" href="#variance-1"><span class="header-section-number">4.4.2</span> Variance</a></li>
 <li><a class="nav-link" href="#moments"><span class="header-section-number">4.4.3</span> Moments</a></li>
@@ -705,13 +719,13 @@ s_X^2 =  \frac{1}{n-1} \sum_{i=1}^n (x_i - \bar{x})^2,
 </ul>
 </li>
 <li>
-<a class="nav-link" href="#common-continuous-random-variables"><span class="header-section-number">4.5</span> Common Continuous Random Variables</a><ul class="nav navbar-nav">
+<a class="nav-link" href="#commContRVs"><span class="header-section-number">4.5</span> Common Continuous Random Variables</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#uniform"><span class="header-section-number">4.5.1</span> Uniform</a></li>
 <li><a class="nav-link" href="#normdist"><span class="header-section-number">4.5.2</span> Normal</a></li>
 </ul>
 </li>
 <li>
-<a class="nav-link" href="#usingR"><span class="header-section-number">4.6</span> Using R</a><ul class="nav navbar-nav">
+<a class="nav-link" href="#RCont"><span class="header-section-number">4.6</span> Using R</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#KDE"><span class="header-section-number">4.6.1</span> Density Plots and Kernel Density Estimation</a></li>
 <li><a class="nav-link" href="#density-plots-and-histograms"><span class="header-section-number">4.6.2</span> Density Plots and Histograms</a></li>
 <li><a class="nav-link" href="#numerical-summaries"><span class="header-section-number">4.6.3</span> Numerical Summaries</a></li>

@@ -72,10 +72,20 @@
 <p>In Section <a href="est.html#est">7</a>, we use data from our sample to estimate parameters of a population. For example, we could use the sample mean systolic blood pressure of 750 randomly selected American adults to estimate the mean systolic blood pressure of all American adults. We also established that estimators such as the sample mean have randomness in them. If we were to obtain another random sample of 750 American adults, the sample mean blood pressure from this other sample is likely to be different from the original random sample. So is there uncertainty in our estimator due to random sampling. We also learned about ways to measure how “well” an estimator does in estimating the parameter, such as bias, variance, standard error, and mean-squared error of the estimator.</p>
 <p>In this section, we will introduce confidence intervals. Confidence intervals build on the ideas from Section <a href="est.html#est">7</a>: that estimators are random and we can quantify their uncertainty. The purpose of a confidence interval is to provide a range of plausible values for an unknown population parameter, based on a sample. A confidence interval not only provides the estimated value of the parameter, but also a measure of uncertainty associated with the estimation.</p>
 <p>We will first cover confidence intervals for the mean and confidence intervals for the proportion, two of the most basic confidence intervals. These intervals are based on the fact that the distribution of their corresponding estimators, the sample mean and sample proportion, are known as long as certain conditions are met. You will notice that the general ideas in finding confidence intervals are pretty similar; confidence intervals for other estimators that have known distributions will be constructed similarly. In the last subsection of this module, we will learn about the bootstrap, which is used when the distribution of an estimator is unknown.</p>
+<div id="module-roadmap-6" class="section level3" number="8.1.1">
+<h3>
+<span class="header-section-number">8.1.1</span> Module Roadmap<a class="anchor" aria-label="anchor" href="#module-roadmap-6"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li>Section <a href="confidence-intervals.html#CImean">8.2</a> covers the key concepts in confidence intervals and how they apply to the mean.</li>
+<li>Section <a href="confidence-intervals.html#CIprop">8.3</a> shows how the concepts from the previous section carry over to the confidence interval for the proportion.</li>
+<li>Section <a href="confidence-intervals.html#bootstrap">8.4</a> goes over the method to create confidence intervals with estimators with unknown sampling distributions.</li>
+</ul>
 </div>
-<div id="confidence-interval-for-the-mean" class="section level2" number="8.2">
+</div>
+<div id="CImean" class="section level2" number="8.2">
 <h2>
-<span class="header-section-number">8.2</span> Confidence Interval for the Mean<a class="anchor" aria-label="anchor" href="#confidence-interval-for-the-mean"><i class="fas fa-link"></i></a>
+<span class="header-section-number">8.2</span> Confidence Interval for the Mean<a class="anchor" aria-label="anchor" href="#CImean"><i class="fas fa-link"></i></a>
 </h2>
 <div id="randomness-of-estimators" class="section level3" number="8.2.1">
 <h3>
@@ -198,15 +208,15 @@ P(-z^{*} \leq \hat{Z} \leq z^{*}) &amp;= 2 \Phi(z^*) - 1 = 1 - \alpha \\
 <span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">qnorm</a></span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">alpha</span><span class="op">/</span><span class="fl">2</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 1.959964</code></pre>
 <p>which tells us the critical value is 1.96 for 95% confidence.</p>
-<p>Note: the <code><a href="https://rdrr.io/r/stats/Normal.html">qnorm()</a></code> function was introduced in a bit more detail in Section <a href="continuous-random-variables.html#usingR">4.6</a>, so feel free to go back to review.</p>
+<p>Note: the <code><a href="https://rdrr.io/r/stats/Normal.html">qnorm()</a></code> function was introduced in a bit more detail in Section <a href="#usingR"><strong>??</strong></a>, so feel free to go back to review.</p>
 <p>View the video below that explains these steps in a bit more detail:</p>
 <iframe width="560px" height="320px" allowfullscreen="true" allow="autoplay *" title="Module 08: Critical Value" src="https://virginiauniversity.instructuremedia.com/embed/74aa9eff-5d3f-4c24-be5d-5798d93f7aa7" frameborder="0">
 </iframe>
 <p><em>Thought question</em>: Can you show that the critical value for 96% confidence is about 2.054? Can you show that the critical value for 98% confidence is about 2.326?</p>
 </div>
-<div id="confidence-interval-for-the-mean-1" class="section level4" number="8.2.3.2">
+<div id="confidence-interval-for-the-mean" class="section level4" number="8.2.3.2">
 <h4>
-<span class="header-section-number">8.2.3.2</span> Confidence Interval for the Mean<a class="anchor" aria-label="anchor" href="#confidence-interval-for-the-mean-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">8.2.3.2</span> Confidence Interval for the Mean<a class="anchor" aria-label="anchor" href="#confidence-interval-for-the-mean"><i class="fas fa-link"></i></a>
 </h4>
 <p>We are now ready to put the pieces together to work on the confidence interval for the mean:</p>
 <p><span class="math display" id="eq:8-CImeanwork">\[\begin{equation}
@@ -431,9 +441,9 @@ which gives (4.793914, 17.20609). Since the entire confidence interval lies abov
 <p>Other factors such as whether <span class="math inline">\(\sigma^2\)</span> is unknown or not, and the value of the variance, are usually not controllable by the researcher.</p>
 </div>
 </div>
-<div id="confidence-interval-for-the-proportion" class="section level2" number="8.3">
+<div id="CIprop" class="section level2" number="8.3">
 <h2>
-<span class="header-section-number">8.3</span> Confidence Interval for the Proportion<a class="anchor" aria-label="anchor" href="#confidence-interval-for-the-proportion"><i class="fas fa-link"></i></a>
+<span class="header-section-number">8.3</span> Confidence Interval for the Proportion<a class="anchor" aria-label="anchor" href="#CIprop"><i class="fas fa-link"></i></a>
 </h2>
 <p>Next, we will go over the confidence interval for the proportion. This is another common confidence interval. The sample proportion is an estimator for the population proportion.</p>
 <p>Proportions are used to summarize categorical variables, whereas means are used to summarize quantitative variables. One way to decide if the variable is categorical or quantitative is to ask whether arithmetic operations make sense when performed on the variable. If such operations make sense, the variable is quantitative, if not, the variable is categorical. Consider the following two research questions:</p>
@@ -534,9 +544,9 @@ So she will need to sample at least 1068 residents to guarantee a margin of erro
 </div>
 </div>
 </div>
-<div id="the-bootstrap" class="section level2" number="8.4">
+<div id="bootstrap" class="section level2" number="8.4">
 <h2>
-<span class="header-section-number">8.4</span> The Bootstrap<a class="anchor" aria-label="anchor" href="#the-bootstrap"><i class="fas fa-link"></i></a>
+<span class="header-section-number">8.4</span> The Bootstrap<a class="anchor" aria-label="anchor" href="#bootstrap"><i class="fas fa-link"></i></a>
 </h2>
 <p>In the previous subsections, we work out the confidence interval of an estimator by using the framework in equation <a href="confidence-intervals.html#eq:8-CIbasic2">(8.2)</a>: we add and subtract the margin of error to and from the point estimate. The margin of error is the critical value multiplied by the standard error of the estimator. The critical value is based on the sampling distribution of the estimator. This framework requires us to know the sampling distribution and the standard error of the estimator.</p>
 <p>However, there are estimators whose sampling distributions and standard errors are unknown, for example, the sample median. How can we construct confidence intervals for the median? Or how can we quantify our uncertainty of the sample median as an estimator of the population median?</p>
@@ -683,9 +693,11 @@ Figure 8.4: Density Plot of Credit Limits
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
 <li><a class="nav-link" href="#confidence-intervals"><span class="header-section-number">8</span> Confidence Intervals</a></li>
-<li><a class="nav-link" href="#introduction-4"><span class="header-section-number">8.1</span> Introduction</a></li>
 <li>
-<a class="nav-link" href="#confidence-interval-for-the-mean"><span class="header-section-number">8.2</span> Confidence Interval for the Mean</a><ul class="nav navbar-nav">
+<a class="nav-link" href="#introduction-4"><span class="header-section-number">8.1</span> Introduction</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#module-roadmap-6"><span class="header-section-number">8.1.1</span> Module Roadmap</a></li></ul>
+</li>
+<li>
+<a class="nav-link" href="#CImean"><span class="header-section-number">8.2</span> Confidence Interval for the Mean</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#randomness-of-estimators"><span class="header-section-number">8.2.1</span> Randomness of Estimators</a></li>
 <li><a class="nav-link" href="#randomness-of-confidence-intervals"><span class="header-section-number">8.2.2</span> Randomness of Confidence Intervals</a></li>
 <li><a class="nav-link" href="#constructing-confidence-interval-for-the-mean"><span class="header-section-number">8.2.3</span> Constructing Confidence Interval for the Mean</a></li>
@@ -694,14 +706,14 @@ Figure 8.4: Density Plot of Credit Limits
 </ul>
 </li>
 <li>
-<a class="nav-link" href="#confidence-interval-for-the-proportion"><span class="header-section-number">8.3</span> Confidence Interval for the Proportion</a><ul class="nav navbar-nav">
+<a class="nav-link" href="#CIprop"><span class="header-section-number">8.3</span> Confidence Interval for the Proportion</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#sampdistprops"><span class="header-section-number">8.3.1</span> Sampling Distribution of Sample Proportions</a></li>
 <li><a class="nav-link" href="#constructing-confidence-interval-for-the-proportion"><span class="header-section-number">8.3.2</span> Constructing Confidence Interval for the Proportion</a></li>
 <li><a class="nav-link" href="#minimum-sample-size"><span class="header-section-number">8.3.3</span> Minimum Sample Size</a></li>
 </ul>
 </li>
 <li>
-<a class="nav-link" href="#the-bootstrap"><span class="header-section-number">8.4</span> The Bootstrap</a><ul class="nav navbar-nav">
+<a class="nav-link" href="#bootstrap"><span class="header-section-number">8.4</span> The Bootstrap</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#estimating-sampling-distributions-using-many-random-samples"><span class="header-section-number">8.4.1</span> Estimating Sampling Distributions Using Many Random Samples</a></li>
 <li><a class="nav-link" href="#the-bootstrap-algorithm"><span class="header-section-number">8.4.2</span> The Bootstrap Algorithm</a></li>
 <li><a class="nav-link" href="#confidence-intervals-using-the-bootstrap"><span class="header-section-number">8.4.3</span> Confidence Intervals using the Bootstrap</a></li>

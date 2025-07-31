@@ -87,10 +87,20 @@
 </ul>
 <p>In this coin flip example, both interpretations are reasonable. However, in some instances, the frequentist interpretation may not be as interpretable if we cannot repeat the event many times. For example, the earlier statement about rain: “I am 50% certain that it will rain in the next hour”. Whether it will rain or not in the next hour is not a repeatable event, so the frequentist interpretation makes less sense here.</p>
 </div>
+<div id="module-roadmap" class="section level3" number="2.1.3">
+<h3>
+<span class="header-section-number">2.1.3</span> Module Roadmap<a class="anchor" aria-label="anchor" href="#module-roadmap"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li>Section <a href="probability.html#probconcepts">2.2</a> introduces the key terms, concepts, and rules in probability.</li>
+<li>Section <a href="probability.html#condprob">2.3</a> introduces the idea of conditional probability. In the frequentist framework, conditional probabilities are probabilities only after certain “conditions” are fulfilled. In the Bayesian frameowrk, conditional probabilities represent how our measure of belief is updated after seeing data.</li>
+<li>Section <a href="probability.html#confusion">2.4</a> covers some common misconceptions when it comes to interpreting conditional probabilities in real life (so much so that these misconceptions have their own names and wikipedia pages).</li>
+</ul>
 </div>
-<div id="key-concepts-in-probability" class="section level2" number="2.2">
+</div>
+<div id="probconcepts" class="section level2" number="2.2">
 <h2>
-<span class="header-section-number">2.2</span> Key Concepts in Probability<a class="anchor" aria-label="anchor" href="#key-concepts-in-probability"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.2</span> Key Concepts in Probability<a class="anchor" aria-label="anchor" href="#probconcepts"><i class="fas fa-link"></i></a>
 </h2>
 <p>In this section, we will cover the basic terminology and foundational ideas in probability.</p>
 <div id="sample-space" class="section level3" number="2.2.1">
@@ -390,9 +400,9 @@ P(E_1|F) = \frac{P(E_1 \cap F)}{P(F)} = \frac{0.198}{0.263} = 0.7528517.
 </div>
 </div>
 </div>
-<div id="confusion-of-the-inverse" class="section level2" number="2.4">
+<div id="confusion" class="section level2" number="2.4">
 <h2>
-<span class="header-section-number">2.4</span> Confusion of the Inverse<a class="anchor" aria-label="anchor" href="#confusion-of-the-inverse"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.4</span> Confusion of the Inverse<a class="anchor" aria-label="anchor" href="#confusion"><i class="fas fa-link"></i></a>
 </h2>
 <p>We are now ready to talk about the prosecutor’s fallacy, or the <strong>confusion of the inverse</strong>, that we had earlier mention in section <a href="probability.html#def">2.3.1</a>. In essence, the confusion happens when we falsely equate <span class="math inline">\(P(X|Y)\)</span> to be equal to <span class="math inline">\(P(Y|X)\)</span>. In fact, a large value for <span class="math inline">\(P(X|Y)\)</span> does not necessarily imply that <span class="math inline">\(P(Y|X)\)</span> is also large. The term prosecutor’s fallacy when this confusion is applied in a criminal trial, e.g. the probability that an abusive relationship ends in murder could be small, but the probability that there was abuse in a relationship that ended in murder could be a lot higher.</p>
 <p>We will go over some examples that are based on real life.</p>
@@ -489,10 +499,11 @@ P(D|+) &amp;= \frac{P(D \cap +)}{P(+)}\\
 <a class="nav-link" href="#introduction-to-probability"><span class="header-section-number">2.1</span> Introduction to Probability</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#why-study-probability"><span class="header-section-number">2.1.1</span> Why Study Probability?</a></li>
 <li><a class="nav-link" href="#frequentiest-and-bayesian-view-of-probability"><span class="header-section-number">2.1.2</span> Frequentiest and Bayesian View of Probability</a></li>
+<li><a class="nav-link" href="#module-roadmap"><span class="header-section-number">2.1.3</span> Module Roadmap</a></li>
 </ul>
 </li>
 <li>
-<a class="nav-link" href="#key-concepts-in-probability"><span class="header-section-number">2.2</span> Key Concepts in Probability</a><ul class="nav navbar-nav">
+<a class="nav-link" href="#probconcepts"><span class="header-section-number">2.2</span> Key Concepts in Probability</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#sample-space"><span class="header-section-number">2.2.1</span> Sample Space</a></li>
 <li><a class="nav-link" href="#event"><span class="header-section-number">2.2.2</span> Event</a></li>
 <li><a class="nav-link" href="#complements"><span class="header-section-number">2.2.3</span> Complements</a></li>
@@ -516,7 +527,7 @@ P(D|+) &amp;= \frac{P(D \cap +)}{P(+)}\\
 </ul>
 </li>
 <li>
-<a class="nav-link" href="#confusion-of-the-inverse"><span class="header-section-number">2.4</span> Confusion of the Inverse</a><ul class="nav navbar-nav">
+<a class="nav-link" href="#confusion"><span class="header-section-number">2.4</span> Confusion of the Inverse</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#disease-diagnostics"><span class="header-section-number">2.4.1</span> Disease Diagnostics</a></li>
 <li><a class="nav-link" href="#prosecutors-fallacy"><span class="header-section-number">2.4.2</span> Prosecutor’s Fallacy</a></li>
 </ul>

@@ -16,7 +16,15 @@ In the previous two modules, we learned how to summarize the distribution of ind
 
 This module will consider these variables jointly, in other words, how they relate to each other. A lot of the concepts such as CDF, PDF, PMF, expectations, variances, and so on will have analogous versions when considering variables jointly. 
 
-## Joint Distributions for Discrete RVs
+### Module Roadmap
+
+- Section \@ref(jointDis) will explore these concepts when the variables are discrete. These concepts are easier to learn when the variables are discrete.
+- Section \@ref(jointCont) will introduce these concepts when the variables are continuous.
+- Section \@ref(covcorr) covers a couple of common ways to quantify the strength of the linear relationship between two quantitative variables. 
+- Section \@ref(condexp) covers the notion of the conditional expectation of a random variable. 
+- Section \@ref(commMultDist) introduces common multivariate distributions.
+
+## Joint Distributions for Discrete RVs {#jointDis}
 
 We will start with discrete random variables, then move on to continuous random variables. To keep things simple, we will use two random variables to explain concepts. These concepts can then be generalized to any number of random variables. 
 
@@ -266,7 +274,7 @@ If study time and grades were independent, we needed to show $P(Y=1|X=x) = P(Y=1
 
 Very often, knowing the context of the random variables helps. Since we expect students who study more to get better grades, we expect these variables to be dependent, so we know we just need to provide a counterexample. 
 
-## Joint, Marginal, Conditional Distributions for Continuous RVs
+## Joint, Marginal, Conditional Distributions for Continuous RVs {#jointCont}
 
 Recall in the previous modules the CDFs and PDFs for a continuous random variable are similar to CDFs and PMFs for discrete random variables. The continuous versions are generally found by swapping summations with integrals. The same general idea applies with joint distributions when both random variables are continuous. 
 
@@ -335,7 +343,7 @@ f_{X|Y} (x|y) = f_X(x).
 (\#eq:5-indcont4)
 \end{equation}
 
-## Covariance and Correlation
+## Covariance and Correlation {#covcorr}
 
 In the previous modules, we used summaries such as the mean, variance, skewness, and kurtosis to provide some insight into the distribution of a single random variable. When we have multiple random variables, one question we have is how are the random variables related to each other. Summaries that are used to quantify the **linear relationship** between two quantitative random variables are the covariance and correlation. 
 
@@ -374,7 +382,7 @@ plot(x3,x4, xlab="X", ylab="Y")
 
 One more thing to note: covariance and correlations can be calculated for random variables as long as they are quantitative, but not if at least one of them is categorical. The concept of increasing a random variable that is categorical does not make intuitive sense, for example, if we have a random variable that denotes the color of eyes, what does increasing color of eyes mean?
 
-### Covariance {#5-cov}
+### Covariance {#covariance}
 
 We now define covariance. The **covariance** between random variables $X$ and $Y$ is
 
@@ -491,7 +499,7 @@ abline(lm(x6~x5), col="blue")
 
 ```
 
-## Conditional Expectation
+## Conditional Expectation {#condexp}
 
 In Section \@ref(condprob) and \@ref(conddist), we explored the notion of conditional probabilities and conditional distributions, which are used for:
 
@@ -616,7 +624,7 @@ View the video below for a more detailed explanation of this example:
 
 <iframe width="560px" height="320px" allowfullscreen="true" allow="autoplay *" title="Module 05: Conditional Expectation Given RV" src="https://virginiauniversity.instructuremedia.com/embed/6c965b1d-bcb9-451e-8dca-de91284376bb" frameborder="0"></iframe>
 
-## Common Multivariate Distributions
+## Common Multivariate Distributions {#commMultDist}
 
 We now cover two of the most common multivariate distributions: the multinomial distribution and multivariate normal distribution for discrete and continuous random variables respectively. 
 

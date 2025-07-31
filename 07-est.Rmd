@@ -55,7 +55,14 @@ Whenever we propose an estimator for a parameter, we want to assess how "good" t
 
 We will also cover a couple of methods in estimating parameters: the method of moments, and the method of maximum likelihood. You will notice that we use probability rules in these methods. 
 
-To sum up estimation: we use data from a sample to estimate unknown characteristics of a population, so that we can answer questions regarding variables in the population, as well as provide a measure of uncertainty for our answers. 
+To sum up estimation: we use data from a sample to estimate unknown characteristics of a population, so that we can answer questions regarding variables in the population, as well as provide a measure of uncertainty for our answers.
+
+### Module Roadmap
+
+- Section \@ref(MOM) covers estimation using the method of moments. This method is fairly intuitive, although it is not as commonly used as it lacks certain ideal properties. 
+- Section \@ref(MLE) covers estimation using the method of maximum likelihood. This method is a workhorse in statistics and probability as many models are estimated using this method. 
+- Section \@ref(estprops) covers measures that are used to evaluate how "good" an estimator is.
+- Section \@ref(estcomments) provides some final comments on estimation.
 
 ## Method of Moments Estimation {#MOM}
 
@@ -167,7 +174,7 @@ So we set $Var(X) = M_2^*$ i.e. $\hat{\sigma^2} = \frac{1}{n} \sum_{i=1}^n (x_i 
 
 The idea behind method of moments estimation is fairly intuitive; however, it has some drawbacks which we will talk about after introducing another method for estimation in the next section, the method of maximum likelihood.
 
-## Method of Maximum Likelihood Estimation
+## Method of Maximum Likelihood Estimation {#MLE}
 
 The method of maximum likelihood is a workhorse in statistics and data science since it is widely used in estimating models. It is preferred to the method of moments as it is built upon a stronger theoretical framework, and its estimators tend to have more desirable properties. You are guaranteed to see the method of maximum likelihood again in the future. 
 
@@ -701,7 +708,7 @@ In other words, the MSE of an estimator is equal to the variance of an estimator
 
 What the MSE of an estimator suggests is that we need to consider both the bias and variance of an estimator. People often think that an unbiased estimator is the "best". However, an unbiased estimator could have high variance. Such an estimator could have high MSE. In such a setting, it may be worth considering another estimator that may be biased, but have much smaller variance, resulting in a lower MSE. An example of where this can happen is in linear regression. Classical methods with linear regression yield unbiased estimators, but under specific scenarios, these estimators could have high variances. Another model, called the ridge regression model, considers biased estimators which may have smaller variances, which can result in lower MSEs in these specific scenarios. You will learn about these models in greater detail in a future class. 
 
-## Final Comments on Estimation
+## Final Comments on Estimation {#estcomments}
 
 We have covered the method of moments and method of maximum likelihood when estimating parameters. These methods are also called **parametric methods** as they involve making an assumption that the data follow some well-known distribution with unknown parameters, and we are then using our data, and our assumed distribution, to estimate the numerical value of the unknown parameters.
 

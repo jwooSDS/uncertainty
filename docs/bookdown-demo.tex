@@ -824,7 +824,19 @@ There are a couple of viewpoints on how to interpret probability: \textbf{freque
 
 In this coin flip example, both interpretations are reasonable. However, in some instances, the frequentist interpretation may not be as interpretable if we cannot repeat the event many times. For example, the earlier statement about rain: ``I am 50\% certain that it will rain in the next hour''. Whether it will rain or not in the next hour is not a repeatable event, so the frequentist interpretation makes less sense here.
 
-\section{Key Concepts in Probability}\label{key-concepts-in-probability}
+\subsection{Module Roadmap}\label{module-roadmap}
+
+\begin{itemize}
+\tightlist
+\item
+  Section \ref{probconcepts} introduces the key terms, concepts, and rules in probability.
+\item
+  Section \ref{condprob} introduces the idea of conditional probability. In the frequentist framework, conditional probabilities are probabilities only after certain ``conditions'' are fulfilled. In the Bayesian frameowrk, conditional probabilities represent how our measure of belief is updated after seeing data.
+\item
+  Section \ref{confusion} covers some common misconceptions when it comes to interpreting conditional probabilities in real life (so much so that these misconceptions have their own names and wikipedia pages).
+\end{itemize}
+
+\section{Key Concepts in Probability}\label{probconcepts}
 
 In this section, we will cover the basic terminology and foundational ideas in probability.
 
@@ -1147,7 +1159,7 @@ Note: If you compare the intermediate calculations in approach 2, you end up usi
 
 The video below goes over tree diagrams in a little bit more detail:
 
-\section{Confusion of the Inverse}\label{confusion-of-the-inverse}
+\section{Confusion of the Inverse}\label{confusion}
 
 We are now ready to talk about the prosecutor's fallacy, or the \textbf{confusion of the inverse}, that we had earlier mention in section \ref{def}. In essence, the confusion happens when we falsely equate \(P(X|Y)\) to be equal to \(P(Y|X)\). In fact, a large value for \(P(X|Y)\) does not necessarily imply that \(P(Y|X)\) is also large. The term prosecutor's fallacy when this confusion is applied in a criminal trial, e.g.~the probability that an abusive relationship ends in murder could be small, but the probability that there was abuse in a relationship that ended in murder could be a lot higher.
 
@@ -1287,7 +1299,23 @@ The \textbf{support} of a discrete random variable \(X\) is the set of values \(
 
 \emph{Thought question}: Can you come of examples of discrete and continuous random variables on your own? Feel free to search the internet for examples as well.
 
-\section{Probability Mass Functions (PMFs)}\label{probability-mass-functions-pmfs}
+\subsection{Module Roadmap}\label{module-roadmap-1}
+
+\begin{itemize}
+\tightlist
+\item
+  Section \ref{PMFs} introduces PMFs, which is a way of mapping each outcome of a discrete random variable with its corresponding probability. PMFs are always used to define the behavior of discrete random variables.
+\item
+  Section \ref{CDFs} introduces CDFs, which is another way of defining the behavior of random variables.
+\item
+  Section \ref{expectations} introduces the notion of (mathematical) expectation, or the long-run average of a random variable.
+\item
+  Section \ref{commonDisRVs} introduces some commonly used discrete random variables. These random variables are the basis of many statistical models.
+\item
+  Section \ref{Rdis} goes over how to use R with commonly used discrete random variables.
+\end{itemize}
+
+\section{Probability Mass Functions (PMFs)}\label{PMFs}
 
 We use probability to describe the behavior of random variables. This is called the \textbf{distribution} of a random variable. The distribution of a random variable specifies the probabilities of all events associated with the random variable.
 
@@ -1383,7 +1411,7 @@ In general, the PMF of a random variable should match the histogram in the long 
 
 Note: What we have just done here was to use simulations to repeat an experiment a large number of times.
 
-\section{Cumulative Distribution Functions (CDFs)}\label{cumulative-distribution-functions-cdfs}
+\section{Cumulative Distribution Functions (CDFs)}\label{CDFs}
 
 Another function that is used to describe the distribution of discrete random variables is the \textbf{cumulative distribution function (CDF)}. The CDF of a random variable \(X\) is \(F_X(x) = P(X \leq x)\). Notice that unlike the PMF, the definition of CDF applies for both discrete and continuous random variables.
 
@@ -1719,7 +1747,7 @@ Variance has the following properties:
   If \(X\) and \(Y\) are independent random variables, then \(Var(X+Y) = Var(X) + Var(Y)\).
 \end{itemize}
 
-\section{Common Discrete Random Variables}\label{common-discrete-random-variables}
+\section{Common Discrete Random Variables}\label{commonDisRVs}
 
 Next, we will introduce some commonly used distributions that may be used for discrete random variables. A number of common statistical models (for example, logistic regression, Poisson regression) are based on these distributions.
 
@@ -2165,7 +2193,23 @@ This is different from a discrete random variable where we would list the sample
 
 Similar to discrete random variables, we want to describe the shape of the distribution, the centrality, and the spread of a continuous random distribution so we have an idea of probabilities associated with different ranges of values of the random variable.
 
-\section{Cumulative Distribution Functions (CDFs)}\label{cumulative-distribution-functions-cdfs-1}
+\subsection{Module Roadmap}\label{module-roadmap-2}
+
+\begin{itemize}
+\tightlist
+\item
+  Section \ref{contCDFs} covers CDFs when used on continuous random variables. Note the similarities and differences when used on discrete random variables.
+\item
+  Section \ref{PDFs} introduces PDFs, which are analogous to the PMFs of discrete random variables.
+\item
+  Section \ref{summsDist} introduces common measures that are used to summarize the distribution of continuous random variables.
+\item
+  Section \ref{commContRVs} introduces some commonly used continuous random variables. These random variables are the basis of many statistical models.
+\item
+  Section \ref{RCont} goes over how to use R with continuous random variables.
+\end{itemize}
+
+\section{Cumulative Distribution Functions (CDFs)}\label{contCDFs}
 
 We start by talking about the cumulative distribution function, as its definition applies to both discrete and continuous random variables. The CDF of a random variable \(X\) is \(F_X(x) = P(X \leq x)\). The difference lies in how a CDF looks visually.
 
@@ -2199,7 +2243,7 @@ The criteria for a valid CDF is the same, it does not matter if the random varia
 
 \emph{Thought question}: Look at the CDFs for our example in Figure \ref{fig:4-compare}, and see how they satisfy the criteria listed above for a valid CDF.
 
-\section{Probability Density Functions (PDFs)}\label{probability-density-functions-pdfs}
+\section{Probability Density Functions (PDFs)}\label{PDFs}
 
 The \textbf{probability density function (PDF)} of a continuous random variable is analogous to the PMF of a discrete random variable.
 
@@ -2269,7 +2313,7 @@ Similarly for continuous random variables, the PDF and the density plot are rela
 
 We will go over some of the details on how density plots are created at the end of this module, in Section \ref{KDE}, as we still need to cover a few concepts.
 
-\section{Summaries of a Distribution}\label{summaries-of-a-distribution}
+\section{Summaries of a Distribution}\label{summsDist}
 
 Next, we will talk about some common summaries associated with a distribution. These involve measures of centrality and variance, which we have covered before. We will also talk about a couple of other measures: skewness and kurtosis.
 
@@ -2413,7 +2457,7 @@ The values of \(Kurt(X)\) that are associated with tail behaviors are:
   \(Kurt(X) < 0\): \(X\) has smaller tails compared to Gaussian distribution (extreme values less likely).
 \end{itemize}
 
-\section{Common Continuous Random Variables}\label{common-continuous-random-variables}
+\section{Common Continuous Random Variables}\label{commContRVs}
 
 Next, we will introduce some commonly used distributions that may be used for continuous random variables. A number of common statistical models (for example, linear regression) are based on these distributions.
 
@@ -2682,7 +2726,7 @@ We will work out the first statement, that about 68\% of the observed values wil
 
 \emph{Thought question}: how would you tweak this code to verify the other two statements associated with the 68-95-99.7\% rule?
 
-\section{Using R}\label{usingR}
+\section{Using R}\label{RCont}
 
 R has built in functions to compute the density, CDF, percentiles, as well as simulate data of common distributions. We will start with a random variable \(Y \sim N(1, 9)\) as an example.
 
@@ -3023,7 +3067,23 @@ In the previous two modules, we learned how to summarize the distribution of ind
 
 This module will consider these variables jointly, in other words, how they relate to each other. A lot of the concepts such as CDF, PDF, PMF, expectations, variances, and so on will have analogous versions when considering variables jointly.
 
-\section{Joint Distributions for Discrete RVs}\label{joint-distributions-for-discrete-rvs}
+\subsection{Module Roadmap}\label{module-roadmap-3}
+
+\begin{itemize}
+\tightlist
+\item
+  Section \ref{jointDis} will explore these concepts when the variables are discrete. These concepts are easier to learn when the variables are discrete.
+\item
+  Section \ref{jointCont} will introduce these concepts when the variables are continuous.
+\item
+  Section \ref{covcorr} covers a couple of common ways to quantify the strength of the linear relationship between two quantitative variables.
+\item
+  Section \ref{condexp} covers the notion of the conditional expectation of a random variable.
+\item
+  Section \ref{commMultDist} introduces common multivariate distributions.
+\end{itemize}
+
+\section{Joint Distributions for Discrete RVs}\label{jointDis}
 
 We will start with discrete random variables, then move on to continuous random variables. To keep things simple, we will use two random variables to explain concepts. These concepts can then be generalized to any number of random variables.
 
@@ -3319,7 +3379,7 @@ If study time and grades were independent, we needed to show \(P(Y=1|X=x) = P(Y=
 
 Very often, knowing the context of the random variables helps. Since we expect students who study more to get better grades, we expect these variables to be dependent, so we know we just need to provide a counterexample.
 
-\section{Joint, Marginal, Conditional Distributions for Continuous RVs}\label{joint-marginal-conditional-distributions-for-continuous-rvs}
+\section{Joint, Marginal, Conditional Distributions for Continuous RVs}\label{jointCont}
 
 Recall in the previous modules the CDFs and PDFs for a continuous random variable are similar to CDFs and PMFs for discrete random variables. The continuous versions are generally found by swapping summations with integrals. The same general idea applies with joint distributions when both random variables are continuous.
 
@@ -3393,7 +3453,7 @@ f_{X|Y} (x|y) = f_X(x).
 \label{eq:5-indcont4}
 \end{equation}
 
-\section{Covariance and Correlation}\label{covariance-and-correlation}
+\section{Covariance and Correlation}\label{covcorr}
 
 In the previous modules, we used summaries such as the mean, variance, skewness, and kurtosis to provide some insight into the distribution of a single random variable. When we have multiple random variables, one question we have is how are the random variables related to each other. Summaries that are used to quantify the \textbf{linear relationship} between two quantitative random variables are the covariance and correlation.
 
@@ -3409,7 +3469,7 @@ Two random variables have a negative covariance and correlation if they move in 
 
 One more thing to note: covariance and correlations can be calculated for random variables as long as they are quantitative, but not if at least one of them is categorical. The concept of increasing a random variable that is categorical does not make intuitive sense, for example, if we have a random variable that denotes the color of eyes, what does increasing color of eyes mean?
 
-\subsection{Covariance}\label{5-cov}
+\subsection{Covariance}\label{covariance}
 
 We now define covariance. The \textbf{covariance} between random variables \(X\) and \(Y\) is
 
@@ -3521,7 +3581,7 @@ Figure \ref{fig:5-corrs} below shows examples of some scatterplots and their sam
 \caption{\label{fig:5-corrs}Strong Negative Correlation (Left), No Correlation (Middle), Moderate Positive Correlation (Right)}
 \end{figure}
 
-\section{Conditional Expectation}\label{conditional-expectation}
+\section{Conditional Expectation}\label{condexp}
 
 In Section \ref{condprob} and \ref{conddist}, we explored the notion of conditional probabilities and conditional distributions, which are used for:
 
@@ -3685,7 +3745,7 @@ Note: We set up \(Y = 10 + X + \epsilon\) where \(\epsilon \sim N(0,1)\) in the 
 
 View the video below for a more detailed explanation of this example:
 
-\section{Common Multivariate Distributions}\label{common-multivariate-distributions}
+\section{Common Multivariate Distributions}\label{commMultDist}
 
 We now cover two of the most common multivariate distributions: the multinomial distribution and multivariate normal distribution for discrete and continuous random variables respectively.
 
@@ -3960,6 +4020,18 @@ This module is based on Introduction to Probability (Blitzstein, Hwang), Chapter
 \section{Introduction}\label{introduction-2}
 
 It can be difficult to calculate probabilities and expected values, for example, when the PDF of a distribution is unknown, or its integral is too difficult to work out. You may notice that we used simulations to approximate probabilities and expected values in some of the examples in previous modules. With improvement in computing capabilities, simulations can now be performed faster and is a tool that is used more and more. Other tools to calculate difficult probabilities and expected values include using inequalities to bound the probabilities (e.g.~the probability cannot be greater or less than a certain value), or approximating using known theorems. We'll look at these three tools in this module.
+
+\subsection{Module Roadmap}\label{module-roadmap-4}
+
+\begin{itemize}
+\tightlist
+\item
+  Section \ref{inequalities} covers 3 famous inequalities that are used in probability (Cauchy-Schwartz, Jensen, Chebyshev), as well as their implications.
+\item
+  Section \ref{limits} covers 2 of the most consequential theorems in probability, the Law of Large Numbers and the Central Limit Theorem. We will be invoking these 2 theorems in a number of the remaining modules .
+\item
+  Section \ref{MCsims} covers Monte Carlo simulations, which is a computational tool used to estimate probabilities, especially when they may be difficult to derive ``by hand''. We will be using Monte Carlo simulations extensively for the rest of this class.
+\end{itemize}
 
 \section{Inequalities}\label{inequalities}
 
@@ -4455,7 +4527,7 @@ Figure \ref{fig:6-CLTnorm} displays the histograms from this simulation, and mat
 \includegraphics{bookdown-demo_files/figure-latex/6-CLTpois-1.pdf}
 Figure \ref{fig:6-CLTpois} displays the histograms from this simulation, and matches what we expect. When \(n\) is 1 or 5, the histograms are clearly not normal, so the CLT approximation will not work well. When \(n=30\) the histogram looks approximately normal, and when \(n=100\), the histogram looks even closer to a normal distribution.
 
-\section{Monte Carlo Simulations}\label{monte-carlo-simulations}
+\section{Monte Carlo Simulations}\label{MCsims}
 
 You may have noticed that we have used simulations in the earlier sections of this module (and previous modules) to help explain certain concepts. These simulations are called \textbf{Monte Carlo} methods, or Monte Carlo simulations. The idea behind Monte Carlo methods is to used repeated random sampling (and by repeated, we mean repeated a large number of times) to estimate features of data, usually probabilities and expected values. Monte Carlo methods are used for the following purposes:
 
@@ -4724,6 +4796,20 @@ We will also cover a couple of methods in estimating parameters: the method of m
 
 To sum up estimation: we use data from a sample to estimate unknown characteristics of a population, so that we can answer questions regarding variables in the population, as well as provide a measure of uncertainty for our answers.
 
+\subsection{Module Roadmap}\label{module-roadmap-5}
+
+\begin{itemize}
+\tightlist
+\item
+  Section \ref{MOM} covers estimation using the method of moments. This method is fairly intuitive, although it is not as commonly used as it lacks certain ideal properties.
+\item
+  Section \ref{MLE} covers estimation using the method of maximum likelihood. This method is a workhorse in statistics and probability as many models are estimated using this method.
+\item
+  Section \ref{estprops} covers measures that are used to evaluate how ``good'' an estimator is.
+\item
+  Section \ref{estcomments} provides some final comments on estimation.
+\end{itemize}
+
 \section{Method of Moments Estimation}\label{MOM}
 
 We will cover a couple of methods in estimation. The first method is the \textbf{method of moments}. It is a more intuitive method, although it lacks certain ideal properties. Before defining this method, we recall and define some terms.
@@ -4913,7 +4999,7 @@ So we set \(Var(X) = M_2^*\) i.e.~\(\hat{\sigma^2} = \frac{1}{n} \sum_{i=1}^n (x
 
 The idea behind method of moments estimation is fairly intuitive; however, it has some drawbacks which we will talk about after introducing another method for estimation in the next section, the method of maximum likelihood.
 
-\section{Method of Maximum Likelihood Estimation}\label{method-of-maximum-likelihood-estimation}
+\section{Method of Maximum Likelihood Estimation}\label{MLE}
 
 The method of maximum likelihood is a workhorse in statistics and data science since it is widely used in estimating models. It is preferred to the method of moments as it is built upon a stronger theoretical framework, and its estimators tend to have more desirable properties. You are guaranteed to see the method of maximum likelihood again in the future.
 
@@ -5601,7 +5687,7 @@ In other words, the MSE of an estimator is equal to the variance of an estimator
 
 What the MSE of an estimator suggests is that we need to consider both the bias and variance of an estimator. People often think that an unbiased estimator is the ``best''. However, an unbiased estimator could have high variance. Such an estimator could have high MSE. In such a setting, it may be worth considering another estimator that may be biased, but have much smaller variance, resulting in a lower MSE. An example of where this can happen is in linear regression. Classical methods with linear regression yield unbiased estimators, but under specific scenarios, these estimators could have high variances. Another model, called the ridge regression model, considers biased estimators which may have smaller variances, which can result in lower MSEs in these specific scenarios. You will learn about these models in greater detail in a future class.
 
-\section{Final Comments on Estimation}\label{final-comments-on-estimation}
+\section{Final Comments on Estimation}\label{estcomments}
 
 We have covered the method of moments and method of maximum likelihood when estimating parameters. These methods are also called \textbf{parametric methods} as they involve making an assumption that the data follow some well-known distribution with unknown parameters, and we are then using our data, and our assumed distribution, to estimate the numerical value of the unknown parameters.
 
@@ -5641,7 +5727,19 @@ In this section, we will introduce confidence intervals. Confidence intervals bu
 
 We will first cover confidence intervals for the mean and confidence intervals for the proportion, two of the most basic confidence intervals. These intervals are based on the fact that the distribution of their corresponding estimators, the sample mean and sample proportion, are known as long as certain conditions are met. You will notice that the general ideas in finding confidence intervals are pretty similar; confidence intervals for other estimators that have known distributions will be constructed similarly. In the last subsection of this module, we will learn about the bootstrap, which is used when the distribution of an estimator is unknown.
 
-\section{Confidence Interval for the Mean}\label{confidence-interval-for-the-mean}
+\subsection{Module Roadmap}\label{module-roadmap-6}
+
+\begin{itemize}
+\tightlist
+\item
+  Section \ref{CImean} covers the key concepts in confidence intervals and how they apply to the mean.
+\item
+  Section \ref{CIprop} shows how the concepts from the previous section carry over to the confidence interval for the proportion.
+\item
+  Section \ref{bootstrap} goes over the method to create confidence intervals with estimators with unknown sampling distributions.
+\end{itemize}
+
+\section{Confidence Interval for the Mean}\label{CImean}
 
 \subsection{Randomness of Estimators}\label{randomness-of-estimators}
 
@@ -5815,7 +5913,7 @@ View the video below that explains these steps in a bit more detail:
 
 \emph{Thought question}: Can you show that the critical value for 96\% confidence is about 2.054? Can you show that the critical value for 98\% confidence is about 2.326?
 
-\subsubsection{Confidence Interval for the Mean}\label{confidence-interval-for-the-mean-1}
+\subsubsection{Confidence Interval for the Mean}\label{confidence-interval-for-the-mean}
 
 We are now ready to put the pieces together to work on the confidence interval for the mean:
 
@@ -6108,7 +6206,7 @@ The width of a confidence interval is used as a measure of \textbf{precision}. A
 
 Other factors such as whether \(\sigma^2\) is unknown or not, and the value of the variance, are usually not controllable by the researcher.
 
-\section{Confidence Interval for the Proportion}\label{confidence-interval-for-the-proportion}
+\section{Confidence Interval for the Proportion}\label{CIprop}
 
 Next, we will go over the confidence interval for the proportion. This is another common confidence interval. The sample proportion is an estimator for the population proportion.
 
@@ -6228,7 +6326,7 @@ Using the inequality \eqref{eq:8-minsamp},
 \]
 So she will need to sample at least 1068 residents to guarantee a margin of error that is no more than 3 percentage points.
 
-\section{The Bootstrap}\label{the-bootstrap}
+\section{The Bootstrap}\label{bootstrap}
 
 In the previous subsections, we work out the confidence interval of an estimator by using the framework in equation \eqref{eq:8-CIbasic2}: we add and subtract the margin of error to and from the point estimate. The margin of error is the critical value multiplied by the standard error of the estimator. The critical value is based on the sampling distribution of the estimator. This framework requires us to know the sampling distribution and the standard error of the estimator.
 
@@ -6486,7 +6584,21 @@ A hypothesis is a statement which we assess whether is is true or not using our 
 
 The book presents these hypotheses and hypothesis testing using a court trial as an analogy. Defendants are assumed to be ``innocent until proven guilty''. The ``null hypothesis'' or status quo in this setting is that the defendant is innocent, and the ``alternative hypothesis'' is that the defendant is guilty. The prosecutor needs to then present evidence that contradicts the null hypothesis in order to prove guilt. The jurors, who come into the trial assuming the defendant is innocent, then assess how strong is the evidence presented: if its strength is beyond a certain threshold (i.e.~beyond ``reasonable doubt'') then there is evidence to reject the null hypothesis and decide the defendant is guilty. However, if the evidence is not strong enough, there is not enough evidence to reject the null hypothesis and the jury renders a not guilty verdict.
 
-\section{Hypothesis Test for the Mean}\label{hypothesis-test-for-the-mean}
+\subsection{Module Roadmap}\label{module-roadmap-7}
+
+\begin{itemize}
+\tightlist
+\item
+  Section \ref{testmean} covers the key concepts in hypothesis tests and how they apply to the mean.
+\item
+  Section \ref{testprop} shows how the concepts from the previous section carry over to the hypothesis test for the proportion.
+\item
+  Section \ref{infcomments} provides comments on things to be mindful of when performing hypothesis tests in real life.
+\item
+  Section \ref{GOF} introduces another class of hypothesis tests: goodness of fit tests, which are used to assess how consistent our data are with some assumed distribution or model.
+\end{itemize}
+
+\section{Hypothesis Test for the Mean}\label{testmean}
 
 When testing for the mean, the parameter is the population mean. This happens when the variable we are measuring is quantitative. Consider this example:
 
@@ -6893,7 +7005,7 @@ Since our p-value is 0.09, which is greater than the significance level of 0.05,
 
 Our conclusion is the data do not support the claim that the average thickness of silicon wafers is different from the target value of 250 micrometers.
 
-\section{Hypothesis Test for the Proportion}\label{hypothesis-test-for-the-proportion}
+\section{Hypothesis Test for the Proportion}\label{testprop}
 
 Next, we will go over the hypothesis test for the proportion. This is another common hypothesis test. The sample proportion is an estimator for the population proportion. Proportions are used to summarize categorical variables, whereas means are used to summarize quantitative variables.
 
@@ -7020,7 +7132,7 @@ Since our p-value is 0.129, which is greater than the significance level of 0.05
 
 Our conclusion is the data do not support the claim that the true proportion of misshelved or unlocatable books is less than 2\%. So there is not enough evidence to postpone the inventory.
 
-\section{Additional Comments on Hypothesis Test of Parameters}\label{additional-comments-on-hypothesis-test-of-parameters}
+\section{Additional Comments on Hypothesis Test of Parameters}\label{infcomments}
 
 \subsection{Two-Sided Tests and Confidence Intervals}\label{inference}
 
@@ -7278,7 +7390,7 @@ To remind ourselves, we use hypothesis tests to test for ``statistical significa
 
 To summarize, hypothesis testing is used to assess ``statistical significance'', but we use subject matter knowledge to assess ``practical significance''.
 
-\section{Goodness of Fit Tests}\label{goodness-of-fit-tests}
+\section{Goodness of Fit Tests}\label{GOF}
 
 \textbf{Goodness of Fit (GOF)} tests are a class of hypothesis tests that assess the deviation of observed data from a hypothesized distribution or model, instead of the deviation of estimators from parameters. The framework is still the same:
 
@@ -7465,7 +7577,21 @@ Figure \ref{fig:10-scatter} could help us with the following questions:
 
 These questions can be answered using linear regression.
 
-\section{Simple Linear Regression}\label{simple-linear-regression}
+\subsection{Module Roadmap}\label{module-roadmap-8}
+
+\begin{itemize}
+\tightlist
+\item
+  Section \ref{SLR} sets up the linear regression model and covers the assumptions made.
+\item
+  Section \ref{estSLR} goes over how the linear regression model is estimated.
+\item
+  Section \ref{SLRinf} goes over the sampling distribution of the estimators in linear regression, as well as associated confidence intervals and hypothesis tests. These are the main tools used when we are focused on the primary goal of association.
+\item
+  Section \ref{SLRacc} goes over how we measure model accuracy in linear regression. These measures are used when we are focused on prediction.
+\end{itemize}
+
+\section{Simple Linear Regression}\label{SLR}
 
 In this module, we will keep things simple by only considering a single quantitative predictor. Such a regression is called \textbf{simple linear regression (SLR)} to emphasize that only one predictor is being considered. We will briefly touch on multiple linear regression (MLR) when multiple predictors are involved later in this module, and you will learn more about linear regression next semester.
 
@@ -7709,7 +7835,7 @@ The scatter plot shown in Figure \ref{fig:10-ass2}(b) is an example of when this
 
 \emph{Thought question}: Look at the scatter plot of the toy example in Figure \ref{fig:10-scatter}. Can you explain why this scatter plot shows the first two assumptions are met for linear regression?
 
-\section{Estimating Regression Coefficients}\label{estimating-regression-coefficients}
+\section{Estimating Regression Coefficients}\label{estSLR}
 
 There are two methods in estimating the regression coefficients: the method of least squares and the method of maximum likelihood. For large sample sizes, these methods give similar results.
 
@@ -8339,7 +8465,7 @@ We use the \texttt{cor()} function to find the correlation between two quantitat
 
 The correlation is -0.4985561. We have a moderate, negative linear association between family income and gift aid.
 
-\section{Assessing Model Accuracy}\label{assessing-model-accuracy}
+\section{Assessing Model Accuracy}\label{SLRacc}
 
 In the introduction of this module, we wrote that supervised methods such as linear regression have two primary uses:
 

@@ -76,10 +76,22 @@
 <li>Marketing: How does the design of a website influence the probability of a customer purchasing an item?</li>
 </ul>
 <p>This module will consider these variables jointly, in other words, how they relate to each other. A lot of the concepts such as CDF, PDF, PMF, expectations, variances, and so on will have analogous versions when considering variables jointly.</p>
+<div id="module-roadmap-3" class="section level3" number="5.1.1">
+<h3>
+<span class="header-section-number">5.1.1</span> Module Roadmap<a class="anchor" aria-label="anchor" href="#module-roadmap-3"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li>Section <a href="joint-distributions.html#jointDis">5.2</a> will explore these concepts when the variables are discrete. These concepts are easier to learn when the variables are discrete.</li>
+<li>Section <a href="joint-distributions.html#jointCont">5.3</a> will introduce these concepts when the variables are continuous.</li>
+<li>Section <a href="joint-distributions.html#covcorr">5.4</a> covers a couple of common ways to quantify the strength of the linear relationship between two quantitative variables.</li>
+<li>Section <a href="joint-distributions.html#condexp">5.5</a> covers the notion of the conditional expectation of a random variable.</li>
+<li>Section <a href="joint-distributions.html#commMultDist">5.6</a> introduces common multivariate distributions.</li>
+</ul>
 </div>
-<div id="joint-distributions-for-discrete-rvs" class="section level2" number="5.2">
+</div>
+<div id="jointDis" class="section level2" number="5.2">
 <h2>
-<span class="header-section-number">5.2</span> Joint Distributions for Discrete RVs<a class="anchor" aria-label="anchor" href="#joint-distributions-for-discrete-rvs"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.2</span> Joint Distributions for Discrete RVs<a class="anchor" aria-label="anchor" href="#jointDis"><i class="fas fa-link"></i></a>
 </h2>
 <p>We will start with discrete random variables, then move on to continuous random variables. To keep things simple, we will use two random variables to explain concepts. These concepts can then be generalized to any number of random variables.</p>
 <p>Recall that for a single discrete random variable <span class="math inline">\(X\)</span>, we use the PMF to inform us the support of <span class="math inline">\(X\)</span> and the probability associated with each value of the support. We said that the PMF informs us about the distribution of the random variable <span class="math inline">\(X\)</span>.</p>
@@ -374,9 +386,9 @@ P(X=x | Y=y) = P(X=x),
 <p>Very often, knowing the context of the random variables helps. Since we expect students who study more to get better grades, we expect these variables to be dependent, so we know we just need to provide a counterexample.</p>
 </div>
 </div>
-<div id="joint-marginal-conditional-distributions-for-continuous-rvs" class="section level2" number="5.3">
+<div id="jointCont" class="section level2" number="5.3">
 <h2>
-<span class="header-section-number">5.3</span> Joint, Marginal, Conditional Distributions for Continuous RVs<a class="anchor" aria-label="anchor" href="#joint-marginal-conditional-distributions-for-continuous-rvs"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.3</span> Joint, Marginal, Conditional Distributions for Continuous RVs<a class="anchor" aria-label="anchor" href="#jointCont"><i class="fas fa-link"></i></a>
 </h2>
 <p>Recall in the previous modules the CDFs and PDFs for a continuous random variable are similar to CDFs and PMFs for discrete random variables. The continuous versions are generally found by swapping summations with integrals. The same general idea applies with joint distributions when both random variables are continuous.</p>
 <p>Now suppose that <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> denote random variables that are continuous. It is required that the <strong>joint CDF</strong> <span class="math inline">\(F_{X,Y}(x,y) = P(X \leq x, Y \leq y)\)</span> is differentiable with respect to <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>. Their <strong>joint PDF</strong> is the partial derivative of their joint CDF with respect to <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>: <span class="math inline">\(f_{X,Y}(x,y) = \frac{\partial^2}{\partial x \partial y} F_{X,Y}(x,y)\)</span>.</p>
@@ -429,9 +441,9 @@ f_{X|Y} (x|y) = f_X(x).
 \tag{5.19}
 \end{equation}\]</span></p>
 </div>
-<div id="covariance-and-correlation" class="section level2" number="5.4">
+<div id="covcorr" class="section level2" number="5.4">
 <h2>
-<span class="header-section-number">5.4</span> Covariance and Correlation<a class="anchor" aria-label="anchor" href="#covariance-and-correlation"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.4</span> Covariance and Correlation<a class="anchor" aria-label="anchor" href="#covcorr"><i class="fas fa-link"></i></a>
 </h2>
 <p>In the previous modules, we used summaries such as the mean, variance, skewness, and kurtosis to provide some insight into the distribution of a single random variable. When we have multiple random variables, one question we have is how are the random variables related to each other. Summaries that are used to quantify the <strong>linear relationship</strong> between two quantitative random variables are the covariance and correlation.</p>
 <p>Generally speaking, two random variables have a positive covariance and correlation if they increase or decrease together, i.e. if <span class="math inline">\(X\)</span> increases, <span class="math inline">\(Y\)</span> also generally increases; if <span class="math inline">\(X\)</span> decreases, <span class="math inline">\(Y\)</span> also generally decreases.</p>
@@ -443,9 +455,9 @@ Figure 5.1: Positive Covariance (Left), Negative Covariance (Right)
 </p>
 </div>
 <p>One more thing to note: covariance and correlations can be calculated for random variables as long as they are quantitative, but not if at least one of them is categorical. The concept of increasing a random variable that is categorical does not make intuitive sense, for example, if we have a random variable that denotes the color of eyes, what does increasing color of eyes mean?</p>
-<div id="id_5-cov" class="section level3" number="5.4.1">
+<div id="covariance" class="section level3" number="5.4.1">
 <h3>
-<span class="header-section-number">5.4.1</span> Covariance<a class="anchor" aria-label="anchor" href="#id_5-cov"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.4.1</span> Covariance<a class="anchor" aria-label="anchor" href="#covariance"><i class="fas fa-link"></i></a>
 </h3>
 <p>We now define covariance. The <strong>covariance</strong> between random variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> is</p>
 <p><span class="math display" id="eq:5-cov">\[\begin{equation}
@@ -526,9 +538,9 @@ Figure 5.3: Strong Negative Correlation (Left), No Correlation (Middle), Moderat
 </div>
 </div>
 </div>
-<div id="conditional-expectation" class="section level2" number="5.5">
+<div id="condexp" class="section level2" number="5.5">
 <h2>
-<span class="header-section-number">5.5</span> Conditional Expectation<a class="anchor" aria-label="anchor" href="#conditional-expectation"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.5</span> Conditional Expectation<a class="anchor" aria-label="anchor" href="#condexp"><i class="fas fa-link"></i></a>
 </h2>
 <p>In Section <a href="probability.html#condprob">2.3</a> and <a href="joint-distributions.html#conddist">5.2.2</a>, we explored the notion of conditional probabilities and conditional distributions, which are used for:</p>
 <ul>
@@ -643,9 +655,9 @@ E(Y|X=x) &amp;= E(10 + X + \epsilon | X=x)\\
 </iframe>
 </div>
 </div>
-<div id="common-multivariate-distributions" class="section level2" number="5.6">
+<div id="commMultDist" class="section level2" number="5.6">
 <h2>
-<span class="header-section-number">5.6</span> Common Multivariate Distributions<a class="anchor" aria-label="anchor" href="#common-multivariate-distributions"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.6</span> Common Multivariate Distributions<a class="anchor" aria-label="anchor" href="#commMultDist"><i class="fas fa-link"></i></a>
 </h2>
 <p>We now cover two of the most common multivariate distributions: the multinomial distribution and multivariate normal distribution for discrete and continuous random variables respectively.</p>
 <div id="multinomial" class="section level3" number="5.6.1">
@@ -854,9 +866,11 @@ Corr(X_1,X_2) &amp;= \frac{Cov(X_1,X_2)}{\sqrt{Var(X_1) Var(X_2)}}\\
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
 <li><a class="nav-link" href="#joint-distributions"><span class="header-section-number">5</span> Joint Distributions</a></li>
-<li><a class="nav-link" href="#introduction-1"><span class="header-section-number">5.1</span> Introduction</a></li>
 <li>
-<a class="nav-link" href="#joint-distributions-for-discrete-rvs"><span class="header-section-number">5.2</span> Joint Distributions for Discrete RVs</a><ul class="nav navbar-nav">
+<a class="nav-link" href="#introduction-1"><span class="header-section-number">5.1</span> Introduction</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#module-roadmap-3"><span class="header-section-number">5.1.1</span> Module Roadmap</a></li></ul>
+</li>
+<li>
+<a class="nav-link" href="#jointDis"><span class="header-section-number">5.2</span> Joint Distributions for Discrete RVs</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#marginal-distributions-for-discrete-rvs"><span class="header-section-number">5.2.1</span> Marginal Distributions for Discrete RVs</a></li>
 <li><a class="nav-link" href="#conddist"><span class="header-section-number">5.2.2</span> Conditional Distributions for Discrete RVs</a></li>
 <li><a class="nav-link" href="#bayes-rule-1"><span class="header-section-number">5.2.3</span> Bayes’ Rule</a></li>
@@ -864,21 +878,21 @@ Corr(X_1,X_2) &amp;= \frac{Cov(X_1,X_2)}{\sqrt{Var(X_1) Var(X_2)}}\\
 <li><a class="nav-link" href="#indepdence-of-discrete-rvs"><span class="header-section-number">5.2.5</span> Indepdence of Discrete RVs</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#joint-marginal-conditional-distributions-for-continuous-rvs"><span class="header-section-number">5.3</span> Joint, Marginal, Conditional Distributions for Continuous RVs</a></li>
+<li><a class="nav-link" href="#jointCont"><span class="header-section-number">5.3</span> Joint, Marginal, Conditional Distributions for Continuous RVs</a></li>
 <li>
-<a class="nav-link" href="#covariance-and-correlation"><span class="header-section-number">5.4</span> Covariance and Correlation</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#id_5-cov"><span class="header-section-number">5.4.1</span> Covariance</a></li>
+<a class="nav-link" href="#covcorr"><span class="header-section-number">5.4</span> Covariance and Correlation</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#covariance"><span class="header-section-number">5.4.1</span> Covariance</a></li>
 <li><a class="nav-link" href="#corr"><span class="header-section-number">5.4.2</span> Correlation</a></li>
 </ul>
 </li>
 <li>
-<a class="nav-link" href="#conditional-expectation"><span class="header-section-number">5.5</span> Conditional Expectation</a><ul class="nav navbar-nav">
+<a class="nav-link" href="#condexp"><span class="header-section-number">5.5</span> Conditional Expectation</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#conditional-expectation-given-event"><span class="header-section-number">5.5.1</span> Conditional Expectation Given Event</a></li>
 <li><a class="nav-link" href="#conditional-expectation-given-random-variable"><span class="header-section-number">5.5.2</span> Conditional Expectation Given Random Variable</a></li>
 </ul>
 </li>
 <li>
-<a class="nav-link" href="#common-multivariate-distributions"><span class="header-section-number">5.6</span> Common Multivariate Distributions</a><ul class="nav navbar-nav">
+<a class="nav-link" href="#commMultDist"><span class="header-section-number">5.6</span> Common Multivariate Distributions</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#multinomial"><span class="header-section-number">5.6.1</span> Multinomial</a></li>
 <li><a class="nav-link" href="#multivariate-normal"><span class="header-section-number">5.6.2</span> Multivariate Normal</a></li>
 </ul>

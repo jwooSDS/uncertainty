@@ -50,7 +50,15 @@ The **support** of a discrete random variable $X$ is the set of values $X$ can t
 
 *Thought question*: Can you come of examples of discrete and continuous random variables on your own? Feel free to search the internet for examples as well. 
 
-## Probability Mass Functions (PMFs)
+### Module Roadmap
+
+- Section \@ref(PMFs) introduces PMFs, which is a way of mapping each outcome of a discrete random variable with its corresponding probability. PMFs are always used to define the behavior of discrete random variables.
+- Section \@ref(CDFs) introduces CDFs, which is another way of defining the behavior of random variables.
+- Section \@ref(expectations) introduces the notion of (mathematical) expectation, or the long-run average of a random variable.
+- Section \@ref(commonDisRVs) introduces some commonly used discrete random variables. These random variables are the basis of many statistical models.
+- Section \@ref(Rdis) goes over how to use R with commonly used discrete random variables. 
+
+## Probability Mass Functions (PMFs) {#PMFs}
 
 We use probability to describe the behavior of random variables.  This is called the **distribution** of a random variable. The distribution of a random variable specifies the probabilities of all events associated with the random variable. 
 
@@ -127,7 +135,7 @@ In general, the PMF of a random variable should match the histogram in the long 
 
 Note: What we have just done here was to use simulations to repeat an experiment a large number of times. 
 
-## Cumulative Distribution Functions (CDFs)
+## Cumulative Distribution Functions (CDFs) {#CDFs}
 
 Another function that is used to describe the distribution of discrete random variables is the **cumulative distribution function (CDF)**. The CDF of a random variable $X$ is $F_X(x) = P(X \leq x)$. Notice that unlike the PMF, the definition of CDF applies for both discrete and continuous random variables. 
 
@@ -178,7 +186,7 @@ The CDF $F_X(x)$ of $X$ must:
 
 *Thought question*: Look at the CDF for our example in Figure \@ref(fig:3-cdf), and see how it satisfies the criteria listed above for a valid CDF. 
 
-## Expectations
+## Expectations {#expectations}
 
 In the previous section, we see how PMFs and CDFs can be used to describe the distribution of a random variable. As the PMF can be viewed as a long-run version of the histogram, it gives us an idea about the shape of the distribution. Similar to Section \@ref(descriptive), we will also be interested in measures of centrality and spread for random variables. 
 
@@ -408,7 +416,7 @@ Variance has the following properties:
 - $Var(cX) = c^2 Var(X)$. Look at Figure \@ref(fig:3-pmf-lin), notice the distance between each value in the support from its expected value gets multiplied by 2 (since $Y=2X$). So if we multiply a random variable by $c$, the distance between each value in the support on its expected value is multiplied by $c$. Since variance measures squared distance, the variance gets multiplied by $c^2$. 
 - If $X$ and $Y$ are independent random variables, then $Var(X+Y) = Var(X) + Var(Y)$.
 
-## Common Discrete Random Variables
+## Common Discrete Random Variables {#commonDisRVs}
 
 Next, we will introduce some commonly used distributions that may be used for discrete random variables. A number of common statistical models (for example, logistic regression, Poisson regression) are based on these distributions.
 

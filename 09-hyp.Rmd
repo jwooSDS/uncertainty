@@ -28,7 +28,14 @@ A hypothesis is a statement which we assess whether is is true or not using our 
 
 The book presents these hypotheses and hypothesis testing using a court trial as an analogy. Defendants are assumed to be "innocent until proven guilty". The "null hypothesis" or status quo in this setting is that the defendant is innocent, and the "alternative hypothesis" is that the defendant is guilty. The prosecutor needs to then present evidence that contradicts the null hypothesis in order to prove guilt. The jurors, who come into the trial assuming the defendant is innocent, then assess how strong is the evidence presented: if its strength is beyond a certain threshold (i.e. beyond "reasonable doubt") then there is evidence to reject the null hypothesis and decide the defendant is guilty. However, if the evidence is not strong enough, there is not enough evidence to reject the null hypothesis and the jury renders a not guilty verdict. 
 
-## Hypothesis Test for the Mean
+### Module Roadmap
+
+- Section \@ref(testmean) covers the key concepts in hypothesis tests and how they apply to the mean.
+- Section \@ref(testprop) shows how the concepts from the previous section carry over to the hypothesis test for the proportion. 
+- Section \@ref(infcomments) provides comments on things to be mindful of when performing hypothesis tests in real life.
+- Section \@ref(GOF) introduces another class of hypothesis tests: goodness of fit tests, which are used to assess how consistent our data are with some assumed distribution or model. 
+
+## Hypothesis Test for the Mean {#testmean}
 
 When testing for the mean, the parameter is the population mean. This happens when the variable we are measuring is quantitative. Consider this example: 
 
@@ -359,7 +366,7 @@ Since our p-value is 0.09, which is greater than the significance level of 0.05,
 
 Our conclusion is the data do not support the claim that the average thickness of silicon wafers is different from the target value of 250 micrometers.
 
-## Hypothesis Test for the Proportion
+## Hypothesis Test for the Proportion {#testprop}
 
 Next, we will go over the hypothesis test for the proportion. This is another common hypothesis test. The sample proportion is an estimator for the population proportion. Proportions are used to summarize categorical variables, whereas means are used to summarize quantitative variables. 
 
@@ -465,7 +472,7 @@ Since our p-value is 0.129, which is greater than the significance level of 0.05
 
 Our conclusion is the data do not support the claim that the true proportion of misshelved or unlocatable books is less than 2%. So there is not enough evidence to postpone the inventory. 
 
-## Additional Comments on Hypothesis Test of Parameters
+## Additional Comments on Hypothesis Test of Parameters {#infcomments}
 
 ### Two-Sided Tests and Confidence Intervals {#inference}
 
@@ -647,7 +654,7 @@ To remind ourselves, we use hypothesis tests to test for "statistical significan
 
 To summarize, hypothesis testing is used to assess "statistical significance", but we use subject matter knowledge to assess "practical significance".
 
-## Goodness of Fit Tests
+## Goodness of Fit Tests {#GOF}
 
 **Goodness of Fit (GOF)** tests are a class of hypothesis tests that assess the deviation of observed data from a hypothesized distribution or model, instead of the deviation of estimators from parameters. The framework is still the same:
 

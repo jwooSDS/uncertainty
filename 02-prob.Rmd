@@ -24,7 +24,13 @@ There are a couple of viewpoints on how to interpret probability: **frequentist*
 
 In this coin flip example, both interpretations are reasonable. However, in some instances, the frequentist interpretation may not be as interpretable if we cannot repeat the event many times. For example, the earlier statement about rain: "I am 50% certain that it will rain in the next hour". Whether it will rain or not in the next hour is not a repeatable event, so the frequentist interpretation makes less sense here. 
 
-## Key Concepts in Probability
+### Module Roadmap
+
+- Section \@ref(probconcepts) introduces the key terms, concepts, and rules in probability.
+- Section \@ref(condprob) introduces the idea of conditional probability. In the frequentist framework, conditional probabilities are probabilities only after certain "conditions" are fulfilled. In the Bayesian frameowrk, conditional probabilities represent how our measure of belief is updated after seeing data.
+- Section \@ref(confusion) covers some common misconceptions when it comes to interpreting conditional probabilities in real life (so much so that these misconceptions have their own names and wikipedia pages).
+
+## Key Concepts in Probability {#probconcepts}
 
 In this section, we will cover the basic terminology and foundational ideas in probability.
 
@@ -326,7 +332,7 @@ The video below goes over tree diagrams in a little bit more detail:
 
 <iframe width="560px" height="320px" allowfullscreen="true" allow="autoplay *" title="Module 02: Conditional Probability" src="https://virginiauniversity.instructuremedia.com/embed/3e9900ed-6464-47e4-9f7c-353e17e8b47a" frameborder="0"></iframe>
 
-## Confusion of the Inverse
+## Confusion of the Inverse {#confusion}
 
 We are now ready to talk about the prosecutor's fallacy, or the **confusion of the inverse**, that we had earlier mention in section \@ref(def). In essence, the confusion happens when we falsely equate $P(X|Y)$ to be equal to $P(Y|X)$. In fact, a large value for $P(X|Y)$ does not necessarily imply that $P(Y|X)$ is also large. The term prosecutor's fallacy when this confusion is applied in a criminal trial, e.g. the probability that an abusive relationship ends in murder could be small, but the probability that there was abuse in a relationship that ended in murder could be a lot higher. 
 

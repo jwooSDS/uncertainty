@@ -108,10 +108,22 @@
 <p>The <strong>support</strong> of a discrete random variable <span class="math inline">\(X\)</span> is the set of values <span class="math inline">\(X\)</span> can take such that <span class="math inline">\(P(X = x) &gt; 0\)</span>, i.e. the set of values that have non zero probability of happening. Using our 3 coin flips example, where <span class="math inline">\(X\)</span> is the number of heads out of the 3 coin slips, the support is <span class="math inline">\(\{0,1,2,3 \}\)</span>. he support of discrete random variables is usually integers.</p>
 <p><em>Thought question</em>: Can you come of examples of discrete and continuous random variables on your own? Feel free to search the internet for examples as well.</p>
 </div>
+<div id="module-roadmap-1" class="section level3" number="3.1.4">
+<h3>
+<span class="header-section-number">3.1.4</span> Module Roadmap<a class="anchor" aria-label="anchor" href="#module-roadmap-1"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li>Section <a href="discrete-random-variables.html#PMFs">3.2</a> introduces PMFs, which is a way of mapping each outcome of a discrete random variable with its corresponding probability. PMFs are always used to define the behavior of discrete random variables.</li>
+<li>Section <a href="discrete-random-variables.html#CDFs">3.3</a> introduces CDFs, which is another way of defining the behavior of random variables.</li>
+<li>Section <a href="discrete-random-variables.html#expectations">3.4</a> introduces the notion of (mathematical) expectation, or the long-run average of a random variable.</li>
+<li>Section <a href="discrete-random-variables.html#commonDisRVs">3.5</a> introduces some commonly used discrete random variables. These random variables are the basis of many statistical models.</li>
+<li>Section <a href="discrete-random-variables.html#Rdis">3.6</a> goes over how to use R with commonly used discrete random variables.</li>
+</ul>
 </div>
-<div id="probability-mass-functions-pmfs" class="section level2" number="3.2">
+</div>
+<div id="PMFs" class="section level2" number="3.2">
 <h2>
-<span class="header-section-number">3.2</span> Probability Mass Functions (PMFs)<a class="anchor" aria-label="anchor" href="#probability-mass-functions-pmfs"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.2</span> Probability Mass Functions (PMFs)<a class="anchor" aria-label="anchor" href="#PMFs"><i class="fas fa-link"></i></a>
 </h2>
 <p>We use probability to describe the behavior of random variables. This is called the <strong>distribution</strong> of a random variable. The distribution of a random variable specifies the probabilities of all events associated with the random variable.</p>
 <p>For discrete random variables, the distribution is specified by the <strong>probability mass function (PMF)</strong>. The PMF of a discrete random variable <span class="math inline">\(X\)</span> is the function <span class="math inline">\(P_X(x) = P(X=x)\)</span>. It is positive when <span class="math inline">\(x\)</span> is in the support of <span class="math inline">\(X\)</span>, and 0 otherwise.</p>
@@ -199,9 +211,9 @@ Figure 3.2: Histogram from Experiment Performed 1 Million Times
 <p>Note: What we have just done here was to use simulations to repeat an experiment a large number of times.</p>
 </div>
 </div>
-<div id="cumulative-distribution-functions-cdfs" class="section level2" number="3.3">
+<div id="CDFs" class="section level2" number="3.3">
 <h2>
-<span class="header-section-number">3.3</span> Cumulative Distribution Functions (CDFs)<a class="anchor" aria-label="anchor" href="#cumulative-distribution-functions-cdfs"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.3</span> Cumulative Distribution Functions (CDFs)<a class="anchor" aria-label="anchor" href="#CDFs"><i class="fas fa-link"></i></a>
 </h2>
 <p>Another function that is used to describe the distribution of discrete random variables is the <strong>cumulative distribution function (CDF)</strong>. The CDF of a random variable <span class="math inline">\(X\)</span> is <span class="math inline">\(F_X(x) = P(X \leq x)\)</span>. Notice that unlike the PMF, the definition of CDF applies for both discrete and continuous random variables.</p>
 <p>Going back to our example where we record the number of heads out of 3 coin flips, we can write out the CDF for the random variable <span class="math inline">\(X\)</span>:</p>
@@ -487,9 +499,9 @@ E(X^2) &amp;= 0^2 \times \frac{1}{8} + 1^2 \times \frac{3}{8} + 2^2 \times \frac
 </div>
 </div>
 </div>
-<div id="common-discrete-random-variables" class="section level2" number="3.5">
+<div id="commonDisRVs" class="section level2" number="3.5">
 <h2>
-<span class="header-section-number">3.5</span> Common Discrete Random Variables<a class="anchor" aria-label="anchor" href="#common-discrete-random-variables"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.5</span> Common Discrete Random Variables<a class="anchor" aria-label="anchor" href="#commonDisRVs"><i class="fas fa-link"></i></a>
 </h2>
 <p>Next, we will introduce some commonly used distributions that may be used for discrete random variables. A number of common statistical models (for example, logistic regression, Poisson regression) are based on these distributions.</p>
 <div id="bernoulli" class="section level3" number="3.5.1">
@@ -773,16 +785,17 @@ Figure 3.8: PMF for Poissons as Rate Parameter is Varied
 <li><a class="nav-link" href="#example"><span class="header-section-number">3.1.1</span> Example</a></li>
 <li><a class="nav-link" href="#definition"><span class="header-section-number">3.1.2</span> Definition</a></li>
 <li><a class="nav-link" href="#discrete-vs-continuous"><span class="header-section-number">3.1.3</span> Discrete Vs Continuous</a></li>
+<li><a class="nav-link" href="#module-roadmap-1"><span class="header-section-number">3.1.4</span> Module Roadmap</a></li>
 </ul>
 </li>
 <li>
-<a class="nav-link" href="#probability-mass-functions-pmfs"><span class="header-section-number">3.2</span> Probability Mass Functions (PMFs)</a><ul class="nav navbar-nav">
+<a class="nav-link" href="#PMFs"><span class="header-section-number">3.2</span> Probability Mass Functions (PMFs)</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#valid-pmfs"><span class="header-section-number">3.2.1</span> Valid PMFs</a></li>
 <li><a class="nav-link" href="#pmfhist"><span class="header-section-number">3.2.2</span> PMFs and Histograms</a></li>
 </ul>
 </li>
 <li>
-<a class="nav-link" href="#cumulative-distribution-functions-cdfs"><span class="header-section-number">3.3</span> Cumulative Distribution Functions (CDFs)</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#valid-cdfs"><span class="header-section-number">3.3.1</span> Valid CDFs</a></li></ul>
+<a class="nav-link" href="#CDFs"><span class="header-section-number">3.3</span> Cumulative Distribution Functions (CDFs)</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#valid-cdfs"><span class="header-section-number">3.3.1</span> Valid CDFs</a></li></ul>
 </li>
 <li>
 <a class="nav-link" href="#expectations"><span class="header-section-number">3.4</span> Expectations</a><ul class="nav navbar-nav">
@@ -792,7 +805,7 @@ Figure 3.8: PMF for Poissons as Rate Parameter is Varied
 </ul>
 </li>
 <li>
-<a class="nav-link" href="#common-discrete-random-variables"><span class="header-section-number">3.5</span> Common Discrete Random Variables</a><ul class="nav navbar-nav">
+<a class="nav-link" href="#commonDisRVs"><span class="header-section-number">3.5</span> Common Discrete Random Variables</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#bernoulli"><span class="header-section-number">3.5.1</span> Bernoulli</a></li>
 <li><a class="nav-link" href="#binomial"><span class="header-section-number">3.5.2</span> Binomial</a></li>
 <li><a class="nav-link" href="#poisson"><span class="header-section-number">3.5.3</span> Poisson</a></li>

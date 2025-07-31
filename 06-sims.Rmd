@@ -10,7 +10,13 @@ This module is based on Introduction to Probability (Blitzstein, Hwang), Chapter
 
 It can be difficult to calculate probabilities and expected values, for example, when the PDF of a distribution is unknown, or its integral is too difficult to work out. You may notice that we used simulations to approximate probabilities and expected values in some of the examples in previous modules. With improvement in computing capabilities, simulations can now be performed faster and is a tool that is used more and more. Other tools to calculate difficult probabilities and expected values include using inequalities to bound the probabilities (e.g. the probability cannot be greater or less than a certain value), or approximating using known theorems. We'll look at these three tools in this module.
 
-## Inequalities
+### Module Roadmap
+
+- Section \@ref(inequalities) covers 3 famous inequalities that are used in probability (Cauchy-Schwartz, Jensen, Chebyshev), as well as their implications.
+- Section \@ref(limits) covers 2 of the most consequential theorems in probability, the Law of Large Numbers and the Central Limit Theorem. We will be invoking these 2 theorems in a number of the remaining modules .
+- Section \@ref(MCsims) covers Monte Carlo simulations, which is a computational tool used to estimate probabilities, especially when they may be difficult to derive "by hand". We will be using Monte Carlo simulations extensively for the rest of this class. 
+
+## Inequalities {#inequalities}
 
 If a probability or expected value is difficult to calculate, it may be easier to find a bound via an inequality. This usually means that we can guarantee that a certain probability or expected value is within a certain range of values, which narrows down the possible values for the exact answer. For example, instead of being able to calculate the probability of a certain event, we may be able to show that its probability is no more than 0.1, so we know the event is unlikely to happen. We will cover a couple of the most well-known inequalities in probability.
 
@@ -400,7 +406,7 @@ for (i in 1:length(n))
 Figure \@ref(fig:6-CLTpois) displays the histograms from this simulation, and matches what we expect. When $n$ is 1 or 5, the histograms are clearly not normal, so the CLT approximation will not work well. When $n=30$ the histogram looks approximately normal, and when $n=100$, the histogram looks even closer to a normal distribution. 
 
 
-## Monte Carlo Simulations
+## Monte Carlo Simulations {#MCsims}
 
 You may have noticed that we have used simulations in the earlier sections of this module (and previous modules) to help explain certain concepts. These simulations are called **Monte Carlo** methods, or Monte Carlo simulations. The idea behind Monte Carlo methods is to used repeated random sampling (and by repeated, we mean repeated a large number of times) to estimate features of data, usually probabilities and expected values. Monte Carlo methods are used for the following purposes:
 

@@ -70,6 +70,16 @@
 <span class="header-section-number">6.1</span> Introduction<a class="anchor" aria-label="anchor" href="#introduction-2"><i class="fas fa-link"></i></a>
 </h2>
 <p>It can be difficult to calculate probabilities and expected values, for example, when the PDF of a distribution is unknown, or its integral is too difficult to work out. You may notice that we used simulations to approximate probabilities and expected values in some of the examples in previous modules. With improvement in computing capabilities, simulations can now be performed faster and is a tool that is used more and more. Other tools to calculate difficult probabilities and expected values include using inequalities to bound the probabilities (e.g. the probability cannot be greater or less than a certain value), or approximating using known theorems. We’ll look at these three tools in this module.</p>
+<div id="module-roadmap-4" class="section level3" number="6.1.1">
+<h3>
+<span class="header-section-number">6.1.1</span> Module Roadmap<a class="anchor" aria-label="anchor" href="#module-roadmap-4"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li>Section <a href="inequalities-limit-theorems-and-simulations.html#inequalities">6.2</a> covers 3 famous inequalities that are used in probability (Cauchy-Schwartz, Jensen, Chebyshev), as well as their implications.</li>
+<li>Section <a href="inequalities-limit-theorems-and-simulations.html#limits">6.3</a> covers 2 of the most consequential theorems in probability, the Law of Large Numbers and the Central Limit Theorem. We will be invoking these 2 theorems in a number of the remaining modules .</li>
+<li>Section <a href="inequalities-limit-theorems-and-simulations.html#MCsims">6.4</a> covers Monte Carlo simulations, which is a computational tool used to estimate probabilities, especially when they may be difficult to derive “by hand”. We will be using Monte Carlo simulations extensively for the rest of this class.</li>
+</ul>
+</div>
 </div>
 <div id="inequalities" class="section level2" number="6.2">
 <h2>
@@ -425,9 +435,9 @@ Figure 6.5: Distribution of Sample Means when X is Pois(1), n varied
 </div>
 </div>
 </div>
-<div id="monte-carlo-simulations" class="section level2" number="6.4">
+<div id="MCsims" class="section level2" number="6.4">
 <h2>
-<span class="header-section-number">6.4</span> Monte Carlo Simulations<a class="anchor" aria-label="anchor" href="#monte-carlo-simulations"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6.4</span> Monte Carlo Simulations<a class="anchor" aria-label="anchor" href="#MCsims"><i class="fas fa-link"></i></a>
 </h2>
 <p>You may have noticed that we have used simulations in the earlier sections of this module (and previous modules) to help explain certain concepts. These simulations are called <strong>Monte Carlo</strong> methods, or Monte Carlo simulations. The idea behind Monte Carlo methods is to used repeated random sampling (and by repeated, we mean repeated a large number of times) to estimate features of data, usually probabilities and expected values. Monte Carlo methods are used for the following purposes:</p>
 <ol style="list-style-type: decimal">
@@ -575,7 +585,9 @@ Figure 6.6: Board for Dart Throwing Experiment
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
 <li><a class="nav-link" href="#inequalities-limit-theorems-and-simulations"><span class="header-section-number">6</span> Inequalities, Limit Theorems, and Simulations</a></li>
-<li><a class="nav-link" href="#introduction-2"><span class="header-section-number">6.1</span> Introduction</a></li>
+<li>
+<a class="nav-link" href="#introduction-2"><span class="header-section-number">6.1</span> Introduction</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#module-roadmap-4"><span class="header-section-number">6.1.1</span> Module Roadmap</a></li></ul>
+</li>
 <li>
 <a class="nav-link" href="#inequalities"><span class="header-section-number">6.2</span> Inequalities</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#cauchy-schwartz-inequality"><span class="header-section-number">6.2.1</span> Cauchy-Schwartz Inequality</a></li>
@@ -590,7 +602,7 @@ Figure 6.6: Board for Dart Throwing Experiment
 </ul>
 </li>
 <li>
-<a class="nav-link" href="#monte-carlo-simulations"><span class="header-section-number">6.4</span> Monte Carlo Simulations</a><ul class="nav navbar-nav">
+<a class="nav-link" href="#MCsims"><span class="header-section-number">6.4</span> Monte Carlo Simulations</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#monte-carlo-methods-for-expected-values"><span class="header-section-number">6.4.1</span> Monte Carlo Methods for Expected Values</a></li>
 <li><a class="nav-link" href="#monte-carlo-methods-for-probabilities"><span class="header-section-number">6.4.2</span> Monte Carlo Methods for Probabilities</a></li>
 <li><a class="nav-link" href="#monte-carlo-methods-for-other-purposes"><span class="header-section-number">6.4.3</span> Monte Carlo Methods for Other Purposes</a></li>

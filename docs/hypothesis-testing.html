@@ -84,10 +84,21 @@
 <li><p>The other hypothesis is the <strong>alternative hypothesis</strong>. This can be viewed as a statement that is “opposite” of the null hypothesis.</p></li>
 </ul>
 <p>The book presents these hypotheses and hypothesis testing using a court trial as an analogy. Defendants are assumed to be “innocent until proven guilty”. The “null hypothesis” or status quo in this setting is that the defendant is innocent, and the “alternative hypothesis” is that the defendant is guilty. The prosecutor needs to then present evidence that contradicts the null hypothesis in order to prove guilt. The jurors, who come into the trial assuming the defendant is innocent, then assess how strong is the evidence presented: if its strength is beyond a certain threshold (i.e. beyond “reasonable doubt”) then there is evidence to reject the null hypothesis and decide the defendant is guilty. However, if the evidence is not strong enough, there is not enough evidence to reject the null hypothesis and the jury renders a not guilty verdict.</p>
+<div id="module-roadmap-7" class="section level3" number="9.1.1">
+<h3>
+<span class="header-section-number">9.1.1</span> Module Roadmap<a class="anchor" aria-label="anchor" href="#module-roadmap-7"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li>Section <a href="hypothesis-testing.html#testmean">9.2</a> covers the key concepts in hypothesis tests and how they apply to the mean.</li>
+<li>Section <a href="hypothesis-testing.html#testprop">9.3</a> shows how the concepts from the previous section carry over to the hypothesis test for the proportion.</li>
+<li>Section <a href="hypothesis-testing.html#infcomments">9.4</a> provides comments on things to be mindful of when performing hypothesis tests in real life.</li>
+<li>Section <a href="hypothesis-testing.html#GOF">9.5</a> introduces another class of hypothesis tests: goodness of fit tests, which are used to assess how consistent our data are with some assumed distribution or model.</li>
+</ul>
 </div>
-<div id="hypothesis-test-for-the-mean" class="section level2" number="9.2">
+</div>
+<div id="testmean" class="section level2" number="9.2">
 <h2>
-<span class="header-section-number">9.2</span> Hypothesis Test for the Mean<a class="anchor" aria-label="anchor" href="#hypothesis-test-for-the-mean"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9.2</span> Hypothesis Test for the Mean<a class="anchor" aria-label="anchor" href="#testmean"><i class="fas fa-link"></i></a>
 </h2>
 <p>When testing for the mean, the parameter is the population mean. This happens when the variable we are measuring is quantitative. Consider this example:</p>
 <p>The term “Freshman 15” is an expression which says that college students gain 15 pounds (on average), in their first year in college. Researchers claim that with better education regarding healthier lifestyle habits, this gain is less than 15 pounds, on average.</p>
@@ -362,9 +373,9 @@ Figure 9.8: Finding P-value, For Silicon Wafer Example
 <p>Our conclusion is the data do not support the claim that the average thickness of silicon wafers is different from the target value of 250 micrometers.</p>
 </div>
 </div>
-<div id="hypothesis-test-for-the-proportion" class="section level2" number="9.3">
+<div id="testprop" class="section level2" number="9.3">
 <h2>
-<span class="header-section-number">9.3</span> Hypothesis Test for the Proportion<a class="anchor" aria-label="anchor" href="#hypothesis-test-for-the-proportion"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9.3</span> Hypothesis Test for the Proportion<a class="anchor" aria-label="anchor" href="#testprop"><i class="fas fa-link"></i></a>
 </h2>
 <p>Next, we will go over the hypothesis test for the proportion. This is another common hypothesis test. The sample proportion is an estimator for the population proportion. Proportions are used to summarize categorical variables, whereas means are used to summarize quantitative variables.</p>
 <p>The general steps are the same as the hypothesis test for the mean, with some changes to some of the details. The differences are:</p>
@@ -458,9 +469,9 @@ Figure 9.9: Finding P-value, For Library Example
 <p>Our conclusion is the data do not support the claim that the true proportion of misshelved or unlocatable books is less than 2%. So there is not enough evidence to postpone the inventory.</p>
 </div>
 </div>
-<div id="additional-comments-on-hypothesis-test-of-parameters" class="section level2" number="9.4">
+<div id="infcomments" class="section level2" number="9.4">
 <h2>
-<span class="header-section-number">9.4</span> Additional Comments on Hypothesis Test of Parameters<a class="anchor" aria-label="anchor" href="#additional-comments-on-hypothesis-test-of-parameters"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9.4</span> Additional Comments on Hypothesis Test of Parameters<a class="anchor" aria-label="anchor" href="#infcomments"><i class="fas fa-link"></i></a>
 </h2>
 <div id="inference" class="section level3" number="9.4.1">
 <h3>
@@ -666,9 +677,9 @@ Figure 9.9: Finding P-value, For Library Example
 <p>To summarize, hypothesis testing is used to assess “statistical significance”, but we use subject matter knowledge to assess “practical significance”.</p>
 </div>
 </div>
-<div id="goodness-of-fit-tests" class="section level2" number="9.5">
+<div id="GOF" class="section level2" number="9.5">
 <h2>
-<span class="header-section-number">9.5</span> Goodness of Fit Tests<a class="anchor" aria-label="anchor" href="#goodness-of-fit-tests"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9.5</span> Goodness of Fit Tests<a class="anchor" aria-label="anchor" href="#GOF"><i class="fas fa-link"></i></a>
 </h2>
 <p><strong>Goodness of Fit (GOF)</strong> tests are a class of hypothesis tests that assess the deviation of observed data from a hypothesized distribution or model, instead of the deviation of estimators from parameters. The framework is still the same:</p>
 <ol style="list-style-type: decimal">
@@ -738,9 +749,11 @@ Figure 9.9: Finding P-value, For Library Example
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
 <li><a class="nav-link" href="#hypothesis-testing"><span class="header-section-number">9</span> Hypothesis Testing</a></li>
-<li><a class="nav-link" href="#introduction-5"><span class="header-section-number">9.1</span> Introduction</a></li>
 <li>
-<a class="nav-link" href="#hypothesis-test-for-the-mean"><span class="header-section-number">9.2</span> Hypothesis Test for the Mean</a><ul class="nav navbar-nav">
+<a class="nav-link" href="#introduction-5"><span class="header-section-number">9.1</span> Introduction</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#module-roadmap-7"><span class="header-section-number">9.1.1</span> Module Roadmap</a></li></ul>
+</li>
+<li>
+<a class="nav-link" href="#testmean"><span class="header-section-number">9.2</span> Hypothesis Test for the Mean</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#null-and-alternative-hypotheses"><span class="header-section-number">9.2.1</span> Null and Alternative Hypotheses</a></li>
 <li><a class="nav-link" href="#test-statistic"><span class="header-section-number">9.2.2</span> Test Statistic</a></li>
 <li><a class="nav-link" href="#decision"><span class="header-section-number">9.2.3</span> Making a Decision</a></li>
@@ -749,7 +762,7 @@ Figure 9.9: Finding P-value, For Library Example
 </ul>
 </li>
 <li>
-<a class="nav-link" href="#hypothesis-test-for-the-proportion"><span class="header-section-number">9.3</span> Hypothesis Test for the Proportion</a><ul class="nav navbar-nav">
+<a class="nav-link" href="#testprop"><span class="header-section-number">9.3</span> Hypothesis Test for the Proportion</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#null-and-alternative-hypotheses-1"><span class="header-section-number">9.3.1</span> Null and Alternative Hypotheses</a></li>
 <li><a class="nav-link" href="#test-statistic-1"><span class="header-section-number">9.3.2</span> Test Statistic</a></li>
 <li><a class="nav-link" href="#making-a-decision-and-writing-conclusions"><span class="header-section-number">9.3.3</span> Making a Decision and Writing Conclusions</a></li>
@@ -757,7 +770,7 @@ Figure 9.9: Finding P-value, For Library Example
 </ul>
 </li>
 <li>
-<a class="nav-link" href="#additional-comments-on-hypothesis-test-of-parameters"><span class="header-section-number">9.4</span> Additional Comments on Hypothesis Test of Parameters</a><ul class="nav navbar-nav">
+<a class="nav-link" href="#infcomments"><span class="header-section-number">9.4</span> Additional Comments on Hypothesis Test of Parameters</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#inference"><span class="header-section-number">9.4.1</span> Two-Sided Tests and Confidence Intervals</a></li>
 <li><a class="nav-link" href="#type-i-and-type-ii-errors"><span class="header-section-number">9.4.2</span> Type I and Type II Errors</a></li>
 <li><a class="nav-link" href="#reporting-conclusions"><span class="header-section-number">9.4.3</span> Reporting Conclusions</a></li>
@@ -765,7 +778,7 @@ Figure 9.9: Finding P-value, For Library Example
 </ul>
 </li>
 <li>
-<a class="nav-link" href="#goodness-of-fit-tests"><span class="header-section-number">9.5</span> Goodness of Fit Tests</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#shapiro-wilk-test-for-normality"><span class="header-section-number">9.5.1</span> Shapiro-Wilk Test for Normality</a></li></ul>
+<a class="nav-link" href="#GOF"><span class="header-section-number">9.5</span> Goodness of Fit Tests</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#shapiro-wilk-test-for-normality"><span class="header-section-number">9.5.1</span> Shapiro-Wilk Test for Normality</a></li></ul>
 </li>
 </ul>
 

@@ -116,6 +116,17 @@ Figure 7.1: Example of Data in a Spreadsheet
 <p>To sum up estimation: we use data from a sample to estimate unknown characteristics of a population, so that we can answer questions regarding variables in the population, as well as provide a measure of uncertainty for our answers.</p>
 </div>
 </div>
+<div id="module-roadmap-5" class="section level3" number="7.1.2">
+<h3>
+<span class="header-section-number">7.1.2</span> Module Roadmap<a class="anchor" aria-label="anchor" href="#module-roadmap-5"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li>Section <a href="est.html#MOM">7.2</a> covers estimation using the method of moments. This method is fairly intuitive, although it is not as commonly used as it lacks certain ideal properties.</li>
+<li>Section <a href="est.html#MLE">7.3</a> covers estimation using the method of maximum likelihood. This method is a workhorse in statistics and probability as many models are estimated using this method.</li>
+<li>Section <a href="est.html#estprops">7.4</a> covers measures that are used to evaluate how “good” an estimator is.</li>
+<li>Section <a href="est.html#estcomments">7.5</a> provides some final comments on estimation.</li>
+</ul>
+</div>
 </div>
 <div id="MOM" class="section level2" number="7.2">
 <h2>
@@ -225,9 +236,9 @@ Figure 7.2: Density Plot of Birth Weights. Normal Curve (in Blue) with Parameter
 <p>The idea behind method of moments estimation is fairly intuitive; however, it has some drawbacks which we will talk about after introducing another method for estimation in the next section, the method of maximum likelihood.</p>
 </div>
 </div>
-<div id="method-of-maximum-likelihood-estimation" class="section level2" number="7.3">
+<div id="MLE" class="section level2" number="7.3">
 <h2>
-<span class="header-section-number">7.3</span> Method of Maximum Likelihood Estimation<a class="anchor" aria-label="anchor" href="#method-of-maximum-likelihood-estimation"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.3</span> Method of Maximum Likelihood Estimation<a class="anchor" aria-label="anchor" href="#MLE"><i class="fas fa-link"></i></a>
 </h2>
 <p>The method of maximum likelihood is a workhorse in statistics and data science since it is widely used in estimating models. It is preferred to the method of moments as it is built upon a stronger theoretical framework, and its estimators tend to have more desirable properties. You are guaranteed to see the method of maximum likelihood again in the future.</p>
 <p>As its name suggests, it is a method of estimating parameters by maximizing the likelihood. We will go over the idea behind the likelihood next.</p>
@@ -746,9 +757,9 @@ MSE(\hat{\Theta}) = Var(\hat{\Theta}) + Bias(\hat{\Theta})^2.
 <p>What the MSE of an estimator suggests is that we need to consider both the bias and variance of an estimator. People often think that an unbiased estimator is the “best”. However, an unbiased estimator could have high variance. Such an estimator could have high MSE. In such a setting, it may be worth considering another estimator that may be biased, but have much smaller variance, resulting in a lower MSE. An example of where this can happen is in linear regression. Classical methods with linear regression yield unbiased estimators, but under specific scenarios, these estimators could have high variances. Another model, called the ridge regression model, considers biased estimators which may have smaller variances, which can result in lower MSEs in these specific scenarios. You will learn about these models in greater detail in a future class.</p>
 </div>
 </div>
-<div id="final-comments-on-estimation" class="section level2" number="7.5">
+<div id="estcomments" class="section level2" number="7.5">
 <h2>
-<span class="header-section-number">7.5</span> Final Comments on Estimation<a class="anchor" aria-label="anchor" href="#final-comments-on-estimation"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.5</span> Final Comments on Estimation<a class="anchor" aria-label="anchor" href="#estcomments"><i class="fas fa-link"></i></a>
 </h2>
 <p>We have covered the method of moments and method of maximum likelihood when estimating parameters. These methods are also called <strong>parametric methods</strong> as they involve making an assumption that the data follow some well-known distribution with unknown parameters, and we are then using our data, and our assumed distribution, to estimate the numerical value of the unknown parameters.</p>
 <p>There exist <strong>nonparametric methods</strong> in estimation. We have actually seen one such method (without calling it nonparametric), which is kernel density estimation (KDE) in Section <a href="continuous-random-variables.html#KDE">4.6.1</a>. KDE is used to estimate the PDF of a random variable so that we can visualize its distribution. If you look back at KDE, you will notice we made no assumption about the distribution of the random variable. This is one of the fundamental differences between parametric and nonparametric estimation: the former assumes a distribution for the data, the latter does not.</p>
@@ -778,13 +789,16 @@ MSE(\hat{\Theta}) = Var(\hat{\Theta}) + Bias(\hat{\Theta})^2.
       <ul class="nav navbar-nav">
 <li><a class="nav-link" href="#est"><span class="header-section-number">7</span> Estimation</a></li>
 <li>
-<a class="nav-link" href="#introduction-3"><span class="header-section-number">7.1</span> Introduction</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#big-picture-idea-with-estimation"><span class="header-section-number">7.1.1</span> Big Picture Idea with Estimation</a></li></ul>
+<a class="nav-link" href="#introduction-3"><span class="header-section-number">7.1</span> Introduction</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#big-picture-idea-with-estimation"><span class="header-section-number">7.1.1</span> Big Picture Idea with Estimation</a></li>
+<li><a class="nav-link" href="#module-roadmap-5"><span class="header-section-number">7.1.2</span> Module Roadmap</a></li>
+</ul>
 </li>
 <li>
 <a class="nav-link" href="#MOM"><span class="header-section-number">7.2</span> Method of Moments Estimation</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#alternative-form-of-method-of-moments-estimation"><span class="header-section-number">7.2.1</span> Alternative Form of Method of Moments Estimation</a></li></ul>
 </li>
 <li>
-<a class="nav-link" href="#method-of-maximum-likelihood-estimation"><span class="header-section-number">7.3</span> Method of Maximum Likelihood Estimation</a><ul class="nav navbar-nav">
+<a class="nav-link" href="#MLE"><span class="header-section-number">7.3</span> Method of Maximum Likelihood Estimation</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#likelihood-function"><span class="header-section-number">7.3.1</span> Likelihood Function</a></li>
 <li><a class="nav-link" href="#maximum-likelihood-estimation"><span class="header-section-number">7.3.2</span> Maximum Likelihood Estimation</a></li>
 </ul>
@@ -799,7 +813,7 @@ MSE(\hat{\Theta}) = Var(\hat{\Theta}) + Bias(\hat{\Theta})^2.
 </ul>
 </li>
 <li>
-<a class="nav-link" href="#final-comments-on-estimation"><span class="header-section-number">7.5</span> Final Comments on Estimation</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#why-ml-estimators"><span class="header-section-number">7.5.1</span> Why ML Estimators?</a></li></ul>
+<a class="nav-link" href="#estcomments"><span class="header-section-number">7.5</span> Final Comments on Estimation</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#why-ml-estimators"><span class="header-section-number">7.5.1</span> Why ML Estimators?</a></li></ul>
 </li>
 </ul>
 

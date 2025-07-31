@@ -127,10 +127,21 @@ Figure 10.1: Scatterplot of Study Time against Number of Courses Taken
 </ul>
 <p>These questions can be answered using linear regression.</p>
 </div>
+<div id="module-roadmap-8" class="section level3" number="10.1.3">
+<h3>
+<span class="header-section-number">10.1.3</span> Module Roadmap<a class="anchor" aria-label="anchor" href="#module-roadmap-8"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li>Section <a href="linear-regression.html#SLR">10.2</a> sets up the linear regression model and covers the assumptions made.</li>
+<li>Section <a href="linear-regression.html#estSLR">10.3</a> goes over how the linear regression model is estimated.</li>
+<li>Section <a href="linear-regression.html#SLRinf">10.4</a> goes over the sampling distribution of the estimators in linear regression, as well as associated confidence intervals and hypothesis tests. These are the main tools used when we are focused on the primary goal of association.</li>
+<li>Section <a href="linear-regression.html#SLRacc">10.5</a> goes over how we measure model accuracy in linear regression. These measures are used when we are focused on prediction.</li>
+</ul>
 </div>
-<div id="simple-linear-regression" class="section level2" number="10.2">
+</div>
+<div id="SLR" class="section level2" number="10.2">
 <h2>
-<span class="header-section-number">10.2</span> Simple Linear Regression<a class="anchor" aria-label="anchor" href="#simple-linear-regression"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.2</span> Simple Linear Regression<a class="anchor" aria-label="anchor" href="#SLR"><i class="fas fa-link"></i></a>
 </h2>
 <p>In this module, we will keep things simple by only considering a single quantitative predictor. Such a regression is called <strong>simple linear regression (SLR)</strong> to emphasize that only one predictor is being considered. We will briefly touch on multiple linear regression (MLR) when multiple predictors are involved later in this module, and you will learn more about linear regression next semester.</p>
 <div id="model-setup" class="section level3" number="10.2.1">
@@ -289,9 +300,9 @@ Figure 10.6: Assumption 2 Assessment
 <p><em>Thought question</em>: Look at the scatter plot of the toy example in Figure <a href="linear-regression.html#fig:10-scatter">10.1</a>. Can you explain why this scatter plot shows the first two assumptions are met for linear regression?</p>
 </div>
 </div>
-<div id="estimating-regression-coefficients" class="section level2" number="10.3">
+<div id="estSLR" class="section level2" number="10.3">
 <h2>
-<span class="header-section-number">10.3</span> Estimating Regression Coefficients<a class="anchor" aria-label="anchor" href="#estimating-regression-coefficients"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.3</span> Estimating Regression Coefficients<a class="anchor" aria-label="anchor" href="#estSLR"><i class="fas fa-link"></i></a>
 </h2>
 <p>There are two methods in estimating the regression coefficients: the method of least squares and the method of maximum likelihood. For large sample sizes, these methods give similar results.</p>
 <p>We will go over the method of least squares first, since this is the method that is usually used to explain to new learners and is conceptually easier to understand.</p>
@@ -703,9 +714,9 @@ Figure 10.8: Scatter Plot for Worked Example
 </div>
 </div>
 </div>
-<div id="assessing-model-accuracy" class="section level2" number="10.5">
+<div id="SLRacc" class="section level2" number="10.5">
 <h2>
-<span class="header-section-number">10.5</span> Assessing Model Accuracy<a class="anchor" aria-label="anchor" href="#assessing-model-accuracy"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.5</span> Assessing Model Accuracy<a class="anchor" aria-label="anchor" href="#SLRacc"><i class="fas fa-link"></i></a>
 </h2>
 <p>In the introduction of this module, we wrote that supervised methods such as linear regression have two primary uses:</p>
 <ol style="list-style-type: decimal">
@@ -739,16 +750,17 @@ Figure 10.8: Scatter Plot for Worked Example
 <a class="nav-link" href="#introduction-6"><span class="header-section-number">10.1</span> Introduction</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#motivation"><span class="header-section-number">10.1.1</span> Motivation</a></li>
 <li><a class="nav-link" href="#toy-example"><span class="header-section-number">10.1.2</span> Toy Example</a></li>
+<li><a class="nav-link" href="#module-roadmap-8"><span class="header-section-number">10.1.3</span> Module Roadmap</a></li>
 </ul>
 </li>
 <li>
-<a class="nav-link" href="#simple-linear-regression"><span class="header-section-number">10.2</span> Simple Linear Regression</a><ul class="nav navbar-nav">
+<a class="nav-link" href="#SLR"><span class="header-section-number">10.2</span> Simple Linear Regression</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#model-setup"><span class="header-section-number">10.2.1</span> Model Setup</a></li>
 <li><a class="nav-link" href="#assessing-assumptions"><span class="header-section-number">10.2.2</span> Assessing Assumptions</a></li>
 </ul>
 </li>
 <li>
-<a class="nav-link" href="#estimating-regression-coefficients"><span class="header-section-number">10.3</span> Estimating Regression Coefficients</a><ul class="nav navbar-nav">
+<a class="nav-link" href="#estSLR"><span class="header-section-number">10.3</span> Estimating Regression Coefficients</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#method-of-least-squares"><span class="header-section-number">10.3.1</span> Method of Least Squares</a></li>
 <li><a class="nav-link" href="#method-of-maximum-likelihood"><span class="header-section-number">10.3.2</span> Method of Maximum Likelihood</a></li>
 </ul>
@@ -763,7 +775,7 @@ Figure 10.8: Scatter Plot for Worked Example
 <li><a class="nav-link" href="#linear-regression-in-r"><span class="header-section-number">10.4.6</span> Linear Regression in R</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#assessing-model-accuracy"><span class="header-section-number">10.5</span> Assessing Model Accuracy</a></li>
+<li><a class="nav-link" href="#SLRacc"><span class="header-section-number">10.5</span> Assessing Model Accuracy</a></li>
 </ul>
 
       <div class="book-extra">
