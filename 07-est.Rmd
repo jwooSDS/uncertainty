@@ -688,7 +688,7 @@ We apply the sampling distribution of the sample mean to the left plot in Figure
 
 We see that when the sample size gets larger, the variance of the sample mean decreases, so there is less spread and their resulting density plot is more concentrated around the mean. This matches with what we see in the left plot in Figure \@ref(fig:7-consistent).
 
-### Mean-Squared Error
+### Mean-Squared Error {#estMSE}
 
 We introduced the mean-squared error (MSE) in the context of evaluating prediction errors in Section \@ref(lossfunc). The MSE can also be used to evaluate an estimator. In this context, the MSE of an estimator $\hat{\Theta}$ is
 

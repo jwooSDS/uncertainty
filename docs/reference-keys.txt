@@ -204,6 +204,13 @@ eq:10-seb0
 eq:10-CIb1
 eq:10-testslope
 fig:10-scatter-eg
+eq:10-MSE
+eq:10-MSEdecomp
+eq:10-RMSE
+eq:10-MAD
+eq:10-MLRmod
+eq:10-polymod
+fig:10-MSE
 examples
 example-1-mario-kart-auction-prices
 eg2
@@ -387,7 +394,7 @@ standard-error-and-variance
 consistency
 sampling-distribution
 sampdistmean
-mean-squared-error
+estMSE
 estcomments
 why-ml-estimators
 confidence-intervals
@@ -466,3 +473,11 @@ correlation
 coefficient-of-determination
 linear-regression-in-r
 SLRacc
+metrics-for-model-accuracy
+mean-squared-error
+root-mean-squared-error
+mean-absolute-deviation
+additional-comments-about-mse-rmse-mad
+model-complexity
+training-test-split
+bias-variance-trade-off-model-complexity

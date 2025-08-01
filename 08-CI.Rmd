@@ -167,7 +167,7 @@ qnorm(1-alpha/2)
 
 which tells us the critical value is 1.96 for 95\% confidence. 
 
-Note: the `qnorm()` function was introduced in a bit more detail in Section \@ref(usingR), so feel free to go back to review.
+Note: the `qnorm()` function was introduced in a bit more detail in Section \@ref(RCont), so feel free to go back to review.
 
 View the video below that explains these steps in a bit more detail:
 

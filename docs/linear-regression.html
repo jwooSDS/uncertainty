@@ -123,7 +123,7 @@ Figure 10.1: Scatterplot of Study Time against Number of Courses Taken
 <ul>
 <li>Are study time and the number of courses taken related to one another?</li>
 <li>How strong is this relationship?</li>
-<li>Could we use the data to make a prediction for the study time of a student who is not in this scatterplot?</li>
+<li>Could we use the data to make a prediction for the study time of a student who is not in this scatter plot?</li>
 </ul>
 <p>These questions can be answered using linear regression.</p>
 </div>
@@ -332,7 +332,7 @@ y=\hat{\beta}_0+\hat{\beta}_1 x + e
 <p>From <a href="linear-regression.html#eq:10-fitted-model">(10.5)</a>, notice we use <span class="math inline">\(e\)</span> to denote the <strong>residual</strong>, or in other words, the “error” in the sample.</p>
 <p>From <a href="linear-regression.html#eq:10-fitted">(10.4)</a> and <a href="linear-regression.html#eq:10-fitted-model">(10.5)</a>, we have the following quantities that we can compute:</p>
 <ul>
-<li>Fitted values:</li>
+<li>Fitted values or predicted values:</li>
 </ul>
 <p><span class="math display" id="eq:10-fits">\[\begin{equation}
 \hat{y}_i = \hat{\beta}_0+\hat{\beta}_1 x_i.
@@ -372,7 +372,7 @@ SS_{res} =  \sum\limits_{i=1}^n(y_i-\hat{y}_i)^2.
 \tag{10.10}
 \end{equation}\]</span></p>
 <p><span class="math inline">\(\hat{\beta}_1, \hat{\beta}_0\)</span> are called <strong>least squares estimators</strong>, to emphasize that these values are found by minimizing <span class="math inline">\(SS_{res}\)</span>.</p>
-<p>The minimization of <span class="math inline">\(SS_{res}\)</span> with respect to <span class="math inline">\(\hat{\beta}_0\)</span> and <span class="math inline">\(\hat{\beta}_1\)</span> is done by taking the partial derivatives of <a href="#eq:SSres">(<strong>??</strong>)</a> with respect to <span class="math inline">\(\hat{\beta}_1\)</span> and <span class="math inline">\(\hat{\beta}_0\)</span>, setting these two partial derivatives equal to 0, and solving these two equations for <span class="math inline">\(\hat{\beta}_1\)</span> and <span class="math inline">\(\hat{\beta}_0\)</span>.</p>
+<p>The minimization of <span class="math inline">\(SS_{res}\)</span> with respect to <span class="math inline">\(\hat{\beta}_0\)</span> and <span class="math inline">\(\hat{\beta}_1\)</span> is done by taking the partial derivatives of <a href="linear-regression.html#eq:10-SSres">(10.8)</a> with respect to <span class="math inline">\(\hat{\beta}_1\)</span> and <span class="math inline">\(\hat{\beta}_0\)</span>, setting these two partial derivatives equal to 0, and solving these two equations for <span class="math inline">\(\hat{\beta}_1\)</span> and <span class="math inline">\(\hat{\beta}_0\)</span>.</p>
 <p>Let’s take a look at the estimated coefficients for our study time example:</p>
 <div class="sourceCode" id="cb190"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##fit regression</span></span>
@@ -737,6 +737,124 @@ Figure 10.8: Scatter Plot for Worked Example
 <li>Personalized medicine: Based on a patient’s history, what is the most effective treatment plan?</li>
 <li>Dynamic pricing: airlines use dynamic pricing that adjusts price to maximize profits, based on real-time market conditions.</li>
 </ul>
+<p>In these questions, we want to know if our model can predict the value of the response variable well; we do not necessarily want to know how the predictors may explain the response variable.</p>
+<div id="metrics-for-model-accuracy" class="section level3" number="10.5.1">
+<h3>
+<span class="header-section-number">10.5.1</span> Metrics for Model Accuracy<a class="anchor" aria-label="anchor" href="#metrics-for-model-accuracy"><i class="fas fa-link"></i></a>
+</h3>
+<p>We will introduce some common metrics that measure model accuracy. As we are talking about these in the framework of linear regression where the response variable is quantitative, these metrics only apply to supervised methods when the response variable is quantitative. There are separate metrics when the response variable is categorical which you will learn about next semester.</p>
+<div id="mean-squared-error" class="section level4" number="10.5.1.1">
+<h4>
+<span class="header-section-number">10.5.1.1</span> Mean-Squared Error<a class="anchor" aria-label="anchor" href="#mean-squared-error"><i class="fas fa-link"></i></a>
+</h4>
+<p>The <strong>mean-squared error (MSE)</strong> is a commonly used metric to assess model accuracy. The MSE is</p>
+<p><span class="math display" id="eq:10-MSE">\[\begin{equation}
+MSE(\hat{y}) = \frac{\sum_{i=1}^n (y_i - \hat{y}_i)^2}{n}.
+\tag{10.21}
+\end{equation}\]</span></p>
+<p>The MSE can be interpreted as an average squared prediction error. If you compare equation <a href="linear-regression.html#eq:10-MSE">(10.21)</a> with equation <a href="linear-regression.html#eq:10-SSres">(10.8)</a>, you may notice the numerator of the MSE is the <span class="math inline">\(SS_{res}\)</span>.</p>
+<p>You may also recall that the MSE was introduced in Section <a href="est.html#estMSE">7.4.5</a>. In that section, we were measuring the average squared difference between an estimator and its parameter, rather than the average squared difference between a predicted value and its true value. From a terminology standpoint, the MSE of an estimator is usually explicitly stated as such, whereas when someone speaks or write about an MSE, it is usually the MSE of the predicted values per equation <a href="linear-regression.html#eq:10-MSE">(10.21)</a>.</p>
+<p>It should then not come as a surprise that the MSE in equation <a href="linear-regression.html#eq:10-MSE">(10.21)</a> can be decomposed like the MSE of an estimator in equation <a href="est.html#eq:7-MSEdecomp">(7.5)</a>:</p>
+<p><span class="math display" id="eq:10-MSEdecomp">\[\begin{equation}
+MSE(\hat{y}) = Var(\hat{y}) + Bias(\hat{y})^2.
+\tag{10.22}
+\end{equation}\]</span></p>
+<p>So the MSE can be decomposed into the variance of the predicted values and the squared bias of the predicted values. In a linear regression setting, the bias will be theoretically 0 if we find the correct form of <span class="math inline">\(f(X)\)</span> to relate the response variable with the predictors.</p>
+</div>
+<div id="root-mean-squared-error" class="section level4" number="10.5.1.2">
+<h4>
+<span class="header-section-number">10.5.1.2</span> Root Mean-Squared Error<a class="anchor" aria-label="anchor" href="#root-mean-squared-error"><i class="fas fa-link"></i></a>
+</h4>
+<p>The MSE is a popular metric for model accuracy because of its decomposition per equation <a href="linear-regression.html#eq:10-MSEdecomp">(10.22)</a>. However, interpreting its numerical value can be a bit challenging, as the unit associated with the MSE is the squared of the unit of the response variable, making it a bit more challenging in making a judgement as to whether a reported value for the MSE is actually large or small.</p>
+<p>The <strong>root mean-squared error (RMSE)</strong> has been suggested, since it has the same unit as the response variable, making it easy to make a judgement as to whether a reported value is large or small:</p>
+<p><span class="math display" id="eq:10-RMSE">\[\begin{equation}
+RMSE(\hat{y}) = \sqrt{\frac{\sum_{i=1}^n (y_i - \hat{y}_i)^2}{n}} = \sqrt{MSE(\hat{y})}.
+\tag{10.23}
+\end{equation}\]</span></p>
+<p>The RMSE is simply the square root of the MSE. Interpreting the RMSE gets tricky; it is tempting to interpret as the average prediction error, but it is not quite correct to do so, since <span class="math inline">\(\sqrt{\frac{\sum_{i=1}^n (y_i - \hat{y}_i)^2}{n}}\)</span> is not the same as <span class="math inline">\(\frac{\sum_{i=1}^n \sqrt{(y_i - \hat{y}_i)^2}}{n}\)</span>.</p>
+</div>
+<div id="mean-absolute-deviation" class="section level4" number="10.5.1.3">
+<h4>
+<span class="header-section-number">10.5.1.3</span> Mean Absolute Deviation<a class="anchor" aria-label="anchor" href="#mean-absolute-deviation"><i class="fas fa-link"></i></a>
+</h4>
+<p>In response to the difficulty in interpreting RMSE, another metric, called the <strong>mean absolute deviation (MAD)</strong> has been proposed:</p>
+<p><span class="math display" id="eq:10-MAD">\[\begin{equation}
+MAD(\hat{y}) = \frac{\sum_{i=1}^n |y_i - \hat{y}_i|}{n}.
+\tag{10.24}
+\end{equation}\]</span></p>
+<p>The unit of MAD is the same as the response variable, and it can be interpreted as the average prediction error.</p>
+</div>
+<div id="additional-comments-about-mse-rmse-mad" class="section level4" number="10.5.1.4">
+<h4>
+<span class="header-section-number">10.5.1.4</span> Additional Comments about MSE, RMSE, MAD<a class="anchor" aria-label="anchor" href="#additional-comments-about-mse-rmse-mad"><i class="fas fa-link"></i></a>
+</h4>
+<p>In the rest of this module, we will be focusing on the MSE and RMSE, as certain properties have been proven mathematically.</p>
+</div>
+</div>
+<div id="model-complexity" class="section level3" number="10.5.2">
+<h3>
+<span class="header-section-number">10.5.2</span> Model Complexity<a class="anchor" aria-label="anchor" href="#model-complexity"><i class="fas fa-link"></i></a>
+</h3>
+<p>Thus far, we have only considered simple linear regression, i.e. only one predictor in our model. This approach is useful if we want to focus on how a single predictor is related to the response variable. However, it should not be surprising to learn that in many settings, we can improve predictions of the response variable by either</p>
+<ul>
+<li>incorporating additional predictors (that are useful), or</li>
+<li>considering polynomials for the predictor (if the relationship between the response variable and predictor is not linear).</li>
+</ul>
+<p>The linear regression model is then written as</p>
+<p><span class="math display" id="eq:10-MLRmod">\[\begin{equation}
+y=\beta_0+\beta_{1}x_1 + \beta_2 x_2 + \cdots + \beta_k x_k \epsilon,
+\tag{10.25}
+\end{equation}\]</span></p>
+<p>if we incorporate <span class="math inline">\(k\)</span> quantitative predictors <span class="math inline">\(x_1, \cdots, x_k\)</span>, or</p>
+<p><span class="math display" id="eq:10-polymod">\[\begin{equation}
+y=\beta_0+\beta_{1}x + \beta_2 x^2 + \cdots + \beta_k x^k \epsilon,
+\tag{10.26}
+\end{equation}\]</span></p>
+<p>if we consider a <span class="math inline">\(k\)</span>-degree polynomial for <span class="math inline">\(f(x)\)</span>, the relationship between the response variable and the predictor. Notice the linear regression model gets more complex when we add more predictors, or higher degree polynomials.</p>
+<p>For this class, we will only consider comparing the complexity of models that are nested. Two models are nested if one model can be derived from the other by setting some parameters to be equal to 0. As an example, the SLR model in equation <a href="linear-regression.html#eq:10-SLRmod">(10.1)</a> is nested within the model in equation @(eq:10-MLRmod), as we can get the SLR model by setting <span class="math inline">\(\beta_2 = \beta_3 = \cdots = \beta_k = 0\)</span> in equation @(eq:10-MLRmod).</p>
+<p><em>Thought question</em>: Can you explain why the SLR model in equation <a href="linear-regression.html#eq:10-SLRmod">(10.1)</a> is nested within the model in equation @(eq:10-polymod).</p>
+<p>When we have nested models, their <strong>complexity</strong> can be measured by the number of parameters in the model, which we denote by <span class="math inline">\(p\)</span>. So for the SLR model in equation <a href="linear-regression.html#eq:10-SLRmod">(10.1)</a>, <span class="math inline">\(p=2\)</span>, since we have <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span>.</p>
+<p>Note: Some consider models that are more complex to be more <strong>flexible</strong>, so fairly often what I call model complexity is sometimes called model flexibility.</p>
+<p>So there are many potential models to consider. Metrics involving model accuracy can help us decide which model is the best in terms of prediction accuracy, by selecting the model that has the smallest MSE (or RMSE).</p>
+</div>
+<div id="training-test-split" class="section level3" number="10.5.3">
+<h3>
+<span class="header-section-number">10.5.3</span> Training-Test Split<a class="anchor" aria-label="anchor" href="#training-test-split"><i class="fas fa-link"></i></a>
+</h3>
+<p>After reading the previous subsections, one may consider the following strategy when assessing model accuracy and choosing between several nested models: fit all models under consideration using all available data, then choose the model that the smallest MSE (or RMSE).</p>
+<p>A property of the MSE and RMSE of nested models is that these values only decrease as the model gets more complex! We will not go through the whole proof of this, but intuitively, one can see why the more complex model will never do worse than the less complex model: this happens when the additional parameters are all 0. This property suggests that using this strategy will always end up selecting the most complex model, as the most complex model will always have the smallest MSE and RMSE.</p>
+<p>Remember what we actually want to do with prediction: after fitting the model, we want to be able to accurately predict the values of the response variable in the future. When we fit a model well based on the current data, the model may do poorly on new data. This is called <strong>overfitting</strong>.</p>
+<p>So what we will do is to split a given dataset into two portions. One portion, called the <strong>training data</strong>, is used to fit (or train) the model. The other portion, called the <strong>test data</strong>, is used to assess the prediction accuracy of the model. The test data are never used to fit the model, so the test data play the role of new data.</p>
+<p>The MSE (or RMSE) is then calculated on both portions, and are called the training MSE and the test MSE. The relationship between the training and test MSEs with the complexity of nested models is shown below in Figure <a href="linear-regression.html#fig:10-MSE">10.9</a>:</p>
+<div class="figure">
+<span style="display:block;" id="fig:10-MSE"></span>
+<img src="images/10-MSE.png" alt="Training &amp; Test MSE vs Complexity"><p class="caption">
+Figure 10.9: Training &amp; Test MSE vs Complexity
+</p>
+</div>
+<p>We make the following comments about Figure <a href="linear-regression.html#fig:10-MSE">10.9</a>:</p>
+<ul>
+<li>The blue curve represents how the training MSE behaves as models get more complex. As models get more complex, the training MSE never decreases.</li>
+<li>The black curve represents how the test MSE behaves as models get more complex. Test MSEs usually exhibit this U-shape. The test MSE is minimum when we find an appropriate level of complexity, and this is denoted by the red line. We call this model the optimal model.</li>
+<li>Overfitted models are models that are more complex than the optimal model.
+<ul>
+<li>Overfitted models generally have low training MSE, and high test MSE. A large difference between these two is also indicative of overgfitting.</li>
+</ul>
+</li>
+<li>Underfitted models are models that are less complex than the optimal model.
+<ul>
+<li>Underfitted models generally have high training MSE and high test MSE.</li>
+</ul>
+</li>
+<li>On average, the training MSE is lower than the test MSE for any model. This is because the model is usually estimated by minimizing some quantity that is related to the training MSE. For example, we minimize <span class="math inline">\(SS_{res}\)</span>, which is the numerator of the training MSE, for linear regression.</li>
+</ul>
+</div>
+<div id="bias-variance-trade-off-model-complexity" class="section level3" number="10.5.4">
+<h3>
+<span class="header-section-number">10.5.4</span> Bias-Variance Trade-Off &amp; Model Complexity<a class="anchor" aria-label="anchor" href="#bias-variance-trade-off-model-complexity"><i class="fas fa-link"></i></a>
+</h3>
+
+</div>
 </div>
 </div>
   <div class="chapter-nav">
@@ -775,7 +893,14 @@ Figure 10.8: Scatter Plot for Worked Example
 <li><a class="nav-link" href="#linear-regression-in-r"><span class="header-section-number">10.4.6</span> Linear Regression in R</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#SLRacc"><span class="header-section-number">10.5</span> Assessing Model Accuracy</a></li>
+<li>
+<a class="nav-link" href="#SLRacc"><span class="header-section-number">10.5</span> Assessing Model Accuracy</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#metrics-for-model-accuracy"><span class="header-section-number">10.5.1</span> Metrics for Model Accuracy</a></li>
+<li><a class="nav-link" href="#model-complexity"><span class="header-section-number">10.5.2</span> Model Complexity</a></li>
+<li><a class="nav-link" href="#training-test-split"><span class="header-section-number">10.5.3</span> Training-Test Split</a></li>
+<li><a class="nav-link" href="#bias-variance-trade-off-model-complexity"><span class="header-section-number">10.5.4</span> Bias-Variance Trade-Off &amp; Model Complexity</a></li>
+</ul>
+</li>
 </ul>
 
       <div class="book-extra">
@@ -792,7 +917,7 @@ Figure 10.8: Scatter Plot for Worked Example
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2025-07-31.</p>
+    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2025-08-01.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

@@ -84,7 +84,7 @@ Figure \@ref(fig:10-scatter) could help us with the following questions:
 
 - Are study time and the number of courses taken related to one another? 
 - How strong is this relationship? 
-- Could we use the data to make a prediction for the study time of a student who is not in this scatterplot? 
+- Could we use the data to make a prediction for the study time of a student who is not in this scatter plot? 
 
 These questions can be answered using linear regression.
 
@@ -266,7 +266,7 @@ From \@ref(eq:10-fitted-model), notice we use $e$ to denote the **residual**, or
 
 From \@ref(eq:10-fitted) and \@ref(eq:10-fitted-model), we have the following quantities that we can compute:
 
-- Fitted values:
+- Fitted values or predicted values:
 
 \begin{equation}
 \hat{y}_i = \hat{\beta}_0+\hat{\beta}_1 x_i.
@@ -313,7 +313,7 @@ and
 
 $\hat{\beta}_1, \hat{\beta}_0$ are called **least squares estimators**, to emphasize that these values are found by minimizing $SS_{res}$.
 
-The minimization of $SS_{res}$ with respect to $\hat{\beta}_0$ and $\hat{\beta}_1$ is done by taking the partial derivatives of \@ref(eq:SSres) with respect to $\hat{\beta}_1$ and $\hat{\beta}_0$, setting these two partial derivatives equal to 0, and solving these two equations for $\hat{\beta}_1$ and $\hat{\beta}_0$.
+The minimization of $SS_{res}$ with respect to $\hat{\beta}_0$ and $\hat{\beta}_1$ is done by taking the partial derivatives of \@ref(eq:10-SSres) with respect to $\hat{\beta}_1$ and $\hat{\beta}_0$, setting these two partial derivatives equal to 0, and solving these two equations for $\hat{\beta}_1$ and $\hat{\beta}_0$.
 
 Let's take a look at the estimated coefficients for our study time example:
 
@@ -660,3 +660,120 @@ In this section, we will focus on the second primary use of supervised methods: 
 - Online ads: Based on a user's history on Amazon, Amazon would like to be able to recommend products that the user is highly likely to purchase.
 - Personalized medicine: Based on a patient's history, what is the most effective treatment plan?
 - Dynamic pricing: airlines use dynamic pricing that adjusts price to maximize profits, based on real-time market conditions. 
+
+In these questions, we want to know if our model can predict the value of the response variable well; we do not necessarily want to know how the predictors may explain the response variable.
+
+### Metrics for Model Accuracy
+
+We will introduce some common metrics that measure model accuracy. As we are talking about these in the framework of linear regression where the response variable is quantitative, these metrics only apply to supervised methods when the response variable is quantitative. There are separate metrics when the response variable is categorical which you will learn about next semester. 
+
+#### Mean-Squared Error
+
+The **mean-squared error (MSE)** is a commonly used metric to assess model accuracy. The MSE is
+
+\begin{equation} 
+MSE(\hat{y}) = \frac{\sum_{i=1}^n (y_i - \hat{y}_i)^2}{n}.
+(\#eq:10-MSE)
+\end{equation}
+
+The MSE can be interpreted as an average squared prediction error. If you compare equation \@ref(eq:10-MSE) with equation \@ref(eq:10-SSres), you may notice the numerator of the MSE is the $SS_{res}$. 
+
+You may also recall that the MSE was introduced in Section \@ref(estMSE). In that section, we were measuring the average squared difference between an estimator and its parameter, rather than the average squared difference between a predicted value and its true value. From a terminology standpoint, the MSE of an estimator is usually explicitly stated as such, whereas when someone speaks or write about an MSE, it is usually the MSE of the predicted values per equation \@ref(eq:10-MSE). 
+
+It should then not come as a surprise that the MSE in equation \@ref(eq:10-MSE) can be decomposed like the MSE of an estimator in equation \@ref(eq:7-MSEdecomp):
+
+\begin{equation} 
+MSE(\hat{y}) = Var(\hat{y}) + Bias(\hat{y})^2.
+(\#eq:10-MSEdecomp)
+\end{equation}
+
+So the MSE can be decomposed into the variance of the predicted values and the squared bias of the predicted values. In a linear regression setting, the bias will be theoretically 0 if we find the correct form of $f(X)$ to relate the response variable with the predictors.
+
+#### Root Mean-Squared Error
+
+The MSE is a popular metric for model accuracy because of its decomposition per equation \@ref(eq:10-MSEdecomp). However, interpreting its numerical value can be a bit challenging, as the unit associated with the MSE is the squared of the unit of the response variable, making it a bit more challenging in making a judgement as to whether a reported value for the MSE is actually large or small.
+
+The **root mean-squared error (RMSE)** has been suggested, since it has the same unit as the response variable, making it easy to make a judgement as to whether a reported value is large or small:
+
+\begin{equation} 
+RMSE(\hat{y}) = \sqrt{\frac{\sum_{i=1}^n (y_i - \hat{y}_i)^2}{n}} = \sqrt{MSE(\hat{y})}.
+(\#eq:10-RMSE)
+\end{equation}
+
+The RMSE is simply the square root of the MSE. Interpreting the RMSE gets tricky; it is tempting to interpret as the average prediction error, but it is not quite correct to do so, since $\sqrt{\frac{\sum_{i=1}^n (y_i - \hat{y}_i)^2}{n}}$ is not the same as $\frac{\sum_{i=1}^n \sqrt{(y_i - \hat{y}_i)^2}}{n}$.
+
+#### Mean Absolute Deviation
+
+In response to the difficulty in interpreting RMSE, another metric, called the **mean absolute deviation (MAD)** has been proposed:
+
+\begin{equation} 
+MAD(\hat{y}) = \frac{\sum_{i=1}^n |y_i - \hat{y}_i|}{n}.
+(\#eq:10-MAD)
+\end{equation}
+
+The unit of MAD is the same as the response variable, and it can be interpreted as the average prediction error. 
+
+#### Additional Comments about MSE, RMSE, MAD
+
+In the rest of this module, we will be focusing on the MSE and RMSE, as certain properties have been proven mathematically.
+
+### Model Complexity
+
+Thus far, we have only considered simple linear regression, i.e. only one predictor in our model. This approach is useful if we want to focus on how a single predictor is related to the response variable. However, it should not be surprising to learn that in many settings, we can improve predictions of the response variable by either
+
+- incorporating additional predictors (that are useful), or
+- considering polynomials for the predictor (if the relationship between the response variable and predictor is not linear).
+
+The linear regression model is then written as
+
+\begin{equation} 
+y=\beta_0+\beta_{1}x_1 + \beta_2 x_2 + \cdots + \beta_k x_k \epsilon,
+(\#eq:10-MLRmod)
+\end{equation} 
+
+if we incorporate $k$ quantitative predictors $x_1, \cdots, x_k$, or
+
+\begin{equation} 
+y=\beta_0+\beta_{1}x + \beta_2 x^2 + \cdots + \beta_k x^k \epsilon,
+(\#eq:10-polymod)
+\end{equation} 
+
+if we consider a $k$-degree polynomial for $f(x)$, the relationship between the response variable and the predictor. Notice the linear regression model gets more complex when we add more predictors, or higher degree polynomials. 
+
+For this class, we will only consider comparing the complexity of models that are nested. Two models are nested if one model can be derived from the other by setting some parameters to be equal to 0. As an example, the SLR model in equation \@ref(eq:10-SLRmod) is nested within the model in equation \@(eq:10-MLRmod), as we can get the SLR model by setting $\beta_2 = \beta_3 = \cdots = \beta_k = 0$ in equation \@(eq:10-MLRmod).
+
+*Thought question*: Can you explain why  the SLR model in equation \@ref(eq:10-SLRmod) is nested within the model in equation \@(eq:10-polymod).
+
+When we have nested models, their **complexity** can be measured by the number of parameters in the model, which we denote by $p$. So for the SLR model in equation \@ref(eq:10-SLRmod), $p=2$, since we have $\beta_0$ and $\beta_1$.
+
+Note: Some consider models that are more complex to be more **flexible**, so fairly often what I call model complexity is sometimes called model flexibility. 
+
+So there are many potential models to consider. Metrics involving model accuracy can help us decide which model is the best in terms of prediction accuracy, by selecting the model that has the smallest MSE (or RMSE). 
+
+### Training-Test Split
+
+After reading the previous subsections, one may consider the following strategy when assessing model accuracy and choosing between several nested models: fit all models under consideration using all available data, then choose the model that the smallest MSE (or RMSE). 
+
+A property of the MSE and RMSE of nested models is that these values only decrease as the model gets more complex! We will not go through the whole proof of this, but intuitively, one can see why the more complex model will never do worse than the less complex model: this happens when the additional parameters are all 0. This property suggests that using this strategy will always end up selecting the most complex model, as the most complex model will always have the smallest MSE and RMSE. 
+
+Remember what we actually want to do with prediction: after fitting the model, we want to be able to accurately predict the values of the response variable in the future. When we fit a model well based on the current data, the model may do poorly on new data. This is called **overfitting**. 
+
+So what we will do is to split a given dataset into two portions. One portion, called the **training data**, is used to fit (or train) the model. The other portion, called the **test data**, is used to assess the prediction accuracy of the model. The test data are never used to fit the model, so the test data play the role of new data. 
+
+The MSE (or RMSE) is then calculated on both portions, and are called the training MSE and the test MSE. The relationship between the training and test MSEs with the complexity of nested models is shown below in Figure \@ref(fig:10-MSE):
+
+```{r 10-MSE, fig.cap = "Training & Test MSE vs Complexity", echo = FALSE}
+knitr::include_graphics("images/10-MSE.png")
+```
+
+We make the following comments about Figure \@ref(fig:10-MSE):
+
+- The blue curve represents how the training MSE behaves as models get more complex. As models get more complex, the training MSE never decreases.
+- The black curve represents how the test MSE behaves as models get more complex. Test MSEs usually exhibit this U-shape. The test MSE is minimum when we find an appropriate level of complexity, and this is denoted by the red line. We call this model the optimal model.
+- Overfitted models are models that are more complex than the optimal model.
+  - Overfitted models generally have low training MSE, and high test MSE. A large difference between these two is also indicative of overgfitting.
+- Underfitted models are models that are less complex than the optimal model. 
+  - Underfitted models generally have high training MSE and high test MSE. 
+- On average, the training MSE is lower than the test MSE for any model. This is because the model is usually estimated by minimizing some quantity that is related to the training MSE. For example, we minimize $SS_{res}$, which is the numerator of the training MSE, for linear regression.
+
+### Bias-Variance Trade-Off & Model Complexity
