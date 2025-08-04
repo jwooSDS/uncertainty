@@ -753,7 +753,7 @@ MSE(\hat{y}) = \frac{\sum_{i=1}^n (y_i - \hat{y}_i)^2}{n}.
 \tag{10.21}
 \end{equation}\]</span></p>
 <p>The MSE can be interpreted as an average squared prediction error. If you compare equation <a href="linear-regression.html#eq:10-MSE">(10.21)</a> with equation <a href="linear-regression.html#eq:10-SSres">(10.8)</a>, you may notice the numerator of the MSE is the <span class="math inline">\(SS_{res}\)</span>.</p>
-<p>You may also recall that the MSE was introduced in Section <a href="est.html#estMSE">7.4.5</a>. In that section, we were measuring the average squared difference between an estimator and its parameter, rather than the average squared difference between a predicted value and its true value. From a terminology standpoint, the MSE of an estimator is usually explicitly stated as such, whereas when someone speaks or write about an MSE, it is usually the MSE of the predicted values per equation <a href="linear-regression.html#eq:10-MSE">(10.21)</a>.</p>
+<p>You may also recall that the MSE was introduced in Section <a href="est.html#estMSE">7.4.5</a>. In that section, we were measuring the average squared difference between an estimator and its parameter, rather than the average squared difference between a predicted value and its true value. From a terminology standpoint, they are both MSEs: one being the MSE of an estimator, the other being the MSE of predictions, so you may need to clarify which MSE is being discussed if someone just uses the term MSE.</p>
 <p>It should then not come as a surprise that the MSE in equation <a href="linear-regression.html#eq:10-MSE">(10.21)</a> can be decomposed like the MSE of an estimator in equation <a href="est.html#eq:7-MSEdecomp">(7.5)</a>:</p>
 <p><span class="math display" id="eq:10-MSEdecomp">\[\begin{equation}
 MSE(\hat{y}) = Var(\hat{y}) + Bias(\hat{y})^2.
@@ -765,7 +765,7 @@ MSE(\hat{y}) = Var(\hat{y}) + Bias(\hat{y})^2.
 <h4>
 <span class="header-section-number">10.5.1.2</span> Root Mean-Squared Error<a class="anchor" aria-label="anchor" href="#root-mean-squared-error"><i class="fas fa-link"></i></a>
 </h4>
-<p>The MSE is a popular metric for model accuracy because of its decomposition per equation <a href="linear-regression.html#eq:10-MSEdecomp">(10.22)</a>. However, interpreting its numerical value can be a bit challenging, as the unit associated with the MSE is the squared of the unit of the response variable, making it a bit more challenging in making a judgement as to whether a reported value for the MSE is actually large or small.</p>
+<p>The MSE is a popular metric for model accuracy because of its decomposition per equation <a href="linear-regression.html#eq:10-MSEdecomp">(10.22)</a>. However, interpreting its numerical value can be challenging, as the unit associated with the MSE is the squared of the unit of the response variable, which poses some difficulty in making a judgement as to whether a reported value for the MSE is actually large or small.</p>
 <p>The <strong>root mean-squared error (RMSE)</strong> has been suggested, since it has the same unit as the response variable, making it easy to make a judgement as to whether a reported value is large or small:</p>
 <p><span class="math display" id="eq:10-RMSE">\[\begin{equation}
 RMSE(\hat{y}) = \sqrt{\frac{\sum_{i=1}^n (y_i - \hat{y}_i)^2}{n}} = \sqrt{MSE(\hat{y})}.
@@ -788,7 +788,7 @@ MAD(\hat{y}) = \frac{\sum_{i=1}^n |y_i - \hat{y}_i|}{n}.
 <h4>
 <span class="header-section-number">10.5.1.4</span> Additional Comments about MSE, RMSE, MAD<a class="anchor" aria-label="anchor" href="#additional-comments-about-mse-rmse-mad"><i class="fas fa-link"></i></a>
 </h4>
-<p>In the rest of this module, we will be focusing on the MSE and RMSE, as certain properties have been proven mathematically.</p>
+<p>In the rest of this module, we will be focusing on the MSE and RMSE, as certain properties for them have been proven mathematically.</p>
 </div>
 </div>
 <div id="model-complexity" class="section level3" number="10.5.2">
@@ -798,22 +798,31 @@ MAD(\hat{y}) = \frac{\sum_{i=1}^n |y_i - \hat{y}_i|}{n}.
 <p>Thus far, we have only considered simple linear regression, i.e. only one predictor in our model. This approach is useful if we want to focus on how a single predictor is related to the response variable. However, it should not be surprising to learn that in many settings, we can improve predictions of the response variable by either</p>
 <ul>
 <li>incorporating additional predictors (that are useful), or</li>
-<li>considering polynomials for the predictor (if the relationship between the response variable and predictor is not linear).</li>
+<li>considering polynomials for the predictor (if the relationship between the response variable and predictor is not linear), or</li>
+<li>adding interactions between predictors.</li>
 </ul>
-<p>The linear regression model is then written as</p>
+<p>With additional predictors, the linear regression model is written as</p>
 <p><span class="math display" id="eq:10-MLRmod">\[\begin{equation}
-y=\beta_0+\beta_{1}x_1 + \beta_2 x_2 + \cdots + \beta_k x_k \epsilon,
+y=\beta_0+\beta_{1}x_1 + \beta_2 x_2 + \cdots + \beta_k x_k + \epsilon,
 \tag{10.25}
 \end{equation}\]</span></p>
-<p>if we incorporate <span class="math inline">\(k\)</span> quantitative predictors <span class="math inline">\(x_1, \cdots, x_k\)</span>, or</p>
+<p>if we incorporate <span class="math inline">\(k\)</span> quantitative predictors <span class="math inline">\(x_1, \cdots, x_k\)</span>.</p>
+<p>If the relationship between the response variable and predictor is not linear, the linear regression model can be written as</p>
 <p><span class="math display" id="eq:10-polymod">\[\begin{equation}
-y=\beta_0+\beta_{1}x + \beta_2 x^2 + \cdots + \beta_k x^k \epsilon,
+y=\beta_0+\beta_{1}x + \beta_2 x^2 + \cdots + \beta_k x^k + \epsilon,
 \tag{10.26}
 \end{equation}\]</span></p>
-<p>if we consider a <span class="math inline">\(k\)</span>-degree polynomial for <span class="math inline">\(f(x)\)</span>, the relationship between the response variable and the predictor. Notice the linear regression model gets more complex when we add more predictors, or higher degree polynomials.</p>
-<p>For this class, we will only consider comparing the complexity of models that are nested. Two models are nested if one model can be derived from the other by setting some parameters to be equal to 0. As an example, the SLR model in equation <a href="linear-regression.html#eq:10-SLRmod">(10.1)</a> is nested within the model in equation @(eq:10-MLRmod), as we can get the SLR model by setting <span class="math inline">\(\beta_2 = \beta_3 = \cdots = \beta_k = 0\)</span> in equation @(eq:10-MLRmod).</p>
-<p><em>Thought question</em>: Can you explain why the SLR model in equation <a href="linear-regression.html#eq:10-SLRmod">(10.1)</a> is nested within the model in equation @(eq:10-polymod).</p>
-<p>When we have nested models, their <strong>complexity</strong> can be measured by the number of parameters in the model, which we denote by <span class="math inline">\(p\)</span>. So for the SLR model in equation <a href="linear-regression.html#eq:10-SLRmod">(10.1)</a>, <span class="math inline">\(p=2\)</span>, since we have <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span>.</p>
+<p>if we consider a <span class="math inline">\(k\)</span>-degree polynomial for <span class="math inline">\(f(x)\)</span> to approximate the relationship between the response variable and the predictor. Notice the linear regression model gets more complex when we add more predictors, or higher degree polynomials.</p>
+<p><strong>Interactions between predictors</strong> occur when the effect of one predictor on the response variable depends on the value of another predictor. Consider predicting recovery rates of patients, based on amount of medication administered and age of the patient. Perhaps higher doses of the medication speeds recovery, but only for young patients. However, the medication may not work at all for old patients. The effect of medication on recovery depends on the age of a patient, so there is an interaction between amount of medicine administered and age of patient. In this scenario, the linear regression model can be written as</p>
+<p><span class="math display" id="eq:10-intmod">\[\begin{equation}
+y=\beta_0+\beta_{1}x_1 + \beta_2 x_2 + \beta_3 x_1 x_2 + \epsilon,
+\tag{10.27}
+\end{equation}\]</span></p>
+<p>where the term <span class="math inline">\(x_1 x_2\)</span> represents that we are considering an interaction between the predictors.</p>
+<p>It is also possible for a linear regression model to have multiple predictors, higher order polynomials, and interactions. For example, y=<em>0+</em>{1}x_1 + _2 x_2 + _3 x_3 + _4 x_3^2 + _5 z_1 x_2 + $.</p>
+<p>For this class, we will only consider comparing the complexity of models that are <strong>nested</strong>. Two models are nested if one model can be derived from the other by setting some parameters of the more complex model to be equal to 0. As an example, the SLR model in equation <a href="linear-regression.html#eq:10-SLRmod">(10.1)</a> is nested within the model in equation <a href="linear-regression.html#eq:10-MLRmod">(10.25)</a>, as we can get the SLR model by setting <span class="math inline">\(\beta_2 = \beta_3 = \cdots = \beta_k = 0\)</span> in equation <a href="linear-regression.html#eq:10-MLRmod">(10.25)</a>.</p>
+<p><em>Thought question</em>: Can you explain why the SLR model in equation <a href="linear-regression.html#eq:10-SLRmod">(10.1)</a> is nested within the model in equation <a href="linear-regression.html#eq:10-polymod">(10.26)</a>? Can you explain why the SLR model in equation <a href="linear-regression.html#eq:10-SLRmod">(10.1)</a> is nested within the model in equation <a href="linear-regression.html#eq:10-intmod">(10.27)</a>?</p>
+<p>The <strong>complexity</strong> of linear regression models can be measured by the number of parameters in the model, which we denote by <span class="math inline">\(p\)</span>. So for the SLR model in equation <a href="linear-regression.html#eq:10-SLRmod">(10.1)</a>, <span class="math inline">\(p=2\)</span>, since we have <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span>.</p>
 <p>Note: Some consider models that are more complex to be more <strong>flexible</strong>, so fairly often what I call model complexity is sometimes called model flexibility.</p>
 <p>So there are many potential models to consider. Metrics involving model accuracy can help us decide which model is the best in terms of prediction accuracy, by selecting the model that has the smallest MSE (or RMSE).</p>
 </div>
@@ -823,7 +832,7 @@ y=\beta_0+\beta_{1}x + \beta_2 x^2 + \cdots + \beta_k x^k \epsilon,
 </h3>
 <p>After reading the previous subsections, one may consider the following strategy when assessing model accuracy and choosing between several nested models: fit all models under consideration using all available data, then choose the model that the smallest MSE (or RMSE).</p>
 <p>A property of the MSE and RMSE of nested models is that these values only decrease as the model gets more complex! We will not go through the whole proof of this, but intuitively, one can see why the more complex model will never do worse than the less complex model: this happens when the additional parameters are all 0. This property suggests that using this strategy will always end up selecting the most complex model, as the most complex model will always have the smallest MSE and RMSE.</p>
-<p>Remember what we actually want to do with prediction: after fitting the model, we want to be able to accurately predict the values of the response variable in the future. When we fit a model well based on the current data, the model may do poorly on new data. This is called <strong>overfitting</strong>.</p>
+<p>Take a step back and remind ourselves what we actually want to do with prediction: after fitting the model, we want to be able to accurately predict the values of the response variable in the future. When we fit a model well based on the current data, the model may do poorly on new data. This is called <strong>overfitting</strong>.</p>
 <p>So what we will do is to split a given dataset into two portions. One portion, called the <strong>training data</strong>, is used to fit (or train) the model. The other portion, called the <strong>test data</strong>, is used to assess the prediction accuracy of the model. The test data are never used to fit the model, so the test data play the role of new data.</p>
 <p>The MSE (or RMSE) is then calculated on both portions, and are called the training MSE and the test MSE. The relationship between the training and test MSEs with the complexity of nested models is shown below in Figure <a href="linear-regression.html#fig:10-MSE">10.9</a>:</p>
 <div class="figure">
@@ -835,7 +844,7 @@ Figure 10.9: Training &amp; Test MSE vs Complexity
 <p>We make the following comments about Figure <a href="linear-regression.html#fig:10-MSE">10.9</a>:</p>
 <ul>
 <li>The blue curve represents how the training MSE behaves as models get more complex. As models get more complex, the training MSE never decreases.</li>
-<li>The black curve represents how the test MSE behaves as models get more complex. Test MSEs usually exhibit this U-shape. The test MSE is minimum when we find an appropriate level of complexity, and this is denoted by the red line. We call this model the optimal model.</li>
+<li>The black curve represents how the test MSE behaves as models get more complex. The test MSE is minimum when we find an appropriate level of complexity, and this is denoted by the red line. We call this model the optimal model. The test MSE increases as models get more complex, or less complex, than the optimal model.</li>
 <li>Overfitted models are models that are more complex than the optimal model.
 <ul>
 <li>Overfitted models generally have low training MSE, and high test MSE. A large difference between these two is also indicative of overgfitting.</li>
@@ -853,7 +862,160 @@ Figure 10.9: Training &amp; Test MSE vs Complexity
 <h3>
 <span class="header-section-number">10.5.4</span> Bias-Variance Trade-Off &amp; Model Complexity<a class="anchor" aria-label="anchor" href="#bias-variance-trade-off-model-complexity"><i class="fas fa-link"></i></a>
 </h3>
-
+<p>In equation <a href="linear-regression.html#eq:10-MSEdecomp">(10.22)</a>, we see that the MSE can be decomposed into the variance of the predicted values and the squared bias of the predicted values. In Figure <a href="linear-regression.html#fig:10-MSE">10.9</a>, we see that the MSE is related to the complexity of the model. So it should not be a surprise to see that the complexity of models is related to the bias and variance of the predictions from those models. This relationship is called the <strong>bias-variance tradeoff</strong>. This tradeoff tells us that if a model produces predictions that are more biased, the predictions will have smaller variance, and vice versa. We summarize the relationship between model complexity and bias and variance of their predictions:</p>
+<ul>
+<li><p>Bias increase as the model gets less complex. Models are too simple (or not complex enough) if we do not include important predictors, or misspecify the relationship between the response and the predictors, or fail to include relevant interactions.</p></li>
+<li><p>Variance increase as the model gets more complex. Models are too complex if we include unnecessary predictors, include higher order polynomials that not needed, or include interactions when they are not needed.</p></li>
+</ul>
+<p>So we can see that to minimize the test MSE, we need to find the right balance between bias and variance of the model, by finding the right level of complexity.</p>
+</div>
+<div id="monte-carlo-simulations" class="section level3" number="10.5.5">
+<h3>
+<span class="header-section-number">10.5.5</span> Monte Carlo Simulations<a class="anchor" aria-label="anchor" href="#monte-carlo-simulations"><i class="fas fa-link"></i></a>
+</h3>
+<p>Next, we use Monte Carlo simulations to illustrate how MSE, bias, variance, and model complexity are related. In our simulation, we are going to simulate data from this model <span class="math inline">\(y = x^2 + \epsilon\)</span>, where <span class="math inline">\(\epsilon\)</span> is i.i.d. <span class="math inline">\(N(0,1)\)</span>. The true relationship between the response variable and the predictor is <span class="math inline">\(f(x) = x^2\)</span>. We write a function that simulates data from this model:</p>
+<div class="sourceCode" id="cb224"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">##function to simulate y = x^2 + eps</span></span>
+<span><span class="va">get.sim.data</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">samp.size</span>, <span class="va">sigma</span><span class="op">)</span></span>
+<span>  </span>
+<span><span class="op">{</span></span>
+<span>  </span>
+<span>  <span class="va">x</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span>n<span class="op">=</span><span class="va">samp.size</span><span class="op">)</span> <span class="co">##note that there are no assumptions made about x so can simulate from any distribution</span></span>
+<span>  <span class="va">eps</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span>n<span class="op">=</span><span class="va">samp.size</span>, sd<span class="op">=</span><span class="va">sigma</span><span class="op">)</span></span>
+<span>  <span class="va">y</span><span class="op">&lt;-</span><span class="va">x</span><span class="op">^</span><span class="fl">2</span> <span class="op">+</span> <span class="va">eps</span> <span class="co">##since f(x) = 2x^2</span></span>
+<span>  </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">x</span>,<span class="va">y</span><span class="op">)</span> <span class="co">##return a dataframe with x and y</span></span>
+<span><span class="op">}</span></span></code></pre></div>
+<p>Note that in a linear regression setting, there are no assumptions made about the predictor, so we are free to simulate the predictor from any distribution. We need to be sure to specify <span class="math inline">\(y = f(x) + \epsilon\)</span> where the errors are i.i.d. Normal with mean 0 and some fixed value for its variance, which we set to be 1.</p>
+<p>We consider fitting a few different fitted lines for our simulated data:</p>
+<ol style="list-style-type: decimal">
+<li>Fitted line 1: <span class="math inline">\(\hat{y} = \hat{\beta}_0,\)</span> so <span class="math inline">\(\hat{f}(x) = \hat{\beta}_0\)</span>.</li>
+<li>Fitted line 2: <span class="math inline">\(\hat{y} = \hat{\beta}_0 + \hat{\beta}_1 x,\)</span> so <span class="math inline">\(\hat{f}(x) = \hat{\beta}_0 + \hat{\beta}_1 x\)</span>.</li>
+<li>Fitted line 3: <span class="math inline">\(\hat{y} = \hat{\beta}_0 + \hat{\beta}_1 x + \hat{\beta}_2 x^2,\)</span> so <span class="math inline">\(\hat{f}(x) = \hat{\beta}_0 + \hat{\beta}_1 x + \hat{\beta}_2 x^2\)</span>.</li>
+<li>Fitted line 4: <span class="math inline">\(\hat{y} = \hat{\beta}_0 + \hat{\beta}_1 x + \cdots + \hat{\beta}_9 x^9,\)</span> so <span class="math inline">\(\hat{f}(x) = \hat{\beta}_0 + \hat{\beta}_1 x + \cdots + \hat{\beta}_9 x^9\)</span>.</li>
+</ol>
+<p>We simulate 1 replicate of 1000 observations, and then fit the four models.</p>
+<div class="sourceCode" id="cb225"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">11</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">1000</span></span>
+<span></span>
+<span><span class="va">Data.sim</span><span class="op">&lt;-</span><span class="fu">get.sim.data</span><span class="op">(</span><span class="va">n</span>,<span class="fl">1</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">fit1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">y</span> <span class="op">~</span> <span class="fl">1</span>,                   data <span class="op">=</span> <span class="va">Data.sim</span><span class="op">)</span></span>
+<span><span class="va">fit2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">y</span> <span class="op">~</span> <span class="va">x</span>,                   data <span class="op">=</span> <span class="va">Data.sim</span><span class="op">)</span></span>
+<span><span class="va">fit3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">y</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/stats/poly.html">poly</a></span><span class="op">(</span><span class="va">x</span>, degree <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">Data.sim</span><span class="op">)</span></span>
+<span><span class="va">fit4</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">y</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/stats/poly.html">poly</a></span><span class="op">(</span><span class="va">x</span>, degree <span class="op">=</span> <span class="fl">9</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">Data.sim</span><span class="op">)</span></span></code></pre></div>
+<p>In Figure <a href="linear-regression.html#fig:10-sims1">10.10</a>, we create a scatter plot of this simulated data, and overlay lines to represent the four fitted lines (in blue, red, green, orange). We also overlay a curve to represent the true relationship between the variables, in black.</p>
+<div class="figure">
+<span style="display:block;" id="fig:10-sims1"></span>
+<img src="bookdown-demo_files/figure-html/10-sims1-1.png" alt="Four Polynomial Models Fitted to a Simulated Dataset" width="672"><p class="caption">
+Figure 10.10: Four Polynomial Models Fitted to a Simulated Dataset
+</p>
+</div>
+<p>From Figure <a href="linear-regression.html#fig:10-sims1">10.10</a>, we make the following comments:</p>
+<ul>
+<li>Fitted line 1, in blue, generally deviates far from the truth (in black).</li>
+<li>Fitted line 2, in red, is closer to the truth, but there are portions where it does not match the truth.</li>
+<li>Fitted line 3, in green, appears to be best in that it matches the closest to the truth, generally.</li>
+<li>Fitted line 4, in orange, does not quite match the true, especially at the extreme ends of the x-axis.</li>
+</ul>
+<p>Of course, these comments are based on 1 simulated dataset, but if we were to create many replicates of the dataset and create a similar scatter plot, we would expect to see similar characteristics.</p>
+<p>To illustrate the idea behind the bias and variance of predictions, we simulate 3 replicates datasets, each of size 1000, and show fitted lines 1 and 4 on each replicate in Figure <a href="linear-regression.html#fig:10-sims3">10.11</a>. Let us remind ourselves of what was written earlier about the bias variance tradeoff and the complexity of models:</p>
+<ul>
+<li>Fitted line 1 is too simple, so we expect a high degree of bias and a low degree of variance.</li>
+<li>Fitted line 2 is also simple, so we expect some bias, and a higher degree of variance.</li>
+<li>Fitted line 3 should be optimal, since its <span class="math inline">\(\hat{f}(x)\)</span> takes the correct form, so we expect bias to be theoretically 0, and a even higher degree of variance.</li>
+<li>Fitted line 4 is too complex, so we expect its bias to be theoretically 0, but it will have the highest degree of variance.</li>
+</ul>
+<div class="figure">
+<span style="display:block;" id="fig:10-sims3"></span>
+<img src="bookdown-demo_files/figure-html/10-sims3-1.png" alt="Fitted Lines 1 &amp; 4 on Three Different Simulated Datasets" width="672"><p class="caption">
+Figure 10.11: Fitted Lines 1 &amp; 4 on Three Different Simulated Datasets
+</p>
+</div>
+<p>For fitted line 1:</p>
+<ul>
+<li>We see that the the blue line always does a poor job capturing the truth in the data, therefore, it will have high bias as it will systematically over- or under-predict.</li>
+<li>However, the blue lines are all pretty similar across all three simulated datasets. Therefore, it has low variance as the line is pretty much the same.</li>
+</ul>
+<p>For fitted line 4:</p>
+<ul>
+<li>We see that the orange lines are very different across all three simulated datasets. Therefore, it has high variance.</li>
+<li>Fitted line 4 will be, on average, theoretically unbiased. However, being an unbiased but highly variable fitted line is can be problematic, since we only observe one dataset in real life, so we cannot average the predictions over many datasets. This is why we also want fitted lines with low variance.</li>
+</ul>
+<p>We now carry out the Monte Carlo simulations, over 1000 replicates. Ideally, the number of replicates should be more, but this simulation takes some time to run (fitting high degree polynomials is computationally expenseive). We will use these 1000 replicates to compute the MSE, bias, and variance of the four fitted lines, evaluated at the point <span class="math inline">\(x=0.1\)</span>. The simulation would do the following:</p>
+<ul>
+<li>Simulate 1 dataset of 1000 observations.</li>
+<li>Fitted fitted lines 1 to 4 on the dataset.</li>
+<li>Compute the predicted value <span class="math inline">\(\hat{y}\)</span> when <span class="math inline">\(x=0.9\)</span> based on each of the four fitted lines, and record these values.</li>
+<li>Repeat these steps for over 1000 replicates.</li>
+</ul>
+<p>Let’s take a look at the distributions of <span class="math inline">\(\hat{y}\)</span>s for each fitted line, in Figure <a href="linear-regression.html#fig:10-simsboxplot">10.12</a>.</p>
+<div class="figure">
+<span style="display:block;" id="fig:10-simsboxplot"></span>
+<img src="bookdown-demo_files/figure-html/10-simsboxplot-1.png" alt="Box Plots of Predictions for Four Fitted Lines" width="672"><p class="caption">
+Figure 10.12: Box Plots of Predictions for Four Fitted Lines
+</p>
+</div>
+<p>The blue horizontal line represents the true value of <span class="math inline">\(y\)</span> when <span class="math inline">\(x=0.1\)</span>. Let <span class="math inline">\(y_0\)</span> denote this value, i.e. <span class="math inline">\(y_0 = f(0.1) = 0.1^2\)</span>. Figure <a href="linear-regression.html#fig:10-simsboxplot">10.12</a> pretty much matches with what we expected:</p>
+<ul>
+<li>The variance, or spread, of <span class="math inline">\(\hat{y}\)</span>s is higher as the model gets more complex.</li>
+<li>Fitted lines 1 and 2 are bias, since the middle of their boxplots are far away from the blue line, but fitted lines 3 and 4 are unbiased, since the middle of their boxplots matches with the blue line.</li>
+</ul>
+<p>We then evaluate the test MSE, bias, and variance of <span class="math inline">\(hat{y}\)</span> from each fitted line:</p>
+<ul>
+<li>MSE: the average squared difference between <span class="math inline">\(\hat{y}\)</span> and <span class="math inline">\(y_0\)</span>.</li>
+<li>Bias: the average difference between <span class="math inline">\(\hat{y}\)</span> and <span class="math inline">\(y_0\)</span>.</li>
+<li>Variance: the sample variance of <span class="math inline">\(\hat{y}\)</span>.</li>
+</ul>
+<div class="inline-table"><table class="table table-sm">
+<caption>
+<span id="tab:10-table">Table 10.1: </span>Metrics for Four Fitted Lines</caption>
+<thead><tr class="header">
+<th align="left"></th>
+<th align="right">degree</th>
+<th align="right">MSE</th>
+<th align="right">Squared.Bias</th>
+<th align="right">Variance</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">line1</td>
+<td align="right">0</td>
+<td align="right">0.1063342</td>
+<td align="right">0.1052441</td>
+<td align="right">0.0010913</td>
+</tr>
+<tr class="even">
+<td align="left">line2</td>
+<td align="right">1</td>
+<td align="right">0.0085085</td>
+<td align="right">0.0055666</td>
+<td align="right">0.0029448</td>
+</tr>
+<tr class="odd">
+<td align="left">line3</td>
+<td align="right">2</td>
+<td align="right">0.0039253</td>
+<td align="right">0.0000035</td>
+<td align="right">0.0039257</td>
+</tr>
+<tr class="even">
+<td align="left">line4</td>
+<td align="right">3</td>
+<td align="right">0.0095384</td>
+<td align="right">0.0000074</td>
+<td align="right">0.0095406</td>
+</tr>
+</tbody>
+</table></div>
+<p>The results in Table <a href="linear-regression.html#tab:10-table">10.1</a> pretty much match with our expectations:</p>
+<ul>
+<li>The variance of the predictions increase as the model gets more complicated (higher degree).</li>
+<li>The bias of the predictions pretty much works in the opposite direction: it decreases as the model gets more complicated.</li>
+<li>The test MSE is smallest for fitted line 3, as its form of <span class="math inline">\(\hat{f}(x)\)</span> matches the true <span class="math inline">\(f(x)\)</span>. So we see the optimal model balances the bias-variance tradeoff.</li>
+</ul>
 </div>
 </div>
 </div>
@@ -899,6 +1061,7 @@ Figure 10.9: Training &amp; Test MSE vs Complexity
 <li><a class="nav-link" href="#model-complexity"><span class="header-section-number">10.5.2</span> Model Complexity</a></li>
 <li><a class="nav-link" href="#training-test-split"><span class="header-section-number">10.5.3</span> Training-Test Split</a></li>
 <li><a class="nav-link" href="#bias-variance-trade-off-model-complexity"><span class="header-section-number">10.5.4</span> Bias-Variance Trade-Off &amp; Model Complexity</a></li>
+<li><a class="nav-link" href="#monte-carlo-simulations"><span class="header-section-number">10.5.5</span> Monte Carlo Simulations</a></li>
 </ul>
 </li>
 </ul>
@@ -917,7 +1080,7 @@ Figure 10.9: Training &amp; Test MSE vs Complexity
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2025-08-01.</p>
+    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2025-08-04.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

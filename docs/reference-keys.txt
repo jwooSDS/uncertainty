@@ -210,7 +210,12 @@ eq:10-RMSE
 eq:10-MAD
 eq:10-MLRmod
 eq:10-polymod
+eq:10-intmod
 fig:10-MSE
+fig:10-sims1
+fig:10-sims3
+fig:10-simsboxplot
+tab:10-table
 examples
 example-1-mario-kart-auction-prices
 eg2
@@ -481,3 +486,4 @@ additional-comments-about-mse-rmse-mad
 model-complexity
 training-test-split
 bias-variance-trade-off-model-complexity
+monte-carlo-simulations

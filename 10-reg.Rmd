@@ -678,7 +678,7 @@ MSE(\hat{y}) = \frac{\sum_{i=1}^n (y_i - \hat{y}_i)^2}{n}.
 
 The MSE can be interpreted as an average squared prediction error. If you compare equation \@ref(eq:10-MSE) with equation \@ref(eq:10-SSres), you may notice the numerator of the MSE is the $SS_{res}$. 
 
-You may also recall that the MSE was introduced in Section \@ref(estMSE). In that section, we were measuring the average squared difference between an estimator and its parameter, rather than the average squared difference between a predicted value and its true value. From a terminology standpoint, the MSE of an estimator is usually explicitly stated as such, whereas when someone speaks or write about an MSE, it is usually the MSE of the predicted values per equation \@ref(eq:10-MSE). 
+You may also recall that the MSE was introduced in Section \@ref(estMSE). In that section, we were measuring the average squared difference between an estimator and its parameter, rather than the average squared difference between a predicted value and its true value. From a terminology standpoint, they are both MSEs: one being the MSE of an estimator, the other being the MSE of predictions, so you may need to clarify which MSE is being discussed if someone just uses the term MSE. 
 
 It should then not come as a surprise that the MSE in equation \@ref(eq:10-MSE) can be decomposed like the MSE of an estimator in equation \@ref(eq:7-MSEdecomp):
 
@@ -691,7 +691,7 @@ So the MSE can be decomposed into the variance of the predicted values and the s
 
 #### Root Mean-Squared Error
 
-The MSE is a popular metric for model accuracy because of its decomposition per equation \@ref(eq:10-MSEdecomp). However, interpreting its numerical value can be a bit challenging, as the unit associated with the MSE is the squared of the unit of the response variable, making it a bit more challenging in making a judgement as to whether a reported value for the MSE is actually large or small.
+The MSE is a popular metric for model accuracy because of its decomposition per equation \@ref(eq:10-MSEdecomp). However, interpreting its numerical value can be challenging, as the unit associated with the MSE is the squared of the unit of the response variable, which poses some difficulty in making a judgement as to whether a reported value for the MSE is actually large or small.
 
 The **root mean-squared error (RMSE)** has been suggested, since it has the same unit as the response variable, making it easy to make a judgement as to whether a reported value is large or small:
 
@@ -715,36 +715,50 @@ The unit of MAD is the same as the response variable, and it can be interpreted 
 
 #### Additional Comments about MSE, RMSE, MAD
 
-In the rest of this module, we will be focusing on the MSE and RMSE, as certain properties have been proven mathematically.
+In the rest of this module, we will be focusing on the MSE and RMSE, as certain properties for them have been proven mathematically.
 
 ### Model Complexity
 
 Thus far, we have only considered simple linear regression, i.e. only one predictor in our model. This approach is useful if we want to focus on how a single predictor is related to the response variable. However, it should not be surprising to learn that in many settings, we can improve predictions of the response variable by either
 
 - incorporating additional predictors (that are useful), or
-- considering polynomials for the predictor (if the relationship between the response variable and predictor is not linear).
+- considering polynomials for the predictor (if the relationship between the response variable and predictor is not linear), or
+- adding interactions between predictors.
 
-The linear regression model is then written as
+With additional predictors, the linear regression model is  written as
 
 \begin{equation} 
-y=\beta_0+\beta_{1}x_1 + \beta_2 x_2 + \cdots + \beta_k x_k \epsilon,
+y=\beta_0+\beta_{1}x_1 + \beta_2 x_2 + \cdots + \beta_k x_k + \epsilon,
 (\#eq:10-MLRmod)
 \end{equation} 
 
-if we incorporate $k$ quantitative predictors $x_1, \cdots, x_k$, or
+if we incorporate $k$ quantitative predictors $x_1, \cdots, x_k$. 
+
+If the relationship between the response variable and predictor is not linear, the linear regression model can be written as
 
 \begin{equation} 
-y=\beta_0+\beta_{1}x + \beta_2 x^2 + \cdots + \beta_k x^k \epsilon,
+y=\beta_0+\beta_{1}x + \beta_2 x^2 + \cdots + \beta_k x^k + \epsilon,
 (\#eq:10-polymod)
 \end{equation} 
 
-if we consider a $k$-degree polynomial for $f(x)$, the relationship between the response variable and the predictor. Notice the linear regression model gets more complex when we add more predictors, or higher degree polynomials. 
+if we consider a $k$-degree polynomial for $f(x)$ to approximate the relationship between the response variable and the predictor. Notice the linear regression model gets more complex when we add more predictors, or higher degree polynomials. 
 
-For this class, we will only consider comparing the complexity of models that are nested. Two models are nested if one model can be derived from the other by setting some parameters to be equal to 0. As an example, the SLR model in equation \@ref(eq:10-SLRmod) is nested within the model in equation \@(eq:10-MLRmod), as we can get the SLR model by setting $\beta_2 = \beta_3 = \cdots = \beta_k = 0$ in equation \@(eq:10-MLRmod).
+**Interactions between predictors** occur when the effect of one predictor on the response variable depends on the value of another predictor. Consider predicting recovery rates of patients, based on amount of medication administered and age of the patient. Perhaps higher doses of the medication speeds recovery, but only for young patients. However, the medication may not work at all for old patients. The effect of medication on recovery depends on the age of a patient, so there is an interaction between amount of medicine administered and age of patient. In this scenario, the linear regression model can be written as
 
-*Thought question*: Can you explain why  the SLR model in equation \@ref(eq:10-SLRmod) is nested within the model in equation \@(eq:10-polymod).
+\begin{equation} 
+y=\beta_0+\beta_{1}x_1 + \beta_2 x_2 + \beta_3 x_1 x_2 + \epsilon,
+(\#eq:10-intmod)
+\end{equation}
 
-When we have nested models, their **complexity** can be measured by the number of parameters in the model, which we denote by $p$. So for the SLR model in equation \@ref(eq:10-SLRmod), $p=2$, since we have $\beta_0$ and $\beta_1$.
+where the term $x_1 x_2$ represents that we are considering an interaction between the predictors.
+
+It is also possible for a linear regression model to have multiple predictors, higher order polynomials, and interactions. For example, y=\beta_0+\beta_{1}x_1 + \beta_2 x_2 + \beta_3 x_3 + \beta_4 x_3^2 + \beta_5 z_1 x_2 + \epsilon$.
+
+For this class, we will only consider comparing the complexity of models that are **nested**. Two models are nested if one model can be derived from the other by setting some parameters of the more complex model to be equal to 0. As an example, the SLR model in equation \@ref(eq:10-SLRmod) is nested within the model in equation \@ref(eq:10-MLRmod), as we can get the SLR model by setting $\beta_2 = \beta_3 = \cdots = \beta_k = 0$ in equation \@ref(eq:10-MLRmod).
+
+*Thought question*: Can you explain why the SLR model in equation \@ref(eq:10-SLRmod) is nested within the model in equation \@ref(eq:10-polymod)? Can you explain why the SLR model in equation \@ref(eq:10-SLRmod) is nested within the model in equation \@ref(eq:10-intmod)?
+
+The **complexity** of linear regression models can be measured by the number of parameters in the model, which we denote by $p$. So for the SLR model in equation \@ref(eq:10-SLRmod), $p=2$, since we have $\beta_0$ and $\beta_1$.
 
 Note: Some consider models that are more complex to be more **flexible**, so fairly often what I call model complexity is sometimes called model flexibility. 
 
@@ -756,7 +770,7 @@ After reading the previous subsections, one may consider the following strategy 
 
 A property of the MSE and RMSE of nested models is that these values only decrease as the model gets more complex! We will not go through the whole proof of this, but intuitively, one can see why the more complex model will never do worse than the less complex model: this happens when the additional parameters are all 0. This property suggests that using this strategy will always end up selecting the most complex model, as the most complex model will always have the smallest MSE and RMSE. 
 
-Remember what we actually want to do with prediction: after fitting the model, we want to be able to accurately predict the values of the response variable in the future. When we fit a model well based on the current data, the model may do poorly on new data. This is called **overfitting**. 
+Take a step back and remind ourselves what we actually want to do with prediction: after fitting the model, we want to be able to accurately predict the values of the response variable in the future. When we fit a model well based on the current data, the model may do poorly on new data. This is called **overfitting**. 
 
 So what we will do is to split a given dataset into two portions. One portion, called the **training data**, is used to fit (or train) the model. The other portion, called the **test data**, is used to assess the prediction accuracy of the model. The test data are never used to fit the model, so the test data play the role of new data. 
 
@@ -769,7 +783,7 @@ knitr::include_graphics("images/10-MSE.png")
 We make the following comments about Figure \@ref(fig:10-MSE):
 
 - The blue curve represents how the training MSE behaves as models get more complex. As models get more complex, the training MSE never decreases.
-- The black curve represents how the test MSE behaves as models get more complex. Test MSEs usually exhibit this U-shape. The test MSE is minimum when we find an appropriate level of complexity, and this is denoted by the red line. We call this model the optimal model.
+- The black curve represents how the test MSE behaves as models get more complex. The test MSE is minimum when we find an appropriate level of complexity, and this is denoted by the red line. We call this model the optimal model. The test MSE increases as models get more complex, or less complex, than the optimal model. 
 - Overfitted models are models that are more complex than the optimal model.
   - Overfitted models generally have low training MSE, and high test MSE. A large difference between these two is also indicative of overgfitting.
 - Underfitted models are models that are less complex than the optimal model. 
@@ -777,3 +791,238 @@ We make the following comments about Figure \@ref(fig:10-MSE):
 - On average, the training MSE is lower than the test MSE for any model. This is because the model is usually estimated by minimizing some quantity that is related to the training MSE. For example, we minimize $SS_{res}$, which is the numerator of the training MSE, for linear regression.
 
 ### Bias-Variance Trade-Off & Model Complexity
+
+In equation \@ref(eq:10-MSEdecomp), we see that the MSE can be decomposed into the variance of the predicted values and the squared bias of the predicted values. In Figure \@ref(fig:10-MSE), we see that the MSE is related to the complexity of the model. So it should not be a surprise to see that the complexity of models is related to the bias and variance of the predictions from those models. This relationship is called the **bias-variance tradeoff**. This tradeoff tells us that if a model produces predictions that are more biased, the predictions will have smaller variance, and vice versa. We summarize the relationship between model complexity and bias and variance of their predictions:
+
+- Bias increase as the model gets less complex. Models are too simple (or not complex enough) if we do not include important predictors, or misspecify the relationship between the response and the predictors, or fail to include relevant interactions. 
+
+- Variance increase as the model gets more complex. Models are too complex if we include unnecessary predictors, include higher order polynomials that not needed, or include interactions when they are not needed. 
+
+So we can see that to minimize the test MSE, we need to find the right balance between bias and variance of the model, by finding the right level of complexity. 
+
+### Monte Carlo Simulations
+
+Next, we use Monte Carlo simulations to illustrate how MSE, bias, variance, and model complexity are related. In our simulation, we are going to simulate data from this model $y = x^2 + \epsilon$, where $\epsilon$ is i.i.d. $N(0,1)$. The true relationship between the response variable and the predictor is $f(x) = x^2$. We write a function that simulates data from this model:
+
+```{r}
+##function to simulate y = x^2 + eps
+get.sim.data <- function(samp.size, sigma)
+  
+{
+  
+  x<-runif(n=samp.size) ##note that there are no assumptions made about x so can simulate from any distribution
+  eps<-rnorm(n=samp.size, sd=sigma)
+  y<-x^2 + eps ##since f(x) = 2x^2
+  
+  data.frame(x,y) ##return a dataframe with x and y
+}
+```
+
+Note that in a linear regression setting, there are no assumptions made about the predictor, so we are free to simulate the predictor from any distribution. We need to be sure to specify $y = f(x) + \epsilon$ where the errors are i.i.d. Normal with mean 0 and some fixed value for its variance, which we set to be 1. 
+
+We consider fitting a few different fitted lines for our simulated data:
+
+1. Fitted line 1: $\hat{y} = \hat{\beta}_0,$ so $\hat{f}(x) = \hat{\beta}_0$.
+2. Fitted line 2: $\hat{y} = \hat{\beta}_0 + \hat{\beta}_1 x,$ so $\hat{f}(x) = \hat{\beta}_0 + \hat{\beta}_1 x$.
+3. Fitted line 3: $\hat{y} = \hat{\beta}_0 + \hat{\beta}_1 x + \hat{\beta}_2 x^2,$ so $\hat{f}(x) = \hat{\beta}_0 + \hat{\beta}_1 x + \hat{\beta}_2 x^2$.
+4. Fitted line 4: $\hat{y} = \hat{\beta}_0 + \hat{\beta}_1 x + \cdots + \hat{\beta}_9 x^9,$ so $\hat{f}(x) = \hat{\beta}_0 + \hat{\beta}_1 x + \cdots + \hat{\beta}_9 x^9$.
+
+We simulate 1 replicate of 1000 observations, and then fit the four models. 
+
+```{r}
+set.seed(11)
+
+n <- 1000
+
+Data.sim<-get.sim.data(n,1)
+
+fit1 <- lm(y ~ 1,                   data = Data.sim)
+fit2 <- lm(y ~ x,                   data = Data.sim)
+fit3 <- lm(y ~ poly(x, degree = 2), data = Data.sim)
+fit4 <- lm(y ~ poly(x, degree = 9), data = Data.sim)
+```
+
+In Figure \@ref(fig:10-sims1), we create a scatter plot of this simulated data, and overlay lines to represent the four fitted lines (in blue, red, green, orange). We also overlay a curve to represent the true relationship between the variables, in black. 
+
+```{r 10-sims1, fig.cap='Four Polynomial Models Fitted to a Simulated Dataset', echo=FALSE}
+plot(y ~ x, data = Data.sim, col = "grey", pch = 20,
+     main = "Four Polynomial Models Fitted to a Simulated Dataset", ylim=c(-0.5,2))
+grid <- seq(from = 0, to = 1, by = 0.01)
+lines(grid, grid^2, col = "black", lwd = 3)
+lines(grid, predict(fit1, newdata = data.frame(x = grid)), col = "blue",  lwd = 2, lty = 2)
+lines(grid, predict(fit2, newdata = data.frame(x = grid)), col = "red",   lwd = 2, lty = 3)
+lines(grid, predict(fit3, newdata = data.frame(x = grid)), col = "green", lwd = 2, lty = 4)
+lines(grid, predict(fit4, newdata = data.frame(x = grid)), col = "orange",  lwd = 2, lty = 5)
+
+legend("topleft", 
+       c("line 1", "line 2", "line 3",  "line 4", "truth"), 
+       col = c("blue", "red", "green", "orange", "black"), lty = c(2, 3, 4, 5, 1), lwd = 2)
+```
+
+From Figure \@ref(fig:10-sims1), we make the following comments:
+
+- Fitted line 1, in blue, generally deviates far from the truth (in black).
+- Fitted line 2, in red, is closer to the truth, but there are portions where it does not match the truth.
+- Fitted line 3, in green, appears to be best in that it matches the closest to the truth, generally.
+- Fitted line 4, in orange, does not quite match the true, especially at the extreme ends of the x-axis.
+
+Of course, these comments are based on 1 simulated dataset, but if we were to create many replicates of the dataset and create a similar scatter plot, we would expect to see similar characteristics. 
+
+To illustrate the idea behind the bias and variance of predictions, we simulate 3 replicates datasets, each of size 1000, and show fitted lines 1 and 4 on each replicate in Figure \@ref(fig:10-sims3). Let us remind ourselves of what was written earlier about the bias variance tradeoff and the complexity of models:
+
+- Fitted line 1 is too simple, so we expect a high degree of bias and a low degree of variance.
+- Fitted line 2 is also simple, so we expect some bias, and a higher degree of variance.
+- Fitted line 3 should be optimal, since its $\hat{f}(x)$ takes the correct form, so we expect bias to be theoretically 0, and a even higher degree of variance. 
+- Fitted line 4 is too complex, so we expect its bias to be theoretically 0, but it will have the highest degree of variance. 
+
+```{r 10-sims3, fig.cap='Fitted Lines 1 & 4 on Three Different Simulated Datasets', echo=FALSE}
+par(mfrow = c(1, 3))
+
+set.seed(77)
+Data.sim1 <- get.sim.data(n,1)
+Data.sim2 <- get.sim.data(n,1)
+Data.sim3 <- get.sim.data(n,1)
+fit_1_v1 <- lm(y ~ 1, data = Data.sim1)
+fit_1_v2 <- lm(y ~ 1, data = Data.sim2)
+fit_1_v3 <- lm(y ~ 1, data = Data.sim3)
+fit_4_v1 <- lm(y ~ poly(x, degree = 9), data = Data.sim1)
+fit_4_v2 <- lm(y ~ poly(x, degree = 9), data = Data.sim2)
+fit_4_v3 <- lm(y ~ poly(x, degree = 9), data = Data.sim3)
+
+plot(y ~ x, data = Data.sim1, col = "grey", pch = 20, main = "Simulated Dataset 1", xlim=c(0,1), ylim=c(min(Data.sim1$y, Data.sim2$y, Data.sim3$y), max(Data.sim1$y, Data.sim2$y, Data.sim3$y)))
+grid <- seq(from = 0, to = 2, by = 0.01)
+lines(grid, predict(fit_1_v1, newdata = data.frame(x = grid)), col = "blue", lwd = 2, lty = 2)
+lines(grid, predict(fit_4_v1, newdata = data.frame(x = grid)), col = "orange", lwd = 2, lty = 5)
+legend("topleft", c("y ~ 1", "y ~ poly(x, 9)"), col = c("blue", "orange"), lty = c(2, 5), lwd = 2)
+
+plot(y ~ x, data = Data.sim2, col = "grey", pch = 20, main = "Simulated Dataset 2", xlim=c(0,1), ylim=c(min(Data.sim1$y, Data.sim2$y, Data.sim3$y), max(Data.sim1$y, Data.sim2$y, Data.sim3$y)))
+grid <- seq(from = 0, to = 2, by = 0.01)
+lines(grid, predict(fit_1_v2, newdata = data.frame(x = grid)), col = "blue", lwd = 2, lty = 2)
+lines(grid, predict(fit_4_v2, newdata = data.frame(x = grid)), col = "orange", lwd = 2, lty = 5)
+legend("topleft", c("y ~ 1", "y ~ poly(x, 9)"), col = c("blue", "orange"), lty = c(2, 5), lwd = 2)
+
+plot(y ~ x, data = Data.sim3, col = "grey", pch = 20, main = "Simulated Dataset 3", xlim=c(0,1), ylim=c(min(Data.sim1$y, Data.sim2$y, Data.sim3$y), max(Data.sim1$y, Data.sim2$y, Data.sim3$y)))
+grid <- seq(from = 0, to = 2, by = 0.01)
+lines(grid, predict(fit_1_v3, newdata = data.frame(x = grid)), col = "blue", lwd = 2, lty = 2)
+lines(grid, predict(fit_4_v3, newdata = data.frame(x = grid)), col = "orange", lwd = 2, lty = 5)
+legend("topleft", c("y ~ 1", "y ~ poly(x, 9)"), col = c("blue", "orange"), lty = c(2, 5), lwd = 2)
+```
+
+For fitted line 1:
+
+- We see that the the blue line always does a poor job capturing the truth in the data, therefore, it will have high bias as it will systematically over- or under-predict.
+- However, the blue lines are all pretty similar across all three simulated datasets. Therefore, it has low variance as the line is pretty much the same. 
+
+For fitted line 4:
+
+- We see that the orange lines are very different across all three simulated datasets. Therefore, it has high variance.
+- Fitted line 4 will be, on average, theoretically unbiased. However, being an unbiased but highly variable fitted line is can be problematic, since we only observe one dataset in real life, so we cannot average the predictions over many datasets. This is why we also want fitted lines with low variance. 
+
+We now carry out the Monte Carlo simulations, over 1000 replicates. Ideally, the number of replicates should be more, but this simulation takes some time to run (fitting high degree polynomials is computationally expenseive). We will use these 1000 replicates to compute the MSE, bias, and variance of the four fitted lines, evaluated at the point $x=0.1$. The simulation would do the following:
+
+- Simulate 1 dataset of 1000 observations.
+- Fitted fitted lines 1 to 4 on the dataset.
+- Compute the predicted value $\hat{y}$ when $x=0.9$ based on each of the four fitted lines, and record these values.
+- Repeat these steps for over 1000 replicates.
+
+```{r, echo=FALSE}
+reps <- 1000 ##should be bigger but this takes a long time to run
+num.models <- 4 ##we are considering 4 models
+x0 <- data.frame(x = 0.1) ##fix x=0.5. We need to fix value to verify bias variance tradeoff
+yhats <- data.frame(0, c(reps, num.models)) ##store yhat for each rep and each model
+
+set.seed(4)
+
+start_time <- Sys.time() ##start time of loop
+
+for (i in 1:reps)
+  
+{
+  
+  ##simulate data
+  Data.sim<-get.sim.data(n,1)
+  
+  ##fitted lines 1, 2, 3, 4
+  fit1 <- lm(y ~ 1,                   data = Data.sim)
+  fit2 <- lm(y ~ x,                   data = Data.sim)
+  fit3 <- lm(y ~ poly(x, degree = 2), data = Data.sim)
+  fit4 <- lm(y ~ poly(x, degree = 9), data = Data.sim)
+  
+  ##predict yhat, when x0 = 0.5, using each of the fitted lines
+  yhats[i, 1] = predict(fit1, x0)
+  yhats[i, 2] = predict(fit2, x0)
+  yhats[i, 3] = predict(fit3, x0)
+  yhats[i, 4] = predict(fit4, x0)
+  
+}
+```
+
+Let's take a look at the distributions of $\hat{y}$s for each fitted line, in Figure \@ref(fig:10-simsboxplot). 
+
+```{r 10-simsboxplot, fig.cap='Box Plots of Predictions for Four Fitted Lines', echo=FALSE}
+yhats.df <- data.frame(line1=yhats[,1], line2=yhats[,2], line3=yhats[,3], line4=yhats[,4])
+
+library(tidyverse)
+data.tidy <- yhats.df %>% pivot_longer(cols = c('line1', 'line2', 'line3', 'line4'),
+                                         names_to = 'line',
+                                         values_to = 'yhats')
+
+true.y <- as.numeric(x0)^2
+
+boxplot(yhats~line, data=data.tidy, main="Distribution of Predictions for each Fitted Line", xlab="", ylab="Predictions")
+abline(h=true.y, col="blue")
+```
+
+The blue horizontal line represents the true value of $y$ when $x=0.1$. Let $y_0$ denote this value, i.e. $y_0 = f(0.1) = 0.1^2$. Figure \@ref(fig:10-simsboxplot) pretty much matches with what we expected:
+
+- The variance, or spread, of $\hat{y}$s is higher as the model gets more complex.
+- Fitted lines 1 and 2 are bias, since the middle of their boxplots are far away from the blue line, but fitted lines 3 and 4 are unbiased, since the middle of their boxplots matches with the blue line. 
+
+We then evaluate the test MSE, bias, and variance of $hat{y}$ from each fitted line:
+
+- MSE: the average squared difference between $\hat{y}$ and $y_0$.
+- Bias: the average difference between $\hat{y}$ and $y_0$.
+- Variance: the sample variance of $\hat{y}$.
+
+```{r 10-table, echo=FALSE}
+get.MSE <- function(predictions, true.val)
+  
+{
+  
+  mean((predictions-true.val)^2)
+  
+}
+
+get.bias <- function(predictions, true.val)
+  
+{
+  
+  mean(predictions-true.val)
+  
+}
+
+
+
+MSEs <- apply(yhats.df, 2, get.MSE, true.val = true.y)
+bias <- apply(yhats.df, 2, get.bias, true.val = true.y)
+variance <- apply(yhats.df, 2, var)
+
+# Define your table data
+my_data <- data.frame(
+  degree = c(0, 1, 2, 3),
+  MSE = c(MSEs[1], MSEs[2], MSEs[3], MSEs[4]),
+  Squared.Bias = c(bias[1]^2, bias[2]^2, bias[3]^2, bias[4]^2),
+  Variance = c(variance[1], variance[2], variance[3], variance[4])
+)
+
+# Create the table using kable
+knitr::kable(my_data, caption = "Metrics for Four Fitted Lines")
+```
+
+The results in Table \@ref(tab:10-table) pretty much match with our expectations:
+
+- The variance of the predictions increase as the model gets more complicated (higher degree).
+- The bias of the predictions pretty much works in the opposite direction: it decreases as the model gets more complicated.
+- The test MSE is smallest for fitted line 3, as its form of $\hat{f}(x)$ matches the true $f(x)$. So we see the optimal model balances the bias-variance tradeoff. 
+
+
