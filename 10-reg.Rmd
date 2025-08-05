@@ -6,7 +6,7 @@ rm(list = ls())
 
 ## Introduction
 
-There is a broad range of statistical methods available for us to learn about data. Broadly speaking, these methods can be classified as **supervised** and **unsupervised**. Supervised methods involve relating a response variable with predictors, whereas unsupervised methods do not make a distinction between response variables and predictors and instead want to find structure or patterns in the data. 
+There is a broad range of statistical methods available for us to learn about data. Broadly speaking, these methods can be classified as **supervised** and **unsupervised**. Supervised methods involve relating a response variable with predictors, whereas unsupervised methods do not make a distinction between response variables and predictors and are used to find structure or patterns in the data. 
 
 Supervised methods generally have two primary uses:
 
@@ -39,7 +39,7 @@ Why do we learn about linear regression?
 
 - Linear regression is fairly easy to interpret and explain to others who may want to know how the method works. Other methods are generally more complicated and can feel like a black-box when explaining to others, leading to less confidence in the method. 
 
-- A lot of the ideas used in other methods can be viewed as an extension or a variation of linear regression. Once you understand how linear regression works, it becomes easier to understand how other methods work. 
+- A lot of the ideas used in other methods can be viewed as extensions or variations of linear regression. Once you understand how linear regression works, it becomes easier to understand how other methods work. 
 
 ### Toy Example
 
@@ -97,7 +97,7 @@ These questions can be answered using linear regression.
 
 ## Simple Linear Regression {#SLR}
 
-In this module, we will keep things simple by only considering a single quantitative predictor. Such a regression is called **simple linear regression (SLR)** to emphasize that only one predictor is being considered. We will briefly touch on multiple linear regression (MLR) when multiple predictors are involved later in this module, and you will learn more about linear regression next semester. 
+For most of this module, we will keep things simple by only considering a single quantitative predictor. Such a regression is called **simple linear regression (SLR)** to emphasize that only one predictor is being considered. We will briefly touch on multiple linear regression (MLR) when multiple predictors are involved later in this module, and you will learn more about linear regression next semester. 
 
 ### Model Setup
 
@@ -188,7 +188,7 @@ ggplot(x.5,aes(x=study))+
 
 Notice all of these plots are normal, with different means (centers), and similar spreads.
 
-The notation on the left hand side of \@ref(eq:10-SLR) denotes the **expected value** of the response variable, for a fixed value of the predictor variable. Therefore, the regression coefficients can be interpreted in the following manner:
+The notation on the left hand side of equation \@ref(eq:10-SLR) denotes the **expected value** of the response variable, for a fixed value of the predictor variable. Therefore, the regression coefficients can be interpreted in the following manner:
 
 - $\beta_1$ denotes the change in the response variable, on average, when the predictor increases by one unit.
 - $\beta_0$ denotes the mean of the response variable when the predictor is 0.
@@ -202,9 +202,11 @@ The assumptions for the error terms, $\epsilon$, expressed in equation \@ref(eq:
   - A scatter plot of the variables should show a linear relationship.
   - This is the most important assumption of the 4. If it is not met, predictions will be biased, in other words, predictions will systematically over- or under- predict the value of the response variable. 
 
-The plots in Figure \@ref(fig:10-ass1) are based on simulated data. The scatter plot shown in Figure \@ref(fig:10-ass1)(a) is an example of when this assumption is met. As we move from left to right on the plot, the data points are generally evenly scattered on both sides of the regression line that is overlaid. 
+The plots in Figure \@ref(fig:10-ass1) are based on simulated data. 
 
-The scatter plot shown in Figure \@ref(fig:10-ass1)(b) is an example of when this assumption is not met. As we move from left to right on the plot in Figure \@ref(fig:10-ass1)(b), the data points are generally not evenly scattered on both sides of the regression line that is overlaid. The shape of the plots look more like a curve rather than a straight line.
+- The scatter plot shown in Figure \@ref(fig:10-ass1)(a) is an example of when this assumption is met. As we move from left to right on the plot, the data points are generally evenly scattered on both sides of the regression line that is overlaid. 
+
+- The scatter plot shown in Figure \@ref(fig:10-ass1)(b) is an example of when this assumption is not met. As we move from left to right on the plot in Figure \@ref(fig:10-ass1)(b), the data points are generally not evenly scattered on both sides of the regression line that is overlaid. The shape of the plots look more like a curve rather than a straight line.
 
 ```{r 10-ass1, fig.cap='Assumption 1 Assessment', echo=FALSE, message=FALSE}
 knitr::include_graphics("images/10-ass1.jpg")
@@ -214,9 +216,11 @@ knitr::include_graphics("images/10-ass1.jpg")
   - This implies that in a scatter plot, the vertical variation of data points around the regression equation has the same magnitude everywhere.
   - If this assumption is not met, hypothesis tests and confidence intervals from the linear regression will be unreliable. 
   
-The plots in Figure \@ref(fig:10-ass2) are based on simulated data. The scatter plot shown in Figure \@ref(fig:10-ass2)(a) is an example of when this assumption is met (this figure is actually the same as Figure \@ref(fig:10-ass1)(a), so the data that produced these plots satisfy both assumptions). As we move from left to right on the plot, the vertical variation of the data points about the regression line is approximately constant. 
+The plots in Figure \@ref(fig:10-ass2) are based on simulated data. 
 
-The scatter plot shown in Figure \@ref(fig:10-ass2)(b) is an example of when this assumption is not met. As we move from left to right on the plot in Figure \@ref(fig:10-ass2)(b), the vertical variation of the data points about the regression line becomes larger as the value of the response variable gets larger, so the variance is not constant.
+- The scatter plot shown in Figure \@ref(fig:10-ass2)(a) is an example of when this assumption is met (this figure is actually the same as Figure \@ref(fig:10-ass1)(a), so the data that produced these plots satisfy both assumptions). As we move from left to right on the plot, the vertical variation of the data points about the regression line is approximately constant. 
+
+- The scatter plot shown in Figure \@ref(fig:10-ass2)(b) is an example of when this assumption is not met. As we move from left to right on the plot in Figure \@ref(fig:10-ass2)(b), the vertical variation of the data points about the regression line becomes larger as the value of the response variable gets larger, so the variance is not constant.
 
 ```{r 10-ass2, fig.cap='Assumption 2 Assessment', echo=FALSE, message=FALSE}
 knitr::include_graphics("images/10-ass2.jpg")
@@ -227,21 +231,23 @@ knitr::include_graphics("images/10-ass2.jpg")
   - If this assumption is not met, hypothesis tests and confidence intervals from the linear regression will be unreliable. 
 
 4. The errors are normally distributed.
-  - This is considered the least important of the 4 assumptions, especially with large sample sizes. This is due to the Central Limit Theorem, and that in linear regression, we write the conditional expectation (or mean) of the response variable to be equal to $f(x) = \beta_0 + \beta_1 x$, so hypothesis tests and confidence intervals from the linear regression are likely to be reliable. 
+  - This is considered the least important of the 4 assumptions, especially with large sample sizes. This is due to the Central Limit Theorem. In linear regression, we write the conditional expectation (or mean) of the response variable to be equal to $f(x) = \beta_0 + \beta_1 x$, so hypothesis tests and confidence intervals from the linear regression are likely to be reliable. 
 
 *Thought question*: Look at the scatter plot of the toy example in Figure \@ref(fig:10-scatter). Can you explain why this scatter plot shows the first two assumptions are met for linear regression?
 
+View the video below for more explanation on how to assess assumptions 1 and 2 with a scatter plot of the data:
+
 ## Estimating Regression Coefficients {#estSLR}
 
-There are two methods in estimating the regression coefficients: the method of least squares and the method of maximum likelihood. For large sample sizes, these methods give similar results.
+There are two methods in estimating the regression coefficients: the method of **least squares** and the method of **maximum likelihood**. For large sample sizes, these methods give similar results.
 
 We will go over the method of least squares first, since this is the method that is usually used to explain to new learners and is conceptually easier to understand. 
 
 ### Method of Least Squares
 
-From \@ref(eq:10-SLR) and \@ref(eq:10-SLRmod), we noted that we have to estimate the regression coefficients $\beta_0, \beta_1$. We are unable to obtain numerical values of these parameters as we do not have data from the entire population. So what we do is use the data from our sample to estimate these parameters. We estimate $\beta_0,\beta_1$ using $\hat{\beta}_0,\hat{\beta}_1$ based on a sample of observations $(x_i,y_i)$ of size $n$.
+From equations \@ref(eq:10-SLR) and \@ref(eq:10-SLRmod), we notice that we have to estimate the regression coefficients $\beta_0, \beta_1$. We are unable to obtain numerical values of these parameters as we do not have data from the entire population. So what we do is use the data from our sample to estimate these parameters. We estimate $\beta_0,\beta_1$ using $\hat{\beta}_0,\hat{\beta}_1$ based on a sample of observations $(x_i,y_i)$ of size $n$.
 
-Following \@ref(eq:10-SLR) and \@ref(eq:10-SLRmod), the sample versions are
+Following equations \@ref(eq:10-SLR) and \@ref(eq:10-SLRmod), the sample versions are
 
 \begin{equation} 
 \hat{y}=\hat{\beta}_0+\hat{\beta}_1 x
@@ -255,21 +261,21 @@ y=\hat{\beta}_0+\hat{\beta}_1 x + e
 (\#eq:10-fitted-model)
 \end{equation}
 
-respectively. \@ref(eq:10-fitted) is called the **fitted line**. The line that was overlaid in the scatter plot for the toy example in Figure \@ref(fig:10-scatter) represents the fitted line. \@ref(eq:10-fitted-model) is called the **estimated SLR model**.
+respectively. Eqaution \@ref(eq:10-fitted) is called the **fitted line**. The line that was overlaid in the scatter plot for the toy example in Figure \@ref(fig:10-scatter) represents the fitted line. Equation \@ref(eq:10-fitted-model) is called the **estimated SLR model**.
 
 $\hat{\beta}_1,\hat{\beta}_0$ are the estimators for $\beta_1,\beta_0$ respectively. These estimators can be interpreted in the following manner:
 
 - $\hat{\beta}_1$ denotes the change in the predicted $y$ when $x$ increases by 1 unit. Alternatively, it estimates the change in $y$, on average, when $x$ increases by 1 unit.
 - $\hat{\beta}_0$ denotes the predicted $y$ when $x=0$. Alternatively, it estimates the average of $y$ when $x=0$.
 
-From \@ref(eq:10-fitted-model), notice we use $e$ to denote the **residual**, or in other words, the "error" in the sample. 
+In equation \@ref(eq:10-fitted-model), notice we use $e$ to denote the **residual**, or in other words, the "error" in the sample. 
 
-From \@ref(eq:10-fitted) and \@ref(eq:10-fitted-model), we have the following quantities that we can compute:
+From equations \@ref(eq:10-fitted) and \@ref(eq:10-fitted-model), we have the following quantities that we can compute:
 
 - Fitted values or predicted values:
 
 \begin{equation}
-\hat{y}_i = \hat{\beta}_0+\hat{\beta}_1 x_i.
+\hat{y} = \hat{\beta}_0+\hat{\beta}_1 x.
 (\#eq:10-fits)
 \end{equation}
 
@@ -288,14 +294,14 @@ The **residuals** are the differences between the actual values of the response 
 knitr::include_graphics("images/10-residuals.png")
 ```
 
-- Sum of Squared Errors:
+- **Sum of Squared Residuals**:
 
 \begin{equation} 
 SS_{res} =  \sum\limits_{i=1}^n(y_i-\hat{y}_i)^2.
 (\#eq:10-SSres)
 \end{equation}
 
-We compute the estimated coefficients $\hat{\beta}_1,\hat{\beta}_0$ using the **method of least squares**, i.e. choose the numerical values of $\hat{\beta}_1,\hat{\beta}_0$ that minimize $SS_{res}$ as given in \@ref(eq:10-SSres). We find the line which minimizes the sum of all the squared residuals on the scatter plot, hence the name method of least squares.
+We compute the estimated coefficients $\hat{\beta}_1,\hat{\beta}_0$ using the **method of least squares**, i.e. choose the numerical values of $\hat{\beta}_1,\hat{\beta}_0$ that minimize $SS_{res}$ as given in equation \@ref(eq:10-SSres). We find the line which minimizes the sum of all the squared residuals on the scatter plot, hence the name method of least squares.
 
 By minimizing $SS_{res}$ with respect to $\hat{\beta}_0$ and $\hat{\beta}_1$, the estimated coefficients in the simple linear regression equation are
 
@@ -315,6 +321,8 @@ $\hat{\beta}_1, \hat{\beta}_0$ are called **least squares estimators**, to empha
 
 The minimization of $SS_{res}$ with respect to $\hat{\beta}_0$ and $\hat{\beta}_1$ is done by taking the partial derivatives of \@ref(eq:10-SSres) with respect to $\hat{\beta}_1$ and $\hat{\beta}_0$, setting these two partial derivatives equal to 0, and solving these two equations for $\hat{\beta}_1$ and $\hat{\beta}_0$.
 
+View the video below for more explanation on the method of least squares:
+
 Let's take a look at the estimated coefficients for our study time example:
 
 ```{r}
@@ -331,7 +339,7 @@ From our sample of 6000 students, we have
 
 *Thought question*: The response variable for the toy example is study time, in minutes. Suppose we convert these values to hours by dividing by 60. How will the numerical value of the estimated coefficients change? How will the interpretation of the estimated coefficients change?
 
-Note: I often get a question about why we minimize $SS_{res}$ and not some other quantity such as minimizing the sum of the absolute value of the residuals $\sum_{i=1}^n |y_i - \hat{y}_i|$? We will state a famous theorem here without proving it. **Gauss Markov Theorem**: Under assumptions for a regression model (as stated in \@ref(eq:10-assumptions)), the least squares estimators $\hat{\beta}_1$ and $\hat{\beta}_0$ are unbiased and have minimum variance among all unbiased linear estimators. This means that any other way of deriving unbiased estimators will result in the estimators having larger variance than least squares estimators. 
+Note: I often get a question about why we minimize $SS_{res}$ and not some other quantity such as minimizing the sum of the absolute value of the residuals $\sum_{i=1}^n |y_i - \hat{y}_i|$? We will state a famous theorem here without proving it. **Gauss Markov Theorem**: Under assumptions for a regression model (as stated in equation \@ref(eq:10-assumptions)), the least squares estimators $\hat{\beta}_1$ and $\hat{\beta}_0$ are unbiased and have minimum variance among all unbiased linear estimators. This means that any other way of deriving unbiased estimators will result in the estimators having larger variance than least squares estimators. 
 
 ### Method of Maximum Likelihood
 
@@ -349,7 +357,9 @@ We can then write the corresponding log-likelihood function, using equation \@re
 (\#eq:10-SLRloglike)
 \end{equation}
 
-We then take the partial derivatives of \@ref(eq:10-SLRloglike) with respect to $\hat{\beta}_1$ and $\hat{\beta}_0$, setting these two partial derivatives equal to 0, and solving these two equations for $\hat{\beta}_1$ and $\hat{\beta}_0$. We end up with the same solutions as the method of least squares. 
+We then take the partial derivatives of equation \@ref(eq:10-SLRloglike) with respect to $\hat{\beta}_1$ and $\hat{\beta}_0$, set these two partial derivatives equal to 0, and solve these two equations for $\hat{\beta}_1$ and $\hat{\beta}_0$. We end up with the same solutions as the method of least squares.
+
+The code below finds the estiamted coeffficients for our study time example. The `glm()` function fits via method of maximum likelihood, whereas the `lm()` function from earlier fits via the method of least squares.
 
 ```{r}
 ##fit regression
@@ -388,7 +398,7 @@ Before proceeding, we will state a few properties associated with the least squa
 
 4. $\hat{\beta}_1$ and $\hat{\beta}_0$ both follow a normal distribution.
 
-Note that in \@ref(eq:10-varb1) and \@ref(eq:10-varb0), we use $s^2 = \frac{SS_{res}}{n-2} = MS_{res}$ to estimate $\sigma^2$ since $\sigma^2$ is a unknown value.
+Note that in equations \@ref(eq:10-varb1) and \@ref(eq:10-varb0), we use $s^2 = \frac{SS_{res}}{n-2} = MS_{res}$ to estimate $\sigma^2$, the variance of the errors, since $\sigma^2$ is a unknown value.
 
 What these imply is that if we standardize $\hat{\beta}_1$ and $\hat{\beta}_0$, these standardized quantities will follow a $t_{n-2}$ distribution, i.e.
 
@@ -418,7 +428,7 @@ se(\hat{\beta}_0) = \sqrt{MS_{res}\left[\frac{1}{n} + \frac{\bar{x}^2}{\sum_{i=1
 (\#eq:10-seb0)
 \end{equation}
 
-Note: The standardized quantities in equations \@ref(eq:10-distb1) and \@ref(eq:10-distb0) follow $t_{n-2}$ distribution. As mentioned in Section \@ref(df), we lose 1 degree of freedom for every equation that must be satisfied. In SLR, we have 2 equations, equations \@ref(eq:10-b1) and \@ref(eq:10-b0), that must be satisfied when calculating the least squares estimators, therefore we have $n-2$ degrees of freedom. 
+Note: The standardized quantities in equations \@ref(eq:10-distb1) and \@ref(eq:10-distb0) follow a $t_{n-2}$ distribution. As mentioned in Section \@ref(df), we lose 1 degree of freedom for every equation that must be satisfied. In SLR, we have 2 equations, equations \@ref(eq:10-b1) and \@ref(eq:10-b0), that must be satisfied when calculating the least squares estimators, therefore we have $n-2$ degrees of freedom. 
 
 ### Confidence Interval
 
@@ -457,7 +467,7 @@ In equation \@ref(eq:10-distb1), we noted that the standardized $\hat{\beta}_1$ 
 The test statistic is
 
 \begin{equation} 
-t = \frac{\hat{\beta}_1 - \text{ value in null}}{se(\hat{\beta}_1)}.
+t = \frac{\hat{\beta}_1 - \text{ value in } H_0}{se(\hat{\beta}_1)}.
 (\#eq:10-testslope)
 \end{equation}
 
@@ -468,7 +478,7 @@ We go back to the study time example:
 ```{r}
 summary(result)$coefficients ##print out est coeffs, SEs, t statistics, and p-vals
 ```
-From R, the reported t-statistic and p-value are 255.74125 and approximately 0 respectively. So we reject the null hypothesis: our data support the claim that there is a linear relationship between study time and number of courses taken. 
+From R, the reported t-statistic and p-value for the hypothesis test of the slope are 255.74125 and approximately 0 respectively. So we reject the null hypothesis: our data support the claim that there is a linear relationship between study time and number of courses taken. Note that R also reports these quantities for the hypothesis test for the intercept, although that is a test that is rarely used as it has less practical implications. 
 
 Note: The reported values are based on a two-sided alternative hypothesis and a null hypothesis of $H_0: \beta_1 = 0$. If we have different hypotheses we will have to perform these calculations on our own. 
 
@@ -640,6 +650,8 @@ cor(Data$family_income,Data$gift_aid)
 
 The correlation is `r cor(Data$family_income,Data$gift_aid)`. We have a moderate, negative linear association between family income and gift aid. 
 
+View the video below if you need a little more explanation on using R for linear regression:
+
 ## Assessing Model Accuracy {#SLRacc}
 
 In the introduction of this module, we wrote that supervised methods such as linear regression have two primary uses:
@@ -669,7 +681,7 @@ We will introduce some common metrics that measure model accuracy. As we are tal
 
 #### Mean-Squared Error
 
-The **mean-squared error (MSE)** is a commonly used metric to assess model accuracy. The MSE is
+The **mean-squared error (MSE)** is a commonly used metric to assess model accuracy. The MSE of predictions is
 
 \begin{equation} 
 MSE(\hat{y}) = \frac{\sum_{i=1}^n (y_i - \hat{y}_i)^2}{n}.
@@ -687,7 +699,7 @@ MSE(\hat{y}) = Var(\hat{y}) + Bias(\hat{y})^2.
 (\#eq:10-MSEdecomp)
 \end{equation}
 
-So the MSE can be decomposed into the variance of the predicted values and the squared bias of the predicted values. In a linear regression setting, the bias will be theoretically 0 if we find the correct form of $f(X)$ to relate the response variable with the predictors.
+So the MSE can be decomposed into the variance of the predicted values and the squared bias of the predicted values. In a linear regression setting, the bias will be theoretically 0 if we find the correct form of $f(x)$ to relate the response variable with the predictors.
 
 #### Root Mean-Squared Error
 
@@ -715,7 +727,7 @@ The unit of MAD is the same as the response variable, and it can be interpreted 
 
 #### Additional Comments about MSE, RMSE, MAD
 
-In the rest of this module, we will be focusing on the MSE and RMSE, as certain properties for them have been proven mathematically.
+In the rest of this module, we will be focusing on the MSE and RMSE, as certain properties for them have been proven mathematically. We will discuss these properties next. 
 
 ### Model Complexity
 
@@ -723,7 +735,8 @@ Thus far, we have only considered simple linear regression, i.e. only one predic
 
 - incorporating additional predictors (that are useful), or
 - considering polynomials for the predictor (if the relationship between the response variable and predictor is not linear), or
-- adding interactions between predictors.
+- adding interactions between predictors, or
+- using any combination of these steps.
 
 With additional predictors, the linear regression model is  written as
 
@@ -741,7 +754,7 @@ y=\beta_0+\beta_{1}x + \beta_2 x^2 + \cdots + \beta_k x^k + \epsilon,
 (\#eq:10-polymod)
 \end{equation} 
 
-if we consider a $k$-degree polynomial for $f(x)$ to approximate the relationship between the response variable and the predictor. Notice the linear regression model gets more complex when we add more predictors, or higher degree polynomials. 
+if we consider a $k$-degree polynomial for $f(x)$ to approximate the relationship between the response variable and the predictor.
 
 **Interactions between predictors** occur when the effect of one predictor on the response variable depends on the value of another predictor. Consider predicting recovery rates of patients, based on amount of medication administered and age of the patient. Perhaps higher doses of the medication speeds recovery, but only for young patients. However, the medication may not work at all for old patients. The effect of medication on recovery depends on the age of a patient, so there is an interaction between amount of medicine administered and age of patient. In this scenario, the linear regression model can be written as
 
@@ -752,7 +765,7 @@ y=\beta_0+\beta_{1}x_1 + \beta_2 x_2 + \beta_3 x_1 x_2 + \epsilon,
 
 where the term $x_1 x_2$ represents that we are considering an interaction between the predictors.
 
-It is also possible for a linear regression model to have multiple predictors, higher order polynomials, and interactions. For example, y=\beta_0+\beta_{1}x_1 + \beta_2 x_2 + \beta_3 x_3 + \beta_4 x_3^2 + \beta_5 z_1 x_2 + \epsilon$.
+It is also possible for a linear regression model to have multiple predictors, higher order polynomials, and interactions. For example, $y=\beta_0+\beta_{1}x_1 + \beta_2 x_2 + \beta_3 x_3 + \beta_4 x_3^2 + \beta_5 z_1 x_2 + \epsilon$.
 
 For this class, we will only consider comparing the complexity of models that are **nested**. Two models are nested if one model can be derived from the other by setting some parameters of the more complex model to be equal to 0. As an example, the SLR model in equation \@ref(eq:10-SLRmod) is nested within the model in equation \@ref(eq:10-MLRmod), as we can get the SLR model by setting $\beta_2 = \beta_3 = \cdots = \beta_k = 0$ in equation \@ref(eq:10-MLRmod).
 
@@ -768,7 +781,7 @@ So there are many potential models to consider. Metrics involving model accuracy
 
 After reading the previous subsections, one may consider the following strategy when assessing model accuracy and choosing between several nested models: fit all models under consideration using all available data, then choose the model that the smallest MSE (or RMSE). 
 
-A property of the MSE and RMSE of nested models is that these values only decrease as the model gets more complex! We will not go through the whole proof of this, but intuitively, one can see why the more complex model will never do worse than the less complex model: this happens when the additional parameters are all 0. This property suggests that using this strategy will always end up selecting the most complex model, as the most complex model will always have the smallest MSE and RMSE. 
+While seemingly intuitive, this stragedy will not work. A property of the MSE and RMSE of nested models is that these values only decrease as the model gets more complex! We will not go through the whole proof of this, but intuitively, one can see why the more complex model will never do worse than the less complex model: this happens when the additional parameters are all 0. This property suggests that using this strategy will always end up selecting the most complex model, as the most complex model will always have the smallest MSE and RMSE. 
 
 Take a step back and remind ourselves what we actually want to do with prediction: after fitting the model, we want to be able to accurately predict the values of the response variable in the future. When we fit a model well based on the current data, the model may do poorly on new data. This is called **overfitting**. 
 
@@ -782,7 +795,7 @@ knitr::include_graphics("images/10-MSE.png")
 
 We make the following comments about Figure \@ref(fig:10-MSE):
 
-- The blue curve represents how the training MSE behaves as models get more complex. As models get more complex, the training MSE never decreases.
+- The blue curve represents how the training MSE behaves as models get more complex. As models get more complex, the training MSE never increases.
 - The black curve represents how the test MSE behaves as models get more complex. The test MSE is minimum when we find an appropriate level of complexity, and this is denoted by the red line. We call this model the optimal model. The test MSE increases as models get more complex, or less complex, than the optimal model. 
 - Overfitted models are models that are more complex than the optimal model.
   - Overfitted models generally have low training MSE, and high test MSE. A large difference between these two is also indicative of overfitting.
@@ -827,6 +840,8 @@ We consider fitting a few different fitted lines for our simulated data:
 3. Fitted line 3: $\hat{y} = \hat{\beta}_0 + \hat{\beta}_1 x + \hat{\beta}_2 x^2,$ so $\hat{f}(x) = \hat{\beta}_0 + \hat{\beta}_1 x + \hat{\beta}_2 x^2$.
 4. Fitted line 4: $\hat{y} = \hat{\beta}_0 + \hat{\beta}_1 x + \cdots + \hat{\beta}_9 x^9,$ so $\hat{f}(x) = \hat{\beta}_0 + \hat{\beta}_1 x + \cdots + \hat{\beta}_9 x^9$.
 
+Because the true relationship is $y = f(x) = x^2$, fitted lines 1 and 2 are not complex enough, fitted line 3 should be optimal, and fitted line 4 is too complex.
+
 We simulate 1 replicate of 1000 observations, and then fit the four models. 
 
 ```{r}
@@ -864,15 +879,13 @@ From Figure \@ref(fig:10-sims1), we make the following comments:
 - Fitted line 1, in blue, generally deviates far from the truth (in black).
 - Fitted line 2, in red, is closer to the truth, but there are portions where it does not match the truth.
 - Fitted line 3, in green, appears to be best in that it matches the closest to the truth, generally.
-- Fitted line 4, in orange, does not quite match the true, especially at the extreme ends of the x-axis.
+- Fitted line 4, in orange, does not quite match the truth, especially at the extreme ends of the x-axis.
 
 Of course, these comments are based on 1 simulated data set, but if we were to create many replicates of the data set and create a similar scatter plot, we would expect to see similar characteristics. 
 
 To illustrate the idea behind the bias and variance of predictions, we simulate 3 replicates data sets, each of size 1000, and show fitted lines 1 and 4 on each replicate in Figure \@ref(fig:10-sims3). Let us remind ourselves of what was written earlier about the bias variance tradeoff and the complexity of models:
 
 - Fitted line 1 is too simple, so we expect a high degree of bias and a low degree of variance.
-- Fitted line 2 is also simple, so we expect some bias, and a higher degree of variance.
-- Fitted line 3 should be optimal, since its $\hat{f}(x)$ takes the correct form, so we expect bias to be theoretically 0, and a even higher degree of variance. 
 - Fitted line 4 is too complex, so we expect its bias to be theoretically 0, but it will have the highest degree of variance. 
 
 ```{r 10-sims3, fig.cap='Fitted Lines 1 & 4 on Three Different Simulated Datasets', echo=FALSE}
@@ -923,7 +936,7 @@ We now carry out the Monte Carlo simulations, over 1000 replicates. Ideally, the
 - Simulate 1 data set of 1000 observations.
 - Fitted fitted lines 1 to 4 on the data set.
 - Compute the predicted value $\hat{y}$ when $x=0.9$ based on each of the four fitted lines, and record these values.
-- Repeat these steps for over 1000 replicates.
+- Repeat these steps over 1000 replicates.
 
 ```{r, echo=FALSE}
 reps <- 1000 ##should be bigger but this takes a long time to run
@@ -957,7 +970,7 @@ for (i in 1:reps)
 }
 ```
 
-Let's take a look at the distributions of $\hat{y}$s for each fitted line, in Figure \@ref(fig:10-simsboxplot). 
+Let's take a look at the distributions of $\hat{y}$s for each fitted line, as shown in Figure \@ref(fig:10-simsboxplot). 
 
 ```{r 10-simsboxplot, fig.cap='Box Plots of Predictions for Four Fitted Lines', echo=FALSE}
 yhats.df <- data.frame(line1=yhats[,1], line2=yhats[,2], line3=yhats[,3], line4=yhats[,4])
@@ -976,9 +989,9 @@ abline(h=true.y, col="blue")
 The blue horizontal line represents the true value of $y$ when $x=0.1$. Let $y_0$ denote this value, i.e. $y_0 = f(0.1) = 0.1^2$. Figure \@ref(fig:10-simsboxplot) pretty much matches with what we expected:
 
 - The variance, or spread, of $\hat{y}$s is higher as the model gets more complex.
-- Fitted lines 1 and 2 are bias, since the middle of their boxplots are far away from the blue line, but fitted lines 3 and 4 are unbiased, since the middle of their boxplots matches with the blue line. 
+- Fitted lines 1 and 2 are biased, since the middle of their boxplots are far away from the blue line, but fitted lines 3 and 4 are unbiased, since the middle of their boxplots matches with the blue line. 
 
-We then evaluate the test MSE, bias, and variance of $hat{y}$ from each fitted line:
+We then evaluate the test MSE, bias, and variance of $\hat{y}$ from each fitted line:
 
 - MSE: the average squared difference between $\hat{y}$ and $y_0$.
 - Bias: the average difference between $\hat{y}$ and $y_0$.
@@ -1022,7 +1035,7 @@ knitr::kable(my_data, caption = "Metrics for Four Fitted Lines")
 The results in Table \@ref(tab:10-table) pretty much match with our expectations:
 
 - The variance of the predictions increase as the model gets more complicated (higher degree).
-- The bias of the predictions pretty much works in the opposite direction: it decreases as the model gets more complicated.
+- The (squared) bias of the predictions pretty much works in the opposite direction: it decreases as the model gets more complicated. We used the squared bias since the bias could be positive or negative so we get rid of the sign this way. Also, we know that the MSE is equal to the variance plus squared bias. The bias for fitted lines 3 and 4 are theoretically 0. 
 - The test MSE is smallest for fitted line 3, as its form of $\hat{f}(x)$ matches the true $f(x)$. So we see the optimal model balances the bias-variance tradeoff. 
 
 

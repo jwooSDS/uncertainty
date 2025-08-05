@@ -68,7 +68,7 @@
 <h2>
 <span class="header-section-number">10.1</span> Introduction<a class="anchor" aria-label="anchor" href="#introduction-6"><i class="fas fa-link"></i></a>
 </h2>
-<p>There is a broad range of statistical methods available for us to learn about data. Broadly speaking, these methods can be classified as <strong>supervised</strong> and <strong>unsupervised</strong>. Supervised methods involve relating a response variable with predictors, whereas unsupervised methods do not make a distinction between response variables and predictors and instead want to find structure or patterns in the data.</p>
+<p>There is a broad range of statistical methods available for us to learn about data. Broadly speaking, these methods can be classified as <strong>supervised</strong> and <strong>unsupervised</strong>. Supervised methods involve relating a response variable with predictors, whereas unsupervised methods do not make a distinction between response variables and predictors and are used to find structure or patterns in the data.</p>
 <p>Supervised methods generally have two primary uses:</p>
 <ol style="list-style-type: decimal">
 <li>
@@ -95,7 +95,7 @@ y = f(x) + \epsilon,
 <ul>
 <li><p>Linear regression is widely used in many fields, and, under certain conditions, does well in the two primary purposes of supervised methods: association and prediction. Other methods may be better at one of these purposes, but usually at the expense of the other purpose. The most important thing is to know what questions you have in order to select the right method that is best for your question.</p></li>
 <li><p>Linear regression is fairly easy to interpret and explain to others who may want to know how the method works. Other methods are generally more complicated and can feel like a black-box when explaining to others, leading to less confidence in the method.</p></li>
-<li><p>A lot of the ideas used in other methods can be viewed as an extension or a variation of linear regression. Once you understand how linear regression works, it becomes easier to understand how other methods work.</p></li>
+<li><p>A lot of the ideas used in other methods can be viewed as extensions or variations of linear regression. Once you understand how linear regression works, it becomes easier to understand how other methods work.</p></li>
 </ul>
 </div>
 <div id="toy-example" class="section level3" number="10.1.2">
@@ -143,7 +143,7 @@ Figure 10.1: Scatterplot of Study Time against Number of Courses Taken
 <h2>
 <span class="header-section-number">10.2</span> Simple Linear Regression<a class="anchor" aria-label="anchor" href="#SLR"><i class="fas fa-link"></i></a>
 </h2>
-<p>In this module, we will keep things simple by only considering a single quantitative predictor. Such a regression is called <strong>simple linear regression (SLR)</strong> to emphasize that only one predictor is being considered. We will briefly touch on multiple linear regression (MLR) when multiple predictors are involved later in this module, and you will learn more about linear regression next semester.</p>
+<p>For most of this module, we will keep things simple by only considering a single quantitative predictor. Such a regression is called <strong>simple linear regression (SLR)</strong> to emphasize that only one predictor is being considered. We will briefly touch on multiple linear regression (MLR) when multiple predictors are involved later in this module, and you will learn more about linear regression next semester.</p>
 <div id="model-setup" class="section level3" number="10.2.1">
 <h3>
 <span class="header-section-number">10.2.1</span> Model Setup<a class="anchor" aria-label="anchor" href="#model-setup"><i class="fas fa-link"></i></a>
@@ -240,7 +240,7 @@ Figure 10.4: Distribution of Study Time for 3, 4, 5 Classes Taken
 </p>
 </div>
 <p>Notice all of these plots are normal, with different means (centers), and similar spreads.</p>
-<p>The notation on the left hand side of <a href="linear-regression.html#eq:10-SLR">(10.3)</a> denotes the <strong>expected value</strong> of the response variable, for a fixed value of the predictor variable. Therefore, the regression coefficients can be interpreted in the following manner:</p>
+<p>The notation on the left hand side of equation <a href="linear-regression.html#eq:10-SLR">(10.3)</a> denotes the <strong>expected value</strong> of the response variable, for a fixed value of the predictor variable. Therefore, the regression coefficients can be interpreted in the following manner:</p>
 <ul>
 <li>
 <span class="math inline">\(\beta_1\)</span> denotes the change in the response variable, on average, when the predictor increases by one unit.</li>
@@ -261,8 +261,11 @@ Figure 10.4: Distribution of Study Time for 3, 4, 5 Classes Taken
 <li>A scatter plot of the variables should show a linear relationship.</li>
 <li>This is the most important assumption of the 4. If it is not met, predictions will be biased, in other words, predictions will systematically over- or under- predict the value of the response variable.</li>
 </ul>
-<p>The plots in Figure <a href="linear-regression.html#fig:10-ass1">10.5</a> are based on simulated data. The scatter plot shown in Figure <a href="linear-regression.html#fig:10-ass1">10.5</a>(a) is an example of when this assumption is met. As we move from left to right on the plot, the data points are generally evenly scattered on both sides of the regression line that is overlaid.</p>
-<p>The scatter plot shown in Figure <a href="linear-regression.html#fig:10-ass1">10.5</a>(b) is an example of when this assumption is not met. As we move from left to right on the plot in Figure <a href="linear-regression.html#fig:10-ass1">10.5</a>(b), the data points are generally not evenly scattered on both sides of the regression line that is overlaid. The shape of the plots look more like a curve rather than a straight line.</p>
+<p>The plots in Figure <a href="linear-regression.html#fig:10-ass1">10.5</a> are based on simulated data.</p>
+<ul>
+<li><p>The scatter plot shown in Figure <a href="linear-regression.html#fig:10-ass1">10.5</a>(a) is an example of when this assumption is met. As we move from left to right on the plot, the data points are generally evenly scattered on both sides of the regression line that is overlaid.</p></li>
+<li><p>The scatter plot shown in Figure <a href="linear-regression.html#fig:10-ass1">10.5</a>(b) is an example of when this assumption is not met. As we move from left to right on the plot in Figure <a href="linear-regression.html#fig:10-ass1">10.5</a>(b), the data points are generally not evenly scattered on both sides of the regression line that is overlaid. The shape of the plots look more like a curve rather than a straight line.</p></li>
+</ul>
 <div class="figure">
 <span style="display:block;" id="fig:10-ass1"></span>
 <img src="images/10-ass1.jpg" alt="Assumption 1 Assessment"><p class="caption">
@@ -276,8 +279,11 @@ Figure 10.5: Assumption 1 Assessment
 <li>This implies that in a scatter plot, the vertical variation of data points around the regression equation has the same magnitude everywhere.</li>
 <li>If this assumption is not met, hypothesis tests and confidence intervals from the linear regression will be unreliable.</li>
 </ul>
-<p>The plots in Figure <a href="linear-regression.html#fig:10-ass2">10.6</a> are based on simulated data. The scatter plot shown in Figure <a href="linear-regression.html#fig:10-ass2">10.6</a>(a) is an example of when this assumption is met (this figure is actually the same as Figure <a href="linear-regression.html#fig:10-ass1">10.5</a>(a), so the data that produced these plots satisfy both assumptions). As we move from left to right on the plot, the vertical variation of the data points about the regression line is approximately constant.</p>
-<p>The scatter plot shown in Figure <a href="linear-regression.html#fig:10-ass2">10.6</a>(b) is an example of when this assumption is not met. As we move from left to right on the plot in Figure <a href="linear-regression.html#fig:10-ass2">10.6</a>(b), the vertical variation of the data points about the regression line becomes larger as the value of the response variable gets larger, so the variance is not constant.</p>
+<p>The plots in Figure <a href="linear-regression.html#fig:10-ass2">10.6</a> are based on simulated data.</p>
+<ul>
+<li><p>The scatter plot shown in Figure <a href="linear-regression.html#fig:10-ass2">10.6</a>(a) is an example of when this assumption is met (this figure is actually the same as Figure <a href="linear-regression.html#fig:10-ass1">10.5</a>(a), so the data that produced these plots satisfy both assumptions). As we move from left to right on the plot, the vertical variation of the data points about the regression line is approximately constant.</p></li>
+<li><p>The scatter plot shown in Figure <a href="linear-regression.html#fig:10-ass2">10.6</a>(b) is an example of when this assumption is not met. As we move from left to right on the plot in Figure <a href="linear-regression.html#fig:10-ass2">10.6</a>(b), the vertical variation of the data points about the regression line becomes larger as the value of the response variable gets larger, so the variance is not constant.</p></li>
+</ul>
 <div class="figure">
 <span style="display:block;" id="fig:10-ass2"></span>
 <img src="images/10-ass2.jpg" alt="Assumption 2 Assessment"><p class="caption">
@@ -295,23 +301,24 @@ Figure 10.6: Assumption 2 Assessment
 <li>The errors are normally distributed.</li>
 </ol>
 <ul>
-<li>This is considered the least important of the 4 assumptions, especially with large sample sizes. This is due to the Central Limit Theorem, and that in linear regression, we write the conditional expectation (or mean) of the response variable to be equal to <span class="math inline">\(f(x) = \beta_0 + \beta_1 x\)</span>, so hypothesis tests and confidence intervals from the linear regression are likely to be reliable.</li>
+<li>This is considered the least important of the 4 assumptions, especially with large sample sizes. This is due to the Central Limit Theorem. In linear regression, we write the conditional expectation (or mean) of the response variable to be equal to <span class="math inline">\(f(x) = \beta_0 + \beta_1 x\)</span>, so hypothesis tests and confidence intervals from the linear regression are likely to be reliable.</li>
 </ul>
 <p><em>Thought question</em>: Look at the scatter plot of the toy example in Figure <a href="linear-regression.html#fig:10-scatter">10.1</a>. Can you explain why this scatter plot shows the first two assumptions are met for linear regression?</p>
+<p>View the video below for more explanation on how to assess assumptions 1 and 2 with a scatter plot of the data:</p>
 </div>
 </div>
 <div id="estSLR" class="section level2" number="10.3">
 <h2>
 <span class="header-section-number">10.3</span> Estimating Regression Coefficients<a class="anchor" aria-label="anchor" href="#estSLR"><i class="fas fa-link"></i></a>
 </h2>
-<p>There are two methods in estimating the regression coefficients: the method of least squares and the method of maximum likelihood. For large sample sizes, these methods give similar results.</p>
+<p>There are two methods in estimating the regression coefficients: the method of <strong>least squares</strong> and the method of <strong>maximum likelihood</strong>. For large sample sizes, these methods give similar results.</p>
 <p>We will go over the method of least squares first, since this is the method that is usually used to explain to new learners and is conceptually easier to understand.</p>
 <div id="method-of-least-squares" class="section level3" number="10.3.1">
 <h3>
 <span class="header-section-number">10.3.1</span> Method of Least Squares<a class="anchor" aria-label="anchor" href="#method-of-least-squares"><i class="fas fa-link"></i></a>
 </h3>
-<p>From <a href="linear-regression.html#eq:10-SLR">(10.3)</a> and <a href="linear-regression.html#eq:10-SLRmod">(10.1)</a>, we noted that we have to estimate the regression coefficients <span class="math inline">\(\beta_0, \beta_1\)</span>. We are unable to obtain numerical values of these parameters as we do not have data from the entire population. So what we do is use the data from our sample to estimate these parameters. We estimate <span class="math inline">\(\beta_0,\beta_1\)</span> using <span class="math inline">\(\hat{\beta}_0,\hat{\beta}_1\)</span> based on a sample of observations <span class="math inline">\((x_i,y_i)\)</span> of size <span class="math inline">\(n\)</span>.</p>
-<p>Following <a href="linear-regression.html#eq:10-SLR">(10.3)</a> and <a href="linear-regression.html#eq:10-SLRmod">(10.1)</a>, the sample versions are</p>
+<p>From equations <a href="linear-regression.html#eq:10-SLR">(10.3)</a> and <a href="linear-regression.html#eq:10-SLRmod">(10.1)</a>, we notice that we have to estimate the regression coefficients <span class="math inline">\(\beta_0, \beta_1\)</span>. We are unable to obtain numerical values of these parameters as we do not have data from the entire population. So what we do is use the data from our sample to estimate these parameters. We estimate <span class="math inline">\(\beta_0,\beta_1\)</span> using <span class="math inline">\(\hat{\beta}_0,\hat{\beta}_1\)</span> based on a sample of observations <span class="math inline">\((x_i,y_i)\)</span> of size <span class="math inline">\(n\)</span>.</p>
+<p>Following equations <a href="linear-regression.html#eq:10-SLR">(10.3)</a> and <a href="linear-regression.html#eq:10-SLRmod">(10.1)</a>, the sample versions are</p>
 <p><span class="math display" id="eq:10-fitted">\[\begin{equation}
 \hat{y}=\hat{\beta}_0+\hat{\beta}_1 x
 \tag{10.4}
@@ -321,7 +328,7 @@ Figure 10.6: Assumption 2 Assessment
 y=\hat{\beta}_0+\hat{\beta}_1 x + e
 \tag{10.5}
 \end{equation}\]</span></p>
-<p>respectively. <a href="linear-regression.html#eq:10-fitted">(10.4)</a> is called the <strong>fitted line</strong>. The line that was overlaid in the scatter plot for the toy example in Figure <a href="linear-regression.html#fig:10-scatter">10.1</a> represents the fitted line. <a href="linear-regression.html#eq:10-fitted-model">(10.5)</a> is called the <strong>estimated SLR model</strong>.</p>
+<p>respectively. Eqaution <a href="linear-regression.html#eq:10-fitted">(10.4)</a> is called the <strong>fitted line</strong>. The line that was overlaid in the scatter plot for the toy example in Figure <a href="linear-regression.html#fig:10-scatter">10.1</a> represents the fitted line. Equation <a href="linear-regression.html#eq:10-fitted-model">(10.5)</a> is called the <strong>estimated SLR model</strong>.</p>
 <p><span class="math inline">\(\hat{\beta}_1,\hat{\beta}_0\)</span> are the estimators for <span class="math inline">\(\beta_1,\beta_0\)</span> respectively. These estimators can be interpreted in the following manner:</p>
 <ul>
 <li>
@@ -329,13 +336,13 @@ y=\hat{\beta}_0+\hat{\beta}_1 x + e
 <li>
 <span class="math inline">\(\hat{\beta}_0\)</span> denotes the predicted <span class="math inline">\(y\)</span> when <span class="math inline">\(x=0\)</span>. Alternatively, it estimates the average of <span class="math inline">\(y\)</span> when <span class="math inline">\(x=0\)</span>.</li>
 </ul>
-<p>From <a href="linear-regression.html#eq:10-fitted-model">(10.5)</a>, notice we use <span class="math inline">\(e\)</span> to denote the <strong>residual</strong>, or in other words, the “error” in the sample.</p>
-<p>From <a href="linear-regression.html#eq:10-fitted">(10.4)</a> and <a href="linear-regression.html#eq:10-fitted-model">(10.5)</a>, we have the following quantities that we can compute:</p>
+<p>In equation <a href="linear-regression.html#eq:10-fitted-model">(10.5)</a>, notice we use <span class="math inline">\(e\)</span> to denote the <strong>residual</strong>, or in other words, the “error” in the sample.</p>
+<p>From equations <a href="linear-regression.html#eq:10-fitted">(10.4)</a> and <a href="linear-regression.html#eq:10-fitted-model">(10.5)</a>, we have the following quantities that we can compute:</p>
 <ul>
 <li>Fitted values or predicted values:</li>
 </ul>
 <p><span class="math display" id="eq:10-fits">\[\begin{equation}
-\hat{y}_i = \hat{\beta}_0+\hat{\beta}_1 x_i.
+\hat{y} = \hat{\beta}_0+\hat{\beta}_1 x.
 \tag{10.6}
 \end{equation}\]</span></p>
 <p>The <strong>fitted values</strong> are the predicted values of the response variable when the predictor is equal to some specific value. Visually, the fitted line represents each fitted value as we vary the value of the predictor.</p>
@@ -354,13 +361,14 @@ Figure 10.7: Example of Residuals. Picture from <a href="https://www.statology.o
 </p>
 </div>
 <ul>
-<li>Sum of Squared Errors:</li>
+<li>
+<strong>Sum of Squared Residuals</strong>:</li>
 </ul>
 <p><span class="math display" id="eq:10-SSres">\[\begin{equation}
 SS_{res} =  \sum\limits_{i=1}^n(y_i-\hat{y}_i)^2.
 \tag{10.8}
 \end{equation}\]</span></p>
-<p>We compute the estimated coefficients <span class="math inline">\(\hat{\beta}_1,\hat{\beta}_0\)</span> using the <strong>method of least squares</strong>, i.e. choose the numerical values of <span class="math inline">\(\hat{\beta}_1,\hat{\beta}_0\)</span> that minimize <span class="math inline">\(SS_{res}\)</span> as given in <a href="linear-regression.html#eq:10-SSres">(10.8)</a>. We find the line which minimizes the sum of all the squared residuals on the scatter plot, hence the name method of least squares.</p>
+<p>We compute the estimated coefficients <span class="math inline">\(\hat{\beta}_1,\hat{\beta}_0\)</span> using the <strong>method of least squares</strong>, i.e. choose the numerical values of <span class="math inline">\(\hat{\beta}_1,\hat{\beta}_0\)</span> that minimize <span class="math inline">\(SS_{res}\)</span> as given in equation <a href="linear-regression.html#eq:10-SSres">(10.8)</a>. We find the line which minimizes the sum of all the squared residuals on the scatter plot, hence the name method of least squares.</p>
 <p>By minimizing <span class="math inline">\(SS_{res}\)</span> with respect to <span class="math inline">\(\hat{\beta}_0\)</span> and <span class="math inline">\(\hat{\beta}_1\)</span>, the estimated coefficients in the simple linear regression equation are</p>
 <p><span class="math display" id="eq:10-b1">\[\begin{equation}
 \hat{\beta}_1 = \frac{\sum\limits_{i=1}^n(x_i-\bar{x})(y_i-\bar{y})}{\sum\limits_{i=1}^n(x_i-\bar{x})^2}
@@ -373,6 +381,7 @@ SS_{res} =  \sum\limits_{i=1}^n(y_i-\hat{y}_i)^2.
 \end{equation}\]</span></p>
 <p><span class="math inline">\(\hat{\beta}_1, \hat{\beta}_0\)</span> are called <strong>least squares estimators</strong>, to emphasize that these values are found by minimizing <span class="math inline">\(SS_{res}\)</span>.</p>
 <p>The minimization of <span class="math inline">\(SS_{res}\)</span> with respect to <span class="math inline">\(\hat{\beta}_0\)</span> and <span class="math inline">\(\hat{\beta}_1\)</span> is done by taking the partial derivatives of <a href="linear-regression.html#eq:10-SSres">(10.8)</a> with respect to <span class="math inline">\(\hat{\beta}_1\)</span> and <span class="math inline">\(\hat{\beta}_0\)</span>, setting these two partial derivatives equal to 0, and solving these two equations for <span class="math inline">\(\hat{\beta}_1\)</span> and <span class="math inline">\(\hat{\beta}_0\)</span>.</p>
+<p>View the video below for more explanation on the method of least squares:</p>
 <p>Let’s take a look at the estimated coefficients for our study time example:</p>
 <div class="sourceCode" id="cb190"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##fit regression</span></span>
@@ -394,7 +403,7 @@ SS_{res} =  \sum\limits_{i=1}^n(y_i-\hat{y}_i)^2.
 <span class="math inline">\(\hat{\beta}_0\)</span> = 58.4482853. The predicted study time is 58.4482853 when no courses are taken. Notice this value does not make sense, as a student cannot be taking 0 courses. If you look at our data, the number of courses taken is 3, 4, or 5. So we should only use our regression when <span class="math inline">\(3 \leq x \leq 5\)</span>. We cannot use it for values of <span class="math inline">\(x\)</span> outside the range of our data. Making predictions of the response variable for predictors outside the range of the data is called <strong>extrapolation</strong> and should not be done.</li>
 </ul>
 <p><em>Thought question</em>: The response variable for the toy example is study time, in minutes. Suppose we convert these values to hours by dividing by 60. How will the numerical value of the estimated coefficients change? How will the interpretation of the estimated coefficients change?</p>
-<p>Note: I often get a question about why we minimize <span class="math inline">\(SS_{res}\)</span> and not some other quantity such as minimizing the sum of the absolute value of the residuals <span class="math inline">\(\sum_{i=1}^n |y_i - \hat{y}_i|\)</span>? We will state a famous theorem here without proving it. <strong>Gauss Markov Theorem</strong>: Under assumptions for a regression model (as stated in <a href="linear-regression.html#eq:10-assumptions">(10.2)</a>), the least squares estimators <span class="math inline">\(\hat{\beta}_1\)</span> and <span class="math inline">\(\hat{\beta}_0\)</span> are unbiased and have minimum variance among all unbiased linear estimators. This means that any other way of deriving unbiased estimators will result in the estimators having larger variance than least squares estimators.</p>
+<p>Note: I often get a question about why we minimize <span class="math inline">\(SS_{res}\)</span> and not some other quantity such as minimizing the sum of the absolute value of the residuals <span class="math inline">\(\sum_{i=1}^n |y_i - \hat{y}_i|\)</span>? We will state a famous theorem here without proving it. <strong>Gauss Markov Theorem</strong>: Under assumptions for a regression model (as stated in equation <a href="linear-regression.html#eq:10-assumptions">(10.2)</a>), the least squares estimators <span class="math inline">\(\hat{\beta}_1\)</span> and <span class="math inline">\(\hat{\beta}_0\)</span> are unbiased and have minimum variance among all unbiased linear estimators. This means that any other way of deriving unbiased estimators will result in the estimators having larger variance than least squares estimators.</p>
 </div>
 <div id="method-of-maximum-likelihood" class="section level3" number="10.3.2">
 <h3>
@@ -410,7 +419,8 @@ f_{Y|X}(y|x) = \frac{1}{\sigma \sqrt{2 \pi}} \exp \left(-\frac{(y - (\beta_0+\be
 \ell(\beta_0, \beta_1, \sigma^2 | \boldsymbol{y}, \boldsymbol{x}) = -\frac{n}{2} \log(2\pi) - n \log(\sigma) - \frac{1}{2 \sigma^2} \sum_{i=1}^n \left(y_i - (\beta_0 + \beta_1 x_i) \right)^2.
 \tag{10.12}
 \end{equation}\]</span></p>
-<p>We then take the partial derivatives of <a href="linear-regression.html#eq:10-SLRloglike">(10.12)</a> with respect to <span class="math inline">\(\hat{\beta}_1\)</span> and <span class="math inline">\(\hat{\beta}_0\)</span>, setting these two partial derivatives equal to 0, and solving these two equations for <span class="math inline">\(\hat{\beta}_1\)</span> and <span class="math inline">\(\hat{\beta}_0\)</span>. We end up with the same solutions as the method of least squares.</p>
+<p>We then take the partial derivatives of equation <a href="linear-regression.html#eq:10-SLRloglike">(10.12)</a> with respect to <span class="math inline">\(\hat{\beta}_1\)</span> and <span class="math inline">\(\hat{\beta}_0\)</span>, set these two partial derivatives equal to 0, and solve these two equations for <span class="math inline">\(\hat{\beta}_1\)</span> and <span class="math inline">\(\hat{\beta}_0\)</span>. We end up with the same solutions as the method of least squares.</p>
+<p>The code below finds the estiamted coeffficients for our study time example. The <code><a href="https://rdrr.io/r/stats/glm.html">glm()</a></code> function fits via method of maximum likelihood, whereas the <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> function from earlier fits via the method of least squares.</p>
 <div class="sourceCode" id="cb192"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##fit regression</span></span>
 <span><span class="va">result.mle</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">study</span><span class="op">~</span><span class="va">courses</span>, data<span class="op">=</span><span class="va">df</span><span class="op">)</span> <span class="co">##we use glm() function for ML instead</span></span>
@@ -459,7 +469,7 @@ f_{Y|X}(y|x) = \frac{1}{\sigma \sqrt{2 \pi}} \exp \left(-\frac{(y - (\beta_0+\be
 <li>
 <span class="math inline">\(\hat{\beta}_1\)</span> and <span class="math inline">\(\hat{\beta}_0\)</span> both follow a normal distribution.</li>
 </ol>
-<p>Note that in <a href="linear-regression.html#eq:10-varb1">(10.13)</a> and <a href="linear-regression.html#eq:10-varb0">(10.14)</a>, we use <span class="math inline">\(s^2 = \frac{SS_{res}}{n-2} = MS_{res}\)</span> to estimate <span class="math inline">\(\sigma^2\)</span> since <span class="math inline">\(\sigma^2\)</span> is a unknown value.</p>
+<p>Note that in equations <a href="linear-regression.html#eq:10-varb1">(10.13)</a> and <a href="linear-regression.html#eq:10-varb0">(10.14)</a>, we use <span class="math inline">\(s^2 = \frac{SS_{res}}{n-2} = MS_{res}\)</span> to estimate <span class="math inline">\(\sigma^2\)</span>, the variance of the errors, since <span class="math inline">\(\sigma^2\)</span> is a unknown value.</p>
 <p>What these imply is that if we standardize <span class="math inline">\(\hat{\beta}_1\)</span> and <span class="math inline">\(\hat{\beta}_0\)</span>, these standardized quantities will follow a <span class="math inline">\(t_{n-2}\)</span> distribution, i.e.</p>
 <p><span class="math display" id="eq:10-distb1">\[\begin{equation}
 \frac{\hat{\beta}_1 - \beta_1}{se(\hat{\beta}_1)}\sim t_{n-2}
@@ -480,7 +490,7 @@ se(\hat{\beta}_1) = \sqrt{\frac{MS_{res}}{\sum_{i=1}^n{(x_{i}-\bar{x})^{2}}}} = 
 se(\hat{\beta}_0) = \sqrt{MS_{res}\left[\frac{1}{n} + \frac{\bar{x}^2}{\sum_{i=1}^n (x_i -\bar{x})^2}\right]} = s \sqrt{\frac{1}{n} + \frac{\bar{x}^2}{\sum_{i=1}^n (x_i -\bar{x})^2}}
 \tag{10.18}
 \end{equation}\]</span></p>
-<p>Note: The standardized quantities in equations <a href="linear-regression.html#eq:10-distb1">(10.15)</a> and <a href="linear-regression.html#eq:10-distb0">(10.16)</a> follow <span class="math inline">\(t_{n-2}\)</span> distribution. As mentioned in Section <a href="confidence-intervals.html#df">8.2.4.3</a>, we lose 1 degree of freedom for every equation that must be satisfied. In SLR, we have 2 equations, equations <a href="linear-regression.html#eq:10-b1">(10.9)</a> and <a href="linear-regression.html#eq:10-b0">(10.10)</a>, that must be satisfied when calculating the least squares estimators, therefore we have <span class="math inline">\(n-2\)</span> degrees of freedom.</p>
+<p>Note: The standardized quantities in equations <a href="linear-regression.html#eq:10-distb1">(10.15)</a> and <a href="linear-regression.html#eq:10-distb0">(10.16)</a> follow a <span class="math inline">\(t_{n-2}\)</span> distribution. As mentioned in Section <a href="confidence-intervals.html#df">8.2.4.3</a>, we lose 1 degree of freedom for every equation that must be satisfied. In SLR, we have 2 equations, equations <a href="linear-regression.html#eq:10-b1">(10.9)</a> and <a href="linear-regression.html#eq:10-b0">(10.10)</a>, that must be satisfied when calculating the least squares estimators, therefore we have <span class="math inline">\(n-2\)</span> degrees of freedom.</p>
 </div>
 <div id="confidence-interval" class="section level3" number="10.4.2">
 <h3>
@@ -512,7 +522,7 @@ se(\hat{\beta}_0) = \sqrt{MS_{res}\left[\frac{1}{n} + \frac{\bar{x}^2}{\sum_{i=1
 <p><em>Thought question</em>: Before scrolling down any further, can you make an educated guess as to the formula of the t-statistic when testing the slope?</p>
 <p>The test statistic is</p>
 <p><span class="math display" id="eq:10-testslope">\[\begin{equation}
-t = \frac{\hat{\beta}_1 - \text{ value in null}}{se(\hat{\beta}_1)}.
+t = \frac{\hat{\beta}_1 - \text{ value in } H_0}{se(\hat{\beta}_1)}.
 \tag{10.20}
 \end{equation}\]</span></p>
 <p>The p-value and critical value are found in the usual manner, based on a <span class="math inline">\(t_{n-2}\)</span> distribution, and are used in the usual manner.</p>
@@ -522,7 +532,7 @@ t = \frac{\hat{\beta}_1 - \text{ value in null}}{se(\hat{\beta}_1)}.
 <pre><code>##              Estimate Std. Error   t value      Pr(&gt;|t|)
 ## (Intercept)  58.44829  1.9218752  30.41211 4.652442e-189
 ## courses     120.39310  0.4707614 255.74125  0.000000e+00</code></pre>
-<p>From R, the reported t-statistic and p-value are 255.74125 and approximately 0 respectively. So we reject the null hypothesis: our data support the claim that there is a linear relationship between study time and number of courses taken.</p>
+<p>From R, the reported t-statistic and p-value for the hypothesis test of the slope are 255.74125 and approximately 0 respectively. So we reject the null hypothesis: our data support the claim that there is a linear relationship between study time and number of courses taken. Note that R also reports these quantities for the hypothesis test for the intercept, although that is a test that is rarely used as it has less practical implications.</p>
 <p>Note: The reported values are based on a two-sided alternative hypothesis and a null hypothesis of <span class="math inline">\(H_0: \beta_1 = 0\)</span>. If we have different hypotheses we will have to perform these calculations on our own.</p>
 </div>
 <div id="correlation" class="section level3" number="10.4.4">
@@ -711,6 +721,7 @@ Figure 10.8: Scatter Plot for Worked Example
 <span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span><span class="op">(</span><span class="va">Data</span><span class="op">$</span><span class="va">family_income</span>,<span class="va">Data</span><span class="op">$</span><span class="va">gift_aid</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] -0.4985561</code></pre>
 <p>The correlation is -0.4985561. We have a moderate, negative linear association between family income and gift aid.</p>
+<p>View the video below if you need a little more explanation on using R for linear regression:</p>
 </div>
 </div>
 </div>
@@ -747,7 +758,7 @@ Figure 10.8: Scatter Plot for Worked Example
 <h4>
 <span class="header-section-number">10.5.1.1</span> Mean-Squared Error<a class="anchor" aria-label="anchor" href="#mean-squared-error"><i class="fas fa-link"></i></a>
 </h4>
-<p>The <strong>mean-squared error (MSE)</strong> is a commonly used metric to assess model accuracy. The MSE is</p>
+<p>The <strong>mean-squared error (MSE)</strong> is a commonly used metric to assess model accuracy. The MSE of predictions is</p>
 <p><span class="math display" id="eq:10-MSE">\[\begin{equation}
 MSE(\hat{y}) = \frac{\sum_{i=1}^n (y_i - \hat{y}_i)^2}{n}.
 \tag{10.21}
@@ -759,7 +770,7 @@ MSE(\hat{y}) = \frac{\sum_{i=1}^n (y_i - \hat{y}_i)^2}{n}.
 MSE(\hat{y}) = Var(\hat{y}) + Bias(\hat{y})^2.
 \tag{10.22}
 \end{equation}\]</span></p>
-<p>So the MSE can be decomposed into the variance of the predicted values and the squared bias of the predicted values. In a linear regression setting, the bias will be theoretically 0 if we find the correct form of <span class="math inline">\(f(X)\)</span> to relate the response variable with the predictors.</p>
+<p>So the MSE can be decomposed into the variance of the predicted values and the squared bias of the predicted values. In a linear regression setting, the bias will be theoretically 0 if we find the correct form of <span class="math inline">\(f(x)\)</span> to relate the response variable with the predictors.</p>
 </div>
 <div id="root-mean-squared-error" class="section level4" number="10.5.1.2">
 <h4>
@@ -788,7 +799,7 @@ MAD(\hat{y}) = \frac{\sum_{i=1}^n |y_i - \hat{y}_i|}{n}.
 <h4>
 <span class="header-section-number">10.5.1.4</span> Additional Comments about MSE, RMSE, MAD<a class="anchor" aria-label="anchor" href="#additional-comments-about-mse-rmse-mad"><i class="fas fa-link"></i></a>
 </h4>
-<p>In the rest of this module, we will be focusing on the MSE and RMSE, as certain properties for them have been proven mathematically.</p>
+<p>In the rest of this module, we will be focusing on the MSE and RMSE, as certain properties for them have been proven mathematically. We will discuss these properties next.</p>
 </div>
 </div>
 <div id="model-complexity" class="section level3" number="10.5.2">
@@ -799,7 +810,8 @@ MAD(\hat{y}) = \frac{\sum_{i=1}^n |y_i - \hat{y}_i|}{n}.
 <ul>
 <li>incorporating additional predictors (that are useful), or</li>
 <li>considering polynomials for the predictor (if the relationship between the response variable and predictor is not linear), or</li>
-<li>adding interactions between predictors.</li>
+<li>adding interactions between predictors, or</li>
+<li>using any combination of these steps.</li>
 </ul>
 <p>With additional predictors, the linear regression model is written as</p>
 <p><span class="math display" id="eq:10-MLRmod">\[\begin{equation}
@@ -812,14 +824,14 @@ y=\beta_0+\beta_{1}x_1 + \beta_2 x_2 + \cdots + \beta_k x_k + \epsilon,
 y=\beta_0+\beta_{1}x + \beta_2 x^2 + \cdots + \beta_k x^k + \epsilon,
 \tag{10.26}
 \end{equation}\]</span></p>
-<p>if we consider a <span class="math inline">\(k\)</span>-degree polynomial for <span class="math inline">\(f(x)\)</span> to approximate the relationship between the response variable and the predictor. Notice the linear regression model gets more complex when we add more predictors, or higher degree polynomials.</p>
+<p>if we consider a <span class="math inline">\(k\)</span>-degree polynomial for <span class="math inline">\(f(x)\)</span> to approximate the relationship between the response variable and the predictor.</p>
 <p><strong>Interactions between predictors</strong> occur when the effect of one predictor on the response variable depends on the value of another predictor. Consider predicting recovery rates of patients, based on amount of medication administered and age of the patient. Perhaps higher doses of the medication speeds recovery, but only for young patients. However, the medication may not work at all for old patients. The effect of medication on recovery depends on the age of a patient, so there is an interaction between amount of medicine administered and age of patient. In this scenario, the linear regression model can be written as</p>
 <p><span class="math display" id="eq:10-intmod">\[\begin{equation}
 y=\beta_0+\beta_{1}x_1 + \beta_2 x_2 + \beta_3 x_1 x_2 + \epsilon,
 \tag{10.27}
 \end{equation}\]</span></p>
 <p>where the term <span class="math inline">\(x_1 x_2\)</span> represents that we are considering an interaction between the predictors.</p>
-<p>It is also possible for a linear regression model to have multiple predictors, higher order polynomials, and interactions. For example, y=<em>0+</em>{1}x_1 + _2 x_2 + _3 x_3 + _4 x_3^2 + _5 z_1 x_2 + $.</p>
+<p>It is also possible for a linear regression model to have multiple predictors, higher order polynomials, and interactions. For example, <span class="math inline">\(y=\beta_0+\beta_{1}x_1 + \beta_2 x_2 + \beta_3 x_3 + \beta_4 x_3^2 + \beta_5 z_1 x_2 + \epsilon\)</span>.</p>
 <p>For this class, we will only consider comparing the complexity of models that are <strong>nested</strong>. Two models are nested if one model can be derived from the other by setting some parameters of the more complex model to be equal to 0. As an example, the SLR model in equation <a href="linear-regression.html#eq:10-SLRmod">(10.1)</a> is nested within the model in equation <a href="linear-regression.html#eq:10-MLRmod">(10.25)</a>, as we can get the SLR model by setting <span class="math inline">\(\beta_2 = \beta_3 = \cdots = \beta_k = 0\)</span> in equation <a href="linear-regression.html#eq:10-MLRmod">(10.25)</a>.</p>
 <p><em>Thought question</em>: Can you explain why the SLR model in equation <a href="linear-regression.html#eq:10-SLRmod">(10.1)</a> is nested within the model in equation <a href="linear-regression.html#eq:10-polymod">(10.26)</a>? Can you explain why the SLR model in equation <a href="linear-regression.html#eq:10-SLRmod">(10.1)</a> is nested within the model in equation <a href="linear-regression.html#eq:10-intmod">(10.27)</a>?</p>
 <p>The <strong>complexity</strong> of linear regression models can be measured by the number of parameters in the model, which we denote by <span class="math inline">\(p\)</span>. So for the SLR model in equation <a href="linear-regression.html#eq:10-SLRmod">(10.1)</a>, <span class="math inline">\(p=2\)</span>, since we have <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span>.</p>
@@ -831,7 +843,7 @@ y=\beta_0+\beta_{1}x_1 + \beta_2 x_2 + \beta_3 x_1 x_2 + \epsilon,
 <span class="header-section-number">10.5.3</span> Training-Test Split<a class="anchor" aria-label="anchor" href="#training-test-split"><i class="fas fa-link"></i></a>
 </h3>
 <p>After reading the previous subsections, one may consider the following strategy when assessing model accuracy and choosing between several nested models: fit all models under consideration using all available data, then choose the model that the smallest MSE (or RMSE).</p>
-<p>A property of the MSE and RMSE of nested models is that these values only decrease as the model gets more complex! We will not go through the whole proof of this, but intuitively, one can see why the more complex model will never do worse than the less complex model: this happens when the additional parameters are all 0. This property suggests that using this strategy will always end up selecting the most complex model, as the most complex model will always have the smallest MSE and RMSE.</p>
+<p>While seemingly intuitive, this stragedy will not work. A property of the MSE and RMSE of nested models is that these values only decrease as the model gets more complex! We will not go through the whole proof of this, but intuitively, one can see why the more complex model will never do worse than the less complex model: this happens when the additional parameters are all 0. This property suggests that using this strategy will always end up selecting the most complex model, as the most complex model will always have the smallest MSE and RMSE.</p>
 <p>Take a step back and remind ourselves what we actually want to do with prediction: after fitting the model, we want to be able to accurately predict the values of the response variable in the future. When we fit a model well based on the current data, the model may do poorly on new data. This is called <strong>overfitting</strong>.</p>
 <p>So what we will do is to split a given data set into two portions. One portion, called the <strong>training data</strong>, is used to fit (or train) the model. The other portion, called the <strong>test data</strong>, is used to assess the prediction accuracy of the model. The test data are never used to fit the model, so the test data play the role of new data.</p>
 <p>The MSE (or RMSE) is then calculated on both portions, and are called the training MSE and the test MSE. The relationship between the training and test MSEs with the complexity of nested models is shown below in Figure <a href="linear-regression.html#fig:10-MSE">10.9</a>:</p>
@@ -843,7 +855,7 @@ Figure 10.9: Training &amp; Test MSE vs Complexity
 </div>
 <p>We make the following comments about Figure <a href="linear-regression.html#fig:10-MSE">10.9</a>:</p>
 <ul>
-<li>The blue curve represents how the training MSE behaves as models get more complex. As models get more complex, the training MSE never decreases.</li>
+<li>The blue curve represents how the training MSE behaves as models get more complex. As models get more complex, the training MSE never increases.</li>
 <li>The black curve represents how the test MSE behaves as models get more complex. The test MSE is minimum when we find an appropriate level of complexity, and this is denoted by the red line. We call this model the optimal model. The test MSE increases as models get more complex, or less complex, than the optimal model.</li>
 <li>Overfitted models are models that are more complex than the optimal model.
 <ul>
@@ -894,6 +906,7 @@ Figure 10.9: Training &amp; Test MSE vs Complexity
 <li>Fitted line 3: <span class="math inline">\(\hat{y} = \hat{\beta}_0 + \hat{\beta}_1 x + \hat{\beta}_2 x^2,\)</span> so <span class="math inline">\(\hat{f}(x) = \hat{\beta}_0 + \hat{\beta}_1 x + \hat{\beta}_2 x^2\)</span>.</li>
 <li>Fitted line 4: <span class="math inline">\(\hat{y} = \hat{\beta}_0 + \hat{\beta}_1 x + \cdots + \hat{\beta}_9 x^9,\)</span> so <span class="math inline">\(\hat{f}(x) = \hat{\beta}_0 + \hat{\beta}_1 x + \cdots + \hat{\beta}_9 x^9\)</span>.</li>
 </ol>
+<p>Because the true relationship is <span class="math inline">\(y = f(x) = x^2\)</span>, fitted lines 1 and 2 are not complex enough, fitted line 3 should be optimal, and fitted line 4 is too complex.</p>
 <p>We simulate 1 replicate of 1000 observations, and then fit the four models.</p>
 <div class="sourceCode" id="cb225"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">11</span><span class="op">)</span></span>
@@ -918,14 +931,12 @@ Figure 10.10: Four Polynomial Models Fitted to a Simulated Dataset
 <li>Fitted line 1, in blue, generally deviates far from the truth (in black).</li>
 <li>Fitted line 2, in red, is closer to the truth, but there are portions where it does not match the truth.</li>
 <li>Fitted line 3, in green, appears to be best in that it matches the closest to the truth, generally.</li>
-<li>Fitted line 4, in orange, does not quite match the true, especially at the extreme ends of the x-axis.</li>
+<li>Fitted line 4, in orange, does not quite match the truth, especially at the extreme ends of the x-axis.</li>
 </ul>
 <p>Of course, these comments are based on 1 simulated data set, but if we were to create many replicates of the data set and create a similar scatter plot, we would expect to see similar characteristics.</p>
 <p>To illustrate the idea behind the bias and variance of predictions, we simulate 3 replicates data sets, each of size 1000, and show fitted lines 1 and 4 on each replicate in Figure <a href="linear-regression.html#fig:10-sims3">10.11</a>. Let us remind ourselves of what was written earlier about the bias variance tradeoff and the complexity of models:</p>
 <ul>
 <li>Fitted line 1 is too simple, so we expect a high degree of bias and a low degree of variance.</li>
-<li>Fitted line 2 is also simple, so we expect some bias, and a higher degree of variance.</li>
-<li>Fitted line 3 should be optimal, since its <span class="math inline">\(\hat{f}(x)\)</span> takes the correct form, so we expect bias to be theoretically 0, and a even higher degree of variance.</li>
 <li>Fitted line 4 is too complex, so we expect its bias to be theoretically 0, but it will have the highest degree of variance.</li>
 </ul>
 <div class="figure">
@@ -949,9 +960,9 @@ Figure 10.11: Fitted Lines 1 &amp; 4 on Three Different Simulated Datasets
 <li>Simulate 1 data set of 1000 observations.</li>
 <li>Fitted fitted lines 1 to 4 on the data set.</li>
 <li>Compute the predicted value <span class="math inline">\(\hat{y}\)</span> when <span class="math inline">\(x=0.9\)</span> based on each of the four fitted lines, and record these values.</li>
-<li>Repeat these steps for over 1000 replicates.</li>
+<li>Repeat these steps over 1000 replicates.</li>
 </ul>
-<p>Let’s take a look at the distributions of <span class="math inline">\(\hat{y}\)</span>s for each fitted line, in Figure <a href="linear-regression.html#fig:10-simsboxplot">10.12</a>.</p>
+<p>Let’s take a look at the distributions of <span class="math inline">\(\hat{y}\)</span>s for each fitted line, as shown in Figure <a href="linear-regression.html#fig:10-simsboxplot">10.12</a>.</p>
 <div class="figure">
 <span style="display:block;" id="fig:10-simsboxplot"></span>
 <img src="bookdown-demo_files/figure-html/10-simsboxplot-1.png" alt="Box Plots of Predictions for Four Fitted Lines" width="672"><p class="caption">
@@ -961,9 +972,9 @@ Figure 10.12: Box Plots of Predictions for Four Fitted Lines
 <p>The blue horizontal line represents the true value of <span class="math inline">\(y\)</span> when <span class="math inline">\(x=0.1\)</span>. Let <span class="math inline">\(y_0\)</span> denote this value, i.e. <span class="math inline">\(y_0 = f(0.1) = 0.1^2\)</span>. Figure <a href="linear-regression.html#fig:10-simsboxplot">10.12</a> pretty much matches with what we expected:</p>
 <ul>
 <li>The variance, or spread, of <span class="math inline">\(\hat{y}\)</span>s is higher as the model gets more complex.</li>
-<li>Fitted lines 1 and 2 are bias, since the middle of their boxplots are far away from the blue line, but fitted lines 3 and 4 are unbiased, since the middle of their boxplots matches with the blue line.</li>
+<li>Fitted lines 1 and 2 are biased, since the middle of their boxplots are far away from the blue line, but fitted lines 3 and 4 are unbiased, since the middle of their boxplots matches with the blue line.</li>
 </ul>
-<p>We then evaluate the test MSE, bias, and variance of <span class="math inline">\(hat{y}\)</span> from each fitted line:</p>
+<p>We then evaluate the test MSE, bias, and variance of <span class="math inline">\(\hat{y}\)</span> from each fitted line:</p>
 <ul>
 <li>MSE: the average squared difference between <span class="math inline">\(\hat{y}\)</span> and <span class="math inline">\(y_0\)</span>.</li>
 <li>Bias: the average difference between <span class="math inline">\(\hat{y}\)</span> and <span class="math inline">\(y_0\)</span>.</li>
@@ -1013,7 +1024,7 @@ Figure 10.12: Box Plots of Predictions for Four Fitted Lines
 <p>The results in Table <a href="linear-regression.html#tab:10-table">10.1</a> pretty much match with our expectations:</p>
 <ul>
 <li>The variance of the predictions increase as the model gets more complicated (higher degree).</li>
-<li>The bias of the predictions pretty much works in the opposite direction: it decreases as the model gets more complicated.</li>
+<li>The (squared) bias of the predictions pretty much works in the opposite direction: it decreases as the model gets more complicated. We used the squared bias since the bias could be positive or negative so we get rid of the sign this way. Also, we know that the MSE is equal to the variance plus squared bias. The bias for fitted lines 3 and 4 are theoretically 0.</li>
 <li>The test MSE is smallest for fitted line 3, as its form of <span class="math inline">\(\hat{f}(x)\)</span> matches the true <span class="math inline">\(f(x)\)</span>. So we see the optimal model balances the bias-variance tradeoff.</li>
 </ul>
 </div>

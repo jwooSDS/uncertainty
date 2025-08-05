@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999996 (MiKTeX 24.4) (preloaded format=xelatex 2025.6.7)  5 AUG 2025 13:12
+This is XeTeX, Version 3.141592653-2.6-0.999996 (MiKTeX 24.4) (preloaded format=xelatex 2025.6.7)  5 AUG 2025 15:05
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1830,16 +1830,12 @@ File: bookdown-demo_files/figure-latex/10-conddist5-1.pdf Graphic file (type pd
 f)
 <use bookdown-demo_files/figure-latex/10-conddist5-1.pdf>
 
-Underfull \vbox (badness 4660) has occurred while \output is active []
-
-
 
 [222]
-File: images/10-ass1.jpg Graphic file (type bmp)
-<images/10-ass1.jpg>
-
 
 [223]
+File: images/10-ass1.jpg Graphic file (type bmp)
+<images/10-ass1.jpg>
 File: images/10-ass2.jpg Graphic file (type bmp)
 <images/10-ass2.jpg>
 
@@ -1864,55 +1860,47 @@ File: images/10-residuals.png Graphic file (type bmp)
 [231]
 
 [232]
+
+[233]
 File: bookdown-demo_files/figure-latex/10-scatter-eg-1.pdf Graphic file (type p
 df)
 <use bookdown-demo_files/figure-latex/10-scatter-eg-1.pdf>
 
 
-[233]
-
 [234]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
 
 [235]
-Underfull \hbox (badness 3872) in paragraph at lines 8363--8364
+Underfull \hbox (badness 3872) in paragraph at lines 8379--8380
 \TU/lmr/m/n/10 We can actually extract these values that are being reported fro
 m
  []
 
 
-Overfull \hbox (22.5pt too wide) in paragraph at lines 8376--8376
+
+[236]
+Overfull \hbox (22.5pt too wide) in paragraph at lines 8392--8392
 []\TU/lmtt/m/n/10 ##  [1] "call"          "terms"         "residuals"     "coef
 ficients"[] 
  []
 
 
-Overfull \hbox (6.75pt too wide) in paragraph at lines 8376--8376
+Overfull \hbox (6.75pt too wide) in paragraph at lines 8392--8392
 []\TU/lmtt/m/n/10 ##  [5] "aliased"       "sigma"         "df"            "r.sq
 uared"[] 
  []
 
 
 
-[236]
-
 [237]
-Underfull \vbox (badness 2573) has occurred while \output is active []
-
-
 
 [238]
 
 [239]
 
 [240]
-Missing character: There is no 𝛽 in font [lmroman10-regular]:mapping=tex-text;!
-Missing character: There is no 𝛽 in font [lmroman10-italic]:mapping=tex-text;!
-Missing character: There is no 𝛽 in font [lmroman10-regular]:mapping=tex-text;!
-Missing character: There is no 𝛽 in font [lmroman10-regular]:mapping=tex-text;!
-Missing character: There is no 𝛽 in font [lmroman10-regular]:mapping=tex-text;!
-Missing character: There is no 𝛽 in font [lmroman10-regular]:mapping=tex-text;!
-Missing character: There is no 𝜖 in font [lmroman10-regular]:mapping=tex-text;!
-
 
 [241]
 File: images/10-MSE.png Graphic file (type bmp)
@@ -1920,22 +1908,20 @@ File: images/10-MSE.png Graphic file (type bmp)
 
 
 [242]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
 
 [243]
-Overfull \vbox (0.61356pt too high) detected at line 8729
- []
-
-
 
 [244]
 File: bookdown-demo_files/figure-latex/10-sims1-1.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/10-sims1-1.pdf>
-
-
-[245]
 File: bookdown-demo_files/figure-latex/10-sims3-1.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/10-sims3-1.pdf>
 
+
+[245]
 
 [246]
 File: bookdown-demo_files/figure-latex/10-simsboxplot-1.pdf Graphic file (type 
@@ -1944,10 +1930,12 @@ pdf)
 
 
 [247]
+
+[248]
 No file bookdown-demo.bbl.
 
 
-[248] (bookdown-demo.aux)
+[249] (bookdown-demo.aux)
  ***********
 LaTeX2e <2024-06-01> patch level 2
 L3 programming layer <2024-07-20>
@@ -1959,10 +1947,10 @@ LaTeX Warning: There were undefined references.
 Here is how much of TeX's memory you used:
  20609 strings out of 409029
  383906 string characters out of 5763847
- 1963612 words of memory out of 5000000
+ 1965612 words of memory out of 5000000
  42951 multiletter control sequences out of 15000+600000
  566021 words of font info for 104 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  90i,21n,123p,1199b,585s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on bookdown-demo.pdf (248 pages).
+Output written on bookdown-demo.pdf (249 pages).
