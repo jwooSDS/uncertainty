@@ -127,7 +127,7 @@
 
 \title{Understanding Uncertainty Course Notes}
 \author{Jeffrey Woo}
-\date{2025-08-04}
+\date{2025-08-05}
 
 \begin{document}
 \maketitle
@@ -7769,7 +7769,7 @@ The assumptions for the error terms, \(\epsilon\), expressed in equation \eqref{
 
 The plots in Figure \ref{fig:10-ass1} are based on simulated data. The scatter plot shown in Figure \ref{fig:10-ass1}(a) is an example of when this assumption is met. As we move from left to right on the plot, the data points are generally evenly scattered on both sides of the regression line that is overlaid.
 
-The scatter plot shown in Figure \ref{fig:10-ass1}(b) is an example of when this assumption is not met. As we move from left to right on the plot in Figure \ref{fig:10-ass1}(b), the data points are generally not evenly scattered on both sides of the regression line that is overlaid. The shape of the plots look more like a cruve rather than a straight line.
+The scatter plot shown in Figure \ref{fig:10-ass1}(b) is an example of when this assumption is not met. As we move from left to right on the plot in Figure \ref{fig:10-ass1}(b), the data points are generally not evenly scattered on both sides of the regression line that is overlaid. The shape of the plots look more like a curve rather than a straight line.
 
 \begin{figure}
 \centering
@@ -7899,7 +7899,7 @@ e_i = y_i-\hat{y}_i.
 \label{eq:10-res}
 \end{equation}
 
-The \textbf{residuals} are the differences between the actual values of the response variable and their corresponding predicted values based on the fitted line. Visually, a residual is the vertical distance of a data point in the scatter plot from the fitted line, as shwon in Figure \ref{fig:10-res} below:
+The \textbf{residuals} are the differences between the actual values of the response variable and their corresponding predicted values based on the fitted line. Visually, a residual is the vertical distance of a data point in the scatter plot from the fitted line, as shown in Figure \ref{fig:10-res} below:
 
 \begin{figure}
 \centering
@@ -8181,7 +8181,7 @@ A few notes about \(R^2\):
 
 \subsection{Linear Regression in R}\label{linear-regression-in-r}
 
-Next, we will perform a simple linear regression on a real dataset using R. We will work with the dataset \texttt{elmhurst} from the \texttt{openintro} package in R.
+Next, we will perform a simple linear regression on a real data set using R. We will work with the data set \texttt{elmhurst} from the \texttt{openintro} package in R.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -8191,7 +8191,7 @@ Next, we will perform a simple linear regression on a real dataset using R. We w
 \end{Highlighting}
 \end{Shaded}
 
-Type \texttt{?openintro::elmhurst} to read the documentation for datasets in R. Always seek to understand the background of your data! The key pieces of information are:
+Type \texttt{?openintro::elmhurst} to read the documentation for data sets in R. Always seek to understand the background of your data! The key pieces of information are:
 
 \begin{itemize}
 \tightlist
@@ -8497,7 +8497,7 @@ In this section, we will focus on the second primary use of supervised methods: 
 \begin{itemize}
 \tightlist
 \item
-  Hospitality: Determining staffing needs for a casino. We want to be able to predict the right number of staff to hire: overstaffing costs money and understaffing results in unhappy customers.
+  Hospitality: Determining staffing needs for a casino. We want to be able to predict the right number of staff to hire: over-staffing costs money and under-staffing results in unhappy customers.
 \item
   Online ads: Based on a user's history on Amazon, Amazon would like to be able to recommend products that the user is highly likely to purchase.
 \item
@@ -8623,7 +8623,7 @@ A property of the MSE and RMSE of nested models is that these values only decrea
 
 Take a step back and remind ourselves what we actually want to do with prediction: after fitting the model, we want to be able to accurately predict the values of the response variable in the future. When we fit a model well based on the current data, the model may do poorly on new data. This is called \textbf{overfitting}.
 
-So what we will do is to split a given dataset into two portions. One portion, called the \textbf{training data}, is used to fit (or train) the model. The other portion, called the \textbf{test data}, is used to assess the prediction accuracy of the model. The test data are never used to fit the model, so the test data play the role of new data.
+So what we will do is to split a given data set into two portions. One portion, called the \textbf{training data}, is used to fit (or train) the model. The other portion, called the \textbf{test data}, is used to assess the prediction accuracy of the model. The test data are never used to fit the model, so the test data play the role of new data.
 
 The MSE (or RMSE) is then calculated on both portions, and are called the training MSE and the test MSE. The relationship between the training and test MSEs with the complexity of nested models is shown below in Figure \ref{fig:10-MSE}:
 
@@ -8647,7 +8647,7 @@ We make the following comments about Figure \ref{fig:10-MSE}:
   \begin{itemize}
   \tightlist
   \item
-    Overfitted models generally have low training MSE, and high test MSE. A large difference between these two is also indicative of overgfitting.
+    Overfitted models generally have low training MSE, and high test MSE. A large difference between these two is also indicative of overfitting.
   \end{itemize}
 \item
   Underfitted models are models that are less complex than the optimal model.
@@ -8750,9 +8750,9 @@ From Figure \ref{fig:10-sims1}, we make the following comments:
   Fitted line 4, in orange, does not quite match the true, especially at the extreme ends of the x-axis.
 \end{itemize}
 
-Of course, these comments are based on 1 simulated dataset, but if we were to create many replicates of the dataset and create a similar scatter plot, we would expect to see similar characteristics.
+Of course, these comments are based on 1 simulated data set, but if we were to create many replicates of the data set and create a similar scatter plot, we would expect to see similar characteristics.
 
-To illustrate the idea behind the bias and variance of predictions, we simulate 3 replicates datasets, each of size 1000, and show fitted lines 1 and 4 on each replicate in Figure \ref{fig:10-sims3}. Let us remind ourselves of what was written earlier about the bias variance tradeoff and the complexity of models:
+To illustrate the idea behind the bias and variance of predictions, we simulate 3 replicates data sets, each of size 1000, and show fitted lines 1 and 4 on each replicate in Figure \ref{fig:10-sims3}. Let us remind ourselves of what was written earlier about the bias variance tradeoff and the complexity of models:
 
 \begin{itemize}
 \tightlist
@@ -8779,7 +8779,7 @@ For fitted line 1:
 \item
   We see that the the blue line always does a poor job capturing the truth in the data, therefore, it will have high bias as it will systematically over- or under-predict.
 \item
-  However, the blue lines are all pretty similar across all three simulated datasets. Therefore, it has low variance as the line is pretty much the same.
+  However, the blue lines are all pretty similar across all three simulated data sets. Therefore, it has low variance as the line is pretty much the same.
 \end{itemize}
 
 For fitted line 4:
@@ -8787,19 +8787,19 @@ For fitted line 4:
 \begin{itemize}
 \tightlist
 \item
-  We see that the orange lines are very different across all three simulated datasets. Therefore, it has high variance.
+  We see that the orange lines are very different across all three simulated data sets. Therefore, it has high variance.
 \item
-  Fitted line 4 will be, on average, theoretically unbiased. However, being an unbiased but highly variable fitted line is can be problematic, since we only observe one dataset in real life, so we cannot average the predictions over many datasets. This is why we also want fitted lines with low variance.
+  Fitted line 4 will be, on average, theoretically unbiased. However, being an unbiased but highly variable fitted line is can be problematic, since we only observe one data set in real life, so we cannot average the predictions over many data sets. This is why we also want fitted lines with low variance.
 \end{itemize}
 
-We now carry out the Monte Carlo simulations, over 1000 replicates. Ideally, the number of replicates should be more, but this simulation takes some time to run (fitting high degree polynomials is computationally expenseive). We will use these 1000 replicates to compute the MSE, bias, and variance of the four fitted lines, evaluated at the point \(x=0.1\). The simulation would do the following:
+We now carry out the Monte Carlo simulations, over 1000 replicates. Ideally, the number of replicates should be more, but this simulation takes some time to run (fitting high degree polynomials is computationally expensive). We will use these 1000 replicates to compute the MSE, bias, and variance of the four fitted lines, evaluated at the point \(x=0.1\). The simulation would do the following:
 
 \begin{itemize}
 \tightlist
 \item
-  Simulate 1 dataset of 1000 observations.
+  Simulate 1 data set of 1000 observations.
 \item
-  Fitted fitted lines 1 to 4 on the dataset.
+  Fitted fitted lines 1 to 4 on the data set.
 \item
   Compute the predicted value \(\hat{y}\) when \(x=0.9\) based on each of the four fitted lines, and record these values.
 \item
@@ -8850,7 +8850,7 @@ line2 & 1 & 0.0085085 & 0.0055666 & 0.0029448\\
 \hline
 line3 & 2 & 0.0039253 & 0.0000035 & 0.0039257\\
 \hline
-line4 & 3 & 0.0095384 & 0.0000074 & 0.0095406\\
+line4 & 9 & 0.0095384 & 0.0000074 & 0.0095406\\
 \hline
 \end{tabular}
 \end{table}

@@ -262,7 +262,7 @@ Figure 10.4: Distribution of Study Time for 3, 4, 5 Classes Taken
 <li>This is the most important assumption of the 4. If it is not met, predictions will be biased, in other words, predictions will systematically over- or under- predict the value of the response variable.</li>
 </ul>
 <p>The plots in Figure <a href="linear-regression.html#fig:10-ass1">10.5</a> are based on simulated data. The scatter plot shown in Figure <a href="linear-regression.html#fig:10-ass1">10.5</a>(a) is an example of when this assumption is met. As we move from left to right on the plot, the data points are generally evenly scattered on both sides of the regression line that is overlaid.</p>
-<p>The scatter plot shown in Figure <a href="linear-regression.html#fig:10-ass1">10.5</a>(b) is an example of when this assumption is not met. As we move from left to right on the plot in Figure <a href="linear-regression.html#fig:10-ass1">10.5</a>(b), the data points are generally not evenly scattered on both sides of the regression line that is overlaid. The shape of the plots look more like a cruve rather than a straight line.</p>
+<p>The scatter plot shown in Figure <a href="linear-regression.html#fig:10-ass1">10.5</a>(b) is an example of when this assumption is not met. As we move from left to right on the plot in Figure <a href="linear-regression.html#fig:10-ass1">10.5</a>(b), the data points are generally not evenly scattered on both sides of the regression line that is overlaid. The shape of the plots look more like a curve rather than a straight line.</p>
 <div class="figure">
 <span style="display:block;" id="fig:10-ass1"></span>
 <img src="images/10-ass1.jpg" alt="Assumption 1 Assessment"><p class="caption">
@@ -346,7 +346,7 @@ y=\hat{\beta}_0+\hat{\beta}_1 x + e
 e_i = y_i-\hat{y}_i.
 \tag{10.7}
 \end{equation}\]</span></p>
-<p>The <strong>residuals</strong> are the differences between the actual values of the response variable and their corresponding predicted values based on the fitted line. Visually, a residual is the vertical distance of a data point in the scatter plot from the fitted line, as shwon in Figure <a href="linear-regression.html#fig:10-res">10.7</a> below:</p>
+<p>The <strong>residuals</strong> are the differences between the actual values of the response variable and their corresponding predicted values based on the fitted line. Visually, a residual is the vertical distance of a data point in the scatter plot from the fitted line, as shown in Figure <a href="linear-regression.html#fig:10-res">10.7</a> below:</p>
 <div class="figure">
 <span style="display:block;" id="fig:10-res"></span>
 <img src="images/10-residuals.png" alt="Example of Residuals. Picture from https://www.statology.org/residuals/"><p class="caption">
@@ -548,12 +548,12 @@ t = \frac{\hat{\beta}_1 - \text{ value in null}}{se(\hat{\beta}_1)}.
 <h3>
 <span class="header-section-number">10.4.6</span> Linear Regression in R<a class="anchor" aria-label="anchor" href="#linear-regression-in-r"><i class="fas fa-link"></i></a>
 </h3>
-<p>Next, we will perform a simple linear regression on a real dataset using R. We will work with the dataset <code>elmhurst</code> from the <code>openintro</code> package in R.</p>
+<p>Next, we will perform a simple linear regression on a real data set using R. We will work with the data set <code>elmhurst</code> from the <code>openintro</code> package in R.</p>
 <div class="sourceCode" id="cb198"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://openintrostat.github.io/openintro/">openintro</a></span><span class="op">)</span></span>
 <span><span class="va">Data</span><span class="op">&lt;-</span><span class="fu">openintro</span><span class="fu">::</span><span class="va"><a href="https://openintrostat.github.io/openintro/reference/elmhurst.html">elmhurst</a></span></span></code></pre></div>
-<p>Type <code><a href="https://openintrostat.github.io/openintro/reference/elmhurst.html">?openintro::elmhurst</a></code> to read the documentation for datasets in R. Always seek to understand the background of your data! The key pieces of information are:</p>
+<p>Type <code><a href="https://openintrostat.github.io/openintro/reference/elmhurst.html">?openintro::elmhurst</a></code> to read the documentation for data sets in R. Always seek to understand the background of your data! The key pieces of information are:</p>
 <ul>
 <li>A random sample of 50 students (all freshman from the 2011 class at Elmhurst College).</li>
 <li>Family income of the student (units are missing).</li>
@@ -732,7 +732,7 @@ Figure 10.8: Scatter Plot for Worked Example
 </ul>
 <p>In this section, we will focus on the second primary use of supervised methods: prediction. When we focus on prediction, we mainly care about how close are the predicted (or fitted) values with their true values. A lot of what was mentioned in Section <a href="linear-regression.html#SLRinf">10.4</a> can actually be ignored (other than assumption 1 of the regression assumptions, since predictions will definitely suffer if this is not met) when our focus is on prediction. Prediction is in the domain of predictive analytics. While predictive analytics can be used in a wide variety of applications, the kind of questions they answer differ from the earlier questions, for example:</p>
 <ul>
-<li>Hospitality: Determining staffing needs for a casino. We want to be able to predict the right number of staff to hire: overstaffing costs money and understaffing results in unhappy customers.</li>
+<li>Hospitality: Determining staffing needs for a casino. We want to be able to predict the right number of staff to hire: over-staffing costs money and under-staffing results in unhappy customers.</li>
 <li>Online ads: Based on a user’s history on Amazon, Amazon would like to be able to recommend products that the user is highly likely to purchase.</li>
 <li>Personalized medicine: Based on a patient’s history, what is the most effective treatment plan?</li>
 <li>Dynamic pricing: airlines use dynamic pricing that adjusts price to maximize profits, based on real-time market conditions.</li>
@@ -833,7 +833,7 @@ y=\beta_0+\beta_{1}x_1 + \beta_2 x_2 + \beta_3 x_1 x_2 + \epsilon,
 <p>After reading the previous subsections, one may consider the following strategy when assessing model accuracy and choosing between several nested models: fit all models under consideration using all available data, then choose the model that the smallest MSE (or RMSE).</p>
 <p>A property of the MSE and RMSE of nested models is that these values only decrease as the model gets more complex! We will not go through the whole proof of this, but intuitively, one can see why the more complex model will never do worse than the less complex model: this happens when the additional parameters are all 0. This property suggests that using this strategy will always end up selecting the most complex model, as the most complex model will always have the smallest MSE and RMSE.</p>
 <p>Take a step back and remind ourselves what we actually want to do with prediction: after fitting the model, we want to be able to accurately predict the values of the response variable in the future. When we fit a model well based on the current data, the model may do poorly on new data. This is called <strong>overfitting</strong>.</p>
-<p>So what we will do is to split a given dataset into two portions. One portion, called the <strong>training data</strong>, is used to fit (or train) the model. The other portion, called the <strong>test data</strong>, is used to assess the prediction accuracy of the model. The test data are never used to fit the model, so the test data play the role of new data.</p>
+<p>So what we will do is to split a given data set into two portions. One portion, called the <strong>training data</strong>, is used to fit (or train) the model. The other portion, called the <strong>test data</strong>, is used to assess the prediction accuracy of the model. The test data are never used to fit the model, so the test data play the role of new data.</p>
 <p>The MSE (or RMSE) is then calculated on both portions, and are called the training MSE and the test MSE. The relationship between the training and test MSEs with the complexity of nested models is shown below in Figure <a href="linear-regression.html#fig:10-MSE">10.9</a>:</p>
 <div class="figure">
 <span style="display:block;" id="fig:10-MSE"></span>
@@ -847,7 +847,7 @@ Figure 10.9: Training &amp; Test MSE vs Complexity
 <li>The black curve represents how the test MSE behaves as models get more complex. The test MSE is minimum when we find an appropriate level of complexity, and this is denoted by the red line. We call this model the optimal model. The test MSE increases as models get more complex, or less complex, than the optimal model.</li>
 <li>Overfitted models are models that are more complex than the optimal model.
 <ul>
-<li>Overfitted models generally have low training MSE, and high test MSE. A large difference between these two is also indicative of overgfitting.</li>
+<li>Overfitted models generally have low training MSE, and high test MSE. A large difference between these two is also indicative of overfitting.</li>
 </ul>
 </li>
 <li>Underfitted models are models that are less complex than the optimal model.
@@ -920,8 +920,8 @@ Figure 10.10: Four Polynomial Models Fitted to a Simulated Dataset
 <li>Fitted line 3, in green, appears to be best in that it matches the closest to the truth, generally.</li>
 <li>Fitted line 4, in orange, does not quite match the true, especially at the extreme ends of the x-axis.</li>
 </ul>
-<p>Of course, these comments are based on 1 simulated dataset, but if we were to create many replicates of the dataset and create a similar scatter plot, we would expect to see similar characteristics.</p>
-<p>To illustrate the idea behind the bias and variance of predictions, we simulate 3 replicates datasets, each of size 1000, and show fitted lines 1 and 4 on each replicate in Figure <a href="linear-regression.html#fig:10-sims3">10.11</a>. Let us remind ourselves of what was written earlier about the bias variance tradeoff and the complexity of models:</p>
+<p>Of course, these comments are based on 1 simulated data set, but if we were to create many replicates of the data set and create a similar scatter plot, we would expect to see similar characteristics.</p>
+<p>To illustrate the idea behind the bias and variance of predictions, we simulate 3 replicates data sets, each of size 1000, and show fitted lines 1 and 4 on each replicate in Figure <a href="linear-regression.html#fig:10-sims3">10.11</a>. Let us remind ourselves of what was written earlier about the bias variance tradeoff and the complexity of models:</p>
 <ul>
 <li>Fitted line 1 is too simple, so we expect a high degree of bias and a low degree of variance.</li>
 <li>Fitted line 2 is also simple, so we expect some bias, and a higher degree of variance.</li>
@@ -937,17 +937,17 @@ Figure 10.11: Fitted Lines 1 &amp; 4 on Three Different Simulated Datasets
 <p>For fitted line 1:</p>
 <ul>
 <li>We see that the the blue line always does a poor job capturing the truth in the data, therefore, it will have high bias as it will systematically over- or under-predict.</li>
-<li>However, the blue lines are all pretty similar across all three simulated datasets. Therefore, it has low variance as the line is pretty much the same.</li>
+<li>However, the blue lines are all pretty similar across all three simulated data sets. Therefore, it has low variance as the line is pretty much the same.</li>
 </ul>
 <p>For fitted line 4:</p>
 <ul>
-<li>We see that the orange lines are very different across all three simulated datasets. Therefore, it has high variance.</li>
-<li>Fitted line 4 will be, on average, theoretically unbiased. However, being an unbiased but highly variable fitted line is can be problematic, since we only observe one dataset in real life, so we cannot average the predictions over many datasets. This is why we also want fitted lines with low variance.</li>
+<li>We see that the orange lines are very different across all three simulated data sets. Therefore, it has high variance.</li>
+<li>Fitted line 4 will be, on average, theoretically unbiased. However, being an unbiased but highly variable fitted line is can be problematic, since we only observe one data set in real life, so we cannot average the predictions over many data sets. This is why we also want fitted lines with low variance.</li>
 </ul>
-<p>We now carry out the Monte Carlo simulations, over 1000 replicates. Ideally, the number of replicates should be more, but this simulation takes some time to run (fitting high degree polynomials is computationally expenseive). We will use these 1000 replicates to compute the MSE, bias, and variance of the four fitted lines, evaluated at the point <span class="math inline">\(x=0.1\)</span>. The simulation would do the following:</p>
+<p>We now carry out the Monte Carlo simulations, over 1000 replicates. Ideally, the number of replicates should be more, but this simulation takes some time to run (fitting high degree polynomials is computationally expensive). We will use these 1000 replicates to compute the MSE, bias, and variance of the four fitted lines, evaluated at the point <span class="math inline">\(x=0.1\)</span>. The simulation would do the following:</p>
 <ul>
-<li>Simulate 1 dataset of 1000 observations.</li>
-<li>Fitted fitted lines 1 to 4 on the dataset.</li>
+<li>Simulate 1 data set of 1000 observations.</li>
+<li>Fitted fitted lines 1 to 4 on the data set.</li>
 <li>Compute the predicted value <span class="math inline">\(\hat{y}\)</span> when <span class="math inline">\(x=0.9\)</span> based on each of the four fitted lines, and record these values.</li>
 <li>Repeat these steps for over 1000 replicates.</li>
 </ul>
@@ -1003,7 +1003,7 @@ Figure 10.12: Box Plots of Predictions for Four Fitted Lines
 </tr>
 <tr class="even">
 <td align="left">line4</td>
-<td align="right">3</td>
+<td align="right">9</td>
 <td align="right">0.0095384</td>
 <td align="right">0.0000074</td>
 <td align="right">0.0095406</td>
@@ -1080,7 +1080,7 @@ Figure 10.12: Box Plots of Predictions for Four Fitted Lines
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2025-08-04.</p>
+    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2025-08-05.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

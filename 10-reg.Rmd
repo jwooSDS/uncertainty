@@ -204,7 +204,7 @@ The assumptions for the error terms, $\epsilon$, expressed in equation \@ref(eq:
 
 The plots in Figure \@ref(fig:10-ass1) are based on simulated data. The scatter plot shown in Figure \@ref(fig:10-ass1)(a) is an example of when this assumption is met. As we move from left to right on the plot, the data points are generally evenly scattered on both sides of the regression line that is overlaid. 
 
-The scatter plot shown in Figure \@ref(fig:10-ass1)(b) is an example of when this assumption is not met. As we move from left to right on the plot in Figure \@ref(fig:10-ass1)(b), the data points are generally not evenly scattered on both sides of the regression line that is overlaid. The shape of the plots look more like a cruve rather than a straight line.
+The scatter plot shown in Figure \@ref(fig:10-ass1)(b) is an example of when this assumption is not met. As we move from left to right on the plot in Figure \@ref(fig:10-ass1)(b), the data points are generally not evenly scattered on both sides of the regression line that is overlaid. The shape of the plots look more like a curve rather than a straight line.
 
 ```{r 10-ass1, fig.cap='Assumption 1 Assessment', echo=FALSE, message=FALSE}
 knitr::include_graphics("images/10-ass1.jpg")
@@ -282,7 +282,7 @@ e_i = y_i-\hat{y}_i.
 (\#eq:10-res)
 \end{equation}
 
-The **residuals** are the differences between the actual values of the response variable and their corresponding predicted values based on the fitted line. Visually, a residual is the vertical distance of a data point in the scatter plot from the fitted line, as shwon in Figure \@ref(fig:10-res) below:
+The **residuals** are the differences between the actual values of the response variable and their corresponding predicted values based on the fitted line. Visually, a residual is the vertical distance of a data point in the scatter plot from the fitted line, as shown in Figure \@ref(fig:10-res) below:
 
 ```{r 10-res, fig.cap = "Example of Residuals. Picture from https://www.statology.org/residuals/", echo = FALSE}
 knitr::include_graphics("images/10-residuals.png")
@@ -488,7 +488,7 @@ A few notes about $R^2$:
 
 ### Linear Regression in R
 
-Next, we will perform a simple linear regression on a real dataset using R. We will work with the dataset `elmhurst` from the `openintro` package in R.
+Next, we will perform a simple linear regression on a real data set using R. We will work with the data set `elmhurst` from the `openintro` package in R.
 
 ```{r, echo=FALSE}
 rm(list = ls())
@@ -500,7 +500,7 @@ library(openintro)
 Data<-openintro::elmhurst
 ```
 
-Type `?openintro::elmhurst` to read the documentation for datasets in R. Always seek to understand the background of your data! The key pieces of information are:
+Type `?openintro::elmhurst` to read the documentation for data sets in R. Always seek to understand the background of your data! The key pieces of information are:
 
 - A random sample of 50 students (all freshman from the 2011 class at Elmhurst College).
 - Family income of the student (units are missing).
@@ -656,7 +656,7 @@ In Section \@ref(SLRinf), we focused on the sampling distribution of the least s
 
 In this section, we will focus on the second primary use of supervised methods: prediction. When we focus on prediction, we mainly care about how close are the predicted (or fitted) values with their true values. A lot of what was mentioned in Section \@ref(SLRinf) can actually be ignored (other than assumption 1 of the regression assumptions, since predictions will definitely suffer if this is not met) when our focus is on prediction. Prediction is in the domain of predictive analytics. While predictive analytics can be used in a wide variety of applications, the kind of questions they answer differ from the earlier questions, for example:
 
-- Hospitality: Determining staffing needs for a casino. We want to be able to predict the right number of staff to hire: overstaffing costs money and understaffing results in unhappy customers. 
+- Hospitality: Determining staffing needs for a casino. We want to be able to predict the right number of staff to hire: over-staffing costs money and under-staffing results in unhappy customers. 
 - Online ads: Based on a user's history on Amazon, Amazon would like to be able to recommend products that the user is highly likely to purchase.
 - Personalized medicine: Based on a patient's history, what is the most effective treatment plan?
 - Dynamic pricing: airlines use dynamic pricing that adjusts price to maximize profits, based on real-time market conditions. 
@@ -772,7 +772,7 @@ A property of the MSE and RMSE of nested models is that these values only decrea
 
 Take a step back and remind ourselves what we actually want to do with prediction: after fitting the model, we want to be able to accurately predict the values of the response variable in the future. When we fit a model well based on the current data, the model may do poorly on new data. This is called **overfitting**. 
 
-So what we will do is to split a given dataset into two portions. One portion, called the **training data**, is used to fit (or train) the model. The other portion, called the **test data**, is used to assess the prediction accuracy of the model. The test data are never used to fit the model, so the test data play the role of new data. 
+So what we will do is to split a given data set into two portions. One portion, called the **training data**, is used to fit (or train) the model. The other portion, called the **test data**, is used to assess the prediction accuracy of the model. The test data are never used to fit the model, so the test data play the role of new data. 
 
 The MSE (or RMSE) is then calculated on both portions, and are called the training MSE and the test MSE. The relationship between the training and test MSEs with the complexity of nested models is shown below in Figure \@ref(fig:10-MSE):
 
@@ -785,7 +785,7 @@ We make the following comments about Figure \@ref(fig:10-MSE):
 - The blue curve represents how the training MSE behaves as models get more complex. As models get more complex, the training MSE never decreases.
 - The black curve represents how the test MSE behaves as models get more complex. The test MSE is minimum when we find an appropriate level of complexity, and this is denoted by the red line. We call this model the optimal model. The test MSE increases as models get more complex, or less complex, than the optimal model. 
 - Overfitted models are models that are more complex than the optimal model.
-  - Overfitted models generally have low training MSE, and high test MSE. A large difference between these two is also indicative of overgfitting.
+  - Overfitted models generally have low training MSE, and high test MSE. A large difference between these two is also indicative of overfitting.
 - Underfitted models are models that are less complex than the optimal model. 
   - Underfitted models generally have high training MSE and high test MSE. 
 - On average, the training MSE is lower than the test MSE for any model. This is because the model is usually estimated by minimizing some quantity that is related to the training MSE. For example, we minimize $SS_{res}$, which is the numerator of the training MSE, for linear regression.
@@ -866,9 +866,9 @@ From Figure \@ref(fig:10-sims1), we make the following comments:
 - Fitted line 3, in green, appears to be best in that it matches the closest to the truth, generally.
 - Fitted line 4, in orange, does not quite match the true, especially at the extreme ends of the x-axis.
 
-Of course, these comments are based on 1 simulated dataset, but if we were to create many replicates of the dataset and create a similar scatter plot, we would expect to see similar characteristics. 
+Of course, these comments are based on 1 simulated data set, but if we were to create many replicates of the data set and create a similar scatter plot, we would expect to see similar characteristics. 
 
-To illustrate the idea behind the bias and variance of predictions, we simulate 3 replicates datasets, each of size 1000, and show fitted lines 1 and 4 on each replicate in Figure \@ref(fig:10-sims3). Let us remind ourselves of what was written earlier about the bias variance tradeoff and the complexity of models:
+To illustrate the idea behind the bias and variance of predictions, we simulate 3 replicates data sets, each of size 1000, and show fitted lines 1 and 4 on each replicate in Figure \@ref(fig:10-sims3). Let us remind ourselves of what was written earlier about the bias variance tradeoff and the complexity of models:
 
 - Fitted line 1 is too simple, so we expect a high degree of bias and a low degree of variance.
 - Fitted line 2 is also simple, so we expect some bias, and a higher degree of variance.
@@ -911,17 +911,17 @@ legend("topleft", c("y ~ 1", "y ~ poly(x, 9)"), col = c("blue", "orange"), lty =
 For fitted line 1:
 
 - We see that the the blue line always does a poor job capturing the truth in the data, therefore, it will have high bias as it will systematically over- or under-predict.
-- However, the blue lines are all pretty similar across all three simulated datasets. Therefore, it has low variance as the line is pretty much the same. 
+- However, the blue lines are all pretty similar across all three simulated data sets. Therefore, it has low variance as the line is pretty much the same. 
 
 For fitted line 4:
 
-- We see that the orange lines are very different across all three simulated datasets. Therefore, it has high variance.
-- Fitted line 4 will be, on average, theoretically unbiased. However, being an unbiased but highly variable fitted line is can be problematic, since we only observe one dataset in real life, so we cannot average the predictions over many datasets. This is why we also want fitted lines with low variance. 
+- We see that the orange lines are very different across all three simulated data sets. Therefore, it has high variance.
+- Fitted line 4 will be, on average, theoretically unbiased. However, being an unbiased but highly variable fitted line is can be problematic, since we only observe one data set in real life, so we cannot average the predictions over many data sets. This is why we also want fitted lines with low variance. 
 
-We now carry out the Monte Carlo simulations, over 1000 replicates. Ideally, the number of replicates should be more, but this simulation takes some time to run (fitting high degree polynomials is computationally expenseive). We will use these 1000 replicates to compute the MSE, bias, and variance of the four fitted lines, evaluated at the point $x=0.1$. The simulation would do the following:
+We now carry out the Monte Carlo simulations, over 1000 replicates. Ideally, the number of replicates should be more, but this simulation takes some time to run (fitting high degree polynomials is computationally expensive). We will use these 1000 replicates to compute the MSE, bias, and variance of the four fitted lines, evaluated at the point $x=0.1$. The simulation would do the following:
 
-- Simulate 1 dataset of 1000 observations.
-- Fitted fitted lines 1 to 4 on the dataset.
+- Simulate 1 data set of 1000 observations.
+- Fitted fitted lines 1 to 4 on the data set.
 - Compute the predicted value $\hat{y}$ when $x=0.9$ based on each of the four fitted lines, and record these values.
 - Repeat these steps for over 1000 replicates.
 
@@ -1009,7 +1009,7 @@ variance <- apply(yhats.df, 2, var)
 
 # Define your table data
 my_data <- data.frame(
-  degree = c(0, 1, 2, 3),
+  degree = c(0, 1, 2, 9),
   MSE = c(MSEs[1], MSEs[2], MSEs[3], MSEs[4]),
   Squared.Bias = c(bias[1]^2, bias[2]^2, bias[3]^2, bias[4]^2),
   Variance = c(variance[1], variance[2], variance[3], variance[4])
