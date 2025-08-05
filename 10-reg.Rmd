@@ -144,6 +144,8 @@ E(Y|X=x) = \beta_0+\beta_{1} x
 
 View the video below that explains how these are derived:
 
+<iframe width="560px" height="320px" allowfullscreen="true" allow="autoplay *" title="Module 10: Distribution of Y given X in Regression" src="https://virginiauniversity.instructuremedia.com/embed/445744ac-5422-496a-943e-6b2912130c4a" frameborder="0"></iframe>
+
 In other words, the conditional distribution of $Y|X=x$ is $N(\beta_0+\beta_{1} x, \sigma^2)$. Applying this to our study time example, it implies that:
 
   * for students who take 3 courses, their study time follows a $N(\beta_0 + 3\beta_1, \sigma^2)$ distribution,
@@ -237,6 +239,8 @@ knitr::include_graphics("images/10-ass2.jpg")
 
 View the video below for more explanation on how to assess assumptions 1 and 2 with a scatter plot of the data:
 
+<iframe width="560px" height="320px" allowfullscreen="true" allow="autoplay *" title="Module 10: Assessing Assumptions in Linear Regression" src="https://virginiauniversity.instructuremedia.com/embed/6cc805a1-4274-4693-91de-c359d90e4e44" frameborder="0"></iframe>
+
 ## Estimating Regression Coefficients {#estSLR}
 
 There are two methods in estimating the regression coefficients: the method of **least squares** and the method of **maximum likelihood**. For large sample sizes, these methods give similar results.
@@ -322,6 +326,8 @@ $\hat{\beta}_1, \hat{\beta}_0$ are called **least squares estimators**, to empha
 The minimization of $SS_{res}$ with respect to $\hat{\beta}_0$ and $\hat{\beta}_1$ is done by taking the partial derivatives of \@ref(eq:10-SSres) with respect to $\hat{\beta}_1$ and $\hat{\beta}_0$, setting these two partial derivatives equal to 0, and solving these two equations for $\hat{\beta}_1$ and $\hat{\beta}_0$.
 
 View the video below for more explanation on the method of least squares:
+
+<iframe width="560px" height="320px" allowfullscreen="true" allow="autoplay *" title="Module 10: Method of Least Squares" src="https://virginiauniversity.instructuremedia.com/embed/129b20c0-b2fa-4bfb-a8e5-e810840cfb95" frameborder="0"></iframe>
 
 Let's take a look at the estimated coefficients for our study time example:
 
@@ -651,6 +657,8 @@ cor(Data$family_income,Data$gift_aid)
 The correlation is `r cor(Data$family_income,Data$gift_aid)`. We have a moderate, negative linear association between family income and gift aid. 
 
 View the video below if you need a little more explanation on using R for linear regression:
+
+<iframe width="560px" height="320px" allowfullscreen="true" allow="autoplay *" title="Module 10: Linear Regression in R" src="https://virginiauniversity.instructuremedia.com/embed/e6ab985e-7b0f-4fe3-8eaa-90f8611b7f70" frameborder="0"></iframe>
 
 ## Assessing Model Accuracy {#SLRacc}
 

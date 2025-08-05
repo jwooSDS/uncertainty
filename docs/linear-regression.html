@@ -190,6 +190,8 @@ E(Y|X=x) = \beta_0+\beta_{1} x
 <li>and variance equal to <span class="math inline">\(\sigma^2\)</span>.</li>
 </ol>
 <p>View the video below that explains how these are derived:</p>
+<iframe width="560px" height="320px" allowfullscreen="true" allow="autoplay *" title="Module 10: Distribution of Y given X in Regression" src="https://virginiauniversity.instructuremedia.com/embed/445744ac-5422-496a-943e-6b2912130c4a" frameborder="0">
+</iframe>
 <p>In other words, the conditional distribution of <span class="math inline">\(Y|X=x\)</span> is <span class="math inline">\(N(\beta_0+\beta_{1} x, \sigma^2)\)</span>. Applying this to our study time example, it implies that:</p>
 <ul>
 <li>for students who take 3 courses, their study time follows a <span class="math inline">\(N(\beta_0 + 3\beta_1, \sigma^2)\)</span> distribution,</li>
@@ -305,6 +307,8 @@ Figure 10.6: Assumption 2 Assessment
 </ul>
 <p><em>Thought question</em>: Look at the scatter plot of the toy example in Figure <a href="linear-regression.html#fig:10-scatter">10.1</a>. Can you explain why this scatter plot shows the first two assumptions are met for linear regression?</p>
 <p>View the video below for more explanation on how to assess assumptions 1 and 2 with a scatter plot of the data:</p>
+<iframe width="560px" height="320px" allowfullscreen="true" allow="autoplay *" title="Module 10: Assessing Assumptions in Linear Regression" src="https://virginiauniversity.instructuremedia.com/embed/6cc805a1-4274-4693-91de-c359d90e4e44" frameborder="0">
+</iframe>
 </div>
 </div>
 <div id="estSLR" class="section level2" number="10.3">
@@ -382,6 +386,8 @@ SS_{res} =  \sum\limits_{i=1}^n(y_i-\hat{y}_i)^2.
 <p><span class="math inline">\(\hat{\beta}_1, \hat{\beta}_0\)</span> are called <strong>least squares estimators</strong>, to emphasize that these values are found by minimizing <span class="math inline">\(SS_{res}\)</span>.</p>
 <p>The minimization of <span class="math inline">\(SS_{res}\)</span> with respect to <span class="math inline">\(\hat{\beta}_0\)</span> and <span class="math inline">\(\hat{\beta}_1\)</span> is done by taking the partial derivatives of <a href="linear-regression.html#eq:10-SSres">(10.8)</a> with respect to <span class="math inline">\(\hat{\beta}_1\)</span> and <span class="math inline">\(\hat{\beta}_0\)</span>, setting these two partial derivatives equal to 0, and solving these two equations for <span class="math inline">\(\hat{\beta}_1\)</span> and <span class="math inline">\(\hat{\beta}_0\)</span>.</p>
 <p>View the video below for more explanation on the method of least squares:</p>
+<iframe width="560px" height="320px" allowfullscreen="true" allow="autoplay *" title="Module 10: Method of Least Squares" src="https://virginiauniversity.instructuremedia.com/embed/129b20c0-b2fa-4bfb-a8e5-e810840cfb95" frameborder="0">
+</iframe>
 <p>Let’s take a look at the estimated coefficients for our study time example:</p>
 <div class="sourceCode" id="cb190"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##fit regression</span></span>
@@ -722,6 +728,8 @@ Figure 10.8: Scatter Plot for Worked Example
 <pre><code>## [1] -0.4985561</code></pre>
 <p>The correlation is -0.4985561. We have a moderate, negative linear association between family income and gift aid.</p>
 <p>View the video below if you need a little more explanation on using R for linear regression:</p>
+<iframe width="560px" height="320px" allowfullscreen="true" allow="autoplay *" title="Module 10: Linear Regression in R" src="https://virginiauniversity.instructuremedia.com/embed/e6ab985e-7b0f-4fe3-8eaa-90f8611b7f70" frameborder="0">
+</iframe>
 </div>
 </div>
 </div>
