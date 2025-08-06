@@ -150,16 +150,52 @@
 </h2>
 <p>In the two examples, notice how I used some R functions, supplied the names of the variables, and the R functions generated the values of the estimated parameters? One thing you will learn is how the functions actually calculate these numbers. It turns out that these calculations are based on foundational concepts associated with measures of uncertainty, probability, and expected values. We will be learning about these concepts in this class.</p>
 <p>Why do we want to know how these calculations are performed? So that we understand the intuition and logic behind how these models are built. It becomes a lot easier to work with these models when we understand their logic (for example, we know when these models can be used or cannot be used, we know what steps to take when we notice our data have certain characteristics, etc), instead of memorizing a bunch of steps.</p>
-<p>When presenting models and data to people, some people may occasionally questions our methods and models. Why should we trust the model? Should we trust these numbers that seem to come out from some black box?</p>
-<p>Notice we used two different models, linear regression and logistic regression, for examples 1 and 2. Why did we use these models? Could we have swapped the type of model used in these examples? The answer is actually no. One of the main considerations when deciding what model to use is to identify if our response variable is quantitative or categorical. You will learn why the linear regression model works when the response variable is quantitative, and why the logistic regression model works when the response variable is categorical.</p>
+<p>When presenting models and data to people, some people may occasionally question our methods and models. Why should we trust the model? Should we trust these numbers that seem to come out from some black box?</p>
+<p>Notice we used two different models, linear regression and logistic regression, for examples 1 and 2. Why did we use these models? Could we have swapped the type of model used in these examples? The answer is actually no. Knowing the foundational concepts of these models will help explain why certain models can be used in certain situations.</p>
 </div>
 <div id="the-course-understanding-uncertainty" class="section level2" number="0.3">
 <h2>
 <span class="header-section-number">0.3</span> The Course: Understanding Uncertainty<a class="anchor" aria-label="anchor" href="#the-course-understanding-uncertainty"><i class="fas fa-link"></i></a>
 </h2>
 <p>As mentioned in the previous section, we will be learning about foundational concepts associated with measures of uncertainty, probability, and expected values. All of these concepts will then help explain the intuition and how statistical models are built.</p>
-<p>At the end of the course, we will apply these concepts and revisit the linear regression and logistic regression models. These are two of the most widely used models used in data science, as they are relatively easier to understand and explain. More modern methods (that you will learn about in future classes) such as decision trees and neural networks can be viewed as extensions of the linear and logistic regression models.</p>
+<p>At the end of the course, we will apply these concepts and revisit the linear regression model. Linear regression is the most widely used models used in data science, as it is relatively easy to understand and explain. More modern methods (that you will learn about in future classes) such as decision trees and neural networks can be viewed as extensions of the linear regression model.</p>
+</div>
+<div id="background-needed-for-the-course" class="section level2" number="0.4">
+<h2>
+<span class="header-section-number">0.4</span> Background Needed for the Course<a class="anchor" aria-label="anchor" href="#background-needed-for-the-course"><i class="fas fa-link"></i></a>
+</h2>
+<div id="mathematical-background" class="section level3" number="0.4.1">
+<h3>
+<span class="header-section-number">0.4.1</span> Mathematical Background<a class="anchor" aria-label="anchor" href="#mathematical-background"><i class="fas fa-link"></i></a>
+</h3>
+<p>We will be covering the basic mathematics associated with probability and measures of uncertainty, so that you know what these are measuring.</p>
+<ul>
+<li><p>Some knowledge of basic calculus is helpful (i.e. the idea behind differentiation as it relates to optimizing a function, the idea that integrating a function corresponds to the area under the function), but you will not be performing these by hand, other than the occasional first order derivative that is simpler than in any calculus class that you’ve been in.</p></li>
+<li><p>Being comfortable with matrix notation will also be helpful.</p></li>
+<li><p>You should also be comfortable with notation regarding sums and products. For example, know what <span class="math inline">\(\sum_{i=1}^n x_i\)</span> and <span class="math inline">\(\prod_{i=1}^n x_i\)</span> represent.</p></li>
+</ul>
+</div>
+<div id="r-background" class="section level3" number="0.4.2">
+<h3>
+<span class="header-section-number">0.4.2</span> R Background<a class="anchor" aria-label="anchor" href="#r-background"><i class="fas fa-link"></i></a>
+</h3>
+<p>These skills should have been covered in the R Boot Camp or in the programming proficiency test.</p>
+<ul>
+<li>Control structures, especially <code>for()</code> loops.</li>
+<li>Data wrangling.</li>
+<li>Data visualization.</li>
+</ul>
+<p>Note that I primarily use base R functions to perform data wrangling and data visualization, although you could perform the same operations using <code>tidyverse</code> functions (<code>dplyr</code> and <code>ggplot2</code> functions are part of the <code>tidyverse</code>).</p>
+<p>Practitioners of data science should be comfortable working with using base R and <code>tidyverse</code> functions. I highly discourage anyone from not learning one of these:</p>
+<ol style="list-style-type: decimal">
+<li>You will likely have to work with other people, so you may need to be comfortable using either base R or <code>tidyverse</code> functions.</li>
+<li>You will find that you perform some tasks faster with base R, and some are faster with <code>tidyverse</code> functions.</li>
+<li>Packages are constantly being added. Depending on the author of the package, the package may only work with base R or only with <code>tidyverse</code> functions. For now, I will say that most packages work with base R functions, but this may change in the future.</li>
+</ol>
+<p>The code to produce visualizations with base R tends to be a lot shorter than with <code>ggplot2</code> functions. I find that base R provides good enough visualizations, especially if all that is needed are some basic visuals for exploration, although `<code>ggplot2</code> functions can produce visualizations that are more complex and beautiful.</p>
+<p>You should feel free to use whatever approach, as long as it performs the needed tasks. You can even use a mix of both approaches if you choose to do so.</p>
 
+</div>
 </div>
 </div>
   <div class="chapter-nav">
@@ -177,6 +213,12 @@
 </li>
 <li><a class="nav-link" href="#how-were-estimated-parameters-calculated"><span class="header-section-number">0.2</span> How were Estimated Parameters Calculated?</a></li>
 <li><a class="nav-link" href="#the-course-understanding-uncertainty"><span class="header-section-number">0.3</span> The Course: Understanding Uncertainty</a></li>
+<li>
+<a class="nav-link" href="#background-needed-for-the-course"><span class="header-section-number">0.4</span> Background Needed for the Course</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#mathematical-background"><span class="header-section-number">0.4.1</span> Mathematical Background</a></li>
+<li><a class="nav-link" href="#r-background"><span class="header-section-number">0.4.2</span> R Background</a></li>
+</ul>
+</li>
 </ul>
 
       <div class="book-extra">
@@ -193,7 +235,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2025-08-05.</p>
+    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2025-08-06.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

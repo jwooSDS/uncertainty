@@ -221,6 +221,9 @@ example-1-mario-kart-auction-prices
 eg2
 how-were-estimated-parameters-calculated
 the-course-understanding-uncertainty
+background-needed-for-the-course
+mathematical-background
+r-background
 descriptive
 uncertainty-with-data
 visualizing-data

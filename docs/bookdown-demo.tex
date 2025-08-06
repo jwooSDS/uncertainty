@@ -127,7 +127,7 @@
 
 \title{Understanding Uncertainty Course Notes}
 \author{Jeffrey Woo}
-\date{2025-08-05}
+\date{2025-08-06}
 
 \begin{document}
 \maketitle
@@ -260,15 +260,63 @@ In the two examples, notice how I used some R functions, supplied the names of t
 
 Why do we want to know how these calculations are performed? So that we understand the intuition and logic behind how these models are built. It becomes a lot easier to work with these models when we understand their logic (for example, we know when these models can be used or cannot be used, we know what steps to take when we notice our data have certain characteristics, etc), instead of memorizing a bunch of steps.
 
-When presenting models and data to people, some people may occasionally questions our methods and models. Why should we trust the model? Should we trust these numbers that seem to come out from some black box?
+When presenting models and data to people, some people may occasionally question our methods and models. Why should we trust the model? Should we trust these numbers that seem to come out from some black box?
 
-Notice we used two different models, linear regression and logistic regression, for examples 1 and 2. Why did we use these models? Could we have swapped the type of model used in these examples? The answer is actually no. One of the main considerations when deciding what model to use is to identify if our response variable is quantitative or categorical. You will learn why the linear regression model works when the response variable is quantitative, and why the logistic regression model works when the response variable is categorical.
+Notice we used two different models, linear regression and logistic regression, for examples 1 and 2. Why did we use these models? Could we have swapped the type of model used in these examples? The answer is actually no. Knowing the foundational concepts of these models will help explain why certain models can be used in certain situations.
 
 \section{The Course: Understanding Uncertainty}\label{the-course-understanding-uncertainty}
 
 As mentioned in the previous section, we will be learning about foundational concepts associated with measures of uncertainty, probability, and expected values. All of these concepts will then help explain the intuition and how statistical models are built.
 
-At the end of the course, we will apply these concepts and revisit the linear regression and logistic regression models. These are two of the most widely used models used in data science, as they are relatively easier to understand and explain. More modern methods (that you will learn about in future classes) such as decision trees and neural networks can be viewed as extensions of the linear and logistic regression models.
+At the end of the course, we will apply these concepts and revisit the linear regression model. Linear regression is the most widely used models used in data science, as it is relatively easy to understand and explain. More modern methods (that you will learn about in future classes) such as decision trees and neural networks can be viewed as extensions of the linear regression model.
+
+\section{Background Needed for the Course}\label{background-needed-for-the-course}
+
+\subsection{Mathematical Background}\label{mathematical-background}
+
+We will be covering the basic mathematics associated with probability and measures of uncertainty, so that you know what these are measuring.
+
+\begin{itemize}
+\item
+  Some knowledge of basic calculus is helpful (i.e.~the idea behind differentiation as it relates to optimizing a function, the idea that integrating a function corresponds to the area under the function), but you will not be performing these by hand, other than the occasional first order derivative that is simpler than in any calculus class that you've been in.
+\item
+  Being comfortable with matrix notation will also be helpful.
+\item
+  You should also be comfortable with notation regarding sums and products. For example, know what \(\sum_{i=1}^n x_i\) and \(\prod_{i=1}^n x_i\) represent.
+\end{itemize}
+
+\subsection{R Background}\label{r-background}
+
+These skills should have been covered in the R Boot Camp or in the programming proficiency test.
+
+\begin{itemize}
+\tightlist
+\item
+  Control structures, especially \texttt{for()} loops.
+\item
+  Data wrangling.
+\item
+  Data visualization.
+\end{itemize}
+
+Note that I primarily use base R functions to perform data wrangling and data visualization, although you could perform the same operations using \texttt{tidyverse} functions (\texttt{dplyr} and \texttt{ggplot2} functions are part of the \texttt{tidyverse}).
+
+Practitioners of data science should be comfortable working with using base R and \texttt{tidyverse} functions. I highly discourage anyone from not learning one of these:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  You will likely have to work with other people, so you may need to be comfortable using either base R or \texttt{tidyverse} functions.
+\item
+  You will find that you perform some tasks faster with base R, and some are faster with \texttt{tidyverse} functions.
+\item
+  Packages are constantly being added. Depending on the author of the package, the package may only work with base R or only with \texttt{tidyverse} functions. For now, I will say that most packages work with base R functions, but this may change in the future.
+\end{enumerate}
+
+The code to produce visualizations with base R tends to be a lot shorter than with \texttt{ggplot2} functions. I find that base R provides good enough visualizations, especially if all that is needed are some basic visuals for exploration, although `\texttt{ggplot2} functions can produce visualizations that are more complex and beautiful.
+
+You should feel free to use whatever approach, as long as it performs the needed tasks. You can even use a mix of both approaches if you choose to do so.
 
 \chapter{Descriptive Statistics}\label{descriptive}
 
