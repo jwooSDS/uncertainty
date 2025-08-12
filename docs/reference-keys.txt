@@ -320,7 +320,7 @@ lossfunc
 variance-1
 moments
 skewness
-kurtosis
+excess-kurtosis
 commContRVs
 uniform
 universality-of-uniform

@@ -244,7 +244,7 @@ If a distribution is not symmetric, we can say its distribution is asymmetric, o
 - $Skew(X) > 0$: $X$ is right (or positively) skewed.
 - $Skew(X) < 0$: $X$ is left (or negatively) skewed.
 
-### Kurtosis
+### (Excess) Kurtosis
 
 One more measure deals with the **tail** behavior of a distribution. Visually, the tails of a PDF are associated with probabilities of extreme values for a random variable. A distribution that is heavy tailed means that extreme values (on both ends) are more likely to occur. Tail behavior is an important consideration in risk management in finance: e.g. a heavy left tail in the PDF could mean a financial crisis. Figure \@ref(fig:4-kurt) shows an example of a heavy tailed distribution (in blue), compared to a Gaussian distribution (in black). We will talk more about the Gaussian distribution in the next subsection.
 
@@ -258,14 +258,18 @@ curve(dnorm, from = -4, to = 4, main = "PDF for Symmetric RV", ylab="Probability
 curve(dt(x,df=1), from = -4, to = 4, add=TRUE, col="blue")
 ```
 
-A common measure of tail behavior is the **Kurtosis**. The kurtosis of a random variable $X$ is the shifted fourth standardized moment:
+A common measure of tail behavior is the **excess kurtosis**. The excess kurtosis of a random variable $X$ is the shifted fourth standardized moment:
 
 \begin{equation} 
 Kurt(X) = E \left(\frac{(X-\mu)^4}{\sigma} \right) - 3.
 (\#eq:4-kurt)
 \end{equation}
 
-The reason for subtracting (or shifting by) 3 is so that the Gaussian distribution (a commonly used distribution for continuous random variables) has a kurtosis of 0. Note: Some authors call equation \@ref(eq:4-kurt) the **excess kurtosis** and the kurtosis does not subtract the 3. 
+The reason for subtracting (or shifting by) 3 is so that the Gaussian distribution (a commonly used distribution for continuous random variables) has an excess kurtosis of 0. 
+
+Note: Some authors write about the kurtosis instead, which does not have the subtract 3 in equation \@ref(eq:4-kurt), and so compare the kurtosis with 3, instead of comparing the excess kurtosis with 0. 
+
+Note: some authors switch the terms kurtosis and excess kurtosis, so you need to be careful when reading about kurtosis and excess kurtosis.
 
 The values of $Kurt(X)$ that are associated with tail behaviors are:
 
@@ -308,7 +312,7 @@ Some properties of the uniform distribution:
 - Its mean is $E(U) = \frac{a+b}{2}$.
 - Its variance is $Var(U) = \frac{(b-a)^2}{12}$.
 - Its skewness is 0, so it is symmetric.
-- Its kurtosis is -$\frac{6}{5}$, so its tails are not as heavy compared to a Gaussian distribution. 
+- Its excess kurtosis is -$\frac{6}{5}$, so its tails are not as heavy compared to a Gaussian distribution. 
 
 *Thought question*: Can you see why a uniform distribution is symmetric? Can you see why its tails are not heavy?
 
@@ -316,7 +320,7 @@ If the support of a uniform distribution is between 0 and 1, we have a **standar
 
 #### Universality of Uniform
 
-It turns out that we can construct a random variable with any continuous distribution based on a standard uniform distribution. This fact is used to simulate random numbers from continuous distributions. This fact is called the **Universality of the Uniform**: Let $F_X(x)$ denote the CDF of a continuous random variable $X$, then:
+It turns out that we can construct a random variable with any continuous distribution based on a standard uniform distribution. This fact is used to simulate random numbers from continuous distributions, and is called the **Universality of the Uniform**. Let $F_X(x)$ denote the CDF of a continuous random variable $X$, then:
 
 1. Let $U \sim U(0,1)$ and $X = F^{-1}(U)$. Then $X$ is a random variable with CDF $F_X(x)$.
 2. $F_X(X) \sim U(0,1)$.
@@ -629,7 +633,7 @@ Notice how the density plot approximates the histogram.
 
 ### Numerical Summaries
 
-Equations \@ref(eq:4-EX), \@ref(eq:4-var), \@ref(eq:4-skew), and \@ref(eq:4-kurt) are used to obtain the mean, variance, skewness, and kurtosis of a known distribution from a random variable. To calculate these quantities based on a sample of observed data, $x_1, x_2, \cdots, x_n$, we use:
+Equations \@ref(eq:4-EX), \@ref(eq:4-var), \@ref(eq:4-skew), and \@ref(eq:4-kurt) are used to obtain the mean, variance, skewness, and excess kurtosis of a known distribution from a random variable. To calculate these quantities based on a sample of observed data, $x_1, x_2, \cdots, x_n$, we use:
 
 \begin{equation} 
 \bar{x} =  \frac{1}{n} \sum_{i=1}^n x_i,
@@ -641,7 +645,7 @@ s_X^2 =  \frac{1}{n-1} \sum_{i=1}^n (x_i - \bar{x})^2,
 (\#eq:4-sampvar)
 \end{equation}
 
-where $\bar{x}$ and $s_x^2$ denote the sample mean and variance respectively. The sample skewness and sample kurtosis are
+where $\bar{x}$ and $s_x^2$ denote the sample mean and variance respectively. The sample skewness and sample excess kurtosis are
 
 \begin{equation} 
 \text{sample skewness } =  \frac{\frac{1}{n} \sum_{i=1}^n (x_i - \bar{x})^3}{s_X^3},
@@ -651,7 +655,7 @@ where $\bar{x}$ and $s_x^2$ denote the sample mean and variance respectively. Th
 and
 
 \begin{equation} 
-\text{sample kurtosis } =  \frac{\frac{1}{n} \sum_{i=1}^n (x_i - \bar{x})^4}{s_X^4} - 3.
+\text{sample excess kurtosis } =  \frac{\frac{1}{n} \sum_{i=1}^n (x_i - \bar{x})^4}{s_X^4} - 3.
 (\#eq:4-sampkurt)
 \end{equation}
 
@@ -663,7 +667,7 @@ var(Data$interest_rate) ##variance
 
 library(moments)
 moments::skewness(Data$interest_rate) ##greater than 0
-moments::kurtosis(Data$interest_rate) ##greater than 0
+moments::kurtosis(Data$interest_rate) - 3 ##greater than 0
 ```
 
-So our data is also right skewed and heavy tailed. 
+So our data is also right skewed and heavy tailed. Note that the `kurtosis()` function from the `moments` package reports the kurtosis, so we subtract 3 from its reported value to obtain the excess kurtosis. 
