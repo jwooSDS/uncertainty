@@ -1,0 +1,8 @@
+# Bayesian Modeling Part 1
+
+```{r, echo=FALSE}
+rm(list = ls())
+```
+
+## Introduction
+

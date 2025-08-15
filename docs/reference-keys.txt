@@ -216,14 +216,6 @@ fig:10-sims1
 fig:10-sims3
 fig:10-simsboxplot
 tab:10-table
-examples
-example-1-mario-kart-auction-prices
-eg2
-how-were-estimated-parameters-calculated
-the-course-understanding-uncertainty
-background-needed-for-the-course
-mathematical-background
-r-background
 descriptive
 uncertainty-with-data
 visualizing-data
@@ -490,3 +482,7 @@ model-complexity
 training-test-split
 bias-variance-trade-off-model-complexity
 monte-carlo-simulations
+bayesian-modeling-part-1
+introduction-7
+bayesian-modeling-part-2
+introduction-8

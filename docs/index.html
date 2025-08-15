@@ -53,6 +53,8 @@
 <li><a class="" href="confidence-intervals.html"><span class="header-section-number">8</span> Confidence Intervals</a></li>
 <li><a class="" href="hypothesis-testing.html"><span class="header-section-number">9</span> Hypothesis Testing</a></li>
 <li><a class="" href="linear-regression.html"><span class="header-section-number">10</span> Linear Regression</a></li>
+<li><a class="" href="bayesian-modeling-part-1.html"><span class="header-section-number">11</span> Bayesian Modeling Part 1</a></li>
+<li><a class="" href="bayesian-modeling-part-2.html"><span class="header-section-number">12</span> Bayesian Modeling Part 2</a></li>
 </ul>
 
         <div class="book-extra">
@@ -65,13 +67,11 @@
 </h1>
 <p>The examples in this preface is based on OpenIntro Statistics (Diez, Ceytinka-Rundel, Barr), Chapter 9.4 and 9.5, which provide more background information. You can access the book for free at <a href="https://www.openintro.org/book/os/" class="uri">https://www.openintro.org/book/os/</a></p>
 <p>The main goal using data science is to understand data. Broadly speaking, this will involve building a statistical model for predicting, or estimating a response variable based on one or more predictors. Such models are used in a wide variety of fields such as finance, medicine, public policy, sports, and so on. We will look a couple of examples.</p>
-<div id="examples" class="section level2" number="0.1">
-<h2>
-<span class="header-section-number">0.1</span> Examples<a class="anchor" aria-label="anchor" href="#examples"><i class="fas fa-link"></i></a>
+<div id="examples" class="section level2 unnumbered">
+<h2>Examples<a class="anchor" aria-label="anchor" href="#examples"><i class="fas fa-link"></i></a>
 </h2>
-<div id="example-1-mario-kart-auction-prices" class="section level3" number="0.1.1">
-<h3>
-<span class="header-section-number">0.1.1</span> Example 1: Mario Kart Auction Prices<a class="anchor" aria-label="anchor" href="#example-1-mario-kart-auction-prices"><i class="fas fa-link"></i></a>
+<div id="example-1-mario-kart-auction-prices" class="section level3 unnumbered">
+<h3>Example 1: Mario Kart Auction Prices<a class="anchor" aria-label="anchor" href="#example-1-mario-kart-auction-prices"><i class="fas fa-link"></i></a>
 </h3>
 <p>In this first example, we will look at Ebay auctions of a video game called Mario Kart that is played on Nintendo Wii. We want to predict the price of an auction based on whether the game is new or not, whether the auction’s main photo is a stock photo, the duration of the auction in days, and the number of Wii wheels included with the auction.</p>
 <p>A model that we can use for this example is the linear regression model:</p>
@@ -104,9 +104,8 @@
 \]</span></p>
 <p>So for an auction for Mario Kart game that is used, that uses a stock photo, is listed for 2 days, and comes with 0 wheels, the predicted price will be <span class="math inline">\(\hat{y} = 43.5201 - 2.5816 - 6.7542 + 0.3788 \times 2 = 34.94\)</span> or about 35 dollars.</p>
 </div>
-<div id="eg2" class="section level3" number="0.1.2">
-<h3>
-<span class="header-section-number">0.1.2</span> Example 2: Job Application Callback Rates<a class="anchor" aria-label="anchor" href="#eg2"><i class="fas fa-link"></i></a>
+<div id="example-2-job-application-callback-rates-eg2" class="section level3 unnumbered">
+<h3>Example 2: Job Application Callback Rates {#eg2}<a class="anchor" aria-label="anchor" href="#example-2-job-application-callback-rates-eg2"><i class="fas fa-link"></i></a>
 </h3>
 <p>In this example, we look at data from an experiment that sought to evaluate the effect of race and gender on job application callback rates. For the experiment, researchers created fake resumes to job postings in Boston and Chicago to see which resumes resulted in a callback. The fake resumes included relevant information such as the applicant’s educational attainment, how many year’s of experience the applicant as well as a first and last name. The names on the fake resume were meant to imply the applicant’s race and gender. Only two races were considered (Black or White) and only two genders were considered (Make or Female) for the experiment.</p>
 <p>Prior to the experiment, the researchers conducted surveys to check for racial and gender associations for the names on the fake resumes; only names that passed a certain threshold from the surveys were included in the experiment.</p>
@@ -144,29 +143,25 @@
 <p>So for an applicant in Boston, who has a college degree, has 10 years of experience and has a name that is associated with being a Black male, the logistic regression equation becomes <span class="math inline">\(\log (\frac{\hat{\pi}}{1-\hat{\pi}}) = -2.63974 - 0.0655 + 0.03152 \times 10 - 0.22814 = -2.61818\)</span>. Doing a little bit of algebra to solve, we get <span class="math inline">\(\hat{\pi} = 0.06797751\)</span>. Such an applicant has about a 6.8 percent chance of receiving a callback.</p>
 </div>
 </div>
-<div id="how-were-estimated-parameters-calculated" class="section level2" number="0.2">
-<h2>
-<span class="header-section-number">0.2</span> How were Estimated Parameters Calculated?<a class="anchor" aria-label="anchor" href="#how-were-estimated-parameters-calculated"><i class="fas fa-link"></i></a>
+<div id="how-were-estimated-parameters-calculated" class="section level2 unnumbered">
+<h2>How were Estimated Parameters Calculated?<a class="anchor" aria-label="anchor" href="#how-were-estimated-parameters-calculated"><i class="fas fa-link"></i></a>
 </h2>
 <p>In the two examples, notice how I used some R functions, supplied the names of the variables, and the R functions generated the values of the estimated parameters? One thing you will learn is how the functions actually calculate these numbers. It turns out that these calculations are based on foundational concepts associated with measures of uncertainty, probability, and expected values. We will be learning about these concepts in this class.</p>
 <p>Why do we want to know how these calculations are performed? So that we understand the intuition and logic behind how these models are built. It becomes a lot easier to work with these models when we understand their logic (for example, we know when these models can be used or cannot be used, we know what steps to take when we notice our data have certain characteristics, etc), instead of memorizing a bunch of steps.</p>
 <p>When presenting models and data to people, some people may occasionally question our methods and models. Why should we trust the model? Should we trust these numbers that seem to come out from some black box?</p>
 <p>Notice we used two different models, linear regression and logistic regression, for examples 1 and 2. Why did we use these models? Could we have swapped the type of model used in these examples? The answer is actually no. Knowing the foundational concepts of these models will help explain why certain models can be used in certain situations.</p>
 </div>
-<div id="the-course-understanding-uncertainty" class="section level2" number="0.3">
-<h2>
-<span class="header-section-number">0.3</span> The Course: Understanding Uncertainty<a class="anchor" aria-label="anchor" href="#the-course-understanding-uncertainty"><i class="fas fa-link"></i></a>
+<div id="the-course-understanding-uncertainty" class="section level2 unnumbered">
+<h2>The Course: Understanding Uncertainty<a class="anchor" aria-label="anchor" href="#the-course-understanding-uncertainty"><i class="fas fa-link"></i></a>
 </h2>
 <p>As mentioned in the previous section, we will be learning about foundational concepts associated with measures of uncertainty, probability, and expected values. All of these concepts will then help explain the intuition and how statistical models are built.</p>
 <p>At the end of the course, we will apply these concepts and revisit the linear regression model. Linear regression is the most widely used models used in data science, as it is relatively easy to understand and explain. More modern methods (that you will learn about in future classes) such as decision trees and neural networks can be viewed as extensions of the linear regression model.</p>
 </div>
-<div id="background-needed-for-the-course" class="section level2" number="0.4">
-<h2>
-<span class="header-section-number">0.4</span> Background Needed for the Course<a class="anchor" aria-label="anchor" href="#background-needed-for-the-course"><i class="fas fa-link"></i></a>
+<div id="background-needed-for-the-course" class="section level2 unnumbered">
+<h2>Background Needed for the Course<a class="anchor" aria-label="anchor" href="#background-needed-for-the-course"><i class="fas fa-link"></i></a>
 </h2>
-<div id="mathematical-background" class="section level3" number="0.4.1">
-<h3>
-<span class="header-section-number">0.4.1</span> Mathematical Background<a class="anchor" aria-label="anchor" href="#mathematical-background"><i class="fas fa-link"></i></a>
+<div id="mathematical-background" class="section level3 unnumbered">
+<h3>Mathematical Background<a class="anchor" aria-label="anchor" href="#mathematical-background"><i class="fas fa-link"></i></a>
 </h3>
 <p>We will be covering the basic mathematics associated with probability and measures of uncertainty, so that you know what these are measuring.</p>
 <ul>
@@ -175,9 +170,8 @@
 <li><p>You should also be comfortable with notation regarding sums and products. For example, know what <span class="math inline">\(\sum_{i=1}^n x_i\)</span> and <span class="math inline">\(\prod_{i=1}^n x_i\)</span> represent.</p></li>
 </ul>
 </div>
-<div id="r-background" class="section level3" number="0.4.2">
-<h3>
-<span class="header-section-number">0.4.2</span> R Background<a class="anchor" aria-label="anchor" href="#r-background"><i class="fas fa-link"></i></a>
+<div id="r-background" class="section level3 unnumbered">
+<h3>R Background<a class="anchor" aria-label="anchor" href="#r-background"><i class="fas fa-link"></i></a>
 </h3>
 <p>These skills should have been covered in the R Boot Camp or in the programming proficiency test.</p>
 <ul>
@@ -194,8 +188,13 @@
 </ol>
 <p>The code to produce visualizations with base R tends to be a lot shorter than with <code>ggplot2</code> functions. I find that base R provides good enough visualizations, especially if all that is needed are some basic visuals for exploration, although `<code>ggplot2</code> functions can produce visualizations that are more complex and beautiful.</p>
 <p>You should feel free to use whatever approach, as long as it performs the needed tasks. You can even use a mix of both approaches if you choose to do so.</p>
-
 </div>
+</div>
+<div id="reporting-issues-with-this-book" class="section level2 unnumbered">
+<h2>Reporting issues with this book<a class="anchor" aria-label="anchor" href="#reporting-issues-with-this-book"><i class="fas fa-link"></i></a>
+</h2>
+<p>If you find any issues (typos, formatting, etc), please report them at <a href="https://github.com/jwooSDS/uncertainty/issues" class="uri">https://github.com/jwooSDS/uncertainty/issues</a>. Please be as specific as you can, including providing the specific section and paragraph where the issue is found.</p>
+
 </div>
 </div>
   <div class="chapter-nav">
@@ -206,19 +205,20 @@
       <ul class="nav navbar-nav">
 <li><a class="nav-link" href="#preface">Preface</a></li>
 <li>
-<a class="nav-link" href="#examples"><span class="header-section-number">0.1</span> Examples</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#example-1-mario-kart-auction-prices"><span class="header-section-number">0.1.1</span> Example 1: Mario Kart Auction Prices</a></li>
-<li><a class="nav-link" href="#eg2"><span class="header-section-number">0.1.2</span> Example 2: Job Application Callback Rates</a></li>
+<a class="nav-link" href="#examples">Examples</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#example-1-mario-kart-auction-prices">Example 1: Mario Kart Auction Prices</a></li>
+<li><a class="nav-link" href="#example-2-job-application-callback-rates-eg2">Example 2: Job Application Callback Rates {#eg2}</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#how-were-estimated-parameters-calculated"><span class="header-section-number">0.2</span> How were Estimated Parameters Calculated?</a></li>
-<li><a class="nav-link" href="#the-course-understanding-uncertainty"><span class="header-section-number">0.3</span> The Course: Understanding Uncertainty</a></li>
+<li><a class="nav-link" href="#how-were-estimated-parameters-calculated">How were Estimated Parameters Calculated?</a></li>
+<li><a class="nav-link" href="#the-course-understanding-uncertainty">The Course: Understanding Uncertainty</a></li>
 <li>
-<a class="nav-link" href="#background-needed-for-the-course"><span class="header-section-number">0.4</span> Background Needed for the Course</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#mathematical-background"><span class="header-section-number">0.4.1</span> Mathematical Background</a></li>
-<li><a class="nav-link" href="#r-background"><span class="header-section-number">0.4.2</span> R Background</a></li>
+<a class="nav-link" href="#background-needed-for-the-course">Background Needed for the Course</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#mathematical-background">Mathematical Background</a></li>
+<li><a class="nav-link" href="#r-background">R Background</a></li>
 </ul>
 </li>
+<li><a class="nav-link" href="#reporting-issues-with-this-book">Reporting issues with this book</a></li>
 </ul>
 
       <div class="book-extra">
@@ -235,7 +235,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2025-08-12.</p>
+    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2025-08-15.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

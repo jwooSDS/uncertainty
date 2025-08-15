@@ -127,7 +127,7 @@
 
 \title{Understanding Uncertainty Course Notes}
 \author{Jeffrey Woo}
-\date{2025-08-12}
+\date{2025-08-15}
 
 \begin{document}
 \maketitle
@@ -143,9 +143,11 @@ The examples in this preface is based on OpenIntro Statistics (Diez, Ceytinka-Ru
 
 The main goal using data science is to understand data. Broadly speaking, this will involve building a statistical model for predicting, or estimating a response variable based on one or more predictors. Such models are used in a wide variety of fields such as finance, medicine, public policy, sports, and so on. We will look a couple of examples.
 
-\section{Examples}\label{examples}
+\section*{Examples}\label{examples}
+\addcontentsline{toc}{section}{Examples}
 
-\subsection{Example 1: Mario Kart Auction Prices}\label{example-1-mario-kart-auction-prices}
+\subsection*{Example 1: Mario Kart Auction Prices}\label{example-1-mario-kart-auction-prices}
+\addcontentsline{toc}{subsection}{Example 1: Mario Kart Auction Prices}
 
 In this first example, we will look at Ebay auctions of a video game called Mario Kart that is played on Nintendo Wii. We want to predict the price of an auction based on whether the game is new or not, whether the auction's main photo is a stock photo, the duration of the auction in days, and the number of Wii wheels included with the auction.
 
@@ -197,7 +199,8 @@ so we have:
 
 So for an auction for Mario Kart game that is used, that uses a stock photo, is listed for 2 days, and comes with 0 wheels, the predicted price will be \(\hat{y} = 43.5201 - 2.5816 - 6.7542 + 0.3788 \times 2 = 34.94\) or about 35 dollars.
 
-\subsection{Example 2: Job Application Callback Rates}\label{eg2}
+\subsection*{Example 2: Job Application Callback Rates \{\#eg2\}}\label{example-2-job-application-callback-rates-eg2}
+\addcontentsline{toc}{subsection}{Example 2: Job Application Callback Rates \{\#eg2\}}
 
 In this example, we look at data from an experiment that sought to evaluate the effect of race and gender on job application callback rates. For the experiment, researchers created fake resumes to job postings in Boston and Chicago to see which resumes resulted in a callback. The fake resumes included relevant information such as the applicant's educational attainment, how many year's of experience the applicant as well as a first and last name. The names on the fake resume were meant to imply the applicant's race and gender. Only two races were considered (Black or White) and only two genders were considered (Make or Female) for the experiment.
 
@@ -254,7 +257,8 @@ so we have
 
 So for an applicant in Boston, who has a college degree, has 10 years of experience and has a name that is associated with being a Black male, the logistic regression equation becomes \(\log (\frac{\hat{\pi}}{1-\hat{\pi}}) = -2.63974 - 0.0655 + 0.03152 \times 10 - 0.22814 = -2.61818\). Doing a little bit of algebra to solve, we get \(\hat{\pi} = 0.06797751\). Such an applicant has about a 6.8 percent chance of receiving a callback.
 
-\section{How were Estimated Parameters Calculated?}\label{how-were-estimated-parameters-calculated}
+\section*{How were Estimated Parameters Calculated?}\label{how-were-estimated-parameters-calculated}
+\addcontentsline{toc}{section}{How were Estimated Parameters Calculated?}
 
 In the two examples, notice how I used some R functions, supplied the names of the variables, and the R functions generated the values of the estimated parameters? One thing you will learn is how the functions actually calculate these numbers. It turns out that these calculations are based on foundational concepts associated with measures of uncertainty, probability, and expected values. We will be learning about these concepts in this class.
 
@@ -264,15 +268,18 @@ When presenting models and data to people, some people may occasionally question
 
 Notice we used two different models, linear regression and logistic regression, for examples 1 and 2. Why did we use these models? Could we have swapped the type of model used in these examples? The answer is actually no. Knowing the foundational concepts of these models will help explain why certain models can be used in certain situations.
 
-\section{The Course: Understanding Uncertainty}\label{the-course-understanding-uncertainty}
+\section*{The Course: Understanding Uncertainty}\label{the-course-understanding-uncertainty}
+\addcontentsline{toc}{section}{The Course: Understanding Uncertainty}
 
 As mentioned in the previous section, we will be learning about foundational concepts associated with measures of uncertainty, probability, and expected values. All of these concepts will then help explain the intuition and how statistical models are built.
 
 At the end of the course, we will apply these concepts and revisit the linear regression model. Linear regression is the most widely used models used in data science, as it is relatively easy to understand and explain. More modern methods (that you will learn about in future classes) such as decision trees and neural networks can be viewed as extensions of the linear regression model.
 
-\section{Background Needed for the Course}\label{background-needed-for-the-course}
+\section*{Background Needed for the Course}\label{background-needed-for-the-course}
+\addcontentsline{toc}{section}{Background Needed for the Course}
 
-\subsection{Mathematical Background}\label{mathematical-background}
+\subsection*{Mathematical Background}\label{mathematical-background}
+\addcontentsline{toc}{subsection}{Mathematical Background}
 
 We will be covering the basic mathematics associated with probability and measures of uncertainty, so that you know what these are measuring.
 
@@ -285,7 +292,8 @@ We will be covering the basic mathematics associated with probability and measur
   You should also be comfortable with notation regarding sums and products. For example, know what \(\sum_{i=1}^n x_i\) and \(\prod_{i=1}^n x_i\) represent.
 \end{itemize}
 
-\subsection{R Background}\label{r-background}
+\subsection*{R Background}\label{r-background}
+\addcontentsline{toc}{subsection}{R Background}
 
 These skills should have been covered in the R Boot Camp or in the programming proficiency test.
 
@@ -317,6 +325,11 @@ Practitioners of data science should be comfortable working with using base R an
 The code to produce visualizations with base R tends to be a lot shorter than with \texttt{ggplot2} functions. I find that base R provides good enough visualizations, especially if all that is needed are some basic visuals for exploration, although `\texttt{ggplot2} functions can produce visualizations that are more complex and beautiful.
 
 You should feel free to use whatever approach, as long as it performs the needed tasks. You can even use a mix of both approaches if you choose to do so.
+
+\section*{Reporting issues with this book}\label{reporting-issues-with-this-book}
+\addcontentsline{toc}{section}{Reporting issues with this book}
+
+If you find any issues (typos, formatting, etc), please report them at \url{https://github.com/jwooSDS/uncertainty/issues}. Please be as specific as you can, including providing the specific section and paragraph where the issue is found.
 
 \chapter{Descriptive Statistics}\label{descriptive}
 
@@ -8936,6 +8949,14 @@ The results in Table \ref{tab:10-table} pretty much match with our expectations:
 \item
   The test MSE is smallest for fitted line 3, as its form of \(\hat{f}(x)\) matches the true \(f(x)\). So we see the optimal model balances the bias-variance tradeoff.
 \end{itemize}
+
+\chapter{Bayesian Modeling Part 1}\label{bayesian-modeling-part-1}
+
+\section{Introduction}\label{introduction-7}
+
+\chapter{Bayesian Modeling Part 2}\label{bayesian-modeling-part-2}
+
+\section{Introduction}\label{introduction-8}
 
   \bibliography{book.bib,packages.bib}
 
