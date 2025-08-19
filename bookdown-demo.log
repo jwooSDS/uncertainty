@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999996 (MiKTeX 24.4) (preloaded format=xelatex 2025.6.7)  15 AUG 2025 10:36
+This is XeTeX, Version 3.141592653-2.6-0.999996 (MiKTeX 24.4) (preloaded format=xelatex 2025.6.7)  19 AUG 2025 17:24
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1690,10 +1690,13 @@ Underfull \hbox (badness 1194) in paragraph at lines 6458--6460
 
 
 [190]
-
-[191]
 File: bookdown-demo_files/figure-latex/8-credit-1.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/8-credit-1.pdf>
+
+
+[191]
+Underfull \vbox (badness 1383) has occurred while \output is active []
+
 
 
 [192]
@@ -1721,17 +1724,17 @@ Underfull \vbox (badness 1072) has occurred while \output is active []
 
 [200]
 
-LaTeX Warning: Reference `fig:9-pvalneq' on page 201 undefined on input line 68
-05.
+LaTeX Warning: Reference `fig:9-pvalneq' on page 201 undefined on input line 67
+89.
 
 
-LaTeX Warning: Reference `fig:9-pvalneq' on page 201 undefined on input line 68
-11.
+LaTeX Warning: Reference `fig:9-pvalneq' on page 201 undefined on input line 67
+95.
 
 File: bookdown-demo_files/figure-latex/9-pvalneq-1.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/9-pvalneq-1.pdf>
 
-Underfull \hbox (badness 10000) in paragraph at lines 6814--6816
+Underfull \hbox (badness 10000) in paragraph at lines 6798--6800
 [][]
  []
 
@@ -1892,7 +1895,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 [239]
-Underfull \hbox (badness 3872) in paragraph at lines 8444--8445
+Underfull \hbox (badness 3872) in paragraph at lines 8428--8429
 \TU/lmr/m/n/10 We can actually extract these values that are being reported fro
 m
  []
@@ -1900,13 +1903,13 @@ m
 
 
 [240]
-Overfull \hbox (22.5pt too wide) in paragraph at lines 8457--8457
+Overfull \hbox (22.5pt too wide) in paragraph at lines 8441--8441
 []\TU/lmtt/m/n/10 ##  [1] "call"          "terms"         "residuals"     "coef
 ficients"[] 
  []
 
 
-Overfull \hbox (6.75pt too wide) in paragraph at lines 8457--8457
+Overfull \hbox (6.75pt too wide) in paragraph at lines 8441--8441
 []\TU/lmtt/m/n/10 ##  [5] "aliased"       "sigma"         "df"            "r.sq
 uared"[] 
  []

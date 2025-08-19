@@ -588,7 +588,7 @@ The bootstrap confidence interval tends to work better as $K$ increases and as $
 
 We have data on 400 credit card customers. A density plot of their credit limits is shown below:
 
-```{r 8-credit, fig.cap="Density Plot of Credit Limits"}
+```{r 8-credit, fig.cap="Density Plot of Credit Limits", message=FALSE}
 library(ISLR2)
 Data<-ISLR2::Credit$Limit
 plot(density(Data), xlab="Credit Limit", main="Density Plot of Credit Limits")

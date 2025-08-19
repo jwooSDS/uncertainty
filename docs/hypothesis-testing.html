@@ -248,7 +248,7 @@ Figure 9.4: Finding P-value, For Freshman 15 Example
 </p>
 </div>
 <p>Using R, this p-value is 0.01123. If our test is conducted at 5% significance level, we reject the null hypothesis, since this p-value is less than 0.05.</p>
-<div class="sourceCode" id="cb159"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb156"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/TDist.html">pt</a></span><span class="op">(</span><span class="op">-</span><span class="fl">2.357023</span>, <span class="fl">49</span><span class="op">)</span> <span class="co">##enter t stat, then df</span></span></code></pre></div>
 <pre><code>## [1] 0.01123111</code></pre>
 <p><em>Thought question</em>: Suppose the research question for the Freshman 15 example was tweaked, so the alternative hypothesis is <span class="math inline">\(H_a:\mu &gt; 15\)</span>. Assuming everything else stays the same, show that the p-value is now 0.98877. If the alternative hypothesis is <span class="math inline">\(H_a: \mu \neq 15\)</span>, show that the p-value is 0.02246.</p>
@@ -269,7 +269,7 @@ Figure 9.5: Critical Value for 2-Sided Alternative, with 0.05 Sig Level
 </p>
 </div>
 <p>Note that since the <span class="math inline">\(t\)</span> distribution is symmetric and both areas in blue add up to 0.05, each shaded area must be 0.025. So <span class="math inline">\(-t_{49}^*\)</span> and <span class="math inline">\(t_{49}^*\)</span> correspond to the 2.5th and 97.5th percentiles of a <span class="math inline">\(t_{49}\)</span> distribution respectively. We can show that <span class="math inline">\(-t_{49}^*\)</span> is -2.009575 by typing</p>
-<div class="sourceCode" id="cb161"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb158"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">alpha</span><span class="op">&lt;-</span><span class="fl">0.05</span></span>
 <span><span class="va">n</span><span class="op">&lt;-</span><span class="fl">50</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/TDist.html">qt</a></span><span class="op">(</span><span class="va">alpha</span><span class="op">/</span><span class="fl">2</span>, <span class="va">n</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span></span></code></pre></div>
@@ -286,7 +286,7 @@ Figure 9.6: Critical Value for Greater Than Alternative, with 0.05 Sig Level
 </p>
 </div>
 <p>Note that <span class="math inline">\(t_{49}^*\)</span> corresponds to the 95th percentile of a <span class="math inline">\(t_{49}\)</span> distribution. We can show that <span class="math inline">\(t_{49}^*\)</span> is 1.677 by typing</p>
-<div class="sourceCode" id="cb163"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb160"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">alpha</span><span class="op">&lt;-</span><span class="fl">0.05</span></span>
 <span><span class="va">n</span><span class="op">&lt;-</span><span class="fl">50</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/TDist.html">qt</a></span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">alpha</span>, <span class="va">n</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span></span></code></pre></div>
@@ -303,7 +303,7 @@ Figure 9.7: Critical Value for Less Than Alternative, with 0.05 Sig Level
 </p>
 </div>
 <p>Note that <span class="math inline">\(t_{49}^*\)</span> corresponds to the 5th percentile of a <span class="math inline">\(t_{49}\)</span> distribution. We can show that <span class="math inline">\(t_{49}^*\)</span> is -1.677 by typing</p>
-<div class="sourceCode" id="cb165"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb162"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">alpha</span><span class="op">&lt;-</span><span class="fl">0.05</span></span>
 <span><span class="va">n</span><span class="op">&lt;-</span><span class="fl">50</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/TDist.html">qt</a></span><span class="op">(</span><span class="va">alpha</span>, <span class="va">n</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span></span></code></pre></div>
@@ -359,15 +359,15 @@ Figure 9.8: Finding P-value, For Silicon Wafer Example
 </p>
 </div>
 <p>Using R, we can find the p-value by typing:</p>
-<div class="sourceCode" id="cb167"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb164"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/TDist.html">pt</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1.728483</span>, <span class="fl">49</span><span class="op">)</span><span class="op">*</span><span class="fl">2</span> </span></code></pre></div>
 <pre><code>## [1] 0.09019905</code></pre>
-<div class="sourceCode" id="cb169"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb166"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##supply test stat, then DF.</span></span>
 <span><span class="co">##multiply by 2 since pt only gives area to left of -1.728483, </span></span>
 <span><span class="co">##but we also want area to right of 1.728483. </span></span></code></pre></div>
 <p>Alternatively, we can work out the critical value by typing:</p>
-<div class="sourceCode" id="cb170"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb167"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">alpha</span><span class="op">&lt;-</span><span class="fl">0.05</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/TDist.html">qt</a></span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">alpha</span><span class="op">/</span><span class="fl">2</span>, <span class="fl">49</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 2.009575</code></pre>
@@ -460,11 +460,11 @@ Figure 9.9: Finding P-value, For Library Example
 </p>
 </div>
 <p>Using R, we can find the p-value by typing:</p>
-<div class="sourceCode" id="cb172"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb169"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">pnorm</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1.129385</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 0.1293677</code></pre>
 <p>Alternatively, we can work out the critical value by typing:</p>
-<div class="sourceCode" id="cb174"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb171"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">qnorm</a></span><span class="op">(</span><span class="fl">0.05</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] -1.644854</code></pre>
 <p>Since our p-value is 0.129, which is greater than the significance level of 0.05, (or since our test statistic is -1.129385 which is not to the left of the critical value of -1.644854), we fail to reject the null hypothesis. Our data do not provide evidence against the null hypothesis.</p>
@@ -527,7 +527,7 @@ Figure 9.9: Finding P-value, For Library Example
 </ul>
 </li>
 </ul>
-<div class="sourceCode" id="cb176"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb173"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##Prob of Type I Error </span></span>
 <span></span>
 <span><span class="va">n</span><span class="op">&lt;-</span><span class="fl">10</span> <span class="co">## sample size of each random sample</span></span>
@@ -591,7 +591,7 @@ Figure 9.9: Finding P-value, For Library Example
 <li>Repeat these steps for a total of 10 thousand replicates.</li>
 <li>Count the number of times we reject the null hypothesis, and divide by the number of replicates. This value estimates the probability of correctly rejecting the null hypothesis, i.e. the power of this test.</li>
 </ul>
-<div class="sourceCode" id="cb178"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb175"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">n</span><span class="op">&lt;-</span><span class="fl">10</span> <span class="co">## sample size of each random sample</span></span>
 <span><span class="va">alpha</span><span class="op">&lt;-</span><span class="fl">0.05</span> <span class="co">##sig level</span></span>
 <span><span class="va">reps</span><span class="op">&lt;-</span><span class="fl">10000</span> <span class="co">## no of replicates</span></span>
@@ -717,7 +717,7 @@ Figure 9.9: Finding P-value, For Library Example
 <ul>
 <li>In the first example, we simulate 25 data points from a standard normal, and apply the Shapiro-Wilk test. As expected, the test fails to reject the null hypothesis, as the p-value is 0.1489.</li>
 </ul>
-<div class="sourceCode" id="cb180"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb177"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">n</span><span class="op">&lt;-</span><span class="fl">25</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">8</span><span class="op">)</span></span>
 <span><span class="va">X</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span></span>
@@ -730,7 +730,7 @@ Figure 9.9: Finding P-value, For Library Example
 <ul>
 <li>In the second example, we simulate 25 data points from a non-normal distribution. We used a <span class="math inline">\(\chi_1^2\)</span> distribution (called chi-squared distribution with 1 degree of freedom), and apply the Shapiro-Wilk test. As expected, the test rejects the null hypothesis based on an extremely small p-value.</li>
 </ul>
-<div class="sourceCode" id="cb182"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb179"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">n</span><span class="op">&lt;-</span><span class="fl">25</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">8</span><span class="op">)</span></span>
 <span><span class="va">X</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/Chisquare.html">rchisq</a></span><span class="op">(</span><span class="va">n</span>, df<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span>
@@ -798,7 +798,7 @@ Figure 9.9: Finding P-value, For Library Example
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2025-08-15.</p>
+    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2025-08-19.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

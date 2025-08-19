@@ -127,7 +127,7 @@
 
 \title{Understanding Uncertainty Course Notes}
 \author{Jeffrey Woo}
-\date{2025-08-15}
+\date{2025-08-19}
 
 \begin{document}
 \maketitle
@@ -6507,22 +6507,6 @@ We have data on 400 credit card customers. A density plot of their credit limits
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{library}\NormalTok{(ISLR2)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## 
-## Attaching package: 'ISLR2'
-\end{verbatim}
-
-\begin{verbatim}
-## The following object is masked from 'package:MASS':
-## 
-##     Boston
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \NormalTok{Data}\OtherTok{\textless{}{-}}\NormalTok{ISLR2}\SpecialCharTok{::}\NormalTok{Credit}\SpecialCharTok{$}\NormalTok{Limit}
 \FunctionTok{plot}\NormalTok{(}\FunctionTok{density}\NormalTok{(Data), }\AttributeTok{xlab=}\StringTok{"Credit Limit"}\NormalTok{, }\AttributeTok{main=}\StringTok{"Density Plot of Credit Limits"}\NormalTok{)}
 \end{Highlighting}
