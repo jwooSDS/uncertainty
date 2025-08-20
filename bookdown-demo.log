@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999996 (MiKTeX 24.4) (preloaded format=xelatex 2025.6.7)  19 AUG 2025 17:24
+This is XeTeX, Version 3.141592653-2.6-0.999996 (MiKTeX 24.4) (preloaded format=xelatex 2025.6.7)  20 AUG 2025 15:54
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1809,6 +1809,9 @@ lmr/m/n/10 215
 [215]
 
 [216]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
 
 
 Overfull \hbox (25.36343pt too wide) has occurred while \output is active
@@ -1823,28 +1826,32 @@ lmr/m/n/10 217
 [219]
 
 [220]
+
+[221]
+
+[222
+
+]
 Chapter 10.
 
 
-[221
-
-]
+[223]
 File: bookdown-demo_files/figure-latex/10-scatter-1.pdf Graphic file (type pdf)
 
 <use bookdown-demo_files/figure-latex/10-scatter-1.pdf>
 
 
-[222]
-
-[223]
-
 [224]
+
+[225]
+
+[226]
 File: bookdown-demo_files/figure-latex/10-conddist3-1.pdf Graphic file (type pd
 f)
 <use bookdown-demo_files/figure-latex/10-conddist3-1.pdf>
 
 
-[225]
+[227]
 File: bookdown-demo_files/figure-latex/10-conddist4-1.pdf Graphic file (type pd
 f)
 <use bookdown-demo_files/figure-latex/10-conddist4-1.pdf>
@@ -1853,25 +1860,21 @@ f)
 <use bookdown-demo_files/figure-latex/10-conddist5-1.pdf>
 
 
-[226]
+[228]
 
-[227]
+[229]
 File: images/10-ass1.jpg Graphic file (type bmp)
 <images/10-ass1.jpg>
 File: images/10-ass2.jpg Graphic file (type bmp)
 <images/10-ass2.jpg>
 
 
-[228]
-
-[229]
-File: images/10-residuals.png Graphic file (type bmp)
-<images/10-residuals.png>
-
-
 [230]
 
 [231]
+File: images/10-residuals.png Graphic file (type bmp)
+<images/10-residuals.png>
+
 
 [232]
 
@@ -1884,95 +1887,99 @@ File: images/10-residuals.png Graphic file (type bmp)
 [236]
 
 [237]
+
+[238]
+
+[239]
 File: bookdown-demo_files/figure-latex/10-scatter-eg-1.pdf Graphic file (type p
 df)
 <use bookdown-demo_files/figure-latex/10-scatter-eg-1.pdf>
 
 
-[238]
+[240]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 
-[239]
-Underfull \hbox (badness 3872) in paragraph at lines 8428--8429
+[241]
+Underfull \hbox (badness 3872) in paragraph at lines 8430--8431
 \TU/lmr/m/n/10 We can actually extract these values that are being reported fro
 m
  []
 
 
 
-[240]
-Overfull \hbox (22.5pt too wide) in paragraph at lines 8441--8441
+[242]
+Overfull \hbox (22.5pt too wide) in paragraph at lines 8443--8443
 []\TU/lmtt/m/n/10 ##  [1] "call"          "terms"         "residuals"     "coef
 ficients"[] 
  []
 
 
-Overfull \hbox (6.75pt too wide) in paragraph at lines 8441--8441
+Overfull \hbox (6.75pt too wide) in paragraph at lines 8443--8443
 []\TU/lmtt/m/n/10 ##  [5] "aliased"       "sigma"         "df"            "r.sq
 uared"[] 
  []
 
 
 
-[241]
-
-[242]
-
 [243]
 
 [244]
 
 [245]
+
+[246]
+
+[247]
 File: images/10-MSE.png Graphic file (type bmp)
 <images/10-MSE.png>
 
 
-[246]
+[248]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 
-[247]
+[249]
 
-[248]
+[250]
 File: bookdown-demo_files/figure-latex/10-sims1-1.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/10-sims1-1.pdf>
 File: bookdown-demo_files/figure-latex/10-sims3-1.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/10-sims3-1.pdf>
 
 
-[249]
+[251]
 
-[250]
+[252]
 File: bookdown-demo_files/figure-latex/10-simsboxplot-1.pdf Graphic file (type 
 pdf)
 <use bookdown-demo_files/figure-latex/10-simsboxplot-1.pdf>
 
 
-[251]
-
-[252]
-
 [253]
 
-[254
-
-]
-Chapter 11.
-
+[254]
 
 [255]
 
 [256
 
 ]
+Chapter 11.
+
+
+[257]
+
+[258
+
+]
 Chapter 12.
 No file bookdown-demo.bbl.
 
 
-[257] (bookdown-demo.aux)
+[259] (bookdown-demo.aux)
  ***********
 LaTeX2e <2024-06-01> patch level 2
 L3 programming layer <2024-07-20>
@@ -1990,4 +1997,4 @@ Here is how much of TeX's memory you used:
  1348 hyphenation exceptions out of 8191
  90i,21n,123p,1199b,585s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on bookdown-demo.pdf (257 pages).
+Output written on bookdown-demo.pdf (259 pages).
