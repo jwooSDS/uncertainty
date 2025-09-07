@@ -198,7 +198,7 @@ Figure 1.4: Density Plot for 50 Interest Rates
 </div>
 <p>Based on Figure <a href="descriptive.html#fig:dens">1.4</a>, we see that low interest rates (between 5 and 12.5 percent) are much more common and high interest rates (higher than 20 percent). A few things to note about interpreting density plots:</p>
 <ul>
-<li>The area under the density plot is always equals to 1.</li>
+<li>The area under the density plot is always equal to 1.</li>
 <li>To find the proportion of interest rates that are between two values, for example between 10 and 15 percent, we would integrate this density plot over this range, i.e. <span class="math inline">\(\int_{10}^{15} f(x) dx\)</span>, where <span class="math inline">\(f(x)\)</span> is a mathematical equation that describes the density plot. We will learn about this equation in more detail in a later module.</li>
 <li>The values on the vertical axis do not equal to probabilities (a common misconception).</li>
 </ul>
@@ -243,9 +243,9 @@ Figure 1.5: Density Plot for 50 Interest Rates with Larger Bandwidth
 <p>Quartiles divide the data into 4 groups, and each group has (nearly) equal number of observations. So there will be three quartiles, denoted by <span class="math inline">\(Q_1, Q_2, Q_3\)</span>.</p>
 <ul>
 <li>The first group will have values between negative infinity and <span class="math inline">\(Q_1\)</span>.</li>
-<li>The second group will have values between negative <span class="math inline">\(Q_1\)</span> and <span class="math inline">\(Q_2\)</span>.</li>
-<li>The third group will have values between negative <span class="math inline">\(Q_2\)</span> and <span class="math inline">\(Q_3\)</span>.</li>
-<li>The fourth group will have values between negative <span class="math inline">\(Q_3\)</span> and infinity.</li>
+<li>The second group will have values between <span class="math inline">\(Q_1\)</span> and <span class="math inline">\(Q_2\)</span>.</li>
+<li>The third group will have values between <span class="math inline">\(Q_2\)</span> and <span class="math inline">\(Q_3\)</span>.</li>
+<li>The fourth group will have values between <span class="math inline">\(Q_3\)</span> and infinity.</li>
 </ul>
 <p><span class="math inline">\(Q_2\)</span>, sometimes called the second quartile, is the easiest value to find. It is also called the <strong>median</strong> of the data. Going back to our interest rates from the 50 loan applicants. Using our ordered statistics, the median is the middle observation. Since we have an even number of observations, we have two middle observations, <span class="math inline">\(x_{(25)}\)</span> and <span class="math inline">\(x_{(26)}\)</span>. In this situation, the median will be the average of these two middle observations. Using R, we find the median to be:</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">

@@ -129,7 +129,7 @@ plot(density(Data$interest_rate), main="Density Plot of Interest Rates")
 
 Based on Figure \@ref(fig:dens), we see that low interest rates (between 5 and 12.5 percent) are much more common and high interest rates (higher than 20 percent). A few things to note about interpreting density plots:
 
-- The area under the density plot is always equals to 1. 
+- The area under the density plot is always equal to 1. 
 - To find the proportion of interest rates that are between two values, for example between 10 and 15 percent, we would integrate this density plot over this range, i.e. $\int_{10}^{15} f(x) dx$, where $f(x)$ is a mathematical equation that describes the density plot. We will learn about this equation in more detail in a later module. 
 - The values on the vertical axis do not equal to probabilities (a common misconception).
 
@@ -165,9 +165,9 @@ We will go over quartiles in more detail.
 Quartiles divide the data into 4 groups, and each group has (nearly) equal number of observations. So there will be three quartiles, denoted by $Q_1, Q_2, Q_3$. 
 
 - The first group will have values between negative infinity and $Q_1$.
-- The second group will have values between negative $Q_1$ and $Q_2$.
-- The third group will have values between negative $Q_2$ and $Q_3$.
-- The fourth group will have values between negative $Q_3$ and infinity.
+- The second group will have values between $Q_1$ and $Q_2$.
+- The third group will have values between $Q_2$ and $Q_3$.
+- The fourth group will have values between $Q_3$ and infinity.
 
 $Q_2$, sometimes called the second quartile, is the easiest value to find. It is also called the **median** of the data. Going back to our interest rates from the 50 loan applicants. Using our ordered statistics, the median is the middle observation. Since we have an even number of observations, we have two middle observations, $x_{(25)}$ and $x_{(26)}$. In this situation, the median will be the average of these two middle observations. Using R, we find the median to be:
 
