@@ -482,7 +482,7 @@ model-complexity
 training-test-split
 bias-variance-trade-off-model-complexity
 monte-carlo-simulations
-bayesian-modeling-part-1
+bayesian-modeling-fundamentals
 introduction-7
 bayesian-modeling-part-2
 introduction-8

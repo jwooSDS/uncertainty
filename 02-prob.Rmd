@@ -330,7 +330,7 @@ Note: If you compare the intermediate calculations in approach 2, you end up usi
 
 The video below goes over tree diagrams in a little bit more detail:
 
-<iframe width="560px" height="320px" allowfullscreen="true" allow="autoplay *" title="Module 02: Conditional Probability" src="https://virginiauniversity.instructuremedia.com/embed/3e9900ed-6464-47e4-9f7c-353e17e8b47a" frameborder="0"></iframe>
+<iframe width="560px" height="320px" allowfullscreen="true" allow="autoplay *" title="Module 02: Worked Example Approach 2" src="https://virginiauniversity.instructuremedia.com/embed/26187674-150f-4dab-b282-6444240332e9" frameborder="0"></iframe>
 
 ## Confusion of the Inverse {#confusion}
 

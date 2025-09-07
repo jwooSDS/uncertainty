@@ -7,7 +7,7 @@
 <title>Chapter 2 Probability | Understanding Uncertainty Course Notes</title>
 <meta name="author" content="Jeffrey Woo">
 <meta name="description" content="This module is based on Introduction to Probability (Blitzstein, Hwang), Chapters 1 and 2. You can access the book for free at https://stat110.hsites.harvard.edu/ (and then click on Book). Please...">
-<meta name="generator" content="bookdown 0.43 with bs4_book()">
+<meta name="generator" content="bookdown 0.34 with bs4_book()">
 <meta property="og:title" content="Chapter 2 Probability | Understanding Uncertainty Course Notes">
 <meta property="og:type" content="book">
 <meta property="og:description" content="This module is based on Introduction to Probability (Blitzstein, Hwang), Chapters 1 and 2. You can access the book for free at https://stat110.hsites.harvard.edu/ (and then click on Book). Please...">
@@ -16,7 +16,7 @@
 <meta name="twitter:description" content="This module is based on Introduction to Probability (Blitzstein, Hwang), Chapters 1 and 2. You can access the book for free at https://stat110.hsites.harvard.edu/ (and then click on Book). Please...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.9.0/transition.js"></script><script src="libs/bs3compat-0.9.0/tabs.js"></script><script src="libs/bs3compat-0.9.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.2/transition.js"></script><script src="libs/bs3compat-0.4.2/tabs.js"></script><script src="libs/bs3compat-0.4.2/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
@@ -53,7 +53,7 @@
 <li><a class="" href="confidence-intervals.html"><span class="header-section-number">8</span> Confidence Intervals</a></li>
 <li><a class="" href="hypothesis-testing.html"><span class="header-section-number">9</span> Hypothesis Testing</a></li>
 <li><a class="" href="linear-regression.html"><span class="header-section-number">10</span> Linear Regression</a></li>
-<li><a class="" href="bayesian-modeling-part-1.html"><span class="header-section-number">11</span> Bayesian Modeling Part 1</a></li>
+<li><a class="" href="bayesian-modeling-fundamentals.html"><span class="header-section-number">11</span> Bayesian Modeling Fundamentals</a></li>
 <li><a class="" href="bayesian-modeling-part-2.html"><span class="header-section-number">12</span> Bayesian Modeling Part 2</a></li>
 </ul>
 
@@ -262,7 +262,7 @@ Figure 2.6: Events A, given B
 P(Y \cap X) = P(Y|X) \times P(X) = P(X|Y) \times P(Y).
 \tag{2.4}
 \end{equation}\]</span></p>
-<p>The multiplication rule is useful in finding the probability of multiple events happening, especially if the events happen sequentially. As an example, consider drawing two cards, without replacement, from a standard deck of cards. Without replacement means that after drawing the first card, it is not returned to the deck, so there will be 51 cards remaining after the first draw. Let <span class="math inline">\(D_1\)</span> and <span class="math inline">\(D_2\)</span> denote the events that the first draw is a diamond suit and the second draw is a diamond suit respectively. We want to find the probability that both cards drawn are diamond suits. This probability can be written as <span class="math inline">\(P(D_1 \cap D_2) = P(D_1) \times P(D_2|D_1)  = \frac{13}{52} \times \frac{12}{51}  = \frac{156}{2652}\)</span>.</p>
+<p>The multiplication rule is useful in finding the probability of multiple events happening, especially if the events happen sequentially. As an example, consider drawing two cards, without replacement, from a standard deck of cards. Without replacement means that after drawing the first card, it is not returned to the deck, so there will be 51 cards remaining after the first draw. Let <span class="math inline">\(D_1\)</span> and <span class="math inline">\(D_2\)</span> denote the events that the first draw is a diamond suit and the second draw is a diamond suit respectively. We want to find the probability that both cards drawn are diamond suits. This probability can be written as <span class="math inline">\(P(D_1 \cap D_2) = P(D_1) \times P(D_2|D_1) = \frac{13}{52} \times \frac{12}{51} = \frac{156}{2652}\)</span>.</p>
 </div>
 <div id="independent-events" class="section level3" number="2.3.3">
 <h3>
@@ -397,7 +397,7 @@ P(E_1|F) = \frac{P(E_1 \cap F)}{P(F)} = \frac{0.198}{0.263} = 0.7528517.
 \]</span></p>
 <p>Note: If you compare the intermediate calculations in approach 2, you end up using the calculations in approach 1, without referring to any of the associated equations.</p>
 <p>The video below goes over tree diagrams in a little bit more detail:</p>
-<iframe width="560px" height="320px" allowfullscreen="true" allow="autoplay *" title="Module 02: Conditional Probability" src="https://virginiauniversity.instructuremedia.com/embed/3e9900ed-6464-47e4-9f7c-353e17e8b47a" frameborder="0">
+<iframe width="560px" height="320px" allowfullscreen="true" allow="autoplay *" title="Module 02: Worked Example Approach 2" src="https://virginiauniversity.instructuremedia.com/embed/26187674-150f-4dab-b282-6444240332e9" frameborder="0">
 </iframe>
 </div>
 </div>
@@ -550,7 +550,7 @@ P(D|+) &amp;= \frac{P(D \cap +)}{P(+)}\\
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2025-08-20.</p>
+    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2025-09-07.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

@@ -1,8 +1,16 @@
-# Bayesian Modeling Part 1
+# Bayesian Modeling Fundamentals
 
 ```{r, echo=FALSE}
 rm(list = ls())
 ```
 
+This module is based on Bayes Rules! (Johnson, Ott, Dogucu), Chapters 1 and 2. You can access the book for free at https://www.bayesrulesbook.com/.
+
+The book is extremely readable, so I have not written any notes for this module. 
+
 ## Introduction
+
+Chapter 1 provides a brief history of the Bayesian philosophy of probability, as well as a big picture overview of the philosophy and how it is used in real life. 
+
+Chapter 2 provides the framework associated with Bayes modeling. A lot of the ideas were covered in Module 2, although some terminology that is associated with Bayes modeling is used instead. 
 
