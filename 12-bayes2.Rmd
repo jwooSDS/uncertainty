@@ -4,5 +4,13 @@
 rm(list = ls())
 ```
 
+This module is based on Bayes Rules! (Johnson, Ott, Dogucu), Chapters 3 and 4. You can access the book for free at https://www.bayesrulesbook.com/.
+
+The book is extremely readable, so I have not written any notes for this module. 
+
 ## Introduction
+
+Chapter 3 introduces the Beta-Binomial model, which is used when the parameter of interest has a support between 0 and 1 (typically a probability), and the data follow a binomial distribution. A lot of the ideas are a continuation of the ideas from Chapter 2, but are now applied in a more realistic setting. 
+
+Chapter 4 goes over how the prior and data affect the posterior model. 
 
