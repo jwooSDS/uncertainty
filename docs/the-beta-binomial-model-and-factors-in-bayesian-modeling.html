@@ -4,16 +4,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 11 Bayesian Modeling Fundamentals | Understanding Uncertainty Course Notes</title>
+<title>Chapter 12 The Beta-Binomial Model, and Factors in Bayesian Modeling | Understanding Uncertainty Course Notes</title>
 <meta name="author" content="Jeffrey Woo">
-<meta name="description" content="This module is based on Bayes Rules! (Johnson, Ott, Dogucu), Chapters 1 and 2. You can access the book for free at https://www.bayesrulesbook.com/. The book is extremely readable, so I have not...">
+<meta name="description" content="This module is based on Bayes Rules! (Johnson, Ott, Dogucu), Chapters 3 and 4. You can access the book for free at https://www.bayesrulesbook.com/. The book is extremely readable, so I have not...">
 <meta name="generator" content="bookdown 0.43 with bs4_book()">
-<meta property="og:title" content="Chapter 11 Bayesian Modeling Fundamentals | Understanding Uncertainty Course Notes">
+<meta property="og:title" content="Chapter 12 The Beta-Binomial Model, and Factors in Bayesian Modeling | Understanding Uncertainty Course Notes">
 <meta property="og:type" content="book">
-<meta property="og:description" content="This module is based on Bayes Rules! (Johnson, Ott, Dogucu), Chapters 1 and 2. You can access the book for free at https://www.bayesrulesbook.com/. The book is extremely readable, so I have not...">
+<meta property="og:description" content="This module is based on Bayes Rules! (Johnson, Ott, Dogucu), Chapters 3 and 4. You can access the book for free at https://www.bayesrulesbook.com/. The book is extremely readable, so I have not...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 11 Bayesian Modeling Fundamentals | Understanding Uncertainty Course Notes">
-<meta name="twitter:description" content="This module is based on Bayes Rules! (Johnson, Ott, Dogucu), Chapters 1 and 2. You can access the book for free at https://www.bayesrulesbook.com/. The book is extremely readable, so I have not...">
+<meta name="twitter:title" content="Chapter 12 The Beta-Binomial Model, and Factors in Bayesian Modeling | Understanding Uncertainty Course Notes">
+<meta name="twitter:description" content="This module is based on Bayes Rules! (Johnson, Ott, Dogucu), Chapters 3 and 4. You can access the book for free at https://www.bayesrulesbook.com/. The book is extremely readable, so I have not...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.9.0/transition.js"></script><script src="libs/bs3compat-0.9.0/tabs.js"></script><script src="libs/bs3compat-0.9.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -53,8 +53,8 @@
 <li><a class="" href="confidence-intervals.html"><span class="header-section-number">8</span> Confidence Intervals</a></li>
 <li><a class="" href="hypothesis-testing.html"><span class="header-section-number">9</span> Hypothesis Testing</a></li>
 <li><a class="" href="linear-regression.html"><span class="header-section-number">10</span> Linear Regression</a></li>
-<li><a class="active" href="bayesian-modeling-fundamentals.html"><span class="header-section-number">11</span> Bayesian Modeling Fundamentals</a></li>
-<li><a class="" href="the-beta-binomial-model-and-factors-in-bayesian-modeling.html"><span class="header-section-number">12</span> The Beta-Binomial Model, and Factors in Bayesian Modeling</a></li>
+<li><a class="" href="bayesian-modeling-fundamentals.html"><span class="header-section-number">11</span> Bayesian Modeling Fundamentals</a></li>
+<li><a class="active" href="the-beta-binomial-model-and-factors-in-bayesian-modeling.html"><span class="header-section-number">12</span> The Beta-Binomial Model, and Factors in Bayesian Modeling</a></li>
 </ul>
 
         <div class="book-extra">
@@ -62,29 +62,29 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="bayesian-modeling-fundamentals" class="section level1" number="11">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="the-beta-binomial-model-and-factors-in-bayesian-modeling" class="section level1" number="12">
 <h1>
-<span class="header-section-number">11</span> Bayesian Modeling Fundamentals<a class="anchor" aria-label="anchor" href="#bayesian-modeling-fundamentals"><i class="fas fa-link"></i></a>
+<span class="header-section-number">12</span> The Beta-Binomial Model, and Factors in Bayesian Modeling<a class="anchor" aria-label="anchor" href="#the-beta-binomial-model-and-factors-in-bayesian-modeling"><i class="fas fa-link"></i></a>
 </h1>
-<p>This module is based on Bayes Rules! (Johnson, Ott, Dogucu), Chapters 1 and 2. You can access the book for free at <a href="https://www.bayesrulesbook.com/" class="uri">https://www.bayesrulesbook.com/</a>.</p>
+<p>This module is based on Bayes Rules! (Johnson, Ott, Dogucu), Chapters 3 and 4. You can access the book for free at <a href="https://www.bayesrulesbook.com/" class="uri">https://www.bayesrulesbook.com/</a>.</p>
 <p>The book is extremely readable, so I have not written any notes for this module.</p>
-<div id="introduction-7" class="section level2" number="11.1">
+<div id="introduction-8" class="section level2" number="12.1">
 <h2>
-<span class="header-section-number">11.1</span> Introduction<a class="anchor" aria-label="anchor" href="#introduction-7"><i class="fas fa-link"></i></a>
+<span class="header-section-number">12.1</span> Introduction<a class="anchor" aria-label="anchor" href="#introduction-8"><i class="fas fa-link"></i></a>
 </h2>
-<p>Chapter 1 provides a brief history of the Bayesian philosophy of probability, as well as a big picture overview of the philosophy and how it is used in real life.</p>
-<p>Chapter 2 provides the framework associated with Bayes modeling. A lot of the ideas were covered in Module 2, although some terminology that is associated with Bayes modeling is used instead.</p>
+<p>Chapter 3 introduces the Beta-Binomial model, which is used when the parameter of interest has a support between 0 and 1 (typically a probability), and the data follow a binomial distribution. A lot of the ideas are a continuation of the ideas from Chapter 2, but are now applied in a more realistic setting.</p>
+<p>Chapter 4 goes over how the prior and data affect the posterior model.</p>
 
 </div>
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="linear-regression.html"><span class="header-section-number">10</span> Linear Regression</a></div>
-<div class="next"><a href="the-beta-binomial-model-and-factors-in-bayesian-modeling.html"><span class="header-section-number">12</span> The Beta-Binomial Model, and Factors in Bayesian Modeling</a></div>
+<div class="prev"><a href="bayesian-modeling-fundamentals.html"><span class="header-section-number">11</span> Bayesian Modeling Fundamentals</a></div>
+<div class="empty"></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#bayesian-modeling-fundamentals"><span class="header-section-number">11</span> Bayesian Modeling Fundamentals</a></li>
-<li><a class="nav-link" href="#introduction-7"><span class="header-section-number">11.1</span> Introduction</a></li>
+<li><a class="nav-link" href="#the-beta-binomial-model-and-factors-in-bayesian-modeling"><span class="header-section-number">12</span> The Beta-Binomial Model, and Factors in Bayesian Modeling</a></li>
+<li><a class="nav-link" href="#introduction-8"><span class="header-section-number">12.1</span> Introduction</a></li>
 </ul>
 
       <div class="book-extra">

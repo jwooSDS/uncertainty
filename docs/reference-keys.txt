@@ -484,5 +484,5 @@ bias-variance-trade-off-model-complexity
 monte-carlo-simulations
 bayesian-modeling-fundamentals
 introduction-7
-bayesian-modeling-part-2
+the-beta-binomial-model-and-factors-in-bayesian-modeling
 introduction-8

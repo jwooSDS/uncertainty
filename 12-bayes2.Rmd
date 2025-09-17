@@ -1,4 +1,4 @@
-# Bayesian Modeling Part 2
+# The Beta-Binomial Model, and Factors in Bayesian Modeling
 
 ```{r, echo=FALSE}
 rm(list = ls())
