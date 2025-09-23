@@ -46,7 +46,7 @@ For example, height of an American adult is a continuous random variable, as hei
 
 For this module, we will focus on discrete random variables. 
 
-The **support** of a discrete random variable $X$ is the set of values $X$ can take such that $P(X = x) > 0$, i.e. the set of values that have non zero probability of happening. Using our 3 coin flips example, where $X$ is the number of heads out of the 3 coin slips, the support is $\{0,1,2,3 \}$. he support of discrete random variables is usually integers. 
+The **support** of a discrete random variable $X$ is the set of values $X$ can take such that $P(X = x) > 0$, i.e. the set of values that have non zero probability of happening. Using our 3 coin flips example, where $X$ is the number of heads out of the 3 coin slips, the support is $\{0,1,2,3 \}$. The support of discrete random variables is usually integers. 
 
 *Thought question*: Can you come of examples of discrete and continuous random variables on your own? Feel free to search the internet for examples as well. 
 
