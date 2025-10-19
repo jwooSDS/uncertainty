@@ -328,10 +328,10 @@ The implication of the CLT is that even if our data do not follow a normal distr
 
 We consider this hypothetical situation. Suppose the waiting time for customers calling customer service during lunch time is known have a mean of 600 seconds with standard deviation 30 seconds. The company decides to cut costs and reduces staffing at the call center, and claims that wait times are not affected negatively. The customers are convinced otherwise. A researchers obtains the wait times from 500 customers who call in during lunch time after staffing is reduced. The sample mean of the wait times for these customers is 700 seconds. Can this data be used to counter the company's claim that wait times have been affected?
 
-One possible calculation will be to assume the company is correct, that wait times have not changed, on average. If so, the sample means will be approximately normal, with mean 600 and variance $\frac{30^2}{\sqrt{500}}$, i.e. $\bar{X}_{500} \sim N(600, \frac{30^2}{\sqrt{500}})$. We then calculate $P(\bar{X}_{500} \geq 700)$, the probability that we have sample mean that is equal to or greater than 700 seconds. Using R, this probability is about 0.0065, which is very small, indicating that our data is inconsistent with the company's claim. 
+One possible calculation will be to assume the company is correct, that wait times have not changed, on average. If so, the sample means will be approximately normal, with mean 600 and variance $\frac{30^2}{500}$, i.e. $\bar{X}_{500} \sim N(600, \frac{30^2}{500})$. We then calculate $P(\bar{X}_{500} \geq 700)$, the probability that we have sample mean that is equal to or greater than 700 seconds. Using R, this probability is virtually 0, which is very small, indicating that our data is inconsistent with the company's claim. 
 
 ```{r}
-1-pnorm(700, 600, 30^2/sqrt(500))
+1-pnorm(700, 600, 30/sqrt(500))
 ```
 The CLT is traditionally associated with the distribution of the sample mean $\bar{X}_n$. It can be applied to the sum as well, due to properties of expectations and variances. Let $T_n = X_1 + \cdots + X_n = n \bar{X}_n$ denote the sum of $n$ i.i.d. random variables. The CLT says that, for large $n$, the distribution of $T_n$ is approximately $N(n\mu, n\sigma^2)$.
 
