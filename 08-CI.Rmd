@@ -203,7 +203,7 @@ View the video below that explains these steps in a bit more detail:
 
 Again, the formula in equation \@ref(eq:8-CImean) is only valid if either of the two conditions in Section \@ref(sampdistmean) is met, i.e. either the data are originally normal, or if the sample size is large enough.
 
-There are several rules of thumb that exist to assess if the "sample size is large enough" (usually at least 25 or 30 is suggested). However, as we mentioned in Section \ref@(considerCLT), there is no fixed answer to this question. It depends on the distribution of the data. In general, the more skewed data is, $n$ needs to be larger for the approximation to work.
+There are several rules of thumb that exist to assess if the "sample size is large enough" (usually at least 25 or 30 is suggested). However, as we mentioned in Section \@ref(considerCLT), there is no fixed answer to this question. It depends on the distribution of the data. In general, the more skewed data is, $n$ needs to be larger for the approximation to work.
 
 #### Coverage Probability {#CP}
 
