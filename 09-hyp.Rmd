@@ -364,7 +364,7 @@ qt(1-alpha/2, 49)
 ```
 Since our p-value is 0.09, which is greater than the significance level of 0.05, (or since our test statistic is 1.728483 which is not to the right of the critical value of 2.009575 ), we fail to reject the null hypothesis. Our data do not provide evidence against the null hypothesis.
 
-Our conclusion is the data do not support the claim that the average thickness of silicon wafers is different from the target value of 250 micrometers.
+Our conclusion is the data do not support the claim that the average thickness of silicon wafers is different from the target value of 245 micrometers.
 
 ## Hypothesis Test for the Proportion {#testprop}
 
