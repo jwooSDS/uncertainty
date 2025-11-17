@@ -334,7 +334,7 @@ Figure 10.6: Assumption 2 Assessment
 y=\hat{\beta}_0+\hat{\beta}_1 x + e
 \tag{10.5}
 \end{equation}\]</span></p>
-<p>respectively. Eqaution <a href="linear-regression.html#eq:10-fitted">(10.4)</a> is called the <strong>fitted line</strong>. The line that was overlaid in the scatter plot for the toy example in Figure <a href="linear-regression.html#fig:10-scatter">10.1</a> represents the fitted line. Equation <a href="linear-regression.html#eq:10-fitted-model">(10.5)</a> is called the <strong>estimated SLR model</strong>.</p>
+<p>respectively. Equation <a href="linear-regression.html#eq:10-fitted">(10.4)</a> is called the <strong>fitted line</strong>. The line that was overlaid in the scatter plot for the toy example in Figure <a href="linear-regression.html#fig:10-scatter">10.1</a> represents the fitted line. Equation <a href="linear-regression.html#eq:10-fitted-model">(10.5)</a> is called the <strong>estimated SLR model</strong>.</p>
 <p><span class="math inline">\(\hat{\beta}_1,\hat{\beta}_0\)</span> are the estimators for <span class="math inline">\(\beta_1,\beta_0\)</span> respectively. These estimators can be interpreted in the following manner:</p>
 <ul>
 <li>
@@ -417,7 +417,7 @@ SS_{res} =  \sum\limits_{i=1}^n(y_i-\hat{y}_i)^2.
 <h3>
 <span class="header-section-number">10.3.2</span> Method of Maximum Likelihood<a class="anchor" aria-label="anchor" href="#method-of-maximum-likelihood"><i class="fas fa-link"></i></a>
 </h3>
-<p>We will give a brief overview of maximum likelihood estimation is carried out for simple linear regression. We had earlier written that the conditional distribution of <span class="math inline">\(Y|X=x\)</span> is <span class="math inline">\(N(\beta_0+\beta_{1} x, \sigma^2)\)</span>. We know the PDF of any normal distribution takes the form in equation <a href="continuous-random-variables.html#eq:4-pdfNormal">(4.11)</a>, which implies that we can write the PDF of this distribution as</p>
+<p>We will give a brief overview of how maximum likelihood estimation is carried out for simple linear regression. We had earlier written that the conditional distribution of <span class="math inline">\(Y|X=x\)</span> is <span class="math inline">\(N(\beta_0+\beta_{1} x, \sigma^2)\)</span>. We know the PDF of any normal distribution takes the form in equation <a href="continuous-random-variables.html#eq:4-pdfNormal">(4.11)</a>, which implies that we can write the PDF of this distribution as</p>
 <p><span class="math display" id="eq:10-SLRpdf">\[\begin{equation}
 f_{Y|X}(y|x) = \frac{1}{\sigma \sqrt{2 \pi}} \exp \left(-\frac{(y - (\beta_0+\beta_{1} x))^2}{2 \sigma^2} \right).
 \tag{10.11}
@@ -853,7 +853,7 @@ y=\beta_0+\beta_{1}x_1 + \beta_2 x_2 + \beta_3 x_1 x_2 + \epsilon,
 <span class="header-section-number">10.5.3</span> Training-Test Split<a class="anchor" aria-label="anchor" href="#training-test-split"><i class="fas fa-link"></i></a>
 </h3>
 <p>After reading the previous subsections, one may consider the following strategy when assessing model accuracy and choosing between several nested models: fit all models under consideration using all available data, then choose the model that the smallest MSE (or RMSE).</p>
-<p>While seemingly intuitive, this stragedy will not work. A property of the MSE and RMSE of nested models is that these values only decrease as the model gets more complex! We will not go through the whole proof of this, but intuitively, one can see why the more complex model will never do worse than the less complex model: this happens when the additional parameters are all 0. This property suggests that using this strategy will always end up selecting the most complex model, as the most complex model will always have the smallest MSE and RMSE.</p>
+<p>While seemingly intuitive, this strategy will not work. A property of the MSE and RMSE of nested models is that these values only decrease as the model gets more complex! We will not go through the whole proof of this, but intuitively, one can see why the more complex model will never do worse than the less complex model: this happens when the additional parameters are all 0. This property suggests that using this strategy will always end up selecting the most complex model, as the most complex model will always have the smallest MSE and RMSE.</p>
 <p>Take a step back and remind ourselves what we actually want to do with prediction: after fitting the model, we want to be able to accurately predict the values of the response variable in the future. When we fit a model well based on the current data, the model may do poorly on new data. This is called <strong>overfitting</strong>.</p>
 <p>So what we will do is to split a given data set into two portions. One portion, called the <strong>training data</strong>, is used to fit (or train) the model. The other portion, called the <strong>test data</strong>, is used to assess the prediction accuracy of the model. The test data are never used to fit the model, so the test data play the role of new data.</p>
 <p>The MSE (or RMSE) is then calculated on both portions, and are called the training MSE and the test MSE. The relationship between the training and test MSEs with the complexity of nested models is shown below in Figure <a href="linear-regression.html#fig:10-MSE">10.9</a>:</p>
@@ -944,7 +944,7 @@ Figure 10.10: Four Polynomial Models Fitted to a Simulated Dataset
 <li>Fitted line 4, in orange, does not quite match the truth, especially at the extreme ends of the x-axis.</li>
 </ul>
 <p>Of course, these comments are based on 1 simulated data set, but if we were to create many replicates of the data set and create a similar scatter plot, we would expect to see similar characteristics.</p>
-<p>To illustrate the idea behind the bias and variance of predictions, we simulate 3 replicates data sets, each of size 1000, and show fitted lines 1 and 4 on each replicate in Figure <a href="linear-regression.html#fig:10-sims3">10.11</a>. Let us remind ourselves of what was written earlier about the bias variance tradeoff and the complexity of models:</p>
+<p>To illustrate the idea behind the bias and variance of predictions, we simulate 3 replicated data sets, each of size 1000, and show fitted lines 1 and 4 on each replicate in Figure <a href="linear-regression.html#fig:10-sims3">10.11</a>. Let us remind ourselves of what was written earlier about the bias variance tradeoff and the complexity of models:</p>
 <ul>
 <li>Fitted line 1 is too simple, so we expect a high degree of bias and a low degree of variance.</li>
 <li>Fitted line 4 is too complex, so we expect its bias to be theoretically 0, but it will have the highest degree of variance.</li>
@@ -969,7 +969,7 @@ Figure 10.11: Fitted Lines 1 &amp; 4 on Three Different Simulated Datasets
 <ul>
 <li>Simulate 1 data set of 1000 observations.</li>
 <li>Fitted fitted lines 1 to 4 on the data set.</li>
-<li>Compute the predicted value <span class="math inline">\(\hat{y}\)</span> when <span class="math inline">\(x=0.9\)</span> based on each of the four fitted lines, and record these values.</li>
+<li>Compute the predicted value <span class="math inline">\(\hat{y}\)</span> when <span class="math inline">\(x=0.1\)</span> based on each of the four fitted lines, and record these values.</li>
 <li>Repeat these steps over 1000 replicates.</li>
 </ul>
 <p>Let’s take a look at the distributions of <span class="math inline">\(\hat{y}\)</span>s for each fitted line, as shown in Figure <a href="linear-regression.html#fig:10-simsboxplot">10.12</a>.</p>
@@ -1101,7 +1101,7 @@ Figure 10.12: Box Plots of Predictions for Four Fitted Lines
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2025-11-11.</p>
+    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2025-11-17.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

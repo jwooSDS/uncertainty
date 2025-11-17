@@ -127,7 +127,7 @@
 
 \title{Understanding Uncertainty Course Notes}
 \author{Jeffrey Woo}
-\date{2025-11-11}
+\date{2025-11-17}
 
 \begin{document}
 \maketitle
@@ -8180,7 +8180,7 @@ y=\hat{\beta}_0+\hat{\beta}_1 x + e
 \label{eq:10-fitted-model}
 \end{equation}
 
-respectively. Eqaution \eqref{eq:10-fitted} is called the \textbf{fitted line}. The line that was overlaid in the scatter plot for the toy example in Figure \ref{fig:10-scatter} represents the fitted line. Equation \eqref{eq:10-fitted-model} is called the \textbf{estimated SLR model}.
+respectively. Equation \eqref{eq:10-fitted} is called the \textbf{fitted line}. The line that was overlaid in the scatter plot for the toy example in Figure \ref{fig:10-scatter} represents the fitted line. Equation \eqref{eq:10-fitted-model} is called the \textbf{estimated SLR model}.
 
 \(\hat{\beta}_1,\hat{\beta}_0\) are the estimators for \(\beta_1,\beta_0\) respectively. These estimators can be interpreted in the following manner:
 
@@ -8299,7 +8299,7 @@ Note: I often get a question about why we minimize \(SS_{res}\) and not some oth
 \hypertarget{method-of-maximum-likelihood}{%
 \subsection{Method of Maximum Likelihood}\label{method-of-maximum-likelihood}}
 
-We will give a brief overview of maximum likelihood estimation is carried out for simple linear regression. We had earlier written that the conditional distribution of \(Y|X=x\) is \(N(\beta_0+\beta_{1} x, \sigma^2)\). We know the PDF of any normal distribution takes the form in equation \eqref{eq:4-pdfNormal}, which implies that we can write the PDF of this distribution as
+We will give a brief overview of how maximum likelihood estimation is carried out for simple linear regression. We had earlier written that the conditional distribution of \(Y|X=x\) is \(N(\beta_0+\beta_{1} x, \sigma^2)\). We know the PDF of any normal distribution takes the form in equation \eqref{eq:4-pdfNormal}, which implies that we can write the PDF of this distribution as
 
 \begin{equation} 
 f_{Y|X}(y|x) = \frac{1}{\sigma \sqrt{2 \pi}} \exp \left(-\frac{(y - (\beta_0+\beta_{1} x))^2}{2 \sigma^2} \right).
@@ -8971,7 +8971,7 @@ So there are many potential models to consider. Metrics involving model accuracy
 
 After reading the previous subsections, one may consider the following strategy when assessing model accuracy and choosing between several nested models: fit all models under consideration using all available data, then choose the model that the smallest MSE (or RMSE).
 
-While seemingly intuitive, this stragedy will not work. A property of the MSE and RMSE of nested models is that these values only decrease as the model gets more complex! We will not go through the whole proof of this, but intuitively, one can see why the more complex model will never do worse than the less complex model: this happens when the additional parameters are all 0. This property suggests that using this strategy will always end up selecting the most complex model, as the most complex model will always have the smallest MSE and RMSE.
+While seemingly intuitive, this strategy will not work. A property of the MSE and RMSE of nested models is that these values only decrease as the model gets more complex! We will not go through the whole proof of this, but intuitively, one can see why the more complex model will never do worse than the less complex model: this happens when the additional parameters are all 0. This property suggests that using this strategy will always end up selecting the most complex model, as the most complex model will always have the smallest MSE and RMSE.
 
 Take a step back and remind ourselves what we actually want to do with prediction: after fitting the model, we want to be able to accurately predict the values of the response variable in the future. When we fit a model well based on the current data, the model may do poorly on new data. This is called \textbf{overfitting}.
 
@@ -9108,7 +9108,7 @@ From Figure \ref{fig:10-sims1}, we make the following comments:
 
 Of course, these comments are based on 1 simulated data set, but if we were to create many replicates of the data set and create a similar scatter plot, we would expect to see similar characteristics.
 
-To illustrate the idea behind the bias and variance of predictions, we simulate 3 replicates data sets, each of size 1000, and show fitted lines 1 and 4 on each replicate in Figure \ref{fig:10-sims3}. Let us remind ourselves of what was written earlier about the bias variance tradeoff and the complexity of models:
+To illustrate the idea behind the bias and variance of predictions, we simulate 3 replicated data sets, each of size 1000, and show fitted lines 1 and 4 on each replicate in Figure \ref{fig:10-sims3}. Let us remind ourselves of what was written earlier about the bias variance tradeoff and the complexity of models:
 
 \begin{itemize}
 \tightlist
@@ -9153,7 +9153,7 @@ We now carry out the Monte Carlo simulations, over 1000 replicates. Ideally, the
 \item
   Fitted fitted lines 1 to 4 on the data set.
 \item
-  Compute the predicted value \(\hat{y}\) when \(x=0.9\) based on each of the four fitted lines, and record these values.
+  Compute the predicted value \(\hat{y}\) when \(x=0.1\) based on each of the four fitted lines, and record these values.
 \item
   Repeat these steps over 1000 replicates.
 \end{itemize}
