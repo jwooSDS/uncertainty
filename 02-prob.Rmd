@@ -227,7 +227,7 @@ odds(Y) = \frac{P(Y)}{P(Y^c)}.
 (\#eq:odds)
 \end{equation}
 
-You may realize that the left hand side of equation \@ref(eq:odds) is equal to the left hand side of a logistic regression equation that we saw in Section \@ref(eg2). 
+You may realize that the left hand side of equation \@ref(eq:odds) is equal to the left hand side of a logistic regression equation that we saw in Section \@ref(eg2).
 
 Using equation \@ref(eq:odds), we can switch from odds to probability easily
 

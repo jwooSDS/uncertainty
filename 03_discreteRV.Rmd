@@ -239,7 +239,7 @@ E(aX + bY + c) = aE(X) + bE(Y) + c.
 
 Applying equation \@ref(eq:3-linEX) to the fishing examples:
 
-- $E(T) = R(Y + W) = E(Y) + E(W)$,
+- $E(T) = E(Y + W) = E(Y) + E(W)$,
 - $E(R) = E(10Y + 15W) = 10E(Y) + 15E(W)$,
 - $E(G) = E(10Y + 15W - 5) = 10E(Y) + 15E(W) - 5$.
 
