@@ -251,7 +251,7 @@ Var(X) = \int_{-\infty}^{\infty} (x-\mu)^2 f_X(x) dx.
 <ul>
 <li>The <strong><span class="math inline">\(k\)</span>th moment</strong> of <span class="math inline">\(X\)</span> is <span class="math inline">\(E(X^k)\)</span>. So the expected value, or the mean, is sometimes called the first moment.</li>
 <li>The <strong><span class="math inline">\(k\)</span>th central moment</strong> of <span class="math inline">\(X\)</span> is <span class="math inline">\(E((X-\mu)^k)\)</span>. So the variance is sometimes called the second central moment.</li>
-<li>The <strong><span class="math inline">\(k\)</span> standardized moment</strong> of <span class="math inline">\(X\)</span> is <span class="math inline">\(E(\frac{(X-\mu)^k}{\sigma})\)</span>.</li>
+<li>The <strong><span class="math inline">\(k\)</span> standardized moment</strong> of <span class="math inline">\(X\)</span> is <span class="math inline">\(E\left(\left(\frac{X-\mu}{\sigma}\right)^k\right)\)</span>.</li>
 </ul>
 </div>
 <div id="skewness" class="section level3" number="4.4.4">
@@ -260,7 +260,7 @@ Var(X) = \int_{-\infty}^{\infty} (x-\mu)^2 f_X(x) dx.
 </h3>
 <p>One measure that is used to describe the shape of a distribution is skewness, which is a measure of symmetry (or measure of skewness). The <strong>skew</strong> of a random variable <span class="math inline">\(X\)</span> is the third standardized moment:</p>
 <p><span class="math display" id="eq:4-skew">\[\begin{equation}
-Skew(X) = E \left(\frac{(X-\mu)^3}{\sigma} \right)
+Skew(X) = E\left(\left(\frac{X-\mu}{\sigma}\right)^3\right)
 \tag{4.6}
 \end{equation}\]</span></p>
 <p>A random variable <span class="math inline">\(X\)</span> has a <strong>symmetric distribution about its mean</strong> if <span class="math inline">\(X - \mu\)</span> has the same distribution as <span class="math inline">\(\mu - X\)</span>. Fairly often, people will just say that <span class="math inline">\(X\)</span> is symmetric; it is almost always assumed that the symmetry is about its mean.</p>
@@ -295,7 +295,7 @@ Figure 4.5: PDF for Heavy Tailed Distribution
 </div>
 <p>A common measure of tail behavior is the <strong>excess kurtosis</strong>. The excess kurtosis of a random variable <span class="math inline">\(X\)</span> is the shifted fourth standardized moment:</p>
 <p><span class="math display" id="eq:4-kurt">\[\begin{equation}
-Kurt(X) = E \left(\frac{(X-\mu)^4}{\sigma} \right) - 3.
+Kurt(X) = E\left(\left(\frac{X-\mu}{\sigma}\right)^4\right) - 3.
 \tag{4.7}
 \end{equation}\]</span></p>
 <p>The reason for subtracting (or shifting by) 3 is so that the Gaussian distribution (a commonly used distribution for continuous random variables) has an excess kurtosis of 0.</p>
@@ -751,7 +751,7 @@ s_X^2 =  \frac{1}{n-1} \sum_{i=1}^n (x_i - \bar{x})^2,
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2026-01-30.</p>
+    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2026-02-08.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

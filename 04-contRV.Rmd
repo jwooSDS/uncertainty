@@ -213,14 +213,14 @@ Before talking about other measures that are used to describe continuous distrib
 
 - The **$k$th moment** of $X$ is $E(X^k)$. So the expected value, or the mean, is sometimes called the first moment.
 - The **$k$th central moment** of $X$ is $E((X-\mu)^k)$. So the variance is sometimes called the second central moment.
-- The **$k$ standardized moment** of $X$ is $E(\frac{(X-\mu)^k}{\sigma})$.
+- The **$k$ standardized moment** of $X$ is $E\left(\left(\frac{X-\mu}{\sigma}\right)^k\right)$.
 
 ### Skewness
 
 One measure that is used to describe the shape of a distribution is skewness, which is a measure of symmetry (or measure of skewness). The **skew** of a random variable $X$ is the third standardized moment:
 
 \begin{equation} 
-Skew(X) = E \left(\frac{(X-\mu)^3}{\sigma} \right)
+Skew(X) = E\left(\left(\frac{X-\mu}{\sigma}\right)^3\right)
 (\#eq:4-skew)
 \end{equation}
 
@@ -261,7 +261,7 @@ curve(dt(x,df=1), from = -4, to = 4, add=TRUE, col="blue")
 A common measure of tail behavior is the **excess kurtosis**. The excess kurtosis of a random variable $X$ is the shifted fourth standardized moment:
 
 \begin{equation} 
-Kurt(X) = E \left(\frac{(X-\mu)^4}{\sigma} \right) - 3.
+Kurt(X) = E\left(\left(\frac{X-\mu}{\sigma}\right)^4\right) - 3.
 (\#eq:4-kurt)
 \end{equation}
 

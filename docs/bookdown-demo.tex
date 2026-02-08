@@ -127,7 +127,7 @@
 
 \title{Understanding Uncertainty Course Notes}
 \author{Jeffrey Woo}
-\date{2026-01-30}
+\date{2026-02-08}
 
 \begin{document}
 \maketitle
@@ -2561,7 +2561,7 @@ Before talking about other measures that are used to describe continuous distrib
 \item
   The \textbf{\(k\)th central moment} of \(X\) is \(E((X-\mu)^k)\). So the variance is sometimes called the second central moment.
 \item
-  The \textbf{\(k\) standardized moment} of \(X\) is \(E(\frac{(X-\mu)^k}{\sigma})\).
+  The \textbf{\(k\) standardized moment} of \(X\) is \(E\left(\left(\frac{X-\mu}{\sigma}\right)^k\right)\).
 \end{itemize}
 
 \hypertarget{skewness}{%
@@ -2570,7 +2570,7 @@ Before talking about other measures that are used to describe continuous distrib
 One measure that is used to describe the shape of a distribution is skewness, which is a measure of symmetry (or measure of skewness). The \textbf{skew} of a random variable \(X\) is the third standardized moment:
 
 \begin{equation} 
-Skew(X) = E \left(\frac{(X-\mu)^3}{\sigma} \right)
+Skew(X) = E\left(\left(\frac{X-\mu}{\sigma}\right)^3\right)
 \label{eq:4-skew}
 \end{equation}
 
@@ -2607,7 +2607,7 @@ One more measure deals with the \textbf{tail} behavior of a distribution. Visual
 A common measure of tail behavior is the \textbf{excess kurtosis}. The excess kurtosis of a random variable \(X\) is the shifted fourth standardized moment:
 
 \begin{equation} 
-Kurt(X) = E \left(\frac{(X-\mu)^4}{\sigma} \right) - 3.
+Kurt(X) = E\left(\left(\frac{X-\mu}{\sigma}\right)^4\right) - 3.
 \label{eq:4-kurt}
 \end{equation}
 
