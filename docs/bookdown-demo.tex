@@ -139,9 +139,9 @@
 \chapter*{Preface (Summer 2026 update)}\label{preface-summer-2026-update}
 \addcontentsline{toc}{chapter}{Preface (Summer 2026 update)}
 
-The examples in this preface is based on OpenIntro Statistics (Diez, Ceytinka-Rundel, Barr), Chapter 9.4 and 9.5, which provide more background information. You can access the book for free at \url{https://www.openintro.org/book/os/}
+The examples in this preface are based on OpenIntro Statistics (Diez, Ceytinka-Rundel, Barr), Chapter 9.4 and 9.5, which provide more background information. You can access the book for free at \url{https://www.openintro.org/book/os/}
 
-The main goal using data science is to understand data. Broadly speaking, this will involve building a statistical model for predicting, or estimating a response variable based on one or more predictors. Such models are used in a wide variety of fields such as finance, medicine, public policy, sports, and so on. We will look a couple of examples.
+The main goal in using data science is to understand data. Broadly speaking, this will involve building a statistical model for predicting, or estimating a response variable based on one or more predictors. Such models are used in a wide variety of fields such as finance, medicine, public policy, sports, and so on. We will look a couple of examples.
 
 \section*{Examples}\label{examples}
 \addcontentsline{toc}{section}{Examples}
@@ -169,7 +169,7 @@ Generally speaking, a linear regression equation takes the following form:
 \hat{y} = \hat{\beta}_0 + \hat{\beta}_1 x_1 + \hat{\beta}_2 x_2 + \cdots + \hat{\beta}_k x_k
 \]
 
-where \(\hat{y}\) denotes the predicted value of the response variable, the price of the action in this example, \(x_1, x_2, \cdots, x_k\) denote the values of the predictors. This is example, we have: \(x_1\) for whether the game is new or not, \(x_2\) for whether the auction's main photo is a stock photo, \(x_3\) for the duration of the auction in days, and \(x_4\) for the number of Wii wheels included with the auction. \(\hat{\beta}_0, \hat{\beta}_1, \cdots, \hat{\beta}_k\) represent the estimated regression parameters. If we know what these values are, we can easily plug in the values of the predictors to obtain the predicted price of the auction.
+where \(\hat{y}\) denotes the predicted value of the response variable, the price of the auction in this example, \(x_1, x_2, \cdots, x_k\) denote the values of the predictors. In this example, we have: \(x_1\) for whether the game is new or not, \(x_2\) for whether the auction's main photo is a stock photo, \(x_3\) for the duration of the auction in days, and \(x_4\) for the number of Wii wheels included with the auction. \(\hat{\beta}_0, \hat{\beta}_1, \cdots, \hat{\beta}_k\) represent the estimated regression parameters. If we know what these values are, we can easily plug in the values of the predictors to obtain the predicted price of the auction.
 
 Fitting the model in R, we obtain the estimated regression parameters:
 
@@ -202,7 +202,7 @@ So for an auction for Mario Kart game that is used, that uses a stock photo, is 
 \subsection*{Example 2: Job Application Callback Rates \{\#eg2\}}\label{example-2-job-application-callback-rates-eg2}
 \addcontentsline{toc}{subsection}{Example 2: Job Application Callback Rates \{\#eg2\}}
 
-In this example, we look at data from an experiment that sought to evaluate the effect of race and gender on job application callback rates. For the experiment, researchers created fake resumes to job postings in Boston and Chicago to see which resumes resulted in a callback. The fake resumes included relevant information such as the applicant's educational attainment, how many year's of experience the applicant as well as a first and last name. The names on the fake resume were meant to imply the applicant's race and gender. Only two races were considered (Black or White) and only two genders were considered (Make or Female) for the experiment.
+In this example, we look at data from an experiment that sought to evaluate the effect of race and gender on job application callback rates. For the experiment, researchers created fake resumes to job postings in Boston and Chicago to see which resumes resulted in a callback. The fake resumes included relevant information such as the applicant's educational attainment, how many years of experience the applicant has as well as a first and last name. The names on the fake resume were meant to imply the applicant's race and gender. Only two races were considered (Black or White) and only two genders were considered (Male or Female) for the experiment.
 
 Prior to the experiment, the researchers conducted surveys to check for racial and gender associations for the names on the fake resumes; only names that passed a certain threshold from the surveys were included in the experiment.
 
@@ -273,7 +273,7 @@ Notice we used two different models, linear regression and logistic regression, 
 
 As mentioned in the previous section, we will be learning about foundational concepts associated with measures of uncertainty, probability, and expected values. All of these concepts will then help explain the intuition and how statistical models are built.
 
-At the end of the course, we will apply these concepts and revisit the linear regression model. Linear regression is the most widely used models used in data science, as it is relatively easy to understand and explain. More modern methods (that you will learn about in future classes) such as decision trees and neural networks can be viewed as extensions of the linear regression model.
+At the end of the course, we will apply these concepts and revisit the linear regression model. Linear regression is the most widely used model used in data science, as it is relatively easy to understand and explain. More modern methods (that you will learn about in future classes) such as decision trees and neural networks can be viewed as extensions of the linear regression model.
 
 \section*{Background Needed for the Course}\label{background-needed-for-the-course}
 \addcontentsline{toc}{section}{Background Needed for the Course}
@@ -309,7 +309,7 @@ These skills should have been covered in the R Boot Camp or in the programming p
 
 Note that I primarily use base R functions to perform data wrangling and data visualization, although you could perform the same operations using \texttt{tidyverse} functions (\texttt{dplyr} and \texttt{ggplot2} functions are part of the \texttt{tidyverse}).
 
-Practitioners of data science should be comfortable working with using base R and \texttt{tidyverse} functions. I highly discourage anyone from not learning one of these:
+Practitioners of data science should be comfortable working with using base R and \texttt{tidyverse} functions. I highly encourage everyone to learn both of these:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
