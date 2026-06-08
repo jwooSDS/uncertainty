@@ -72,7 +72,7 @@
 <span class="header-section-number">1.1</span> Uncertainty with Data<a class="anchor" aria-label="anchor" href="#uncertainty-with-data"><i class="fas fa-link"></i></a>
 </h2>
 <p>When we are analyzing data, there is always going to be some degree of uncertainty, as there is randomness in a lot of phenomena that we observe in our world. An event is <strong>random</strong> if individual outcomes of the event are unpredictable. For example, the weight of the next baby born in a local hospital. Without knowing any information about the biological parents, we have a high degree of uncertainty if we try to predict this baby’s weight. Even if we know detailed information about the biological parents (for example they are both very tall), we may feel more confident in predicting that the baby is likely to be heavier than average, but we cannot be certain about this prediction.</p>
-<p>On the other end hand, an event is <strong>deterministic</strong> if we can predict individual outcomes of the event with certainty. For example, if we know the length of a cube is 2 inches, we know for sure that its volume is is <span class="math inline">\(2^3 = 8\)</span> cubic inches, based on rules of mathematics. The volume of a cube with length 2 inches is always going to be 8 cubic inches, so the volume is deterministic.</p>
+<p>On the other hand, an event is <strong>deterministic</strong> if we can predict individual outcomes of the event with certainty. For example, if we know the length of a cube is 2 inches, we know for sure that its volume is <span class="math inline">\(2^3 = 8\)</span> cubic inches, based on rules of mathematics. The volume of a cube with length 2 inches is always going to be 8 cubic inches, so the volume is deterministic.</p>
 <p><em>Thought question</em>: think about data that you see in real life. Write these down. Are these data random or deterministic?</p>
 <p>We will explore tools to help us quantify uncertainty in data. In this module, we will explore fairly standard tools that are used to describe data and give us an idea about the degree of uncertainty we have in the data. When describing data that is quantitative, we usually describe the following: the shape of its distribution, its average or typical value, and its spread and uncertainty.</p>
 </div>
@@ -115,7 +115,7 @@ Figure 1.1: Dot Plot for 50 Interest Rates (rounded)
 </p>
 </div>
 <p>Notice there is 1 black dot that corresponds to an interest rate of 20 (presumably in percent), so there is one applicant who has a rounded interest rate of 20 percent. There are 8 black dots that correspond to an interest rate to 10 percent, so there are 8 applicants with a rounded interest rate of 10 percent. So interest rates of 10 percent are much more commonly occurring than interest rate of 20 percent. So we can use the height, or number of dots, to help us glean how often the value of a certain interest rate occurs. Based on this dotplot, interest rates between 5 and 11 percent are common, with higher values being less common.</p>
-<p><em>Note:</em> do not get too torn up about the details in the code to produce this dot plot. I have chosen the present the dot plot this way to highlight how we use it, without getting bogged down in the details of how it can be produced. We will not be using dot plots in this class.</p>
+<p><em>Note:</em> do not get too torn up about the details in the code to produce this dot plot. I have chosen to present the dot plot this way to highlight how we use it, without getting bogged down in the details of how it can be produced. We will not be using dot plots in this class.</p>
 </div>
 <div id="histograms" class="section level3" number="1.2.2">
 <h3>
@@ -137,8 +137,8 @@ Figure 1.1: Dot Plot for 50 Interest Rates (rounded)
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x<span class="op">=</span><span class="st">"Interest Rate"</span>, title<span class="op">=</span><span class="st">"Histogram of Interest Rates"</span><span class="op">)</span></span></code></pre></div>
 <div class="figure">
 <span style="display:block;" id="fig:hist"></span>
-<img src="bookdown-demo_files/figure-html/hist-1.png" alt="Historgram for 50 Interest Rates" width="672"><p class="caption">
-Figure 1.2: Historgram for 50 Interest Rates
+<img src="bookdown-demo_files/figure-html/hist-1.png" alt="Histogram for 50 Interest Rates" width="672"><p class="caption">
+Figure 1.2: Histogram for 50 Interest Rates
 </p>
 </div>
 <p>Similar to the dot plot in Figure <a href="descriptive.html#fig:dotplot">1.1</a>, the height of the histogram inform us what values are more commonly occurring. We can see from this histogram that interest rates between 5 and 10 percent are common, much more so than loans with interest rates greater than 20 percent. We could say that we have more certainty that a randomly selected loan applicant will have an interest rate between 5 and 10 percent than an interest rate that is greater than 20 percent.</p>
@@ -146,7 +146,7 @@ Figure 1.2: Historgram for 50 Interest Rates
 <h4>
 <span class="header-section-number">1.2.2.1</span> Shapes of Distribution<a class="anchor" aria-label="anchor" href="#shapes-of-distribution"><i class="fas fa-link"></i></a>
 </h4>
-<p>Histograms can also give us an idea about the <strong>shape</strong> of the distribution of interest rates. For the histogram in Figure <a href="descriptive.html#fig:hist">1.2</a>, most of the loans are less than 15 percent, with only a small number of loans greater than 20 percent. We can say that we have greater certainty that a loan will have an interest rate less than 15 percent. When the data tail off to the right as in our histogram, the shape is said to be <strong>right-skewed</strong>. When a variable is said to be right-skewed, large values of the variable are much less common than small values of the variable; smaller values are more likely occur.</p>
+<p>Histograms can also give us an idea about the <strong>shape</strong> of the distribution of interest rates. For the histogram in Figure <a href="descriptive.html#fig:hist">1.2</a>, most of the loans are less than 15 percent, with only a small number of loans greater than 20 percent. We can say that we have greater certainty that a loan will have an interest rate less than 15 percent. When the data tail off to the right as in our histogram, the shape is said to be <strong>right-skewed</strong>. When a variable is said to be right-skewed, large values of the variable are much less common than small values of the variable; smaller values are more likely to occur.</p>
 <ul>
 <li><p>If the histogram has the reverse characteristic, i.e. the data tail off to the left instead, the shape is said to be <strong>left-skewed</strong>. This implies that small values of the variable are much less common than large values of the variable; larger values are more likely to occur.</p></li>
 <li><p>Histograms that tail off similarly in both directions are called <strong>symmetric</strong>. Large and small values are of the variable are equally likely.</p></li>
@@ -169,8 +169,8 @@ Figure 1.2: Historgram for 50 Interest Rates
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x<span class="op">=</span><span class="st">"Interest Rate"</span>, title<span class="op">=</span><span class="st">"Histogram of Interest Rates"</span><span class="op">)</span></span></code></pre></div>
 <div class="figure">
 <span style="display:block;" id="fig:hist05"></span>
-<img src="bookdown-demo_files/figure-html/hist05-1.png" alt="Historgram for 50 Interest Rates, with Bin Width 0.5" width="672"><p class="caption">
-Figure 1.3: Historgram for 50 Interest Rates, with Bin Width 0.5
+<img src="bookdown-demo_files/figure-html/hist05-1.png" alt="Histogram for 50 Interest Rates, with Bin Width 0.5" width="672"><p class="caption">
+Figure 1.3: Histogram for 50 Interest Rates, with Bin Width 0.5
 </p>
 </div>
 <p>Comparing Figure <a href="descriptive.html#fig:hist05">1.3</a> with Figure <a href="descriptive.html#fig:hist">1.2</a>, note the following:</p>
@@ -196,13 +196,13 @@ Figure 1.3: Historgram for 50 Interest Rates, with Bin Width 0.5
 Figure 1.4: Density Plot for 50 Interest Rates
 </p>
 </div>
-<p>Based on Figure <a href="descriptive.html#fig:dens">1.4</a>, we see that low interest rates (between 5 and 12.5 percent) are much more common and high interest rates (higher than 20 percent). A few things to note about interpreting density plots:</p>
+<p>Based on Figure <a href="descriptive.html#fig:dens">1.4</a>, we see that low interest rates (between 5 and 12.5 percent) are much more common than high interest rates (higher than 20 percent). A few things to note about interpreting density plots:</p>
 <ul>
 <li>The area under the density plot is always equal to 1.</li>
 <li>To find the proportion of interest rates that are between two values, for example between 10 and 15 percent, we would integrate this density plot over this range, i.e. <span class="math inline">\(\int_{10}^{15} f(x) dx\)</span>, where <span class="math inline">\(f(x)\)</span> is a mathematical equation that describes the density plot. We will learn about this equation in more detail in a later module.</li>
 <li>The values on the vertical axis do not equal to probabilities (a common misconception).</li>
 </ul>
-<p>The density plot is found using a method called kernel density estimation (KDE). We will over details about KDE in Section <a href="continuous-random-variables.html#KDE">4.6.1</a> as we need to cover quite a bit of material before doing so.</p>
+<p>The density plot is found using a method called kernel density estimation (KDE). We will go over the details about KDE in Section <a href="continuous-random-variables.html#KDE">4.6.1</a> as we need to cover quite a bit of material before doing so.</p>
 <div id="considerations-with-density-plots" class="section level4" number="1.2.3.1">
 <h4>
 <span class="header-section-number">1.2.3.1</span> Considerations with Density Plots<a class="anchor" aria-label="anchor" href="#considerations-with-density-plots"><i class="fas fa-link"></i></a>
@@ -272,10 +272,10 @@ Figure 1.5: Density Plot for 50 Interest Rates with Larger Bandwidth
 <p>So <span class="math inline">\(Q_1\)</span> is 7.96 percent, and <span class="math inline">\(Q_3\)</span> is 14.08 percent. It turns out that <span class="math inline">\(Q_1\)</span> is also the 25th percentile, and <span class="math inline">\(Q_3\)</span> is also the 75th percentile, by definition.</p>
 <p>Remember we wrote the following earlier:</p>
 <ul>
-<li>The first group will have values between negative infinity and <span class="math inline">\(Q_1\)</span>. So about a quarter of observations are have interest rates less than 7.96 percent.</li>
-<li>The second group will have values between negative <span class="math inline">\(Q_1\)</span> and <span class="math inline">\(Q_2\)</span>. So about a quarter of observations have interest rates between 7.96 and 9.93 percent.</li>
-<li>The third group will have values between negative <span class="math inline">\(Q_2\)</span> and <span class="math inline">\(Q_3\)</span>. So about a quarter of observations have interest rates between 9.93 and 14.08 percent.</li>
-<li>The fourth group will have values between negative <span class="math inline">\(Q_3\)</span> and infinity. So about a quarter of observations have interest rates above 14.08 percent.</li>
+<li>The first group will have values between negative infinity and <span class="math inline">\(Q_1\)</span>. So about a quarter of observations have interest rates less than 7.96 percent.</li>
+<li>The second group will have values between <span class="math inline">\(Q_1\)</span> and <span class="math inline">\(Q_2\)</span>. So about a quarter of observations have interest rates between 7.96 and 9.93 percent.</li>
+<li>The third group will have values between <span class="math inline">\(Q_2\)</span> and <span class="math inline">\(Q_3\)</span>. So about a quarter of observations have interest rates between 9.93 and 14.08 percent.</li>
+<li>The fourth group will have values between <span class="math inline">\(Q_3\)</span> and infinity. So about a quarter of observations have interest rates above 14.08 percent.</li>
 </ul>
 <p>Note: you may notice that we used <code>type = 1</code> inside the <code><a href="https://rdrr.io/r/stats/quantile.html">quantile()</a></code> function. Using <code>type = 1</code> gives the values of the first and third quartiles that are based on the method that was just described. There are actually several ways to find quantiles, which may result in slightly differing values, although they all generally meet the definition that <span class="math inline">\(Q_1\)</span> is the 25th percentile, and <span class="math inline">\(Q_3\)</span> is the 75th percentile.</p>
 </div>
@@ -392,7 +392,7 @@ Figure 1.8: ECDF Plot of Interest Rates
 <span class="header-section-number">1.4.2</span> Median<a class="anchor" aria-label="anchor" href="#median"><i class="fas fa-link"></i></a>
 </h3>
 <p>We went over how to find the median in section <a href="descriptive.html#quart">1.3.1.1</a>. The <strong>median</strong> is the value of the middle observation in ordered statistics. It is also called <span class="math inline">\(Q_2\)</span>, the second quartile, and the 50th percentile, so approximately 50 percent of observations have values smaller than the median.</p>
-<p>So, for our toy example of the 5 people and how often they go to the gym in a week, their sample median is <span class="math inline">\(x_{(3)} = 3\)</span>. So about 50 percent of people went to gym less than 3 times in a week.</p>
+<p>So, for our toy example of the 5 people and how often they go to the gym in a week, their sample median is <span class="math inline">\(x_{(3)} = 3\)</span>. So about 50 percent of people went to the gym less than 3 times in a week.</p>
 </div>
 <div id="mode" class="section level3" number="1.4.3">
 <h3>
@@ -406,7 +406,7 @@ Figure 1.8: ECDF Plot of Interest Rates
 </h3>
 <p>A few things to consider when using these measures of centrality:</p>
 <ul>
-<li><p>The mean is a measure that most people are comfortable with, however, caution needs to be used if the variable is skewed, as extreme outliers and drastically alter the value of the mean. Using our toy example with the gym, suppose the person who visits the gym the most visits 50 times, instead of 5. The numerical value of the sample mean explodes, and does not give a good representation of the central value of how many visits to the gym a person makes in a week. The mean is fine if the variable is symmetric.</p></li>
+<li><p>The mean is a measure that most people are comfortable with, however, caution needs to be used if the variable is skewed, as extreme outliers can drastically alter the value of the mean. Using our toy example with the gym, suppose the person who visits the gym the most visits 50 times, instead of 5. The numerical value of the sample mean explodes, and does not give a good representation of the central value of how many visits to the gym a person makes in a week. The mean is fine if the variable is symmetric.</p></li>
 <li><p>The median is a measure that is recommended for skewed distributions, since the order associated with ordered statistics is not influenced by extreme outliers. Using the gym example, in the previous bullet point, the median is unaffected.</p></li>
 <li><p>The mean being larger than the median is an indication that the distribution is right-skewed. Using our interest rate example, we have:</p></li>
 </ul>
@@ -419,7 +419,7 @@ Figure 1.8: ECDF Plot of Interest Rates
 <p>which is consistent with the right skew we saw in the histogram and density plot in Figures <a href="descriptive.html#fig:hist">1.2</a> and <a href="descriptive.html#fig:dens">1.4</a>. Conversely, a left-skewed distribution usually has a mean that is smaller than the median. A symmetric distribution typically has similar values for the mean and median.</p>
 <ul>
 <li><p>The mean is considered a <strong>sensitive</strong> measure, since its numerical value can be drastically affected by outliers. The median is considered a <strong>robust</strong> measure, since its numerical value is more resistant and is less affected by outliers.</p></li>
-<li><p>The mathematical definition of mode can be difficult to use for variables that are continuous, since it is likely that there are no observations that have the same value when the variable is continuous. In this instance, the mode typically refers to the bin in the histogram that has is the tallest. So, using the histogram in Figure <a href="descriptive.html#fig:hist">1.2</a> for the interest rates, the mode is between 7.5 to 10 percent.</p></li>
+<li><p>The mathematical definition of mode can be difficult to use for variables that are continuous, since it is likely that there are no observations that have the same value when the variable is continuous. In this instance, the mode typically refers to the bin in the histogram that is the tallest. So, using the histogram in Figure <a href="descriptive.html#fig:hist">1.2</a> for the interest rates, the mode is between 7.5 to 10 percent.</p></li>
 </ul>
 </div>
 </div>
@@ -427,7 +427,7 @@ Figure 1.8: ECDF Plot of Interest Rates
 <h2>
 <span class="header-section-number">1.5</span> Measures of Spread<a class="anchor" aria-label="anchor" href="#measures-of-spread"><i class="fas fa-link"></i></a>
 </h2>
-<p>In the previous sections, we learned about summarizing features a quantitative variable, by using visualizations to summarize its shape, and by using some measures of centrality that describe the average or typical values of the variable. One more feature we can summarize is the spread, associated with the values of a quantitative variable. Measures of spread are considered a way to measure uncertainty. Data that have larger spread have more uncertainty.</p>
+<p>In the previous sections, we learned about summarizing features of a quantitative variable, by using visualizations to summarize its shape, and by using some measures of centrality that describe the average or typical values of the variable. One more feature we can summarize is the spread, associated with the values of a quantitative variable. Measures of spread are considered a way to measure uncertainty. Data that have larger spread have more uncertainty.</p>
 <div id="variance-and-standard-deviation" class="section level3" number="1.5.1">
 <h3>
 <span class="header-section-number">1.5.1</span> Variance and Standard Deviation<a class="anchor" aria-label="anchor" href="#variance-and-standard-deviation"><i class="fas fa-link"></i></a>
@@ -450,8 +450,8 @@ s^2 &amp;= \frac{\sum_{i=1}^n (x_i-\bar{x})^2}{n-1}\\
 <iframe width="560px" height="320px" allowfullscreen="true" allow="autoplay *" title="Mod 01: Sample Variance" src="https://virginiauniversity.instructuremedia.com/embed/d4a39613-d29e-47de-b5b0-e3a7304d0e16" frameborder="0">
 </iframe>
 <p>Larger values of the sample variance indicate that the observations are generally further away from the sample mean, indicating larger spread, and a higher degree of uncertainty about future values.</p>
-<p><em>Thought question</em>: What does it mean if the sample variance of a set of observations is 0? Why does this indicate their there is little (or no) uncertainty about the set of observations?</p>
-<p>Another related measure is the sample <strong>standard deviation</strong>, which is the square root of the sample variance. Similar to the variance, larger values indicated more spread in the data.</p>
+<p><em>Thought question</em>: What does it mean if the sample variance of a set of observations is 0? Why does this indicate that there is little (or no) uncertainty about the set of observations?</p>
+<p>Another related measure is the sample <strong>standard deviation</strong>, which is the square root of the sample variance. Similar to the variance, larger values indicate more spread in the data.</p>
 </div>
 <div id="interquartile-range" class="section level3" number="1.5.2">
 <h3>

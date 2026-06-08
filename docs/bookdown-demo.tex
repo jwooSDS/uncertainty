@@ -339,7 +339,7 @@ This module is based on OpenIntro Statistics (Diez, Ceytinka-Rundel, Barr), Chap
 
 When we are analyzing data, there is always going to be some degree of uncertainty, as there is randomness in a lot of phenomena that we observe in our world. An event is \textbf{random} if individual outcomes of the event are unpredictable. For example, the weight of the next baby born in a local hospital. Without knowing any information about the biological parents, we have a high degree of uncertainty if we try to predict this baby's weight. Even if we know detailed information about the biological parents (for example they are both very tall), we may feel more confident in predicting that the baby is likely to be heavier than average, but we cannot be certain about this prediction.
 
-On the other end hand, an event is \textbf{deterministic} if we can predict individual outcomes of the event with certainty. For example, if we know the length of a cube is 2 inches, we know for sure that its volume is is \(2^3 = 8\) cubic inches, based on rules of mathematics. The volume of a cube with length 2 inches is always going to be 8 cubic inches, so the volume is deterministic.
+On the other hand, an event is \textbf{deterministic} if we can predict individual outcomes of the event with certainty. For example, if we know the length of a cube is 2 inches, we know for sure that its volume is \(2^3 = 8\) cubic inches, based on rules of mathematics. The volume of a cube with length 2 inches is always going to be 8 cubic inches, so the volume is deterministic.
 
 \emph{Thought question}: think about data that you see in real life. Write these down. Are these data random or deterministic?
 
@@ -397,7 +397,7 @@ We can create the corresponding dot plot, per Figure \ref{fig:dotplot}:
 
 Notice there is 1 black dot that corresponds to an interest rate of 20 (presumably in percent), so there is one applicant who has a rounded interest rate of 20 percent. There are 8 black dots that correspond to an interest rate to 10 percent, so there are 8 applicants with a rounded interest rate of 10 percent. So interest rates of 10 percent are much more commonly occurring than interest rate of 20 percent. So we can use the height, or number of dots, to help us glean how often the value of a certain interest rate occurs. Based on this dotplot, interest rates between 5 and 11 percent are common, with higher values being less common.
 
-\emph{Note:} do not get too torn up about the details in the code to produce this dot plot. I have chosen the present the dot plot this way to highlight how we use it, without getting bogged down in the details of how it can be produced. We will not be using dot plots in this class.
+\emph{Note:} do not get too torn up about the details in the code to produce this dot plot. I have chosen to present the dot plot this way to highlight how we use it, without getting bogged down in the details of how it can be produced. We will not be using dot plots in this class.
 
 \subsection{Histograms}\label{histograms}
 
@@ -428,14 +428,14 @@ We create this histogram (using the original interest rates) below, per Figure \
 \begin{figure}
 \centering
 \includegraphics{bookdown-demo_files/figure-latex/hist-1.pdf}
-\caption{\label{fig:hist}Historgram for 50 Interest Rates}
+\caption{\label{fig:hist}Histogram for 50 Interest Rates}
 \end{figure}
 
 Similar to the dot plot in Figure \ref{fig:dotplot}, the height of the histogram inform us what values are more commonly occurring. We can see from this histogram that interest rates between 5 and 10 percent are common, much more so than loans with interest rates greater than 20 percent. We could say that we have more certainty that a randomly selected loan applicant will have an interest rate between 5 and 10 percent than an interest rate that is greater than 20 percent.
 
 \subsubsection{Shapes of Distribution}\label{shapes-of-distribution}
 
-Histograms can also give us an idea about the \textbf{shape} of the distribution of interest rates. For the histogram in Figure \ref{fig:hist}, most of the loans are less than 15 percent, with only a small number of loans greater than 20 percent. We can say that we have greater certainty that a loan will have an interest rate less than 15 percent. When the data tail off to the right as in our histogram, the shape is said to be \textbf{right-skewed}. When a variable is said to be right-skewed, large values of the variable are much less common than small values of the variable; smaller values are more likely occur.
+Histograms can also give us an idea about the \textbf{shape} of the distribution of interest rates. For the histogram in Figure \ref{fig:hist}, most of the loans are less than 15 percent, with only a small number of loans greater than 20 percent. We can say that we have greater certainty that a loan will have an interest rate less than 15 percent. When the data tail off to the right as in our histogram, the shape is said to be \textbf{right-skewed}. When a variable is said to be right-skewed, large values of the variable are much less common than small values of the variable; smaller values are more likely to occur.
 
 \begin{itemize}
 \item
@@ -468,7 +468,7 @@ Consider creating a histogram with bin width of 0.5, instead of 2.5, per Figure 
 \begin{figure}
 \centering
 \includegraphics{bookdown-demo_files/figure-latex/hist05-1.pdf}
-\caption{\label{fig:hist05}Historgram for 50 Interest Rates, with Bin Width 0.5}
+\caption{\label{fig:hist05}Histogram for 50 Interest Rates, with Bin Width 0.5}
 \end{figure}
 
 Comparing Figure \ref{fig:hist05} with Figure \ref{fig:hist}, note the following:
@@ -501,7 +501,7 @@ Another visualization for a quantitative variable is a \textbf{density plot}. A 
 \caption{\label{fig:dens}Density Plot for 50 Interest Rates}
 \end{figure}
 
-Based on Figure \ref{fig:dens}, we see that low interest rates (between 5 and 12.5 percent) are much more common and high interest rates (higher than 20 percent). A few things to note about interpreting density plots:
+Based on Figure \ref{fig:dens}, we see that low interest rates (between 5 and 12.5 percent) are much more common than high interest rates (higher than 20 percent). A few things to note about interpreting density plots:
 
 \begin{itemize}
 \tightlist
@@ -513,7 +513,7 @@ Based on Figure \ref{fig:dens}, we see that low interest rates (between 5 and 12
   The values on the vertical axis do not equal to probabilities (a common misconception).
 \end{itemize}
 
-The density plot is found using a method called kernel density estimation (KDE). We will over details about KDE in Section \ref{KDE} as we need to cover quite a bit of material before doing so.
+The density plot is found using a method called kernel density estimation (KDE). We will go over the details about KDE in Section \ref{KDE} as we need to cover quite a bit of material before doing so.
 
 \subsubsection{Considerations with Density Plots}\label{considerations-with-density-plots}
 
@@ -623,13 +623,13 @@ Remember we wrote the following earlier:
 \begin{itemize}
 \tightlist
 \item
-  The first group will have values between negative infinity and \(Q_1\). So about a quarter of observations are have interest rates less than 7.96 percent.
+  The first group will have values between negative infinity and \(Q_1\). So about a quarter of observations have interest rates less than 7.96 percent.
 \item
-  The second group will have values between negative \(Q_1\) and \(Q_2\). So about a quarter of observations have interest rates between 7.96 and 9.93 percent.
+  The second group will have values between \(Q_1\) and \(Q_2\). So about a quarter of observations have interest rates between 7.96 and 9.93 percent.
 \item
-  The third group will have values between negative \(Q_2\) and \(Q_3\). So about a quarter of observations have interest rates between 9.93 and 14.08 percent.
+  The third group will have values between \(Q_2\) and \(Q_3\). So about a quarter of observations have interest rates between 9.93 and 14.08 percent.
 \item
-  The fourth group will have values between negative \(Q_3\) and infinity. So about a quarter of observations have interest rates above 14.08 percent.
+  The fourth group will have values between \(Q_3\) and infinity. So about a quarter of observations have interest rates above 14.08 percent.
 \end{itemize}
 
 Note: you may notice that we used \texttt{type\ =\ 1} inside the \texttt{quantile()} function. Using \texttt{type\ =\ 1} gives the values of the first and third quartiles that are based on the method that was just described. There are actually several ways to find quantiles, which may result in slightly differing values, although they all generally meet the definition that \(Q_1\) is the 25th percentile, and \(Q_3\) is the 75th percentile.
@@ -768,7 +768,7 @@ So, for our toy example of the 5 people and how often they go to the gym in a we
 
 We went over how to find the median in section \ref{quart}. The \textbf{median} is the value of the middle observation in ordered statistics. It is also called \(Q_2\), the second quartile, and the 50th percentile, so approximately 50 percent of observations have values smaller than the median.
 
-So, for our toy example of the 5 people and how often they go to the gym in a week, their sample median is \(x_{(3)} = 3\). So about 50 percent of people went to gym less than 3 times in a week.
+So, for our toy example of the 5 people and how often they go to the gym in a week, their sample median is \(x_{(3)} = 3\). So about 50 percent of people went to the gym less than 3 times in a week.
 
 \subsection{Mode}\label{mode}
 
@@ -780,7 +780,7 @@ A few things to consider when using these measures of centrality:
 
 \begin{itemize}
 \item
-  The mean is a measure that most people are comfortable with, however, caution needs to be used if the variable is skewed, as extreme outliers and drastically alter the value of the mean. Using our toy example with the gym, suppose the person who visits the gym the most visits 50 times, instead of 5. The numerical value of the sample mean explodes, and does not give a good representation of the central value of how many visits to the gym a person makes in a week. The mean is fine if the variable is symmetric.
+  The mean is a measure that most people are comfortable with, however, caution needs to be used if the variable is skewed, as extreme outliers can drastically alter the value of the mean. Using our toy example with the gym, suppose the person who visits the gym the most visits 50 times, instead of 5. The numerical value of the sample mean explodes, and does not give a good representation of the central value of how many visits to the gym a person makes in a week. The mean is fine if the variable is symmetric.
 \item
   The median is a measure that is recommended for skewed distributions, since the order associated with ordered statistics is not influenced by extreme outliers. Using the gym example, in the previous bullet point, the median is unaffected.
 \item
@@ -813,12 +813,12 @@ which is consistent with the right skew we saw in the histogram and density plot
 \item
   The mean is considered a \textbf{sensitive} measure, since its numerical value can be drastically affected by outliers. The median is considered a \textbf{robust} measure, since its numerical value is more resistant and is less affected by outliers.
 \item
-  The mathematical definition of mode can be difficult to use for variables that are continuous, since it is likely that there are no observations that have the same value when the variable is continuous. In this instance, the mode typically refers to the bin in the histogram that has is the tallest. So, using the histogram in Figure \ref{fig:hist} for the interest rates, the mode is between 7.5 to 10 percent.
+  The mathematical definition of mode can be difficult to use for variables that are continuous, since it is likely that there are no observations that have the same value when the variable is continuous. In this instance, the mode typically refers to the bin in the histogram that is the tallest. So, using the histogram in Figure \ref{fig:hist} for the interest rates, the mode is between 7.5 to 10 percent.
 \end{itemize}
 
 \section{Measures of Spread}\label{measures-of-spread}
 
-In the previous sections, we learned about summarizing features a quantitative variable, by using visualizations to summarize its shape, and by using some measures of centrality that describe the average or typical values of the variable. One more feature we can summarize is the spread, associated with the values of a quantitative variable. Measures of spread are considered a way to measure uncertainty. Data that have larger spread have more uncertainty.
+In the previous sections, we learned about summarizing features of a quantitative variable, by using visualizations to summarize its shape, and by using some measures of centrality that describe the average or typical values of the variable. One more feature we can summarize is the spread, associated with the values of a quantitative variable. Measures of spread are considered a way to measure uncertainty. Data that have larger spread have more uncertainty.
 
 \subsection{Variance and Standard Deviation}\label{variance-and-standard-deviation}
 
@@ -845,9 +845,9 @@ The video below explains the calculation of the sample variance:
 
 Larger values of the sample variance indicate that the observations are generally further away from the sample mean, indicating larger spread, and a higher degree of uncertainty about future values.
 
-\emph{Thought question}: What does it mean if the sample variance of a set of observations is 0? Why does this indicate their there is little (or no) uncertainty about the set of observations?
+\emph{Thought question}: What does it mean if the sample variance of a set of observations is 0? Why does this indicate that there is little (or no) uncertainty about the set of observations?
 
-Another related measure is the sample \textbf{standard deviation}, which is the square root of the sample variance. Similar to the variance, larger values indicated more spread in the data.
+Another related measure is the sample \textbf{standard deviation}, which is the square root of the sample variance. Similar to the variance, larger values indicate more spread in the data.
 
 \subsection{Interquartile Range}\label{interquartile-range}
 
