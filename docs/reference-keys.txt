@@ -352,7 +352,7 @@ inequalities-limit-theorems-and-simulations
 introduction-2
 module-roadmap-4
 inequalities
-cauchy-schwartz-inequality
+cauchy-schwarz-inequality
 jensens-inequality
 linnonlin
 convex-and-concave-functions

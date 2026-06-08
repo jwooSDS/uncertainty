@@ -77,7 +77,7 @@
 <span class="header-section-number">6.1.1</span> Module Roadmap<a class="anchor" aria-label="anchor" href="#module-roadmap-4"><i class="fas fa-link"></i></a>
 </h3>
 <ul>
-<li>Section <a href="inequalities-limit-theorems-and-simulations.html#inequalities">6.2</a> covers 3 famous inequalities that are used in probability (Cauchy-Schwartz, Jensen, Chebyshev), as well as their implications.</li>
+<li>Section <a href="inequalities-limit-theorems-and-simulations.html#inequalities">6.2</a> covers 3 famous inequalities that are used in probability (Cauchy-Schwarz, Jensen, Chebyshev), as well as their implications.</li>
 <li>Section <a href="inequalities-limit-theorems-and-simulations.html#limits">6.3</a> covers 2 of the most consequential theorems in probability, the Law of Large Numbers and the Central Limit Theorem. We will be invoking these 2 theorems in a number of the remaining modules .</li>
 <li>Section <a href="inequalities-limit-theorems-and-simulations.html#MCsims">6.4</a> covers Monte Carlo simulations, which is a computational tool used to estimate probabilities, especially when they may be difficult to derive “by hand”. We will be using Monte Carlo simulations extensively for the rest of this class.</li>
 </ul>
@@ -88,18 +88,18 @@
 <span class="header-section-number">6.2</span> Inequalities<a class="anchor" aria-label="anchor" href="#inequalities"><i class="fas fa-link"></i></a>
 </h2>
 <p>If a probability or expected value is difficult to calculate, it may be easier to find a bound via an inequality. This usually means that we can guarantee that a certain probability or expected value is within a certain range of values, which narrows down the possible values for the exact answer. For example, instead of being able to calculate the probability of a certain event, we may be able to show that its probability is no more than 0.1, so we know the event is unlikely to happen. We will cover a couple of the most well-known inequalities in probability.</p>
-<div id="cauchy-schwartz-inequality" class="section level3" number="6.2.1">
+<div id="cauchy-schwarz-inequality" class="section level3" number="6.2.1">
 <h3>
-<span class="header-section-number">6.2.1</span> Cauchy-Schwartz Inequality<a class="anchor" aria-label="anchor" href="#cauchy-schwartz-inequality"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6.2.1</span> Cauchy-Schwarz Inequality<a class="anchor" aria-label="anchor" href="#cauchy-schwarz-inequality"><i class="fas fa-link"></i></a>
 </h3>
 <p>The <strong>Cauchy-Schwarz inequality</strong> is one of the most famous inequalities in mathematics and has many applications. In the context of probability, it is written as: For any random variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> with finite variances</p>
 <p><span class="math display" id="eq:6-CS">\[\begin{equation}
 |E(XY)| \leq \sqrt{E(X^2)E(Y^2)}.
 \tag{6.1}
 \end{equation}\]</span></p>
-<p>Next, we use the Cauchy-Schwartz inequality to prove a couple of properties that we have stated in earlier modules:</p>
+<p>Next, we use the Cauchy-Schwarz inequality to prove a couple of properties that we have stated in earlier modules:</p>
 <ol style="list-style-type: decimal">
-<li>The Cauchy-Schwartz inequality can be used to show the correlation between any two random variables with finite variances must be between -1 and 1. A quick proof is as follows: we apply equation <a href="inequalities-limit-theorems-and-simulations.html#eq:6-CS">(6.1)</a> to the <strong>centered</strong> random variables <span class="math inline">\(X - \mu_X\)</span> and <span class="math inline">\(Y - \mu_Y\)</span>:</li>
+<li>The Cauchy-Schwarz inequality can be used to show the correlation between any two random variables with finite variances must be between -1 and 1. A quick proof is as follows: we apply equation <a href="inequalities-limit-theorems-and-simulations.html#eq:6-CS">(6.1)</a> to the <strong>centered</strong> random variables <span class="math inline">\(X - \mu_X\)</span> and <span class="math inline">\(Y - \mu_Y\)</span>:</li>
 </ol>
 <p><span class="math display">\[
 \begin{split}
@@ -109,7 +109,7 @@
 \end{split}
 \]</span></p>
 <p>View the video below for a more detailed explanation of this proof:</p>
-<iframe width="560px" height="320px" allowfullscreen="true" allow="autoplay *" title="Module 06: Cauchy Schwartz and Correlation" src="https://virginiauniversity.instructuremedia.com/embed/bf9948b4-1c86-4529-9b49-53c808b4a0be" frameborder="0">
+<iframe width="560px" height="320px" allowfullscreen="true" allow="autoplay *" title="Module 06: Cauchy Schwarz and Correlation" src="https://virginiauniversity.instructuremedia.com/embed/bf9948b4-1c86-4529-9b49-53c808b4a0be" frameborder="0">
 </iframe>
 <ol start="2" style="list-style-type: decimal">
 <li>The Cauchy-Schwarz inequality can also be used to show that the variance of any random variable has to be non negative. A quick proof is as follows: we apply equation <a href="inequalities-limit-theorems-and-simulations.html#eq:6-CS">(6.1)</a> to the random variable <span class="math inline">\(X\)</span> and to a constant 1:</li>
@@ -123,9 +123,9 @@
 \end{split}
 \]</span>
 View the video below for a more detailed explanation of this proof:</p>
-<iframe width="560px" height="320px" allowfullscreen="true" allow="autoplay *" title="Module 06: Cauchy Schwartz and Variance" src="https://virginiauniversity.instructuremedia.com/embed/856ad59e-6e7f-4039-97e5-d1ce7397752c" frameborder="0">
+<iframe width="560px" height="320px" allowfullscreen="true" allow="autoplay *" title="Module 06: Cauchy Schwarz and Variance" src="https://virginiauniversity.instructuremedia.com/embed/856ad59e-6e7f-4039-97e5-d1ce7397752c" frameborder="0">
 </iframe>
-<p>Note: One other place that you may seen the Cauchy-Schwarz inequality is in the proof of the triangle inequality in geometry.</p>
+<p>Note: One other place that you may have seen the Cauchy-Schwarz inequality is in the proof of the triangle inequality in geometry.</p>
 </div>
 <div id="jensens-inequality" class="section level3" number="6.2.2">
 <h3>
@@ -150,7 +150,7 @@ View the video below for a more detailed explanation of this proof:</p>
 <div class="sourceCode" id="cb91"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">D</span><span class="op">)</span> <span class="co">##Expected winnings. This is equal to 2 times mean(X)</span></span></code></pre></div>
 <pre><code>## [1] 7</code></pre>
-<p>Now suppose the winnings is now defined as the squared of the number of dots the die shows. Let <span class="math inline">\(T\)</span> denote the new winnings, so <span class="math inline">\(T = X^2\)</span>. Since this is a non linear transformation, <span class="math inline">\(E(T) = E(X^2)\)</span> may not equal to <span class="math inline">\(E(X)^2\)</span>:</p>
+<p>Now suppose the winnings is now defined as the square of the number of dots the die shows. Let <span class="math inline">\(T\)</span> denote the new winnings, so <span class="math inline">\(T = X^2\)</span>. Since this is a non linear transformation, <span class="math inline">\(E(T) = E(X^2)\)</span> may not equal to <span class="math inline">\(E(X)^2\)</span>:</p>
 <div class="sourceCode" id="cb93"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">X</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">4</span>,<span class="fl">5</span>,<span class="fl">6</span><span class="op">)</span> <span class="co">##support for X</span></span>
 <span></span>
@@ -251,7 +251,7 @@ P(|X-\mu| \geq a) \leq \frac{\sigma^2}{a^2}.
 P(|X-\mu| \geq c \sigma) \leq \frac{\sigma^2}{c^2 \sigma^2} = \frac{1}{c^2}.
 \tag{6.3}
 \end{equation}\]</span></p>
-<p>Using equation <a href="inequalities-limit-theorems-and-simulations.html#eq:6-CIalt">(6.3)</a>, we can say the following about the upper bond on the probability that a random variable is at least 1, 2, and 3 standard deviations from its mean:</p>
+<p>Using equation <a href="inequalities-limit-theorems-and-simulations.html#eq:6-CIalt">(6.3)</a>, we can say the following about the upper bound on the probability that a random variable is at least 1, 2, and 3 standard deviations from its mean:</p>
 <ul>
 <li>When <span class="math inline">\(c=1\)</span>,</li>
 </ul>
@@ -281,7 +281,7 @@ P(|X-\mu| \geq 3\sigma) \leq \frac{1}{3^2} = \frac{1}{9}.
 <h2>
 <span class="header-section-number">6.3</span> Limit Theorems<a class="anchor" aria-label="anchor" href="#limits"><i class="fas fa-link"></i></a>
 </h2>
-<p>In the previous subsection, we used inequalities to provide bounds on probabilities and expectations that may be difficult to calculate. Another way of handing difficult calculations would be to use approximations for the distribution of the random variable, instead of the exact distribution of the random variable. Generally speaking, these approximations work better when we have more data (i.e. when the sample size is larger). These approximations are covered by two of the most important limit theorems: the Law of Large Numbers and the Central Limit Theorem. These theorems approximate the distribution of the sample mean of i.i.d. (independent and identically distributed) random variables as the sample size gets larger.</p>
+<p>In the previous subsection, we used inequalities to provide bounds on probabilities and expectations that may be difficult to calculate. Another way of handling difficult calculations would be to use approximations for the distribution of the random variable, instead of the exact distribution of the random variable. Generally speaking, these approximations work better when we have more data (i.e. when the sample size is larger). These approximations are covered by two of the most important limit theorems: the Law of Large Numbers and the Central Limit Theorem. These theorems approximate the distribution of the sample mean of i.i.d. (independent and identically distributed) random variables as the sample size gets larger.</p>
 <p>Note: The idea of i.i.d. random variables implies that each observed value of the random variable is independent of each other, and that each observed value come from the same random variable. For example, let <span class="math inline">\(X\)</span> denote the number of dots from a roll of a 6-sided fair die, and let <span class="math inline">\(X_1, X_2\)</span> denote the value of the first and second roll respectively. <span class="math inline">\(X_1\)</span> and <span class="math inline">\(X_2\)</span> are i.i.d. since the outcomes from the first and second roll do not influence each other, so they are independent. <span class="math inline">\(X_1\)</span> and <span class="math inline">\(X_2\)</span> are identically distributed as they both follow the same distribution, <span class="math inline">\(Mult_6(1, (1/6, 1/6, 1/6, 1/6, 1/6, 1/6))\)</span>.</p>
 <p>For the rest of this section, Section <a href="inequalities-limit-theorems-and-simulations.html#limits">6.3</a>, assume we have i.i.d. <span class="math inline">\(X_1, \cdots, X_n\)</span> with finite mean <span class="math inline">\(\mu\)</span> and finite variance <span class="math inline">\(\sigma^2\)</span>. For all positive integers <span class="math inline">\(n\)</span> (i.e. for any possible sample size), define the sample mean as <span class="math inline">\(\bar{X}_n = \frac{X_1 + \cdots + X_n}{n}\)</span>. We can easily derive the expected value and variance of the sample mean using properties of expectations and variances. Its expected value is</p>
 <p><span class="math display" id="eq:6-Emean">\[\begin{equation}
@@ -343,7 +343,7 @@ Var(\bar{X}_n) &amp;= Var(\frac{X_1 + \cdots + X_n}{n}) \\
 <p>The <strong>Law of Large Numbers (LLN)</strong> states that as <span class="math inline">\(n\)</span> gets larger and approaches infinity, the sample mean <span class="math inline">\(\bar{X}_n\)</span> converges to the true mean <span class="math inline">\(\mu\)</span>. This implies that the sample mean tends to get closer to the population mean with larger sample sizes. The key word here is tends to, it is not a guarantee that the sample mean always gets closer to the population mean whenever <span class="math inline">\(n\)</span> gets larger, but it generally does. This explains why we tend to trust results from larger sample sizes.</p>
 <p>Another implication of the LLN is that we can use simulations to verify theoretical results, since these results usually require us to simulate data based on a large number of independent replications.</p>
 <p>The LLN is a by product of equations <a href="inequalities-limit-theorems-and-simulations.html#eq:6-Emean">(6.4)</a> and <a href="inequalities-limit-theorems-and-simulations.html#eq:6-Varmean">(6.5)</a>. Equation <a href="inequalities-limit-theorems-and-simulations.html#eq:6-Varmean">(6.5)</a> informs us that as <span class="math inline">\(n\)</span> gets larger, the variance of the sample mean gets smaller. Equation <a href="inequalities-limit-theorems-and-simulations.html#eq:6-Emean">(6.4)</a> informs us that the sample mean is unbiased, i.e. its long run average is equal to the true mean. Collectively, these inform us that as <span class="math inline">\(n\)</span> gets larger, the sample mean is more likely to be closer to the true mean.</p>
-<p>We use an example to illustrate the LLN, which comes from flipping a fair coin. Let <span class="math inline">\(X\)</span> denote whether the coin lands heads or tails, and let <span class="math inline">\(X=1\)</span> for heads and <span class="math inline">\(X=0\)</span> for tails. We can say that <span class="math inline">\(X \sim Bern(0.5)\)</span> since the coin is fair. Imagine flipping the coin <span class="math inline">\(n\)</span> times, and record the outcome after each flip, so <span class="math inline">\(X_1, \cdots, X_n\)</span> denote the outcome of each flip. We know that <span class="math inline">\(E(X) = 0.5\)</span> since <span class="math inline">\(X \sim Bern(0.5)\)</span>. The LLN informs us that <span class="math inline">\(\bar{X}_1, \cdots, \bar{X}_n\)</span> should usually get closer to 0.5 as <span class="math inline">\(n\)</span> increases. In other words, the value of the sample proportion after each flip should get usually closer to 0.5 with more flips. The code below simulates this example for <span class="math inline">\(n=500\)</span>, and Figure <a href="inequalities-limit-theorems-and-simulations.html#fig:4-LLN2">6.3</a> shows how the sample proportions get closer to 0.5, in general, as <span class="math inline">\(n\)</span> increases.</p>
+<p>We use an example to illustrate the LLN, which comes from flipping a fair coin. Let <span class="math inline">\(X\)</span> denote whether the coin lands heads or tails, and let <span class="math inline">\(X=1\)</span> for heads and <span class="math inline">\(X=0\)</span> for tails. We can say that <span class="math inline">\(X \sim Bern(0.5)\)</span> since the coin is fair. Imagine flipping the coin <span class="math inline">\(n\)</span> times, and record the outcome after each flip, so <span class="math inline">\(X_1, \cdots, X_n\)</span> denote the outcome of each flip. We know that <span class="math inline">\(E(X) = 0.5\)</span> since <span class="math inline">\(X \sim Bern(0.5)\)</span>. The LLN informs us that <span class="math inline">\(\bar{X}_1, \cdots, \bar{X}_n\)</span> should usually get closer to 0.5 as <span class="math inline">\(n\)</span> increases. In other words, the value of the sample proportion after each flip should usually get closer to 0.5 with more flips. The code below simulates this example for <span class="math inline">\(n=500\)</span>, and Figure <a href="inequalities-limit-theorems-and-simulations.html#fig:4-LLN2">6.3</a> shows how the sample proportions get closer to 0.5, in general, as <span class="math inline">\(n\)</span> increases.</p>
 <div class="sourceCode" id="cb101"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">n</span><span class="op">&lt;-</span><span class="fl">500</span> <span class="co">##make this big, but not too big otherwise picture is difficult to see</span></span>
 <span></span>
@@ -592,7 +592,7 @@ Figure 6.6: Board for Dart Throwing Experiment
 </li>
 <li>
 <a class="nav-link" href="#inequalities"><span class="header-section-number">6.2</span> Inequalities</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#cauchy-schwartz-inequality"><span class="header-section-number">6.2.1</span> Cauchy-Schwartz Inequality</a></li>
+<li><a class="nav-link" href="#cauchy-schwarz-inequality"><span class="header-section-number">6.2.1</span> Cauchy-Schwarz Inequality</a></li>
 <li><a class="nav-link" href="#jensens-inequality"><span class="header-section-number">6.2.2</span> Jensen’s Inequality</a></li>
 <li><a class="nav-link" href="#chebyshevs-inequality"><span class="header-section-number">6.2.3</span> Chebyshev’s Inequality</a></li>
 </ul>
