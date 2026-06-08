@@ -51,7 +51,7 @@ So a parameter is a number that is associated with a population, while an estima
 - The value of parameters are unknown, while we can actually calculate numerical values of estimators.
 - The value of parameters are considered fixed (as there is only one population), while the numerical values of estimators can vary if we obtain multiple random samples of the same sample size. Using the scenario above again, suppose we obtain a second representative sample of 750 American adults. The average systolic blood pressure of this second sample is likely to be different from the average systolic blood pressure of the first sample. This illustrates that there is **variance, or uncertainty, associated with estimators due to random sampling**. This is the uncertainty that we will be focusing on in this section. 
 
-Whenever we propose an estimator for a parameter, we want to assess how "good" the estimator is. In some situations, there is an obvious choice for an estimator, for example, using the sample mean, $\bar{x} = \frac{\sum x_i}{n}$ to estimate the population mean. But in some instances, the choice may not be so obvious. For example, why do use the sample variance $s^2 = \frac{\sum (x_i - \bar{x})^2}{n-1}$ as an estimator for the population variance, and not $\frac{\sum (x_i - \bar{x})^2}{n}$? We will cover a few measures that are used to assess an estimator: bias, variance, and mean-squared error.
+Whenever we propose an estimator for a parameter, we want to assess how "good" the estimator is. In some situations, there is an obvious choice for an estimator, for example, using the sample mean, $\bar{x} = \frac{\sum x_i}{n}$ to estimate the population mean. But in some instances, the choice may not be so obvious. For example, why do we use the sample variance $s^2 = \frac{\sum (x_i - \bar{x})^2}{n-1}$ as an estimator for the population variance, and not $\frac{\sum (x_i - \bar{x})^2}{n}$? We will cover a few measures that are used to assess an estimator: bias, variance, and mean-squared error.
 
 We will also cover a couple of methods in estimating parameters: the method of moments, and the method of maximum likelihood. You will notice that we use probability rules in these methods. 
 
@@ -202,7 +202,7 @@ To simplify calculations involving the likelihood function, we make an assumptio
 Given i.i.d. random variables $X_1, \cdots, X_n$, each having PDF $f_X(x)$, the likelihood function is
 
 \begin{equation} 
-L(\boldsymbol{\theta} | \boldsymbol{x} ) = \prod_i^n f_X(x; \boldsymbol{\theta}).
+L(\boldsymbol{\theta} | \boldsymbol{x} ) = \prod_{i=1}^n f_X(x; \boldsymbol{\theta}).
 (\#eq:7-like)
 \end{equation}
 
