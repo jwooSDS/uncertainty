@@ -14,7 +14,7 @@ A way of quantifying uncertainty is through probability. Think about these state
 
 The book (Section 1.1) lists 10 different applications of probability, and there are many more applications. I will go as far as to say that anything that deals with data will also deal with probability. 
 
-### Frequentiest and Bayesian View of Probability
+### Frequentist and Bayesian View of Probability
 
 There are a couple of viewpoints on how to interpret probability: **frequentist** and **Bayesian**. Consider the statement that "if we flip a fair coin, the coin has a 50% chance of landing heads". 
 
@@ -27,7 +27,7 @@ In this coin flip example, both interpretations are reasonable. However, in some
 ### Module Roadmap
 
 - Section \@ref(probconcepts) introduces the key terms, concepts, and rules in probability.
-- Section \@ref(condprob) introduces the idea of conditional probability. In the frequentist framework, conditional probabilities are probabilities only after certain "conditions" are fulfilled. In the Bayesian frameowrk, conditional probabilities represent how our measure of belief is updated after seeing data.
+- Section \@ref(condprob) introduces the idea of conditional probability. In the frequentist framework, conditional probabilities are probabilities only after certain "conditions" are fulfilled. In the Bayesian framework, conditional probabilities represent how our measure of belief is updated after seeing data.
 - Section \@ref(confusion) covers some common misconceptions when it comes to interpreting conditional probabilities in real life (so much so that these misconceptions have their own names and wikipedia pages).
 
 ## Key Concepts in Probability {#probconcepts}
@@ -48,7 +48,7 @@ While the definition of sample space may appear elementary, writing out the samp
 
 ### Event
 
-An **event** is a subset of the sample space, and is usually denoted by an upper case letter. For example, let $A$ denote the event that I draw a card with a black suit (spades or clubs), and let $B$ denote the event I draw a picture card (Jack, Queen, or King). Events $A$ and $B$ are each shown in Figures Figure \@ref(fig:cardsA) and Figure \@ref(fig:cardsB) below.
+An **event** is a subset of the sample space, and is usually denoted by an upper case letter. For example, let $A$ denote the event that I draw a card with a black suit (spades or clubs), and let $B$ denote the event I draw a picture card (Jack, Queen, or King). Events $A$ and $B$ are each shown in Figure \@ref(fig:cardsA) and Figure \@ref(fig:cardsB) below.
 
 ```{r cardsA, fig.cap = "Event $A$ (in Blue)", echo = FALSE}
 knitr::include_graphics("images/02-cardsA.jpg")
@@ -66,7 +66,7 @@ We assign a probability to each event. The probability of event $A$ happening is
 
 The **complement** of an event is the set of all outcomes that do not belong to the event. For example, the complement of $A$, denoted by $A^c$, will be drawing a card with a red suit (hearts or diamonds). One way to think about complements is that the complement of an event is the event not happening. Looking at Figure \@ref(fig:cardsA), this will be the cards that are not outlined in blue. In this example, $P(A^c) = \frac{26}{52} = \frac{1}{2}$.
 
-*Thought question*: What is the probability of drawing a non picture card?
+*Thought question*: What is the probability of drawing a non-picture card?
 
 From these examples, you might realize the probability associated with the complement of an event can be found by subtracting the probability of the event from 1, i.e.
 
@@ -102,7 +102,7 @@ P(A \cup B) = P(A) + P(B) - P(A \cap B).
 (\#eq:union)
 \end{equation}
 
-Using equation \@ref(eq:union), $P(A \cup B) = \frac{26}{52} + \frac{12}{52} - \frac{6}{32} = \frac{32}{52}$.
+Using equation \@ref(eq:union), $P(A \cup B) = \frac{26}{52} + \frac{12}{52} - \frac{6}{52} = \frac{32}{52}$.
 
 The video below explains the addition rule with this example in a bit more detail:
 
@@ -114,7 +114,7 @@ The previous discussion leads to the idea of **disjoint**, or **mutually exclusi
 
 Using Figure \@ref(fig:cardsAB) as a visual example, we can see that events $A$ and $B$ are not disjoint since the outcomes in blue overlap with the outcomes in gold. 
 
-Suppose we define another event, $C$, to denote that the card drawn is an Ace. The events $B$ and $C$ are disjoint since a card that is drawn cannot be both a picture card and an ace. This definition of disjoint events leads to the following: for events are disjoint, the probability of their intersection will be 0. 
+Suppose we define another event, $C$, to denote that the card drawn is an Ace. The events $B$ and $C$ are disjoint since a card that is drawn cannot be both a picture card and an ace. This definition of disjoint events leads to the following: for events that are disjoint, the probability of their intersection will be 0. 
 
 Using Figure \@ref(fig:cardsBC) below as a visual example, we can see that events $B$ and $C$ are disjoint since the outcomes in gold and pink do not overlap. 
 
@@ -122,11 +122,11 @@ Using Figure \@ref(fig:cardsBC) below as a visual example, we can see that event
 knitr::include_graphics("images/02-cardsBC.jpg")
 ```
 
-Applying this idea to equation \@ref(eq:union), we have the following for disjoint events: **for disjoint events, the probability of at least one event happening is the sum of the probabilities for each event**.
+Applying this idea to equation \@ref(eq:union), we have the following: **for disjoint events, the probability of at least one event happening is the sum of the probabilities for each event**.
 
 ### Axioms of Probability
 
-The following are called the axioms of probability, which are considered foundation properties associated with probability:
+The following are called the axioms of probability, which are considered foundational properties associated with probability:
 
 1. The probability of any event, $E$, is non negative, i.e. $P(E) \geq 0$. 
 2. The probability that at least one outcome in the sample space occurs is 1, i.e.$P(S) = 1$.
@@ -147,7 +147,7 @@ The concept of conditional probability appears in almost all statistical and dat
 
 Consider that we are headed out for lunch, and we need to decide if we want to bring an umbrella (assuming we only bring an umbrella if we think it is going to rain). If we had been working in a windowless basement with no internet, we will have a high degree of uncertainty when evaluating if it will rain or not. However, if we were to look outside and observe the current weather conditions before heading out, we are likely to have a higher degree of certainty when evaluating if it will rain or not. Conditional probabilities allow us to incorporate what we see into our prediction of a random event. 
 
-If we were to use the language of probability to denote this example, let $R$ denote the event that it will rain when we go for lunch. If we had been working in the windowless basement with no internet, we will be calculating $P(R)$, the probability it will rain when we go to lunch. If we are able to incorporate the current weather conditions, this probability will be denoted as $P(R|data)$, where data denotes the current observe weather conditions. $P(R|data)$ can be read as the probability that it will rain when we go to lunch, given what we have observed with the weather. With this example, we can see that $P(R)$ and $P(R|data)$ will be different, since we update our probability given useful information. Notice the $|$ symbol inside the probability. This symbol implies that we are working with a conditional probability, with the given or observed information listed after the $|$.
+If we were to use the language of probability to denote this example, let $R$ denote the event that it will rain when we go for lunch. If we had been working in the windowless basement with no internet, we will be calculating $P(R)$, the probability it will rain when we go to lunch. If we are able to incorporate the current weather conditions, this probability will be denoted as $P(R|data)$, where data denotes the current weather conditions. $P(R|data)$ can be read as the probability that it will rain when we go to lunch, given what we have observed with the weather. With this example, we can see that $P(R)$ and $P(R|data)$ will be different, since we update our probability given useful information. Notice the $|$ symbol inside the probability. This symbol implies that we are working with a conditional probability, with the given or observed information listed after the $|$.
 
 ### Definition {#def}
 
@@ -168,7 +168,7 @@ Let us go back to the standard deck of cards example. Let us find $P(B|A)$, the 
 knitr::include_graphics("images/02-cardscond.jpg")
 ```
 
-We are told that our card is a black suit, so we have only 26 possible outcomes to consider, as the red cards are eliminated and are crossed out in Figure \@ref(fig:cardscond). Out of these 26 outcomes, how many are picture cards? So this probability $P(B|A)$ is $\frac{6}{26}$. Figure \@ref(fig:cardscond) represents the frequentist viewpoint of conditional probability: $P(B|A)$ represents the long run proportion of picture cards among cards that are black suits. 
+We are told that our card is a black suit, so we have only 26 possible outcomes to consider, as the red cards are eliminated and are crossed out in Figure \@ref(fig:cardscond). Out of these 26 outcomes, how many are picture cards? So this probability $P(B|A)$ is $\frac{6}{26}$. Figure \@ref(fig:cardscond) represents the frequentist viewpoint of conditional probability: $P(B|A)$ represents the long-run proportion of picture cards among cards that are black suits. 
 
 We can also apply equation \@ref(eq:cond): $P(B|A) = \frac{\frac{6}{52}}{\frac{1}{2}} = \frac{6}{26}$ which gives the same answer. 
 
@@ -204,7 +204,7 @@ P(Y \cap X) = P(Y) \times P(X).
 
 The probability of all events happening is just the product of the probabilities for each individual event, if the events are all independent. 
 
-Going back to our example with the standard deck of cards, where $A$ denotes the event that I draw a card with a black suit (spades or clubs), and $B$ denotes the event I draw a picture card (Jack, Queen, or King). We had earlier found that $P(B) = \frac{12}{52}$ and that $P(B|A) = \frac{6}{26}$. Notice that these two probabilities are numerically equal, which informs us that the events are independent. Knowing whether the card is a black suit or not does not change the probability that the card is a picture card. This makes sense intuitively since the proportion of cars that are picture is the same for black and red suits. 
+Going back to our example with the standard deck of cards, where $A$ denotes the event that I draw a card with a black suit (spades or clubs), and $B$ denotes the event I draw a picture card (Jack, Queen, or King). We had earlier found that $P(B) = \frac{12}{52}$ and that $P(B|A) = \frac{6}{26}$. Notice that these two probabilities are numerically equal, which informs us that the events are independent. Knowing whether the card is a black suit or not does not change the probability that the card is a picture card. This makes sense intuitively since the proportion of cards that are picture is the same for black and red suits. 
 
 
 ### Bayes' Rule
@@ -227,7 +227,7 @@ odds(Y) = \frac{P(Y)}{P(Y^c)}.
 (\#eq:odds)
 \end{equation}
 
-You may realize that the left hand side of equation \@ref(eq:odds) is equal to the left hand side of a logistic regression equation that we saw in Section \@ref(eg2).
+You may realize that the left-hand side of equation \@ref(eq:odds) is equal to the left-hand side of a logistic regression equation that we saw in the Job Application Callback Rates Example in the Preface.
 
 Using equation \@ref(eq:odds), we can switch from odds to probability easily
 
@@ -296,7 +296,7 @@ The video below goes over this approach in a little bit more detail:
 
 #### Approach 2: Using Tree Diagrams
 
-A tree diagram is useful in finding conditional probabilities and probabilities involving intersections. It is a visual way of displaying the information you have at hand, when you have conditional probabilities over disjoint sets and probabilities for each disjoint set. In our toy example, the disjoint sets are the type of email I receive, $E_1, E_2, E_3$, and the conditional probabilities we have are over these disjoint sets, i.e. $P(F|E_1), P(F|E_2)$ and $P(F|E_3)$. We can put this information visual by first splitting our sample space into the disjoint sets $E_1, E_2, E_3$, and then splitting each disjoint set on whether the email has the word "free" ($F$) or not ($F^c$). This information is displayed in a tree diagram as in Figure \@ref(fig:tree).
+A tree diagram is useful in finding conditional probabilities and probabilities involving intersections. It is a visual way of displaying the information you have at hand when you have conditional probabilities over disjoint sets and probabilities for each disjoint set. In our toy example, the disjoint sets are the type of email I receive, $E_1, E_2, E_3$, and the conditional probabilities we have are over these disjoint sets, i.e. $P(F|E_1), P(F|E_2)$ and $P(F|E_3)$. We can display this information visually by first splitting our sample space into the disjoint sets $E_1, E_2, E_3$, and then splitting each disjoint set on whether the email has the word "free" ($F$) or not ($F^c$). This information is displayed in a tree diagram as in Figure \@ref(fig:tree).
 
 ```{r tree, fig.cap = "Tree Diagram for Email Example", echo = FALSE}
 knitr::include_graphics("images/02-tree.jpg")
@@ -334,7 +334,7 @@ The video below goes over tree diagrams in a little bit more detail:
 
 ## Confusion of the Inverse {#confusion}
 
-We are now ready to talk about the prosecutor's fallacy, or the **confusion of the inverse**, that we had earlier mention in section \@ref(def). In essence, the confusion happens when we falsely equate $P(X|Y)$ to be equal to $P(Y|X)$. In fact, a large value for $P(X|Y)$ does not necessarily imply that $P(Y|X)$ is also large. The term prosecutor's fallacy when this confusion is applied in a criminal trial, e.g. the probability that an abusive relationship ends in murder could be small, but the probability that there was abuse in a relationship that ended in murder could be a lot higher. 
+We are now ready to talk about the prosecutor's fallacy, or the **confusion of the inverse**, that we had mentioned earlier in section \@ref(def). In essence, the confusion happens when we falsely equate $P(X|Y)$ to be equal to $P(Y|X)$. In fact, a large value for $P(X|Y)$ does not necessarily imply that $P(Y|X)$ is also large. The term prosecutor's fallacy when this confusion is applied in a criminal trial, e.g. the probability that an abusive relationship ends in murder could be small, but the probability that there was abuse in a relationship that ended in murder could be a lot higher. 
 
 We will go over some examples that are based on real life. 
 
@@ -371,9 +371,9 @@ Table: (\#tab:disease) Hypothetical Table Based on 20,000 People
 | No Disease |    1990   | 17910 | 19900 | 
 | Total | 2085 | 17915 | 20000 |
 
-Look at the first column of Table \@ref(tab:disease), which shows number of people who test positive. A see that a large proportion of diseased people are detected, but since there are relatively few people with the disease, this number is small, 95. A small proportion of people who do not have the disease test positive for the disease, and a small proportion of this large population results in a relatively larger number, 1990. So most of the people who test positive, $95 + 1990 = 2085$ actually do not have the disease. Therefore $P(D|+) = \frac{95}{2085} = 0.04556355$.
+Look at the first column of Table \@ref(tab:disease), which shows the number of people who test positive. We see that a large proportion of diseased people are detected, but since there are relatively few people with the disease, this number is small, 95. A small proportion of people who do not have the disease test positive for the disease, and a small proportion of this large population results in a relatively larger number, 1990. So most of the people who test positive, $95 + 1990 = 2085$ actually do not have the disease. Therefore $P(D|+) = \frac{95}{2085} = 0.04556355$.
 
-We can also explain this result through the Bayes' viewpoint of probability. Without knowing any information about the results of the test, the prior probability $P(D) = 0.005$. However, upon seeing that the person positive, we updated the posterior probability $P(D|+) = 0.04556355$, which is an increase from 0.005 when we knew knowing. The updated posterior probability is about 9 times the prior. So we believe the person is more likely to have the disease upon viewing the positive test, than if we knew nothing about the test result. The posterior probability is still small since its value depends on two pieces of information: the prior $P(D)$ and the sensitivity $P(+|D)$. The product of these values belong to the numerator when calculating $P(D|+)$. The denominator is $P(+|D) \times P(D) + P(+|D^c) \times P(D^c)$. If the prior $P(D)$ is extremely low, then $P(D^c)$ is extremely close to 1, since the person either has the disease or does not have the disease. With $P(D)$ belong extremely low, the numerator is close to 0, and the value of the denominator is close to $P(+|D^c) \times P(D^c)$, therefore $P(D|+)$ is small. 
+We can also explain this result through the Bayes' viewpoint of probability. Without knowing any information about the results of the test, the prior probability $P(D) = 0.005$. However, upon seeing that the person tested positive, we updated the posterior probability $P(D|+) = 0.04556355$, which is an increase from 0.005 when we knew nothing. The updated posterior probability is about 9 times the prior. So we believe the person is more likely to have the disease upon viewing the positive test, than if we knew nothing about the test result. The posterior probability is still small since its value depends on two pieces of information: the prior $P(D)$ and the sensitivity $P(+|D)$. The product of these values belong to the numerator when calculating $P(D|+)$. The denominator is $P(+|D) \times P(D) + P(+|D^c) \times P(D^c)$. If the prior $P(D)$ is extremely low, then $P(D^c)$ is extremely close to 1, since the person either has the disease or does not have the disease. With $P(D)$ being extremely low, the numerator is close to 0, and the value of the denominator is close to $P(+|D^c) \times P(D^c)$, therefore $P(D|+)$ is small. 
 
 Notice how we have talking about rare diseases? This confusion of the inverse, thinking that a high sensitivity implies that a person likely to have the disease if they test positive, only applies to rare diseases. If the disease is more prevalent, a high sensitivity is more likely to imply the person has the disease if they test positive.
 
@@ -391,7 +391,7 @@ $$
 
 where $T_1$ and $T_2$ denote the events the person test positive in the first test and second test respectively. We also assume that the results from each test are independent with previous tests. 
 
-The odds of having the disease given that the person positive twice is 0.4535176. Therefore, using equation \@ref(eq:odds2), the corresponding probability of having the disease given that the person tested positive twice is $P(D|T_1 \cap T_2) = \frac{0.4535176}{1+0.4535176} = 0.3120138$. See how this posterior probability has increased with two positive tests, from 1 positive test.
+The odds of having the disease given that the person tested positive twice is 0.4535176. Therefore, using equation \@ref(eq:odds2), the corresponding probability of having the disease given that the person tested positive twice is $P(D|T_1 \cap T_2) = \frac{0.4535176}{1+0.4535176} = 0.3120138$. See how this posterior probability has increased with two positive tests, from 1 positive test.
 
 *Thought question*: perform the calculations to show that the posterior probability that the person has the disease if the person tests positive on 3 tests is 0.8116199. 
 

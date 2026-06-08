@@ -242,7 +242,7 @@ interquartile-range
 probability
 introduction-to-probability
 why-study-probability
-frequentiest-and-bayesian-view-of-probability
+frequentist-and-bayesian-view-of-probability
 module-roadmap
 probconcepts
 sample-space

@@ -78,9 +78,9 @@
 </h3>
 <p>The book (Section 1.1) lists 10 different applications of probability, and there are many more applications. I will go as far as to say that anything that deals with data will also deal with probability.</p>
 </div>
-<div id="frequentiest-and-bayesian-view-of-probability" class="section level3" number="2.1.2">
+<div id="frequentist-and-bayesian-view-of-probability" class="section level3" number="2.1.2">
 <h3>
-<span class="header-section-number">2.1.2</span> Frequentiest and Bayesian View of Probability<a class="anchor" aria-label="anchor" href="#frequentiest-and-bayesian-view-of-probability"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.1.2</span> Frequentist and Bayesian View of Probability<a class="anchor" aria-label="anchor" href="#frequentist-and-bayesian-view-of-probability"><i class="fas fa-link"></i></a>
 </h3>
 <p>There are a couple of viewpoints on how to interpret probability: <strong>frequentist</strong> and <strong>Bayesian</strong>. Consider the statement that “if we flip a fair coin, the coin has a 50% chance of landing heads”.</p>
 <ul>
@@ -95,7 +95,7 @@
 </h3>
 <ul>
 <li>Section <a href="probability.html#probconcepts">2.2</a> introduces the key terms, concepts, and rules in probability.</li>
-<li>Section <a href="probability.html#condprob">2.3</a> introduces the idea of conditional probability. In the frequentist framework, conditional probabilities are probabilities only after certain “conditions” are fulfilled. In the Bayesian frameowrk, conditional probabilities represent how our measure of belief is updated after seeing data.</li>
+<li>Section <a href="probability.html#condprob">2.3</a> introduces the idea of conditional probability. In the frequentist framework, conditional probabilities are probabilities only after certain “conditions” are fulfilled. In the Bayesian framework, conditional probabilities represent how our measure of belief is updated after seeing data.</li>
 <li>Section <a href="probability.html#confusion">2.4</a> covers some common misconceptions when it comes to interpreting conditional probabilities in real life (so much so that these misconceptions have their own names and wikipedia pages).</li>
 </ul>
 </div>
@@ -123,7 +123,7 @@ Figure 2.1: Sample Space of Drawing One Card from Standard Deck. Picture from <a
 <h3>
 <span class="header-section-number">2.2.2</span> Event<a class="anchor" aria-label="anchor" href="#event"><i class="fas fa-link"></i></a>
 </h3>
-<p>An <strong>event</strong> is a subset of the sample space, and is usually denoted by an upper case letter. For example, let <span class="math inline">\(A\)</span> denote the event that I draw a card with a black suit (spades or clubs), and let <span class="math inline">\(B\)</span> denote the event I draw a picture card (Jack, Queen, or King). Events <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are each shown in Figures Figure <a href="probability.html#fig:cardsA">2.2</a> and Figure <a href="probability.html#fig:cardsB">2.3</a> below.</p>
+<p>An <strong>event</strong> is a subset of the sample space, and is usually denoted by an upper case letter. For example, let <span class="math inline">\(A\)</span> denote the event that I draw a card with a black suit (spades or clubs), and let <span class="math inline">\(B\)</span> denote the event I draw a picture card (Jack, Queen, or King). Events <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are each shown in Figure <a href="probability.html#fig:cardsA">2.2</a> and Figure <a href="probability.html#fig:cardsB">2.3</a> below.</p>
 <div class="figure">
 <span style="display:block;" id="fig:cardsA"></span>
 <img src="images/02-cardsA.jpg" alt="Event $A$ (in Blue)"><p class="caption">
@@ -144,7 +144,7 @@ Figure 2.3: Event <span class="math inline">\(B\)</span> (in gold)
 <span class="header-section-number">2.2.3</span> Complements<a class="anchor" aria-label="anchor" href="#complements"><i class="fas fa-link"></i></a>
 </h3>
 <p>The <strong>complement</strong> of an event is the set of all outcomes that do not belong to the event. For example, the complement of <span class="math inline">\(A\)</span>, denoted by <span class="math inline">\(A^c\)</span>, will be drawing a card with a red suit (hearts or diamonds). One way to think about complements is that the complement of an event is the event not happening. Looking at Figure <a href="probability.html#fig:cardsA">2.2</a>, this will be the cards that are not outlined in blue. In this example, <span class="math inline">\(P(A^c) = \frac{26}{52} = \frac{1}{2}\)</span>.</p>
-<p><em>Thought question</em>: What is the probability of drawing a non picture card?</p>
+<p><em>Thought question</em>: What is the probability of drawing a non-picture card?</p>
 <p>From these examples, you might realize the probability associated with the complement of an event can be found by subtracting the probability of the event from 1, i.e.</p>
 <p><span class="math display" id="eq:comp">\[\begin{equation}
 P(A^c) = 1 - P(A).
@@ -181,7 +181,7 @@ Figure 2.4: Union of A, B (in blue or gold, or both blue and gold)
 P(A \cup B) = P(A) + P(B) - P(A \cap B).
 \tag{2.2}
 \end{equation}\]</span></p>
-<p>Using equation <a href="probability.html#eq:union">(2.2)</a>, <span class="math inline">\(P(A \cup B) = \frac{26}{52} + \frac{12}{52} - \frac{6}{32} = \frac{32}{52}\)</span>.</p>
+<p>Using equation <a href="probability.html#eq:union">(2.2)</a>, <span class="math inline">\(P(A \cup B) = \frac{26}{52} + \frac{12}{52} - \frac{6}{52} = \frac{32}{52}\)</span>.</p>
 <p>The video below explains the addition rule with this example in a bit more detail:</p>
 <iframe width="560px" height="320px" allowfullscreen="true" allow="autoplay *" title="Module 02: Addition Rule" src="https://virginiauniversity.instructuremedia.com/embed/87c82b1d-d796-46a3-8307-70f40eeda26c" frameborder="0">
 </iframe>
@@ -192,7 +192,7 @@ P(A \cup B) = P(A) + P(B) - P(A \cap B).
 </h3>
 <p>The previous discussion leads to the idea of <strong>disjoint</strong>, or <strong>mutually exclusive</strong> events. Events are disjoint if they cannot happen simultaneously. In our card example, events <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are not disjoint, since <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> can happen simultaneously, since a card that is drawn can be both black and a picture card, e.g. we draw a king of spades.</p>
 <p>Using Figure <a href="probability.html#fig:cardsAB">2.4</a> as a visual example, we can see that events <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are not disjoint since the outcomes in blue overlap with the outcomes in gold.</p>
-<p>Suppose we define another event, <span class="math inline">\(C\)</span>, to denote that the card drawn is an Ace. The events <span class="math inline">\(B\)</span> and <span class="math inline">\(C\)</span> are disjoint since a card that is drawn cannot be both a picture card and an ace. This definition of disjoint events leads to the following: for events are disjoint, the probability of their intersection will be 0.</p>
+<p>Suppose we define another event, <span class="math inline">\(C\)</span>, to denote that the card drawn is an Ace. The events <span class="math inline">\(B\)</span> and <span class="math inline">\(C\)</span> are disjoint since a card that is drawn cannot be both a picture card and an ace. This definition of disjoint events leads to the following: for events that are disjoint, the probability of their intersection will be 0.</p>
 <p>Using Figure <a href="probability.html#fig:cardsBC">2.5</a> below as a visual example, we can see that events <span class="math inline">\(B\)</span> and <span class="math inline">\(C\)</span> are disjoint since the outcomes in gold and pink do not overlap.</p>
 <div class="figure">
 <span style="display:block;" id="fig:cardsBC"></span>
@@ -200,13 +200,13 @@ P(A \cup B) = P(A) + P(B) - P(A \cap B).
 Figure 2.5: Events B, C (in gold and pink respectively)
 </p>
 </div>
-<p>Applying this idea to equation <a href="probability.html#eq:union">(2.2)</a>, we have the following for disjoint events: <strong>for disjoint events, the probability of at least one event happening is the sum of the probabilities for each event</strong>.</p>
+<p>Applying this idea to equation <a href="probability.html#eq:union">(2.2)</a>, we have the following: <strong>for disjoint events, the probability of at least one event happening is the sum of the probabilities for each event</strong>.</p>
 </div>
 <div id="axioms-of-probability" class="section level3" number="2.2.8">
 <h3>
 <span class="header-section-number">2.2.8</span> Axioms of Probability<a class="anchor" aria-label="anchor" href="#axioms-of-probability"><i class="fas fa-link"></i></a>
 </h3>
-<p>The following are called the axioms of probability, which are considered foundation properties associated with probability:</p>
+<p>The following are called the axioms of probability, which are considered foundational properties associated with probability:</p>
 <ol style="list-style-type: decimal">
 <li>The probability of any event, <span class="math inline">\(E\)</span>, is non negative, i.e. <span class="math inline">\(P(E) \geq 0\)</span>.</li>
 <li>The probability that at least one outcome in the sample space occurs is 1, i.e.<span class="math inline">\(P(S) = 1\)</span>.</li>
@@ -226,7 +226,7 @@ In other words, for disjoint events, the probability that at least one event hap
 </h2>
 <p>The concept of conditional probability appears in almost all statistical and data science models. In statistical models such as logistic regression, we are trying to use observable data (called predictors, input variables, etc) to model the probabilities associated with the different values of an outcome that is random (called response variable, output variable, etc). If the observable data are predictive of the outcome, then the probabilities associated with the outcome should indicate greater certainty, than if we do not have the observable data. Conditional probabilities allows us to incorporate observable data, or evidence, when evaluating uncertainty with random outcomes.</p>
 <p>Consider that we are headed out for lunch, and we need to decide if we want to bring an umbrella (assuming we only bring an umbrella if we think it is going to rain). If we had been working in a windowless basement with no internet, we will have a high degree of uncertainty when evaluating if it will rain or not. However, if we were to look outside and observe the current weather conditions before heading out, we are likely to have a higher degree of certainty when evaluating if it will rain or not. Conditional probabilities allow us to incorporate what we see into our prediction of a random event.</p>
-<p>If we were to use the language of probability to denote this example, let <span class="math inline">\(R\)</span> denote the event that it will rain when we go for lunch. If we had been working in the windowless basement with no internet, we will be calculating <span class="math inline">\(P(R)\)</span>, the probability it will rain when we go to lunch. If we are able to incorporate the current weather conditions, this probability will be denoted as <span class="math inline">\(P(R|data)\)</span>, where data denotes the current observe weather conditions. <span class="math inline">\(P(R|data)\)</span> can be read as the probability that it will rain when we go to lunch, given what we have observed with the weather. With this example, we can see that <span class="math inline">\(P(R)\)</span> and <span class="math inline">\(P(R|data)\)</span> will be different, since we update our probability given useful information. Notice the <span class="math inline">\(|\)</span> symbol inside the probability. This symbol implies that we are working with a conditional probability, with the given or observed information listed after the <span class="math inline">\(|\)</span>.</p>
+<p>If we were to use the language of probability to denote this example, let <span class="math inline">\(R\)</span> denote the event that it will rain when we go for lunch. If we had been working in the windowless basement with no internet, we will be calculating <span class="math inline">\(P(R)\)</span>, the probability it will rain when we go to lunch. If we are able to incorporate the current weather conditions, this probability will be denoted as <span class="math inline">\(P(R|data)\)</span>, where data denotes the current weather conditions. <span class="math inline">\(P(R|data)\)</span> can be read as the probability that it will rain when we go to lunch, given what we have observed with the weather. With this example, we can see that <span class="math inline">\(P(R)\)</span> and <span class="math inline">\(P(R|data)\)</span> will be different, since we update our probability given useful information. Notice the <span class="math inline">\(|\)</span> symbol inside the probability. This symbol implies that we are working with a conditional probability, with the given or observed information listed after the <span class="math inline">\(|\)</span>.</p>
 <div id="def" class="section level3" number="2.3.1">
 <h3>
 <span class="header-section-number">2.3.1</span> Definition<a class="anchor" aria-label="anchor" href="#def"><i class="fas fa-link"></i></a>
@@ -245,7 +245,7 @@ P(Y|X) = \frac{P(Y \cap X)}{P(X)}.
 Figure 2.6: Events A, given B
 </p>
 </div>
-<p>We are told that our card is a black suit, so we have only 26 possible outcomes to consider, as the red cards are eliminated and are crossed out in Figure <a href="probability.html#fig:cardscond">2.6</a>. Out of these 26 outcomes, how many are picture cards? So this probability <span class="math inline">\(P(B|A)\)</span> is <span class="math inline">\(\frac{6}{26}\)</span>. Figure <a href="probability.html#fig:cardscond">2.6</a> represents the frequentist viewpoint of conditional probability: <span class="math inline">\(P(B|A)\)</span> represents the long run proportion of picture cards among cards that are black suits.</p>
+<p>We are told that our card is a black suit, so we have only 26 possible outcomes to consider, as the red cards are eliminated and are crossed out in Figure <a href="probability.html#fig:cardscond">2.6</a>. Out of these 26 outcomes, how many are picture cards? So this probability <span class="math inline">\(P(B|A)\)</span> is <span class="math inline">\(\frac{6}{26}\)</span>. Figure <a href="probability.html#fig:cardscond">2.6</a> represents the frequentist viewpoint of conditional probability: <span class="math inline">\(P(B|A)\)</span> represents the long-run proportion of picture cards among cards that are black suits.</p>
 <p>We can also apply equation <a href="probability.html#eq:cond">(2.3)</a>: <span class="math inline">\(P(B|A) = \frac{\frac{6}{52}}{\frac{1}{2}} = \frac{6}{26}\)</span> which gives the same answer.</p>
 <p>The video explains conditional probability with this example in a bit more detail:</p>
 <iframe width="560px" height="320px" allowfullscreen="true" allow="autoplay *" title="Module 02: Conditional Probability" src="https://virginiauniversity.instructuremedia.com/embed/3e9900ed-6464-47e4-9f7c-353e17e8b47a" frameborder="0">
@@ -274,7 +274,7 @@ P(Y \cap X) = P(Y) \times P(X).
 \tag{2.5}
 \end{equation}\]</span></p>
 <p>The probability of all events happening is just the product of the probabilities for each individual event, if the events are all independent.</p>
-<p>Going back to our example with the standard deck of cards, where <span class="math inline">\(A\)</span> denotes the event that I draw a card with a black suit (spades or clubs), and <span class="math inline">\(B\)</span> denotes the event I draw a picture card (Jack, Queen, or King). We had earlier found that <span class="math inline">\(P(B) = \frac{12}{52}\)</span> and that <span class="math inline">\(P(B|A) = \frac{6}{26}\)</span>. Notice that these two probabilities are numerically equal, which informs us that the events are independent. Knowing whether the card is a black suit or not does not change the probability that the card is a picture card. This makes sense intuitively since the proportion of cars that are picture is the same for black and red suits.</p>
+<p>Going back to our example with the standard deck of cards, where <span class="math inline">\(A\)</span> denotes the event that I draw a card with a black suit (spades or clubs), and <span class="math inline">\(B\)</span> denotes the event I draw a picture card (Jack, Queen, or King). We had earlier found that <span class="math inline">\(P(B) = \frac{12}{52}\)</span> and that <span class="math inline">\(P(B|A) = \frac{6}{26}\)</span>. Notice that these two probabilities are numerically equal, which informs us that the events are independent. Knowing whether the card is a black suit or not does not change the probability that the card is a picture card. This makes sense intuitively since the proportion of cards that are picture is the same for black and red suits.</p>
 </div>
 <div id="bayes-rule" class="section level3" number="2.3.4">
 <h3>
@@ -296,7 +296,7 @@ P(Y|X) = \frac{P(X|Y)P(Y)}{P(X)}.
 odds(Y) = \frac{P(Y)}{P(Y^c)}.
 \tag{2.7}
 \end{equation}\]</span></p>
-<p>You may realize that the left hand side of equation <a href="probability.html#eq:odds">(2.7)</a> is equal to the left hand side of a logistic regression equation that we saw in Section <a href="#eg2"><strong>??</strong></a>.</p>
+<p>You may realize that the left-hand side of equation <a href="probability.html#eq:odds">(2.7)</a> is equal to the left-hand side of a logistic regression equation that we saw in the Job Application Callback Rates Example in the Preface.</p>
 <p>Using equation <a href="probability.html#eq:odds">(2.7)</a>, we can switch from odds to probability easily</p>
 <p><span class="math display" id="eq:odds2">\[\begin{equation}
 P(Y) = \frac{odds(Y)}{1 + odds(Y)}.
@@ -366,7 +366,7 @@ P(E_1|F) &amp;= \frac{P(E_1 \cap F)}{P(F)}\\
 <h4>
 <span class="header-section-number">2.3.8.2</span> Approach 2: Using Tree Diagrams<a class="anchor" aria-label="anchor" href="#approach-2-using-tree-diagrams"><i class="fas fa-link"></i></a>
 </h4>
-<p>A tree diagram is useful in finding conditional probabilities and probabilities involving intersections. It is a visual way of displaying the information you have at hand, when you have conditional probabilities over disjoint sets and probabilities for each disjoint set. In our toy example, the disjoint sets are the type of email I receive, <span class="math inline">\(E_1, E_2, E_3\)</span>, and the conditional probabilities we have are over these disjoint sets, i.e. <span class="math inline">\(P(F|E_1), P(F|E_2)\)</span> and <span class="math inline">\(P(F|E_3)\)</span>. We can put this information visual by first splitting our sample space into the disjoint sets <span class="math inline">\(E_1, E_2, E_3\)</span>, and then splitting each disjoint set on whether the email has the word “free” (<span class="math inline">\(F\)</span>) or not (<span class="math inline">\(F^c\)</span>). This information is displayed in a tree diagram as in Figure <a href="probability.html#fig:tree">2.7</a>.</p>
+<p>A tree diagram is useful in finding conditional probabilities and probabilities involving intersections. It is a visual way of displaying the information you have at hand when you have conditional probabilities over disjoint sets and probabilities for each disjoint set. In our toy example, the disjoint sets are the type of email I receive, <span class="math inline">\(E_1, E_2, E_3\)</span>, and the conditional probabilities we have are over these disjoint sets, i.e. <span class="math inline">\(P(F|E_1), P(F|E_2)\)</span> and <span class="math inline">\(P(F|E_3)\)</span>. We can display this information visually by first splitting our sample space into the disjoint sets <span class="math inline">\(E_1, E_2, E_3\)</span>, and then splitting each disjoint set on whether the email has the word “free” (<span class="math inline">\(F\)</span>) or not (<span class="math inline">\(F^c\)</span>). This information is displayed in a tree diagram as in Figure <a href="probability.html#fig:tree">2.7</a>.</p>
 <div class="figure">
 <span style="display:block;" id="fig:tree"></span>
 <img src="images/02-tree.jpg" alt="Tree Diagram for Email Example"><p class="caption">
@@ -406,7 +406,7 @@ P(E_1|F) = \frac{P(E_1 \cap F)}{P(F)} = \frac{0.198}{0.263} = 0.7528517.
 <h2>
 <span class="header-section-number">2.4</span> Confusion of the Inverse<a class="anchor" aria-label="anchor" href="#confusion"><i class="fas fa-link"></i></a>
 </h2>
-<p>We are now ready to talk about the prosecutor’s fallacy, or the <strong>confusion of the inverse</strong>, that we had earlier mention in section <a href="probability.html#def">2.3.1</a>. In essence, the confusion happens when we falsely equate <span class="math inline">\(P(X|Y)\)</span> to be equal to <span class="math inline">\(P(Y|X)\)</span>. In fact, a large value for <span class="math inline">\(P(X|Y)\)</span> does not necessarily imply that <span class="math inline">\(P(Y|X)\)</span> is also large. The term prosecutor’s fallacy when this confusion is applied in a criminal trial, e.g. the probability that an abusive relationship ends in murder could be small, but the probability that there was abuse in a relationship that ended in murder could be a lot higher.</p>
+<p>We are now ready to talk about the prosecutor’s fallacy, or the <strong>confusion of the inverse</strong>, that we had mentioned earlier in section <a href="probability.html#def">2.3.1</a>. In essence, the confusion happens when we falsely equate <span class="math inline">\(P(X|Y)\)</span> to be equal to <span class="math inline">\(P(Y|X)\)</span>. In fact, a large value for <span class="math inline">\(P(X|Y)\)</span> does not necessarily imply that <span class="math inline">\(P(Y|X)\)</span> is also large. The term prosecutor’s fallacy when this confusion is applied in a criminal trial, e.g. the probability that an abusive relationship ends in murder could be small, but the probability that there was abuse in a relationship that ended in murder could be a lot higher.</p>
 <p>We will go over some examples that are based on real life.</p>
 <div id="disease-diagnostics" class="section level3" number="2.4.1">
 <h3>
@@ -463,8 +463,8 @@ P(D|+) &amp;= \frac{P(D \cap +)}{P(+)}\\
 </tr>
 </tbody>
 </table></div>
-<p>Look at the first column of Table <a href="probability.html#tab:disease">2.1</a>, which shows number of people who test positive. A see that a large proportion of diseased people are detected, but since there are relatively few people with the disease, this number is small, 95. A small proportion of people who do not have the disease test positive for the disease, and a small proportion of this large population results in a relatively larger number, 1990. So most of the people who test positive, <span class="math inline">\(95 + 1990 = 2085\)</span> actually do not have the disease. Therefore <span class="math inline">\(P(D|+) = \frac{95}{2085} = 0.04556355\)</span>.</p>
-<p>We can also explain this result through the Bayes’ viewpoint of probability. Without knowing any information about the results of the test, the prior probability <span class="math inline">\(P(D) = 0.005\)</span>. However, upon seeing that the person positive, we updated the posterior probability <span class="math inline">\(P(D|+) = 0.04556355\)</span>, which is an increase from 0.005 when we knew knowing. The updated posterior probability is about 9 times the prior. So we believe the person is more likely to have the disease upon viewing the positive test, than if we knew nothing about the test result. The posterior probability is still small since its value depends on two pieces of information: the prior <span class="math inline">\(P(D)\)</span> and the sensitivity <span class="math inline">\(P(+|D)\)</span>. The product of these values belong to the numerator when calculating <span class="math inline">\(P(D|+)\)</span>. The denominator is <span class="math inline">\(P(+|D) \times P(D) + P(+|D^c) \times P(D^c)\)</span>. If the prior <span class="math inline">\(P(D)\)</span> is extremely low, then <span class="math inline">\(P(D^c)\)</span> is extremely close to 1, since the person either has the disease or does not have the disease. With <span class="math inline">\(P(D)\)</span> belong extremely low, the numerator is close to 0, and the value of the denominator is close to <span class="math inline">\(P(+|D^c) \times P(D^c)\)</span>, therefore <span class="math inline">\(P(D|+)\)</span> is small.</p>
+<p>Look at the first column of Table <a href="probability.html#tab:disease">2.1</a>, which shows the number of people who test positive. We see that a large proportion of diseased people are detected, but since there are relatively few people with the disease, this number is small, 95. A small proportion of people who do not have the disease test positive for the disease, and a small proportion of this large population results in a relatively larger number, 1990. So most of the people who test positive, <span class="math inline">\(95 + 1990 = 2085\)</span> actually do not have the disease. Therefore <span class="math inline">\(P(D|+) = \frac{95}{2085} = 0.04556355\)</span>.</p>
+<p>We can also explain this result through the Bayes’ viewpoint of probability. Without knowing any information about the results of the test, the prior probability <span class="math inline">\(P(D) = 0.005\)</span>. However, upon seeing that the person tested positive, we updated the posterior probability <span class="math inline">\(P(D|+) = 0.04556355\)</span>, which is an increase from 0.005 when we knew nothing. The updated posterior probability is about 9 times the prior. So we believe the person is more likely to have the disease upon viewing the positive test, than if we knew nothing about the test result. The posterior probability is still small since its value depends on two pieces of information: the prior <span class="math inline">\(P(D)\)</span> and the sensitivity <span class="math inline">\(P(+|D)\)</span>. The product of these values belong to the numerator when calculating <span class="math inline">\(P(D|+)\)</span>. The denominator is <span class="math inline">\(P(+|D) \times P(D) + P(+|D^c) \times P(D^c)\)</span>. If the prior <span class="math inline">\(P(D)\)</span> is extremely low, then <span class="math inline">\(P(D^c)\)</span> is extremely close to 1, since the person either has the disease or does not have the disease. With <span class="math inline">\(P(D)\)</span> being extremely low, the numerator is close to 0, and the value of the denominator is close to <span class="math inline">\(P(+|D^c) \times P(D^c)\)</span>, therefore <span class="math inline">\(P(D|+)\)</span> is small.</p>
 <p>Notice how we have talking about rare diseases? This confusion of the inverse, thinking that a high sensitivity implies that a person likely to have the disease if they test positive, only applies to rare diseases. If the disease is more prevalent, a high sensitivity is more likely to imply the person has the disease if they test positive.</p>
 <p>So why should we take such tests for rare diseases? What should we do? We should go through the test again. It turns out that if you test positive twice for a rare disease, the probability that you have the disease increases by a lot than if you only tested once and tested positive.</p>
 <p>To perform this calculation, we will use the odds form for Bayes’ rule, per equation <a href="probability.html#eq:oddsbayes">(2.9)</a></p>
@@ -476,7 +476,7 @@ P(D|+) &amp;= \frac{P(D \cap +)}{P(+)}\\
 \end{split}
 \]</span></p>
 <p>where <span class="math inline">\(T_1\)</span> and <span class="math inline">\(T_2\)</span> denote the events the person test positive in the first test and second test respectively. We also assume that the results from each test are independent with previous tests.</p>
-<p>The odds of having the disease given that the person positive twice is 0.4535176. Therefore, using equation <a href="probability.html#eq:odds2">(2.8)</a>, the corresponding probability of having the disease given that the person tested positive twice is <span class="math inline">\(P(D|T_1 \cap T_2) = \frac{0.4535176}{1+0.4535176} = 0.3120138\)</span>. See how this posterior probability has increased with two positive tests, from 1 positive test.</p>
+<p>The odds of having the disease given that the person tested positive twice is 0.4535176. Therefore, using equation <a href="probability.html#eq:odds2">(2.8)</a>, the corresponding probability of having the disease given that the person tested positive twice is <span class="math inline">\(P(D|T_1 \cap T_2) = \frac{0.4535176}{1+0.4535176} = 0.3120138\)</span>. See how this posterior probability has increased with two positive tests, from 1 positive test.</p>
 <p><em>Thought question</em>: perform the calculations to show that the posterior probability that the person has the disease if the person tests positive on 3 tests is 0.8116199.</p>
 <p><em>Thought question</em>: do you notice a certain pattern emerging when performing these calculations as the person undergoes more tests? Could you write either a mathematical equation, or even a function in R, that allows us to quickly compute the probability the person has the disease given that the person tested positive <span class="math inline">\(k\)</span> times, where <span class="math inline">\(k\)</span> can denote any non negative integer?</p>
 </div>
@@ -500,7 +500,7 @@ P(D|+) &amp;= \frac{P(D \cap +)}{P(+)}\\
 <li>
 <a class="nav-link" href="#introduction-to-probability"><span class="header-section-number">2.1</span> Introduction to Probability</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#why-study-probability"><span class="header-section-number">2.1.1</span> Why Study Probability?</a></li>
-<li><a class="nav-link" href="#frequentiest-and-bayesian-view-of-probability"><span class="header-section-number">2.1.2</span> Frequentiest and Bayesian View of Probability</a></li>
+<li><a class="nav-link" href="#frequentist-and-bayesian-view-of-probability"><span class="header-section-number">2.1.2</span> Frequentist and Bayesian View of Probability</a></li>
 <li><a class="nav-link" href="#module-roadmap"><span class="header-section-number">2.1.3</span> Module Roadmap</a></li>
 </ul>
 </li>
