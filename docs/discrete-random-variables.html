@@ -94,28 +94,28 @@
 </h3>
 <p>A <strong>random variable (RV)</strong> is a function from the sample space to real numbers.</p>
 <p>By convention, we denote random variables by capital letters. Using our 3 coin flip example, <span class="math inline">\(X\)</span> could be 0, 1, 2, or 3. We assign a number to each possible outcome of the sample space.</p>
-<p>Random variables provide numerical summaries of the experiment. This can be useful especially if the sample space is complicated. Random variables can also be used for non numeric outcomes.</p>
+<p>Random variables provide numerical summaries of the experiment. This can be useful especially if the sample space is complicated. Random variables can also be used for non-numeric outcomes.</p>
 </div>
 <div id="discrete-vs-continuous" class="section level3" number="3.1.3">
 <h3>
-<span class="header-section-number">3.1.3</span> Discrete Vs Continuous<a class="anchor" aria-label="anchor" href="#discrete-vs-continuous"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.1.3</span> Discrete VS Continuous<a class="anchor" aria-label="anchor" href="#discrete-vs-continuous"><i class="fas fa-link"></i></a>
 </h3>
 <p>One of the key distinctions we have to make for random variables is to determine if it is discrete or continuous. The way we express probabilities for random variables depends on whether the random variable is discrete or continuous.</p>
 <p>A <strong>discrete random variable</strong> can only take on a countable (finite or infinite) number of values.</p>
 <p>The number of heads in 3 coin flips, <span class="math inline">\(X\)</span> is <strong>countable and finite</strong>, since we can actually list all of the values it can take as <span class="math inline">\(\{0,1,2,3 \}\)</span> and there are 4 such values. <span class="math inline">\(X\)</span> must take on one of these 4 numerical values; it cannot be a number outside this list. So it is discrete.</p>
 <p>A random variable is <strong>countable and infinite</strong> if we can list the values it can take, but the list has no end. For example, the number of people using a crosswalk over a 10 year period could take on the values <span class="math inline">\(\{0, 1, 2, 3, \cdots \}\)</span>. The number could take on any of an infinite number of values, but values in between these whole numbers cannot occur. So the number of people using a crosswalk over a 10 year period is a discrete random variable.</p>
 <p>A <strong>continuous random variable</strong> can take on an uncountable number of values in an interval of real numbers.</p>
-<p>For example, height of an American adult is a continuous random variable, as height can take on any value in interval between any interval, say 40 and 100 inches. All values between 40 and 100 are possible.</p>
+<p>For example, height of an American adult is a continuous random variable, as height can take on any value in between any interval, say 40 and 100 inches. All values between 40 and 100 are possible.</p>
 <p>For this module, we will focus on discrete random variables.</p>
-<p>The <strong>support</strong> of a discrete random variable <span class="math inline">\(X\)</span> is the set of values <span class="math inline">\(X\)</span> can take such that <span class="math inline">\(P(X = x) &gt; 0\)</span>, i.e. the set of values that have non zero probability of happening. Using our 3 coin flips example, where <span class="math inline">\(X\)</span> is the number of heads out of the 3 coin slips, the support is <span class="math inline">\(\{0,1,2,3 \}\)</span>. he support of discrete random variables is usually integers.</p>
-<p><em>Thought question</em>: Can you come of examples of discrete and continuous random variables on your own? Feel free to search the internet for examples as well.</p>
+<p>The <strong>support</strong> of a discrete random variable <span class="math inline">\(X\)</span> is the set of values <span class="math inline">\(X\)</span> can take such that <span class="math inline">\(P(X = x) &gt; 0\)</span>, i.e. the set of values that have non zero probability of happening. Using our 3 coin flips example, where <span class="math inline">\(X\)</span> is the number of heads out of the 3 coin flips, the support is <span class="math inline">\(\{0,1,2,3 \}\)</span>. The support of discrete random variables is usually integers.</p>
+<p><em>Thought question</em>: Can you come up with examples of discrete and continuous random variables on your own? Feel free to search the internet for examples as well.</p>
 </div>
 <div id="module-roadmap-1" class="section level3" number="3.1.4">
 <h3>
 <span class="header-section-number">3.1.4</span> Module Roadmap<a class="anchor" aria-label="anchor" href="#module-roadmap-1"><i class="fas fa-link"></i></a>
 </h3>
 <ul>
-<li>Section <a href="discrete-random-variables.html#PMFs">3.2</a> introduces PMFs, which is a way of mapping each outcome of a discrete random variable with its corresponding probability. PMFs are always used to define the behavior of discrete random variables.</li>
+<li>Section <a href="discrete-random-variables.html#PMFs">3.2</a> introduces PMFs, which are a way of mapping each outcome of a discrete random variable with its corresponding probability. PMFs are always used to define the behavior of discrete random variables.</li>
 <li>Section <a href="discrete-random-variables.html#CDFs">3.3</a> introduces CDFs, which is another way of defining the behavior of random variables.</li>
 <li>Section <a href="discrete-random-variables.html#expectations">3.4</a> introduces the notion of (mathematical) expectation, or the long-run average of a random variable.</li>
 <li>Section <a href="discrete-random-variables.html#commonDisRVs">3.5</a> introduces some commonly used discrete random variables. These random variables are the basis of many statistical models.</li>
@@ -229,7 +229,7 @@ Figure 3.2: Histogram from Experiment Performed 1 Million Times
 <li>
 <span class="math inline">\(F_X(3) = P(X \leq 3) = P(X=0) + P(X=1) + P(X=2) + P(X=3) = \frac{7}{8} + \frac{1}{8} = 1\)</span>.</li>
 </ul>
-<p>Notice how these calculations were based on the PMF. To find <span class="math inline">\(P(X \leq x)\)</span>, we summed the PDF over all values of the support that is less than or equal to <span class="math inline">\(x\)</span>. Therefore, another way to write the CDF for a discrete random variable is</p>
+<p>Notice how these calculations were based on the PMF. To find <span class="math inline">\(P(X \leq x)\)</span>, we summed the PMF over all values of the support that is less than or equal to <span class="math inline">\(x\)</span>. Therefore, another way to write the CDF for a discrete random variable is</p>
 <p><span class="math display" id="eq:3-CDF">\[\begin{equation}
 F_X(x) = P(X \leq x) = \sum_{x_j \leq x} P(X=x_j).
 \tag{3.1}
@@ -268,7 +268,7 @@ F_X(x) = P(X \leq x) = \sum_{x_j \leq x} P(X=x_j).
 Figure 3.3: CDF for X
 </p>
 </div>
-<p>The CDF for discrete random variables always look like a step function, as it increases in discrete jumps at each value of the support. The height of each jump corresponds to the PMF at that value of the support.</p>
+<p>The CDF for discrete random variables always looks like a step function, as it increases in discrete jumps at each value of the support. The height of each jump corresponds to the PMF at that value of the support.</p>
 <p><em>Thought question</em>: do you see similarities between the CDF and the empirical cumulative density function (ECDF) from section <a href="descriptive.html#ecdf">1.3.3</a>?</p>
 <div id="valid-cdfs" class="section level3" number="3.3.1">
 <h3>
@@ -276,8 +276,8 @@ Figure 3.3: CDF for X
 </h3>
 <p>The CDF <span class="math inline">\(F_X(x)\)</span> of <span class="math inline">\(X\)</span> must:</p>
 <ul>
-<li>be non decreasing. This means that as <span class="math inline">\(x\)</span> gets larger, the CDF either stays the same or increases. Visually, a graph of the CDF never decreases as <span class="math inline">\(x\)</span> increases.</li>
-<li>approach 1 as <span class="math inline">\(x\)</span> approaches infinity and approach 0 as <span class="math inline">\(x\)</span> approaches negative infinity. Visually, a graph of the CDF should be equal to or close to 1 for large values of x, and it should be equal to or close to 0 for small values of x.</li>
+<li>be non-decreasing. This means that as <span class="math inline">\(x\)</span> gets larger, the CDF either stays the same or increases. Visually, a graph of the CDF never decreases as <span class="math inline">\(x\)</span> increases.</li>
+<li>approach 1 as <span class="math inline">\(x\)</span> approaches infinity, and approach 0 as <span class="math inline">\(x\)</span> approaches negative infinity. Visually, a graph of the CDF should be equal to or close to 1 for large values of x, and it should be equal to or close to 0 for small values of x.</li>
 </ul>
 <p><em>Thought question</em>: Look at the CDF for our example in Figure <a href="discrete-random-variables.html#fig:3-cdf">3.3</a>, and see how it satisfies the criteria listed above for a valid CDF.</p>
 </div>
@@ -312,11 +312,11 @@ E(X) &amp;= 0 \times \frac{1}{8} + 1 \times \frac{3}{8} + 2 \times \frac{3}{8} +
 </h3>
 <p>We have seen how to calculate the expected value of a random variable <span class="math inline">\(X\)</span> using equation <a href="discrete-random-variables.html#eq:3-EX">(3.2)</a>. What we need is the PMF of <span class="math inline">\(X\)</span>. Sometimes our random variable can be viewed as a sum (or difference) of other random variables, or it could involve a multiplication and / or adding a constant to the random variable. Consider some of these scenarios:</p>
 <ul>
-<li><p>Suppose my friend and I are fisherman. Let <span class="math inline">\(Y\)</span> be the random variable describing the number of fish I catch on a workday, and let <span class="math inline">\(W\)</span> be the random variable describing the number of fish my friend catches on a workday. We can let <span class="math inline">\(T = Y+W\)</span> be the random variable describing the total number of fish we catch on a workday.</p></li>
+<li><p>Suppose my friend and I are fishermen. Let <span class="math inline">\(Y\)</span> be the random variable describing the number of fish I catch on a workday, and let <span class="math inline">\(W\)</span> be the random variable describing the number of fish my friend catches on a workday. We can let <span class="math inline">\(T = Y+W\)</span> be the random variable describing the total number of fish we catch on a workday.</p></li>
 <li><p>Suppose that I sell each fish for $10 and my friend sells each fish for $15. We can let <span class="math inline">\(R = 10Y + 15W\)</span> be the random variable that describes the revenue we generate on a workday.</p></li>
 <li><p>Suppose that my friend and I rent out a space at the market to sell our fish, and it costs $5 a day to rent out the space. We can let <span class="math inline">\(G = 10Y + 15W - 5\)</span> be the random variable that describes our gross income for the day.</p></li>
 </ul>
-<p>All of these examples involve new random variables, <span class="math inline">\(T, R, G\)</span> that can be based on previously defined random variables, <span class="math inline">\(Y, W\)</span>. It turns out that to find the expectations of the new random variables, all we need is the expectations of the previously defined random variables. We do not need to find the PMFs for <span class="math inline">\(T, R\)</span> and <span class="math inline">\(S\)</span> and then apply equation <a href="discrete-random-variables.html#eq:3-EX">(3.2)</a>.</p>
+<p>All of these examples involve new random variables, <span class="math inline">\(T, R, G\)</span> that can be based on previously defined random variables, <span class="math inline">\(Y, W\)</span>. It turns out that to find the expectations of the new random variables, all we need is the expectations of the previously defined random variables. We do not need to find the PMFs for <span class="math inline">\(T\)</span>, <span class="math inline">\(R\)</span> and <span class="math inline">\(G\)</span> and then apply equation <a href="discrete-random-variables.html#eq:3-EX">(3.2)</a>.</p>
 <p>These can be done through the <strong>linearity of expectations</strong>: Let <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> denote random variables, and <span class="math inline">\(a,b,c\)</span> denote some constants, then</p>
 <p><span class="math display" id="eq:3-linEX">\[\begin{equation}
 E(aX + bY + c) = aE(X) + bE(Y) + c.
@@ -422,7 +422,7 @@ E(Y) &amp;= -2 \times p_b^2 + -1 \times 2p_b p_s + 0 \times p_s^2 + 2 p_b p_f + 
 \end{split}
 \]</span></p>
 <p>Note: I skipped a lot of messy algebra to get to the end result. Even with skipping some of the messy algebra, setting up the PMF was quite a bit of work.</p>
-<p>Suppose we use the linearity of expectations in equation <a href="discrete-random-variables.html#eq:3-linEX">(3.3)</a>. Let <span class="math inline">\(Y_1, Y_2\)</span> denote the distance the man moves at step 1 and 2 respectively. Then <span class="math inline">\(Y = Y_1 + Y_2\)</span>. The sample of <span class="math inline">\(Y_1\)</span> and <span class="math inline">\(Y_2\)</span> are the same: <span class="math inline">\(\{-1,0,1\}\)</span>. Both <span class="math inline">\(Y_1\)</span> and <span class="math inline">\(Y_2\)</span> have the following PMF:</p>
+<p>Suppose we use the linearity of expectations in equation <a href="discrete-random-variables.html#eq:3-linEX">(3.3)</a>. Let <span class="math inline">\(Y_1, Y_2\)</span> denote the distance the man moves at step 1 and 2 respectively. Then <span class="math inline">\(Y = Y_1 + Y_2\)</span>. The sample spaces of <span class="math inline">\(Y_1\)</span> and <span class="math inline">\(Y_2\)</span> are the same: <span class="math inline">\(\{-1,0,1\}\)</span>. Both <span class="math inline">\(Y_1\)</span> and <span class="math inline">\(Y_2\)</span> have the following PMF:</p>
 <ul>
 <li><span class="math inline">\(P(Y_i = -1) = p_b\)</span></li>
 <li><span class="math inline">\(P(Y_i = 0) = p_s\)</span></li>
@@ -435,7 +435,7 @@ E(Y_i) &amp;= -1 \times p_b + 0 \times p_s + 1 \times p_f \\
        &amp;= p_f - p_b
 \end{split}
 \]</span></p>
-<p>So therefore <span class="math inline">\(E(Y) = E(Y_1 + Y_2) = E(Y_1) + E(Y_2) = 2(p_f - p_b)\)</span>. Both approaches resulted in the same answer, but notice how much simpler its was to obtain the solution using linearity of expectations. Imagine if we wanted to find the expected position after 500 steps? Writing out the sample space for 500 steps will be extremely long.</p>
+<p>So therefore <span class="math inline">\(E(Y) = E(Y_1 + Y_2) = E(Y_1) + E(Y_2) = 2(p_f - p_b)\)</span>. Both approaches resulted in the same answer, but notice how much simpler it was to obtain the solution using linearity of expectations. Imagine if we wanted to find the expected position after 500 steps? Writing out the sample space for 500 steps will be extremely long.</p>
 <p>View the video below for a more detailed explanation of this worked example:</p>
 <iframe width="560px" height="320px" allowfullscreen="true" allow="autoplay *" title="Module 03: Worked Example" src="https://virginiauniversity.instructuremedia.com/embed/6528fdc7-39ac-4547-a9c7-dda7424f5f4d" frameborder="0">
 </iframe>
@@ -481,7 +481,7 @@ E(X^2) &amp;= 0^2 \times \frac{1}{8} + 1^2 \times \frac{3}{8} + 2^2 \times \frac
        &amp;= 3
 \end{split}
 \]</span></p>
-<p>so <span class="math inline">\(Var(x) = 3 - 1.5^2 = \frac{3}{4}\)</span>.</p>
+<p>so <span class="math inline">\(Var(X) = 3 - 1.5^2 = \frac{3}{4}\)</span>.</p>
 <p><em>Thought question</em>: Try to find <span class="math inline">\(Var(X)\)</span> using equation <a href="discrete-random-variables.html#eq:3-var2">(3.5)</a> and LOTUS. You should arrive at the same answer but the steps may be a bit more complicated.</p>
 <p>View the video below for a more detailed explanation on how to calculate variance of discrete random variables using equations <a href="discrete-random-variables.html#eq:3-var">(3.7)</a> and <a href="discrete-random-variables.html#eq:3-var2">(3.5)</a>:</p>
 <iframe width="560px" height="320px" allowfullscreen="true" allow="autoplay *" title="Module 03: Variance" src="https://virginiauniversity.instructuremedia.com/embed/63538958-9ac6-4b72-a6cc-d32714330c28" frameborder="0">
@@ -524,7 +524,7 @@ P(X=k) = p^k (1-p)^{1-k}
 </ul>
 <p><span class="math inline">\(P(Y=1)\)</span> and <span class="math inline">\(P(W=1)\)</span> are not the same in these examples.</p>
 <p>Fairly often, when we have a Bernoulli random variable, the event that results in the random variable being coded as 1 is called a <strong>success</strong>, and the event that results in the random variable being coded as 0 is called a <strong>failure</strong>. In such a setting, the parameter <span class="math inline">\(p\)</span> is called the <strong>success probability</strong> of the Bernoulli distribution. An experiment that has a Bernoulli distribution can be called a Bernoulli trial.</p>
-<p>If you go back to the second example in section <a href="#eg2"><strong>??</strong></a>, we were modeling whether a job applicant receives a callback or not. In this example, we could let <span class="math inline">\(V\)</span> be the random variable that an applicant receives a callback, with <span class="math inline">\(V=1\)</span> denoting the applicant received a callback, and <span class="math inline">\(V=0\)</span> when the applicant did not receive a callback. We used logistic regression in the example. It turns out that logistic regression is used when the variable of interest follows a Bernoulli distribution.</p>
+<p>If you go back to the second example in the Preface, we were modeling whether a job applicant receives a callback or not. In this example, we could let <span class="math inline">\(V\)</span> be the random variable that an applicant receives a callback, with <span class="math inline">\(V=1\)</span> denoting the applicant received a callback, and <span class="math inline">\(V=0\)</span> when the applicant did not receive a callback. We used logistic regression in the example. It turns out that logistic regression is used when the variable of interest follows a Bernoulli distribution.</p>
 <div id="bernprop" class="section level4" number="3.5.1.1">
 <h4>
 <span class="header-section-number">3.5.1.1</span> Properties of Bernoulli<a class="anchor" aria-label="anchor" href="#bernprop"><i class="fas fa-link"></i></a>
@@ -540,7 +540,7 @@ Var(X) = p(1-p).
 \tag{3.10}
 \end{equation}\]</span></p>
 <p><em>Thought question</em>: Use the definition of expectations for discrete random variables, equation <a href="discrete-random-variables.html#eq:3-EX">(3.2)</a>, and the PMF of a Bernoulli random variable, and LOTUS to prove equations <a href="discrete-random-variables.html#eq:3-bern-EX">(3.9)</a> and <a href="discrete-random-variables.html#eq:3-bern-var">(3.10)</a>.</p>
-<p>The expected value being equal to <span class="math inline">\(p\)</span> for a Bernoulli distribution should make sense. Remember that the support for such a random variable is 0 or 1, with <span class="math inline">\(P(X=1) = p\)</span>. Using the frequentist viewpoint, if we were to flip a coin and record heads or tails, and repeat this coin flipping many times, we will have record a bunch of 0s and 1s to represent the result for all the coin flips. The average of this bunch of 0s and 1s is just the proportion of 1s.</p>
+<p>The expected value being equal to <span class="math inline">\(p\)</span> for a Bernoulli distribution should make sense. Remember that the support for such a random variable is 0 or 1, with <span class="math inline">\(P(X=1) = p\)</span>. Using the frequentist viewpoint, if we were to flip a coin and record heads or tails, and repeat this coin flipping many times, we will have to record a bunch of 0s and 1s to represent the result for all the coin flips. The average of this bunch of 0s and 1s is just the proportion of 1s.</p>
 <p>The equation for the variance of a Bernoulli distribution exhibits an interesting and intuitive behavior. Figure <a href="discrete-random-variables.html#fig:3-varBern">3.6</a> below shows how the variance behaves as we vary the value of <span class="math inline">\(p\)</span>:</p>
 <div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">p</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span>,by <span class="op">=</span> <span class="fl">0.001</span><span class="op">)</span> <span class="co">##sequence of values for p</span></span>
@@ -594,7 +594,7 @@ P(X=2) &amp;= \binom{3}{2} (0.5)^2 (0.5)^1\\
        &amp;= \frac{3}{8}.
 \end{split}
 \]</span></p>
-<p>In this example, the binomial coefficient equals to 3. Which indicates there were 3 combinations to obtain 2 heads in 3 coin flips. <span class="math inline">\(P(X=2)\)</span> can be written as <span class="math inline">\(P(HHT \cup HTH \cup THH)\)</span>. Solving for <span class="math inline">\(P(HHT \cup HTH \cup THH)\)</span>, we have</p>
+<p>In this example, the binomial coefficient equals 3. Which indicates there were 3 combinations to obtain 2 heads in 3 coin flips. <span class="math inline">\(P(X=2)\)</span> can be written as <span class="math inline">\(P(HHT \cup HTH \cup THH)\)</span>. Solving for <span class="math inline">\(P(HHT \cup HTH \cup THH)\)</span>, we have</p>
 <p><span class="math display">\[
 \begin{split}
 P(HHT \cup HTH \cup THH) &amp;= P(HHT) + P(HTH) + P(THH)\\
@@ -603,7 +603,7 @@ P(HHT \cup HTH \cup THH) &amp;= P(HHT) + P(HTH) + P(THH)\\
        &amp;= \frac{3}{8}.
 \end{split}
 \]</span>
-so we could have solved this using basic probability rules from the previous module, without using the PMF of the binomial distribution in equation <a href="discrete-random-variables.html#eq:3-bin">(3.11)</a>. Of course, the PMF of the binomial distribution gets a lot more convenient if <span class="math inline">\(n\)</span> gets larger, as the number of combinations and sample space get a lot larger.</p>
+so we could have solved this using basic probability rules from the previous module, without using the PMF of the binomial distribution in equation <a href="discrete-random-variables.html#eq:3-bin">(3.11)</a>. Of course, the PMF of the binomial distribution gets a lot more convenient if <span class="math inline">\(n\)</span> gets larger, as the number of combinations and sample space become a lot larger.</p>
 <p>We can also use R to find <span class="math inline">\(P(X=2)\)</span>:</p>
 <div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">dbinom</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">0.5</span><span class="op">)</span> <span class="co">##specify values of k, n, p in this order</span></span></code></pre></div>
@@ -642,20 +642,20 @@ Var(X) = np(1-p).
 Figure 3.7: PMF for X, n=10, p varied
 </p>
 </div>
-<p>From figure <a href="discrete-random-variables.html#fig:3-pmfs">3.7</a>, we can see that the distribution of the binomial is symmetric when <span class="math inline">\(p=0.5\)</span>, as middle values of <span class="math inline">\(k\)</span> have higher probabilities, and the probabilities decrease as we go further away from the middle. When <span class="math inline">\(p \neq 0.5\)</span>, we see that the distribution gets skewed. When the success probability is small, smaller number of successes are likelier, and when the success probability is large, larger number of successes are likelier, which is intuitive. If the probability of success is small, we expect most outcomes to be failures.</p>
+<p>From Figure <a href="discrete-random-variables.html#fig:3-pmfs">3.7</a>, we can see that the distribution of the binomial is symmetric when <span class="math inline">\(p=0.5\)</span>, as middle values of <span class="math inline">\(k\)</span> have higher probabilities, and the probabilities decrease as we go further away from the middle. When <span class="math inline">\(p \neq 0.5\)</span>, we see that the distribution gets skewed. When the success probability is small, smaller number of successes are likelier, and when the success probability is large, larger number of successes are likelier, which is intuitive. If the probability of success is small, we expect most outcomes to be failures.</p>
 </div>
 </div>
 <div id="poisson" class="section level3" number="3.5.3">
 <h3>
 <span class="header-section-number">3.5.3</span> Poisson<a class="anchor" aria-label="anchor" href="#poisson"><i class="fas fa-link"></i></a>
 </h3>
-<p>One more common distribution used for discrete random variables is the Poisson distribution. This is often used when the variable of interest is what we call count data (the support is non negative integers), for example, the number of cars that cross an intersection during the day.</p>
-<p>A random variable <span class="math inline">\(X\)</span> follows a <strong>Poisson distribution</strong> with parameter <span class="math inline">\(\lambda\)</span>, where <span class="math inline">\(\lambda&gt;0\)</span>. Using mathematical notation, we can write <span class="math inline">\(X \sim Pois(\lambda)\)</span> to express that the random variable <span class="math inline">\(X\)</span> is distributed as a Poisson with parameter <span class="math inline">\(p\)</span>. The PMF of a Poisson distribution is written as</p>
+<p>One more common distribution used for discrete random variables is the Poisson distribution. This is often used when the variable of interest is what we call count data (the support is non-negative integers), for example, the number of cars that cross an intersection during the day.</p>
+<p>A random variable <span class="math inline">\(X\)</span> follows a <strong>Poisson distribution</strong> with parameter <span class="math inline">\(\lambda\)</span>, where <span class="math inline">\(\lambda&gt;0\)</span>. Using mathematical notation, we can write <span class="math inline">\(X \sim Pois(\lambda)\)</span> to express that the random variable <span class="math inline">\(X\)</span> is distributed as a Poisson with parameter <span class="math inline">\(\lambda\)</span>. The PMF of a Poisson distribution is written as</p>
 <p><span class="math display" id="eq:3-pois">\[\begin{equation}
 P(X=k) = \frac{e^{-\lambda}\lambda^k}{k!}
 \tag{3.15}
 \end{equation}\]</span></p>
-<p>for <span class="math inline">\(k=0,1,2,\cdots\)</span>. <span class="math inline">\(\lambda\)</span> is sometimes called a rate parameter, as it is related to the rate of arrivals, for example, the number of that cross an intersection during a period of time.</p>
+<p>for <span class="math inline">\(k=0,1,2,\cdots\)</span>. <span class="math inline">\(\lambda\)</span> is sometimes called a rate parameter, as it is related to the rate of arrivals, for example, the number of cars that cross an intersection during a period of time.</p>
 <div id="properties-of-poisson" class="section level4" number="3.5.3.1">
 <h4>
 <span class="header-section-number">3.5.3.1</span> Properties of Poisson<a class="anchor" aria-label="anchor" href="#properties-of-poisson"><i class="fas fa-link"></i></a>
@@ -670,7 +670,7 @@ E(X) = \lambda
 Var(X) = \lambda.
 \tag{3.17}
 \end{equation}\]</span></p>
-<p>These imply that larger values of a Poisson random variable are associated with larger variances. This is a common feature for count data. Consider the number of cars that cross an intersection during a one-hour time period. Consider the average number of cars during rush hour, say between 5 and 6pm. This average number is large, but the number could be a lot smaller due to inclement weather, or the number could get a lot larger is there is a convention occurring nearby. On the other hand, consider the average number of cars between 3 and 4am. This average number is small, and is likely to be small all the time, regardless of weather conditions and whether special events are happening.</p>
+<p>These imply that larger values of a Poisson random variable are associated with larger variances. This is a common feature for count data. Consider the number of cars that cross an intersection during a one-hour time period. Consider the average number of cars during rush hour, say between 5 and 6pm. This average number is large, but the number could be a lot smaller due to inclement weather, or the number could get a lot larger if there is a convention occurring nearby. On the other hand, consider the average number of cars between 3 and 4am. This average number is small, and is likely to be small all the time, regardless of weather conditions and whether special events are happening.</p>
 <p>Another interesting property of the Poisson distribution is that it is skewed when <span class="math inline">\(\lambda\)</span> is small, and approaches a bell-shaped distribution as <span class="math inline">\(\lambda\)</span> gets bigger. Figure <a href="discrete-random-variables.html#fig:3-pmfs-lambda">3.8</a> displays density plots of Poisson distributions as <span class="math inline">\(\lambda\)</span> is varied:</p>
 <div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##calculate probability of Poisson with these values on the support</span></span>
@@ -697,8 +697,8 @@ Figure 3.8: PMF for Poissons as Rate Parameter is Varied
 <span class="header-section-number">3.5.3.2</span> Poisson Approximation to Binomial<a class="anchor" aria-label="anchor" href="#poisson-approximation-to-binomial"><i class="fas fa-link"></i></a>
 </h4>
 <p>If <span class="math inline">\(X \sim Bin(n,p)\)</span>, and if <span class="math inline">\(n\)</span> is large and <span class="math inline">\(p\)</span> is small, then the PMF of <span class="math inline">\(X\)</span> can be approximated by a Poisson distribution with rate parameter <span class="math inline">\(\lambda = np\)</span>. In other words, the approximation works better as <span class="math inline">\(n\)</span> gets larger and <span class="math inline">\(np\)</span> gets smaller.</p>
-<p>There are several rules of thumbs that exist to guide as to how large <span class="math inline">\(n\)</span> should be and how small <span class="math inline">\(np\)</span> should be. The National Institute of Standards and Technology <a href="https://www.itl.nist.gov/div898/handbook/pmc/section3/pmc331.htm">(NIST)</a> suggest <span class="math inline">\(n \geq 20\)</span> and <span class="math inline">\(p \leq 0.05\)</span>, or <span class="math inline">\(n \geq 100\)</span>, and <span class="math inline">\(np \leq 10\)</span>.</p>
-<p>One of the main for using this approximation, instead of directly using the binomial distribution, is that the binomial coefficient can become computationally expensive to compute when <span class="math inline">\(n\)</span> is large.</p>
+<p>There are several rules of thumb that exist to guide as to how large <span class="math inline">\(n\)</span> should be and how small <span class="math inline">\(np\)</span> should be. The National Institute of Standards and Technology <a href="https://www.itl.nist.gov/div898/handbook/pmc/section3/pmc331.htm">(NIST)</a> suggest <span class="math inline">\(n \geq 20\)</span> and <span class="math inline">\(p \leq 0.05\)</span>, or <span class="math inline">\(n \geq 100\)</span>, and <span class="math inline">\(np \leq 10\)</span>.</p>
+<p>One of the main reasons for using this approximation, instead of directly using the binomial distribution, is that the binomial coefficient can become computationally expensive to compute when <span class="math inline">\(n\)</span> is large.</p>
 <p>Consider this example: A company manufactures computer chips, and 2 percent of chips are defective. The quality control manager randomly samples 100 chips coming off the assembly line. What is the probability that at most 3 chips are defective?</p>
 <p>Let <span class="math inline">\(Y\)</span> denote the number of chips that are defective out of 100 chips.</p>
 <ul>
@@ -732,7 +732,7 @@ Figure 3.8: PMF for Poissons as Rate Parameter is Varied
 <h2>
 <span class="header-section-number">3.6</span> Using R<a class="anchor" aria-label="anchor" href="#Rdis"><i class="fas fa-link"></i></a>
 </h2>
-<p>R has built in functions to compute the PMF, CDF, percentiles, as well as simulate data of common distributions. We will start using a random variable <span class="math inline">\(Y\)</span> which follows binomial distribution, with <span class="math inline">\(n=5, p = 0.3\)</span> as an example first. Note in this example that the support for <span class="math inline">\(Y\)</span> is <span class="math inline">\(\{0,1,2,3,4,5 \}\)</span>.</p>
+<p>R has built-in functions to compute the PMF, CDF, percentiles, as well as simulate data of common distributions. We will start using a random variable <span class="math inline">\(Y\)</span> which follows a binomial distribution, with <span class="math inline">\(n=5, p = 0.3\)</span> as an example first. Note in this example that the support for <span class="math inline">\(Y\)</span> is <span class="math inline">\(\{0,1,2,3,4,5 \}\)</span>.</p>
 <ol style="list-style-type: decimal">
 <li>To find <span class="math inline">\(P(Y=2)\)</span>, use:</li>
 </ol>
@@ -786,7 +786,7 @@ Figure 3.8: PMF for Poissons as Rate Parameter is Varied
 <a class="nav-link" href="#random-variables"><span class="header-section-number">3.1</span> Random Variables</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#example"><span class="header-section-number">3.1.1</span> Example</a></li>
 <li><a class="nav-link" href="#definition"><span class="header-section-number">3.1.2</span> Definition</a></li>
-<li><a class="nav-link" href="#discrete-vs-continuous"><span class="header-section-number">3.1.3</span> Discrete Vs Continuous</a></li>
+<li><a class="nav-link" href="#discrete-vs-continuous"><span class="header-section-number">3.1.3</span> Discrete VS Continuous</a></li>
 <li><a class="nav-link" href="#module-roadmap-1"><span class="header-section-number">3.1.4</span> Module Roadmap</a></li>
 </ul>
 </li>

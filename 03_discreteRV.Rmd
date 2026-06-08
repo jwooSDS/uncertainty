@@ -28,9 +28,9 @@ A **random variable (RV)** is a function from the sample space to real numbers.
 
 By convention, we denote random variables by capital letters. Using our 3 coin flip example, $X$ could be 0, 1, 2, or 3. We assign a number to each possible outcome of the sample space. 
 
-Random variables provide numerical summaries of the experiment. This can be useful especially if the sample space is complicated. Random variables can also be used for non numeric outcomes. 
+Random variables provide numerical summaries of the experiment. This can be useful especially if the sample space is complicated. Random variables can also be used for non-numeric outcomes. 
 
-### Discrete Vs Continuous
+### Discrete VS Continuous
 
 One of the key distinctions we have to make for random variables is to determine if it is discrete or continuous. The way we express probabilities for random variables depends on whether the random variable is discrete or continuous.
 
@@ -42,17 +42,17 @@ A random variable is **countable and infinite** if we can list the values it can
 
 A **continuous random variable** can take on an uncountable number of values in an interval of real numbers. 
 
-For example, height of an American adult is a continuous random variable, as height can take on any value in interval between any interval, say 40 and 100 inches. All values between 40 and 100 are possible. 
+For example, height of an American adult is a continuous random variable, as height can take on any value in between any interval, say 40 and 100 inches. All values between 40 and 100 are possible. 
 
 For this module, we will focus on discrete random variables. 
 
-The **support** of a discrete random variable $X$ is the set of values $X$ can take such that $P(X = x) > 0$, i.e. the set of values that have non zero probability of happening. Using our 3 coin flips example, where $X$ is the number of heads out of the 3 coin slips, the support is $\{0,1,2,3 \}$. he support of discrete random variables is usually integers. 
+The **support** of a discrete random variable $X$ is the set of values $X$ can take such that $P(X = x) > 0$, i.e. the set of values that have non zero probability of happening. Using our 3 coin flips example, where $X$ is the number of heads out of the 3 coin flips, the support is $\{0,1,2,3 \}$. The support of discrete random variables is usually integers. 
 
-*Thought question*: Can you come of examples of discrete and continuous random variables on your own? Feel free to search the internet for examples as well. 
+*Thought question*: Can you come up with examples of discrete and continuous random variables on your own? Feel free to search the internet for examples as well. 
 
 ### Module Roadmap
 
-- Section \@ref(PMFs) introduces PMFs, which is a way of mapping each outcome of a discrete random variable with its corresponding probability. PMFs are always used to define the behavior of discrete random variables.
+- Section \@ref(PMFs) introduces PMFs, which are a way of mapping each outcome of a discrete random variable with its corresponding probability. PMFs are always used to define the behavior of discrete random variables.
 - Section \@ref(CDFs) introduces CDFs, which is another way of defining the behavior of random variables.
 - Section \@ref(expectations) introduces the notion of (mathematical) expectation, or the long-run average of a random variable.
 - Section \@ref(commonDisRVs) introduces some commonly used discrete random variables. These random variables are the basis of many statistical models.
@@ -146,7 +146,7 @@ Going back to our example where we record the number of heads out of 3 coin flip
 - $F_X(2) = P(X \leq 2) = P(X=0) + P(X=1) + P(X=2) = \frac{1}{2} + \frac{3}{8} = \frac{7}{8}$,
 - $F_X(3) = P(X \leq 3) = P(X=0) + P(X=1) + P(X=2) + P(X=3) = \frac{7}{8} + \frac{1}{8} = 1$.
 
-Notice how these calculations were based on the PMF. To find $P(X \leq x)$, we summed the PDF over all values of the support that is less than or equal to $x$. Therefore, another way to write the CDF for a discrete random variable is
+Notice how these calculations were based on the PMF. To find $P(X \leq x)$, we summed the PMF over all values of the support that is less than or equal to $x$. Therefore, another way to write the CDF for a discrete random variable is
 
 \begin{equation} 
 F_X(x) = P(X \leq x) = \sum_{x_j \leq x} P(X=x_j).
@@ -173,7 +173,7 @@ y<-c(0,1,1,1,2,2,2,3)
 ## create plot of CDF vs each value in support
 plot(ecdf(y), main = "CDF for X", xlab="# of heads", ylab="Probability")
 ```
-The CDF for discrete random variables always look like a step function, as it increases in discrete jumps at each value of the support. The height of each jump corresponds to the PMF at that value of the support. 
+The CDF for discrete random variables always looks like a step function, as it increases in discrete jumps at each value of the support. The height of each jump corresponds to the PMF at that value of the support. 
 
 *Thought question*: do you see similarities between the CDF and the empirical cumulative density function (ECDF) from section \@ref(ecdf)?
 
@@ -181,8 +181,8 @@ The CDF for discrete random variables always look like a step function, as it in
 
 The CDF $F_X(x)$ of $X$ must:
 
-- be non decreasing. This means that as $x$ gets larger, the CDF either stays the same or increases. Visually, a graph of the CDF never decreases as $x$ increases. 
-- approach 1 as $x$ approaches infinity and approach 0 as $x$ approaches negative infinity. Visually, a graph of the CDF should be equal to or close to 1 for large values of x, and it should be equal to or close to 0 for small values of x. 
+- be non-decreasing. This means that as $x$ gets larger, the CDF either stays the same or increases. Visually, a graph of the CDF never decreases as $x$ increases. 
+- approach 1 as $x$ approaches infinity, and approach 0 as $x$ approaches negative infinity. Visually, a graph of the CDF should be equal to or close to 1 for large values of x, and it should be equal to or close to 0 for small values of x. 
 
 *Thought question*: Look at the CDF for our example in Figure \@ref(fig:3-cdf), and see how it satisfies the criteria listed above for a valid CDF. 
 
@@ -222,13 +222,13 @@ View the video below for a more detailed explanation on how to calculate expecte
 
 We have seen how to calculate the expected value of a random variable $X$ using equation \@ref(eq:3-EX). What we need is the PMF of $X$. Sometimes our random variable can be viewed as a sum (or difference) of other random variables, or it could involve a multiplication and / or adding a constant to the random variable. Consider some of these scenarios:
 
-- Suppose my friend and I are fisherman. Let $Y$ be the random variable describing the number of fish I catch on a workday, and let $W$ be the random variable describing the number of fish my friend catches on a workday. We can let $T = Y+W$ be the random variable describing the total number of fish we catch on a workday.
+- Suppose my friend and I are fishermen. Let $Y$ be the random variable describing the number of fish I catch on a workday, and let $W$ be the random variable describing the number of fish my friend catches on a workday. We can let $T = Y+W$ be the random variable describing the total number of fish we catch on a workday.
 
 - Suppose that I sell each fish for \$10 and my friend sells each fish for \$15. We can let $R = 10Y + 15W$ be the random variable that describes the revenue we generate on a workday.
 
 - Suppose that my friend and I rent out a space at the market to sell our fish, and it costs \$5 a day to rent out the space. We can let $G = 10Y + 15W - 5$ be the random variable that describes our gross income for the day. 
 
-All of these examples involve new random variables, $T, R, G$ that can be based on previously defined random variables, $Y, W$. It turns out that to find the expectations of the new random variables, all we need is the expectations of the previously defined random variables. We do not need to find the PMFs for $T, R$ and $S$ and then apply equation \@ref(eq:3-EX). 
+All of these examples involve new random variables, $T, R, G$ that can be based on previously defined random variables, $Y, W$. It turns out that to find the expectations of the new random variables, all we need is the expectations of the previously defined random variables. We do not need to find the PMFs for $T$, $R$ and $G$ and then apply equation \@ref(eq:3-EX). 
 
 These can be done through the **linearity of expectations**: Let $X$ and $Y$ denote random variables, and $a,b,c$ denote some constants, then
 
@@ -330,7 +330,7 @@ $$
 
 Note: I skipped a lot of messy algebra to get to the end result. Even with skipping some of the messy algebra, setting up the PMF was quite a bit of work. 
 
-Suppose we use the linearity of expectations in equation \@ref(eq:3-linEX). Let $Y_1, Y_2$ denote the distance the man moves at step 1 and 2 respectively. Then $Y = Y_1 + Y_2$. The sample of $Y_1$ and $Y_2$ are the same: $\{-1,0,1\}$. Both $Y_1$ and $Y_2$ have the following PMF:
+Suppose we use the linearity of expectations in equation \@ref(eq:3-linEX). Let $Y_1, Y_2$ denote the distance the man moves at step 1 and 2 respectively. Then $Y = Y_1 + Y_2$. The sample spaces of $Y_1$ and $Y_2$ are the same: $\{-1,0,1\}$. Both $Y_1$ and $Y_2$ have the following PMF:
 
 - $P(Y_i = -1) = p_b$
 - $P(Y_i = 0) = p_s$
@@ -345,7 +345,7 @@ E(Y_i) &= -1 \times p_b + 0 \times p_s + 1 \times p_f \\
 \end{split}
 $$
 
-So therefore $E(Y) = E(Y_1 + Y_2) = E(Y_1) + E(Y_2) = 2(p_f - p_b)$. Both approaches resulted in the same answer, but notice how much simpler its was to obtain the solution using linearity of expectations. Imagine if we wanted to find the expected position after 500 steps? Writing out the sample space for 500 steps will be extremely long. 
+So therefore $E(Y) = E(Y_1 + Y_2) = E(Y_1) + E(Y_2) = 2(p_f - p_b)$. Both approaches resulted in the same answer, but notice how much simpler it was to obtain the solution using linearity of expectations. Imagine if we wanted to find the expected position after 500 steps? Writing out the sample space for 500 steps will be extremely long. 
 
 View the video below for a more detailed explanation of this worked example:
 
@@ -400,7 +400,7 @@ E(X^2) &= 0^2 \times \frac{1}{8} + 1^2 \times \frac{3}{8} + 2^2 \times \frac{3}{
 \end{split}
 $$
 
-so $Var(x) = 3 - 1.5^2 = \frac{3}{4}$.
+so $Var(X) = 3 - 1.5^2 = \frac{3}{4}$.
 
 *Thought question*: Try to find $Var(X)$ using equation \@ref(eq:3-var2) and LOTUS. You should arrive at the same answer but the steps may be a bit more complicated.
 
@@ -443,7 +443,7 @@ $P(Y=1)$ and $P(W=1)$ are not the same in these examples.
 
 Fairly often, when we have a Bernoulli random variable, the event that results in the random variable being coded as 1 is called a **success**, and the event that results in the random variable being coded as 0 is called a **failure**. In such a setting, the parameter $p$ is called the **success probability** of the Bernoulli distribution. An experiment that has a Bernoulli distribution can be called a Bernoulli trial. 
 
-If you go back to the second example in section \@ref(eg2), we were modeling whether a job applicant receives a callback or not. In this example, we could let $V$ be the random variable that an applicant receives a callback, with $V=1$ denoting the applicant received a callback, and $V=0$ when the applicant did not receive a callback. We used logistic regression in the example. It turns out that logistic regression is used when the variable of interest follows a Bernoulli distribution. 
+If you go back to the second example in the Preface, we were modeling whether a job applicant receives a callback or not. In this example, we could let $V$ be the random variable that an applicant receives a callback, with $V=1$ denoting the applicant received a callback, and $V=0$ when the applicant did not receive a callback. We used logistic regression in the example. It turns out that logistic regression is used when the variable of interest follows a Bernoulli distribution. 
 
 #### Properties of Bernoulli {#bernprop}
 
@@ -463,7 +463,7 @@ Var(X) = p(1-p).
 
 *Thought question*: Use the definition of expectations for discrete random variables, equation \@ref(eq:3-EX), and the PMF of a Bernoulli random variable, and LOTUS to prove equations \@ref(eq:3-bern-EX) and \@ref(eq:3-bern-var).
 
-The expected value being equal to $p$ for a Bernoulli distribution should make sense. Remember that the support for such a random variable is 0 or 1, with $P(X=1) = p$. Using the frequentist viewpoint, if we were to flip a coin and record heads or tails, and repeat this coin flipping many times, we will have record a bunch of 0s and 1s to represent the result for all the coin flips. The average of this bunch of 0s and 1s is just the proportion of 1s. 
+The expected value being equal to $p$ for a Bernoulli distribution should make sense. Remember that the support for such a random variable is 0 or 1, with $P(X=1) = p$. Using the frequentist viewpoint, if we were to flip a coin and record heads or tails, and repeat this coin flipping many times, we will have to record a bunch of 0s and 1s to represent the result for all the coin flips. The average of this bunch of 0s and 1s is just the proportion of 1s. 
 
 The equation for the variance of a Bernoulli distribution exhibits an interesting and intuitive behavior. Figure \@ref(fig:3-varBern) below shows how the variance behaves as we vary the value of $p$:
 
@@ -524,7 +524,7 @@ P(X=2) &= \binom{3}{2} (0.5)^2 (0.5)^1\\
 \end{split}
 $$
 
-In this example, the binomial coefficient equals to 3. Which indicates there were 3 combinations to obtain 2 heads in 3 coin flips. $P(X=2)$ can be written as $P(HHT \cup HTH \cup THH)$. Solving for $P(HHT \cup HTH \cup THH)$, we have
+In this example, the binomial coefficient equals 3. Which indicates there were 3 combinations to obtain 2 heads in 3 coin flips. $P(X=2)$ can be written as $P(HHT \cup HTH \cup THH)$. Solving for $P(HHT \cup HTH \cup THH)$, we have
 
 $$
 \begin{split}
@@ -534,7 +534,7 @@ P(HHT \cup HTH \cup THH) &= P(HHT) + P(HTH) + P(THH)\\
        &= \frac{3}{8}.
 \end{split}
 $$
-so we could have solved this using basic probability rules from the previous module, without using the PMF of the binomial distribution in equation \@ref(eq:3-bin). Of course, the PMF of the binomial distribution gets a lot more convenient if $n$ gets larger, as the number of combinations and sample space get a lot larger. 
+so we could have solved this using basic probability rules from the previous module, without using the PMF of the binomial distribution in equation \@ref(eq:3-bin). Of course, the PMF of the binomial distribution gets a lot more convenient if $n$ gets larger, as the number of combinations and sample space become a lot larger. 
 
 We can also use R to find $P(X=2)$:
 
@@ -583,20 +583,20 @@ plot(x, PMFs5, type="h", main = "PMF when p=0.5", xlab="# of heads", ylab="Proba
 plot(x, PMFs9, type="h", main = "PMF when p=0.9", xlab="# of heads", ylab="Probability", ylim=c(0,0.4))
 ```
 
-From figure \@ref(fig:3-pmfs), we can see that the distribution of the binomial is symmetric when $p=0.5$, as middle values of $k$ have higher probabilities, and the probabilities decrease as we go further away from the middle. When $p \neq 0.5$, we see that the distribution gets skewed. When the success probability is small, smaller number of successes are likelier, and when the success probability is large, larger number of successes are likelier, which is intuitive. If the probability of success is small, we expect most outcomes to be failures. 
+From Figure \@ref(fig:3-pmfs), we can see that the distribution of the binomial is symmetric when $p=0.5$, as middle values of $k$ have higher probabilities, and the probabilities decrease as we go further away from the middle. When $p \neq 0.5$, we see that the distribution gets skewed. When the success probability is small, smaller number of successes are likelier, and when the success probability is large, larger number of successes are likelier, which is intuitive. If the probability of success is small, we expect most outcomes to be failures. 
 
 ### Poisson
 
-One more common distribution used for discrete random variables is the Poisson distribution. This is often used when the variable of interest is what we call count data (the support is non negative integers), for example, the number of cars that cross an intersection during the day. 
+One more common distribution used for discrete random variables is the Poisson distribution. This is often used when the variable of interest is what we call count data (the support is non-negative integers), for example, the number of cars that cross an intersection during the day. 
 
-A random variable $X$ follows a **Poisson distribution** with parameter $\lambda$, where $\lambda>0$. Using mathematical notation, we can write $X \sim Pois(\lambda)$ to express that the random variable $X$ is distributed as a Poisson with parameter $p$. The PMF of a Poisson distribution is written as
+A random variable $X$ follows a **Poisson distribution** with parameter $\lambda$, where $\lambda>0$. Using mathematical notation, we can write $X \sim Pois(\lambda)$ to express that the random variable $X$ is distributed as a Poisson with parameter $\lambda$. The PMF of a Poisson distribution is written as
 
 \begin{equation} 
 P(X=k) = \frac{e^{-\lambda}\lambda^k}{k!} 
 (\#eq:3-pois)
 \end{equation}
 
-for $k=0,1,2,\cdots$. $\lambda$ is sometimes called a rate parameter, as it is related to the rate of arrivals, for example, the number of that cross an intersection during a period of time. 
+for $k=0,1,2,\cdots$. $\lambda$ is sometimes called a rate parameter, as it is related to the rate of arrivals, for example, the number of cars that cross an intersection during a period of time. 
 
 #### Properties of Poisson
 
@@ -614,7 +614,7 @@ Var(X) = \lambda.
 (\#eq:3-pois-var)
 \end{equation}
 
-These imply that larger values of a Poisson random variable are associated with larger variances. This is a common feature for count data. Consider the number of cars that cross an intersection during a one-hour time period. Consider the average number of cars during rush hour, say between 5 and 6pm. This average number is large, but the number could be a lot smaller due to inclement weather, or the number could get a lot larger is there is a convention occurring nearby. On the other hand, consider the average number of cars between 3 and 4am. This average number is small, and is likely to be small all the time, regardless of weather conditions and whether special events are happening. 
+These imply that larger values of a Poisson random variable are associated with larger variances. This is a common feature for count data. Consider the number of cars that cross an intersection during a one-hour time period. Consider the average number of cars during rush hour, say between 5 and 6pm. This average number is large, but the number could be a lot smaller due to inclement weather, or the number could get a lot larger if there is a convention occurring nearby. On the other hand, consider the average number of cars between 3 and 4am. This average number is small, and is likely to be small all the time, regardless of weather conditions and whether special events are happening. 
 
 Another interesting property of the Poisson distribution is that it is skewed when $\lambda$ is small, and approaches a bell-shaped distribution as $\lambda$ gets bigger. Figure \@ref(fig:3-pmfs-lambda) displays density plots of Poisson distributions as $\lambda$ is varied:
 
@@ -639,9 +639,9 @@ for (i in 1:4)
 
 If $X \sim Bin(n,p)$, and if $n$ is large and $p$ is small, then the PMF of $X$ can be approximated by a Poisson distribution with rate parameter $\lambda = np$. In other words, the approximation works better as $n$ gets larger and $np$ gets smaller. 
 
-There are several rules of thumbs that exist to guide as to how large $n$ should be and how small $np$ should be. The National Institute of Standards and Technology [(NIST)](https://www.itl.nist.gov/div898/handbook/pmc/section3/pmc331.htm) suggest $n \geq 20$ and $p \leq 0.05$, or $n \geq 100$, and $np \leq 10$.
+There are several rules of thumb that exist to guide as to how large $n$ should be and how small $np$ should be. The National Institute of Standards and Technology [(NIST)](https://www.itl.nist.gov/div898/handbook/pmc/section3/pmc331.htm) suggest $n \geq 20$ and $p \leq 0.05$, or $n \geq 100$, and $np \leq 10$.
 
-One of the main for using this approximation, instead of directly using the binomial distribution, is that the binomial coefficient can become computationally expensive to compute when $n$ is large. 
+One of the main reasons for using this approximation, instead of directly using the binomial distribution, is that the binomial coefficient can become computationally expensive to compute when $n$ is large. 
 
 Consider this example: A company manufactures computer chips, and 2 percent of chips are defective. The quality control manager randomly samples 100 chips coming off the assembly line. What is the probability that at most 3 chips are defective?
 
@@ -673,7 +673,7 @@ Notice the values are very close to each other.
 
 ## Using R {#Rdis}
 
-R has built in functions to compute the PMF, CDF, percentiles, as well as simulate data of common distributions. We will start using a random variable $Y$ which follows binomial distribution, with $n=5, p = 0.3$ as an example first. Note in this example that the support for $Y$ is $\{0,1,2,3,4,5 \}$.
+R has built-in functions to compute the PMF, CDF, percentiles, as well as simulate data of common distributions. We will start using a random variable $Y$ which follows a binomial distribution, with $n=5, p = 0.3$ as an example first. Note in this example that the support for $Y$ is $\{0,1,2,3,4,5 \}$.
 
 1. To find $P(Y=2)$, use:
 
