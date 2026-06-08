@@ -205,7 +205,7 @@ Var(X) = \int_{-\infty}^{\infty} (x-\mu)^2 f_X(x) dx.
 (\#eq:4-var)
 \end{equation}
 
-The properties of variance is still the same as in Section \@ref(var-prop). It does not matter if the random variable is discrete or continuous. A common notation used for variance is $\sigma^2$, or sometimes $\sigma_X^2$ to show it is the variance of the random variable $X$. 
+The properties of variance are still the same as in Section \@ref(var-prop). It does not matter if the random variable is discrete or continuous. A common notation used for variance is $\sigma^2$, or sometimes $\sigma_X^2$ to show it is the variance of the random variable $X$. 
 
 ### Moments {#moments}
 
@@ -426,7 +426,7 @@ Note that some authors say the parameters are the mean $\mu$ and standard deviat
 
 Notice how we started from a standard normal $Z$, and transformed $Z$ by multiplying it by $\sigma$ and then adding $\mu$ to get any normal distribution. This transformation is called a **location-scale** transformation, or shifting and scaling. The scale changes since we multiply by a constant $\sigma$; the location is transformed since its mean changes from 0 to $\mu$. 
 
-We can also reverse this transformation and state the following: If $X \sim N(\mu, \sigma^2)$, then $Z = \frac{X-\mu}{\sigma} \sim N(0,1)$. If we start with $X \sim N(\mu, \sigma^2)$, then we can transform $X$ by subtracting \mu, and then dividing by $\sigma$, to obtain $Z$. This particular transformation is called **standardization**:
+We can also reverse this transformation and state the following: If $X \sim N(\mu, \sigma^2)$, then $Z = \frac{X-\mu}{\sigma} \sim N(0,1)$. If we start with $X \sim N(\mu, \sigma^2)$, then we can transform $X$ by subtracting $\mu$, and then dividing by $\sigma$, to obtain $Z$. This particular transformation is called **standardization**:
 
 \begin{equation} 
 Z = \frac{X-\mu}{\sigma}.
@@ -444,7 +444,7 @@ f_X(x) = \frac{1}{\sigma \sqrt{2 \pi}} \exp \left(-\frac{(x - \mu)^2}{2 \sigma^2
 
 #### 68-95-99.7% Rule {#rulenorm}
 
-The following property holds for any normal distribution, and is often called the **68-99-99.7%** rule. For any normal distribution $X \sim N(\mu, \sigma^2)$:
+The following property holds for any normal distribution, and is often called the **68-95-99.7%** rule. For any normal distribution $X \sim N(\mu, \sigma^2)$:
 
 - $P(\mu - \sigma < X < \mu + \sigma) \approx 0.68$,
 - $P(\mu - 2\sigma < X < \mu + 2\sigma) \approx 0.95$,
@@ -582,7 +582,7 @@ where $K$ is the **kernel** and $h$ is a smoothing parameter, often called the *
 
 The kernel can be viewed as a weighting function, with the weights following the shape of a distribution that the user specifies (usually symmetric). Common kernel functions and their shapes are displayed in Figure \@ref(fig:4-KDE):
 
-```{r 4-KDE, fig.cap = "Common Kernals. Picture adapted from https://tgstewart.cloud/compprob/kde.html", echo = FALSE}
+```{r 4-KDE, fig.cap = "Common Kernels. Picture adapted from https://tgstewart.cloud/compprob/kde.html", echo = FALSE}
 knitr::include_graphics("images/04-KDE.png")
 ```
 

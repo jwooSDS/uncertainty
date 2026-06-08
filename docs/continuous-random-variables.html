@@ -241,7 +241,7 @@ E(g(X)) = \int_{-\infty}^{\infty} g(x) f_X(x) dx.
 Var(X) = \int_{-\infty}^{\infty} (x-\mu)^2 f_X(x) dx.
 \tag{4.5}
 \end{equation}\]</span></p>
-<p>The properties of variance is still the same as in Section <a href="discrete-random-variables.html#var-prop">3.4.3.1</a>. It does not matter if the random variable is discrete or continuous. A common notation used for variance is <span class="math inline">\(\sigma^2\)</span>, or sometimes <span class="math inline">\(\sigma_X^2\)</span> to show it is the variance of the random variable <span class="math inline">\(X\)</span>.</p>
+<p>The properties of variance are still the same as in Section <a href="discrete-random-variables.html#var-prop">3.4.3.1</a>. It does not matter if the random variable is discrete or continuous. A common notation used for variance is <span class="math inline">\(\sigma^2\)</span>, or sometimes <span class="math inline">\(\sigma_X^2\)</span> to show it is the variance of the random variable <span class="math inline">\(X\)</span>.</p>
 </div>
 <div id="moments" class="section level3" number="4.4.3">
 <h3>
@@ -461,7 +461,7 @@ Figure 4.9: PDF of Standard Normal
 <p>Note that some authors say the parameters are the mean <span class="math inline">\(\mu\)</span> and standard deviation <span class="math inline">\(\sigma\)</span> instead, so be careful when reading notation associated with normal distributions from various sources. For example, <span class="math inline">\(N(0,2)\)</span> in our class and our book means normal distribution with mean 0 and variance 2, but for some other authors, <span class="math inline">\(N(0,2)\)</span> means normal distribution with mean 0 and standard deviation 2. Indeed, the functions in R use this alternate parameterization, so you need to be careful.</p>
 <p><em>Thought question</em>: Can you use the linearity of expectations to explain why <span class="math inline">\(X\)</span> has mean <span class="math inline">\(\mu\)</span>? Can you use properties of variance from Section <a href="discrete-random-variables.html#var-prop">3.4.3.1</a> to explain why <span class="math inline">\(X\)</span> has variance <span class="math inline">\(\sigma^2\)</span>?</p>
 <p>Notice how we started from a standard normal <span class="math inline">\(Z\)</span>, and transformed <span class="math inline">\(Z\)</span> by multiplying it by <span class="math inline">\(\sigma\)</span> and then adding <span class="math inline">\(\mu\)</span> to get any normal distribution. This transformation is called a <strong>location-scale</strong> transformation, or shifting and scaling. The scale changes since we multiply by a constant <span class="math inline">\(\sigma\)</span>; the location is transformed since its mean changes from 0 to <span class="math inline">\(\mu\)</span>.</p>
-<p>We can also reverse this transformation and state the following: If <span class="math inline">\(X \sim N(\mu, \sigma^2)\)</span>, then <span class="math inline">\(Z = \frac{X-\mu}{\sigma} \sim N(0,1)\)</span>. If we start with <span class="math inline">\(X \sim N(\mu, \sigma^2)\)</span>, then we can transform <span class="math inline">\(X\)</span> by subtracting , and then dividing by <span class="math inline">\(\sigma\)</span>, to obtain <span class="math inline">\(Z\)</span>. This particular transformation is called <strong>standardization</strong>:</p>
+<p>We can also reverse this transformation and state the following: If <span class="math inline">\(X \sim N(\mu, \sigma^2)\)</span>, then <span class="math inline">\(Z = \frac{X-\mu}{\sigma} \sim N(0,1)\)</span>. If we start with <span class="math inline">\(X \sim N(\mu, \sigma^2)\)</span>, then we can transform <span class="math inline">\(X\)</span> by subtracting <span class="math inline">\(\mu\)</span>, and then dividing by <span class="math inline">\(\sigma\)</span>, to obtain <span class="math inline">\(Z\)</span>. This particular transformation is called <strong>standardization</strong>:</p>
 <p><span class="math display" id="eq:4-standardize">\[\begin{equation}
 Z = \frac{X-\mu}{\sigma}.
 \tag{4.10}
@@ -477,7 +477,7 @@ f_X(x) = \frac{1}{\sigma \sqrt{2 \pi}} \exp \left(-\frac{(x - \mu)^2}{2 \sigma^2
 <h4>
 <span class="header-section-number">4.5.2.3</span> 68-95-99.7% Rule<a class="anchor" aria-label="anchor" href="#rulenorm"><i class="fas fa-link"></i></a>
 </h4>
-<p>The following property holds for any normal distribution, and is often called the <strong>68-99-99.7%</strong> rule. For any normal distribution <span class="math inline">\(X \sim N(\mu, \sigma^2)\)</span>:</p>
+<p>The following property holds for any normal distribution, and is often called the <strong>68-95-99.7%</strong> rule. For any normal distribution <span class="math inline">\(X \sim N(\mu, \sigma^2)\)</span>:</p>
 <ul>
 <li>
 <span class="math inline">\(P(\mu - \sigma &lt; X &lt; \mu + \sigma) \approx 0.68\)</span>,</li>
@@ -594,8 +594,8 @@ P(Y \leq 2) &amp;= P(\frac{Y-\mu}{\sigma} \leq \frac{2-1}{3}) \\
 <p>The kernel can be viewed as a weighting function, with the weights following the shape of a distribution that the user specifies (usually symmetric). Common kernel functions and their shapes are displayed in Figure <a href="continuous-random-variables.html#fig:4-KDE">4.11</a>:</p>
 <div class="figure">
 <span style="display:block;" id="fig:4-KDE"></span>
-<img src="images/04-KDE.png" alt="Common Kernals. Picture adapted from https://tgstewart.cloud/compprob/kde.html"><p class="caption">
-Figure 4.11: Common Kernals. Picture adapted from <a href="https://tgstewart.cloud/compprob/kde.html" class="uri">https://tgstewart.cloud/compprob/kde.html</a>
+<img src="images/04-KDE.png" alt="Common Kernels. Picture adapted from https://tgstewart.cloud/compprob/kde.html"><p class="caption">
+Figure 4.11: Common Kernels. Picture adapted from <a href="https://tgstewart.cloud/compprob/kde.html" class="uri">https://tgstewart.cloud/compprob/kde.html</a>
 </p>
 </div>
 <p>The horizontal axis on the kernel can be viewed as the distance of the value of a data point from a specific value on the support, and the mid point on the horizontal axis represents a distance of 0.</p>

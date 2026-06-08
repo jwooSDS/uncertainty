@@ -2443,7 +2443,7 @@ Var(X) = \int_{-\infty}^{\infty} (x-\mu)^2 f_X(x) dx.
 \label{eq:4-var}
 \end{equation}
 
-The properties of variance is still the same as in Section \ref{var-prop}. It does not matter if the random variable is discrete or continuous. A common notation used for variance is \(\sigma^2\), or sometimes \(\sigma_X^2\) to show it is the variance of the random variable \(X\).
+The properties of variance are still the same as in Section \ref{var-prop}. It does not matter if the random variable is discrete or continuous. A common notation used for variance is \(\sigma^2\), or sometimes \(\sigma_X^2\) to show it is the variance of the random variable \(X\).
 
 \subsection{Moments}\label{moments}
 
@@ -2725,7 +2725,7 @@ Note that some authors say the parameters are the mean \(\mu\) and standard devi
 
 Notice how we started from a standard normal \(Z\), and transformed \(Z\) by multiplying it by \(\sigma\) and then adding \(\mu\) to get any normal distribution. This transformation is called a \textbf{location-scale} transformation, or shifting and scaling. The scale changes since we multiply by a constant \(\sigma\); the location is transformed since its mean changes from 0 to \(\mu\).
 
-We can also reverse this transformation and state the following: If \(X \sim N(\mu, \sigma^2)\), then \(Z = \frac{X-\mu}{\sigma} \sim N(0,1)\). If we start with \(X \sim N(\mu, \sigma^2)\), then we can transform \(X\) by subtracting \mu, and then dividing by \(\sigma\), to obtain \(Z\). This particular transformation is called \textbf{standardization}:
+We can also reverse this transformation and state the following: If \(X \sim N(\mu, \sigma^2)\), then \(Z = \frac{X-\mu}{\sigma} \sim N(0,1)\). If we start with \(X \sim N(\mu, \sigma^2)\), then we can transform \(X\) by subtracting \(\mu\), and then dividing by \(\sigma\), to obtain \(Z\). This particular transformation is called \textbf{standardization}:
 
 \begin{equation} 
 Z = \frac{X-\mu}{\sigma}.
@@ -2743,7 +2743,7 @@ f_X(x) = \frac{1}{\sigma \sqrt{2 \pi}} \exp \left(-\frac{(x - \mu)^2}{2 \sigma^2
 
 \subsubsection{68-95-99.7\% Rule}\label{rulenorm}
 
-The following property holds for any normal distribution, and is often called the \textbf{68-99-99.7\%} rule. For any normal distribution \(X \sim N(\mu, \sigma^2)\):
+The following property holds for any normal distribution, and is often called the \textbf{68-95-99.7\%} rule. For any normal distribution \(X \sim N(\mu, \sigma^2)\):
 
 \begin{itemize}
 \tightlist
@@ -2966,7 +2966,7 @@ The kernel can be viewed as a weighting function, with the weights following the
 \begin{figure}
 \centering
 \includegraphics{images/04-KDE.png}
-\caption{\label{fig:4-KDE}Common Kernals. Picture adapted from \url{https://tgstewart.cloud/compprob/kde.html}}
+\caption{\label{fig:4-KDE}Common Kernels. Picture adapted from \url{https://tgstewart.cloud/compprob/kde.html}}
 \end{figure}
 
 The horizontal axis on the kernel can be viewed as the distance of the value of a data point from a specific value on the support, and the mid point on the horizontal axis represents a distance of 0.
