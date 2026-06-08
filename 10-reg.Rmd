@@ -558,7 +558,7 @@ summary(result)
 
 We see the following values:
 
-- $\hat{\beta}_1 =$ `r summary(result)$coefficients[2,1]`. The estimated slope informs us the the predicted gift aid decreases by `r -summary(result)$coefficients[2,1]` thousands of dollars (or \$43.07) per unit increase in family income.
+- $\hat{\beta}_1 =$ `r summary(result)$coefficients[2,1]`. The estimated slope informs us the predicted gift aid decreases by `r -summary(result)$coefficients[2,1]` thousands of dollars (or \$43.07) per unit increase in family income.
 - $\hat{\beta}_0 =$ `r summary(result)$coefficients[1,1]`. For students with no family income, their predicted gift aid is \$24 319.33. Note: from the scatter plot, we have an observation with 0 family income. We must be careful in not extrapolating when making predictions with our regression. We should only make predictions for family incomes between the minimum and maximum values of family incomes in our data.
 - $s$  = `r summary(result)$sigma`, is the estimate of the standard deviation of the error terms, $\sigma$. This is reported as residual standard error in R. Squaring this gives the estimated variance of the error terms.
 - $R^2 =$ `r summary(result)$r.squared`. The coefficient of determination informs us that about 24.86% of the variation in gift aid can be explained by family income. This is reported as multiple R-squared in R.
@@ -931,7 +931,7 @@ legend("topleft", c("y ~ 1", "y ~ poly(x, 9)"), col = c("blue", "orange"), lty =
 
 For fitted line 1:
 
-- We see that the the blue line always does a poor job capturing the truth in the data, therefore, it will have high bias as it will systematically over- or under-predict.
+- We see that the blue line always does a poor job capturing the truth in the data, therefore, it will have high bias as it will systematically over- or under-predict.
 - However, the blue lines are all pretty similar across all three simulated data sets. Therefore, it has low variance as the line is pretty much the same. 
 
 For fitted line 4:
