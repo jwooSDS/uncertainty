@@ -155,7 +155,7 @@ The summation is now performed over the support of $X$.
 
 *Thought question*: Can you verify the marginal PMF for grades displayed Table \@ref(tab:5-marg-table2) below?
 
-Table: (\#tab:5-marg-table2) Example Joint PMF of Study Time ($X$) and Grades ($Y$), with Marginal PMF of Study Time and Study Time
+Table: (\#tab:5-marg-table2) Example Joint PMF of Study Time ($X$) and Grades ($Y$), with Marginal PMF of Study Time and Grades
 
 |  | X=1 | X=2 | X=3 | Total |
 | :------- | :------- | :------- | :------- | :------- |
@@ -237,7 +237,7 @@ P(Y=y|X=x) = \frac{P(X=x|Y=y) P(Y=y)}{\sum_y P(X=x|Y=y) P(Y=y)}.
 (\#eq:5-condPMFtotal)
 \end{equation}
 
-### Indepdence of Discrete RVs
+### Indepedence of Discrete RVs
 
 The notion of whether two random variables are **independent** or not (also called dependent) is whether the random variables have an association, or in other words, does changing the value of one random variable affect the distribution of the other? 
 
@@ -651,7 +651,7 @@ P(X_1 = n_1, \cdots, X_k = n_k) = \frac{n!}{n_{1}! \cdots n_{k}!} p_1^{n_1} \cdo
 
 where $n_1 + \cdots + n_k = n$. 
 
-Let us use a toy example. Going back to political affiliations. Suppose among American voters, 28% identify as Democrats, 29% identify as Republicans, and 10% identify have other affiliations, and 33% are independents. Let $X_1, X_2, X_3, X_4$ denote the number of Democrats, Republicans, others, and independents. The joint distribution of $X_1, X_2, X_3, X_4$ is $\boldsymbol{X} = (X_1, X_2, X_3, X_4) \sim Mult_4(0.28, 0.29, 0.1, 0.33)$.
+Let us use a toy example. Going back to political affiliations. Suppose among American voters, 28% identify as Democrats, 29% identify as Republicans, and 10% identify have other affiliations, and 33% are independents. Let $X_1, X_2, X_3, X_4$ denote the number of Democrats, Republicans, others, and independents. The joint distribution of $X_1, X_2, X_3, X_4$ is $\boldsymbol{X} = (X_1, X_2, X_3, X_4) \sim Mult_4(n, (0.28, 0.29, 0.1, 0.33))$.
 
 Suppose we want to find the probability that in a sample of 10 voters, 2 are Democrats, 3 are Republicans, and 1 has another affiliation, and 4 are Independents:
 

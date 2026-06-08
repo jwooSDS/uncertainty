@@ -256,7 +256,7 @@ P(X=x) = \sum_x P(X=x, Y=y).
 <p><em>Thought question</em>: Can you verify the marginal PMF for grades displayed Table <a href="joint-distributions.html#tab:5-marg-table2">5.3</a> below?</p>
 <div class="inline-table"><table class="table table-sm">
 <caption>
-<span id="tab:5-marg-table2">Table 5.3: </span> Example Joint PMF of Study Time (<span class="math inline">\(X\)</span>) and Grades (<span class="math inline">\(Y\)</span>), with Marginal PMF of Study Time and Study Time</caption>
+<span id="tab:5-marg-table2">Table 5.3: </span> Example Joint PMF of Study Time (<span class="math inline">\(X\)</span>) and Grades (<span class="math inline">\(Y\)</span>), with Marginal PMF of Study Time and Grades</caption>
 <thead><tr class="header">
 <th align="left"></th>
 <th align="left">X=1</th>
@@ -360,9 +360,9 @@ P(Y=y|X=x) = \frac{P(X=x|Y=y) P(Y=y)}{\sum_y P(X=x|Y=y) P(Y=y)}.
 \tag{5.8}
 \end{equation}\]</span></p>
 </div>
-<div id="indepdence-of-discrete-rvs" class="section level3" number="5.2.5">
+<div id="indepedence-of-discrete-rvs" class="section level3" number="5.2.5">
 <h3>
-<span class="header-section-number">5.2.5</span> Indepdence of Discrete RVs<a class="anchor" aria-label="anchor" href="#indepdence-of-discrete-rvs"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.2.5</span> Indepedence of Discrete RVs<a class="anchor" aria-label="anchor" href="#indepedence-of-discrete-rvs"><i class="fas fa-link"></i></a>
 </h3>
 <p>The notion of whether two random variables are <strong>independent</strong> or not (also called dependent) is whether the random variables have an association, or in other words, does changing the value of one random variable affect the distribution of the other?</p>
 <p>If <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are discrete random variables, they are independent only if, for all values in the support of <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>:</p>
@@ -681,7 +681,7 @@ P(X_1 = n_1, \cdots, X_k = n_k) = \frac{n!}{n_{1}! \cdots n_{k}!} p_1^{n_1} \cdo
 \tag{5.28}
 \end{equation}\]</span></p>
 <p>where <span class="math inline">\(n_1 + \cdots + n_k = n\)</span>.</p>
-<p>Let us use a toy example. Going back to political affiliations. Suppose among American voters, 28% identify as Democrats, 29% identify as Republicans, and 10% identify have other affiliations, and 33% are independents. Let <span class="math inline">\(X_1, X_2, X_3, X_4\)</span> denote the number of Democrats, Republicans, others, and independents. The joint distribution of <span class="math inline">\(X_1, X_2, X_3, X_4\)</span> is <span class="math inline">\(\boldsymbol{X} = (X_1, X_2, X_3, X_4) \sim Mult_4(0.28, 0.29, 0.1, 0.33)\)</span>.</p>
+<p>Let us use a toy example. Going back to political affiliations. Suppose among American voters, 28% identify as Democrats, 29% identify as Republicans, and 10% identify have other affiliations, and 33% are independents. Let <span class="math inline">\(X_1, X_2, X_3, X_4\)</span> denote the number of Democrats, Republicans, others, and independents. The joint distribution of <span class="math inline">\(X_1, X_2, X_3, X_4\)</span> is <span class="math inline">\(\boldsymbol{X} = (X_1, X_2, X_3, X_4) \sim Mult_4(n, (0.28, 0.29, 0.1, 0.33))\)</span>.</p>
 <p>Suppose we want to find the probability that in a sample of 10 voters, 2 are Democrats, 3 are Republicans, and 1 has another affiliation, and 4 are Independents:</p>
 <p><span class="math display">\[
 \begin{split}
@@ -877,7 +877,7 @@ Corr(X_1,X_2) &amp;= \frac{Cov(X_1,X_2)}{\sqrt{Var(X_1) Var(X_2)}}\\
 <li><a class="nav-link" href="#conddist"><span class="header-section-number">5.2.2</span> Conditional Distributions for Discrete RVs</a></li>
 <li><a class="nav-link" href="#bayes-rule-1"><span class="header-section-number">5.2.3</span> Bayes’ Rule</a></li>
 <li><a class="nav-link" href="#law-of-total-probability-1"><span class="header-section-number">5.2.4</span> Law of Total Probability</a></li>
-<li><a class="nav-link" href="#indepdence-of-discrete-rvs"><span class="header-section-number">5.2.5</span> Indepdence of Discrete RVs</a></li>
+<li><a class="nav-link" href="#indepedence-of-discrete-rvs"><span class="header-section-number">5.2.5</span> Indepedence of Discrete RVs</a></li>
 </ul>
 </li>
 <li><a class="nav-link" href="#jointCont"><span class="header-section-number">5.3</span> Joint, Marginal, Conditional Distributions for Continuous RVs</a></li>

@@ -332,7 +332,7 @@ marginal-distributions-for-discrete-rvs
 conddist
 bayes-rule-1
 law-of-total-probability-1
-indepdence-of-discrete-rvs
+indepedence-of-discrete-rvs
 jointCont
 covcorr
 covariance
