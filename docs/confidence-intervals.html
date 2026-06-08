@@ -108,14 +108,14 @@ I = \left(\bar{X}_n - \epsilon, \bar{X}_n + \epsilon \right).
 <p>Some terminology associated with intervals of the form in equation <a href="confidence-intervals.html#eq:8-CIbasic">(8.1)</a>:</p>
 <ul>
 <li>
-<p><span class="math inline">\(\epsilon\)</span> is often called the <strong>margin of error</strong>. (Yes that margin of error that you often see reported in elections polls). This value is a function of the standard error of the estimator, so it gives a measure of uncertainty of the estimated value.</p>
+<p><span class="math inline">\(\epsilon\)</span> is often called the <strong>margin of error</strong>. (Yes that margin of error that you often see reported in election polls). This value is a function of the standard error of the estimator, so it gives a measure of uncertainty of the estimated value.</p>
 <ul>
 <li>Remember that the uncertainty being measured is the uncertainty due to random sampling, not due to other sources of uncertainty such as not getting a representative sample, people lying, etc. As mentioned in earlier modules, other methods are used to handle such issues and belong to the field of survey sampling, which is very interesting and an active area of research. We will not get into these issues in this class.</li>
 </ul>
 </li>
 <li><p>The value of <span class="math inline">\(\bar{X}_n - \epsilon\)</span> is often called the <strong>lower bound</strong> of the confidence interval.</p></li>
 <li><p>The value of <span class="math inline">\(\bar{X}_n + \epsilon\)</span> is often called the <strong>upper bound</strong> of the confidence interval.</p></li>
-<li><p>The value of <span class="math inline">\(\bar{X}_n\)</span> is often called the <strong>point estimate</strong> of the the population mean.</p></li>
+<li><p>The value of <span class="math inline">\(\bar{X}_n\)</span> is often called the <strong>point estimate</strong> of the population mean.</p></li>
 </ul>
 <p>Equation <a href="confidence-intervals.html#eq:8-CIbasic">(8.1)</a> is sometimes expressed as</p>
 <p><span class="math display" id="eq:8-CIbasic2">\[\begin{equation}
@@ -204,7 +204,7 @@ P(-z^{*} \leq \hat{Z} \leq z^{*}) &amp;= 2 \Phi(z^*) - 1 = 1 - \alpha \\
 \end{split}
 \tag{8.7}
 \end{equation}\]</span></p>
-<p>So <span class="math inline">\(z^*\)</span> is found by inverting the CDF of a standard normal evaluated at <span class="math inline">\(1 - \frac{\alpha}{2}\)</span>. This quantity can be easily be found using R. For example, for 95% confidence, <span class="math inline">\(\alpha = 0.05\)</span>, so we type:</p>
+<p>So <span class="math inline">\(z^*\)</span> is found by inverting the CDF of a standard normal evaluated at <span class="math inline">\(1 - \frac{\alpha}{2}\)</span>. This quantity can easily be found using R. For example, for 95% confidence, <span class="math inline">\(\alpha = 0.05\)</span>, so we type:</p>
 <div class="sourceCode" id="cb140"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">alpha</span><span class="op">&lt;-</span><span class="fl">0.05</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">qnorm</a></span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">alpha</span><span class="op">/</span><span class="fl">2</span><span class="op">)</span></span></code></pre></div>
