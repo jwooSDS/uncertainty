@@ -14,7 +14,7 @@ description: "DS 5030"
 
 # Preface (Summer 2026 update) {-}
 
-The examples in this preface are based on OpenIntro Statistics (Diez, Ceytinka-Rundel, Barr), Chapter 9.4 and 9.5, which provide more background information. You can access the book for free at https://www.openintro.org/book/os/ 
+The examples in this preface are based on [OpenIntro Statistics](https://www.openintro.org/book/os/) (Diez, Ceytinka-Rundel, Barr), Chapter 9.4 and 9.5, which provide more background information. 
 
 The main goal in using data science is to understand data. Broadly speaking, this will involve building a statistical model for predicting, or estimating a response variable based on one or more predictors. Such models are used in a wide variety of fields such as finance, medicine, public policy, sports, and so on. We will look a couple of examples.
 
@@ -145,4 +145,4 @@ You should feel free to use whatever approach, as long as it performs the needed
 
 ## Reporting issues with this book {-}
 
-If you find any issues (typos, formatting, etc), please report them at <https://github.com/jwooSDS/uncertainty/issues>. Please be as specific as you can, including providing the specific section and paragraph where the issue is found.  
+If you find any issues (typos, formatting, etc), please [report them at my GitHub page](https://github.com/jwooSDS/uncertainty/issues). Please be as specific as you can, by specifying the section and paragraph where the issue is found.  
