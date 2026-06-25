@@ -4,7 +4,7 @@
 rm(list = ls())
 ```
 
-This module is based on Introduction to Probability (Blitzstein, Hwang), Chapters 5 and 6. You can access the book for free at https://stat110.hsites.harvard.edu/ (and then click on Book). Please note that I cover additional topics, and skip certain topics from the book. You may skip Examples 5.1.6, 5.1.7, Proposition 5.2.3, Example 5.2.4, Sections 5.2.6, 5.2.7, Definition 5.3.7, Theorem 5.3.8, Example 5.4.7, Sections 5.5, 5.6, 5.7, Proposition 6.2.5, 6.2.6, Theorem 6.3.4, Sections 6.4 to 6.7 from the book.
+This module is based on [Introduction to Probability](https://stat110.hsites.harvard.edu/), Chapters 5 and 6. Please note that I cover additional topics, and skip certain topics from the book. You may skip Examples 5.1.6, 5.1.7, Proposition 5.2.3, Example 5.2.4, Sections 5.2.6, 5.2.7, Definition 5.3.7, Theorem 5.3.8, Example 5.4.7, Sections 5.5, 5.6, 5.7, Proposition 6.2.5, 6.2.6, Theorem 6.3.4, Sections 6.4 to 6.7 from the book.
 
 ## Introduction
 
@@ -295,7 +295,7 @@ f_X(x) = \begin{cases}
 
 Note that the parameters $a,b$ also help define the support of a uniform distribution. Figure \@ref(fig:4-U) below displays a plot of the PDF of a $U(a,b)$:
 
-```{r 4-U, fig.cap = "PDF of U(a,b). Picture from https://en.wikipedia.org/wiki/Continuous_uniform_distribution", echo = FALSE}
+```{r 4-U, fig.cap = "PDF of U(a,b). Picture from [wikipedia](https://en.wikipedia.org/wiki/Continuous_uniform_distribution)", echo = FALSE}
 knitr::include_graphics("images/04-U.png")
 ```
 
@@ -303,7 +303,7 @@ knitr::include_graphics("images/04-U.png")
 
 Figure \@ref(fig:4-Ucdf) below displays a plot of the CDF of a $U(a,b)$:
 
-```{r 4-Ucdf, fig.cap = "CDF of U(a,b). Picture from https://en.wikipedia.org/wiki/Continuous_uniform_distribution", echo = FALSE}
+```{r 4-Ucdf, fig.cap = "CDF of U(a,b). Picture from [wikipedia](https://en.wikipedia.org/wiki/Continuous_uniform_distribution)", echo = FALSE}
 knitr::include_graphics("images/04-Ucdf.png")
 ```
 
@@ -582,7 +582,7 @@ where $K$ is the **kernel** and $h$ is a smoothing parameter, often called the *
 
 The kernel can be viewed as a weighting function, with the weights following the shape of a distribution that the user specifies (usually symmetric). Common kernel functions and their shapes are displayed in Figure \@ref(fig:4-KDE):
 
-```{r 4-KDE, fig.cap = "Common Kernels. Picture adapted from https://tgstewart.cloud/compprob/kde.html", echo = FALSE}
+```{r 4-KDE, fig.cap = "Common Kernels. [Picture adapted from Computational Probability](https://tgstewart.cloud/compprob/kde.html)", echo = FALSE}
 knitr::include_graphics("images/04-KDE.png")
 ```
 

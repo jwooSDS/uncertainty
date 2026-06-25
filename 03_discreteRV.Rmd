@@ -4,7 +4,7 @@
 rm(list = ls())
 ```
 
-This module is based on Introduction to Probability (Blitzstein, Hwang), Chapters 3 and 4. You can access the book for free at https://stat110.hsites.harvard.edu/ (and then click on Book). Please note that I cover additional topics, and skip certain topics from the book. You may skip Sections 3.4, 3.9, Example 4.2.3, Section 4.3, Example 4.4.6, 4.4.7, Theorem 4.4.8, Example 4.4.9, 4.6.4, 4.7.4, 4.7.7, and Section 4.9 from the book.
+This module is based on [Introduction to Probability](https://stat110.hsites.harvard.edu/) (Blitzstein, Hwang), Chapters 3 and 4. Please note that I cover additional topics, and skip certain topics from the book. You may skip Sections 3.4, 3.9, Example 4.2.3, Section 4.3, Example 4.4.6, 4.4.7, Theorem 4.4.8, Example 4.4.9, 4.6.4, 4.7.4, 4.7.7, and Section 4.9 from the book.
 
 ## Random Variables
 
@@ -502,7 +502,7 @@ $n!$ is called n-factorial, and is the product of all positive integers less tha
 factorial(5)
 ```
 
-Note: A fairly common model, the logistic regression model with aggregated data, is based on the binomial distribution. We mentioned logistic regression earlier. The difference between these two (with and without aggregated data) is based on the structure of the data frame. If you are interested in these differences, please read https://www.r-bloggers.com/2021/02/how-to-run-logistic-regression-on-aggregate-data-in-r/.
+Note: A fairly common model, the logistic regression model with aggregated data, is based on the binomial distribution. We mentioned logistic regression earlier. The difference between these two (with and without aggregated data) is based on the structure of the data frame. If you are interested in this difference, [this page](https://www.r-bloggers.com/2021/02/how-to-run-logistic-regression-on-aggregate-data-in-r/) provides an explanation. 
 
 We go back to our first example of counting the number of heads out of three coin flips follows a binomial distribution. 
 
