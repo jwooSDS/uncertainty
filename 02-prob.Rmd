@@ -4,7 +4,7 @@
 rm(list = ls())
 ```
 
-This module is based on Introduction to Probability (Blitzstein, Hwang), Chapters 1 and 2. You can access the book for free at https://stat110.hsites.harvard.edu/ (and then click on Book). Please note that I cover additional topics, and skip certain topics from the book. You may skip: Sections 1.4, 1.5, Theorem 1.6.3, Examples 1.6.4, 2.4.5, 2.5.12, 2.7.3 from the book.
+This module is based on [Introduction to Probability](https://stat110.hsites.harvard.edu/) (Blitzstein, Hwang), Chapters 1 and 2. Please note that I cover additional topics, and skip certain topics from the book. You may skip: Sections 1.4, 1.5, Theorem 1.6.3, Examples 1.6.4, 2.4.5, 2.5.12, 2.7.3 from the book.
 
 ## Introduction to Probability
 
@@ -40,7 +40,7 @@ The **sample space** of an experiment, denoted by $S$, is the set of all possibl
 
 For the rest of this module, we will use the following as an example: consider a standard deck of 52 cards, and we draw one card at random. What is the card drawn? The sample space for this experiment can be viewed as a list of all 52 cards, per Figure \@ref(fig:cards) below.
 
-```{r cards, fig.cap = "Sample Space of Drawing One Card from Standard Deck. Picture from https://en.wikipedia.org/wiki/Standard_52-card_deck", echo = FALSE}
+```{r cards, fig.cap = "Sample Space of Drawing One Card from Standard Deck. Picture from [wikipedia](https://en.wikipedia.org/wiki/Standard_52-card_deck)", echo = FALSE}
 knitr::include_graphics("images/02-cards.jpg")
 ```
 
