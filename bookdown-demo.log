@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999996 (MiKTeX 24.4) (preloaded format=xelatex 2025.6.7)  25 JUN 2026 12:39
+This is XeTeX, Version 3.141592653-2.6-0.999996 (MiKTeX 24.4) (preloaded format=xelatex 2025.6.7)  25 JUN 2026 12:51
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1254,6 +1254,9 @@ Underfull \hbox (badness 10000) in paragraph at lines 3039--3041
 
 [98]
 Chapter 5.
+
+Underfull \vbox (badness 1565) has occurred while \output is active []
+
 
 
 [99
