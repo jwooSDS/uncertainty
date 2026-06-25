@@ -294,7 +294,7 @@ e_i = y_i-\hat{y}_i.
 
 The **residuals** are the differences between the actual values of the response variable and their corresponding predicted values based on the fitted line. Visually, a residual is the vertical distance of a data point in the scatter plot from the fitted line, as shown in Figure \@ref(fig:10-res) below:
 
-```{r 10-res, fig.cap = "Example of Residuals. Picture from https://www.statology.org/residuals/", echo = FALSE}
+```{r 10-res, fig.cap = "Example of Residuals. Picture from [Statology](https://www.statology.org/residuals/)", echo = FALSE}
 knitr::include_graphics("images/10-residuals.png")
 ```
 

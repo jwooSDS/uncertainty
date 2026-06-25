@@ -67,7 +67,7 @@ It is important to bear in mind that since the estimator, the sample mean $\bar{
 
 The idea of the interval $I$ being random is represented in Figure \@ref(fig:8-CI) below:
 
-```{r 8-CI, fig.cap = "Randomness of Confidence Interval. Picture from  https://en.wikipedia.org/wiki/Confidence_interval", echo = FALSE}
+```{r 8-CI, fig.cap = "Randomness of Confidence Interval. Picture from [wikipedia](https://en.wikipedia.org/wiki/Confidence_interval)", echo = FALSE}
 knitr::include_graphics("images/08-CI.png")
 ```
 

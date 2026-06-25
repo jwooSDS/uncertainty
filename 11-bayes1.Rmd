@@ -4,9 +4,9 @@
 rm(list = ls())
 ```
 
-This module is based on Bayes Rules! (Johnson, Ott, Dogucu), Chapters 1 and 2. You can access the book for free at https://www.bayesrulesbook.com/.
+This module is based on [Bayes Rules!](https://www.bayesrulesbook.com/) (Johnson, Ott, Dogucu), Chapters 1 and 2. 
 
-The book is extremely readable, so I have not written any notes for this module. 
+The book is extremely readable, so I have not written any notes for this module. Please access the book via the link above. 
 
 ## Introduction
 
