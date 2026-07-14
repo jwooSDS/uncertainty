@@ -83,7 +83,7 @@ D<-2* X ##winnings
 mean(X) ##EX since die is fair
 mean(D) ##Expected winnings. This is equal to 2 times mean(X)
 ```
-Now suppose the winnings is now defined as the square of the number of dots the die shows. Let $T$ denote the new winnings, so $T = X^2$. Since this is a non linear transformation, $E(T) = E(X^2)$ may not equal to $E(X)^2$:
+Now suppose the winnings are now defined as the square of the number of dots the die shows. Let $T$ denote the new winnings, so $T = X^2$. Since this is a non linear transformation, $E(T) = E(X^2)$ may not equal to $E(X)^2$:
 
 ```{r}
 X<-c(1,2,3,4,5,6) ##support for X
@@ -408,7 +408,7 @@ Figure \@ref(fig:6-CLTpois) displays the histograms from this simulation, and ma
 
 ## Monte Carlo Simulations {#MCsims}
 
-You may have noticed that we have used simulations in the earlier sections of this module (and previous modules) to help explain certain concepts. These simulations are called **Monte Carlo** methods, or Monte Carlo simulations. The idea behind Monte Carlo methods is to used repeated random sampling (and by repeated, we mean repeated a large number of times) to estimate features of data, usually probabilities and expected values. Monte Carlo methods are used for the following purposes:
+You may have noticed that we have used simulations in the earlier sections of this module (and previous modules) to help explain certain concepts. These simulations are called **Monte Carlo** methods, or Monte Carlo simulations. The idea behind Monte Carlo methods is to use repeated random sampling (and by repeated, we mean repeated a large number of times) to estimate features of data, usually probabilities and expected values. Monte Carlo methods are used for the following purposes:
 
 1. When the probability or expectation is too complicated to work out by hand. Recall that finding probabilities and expectations by hand involve summations or integrals, and it becomes obvious that working with summations and especially integrals can get onerous. 
 
@@ -489,7 +489,7 @@ The experiment works in this way:
     - We can let $Y \sim U(-1,1)$ to represent the position of the dart on the y-axis of the circle in Figure \@ref(fig:circle).
 - We will throw a large number of darts. For each dart, we will see if it lands in the circle or not.
     - To assess if a dart lies in the circle, we assess whether $x_i^2 + y_i^2 \leq 1$ for dart $i$. If this condition is met, we know dart $i$ lies in the circle, if not, it lies outside the circle.
-- It stands to reason that $\frac{\text{Area of circle}}{\text{Are of square}} = \frac{\pi}{4} \approx \frac{\text{Number of darts landing in circle}}{\text{Number of darts thrown}}$.
+- It stands to reason that $\frac{\text{Area of circle}}{\text{Area of square}} = \frac{\pi}{4} \approx \frac{\text{Number of darts landing in circle}}{\text{Number of darts thrown}}$.
 - Therefore, after throwing a large number of darts, $\pi \approx 4 \times \frac{\text{Number of darts landing in circle}}{\text{Number of darts thrown}}.$
 
 The code below carries out this experiment with 10 thousand reps (or 10 thousand dart throws):

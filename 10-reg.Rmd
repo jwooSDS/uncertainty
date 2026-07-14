@@ -365,7 +365,7 @@ We can then write the corresponding log-likelihood function, using equation \@re
 
 We then take the partial derivatives of equation \@ref(eq:10-SLRloglike) with respect to $\hat{\beta}_1$ and $\hat{\beta}_0$, set these two partial derivatives equal to 0, and solve these two equations for $\hat{\beta}_1$ and $\hat{\beta}_0$. We end up with the same solutions as the method of least squares.
 
-The code below finds the estiamted coeffficients for our study time example. The `glm()` function fits via method of maximum likelihood, whereas the `lm()` function from earlier fits via the method of least squares.
+The code below finds the estimated coeffficients for our study time example. The `glm()` function fits via method of maximum likelihood, whereas the `lm()` function from earlier fits via the method of least squares.
 
 ```{r}
 ##fit regression
@@ -494,7 +494,7 @@ Another commonly used measure in linear regression is the correlation, which we 
 
 ### Coefficient of Determination
 
-Another measure that is commonly used in linear regression is the **coefficient of determination**, usually denoted by $R^2$. The value represents the proportion of variation in the response variable that can be explained by our linear regression. In SLR, it is numerically equal to the squared of the sample correlation. 
+Another measure that is commonly used in linear regression is the **coefficient of determination**, usually denoted by $R^2$. The value represents the proportion of variation in the response variable that can be explained by our linear regression. In SLR, it is numerically equal to the square of the sample correlation. 
 
 A few notes about $R^2$:
 
@@ -559,7 +559,7 @@ summary(result)
 We see the following values:
 
 - $\hat{\beta}_1 =$ `r summary(result)$coefficients[2,1]`. The estimated slope informs us the predicted gift aid decreases by `r -summary(result)$coefficients[2,1]` thousands of dollars (or \$43.07) per unit increase in family income.
-- $\hat{\beta}_0 =$ `r summary(result)$coefficients[1,1]`. For students with no family income, their predicted gift aid is \$24 319.33. Note: from the scatter plot, we have an observation with 0 family income. We must be careful in not extrapolating when making predictions with our regression. We should only make predictions for family incomes between the minimum and maximum values of family incomes in our data.
+- $\hat{\beta}_0 =$ `r summary(result)$coefficients[1,1]`. For students with no family income, their predicted gift aid is \$24319.33. Note: from the scatter plot, we have an observation with 0 family income. We must be careful in not extrapolating when making predictions with our regression. We should only make predictions for family incomes between the minimum and maximum values of family incomes in our data.
 - $s$  = `r summary(result)$sigma`, is the estimate of the standard deviation of the error terms, $\sigma$. This is reported as residual standard error in R. Squaring this gives the estimated variance of the error terms.
 - $R^2 =$ `r summary(result)$r.squared`. The coefficient of determination informs us that about 24.86% of the variation in gift aid can be explained by family income. This is reported as multiple R-squared in R.
 
@@ -639,7 +639,7 @@ newdata<-data.frame(family_income=50)
 predict(result,newdata)
 ```
 
-This student's predicted gift aid is \$22 165.75. Alternatively, you could have calculated this by plugging $x=50$ into the estimated SLR equation:
+This student's predicted gift aid is \$22165.75. Alternatively, you could have calculated this by plugging $x=50$ into the estimated SLR equation:
 
 ```{r}
 summary(result)$coefficients[1,1] + summary(result)$coefficients[2,1]*50
@@ -817,7 +817,7 @@ In equation \@ref(eq:10-MSEdecomp), we see that the MSE can be decomposed into t
 
 - Bias increase as the model gets less complex. Models are too simple (or not complex enough) if we do not include important predictors, or misspecify the relationship between the response and the predictors, or fail to include relevant interactions. 
 
-- Variance increase as the model gets more complex. Models are too complex if we include unnecessary predictors, include higher order polynomials that not needed, or include interactions when they are not needed. 
+- Variance increase as the model gets more complex. Models are too complex if we include unnecessary predictors, include higher order polynomials that are not needed, or include interactions when they are not needed. 
 
 So we can see that to minimize the test MSE, we need to find the right balance between bias and variance of the model, by finding the right level of complexity. 
 

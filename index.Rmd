@@ -12,7 +12,7 @@ github-repo: rstudio/bookdown-demo
 description: "DS 5030"
 ---
 
-# Preface (Summer 2026 update) {-}
+# Preface {-}
 
 The examples in this preface are based on [OpenIntro Statistics](https://www.openintro.org/book/os/) (Diez, Ceytinka-Rundel, Barr), Chapter 9.4 and 9.5, which provide more background information. 
 

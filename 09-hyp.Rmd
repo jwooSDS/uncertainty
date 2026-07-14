@@ -230,7 +230,7 @@ pt(-2.357023, 49) ##enter t stat, then df
 
 Informally, the critical value is the value of the test statistic that is considered "enough" to say that we have enough evidence against the null hypothesis to reject it, based on the value of the significance level. 
 
-We use the PDF of a $t$ distribution to visualize what a critical is. We want to find the "cut off" value, denoted by $t_{n-1}^*$, of the distribution where the area under its PDF in the direction of the alternative hypothesis is equal to the significance level $\alpha$. Since we have three options for the alternative hypothesis, we have 3 different areas under the PDF to consider. In Figures \@ref(fig:9-critneq), \@ref(fig:9-critgreater), and \@ref(fig:9-critless) below, we have examples on the relevant areas under the PDF if $\alpha=0.05$ and $n=50$:
+We use the PDF of a $t$ distribution to visualize what a critical value is. We want to find the "cut off" value, denoted by $t_{n-1}^*$, of the distribution where the area under its PDF in the direction of the alternative hypothesis is equal to the significance level $\alpha$. Since we have three options for the alternative hypothesis, we have 3 different areas under the PDF to consider. In Figures \@ref(fig:9-critneq), \@ref(fig:9-critgreater), and \@ref(fig:9-critless) below, we have examples on the relevant areas under the PDF if $\alpha=0.05$ and $n=50$:
 
 1. If $H_a: \mu \neq \mu_0$, i.e. we have a two-sided alternative, we want the areas under the PDF of the $t_{49}$ distribution to the right of $t_{49}^*$ and to the left of $-t_{49}^*$ to be equal to 0.05. This is shown in Figure \@ref(fig:9-critneq):
 

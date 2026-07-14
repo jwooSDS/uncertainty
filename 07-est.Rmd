@@ -14,7 +14,7 @@ We consider building models based on the data we have. Many models are based on 
 
 Consider this simple scenario. We want to find the distribution associated with the systolic blood pressure of American adults. To be able to achieve this goal, we would have to get the systolic blood pressure of every single American adult. This is usually not feasible as researchers are unlikely to have the time and money to interview every single American adult. Instead, a representative sample of American adults will be obtained, for example, 750 randomly selected American adults are interviewed. We can then create density plots, histograms, compute the mean, median, variance, skewness, and other summaries that may be of interest, based on these 750 American adults. 
 
-#### Population Vs Sample
+#### Population Vs. Sample
 
 The above scenario illustrates a few concepts and terms that are fundamental in estimation. In any study, we must be clear as to who or what is the population of interest, and who or what is the sample. 
 
@@ -573,7 +573,7 @@ Note: The term standard error is only applied to estimators. It is not used when
 We can also use our Monte Carlo simulation from the previous subsection to estimate these values:
 
 ```{r}
-var(est1) ##should be close to 1/100, since n=1000
+var(est1) ##should be close to 1/100, since n=100
 var(est2) ##should be close to 1
 sd(est1) ##should be close to 1/10
 sd(est2) ##should be close to 1

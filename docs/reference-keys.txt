@@ -332,7 +332,7 @@ marginal-distributions-for-discrete-rvs
 conddist
 bayes-rule-1
 law-of-total-probability-1
-indepedence-of-discrete-rvs
+independence-of-discrete-rvs
 jointCont
 covcorr
 covariance
@@ -372,7 +372,7 @@ set.seed-in-r
 est
 introduction-3
 big-picture-idea-with-estimation
-population-vs-sample
+population-vs.-sample
 variables-observations
 parameter-vs-estimator
 module-roadmap-5

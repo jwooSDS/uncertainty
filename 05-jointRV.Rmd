@@ -237,7 +237,7 @@ P(Y=y|X=x) = \frac{P(X=x|Y=y) P(Y=y)}{\sum_y P(X=x|Y=y) P(Y=y)}.
 (\#eq:5-condPMFtotal)
 \end{equation}
 
-### Indepedence of Discrete RVs
+### Independence of Discrete RVs
 
 The notion of whether two random variables are **independent** or not (also called dependent) is whether the random variables have an association, or in other words, does changing the value of one random variable affect the distribution of the other? 
 
@@ -677,7 +677,7 @@ Going back to our toy example with American voters, this means that $X_1 \sim Bi
 
 With discrete and categorical variables, it can be common to want to lump (or merge, or collapse, or combine) categories together. If $\boldsymbol{X} \sim Mult_k(n, \boldsymbol{p})$, then $X_i + X_j \sim Bin(n, p_i + p_j)$. If we decide to merge categories 1 and 2, we have $(X_1 + X_2, X_3, \cdots, X_k) \sim Mult_{k-1}(n, (p_1 + p_2, p_3, \cdots, p_k))$.
 
-We go back to our toy example. Suppose we consider Democrats and Republicans to be the major parties, we may wish to combine everyone else into one category: those with other affiliations and independents. We can define this using a new random variable $\boldsymbol{Y} = (X_1, X_2, X_3+X_4) \sim Mult_3(n,(0.29,0.29,0.43)$. Note we now have 3 categories instead of 4. The proportion for the lumped category is the sum of their individual proportions. 
+We go back to our toy example. Suppose we consider Democrats and Republicans to be the major parties, we may wish to combine everyone else into one category: those with other affiliations and independents. We can define this using a new random variable $\boldsymbol{Y} = (X_1, X_2, X_3+X_4) \sim Mult_3(n,(0.28,0.29,0.43)$. Note we now have 3 categories instead of 4. The proportion for the lumped category is the sum of their individual proportions. 
 
 #### Multinomial Covariance
 

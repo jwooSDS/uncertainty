@@ -594,7 +594,7 @@ Data<-ISLR2::Credit$Limit
 plot(density(Data), xlab="Credit Limit", main="Density Plot of Credit Limits")
 ```
 
-The density plot in Figure \@ref(fig:8-credit) informs us that the values of credit limits is skewed, so the median is a better measure of centrality for credit limits. We wish to estimate the population median credit limit, give a measure of uncertainty, as well as report a 95% confidence interval for the median credit limit. Since the sampling distribution of the sample median is unknown, we use the bootstrap:
+The density plot in Figure \@ref(fig:8-credit) informs us that the values of credit limits are skewed, so the median is a better measure of centrality for credit limits. We wish to estimate the population median credit limit, give a measure of uncertainty, as well as report a 95% confidence interval for the median credit limit. Since the sampling distribution of the sample median is unknown, we use the bootstrap:
 
 ```{r}
 ##get sample size

@@ -7,7 +7,7 @@
 <title>Chapter 10 Linear Regression | Understanding Uncertainty Course Notes</title>
 <meta name="author" content="Jeffrey Woo">
 <meta name="description" content="10.1 Introduction There is a broad range of statistical methods available for us to learn about data. Broadly speaking, these methods can be classified as supervised and unsupervised. Supervised...">
-<meta name="generator" content="bookdown 0.46 with bs4_book()">
+<meta name="generator" content="bookdown 0.34 with bs4_book()">
 <meta property="og:title" content="Chapter 10 Linear Regression | Understanding Uncertainty Course Notes">
 <meta property="og:type" content="book">
 <meta property="og:description" content="10.1 Introduction There is a broad range of statistical methods available for us to learn about data. Broadly speaking, these methods can be classified as supervised and unsupervised. Supervised...">
@@ -16,7 +16,7 @@
 <meta name="twitter:description" content="10.1 Introduction There is a broad range of statistical methods available for us to learn about data. Broadly speaking, these methods can be classified as supervised and unsupervised. Supervised...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.9.0/transition.js"></script><script src="libs/bs3compat-0.9.0/tabs.js"></script><script src="libs/bs3compat-0.9.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.2/transition.js"></script><script src="libs/bs3compat-0.4.2/tabs.js"></script><script src="libs/bs3compat-0.4.2/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
@@ -42,7 +42,7 @@
 
       <nav aria-label="Table of contents"><h2>Table of contents</h2>
         <ul class="book-toc list-unstyled">
-<li><a class="" href="index.html">Preface (Summer 2026 update)</a></li>
+<li><a class="" href="index.html">Preface</a></li>
 <li><a class="" href="descriptive.html"><span class="header-section-number">1</span> Descriptive Statistics</a></li>
 <li><a class="" href="probability.html"><span class="header-section-number">2</span> Probability</a></li>
 <li><a class="" href="discrete-random-variables.html"><span class="header-section-number">3</span> Discrete Random Variables</a></li>
@@ -428,7 +428,7 @@ f_{Y|X}(y|x) = \frac{1}{\sigma \sqrt{2 \pi}} \exp \left(-\frac{(y - (\beta_0+\be
 \tag{10.12}
 \end{equation}\]</span></p>
 <p>We then take the partial derivatives of equation <a href="linear-regression.html#eq:10-SLRloglike">(10.12)</a> with respect to <span class="math inline">\(\hat{\beta}_1\)</span> and <span class="math inline">\(\hat{\beta}_0\)</span>, set these two partial derivatives equal to 0, and solve these two equations for <span class="math inline">\(\hat{\beta}_1\)</span> and <span class="math inline">\(\hat{\beta}_0\)</span>. We end up with the same solutions as the method of least squares.</p>
-<p>The code below finds the estiamted coeffficients for our study time example. The <code><a href="https://rdrr.io/r/stats/glm.html">glm()</a></code> function fits via method of maximum likelihood, whereas the <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> function from earlier fits via the method of least squares.</p>
+<p>The code below finds the estimated coeffficients for our study time example. The <code><a href="https://rdrr.io/r/stats/glm.html">glm()</a></code> function fits via method of maximum likelihood, whereas the <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> function from earlier fits via the method of least squares.</p>
 <div class="sourceCode" id="cb189"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##fit regression</span></span>
 <span><span class="va">result.mle</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">study</span><span class="op">~</span><span class="va">courses</span>, data<span class="op">=</span><span class="va">df</span><span class="op">)</span> <span class="co">##we use glm() function for ML instead</span></span>
@@ -553,7 +553,7 @@ t = \frac{\hat{\beta}_1 - \text{ value in } H_0}{se(\hat{\beta}_1)}.
 <h3>
 <span class="header-section-number">10.4.5</span> Coefficient of Determination<a class="anchor" aria-label="anchor" href="#coefficient-of-determination"><i class="fas fa-link"></i></a>
 </h3>
-<p>Another measure that is commonly used in linear regression is the <strong>coefficient of determination</strong>, usually denoted by <span class="math inline">\(R^2\)</span>. The value represents the proportion of variation in the response variable that can be explained by our linear regression. In SLR, it is numerically equal to the squared of the sample correlation.</p>
+<p>Another measure that is commonly used in linear regression is the <strong>coefficient of determination</strong>, usually denoted by <span class="math inline">\(R^2\)</span>. The value represents the proportion of variation in the response variable that can be explained by our linear regression. In SLR, it is numerically equal to the square of the sample correlation.</p>
 <p>A few notes about <span class="math inline">\(R^2\)</span>:</p>
 <ul>
 <li>
@@ -632,7 +632,7 @@ Figure 10.8: Scatter Plot for Worked Example
 <li>
 <span class="math inline">\(\hat{\beta}_1 =\)</span> -0.0430717. The estimated slope informs us the predicted gift aid decreases by 0.0430717 thousands of dollars (or $43.07) per unit increase in family income.</li>
 <li>
-<span class="math inline">\(\hat{\beta}_0 =\)</span> 24.319329. For students with no family income, their predicted gift aid is $24 319.33. Note: from the scatter plot, we have an observation with 0 family income. We must be careful in not extrapolating when making predictions with our regression. We should only make predictions for family incomes between the minimum and maximum values of family incomes in our data.</li>
+<span class="math inline">\(\hat{\beta}_0 =\)</span> 24.319329. For students with no family income, their predicted gift aid is $24319.33. Note: from the scatter plot, we have an observation with 0 family income. We must be careful in not extrapolating when making predictions with our regression. We should only make predictions for family incomes between the minimum and maximum values of family incomes in our data.</li>
 <li>
 <span class="math inline">\(s\)</span> = 4.7825989, is the estimate of the standard deviation of the error terms, <span class="math inline">\(\sigma\)</span>. This is reported as residual standard error in R. Squaring this gives the estimated variance of the error terms.</li>
 <li>
@@ -715,7 +715,7 @@ Figure 10.8: Scatter Plot for Worked Example
 <span><span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">result</span>,<span class="va">newdata</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##        1 
 ## 22.16575</code></pre>
-<p>This student’s predicted gift aid is $22 165.75. Alternatively, you could have calculated this by plugging <span class="math inline">\(x=50\)</span> into the estimated SLR equation:</p>
+<p>This student’s predicted gift aid is $22165.75. Alternatively, you could have calculated this by plugging <span class="math inline">\(x=50\)</span> into the estimated SLR equation:</p>
 <div class="sourceCode" id="cb217"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span><span class="op">$</span><span class="va">coefficients</span><span class="op">[</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">]</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span><span class="op">$</span><span class="va">coefficients</span><span class="op">[</span><span class="fl">2</span>,<span class="fl">1</span><span class="op">]</span><span class="op">*</span><span class="fl">50</span></span></code></pre></div>
 <pre><code>## [1] 22.16575</code></pre>
@@ -887,7 +887,7 @@ Figure 10.9: Training &amp; Test MSE vs Complexity
 <p>In equation <a href="linear-regression.html#eq:10-MSEdecomp">(10.22)</a>, we see that the MSE can be decomposed into the variance of the predicted values and the squared bias of the predicted values. In Figure <a href="linear-regression.html#fig:10-MSE">10.9</a>, we see that the MSE is related to the complexity of the model. So it should not be a surprise to see that the complexity of models is related to the bias and variance of the predictions from those models. This relationship is called the <strong>bias-variance tradeoff</strong>. This tradeoff tells us that if a model produces predictions that are more biased, the predictions will have smaller variance, and vice versa. We summarize the relationship between model complexity and bias and variance of their predictions:</p>
 <ul>
 <li><p>Bias increase as the model gets less complex. Models are too simple (or not complex enough) if we do not include important predictors, or misspecify the relationship between the response and the predictors, or fail to include relevant interactions.</p></li>
-<li><p>Variance increase as the model gets more complex. Models are too complex if we include unnecessary predictors, include higher order polynomials that not needed, or include interactions when they are not needed.</p></li>
+<li><p>Variance increase as the model gets more complex. Models are too complex if we include unnecessary predictors, include higher order polynomials that are not needed, or include interactions when they are not needed.</p></li>
 </ul>
 <p>So we can see that to minimize the test MSE, we need to find the right balance between bias and variance of the model, by finding the right level of complexity.</p>
 </div>
@@ -1101,7 +1101,7 @@ Figure 10.12: Box Plots of Predictions for Four Fitted Lines
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2026-06-25.</p>
+    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2026-07-14.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
