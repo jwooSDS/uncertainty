@@ -187,7 +187,7 @@ Var(X) &amp;= E(X^2) - E(X)^2\\
 <iframe width="560px" height="320px" allowfullscreen="true" allow="autoplay *" title="Module 07: MOM Estimation for Normal" src="https://virginiauniversity.instructuremedia.com/embed/cd5ff3c8-0e95-4790-aefd-e1ee23d70170" frameborder="0">
 </iframe>
 <p>We now use these MOM estimates on the data set of birth weights at Baystate Medical Center in 1986. It is well established in the literature that birth weights of babies follow a normal distribution. A quick check with the Shapiro-Wilk test for normality shows no contradiction, so we proceed with finding the estimates for <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma^2\)</span>. We then produce a density plot of the birth weights, and overlay a curve that corresponds to a normal distribution with <span class="math inline">\(\hat{\mu} = \bar{x}\)</span> and <span class="math inline">\(\hat{\sigma^2} = \frac{1}{n} \sum_{i=1}^n (x_i - \bar{x})^2\)</span>. This normal curve is pretty close to the density plot, so it appears reasonable to say that the birth weights follow a normal distribution with mean 2944.587 (grams) and variance 528940 (grams-squared).</p>
-<div class="sourceCode" id="cb114"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb116"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://www.stats.ox.ac.uk/pub/MASS4/">MASS</a></span><span class="op">)</span></span>
 <span><span class="va">data</span><span class="op">&lt;-</span><span class="fu">MASS</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/MASS/man/birthwt.html">birthwt</a></span> <span class="co">##dataset comes from MASS package</span></span>
 <span></span>
@@ -197,15 +197,15 @@ Var(X) &amp;= E(X^2) - E(X)^2\\
 ## 
 ## data:  data$bwt
 ## W = 0.99244, p-value = 0.4353</code></pre>
-<div class="sourceCode" id="cb116"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb118"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mu</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">data</span><span class="op">$</span><span class="va">bwt</span><span class="op">)</span> <span class="co">##MOM estimate for mu</span></span>
 <span><span class="va">mu</span></span></code></pre></div>
 <pre><code>## [1] 2944.587</code></pre>
-<div class="sourceCode" id="cb118"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb120"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">sigma2</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="op">(</span><span class="va">data</span><span class="op">$</span><span class="va">bwt</span><span class="op">-</span><span class="va">mu</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span> <span class="co">##MOM estimate for sigma2</span></span>
 <span><span class="va">sigma2</span></span></code></pre></div>
 <pre><code>## [1] 528940</code></pre>
-<div class="sourceCode" id="cb120"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb122"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##create density plot for data, and overlay Normal curve with parameters estimated by MOM</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/density.html">density</a></span><span class="op">(</span><span class="va">data</span><span class="op">$</span><span class="va">bwt</span><span class="op">)</span>, main<span class="op">=</span><span class="st">""</span>, ylim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">6e-04</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/curve.html">curve</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">dnorm</a></span><span class="op">(</span><span class="va">x</span>, mean<span class="op">=</span><span class="va">mu</span>, sd<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">sigma2</span><span class="op">)</span><span class="op">)</span>, </span>
@@ -311,7 +311,7 @@ L(p | \boldsymbol{x} ) &amp;= \prod_{i=1}^n p^{x_i} (1-p)^{1-x_i} \\
 \end{split}
 \]</span>
 We can create plots of <span class="math inline">\(L(p | \boldsymbol{x} )\)</span> and <span class="math inline">\(\ell(p | \boldsymbol{x} )\)</span> based on the observed data, as we vary the value of <span class="math inline">\(p\)</span> from 0 to 1 (the support of <span class="math inline">\(p\)</span>). These plots are displayed in Figure <a href="est.html#fig:7-bernlikelihood">7.3</a> below</p>
-<div class="sourceCode" id="cb121"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb123"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##function to compute likelihood function </span></span>
 <span><span class="va">bern_like</span><span class="op">&lt;-</span><span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">p</span><span class="op">)</span> <span class="co">##supply vector of data, and value of success probability</span></span>
 <span>  </span>
@@ -359,11 +359,11 @@ We can create plots of <span class="math inline">\(L(p | \boldsymbol{x} )\)</spa
 Figure 7.3: Likelihood (left) and Log-Likelihood (right) Functions of Bernoulli, when n=20, and 7 Yeses
 </p>
 </div>
-<div class="sourceCode" id="cb122"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb124"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## what value of p had maximum value of likelihood</span></span>
 <span><span class="va">props</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/which.min.html">which.max</a></span><span class="op">(</span><span class="fu">bern_like</span><span class="op">(</span><span class="va">data</span>, <span class="va">props</span><span class="op">)</span><span class="op">)</span><span class="op">]</span></span></code></pre></div>
 <pre><code>## [1] 0.35</code></pre>
-<div class="sourceCode" id="cb124"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb126"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## what value of p had maximum value of loglikelihood</span></span>
 <span><span class="va">props</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/which.min.html">which.max</a></span><span class="op">(</span><span class="fu">bern_loglike</span><span class="op">(</span><span class="va">data</span>, <span class="va">props</span><span class="op">)</span><span class="op">)</span><span class="op">]</span></span></code></pre></div>
 <pre><code>## [1] 0.35</code></pre>
@@ -557,7 +557,7 @@ Bias(\hat{\Theta}) = E(\hat{\Theta}) - \theta.
 </li>
 </ul>
 <p>If the estimator is unbiased, the average from the Monte Carlo simulation should be close to 0, since the true mean of a standard normal is 0.</p>
-<div class="sourceCode" id="cb126"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb128"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">reps</span><span class="op">&lt;-</span><span class="fl">10000</span></span>
 <span></span>
 <span><span class="va">est1</span><span class="op">&lt;-</span><span class="va">est2</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span><span class="op">(</span><span class="fl">0</span>,<span class="va">reps</span><span class="op">)</span> <span class="co">##array to store est1 &amp; est2 from each rep</span></span>
@@ -579,10 +579,10 @@ Bias(\hat{\Theta}) = E(\hat{\Theta}) - \theta.
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">est1</span><span class="op">)</span> <span class="co">##should be close to 0, indicating sample mean is unbiased</span></span></code></pre></div>
 <pre><code>## [1] -0.0009093132</code></pre>
-<div class="sourceCode" id="cb128"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb130"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">est2</span><span class="op">)</span> <span class="co">##should not be close to 0, indicating first obs + 2 is biased</span></span></code></pre></div>
 <pre><code>## [1] 2.003234</code></pre>
-<div class="sourceCode" id="cb130"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb132"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##create density plots to show distribution for est1 and est 2, and overlay line to show true value of mu</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/density.html">density</a></span><span class="op">(</span><span class="va">est1</span><span class="op">)</span>, main<span class="op">=</span><span class="st">"Density Plot for Theta1"</span><span class="op">)</span></span>
@@ -614,16 +614,16 @@ Figure 7.4: Dist of Theta1 (left) and Theta2 (right)
 <p>There is also a separate term used when evaluating the variance of an estimator: this is the <strong>standard error</strong> of an estimator. This is essentially the standard deviation of the estimator, i.e. <span class="math inline">\(SE(\hat{\Theta}) = \sqrt{Var(\hat{\Theta})}\)</span>. Going back to our example: <span class="math inline">\(SE(\hat{\Theta}_1) = \frac{\sigma}{\sqrt{n}}\)</span> and <span class="math inline">\(SE(\hat{\Theta}_2) = \sigma\)</span>.</p>
 <p>Note: The term standard error is only applied to estimators. It is not used when finding the standard deviation of data points.</p>
 <p>We can also use our Monte Carlo simulation from the previous subsection to estimate these values:</p>
-<div class="sourceCode" id="cb131"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb133"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html">var</a></span><span class="op">(</span><span class="va">est1</span><span class="op">)</span> <span class="co">##should be close to 1/100, since n=100</span></span></code></pre></div>
 <pre><code>## [1] 0.009956095</code></pre>
-<div class="sourceCode" id="cb133"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb135"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html">var</a></span><span class="op">(</span><span class="va">est2</span><span class="op">)</span> <span class="co">##should be close to 1</span></span></code></pre></div>
 <pre><code>## [1] 0.9988228</code></pre>
-<div class="sourceCode" id="cb135"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb137"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">est1</span><span class="op">)</span> <span class="co">##should be close to 1/10</span></span></code></pre></div>
 <pre><code>## [1] 0.09978023</code></pre>
-<div class="sourceCode" id="cb137"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb139"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">est2</span><span class="op">)</span> <span class="co">##should be close to 1</span></span></code></pre></div>
 <pre><code>## [1] 0.9994112</code></pre>
 <p>These results are reflected in Figure <a href="est.html#fig:7-bias">7.4</a>. Notice the scale of the x-axis for the plot of <span class="math inline">\(\hat{\Theta}_2\)</span> (on the right) is much larger, so <span class="math inline">\(\hat{\Theta}_2\)</span> has larger variability than <span class="math inline">\(\hat{\Theta}_1\)</span>, i.e. we are more uncertain about the value of <span class="math inline">\(\hat{\Theta}_2\)</span>, since they deviate more from each other.</p>
@@ -656,7 +656,7 @@ Figure 7.4: Dist of Theta1 (left) and Theta2 (right)
 </li>
 </ul>
 <p>If an estimator is consistent, we should notice the spread of its density plot get narrower as <span class="math inline">\(n\)</span> gets larger.</p>
-<div class="sourceCode" id="cb139"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb141"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">n</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">10</span>,<span class="fl">100</span>,<span class="fl">1000</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">reps</span><span class="op">&lt;-</span><span class="fl">10000</span></span>
@@ -833,7 +833,7 @@ MSE(\hat{\Theta}) = Var(\hat{\Theta}) + Bias(\hat{\Theta})^2.
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2026-07-14.</p>
+    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2026-09-04.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

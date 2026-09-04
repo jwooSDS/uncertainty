@@ -127,7 +127,7 @@
 
 \title{Understanding Uncertainty Course Notes}
 \author{Jeffrey Woo}
-\date{2026-07-14}
+\date{2026-09-04}
 
 \begin{document}
 \maketitle
@@ -629,13 +629,22 @@ To find these values in R, we could type:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{quantile}\NormalTok{(Data}\SpecialCharTok{$}\NormalTok{interest\_rate, }\AttributeTok{prob=}\FunctionTok{c}\NormalTok{(}\FloatTok{0.25}\NormalTok{,}\FloatTok{0.75}\NormalTok{), }\AttributeTok{type =} \DecValTok{1}\NormalTok{)}
+\FunctionTok{sort}\NormalTok{(Data}\SpecialCharTok{$}\NormalTok{interest\_rate)[}\DecValTok{13}\NormalTok{] }
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-##   25%   75% 
-##  7.96 14.08
+## [1] 7.96
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sort}\NormalTok{(Data}\SpecialCharTok{$}\NormalTok{interest\_rate)[}\DecValTok{38}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 14.08
 \end{verbatim}
 
 So \(Q_1\) is 7.96 percent, and \(Q_3\) is 14.08 percent. It turns out that \(Q_1\) is also the 25th percentile, and \(Q_3\) is also the 75th percentile, by definition.

@@ -482,7 +482,7 @@ Cov(X,Y) = E\left[(X- \mu_X)(Y - \mu_Y) \right].
 <li>If <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are independent, then <span class="math inline">\(Cov(X,Y) = 0\)</span>.</li>
 <li>However, <span class="math inline">\(Cov(X,Y) = 0\)</span> does not mean that <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are independent. This is a common misconception. Remember that covariance measures linear relationship. The relationship between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> could be non linear, and in such instances, the covariance should not be used. Figure <a href="joint-distributions.html#fig:5-cov0">5.2</a> below provides an example this. In this figure, <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> have a quadratic relationship, so they are clearly not independent, yet their covariance is virtually 0.</li>
 </ul>
-<div class="sourceCode" id="cb77"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb79"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>,<span class="fl">1</span>, by<span class="op">=</span><span class="fl">0.01</span><span class="op">)</span></span>
 <span><span class="va">y</span><span class="op">&lt;-</span><span class="va">x</span><span class="op">^</span><span class="fl">2</span></span>
 <span></span>
@@ -494,7 +494,7 @@ Cov(X,Y) = E\left[(X- \mu_X)(Y - \mu_Y) \right].
 Figure 5.2: Covariance with Non Linear Relationship
 </p>
 </div>
-<div class="sourceCode" id="cb78"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb80"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cov</a></span><span class="op">(</span><span class="va">x</span>,<span class="va">y</span><span class="op">)</span> <span class="co">##covariance is virtually 0</span></span></code></pre></div>
 <pre><code>## [1] 1.19967e-17</code></pre>
 <p>Suppose we have two vectors of observed data, each of size <span class="math inline">\(n\)</span>: <span class="math inline">\(X = (x_1, x_2, \cdots, x_n)\)</span> and <span class="math inline">\(Y = (y_1, y_2, \cdots, y_n)\)</span>. Their <strong>sample covariance</strong> is</p>
@@ -585,7 +585,7 @@ E(Y|A) = \int_{-\infty}^{\infty} y f(y|A) dy.
 <li>Represent these values on a scatter plot, and also overlay a line that represents the sample mean of <span class="math inline">\(Y\)</span>, which estimates <span class="math inline">\(E(Y)\)</span>. This is simply the average value on the y-axis for all 100 data points. This is the plot on the left in Figure <a href="joint-distributions.html#fig:5-condexp">5.4</a> below.</li>
 <li>Represent these values on a scatter plot, but use blue to denote the event <span class="math inline">\(A\)</span> which is when <span class="math inline">\(X=1\)</span>. A line that represents the sample mean of <span class="math inline">\(Y\)</span>, only for these blue data points (i.e. only when <span class="math inline">\(X=1\)</span>), is overlaid. This value estimates <span class="math inline">\(E(Y|A)\)</span> or <span class="math inline">\(E(Y|X=1)\)</span>. This is the plot on the right in Figure <a href="joint-distributions.html#fig:5-condexp">5.4</a> below. In calculating this sample mean, we could have completed disregarded the black data points when <span class="math inline">\(X\)</span> was not 1.</li>
 </ul>
-<div class="sourceCode" id="cb80"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb82"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">40</span><span class="op">)</span></span>
 <span><span class="va">n</span><span class="op">&lt;-</span><span class="fl">100</span> <span class="co">##100 data points</span></span>
 <span></span>
@@ -690,7 +690,7 @@ P(X_1 = 2, X_2 = 3, X_3 = 1, X_4 = 4) &amp;= \frac{10!}{2! 3! 1!4!} 0.28^{2} 0.2
 \end{split}
 \]</span></p>
 <p>Or use</p>
-<div class="sourceCode" id="cb81"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb83"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Multinom.html">dmultinom</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">1</span>,<span class="fl">4</span><span class="op">)</span>, prob<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.28</span>,<span class="fl">0.29</span>,<span class="fl">0.1</span>,<span class="fl">0.33</span><span class="op">)</span><span class="op">)</span> <span class="co">##specify X1, X2, X3, X4, then p1,p2,p3, p4</span></span></code></pre></div>
 <pre><code>## [1] 0.02857172</code></pre>
 <div id="multinomial-marginals" class="section level4" number="5.6.1.1">
@@ -808,7 +808,7 @@ Corr(X_1,X_2) &amp;= \frac{Cov(X_1,X_2)}{\sqrt{Var(X_1) Var(X_2)}}\\
 </ul>
 </li>
 </ul>
-<div class="sourceCode" id="cb83"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb85"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://mvtnorm.R-forge.R-project.org">mvtnorm</a></span><span class="op">)</span> <span class="co">##package to simulate from MVN</span></span>
 <span></span>
 <span><span class="va">reps</span><span class="op">&lt;-</span><span class="fl">1000</span> <span class="co">## how many reps</span></span>
@@ -848,10 +848,10 @@ Corr(X_1,X_2) &amp;= \frac{Cov(X_1,X_2)}{\sqrt{Var(X_1) Var(X_2)}}\\
 <span><span class="co">##proportion of tests that wrongly reject the null</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">pvalsx1</span><span class="op">&lt;</span><span class="va">siglevel</span><span class="op">)</span><span class="op">/</span><span class="va">reps</span> <span class="co">##for X1</span></span></code></pre></div>
 <pre><code>## [1] 0.054</code></pre>
-<div class="sourceCode" id="cb85"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb87"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">pvalsx2</span><span class="op">&lt;</span><span class="va">siglevel</span><span class="op">)</span><span class="op">/</span><span class="va">reps</span> <span class="co">##for X2</span></span></code></pre></div>
 <pre><code>## [1] 0.037</code></pre>
-<div class="sourceCode" id="cb87"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb89"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">pvalsx3</span><span class="op">&lt;</span><span class="va">siglevel</span><span class="op">)</span><span class="op">/</span><span class="va">reps</span> <span class="co">##for X3</span></span></code></pre></div>
 <pre><code>## [1] 0.047</code></pre>
 <p>Since close to 5% of each hypothesis test rejected the null hypothesis, it appears that each component is consistent with a normal distribution. (Or more accurately, we do not have evidence to say that each component is not normal.) It does appear that if <span class="math inline">\(\boldsymbol{X} = (X_1, \cdots, X_k)\)</span> is MVN, the marginal distribution of each <span class="math inline">\(X_j\)</span> is normal. Our simulation does not provide evidence against this property.</p>
@@ -915,7 +915,7 @@ Corr(X_1,X_2) &amp;= \frac{Cov(X_1,X_2)}{\sqrt{Var(X_1) Var(X_2)}}\\
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2026-07-14.</p>
+    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2026-09-04.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

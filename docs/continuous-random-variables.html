@@ -378,7 +378,7 @@ u + u e^x &amp;= e^x\\
 \]</span></p>
 <p>Therefore <span class="math inline">\(F^{-1}(u) = \log (\frac{u}{1-u})\)</span> and <span class="math inline">\(F^{-1}(U) = \log (\frac{U}{1-U})\)</span>. Therefore <span class="math inline">\(\log (\frac{U}{1-U})\)</span> follows a standard logistic distribution.</p>
 <p>Let us use simulations to show what is going on. First, we simulate 10,000 reps from a standard uniform distribution, then invert these values using <span class="math inline">\(\log (\frac{u}{1-u})\)</span>, and create the density plot of <span class="math inline">\(\log (\frac{u}{1-u})\)</span>. These steps are shown in Figure <a href="continuous-random-variables.html#fig:4-universe">4.8</a> below:</p>
-<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">4</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">reps</span><span class="op">&lt;-</span><span class="fl">10000</span> <span class="co">##number of reps</span></span>
@@ -436,7 +436,7 @@ Figure 4.8: Uniform to Logistic
 \end{equation}\]</span></p>
 <p>Notice the constant <span class="math inline">\(\frac{1}{\sqrt{2 \pi}}\)</span> in equation <a href="continuous-random-variables.html#eq:4-Z">(4.9)</a>. Its presence is needed to make the PDF valid, since the PDF must integrate to 1. Such constants are called <strong>normalizing constants</strong>.</p>
 <p>Figure <a href="continuous-random-variables.html#fig:4-Z">4.9</a> below displays its PDF:</p>
-<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/curve.html">curve</a></span><span class="op">(</span><span class="va">dnorm</span>, from <span class="op">=</span> <span class="op">-</span><span class="fl">4</span>, to <span class="op">=</span> <span class="fl">4</span>, main <span class="op">=</span> <span class="st">"PDF for Z"</span>, ylab<span class="op">=</span><span class="st">"Density"</span>, xlab<span class="op">=</span><span class="st">""</span><span class="op">)</span></span></code></pre></div>
 <div class="figure">
 <span style="display:block;" id="fig:4-Z"></span>
@@ -500,7 +500,7 @@ Figure 4.10: 68-95-99.7 Rule
 </p>
 </div>
 <p>We will work out the first statement, that about 68% of the observed values will fall within 1 standard deviation of the mean for any normal distribution. We will use R to help us verify this rule for a standard normal:</p>
-<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">upper1</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">pnorm</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span> <span class="co">## what is percentile associated with Z=1 (i.e. 1 standard deviation above mean)</span></span>
 <span><span class="va">lower1</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">pnorm</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span> <span class="co">## what is percentile associated with Z=-1 (i.e. 1 standard deviation below mean)</span></span>
 <span><span class="va">upper1</span><span class="op">-</span><span class="va">lower1</span> <span class="co">## find proportion in between 1 SD above and below mean.</span></span></code></pre></div>
@@ -517,14 +517,14 @@ Figure 4.10: 68-95-99.7 Rule
 <ol style="list-style-type: decimal">
 <li>To find <span class="math inline">\(f_Y(2)\)</span>, use:</li>
 </ol>
-<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">dnorm</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span> <span class="co">##supply the value of Y you want, then the parameters mu and sigma</span></span></code></pre></div>
 <pre><code>## [1] 0.1257944</code></pre>
 <p>The density <span class="math inline">\(f_Y(2)\)</span> is 0.1257944. Note: In R, the normal distribution is parameterized by the mean and standard deviation, which is different from these set of notes and our book, which uses the mean and variance.</p>
 <ol start="2" style="list-style-type: decimal">
 <li>To find <span class="math inline">\(P(Y \leq 2)\)</span>, use:</li>
 </ol>
-<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">pnorm</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span> <span class="co">##supply the value of Y you want, then the parameters mu and sigma</span></span></code></pre></div>
 <pre><code>## [1] 0.6305587</code></pre>
 <p>The probability that <span class="math inline">\(Y\)</span> is less than or equal to 2 is 0.6305587.</p>
@@ -541,7 +541,7 @@ P(Y \leq 2) &amp;= P(\frac{Y-\mu}{\sigma} \leq \frac{2-1}{3}) \\
 \end{split}
 \]</span></p>
 <p>which can be found using</p>
-<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">pnorm</a></span><span class="op">(</span><span class="fl">1</span><span class="op">/</span><span class="fl">3</span><span class="op">)</span> <span class="co">##don't supply mu and sigma means you want to use standard normal</span></span></code></pre></div>
 <pre><code>## [1] 0.6305587</code></pre>
 <p>which gives the same answer as <code>pnorm(2,1,3)</code>.</p>
@@ -551,23 +551,23 @@ P(Y \leq 2) &amp;= P(\frac{Y-\mu}{\sigma} \leq \frac{2-1}{3}) \\
 <ol start="3" style="list-style-type: decimal">
 <li>To find the value on the support that corresponds to the 90th percentile, use:</li>
 </ol>
-<div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">qnorm</a></span><span class="op">(</span><span class="fl">0.9</span>, <span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span> <span class="co">##supply the value of the percentile you need, then the parameters mu and sigma</span></span></code></pre></div>
 <pre><code>## [1] 4.844655</code></pre>
 <p>The 90th percentile of <span class="math inline">\(Y \sim N(1,9)\)</span> is 4.844655.</p>
 <p>If we want to use the standard normal, we could find its 90th percentile:</p>
-<div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">qnorm</a></span><span class="op">(</span><span class="fl">0.9</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 1.281552</code></pre>
 <p>and then apply the location scale transformation</p>
-<div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">qnorm</a></span><span class="op">(</span><span class="fl">0.9</span><span class="op">)</span><span class="op">*</span><span class="fl">3</span> <span class="op">+</span> <span class="fl">1</span> <span class="co">##multiply by sigma, then add mu</span></span></code></pre></div>
 <pre><code>## [1] 4.844655</code></pre>
 <p>which is the same answer as <code>qnorm(0.9,1,3)</code>.</p>
 <ol start="4" style="list-style-type: decimal">
 <li>To simulate 10 draws (replicates) of <span class="math inline">\(Y\)</span>, use:</li>
 </ol>
-<div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span> <span class="co">##use set.seed() so we get the same random numbers each time the code is run</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span> <span class="co">##supply the number of simulated data you need, then the parameters mu and sigma</span></span></code></pre></div>
 <pre><code>##  [1] -1.6907436  1.5545476  5.7635360 -2.3911270  0.7592447  1.3972609
@@ -606,7 +606,7 @@ Figure 4.11: Common Kernels. <a href="https://tgstewart.cloud/compprob/kde.html"
 </ul>
 <p><span class="math inline">\(h\)</span> is the smoothing parameter and is analogous to bin width in histograms. Larger values result in smoother looking density plots.</p>
 <p>Let us go back to an old example. We will use the <code>loan50</code> dataset from the <code>openintro</code> package. The data originally consist of thousands of loans made through the Lending Club platform, but we will randomly select 50 of these loans. Let us study the interest rate the loans the 50 applicants received.</p>
-<div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://openintrostat.github.io/openintro/">openintro</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">##create object for data</span></span>
@@ -622,7 +622,7 @@ Figure 4.12: Density Plot for 50 Interest Rates
 </div>
 <p>This uses KDE with the default settings: kernel is normal, and the bandwidth is based on <a href="https://en.wikipedia.org/wiki/Kernel_density_estimation#A_rule-of-thumb_bandwidth_estimator">Silverman’s rule of thumb</a>.</p>
 <p>To change these, we add the <code>kernel</code> and <code>adjust</code> argument when using the <code><a href="https://rdrr.io/r/stats/density.html">density()</a></code> function, for example, to use the Epanechnikov kernel with twice the default bandwidth:</p>
-<div class="sourceCode" id="cb67"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb69"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##create density plot using different settings</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/density.html">density</a></span><span class="op">(</span><span class="va">Data</span><span class="op">$</span><span class="va">interest_rate</span>, kernel <span class="op">=</span> <span class="st">"epanechnikov"</span>, adjust <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>, </span>
 <span>     main<span class="op">=</span><span class="st">"Density Plot of Interest Rates"</span><span class="op">)</span></span></code></pre></div>
@@ -639,7 +639,7 @@ Figure 4.13: Density Plot for 50 Interest Rates, Epanechnikov Kernel, Twice the 
 <span class="header-section-number">4.6.2</span> Density Plots and Histograms<a class="anchor" aria-label="anchor" href="#density-plots-and-histograms"><i class="fas fa-link"></i></a>
 </h3>
 <p>In Section <a href="descriptive.html#densplots">1.2.3</a>, we mentioned that density plots can be viewed as smoothed versions of a histogram. We create a histogram of interest rates, and overlay a density plot in blue, per Figure <a href="continuous-random-variables.html#fig:4-R3">4.14</a> below:</p>
-<div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb70"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">Data</span><span class="op">$</span><span class="va">interest_rate</span>, prob <span class="op">=</span> <span class="cn">TRUE</span>, main <span class="op">=</span> <span class="st">"Histogram with Density Plot"</span>, xlab<span class="op">=</span><span class="st">"Interest Rates"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">##create density plot using default</span></span>
@@ -676,17 +676,17 @@ s_X^2 =  \frac{1}{n-1} \sum_{i=1}^n (x_i - \bar{x})^2,
 \tag{4.16}
 \end{equation}\]</span></p>
 <p>The functions <code><a href="https://rdrr.io/r/base/mean.html">mean()</a></code>, <code><a href="https://rdrr.io/r/stats/cor.html">var()</a></code>, <code><a href="https://rdrr.io/pkg/moments/man/skewness.html">skewness()</a></code>, and <code><a href="https://rdrr.io/pkg/moments/man/kurtosis.html">kurtosis()</a></code> compute these quantities in R. The latter two functions come from the <code>moments</code> package so be sure to install and load it prior to using them.</p>
-<div class="sourceCode" id="cb69"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb71"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">Data</span><span class="op">$</span><span class="va">interest_rate</span><span class="op">)</span> <span class="co">##mean</span></span></code></pre></div>
 <pre><code>## [1] 11.5672</code></pre>
-<div class="sourceCode" id="cb71"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb73"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html">var</a></span><span class="op">(</span><span class="va">Data</span><span class="op">$</span><span class="va">interest_rate</span><span class="op">)</span> <span class="co">##variance</span></span></code></pre></div>
 <pre><code>## [1] 25.52387</code></pre>
-<div class="sourceCode" id="cb73"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb75"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://www.r-project.org">moments</a></span><span class="op">)</span></span>
 <span><span class="fu">moments</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/moments/man/skewness.html">skewness</a></span><span class="op">(</span><span class="va">Data</span><span class="op">$</span><span class="va">interest_rate</span><span class="op">)</span> <span class="co">##greater than 0</span></span></code></pre></div>
 <pre><code>## [1] 1.102193</code></pre>
-<div class="sourceCode" id="cb75"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb77"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">moments</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/moments/man/kurtosis.html">kurtosis</a></span><span class="op">(</span><span class="va">Data</span><span class="op">$</span><span class="va">interest_rate</span><span class="op">)</span> <span class="op">-</span> <span class="fl">3</span> <span class="co">##greater than 0</span></span></code></pre></div>
 <pre><code>## [1] 0.6516311</code></pre>
 <p>So our data is also right skewed and heavy tailed. Note that the <code><a href="https://rdrr.io/pkg/moments/man/kurtosis.html">kurtosis()</a></code> function from the <code>moments</code> package reports the kurtosis, so we subtract 3 from its reported value to obtain the excess kurtosis.</p>
@@ -751,7 +751,7 @@ s_X^2 =  \frac{1}{n-1} \sum_{i=1}^n (x_i - \bar{x})^2,
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2026-07-14.</p>
+    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2026-09-04.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

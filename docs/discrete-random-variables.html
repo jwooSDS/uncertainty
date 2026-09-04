@@ -169,7 +169,7 @@
 </tbody>
 </table></div>
 <p>Or the PMF can be represented using a simple plot like the one below in Figure <a href="discrete-random-variables.html#fig:3-pmf">3.1</a>:</p>
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##support</span></span>
 <span><span class="va">x</span><span class="op">&lt;-</span><span class="fl">0</span><span class="op">:</span><span class="fl">3</span></span>
 <span><span class="co">## PMF for each value in the support. </span></span>
@@ -337,7 +337,7 @@ E(aX + bY + c) = aE(X) + bE(Y) + c.
 <span class="header-section-number">3.4.1.1</span> Visual Explanation<a class="anchor" aria-label="anchor" href="#visual-explanation"><i class="fas fa-link"></i></a>
 </h4>
 <p>For a visual explanation of why equation <a href="discrete-random-variables.html#eq:3-linEX">(3.3)</a> makes sense, we go back to our previous example where <span class="math inline">\(X\)</span> denotes the number of heads in 3 coin flips. Figure <a href="discrete-random-variables.html#fig:3-pmf">3.1</a> displays the PMF for this random variable. Let us create the PMF for a new random variable <span class="math inline">\(Y=2X\)</span> and display it in Figure <a href="discrete-random-variables.html#fig:3-pmf-lin">3.4</a> below:</p>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##support of X</span></span>
 <span><span class="va">x</span><span class="op">&lt;-</span><span class="fl">0</span><span class="op">:</span><span class="fl">3</span></span>
 <span><span class="co">## PMF for each value in the support. </span></span>
@@ -369,7 +369,7 @@ Figure 3.4: PMF for X and Y=2X
 </div>
 <p>Note that the red vertical lines represent the expected value for the random variable, and since the PMFs are symmetric, the expected value lies right in the middle of the support. Comparing the PMFs in Figure <a href="discrete-random-variables.html#fig:3-pmf-lin">3.4</a>, we get <span class="math inline">\(Y\)</span> by multiplying <span class="math inline">\(X\)</span> by 2. So the support of <span class="math inline">\(Y\)</span> is now <span class="math inline">\(\{0,2,4,6\}\)</span> but the associated probabilities are unchanged, so the heights of the probabilities on the vertical axis are unchanged. Therefore, the center, the expected value, is multiplied by the same constant.</p>
 <p>Consider another random variable <span class="math inline">\(W = X+3\)</span>. We create the PMF for <span class="math inline">\(W\)</span> and display it in Figure <a href="discrete-random-variables.html#fig:3-pmf-lin2">3.5</a> below:</p>
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##support of X</span></span>
 <span><span class="va">x</span><span class="op">&lt;-</span><span class="fl">0</span><span class="op">:</span><span class="fl">3</span></span>
 <span><span class="co">## PMF for each value in the support. </span></span>
@@ -542,7 +542,7 @@ Var(X) = p(1-p).
 <p><em>Thought question</em>: Use the definition of expectations for discrete random variables, equation <a href="discrete-random-variables.html#eq:3-EX">(3.2)</a>, and the PMF of a Bernoulli random variable, and LOTUS to prove equations <a href="discrete-random-variables.html#eq:3-bern-EX">(3.9)</a> and <a href="discrete-random-variables.html#eq:3-bern-var">(3.10)</a>.</p>
 <p>The expected value being equal to <span class="math inline">\(p\)</span> for a Bernoulli distribution should make sense. Remember that the support for such a random variable is 0 or 1, with <span class="math inline">\(P(X=1) = p\)</span>. Using the frequentist viewpoint, if we were to flip a coin and record heads or tails, and repeat this coin flipping many times, we will have to record a bunch of 0s and 1s to represent the result for all the coin flips. The average of this bunch of 0s and 1s is just the proportion of 1s.</p>
 <p>The equation for the variance of a Bernoulli distribution exhibits an interesting and intuitive behavior. Figure <a href="discrete-random-variables.html#fig:3-varBern">3.6</a> below shows how the variance behaves as we vary the value of <span class="math inline">\(p\)</span>:</p>
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">p</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span>,by <span class="op">=</span> <span class="fl">0.001</span><span class="op">)</span> <span class="co">##sequence of values for p</span></span>
 <span><span class="va">Bern_var</span><span class="op">&lt;-</span><span class="va">p</span><span class="op">*</span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">p</span><span class="op">)</span> <span class="co">##variance of Bernoulli</span></span>
 <span><span class="co">##plot variance against p</span></span>
@@ -573,7 +573,7 @@ P(X=k) = \binom{n}{k} p^k (1-p)^{n-k}
 \tag{3.12}
 \end{equation}\]</span></p>
 <p><span class="math inline">\(n!\)</span> is called n-factorial, and is the product of all positive integers less than or equal to n. So <span class="math inline">\(n! = n \times (n-1) \times (n-2) \times \cdots \times 1.\)</span> As an example <span class="math inline">\(5! = 5 \times 4 \times 3 \times 2 \times 1 = 120\)</span>, or using R:</p>
-<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Special.html">factorial</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 120</code></pre>
 <p>Note: A fairly common model, the logistic regression model with aggregated data, is based on the binomial distribution. We mentioned logistic regression earlier. The difference between these two (with and without aggregated data) is based on the structure of the data frame. If you are interested in this difference, <a href="https://www.r-bloggers.com/2021/02/how-to-run-logistic-regression-on-aggregate-data-in-r/">this page</a> provides an explanation.</p>
@@ -605,7 +605,7 @@ P(HHT \cup HTH \cup THH) &amp;= P(HHT) + P(HTH) + P(THH)\\
 \]</span>
 so we could have solved this using basic probability rules from the previous module, without using the PMF of the binomial distribution in equation <a href="discrete-random-variables.html#eq:3-bin">(3.11)</a>. Of course, the PMF of the binomial distribution gets a lot more convenient if <span class="math inline">\(n\)</span> gets larger, as the number of combinations and sample space become a lot larger.</p>
 <p>We can also use R to find <span class="math inline">\(P(X=2)\)</span>:</p>
-<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">dbinom</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">0.5</span><span class="op">)</span> <span class="co">##specify values of k, n, p in this order</span></span></code></pre></div>
 <pre><code>## [1] 0.375</code></pre>
 <div id="relationship-between-binomial-and-bernoulli" class="section level4" number="3.5.2.1">
@@ -672,7 +672,7 @@ Var(X) = \lambda.
 \end{equation}\]</span></p>
 <p>These imply that larger values of a Poisson random variable are associated with larger variances. This is a common feature for count data. Consider the number of cars that cross an intersection during a one-hour time period. Consider the average number of cars during rush hour, say between 5 and 6pm. This average number is large, but the number could be a lot smaller due to inclement weather, or the number could get a lot larger if there is a convention occurring nearby. On the other hand, consider the average number of cars between 3 and 4am. This average number is small, and is likely to be small all the time, regardless of weather conditions and whether special events are happening.</p>
 <p>Another interesting property of the Poisson distribution is that it is skewed when <span class="math inline">\(\lambda\)</span> is small, and approaches a bell-shaped distribution as <span class="math inline">\(\lambda\)</span> gets bigger. Figure <a href="discrete-random-variables.html#fig:3-pmfs-lambda">3.8</a> displays density plots of Poisson distributions as <span class="math inline">\(\lambda\)</span> is varied:</p>
-<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##calculate probability of Poisson with these values on the support</span></span>
 <span><span class="va">x</span><span class="op">&lt;-</span><span class="fl">0</span><span class="op">:</span><span class="fl">20</span></span>
 <span><span class="va">lambda</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.5</span>, <span class="fl">1</span>, <span class="fl">4</span>, <span class="fl">10</span><span class="op">)</span> <span class="co">##try 4 different values of lambda</span></span>
@@ -712,14 +712,14 @@ Figure 3.8: PMF for Poissons as Rate Parameter is Varied
 <li>use the binomial distribution, or</li>
 <li>approximate it using <span class="math inline">\(Pois(2)\)</span>, as <span class="math inline">\(\lambda = np = 100 \times 0.02\)</span>.</li>
 </ul>
-<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##set up binomial</span></span>
 <span><span class="va">n</span><span class="op">&lt;-</span><span class="fl">100</span> </span>
 <span><span class="va">p</span><span class="op">&lt;-</span><span class="fl">0.02</span> </span>
 <span><span class="va">y</span><span class="op">&lt;-</span><span class="fl">0</span><span class="op">:</span><span class="fl">3</span> <span class="co">##we want P(Y=0), P(Y=1), P(Y=2), P(Y=3)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">dbinom</a></span><span class="op">(</span><span class="va">y</span>,<span class="va">n</span>,<span class="va">p</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 0.8589616</code></pre>
-<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##Use Poisson to approx binomial</span></span>
 <span><span class="va">lambda</span><span class="op">&lt;-</span><span class="va">n</span><span class="op">*</span><span class="va">p</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Poisson.html">dpois</a></span><span class="op">(</span><span class="va">y</span>,<span class="va">lambda</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
@@ -736,35 +736,35 @@ Figure 3.8: PMF for Poissons as Rate Parameter is Varied
 <ol style="list-style-type: decimal">
 <li>To find <span class="math inline">\(P(Y=2)\)</span>, use:</li>
 </ol>
-<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">dbinom</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">5</span>, <span class="fl">0.3</span><span class="op">)</span> <span class="co">##supply the value of Y you want, then the parameters n and p in this order</span></span></code></pre></div>
 <pre><code>## [1] 0.3087</code></pre>
 <p>The probability that <span class="math inline">\(Y\)</span> is equal to 2 is 0.3087.</p>
 <ol start="2" style="list-style-type: decimal">
 <li>To find <span class="math inline">\(P(Y \leq 2)\)</span>, use:</li>
 </ol>
-<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">pbinom</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">5</span>, <span class="fl">0.3</span><span class="op">)</span> <span class="co">##supply the value of Y you want, then the parameters n and p in this order</span></span></code></pre></div>
 <pre><code>## [1] 0.83692</code></pre>
 <p>The probability that <span class="math inline">\(Y\)</span> is less than or equal to 2 is 0.83692.</p>
 <ol start="3" style="list-style-type: decimal">
 <li>To find the value on the support that corresponds to the median (or 50th percentile), use:</li>
 </ol>
-<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">qbinom</a></span><span class="op">(</span><span class="fl">0.5</span>, <span class="fl">5</span>, <span class="fl">0.3</span><span class="op">)</span> <span class="co">##supply the value of the percentile you need, then the parameters n and p in this order</span></span></code></pre></div>
 <pre><code>## [1] 1</code></pre>
 <p>The median of a binomial distribution with 5 trials and success probability 0.3 is 1.</p>
 <ol start="4" style="list-style-type: decimal">
 <li>To simulate 10 realizations (replications) of <span class="math inline">\(Y\)</span>, use:</li>
 </ol>
-<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span> <span class="co">##use set.seed() so we get the same random numbers each time the code is run</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">rbinom</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">5</span>, <span class="fl">0.3</span><span class="op">)</span> <span class="co">##supply the number of simulated data you need, then the parameters n and p</span></span></code></pre></div>
 <pre><code>##  [1] 1 2 2 0 3 3 0 2 1 2</code></pre>
 <p>This outputs a vector of length 10. Each value represents the result of each rep. So the first time we ran the binomial distribution with <span class="math inline">\(n=5, p=0.3\)</span>, only 1 out of the 5 was a success. The second time it was run, only 2 out of the 5 was a success, and so on.</p>
 <p>Notice these functions all ended with <code>binom</code>. We just added a different letter first, depending on whether we want the PMF, CDF, percentile, or random draw. The letters are <code>d</code>, <code>p</code>, <code>q</code>, and <code>r</code> respectively.</p>
 <p>The same idea works for any other distribution. For example, to find the probability of a Poisson distribution with rate parameter 2 being equal to 1, we type:</p>
-<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Poisson.html">dpois</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span> <span class="co">##supply value of k, then parameter</span></span></code></pre></div>
 <pre><code>## [1] 0.2706706</code></pre>
 <p><em>Thought questions:</em> Suppose <span class="math inline">\(Y \sim Pois(1)\)</span>.</p>
@@ -830,7 +830,7 @@ Figure 3.8: PMF for Poissons as Rate Parameter is Varied
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2026-07-14.</p>
+    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2026-09-04.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

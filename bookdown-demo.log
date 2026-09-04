@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999994 (MiKTeX 23.1) (preloaded format=xelatex 2023.6.9)  14 JUL 2026 10:36
+This is XeTeX, Version 3.141592653-2.6-0.999994 (MiKTeX 23.1) (preloaded format=xelatex 2023.6.9)  4 SEP 2026 10:26
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1001,13 +1001,13 @@ File: images/02-treepath2.jpg Graphic file (type bmp)
 ]
 Chapter 3.
 
-Underfull \hbox (badness 1264) in paragraph at lines 1383--1384
+Underfull \hbox (badness 1264) in paragraph at lines 1392--1393
 \TU/lmr/m/n/10 tails each time. The sample space for this experiment will be $[
 ] []
  []
 
 
-Underfull \hbox (badness 4647) in paragraph at lines 1383--1384
+Underfull \hbox (badness 4647) in paragraph at lines 1392--1393
 [][][][][] [][][][] [][][][] [][][][] [][][][] [][][][] [][][][] [][][][]$\TU/l
 mr/m/n/10 . Given that each
  []
@@ -1020,12 +1020,12 @@ File: bookdown-demo_files/figure-latex/3-sim-1.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/3-sim-1.pdf>
 [55]
 
-LaTeX Warning: Reference `fig:3-cdf' on page 56 undefined on input line 1592.
+LaTeX Warning: Reference `fig:3-cdf' on page 56 undefined on input line 1601.
 
 File: bookdown-demo_files/figure-latex/3-cdf-1.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/3-cdf-1.pdf>
 
-Underfull \hbox (badness 10000) in paragraph at lines 1594--1596
+Underfull \hbox (badness 10000) in paragraph at lines 1603--1605
 [][]
  []
 
@@ -1034,7 +1034,7 @@ Underfull \vbox (badness 1122) has occurred while \output is active []
 
 [56]
 
-LaTeX Warning: Reference `fig:3-cdf' on page 57 undefined on input line 1612.
+LaTeX Warning: Reference `fig:3-cdf' on page 57 undefined on input line 1621.
 
 [57] [58] [59]
 File: bookdown-demo_files/figure-latex/3-pmf-lin-1.pdf Graphic file (type pdf)
@@ -1068,13 +1068,13 @@ File: bookdown-demo_files/figure-latex/4-prob2-1.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/4-prob2-1.pdf>
 [79] [80] [81]
 
-LaTeX Warning: Reference `fig:4-symm' on page 82 undefined on input line 2579.
+LaTeX Warning: Reference `fig:4-symm' on page 82 undefined on input line 2588.
 
 [82]
 File: bookdown-demo_files/figure-latex/4-symm-1.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/4-symm-1.pdf>
 
-Underfull \hbox (badness 10000) in paragraph at lines 2581--2583
+Underfull \hbox (badness 10000) in paragraph at lines 2590--2592
 [][]
  []
 
@@ -1096,7 +1096,7 @@ File: bookdown-demo_files/figure-latex/4-Z-1.pdf Graphic file (type pdf)
 File: bookdown-demo_files/figure-latex/4-rule-1.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/4-rule-1.pdf>
 [91] [92] [93]
-Overfull \hbox (38.25pt too wide) in paragraph at lines 3048--3048
+Overfull \hbox (38.25pt too wide) in paragraph at lines 3057--3057
 []\TU/lmtt/m/n/10 ##  [1] -1.6907436  1.5545476  5.7635360 -2.3911270  0.759244
 7  1.3972609[] 
  []
@@ -1110,12 +1110,12 @@ File: bookdown-demo_files/figure-latex/4-R2-1.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/4-R2-1.pdf>
 [95] [96]
 
-LaTeX Warning: Reference `fig:4-R3' on page 97 undefined on input line 3145.
+LaTeX Warning: Reference `fig:4-R3' on page 97 undefined on input line 3154.
 
 File: bookdown-demo_files/figure-latex/4-R3-1.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/4-R3-1.pdf>
 
-Underfull \hbox (badness 10000) in paragraph at lines 3156--3158
+Underfull \hbox (badness 10000) in paragraph at lines 3165--3167
 [][]
  []
 
@@ -1146,31 +1146,31 @@ File: bookdown-demo_files/figure-latex/5-condexp-1.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/5-condexp-1.pdf>
 [113] [114] [115]
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/b/n' will be
-(Font)              scaled to size 10.0pt on input line 3969.
+(Font)              scaled to size 10.0pt on input line 3978.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/b/n' will be
-(Font)              scaled to size 7.0pt on input line 3969.
+(Font)              scaled to size 7.0pt on input line 3978.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/b/n' will be
-(Font)              scaled to size 5.0pt on input line 3969.
+(Font)              scaled to size 5.0pt on input line 3978.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/b/n' will be
-(Font)              scaled to size 10.00092pt on input line 3969.
+(Font)              scaled to size 10.00092pt on input line 3978.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/b/n' will be
-(Font)              scaled to size 7.00064pt on input line 3969.
+(Font)              scaled to size 7.00064pt on input line 3978.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/b/n' will be
-(Font)              scaled to size 5.00046pt on input line 3969.
+(Font)              scaled to size 5.00046pt on input line 3978.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/b/n' will be
-(Font)              scaled to size 9.99893pt on input line 3969.
+(Font)              scaled to size 9.99893pt on input line 3978.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/b/n' will be
-(Font)              scaled to size 6.99925pt on input line 3969.
+(Font)              scaled to size 6.99925pt on input line 3978.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/b/n' will be
-(Font)              scaled to size 4.99947pt on input line 3969.
+(Font)              scaled to size 4.99947pt on input line 3978.
 
-Underfull \hbox (badness 2277) in paragraph at lines 3982--3983
+Underfull \hbox (badness 2277) in paragraph at lines 3991--3992
 \TU/lmr/m/n/10 among American voters, 28% identify as Democrats, 29% identify a
 s
  []
 
 
-Underfull \hbox (badness 1701) in paragraph at lines 3982--3983
+Underfull \hbox (badness 1701) in paragraph at lines 3991--3992
 \TU/lmr/m/n/10 others, and independents. The joint distribution of $[][][] [][]
 [] [][][] [][]$ is
  []
@@ -1233,10 +1233,10 @@ File: bookdown-demo_files/figure-latex/6-CLTpois-1.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/6-CLTpois-1.pdf>
 
 LaTeX Warning: Reference `fig:6-CLTpois' on page 136 undefined on input line 47
-50.
+59.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 4749--4751
+Underfull \hbox (badness 10000) in paragraph at lines 4758--4760
 [][]
  []
 
@@ -1253,14 +1253,14 @@ D SIMULATIONS
  []
 
 [138]
-Overfull \vbox (1.27286pt too high) detected at line 4843
+Overfull \vbox (1.27286pt too high) detected at line 4852
  []
 
 [139]
 File: images/06-circle.jpg Graphic file (type bmp)
 <images/06-circle.jpg>
 
-Underfull \hbox (badness 2809) in paragraph at lines 4906--4907
+Underfull \hbox (badness 2809) in paragraph at lines 4915--4916
 []\TU/lmr/m/n/10 Therefore, after throwing a large number of darts, $[] [] [] [
 ]
  []
@@ -1298,7 +1298,7 @@ File: bookdown-demo_files/figure-latex/7-bernlikelihood-1.pdf Graphic file (typ
 e pdf)
 <use bookdown-demo_files/figure-latex/7-bernlikelihood-1.pdf>
 [154] [155] [156] [157] [158] [159] [160]
-Underfull \hbox (badness 10000) in paragraph at lines 5635--5637
+Underfull \hbox (badness 10000) in paragraph at lines 5644--5646
 
  []
 
@@ -1306,7 +1306,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 5635--5637
 File: bookdown-demo_files/figure-latex/7-bias-1.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/7-bias-1.pdf>
 [162] [163]
-Underfull \hbox (badness 10000) in paragraph at lines 5804--5806
+Underfull \hbox (badness 10000) in paragraph at lines 5813--5815
 
  []
 
@@ -1328,7 +1328,7 @@ File: images/08-CI.png Graphic file (type bmp)
 File: bookdown-demo_files/figure-latex/8-crit-1.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/8-crit-1.pdf>
 [176] [177] [178] [179] [180]
-Underfull \hbox (badness 2980) in paragraph at lines 6324--6325
+Underfull \hbox (badness 2980) in paragraph at lines 6333--6334
 []\TU/lmr/m/n/10 The solution to this is fairly intuitive, we use the sample va
 riance
  []
@@ -1336,18 +1336,18 @@ riance
 File: bookdown-demo_files/figure-latex/8-t-1.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/8-t-1.pdf>
 [181] [182] [183] [184] [185] [186] [187] [188]
-Underfull \hbox (badness 1762) in paragraph at lines 6629--6629
+Underfull \hbox (badness 1762) in paragraph at lines 6638--6638
 []\TU/lmr/bx/n/12 Estimating Sampling Distributions Using Many
  []
 
 [189]
-Underfull \hbox (badness 1365) in paragraph at lines 6671--6673
+Underfull \hbox (badness 1365) in paragraph at lines 6680--6682
 []\TU/lmr/m/n/10 Synthesize $[]$ bootstrapped datasets $[][][] [] [] [][]$ wher
 e each boot-
  []
 
 
-Underfull \hbox (badness 1194) in paragraph at lines 6675--6677
+Underfull \hbox (badness 1194) in paragraph at lines 6684--6686
 []\TU/lmr/m/n/10 We estimate the true mean of $[]$ by taking the sample mean of
 
  []
@@ -1368,16 +1368,16 @@ Underfull \vbox (badness 1072) has occurred while \output is active []
 [200]
 
 LaTeX Warning: Reference `fig:9-pvalneq' on page 201 undefined on input line 70
-19.
+28.
 
 
 LaTeX Warning: Reference `fig:9-pvalneq' on page 201 undefined on input line 70
-25.
+34.
 
 File: bookdown-demo_files/figure-latex/9-pvalneq-1.pdf Graphic file (type pdf)
 <use bookdown-demo_files/figure-latex/9-pvalneq-1.pdf>
 
-Underfull \hbox (badness 10000) in paragraph at lines 7028--7030
+Underfull \hbox (badness 10000) in paragraph at lines 7037--7039
 [][]
  []
 
@@ -1463,19 +1463,19 @@ df)
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 [241]
-Underfull \hbox (badness 3872) in paragraph at lines 8701--8702
+Underfull \hbox (badness 3872) in paragraph at lines 8710--8711
 \TU/lmr/m/n/10 We can actually extract these values that are being reported fro
 m
  []
 
 [242]
-Overfull \hbox (22.5pt too wide) in paragraph at lines 8714--8714
+Overfull \hbox (22.5pt too wide) in paragraph at lines 8723--8723
 []\TU/lmtt/m/n/10 ##  [1] "call"          "terms"         "residuals"     "coef
 ficients"[] 
  []
 
 
-Overfull \hbox (6.75pt too wide) in paragraph at lines 8714--8714
+Overfull \hbox (6.75pt too wide) in paragraph at lines 8723--8723
 []\TU/lmtt/m/n/10 ##  [5] "aliased"       "sigma"         "df"            "r.sq
 uared"[] 
  []

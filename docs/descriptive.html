@@ -266,9 +266,11 @@ Figure 1.5: Density Plot for 50 Interest Rates with Larger Bandwidth
 </ul>
 <p>To find these values in R, we could type:</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">Data</span><span class="op">$</span><span class="va">interest_rate</span>, prob<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.25</span>,<span class="fl">0.75</span><span class="op">)</span>, type <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
-<pre><code>##   25%   75% 
-##  7.96 14.08</code></pre>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="va">Data</span><span class="op">$</span><span class="va">interest_rate</span><span class="op">)</span><span class="op">[</span><span class="fl">13</span><span class="op">]</span> </span></code></pre></div>
+<pre><code>## [1] 7.96</code></pre>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="va">Data</span><span class="op">$</span><span class="va">interest_rate</span><span class="op">)</span><span class="op">[</span><span class="fl">38</span><span class="op">]</span></span></code></pre></div>
+<pre><code>## [1] 14.08</code></pre>
 <p>So <span class="math inline">\(Q_1\)</span> is 7.96 percent, and <span class="math inline">\(Q_3\)</span> is 14.08 percent. It turns out that <span class="math inline">\(Q_1\)</span> is also the 25th percentile, and <span class="math inline">\(Q_3\)</span> is also the 75th percentile, by definition.</p>
 <p>Remember we wrote the following earlier:</p>
 <ul>
@@ -291,7 +293,7 @@ Figure 1.5: Density Plot for 50 Interest Rates with Larger Bandwidth
 <span class="header-section-number">1.3.2</span> Box Plots<a class="anchor" aria-label="anchor" href="#box-plots"><i class="fas fa-link"></i></a>
 </h3>
 <p>Another visualization used to summarize quantitative data is the box plot. A <strong>box plot</strong> summarizes the 5-number summary. The 5 numbers are the minimum, <span class="math inline">\(Q_1, Q_2, Q_3\)</span>, and the maximum. Using our interest rate data, the box plot is shown in Figure <a href="descriptive.html#fig:boxplot">1.6</a>:</p>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##box plot</span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">Data</span>,<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>y<span class="op">=</span><span class="va">interest_rate</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span></span>
@@ -343,7 +345,7 @@ We shall use a simple toy example to illustrate how an ECDF is constructed. Supp
 <span class="math inline">\(\hat{F}_n(x) = 1\)</span> for <span class="math inline">\(x \geq 5\)</span>.</li>
 </ul>
 <p>The corresponding ECDF plot is shown in Figure <a href="descriptive.html#fig:ecdf">1.7</a>:</p>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">##toy data</span></span>
 <span><span class="va">y</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">5</span>, <span class="fl">3</span><span class="op">)</span></span>
 <span><span class="co">##ECDF plot</span></span>
@@ -358,7 +360,7 @@ Figure 1.7: ECDF Plot for Toy Example
 <iframe width="560px" height="320px" allowfullscreen="true" allow="autoplay *" title="Mod 01: Empirical Cumulative Distribution Function" src="https://virginiauniversity.instructuremedia.com/embed/d6e01cbb-e682-4291-b969-dc3a1855e952" frameborder="0">
 </iframe>
 <p>Next, we create the ECDF plot for the interest rates from the 50 loan applicants.</p>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/ecdf.html">ecdf</a></span><span class="op">(</span><span class="va">Data</span><span class="op">$</span><span class="va">interest_rate</span><span class="op">)</span>, main <span class="op">=</span> <span class="st">"ECDF Plot of Interest Rates"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span>h<span class="op">=</span><span class="fl">0.8</span><span class="op">)</span></span></code></pre></div>
 <div class="figure">
@@ -410,10 +412,10 @@ Figure 1.8: ECDF Plot of Interest Rates
 <li><p>The median is a measure that is recommended for skewed distributions, since the order associated with ordered statistics is not influenced by extreme outliers. Using the gym example, in the previous bullet point, the median is unaffected.</p></li>
 <li><p>The mean being larger than the median is an indication that the distribution is right-skewed. Using our interest rate example, we have:</p></li>
 </ul>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">Data</span><span class="op">$</span><span class="va">interest_rate</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 11.5672</code></pre>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span><span class="va">Data</span><span class="op">$</span><span class="va">interest_rate</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 9.93</code></pre>
 <p>which is consistent with the right skew we saw in the histogram and density plot in Figures <a href="descriptive.html#fig:hist">1.2</a> and <a href="descriptive.html#fig:dens">1.4</a>. Conversely, a left-skewed distribution usually has a mean that is smaller than the median. A symmetric distribution typically has similar values for the mean and median.</p>
@@ -519,7 +521,7 @@ IQR = Q_3 - Q_1.
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2026-07-14.</p>
+    <p>"<strong>Understanding Uncertainty Course Notes</strong>" was written by Jeffrey Woo. It was last built on 2026-09-04.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

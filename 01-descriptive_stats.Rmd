@@ -190,7 +190,8 @@ $Q_1$ and $Q_3$ (also called the first and third quartiles) are found together, 
 To find these values in R, we could type:
 
 ```{r}
-quantile(Data$interest_rate, prob=c(0.25,0.75), type = 1)
+sort(Data$interest_rate)[13] 
+sort(Data$interest_rate)[38]
 ```
 
 So $Q_1$ is 7.96 percent, and $Q_3$ is 14.08 percent. It turns out that $Q_1$ is also the 25th percentile, and $Q_3$ is also the 75th percentile, by definition. 
